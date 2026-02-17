@@ -1,6 +1,6 @@
-import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -40,12 +40,6 @@ const tertiaryButtonStencil = createStencil({
       ),
       [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      // ...focusRing({
-      //   width: 2,
-      //   separation: 0,
-      //   innerColor: system.color.border.inverse.default,
-      //   outerColor: brand.common.focusOutline,
-      // }),
       [buttonStencil.vars.boxShadowInner]: cssVar(
         system.color.focus.inverse,
         cssVar(system.color.border.inverse.default, base.neutral0)
@@ -64,7 +58,10 @@ const tertiaryButtonStencil = createStencil({
         system.opacity.surface.hover
       ),
       [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
+      [systemIconStencil.vars.color]: cssVar(
+        system.color.fg.strong,
+        cssVar(buttonColorPropVars.hover.icon, 'currentColor')
+      ),
       textDecoration: 'underline',
     },
     // Active Styles
@@ -81,13 +78,7 @@ const tertiaryButtonStencil = createStencil({
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
     },
   },
   modifiers: {
@@ -98,7 +89,7 @@ const tertiaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: system.color.fg.default,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
-          system.color.fg.strong
+          system.color.fg.default
         ),
         '&:focus-visible, &.focus': {
           [systemIconStencil.vars.color]: cssVar(
@@ -121,7 +112,7 @@ const tertiaryButtonStencil = createStencil({
         '&:disabled, &.disabled': {
           [systemIconStencil.vars.color]: cssVar(
             buttonColorPropVars.disabled.icon,
-            system.color.fg.strong
+            system.color.fg.default
           ),
         },
       },

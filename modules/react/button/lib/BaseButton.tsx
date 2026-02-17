@@ -3,7 +3,7 @@ import * as React from 'react';
 import {GrowthBehavior, createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
@@ -228,10 +228,7 @@ export const buttonStencil = createStencil({
       ),
       borderColor: cssVar(buttonColorPropVars.disabled.border, cssVar(border, 'transparent')),
       color: cssVar(buttonColorPropVars.disabled.label, cssVar(label, system.color.fg.strong)),
-      [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.disabled.icon,
-        system.color.fg.strong
-      ),
+      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
     },
     // for Windows high contrast desktop themes
     '@media (prefers-contrast: more)': {

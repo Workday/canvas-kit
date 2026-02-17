@@ -79,10 +79,7 @@ const secondaryButtonStencil = createStencil({
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [buttonStencil.vars.label]: system.color.fg.stronger,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
     },
   },
   modifiers: {

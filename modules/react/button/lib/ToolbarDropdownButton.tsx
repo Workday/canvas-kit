@@ -1,8 +1,15 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  calc,
+  colorSpace,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
@@ -17,55 +24,66 @@ export const toolbarDropdownButtonStencil = createStencil({
     customIcon: 'toolbar-dropdown-btn-custom-icon',
   },
   base: ({chevronPart, customIconPart}) => ({
-    padding: system.space.zero,
-    minWidth: system.space.x8,
-    gap: system.space.zero,
-    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    padding: 0,
+    minWidth: cssVar(system.size.sm, system.space.x8),
+    gap: 0,
+    [buttonStencil.vars.borderRadius]: cssVar(system.shape.sm, system.shape.x1),
     [systemIconStencil.vars.color]: cssVar(
-      buttonColorPropVars.default.icon,
-      system.color.fg.muted.soft
+      system.color.fg.default,
+      cssVar(buttonColorPropVars.default.icon, system.color.fg.muted.soft)
     ),
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.focus.icon,
-        system.color.fg.muted.soft
+      [buttonStencil.vars.background]: cssVar(
+        system.color.surface.transparent,
+        system.color.bg.transparent.default
       ),
-      ...focusRing({
-        width: 2,
-        separation: 0,
-        innerColor: system.color.border.transparent,
-        outerColor: brand.common.focusOutline,
-      }),
+      [systemIconStencil.vars.color]: cssVar(
+        system.color.fg.default,
+        cssVar(buttonColorPropVars.focus.icon, system.color.fg.muted.soft)
+      ),
+      [buttonStencil.vars.boxShadowInner]: cssVar(
+        system.color.focus.inverse,
+        cssVar(system.color.border.inverse.default, base.neutral0)
+      ),
+      [buttonStencil.vars.boxShadowOuter]: cssVar(
+        system.color.brand.focus.primary,
+        brand.common.focusOutline
+      ),
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.surface.transparent,
+        system.color.bg.alt.default,
+        system.color.surface.overlay.mixin,
+        system.opacity.surface.hover
+      ),
       [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.hover.icon,
-        system.color.fg.muted.stronger
+        system.color.fg.strong,
+        cssVar(buttonColorPropVars.hover.icon, 'currentColor')
       ),
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: colorSpace.darken(
+        system.color.surface.transparent,
+        system.color.bg.alt.stronger,
+        system.color.surface.overlay.mixin,
+        system.opacity.surface.pressed
+      ),
       [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.active.icon,
-        system.color.fg.muted.stronger
+        system.color.fg.strong,
+        cssVar(buttonColorPropVars.active.icon, system.color.fg.muted.stronger)
       ),
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.disabled.icon,
-        system.color.fg.disabled
-      ),
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
     },
 
     [customIconPart]: {
-      marginInlineStart: system.space.x1,
+      marginInlineStart: cssVar(system.padding.xxs, system.space.x1),
       marginInlineEnd: calc.negate(px2rem(2)),
     },
 

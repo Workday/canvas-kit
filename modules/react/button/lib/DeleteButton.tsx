@@ -71,12 +71,6 @@ const deleteButtonStencil = createStencil({
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.inverse,
-        cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
-      ),
       [buttonStencil.vars.opacity]: system.opacity.disabled,
     },
   },
