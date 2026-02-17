@@ -4,15 +4,35 @@ import {BreakpointFnParam, CanvasBreakpoints} from './breakpoints';
  * A single palette within a Canvas theme
  */
 
-export type CanvasThemePalette = {
-  lightest: string;
-  lighter: string;
-  light: string;
-  main: string;
-  dark: string;
-  darkest: string;
-  contrast: string;
+/**
+ * Numerical palette keys for the new branding scale
+ */
+export type CanvasThemeNumericalPalette = {
+  25?: string;
+  50?: string;
+  100?: string;
+  200?: string;
+  300?: string;
+  400?: string;
+  500?: string;
+  600?: string;
+  700?: string;
+  800?: string;
+  900?: string;
+  950?: string;
+  975?: string;
 };
+
+export type CanvasThemePalette = {
+  // Legacy format (deprecated but supported for backward compatibility)
+  lightest?: string;
+  lighter?: string;
+  light?: string;
+  main?: string;
+  dark?: string;
+  darkest?: string;
+  contrast?: string;
+} & CanvasThemeNumericalPalette;
 
 type CanvasThemeCommonPalette = {
   focusOutline: string;

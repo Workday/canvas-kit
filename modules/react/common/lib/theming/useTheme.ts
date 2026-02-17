@@ -30,30 +30,50 @@ const generatePalette = (
   const colorPalette = palette?.[key];
   if (colorPalette) {
     const defaultPalette = defaultCanvasTheme.palette[key];
-    return {
-      lightest:
-        colorPalette.lightest ||
-        (colorPalette.main && shiftColor(colorPalette.main, 400)) ||
-        defaultPalette.lightest,
-      lighter:
-        colorPalette.lighter ||
-        (colorPalette.main && shiftColor(colorPalette.main, 150)) ||
-        defaultPalette.lighter,
-      light:
-        colorPalette.light ||
-        (colorPalette.main && shiftColor(colorPalette.main, 100)) ||
-        defaultPalette.light,
-      main: colorPalette.main || defaultPalette.main,
-      dark:
-        colorPalette.dark ||
-        (colorPalette.main && shiftColor(colorPalette.main, -100)) ||
-        defaultPalette.dark,
-      darkest:
-        colorPalette.darkest ||
-        (colorPalette.main && shiftColor(colorPalette.main, -200)) ||
-        defaultPalette.darkest,
-      contrast: colorPalette.contrast || cssVar(base.neutral0),
-    };
+    const result: any = {};
+
+    // Handle new numerical scale keys (25, 50, 100...975)
+    const numericalKeys = [25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975] as const;
+    numericalKeys.forEach(numKey => {
+      const numKeyStr = numKey.toString() as keyof typeof colorPalette;
+      if ((colorPalette as any)[numKeyStr] !== undefined) {
+        result[numKeyStr] = (colorPalette as any)[numKeyStr];
+      } else if ((defaultPalette as any)[numKeyStr] !== undefined) {
+        result[numKeyStr] = (defaultPalette as any)[numKeyStr];
+      }
+    });
+
+    // Handle legacy keys for backward compatibility
+    // Map legacy keys to numerical equivalents if provided, otherwise use legacy values or generate from main
+    result.lightest =
+      colorPalette.lightest ||
+      colorPalette[25] ||
+      (colorPalette.main && shiftColor(colorPalette.main, 400)) ||
+      defaultPalette.lightest;
+    result.lighter =
+      colorPalette.lighter ||
+      colorPalette[50] ||
+      (colorPalette.main && shiftColor(colorPalette.main, 150)) ||
+      defaultPalette.lighter;
+    result.light =
+      colorPalette.light ||
+      colorPalette[200] ||
+      (colorPalette.main && shiftColor(colorPalette.main, 100)) ||
+      defaultPalette.light;
+    result.main = colorPalette.main || colorPalette[600] || defaultPalette.main;
+    result.dark =
+      colorPalette.dark ||
+      colorPalette[700] ||
+      (colorPalette.main && shiftColor(colorPalette.main, -100)) ||
+      defaultPalette.dark;
+    result.darkest =
+      colorPalette.darkest ||
+      colorPalette[800] ||
+      (colorPalette.main && shiftColor(colorPalette.main, -200)) ||
+      defaultPalette.darkest;
+    result.contrast = colorPalette.contrast || cssVar(base.neutral0);
+
+    return result;
   }
   return defaultCanvasTheme.palette[key];
 };
