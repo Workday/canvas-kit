@@ -123,11 +123,11 @@ export const buttonStencil = createStencil({
     // Default Styles
     fontFamily: system.fontFamily.default,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, '0.875rem'),
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, 'normal'),
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, '0.015rem'),
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     fontWeight: system.fontWeight.bold,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
