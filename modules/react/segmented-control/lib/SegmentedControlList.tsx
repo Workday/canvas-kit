@@ -26,6 +26,7 @@ export const segmentedControlListStencil = createStencil({
     border: `${cssVar(base.size0, px2rem(1))} solid ${cssVar(system.color.border.transparent, system.color.border.input.default)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.lg, system.shape.x2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xxs, px2rem(3)),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     gridGap: cssVar(system.gap.sm, system.space.x2),
