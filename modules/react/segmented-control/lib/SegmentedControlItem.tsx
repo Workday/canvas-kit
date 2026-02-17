@@ -60,7 +60,7 @@ export const segmentedControlItemStencil = createStencil({
     lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-    fontWeight: system.fontWeight.normal,
+    fontWeight: system.fontWeight.bold,
     textAlign: 'start',
     paddingInline: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

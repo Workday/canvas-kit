@@ -45,8 +45,7 @@ export const actionBarListStencil = createStencil({
     padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(base.size500, system.space.x10)} `,
     position: 'fixed',
     insetBlockEnd: 0,
-    insetInlineStart: 0,
-    insetInlineEnd: 0,
+    insetInline: 0,
     '@media (max-width: 767.5px)': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       padding: cssVar(system.size.xxxs, system.space.x4),
