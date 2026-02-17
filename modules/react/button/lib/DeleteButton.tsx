@@ -24,8 +24,8 @@ const deleteButtonStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     [systemIconStencil.vars.color]: cssVar(
-      system.color.fg.inverse,
-      cssVar(buttonColorPropVars.default.icon, brand.error.accent)
+      buttonColorPropVars.default.icon,
+      cssVar(system.color.fg.inverse, brand.error.accent)
     ),
     // Focus Styles
     '&:focus-visible, &.focus': {
@@ -35,8 +35,8 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.inverse,
-        cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
+        buttonColorPropVars.focus.icon,
+        cssVar(system.color.fg.inverse, brand.error.accent)
       ),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.boxShadowInner]: cssVar(
@@ -62,8 +62,8 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.inverse,
-        cssVar(buttonColorPropVars.hover.icon, brand.error.accent)
+        buttonColorPropVars.hover.icon,
+        cssVar(system.color.fg.inverse, brand.error.accent)
       ),
     },
     // Active Styles
@@ -79,8 +79,8 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.inverse,
-        cssVar(buttonColorPropVars.active.icon, brand.error.accent)
+        buttonColorPropVars.active.icon,
+        cssVar(system.color.fg.inverse, brand.error.accent)
       ),
     },
     // Disabled Styles
@@ -88,7 +88,10 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
-      [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, brand.error.accent),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.disabled.icon,
+        cssVar(system.color.fg.inverse, brand.error.accent)
+      ),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     },

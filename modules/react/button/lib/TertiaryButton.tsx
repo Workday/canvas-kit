@@ -108,7 +108,7 @@ const tertiaryButtonStencil = createStencil({
         padding: 0,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
-          system.color.fg.default
+          cssVar(system.color.fg.default, system.color.fg.strong)
         ),
         '&:focus-visible, &.focus': {
           [systemIconStencil.vars.color]: cssVar(
@@ -130,6 +130,10 @@ const tertiaryButtonStencil = createStencil({
         },
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
+          [systemIconStencil.vars.color]: cssVar(
+            buttonColorPropVars.disabled.icon,
+            system.color.fg.default
+          ),
         },
       },
       start: {},
