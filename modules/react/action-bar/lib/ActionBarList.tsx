@@ -3,7 +3,7 @@ import * as React from 'react';
 import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useActionBarModel} from './useActionBarModel';
@@ -40,7 +40,7 @@ export const actionBarListStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     background: cssVar(system.color.surface.default, system.color.bg.default),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderBlockStart: `solid 1px ${cssVar(system.color.border.default, system.color.border.divider)}`,
+    borderBlockStart: `solid ${px2rem(1)}  ${cssVar(system.color.border.default, system.color.border.divider)}`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(base.size500, system.space.x10)} `,
     position: 'fixed',

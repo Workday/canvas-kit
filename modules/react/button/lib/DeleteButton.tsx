@@ -63,7 +63,7 @@ const deleteButtonStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.inverse,
-        cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
+        cssVar(buttonColorPropVars.hover.icon, brand.error.accent)
       ),
     },
     // Active Styles
@@ -80,7 +80,7 @@ const deleteButtonStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [systemIconStencil.vars.color]: cssVar(
         system.color.fg.inverse,
-        cssVar(buttonColorPropVars.focus.icon, brand.error.accent)
+        cssVar(buttonColorPropVars.active.icon, brand.error.accent)
       ),
     },
     // Disabled Styles

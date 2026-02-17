@@ -42,7 +42,7 @@ const primaryButtonStencil = createStencil({
         brand.action.base,
         cssVar(system.color.brand.accent.primary, brand.primary.base)
       ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token// TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(
         brand.action.accent,
         cssVar(system.color.fg.inverse, brand.primary.accent)

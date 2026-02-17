@@ -176,7 +176,7 @@ const tertiaryButtonStencil = createStencil({
             system.opacity.surface.pressed
           ),
           [buttonStencil.vars.label]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {

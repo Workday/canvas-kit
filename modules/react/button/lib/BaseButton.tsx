@@ -292,6 +292,7 @@ export const buttonStencil = createStencil({
         lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         height: cssVar(system.size.sm, system.space.x8),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         minWidth: cssVar(base.size1000, system.space.x20),
