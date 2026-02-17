@@ -63,8 +63,8 @@ const primaryButtonStencil = createStencil({
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
-        cssVar(brand.action.dark, system.color.brand.accent.primary),
-        cssVar(brand.action.dark, brand.primary.dark),
+        brand.action.dark,
+        cssVar(system.color.brand.accent.primary, brand.primary.dark),
         system.color.accent.overlay.mixin,
         system.opacity.accent.hover
       ),
@@ -79,8 +79,8 @@ const primaryButtonStencil = createStencil({
     '&:active, &.active': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken(
-        cssVar(brand.action.darkest, system.color.brand.accent.primary),
-        cssVar(brand.action.darkest, brand.primary.darkest),
+        brand.action.darkest,
+        cssVar(system.color.brand.accent.primary, brand.primary.darkest),
         system.color.accent.overlay.mixin,
         system.opacity.accent.pressed
       ),
