@@ -99,7 +99,7 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
               0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)},
               0 0 0 ${px2rem(5)} transparent`,
         },
@@ -107,7 +107,7 @@ const switchInputStencil = createStencil({
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
           0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
           0 0 0 ${px2rem(5)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}`,
         },
@@ -137,8 +137,7 @@ const switchBackgroundStencil = createStencil({
     height: cssVar(system.size.xxxs, system.space.x4),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.none, system.space.zero)} ${px2rem(2)}`,
+    padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),

@@ -133,7 +133,7 @@ export const tabsListStencil = createStencil({
       touch: {
         overflowX: 'auto',
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.none, system.space.zero),
+        paddingInline: 0,
         // data attributes are needed until scroll-driven animations are supported. Once they are,
         // we can use a CSS-only solution:
         // https://www.bram.us/2023/09/16/solved-by-css-scroll-driven-animations-detect-if-an-element-can-scroll-or-not/

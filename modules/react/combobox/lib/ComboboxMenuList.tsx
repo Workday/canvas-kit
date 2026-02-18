@@ -34,7 +34,8 @@ export const ComboboxMenuList = createSubcomponent('ul')({
     <ListBox
       as={Element}
       model={model}
-      marginY={cssVar(system.space.x2)}
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginY={cssVar(system.gap.none, system.space.x2)}
       {...handleCsProp(elemProps, comboboxMenuListStencil({orientation: model.state.orientation}))}
     >
       {children}

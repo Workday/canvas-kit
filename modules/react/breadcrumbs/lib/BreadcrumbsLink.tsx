@@ -1,8 +1,8 @@
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface BreadcrumbsLinkProps extends HyperlinkProps {
   /**
@@ -14,7 +14,7 @@ export interface BreadcrumbsLinkProps extends HyperlinkProps {
    *
    * @default 350px
    */
-  maxWidth?: number;
+  maxWidth?: string | number;
   tooltipProps?: OverflowTooltipProps | {};
 }
 
@@ -23,7 +23,14 @@ export const breadcrumbsLinkStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    fontWeight: system.fontWeight.normal,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',

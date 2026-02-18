@@ -157,6 +157,10 @@ export const multiSelectInputStencil = createStencil({
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
           },
+        '&:hover, &.hover': {
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
+        },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
