@@ -1,3 +1,6 @@
+/**
+  Extracts initials from a person's name by taking the first letter of the first and last name parts. It also sanitizes input to filter out common name prefixes and suffixes.
+*/
 export const getInitialsFromName = (name: string) => {
   // Remove parenthetical content (e.g., titles, departments) and trim
   const sanitized = name.replace(/\([^)]*\)/g, '').trim();
