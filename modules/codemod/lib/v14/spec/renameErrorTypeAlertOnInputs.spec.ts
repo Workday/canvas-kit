@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../renameErrorTypeAlertOnInputs';
 import {stripIndent} from 'common-tags';
+
+import transform from '../renameErrorTypeAlertOnInputs';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

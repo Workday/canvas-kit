@@ -1,5 +1,6 @@
-import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 import * as React from 'react';
+
+import {createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 /**
  * The transition states of the SidePanel during expand/collapse animations.

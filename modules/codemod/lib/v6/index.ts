@@ -1,12 +1,13 @@
 import {Transform} from 'jscodeshift';
-// deprecate PageHeader
-import deprecatePageHeader from './deprecatePageHeader';
+
 // deprecate CookieBanner
 import deprecateCookieBanner from './deprecateCookieBanner';
-// move and rename SearchBar
-import moveAndRenameSearchBar from './moveAndRenameSearchBar';
 // deprecate header imports
 import deprecateHeader from './deprecateHeader';
+// deprecate PageHeader
+import deprecatePageHeader from './deprecatePageHeader';
+// move and rename SearchBar
+import moveAndRenameSearchBar from './moveAndRenameSearchBar';
 // rename CanvasDepthValue
 import renameCanvasDepthValue from './renameCanvasDepthValue';
 

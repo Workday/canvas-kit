@@ -1,6 +1,7 @@
 import {API, FileInfo, JSXElement, JSXIdentifier, Options} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
+
 import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 
 const expandablePackage = '@workday/canvas-kit-react/expandable';
 

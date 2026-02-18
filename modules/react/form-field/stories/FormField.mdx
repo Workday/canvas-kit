@@ -1,5 +1,6 @@
+import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
-import * as FormFieldStories from './FormField.stories';
+import FormFieldStoriesMeta from './FormField.stories';
 
 import { Basic } from './examples/Basic';
 import { Caution } from './examples/Caution';
@@ -18,7 +19,7 @@ import { Grow } from './examples/Grow';
 import { ThemedError } from './examples/ThemedErrors';
 import { GroupedInputs } from './examples/GroupedInputs';
 
-<Meta of={FormFieldStories} />
+<Meta of={FormFieldStoriesMeta} />
 
 # Canvas Kit Form Field
 
@@ -213,4 +214,4 @@ check our
 
 ## Specifications
 
-<Specifications file="FormField.spec.tsx" name="FormField" />
+<Specifications file="./cypress/component/FormField.spec.tsx" name="FormField" />

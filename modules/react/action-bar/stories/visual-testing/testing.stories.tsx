@@ -1,8 +1,9 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {colors, space} from '@workday/canvas-kit-react/tokens';
 
 export default {
   title: 'Testing/Buttons/ActionBar',

@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/preview-react/radio/stories/examples/Basic';
 import {Caution} from '../../modules/preview-react/radio/stories/examples/Caution';
-import {Error} from '../../modules/preview-react/radio/stories/examples/Error';
 import {Disabled} from '../../modules/preview-react/radio/stories/examples/Disabled';
+import {Error} from '../../modules/preview-react/radio/stories/examples/Error';
 
 describe('Radio Preview', () => {
   [Basic, Caution, Error].forEach(Example => {

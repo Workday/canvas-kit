@@ -16,11 +16,13 @@ import {isCursor, useCursorListModel} from './useCursorListModel';
  * );
 ```
  */
-export const useListItemActiveDescendant = createElemPropsHook(useCursorListModel)(
-  (model, _ref, elemProps: {'data-id'?: string} = {}) => {
-    const id = elemProps['data-id'] || '';
-    return {
-      className: isCursor(model.state, id) ? 'focus' : '',
-    };
-  }
-);
+export const useListItemActiveDescendant = createElemPropsHook(useCursorListModel)((
+  model,
+  _ref,
+  elemProps: {'data-id'?: string} = {}
+) => {
+  const id = elemProps['data-id'] || '';
+  return {
+    className: isCursor(model.state, id) ? 'focus' : '',
+  };
+});

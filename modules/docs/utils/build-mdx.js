@@ -45,7 +45,9 @@ const sanitizeMdxFile = (inFile, outFile) => {
       .replace(/import {\s?(\w+)\s?} from '\.\/examples/g, "import $1 from './examples");
 
     fs.writeFile(outFile, result, 'utf8', err => {
-      if (err) return console.error(err);
+      if (err) {
+        return console.error(err);
+      }
     });
   });
 };

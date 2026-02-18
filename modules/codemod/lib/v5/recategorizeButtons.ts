@@ -1,13 +1,14 @@
 import {
   API,
+  ASTPath,
   FileInfo,
+  JSXAttribute,
+  JSXElement,
+  JSXIdentifier,
   Options,
   StringLiteral,
-  JSXIdentifier,
-  JSXAttribute,
-  ASTPath,
-  JSXElement,
 } from 'jscodeshift';
+
 import {getImportRenameMap} from './getImportRenameMap';
 
 const updateJSXTag = (nodePath: ASTPath<JSXElement>, newTag: string) => {

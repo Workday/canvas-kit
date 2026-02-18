@@ -1,21 +1,21 @@
 import * as React from 'react';
 
-import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {
-  createElemPropsHook,
   composeHooks,
+  createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
-
-import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {useTabsModel} from './useTabsModel';
-import {StyledTabItem} from './TabsItem';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {useMenuTarget} from '@workday/canvas-kit-react/menu';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {StyledTabItem} from './TabsItem';
+import {useTabsModel} from './useTabsModel';
 
 export interface OverflowButtonProps {
   /**
@@ -28,7 +28,8 @@ const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
       display: 'flex',
-      gap: system.space.zero,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      gap: cssVar(system.gap.none, system.space.zero),
     },
   },
 });

@@ -1,13 +1,16 @@
 import React from 'react';
 
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {
   ComponentStatesTable,
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {customColorTheme} from '../../../../utils/storybook';
-import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 const hintText = 'Helpful text goes here.';
 const hintId = 'error-desc-id';
@@ -214,7 +217,13 @@ export const InverseRadioStates = {
           )}
         >
           {({disabled, ...props}) => (
-            <div style={{backgroundColor: '#0875e1', padding: '12px', borderRadius: '4px'}}>
+            <div
+              style={{
+                backgroundColor: cssVar(system.color.surface.contrast.default),
+                padding: cssVar(system.padding.sm),
+                borderRadius: cssVar(system.shape.sm),
+              }}
+            >
               <RadioGroup>
                 <RadioGroup.Label disabled={disabled} variant="inverse">
                   <RadioGroup.Label.Input {...props} />

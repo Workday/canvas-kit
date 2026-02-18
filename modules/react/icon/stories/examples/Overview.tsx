@@ -1,15 +1,15 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
+import * as React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {activityStreamIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
-import {AccentIcon, AppletIcon, SystemIcon, SystemIconCircle, Graphic} from '../../index';
-import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {AccentIcon, AppletIcon, Graphic, SystemIcon, SystemIconCircle} from '../../index';
 
 const graphicExample: CanvasGraphic = {
   name: 'badgeAchievement',

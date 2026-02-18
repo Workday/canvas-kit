@@ -22,11 +22,11 @@
   "scripts": {
     "watch": "yarn build:es6 -w",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
-    "build:mdx": "node ./utils/build-mdx.js mdx/",
+    "build:mdx": "tsx ./utils/build-mdx.js mdx/",
     "build:es6": "tsc -p tsconfig.es6.json",
-    "build:docs": "node ./utils/build-docs.js",
+    "build:docs": "tsx ./utils/build-docs.js",
     "build:rebuild": "npm-run-all clean build",
-    "build:specs": "node ./utils/build-specifications.js",
+    "build:specs": "tsx ./utils/build-specifications.js",
     "build": "npm-run-all build:es6 build:mdx build:specs build:docs",
     "depcheck": "node ../../utils/check-dependencies-exist.js",
     "typecheck:src": "tsc -p . --noEmit --incremental false"
@@ -43,6 +43,7 @@
   ],
   "dependencies": {
     "@emotion/styled": "^11.6.0",
+    "@mdx-js/react": "^3.1.0",
     "@stackblitz/sdk": "^1.11.0",
     "@storybook/csf": "0.0.1",
     "@workday/canvas-kit-labs-react": "^14.2.24",
@@ -50,7 +51,7 @@
     "@workday/canvas-kit-react": "^14.2.24",
     "@workday/canvas-kit-styling": "^14.2.24",
     "@workday/canvas-system-icons-web": "^3.0.36",
-    "@workday/canvas-tokens-web": "^3.1.6",
+    "@workday/canvas-tokens-web": "4.1.2",
     "markdown-to-jsx": "^7.2.0",
     "react-syntax-highlighter": "^15.5.0",
     "ts-node": "^10.9.1"

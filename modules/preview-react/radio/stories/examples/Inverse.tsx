@@ -1,17 +1,18 @@
 import React from 'react';
-import {Box} from '@workday/canvas-kit-react/layout';
+
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   containerStyles: createStyles({
-    backgroundColor: system.color.bg.primary.default,
+    backgroundColor: system.color.surface.contrast.default,
     padding: system.space.x4,
   }),
   formFieldStyles: createStyles({
     legend: {
-      color: system.color.text.inverse,
+      color: system.color.fg.inverse,
     },
   }),
 };
