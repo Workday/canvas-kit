@@ -16,7 +16,7 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -168,8 +168,8 @@ const MenuItemIcon = (elemProps: SystemIconProps) => {
 };
 
 const MenuItemText = createComponent('span')({
-  Component: ({...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...menuItemStencil.parts.text} {...elemProps} />;
+  Component: ({...elemProps}: CSProps, ref, Element) => {
+    return <Element ref={ref} {...menuItemStencil.parts.text} {...handleCsProp(elemProps)} />;
   },
 });
 
