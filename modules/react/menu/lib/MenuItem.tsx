@@ -16,8 +16,8 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -59,20 +59,32 @@ export const menuItemStencil = createStencil({
     selected: 'menu-item-selected',
   },
   base: ({textPart, iconPart, selectedPart}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.space.x4,
-    padding: `${system.space.x2} ${system.space.x4}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.md, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.sm, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, '0'),
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
-    minHeight: system.space.x10,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    minHeight: cssVar(system.size.md, system.space.x10),
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -90,45 +102,53 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: brand.primary.dark,
-      backgroundColor: brand.primary.lightest,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.brand.fg.primary.strong, brand.primary.dark),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.brand.surface.primary.strong, brand.primary.lightest),
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        [systemIconStencil.vars.color]: brand.primary.accent,
+        [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
-        backgroundColor: brand.primary.base,
-        color: systemIconStencil.vars.color,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        color: cssVar(system.color.fg.inverse, brand.primary.accent),
       },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: brand.neutral.lightest,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.surface.overlay.hover.default, brand.neutral.lightest),
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      color: brand.primary.accent,
-      backgroundColor: brand.primary.base,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      color: cssVar(system.color.fg.inverse, brand.primary.accent),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      color: system.color.fg.disabled,
       cursor: 'default',
+      opacity: system.opacity.disabled,
 
       '&:where(.hover, :hover, [aria-selected=true])': {
         background: 'none',
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: brand.primary.light,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.light),
+        opacity: system.opacity.disabled,
       },
     },
 

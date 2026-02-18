@@ -4,10 +4,11 @@ import React from 'react';
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {space} from '@workday/canvas-kit-react/tokens';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {system} from '@workday/canvas-tokens-web';
 
 const StatusIndicators = styled('div')({
   '& > *': {
-    margin: space.xxs,
+    margin: system.gap.sm,
   },
 });
 

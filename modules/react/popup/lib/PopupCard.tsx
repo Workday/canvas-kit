@@ -8,8 +8,8 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {space} from '@workday/canvas-kit-react/tokens';
-import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
@@ -44,8 +44,9 @@ function getSpace(value?: string | number) {
 }
 
 function getMaxHeight(margin?: string | number) {
-  // set the default margin offset to space.xl
-  let marginOffset: string | number = cssVar(system.space.x10);
+  // set the default margin offset to 40px
+  // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+  let marginOffset: string | number = cssVar(base.size500, system.space.x10);
 
   if (margin) {
     // parse the margin prop
@@ -71,13 +72,25 @@ export const popupCardStencil = createStencil({
     transformOriginVertical: '',
   },
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    color: cssVar(system.color.fg.default, system.color.text.default),
     position: 'relative',
-    maxWidth: `calc(100vw - ${system.space.x8})`,
-    gap: system.space.x2,
-    boxShadow: system.depth[5],
-    minHeight: system.space.zero,
-    padding: system.space.x6,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    maxWidth: calc.subtract('100vw', cssVar(system.size.sm, system.space.x8)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.lg, system.space.x2),
+    boxShadow: system.depth[3],
+    minHeight: 0,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xl, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxxl, system.shape.x6),
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,
@@ -102,7 +115,8 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
-  const translate = getTransformOrigin(transformOrigin, cssVar(system.space.x2));
+  // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+  const translate = getTransformOrigin(transformOrigin, cssVar(system.gap.sm, system.space.x2));
   const cardMaxHeight = getMaxHeight(elemProps.margin);
 
   return (

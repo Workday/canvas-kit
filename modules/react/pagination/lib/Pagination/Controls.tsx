@@ -3,7 +3,7 @@ import * as React from 'react';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {
   chevron2xLeftSmallIcon,
   chevron2xRightSmallIcon,
@@ -23,7 +23,8 @@ export interface PaginationControlsProps {}
 export const paginationControlsStencil = createStencil({
   base: {
     display: 'flex',
-    gap: system.space.x1,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.xs, system.space.x1),
     alignItems: 'center',
   },
 });
