@@ -24,7 +24,7 @@ const deleteButtonStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
     [systemIconStencil.vars.color]: cssVar(
-    buttonColorPropVars.default.icon,
+      buttonColorPropVars.default.icon,
       cssVar(system.color.fg.inverse, brand.error.accent)
     ),
     // Focus Styles
