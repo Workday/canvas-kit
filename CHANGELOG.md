@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.25](https://github.com/Workday/canvas-kit/releases/tag/v14.2.25) (2026-02-18)
+
+### Components
+
+- fix: Add forward-fit to system.color.border.inverse for v4 tokens ([#3761](https://github.com/Workday/canvas-kit/pull/3761)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith, [@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v14.2.24](https://github.com/Workday/canvas-kit/releases/tag/v14.2.24) (2026-02-18)
 
 ### Documentation
