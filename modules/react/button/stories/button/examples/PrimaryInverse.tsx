@@ -13,7 +13,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   gap: system.gap.md,
-  backgroundColor: system.color.bg.primary.default,
+  backgroundColor: system.color.surface.contrast.default,
   padding: system.padding.md,
 });
 
