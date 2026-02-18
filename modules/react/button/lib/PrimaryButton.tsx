@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
 
@@ -29,7 +29,8 @@ const primaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      /* TODO: Update to `system.color.border.inverse.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
@@ -66,7 +67,8 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          [buttonStencil.vars.boxShadowOuter]: cssVar(system.color.border.inverse, base.neutral0),
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Hover Styles

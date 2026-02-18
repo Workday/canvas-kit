@@ -5,7 +5,7 @@ import {
   forwardFitTokens,
 } from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
@@ -84,7 +84,10 @@ export const textInputStencil = createStencil({
             borderColor: brand.common.errorInner,
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `0 0 0 2px ${system.color.border.inverse}, 0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `0 0 0 2px ${
+            /* TODO: Update to `system.color.border.inverse.default` in v15. */
+            cssVar(system.color.border.inverse, base.neutral0)
+          }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
       },
@@ -98,7 +101,10 @@ export const textInputStencil = createStencil({
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          cssVar(system.color.border.inverse, base.neutral0)
+        },
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),
