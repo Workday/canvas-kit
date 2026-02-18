@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.24](https://github.com/Workday/canvas-kit/releases/tag/v14.2.24) (2026-02-18)
+
+### Documentation
+
+- docs: Update v4 tokens guide for MCP ([#3767](https://github.com/Workday/canvas-kit/pull/3767)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
 ## [v14.2.23](https://github.com/Workday/canvas-kit/releases/tag/v14.2.23) (2026-02-12)
 
 ### Components
