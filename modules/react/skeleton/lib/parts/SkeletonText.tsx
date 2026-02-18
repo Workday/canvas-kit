@@ -1,8 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SkeletonTextProps {
+export interface SkeletonTextProps extends CSProps {
   /**
    * The number of "lines" that SkeletonText will display. If there is more than one line, the last line will have a width of `60%`.
    * @default 2

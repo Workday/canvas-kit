@@ -1,5 +1,6 @@
 import {Tabs} from '@workday/canvas-kit-react/tabs';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   return (
@@ -11,7 +12,7 @@ export const Basic = () => {
         <Tabs.Item>Fourth Tab</Tabs.Item>
         <Tabs.Item>Fifth Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: space.m}}>
+      <div style={{marginTop: cssVar(system.gap.lg)}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>

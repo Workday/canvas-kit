@@ -7,8 +7,14 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
-import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {
+  calc,
+  createStencil,
+  createVars,
+  cssVar,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
@@ -36,8 +42,22 @@ const fadeIn = keyframes({
 });
 
 function getSpace(value?: string | number) {
-  if (value && value in space) {
-    return space[value as keyof typeof space];
+  // TODO (deprecated tokens): Revisit tokens after removal of style props
+  const spaceMap = {
+    zero: system.gap.none,
+    xxxs: system.gap.xs,
+    xxs: system.gap.sm,
+    xs: px2rem(12),
+    s: system.gap.md,
+    m: system.gap.lg,
+    l: system.gap.xl,
+    xl: px2rem(40),
+    xxl: system.gap.xxl,
+    xxxl: px2rem(80),
+  };
+
+  if (value && value in spaceMap) {
+    return spaceMap[value as keyof typeof spaceMap];
   } else {
     return value;
   }

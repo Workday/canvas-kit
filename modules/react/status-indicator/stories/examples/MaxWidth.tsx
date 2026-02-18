@@ -1,14 +1,13 @@
 import styled from '@emotion/styled';
-import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const StatusIndicators = styled('div')({
   '& > *': {
-    margin: system.gap.sm,
+    margin: cssVar(system.gap.sm),
   },
 });
 
