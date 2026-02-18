@@ -10,7 +10,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.darken(color, fallback, mixinColor, mixinValue);
 
       expect(expected).toBe(
-        `color-mix(in oklch, var(${color}, var(${fallback})) , var(${mixinColor}, black) calc(var(${mixinValue}, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(${mixinColor}, black) calc(var(${mixinValue}, 0) * 100%))`
       );
     });
   });

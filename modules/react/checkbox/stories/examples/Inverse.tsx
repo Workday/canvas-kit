@@ -6,7 +6,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
-  backgroundColor: system.color.bg.primary.default,
+  backgroundColor: system.color.surface.contrast.default,
   padding: system.space.x4,
 });
 

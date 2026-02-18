@@ -32,8 +32,8 @@ export function maybeWrapValue(input: string, fallback: string): string {
  *
  * ```ts
  * const styles = {
- *   // returns 'color-mix(in oklch, var(--color, --fallback), var(--mixinColor) var(--mixinValue)'
- *   backgroundColor: 'color-mix(in oklch, var(--color, --fallback), var(--mixinColor) var(--mixinValue)'
+ *   // returns 'color-mix(in srgb, var(--color, --fallback), var(--mixinColor) var(--mixinValue)'
+ *   backgroundColor: 'color-mix(in srgb, var(--color, --fallback), var(--mixinColor) var(--mixinValue)'
  * }
  * ```
  *
@@ -51,7 +51,7 @@ export function maybeWrapValue(input: string, fallback: string): string {
  *
  */
 const darken = (color: string, fallback: string, mixinColor: string, mixinValue: string) => {
-  return `color-mix(in oklch, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
+  return `color-mix(in srgb, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
 };
 
 export const colorSpace = {
