@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {
   calc,
@@ -9,7 +9,7 @@ import {
   px2rem,
 } from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
@@ -52,6 +52,17 @@ export const toolbarDropdownButtonStencil = createStencil({
         buttonColorPropVars.focus.icon,
         cssVar(system.color.fg.strong, system.color.fg.muted.soft)
       ),
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        innerColor: cssVar(
+          system.color.focus.inverse,
+          cssVar(system.color.border.inverse.default, base.neutral0)
+        ),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+      }),
     },
 
     '&:hover, &.hover': {

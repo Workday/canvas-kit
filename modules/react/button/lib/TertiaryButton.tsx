@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
@@ -46,16 +46,17 @@ const tertiaryButtonStencil = createStencil({
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowInner]: cssVar(
-        system.color.focus.inverse,
-        cssVar(system.color.border.inverse.default, base.neutral0)
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowOuter]: cssVar(
-        system.color.brand.focus.primary,
-        brand.common.focusOutline
-      ),
+      ...focusRing({
+        width: 2,
+        separation: 0,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        innerColor: cssVar(
+          system.color.focus.inverse,
+          cssVar(system.color.border.inverse.default, base.neutral0)
+        ),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+      }),
     },
     // Hover Styles
     '&:hover, &.hover': {
@@ -171,12 +172,14 @@ const tertiaryButtonStencil = createStencil({
             system.color.fg.inverse
           ),
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.boxShadowOuter]: cssVar(
-            system.color.focus.inverse,
-            cssVar(system.color.border.inverse.default, base.neutral0)
-          ),
+          ...focusRing({
+            width: 2,
+            separation: 0,
+            outerColor: cssVar(
+              system.color.focus.inverse,
+              cssVar(system.color.border.inverse.default, base.neutral0)
+            ),
+          }),
         },
         // Active Styles
         '&:active, &.active': {
