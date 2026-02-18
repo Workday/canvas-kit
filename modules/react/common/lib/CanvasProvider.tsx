@@ -54,6 +54,51 @@ const brandColorMapping = {
 
 /**
  * Mapping from deprecated common palette keys to new brand.common tokens.
+ *
+ * ## Brandable System Tokens
+ *
+ * These are all the `system.color.brand.*` tokens that can be customized via theming.
+ * Each token references a brand token that can be overridden through the CanvasProvider theme prop.
+ *
+ * ### Focus Tokens
+ * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.focus.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
+ * - `system.color.brand.focus.caution.inner` → `brand.caution.400` → Controlled by `palette.alert.main` or `alertInner`
+ * - `system.color.brand.focus.caution.outer` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
+ *
+ * ### Border Tokens
+ * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.border.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
+ * - `system.color.brand.border.caution` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
+ *
+ * ### Surface Tokens
+ * - `system.color.brand.surface.primary.default` → `brand.primary.A25` → Controlled by `palette.primary.lightest`
+ * - `system.color.brand.surface.primary.strong` → `brand.primary.A50` → Controlled by `palette.primary.lighter`
+ * - `system.color.brand.surface.critical.default` → `brand.critical.A25` → Controlled by `palette.error.lightest`
+ * - `system.color.brand.surface.critical.strong` → `brand.critical.A50` → Controlled by `palette.error.lighter`
+ * - `system.color.brand.surface.caution.default` → `brand.caution.A25` → Controlled by `palette.alert.lightest`
+ * - `system.color.brand.surface.caution.strong` → `brand.caution.A50` → Controlled by `palette.alert.lighter`
+ * - `system.color.brand.surface.positive.default` → `brand.positive.A25` → Controlled by `palette.success.lightest`
+ * - `system.color.brand.surface.positive.strong` → `brand.positive.A50` → Controlled by `palette.success.lighter`
+ * - `system.color.brand.surface.selected` → `brand.primary.A50` → Controlled by `palette.primary.lighter`
+ *
+ * ### Accent Tokens
+ * - `system.color.brand.accent.primary` → `brand.primary.600` → Controlled by `palette.primary.main`
+ * - `system.color.brand.accent.critical` → `brand.critical.600` → Controlled by `palette.error.main`
+ * - `system.color.brand.accent.caution` → `brand.caution.400` → Controlled by `palette.alert.main`
+ * - `system.color.brand.accent.positive` → `brand.positive.600` → Controlled by `palette.success.main`
+ * - `system.color.brand.accent.action` → `brand.primary.600` → Controlled by `palette.primary.main`
+ *
+ * ### Foreground (Text/Icon) Tokens
+ * - `system.color.brand.fg.primary.default` → `brand.primary.600` → Controlled by `palette.primary.main`
+ * - `system.color.brand.fg.primary.strong` → `brand.primary.700` → Controlled by `palette.primary.dark`
+ * - `system.color.brand.fg.critical.default` → `brand.critical.600` → Controlled by `palette.error.main`
+ * - `system.color.brand.fg.critical.strong` → `brand.critical.700` → Controlled by `palette.error.dark`
+ * - `system.color.brand.fg.caution.default` → `brand.caution.600` → Controlled by `palette.alert.darkest`
+ * - `system.color.brand.fg.caution.strong` → `brand.caution.700` → Controlled by `palette.alert.dark` (Note: no direct mapping, inherits default)
+ * - `system.color.brand.fg.positive.default` → `brand.positive.600` → Controlled by `palette.success.main`
+ * - `system.color.brand.fg.positive.strong` → `brand.positive.700` → Controlled by `palette.success.dark`
+ * - `system.color.brand.fg.selected` → `brand.primary.700` → Controlled by `palette.primary.dark`
  */
 const commonTokenMapping = {
   focusOutline: brand.common.focus, // maps to brand.primary500
@@ -143,6 +188,26 @@ export const useCanvasThemeToCssVars = (
             // system.color.brand.border.primary -> brand.primary.500
             // @ts-ignore
             style[system.color.brand.border.primary] = value;
+          }
+
+          // Additional system token forwarding for alertInner
+          if (key === 'alertInner') {
+            // Forward alertInner to system.color.brand.focus.caution.inner
+            // This token is used by components (e.g., TextInput with error="caution")
+            // for inner focus ring styling. Maps to brand.caution400 via brand.common.caution.inner.
+            // This ensures backwards compatibility when users customize alertInner in their theme.
+            // @ts-ignore
+            style[system.color.brand.focus.caution.inner] = value;
+          }
+
+          // Additional system token forwarding for alertOuter
+          if (key === 'alertOuter') {
+            // Forward alertOuter to system.color.brand.border.caution
+            // This token is used by components (e.g., TextInput with error="caution")
+            // for border and outer focus ring styling. Maps to brand.caution500 via brand.common.caution.outer.
+            // This ensures backwards compatibility when users customize alertOuter in their theme.
+            // @ts-ignore
+            style[system.color.brand.border.caution] = value;
           }
         }
       });
