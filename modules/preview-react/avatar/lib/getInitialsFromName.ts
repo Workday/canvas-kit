@@ -17,5 +17,5 @@ export const getInitialsFromName = (name: string) => {
   const last = filteredParts.length > 1 ? filteredParts[filteredParts.length - 1] : undefined;
   const lastInitial = last?.[0] || '';
 
-  return `${firstInitial}${lastInitial}`;
+  return `${firstInitial}${lastInitial}`.toUpperCase();
 };
