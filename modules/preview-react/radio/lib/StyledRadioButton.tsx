@@ -132,7 +132,7 @@ const radioInputStencil = createStencil({
           // The backgroundColor represents the dot in the middle of the radio.
           // The borderColor represents the border around the middle dot of the radio.
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-            backgroundColor: brand.primary.base, // innr circle background color
+            backgroundColor: brand.primary.base, // inner circle background color
             /* TODO: Update to `system.color.border.inverse.default` in v15. */
             borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
           },
@@ -147,7 +147,7 @@ const radioInputStencil = createStencil({
         // The backgroundColor represents the dot in the middle of the radio.
         // The borderColor represents the border around the middle dot of the radio.
         '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
-          backgroundColor: brand.primary.base, // innr circle background color
+          backgroundColor: brand.primary.base, // inner circle background color
           /* TODO: Update to `system.color.border.inverse.default` in v15. */
           borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
         },
