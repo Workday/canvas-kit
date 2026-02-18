@@ -2,7 +2,7 @@ import {CacheProvider, Theme, ThemeProvider} from '@emotion/react';
 import * as React from 'react';
 
 import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
 
@@ -25,6 +25,42 @@ const mappedKeys = {
   darkest: 'darkest',
   contrast: 'accent',
 };
+
+/**
+ * Mapping from deprecated theme palette keys to new numerical brand tokens.
+ * This ensures backwards compatibility when consumers use the old theme format.
+ * For example: palette.primary.main -> brand.primary600
+ */
+const numericalTokenMapping = {
+  lightest: '25',
+  lighter: '50',
+  light: '200',
+  main: '600',
+  dark: '700',
+  darkest: '800',
+} as const;
+
+/**
+ * Mapping from deprecated theme palette colors to new brand token names.
+ * For example: 'primary' -> 'primary', 'error' -> 'critical', 'success' -> 'positive'
+ */
+const brandColorMapping = {
+  primary: 'primary',
+  error: 'critical',
+  success: 'positive',
+  alert: 'caution',
+  neutral: 'neutral',
+} as const;
+
+/**
+ * Mapping from deprecated common palette keys to new brand.common tokens.
+ */
+const commonTokenMapping = {
+  focusOutline: brand.common.focus, // maps to brand.primary500
+  alertInner: brand.common.caution.inner, // maps to brand.caution400
+  alertOuter: brand.common.caution.outer, // maps to brand.caution500
+  errorInner: brand.common.critical, // maps to brand.critical500
+} as const;
 
 /**
  * If you wish to reset the theme to the default, apply this class on the CanvasProvider.
@@ -84,32 +120,142 @@ export const useCanvasThemeToCssVars = (
   const className = (elemProps.className || '').split(' ').concat(defaultBranding).join(' ');
   const style = elemProps.style || {};
   const {palette} = filledTheme.canvas;
+
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
       (['focusOutline', 'alertInner', 'alertOuter', 'errorInner'] as const).forEach(key => {
         if (palette.common[key] !== defaultCanvasTheme.palette.common[key]) {
+          const value = maybeWrapCSSVariables(palette.common[key]);
+
+          // Set deprecated token for backwards compatibility
           //@ts-ignore
-          style[brand.common.focusOutline] = maybeWrapCSSVariables(palette.common.focusOutline);
+          style[brand.common[key]] = value;
+
+          // Forward to new brand.common tokens
           //@ts-ignore
-          style[brand.common.alertInner] = maybeWrapCSSVariables(palette.common.alertInner);
-          //@ts-ignore
-          style[brand.common.alertOuter] = maybeWrapCSSVariables(palette.common.alertOuter);
-          //@ts-ignore
-          style[brand.common.errorInner] = maybeWrapCSSVariables(palette.common.errorInner);
+          style[commonTokenMapping[key]] = value;
+
+          // Additional system token forwarding for focusOutline
+          if (key === 'focusOutline') {
+            // system.color.brand.focus.primary -> brand.primary.500 (via brand.common.focus)
+            // @ts-ignore
+            style[system.color.brand.focus.primary] = value;
+            // system.color.brand.border.primary -> brand.primary.500
+            // @ts-ignore
+            style[system.color.brand.border.primary] = value;
+          }
         }
       });
-    }
-    (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
-      key => {
-        // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-        //@ts-ignore
-        if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
-          // @ts-ignore
-          style[brand[color][mappedKeys[key]]] = maybeWrapCSSVariables(palette[color][key]);
+    } else {
+      (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
+        key => {
+          // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
+          //@ts-ignore
+          if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+            const value = maybeWrapCSSVariables(palette[color][key]);
+
+            // Set deprecated token (e.g., brand.primary.base) for backwards compatibility
+            // @ts-ignore
+            style[brand[color][mappedKeys[key]]] = value;
+
+            // Forward to new numerical brand tokens (e.g., brand.primary600)
+            // Skip 'contrast' as it doesn't map to numerical tokens
+            if (key !== 'contrast' && key in numericalTokenMapping) {
+              const newBrandColor = brandColorMapping[color as keyof typeof brandColorMapping];
+              const numericalSuffix =
+                numericalTokenMapping[key as keyof typeof numericalTokenMapping];
+
+              // @ts-ignore - Dynamically access brand tokens like brand.primary600
+              const numericalToken = brand[newBrandColor + numericalSuffix];
+              if (numericalToken) {
+                // @ts-ignore
+                style[numericalToken] = value;
+              }
+
+              // Forward to all relevant system.color.brand.* tokens
+              // These system tokens reference the numerical brand tokens, so updating them ensures full compatibility
+              if (key === 'main') {
+                // system.color.brand.accent.{color} -> brand.{color}.600 (except caution -> 400)
+                // @ts-ignore
+                const systemAccentToken = system.color.brand.accent[newBrandColor];
+                if (systemAccentToken) {
+                  // @ts-ignore
+                  style[systemAccentToken] = value;
+                }
+
+                // system.color.brand.fg.{color}.default -> brand.{color}.600
+                // @ts-ignore
+                const systemFgToken = system.color.brand.fg[newBrandColor]?.default;
+                if (systemFgToken) {
+                  // @ts-ignore
+                  style[systemFgToken] = value;
+                }
+
+                // system.color.brand.focus.primary (maps to brand.primary.500 per docs)
+                // For primary only, update focus border when 'main' changes
+                if (newBrandColor === 'primary') {
+                  // Calculate a reasonable focus color based on the main color
+                  // We'll use the main value since brand.primary.500 derives from it
+                  // @ts-ignore
+                  const focusToken = system.color.brand.focus.primary;
+                  if (focusToken) {
+                    // @ts-ignore
+                    style[focusToken] = value;
+                  }
+                }
+              } else if (key === 'dark') {
+                // system.color.brand.fg.{color}.strong -> brand.{color}.700
+                // @ts-ignore
+                const systemFgStrongToken = system.color.brand.fg[newBrandColor]?.strong;
+                if (systemFgStrongToken) {
+                  // @ts-ignore
+                  style[systemFgStrongToken] = value;
+                }
+
+                // system.color.brand.fg.selected -> brand.primary.700 (for primary only)
+                if (newBrandColor === 'primary') {
+                  // @ts-ignore
+                  const selectedToken = system.color.brand.fg.selected;
+                  if (selectedToken) {
+                    // @ts-ignore
+                    style[selectedToken] = value;
+                  }
+                }
+              } else if (key === 'lighter') {
+                // system.color.brand.surface.{color}.strong -> brand.{color}.A50
+                // Note: A50 tokens are different from regular 50 tokens but we'll forward the lighter value
+                // @ts-ignore
+                const surfaceStrongToken = system.color.brand.surface[newBrandColor]?.strong;
+                if (surfaceStrongToken) {
+                  // @ts-ignore
+                  style[surfaceStrongToken] = value;
+                }
+
+                // system.color.brand.surface.selected -> brand.primary.A50 (for primary only)
+                if (newBrandColor === 'primary') {
+                  // @ts-ignore
+                  const selectedSurfaceToken = system.color.brand.surface.selected;
+                  if (selectedSurfaceToken) {
+                    // @ts-ignore
+                    style[selectedSurfaceToken] = value;
+                  }
+                }
+              } else if (key === 'lightest') {
+                // system.color.brand.surface.{color}.default -> brand.{color}.A25
+                // @ts-ignore
+                const surfaceDefaultToken = system.color.brand.surface[newBrandColor]?.default;
+                if (surfaceDefaultToken) {
+                  // @ts-ignore
+                  style[surfaceDefaultToken] = value;
+                }
+              }
+            }
+          }
         }
-      }
-    );
+      );
+    }
   });
+
   return {...elemProps, className, style};
 };
 
