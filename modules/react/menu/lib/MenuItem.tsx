@@ -184,7 +184,6 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
   (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
     const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
     const id = elemProps['data-id'];
-    const [canShowFocus, setCanShowFocus] = React.useState(false);
 
     // focus on the item with the cursor
     React.useLayoutEffect(() => {
@@ -193,7 +192,6 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
           // delay focus changes to allow PopperJS to position
           requestAnimationFrame(() => {
             localRef.current?.focus();
-            setCanShowFocus(true);
           });
         }
       }
@@ -202,7 +200,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
 
     return {
       ref: elementRef,
-      className: canShowFocus && isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
+      className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,
     };
   }
 );
