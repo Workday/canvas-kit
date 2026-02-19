@@ -143,7 +143,6 @@ export const Tooltip = createComponent('div')({
           ...(/^(muted|describe)$/.test(type) && children.props['aria-label']
             ? {'aria-label': children.props['aria-label']}
             : {}),
-          ref: elementRef,
         })}
         <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
           {({placement}) => {
