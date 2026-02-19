@@ -4,10 +4,8 @@ import {
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
-import {Caution} from './examples/Caution';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
-import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
@@ -35,8 +33,8 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Text Input should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
-accessibility standards.
+Text Input should be used in tandem with [Form Field](/components/inputs/form-field/) to ensure
+proper label association and screen reader support.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -52,6 +50,11 @@ Set the `placeholder` prop of the Text Input to display a sample of its expected
 before a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
+
+> **Accessibility Note**: Always provide a persistent `FormField.Label` and never rely on
+> placeholder text as the only label for an input. Placeholders can disappear or lack sufficient
+> contrast. Use placeholders only for short format examples (e.g., "name@example.com"), and place
+> detailed instructions or guidance in `FormField.Hint` instead of the placeholder.
 
 ### Ref Forwarding
 
@@ -100,23 +103,46 @@ method to change width. The `width` prop is used to correctly position other inn
 
 <ExampleCodeBlock code={Icons} />
 
+> **Accessibility Note**: In this example, the mail icon is decorative and hidden from screen
+> readers. If icons are used for conveying meaning in addition to the label text, a text alternative
+> must be provided for screen readers.
+
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Text Input to the Caution or Error state, respectively. You
-will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Form Field provides error and caution states for Text Input. Set the `error` prop on Form Field to
+`"error"` or `"caution"` and use `FormField.Hint` to provide error messages. See
+[Form Field's Error documentation](/components/inputs/form-field/#error-states) for examples and
+accessibility guidance.
 
-The `error` prop may be applied directly to the Text Input with a value of
-`TextInput.ErrorType.Caution` or `TextInput.ErrorType.Error` if Form Field is not being used.
+## Accessibility
 
-#### Caution
+`TextInput` should be used with [Form Field](/components/inputs/form-field/) to ensure proper
+labeling, error handling, and help text association. See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
+comprehensive guidance on form accessibility best practices.
 
-<ExampleCodeBlock code={Caution} />
+### Autocomplete Attribute
 
-#### Error
+- Add appropriate `autoComplete` values to indicate the input's purpose (e.g., `"email"`, `"name"`,
+  `"street-address"`, `"tel"`). Read more about
+  [Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html).
+- Autocomplete enables browser autofill and helps assistive technologies understand the field's
+  purpose, benefiting users with cognitive disabilities and motor impairments.
+- Autocomplete also helps password managers identify the correct fields.
 
-<ExampleCodeBlock code={Error} />
+### Input Type for Mobile Keyboards
+
+`TextInput` defaults to `<input type="text">`, but for better mobile keyboard support, use more
+specific `type` attributes (like `"email"`, `"tel"`, `"url"`, or `"search"`) as needed.
+
+### Screen Reader Experience
+
+When properly implemented with `FormField`, screen readers will announce:
+
+- The label text when the input receives focus.
+- Required, disabled, or read-only status.
+- Help text and error messages (via `aria-describedby`).
+- The current value or "blank" if empty.
 
 ## Component API
 

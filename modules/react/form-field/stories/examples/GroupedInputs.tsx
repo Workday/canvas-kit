@@ -160,7 +160,7 @@ export const GroupedInputs = () => {
             })}
           </FormFieldGroup.List>
           <FormFieldGroup.Hint>
-            {error === 'error' && 'You must choose one topping'}
+            {error === 'error' && 'Error: You must choose one topping'}
           </FormFieldGroup.Hint>
         </FormFieldGroup>
         <FormFieldGroup error={radioError} isRequired>
@@ -186,7 +186,7 @@ export const GroupedInputs = () => {
               </FormFieldGroup.Input>
             </FormFieldGroup.List>
             <FormFieldGroup.Hint>
-              {radioError === 'error' ? 'You must choose a crust' : null}
+              {radioError === 'error' ? 'Error: You must choose a crust' : null}
             </FormFieldGroup.Hint>
           </FormFieldGroup.Field>
         </FormFieldGroup>
