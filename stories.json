@@ -2065,18 +2065,6 @@
         "__isArgsStory": false
       }
     },
-    "components-inputs-text-input--caution": {
-      "id": "components-inputs-text-input--caution",
-      "name": "Caution",
-      "title": "Components/Inputs/Text Input",
-      "importPath": "./modules/react/text-input/stories/TextInput.stories.ts",
-      "kind": "Components/Inputs/Text Input",
-      "story": "Caution",
-      "parameters": {
-        "fileName": "./modules/react/text-input/stories/TextInput.stories.ts",
-        "__isArgsStory": false
-      }
-    },
     "components-inputs-text-input--disabled": {
       "id": "components-inputs-text-input--disabled",
       "name": "Disabled",
@@ -2084,18 +2072,6 @@
       "importPath": "./modules/react/text-input/stories/TextInput.stories.ts",
       "kind": "Components/Inputs/Text Input",
       "story": "Disabled",
-      "parameters": {
-        "fileName": "./modules/react/text-input/stories/TextInput.stories.ts",
-        "__isArgsStory": false
-      }
-    },
-    "components-inputs-text-input--error": {
-      "id": "components-inputs-text-input--error",
-      "name": "Error",
-      "title": "Components/Inputs/Text Input",
-      "importPath": "./modules/react/text-input/stories/TextInput.stories.ts",
-      "kind": "Components/Inputs/Text Input",
-      "story": "Error",
       "parameters": {
         "fileName": "./modules/react/text-input/stories/TextInput.stories.ts",
         "__isArgsStory": false
@@ -2185,18 +2161,6 @@
         "__isArgsStory": false
       }
     },
-    "components-inputs-textarea--caution": {
-      "id": "components-inputs-textarea--caution",
-      "name": "Caution",
-      "title": "Components/Inputs/TextArea",
-      "importPath": "./modules/react/text-area/stories/TextArea.stories.ts",
-      "kind": "Components/Inputs/TextArea",
-      "story": "Caution",
-      "parameters": {
-        "fileName": "./modules/react/text-area/stories/TextArea.stories.ts",
-        "__isArgsStory": false
-      }
-    },
     "components-inputs-textarea--disabled": {
       "id": "components-inputs-textarea--disabled",
       "name": "Disabled",
@@ -2204,18 +2168,6 @@
       "importPath": "./modules/react/text-area/stories/TextArea.stories.ts",
       "kind": "Components/Inputs/TextArea",
       "story": "Disabled",
-      "parameters": {
-        "fileName": "./modules/react/text-area/stories/TextArea.stories.ts",
-        "__isArgsStory": false
-      }
-    },
-    "components-inputs-textarea--error": {
-      "id": "components-inputs-textarea--error",
-      "name": "Error",
-      "title": "Components/Inputs/TextArea",
-      "importPath": "./modules/react/text-area/stories/TextArea.stories.ts",
-      "kind": "Components/Inputs/TextArea",
-      "story": "Error",
       "parameters": {
         "fileName": "./modules/react/text-area/stories/TextArea.stories.ts",
         "__isArgsStory": false
