@@ -1,12 +1,13 @@
 import * as React from 'react';
+
+import {AccessibleHide} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   SidePanel,
-  useSidePanelModel,
   SidePanelTransitionStates,
+  useSidePanelModel,
 } from '@workday/canvas-kit-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
-import {AccessibleHide} from '@workday/canvas-kit-react/common';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const stylesOverride = {
@@ -36,11 +37,10 @@ export const OnStateTransition = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton
-          tooltipTextCollapse="Collapsing View"
-          tooltipText="Control Side Panel"
-        />
-        <AccessibleHide id={model.state.labelId}>Hidden Title</AccessibleHide>
+        <SidePanel.ToggleButton />
+        <SidePanel.Heading hidden size="small">
+          Hidden Title
+        </SidePanel.Heading>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">

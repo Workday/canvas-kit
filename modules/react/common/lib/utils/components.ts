@@ -1,9 +1,10 @@
 import React from 'react';
+
 import {assert} from './assert';
-import {memoize} from './memoize';
-import {MergeProps, mergeProps, RemoveNulls} from './mergeProps';
-import {Model} from './models';
 import {setCanvasKitTags} from './insights';
+import {memoize} from './memoize';
+import {MergeProps, RemoveNulls, mergeProps} from './mergeProps';
+import {Model} from './models';
 
 /**
  * Adds the `as` to the style interface to support `as` in styled components
@@ -26,20 +27,20 @@ type Constructor<T> = new (...args: any[]) => T;
 type ExtractRef<T> = T extends undefined // test if T was even passed in
   ? never // T not passed in, we'll set the ref to `never`
   : T extends Constructor<infer C>
-  ? React.LegacyRef<C>
-  : React.Ref<
-      T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
-        ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
-        : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from an `ElementComponent` interface
-        ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
-          ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
-          : U // if no, fall back to inferred U. Hopefully it is already an element interface
-        : T extends React.FC<{ref?: infer R}> // test if T extends a React functional component with a ref (Emotion's styled components do this)
-        ? R extends React.RefObject<infer E> // if yes, extract the element interface. This step unwraps the ref. Otherwise we'll get React.Ref<React.Ref<Element>>
-          ? E // if yes, use the inferred E
-          : never // never here prevents double refs. Basically the return would be React.Ref<E | {this value}>. I'm not entirely sure why...
-        : T // if no, fall back to T. Hopefully it is already an element interface
-    >;
+    ? React.LegacyRef<C>
+    : React.Ref<
+        T extends keyof ElementTagNameMap // test if T is an element string like 'button' or 'div'
+          ? ElementTagNameMap[T] // if yes, the ref should be the element interface. `'button' => HTMLButtonElement`
+          : T extends ElementComponent<infer U, any> // if no, check if we can infer the the element type from an `ElementComponent` interface
+            ? U extends keyof ElementTagNameMap // test inferred U to see if it extends an element string
+              ? ElementTagNameMap[U] // if yes, use the inferred U and convert to an element interface. `'button' => HTMLButtonElement`
+              : U // if no, fall back to inferred U. Hopefully it is already an element interface
+            : T extends React.FC<{ref?: infer R}> // test if T extends a React functional component with a ref (Emotion's styled components do this)
+              ? R extends React.RefObject<infer E> // if yes, extract the element interface. This step unwraps the ref. Otherwise we'll get React.Ref<React.Ref<Element>>
+                ? E // if yes, use the inferred E
+                : never // never here prevents double refs. Basically the return would be React.Ref<E | {this value}>. I'm not entirely sure why...
+              : T // if no, fall back to T. Hopefully it is already an element interface
+      >;
 
 /**
  * Generic component props with "as" prop
@@ -98,24 +99,24 @@ export type ExtractProps<
     | Component<any>
     | React.ComponentType<any>
     | undefined
-    | never = undefined
+    | never = undefined,
 > = ExtractMaybeModel<
   TComponent,
   TComponent extends {__element: infer E; __props: infer P} //ElementComponent<infer E, infer P> // test if `TComponent` is an `ElementComponent`, while inferring both default element and props associated
     ? [TElement] extends [never] // test if user passed `never` for the `TElement` override. We have to test `never` first, otherwise TS gets confused and `ExtractProps` will return `never`. https://github.com/microsoft/TypeScript/issues/23182
       ? P // else attach only inferred props `P`
       : TElement extends undefined // else test if TElement was defined
-      ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
-        ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
-        : P & ExtractProps<E> // E isn't in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `E`.
-      : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
-      ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
-      : P & ExtractProps<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`.
+        ? E extends keyof JSX.IntrinsicElements // test if the inferred element `E` is in `JSX.IntrinsicElements`
+          ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[E]> // `TElement` wasn't explicitly defined, so let's fall back to the inferred element's HTML attribute interface + props `P`
+          : P & ExtractProps<E> // E isn't in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `E`.
+        : TElement extends keyof JSX.IntrinsicElements // `TElement` was defined, test if it is in `JSX.IntrinsicElements`
+          ? P & ExtractHTMLAttributes<JSX.IntrinsicElements[TElement]> // `TElement` is in `JSX.IntrinsicElements`, return inferred props `P` + HTML attributes of `TElement`
+          : P & ExtractProps<TElement> // `TElement` is not in `JSX.IntrinsicElements`, return inferred props `P` + props extracted from component `TElement`.
     : TComponent extends {__props: infer P} // test if `TComponent` is a `Component`, while inferring props `P`
-    ? P // else attach only inferred props `P`
-    : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
-    ? P // it was a `React.ComponentType`, return inferred props `P`
-    : {} // We don't know what `TComponent` was, return an empty object
+      ? P // else attach only inferred props `P`
+      : TComponent extends React.ComponentType<infer P> // test if `TComponent` is a `React.ComponentType` (class or functional component)
+        ? P // it was a `React.ComponentType`, return inferred props `P`
+        : {} // We don't know what `TComponent` was, return an empty object
 >;
 
 // If the component has a model, be sure to add it to the prop interface
@@ -240,7 +241,7 @@ export const createContainer =
       | React.ComponentType
       | ElementComponent<any, any>
       | ElementComponentM<any, any, any>
-      | undefined = undefined
+      | undefined = undefined,
   >(
     as?: E
   ) =>
@@ -250,7 +251,7 @@ export const createContainer =
     } & {defaultConfig?: Record<string, any>},
     TDefaultContext extends Model<any, any>,
     TElemPropsHook,
-    SubComponents = {}
+    SubComponents = {},
   >({
     displayName,
     modelHook,
@@ -383,14 +384,14 @@ export const createSubcomponent =
       | React.ComponentType
       | ElementComponent<any, any>
       | ElementComponentM<any, any, any>
-      | undefined = undefined
+      | undefined = undefined,
   >(
     as?: E
   ) =>
   <
     TElemPropsHook, // normally we'd put a constraint here, but doing so causes the `infer` below to fail to infer the return props
     TModelHook extends ((config: any) => Model<any, any>) & {Context?: React.Context<any>},
-    SubComponents = {}
+    SubComponents = {},
   >({
     displayName,
     modelHook,
@@ -493,7 +494,7 @@ export const createComponent =
       | keyof JSX.IntrinsicElements
       | React.ComponentType
       | ElementComponent<any, any>
-      | undefined = undefined
+      | undefined = undefined,
   >(
     as?: E
   ) =>
@@ -542,7 +543,7 @@ export const createComponent =
       ({as: asOverride, ...props}, ref) => {
         return Component(
           {
-            ...setCanvasKitTags(displayName),
+            ...setCanvasKitTags(displayName, props),
             ...props,
           } as any,
           ref as ExtractRef<E>,
@@ -940,7 +941,7 @@ export function composeHooks<
   H4 extends BaseHook<any, {}>,
   H5 extends BaseHook<any, {}>,
   H6 extends BaseHook<any, {}>,
-  H7 extends BaseHook<any, {}>
+  H7 extends BaseHook<any, {}>,
 >(
   hook1: H1,
   hook2: H2,

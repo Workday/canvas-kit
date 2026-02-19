@@ -2,8 +2,8 @@ import {Basic} from '../../modules/react/pill/stories/examples/Basic';
 import {WithAvatar} from '../../modules/react/pill/stories/examples/WithAvatar';
 import {WithCount} from '../../modules/react/pill/stories/examples/WithCount';
 import {WithList} from '../../modules/react/pill/stories/examples/WithList';
-import {WithRemovable} from '../../modules/react/pill/stories/examples/WithRemovable';
 import {WithReadOnly} from '../../modules/react/pill/stories/examples/WithReadOnly';
+import {WithRemovable} from '../../modules/react/pill/stories/examples/WithRemovable';
 
 describe('Pill', () => {
   [Basic, WithAvatar, WithCount].forEach(Example => {

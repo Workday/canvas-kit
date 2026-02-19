@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -26,19 +27,6 @@ const stylesOverride = {
   }),
 };
 
-/*
- * NOTE TO DEV:
- * Spreading the `controlProps` onto an external control creates serious accessibility issues.
- * - `aria-labelledby` id reference is invalid when the SidePanel is collapsed
- * - `aria-labelledby` will change the name of "Toggle Side Panel" button to "Tasks Panel"
- * - `aria-expanded` won't make sense to screen reader users when the expanded SidePanel content isn't following the control
- * - `aria-controls` is unsupported by screen readers and will not allow users to navigate to the controlled content
- *
- * SOLUTION:
- * - Pass the `controlProps` click handler function down to the external control component.
- * - Add a toggle state to Button components with `aria-pressed` for screen readers,
- * - OR use a similar toggle input like Checkbox or Switch.
- */
 export const ExternalControl = () => {
   const model = useSidePanelModel({
     initialTransitionState: 'collapsed',
@@ -48,13 +36,13 @@ export const ExternalControl = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton
-          tooltipTextCollapse="Collapsing View"
-          tooltipText="Control Side Panel"
-        />
-        <Flex cs={stylesOverride.panel}>
-          <SidePanel.Heading cs={stylesOverride.panelHeading}>Tasks Panel</SidePanel.Heading>
-        </Flex>
+        <SidePanel.ToggleButton aria-label="Collapse View" />
+        <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>
+          Task Panel
+        </SidePanel.Heading>
+        {model.state.transitionState === 'expanded' && (
+          <Flex cs={stylesOverride.panel}>Contents</Flex>
+        )}
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">

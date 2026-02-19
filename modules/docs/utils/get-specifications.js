@@ -1,73 +1,40 @@
-const fs = require('fs');
-const util = require('util');
+const glob = require('glob');
 const path = require('path');
-const glob = util.promisify(require('glob'));
-const readFile = util.promisify(fs.readFile);
-const typescript = require('typescript');
+const fs = require('fs');
 
-function getSpecifications() {
-  return glob('cypress/integration/**/*.spec.ts', {cwd: path.join(__dirname, '../../..')}).then(
-    async matches => {
-      const all = [];
-      for (match of matches) {
-        const specs = await readFile(path.join(__dirname, '../../../', match))
-          .then(contents => contents.toString())
-          .then(contents => contents.replace(/(import [^\n]+\n)/g, '')) // remove imports
-          .then(contents => typescript.transpile(contents))
-          .then(contents => {
-            let children = [];
+const parseSpecFilePath = path.join(__dirname, '../dist/es6/utils/parseSpecFile.js');
 
-            // eslint-disable-next-line no-empty-function
-            const noop = () => {};
-            const before = noop;
-            const beforeEach = noop;
-            const after = noop;
-            const afterEach = noop;
+async function getSpecifications() {
+  let parseSpecFile;
+  if (fs.existsSync(parseSpecFilePath)) {
+    const module = require(parseSpecFilePath);
+    parseSpecFile = module.parseSpecFile;
+  } else {
+    // Fallback: load the TypeScript file directly (tsx handles this)
+    const module = require('./parseSpecFile');
+    parseSpecFile = module.parseSpecFile;
+  }
 
-            const describe = (name, optionsOrCb, cb) => {
-              const childrenBefore = children;
-              const obj = {};
-              obj.type = 'describe';
-              obj.name = name;
-              obj.children = [];
-              children.push(obj);
-              children = obj.children;
-              if (typeof optionsOrCb === 'function') {
-                optionsOrCb();
-              } else if (typeof optionsOrCb === 'function') {
-                cb();
-              }
-              children = childrenBefore;
-            };
-            describe.skip = noop;
-            describe.only = noop;
-            const context = describe;
+  // Find all Cypress component spec files
+  const specFiles = glob.sync('cypress/component/**/*.spec.tsx', {
+    cwd: path.join(__dirname, '../../..'),
+    absolute: true,
+  });
 
-            const it = name => {
-              const obj = {};
-              obj.type = 'it';
-              obj.name = name;
-              children.push(obj);
-            };
-            it.skip = noop;
-            it.only = noop;
-
-            // eslint-disable-next-line no-eval
-            eval(contents);
-
-            return {
-              type: 'file',
-              name: path.basename(match).replace(`spec.${path.extname(match)}`, ''),
-              children,
-            };
-          });
-
-        all.push(specs);
+  // Parse each spec file
+  const specifications = [];
+  for (const file of specFiles) {
+    try {
+      const parsed = await parseSpecFile(file);
+      if (parsed) {
+        specifications.push(parsed);
       }
-
-      return all;
+    } catch (error) {
+      console.warn(`Failed to parse spec file ${file}:`, error.message);
     }
-  );
+  }
+
+  return specifications;
 }
 
 module.exports = getSpecifications;

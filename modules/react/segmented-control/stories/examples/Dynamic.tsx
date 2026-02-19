@@ -1,12 +1,13 @@
 import React from 'react';
+
 import {
   SegmentedControl,
   useSegmentedControlModel,
 } from '@workday/canvas-kit-react/segmented-control';
 import {
   gridIcon,
-  listViewIcon,
   listDetailIcon,
+  listViewIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 

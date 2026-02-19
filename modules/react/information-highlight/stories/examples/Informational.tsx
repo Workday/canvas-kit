@@ -1,7 +1,7 @@
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
-import {system} from '@workday/canvas-tokens-web';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const contentTextStyles = createStyles({
   margin: 0,

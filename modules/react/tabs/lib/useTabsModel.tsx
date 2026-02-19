@@ -1,16 +1,16 @@
 import React from 'react';
-import {createModelHook, useModalityType} from '@workday/canvas-kit-react/common';
+
 import {
   defaultGetId,
   useListModel,
   useOverflowListModel,
 } from '@workday/canvas-kit-react/collection';
-
+import {createModelHook, useModalityType} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 /**
  * The TabsModel extends the [Collection
- * System](/getting-started/for-developers/resources/collection-api/). Tabs have tab items and
+ * System](/get-started/for-developers/guides/collection-api/). Tabs have tab items and
  * panels. Tabs can be overflowed if there isn't enough room to render and will overflow to a
  * {@link MenuModel} sub-model.
  *
@@ -67,8 +67,8 @@ export const useTabsModel = createModelHook({
       initialSelectedIds: config.initialTab
         ? [config.initialTab]
         : config.items?.length
-        ? [getId(config.items![0])]
-        : [],
+          ? [getId(config.items![0])]
+          : [],
       shouldVirtualize: false,
     })
   );

@@ -1,18 +1,19 @@
+import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
-import * as CardStories from './card.stories';
+import CardStoriesMeta from './Card.stories';
 
 import {Basic} from './examples/Basic';
 import {Borderless} from './examples/Borderless';
-import {Filled} from './examples/Filled';
+import {Tonal} from './examples/Tonal';
 import {WithCustomStyles} from './examples/CustomStyles';
 import {WithStencils} from './examples/Stencils';
 
-<Meta of={CardStories} />
+<Meta of={CardStoriesMeta} />
 
 # Canvas Kit Card
 
 A Card is a preview that serves as an entry point to more detailed information. Card is a
-presentational [compound component](/getting-started/for-developers/resources/compound-components/)
+presentational [compound component](/get-started/for-developers/documentation/compound-components/)
 used as a building block for other components such as [Popup](/components/popups/popup/) and
 [Modal](/components/popups/modal/).
 
@@ -40,13 +41,13 @@ backgrounds where you want the card to blend seamlessly without borders or shado
 
 <ExampleCodeBlock code={Borderless} />
 
-### Filled Example
+### Tonal Example
 
-The `filled` variant adds a background color to the Card, creating a more prominent appearance while
+The `tonal` variant adds a background color to the Card, creating a more prominent appearance while
 maintaining the same internal spacing and structure. Use this variant when you need a card with a
 grayish background to create visual separation from the page background.
 
-<ExampleCodeBlock code={Filled} />
+<ExampleCodeBlock code={Tonal} />
 
 ### Custom Styles
 

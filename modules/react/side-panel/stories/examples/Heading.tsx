@@ -1,7 +1,7 @@
 import * as React from 'react';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {AccessibleHide} from '@workday/canvas-kit-react/common';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
@@ -28,12 +28,10 @@ export const Heading = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton
-          tooltipTextCollapse="Collapsing View"
-          tooltipTextExpand="Expand View"
-          tooltipText="Control Side Panel"
-        />
-        <SidePanel.Heading hidden>Hidden Title</SidePanel.Heading>
+        <SidePanel.ToggleButton aria-label="Collapse View" />
+        <SidePanel.Heading hidden size="small">
+          Tasks Panel
+        </SidePanel.Heading>
       </SidePanel>
       <Flex as="main" cs={stylesOverride.main}>
         <Text as="p" typeLevel="body.large">

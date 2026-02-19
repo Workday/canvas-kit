@@ -1,25 +1,27 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
+  Specifications,
   StorybookStatusIndicator,
   SymbolDoc,
-  Specifications,
 } from '@workday/canvas-kit-docs';
 
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
-import {Caution} from './examples/Caution';
 import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
 import {Disabled} from './examples/Disabled';
-import {Inverse} from './examples/Inverse';
 import {Error} from './examples/Error';
+import {Inverse} from './examples/Inverse';
 import {LabelPosition} from './examples/LabelPosition';
 import {NoValue} from './examples/NoValue';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 
-import * as RadioStories from './Radio.stories';
+import RadioStoriesMeta from './Radio.stories';
 
-<Meta of={RadioStories} />
+<Meta of={RadioStoriesMeta} />
 
 # Canvas Kit Radio <StorybookStatusIndicator type="deprecated" />
 
@@ -99,10 +101,9 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or
-`"error"` to set the Radio Group to the Caution or Error state, respectively. You
-will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
-standards.
+Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Radio Group
+to the Caution or Error state, respectively. You will also need to set the `hintId` and `hintText`
+props on the Form Field to meet accessibility standards.
 
 #### Caution
 
@@ -122,4 +123,4 @@ standards.
 
 ## Specifications
 
-<Specifications file="Radio.spec.ts" name="Radio" />
+<Specifications file="./cypress/component/Radio.spec.tsx" name="Radio" />

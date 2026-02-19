@@ -1,15 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './SidePanel.mdx';
 
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+
+import mdxDoc from './SidePanel.mdx';
+import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
-import {Heading as HeadingExample} from './examples/Heading';
-import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 import {ExternalControl as ExternalControlExample} from './examples/ExternalControl';
-import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
-import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
+import {Heading as HeadingExample} from './examples/Heading';
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
+import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
+import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 
 export default {
   title: 'Components/Containers/Side Panel (New)',

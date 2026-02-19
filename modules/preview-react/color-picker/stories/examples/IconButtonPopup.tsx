@@ -1,17 +1,18 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react/tokens';
+
+import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {changeFocus} from '@workday/canvas-kit-react/common';
 import {
   Popup,
-  usePopupModel,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {colors} from '@workday/canvas-kit-react/tokens';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
-import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
-import {changeFocus} from '@workday/canvas-kit-react/common';
 
 export const IconButtonPopup = () => {
   const model = usePopupModel();

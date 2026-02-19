@@ -1,3 +1,5 @@
+import {Meta} from '@storybook/blocks';
+
 <Meta title="Guides/Upgrade Guides/v10.0" />
 
 # Canvas Kit 10.0 Upgrade Guide
@@ -257,12 +259,12 @@ the target and popup to `4px`.
 **PR:** [#2309](https://github.com/Workday/canvas-kit/pull/2309)
 
 We've converted `Select` into a
-[compound component](/getting-started/for-developers/resources/compound-components/) which provides
+[compound component](/get-started/for-developers/documentation/compound-components/) which provides
 a flexible API and access to its internals via its subcomponents.
 
 ```tsx
-import {Select} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select} from '@workday/canvas-kit-react/select';
 
 // v9
 <FormField label="Pizza Size">
@@ -275,8 +277,8 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 ```
 
 ```tsx
-import {Select} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select} from '@workday/canvas-kit-react/select';
 
 // v10
 <Select items={['Small', 'Medium', 'Large']}>

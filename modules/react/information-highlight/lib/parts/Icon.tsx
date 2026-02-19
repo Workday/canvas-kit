@@ -1,10 +1,11 @@
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
 import {
-  infoIcon,
   exclamationCircleIcon,
   exclamationTriangleIcon,
+  infoIcon,
 } from '@workday/canvas-system-icons-web';
+
 import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
 
 export interface IconProps extends Partial<ExtractProps<typeof SystemIcon, never>> {}

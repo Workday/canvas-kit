@@ -1,17 +1,18 @@
 import React from 'react';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {
-  Popup,
-  usePopupModel,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  useInitialFocus,
-  useReturnFocus,
-} from '@workday/canvas-kit-react/popup';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 export const ColorInputPopup = () => {
   const defaultColor = colors.blueberry400;

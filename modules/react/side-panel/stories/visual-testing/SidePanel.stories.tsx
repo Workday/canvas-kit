@@ -1,0 +1,95 @@
+import React from 'react';
+
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {space} from '@workday/canvas-kit-react/tokens';
+
+export default {
+  title: 'Testing/Containers/Side Panel',
+  component: SidePanel,
+  parameters: {
+    chromatic: {
+      disable: false,
+    },
+  },
+};
+
+export const SidePanelStates = {
+  render: () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Default', props: {initialTransitionState: 'expanded'}},
+          {
+            label: 'With Heading',
+            props: {header: 'Navigation', initialTransitionState: 'expanded'},
+          },
+          {
+            label: 'With Gray Background',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
+            },
+          },
+          {
+            label: 'With On Toggle Click',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'expanded',
+              variant: 'standard',
+              onToggleClick: () => console.log('click toggle button'),
+            },
+          },
+          {
+            label: 'With open direction from right',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'expanded',
+              variant: 'standard',
+              onToggleClick: () => console.log('click toggle button'),
+              origin: 'end',
+            },
+          },
+          {
+            label: 'With custom padding',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'expanded',
+              variant: 'standard',
+              onToggleClick: () => console.log('click toggle button'),
+              padding: space.xxs,
+            },
+          },
+          {
+            label: 'With custom open width',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
+              onToggleClick: () => console.log('click toggle button'),
+              openWidth: 350,
+            },
+          },
+          {
+            label: 'When closed',
+            props: {
+              header: 'Navigation',
+              initialTransitionState: 'collapsed',
+              onToggleClick: () => console.log('click toggle button'),
+            },
+          },
+        ]}
+        columnProps={[{label: 'Default', props: {}}]}
+      >
+        {props => (
+          <div style={{position: 'relative', height: 200}}>
+            <SidePanel initialTransitionState={props.initialTransitionState} {...props}>
+              Side Panel Content
+            </SidePanel>
+          </div>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ),
+};

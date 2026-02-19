@@ -1,6 +1,7 @@
+import chroma from 'chroma-js';
+
 import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 import {colors} from '@workday/canvas-kit-react/tokens';
-import chroma from 'chroma-js';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 

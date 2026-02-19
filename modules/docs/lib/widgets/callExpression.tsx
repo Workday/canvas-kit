@@ -1,8 +1,7 @@
 import React from 'react';
 
 import {CallExpression} from '../../docgen/docTypes';
-import {registerWidget, Value} from '../Value';
-
+import {Value, registerWidget} from '../Value';
 import {IndentLevelContext, indent} from '../widgetUtils';
 
 registerWidget<CallExpression>('callExpression', ({value}) => {

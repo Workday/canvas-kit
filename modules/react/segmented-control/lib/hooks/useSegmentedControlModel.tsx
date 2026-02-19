@@ -1,6 +1,7 @@
 import React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
+
 import {defaultGetId, useListModel} from '@workday/canvas-kit-react/collection';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
 export const useSegmentedControlModel = createModelHook({
   defaultConfig: {
@@ -51,8 +52,8 @@ export const useSegmentedControlModel = createModelHook({
       initialSelectedIds: config.initialValue
         ? [config.initialValue]
         : config.items?.length
-        ? [getId(config.items![0])]
-        : [],
+          ? [getId(config.items![0])]
+          : [],
       shouldVirtualize: false,
     })
   );

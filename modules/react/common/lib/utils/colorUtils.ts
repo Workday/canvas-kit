@@ -1,5 +1,6 @@
-import {CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
+
+import {CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
 
 /**
  * The function takes in a color string or an enum value of CanvasColor and returns its hex value color.

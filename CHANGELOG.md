@@ -3,6 +3,206 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.24](https://github.com/Workday/canvas-kit/releases/tag/v14.2.24) (2026-02-18)
+
+### Documentation
+
+- docs: Update v4 tokens guide for MCP ([#3767](https://github.com/Workday/canvas-kit/pull/3767)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
+## [v14.2.23](https://github.com/Workday/canvas-kit/releases/tag/v14.2.23) (2026-02-12)
+
+### Components
+
+- fix: Update MenuItem.Text to support cs prop ([#3760](https://github.com/Workday/canvas-kit/pull/3760)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
+## [v14.2.22](https://github.com/Workday/canvas-kit/releases/tag/v14.2.22) (2026-02-11)
+
+### Components
+
+- fix: Ensure variables are wrapped ([#3755](https://github.com/Workday/canvas-kit/pull/3755)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.55](https://github.com/Workday/canvas-kit/releases/tag/v13.2.55) (2026-02-11)
+## [v14.2.21](https://github.com/Workday/canvas-kit/releases/tag/v14.2.21) (2026-02-10)
+
+### Components
+
+- fix: Update SecondaryButton hover color ([#3751](https://github.com/Workday/canvas-kit/pull/3751)) ([@alanbsmith](https://github.com/alanbsmith), Alan Smith)
+
+
+## [v14.2.20](https://github.com/Workday/canvas-kit/releases/tag/v14.2.20) (2026-02-03)
+
+### Components
+
+- fix: Update out of sync lock file ([#3736](https://github.com/Workday/canvas-kit/pull/3736)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Ensure variables are wrapped ([#3755](https://github.com/Workday/canvas-kit/pull/3755)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.2.19](https://github.com/Workday/canvas-kit/releases/tag/v14.2.19) (2026-02-02)
+
+### Components
+
+- fix: Update tooltip to add spacing when element has focus ([#3707](https://github.com/Workday/canvas-kit/pull/3707)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update logic in tooltip to check if the target has focus visible to add a little extra spacing
+
+
+## [v13.2.54](https://github.com/Workday/canvas-kit/releases/tag/v13.2.54) (2026-02-02)
+
+### Components
+
+- fix: Update tooltip to add spacing when element has focus ([#3707](https://github.com/Workday/canvas-kit/pull/3707)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update logic in tooltip to check if the target has focus visible to add a little extra spacing
+## [v14.2.18](https://github.com/Workday/canvas-kit/releases/tag/v14.2.18) (2026-01-30)
+
+### Components
+
+- fix: Update canary script to not use extract since we upgrade sb ([#3731](https://github.com/Workday/canvas-kit/pull/3731)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.2.17](https://github.com/Workday/canvas-kit/releases/tag/v14.2.17) (2026-01-30)
+
+### Documentation
+
+- docs: Add mcp docs and info about v4 tokens ([#3724](https://github.com/Workday/canvas-kit/pull/3724)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot), Alan Smith)
+
+
+## [v14.2.16](https://github.com/Workday/canvas-kit/releases/tag/v14.2.16) (2026-01-27)
+
+### Documentation
+
+- docs: Update mcp readme ([#3721](https://github.com/Workday/canvas-kit/pull/3721)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.2.15](https://github.com/Workday/canvas-kit/releases/tag/v14.2.15) (2026-01-27)
+
+
+
+
+## [v14.2.14](https://github.com/Workday/canvas-kit/releases/tag/v14.2.14) (2026-01-27)
+
+### Components
+
+- fix: When no Popup or Modal.Target element is used, make sure RTL direction is inherited correctly ([#3720](https://github.com/Workday/canvas-kit/pull/3720)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v14.2.13](https://github.com/Workday/canvas-kit/releases/tag/v14.2.13) (2026-01-27)
+
+### Documentation
+
+- docs: Add v4 token upgrade to mcp ([#3711](https://github.com/Workday/canvas-kit/pull/3711)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Add v4 token docs and upgrade guide to mcp to help teams migrate to v4 tokens. For a thorough guide, please view our [token docs](https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v4-overview--docs).
+
+
+## [v14.2.12](https://github.com/Workday/canvas-kit/releases/tag/v14.2.12) (2026-01-26)
+
+
+
+
+## [v14.2.11](https://github.com/Workday/canvas-kit/releases/tag/v14.2.11) (2026-01-22)
+
+### Components
+
+- fix: Add RTL icon support to ExternalHyperlink component in v13 ([#3694](https://github.com/Workday/canvas-kit/pull/3694)) ([@ahayes91](https://github.com/ahayes91))
+- fix: Remove global selector on body for tooltip ([#3705](https://github.com/Workday/canvas-kit/pull/3705)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.53](https://github.com/Workday/canvas-kit/releases/tag/v13.2.53) (2026-01-22)
+
+### Components
+
+- fix: Remove global selector on body for tooltip ([#3705](https://github.com/Workday/canvas-kit/pull/3705)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.52](https://github.com/Workday/canvas-kit/releases/tag/v13.2.52) (2026-01-22)
+
+### Components
+
+- fix: Add RTL icon support to ExternalHyperlink component in v13 ([#3694](https://github.com/Workday/canvas-kit/pull/3694)) ([@ahayes91](https://github.com/ahayes91))
+## [v14.2.10](https://github.com/Workday/canvas-kit/releases/tag/v14.2.10) (2026-01-21)
+
+### Components
+
+- fix: Set min width on avatar so it doesn't squish ([#3698](https://github.com/Workday/canvas-kit/pull/3698)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+### Documentation
+
+- docs: Update ExternalHyperlink stories to show full RTL example ([#3695](https://github.com/Workday/canvas-kit/pull/3695)) ([@ahayes91](https://github.com/ahayes91))
+
+
+## [v14.2.9](https://github.com/Workday/canvas-kit/releases/tag/v14.2.9) (2026-01-16)
+
+### Components
+
+- fix: Fix default icon colors for ToolbarIconButton and ToolbarDropdownButton ([#3691](https://github.com/Workday/canvas-kit/pull/3691)) ([@adamtbui](https://github.com/adamtbui), Adam Bui)
+
+
+## [v14.2.8](https://github.com/Workday/canvas-kit/releases/tag/v14.2.8) (2026-01-15)
+
+### Components
+
+- fix: Add variant type to insights ([#3685](https://github.com/Workday/canvas-kit/pull/3685)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, Alan Smith)
+
+
+## [v13.2.51](https://github.com/Workday/canvas-kit/releases/tag/v13.2.51) (2026-01-15)
+
+### Components
+
+- fix: Add variant type to insights ([#3685](https://github.com/Workday/canvas-kit/pull/3685)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, Alan Smith)
+## [v14.2.7](https://github.com/Workday/canvas-kit/releases/tag/v14.2.7) (2026-01-15)
+
+### Documentation
+
+- chore: Add llm cursor rules mdc ([#3684](https://github.com/Workday/canvas-kit/pull/3684)) ([@youryss](https://github.com/youryss), Youry Stancatte)
+  Added `modules/docs/llm/canvas-kit.mdc` - a Cursor/Claude rules file containing Canvas Kit best practices. Teams can add this to their `.cursor/rules/` directory to have AI assistants follow Canvas Kit conventions automatically.
+
+
+## [v14.2.6](https://github.com/Workday/canvas-kit/releases/tag/v14.2.6) (2026-01-13)
+
+### Components
+
+- fix: Use getBoundingClientRect for popup width measurement ([#3686](https://github.com/Workday/canvas-kit/pull/3686)) ([@Zav39](https://github.com/Zav39))
+
+
+## [v14.2.5](https://github.com/Workday/canvas-kit/releases/tag/v14.2.5) (2026-01-08)
+
+
+
+
+## [v14.2.4](https://github.com/Workday/canvas-kit/releases/tag/v14.2.4) (2026-01-07)
+
+### Components
+
+- fix: Add missing heading component and update to remove aria labels on toggle button ([#3655](https://github.com/Workday/canvas-kit/pull/3655)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, manuel.carrera)
+- fix: Select should close on blur ([#3674](https://github.com/Workday/canvas-kit/pull/3674)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Fixed Box style props links ([#3672](https://github.com/Workday/canvas-kit/pull/3672)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updates style props links in the `Box` component documentation.
+
+
+## [v13.2.50](https://github.com/Workday/canvas-kit/releases/tag/v13.2.50) (2026-01-06)
+
+### Components
+
+- fix: Select should close on blur ([#3674](https://github.com/Workday/canvas-kit/pull/3674)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v13.2.49](https://github.com/Workday/canvas-kit/releases/tag/v13.2.49) (2026-01-06)
+
+### Documentation
+
+- docs: Fixed Box style props links ([#3672](https://github.com/Workday/canvas-kit/pull/3672)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Updates style props links in the `Box` component documentation.
+## [v14.2.3](https://github.com/Workday/canvas-kit/releases/tag/v14.2.3) (2026-01-02)
+
+### Documentation
+
+- docs: Fix broken docs links ([#3667](https://github.com/Workday/canvas-kit/pull/3667)) ([@alanbsmith](https://github.com/alanbsmith), [@jamesfan](https://github.com/jamesfan), Alan Smith)
+
+
 ## [v14.2.2](https://github.com/Workday/canvas-kit/releases/tag/v14.2.2) (2025-12-31)
 
 ### Documentation

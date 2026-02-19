@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../promoteSegmentedControl';
 import {stripIndent} from 'common-tags';
+
+import transform from '../promoteSegmentedControl';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

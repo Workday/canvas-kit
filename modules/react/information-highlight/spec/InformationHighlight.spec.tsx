@@ -3,7 +3,9 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
+
 import {infoIcon} from '@workday/canvas-system-icons-web';
+
 import {InformationHighlight} from '../';
 
 describe('InformationHighlight', () => {

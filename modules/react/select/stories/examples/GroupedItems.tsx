@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Select} from '@workday/canvas-kit-react/select';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const items = [
   {

@@ -1,6 +1,7 @@
 import ts from 'typescript';
 
 import {parentModifier} from '@workday/canvas-kit-styling';
+
 import {createPropertyTransform} from '../createPropertyTransform';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 
