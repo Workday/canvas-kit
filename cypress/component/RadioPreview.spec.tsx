@@ -1,10 +1,10 @@
 import {Basic} from '../../modules/preview-react/radio/stories/examples/Basic';
-import {Alert} from '../../modules/preview-react/radio/stories/examples/Alert';
+import {Caution} from '../../modules/preview-react/radio/stories/examples/Caution';
 import {Error} from '../../modules/preview-react/radio/stories/examples/Error';
 import {Disabled} from '../../modules/preview-react/radio/stories/examples/Disabled';
 
 describe('Radio Preview', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
@@ -60,7 +60,7 @@ describe('Radio Preview', () => {
 
   context(`given the 'Alert' story is rendered`, () => {
     beforeEach(() => {
-      cy.mount(<Alert />);
+      cy.mount(<Caution />);
     });
 
     it('should not have any axe errors', () => {

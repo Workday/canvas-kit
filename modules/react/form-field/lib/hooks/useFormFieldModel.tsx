@@ -5,9 +5,9 @@ export const useFormFieldModel = createModelHook({
     /**
      * Optional flag to denote if this field has an error or warning to display.
      * If value is `error`: `aria-invalid` is added to the `FormField.Input` and the red error ring is added.
-     * If value is `alert`: A visual orange warning ring is added to the `FormField.Input`.
+     * If value is `cautiion`: A visual orange warning ring is added to the `FormField.Input`.
      */
-    error: undefined as undefined | 'error' | 'alert',
+    error: undefined as undefined | 'error' | 'caution',
     /**
      * Optional `id` provided to `FormField`'s subcomponents as HTML attributes:
      * - `FormField.Input` will set `aria-describedby` to `hint-${id}`

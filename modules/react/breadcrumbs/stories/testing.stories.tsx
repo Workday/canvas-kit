@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
@@ -190,7 +190,7 @@ export const RTLStates = {
         >
           {props => {
             return (
-              <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+              <CanvasProvider dir="rtl">
                 <Breadcrumbs aria-label="Breadcrumbs">
                   <Breadcrumbs.List>
                     <Breadcrumbs.Item>

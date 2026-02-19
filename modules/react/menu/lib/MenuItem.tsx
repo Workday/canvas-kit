@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {
@@ -76,7 +76,7 @@ export const menuItemStencil = createStencil({
     minHeight: system.space.x10,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
-    [systemIconStencil.vars.color]: 'currentcolor',
+    [systemIconStencil.vars.color]: 'currentColor',
 
     // selected checkmark
     [`& :where(${selectedPart})`]: {
@@ -121,9 +121,12 @@ export const menuItemStencil = createStencil({
 
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
-      color: system.color.text.disabled,
+      color: system.color.fg.disabled,
       cursor: 'default',
 
+      '&:where(.hover, :hover, [aria-selected=true])': {
+        background: 'none',
+      },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
         backgroundColor: brand.primary.light,
@@ -146,8 +149,8 @@ const MenuItemIcon = (elemProps: SystemIconProps) => {
 };
 
 const MenuItemText = createComponent('span')({
-  Component: ({...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...menuItemStencil.parts.text} {...elemProps} />;
+  Component: ({...elemProps}: CSProps, ref, Element) => {
+    return <Element ref={ref} {...menuItemStencil.parts.text} {...handleCsProp(elemProps)} />;
   },
 });
 
