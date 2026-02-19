@@ -113,7 +113,7 @@ export const Tooltip = createComponent('div')({
     });
 
     const [elementHasFocus, setElementHasFocus] = React.useState(false);
-    const {localRef: targetRef, elementRef} = useLocalRef<HTMLElement>();
+    const {localRef: targetRef} = useLocalRef<HTMLElement>();
 
     React.useEffect(() => {
       const target = targetRef.current;
