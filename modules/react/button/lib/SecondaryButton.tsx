@@ -1,7 +1,7 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -30,13 +30,14 @@ const secondaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      /* TODO: Update to `system.color.border.inverse.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: base.slate100, // TODO: Correct this in v15 with our new color tokens
       [buttonStencil.vars.label]: system.color.fg.stronger,
       [buttonStencil.vars.border]: system.color.border.input.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
@@ -61,13 +62,15 @@ const secondaryButtonStencil = createStencil({
       inverse: {
         // Default Styles
         [buttonStencil.vars.background]: 'transparent',
-        [buttonStencil.vars.border]: system.color.border.inverse,
+        /* TODO: Update to `system.color.border.inverse.default` in v15. */
+        [buttonStencil.vars.border]: cssVar(system.color.border.inverse, base.neutral0),
         [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: system.color.bg.transparent.strong,
-          [buttonStencil.vars.border]: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          [buttonStencil.vars.border]: cssVar(system.color.border.inverse, base.neutral0),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
@@ -77,20 +80,23 @@ const secondaryButtonStencil = createStencil({
           [buttonStencil.vars.border]: 'transparent',
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          [buttonStencil.vars.boxShadowOuter]: cssVar(system.color.border.inverse, base.neutral0),
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
           [buttonStencil.vars.background]: system.color.bg.transparent.stronger,
-          [buttonStencil.vars.border]: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          [buttonStencil.vars.border]: cssVar(system.color.border.inverse, base.neutral0),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.background]: 'transparent',
-          [buttonStencil.vars.border]: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          [buttonStencil.vars.border]: cssVar(system.color.border.inverse, base.neutral0),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),
         },

@@ -3,9 +3,11 @@
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
+  // Assets
   '/assets/accent-icons/': 'assets-icons--docs#accent-icon-list',
   '/assets/applet-icons/': 'assets-icons--docs#applet-icon-list',
   '/assets/system-icons/': 'assets-icons--docs#system-icon-list',
+  // Components
   '/components/buttons/action-bar/': 'components-buttons-action-bar--docs',
   '/components/buttons/button/': 'components-buttons--docs',
   '/components/buttons/segmented-control/': 'preview-segmented-control--docs',
@@ -41,39 +43,42 @@ const routes = {
   '/components/text/subtext/': 'components-text-subtext--docs',
   '/components/text/text/': 'components-text-text--docs',
   '/components/text/title/': 'components-text-title--docs',
-  '/examples/layout/': 'examples-layouts--docs',
+  // Get Started
   '/get-started/for-developers/theming/overview/': 'features-theming-overview--docs',
-  '/getting-started/for-developers/contributing/': 'guides-contributing--docs',
-  '/getting-started/for-developers/resources/api-pattern-guidelines/':
+  '/get-started/for-contributors/code/': 'guides-contributing--docs',
+  '/get-started/for-developers/guides/combobox/': 'features-combobox--docs',
+  '/get-started/for-developers/documentation/api-pattern-guidelines/':
     'guides-api-pattern-guidelines--docs',
-  '/getting-started/for-developers/resources/collection-api/': 'features-collections--docs',
-  '/get-started/for-developers/resources/combobox/': 'features-combobox--docs',
-  '/getting-started/for-developers/resources/compound-components/':
+  '/get-started/for-developers/guides/collection-api/': 'features-collections--docs',
+  '/get-started/for-developers/documentation/compound-components/':
     'guides-compound-components--docs',
-  '/getting-started/for-developers/resources/creating-compound-components/':
+  '/get-started/for-developers/documentation/creating-compound-components/':
     'guides-creating-compound-components--docs',
-  '/getting-started/for-developers/resources/responsive-styling/':
+  '/get-started/for-developers/guides/responsive-styling/':
     'features-responsive-styling--responsive-container',
-  '/getting-started/for-developers/resources/style-props/': 'features-style-props--docs',
-  '/getting-started/for-developers/resources/testing/': 'guides-testing--docs',
-  '/getting-started/introduction/': 'guides-getting-started--docs',
-  '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
-  '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
-    'guides-upgrade-guides-v14-0-visual-changes--docs',
+  '/get-started/for-developers/documentation/style-props/': 'features-style-props--docs',
+  '/get-started/for-developers/documentation/testing/': 'guides-testing--docs',
+  '/get-started/for-developers/documentation/testing#visual-tests':
+    'hooks-and-utilities-testing--docs',
+  '/get-started/introduction/': 'guides-getting-started--docs',
+  // Tokens
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
   '/tokens/space/': 'tokens-tokens--docs#space',
   '/tokens/type/': 'tokens-tokens--docs#type',
-  '/utilities/testing/': 'hooks-and-utilities-testing--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'guides-upgrade-guides-v4-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--docs',
-  '/whats-new/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--docs',
-  '/whats-new/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--docs',
-  '/whats-new/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--docs',
-  '/whats-new/upgrade-guides/canvas-v11-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
-  '/whats-new/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
+  // Upgrade Guides
+  '/help/upgrade-guides/canvas-kit-v4-upgrade-guide/': 'guides-upgrade-guides-v4-0--docs',
+  '/help/upgrade-guides/canvas-kit-v5-upgrade-guide/': 'guides-upgrade-guides-v5-0--docs',
+  '/help/upgrade-guides/canvas-kit-v6-upgrade-guide/': 'guides-upgrade-guides-v6-0--docs',
+  '/help/upgrade-guides/canvas-kit-v7-upgrade-guide/': 'guides-upgrade-guides-v7-0--docs',
+  '/help/upgrade-guides/canvas-kit-v8-upgrade-guide/': 'guides-upgrade-guides-v8-0--docs',
+  '/help/upgrade-guides/canvas-v9-upgrade-guide/': 'guides-upgrade-guides-v9-0--docs',
+  '/help/upgrade-guides/canvas-v10-upgrade-guide/': 'guides-upgrade-guides-v10-0--docs',
+  '/help/upgrade-guides/canvas-v11-upgrade-guide/': 'guides-upgrade-guides-v11-0--docs',
+  '/help/upgrade-guides/canvas-v12-upgrade-guide/': 'guides-upgrade-guides-v12-0--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
+  '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
+    'guides-upgrade-guides-v14-0-visual-changes--docs',
 };
 
 module.exports = routes;

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {calc, cssVar, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
   value: string;
@@ -17,7 +17,8 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
-    shadow: `${system.color.border.inverse} 0 0 0 ${px2rem(2)}, ${
+    /* TODO: Update to `system.color.border.inverse.default` in v15. */
+    shadow: `${cssVar(system.color.border.inverse, base.neutral0)} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
   },
