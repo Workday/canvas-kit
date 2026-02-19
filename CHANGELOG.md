@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.26](https://github.com/Workday/canvas-kit/releases/tag/v14.2.26) (2026-02-19)
+
+### Documentation
+
+- docs: Migrating accessibility guidelines for FormFIeld, TextInput, TextArea ([#3615](https://github.com/Workday/canvas-kit/pull/3615)) ([@williamjstanton](https://github.com/williamjstanton), [@Copilot](https://github.com/Copilot), manuel.carrera)
+
+
 ## [v14.2.25](https://github.com/Workday/canvas-kit/releases/tag/v14.2.25) (2026-02-18)
 
 ### Components
