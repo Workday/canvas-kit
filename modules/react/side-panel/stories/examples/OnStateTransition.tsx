@@ -37,7 +37,7 @@ export const OnStateTransition = () => {
   return (
     <Flex cs={stylesOverride.viewport}>
       <SidePanel model={model}>
-        <SidePanel.ToggleButton />
+        <SidePanel.ToggleButton aria-label="Collapse View" />
         <SidePanel.Heading hidden size="small">
           Hidden Title
         </SidePanel.Heading>

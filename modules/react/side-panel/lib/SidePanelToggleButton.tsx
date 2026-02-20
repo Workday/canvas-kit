@@ -144,8 +144,8 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     {
       variant = undefined,
       icon = transformationImportIcon,
-      tooltipTextExpand,
-      tooltipTextCollapse,
+      tooltipTextExpand = 'Expand View',
+      tooltipTextCollapse = 'Collapse View',
       tooltipProps,
       tooltipText,
       ...elemProps
@@ -159,7 +159,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
         {...tooltipProps}
         title={
           tooltipText ||
-          (model.state.transitionState === 'collapsed' ? tooltipTextCollapse : tooltipTextExpand)
+          (model.state.transitionState === 'expanded' ? tooltipTextCollapse : tooltipTextExpand)
         }
       >
         <TertiaryButton

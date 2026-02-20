@@ -17,11 +17,11 @@ const viewPortStyles = createStyles({
 });
 
 export const Basic = () => {
-  const model = useSidePanelModel();
+  // const model = useSidePanelModel();
 
   return (
     <Flex cs={viewPortStyles}>
-      <SidePanel model={model}>
+      <SidePanel>
         <SidePanel.Heading size="small">
           <Flex cs={flexHeadingStyles}>
             <AccentIcon icon={rocketIcon} />

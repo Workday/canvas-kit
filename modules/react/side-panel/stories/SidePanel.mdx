@@ -1,10 +1,12 @@
+
+import {Meta} from '@storybook/blocks';
 import {
   ExampleCodeBlock,
   SymbolDoc,
   Specifications,
   StorybookStatusIndicator,
 } from '@workday/canvas-kit-docs';
-import * as SidePanelStories from './SidePanel.stories';
+import SidePanelStoriesMeta from './SidePanel.stories';
 
 import {Basic} from './examples/Basic';
 import {Heading} from './examples/Heading';
@@ -14,7 +16,7 @@ import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
 import {OnStateTransition} from './examples/OnStateTransition';
 
-<Meta of={SidePanelStories} />
+<Meta of={SidePanelStoriesMeta} />
 
 # Canvas Kit Side Panel <StorybookStatusIndicator type="new" />
 

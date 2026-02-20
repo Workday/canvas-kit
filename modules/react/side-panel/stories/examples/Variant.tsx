@@ -29,12 +29,11 @@ const stylesOverride = {
 
 export const AlternatePanel = () => {
   const {direction, toggleDirection} = useDirection();
-  const model = useSidePanelModel({});
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel model={model} variant="alternate">
+        <SidePanel variant="alternate">
           <SidePanel.ToggleButton aria-label="Collapse View" />
           <Flex cs={stylesOverride.panel}>
             <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
