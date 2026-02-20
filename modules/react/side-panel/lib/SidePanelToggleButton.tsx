@@ -7,7 +7,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -33,9 +33,12 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.space.x6,
-    width: system.space.x8,
-    insetInlineEnd: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    top: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.gap.lg, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    insetInlineEnd: cssVar(system.gap.md, system.space.x4),
   },
   modifiers: {
     state: {
@@ -95,10 +98,12 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },
@@ -106,10 +111,12 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },
@@ -117,10 +124,12 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },

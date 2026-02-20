@@ -9,7 +9,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const flexHeadingStyles = createStyles({
   alignItems: 'center',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const viewPortStyles = createStyles({

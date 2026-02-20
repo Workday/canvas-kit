@@ -1,10 +1,13 @@
 import * as React from 'react';
+
 import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {useSidePanelModel} from './useSidePanelModel';
-import {SidePanelToggleButton} from './SidePanelToggleButton';
+
 import {SidePanelHeading} from './SidePanelHeading';
+import {SidePanelToggleButton} from './SidePanelToggleButton';
+import {useSidePanelModel} from './useSidePanelModel';
+
 /**
  * Adds the necessary props to the SidePanel container element.
  * This includes the `id` and `aria-labelledby` attributes for accessibility.
@@ -56,11 +59,13 @@ export const panelStencil = createStencil({
   modifiers: {
     variant: {
       alternate: {
-        backgroundColor: system.color.bg.default,
-        boxShadow: system.depth[5],
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+        boxShadow: system.depth[3],
       },
       standard: {
-        backgroundColor: system.color.bg.alt.softer,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.navigation, system.color.bg.alt.softer),
       },
     },
     expanded: {
