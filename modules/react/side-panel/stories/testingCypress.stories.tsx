@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
@@ -72,9 +71,6 @@ export const FirstFocusable = () => {
       />
     );
   };
-
-  // eslint-disable-next-line no-empty-function
-  const noop = () => {};
 
   return (
     <React.Fragment>
