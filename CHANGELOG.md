@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.29](https://github.com/Workday/canvas-kit/releases/tag/v14.2.29) (2026-02-20)
+
+
+
+
+## [v14.2.28](https://github.com/Workday/canvas-kit/releases/tag/v14.2.28) (2026-02-20)
+
+
+
+
+## [v14.2.27](https://github.com/Workday/canvas-kit/releases/tag/v14.2.27) (2026-02-19)
+
+### Components
+
+- fix: Remove extra ref on Tooltip ([#3782](https://github.com/Workday/canvas-kit/pull/3782)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  This [change](https://github.com/Workday/canvas-kit/pull/3707) added an extra ref that overrides the popupStack.ref which breaks consumers passing in their own ref. Removing this should fix the issue.
+
+
+## [v13.2.56](https://github.com/Workday/canvas-kit/releases/tag/v13.2.56) (2026-02-19)
+
+### Components
+
+- fix: Remove extra ref on Tooltip ([#3782](https://github.com/Workday/canvas-kit/pull/3782)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  This [change](https://github.com/Workday/canvas-kit/pull/3707) added an extra ref that overrides the popupStack.ref which breaks consumers passing in their own ref. Removing this should fix the issue.
 ## [v14.2.26](https://github.com/Workday/canvas-kit/releases/tag/v14.2.26) (2026-02-19)
 
 ### Documentation
