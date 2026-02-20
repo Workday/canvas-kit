@@ -12,7 +12,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
@@ -140,7 +140,10 @@ export const multiSelectInputStencil = createStencil({
           borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}, 0 0 0 2px ${
             // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            cssVar(system.color.focus.inverse, system.color.focus.inverse)
+            cssVar(
+              system.color.focus.inverse,
+              cssVar(system.color.border.inverse.default, base.neutral0)
+            )
           }, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
           outlineOffset: px2rem(2),
         },

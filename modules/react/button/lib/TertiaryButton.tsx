@@ -176,12 +176,6 @@ const tertiaryButtonStencil = createStencil({
             system.color.fg.inverse
           ),
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.boxShadowOuter]: cssVar(
-            system.color.focus.inverse,
-            cssVar(system.color.border.inverse.default, base.neutral0)
-          ),
           ...focusRing({
             width: 2,
             separation: 2,
