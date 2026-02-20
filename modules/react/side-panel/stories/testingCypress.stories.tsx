@@ -1,7 +1,8 @@
 import * as React from 'react';
 
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+import {relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Labs/Side Panel/Cypress',
@@ -19,9 +20,7 @@ export const Default = () => {
   return (
     <Container>
       <SidePanel model={model}>
-        <span hidden id={model.state.labelId}>
-          {label}
-        </span>
+        <SidePanel.Heading hidden>{label}</SidePanel.Heading>
         <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
@@ -32,9 +31,7 @@ export const AsDiv = () => {
   return (
     <Container>
       <SidePanel as="div" role="region" model={model}>
-        <span hidden id={model.state.labelId}>
-          {label}
-        </span>
+        <SidePanel.Heading hidden>{label}</SidePanel.Heading>
         <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
     </Container>
@@ -45,9 +42,7 @@ export const AsAside = () => {
   return (
     <Container>
       <SidePanel as="aside" model={model}>
-        <span hidden id={model.state.labelId}>
-          {label}
-        </span>
+        <SidePanel.Heading hidden>{label}</SidePanel.Heading>
         <SidePanel.ToggleButton aria-label={label} />
       </SidePanel>
       <div>Main Content</div>
@@ -80,13 +75,11 @@ export const FirstFocusable = () => {
   return (
     <React.Fragment>
       <Header>
-        <PrimaryButton>Open</PrimaryButton>
+        <TertiaryButton icon={relatedActionsVerticalIcon} aria-label="Open" />
       </Header>
       <Container>
         <SidePanel model={model}>
-          <span hidden id={model.state.labelId}>
-            {label}
-          </span>
+          <SidePanel.Heading hidden>{label}</SidePanel.Heading>
           <h1>Panel Name</h1>
           <SidePanel.ToggleButton aria-label={label} />
           <PrimaryButton>Another Button</PrimaryButton>

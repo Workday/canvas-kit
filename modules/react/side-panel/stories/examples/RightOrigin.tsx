@@ -1,8 +1,8 @@
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -12,10 +12,13 @@ import {useDirection} from './useDirection';
 const stylesOverride = {
   viewport: createStyles({
     height: px2rem(320),
-    backgroundColor: system.color.bg.alt.default,
+  }),
+  panelContainer: createStyles({
+    marginInlineStart: 'auto',
   }),
   panel: createStyles({
     alignItems: 'center',
+    justifyContent: 'flex-end',
     padding: system.space.x4,
   }),
   main: createStyles({
@@ -27,19 +30,27 @@ const stylesOverride = {
   }),
 };
 
-export const AlternatePanel = () => {
+const RightPanel = () => {
+  const model = useSidePanelModel({
+    origin: 'end',
+  });
+
+  return (
+    <SidePanel model={model} className={stylesOverride.panelContainer}>
+      <SidePanel.ToggleButton aria-label="Collapse View" />
+      <Flex cs={stylesOverride.panel}>
+        <SidePanel.Heading size="small">Tasks Panel</SidePanel.Heading>
+      </Flex>
+    </SidePanel>
+  );
+};
+
+export const RightOrigin = () => {
   const {direction, toggleDirection} = useDirection();
-  const model = useSidePanelModel({});
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel model={model} variant="alternate">
-          <SidePanel.ToggleButton aria-label="Collapse View" />
-          <Flex cs={stylesOverride.panel}>
-            <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
-          </Flex>
-        </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">
             Toggle the content direction
@@ -48,6 +59,8 @@ export const AlternatePanel = () => {
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>
         </Flex>
+
+        <RightPanel />
       </Flex>
     </CanvasProvider>
   );

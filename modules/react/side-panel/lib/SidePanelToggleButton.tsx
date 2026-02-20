@@ -7,7 +7,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -16,10 +16,15 @@ import {useSidePanelModel} from './useSidePanelModel';
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton> {
   /**
    * The tooltip text to expand the side panel
+   * @deprecated Use
    */
   tooltipTextExpand?: string;
   /**
-   * The tooltip text to collapse the side panel
+   * Provides an accessible label to the button. This text **should not** convey visual state but rather what it does like "control data panel."
+   */
+  tooltipText?: string;
+  /**
+   * The tooltip text to collapse the side panel. Optional text for when the side panel is in a collapsed state.
    */
   tooltipTextCollapse?: string;
   tooltipProps?: Omit<TooltipProps, 'children'>;
@@ -28,9 +33,12 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.space.x6,
-    width: system.space.x8,
-    insetInlineEnd: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    top: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.gap.lg, system.space.x8),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    insetInlineEnd: cssVar(system.gap.md, system.space.x4),
   },
   modifiers: {
     state: {
@@ -90,10 +98,12 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },
@@ -101,10 +111,12 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },
@@ -112,19 +124,19 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(system.gap.md, system.space.x4),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: system.space.x4,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
         },
       },
     },
   ],
 });
 
-export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePanelModel)(({
-  state,
-}) => {
+export const useSidePanelToggleButton = createElemPropsHook(useSidePanelModel)(({state}) => {
   return {
     'aria-controls': state.panelId,
     'aria-pressed': state.transitionState === 'collapsed',
@@ -135,7 +147,7 @@ export const useSidePanelToggleButtonElemProps = createElemPropsHook(useSidePane
 export const SidePanelToggleButton = createSubcomponent('button')({
   displayName: 'SidePanel.ToggleButton',
   modelHook: useSidePanelModel,
-  elemPropsHook: useSidePanelToggleButtonElemProps,
+  elemPropsHook: useSidePanelToggleButton,
 })(
   (
     {
@@ -144,6 +156,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
       tooltipTextExpand = 'Expand View',
       tooltipTextCollapse = 'Collapse View',
       tooltipProps,
+      tooltipText,
       ...elemProps
     }: SidePanelToggleButtonProps,
     Element,
@@ -154,13 +167,15 @@ export const SidePanelToggleButton = createSubcomponent('button')({
         type="muted"
         {...tooltipProps}
         title={
-          model.state.transitionState === 'collapsed' ? tooltipTextExpand : tooltipTextCollapse
+          tooltipText ||
+          (model.state.transitionState === 'expanded' ? tooltipTextCollapse : tooltipTextExpand)
         }
       >
         <TertiaryButton
           icon={icon}
           as={Element}
           variant={variant}
+          aria-label={tooltipText}
           {...handleCsProp(
             elemProps,
             sidePanelToggleButtonStencil({

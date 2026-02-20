@@ -1,10 +1,6 @@
 import React from 'react';
 
-import {
-  SidePanel,
-  SidePanelBackgroundColor,
-  SidePanelOpenDirection,
-} from '@workday/canvas-kit-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {space} from '@workday/canvas-kit-react/tokens';
 
@@ -23,25 +19,25 @@ export const SidePanelStates = {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default', props: {open: true}},
+          {label: 'Default', props: {initialTransitionState: 'expanded'}},
           {
             label: 'With Heading',
-            props: {header: 'Navigation', open: true},
+            props: {header: 'Navigation', initialTransitionState: 'expanded'},
           },
           {
             label: 'With Gray Background',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
             },
           },
           {
             label: 'With On Toggle Click',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
             },
           },
@@ -49,18 +45,18 @@ export const SidePanelStates = {
             label: 'With open direction from right',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
-              openDirection: SidePanelOpenDirection.Right,
+              origin: 'end',
             },
           },
           {
             label: 'With custom padding',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
               padding: space.xxs,
             },
@@ -69,8 +65,8 @@ export const SidePanelStates = {
             label: 'With custom open width',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
               onToggleClick: () => console.log('click toggle button'),
               openWidth: 350,
             },
@@ -79,7 +75,7 @@ export const SidePanelStates = {
             label: 'When closed',
             props: {
               header: 'Navigation',
-              open: false,
+              initialTransitionState: 'collapsed',
               onToggleClick: () => console.log('click toggle button'),
             },
           },
@@ -88,7 +84,7 @@ export const SidePanelStates = {
       >
         {props => (
           <div style={{position: 'relative', height: 200}}>
-            <SidePanel open={props.open} {...props}>
+            <SidePanel initialTransitionState={props.initialTransitionState} {...props}>
               Side Panel Content
             </SidePanel>
           </div>
