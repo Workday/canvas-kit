@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+import {relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Labs/Side Panel/Cypress',
@@ -78,7 +79,7 @@ export const FirstFocusable = () => {
   return (
     <React.Fragment>
       <Header>
-        <Avatar name="Avatar" as="button" onClick={noop} />
+        <TertiaryButton icon={relatedActionsVerticalIcon} aria-label="Open" />
       </Header>
       <Container>
         <SidePanel model={model}>
