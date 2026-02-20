@@ -1,10 +1,10 @@
 /**
  * Note: you need to run `yarn add -WD file:./utils/custom-lint-rules` after changes for them to be reflected locally
  */
-const restrictedImports = require('./restricted-imports');
-const useCKSlashImports = require('./use-ck-slash-imports');
+import restrictedImports from './restricted-imports.js';
+import useCKSlashImports from './use-ck-slash-imports.js';
 
-module.exports = {
+export default {
   rules: {
     'restricted-imports': restrictedImports,
     'use-ck-slash-imports': useCKSlashImports,

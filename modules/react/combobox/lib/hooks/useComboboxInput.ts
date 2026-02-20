@@ -1,14 +1,13 @@
 import React from 'react';
 
+import {getCursor, useListActiveDescendant} from '@workday/canvas-kit-react/collection';
 import {composeHooks, createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
 import {usePopupTarget} from '@workday/canvas-kit-react/popup';
 
-import {getCursor, useListActiveDescendant} from '@workday/canvas-kit-react/collection';
-
-import {useComboboxModel} from './useComboboxModel';
 import {useComboboxInputOpenWithArrowKeys} from './useComboboxInputOpenWithArrowKeys';
-import {useSetPopupWidth} from './useSetPopupWidth';
 import {useComboboxListKeyboardHandler} from './useComboboxListKeyboardHandler';
+import {useComboboxModel} from './useComboboxModel';
+import {useSetPopupWidth} from './useSetPopupWidth';
 
 /**
  * `useComboboxInput` Adds all attributes necessary to start with a {@link ComboboxInput Combobox.Input}. It opens the

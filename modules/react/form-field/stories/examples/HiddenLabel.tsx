@@ -1,12 +1,13 @@
 import React from 'react';
+
 import {
   FormField,
-  useFormFieldModel,
   useFormFieldInput,
+  useFormFieldModel,
 } from '@workday/canvas-kit-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {TextInput, InputGroup} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchIcon} from '@workday/canvas-system-icons-web';
 
 /**

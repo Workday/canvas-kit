@@ -1,10 +1,14 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  SymbolDoc,
   Specifications,
-  InformationHighlight,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
+
+import TextAreaStoriesMeta from './TextArea.stories';
 import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
 import {Disabled} from './examples/Disabled';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
@@ -12,9 +16,8 @@ import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
 import {ResizeConstraints} from './examples/ResizeConstraints';
-import * as TextAreaStories from './TextArea.stories';
 
-<Meta of={TextAreaStories} />
+<Meta of={TextAreaStoriesMeta} />
 
 # Canvas Kit Text Area
 
@@ -142,4 +145,4 @@ When properly implemented with `FormField`, screen readers will announce:
 
 ## Specifications
 
-<Specifications file="TextArea.spec.ts" name="Text Area" />
+<Specifications file="./cypress/component/TextArea.spec.tsx" name="Text Area" />

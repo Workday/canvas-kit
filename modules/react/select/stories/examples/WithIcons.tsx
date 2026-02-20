@@ -1,14 +1,15 @@
 import React from 'react';
+
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   activityStreamIcon,
   avatarIcon,
   uploadCloudIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const styleOverrides = {
   formfieldInputStyles: createStyles({

@@ -1,11 +1,12 @@
 import React from 'react';
-import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
-import {notificationsIcon, inboxIcon, assistantIcon} from '@workday/canvas-system-icons-web';
-import {space} from '@workday/canvas-kit-react/tokens';
-import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {space} from '@workday/canvas-kit-react/tokens';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {assistantIcon, inboxIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 const MyTasksLiveBadge = ({cnt}: {cnt: number}) => {
   // use tooltip to assign name,

@@ -1,4 +1,5 @@
-import {API, FileInfo, JSXElement, JSXAttribute, Options} from 'jscodeshift';
+import {API, FileInfo, JSXAttribute, JSXElement, Options} from 'jscodeshift';
+
 import {hasImportSpecifiers} from '../v6/utils';
 import {getImportRenameMap} from './utils/getImportRenameMap';
 

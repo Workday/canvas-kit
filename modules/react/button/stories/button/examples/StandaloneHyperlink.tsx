@@ -1,10 +1,10 @@
-import {Hyperlink, ExternalHyperlink} from '@workday/canvas-kit-react/button';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 export const StandaloneLink = () => (
