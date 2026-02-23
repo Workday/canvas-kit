@@ -16,12 +16,9 @@ export const defaultGetId = (item: Generic): string => {
   return item === undefined ? '' : typeof item === 'string' ? item : item.id || '';
 };
 
-let hasWarnedNoGetTextValue = false;
-
 export const defaultGetTextValue = (item: Generic): string => {
   if (process.env.NODE_ENV === 'development') {
-    if (!hasWarnedNoGetTextValue && typeof item === 'object' && item.text === undefined) {
-      hasWarnedNoGetTextValue = true;
+    if (typeof item === 'object' && item.text === undefined) {
       console.warn(
         "List item was an object, but no `getTextValue` was passed to the model to inform the list where to find the item's text value. The item's text value is used for accessibility. Please pass a `getTextValue` to the list model"
       );
