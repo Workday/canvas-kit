@@ -315,12 +315,12 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel
 | `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
 | `touched` prop on SidePanel                    | Managed internally                                |
 | `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
-| `onStateTransition` on component               | `onStateTransition` on model config               |
+| `onStateTransition` on component               | `onStateTransition` in model config               |
 
 #### Code Migration Example
 
 ```tsx
-// Before (preview-react)
+// Before (in Preview)
 const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
   initialExpanded: false,
 });
@@ -331,7 +331,7 @@ const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
   {expanded && <Content />}
 </SidePanel>;
 
-// After (react)
+// After (in Main)
 const model = useSidePanelModel({
   initialTransitionState: 'collapsed',
   origin: 'end',
@@ -364,6 +364,7 @@ if (model.state.transitionState === 'expanded') {
 // After (@workday/canvas-kit-react/side-panel) - including animation states
 const isExpanded =
   model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
+```
 
 
 ### Segmented Control
