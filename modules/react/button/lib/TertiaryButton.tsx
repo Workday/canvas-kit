@@ -50,7 +50,8 @@ const tertiaryButtonStencil = createStencil({
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      // TODO: Correct this in v15 with our new color tokens
+      [buttonStencil.vars.background]: base.slate100,
       [buttonStencil.vars.label]: brand.primary.darkest,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
       textDecoration: 'underline',
