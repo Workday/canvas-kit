@@ -351,20 +351,19 @@ const model = useSidePanelModel({
 ### Checking Expanded State
 
 ```tsx
-// Before (preview-react)
+// Before (@workday/canvas-kit-preview-react/side-panel)
 if (expanded) {
   /* ... */
 }
 
-// After (react) - for exact state
+// After (@workday/canvas-kit-react/side-panel) - for exact state
 if (model.state.transitionState === 'expanded') {
   /* ... */
 }
 
-// After (react) - including animation states
+// After (@workday/canvas-kit-react/side-panel) - including animation states
 const isExpanded =
   model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
-```
 
 
 ### Segmented Control
