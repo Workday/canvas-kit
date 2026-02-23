@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.31](https://github.com/Workday/canvas-kit/releases/tag/v14.2.31) (2026-02-23)
+
+### Components
+
+- fix(MultiSelect): Remove repeated console.warn messages for undefined items in MultiSelect ([#3788](https://github.com/Workday/canvas-kit/pull/3788)) ([@harrylakers](https://github.com/harrylakers), Harry Zhu)
+
+
 ## [v14.2.30](https://github.com/Workday/canvas-kit/releases/tag/v14.2.30) (2026-02-23)
 
 ### Components
