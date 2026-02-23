@@ -116,7 +116,7 @@ export const Tooltip = createComponent('div')({
     });
 
     const [elementHasFocus, setElementHasFocus] = React.useState(false);
-    const {localRef: targetRef, elementRef} = useLocalRef<HTMLElement>();
+    const {localRef: targetRef} = useLocalRef<HTMLElement>();
 
     React.useEffect(() => {
       const target = targetRef.current;
@@ -146,7 +146,6 @@ export const Tooltip = createComponent('div')({
           ...(/^(muted|describe)$/.test(type) && children.props['aria-label']
             ? {'aria-label': children.props['aria-label']}
             : {}),
-          ref: elementRef,
         })}
         <Popper placement={placement} fallbackPlacements={fallbackPlacements} {...popperProps}>
           {({placement}) => {
