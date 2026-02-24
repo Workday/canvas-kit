@@ -1,12 +1,8 @@
+import {Theme, ThemeContext} from '@emotion/react';
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {
-  isElementRTL,
-  useCanvasThemeToCssVars,
-  useLocalRef,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {isElementRTL, useCanvasThemeToCssVars, useLocalRef} from '@workday/canvas-kit-react/common';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -55,10 +51,9 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
-  // Use useTheme() (no args) so we get the filled theme from Emotion context—same as CanvasProvider.
-  // Passing raw context can miss filling; useTheme() ensures palette + system.brand tokens are resolved.
-  const filledTheme = useTheme();
-  const {style} = useCanvasThemeToCssVars(filledTheme, {});
+
+  const theme = React.useContext(ThemeContext as React.Context<Theme>);
+  const {style} = useCanvasThemeToCssVars(theme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.

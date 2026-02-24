@@ -186,6 +186,31 @@ const themedBrand = createStyles({
 </CanvasProvider>
 ```
 
+#### System Brand Tokens When Theming via CSS
+
+Components use **system brand tokens** (e.g. `system.color.brand.accent.primary`) for colors. Those system tokens reference **brand tokens** (e.g. `brand.primary600`). When you use the `theme` prop on `CanvasProvider`, we map your palette values to both brand and system tokens for backwards compatibility. When you theme via **CSS** (e.g. with `createStyles` and a `className`), that mapping does not run—you must set both:
+
+1. The **brand token** to your color value.
+2. The **system brand token** to reference the brand token.
+
+Example using numerical brand tokens and system tokens:
+
+```tsx
+import { createStyles } from '@workday/canvas-kit-styling';
+import { brand, system } from '@workday/canvas-tokens-web';
+
+const v4TokensCustomStyles = createStyles({
+  [brand.primary600]: 'darkorange',
+  [system.color.brand.accent.primary]: brand.primary600,
+});
+
+<CanvasProvider className={v4TokensCustomStyles}>
+  <App />
+</CanvasProvider>
+```
+
+In plain CSS you would set the brand variable and set the system variable to reference it (e.g. `var(--cnvs-brand-primary-600)`).
+
 ### Theming Modals and Dialogs
 
 Previously, the `usePopupStack` hook created a CSS class name that was passed to our Popups. We attached those theme styles to that class name. This allowed the theme to be available in our Popups. But it also created a cascade barrier that blocked the global theme from being applied to our Popup components.

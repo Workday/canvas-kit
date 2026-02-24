@@ -34,6 +34,8 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
   - [Information Highlight ⚡️](#information-highlight-️)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
+- [Theming](#theming)
+  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
 - [Deprecations](#deprecations)
   - [Accent Icon](#accent-icon)
   - [Applet Icon](#applet-icon)
@@ -396,6 +398,36 @@ tokens. These changes are **only visual**.
 
 `PrimaryButton`, `SecondaryButton`, `DeleteButton`, `TertiaryButton`, `ToolbarButton`,
 `ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink`, and `ActionBar`.
+
+## Theming
+
+### System Brand Tokens and Brand Tokens
+
+The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and **brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as `base`, `dark`, `darkest`, `light`, `lightest`, and `lighter` via the `CanvasProvider` theme prop. The mapping inside `CanvasProvider` exists for **backwards compatibility**: when you pass a theme object, we forward those values to both the legacy brand tokens and the system brand tokens so existing usage continues to work.
+
+If you theme via **CSS** (e.g. with `createStyles` and a `className` on `CanvasProvider`), that automatic mapping does not run. You must:
+
+1. **Set the brand token** to your desired color value.
+2. **Set the system brand token** to reference the brand token (so components that use system tokens still pick up your theme).
+
+Example:
+
+```tsx
+import { createStyles } from '@workday/canvas-kit-styling';
+import { brand, system } from '@workday/canvas-tokens-web';
+
+const v4TokensCustomStyles = createStyles({
+  [brand.primary600]: 'darkorange',
+  [system.color.brand.accent.primary]: brand.primary600,
+});
+
+// Apply the class to CanvasProvider (or a scoped container)
+<CanvasProvider className={v4TokensCustomStyles}>
+  <App />
+</CanvasProvider>
+```
+
+Here the **class name** defines the value for the brand token (`brand.primary600`) and sets the system brand token (`system.color.brand.accent.primary`) to that brand token so both the semantic brand layer and the system layer stay in sync. In plain CSS you would do the same: define the brand variable and set the system variable to `var(--cnvs-brand-primary-600)` (or the appropriate token name).
 
 ## Deprecations
 
