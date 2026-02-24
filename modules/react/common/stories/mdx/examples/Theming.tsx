@@ -1,6 +1,8 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {base} from '@workday/canvas-tokens-web';
 
 const App = () => {
@@ -11,12 +13,15 @@ const App = () => {
           palette: {
             primary: {
               main: base.green600,
-              dark: base.green700,
-              darkest: base.green800,
-              light: base.green200,
-              lighter: base.green50,
-              lightest: base.green25,
-              contrast: base.neutral0,
+            },
+            alert: {
+              main: base.magenta600,
+            },
+            common: {
+              focusOutline: base.purple500,
+              alertInner: base.magenta400,
+              alertOuter: base.magenta500,
+              errorInner: base.red500,
             },
           },
         },
@@ -26,7 +31,12 @@ const App = () => {
         <Card.Heading>Theming</Card.Heading>
         <Card.Body>
           <PrimaryButton>Theming</PrimaryButton>
-          <input />
+          <FormField error="caution">
+            <FormField.Label>Email</FormField.Label>
+            <FormField.Field>
+              <FormField.Input as={TextInput} />
+            </FormField.Field>
+          </FormField>
         </Card.Body>
       </Card>
     </CanvasProvider>
@@ -35,8 +45,8 @@ const App = () => {
 
 export const Theming = () => {
   return (
-    <CanvasProvider theme={{canvas: {palette: {primary: {main: base.green600}}}}}>
+    <div>
       <App />
-    </CanvasProvider>
+    </div>
   );
 };
