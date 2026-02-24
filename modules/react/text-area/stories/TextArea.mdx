@@ -8,9 +8,7 @@ import {
 
 import TextAreaStoriesMeta from './TextArea.stories';
 import {Basic} from './examples/Basic';
-import {Caution} from './examples/Caution';
 import {Disabled} from './examples/Disabled';
-import {Error} from './examples/Error';
 import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
@@ -36,8 +34,8 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Text Area should be used in tandem with [Form Field](/components/inputs/form-field/) to meet
-accessibility standards.
+Text Area should be used in tandem with [Form Field](/components/inputs/form-field/) to ensure
+proper label association and screen reader support.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -49,10 +47,15 @@ Set the `disabled` prop of the Text Area to prevent users from interacting with 
 
 ### Placeholder
 
-Set the `placeholder` prop of the Text Input to display a sample of its expected format or value
+Set the `placeholder` prop of the Text Area to display a sample of its expected format or value
 before a value has been provided.
 
 <ExampleCodeBlock code={Placeholder} />
+
+> **Accessibility Note**: Always provide a persistent `FormField.Label` and never rely on
+> placeholder text as the only label for a text area. Placeholders can disappear or lack sufficient
+> contrast. Use placeholders only for short format examples, and place detailed instructions or
+> guidance in `FormField.Hint` instead of the placeholder.
 
 ### Ref Forwarding
 
@@ -72,6 +75,10 @@ accepts the following values:
 - `TextArea.ResizeDirection.Vertical`
 
 <ExampleCodeBlock code={ResizeConstraints} />
+
+> **Accessibility Note**: Allowing users to resize the text area (default `resize: both`) improves
+> accessibility by letting them adjust it for comfort. Avoid disabling resizing (`resize: none`)
+> unless necessary, and always ensure the initial size meets the needs of your content.
 
 ### Grow
 
@@ -96,20 +103,40 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Text Area to
-the Caution or Error state, respectively. You will also need to set the `hintId` and `hintText`
-props on the Form Field to meet accessibility standards.
+Form Field provides error and caution states for Text Area. Set the `error` prop on Form Field to
+`"error"` or `"caution"` and use `FormField.Hint` to provide error messages. See
+[Form Field's Error documentation](/components/inputs/form-field/#error-states) for
+examples and accessibility guidance.
 
-The `error` prop may be applied directly to the Text Area with a value of
-`"TextArea.ErrorType.Caution"` or `TextArea.ErrorType.Error` if Form Field is not being used.
+## Accessibility
 
-#### Caution
+`TextArea` should be used with [Form Field](/components/inputs/form-field/) to
+ensure proper labeling, error handling, and help text association. See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility)
+for comprehensive guidance on form accessibility best practices.
 
-<ExampleCodeBlock code={Caution} />
+### Character Limits
 
-#### Error
+When limiting text area length:
 
-<ExampleCodeBlock code={Error} />
+- Use the `maxLength` attribute to enforce the limit programmatically.
+- For longer limits (100+ characters), consider adding character count information to
+  `FormField.Hint`.
+- Avoid announcing character counts after every keystroke, as this disrupts screen reader users.
+  Check out
+  [Debouncing an AriaLiveRegion: TextArea with character limit](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit)
+  for an example of how to wait for users to stop typing before announcing the character count to
+  screen readers.
+
+### Screen Reader Experience
+
+When properly implemented with `FormField`, screen readers will announce:
+
+- The label text when the text area receives focus.
+- Required, disabled, or read-only status.
+- Help text and error messages (via `aria-describedby`).
+- The current value or "blank" if empty.
+- That it's a multi-line text input field.
 
 ## Component API
 
