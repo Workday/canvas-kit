@@ -6,20 +6,15 @@ import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Overview" />
 
-# Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web@3.0.0`
-
-<StorybookInformationHighlight
-  title="Note: This guide is for Canvas Tokens v3"
-  description="This guide is meant to help you migrate to Canvas Tokens v3. When we upgrade to Canvas Kit v15, we will update this guide to reflect the new tokens."
-  link="https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v4-overview--docs"
-  linkText="Looking for Canvas Tokens v4? View docs here."
-/>
+# Canvas Kit Token Migration Guide: Moving to `@workday/canvas-tokens-web@4.0.0`
 
 Canvas Kit v10+ introduces a new token system that replaces the old JavaScript-based tokens from
 `@workday/canvas-kit-react/tokens` with CSS variables from `@workday/canvas-tokens-web`. Canvas Kit
-is using tokens from `@workday/canvas-tokens-web` v3 that introduced a new color palette with more
-clear names (like `red.600`, `blue100`) instead of the previous "fruity" palette (like `watermelon`,
-`blueberry`, etc).
+is using tokens from `@workday/canvas-tokens-web` v4 that introduced significant updates to align
+with our Design Refresh, providing enhanced scalability, better product support, and a more
+comprehensive token system. This release focuses on improving the color system with extended alpha
+scales, updating brand tokens to use numerical naming conventions, and introducing new surface,
+focus, accent, and semantic tokens.
 
 ## Why Migrate?
 
@@ -36,31 +31,6 @@ clear names (like `red.600`, `blue100`) instead of the previous "fruity" palette
   description="We recommend using the Canvas Kit MCP"
   link="/?path=/docs/ai-for-llms-mcp-docs--docs"
   linkText="Learn more about the Canvas Kit MCP"
-/>
-
-We provide a **LLM migration mapping file** (`llm-token-migration.txt`) specifically designed for
-use with LLM-based code assistants (such as [Cursor](https://www.cursor.so/) or similar tools). This
-file is not intended for direct human reference or team documentation, but rather as structured
-input for LLMs to automate and assist with your token migration process.
-
-> Important: LLMs can make mistakes. Please review changes to be sure they are correct using our
-> docs and upgrade guides. The LLM migration file is regularly updated to reflect the latest token
-> mappings and best practices. For more details, see other sections of this migration guide.
-
-This file contains a comprehensive mapping of old Canvas Kit token usages to their new equivalents
-in `@workday/canvas-tokens-web`, along with migration tips and examples and formatted for optimal
-LLM consumption.
-
-**How to use:**
-
-- **View raw file**: Open the file in a new tab to see the complete migration mapping
-- **Download as txt**: Save the file locally to upload or paste into your LLM/code assistant
-- **Use with LLM**: Provide the raw content to your LLM/code assistant as context for automated
-  migration
-
-<DownloadLLMFile
-  rawFileLink="https://raw.githubusercontent.com/Workday/canvas-kit/master/modules/docs/llm/llm-token-migration-14.txt"
-  filename="llm-token-migration-14.0.0.txt"
 />
 
 ## Core Principles
@@ -89,12 +59,12 @@ const styles = {padding: space.s};
 // New approach - CSS variables with var()
 import {system} from '@workday/canvas-tokens-web';
 // padding: 'var(--cnvs-sys-space-x4)'
-const styles = {padding: `var(${system.space.x4})`};
+const styles = {padding: `var(${system.padding.md})`};
 
 // New approach - Using cssVar utility (recommended) and fallback
 import {cssVar} from '@workday/canvas-kit-styling';
 // padding: 'var(--cnvs-sys-space-x4, 1rem)'
-const styles = {padding: cssVar(system.space.x4, '1rem')};
+const styles = {padding: cssVar(system.padding.md, '1rem')};
 ```
 
 ### Styling Utilities
@@ -119,7 +89,7 @@ Use system tokens over base tokens whenever possible for better theming support:
 
 ```javascript
 // Good - Semantic and themeable
-backgroundColor: system.color.bg.default;
+backgroundColor: system.color.surface.default;
 
 // Avoid - Hard-coded base value
 backgroundColor: base.neutral0;
@@ -131,10 +101,10 @@ Instead of mixing individual type properties, use complete type level tokens:
 
 ```javascript
 // Good - Consistent type styling
-...system.type.body.medium
+...system.type.body.md
 
 // Avoid - Mixing individual properties
-fontSize: system.fontSize.body.medium,
+fontSize: system.fontSize.body.md,
 fontWeight: system.fontWeight.regular,
 lineHeight: '1.5'
 ```
@@ -146,12 +116,12 @@ Always use `createStyles` and `cssVar` for proper CSS variable handling:
 ```javascript
 // Good - Proper CSS variable wrapping
 const styles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 // Avoid - Manual CSS variable handling
 const styles = {
-  padding: `var(${system.space.x4})`,
+  padding: `var(${system.padding.md})`,
 };
 ```
 
@@ -164,6 +134,6 @@ import {px2rem} from '@workday/canvas-kit-styling';
 
 const styles = createStyles({
   border: `solid ${px2rem(1)}`,
-  borderColor: system.color.border.container,
+  borderColor: system.color.border.strong,
 });
 ```
