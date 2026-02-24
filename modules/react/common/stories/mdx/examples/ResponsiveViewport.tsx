@@ -1,8 +1,9 @@
-import * as React from 'react';
-import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import styled from '@emotion/styled';
-import {type, space, colors, borderRadius} from '@workday/canvas-kit-react/tokens';
+import * as React from 'react';
+
 import {getTheme} from '@workday/canvas-kit-react/common';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
+import {borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
 
 const theme = getTheme();
 const {up, down} = theme.canvas.breakpoints;

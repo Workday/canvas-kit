@@ -1,7 +1,8 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-import {useRadioModel} from './hooks/useRadioModel';
+
 import {RadioGroup} from './RadioGroup';
 import {RadioLabelProps} from './RadioLabel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 export const RadioButton = createSubcomponent('input')({
   displayName: 'Radio',

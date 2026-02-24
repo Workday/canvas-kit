@@ -3,8 +3,8 @@ import React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {Popup} from '@workday/canvas-kit-react/popup';
 
-import {DialogPopper} from './DialogPopper';
 import {DialogCard} from './DialogCard';
+import {DialogPopper} from './DialogPopper';
 import {useDialogModel} from './hooks';
 
 export interface DialogProps {

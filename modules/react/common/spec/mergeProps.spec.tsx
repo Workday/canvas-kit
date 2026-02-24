@@ -58,8 +58,8 @@ describe('mergeProps', () => {
   });
 
   it('should call both callbacks of the same keys', () => {
-    const targetSpy = jest.fn();
-    const sourceSpy = jest.fn();
+    const targetSpy = vi.fn();
+    const sourceSpy = vi.fn();
     const target = {
       onClick: targetSpy,
     };
@@ -77,10 +77,10 @@ describe('mergeProps', () => {
 
   it('should target callback before source callback', () => {
     const executionOrder = [] as number[];
-    const targetSpy = jest.fn(() => {
+    const targetSpy = vi.fn(() => {
       executionOrder.push(1);
     });
-    const sourceSpy = jest.fn(() => {
+    const sourceSpy = vi.fn(() => {
       executionOrder.push(2);
     });
     const target = {
@@ -96,7 +96,7 @@ describe('mergeProps', () => {
   });
 
   it('should not overwrite a callback with undefined', () => {
-    const targetSpy = jest.fn();
+    const targetSpy = vi.fn();
     const target = {
       onClick: targetSpy,
     };

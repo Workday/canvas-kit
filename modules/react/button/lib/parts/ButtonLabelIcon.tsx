@@ -1,7 +1,8 @@
-import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {px2rem} from '@workday/canvas-kit-styling';
+
+import {ButtonSizes} from '../types';
 
 export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   /**

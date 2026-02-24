@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Toast} from '@workday/canvas-kit-react/toast';
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Toast} from '@workday/canvas-kit-react/toast';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {checkIcon} from '@workday/canvas-system-icons-web';
 
 export const RTL = () => {
   const handleClose = () => console.log('close button clicked');

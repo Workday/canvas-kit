@@ -1,7 +1,7 @@
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {extLinkIcon} from '@workday/canvas-system-icons-web';
 
 export const NoTargetRTL = () => {

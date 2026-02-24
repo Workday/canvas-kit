@@ -1,10 +1,12 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
-import * as IconStories from './Assets.stories';
+import { Meta } from "@storybook/blocks";
+import { ExampleCodeBlock, StorybookStatusIndicator } from "@workday/canvas-kit-docs";
+import { InformationHighlight } from "@workday/canvas-kit-react/information-highlight";
+import * as IconStories from "./Assets.stories";
 
-import {SystemIconList} from './examples/IconList';
-import {AppletIconList} from './examples/AppletIconList';
-import {AccentIconList} from './examples/AccentIconList';
-import {Overview} from './examples/Overview';
+import { SystemIconList } from "./examples/IconList";
+import { AppletIconList } from "./examples/AppletIconList";
+import { AccentIconList } from "./examples/AccentIconList";
+import { Overview } from "./examples/Overview";
 
 <Meta of={IconStories} />
 
@@ -16,14 +18,38 @@ patterns.
 
 <ExampleCodeBlock code={Overview} />
 
-## Accent Icon List
+## Accent Icon List <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight
+	className="sb-unstyled"
+	variant="caution"
+	cs={{ p: { marginBlock: 0 } }}
+>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Body>
+		Accent icons have been deprecated and will be removed in a future major
+		version. Please use expressive icons instead.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 Accent Icons add clarity, and visual interest, they bring delight to the experience by communicating
 the overall tone and meaning of a page.
 
 <ExampleCodeBlock code={AccentIconList} />
 
-## Applet Icon List
+## Applet Icon List <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight
+	className="sb-unstyled"
+	variant="caution"
+	cs={{ p: { marginBlock: 0 } }}
+>
+	<InformationHighlight.Icon />
+	<InformationHighlight.Body>
+		Applet icons have been deprecated and will be removed in a future major
+		version. Please use expressive icons instead.
+	</InformationHighlight.Body>
+</InformationHighlight>
 
 Applet Icons convey entry points, categories of actions, or information sources on the Workday
 homepage.

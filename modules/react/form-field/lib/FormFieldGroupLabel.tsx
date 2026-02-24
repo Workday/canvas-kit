@@ -1,10 +1,11 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
+
 import {useFormFieldModel} from './hooks';
 
 export interface FormFieldGroupLabelProps
@@ -20,8 +21,9 @@ export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    color: system.color.text.default,
-    paddingInlineStart: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    color: cssVar(system.color.fg.default, system.color.text.default),
+    paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
@@ -31,11 +33,14 @@ export const formFieldGroupLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          fontSize: system.fontSize.body.large,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
           fontWeight: system.fontWeight.normal,
-          color: brand.error.base,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
           textDecoration: 'unset',
-          marginInlineStart: system.space.x1,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
         },
       },
     },

@@ -1,8 +1,8 @@
+import {cssVar} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
+
 import {EmotionCanvasTheme} from '../theming/index';
 import {ErrorType} from '../types';
-import {cssVar} from '@workday/canvas-kit-styling';
-
-import {base, brand, system} from '@workday/canvas-tokens-web';
 
 export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
   if (error === ErrorType.Error) {
@@ -55,10 +55,7 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme) {
     '&:focus-visible:not([disabled]), &.focus:not([disabled])': {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          cssVar(system.color.border.inverse, base.neutral0)
-        },
+        0 0 0 2px ${cssVar(system.color.border.inverse.default, base.neutral0)},
         0 0 0 4px ${
           theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
         }`,

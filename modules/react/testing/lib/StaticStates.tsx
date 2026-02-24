@@ -1,10 +1,11 @@
 import * as React from 'react';
+
 import {
-  useTheme,
   CanvasProvider,
   EmotionCanvasTheme,
   PartialEmotionCanvasTheme,
   StyleRewriteFn,
+  useTheme,
 } from '@workday/canvas-kit-react/common';
 import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 

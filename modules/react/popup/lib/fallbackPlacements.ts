@@ -1,10 +1,10 @@
 import {
-  Placement as PopperJSPlacement,
-  State,
-  detectOverflow,
-  SideObject,
   Modifier,
   ModifierArguments,
+  Placement as PopperJSPlacement,
+  SideObject,
+  State,
+  detectOverflow,
 } from '@popperjs/core';
 
 export type Placement = PopperJSPlacement; // Use template literals to make documentation list them out
@@ -26,7 +26,7 @@ const placements: Placement[] = [
   'left-end',
   'auto',
   'auto-start',
-  'auto-end'
+  'auto-end',
 ];
 
 const getOppositePlacement = (popperPlacement: Placement): Placement => {

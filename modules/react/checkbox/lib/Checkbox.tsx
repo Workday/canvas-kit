@@ -1,14 +1,16 @@
 import * as React from 'react';
+
 import {
-  createComponent,
   ErrorType,
-  useUniqueId,
+  createComponent,
   useLocalRef,
+  useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {CheckboxRipple} from './CheckboxRipple';
-import {CheckboxContainer} from './CheckboxContainer';
+
 import {CheckboxCheck} from './CheckboxCheck';
-import {CheckboxInput, CheckboxProps} from './CheckboxInput';
+import {CheckboxContainer} from './CheckboxContainer';
+import {CheckboxInput, type CheckboxProps} from './CheckboxInput';
+import {CheckboxRipple} from './CheckboxRipple';
 
 export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
@@ -41,4 +43,4 @@ export const Checkbox = createComponent('input')({
   },
 });
 
-export {CheckboxProps};
+export {type CheckboxProps};

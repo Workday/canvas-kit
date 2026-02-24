@@ -1,8 +1,8 @@
 import React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 export const HoistedModel = () => {
   const model = useTabsModel({

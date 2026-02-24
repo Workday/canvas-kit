@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {cardStencil, cardBodyStencil, cardHeadingStencil} from '@workday/canvas-kit-react/card';
+
+import {cardBodyStencil, cardHeadingStencil, cardStencil} from '@workday/canvas-kit-react/card';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 const menuCardStencil = createStencil({
   extends: cardStencil,
