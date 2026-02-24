@@ -1,8 +1,12 @@
-import {Theme, ThemeContext} from '@emotion/react';
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {isElementRTL, useCanvasThemeToCssVars, useLocalRef} from '@workday/canvas-kit-react/common';
+import {
+  isElementRTL,
+  useCanvasThemeToCssVars,
+  useLocalRef,
+  useTheme,
+} from '@workday/canvas-kit-react/common';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -51,8 +55,10 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
-  const theme = React.useContext(ThemeContext as React.Context<Theme>);
-  const {style} = useCanvasThemeToCssVars(theme, {});
+  // Use useTheme() (no args) so we get the filled theme from Emotion context—same as CanvasProvider.
+  // Passing raw context can miss filling; useTheme() ensures palette + system.brand tokens are resolved.
+  const filledTheme = useTheme();
+  const {style} = useCanvasThemeToCssVars(filledTheme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
@@ -65,6 +71,28 @@ export const usePopupStack = <E extends HTMLElement>(
     }
     return localRef.current;
   });
+
+  // Forward only theme overrides (style) to the popup container when a theme was provided via
+  // CanvasProvider theme prop. We do NOT apply defaultBranding (className) so we don't create a
+  // cascade barrier—only the CSS variables the consumer overrode are set. This effect runs
+  // before PopupStack.add below so the container has the theme before it's shown (avoids blue→magenta flash).
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    if (!element) {
+      return undefined;
+    }
+    const styleKeys = Object.keys(style);
+    if (styleKeys.length === 0) {
+      return undefined;
+    }
+    for (const key of styleKeys) {
+      // @ts-ignore - token keys are CSS custom property names
+      element.style.setProperty(key, style[key]);
+    }
+    // No cleanup: leave theme on container so reopening doesn't flash
+    return undefined;
+  }, [localRef, style]);
+
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
   // should also register as soon as the element is available
@@ -112,24 +140,6 @@ export const usePopupStack = <E extends HTMLElement>(
       }
     }
   }, [localRef, target]);
-
-  React.useLayoutEffect(() => {
-    const element = localRef.current;
-    const keys = Object.keys(style);
-    if (element && theme) {
-      for (const key of keys) {
-        // @ts-ignore
-        element.style.setProperty(key, style[key]);
-      }
-      return () => {
-        for (const key of keys) {
-          element.style.removeProperty(key);
-        }
-      };
-    }
-    // No cleanup is needed if element or theme is not set, so return undefined (no effect)
-    return undefined;
-  }, [localRef, style, theme]);
 
   return localRef;
 };
