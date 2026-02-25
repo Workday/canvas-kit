@@ -1,0 +1,77 @@
+
+:root {
+  /* color: blue !important; */
+  --cnvs-sys-font-family-default: 'Inter';
+  --cnvs-sys-font-family-mono: 'Roboto Mono';
+  --cnvs-sys-font-family-global: 'Noto Sans';
+
+  --cnvs-sys-font-weight-light: 300;
+  --cnvs-sys-font-weight-regular: 400;
+  --cnvs-sys-font-weight-medium: 500;
+  --cnvs-sys-font-weight-semibold: 600;
+  --cnvs-sys-font-weight-bold: 700;
+
+  --cnvs-sys-font-size-subtext-sm: 0.625rem;
+  --cnvs-sys-font-size-subtext-md: 0.75rem;
+  --cnvs-sys-font-size-subtext-lg: 0.875rem;
+  --cnvs-sys-font-size-body-sm: 1rem;
+  --cnvs-sys-font-size-body-md: 1.125rem;
+  --cnvs-sys-font-size-body-lg: 1.25rem;
+  --cnvs-sys-font-size-heading-sm: 1.5rem;
+  --cnvs-sys-font-size-heading-md: 1.75rem;
+  --cnvs-sys-font-size-heading-lg: 2rem;
+  --cnvs-sys-font-size-title-sm: 2.5rem;
+  --cnvs-sys-font-size-title-md: 3rem;
+  --cnvs-sys-font-size-title-lg: 3.5rem;
+
+  --cnvs-sys-letter-spacing-subtext-sm: calc(0.3px / 16px);
+  --cnvs-sys-letter-spacing-subtext-md: calc(0.12px / 16px);
+  --cnvs-sys-letter-spacing-subtext-lg: calc(0.14px / 16px);
+  --cnvs-sys-letter-spacing-body-sm: calc(-0.16px / 16px);
+  --cnvs-sys-letter-spacing-body-md: calc(-0.18px / 16px);
+  --cnvs-sys-letter-spacing-body-lg: calc(-0.2px / 16px);
+  --cnvs-sys-letter-spacing-heading-sm: calc(-0.24px / 16px);
+  --cnvs-sys-letter-spacing-heading-md: calc(-0.28px / 16px);
+  --cnvs-sys-letter-spacing-heading-lg: calc(-0.64px / 16px);
+  --cnvs-sys-letter-spacing-title-sm: calc(-0.8px / 16px);
+  --cnvs-sys-letter-spacing-title-md: calc(-1.44px / 16px);
+  --cnvs-sys-letter-spacing-title-lg: calc(-1.68px / 16px);
+
+  --cnvs-sys-line-height-subtext-sm: 1rem;
+  --cnvs-sys-line-height-subtext-md: 1rem;
+  --cnvs-sys-line-height-subtext-lg: 1.25rem;
+  --cnvs-sys-line-height-body-sm: 1.5rem;
+  --cnvs-sys-line-height-body-md: 1.75rem;
+  --cnvs-sys-line-height-body-lg: 1.75rem;
+  --cnvs-sys-line-height-heading-sm: 2rem;
+  --cnvs-sys-line-height-heading-md: 2.25rem;
+  --cnvs-sys-line-height-heading-lg: 2.5rem;
+  --cnvs-sys-line-height-title-sm: 3rem;
+  --cnvs-sys-line-height-title-md: 3.5rem;
+  --cnvs-sys-line-height-title-lg: 4rem;
+
+  --cnvs-sys-font-subtext-sm:
+    var(--cnvs-sys-font-size-subtext-sm) / var(--cnvs-sys-line-height-subtext-sm);
+  --cnvs-sys-font-subtext-md:
+    var(--cnvs-sys-font-size-subtext-md) / var(--cnvs-sys-line-height-subtext-md);
+  --cnvs-sys-font-subtext-lg:
+    var(--cnvs-sys-font-size-subtext-lg) / var(--cnvs-sys-line-height-subtext-lg);
+  --cnvs-sys-font-body-sm:
+    var(--cnvs-sys-font-size-body-sm) / var(--cnvs-sys-line-height-body-sm);
+  --cnvs-sys-font-body-md:
+    var(--cnvs-sys-font-size-body-md) / var(--cnvs-sys-line-height-body-md);
+  --cnvs-sys-font-body-lg:
+    var(--cnvs-sys-font-size-body-lg) / var(--cnvs-sys-line-height-body-lg);
+  --cnvs-sys-font-heading-sm:
+    var(--cnvs-sys-font-size-heading-sm) / var(--cnvs-sys-line-height-heading-sm);
+  --cnvs-sys-font-heading-md:
+    var(--cnvs-sys-font-size-heading-md) / var(--cnvs-sys-line-height-heading-md);
+  --cnvs-sys-font-heading-lg:
+    var(--cnvs-sys-font-size-heading-lg) / var(--cnvs-sys-line-height-heading-lg);
+  --cnvs-sys-font-title-sm:
+    var(--cnvs-sys-font-size-title-sm) / var(--cnvs-sys-line-height-title-sm);
+  --cnvs-sys-font-title-md:
+    var(--cnvs-sys-font-size-title-md) / var(--cnvs-sys-line-height-title-md);
+  --cnvs-sys-font-title-lg:
+    var(--cnvs-sys-font-size-title-lg) / var(--cnvs-sys-line-height-title-lg);
+}
