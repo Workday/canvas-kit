@@ -44,15 +44,22 @@ const fadeIn = keyframes({
 function getSpace(value?: string | number) {
   // TODO (deprecated tokens): Revisit tokens after removal of style props
   const spaceMap = {
-    zero: system.gap.none,
-    xxxs: system.gap.xs,
-    xxs: system.gap.sm,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    zero: cssVar(system.gap.none, '0'),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxxs: cssVar(system.gap.xs, system.space.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxs: cssVar(system.gap.sm, system.space.x2),
     xs: px2rem(12),
-    s: system.gap.md,
-    m: system.gap.lg,
-    l: system.gap.xl,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    s: cssVar(system.gap.md, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    m: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    l: cssVar(system.gap.xl, system.space.x8),
     xl: px2rem(40),
-    xxl: system.gap.xxl,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxl: cssVar(system.gap.xxl, system.space.x16),
     xxxl: px2rem(80),
   };
 

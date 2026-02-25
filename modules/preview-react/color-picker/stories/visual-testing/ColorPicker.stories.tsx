@@ -1,9 +1,7 @@
-import * as React from 'react';
-
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {colors} from '@workday/canvas-kit-react/tokens';
 
+import {defaultColorSet} from '../../lib/defaultColorSet';
 import {InputInteraction as InputInteractionExample} from '../examples/InputInteraction';
 
 export default {
@@ -34,7 +32,7 @@ export const ColorPickerStates = {
           {
             label: 'With Reset',
             props: {
-              resetColor: colors.blueberry400,
+              resetColor: defaultColorSet.blueberry400,
               resetLabel: 'Reset',
               onColorReset: noop,
             },
@@ -43,7 +41,7 @@ export const ColorPickerStates = {
             label: 'With Reset and Hex Input',
             props: {
               showCustomHexInput: true,
-              resetColor: colors.blueberry400,
+              resetColor: defaultColorSet.blueberry400,
               resetLabel: 'Reset',
               onColorReset: noop,
             },

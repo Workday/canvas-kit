@@ -6,6 +6,7 @@ import {CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
  * The function takes in a color string or an enum value of CanvasColor and returns its hex value color.
  * @param value a string or an enum value of CanvasColor
  * @returns the hex value color
+ * @deprecated ⚠️ `getColor` is deprecated.
  */
 export function getColor(value?: CanvasColor | string) {
   if (value! in colors) {
@@ -15,6 +16,9 @@ export function getColor(value?: CanvasColor | string) {
 }
 
 // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+/**
+ * @deprecated ⚠️ `expandHex` is deprecated.
+ */
 export const expandHex = (hex: string) => {
   const shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   return hex.replace(shorthandRegex, function (m: string, r: string, g: string, b: string) {

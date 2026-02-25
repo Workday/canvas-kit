@@ -6,7 +6,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const h3Styles = createStyles({
-  ...system.type.body.large,
+  ...system.type.body.lg,
   margin: 0,
   fontWeight: system.fontWeight.bold,
 });
@@ -17,7 +17,7 @@ const H3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
 );
 
 const bodyStyles = createStyles({
-  ...system.type.body.small,
+  ...system.type.body.sm,
   margin: 0,
 });
 
