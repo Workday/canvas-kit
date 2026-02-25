@@ -184,6 +184,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
   (model, ref, elemProps: {'data-id': string} = {'data-id': ''}) => {
     const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
     const id = elemProps['data-id'];
+
     // focus on the item with the cursor
     React.useLayoutEffect(() => {
       if (model.state.mode === 'single') {
@@ -196,6 +197,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)(
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id, localRef, model.state.cursorId, model.state.mode]);
+
     return {
       ref: elementRef,
       className: isCursor(model.state, elemProps['data-id']) ? 'focus' : undefined,

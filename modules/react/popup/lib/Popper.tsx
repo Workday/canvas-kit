@@ -13,8 +13,24 @@ export type PopperOptions = Options;
 export const defaultFallbackPlacements: Placement[] = ['top', 'right', 'bottom', 'left'];
 
 import {usePopupStack} from './hooks';
-import {useLocalRef} from '@workday/canvas-kit-react/common';
+import {isElementRTL, useLocalRef} from '@workday/canvas-kit-react/common';
 import {fallbackPlacementsModifier} from './fallbackPlacements';
+
+/**
+ * Flips a placement for RTL layouts. Popper.js doesn't automatically flip
+ * placements based on dir attribute, so we need to do it manually. In RTL:
+ * - `left` ↔ `right`
+ * - `-start` ↔ `-end`
+ */
+const flipPlacementForRTL = (placement: Placement): Placement => {
+  return placement
+    .replace(/left/g, '__LEFT__')
+    .replace(/right/g, 'left')
+    .replace(/__LEFT__/g, 'right')
+    .replace(/-start/g, '__START__')
+    .replace(/-end/g, '-start')
+    .replace(/__START__/g, '-end') as Placement;
+};
 
 export interface PopperProps {
   /**
@@ -172,16 +188,25 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         return undefined;
       }
 
+      // Check RTL from the popup container (stackRef) to flip placements.
+      // Popper.js doesn't automatically flip left/right placements in RTL mode.
+      // We use stackRef because it has the dir attribute set by usePopupStack.
+      const isRTL = stackRef.current ? isElementRTL(stackRef.current) : false;
+      const rtlAwarePlacement = isRTL ? flipPlacementForRTL(popperPlacement) : popperPlacement;
+      const rtlAwareFallbackPlacements = isRTL
+        ? fallbackPlacements.map(flipPlacementForRTL)
+        : fallbackPlacements;
+
       if (stackRef.current) {
         const instance = createPopper(anchorEl, stackRef.current, {
-          placement: popperPlacement,
+          placement: rtlAwarePlacement,
           ...popperOptions,
           modifiers: [
             placementModifier,
             {
               ...fallbackPlacementsModifier,
               options: {
-                fallbackPlacements,
+                fallbackPlacements: rtlAwareFallbackPlacements,
               },
             },
             ...(popperOptions.modifiers || []),
@@ -204,15 +229,23 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     React.useLayoutEffect(() => {
       // Only update options if this is _not_ the first render
       if (!firstRender.current) {
+        // Check RTL from the popup container to flip placements.
+        const popperElement = localRef.current?.state?.elements?.popper;
+        const isRTL = popperElement ? isElementRTL(popperElement) : false;
+        const rtlAwarePlacement = isRTL ? flipPlacementForRTL(popperPlacement) : popperPlacement;
+        const rtlAwareFallbackPlacements = isRTL
+          ? fallbackPlacements.map(flipPlacementForRTL)
+          : fallbackPlacements;
+
         localRef.current?.setOptions({
-          placement: popperPlacement,
+          placement: rtlAwarePlacement,
           ...popperOptions,
           modifiers: [
             placementModifier,
             {
               ...fallbackPlacementsModifier,
               options: {
-                fallbackPlacements,
+                fallbackPlacements: rtlAwareFallbackPlacements,
               },
             },
             ...(popperOptions.modifiers || []),
@@ -220,7 +253,14 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
         });
       }
       firstRender.current = false;
-    }, [popperOptions, popperPlacement, fallbackPlacements, placementModifier, localRef]);
+    }, [
+      popperOptions,
+      popperPlacement,
+      fallbackPlacements,
+      anchorElement,
+      placementModifier,
+      localRef,
+    ]);
 
     const contents = <>{isRenderProp(children) ? children({placement}) : children}</>;
 

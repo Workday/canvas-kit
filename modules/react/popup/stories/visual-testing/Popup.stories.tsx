@@ -148,16 +148,18 @@ export const PopupRTL = {
     });
     return (
       <CanvasProvider dir="rtl">
-        <Popup model={model}>
-          <Popup.Target style={{display: 'none'}}></Popup.Target>
-          <Popup.Popper>
-            <Popup.Card style={{animation: 'none'}} width={300}>
-              <Popup.CloseIcon aria-label="" />
-              <Popup.Heading>למחוק פריט</Popup.Heading>
-              <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
-            </Popup.Card>
-          </Popup.Popper>
-        </Popup>
+        <div style={{display: 'flex', justifyContent: 'flex-start'}}>
+          <Popup model={model}>
+            <Popup.Target style={{visibility: 'hidden'}}></Popup.Target>
+            <Popup.Popper>
+              <Popup.Card style={{animation: 'none'}} width={300}>
+                <Popup.CloseIcon aria-label="" />
+                <Popup.Heading>למחוק פריט</Popup.Heading>
+                <Popup.Body>האם ברצונך למחוק פריט זה</Popup.Body>
+              </Popup.Card>
+            </Popup.Popper>
+          </Popup>
+        </div>
       </CanvasProvider>
     );
   },
