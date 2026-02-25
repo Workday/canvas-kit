@@ -11,8 +11,10 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {bgColorIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {defaultColorSet} from '../../lib/defaultColorSet';
 
 export const IconButtonPopup = () => {
   const model = usePopupModel();
@@ -36,14 +38,16 @@ export const IconButtonPopup = () => {
     <Popup model={model}>
       <Popup.Target as={TertiaryButton} icon={bgColorIcon} aria-label="Select Background Color" />
       <Popup.Popper>
-        <Popup.Card marginTop="xxs" padding="s" depth={3}>
+        <Popup.Card
+          cs={{marginTop: system.gap.sm, padding: system.padding.md, boxShadow: system.depth[3]}}
+        >
           <Popup.Body>
             <ColorPicker
-              resetColor={colors.blueberry400}
+              resetColor={defaultColorSet.blueberry400}
               resetLabel={'Reset'}
               showCustomHexInput={true}
               onColorChange={handleSubmit}
-              onColorReset={() => handleSubmit(colors.blueberry400)}
+              onColorReset={() => handleSubmit(defaultColorSet.blueberry400)}
               onSubmitClick={model.events.hide}
               value={color}
             />
