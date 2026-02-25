@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-css",
-  "version": "14.2.24",
+  "version": "14.2.31",
   "type": "module",
   "description": "The parent module that contains all Workday Canvas Kit CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
