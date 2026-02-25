@@ -9,7 +9,7 @@ import {
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
 
@@ -51,9 +51,11 @@ export const sidePanelToggleButtonStencil = createStencil({
       },
       collapsed: {
         margin: 'auto',
-        insetInlineStart: 0,
-        insetInlineEnd: 0,
         transform: `scaleX(1)`,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineStart: cssVar(base.size150, '12px'),
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        insetInlineEnd: cssVar(base.size150, '12px'),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
         },
