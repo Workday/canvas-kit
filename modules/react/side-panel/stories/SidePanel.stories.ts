@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
 import mdxDoc from './SidePanel.mdx';
 import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
@@ -13,7 +13,7 @@ import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
 import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 
 export default {
-  title: 'Labs/Side Panel (New)',
+  title: 'Components/Containers/Side Panel (New)',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {
