@@ -38,7 +38,7 @@ export const sidePanelToggleButtonStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     width: cssVar(system.gap.lg, system.space.x8),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    insetInlineEnd: cssVar(system.gap.md, system.space.x4),
+    insetInlineEnd: cssVar(base.size150, system.space.x3),
   },
   modifiers: {
     state: {
@@ -52,10 +52,6 @@ export const sidePanelToggleButtonStencil = createStencil({
       collapsed: {
         margin: 'auto',
         transform: `scaleX(1)`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        insetInlineStart: cssVar(base.size150, '12px'),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        insetInlineEnd: cssVar(base.size150, '12px'),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
         },

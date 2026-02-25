@@ -36,7 +36,7 @@ export interface SidePanelProps {
    */
   expandedWidth?: number | string;
   /**
-   * The style variant of the side panel. 'standard' uses a lighter gray background (`system.color.bg.alt.softer`), no depth. 'alternate' uses a white background with depth (`system.color.bg.default` and level 5 depth).
+   * The style variant of the side panel. 'standard' uses a lighter gray background (`system.color.bg.alt.softer`), no depth. 'alternate' uses a white background with depth (`system.color.bg.default` and level 3 depth).
    *
    * @default 'standard'
    */
@@ -54,7 +54,7 @@ export const panelStencil = createStencil({
     position: 'relative',
     height: '100%',
     outline: `${px2rem(1)} solid transparent`,
-    transition: 'width ease-out 200ms, max-width ease-out 200ms',
+    transition: 'width ease-out 2000ms, max-width ease-out 2000ms',
   }),
   modifiers: {
     variant: {

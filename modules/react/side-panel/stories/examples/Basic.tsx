@@ -17,8 +17,6 @@ const viewPortStyles = createStyles({
 });
 
 export const Basic = () => {
-  // const model = useSidePanelModel();
-
   return (
     <Flex cs={viewPortStyles}>
       <SidePanel>
