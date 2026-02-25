@@ -91,7 +91,7 @@ export const BodyText = createComponent('p')({
   },
 });
 
-const headingStencil = createStencil({
+export const headingStencil = createStencil({
   extends: textStencil,
   base: {},
 });
