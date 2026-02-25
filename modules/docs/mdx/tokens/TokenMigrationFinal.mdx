@@ -103,6 +103,7 @@ const errorTextStyles = createStyles({
 
 ```javascript
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const inputStyles = createStyles({
   padding: `${space.xs} ${space.s}`,
@@ -128,6 +129,7 @@ const inputStyles = createStyles({
 #### After (New Tokens - System Approach)
 
 ```javascript
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const inputStyles = createStyles({
@@ -159,6 +161,7 @@ const inputStyles = createStyles({
 import {theme} from '@emotion/react';
 
 import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const primaryButtonStyles = createStyles({
   padding: `${space.xs} ${space.m}`,
@@ -175,6 +178,7 @@ const primaryButtonStyles = createStyles({
 #### After (New Tokens - Brand + System)
 
 ```javascript
+import {createStyles} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 const primaryButtonStyles = createStyles({

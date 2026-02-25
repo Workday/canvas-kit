@@ -56,14 +56,10 @@ import {space} from '@workday/canvas-kit-react/tokens';
 // padding: '1rem'
 const styles = {padding: space.s};
 
-// New approach - CSS variables with var()
-import {system} from '@workday/canvas-tokens-web';
-// padding: 'var(--cnvs-sys-space-x4)'
-const styles = {padding: `var(${system.padding.md})`};
-
 // New approach - Using cssVar utility (recommended) and fallback
 import {cssVar} from '@workday/canvas-kit-styling';
-// padding: 'var(--cnvs-sys-space-x4, 1rem)'
+import {system} from '@workday/canvas-tokens-web';
+// padding: 'var(--cnvs-sys-padding-md, 1rem)'
 const styles = {padding: cssVar(system.padding.md, '1rem')};
 ```
 
@@ -131,6 +127,7 @@ Use `px2rem` for pixel-based values to maintain consistency:
 
 ```javascript
 import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
   border: `solid ${px2rem(1)}`,
