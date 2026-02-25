@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {
@@ -7,7 +5,7 @@ import {
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {type} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
 
 import {Container} from './utils';
 
@@ -45,8 +43,11 @@ export const HyperlinkStates = {
       >
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
-            <Box {...type.levels.subtext.large}>
-              <Box as="span" color={props.variant === 'inverse' ? 'frenchVanilla100' : undefined}>
+            <Box cs={{...system.type.subtext.large}}>
+              <Box
+                as="span"
+                cs={{color: props.variant === 'inverse' ? system.color.fg.inverse : undefined}}
+              >
                 Here's a <Hyperlink {...props}>Link</Hyperlink> to something
               </Box>
             </Box>

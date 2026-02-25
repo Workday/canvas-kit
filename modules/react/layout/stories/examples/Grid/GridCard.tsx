@@ -2,40 +2,49 @@ import * as React from 'react';
 
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
-import {type} from '@workday/canvas-kit-react/tokens';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const h3Styles = createStyles({
+  ...system.type.body.lg,
+  margin: 0,
+  fontWeight: system.fontWeight.bold,
+});
 
 // temporary placeholder until type components are added to canvas-kit
-const H3 = props => (
-  <h3
-    style={{
-      ...type.levels.body.large,
-      margin: 0,
-      fontWeight: type.properties.fontWeights.bold,
-    }}
-    {...props}
-  />
+const H3 = (props: React.HTMLAttributes<HTMLHeadingElement>) => (
+  <h3 className={h3Styles} {...props} />
 );
 
-const Body = props => <p style={{...type.levels.body.small, margin: 0}} {...props} />;
+const bodyStyles = createStyles({
+  ...system.type.body.sm,
+  margin: 0,
+});
+
+const Body = (props: React.HTMLAttributes<HTMLParagraphElement>) => (
+  <p className={bodyStyles} {...props} />
+);
+
+const containerStyles = createStyles({
+  padding: system.padding.xl,
+  backgroundColor: system.color.surface.info.default,
+  borderRadius: system.shape.lg,
+  boxShadow: system.depth[1],
+  maxWidth: px2rem(600),
+  gridTemplate: 'auto / auto',
+  border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
+});
 
 export const GridCard = () => {
   const [isComplete, setIsComplete] = React.useState(false);
   return (
-    <Grid
-      padding="m"
-      depth={1}
-      borderRadius="l"
-      border="solid 1px"
-      borderColor="soap400"
-      maxWidth={600}
-      gridTemplate="auto / auto"
-    >
+    <Grid cs={containerStyles}>
       <H3>Learn about Grid {isComplete && '🥳'}</H3>
-      <Box paddingY="s">
+      <Box cs={{paddingBlock: system.padding.md}}>
         <Body>Complete this task when you have a functional understanding of Grid.</Body>
       </Box>
-      <Grid gridTemplate="auto / 1fr auto" justifyItems="end">
-        <Box marginRight="xxs">
+      <Grid cs={{gridTemplate: 'auto / 1fr auto', justifyItems: 'end'}}>
+        <Box cs={{marginRight: system.gap.sm}}>
           <PrimaryButton onClick={() => setIsComplete(true)}>Complete</PrimaryButton>
         </Box>
         <SecondaryButton onClick={() => setIsComplete(false)}>Cancel</SecondaryButton>

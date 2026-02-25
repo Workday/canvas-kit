@@ -3,12 +3,11 @@ import React from 'react';
 import {CanvasProvider, PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const formFieldHintStyles = createStyles({
-  paddingTop: system.space.x2,
+  paddingTop: system.padding.xs,
 });
 
 export const ThemedError = () => {
@@ -22,10 +21,10 @@ export const ThemedError = () => {
     canvas: {
       palette: {
         common: {
-          focusOutline: colors.grapeSoda300,
+          focusOutline: cssVar(base.green600),
         },
         error: {
-          main: colors.islandPunch400,
+          main: cssVar(base.magenta700),
         },
       },
     },

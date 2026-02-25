@@ -2,7 +2,8 @@ import React from 'react';
 
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Side Panel',
@@ -58,7 +59,7 @@ export const SidePanelStates = {
               initialTransitionState: 'expanded',
               variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
-              padding: space.xxs,
+              padding: cssVar(system.padding.xs),
             },
           },
           {
