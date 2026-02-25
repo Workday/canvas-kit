@@ -69,7 +69,7 @@ export const SidePanelStates = {
               initialTransitionState: 'expanded',
               variant: 'alternate',
               onToggleClick: () => console.log('click toggle button'),
-              openWidth: 350,
+              expandedWidth: 350,
             },
           },
           {
@@ -89,6 +89,7 @@ export const SidePanelStates = {
               initialTransitionState={props.initialTransitionState}
               origin={props.origin}
               cs={{padding: props.padding ? props.padding : 'none'}}
+              expandedWidth={props.expandedWidth}
               {...props}
             >
               {props.header && <SidePanel.Heading>{props.header}</SidePanel.Heading>}
