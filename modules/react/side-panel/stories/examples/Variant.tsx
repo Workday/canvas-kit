@@ -35,9 +35,7 @@ export const AlternatePanel = () => {
       <Flex cs={stylesOverride.viewport}>
         <SidePanel variant="alternate">
           <SidePanel.ToggleButton aria-label="Collapse View" />
-          <Flex cs={stylesOverride.panel}>
-            <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
-          </Flex>
+          <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">

@@ -25,7 +25,7 @@ export const SidePanelStates = {
             props: {header: 'Navigation', initialTransitionState: 'expanded'},
           },
           {
-            label: 'With Gray Background',
+            label: 'With White Background',
             props: {
               header: 'Navigation',
               initialTransitionState: 'expanded',
@@ -84,8 +84,15 @@ export const SidePanelStates = {
       >
         {props => (
           <div style={{position: 'relative', height: 200}}>
-            <SidePanel initialTransitionState={props.initialTransitionState} {...props}>
-              Side Panel Content
+            <SidePanel
+              initialTransitionState={props.initialTransitionState}
+              origin={props.origin}
+              cs={{padding: props.padding ? props.padding : 'none'}}
+              {...props}
+            >
+              {props.header && <SidePanel.Heading>{props.header}</SidePanel.Heading>}
+              {props.onToggleClick && <SidePanel.ToggleButton aria-label="Collapse View" />}
+              {props.initialTransitionState !== 'collapsed' && 'Panel Content'}
             </SidePanel>
           </div>
         )}

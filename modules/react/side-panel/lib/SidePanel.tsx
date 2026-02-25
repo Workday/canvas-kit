@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {SidePanelHeading} from './SidePanelHeading';
@@ -22,7 +22,7 @@ export const useSidePanelContainer = createElemPropsHook(useSidePanelModel)(({st
 
 export type SidePanelVariant = 'standard' | 'alternate';
 
-export interface SidePanelProps {
+export interface SidePanelProps extends CSProps {
   /**
    * The width of the component (in `px` if it's a `number`) when it is collapsed.
    *
@@ -54,7 +54,7 @@ export const panelStencil = createStencil({
     position: 'relative',
     height: '100%',
     outline: `${px2rem(1)} solid transparent`,
-    transition: 'width ease-out 2000ms, max-width ease-out 2000ms',
+    transition: 'width ease-out 200ms, max-width ease-out 200ms',
   }),
   modifiers: {
     variant: {

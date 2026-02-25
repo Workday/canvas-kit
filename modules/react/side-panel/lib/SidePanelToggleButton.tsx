@@ -97,11 +97,11 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(-1)`,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        insetInlineStart: cssVar(system.gap.md, system.space.x4),
+        insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(1)`,
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
+          insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },
     },
@@ -110,11 +110,11 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(1)`,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        insetInlineStart: cssVar(system.gap.md, system.space.x4),
+        insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
+          insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },
     },
@@ -123,11 +123,11 @@ export const sidePanelToggleButtonStencil = createStencil({
       styles: {
         transform: `scaleX(1)`,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        insetInlineStart: cssVar(system.gap.md, system.space.x4),
+        insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          insetInlineEnd: cssVar(system.gap.md, system.space.x4),
+          insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },
     },

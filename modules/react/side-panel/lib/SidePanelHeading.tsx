@@ -1,13 +1,14 @@
 import * as React from 'react';
 
 import {
+  ExtractProps,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Heading, TypeLevelProps} from '@workday/canvas-kit-react/text';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {useSidePanelModel} from './useSidePanelModel';
 
 export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading, never>, 'size'> {
@@ -21,7 +22,8 @@ export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading,
 
 export const sidePanelHeadingStencil = createStencil({
   base: {
-    padding: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xs, system.space.x2),
   },
 });
 
