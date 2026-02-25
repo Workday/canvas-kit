@@ -1,0 +1,981 @@
+/* ==========================================================================
+   Canvas Base Palettes
+
+   Dark mode: opposite light step, chroma reduced by 20%
+     - okLCH guarantees contrast relationships are preserved
+     - Solarized theme is a good case study
+   
+   Alpha variants (-a*) look the same on the default bg color
+     - neutral/0 on light
+     - neutral/25 on dark
+     - alpha compositing
+
+
+   Brand colors are built with the palette generator
+   - https://stackblitz.com/~/github.com/takashimokobe/oklch-scales
+   ========================================================================== */
+
+:root {
+  /* Global
+     ======================================================================== */
+  --cnvs-base-palette-black: oklch(0 0 0);
+  --cnvs-base-palette-white: oklch(1 0 0);
+
+  /* Brand Colors
+     ======================================================================== */
+
+  /* Airbnb */
+  --cnvs-base-palette-l-airbnb-25: oklch(0.97 0.01 12);
+  --cnvs-base-palette-l-airbnb-50: oklch(0.95 0.02 17.6);
+  --cnvs-base-palette-l-airbnb-100: oklch(0.91 0.05 16.4);
+  --cnvs-base-palette-l-airbnb-200: oklch(0.82 0.1 16.3);
+  --cnvs-base-palette-l-airbnb-300: oklch(0.74 0.16 16.6);
+  --cnvs-base-palette-l-airbnb-400: oklch(0.66 0.23 17.1);
+  --cnvs-base-palette-l-airbnb-500: oklch(0.59 0.23 17.5);
+  --cnvs-base-palette-l-airbnb-600: oklch(0.49 0.19 17.7);
+  --cnvs-base-palette-l-airbnb-700: oklch(0.42 0.17 18.1);
+  --cnvs-base-palette-l-airbnb-800: oklch(0.34 0.14 18.2);
+  --cnvs-base-palette-l-airbnb-900: oklch(0.26 0.11 18.7);
+  --cnvs-base-palette-l-airbnb-950: oklch(0.22 0.09 19.2);
+  --cnvs-base-palette-l-airbnb-975: oklch(0.2 0.08 18.7);
+  --cnvs-base-palette-l-airbnb-a25: oklch(0.63 0.26 28 / 0.05);
+  --cnvs-base-palette-l-airbnb-a50: oklch(0.63 0.26 29.2 / 0.09);
+  --cnvs-base-palette-l-airbnb-a100: oklch(0.63 0.26 28.9 / 0.16);
+  --cnvs-base-palette-l-airbnb-a200: oklch(0.63 0.26 28.6 / 0.33);
+
+  --cnvs-base-palette-d-airbnb-25: oklch(
+    from var(--cnvs-base-palette-l-airbnb-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-50: oklch(
+    from var(--cnvs-base-palette-l-airbnb-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-100: oklch(
+    from var(--cnvs-base-palette-l-airbnb-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-200: oklch(
+    from var(--cnvs-base-palette-l-airbnb-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-300: oklch(
+    from var(--cnvs-base-palette-l-airbnb-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-400: oklch(
+    from var(--cnvs-base-palette-l-airbnb-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-500: oklch(
+    from var(--cnvs-base-palette-l-airbnb-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-600: oklch(
+    from var(--cnvs-base-palette-l-airbnb-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-700: oklch(
+    from var(--cnvs-base-palette-l-airbnb-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-800: oklch(
+    from var(--cnvs-base-palette-l-airbnb-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-900: oklch(
+    from var(--cnvs-base-palette-l-airbnb-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-950: oklch(
+    from var(--cnvs-base-palette-l-airbnb-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-975: oklch(
+    from var(--cnvs-base-palette-l-airbnb-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-airbnb-a25: oklch(0.26 0.1 23.1 / 0.54);
+  --cnvs-base-palette-d-airbnb-a50: oklch(0.37 0.15 25.7 / 0.37);
+  --cnvs-base-palette-d-airbnb-a100: oklch(0.63 0.25 25.5 / 0.23);
+  --cnvs-base-palette-d-airbnb-a200: oklch(0.65 0.24 21.7 / 0.36);
+
+  /* Amber
+     ======================================================================== */
+  --cnvs-base-palette-l-amber-25: oklch(0.98 0.02 95.3);
+  --cnvs-base-palette-l-amber-50: oklch(0.97 0.06 102);
+  --cnvs-base-palette-l-amber-100: oklch(0.96 0.09 100);
+  --cnvs-base-palette-l-amber-200: oklch(0.92 0.15 99.7);
+  --cnvs-base-palette-l-amber-300: oklch(0.84 0.17 85.2);
+  --cnvs-base-palette-l-amber-400: oklch(0.79 0.17 70.2);
+  --cnvs-base-palette-l-amber-500: oklch(0.66 0.15 60.9);
+  --cnvs-base-palette-l-amber-600: oklch(0.55 0.14 50.8);
+  --cnvs-base-palette-l-amber-700: oklch(0.48 0.14 46.1);
+  --cnvs-base-palette-l-amber-800: oklch(0.41 0.12 42.2);
+  --cnvs-base-palette-l-amber-900: oklch(0.32 0.1 41.2);
+  --cnvs-base-palette-l-amber-950: oklch(0.25 0.08 40.6);
+  --cnvs-base-palette-l-amber-975: oklch(0.22 0.07 40.4);
+  --cnvs-base-palette-l-amber-a25: oklch(0.8 0.16 92.6 / 0.1);
+  --cnvs-base-palette-l-amber-a50: oklch(0.89 0.18 100 / 0.22);
+  --cnvs-base-palette-l-amber-a100: oklch(0.9 0.19 97.8 / 0.35);
+  --cnvs-base-palette-l-amber-a200: oklch(0.89 0.18 96.8 / 0.64);
+
+  --cnvs-base-palette-d-amber-25: oklch(
+    from var(--cnvs-base-palette-l-amber-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-50: oklch(
+    from var(--cnvs-base-palette-l-amber-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-100: oklch(
+    from var(--cnvs-base-palette-l-amber-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-200: oklch(
+    from var(--cnvs-base-palette-l-amber-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-300: oklch(
+    from var(--cnvs-base-palette-l-amber-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-400: oklch(
+    from var(--cnvs-base-palette-l-amber-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-500: oklch(
+    from var(--cnvs-base-palette-l-amber-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-600: oklch(
+    from var(--cnvs-base-palette-l-amber-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-700: oklch(
+    from var(--cnvs-base-palette-l-amber-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-800: oklch(
+    from var(--cnvs-base-palette-l-amber-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-900: oklch(
+    from var(--cnvs-base-palette-l-amber-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-950: oklch(
+    from var(--cnvs-base-palette-l-amber-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-975: oklch(
+    from var(--cnvs-base-palette-l-amber-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-amber-a25: oklch(0.26 0.08 40.1 / 0.62);
+  --cnvs-base-palette-d-amber-a50: oklch(0.38 0.13 37.6 / 0.42);
+  --cnvs-base-palette-d-amber-a100: oklch(0.68 0.21 38.1 / 0.29);
+  --cnvs-base-palette-d-amber-a200: oklch(0.7 0.2 40.7 / 0.44);
+
+  /* Azure
+     ======================================================================== */
+  --cnvs-base-palette-l-azure-25: oklch(0.98 0.01 221);
+  --cnvs-base-palette-l-azure-50: oklch(0.95 0.03 224);
+  --cnvs-base-palette-l-azure-100: oklch(0.93 0.04 227);
+  --cnvs-base-palette-l-azure-200: oklch(0.86 0.09 230);
+  --cnvs-base-palette-l-azure-300: oklch(0.8 0.11 239);
+  --cnvs-base-palette-l-azure-400: oklch(0.73 0.14 243);
+  --cnvs-base-palette-l-azure-500: oklch(0.66 0.16 244);
+  --cnvs-base-palette-l-azure-600: oklch(0.52 0.13 243);
+  --cnvs-base-palette-l-azure-700: oklch(0.46 0.11 242);
+  --cnvs-base-palette-l-azure-800: oklch(0.39 0.09 237);
+  --cnvs-base-palette-l-azure-900: oklch(0.33 0.07 236);
+  --cnvs-base-palette-l-azure-950: oklch(0.25 0.05 235);
+  --cnvs-base-palette-l-azure-975: oklch(0.21 0.05 235);
+  --cnvs-base-palette-l-azure-a25: oklch(0.75 0.15 233 / 0.06);
+  --cnvs-base-palette-l-azure-a50: oklch(0.74 0.16 235 / 0.14);
+  --cnvs-base-palette-l-azure-a100: oklch(0.72 0.16 240 / 0.2);
+  --cnvs-base-palette-l-azure-a200: oklch(0.71 0.17 241 / 0.42);
+
+  --cnvs-base-palette-d-azure-25: oklch(
+    from var(--cnvs-base-palette-l-azure-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-50: oklch(
+    from var(--cnvs-base-palette-l-azure-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-100: oklch(
+    from var(--cnvs-base-palette-l-azure-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-200: oklch(
+    from var(--cnvs-base-palette-l-azure-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-300: oklch(
+    from var(--cnvs-base-palette-l-azure-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-400: oklch(
+    from var(--cnvs-base-palette-l-azure-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-500: oklch(
+    from var(--cnvs-base-palette-l-azure-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-600: oklch(
+    from var(--cnvs-base-palette-l-azure-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-700: oklch(
+    from var(--cnvs-base-palette-l-azure-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-800: oklch(
+    from var(--cnvs-base-palette-l-azure-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-900: oklch(
+    from var(--cnvs-base-palette-l-azure-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-950: oklch(
+    from var(--cnvs-base-palette-l-azure-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-975: oklch(
+    from var(--cnvs-base-palette-l-azure-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-azure-a25: oklch(0.26 0.06 239 / 0.55);
+  --cnvs-base-palette-d-azure-a50: oklch(0.46 0.11 242 / 0.29);
+  --cnvs-base-palette-d-azure-a100: oklch(0.73 0.16 240 / 0.26);
+  --cnvs-base-palette-d-azure-a200: oklch(0.74 0.15 239 / 0.36);
+
+  /* Base
+     ======================================================================== */
+  --cnvs-base-palette-l-base-25: oklch(0.99 0 0);
+  --cnvs-base-palette-l-base-50: oklch(0.97 0 0);
+  --cnvs-base-palette-l-base-100: oklch(0.94 0 0);
+  --cnvs-base-palette-l-base-200: oklch(0.87 0 0);
+  --cnvs-base-palette-l-base-300: oklch(0.8 0 0);
+  --cnvs-base-palette-l-base-400: oklch(0.72 0 0);
+  --cnvs-base-palette-l-base-500: oklch(0.62 0 0);
+  --cnvs-base-palette-l-base-600: oklch(0.51 0 0);
+  --cnvs-base-palette-l-base-700: oklch(0.45 0 0);
+  --cnvs-base-palette-l-base-800: oklch(0.35 0 0);
+  --cnvs-base-palette-l-base-900: oklch(0.29 0 0);
+  --cnvs-base-palette-l-base-950: oklch(0.23 0 0);
+  --cnvs-base-palette-l-base-975: oklch(0.16 0 0);
+  --cnvs-base-palette-l-base-a0: oklch(0 0 0 / 0);
+  --cnvs-base-palette-l-base-a25: oklch(0.11 0 0 / 0.02);
+  --cnvs-base-palette-l-base-a50: oklch(0.11 0 0 / 0.04);
+  --cnvs-base-palette-l-base-a100: oklch(0.18 0 0 / 0.08);
+  --cnvs-base-palette-l-base-a200: oklch(0.08 0 0 / 0.17);
+  --cnvs-base-palette-l-base-a300: oklch(0.11 0 0 / 0.26);
+  --cnvs-base-palette-l-base-a400: oklch(0 0 0 / 0.36);
+  --cnvs-base-palette-l-base-a500: oklch(0.11 0 0 / 0.48);
+  --cnvs-base-palette-l-base-a600: oklch(0 0 0 / 0.6);
+  --cnvs-base-palette-l-base-a700: oklch(0 0 0 / 0.67);
+  --cnvs-base-palette-l-base-a800: oklch(0 0 0 / 0.77);
+  --cnvs-base-palette-l-base-a900: oklch(0.1 0 0 / 0.84);
+  --cnvs-base-palette-l-base-a950: oklch(0 0 0 / 0.89);
+  --cnvs-base-palette-l-base-a975: oklch(0 0 0 / 0.95);
+
+  --cnvs-base-palette-d-base-25: oklch(from var(--cnvs-base-palette-l-base-975) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-50: oklch(from var(--cnvs-base-palette-l-base-950) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-100: oklch(from var(--cnvs-base-palette-l-base-900) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-200: oklch(from var(--cnvs-base-palette-l-base-800) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-300: oklch(from var(--cnvs-base-palette-l-base-700) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-400: oklch(from var(--cnvs-base-palette-l-base-600) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-500: oklch(from var(--cnvs-base-palette-l-base-500) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-600: oklch(from var(--cnvs-base-palette-l-base-400) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-700: oklch(from var(--cnvs-base-palette-l-base-300) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-800: oklch(from var(--cnvs-base-palette-l-base-200) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-900: oklch(from var(--cnvs-base-palette-l-base-100) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-950: oklch(from var(--cnvs-base-palette-l-base-50) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-975: oklch(from var(--cnvs-base-palette-l-base-25) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-base-a0: oklch(1 0 0 / 0);
+  --cnvs-base-palette-d-base-a25: oklch(0.16 0 0 / 0.01);
+  --cnvs-base-palette-d-base-a50: oklch(1 0 0 / 0.07);
+  --cnvs-base-palette-d-base-a100: oklch(1 0 0 / 0.12);
+  --cnvs-base-palette-d-base-a200: oklch(1 0 0 / 0.19);
+  --cnvs-base-palette-d-base-a300: oklch(1 0 0 / 0.3);
+  --cnvs-base-palette-d-base-a400: oklch(1 0 0 / 0.37);
+  --cnvs-base-palette-d-base-a500: oklch(1 0 0 / 0.5);
+  --cnvs-base-palette-d-base-a600: oklch(1 0 0 / 0.62);
+  --cnvs-base-palette-d-base-a700: oklch(1 0 0 / 0.73);
+  --cnvs-base-palette-d-base-a800: oklch(1 0 0 / 0.82);
+  --cnvs-base-palette-d-base-a900: oklch(1 0 0 / 0.92);
+  --cnvs-base-palette-d-base-a950: oklch(1 0 0 / 0.96);
+  --cnvs-base-palette-d-base-a975: oklch(1 0 0 / 0.98);
+
+  /* Blue
+     ======================================================================== */
+  --cnvs-base-palette-l-blue-25: oklch(0.97 0.02 248);
+  --cnvs-base-palette-l-blue-50: oklch(0.95 0.02 248);
+  --cnvs-base-palette-l-blue-100: oklch(0.93 0.04 250);
+  --cnvs-base-palette-l-blue-200: oklch(0.86 0.07 251);
+  --cnvs-base-palette-l-blue-300: oklch(0.79 0.11 252);
+  --cnvs-base-palette-l-blue-400: oklch(0.71 0.16 255);
+  --cnvs-base-palette-l-blue-500: oklch(0.6 0.2 256);
+  --cnvs-base-palette-l-blue-600: oklch(0.52 0.18 256);
+  --cnvs-base-palette-l-blue-700: oklch(0.47 0.16 255);
+  --cnvs-base-palette-l-blue-800: oklch(0.39 0.13 258);
+  --cnvs-base-palette-l-blue-900: oklch(0.32 0.11 261);
+  --cnvs-base-palette-l-blue-950: oklch(0.25 0.08 255);
+  --cnvs-base-palette-l-blue-975: oklch(0.21 0.07 256);
+  --cnvs-base-palette-l-blue-a25: oklch(0.65 0.19 254 / 0.08);
+  --cnvs-base-palette-l-blue-a50: oklch(0.62 0.21 256 / 0.11);
+  --cnvs-base-palette-l-blue-a100: oklch(0.62 0.21 256 / 0.17);
+  --cnvs-base-palette-l-blue-a200: oklch(0.6 0.22 257 / 0.31);
+
+  --cnvs-base-palette-d-blue-25: oklch(from var(--cnvs-base-palette-l-blue-975) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-50: oklch(from var(--cnvs-base-palette-l-blue-950) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-100: oklch(from var(--cnvs-base-palette-l-blue-900) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-200: oklch(from var(--cnvs-base-palette-l-blue-800) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-300: oklch(from var(--cnvs-base-palette-l-blue-700) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-400: oklch(from var(--cnvs-base-palette-l-blue-600) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-500: oklch(from var(--cnvs-base-palette-l-blue-500) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-600: oklch(from var(--cnvs-base-palette-l-blue-400) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-700: oklch(from var(--cnvs-base-palette-l-blue-300) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-800: oklch(from var(--cnvs-base-palette-l-blue-200) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-900: oklch(from var(--cnvs-base-palette-l-blue-100) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-950: oklch(from var(--cnvs-base-palette-l-blue-50) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-975: oklch(from var(--cnvs-base-palette-l-blue-25) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-blue-a25: oklch(0.24 0.08 256 / 0.63);
+  --cnvs-base-palette-d-blue-a50: oklch(0.48 0.18 258 / 0.27);
+  --cnvs-base-palette-d-blue-a100: oklch(0.61 0.21 261 / 0.33);
+  --cnvs-base-palette-d-blue-a200: oklch(0.64 0.2 259 / 0.45);
+
+  /* Coral
+     ======================================================================== */
+  --cnvs-base-palette-l-coral-25: oklch(0.98 0.01 44.9);
+  --cnvs-base-palette-l-coral-50: oklch(0.97 0.02 35.3);
+  --cnvs-base-palette-l-coral-100: oklch(0.93 0.03 35.8);
+  --cnvs-base-palette-l-coral-200: oklch(0.85 0.09 37.6);
+  --cnvs-base-palette-l-coral-300: oklch(0.77 0.14 38.4);
+  --cnvs-base-palette-l-coral-400: oklch(0.73 0.17 38.6);
+  --cnvs-base-palette-l-coral-500: oklch(0.68 0.21 40.5);
+  --cnvs-base-palette-l-coral-600: oklch(0.54 0.18 36.4);
+  --cnvs-base-palette-l-coral-700: oklch(0.46 0.16 34.7);
+  --cnvs-base-palette-l-coral-800: oklch(0.39 0.14 33.5);
+  --cnvs-base-palette-l-coral-900: oklch(0.3 0.11 32.5);
+  --cnvs-base-palette-l-coral-950: oklch(0.24 0.09 31.7);
+  --cnvs-base-palette-l-coral-975: oklch(0.21 0.07 29.7);
+  --cnvs-base-palette-l-coral-a25: oklch(0.67 0.22 37.4 / 0.04);
+  --cnvs-base-palette-l-coral-a50: oklch(0.66 0.23 34.1 / 0.08);
+  --cnvs-base-palette-l-coral-a100: oklch(0.65 0.23 33.8 / 0.15);
+  --cnvs-base-palette-l-coral-a200: oklch(0.66 0.23 34.1 / 0.36);
+
+  --cnvs-base-palette-d-coral-25: oklch(
+    from var(--cnvs-base-palette-l-coral-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-50: oklch(
+    from var(--cnvs-base-palette-l-coral-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-100: oklch(
+    from var(--cnvs-base-palette-l-coral-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-200: oklch(
+    from var(--cnvs-base-palette-l-coral-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-300: oklch(
+    from var(--cnvs-base-palette-l-coral-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-400: oklch(
+    from var(--cnvs-base-palette-l-coral-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-500: oklch(
+    from var(--cnvs-base-palette-l-coral-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-600: oklch(
+    from var(--cnvs-base-palette-l-coral-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-700: oklch(
+    from var(--cnvs-base-palette-l-coral-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-800: oklch(
+    from var(--cnvs-base-palette-l-coral-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-900: oklch(
+    from var(--cnvs-base-palette-l-coral-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-950: oklch(
+    from var(--cnvs-base-palette-l-coral-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-975: oklch(
+    from var(--cnvs-base-palette-l-coral-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-coral-a25: oklch(0.32 0.12 31.9 / 0.37);
+  --cnvs-base-palette-d-coral-a50: oklch(0.32 0.12 32.6 / 0.52);
+  --cnvs-base-palette-d-coral-a100: oklch(0.65 0.24 31.9 / 0.29);
+  --cnvs-base-palette-d-coral-a200: oklch(0.67 0.22 33.2 / 0.44);
+
+  /* Discord */
+  --cnvs-base-palette-l-discord-25: oklch(0.98 0.01 275);
+  --cnvs-base-palette-l-discord-50: oklch(0.96 0.02 271);
+  --cnvs-base-palette-l-discord-100: oklch(0.91 0.04 272);
+  --cnvs-base-palette-l-discord-200: oklch(0.83 0.09 274);
+  --cnvs-base-palette-l-discord-300: oklch(0.74 0.13 273);
+  --cnvs-base-palette-l-discord-400: oklch(0.66 0.18 273);
+  --cnvs-base-palette-l-discord-500: oklch(0.58 0.21 274);
+  --cnvs-base-palette-l-discord-600: oklch(0.49 0.21 274);
+  --cnvs-base-palette-l-discord-700: oklch(0.42 0.21 274);
+  --cnvs-base-palette-l-discord-800: oklch(0.34 0.2 275);
+  --cnvs-base-palette-l-discord-900: oklch(0.26 0.16 275);
+  --cnvs-base-palette-l-discord-950: oklch(0.22 0.14 276);
+  --cnvs-base-palette-l-discord-975: oklch(0.2 0.13 275);
+  --cnvs-base-palette-l-discord-a25: oklch(0.48 0.29 264 / 0.04);
+  --cnvs-base-palette-l-discord-a50: oklch(0.5 0.28 264 / 0.08);
+  --cnvs-base-palette-l-discord-a100: oklch(0.49 0.28 264 / 0.15);
+  --cnvs-base-palette-l-discord-a200: oklch(0.48 0.29 264 / 0.29);
+
+  --cnvs-base-palette-d-discord-25: oklch(
+    from var(--cnvs-base-palette-l-discord-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-50: oklch(
+    from var(--cnvs-base-palette-l-discord-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-100: oklch(
+    from var(--cnvs-base-palette-l-discord-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-200: oklch(
+    from var(--cnvs-base-palette-l-discord-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-300: oklch(
+    from var(--cnvs-base-palette-l-discord-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-400: oklch(
+    from var(--cnvs-base-palette-l-discord-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-500: oklch(
+    from var(--cnvs-base-palette-l-discord-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-600: oklch(
+    from var(--cnvs-base-palette-l-discord-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-700: oklch(
+    from var(--cnvs-base-palette-l-discord-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-800: oklch(
+    from var(--cnvs-base-palette-l-discord-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-900: oklch(
+    from var(--cnvs-base-palette-l-discord-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-950: oklch(
+    from var(--cnvs-base-palette-l-discord-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-975: oklch(
+    from var(--cnvs-base-palette-l-discord-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-discord-a25: oklch(0.4 0.27 265 / 0.26);
+  --cnvs-base-palette-d-discord-a50: oklch(0.46 0.31 267 / 0.26);
+  --cnvs-base-palette-d-discord-a100: oklch(0.47 0.3 269 / 0.34);
+  --cnvs-base-palette-d-discord-a200: oklch(0.51 0.28 272 / 0.51);
+
+  /* Green
+     ======================================================================== */
+  --cnvs-base-palette-l-green-25: oklch(0.98 0.03 149);
+  --cnvs-base-palette-l-green-50: oklch(0.97 0.06 150);
+  --cnvs-base-palette-l-green-100: oklch(0.93 0.1 150);
+  --cnvs-base-palette-l-green-200: oklch(0.85 0.18 150);
+  --cnvs-base-palette-l-green-300: oklch(0.78 0.19 151);
+  --cnvs-base-palette-l-green-400: oklch(0.7 0.2 148);
+  --cnvs-base-palette-l-green-500: oklch(0.64 0.2 145);
+  --cnvs-base-palette-l-green-600: oklch(0.51 0.16 146);
+  --cnvs-base-palette-l-green-700: oklch(0.45 0.14 145);
+  --cnvs-base-palette-l-green-800: oklch(0.4 0.12 148);
+  --cnvs-base-palette-l-green-900: oklch(0.32 0.1 145);
+  --cnvs-base-palette-l-green-950: oklch(0.25 0.08 145);
+  --cnvs-base-palette-l-green-975: oklch(0.21 0.07 146);
+  --cnvs-base-palette-l-green-a25: oklch(0.87 0.28 144 / 0.08);
+  --cnvs-base-palette-l-green-a50: oklch(0.87 0.28 144 / 0.15);
+  --cnvs-base-palette-l-green-a100: oklch(0.83 0.27 144 / 0.29);
+  --cnvs-base-palette-l-green-a200: oklch(0.8 0.25 145 / 0.6);
+
+  --cnvs-base-palette-d-green-25: oklch(
+    from var(--cnvs-base-palette-l-green-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-50: oklch(
+    from var(--cnvs-base-palette-l-green-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-100: oklch(
+    from var(--cnvs-base-palette-l-green-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-200: oklch(
+    from var(--cnvs-base-palette-l-green-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-300: oklch(
+    from var(--cnvs-base-palette-l-green-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-400: oklch(
+    from var(--cnvs-base-palette-l-green-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-500: oklch(
+    from var(--cnvs-base-palette-l-green-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-600: oklch(
+    from var(--cnvs-base-palette-l-green-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-700: oklch(
+    from var(--cnvs-base-palette-l-green-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-800: oklch(
+    from var(--cnvs-base-palette-l-green-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-900: oklch(
+    from var(--cnvs-base-palette-l-green-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-950: oklch(
+    from var(--cnvs-base-palette-l-green-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-975: oklch(
+    from var(--cnvs-base-palette-l-green-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-green-a25: oklch(0.26 0.08 145 / 0.54);
+  --cnvs-base-palette-d-green-a50: oklch(0.6 0.2 143 / 0.21);
+  --cnvs-base-palette-d-green-a100: oklch(0.87 0.28 144 / 0.2);
+  --cnvs-base-palette-d-green-a200: oklch(0.88 0.24 146 / 0.29);
+
+  /* Indigo
+     ======================================================================== */
+  --cnvs-base-palette-l-indigo-25: oklch(0.97 0.01 286);
+  --cnvs-base-palette-l-indigo-50: oklch(0.95 0.02 281);
+  --cnvs-base-palette-l-indigo-100: oklch(0.92 0.04 282);
+  --cnvs-base-palette-l-indigo-200: oklch(0.85 0.08 281);
+  --cnvs-base-palette-l-indigo-300: oklch(0.76 0.12 281);
+  --cnvs-base-palette-l-indigo-400: oklch(0.71 0.15 280);
+  --cnvs-base-palette-l-indigo-500: oklch(0.61 0.21 281);
+  --cnvs-base-palette-l-indigo-600: oklch(0.53 0.22 282);
+  --cnvs-base-palette-l-indigo-700: oklch(0.47 0.2 281);
+  --cnvs-base-palette-l-indigo-800: oklch(0.38 0.18 278);
+  --cnvs-base-palette-l-indigo-900: oklch(0.32 0.14 278);
+  --cnvs-base-palette-l-indigo-950: oklch(0.25 0.11 278);
+  --cnvs-base-palette-l-indigo-975: oklch(0.2 0.07 278);
+  --cnvs-base-palette-l-indigo-a25: oklch(0.48 0.3 267 / 0.05);
+  --cnvs-base-palette-l-indigo-a50: oklch(0.47 0.3 265 / 0.08);
+  --cnvs-base-palette-l-indigo-a100: oklch(0.47 0.3 265 / 0.13);
+  --cnvs-base-palette-l-indigo-a200: oklch(0.47 0.3 265 / 0.24);
+
+  --cnvs-base-palette-d-indigo-25: oklch(
+    from var(--cnvs-base-palette-l-indigo-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-50: oklch(
+    from var(--cnvs-base-palette-l-indigo-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-100: oklch(
+    from var(--cnvs-base-palette-l-indigo-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-200: oklch(
+    from var(--cnvs-base-palette-l-indigo-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-300: oklch(
+    from var(--cnvs-base-palette-l-indigo-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-400: oklch(
+    from var(--cnvs-base-palette-l-indigo-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-500: oklch(
+    from var(--cnvs-base-palette-l-indigo-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-600: oklch(
+    from var(--cnvs-base-palette-l-indigo-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-700: oklch(
+    from var(--cnvs-base-palette-l-indigo-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-800: oklch(
+    from var(--cnvs-base-palette-l-indigo-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-900: oklch(
+    from var(--cnvs-base-palette-l-indigo-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-950: oklch(
+    from var(--cnvs-base-palette-l-indigo-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-975: oklch(
+    from var(--cnvs-base-palette-l-indigo-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-indigo-a25: oklch(0.48 0.29 267 / 0.13);
+  --cnvs-base-palette-d-indigo-a50: oklch(0.51 0.28 271 / 0.25);
+  --cnvs-base-palette-d-indigo-a100: oklch(0.55 0.25 275 / 0.38);
+  --cnvs-base-palette-d-indigo-a200: oklch(0.56 0.24 276 / 0.52);
+
+  /* Magenta
+     ======================================================================== */
+  --cnvs-base-palette-l-magenta-25: oklch(0.98 0.02 326);
+  --cnvs-base-palette-l-magenta-50: oklch(0.96 0.03 326);
+  --cnvs-base-palette-l-magenta-100: oklch(0.92 0.06 329);
+  --cnvs-base-palette-l-magenta-200: oklch(0.89 0.1 328);
+  --cnvs-base-palette-l-magenta-300: oklch(0.81 0.17 334);
+  --cnvs-base-palette-l-magenta-400: oklch(0.74 0.2 342);
+  --cnvs-base-palette-l-magenta-500: oklch(0.66 0.2 347);
+  --cnvs-base-palette-l-magenta-600: oklch(0.53 0.18 344);
+  --cnvs-base-palette-l-magenta-700: oklch(0.46 0.16 344);
+  --cnvs-base-palette-l-magenta-800: oklch(0.4 0.13 344);
+  --cnvs-base-palette-l-magenta-900: oklch(0.3 0.1 343);
+  --cnvs-base-palette-l-magenta-950: oklch(0.23 0.09 344);
+  --cnvs-base-palette-l-magenta-975: oklch(0.2 0.07 346);
+  --cnvs-base-palette-l-magenta-a25: oklch(0.71 0.31 328 / 0.05);
+  --cnvs-base-palette-l-magenta-a50: oklch(0.7 0.32 328 / 0.08);
+  --cnvs-base-palette-l-magenta-a100: oklch(0.69 0.31 334 / 0.16);
+  --cnvs-base-palette-l-magenta-a200: oklch(0.7 0.32 330 / 0.24);
+
+  --cnvs-base-palette-d-magenta-25: oklch(
+    from var(--cnvs-base-palette-l-magenta-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-50: oklch(
+    from var(--cnvs-base-palette-l-magenta-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-100: oklch(
+    from var(--cnvs-base-palette-l-magenta-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-200: oklch(
+    from var(--cnvs-base-palette-l-magenta-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-300: oklch(
+    from var(--cnvs-base-palette-l-magenta-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-400: oklch(
+    from var(--cnvs-base-palette-l-magenta-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-500: oklch(
+    from var(--cnvs-base-palette-l-magenta-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-600: oklch(
+    from var(--cnvs-base-palette-l-magenta-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-700: oklch(
+    from var(--cnvs-base-palette-l-magenta-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-800: oklch(
+    from var(--cnvs-base-palette-l-magenta-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-900: oklch(
+    from var(--cnvs-base-palette-l-magenta-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-950: oklch(
+    from var(--cnvs-base-palette-l-magenta-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-975: oklch(
+    from var(--cnvs-base-palette-l-magenta-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-magenta-a25: oklch(0.36 0.15 352 / 0.26);
+  --cnvs-base-palette-d-magenta-a50: oklch(0.66 0.27 350 / 0.16);
+  --cnvs-base-palette-d-magenta-a100: oklch(0.7 0.24 345 / 0.24);
+  --cnvs-base-palette-d-magenta-a200: oklch(0.72 0.22 346 / 0.39);
+
+  /* Orange
+     ======================================================================== */
+  --cnvs-base-palette-l-orange-25: oklch(0.97 0.02 67.6);
+  --cnvs-base-palette-l-orange-50: oklch(0.95 0.04 72.6);
+  --cnvs-base-palette-l-orange-100: oklch(0.92 0.05 68);
+  --cnvs-base-palette-l-orange-200: oklch(0.86 0.1 65.3);
+  --cnvs-base-palette-l-orange-300: oklch(0.78 0.16 63.6);
+  --cnvs-base-palette-l-orange-400: oklch(0.73 0.19 52.6);
+  --cnvs-base-palette-l-orange-500: oklch(0.66 0.19 44.9);
+  --cnvs-base-palette-l-orange-600: oklch(0.53 0.16 40.4);
+  --cnvs-base-palette-l-orange-700: oklch(0.47 0.15 40.5);
+  --cnvs-base-palette-l-orange-800: oklch(0.41 0.13 37.9);
+  --cnvs-base-palette-l-orange-900: oklch(0.32 0.11 37.1);
+  --cnvs-base-palette-l-orange-950: oklch(0.24 0.08 36.5);
+  --cnvs-base-palette-l-orange-975: oklch(0.21 0.07 37.2);
+  --cnvs-base-palette-l-orange-a25: oklch(0.71 0.18 53.7 / 0.1);
+  --cnvs-base-palette-l-orange-a50: oklch(0.76 0.18 59.3 / 0.17);
+  --cnvs-base-palette-l-orange-a100: oklch(0.74 0.18 54.1 / 0.25);
+  --cnvs-base-palette-l-orange-a200: oklch(0.73 0.19 52.5 / 0.46);
+
+  --cnvs-base-palette-d-orange-25: oklch(
+    from var(--cnvs-base-palette-l-orange-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-50: oklch(
+    from var(--cnvs-base-palette-l-orange-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-100: oklch(
+    from var(--cnvs-base-palette-l-orange-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-200: oklch(
+    from var(--cnvs-base-palette-l-orange-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-300: oklch(
+    from var(--cnvs-base-palette-l-orange-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-400: oklch(
+    from var(--cnvs-base-palette-l-orange-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-500: oklch(
+    from var(--cnvs-base-palette-l-orange-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-600: oklch(
+    from var(--cnvs-base-palette-l-orange-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-700: oklch(
+    from var(--cnvs-base-palette-l-orange-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-800: oklch(
+    from var(--cnvs-base-palette-l-orange-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-900: oklch(
+    from var(--cnvs-base-palette-l-orange-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-950: oklch(
+    from var(--cnvs-base-palette-l-orange-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-975: oklch(
+    from var(--cnvs-base-palette-l-orange-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-orange-a25: oklch(0.25 0.08 37.7 / 0.65);
+  --cnvs-base-palette-d-orange-a50: oklch(0.34 0.12 35.5 / 0.48);
+  --cnvs-base-palette-d-orange-a100: oklch(0.67 0.22 35.2 / 0.31);
+  --cnvs-base-palette-d-orange-a200: oklch(0.69 0.21 37.1 / 0.44);
+
+  /* Purple
+     ======================================================================== */
+  --cnvs-base-palette-l-purple-25: oklch(0.98 0.01 312);
+  --cnvs-base-palette-l-purple-50: oklch(0.95 0.03 312);
+  --cnvs-base-palette-l-purple-100: oklch(0.91 0.06 314);
+  --cnvs-base-palette-l-purple-200: oklch(0.87 0.1 317);
+  --cnvs-base-palette-l-purple-300: oklch(0.81 0.14 315);
+  --cnvs-base-palette-l-purple-400: oklch(0.73 0.16 316);
+  --cnvs-base-palette-l-purple-500: oklch(0.63 0.17 313);
+  --cnvs-base-palette-l-purple-600: oklch(0.52 0.16 314);
+  --cnvs-base-palette-l-purple-700: oklch(0.48 0.16 314);
+  --cnvs-base-palette-l-purple-800: oklch(0.42 0.14 315);
+  --cnvs-base-palette-l-purple-900: oklch(0.31 0.1 314);
+  --cnvs-base-palette-l-purple-950: oklch(0.24 0.07 313);
+  --cnvs-base-palette-l-purple-975: oklch(0.19 0.06 313);
+  --cnvs-base-palette-l-purple-a25: oklch(0.56 0.29 302 / 0.04);
+  --cnvs-base-palette-l-purple-a50: oklch(0.56 0.29 302 / 0.09);
+  --cnvs-base-palette-l-purple-a100: oklch(0.59 0.3 308 / 0.17);
+  --cnvs-base-palette-l-purple-a200: oklch(0.61 0.3 312 / 0.25);
+
+  --cnvs-base-palette-d-purple-25: oklch(
+    from var(--cnvs-base-palette-l-purple-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-50: oklch(
+    from var(--cnvs-base-palette-l-purple-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-100: oklch(
+    from var(--cnvs-base-palette-l-purple-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-200: oklch(
+    from var(--cnvs-base-palette-l-purple-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-300: oklch(
+    from var(--cnvs-base-palette-l-purple-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-400: oklch(
+    from var(--cnvs-base-palette-l-purple-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-500: oklch(
+    from var(--cnvs-base-palette-l-purple-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-600: oklch(
+    from var(--cnvs-base-palette-l-purple-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-700: oklch(
+    from var(--cnvs-base-palette-l-purple-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-800: oklch(
+    from var(--cnvs-base-palette-l-purple-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-900: oklch(
+    from var(--cnvs-base-palette-l-purple-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-950: oklch(
+    from var(--cnvs-base-palette-l-purple-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-975: oklch(
+    from var(--cnvs-base-palette-l-purple-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-purple-a25: oklch(0.59 0.3 307 / 0.1);
+  --cnvs-base-palette-d-purple-a50: oklch(0.64 0.27 311 / 0.15);
+  --cnvs-base-palette-d-purple-a100: oklch(0.69 0.24 313 / 0.27);
+  --cnvs-base-palette-d-purple-a200: oklch(0.72 0.22 315 / 0.43);
+
+  /* Red
+     ======================================================================== */
+  --cnvs-base-palette-l-red-25: oklch(0.97 0.02 22.1);
+  --cnvs-base-palette-l-red-50: oklch(0.95 0.02 24.1);
+  --cnvs-base-palette-l-red-100: oklch(0.92 0.04 25.6);
+  --cnvs-base-palette-l-red-200: oklch(0.83 0.09 28.2);
+  --cnvs-base-palette-l-red-300: oklch(0.75 0.15 28.4);
+  --cnvs-base-palette-l-red-400: oklch(0.69 0.2 29.8);
+  --cnvs-base-palette-l-red-500: oklch(0.65 0.24 30.1);
+  --cnvs-base-palette-l-red-600: oklch(0.53 0.22 29.5);
+  --cnvs-base-palette-l-red-700: oklch(0.45 0.18 28.2);
+  --cnvs-base-palette-l-red-800: oklch(0.37 0.15 26.1);
+  --cnvs-base-palette-l-red-900: oklch(0.29 0.12 25.6);
+  --cnvs-base-palette-l-red-950: oklch(0.23 0.09 24);
+  --cnvs-base-palette-l-red-975: oklch(0.2 0.07 20.6);
+  --cnvs-base-palette-l-red-a25: oklch(0.63 0.26 29.1 / 0.04);
+  --cnvs-base-palette-l-red-a50: oklch(0.64 0.24 30.2 / 0.1);
+  --cnvs-base-palette-l-red-a100: oklch(0.64 0.25 30.4 / 0.16);
+  --cnvs-base-palette-l-red-a200: oklch(0.64 0.25 30.7 / 0.35);
+
+  --cnvs-base-palette-d-red-25: oklch(from var(--cnvs-base-palette-l-red-975) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-50: oklch(from var(--cnvs-base-palette-l-red-950) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-100: oklch(from var(--cnvs-base-palette-l-red-900) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-200: oklch(from var(--cnvs-base-palette-l-red-800) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-300: oklch(from var(--cnvs-base-palette-l-red-700) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-400: oklch(from var(--cnvs-base-palette-l-red-600) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-500: oklch(from var(--cnvs-base-palette-l-red-500) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-600: oklch(from var(--cnvs-base-palette-l-red-400) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-700: oklch(from var(--cnvs-base-palette-l-red-300) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-800: oklch(from var(--cnvs-base-palette-l-red-200) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-900: oklch(from var(--cnvs-base-palette-l-red-100) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-950: oklch(from var(--cnvs-base-palette-l-red-50) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-975: oklch(from var(--cnvs-base-palette-l-red-25) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-red-a25: oklch(0.3 0.12 26.7 / 0.38);
+  --cnvs-base-palette-d-red-a50: oklch(0.47 0.19 28.7 / 0.28);
+  --cnvs-base-palette-d-red-a100: oklch(0.64 0.25 28.6 / 0.28);
+  --cnvs-base-palette-d-red-a200: oklch(0.65 0.24 27.7 / 0.42);
+
+  /* Slate
+     ======================================================================== */
+  --cnvs-base-palette-l-slate-25: oklch(0.99 0 0);
+  --cnvs-base-palette-l-slate-50: oklch(0.97 0 0);
+  --cnvs-base-palette-l-slate-100: oklch(0.94 0.01 248);
+  --cnvs-base-palette-l-slate-200: oklch(0.92 0.01 254);
+  --cnvs-base-palette-l-slate-300: oklch(0.86 0.01 257);
+  --cnvs-base-palette-l-slate-400: oklch(0.75 0.02 256);
+  --cnvs-base-palette-l-slate-500: oklch(0.63 0.03 256);
+  --cnvs-base-palette-l-slate-600: oklch(0.51 0.03 257);
+  --cnvs-base-palette-l-slate-700: oklch(0.45 0.02 256);
+  --cnvs-base-palette-l-slate-800: oklch(0.37 0.02 256);
+  --cnvs-base-palette-l-slate-900: oklch(0.28 0.02 252);
+  --cnvs-base-palette-l-slate-950: oklch(0.25 0.01 253);
+  --cnvs-base-palette-l-slate-975: oklch(0.18 0.01 248);
+  --cnvs-base-palette-l-slate-a25: oklch(0.47 0.08 251 / 0.03);
+  --cnvs-base-palette-l-slate-a50: oklch(0.33 0.1 253 / 0.05);
+  --cnvs-base-palette-l-slate-a100: oklch(0.33 0.07 251 / 0.09);
+  --cnvs-base-palette-l-slate-a200: oklch(0.31 0.08 256 / 0.13);
+  --cnvs-base-palette-l-slate-a300: oklch(0.24 0.07 258 / 0.21);
+  --cnvs-base-palette-l-slate-a400: oklch(0.23 0.07 257 / 0.35);
+  --cnvs-base-palette-l-slate-a500: oklch(0.22 0.07 255 / 0.51);
+  --cnvs-base-palette-l-slate-a600: oklch(0.18 0.05 255 / 0.64);
+  --cnvs-base-palette-l-slate-a700: oklch(0.16 0.04 251 / 0.7);
+  --cnvs-base-palette-l-slate-a800: oklch(0.16 0.03 253 / 0.79);
+  --cnvs-base-palette-l-slate-a900: oklch(0.13 0.02 244 / 0.87);
+  --cnvs-base-palette-l-slate-a950: oklch(0.13 0.02 249 / 0.9);
+  --cnvs-base-palette-l-slate-a975: oklch(0.12 0.01 231 / 0.95);
+
+  --cnvs-base-palette-d-slate-25: oklch(
+    from var(--cnvs-base-palette-l-slate-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-50: oklch(
+    from var(--cnvs-base-palette-l-slate-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-100: oklch(
+    from var(--cnvs-base-palette-l-slate-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-200: oklch(
+    from var(--cnvs-base-palette-l-slate-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-300: oklch(
+    from var(--cnvs-base-palette-l-slate-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-400: oklch(
+    from var(--cnvs-base-palette-l-slate-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-500: oklch(
+    from var(--cnvs-base-palette-l-slate-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-600: oklch(
+    from var(--cnvs-base-palette-l-slate-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-700: oklch(
+    from var(--cnvs-base-palette-l-slate-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-800: oklch(
+    from var(--cnvs-base-palette-l-slate-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-900: oklch(
+    from var(--cnvs-base-palette-l-slate-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-950: oklch(
+    from var(--cnvs-base-palette-l-slate-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-975: oklch(
+    from var(--cnvs-base-palette-l-slate-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-slate-a25: oklch(0.85 0.08 253 / 0.03);
+  --cnvs-base-palette-d-slate-a50: oklch(0.85 0.08 253 / 0.1);
+  --cnvs-base-palette-d-slate-a100: oklch(0.87 0.07 252 / 0.14);
+  --cnvs-base-palette-d-slate-a200: oklch(0.88 0.06 257 / 0.25);
+  --cnvs-base-palette-d-slate-a300: oklch(0.91 0.04 256 / 0.34);
+  --cnvs-base-palette-d-slate-a400: oklch(0.91 0.04 257 / 0.42);
+  --cnvs-base-palette-d-slate-a500: oklch(0.93 0.04 256 / 0.57);
+  --cnvs-base-palette-d-slate-a600: oklch(0.96 0.02 256 / 0.71);
+  --cnvs-base-palette-d-slate-a700: oklch(0.98 0.01 262 / 0.83);
+  --cnvs-base-palette-d-slate-a800: oklch(0.99 0.01 248 / 0.9);
+  --cnvs-base-palette-d-slate-a900: oklch(0.99 0 258 / 0.94);
+  --cnvs-base-palette-d-slate-a950: oklch(1 0 0 / 0.96);
+  --cnvs-base-palette-d-slate-a975: oklch(1 0 0 / 0.98);
+
+  /* Spotify */
+  --cnvs-base-palette-l-spotify-25: oklch(0.99 0.02 148);
+  --cnvs-base-palette-l-spotify-50: oklch(0.97 0.05 148);
+  --cnvs-base-palette-l-spotify-100: oklch(0.93 0.12 148);
+  --cnvs-base-palette-l-spotify-200: oklch(0.85 0.19 148);
+  --cnvs-base-palette-l-spotify-300: oklch(0.77 0.21 149);
+  --cnvs-base-palette-l-spotify-400: oklch(0.69 0.19 149);
+  --cnvs-base-palette-l-spotify-500: oklch(0.61 0.17 149);
+  --cnvs-base-palette-l-spotify-600: oklch(0.51 0.14 150);
+  --cnvs-base-palette-l-spotify-700: oklch(0.43 0.12 150);
+  --cnvs-base-palette-l-spotify-800: oklch(0.34 0.09 150);
+  --cnvs-base-palette-l-spotify-900: oklch(0.26 0.07 151);
+  --cnvs-base-palette-l-spotify-950: oklch(0.22 0.06 151);
+  --cnvs-base-palette-l-spotify-975: oklch(0.2 0.06 150);
+  --cnvs-base-palette-l-spotify-a25: oklch(0.87 0.29 143 / 0.04);
+  --cnvs-base-palette-l-spotify-a50: oklch(0.87 0.29 143 / 0.13);
+  --cnvs-base-palette-l-spotify-a100: oklch(0.87 0.29 143 / 0.32);
+  --cnvs-base-palette-l-spotify-a200: oklch(0.8 0.26 144 / 0.61);
+
+  --cnvs-base-palette-d-spotify-25: oklch(
+    from var(--cnvs-base-palette-l-spotify-975) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-50: oklch(
+    from var(--cnvs-base-palette-l-spotify-950) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-100: oklch(
+    from var(--cnvs-base-palette-l-spotify-900) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-200: oklch(
+    from var(--cnvs-base-palette-l-spotify-800) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-300: oklch(
+    from var(--cnvs-base-palette-l-spotify-700) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-400: oklch(
+    from var(--cnvs-base-palette-l-spotify-600) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-500: oklch(
+    from var(--cnvs-base-palette-l-spotify-500) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-600: oklch(
+    from var(--cnvs-base-palette-l-spotify-400) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-700: oklch(
+    from var(--cnvs-base-palette-l-spotify-300) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-800: oklch(
+    from var(--cnvs-base-palette-l-spotify-200) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-900: oklch(
+    from var(--cnvs-base-palette-l-spotify-100) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-950: oklch(
+    from var(--cnvs-base-palette-l-spotify-50) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-975: oklch(
+    from var(--cnvs-base-palette-l-spotify-25) l calc(c * 0.8) h
+  );
+  --cnvs-base-palette-d-spotify-a25: oklch(0.23 0.07 149 / 0.6);
+  --cnvs-base-palette-d-spotify-a50: oklch(0.29 0.08 148 / 0.48);
+  --cnvs-base-palette-d-spotify-a100: oklch(0.87 0.27 146 / 0.13);
+  --cnvs-base-palette-d-spotify-a200: oklch(0.88 0.24 148 / 0.23);
+
+  /* Teal
+     ======================================================================== */
+  --cnvs-base-palette-l-teal-25: oklch(0.98 0.02 200);
+  --cnvs-base-palette-l-teal-50: oklch(0.96 0.04 204);
+  --cnvs-base-palette-l-teal-100: oklch(0.93 0.05 205);
+  --cnvs-base-palette-l-teal-200: oklch(0.88 0.07 204);
+  --cnvs-base-palette-l-teal-300: oklch(0.78 0.09 205);
+  --cnvs-base-palette-l-teal-400: oklch(0.72 0.1 206);
+  --cnvs-base-palette-l-teal-500: oklch(0.64 0.11 206);
+  --cnvs-base-palette-l-teal-600: oklch(0.51 0.09 207);
+  --cnvs-base-palette-l-teal-700: oklch(0.46 0.08 208);
+  --cnvs-base-palette-l-teal-800: oklch(0.4 0.07 209);
+  --cnvs-base-palette-l-teal-900: oklch(0.31 0.05 211);
+  --cnvs-base-palette-l-teal-950: oklch(0.24 0.04 211);
+  --cnvs-base-palette-l-teal-975: oklch(0.2 0.04 211);
+  --cnvs-base-palette-l-teal-a25: oklch(0.88 0.15 201 / 0.09);
+  --cnvs-base-palette-l-teal-a50: oklch(0.84 0.14 207 / 0.19);
+  --cnvs-base-palette-l-teal-a100: oklch(0.76 0.13 209 / 0.22);
+  --cnvs-base-palette-l-teal-a200: oklch(0.71 0.12 208 / 0.37);
+
+  --cnvs-base-palette-d-teal-25: oklch(from var(--cnvs-base-palette-l-teal-975) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-50: oklch(from var(--cnvs-base-palette-l-teal-950) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-100: oklch(from var(--cnvs-base-palette-l-teal-900) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-200: oklch(from var(--cnvs-base-palette-l-teal-800) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-300: oklch(from var(--cnvs-base-palette-l-teal-700) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-400: oklch(from var(--cnvs-base-palette-l-teal-600) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-500: oklch(from var(--cnvs-base-palette-l-teal-500) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-600: oklch(from var(--cnvs-base-palette-l-teal-400) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-700: oklch(from var(--cnvs-base-palette-l-teal-300) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-800: oklch(from var(--cnvs-base-palette-l-teal-200) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-900: oklch(from var(--cnvs-base-palette-l-teal-100) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-950: oklch(from var(--cnvs-base-palette-l-teal-50) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-975: oklch(from var(--cnvs-base-palette-l-teal-25) l calc(c * 0.8) h);
+  --cnvs-base-palette-d-teal-a25: oklch(0.24 0.04 214 / 0.6);
+  --cnvs-base-palette-d-teal-a50: oklch(0.41 0.07 214 / 0.32);
+  --cnvs-base-palette-d-teal-a100: oklch(0.83 0.14 214 / 0.19);
+  --cnvs-base-palette-d-teal-a200: oklch(0.85 0.13 210 / 0.31);
+}

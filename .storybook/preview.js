@@ -4,6 +4,7 @@ import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+import './v5-alpha-tokens/index.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';

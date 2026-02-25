@@ -1,0 +1,831 @@
+@import './brand.colors.css';
+
+.light {
+  --color-scheme: light;
+  color-scheme: light;
+}
+
+.dark,
+[data-theme='dark'] {
+  --color-scheme: dark;
+  color-scheme: dark;
+}
+
+:root, #storybook-root {
+  color-scheme: var(--color-scheme, dark);
+
+  /* Background */
+  --cnvs-sys-color-bg-default: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-base-25)
+  );
+  --cnvs-sys-color-bg-alt: light-dark(
+    var(--cnvs-base-palette-l-slate-50),
+    var(--cnvs-base-palette-d-slate-50)
+  );
+  --cnvs-sys-color-surface-default: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-slate-50)
+  );
+
+  /* Accents */
+  --cnvs-sys-color-accent-primary: light-dark(
+    var(--cnvs-brand-l-primary-600),
+    var(--cnvs-brand-d-primary-600)
+  );
+  --cnvs-sys-color-accent-positive: light-dark(
+    var(--cnvs-brand-l-positive-600),
+    var(--cnvs-brand-d-positive-600)
+  );
+  --cnvs-sys-color-accent-caution: light-dark(
+    var(--cnvs-brand-l-caution-400),
+    var(--cnvs-brand-d-caution-400)
+  );
+  --cnvs-sys-color-accent-critical: light-dark(
+    var(--cnvs-brand-l-critical-600),
+    var(--cnvs-brand-d-critical-600)
+  );
+  --cnvs-sys-color-accent-info: light-dark(
+    var(--cnvs-base-palette-l-blue-600),
+    var(--cnvs-base-palette-d-blue-600)
+  );
+  --cnvs-sys-color-accent-success: light-dark(
+    var(--cnvs-base-palette-l-green-600),
+    var(--cnvs-base-palette-d-green-600)
+  );
+  --cnvs-sys-color-accent-danger: light-dark(
+    var(--cnvs-base-palette-l-red-600),
+    var(--cnvs-base-palette-d-red-600)
+  );
+  --cnvs-sys-color-accent-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-400),
+    var(--cnvs-base-palette-d-amber-400)
+  );
+  --cnvs-sys-color-accent-ai: light-dark(
+    var(--cnvs-base-palette-l-blue-950),
+    var(--cnvs-base-palette-d-blue-950)
+  );
+  --cnvs-sys-color-accent-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-accent-muted: light-dark(
+    var(--cnvs-brand-l-neutral-600),
+    var(--cnvs-brand-d-neutral-600)
+  );
+  --cnvs-sys-color-accent-muted-soft: light-dark(
+    var(--cnvs-brand-l-neutral-400),
+    var(--cnvs-brand-d-neutral-400)
+  );
+  --cnvs-sys-color-accent-action: light-dark(
+    var(--cnvs-brand-l-primary-600),
+    var(--cnvs-base-palette-d-blue-600)
+  );
+  --cnvs-sys-color-accent-overlay-hover: light-dark(oklch(0 0 0 / 0.18), oklch(1 0 0 / 0.09));
+  --cnvs-sys-color-accent-overlay-pressed: light-dark(
+    var(--cnvs-base-palette-l-base-a400),
+    var(--cnvs-base-palette-d-base-a400)
+  );
+  --cnvs-sys-color-accent-overlay-mixin: light-dark(
+    var(--cnvs-base-palette-black),
+    var(--cnvs-base-palette-white)
+  );
+
+  /* Surfaces */
+  --cnvs-sys-color-surface-navigation: var(--cnvs-sys-color-bg-alt);
+  --cnvs-sys-color-surface-popover: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-slate-100)
+  );
+  --cnvs-sys-color-surface-modal: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-slate-200)
+  );
+  --cnvs-sys-color-surface-raised: light-dark(
+    var(--cnvs-base-palette-l-slate-a25),
+    var(--cnvs-base-palette-d-slate-a25)
+  );
+  --cnvs-sys-color-surface-alt: light-dark(
+    var(--cnvs-base-palette-l-slate-a50),
+    var(--cnvs-base-palette-d-slate-a50)
+  );
+  --cnvs-sys-color-surface-alt-strong: light-dark(
+    var(--cnvs-base-palette-l-slate-a100),
+    var(--cnvs-base-palette-d-slate-a100)
+  );
+  --cnvs-sys-color-surface-info: light-dark(
+    var(--cnvs-base-palette-l-blue-a25),
+    var(--cnvs-base-palette-d-blue-a25)
+  );
+  --cnvs-sys-color-surface-info-strong: light-dark(
+    var(--cnvs-base-palette-l-blue-a50),
+    var(--cnvs-base-palette-d-blue-a50)
+  );
+  --cnvs-sys-color-surface-danger: light-dark(
+    var(--cnvs-base-palette-l-red-a25),
+    var(--cnvs-base-palette-d-red-a25)
+  );
+  --cnvs-sys-color-surface-danger-strong: light-dark(
+    var(--cnvs-base-palette-l-red-a50),
+    var(--cnvs-base-palette-d-red-a50)
+  );
+  --cnvs-sys-color-surface-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-a25),
+    var(--cnvs-base-palette-d-amber-a25)
+  );
+  --cnvs-sys-color-surface-warning-strong: light-dark(
+    var(--cnvs-base-palette-l-amber-a50),
+    var(--cnvs-base-palette-d-amber-a50)
+  );
+  --cnvs-sys-color-surface-success: light-dark(
+    var(--cnvs-base-palette-l-green-a25),
+    var(--cnvs-base-palette-d-green-a25)
+  );
+  --cnvs-sys-color-surface-success-strong: light-dark(
+    var(--cnvs-base-palette-l-green-a50),
+    var(--cnvs-base-palette-d-green-a50)
+  );
+  --cnvs-sys-color-surface-ai: light-dark(
+    var(--cnvs-base-palette-l-blue-a100),
+    var(--cnvs-base-palette-d-blue-a100)
+  );
+  --cnvs-sys-color-surface-ai-hover: light-dark(
+    var(--cnvs-base-palette-l-blue-a200),
+    var(--cnvs-base-palette-d-blue-a200)
+  );
+  --cnvs-sys-color-surface-ai-pressed: light-dark(
+    var(--cnvs-base-palette-l-blue-400),
+    var(--cnvs-base-palette-d-blue-400)
+  );
+  --cnvs-sys-color-surface-transparent: light-dark(
+    var(--cnvs-base-palette-l-base-a0),
+    var(--cnvs-base-palette-d-base-a0)
+  );
+  --cnvs-sys-color-surface-inverse: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-sys-color-bg-default)
+  );
+  --cnvs-sys-color-surface-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-surface-contrast-strong: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+  --cnvs-sys-color-surface-primary: light-dark(
+    var(--cnvs-brand-l-primary-a25),
+    var(--cnvs-brand-d-primary-a25)
+  );
+  --cnvs-sys-color-surface-primary-strong: light-dark(
+    var(--cnvs-brand-l-primary-a50),
+    var(--cnvs-brand-d-primary-a50)
+  );
+  --cnvs-sys-color-surface-critical: light-dark(
+    var(--cnvs-brand-l-critical-a25),
+    var(--cnvs-brand-d-critical-a25)
+  );
+  --cnvs-sys-color-surface-critical-strong: light-dark(
+    var(--cnvs-brand-l-critical-a50),
+    var(--cnvs-brand-d-critical-a50)
+  );
+  --cnvs-sys-color-surface-caution: light-dark(
+    var(--cnvs-brand-l-caution-a25),
+    var(--cnvs-brand-d-caution-a25)
+  );
+  --cnvs-sys-color-surface-caution-strong: light-dark(
+    var(--cnvs-brand-l-caution-a50),
+    var(--cnvs-brand-d-caution-a50)
+  );
+  --cnvs-sys-color-surface-positive: light-dark(
+    var(--cnvs-brand-l-positive-a25),
+    var(--cnvs-brand-d-positive-a25)
+  );
+  --cnvs-sys-color-surface-positive-strong: light-dark(
+    var(--cnvs-brand-l-positive-a50),
+    var(--cnvs-brand-d-positive-a50)
+  );
+  --cnvs-sys-color-surface-selected: light-dark(
+    var(--cnvs-brand-l-primary-a50),
+    var(--cnvs-brand-d-primary-a50)
+  );
+  --cnvs-sys-color-surface-loading: light-dark(
+    var(--cnvs-base-palette-l-slate-a200),
+    var(--cnvs-base-palette-d-slate-a200)
+  );
+
+  /* Foreground */
+  --cnvs-sys-color-fg-default: light-dark(
+    var(--cnvs-base-palette-l-base-a800),
+    var(--cnvs-base-palette-d-base-a800)
+  );
+  --cnvs-sys-color-fg-strong: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-fg-stronger: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+  --cnvs-sys-color-fg-disabled: light-dark(
+    var(--cnvs-base-palette-l-slate-a400),
+    var(--cnvs-base-palette-d-slate-a400)
+  );
+  --cnvs-sys-color-fg-muted: light-dark(
+    var(--cnvs-base-palette-l-slate-a600),
+    var(--cnvs-base-palette-d-slate-a600)
+  );
+  --cnvs-sys-color-fg-muted-strong: light-dark(
+    var(--cnvs-base-palette-l-slate-a600),
+    var(--cnvs-base-palette-d-slate-a700)
+  );
+  --cnvs-sys-color-fg-inverse: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-black)
+  );
+  --cnvs-sys-color-fg-primary: light-dark(
+    var(--cnvs-brand-l-primary-600),
+    var(--cnvs-brand-d-primary-600)
+  );
+  --cnvs-sys-color-fg-primary-strong: light-dark(
+    var(--cnvs-brand-l-primary-700),
+    var(--cnvs-brand-d-primary-700)
+  );
+  --cnvs-sys-color-fg-critical: light-dark(
+    var(--cnvs-brand-l-critical-600),
+    var(--cnvs-brand-d-critical-600)
+  );
+  --cnvs-sys-color-fg-critical-strong: light-dark(
+    var(--cnvs-brand-l-critical-700),
+    var(--cnvs-brand-d-critical-700)
+  );
+  --cnvs-sys-color-fg-caution: light-dark(
+    var(--cnvs-brand-l-caution-600),
+    var(--cnvs-brand-d-caution-600)
+  );
+  --cnvs-sys-color-fg-caution-strong: light-dark(
+    var(--cnvs-brand-l-caution-700),
+    var(--cnvs-brand-d-caution-700)
+  );
+  --cnvs-sys-color-fg-positive: light-dark(
+    var(--cnvs-brand-l-positive-600),
+    var(--cnvs-brand-d-positive-600)
+  );
+  --cnvs-sys-color-fg-positive-strong: light-dark(
+    var(--cnvs-brand-l-positive-700),
+    var(--cnvs-brand-d-positive-700)
+  );
+  --cnvs-sys-color-fg-selected: light-dark(
+    var(--cnvs-brand-l-primary-700),
+    var(--cnvs-brand-d-primary-700)
+  );
+  --cnvs-sys-color-fg-info: light-dark(
+    var(--cnvs-base-palette-l-blue-600),
+    var(--cnvs-base-palette-d-blue-600)
+  );
+  --cnvs-sys-color-fg-info-strong: light-dark(
+    var(--cnvs-base-palette-l-blue-700),
+    var(--cnvs-base-palette-d-blue-700)
+  );
+  --cnvs-sys-color-fg-danger: light-dark(
+    var(--cnvs-base-palette-l-red-600),
+    var(--cnvs-base-palette-d-red-600)
+  );
+  --cnvs-sys-color-fg-danger-strong: light-dark(
+    var(--cnvs-base-palette-l-red-700),
+    var(--cnvs-base-palette-d-red-700)
+  );
+  --cnvs-sys-color-fg-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-600),
+    var(--cnvs-base-palette-d-amber-600)
+  );
+  --cnvs-sys-color-fg-warning-strong: light-dark(
+    var(--cnvs-base-palette-l-amber-700),
+    var(--cnvs-base-palette-d-amber-700)
+  );
+  --cnvs-sys-color-fg-success: light-dark(
+    var(--cnvs-base-palette-l-green-600),
+    var(--cnvs-base-palette-d-green-600)
+  );
+  --cnvs-sys-color-fg-success-strong: light-dark(
+    var(--cnvs-base-palette-l-green-700),
+    var(--cnvs-base-palette-d-green-700)
+  );
+  --cnvs-sys-color-fg-ai: light-dark(
+    var(--cnvs-base-palette-l-blue-950),
+    var(--cnvs-base-palette-d-blue-950)
+  );
+  --cnvs-sys-color-fg-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-fg-contrast-strong: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+
+  /* Border */
+  --cnvs-sys-color-border-default: light-dark(
+    var(--cnvs-base-palette-l-slate-a200),
+    var(--cnvs-base-palette-d-slate-a100)
+  );
+  --cnvs-sys-color-border-strong: light-dark(
+    var(--cnvs-base-palette-l-slate-a300),
+    var(--cnvs-base-palette-d-slate-a200)
+  );
+  --cnvs-sys-color-border-input: light-dark(
+    var(--cnvs-base-palette-l-slate-500),
+    var(--cnvs-base-palette-d-slate-a400)
+  );
+  --cnvs-sys-color-border-input-hover: light-dark(
+    var(--cnvs-base-palette-l-slate-700),
+    var(--cnvs-base-palette-d-slate-a600)
+  );
+  --cnvs-sys-color-border-primary: light-dark(
+    var(--cnvs-brand-l-primary-500),
+    var(--cnvs-brand-d-primary-500)
+  );
+  --cnvs-sys-color-border-critical: light-dark(
+    var(--cnvs-brand-l-critical-500),
+    var(--cnvs-brand-d-critical-500)
+  );
+  --cnvs-sys-color-border-caution: light-dark(
+    var(--cnvs-brand-l-caution-500),
+    var(--cnvs-brand-d-caution-500)
+  );
+  --cnvs-sys-color-border-info: light-dark(
+    var(--cnvs-base-palette-l-blue-500),
+    var(--cnvs-base-palette-d-blue-500)
+  );
+  --cnvs-sys-color-border-danger: light-dark(
+    var(--cnvs-base-palette-l-red-500),
+    var(--cnvs-base-palette-d-red-500)
+  );
+  --cnvs-sys-color-border-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-500),
+    var(--cnvs-base-palette-d-amber-500)
+  );
+  --cnvs-sys-color-border-inverse: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-black)
+  );
+  --cnvs-sys-color-border-inverse-strong: oklch(1 0 0 / 0.67);
+  --cnvs-sys-color-border-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-border-transparent: light-dark(
+    var(--cnvs-base-palette-l-base-a0),
+    var(--cnvs-base-palette-d-base-a0)
+  );
+  --cnvs-sys-color-border-ai: light-dark(
+    var(--cnvs-base-palette-l-blue-950),
+    var(--cnvs-base-palette-d-blue-950)
+  );
+
+  /* Surface overlays */
+  --cnvs-sys-color-surface-overlay-hover: light-dark(
+    oklch(0.63 0.03 256 / 0.1),
+    oklch(0.63 0.02 255 / 0.1)
+  );
+  --cnvs-sys-color-surface-overlay-pressed: light-dark(
+    oklch(0.63 0.03 256 / 0.18),
+    oklch(0.63 0.02 255 / 0.18)
+  );
+  --cnvs-sys-color-surface-overlay-mixin: light-dark(
+    var(--cnvs-base-palette-l-slate-500),
+    var(--cnvs-base-palette-d-slate-500)
+  );
+
+  --cnvs-sys-color-surface-primary-overlay-hover: light-dark(
+    var(--cnvs-brand-l-primary-a50),
+    var(--cnvs-brand-d-primary-a25)
+  );
+  --cnvs-sys-color-surface-primary-overlay-pressed: light-dark(
+    var(--cnvs-brand-l-primary-a100),
+    var(--cnvs-brand-d-primary-a100)
+  );
+  --cnvs-sys-color-surface-primary-overlay-mixin: light-dark(
+    var(--cnvs-base-palette-black),
+    var(--cnvs-base-palette-white)
+  );
+
+  --cnvs-sys-color-surface-info-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-blue-a50),
+    var(--cnvs-base-palette-d-blue-a25)
+  );
+  --cnvs-sys-color-surface-info-strong-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-blue-a100),
+    var(--cnvs-base-palette-d-blue-a50)
+  );
+  --cnvs-sys-color-surface-danger-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-red-a50),
+    var(--cnvs-base-palette-d-red-a25)
+  );
+  --cnvs-sys-color-surface-danger-strong-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-red-a100),
+    var(--cnvs-base-palette-d-red-a50)
+  );
+  --cnvs-sys-color-surface-warning-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-amber-a50),
+    var(--cnvs-base-palette-d-amber-a25)
+  );
+  --cnvs-sys-color-surface-warning-strong-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-amber-a100),
+    var(--cnvs-base-palette-d-amber-a50)
+  );
+  --cnvs-sys-color-surface-success-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-green-a50),
+    var(--cnvs-base-palette-d-green-a25)
+  );
+  --cnvs-sys-color-surface-success-strong-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-green-a100),
+    var(--cnvs-base-palette-d-green-a50)
+  );
+  --cnvs-sys-color-surface-primary-strong-overlay-hover: light-dark(
+    var(--cnvs-brand-l-primary-a100),
+    var(--cnvs-brand-d-primary-a50)
+  );
+  --cnvs-sys-color-surface-critical-overlay-hover: light-dark(
+    var(--cnvs-brand-l-critical-a50),
+    var(--cnvs-brand-d-critical-a25)
+  );
+  --cnvs-sys-color-surface-critical-strong-overlay-hover: light-dark(
+    var(--cnvs-brand-l-critical-a100),
+    var(--cnvs-brand-d-critical-a50)
+  );
+  --cnvs-sys-color-surface-caution-overlay-hover: light-dark(
+    var(--cnvs-brand-l-caution-a50),
+    var(--cnvs-brand-d-caution-a25)
+  );
+  --cnvs-sys-color-surface-caution-strong-overlay-hover: light-dark(
+    var(--cnvs-brand-l-caution-a100),
+    var(--cnvs-brand-d-caution-a50)
+  );
+  --cnvs-sys-color-surface-positive-overlay-hover: light-dark(
+    var(--cnvs-brand-l-positive-a50),
+    var(--cnvs-brand-d-positive-a25)
+  );
+  --cnvs-sys-color-surface-positive-strong-overlay-hover: light-dark(
+    var(--cnvs-brand-l-positive-a100),
+    var(--cnvs-brand-d-positive-a50)
+  );
+  --cnvs-sys-color-surface-selected-overlay-hover: light-dark(
+    var(--cnvs-brand-l-primary-a100),
+    var(--cnvs-brand-d-primary-a50)
+  );
+  --cnvs-sys-color-surface-ai-overlay-hover: light-dark(
+    var(--cnvs-base-palette-l-blue-a200),
+    var(--cnvs-base-palette-d-blue-a100)
+  );
+
+  --cnvs-sys-color-surface-overlay-hover-inverse: oklch(1 0 0 / 0.16);
+  --cnvs-sys-color-surface-overlay-pressed-inverse: oklch(1 0 0 / 0.26);
+  --cnvs-sys-color-surface-overlay-scrim: light-dark(
+    var(--cnvs-base-palette-l-base-a400),
+    var(--cnvs-base-palette-d-slate-a25)
+  );
+
+  /* Focus */
+  --cnvs-sys-color-focus-primary: light-dark(
+    var(--cnvs-brand-l-primary-500),
+    var(--cnvs-brand-d-primary-500)
+  );
+  --cnvs-sys-color-focus-critical: light-dark(
+    var(--cnvs-brand-l-critical-500),
+    var(--cnvs-brand-d-critical-500)
+  );
+  --cnvs-sys-color-focus-caution-inner: light-dark(
+    var(--cnvs-brand-l-caution-400),
+    var(--cnvs-brand-d-caution-400)
+  );
+  --cnvs-sys-color-focus-caution-outer: light-dark(
+    var(--cnvs-brand-l-caution-500),
+    var(--cnvs-brand-d-caution-500)
+  );
+  --cnvs-sys-color-focus-inverse: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-base-25)
+  );
+  --cnvs-sys-color-focus-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+
+  /* Focus ring (inline: 2px focus-inverse, 2px focus-primary outer) */
+  --cnvs-sys-focus-inline: 0 0 0 2px var(--cnvs-sys-color-focus-inverse),
+    0 0 0 4px var(--cnvs-sys-color-focus-primary);
+
+  /* Shadow */
+  --cnvs-sys-color-shadow-base: light-dark( 
+    var(--cnvs-base-palette-l-slate-a200),
+    oklch(0.08 0 0 / 0.17)
+  );
+  --cnvs-sys-color-shadow-ambient: light-dark(
+    var(--cnvs-base-palette-l-slate-a100),
+    oklch(1 0 0 / 0.02)
+  );
+
+  /* Avatar */
+  --cnvs-sys-color-avatar-bg-teal: light-dark(
+    var(--cnvs-base-palette-l-teal-300),
+    var(--cnvs-base-palette-d-teal-300)
+  );
+  --cnvs-sys-color-avatar-bg-indigo: light-dark(
+    var(--cnvs-base-palette-l-indigo-300),
+    var(--cnvs-base-palette-d-indigo-300)
+  );
+  --cnvs-sys-color-avatar-bg-blue: light-dark(
+    var(--cnvs-base-palette-l-blue-300),
+    var(--cnvs-base-palette-d-blue-300)
+  );
+  --cnvs-sys-color-avatar-bg-amber: light-dark(
+    var(--cnvs-base-palette-l-amber-200),
+    var(--cnvs-base-palette-d-amber-200)
+  );
+  --cnvs-sys-color-avatar-bg-coral: light-dark(
+    var(--cnvs-base-palette-l-coral-300),
+    var(--cnvs-base-palette-d-coral-300)
+  );
+  --cnvs-sys-color-avatar-fg-teal: light-dark(
+    var(--cnvs-base-palette-l-teal-800),
+    var(--cnvs-base-palette-d-teal-800)
+  );
+  --cnvs-sys-color-avatar-fg-indigo: light-dark(
+    var(--cnvs-base-palette-l-indigo-800),
+    var(--cnvs-base-palette-d-indigo-800)
+  );
+  --cnvs-sys-color-avatar-fg-blue: light-dark(
+    var(--cnvs-base-palette-l-blue-800),
+    var(--cnvs-base-palette-d-blue-800)
+  );
+  --cnvs-sys-color-avatar-fg-amber: light-dark(
+    var(--cnvs-base-palette-l-amber-800),
+    var(--cnvs-base-palette-d-amber-800)
+  );
+  --cnvs-sys-color-avatar-fg-coral: light-dark(
+    var(--cnvs-base-palette-l-coral-800),
+    var(--cnvs-base-palette-d-coral-800)
+  );
+
+  /* Search glow */
+  --cnvs-sys-color-search-glow-stop-1: light-dark(
+    var(--cnvs-base-palette-l-orange-300),
+    var(--cnvs-base-palette-d-orange-300)
+  );
+  --cnvs-sys-color-search-glow-stop-2: light-dark(
+    var(--cnvs-base-palette-l-orange-100),
+    var(--cnvs-base-palette-d-orange-100)
+  );
+  --cnvs-sys-color-search-glow-stop-3: light-dark(
+    var(--cnvs-base-palette-l-magenta-100),
+    var(--cnvs-base-palette-d-magenta-100)
+  );
+  --cnvs-sys-color-search-glow-stop-4: light-dark(
+    var(--cnvs-base-palette-l-purple-200),
+    var(--cnvs-base-palette-d-purple-200)
+  );
+  --cnvs-sys-color-search-glow-stop-5: light-dark(
+    var(--cnvs-base-palette-l-indigo-400),
+    var(--cnvs-base-palette-d-indigo-400)
+  );
+  --cnvs-sys-color-search-glow-stop-6: light-dark(
+    var(--cnvs-base-palette-l-blue-700),
+    var(--cnvs-base-palette-d-blue-700)
+  );
+  --cnvs-sys-color-search-glow-stop-7: light-dark(
+    var(--cnvs-base-palette-l-blue-900),
+    var(--cnvs-base-palette-d-blue-900)
+  );
+
+  /* Logo */
+  --cnvs-sys-color-logo-dub: light-dark(
+    var(--cnvs-base-palette-l-blue-950),
+    var(--cnvs-sys-color-fg-default)
+  );
+  --cnvs-sys-color-logo-arc: light-dark(
+    var(--cnvs-base-palette-l-coral-500),
+    var(--cnvs-sys-color-fg-default)
+  );
+
+  /* Chart */
+  --cnvs-sys-color-chart-1: light-dark(
+    var(--cnvs-base-palette-l-azure-400),
+    var(--cnvs-base-palette-d-azure-400)
+  );
+  --cnvs-sys-color-chart-2: light-dark(
+    var(--cnvs-base-palette-l-purple-300),
+    var(--cnvs-base-palette-d-purple-300)
+  );
+  --cnvs-sys-color-chart-3: light-dark(
+    var(--cnvs-base-palette-l-red-300),
+    var(--cnvs-base-palette-d-red-300)
+  );
+  --cnvs-sys-color-chart-4: light-dark(
+    var(--cnvs-base-palette-l-amber-200),
+    var(--cnvs-base-palette-d-amber-200)
+  );
+  --cnvs-sys-color-chart-5: light-dark(
+    var(--cnvs-base-palette-l-green-200),
+    var(--cnvs-base-palette-d-green-200)
+  );
+  --cnvs-sys-color-chart-6: light-dark(
+    var(--cnvs-base-palette-l-teal-300),
+    var(--cnvs-base-palette-d-teal-300)
+  );
+  --cnvs-sys-color-chart-7: light-dark(
+    var(--cnvs-base-palette-l-base-400),
+    var(--cnvs-base-palette-d-base-400)
+  );
+  --cnvs-sys-color-chart-8: light-dark(
+    var(--cnvs-base-palette-l-base-600),
+    var(--cnvs-base-palette-d-base-600)
+  );
+}
+
+/* High contrast: foreground +100, stronger borders and focus (light and dark) */
+:where(html[data-high-contrast]) {
+  /* Foreground (+100 step) */
+  --cnvs-sys-color-fg-default: light-dark(
+    var(--cnvs-base-palette-l-base-a900),
+    var(--cnvs-base-palette-d-base-a900)
+  );
+  --cnvs-sys-color-fg-strong: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+  --cnvs-sys-color-fg-stronger: light-dark(
+    var(--cnvs-base-palette-l-base-a975),
+    var(--cnvs-base-palette-d-base-a975)
+  );
+  --cnvs-sys-color-fg-disabled: light-dark(
+    var(--cnvs-base-palette-l-slate-a500),
+    var(--cnvs-base-palette-d-slate-a500)
+  );
+  --cnvs-sys-color-fg-muted: light-dark(
+    var(--cnvs-base-palette-l-slate-a700),
+    var(--cnvs-base-palette-d-slate-a700)
+  );
+  --cnvs-sys-color-fg-muted-strong: light-dark(
+    var(--cnvs-base-palette-l-slate-a700),
+    var(--cnvs-base-palette-d-slate-a800)
+  );
+  --cnvs-sys-color-fg-primary: light-dark(
+    var(--cnvs-brand-l-primary-700),
+    var(--cnvs-brand-d-primary-700)
+  );
+  --cnvs-sys-color-fg-primary-strong: light-dark(
+    var(--cnvs-brand-l-primary-800),
+    var(--cnvs-brand-d-primary-800)
+  );
+  --cnvs-sys-color-fg-critical: light-dark(
+    var(--cnvs-brand-l-critical-700),
+    var(--cnvs-brand-d-critical-700)
+  );
+  --cnvs-sys-color-fg-critical-strong: light-dark(
+    var(--cnvs-brand-l-critical-800),
+    var(--cnvs-brand-d-critical-800)
+  );
+  --cnvs-sys-color-fg-caution: light-dark(
+    var(--cnvs-brand-l-caution-700),
+    var(--cnvs-brand-d-caution-700)
+  );
+  --cnvs-sys-color-fg-caution-strong: light-dark(
+    var(--cnvs-brand-l-caution-800),
+    var(--cnvs-brand-d-caution-800)
+  );
+  --cnvs-sys-color-fg-positive: light-dark(
+    var(--cnvs-brand-l-positive-700),
+    var(--cnvs-brand-d-positive-700)
+  );
+  --cnvs-sys-color-fg-positive-strong: light-dark(
+    var(--cnvs-brand-l-positive-800),
+    var(--cnvs-brand-d-positive-800)
+  );
+  --cnvs-sys-color-fg-selected: light-dark(
+    var(--cnvs-brand-l-primary-800),
+    var(--cnvs-brand-d-primary-800)
+  );
+  --cnvs-sys-color-fg-info: light-dark(
+    var(--cnvs-base-palette-l-blue-700),
+    var(--cnvs-base-palette-d-blue-700)
+  );
+  --cnvs-sys-color-fg-info-strong: light-dark(
+    var(--cnvs-base-palette-l-blue-800),
+    var(--cnvs-base-palette-d-blue-800)
+  );
+  --cnvs-sys-color-fg-danger: light-dark(
+    var(--cnvs-base-palette-l-red-700),
+    var(--cnvs-base-palette-d-red-700)
+  );
+  --cnvs-sys-color-fg-danger-strong: light-dark(
+    var(--cnvs-base-palette-l-red-800),
+    var(--cnvs-base-palette-d-red-800)
+  );
+  --cnvs-sys-color-fg-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-700),
+    var(--cnvs-base-palette-d-amber-700)
+  );
+  --cnvs-sys-color-fg-warning-strong: light-dark(
+    var(--cnvs-base-palette-l-amber-800),
+    var(--cnvs-base-palette-d-amber-800)
+  );
+  --cnvs-sys-color-fg-success: light-dark(
+    var(--cnvs-base-palette-l-green-700),
+    var(--cnvs-base-palette-d-green-700)
+  );
+  --cnvs-sys-color-fg-success-strong: light-dark(
+    var(--cnvs-base-palette-l-green-800),
+    var(--cnvs-base-palette-d-green-800)
+  );
+  --cnvs-sys-color-fg-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+  --cnvs-sys-color-fg-contrast-strong: light-dark(
+    var(--cnvs-base-palette-l-base-a975),
+    var(--cnvs-base-palette-d-base-a975)
+  );
+  --cnvs-sys-color-fg-ai: light-dark(
+    var(--cnvs-base-palette-l-blue-975),
+    var(--cnvs-base-palette-d-blue-975)
+  );
+
+  /* Border (stronger) */
+  --cnvs-sys-color-border-default: light-dark(
+    var(--cnvs-base-palette-l-slate-a300),
+    var(--cnvs-base-palette-d-slate-a200)
+  );
+  --cnvs-sys-color-border-strong: light-dark(
+    var(--cnvs-base-palette-l-slate-a400),
+    var(--cnvs-base-palette-d-slate-a300)
+  );
+  --cnvs-sys-color-border-input: light-dark(
+    var(--cnvs-base-palette-l-slate-600),
+    var(--cnvs-base-palette-d-slate-a500)
+  );
+  --cnvs-sys-color-border-input-hover: light-dark(
+    var(--cnvs-base-palette-l-slate-800),
+    var(--cnvs-base-palette-d-slate-a700)
+  );
+  --cnvs-sys-color-border-primary: light-dark(
+    var(--cnvs-brand-l-primary-600),
+    var(--cnvs-brand-d-primary-600)
+  );
+  --cnvs-sys-color-border-critical: light-dark(
+    var(--cnvs-brand-l-critical-600),
+    var(--cnvs-brand-d-critical-600)
+  );
+  --cnvs-sys-color-border-caution: light-dark(
+    var(--cnvs-brand-l-caution-600),
+    var(--cnvs-brand-d-caution-600)
+  );
+  --cnvs-sys-color-border-info: light-dark(
+    var(--cnvs-base-palette-l-blue-600),
+    var(--cnvs-base-palette-d-blue-600)
+  );
+  --cnvs-sys-color-border-danger: light-dark(
+    var(--cnvs-base-palette-l-red-600),
+    var(--cnvs-base-palette-d-red-600)
+  );
+  --cnvs-sys-color-border-warning: light-dark(
+    var(--cnvs-base-palette-l-amber-600),
+    var(--cnvs-base-palette-d-amber-600)
+  );
+  --cnvs-sys-color-border-inverse-strong: light-dark(
+    oklch(0 0 0 / 0.9),
+    oklch(1 0 0 / 0.9)
+  );
+  --cnvs-sys-color-border-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a950)
+  );
+
+  /* Focus (stronger colors + thicker ring) */
+  --cnvs-sys-color-focus-primary: light-dark(
+    var(--cnvs-brand-l-primary-600),
+    var(--cnvs-brand-d-primary-600)
+  );
+  --cnvs-sys-color-focus-critical: light-dark(
+    var(--cnvs-brand-l-critical-600),
+    var(--cnvs-brand-d-critical-600)
+  );
+  --cnvs-sys-color-focus-caution-inner: light-dark(
+    var(--cnvs-brand-l-caution-500),
+    var(--cnvs-brand-d-caution-500)
+  );
+  --cnvs-sys-color-focus-caution-outer: light-dark(
+    var(--cnvs-brand-l-caution-600),
+    var(--cnvs-brand-d-caution-600)
+  );
+  --cnvs-sys-color-focus-inverse: light-dark(
+    var(--cnvs-base-palette-white),
+    var(--cnvs-base-palette-d-base-50)
+  );
+  --cnvs-sys-color-focus-contrast: light-dark(
+    var(--cnvs-base-palette-l-base-a950),
+    var(--cnvs-base-palette-d-base-a975)
+  );
+  --cnvs-sys-focus-inline: 0 0 0 3px var(--cnvs-sys-color-focus-inverse),
+    0 0 0 5px var(--cnvs-sys-color-focus-primary);
+}
