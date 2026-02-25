@@ -10,7 +10,7 @@ import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {patternIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -23,6 +23,23 @@ const fadeOut = keyframes`
     opacity: 0;
   }
 `;
+
+const boxStencil = createStencil({
+  base: {
+    pointerEvents: 'none',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+  },
+  modifiers: {
+    loading: {
+      true: {
+        animation: `${fadeOut} 150ms ease-out forwards`,
+      },
+    },
+  },
+});
 
 export const Simulation = () => {
   const [loading, setLoading] = React.useState(true);
@@ -74,16 +91,7 @@ export const Simulation = () => {
         <Card.Body>
           <Box cs={{minHeight: px2rem(180), position: 'relative'}}>
             {loading ? (
-              <Box
-                cs={{
-                  animation: !loading ? `${fadeOut} 150ms ease-out forwards` : undefined,
-                  pointerEvents: 'none',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                }}
-              >
+              <Box cs={boxStencil({loading})}>
                 <Skeleton>
                   <Flex cs={{alignItems: 'center'}}>
                     <Skeleton.Shape

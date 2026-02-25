@@ -1,4 +1,3 @@
-// import styled from '@emotion/styled';
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
