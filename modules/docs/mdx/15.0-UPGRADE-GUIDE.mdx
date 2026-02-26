@@ -43,11 +43,13 @@ semantic meaning to allow for better use and theming.
   - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
+  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
   - [Inputs](#inputs)
   - [Containers](#containers)
   - [Indicators](#indicators)
   - [Navigation](#navigation)
   - [Popups](#popups)
+- [Theming](#theming)
 - [Deprecations](#deprecations)
   - [Accent Icon](#accent-icon)
   - [Applet Icon](#applet-icon)
@@ -543,6 +545,16 @@ If you'd like to see the visual differences between `v14` with `v3` tokens and `
 **PR:** [#3745](https://github.com/Workday/canvas-kit/pull/3745)
 
 `Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
+
+## Theming
+
+### System Brand Tokens and Brand Tokens
+
+The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and **brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as `base`, `dark`, `darkest`, `light`, `lightest`, and `lighter` via the `CanvasProvider` theme prop. The mapping inside `CanvasProvider` exists for **backwards compatibility**: when you pass a theme object, we forward those values to both the legacy brand tokens and the system brand tokens so existing usage continues to work.
+For more information on theming, view our [Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) documentation.
+
+For more information on our tokens, view our [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) documentation.
+
 
 ## Deprecations
 
