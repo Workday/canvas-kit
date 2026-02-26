@@ -130,6 +130,20 @@ In this release, we:
           uri: 'docs://upgrade-guides/14.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'upgrade-guides/15.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 15.0 Upgrade Guide',
+          description: `# Canvas Kit 15.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v15.
+
+In this release, we:
+- introduced new shape, size, gap, and padding tokens to our components
+- deprecated old shape and space tokens
+- introduced new tokens to our components`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/15.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       case 'theming.md':
         return {
           title: 'Canvas Kit Theming Guide',

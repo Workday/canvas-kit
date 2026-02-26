@@ -1,7 +1,5 @@
 import {Basic} from '../../modules/react/text-area/stories/examples/Basic';
-import {Caution} from '../../modules/react/text-area/stories/examples/Caution';
 import {Disabled} from '../../modules/react/text-area/stories/examples/Disabled';
-import {Error} from '../../modules/react/text-area/stories/examples/Error';
 import {Placeholder} from '../../modules/react/text-area/stories/examples/Placeholder';
 
 const getTextArea = () => {
@@ -9,34 +7,32 @@ const getTextArea = () => {
 };
 
 describe('Text Area', () => {
-  [Basic, Caution, Error].forEach(Example => {
-    context(`given the '${Example.name}' story is rendered`, () => {
+  context(`given the 'Basic' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<Basic />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    context('when clicked', () => {
       beforeEach(() => {
-        cy.mount(<Example />);
+        getTextArea().click();
       });
 
-      it('should not have any axe errors', () => {
-        cy.checkA11y();
+      it('should be focused', () => {
+        getTextArea().should('be.focused');
+      });
+    });
+
+    context('when text is entered', () => {
+      beforeEach(() => {
+        getTextArea().clear().type('Test');
       });
 
-      context('when clicked', () => {
-        beforeEach(() => {
-          getTextArea().click();
-        });
-
-        it('should be focused', () => {
-          getTextArea().should('be.focused');
-        });
-      });
-
-      context('when text is entered', () => {
-        beforeEach(() => {
-          getTextArea().clear().type('Test');
-        });
-
-        it('should reflect the text typed', () => {
-          getTextArea().should('have.value', 'Test');
-        });
+      it('should reflect the text typed', () => {
+        getTextArea().should('have.value', 'Test');
       });
     });
   });

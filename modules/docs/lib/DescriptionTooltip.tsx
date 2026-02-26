@@ -1,13 +1,17 @@
-import styled from '@emotion/styled';
+import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
+import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-
-export const DescriptionTooltip = styled(Tooltip)({
-  ':before': {
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: colors.blackPepper500,
-    backgroundColor: 'rgba(255,255,255,.85)',
-  },
-});
+export const DescriptionTooltip = (props: TooltipProps) => (
+  <Tooltip
+    cs={{
+      ':before': {
+        borderWidth: px2rem(1),
+        borderStyle: 'solid',
+        borderColor: system.color.border.contrast.default,
+        backgroundColor: `oklch(from ${cssVar(system.color.surface.default)} / ${system.opacity.contrast})`,
+      },
+    }}
+    {...props}
+  />
+);

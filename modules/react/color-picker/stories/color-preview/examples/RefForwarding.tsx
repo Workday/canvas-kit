@@ -3,7 +3,7 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {type} from '@workday/canvas-kit-react/tokens';
+import {Subtext} from '@workday/canvas-kit-react/text';
 
 export const RefForwarding = () => {
   const [width, setWidth] = React.useState(null);
@@ -21,7 +21,7 @@ export const RefForwarding = () => {
           <FormField.Input as={ColorPreview} ref={ref} value="#00ffcc" />
         </FormField.Field>
       </FormField>
-      <p style={type.levels.subtext.large}>Width of Color Preview: {width}</p>
+      <Subtext size="large">Width of Color Preview: {width}</Subtext>
       <PrimaryButton onClick={handleClick}>Calculate Width of Color Preview</PrimaryButton>
     </>
   );

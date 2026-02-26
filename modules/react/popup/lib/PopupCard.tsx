@@ -7,8 +7,14 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
-import {calc, createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {
+  calc,
+  createStencil,
+  createVars,
+  cssVar,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
@@ -36,8 +42,29 @@ const fadeIn = keyframes({
 });
 
 function getSpace(value?: string | number) {
-  if (value && value in space) {
-    return space[value as keyof typeof space];
+  // TODO (deprecated tokens): Revisit tokens after removal of style props
+  const spaceMap = {
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    zero: cssVar(system.gap.none, '0'),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxxs: cssVar(system.gap.xs, system.space.x1),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxs: cssVar(system.gap.sm, system.space.x2),
+    xs: px2rem(12),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    s: cssVar(system.gap.md, system.space.x4),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    m: cssVar(system.gap.lg, system.space.x6),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    l: cssVar(system.gap.xl, system.space.x8),
+    xl: px2rem(40),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    xxl: cssVar(system.gap.xxl, system.space.x16),
+    xxxl: px2rem(80),
+  };
+
+  if (value && value in spaceMap) {
+    return spaceMap[value as keyof typeof spaceMap];
   } else {
     return value;
   }
