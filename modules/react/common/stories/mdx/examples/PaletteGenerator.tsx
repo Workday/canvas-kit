@@ -1,17 +1,19 @@
 import * as React from 'react';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Switch} from '@workday/canvas-kit-react/switch';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {
+  AccessiblePalette,
+  type AlphaLevel,
+  PaletteStep,
   generateAccessiblePalette,
   generateNeutralPalette,
-  AccessiblePalette,
-  PaletteStep,
-} from '@workday/canvas-kit-react/common';
+} from '@workday/canvas-kit-labs-react/common';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import {Text} from '@workday/canvas-kit-react/text';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 // Contrast pairs to display - common combinations for UI design
 const CONTRAST_PAIRS = [
@@ -30,6 +32,16 @@ const BRAND_TOKEN_MAPPING = [
   {step: 700, token: 'brand.primary.dark', cssVar: '--cnvs-brand-primary-dark'},
   {step: 800, token: 'brand.primary.darkest', cssVar: '--cnvs-brand-primary-darkest'},
 ] as const;
+
+// Alpha token mapping for brand.primary (step 600 = base) — a25, a50, a100, a200
+const ALPHA_LEVELS: AlphaLevel[] = ['a25', 'a50', 'a100', 'a200'];
+const BRAND_ALPHA_STEP = 600;
+const BRAND_ALPHA_TOKEN_MAPPING = ALPHA_LEVELS.map(level => ({
+  step: BRAND_ALPHA_STEP,
+  alphaLevel: level,
+  token: `brand.primary.${level}`,
+  cssVar: `--cnvs-brand-primary-${level}` as const,
+}));
 
 const getWcagLevel = (ratio: number): {level: string; color: string} => {
   if (ratio >= 7) {
@@ -203,6 +215,79 @@ const TokenRow = ({
   );
 };
 
+const AlphaTokenRow = ({
+  step,
+  alphaLevel,
+  token,
+  cssVar,
+  hexWithAlpha,
+  isDarkMode,
+  onCopy,
+  copied,
+}: {
+  step: number;
+  alphaLevel: AlphaLevel;
+  token: string;
+  cssVar: string;
+  hexWithAlpha: string;
+  isDarkMode: boolean;
+  onCopy: (text: string) => void;
+  copied: boolean;
+}) => {
+  const textColor = isDarkMode ? '#e5e5e5' : '#333';
+  const mutedColor = isDarkMode ? '#888' : '#666';
+
+  return (
+    <Flex
+      alignItems="center"
+      gap="s"
+      style={{
+        padding: '8px 12px',
+        borderRadius: '6px',
+        backgroundColor: isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.03)',
+      }}
+    >
+      <Box
+        style={{
+          width: '32px',
+          height: '32px',
+          backgroundColor: hexWithAlpha,
+          borderRadius: '6px',
+          border: '1px solid rgba(0,0,0,0.1)',
+          flexShrink: 0,
+        }}
+      />
+      <Box style={{flex: 1, minWidth: 0}}>
+        <Text
+          as="div"
+          style={{
+            fontSize: '13px',
+            fontWeight: 600,
+            color: textColor,
+          }}
+        >
+          {token}
+        </Text>
+        <Text
+          as="div"
+          style={{
+            fontSize: '11px',
+            color: mutedColor,
+            fontFamily: 'monospace',
+          }}
+        >
+          Step {step} · {alphaLevel} → {hexWithAlpha}
+        </Text>
+      </Box>
+      <Tooltip title={copied ? 'Copied!' : 'Copy CSS variable'}>
+        <TertiaryButton size="small" onClick={() => onCopy(`${cssVar}: ${hexWithAlpha};`)}>
+          {copied ? '✓' : 'Copy'}
+        </TertiaryButton>
+      </Tooltip>
+    </Flex>
+  );
+};
+
 const ContrastPair = ({
   palette,
   lightStep,
@@ -218,8 +303,8 @@ const ContrastPair = ({
     lightStep === 'white'
       ? '#ffffff'
       : lightStep === 'black'
-      ? '#000000'
-      : palette.getHex(lightStep);
+        ? '#000000'
+        : palette.getHex(lightStep);
   const darkHex =
     darkStep === 'white' ? '#ffffff' : darkStep === 'black' ? '#000000' : palette.getHex(darkStep);
 
@@ -327,10 +412,13 @@ export const PaletteGenerator = () => {
   };
 
   const copyAllColors = () => {
-    const colorMap = palette.steps.reduce((acc, step) => {
-      acc[step.step] = step.hex;
-      return acc;
-    }, {} as Record<number, string>);
+    const colorMap = palette.steps.reduce(
+      (acc, step) => {
+        acc[step.step] = step.hex;
+        return acc;
+      },
+      {} as Record<number, string>
+    );
     navigator.clipboard.writeText(JSON.stringify(colorMap, null, 2));
     setCopiedStep(-1);
     setTimeout(() => setCopiedStep(null), 1500);
@@ -343,10 +431,13 @@ export const PaletteGenerator = () => {
   };
 
   const copyAllBrandTokens = () => {
-    const css = BRAND_TOKEN_MAPPING.map(
+    const solidCss = BRAND_TOKEN_MAPPING.map(
       ({step, cssVar}) => `  ${cssVar}: ${palette.getHex(step)};`
     ).join('\n');
-    const fullCss = `:root {\n${css}\n}`;
+    const alphaCss = BRAND_ALPHA_TOKEN_MAPPING.map(
+      ({alphaLevel, cssVar}) => `  ${cssVar}: ${palette.getAlphaHex(BRAND_ALPHA_STEP, alphaLevel)};`
+    ).join('\n');
+    const fullCss = `:root {\n${solidCss}\n${alphaCss}\n}`;
     navigator.clipboard.writeText(fullCss);
     setCopiedToken('all');
     setTimeout(() => setCopiedToken(null), 1500);
@@ -472,6 +563,79 @@ export const PaletteGenerator = () => {
         ))}
       </Box>
 
+      {/* Alpha (transparency) — under the accessible palette */}
+      <Text
+        as="h4"
+        typeLevel="body.large"
+        marginBottom="xs"
+        fontWeight="bold"
+        style={{fontSize: '14px'}}
+      >
+        Alpha (transparency)
+      </Text>
+      <Text
+        as="p"
+        style={{
+          fontSize: '13px',
+          color: isDarkMode ? '#aaa' : '#666',
+          marginBottom: 's',
+        }}
+      >
+        Transparent variants with alpha channel (a25 = 8%, a50 = 11%, a100 = 17%, a200 = 31%
+        opacity). Shown over background so transparency is visible. Example for step{' '}
+        {BRAND_ALPHA_STEP} (base):
+      </Text>
+      <Flex gap="s" marginBottom="l" flexWrap="wrap" alignItems="flex-start">
+        {ALPHA_LEVELS.map(level => {
+          const hexWithAlpha = palette.getAlphaHex(BRAND_ALPHA_STEP, level);
+          return (
+            hexWithAlpha && (
+              <Flex key={level} alignItems="center" gap="xs">
+                <Box
+                  style={{
+                    width: '48px',
+                    height: '40px',
+                    backgroundColor: bgColor,
+                    borderRadius: '6px',
+                    border: '1px solid rgba(0,0,0,0.1)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                  }}
+                  title={`${level}: transparent over background`}
+                >
+                  <Box
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      backgroundColor: hexWithAlpha,
+                      borderRadius: '6px',
+                    }}
+                  />
+                </Box>
+                <Box>
+                  <Text
+                    as="div"
+                    style={{fontSize: '12px', fontFamily: 'monospace', fontWeight: 600}}
+                  >
+                    {level}
+                  </Text>
+                  <Text as="div" style={{fontSize: '11px', color: isDarkMode ? '#888' : '#666'}}>
+                    {level === 'a25'
+                      ? '8%'
+                      : level === 'a50'
+                        ? '11%'
+                        : level === 'a100'
+                          ? '17%'
+                          : '31%'}{' '}
+                    opacity
+                  </Text>
+                </Box>
+              </Flex>
+            )
+          );
+        })}
+      </Flex>
+
       {/* Brand Token Mapping Section */}
       <Flex justifyContent="space-between" alignItems="center" marginBottom="s">
         <Text as="h3" typeLevel="heading.small">
@@ -491,8 +655,8 @@ export const PaletteGenerator = () => {
           marginBottom: '12px',
         }}
       >
-        Use these values to configure <code>@workday/canvas-tokens-web</code> brand tokens in your
-        CSS:
+        Use these values to configure <code>@workday/canvas-tokens-web</code> brand tokens (solid +
+        transparent alpha) in your CSS:
       </Text>
       <Box
         style={{
@@ -509,6 +673,19 @@ export const PaletteGenerator = () => {
             token={token}
             cssVar={cssVar}
             hex={palette.getHex(step) || ''}
+            isDarkMode={isDarkMode}
+            onCopy={text => copyTokenValue(text, token)}
+            copied={copiedToken === token}
+          />
+        ))}
+        {BRAND_ALPHA_TOKEN_MAPPING.map(({step, alphaLevel, token, cssVar}) => (
+          <AlphaTokenRow
+            key={token}
+            step={step}
+            alphaLevel={alphaLevel}
+            token={token}
+            cssVar={cssVar}
+            hexWithAlpha={palette.getAlphaHex(step, alphaLevel) || ''}
             isDarkMode={isDarkMode}
             onCopy={text => copyTokenValue(text, token)}
             copied={copiedToken === token}
@@ -565,12 +742,13 @@ export const PaletteGenerator = () => {
           {`// Configure brand tokens in your CSS (e.g., index.css)
 :root {
   ${BRAND_TOKEN_MAPPING.map(({step, cssVar}) => `${cssVar}: ${palette.getHex(step)};`).join('\n  ')}
+  ${BRAND_ALPHA_TOKEN_MAPPING.map(({alphaLevel, cssVar}) => `${cssVar}: ${palette.getAlphaHex(BRAND_ALPHA_STEP, alphaLevel)};`).join('\n  ')}
 }
 
 // Or generate dynamically with JavaScript
 import { generateAccessiblePalette${
             isNeutral ? ', generateNeutralPalette' : ''
-          } } from '@workday/canvas-kit-react/common';
+          } } from '@workday/canvas-kit-labs-react/common';
 
 ${
   isNeutral
@@ -584,7 +762,7 @@ ${
 });`
 }
 
-// Map to brand tokens
+// Map to brand tokens (solid + alpha)
 const brandTokens = {
   lightest: palette.getHex(25),   // ${palette.getHex(25)}
   lighter: palette.getHex(50),    // ${palette.getHex(50)}
@@ -592,6 +770,10 @@ const brandTokens = {
   base: palette.getHex(600),      // ${palette.getHex(600)}
   dark: palette.getHex(700),      // ${palette.getHex(700)}
   darkest: palette.getHex(800),   // ${palette.getHex(800)}
+  a25: palette.getAlphaHex(600, 'a25'),   // ${palette.getAlphaHex(600, 'a25')}
+  a50: palette.getAlphaHex(600, 'a50'),   // ${palette.getAlphaHex(600, 'a50')}
+  a100: palette.getAlphaHex(600, 'a100'), // ${palette.getAlphaHex(600, 'a100')}
+  a200: palette.getAlphaHex(600, 'a200'), // ${palette.getAlphaHex(600, 'a200')}
 };`}
         </pre>
       </Box>

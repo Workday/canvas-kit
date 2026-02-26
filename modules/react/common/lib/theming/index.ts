@@ -35,15 +35,6 @@ export * from './useIsRTL';
  */
 export * from './getObjectProxy';
 /**
- * Accessible Palette Generator
- *
- * Generate WCAG-compliant color palettes from any input color.
- * @example
- * ```tsx
- * import { generateAccessiblePalette } from '@workday/canvas-kit-react/common';
- *
- * const palette = generateAccessiblePalette('#0875E1');
- * const primaryColor = palette.getHex(500);
- * ```
+ * Palette generator has moved to @workday/canvas-kit-labs-react/common.
+ * Import from '@workday/canvas-kit-labs-react/common' for generateAccessiblePalette, palette types, and alpha utilities.
  */
-export * from './palette';

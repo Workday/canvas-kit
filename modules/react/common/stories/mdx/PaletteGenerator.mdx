@@ -1,9 +1,10 @@
+import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {PaletteGenerator} from './examples/PaletteGenerator';
 
-<Meta title="Features/Palette Generator" />
+<Meta title="Features/Palette Generator (Experimental)" />
 
-# Accessible Palette Generator
+# Accessible Palette Generator (Experimental)
 
 Generate WCAG-compliant color palettes from any input color. The palette generator creates a 13-step color scale optimized for accessibility, ensuring that key steps meet contrast requirements.
 
@@ -12,6 +13,7 @@ Generate WCAG-compliant color palettes from any input color. The palette generat
 The `generateAccessiblePalette` function takes any valid CSS color and generates a complete palette with:
 
 - **13 color steps**: 25, 50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950, 975
+- **Alpha (transparency)**: Each step has transparent variants (a25, a50, a100, a200) that composite over the palette background
 - **WCAG contrast guarantees**: Steps 500 and 600 are optimized to meet AA contrast requirements
 - **Gamut mapping**: Colors stay within sRGB or P3 color gamuts
 - **Multiple input formats**: Supports hex, rgb, hsl, oklch, and more
@@ -24,16 +26,16 @@ Try entering different colors to see how the palette generator creates accessibl
 
 ## Installation
 
-The palette generator is included in `@workday/canvas-kit-react/common`:
+The palette generator is in `@workday/canvas-kit-labs-react/common`:
 
 ```tsx
-import {generateAccessiblePalette} from '@workday/canvas-kit-react/common';
+import {generateAccessiblePalette} from '@workday/canvas-kit-labs-react/common';
 ```
 
 ## Basic Usage
 
 ```tsx
-import {generateAccessiblePalette} from '@workday/canvas-kit-react/common';
+import {generateAccessiblePalette} from '@workday/canvas-kit-labs-react/common';
 
 // Generate a palette from a hex color
 const palette = generateAccessiblePalette('#0875E1');
@@ -112,7 +114,7 @@ const darkModePalette = generateAccessiblePalette('#0875E1', {
 Generate low-chroma palettes for backgrounds and surfaces:
 
 ```tsx
-import {generateNeutralPalette} from '@workday/canvas-kit-react/common';
+import {generateNeutralPalette} from '@workday/canvas-kit-labs-react/common';
 
 // Generate neutral grays with a blue tint
 const neutrals = generateNeutralPalette(220);
@@ -148,12 +150,15 @@ interface PaletteStep {
   contrastRatio: number; // Against background
   wcagAA: boolean; // Meets 4.5:1
   wcagAAA: boolean; // Meets 7:1
+  alpha?: Record<AlphaLevel, string>; // Hex with alpha (#RRGGBBAA) for a25, a50, a100, a200
 }
 ```
 
 ## Mapping to Canvas Tokens
 
-The primary use case for this tool is to generate values for `@workday/canvas-tokens-web` brand tokens. The palette steps map to brand tokens as follows:
+The primary use case for this tool is to generate values for `@workday/canvas-tokens-web` brand tokens. The accessible palette includes solid steps and **alpha (transparency)** variants for each step with true alpha channel: a25 (8% opacity), a50 (11%), a100 (17%), a200 (31%). Alpha tokens use the same step color with an alpha channel (e.g. `oklch(L C H / 0.11)` for a50).
+
+**Solid steps:**
 
 | Palette Step | Brand Token | CSS Variable |
 |-------------|-------------|--------------|
@@ -163,6 +168,34 @@ The primary use case for this tool is to generate values for `@workday/canvas-to
 | 600 | `brand.primary.base` | `--cnvs-brand-primary-base` |
 | 700 | `brand.primary.dark` | `--cnvs-brand-primary-dark` |
 | 800 | `brand.primary.darkest` | `--cnvs-brand-primary-darkest` |
+
+**Alpha (transparency) levels (per step) — alpha channel values:**
+
+| Alpha level | Alpha channel | Example CSS variable |
+|-------------|---------------|----------------------|
+| `a25` | 8% opacity (0.08) | `--cnvs-brand-primary-a25` |
+| `a50` | 11% opacity (0.11) | `--cnvs-brand-primary-a50` |
+| `a100` | 17% opacity (0.17) | `--cnvs-brand-primary-a100` |
+| `a200` | 31% opacity (0.31) | `--cnvs-brand-primary-a200` |
+
+Use the palette API for both solid and alpha (alpha channel = true transparency):
+
+```tsx
+const palette = generateAccessiblePalette('#0875E1');
+
+// Solid steps
+palette.getHex(600); // "#0875e1"
+
+// Alpha channel: same step color with opacity (a25=8%, a50=11%, a100=17%, a200=31%)
+palette.getAlphaHex(600, 'a25');   // #RRGGBB + alpha 0.08
+palette.getAlphaHex(600, 'a50');   // #RRGGBB + alpha 0.11
+palette.getAlphaHex(600, 'a100');  // #RRGGBB + alpha 0.17
+palette.getAlphaHex(600, 'a200');  // #RRGGBB + alpha 0.31
+palette.getAlphaRgba(600, 'a50');  // e.g. "rgba(8, 117, 225, 0.11)"
+palette.getAlphaOklch(600, 'a50'); // e.g. "oklch(0.6152 0.2108 256.1 / 0.11)"
+```
+
+For custom alpha over a custom background, use `alphaColor` from the same package (see alpha compositing utilities).
 
 ### Configuring Brand Tokens via CSS
 
@@ -190,14 +223,14 @@ The recommended approach is to set brand tokens in your root CSS file:
 You can also use the palette generator with `createStyles` for runtime theming:
 
 ```tsx
-import {generateAccessiblePalette} from '@workday/canvas-kit-react/common';
+import {generateAccessiblePalette} from '@workday/canvas-kit-labs-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {brand} from '@workday/canvas-tokens-web';
 
 // Generate a palette from your brand color
 const palette = generateAccessiblePalette('#E91E63');
 
-// Create a theme using the generated colors
+// Create a theme using the generated colors (solid + alpha)
 const customBrandTheme = createStyles({
   [brand.primary.lightest]: palette.getHex(25),
   [brand.primary.lighter]: palette.getHex(50),
@@ -205,6 +238,8 @@ const customBrandTheme = createStyles({
   [brand.primary.base]: palette.getHex(600),
   [brand.primary.dark]: palette.getHex(700),
   [brand.primary.darkest]: palette.getHex(800),
+  // Alpha variants (use your token names for brand.primary.a25, etc.)
+  // palette.getAlphaHex(600, 'a25'), palette.getAlphaHex(600, 'a50'), ...
 });
 ```
 
@@ -235,9 +270,14 @@ import {
   computeMaxChroma,
   isInGamut,
 
+  // Alpha compositing (custom alpha over custom background)
+  alphaColor,
+  formatRGBA,
+  rgbToHex,
+
   // colorjs.io Color class for advanced manipulation
   Color,
-} from '@workday/canvas-kit-react/common';
+} from '@workday/canvas-kit-labs-react/common';
 
 // Example: Check if a color meets contrast requirements
 const color = parseColorToOklch('#0875E1');

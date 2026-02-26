@@ -4,8 +4,8 @@
  *
  * Uses colorjs.io for accurate gamut boundary calculations.
  */
-
 import Color from 'colorjs.io';
+
 import type {GamutType} from './types';
 
 /**

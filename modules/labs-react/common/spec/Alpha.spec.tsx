@@ -1,13 +1,13 @@
-import type {RGB} from '../lib/theming/palette/types';
-import {hexToRgb} from '../lib/theming/palette/conversion';
 import {
-  minAlpha,
   alpha,
+  alphaColor,
   composite,
   formatRGBA,
+  minAlpha,
   rgbToHex,
-  alphaColor,
 } from '../lib/theming/palette/alpha';
+import {hexToRgb} from '../lib/theming/palette/conversion';
+import type {RGB} from '../lib/theming/palette/types';
 
 describe('alpha utilities', () => {
   describe('minAlpha', () => {

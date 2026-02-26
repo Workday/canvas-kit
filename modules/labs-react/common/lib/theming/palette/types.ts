@@ -17,6 +17,15 @@ export type GamutType = 'sRGB' | 'P3';
 export type PaletteType = 'accessible' | 'neutral';
 
 /**
+ * Alpha level for brand tokens (alpha channel = true transparency).
+ * - a25: 8% opacity (0.08)
+ * - a50: 11% opacity (0.11)
+ * - a100: 17% opacity (0.17)
+ * - a200: 31% opacity (0.31)
+ */
+export type AlphaLevel = 'a25' | 'a50' | 'a100' | 'a200';
+
+/**
  * Color representation as RGB tuple (values 0-1)
  */
 export type RGB = [number, number, number];
@@ -34,6 +43,11 @@ export interface OklchColor {
 }
 
 /**
+ * Alpha variants for a palette step (hex with alpha #RRGGBBAA)
+ */
+export type PaletteStepAlpha = Record<AlphaLevel, string>;
+
+/**
  * A single step in the color palette
  */
 export interface PaletteStep {
@@ -49,6 +63,8 @@ export interface PaletteStep {
   wcagAA: boolean;
   /** Whether the step meets WCAG AAA contrast requirements (7:1) */
   wcagAAA: boolean;
+  /** Alpha variants (a25, a50, a100, a200) — hex with alpha for compositing over palette background */
+  alpha?: PaletteStepAlpha;
 }
 
 /**
@@ -65,6 +81,12 @@ export interface AccessiblePalette {
   getStep: (step: number) => PaletteStep | undefined;
   /** Get hex color for a specific step */
   getHex: (step: number) => string | undefined;
+  /** Get hex with alpha for a step at the given alpha level (#RRGGBBAA) */
+  getAlphaHex: (step: number, alphaLevel: AlphaLevel) => string | undefined;
+  /** Get rgba string for a step at the given alpha level */
+  getAlphaRgba: (step: number, alphaLevel: AlphaLevel) => string | undefined;
+  /** Get oklch(L C H / alpha) string for a step at the given alpha level */
+  getAlphaOklch: (step: number, alphaLevel: AlphaLevel) => string | undefined;
 }
 
 /**

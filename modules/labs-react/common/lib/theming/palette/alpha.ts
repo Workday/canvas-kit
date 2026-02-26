@@ -2,9 +2,8 @@
  * Alpha compositing utilities for transparent colors over a background.
  * Porter-Duff blending. @see https://www.w3.org/TR/compositing-1/
  */
-
+import {clamp, hexToRgb} from './conversion';
 import type {RGB} from './types';
-import {hexToRgb, clamp} from './conversion';
 
 /**
  * Result of alpha color calculation

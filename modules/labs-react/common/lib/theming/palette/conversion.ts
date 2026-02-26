@@ -4,9 +4,9 @@
  *
  * Uses colorjs.io for accurate color space conversions.
  */
-
 import Color from 'colorjs.io';
-import type {RGB, GamutType, OklchColor} from './types';
+
+import type {GamutType, OklchColor, RGB} from './types';
 
 /**
  * Checks if a contrast ratio meets WCAG requirements

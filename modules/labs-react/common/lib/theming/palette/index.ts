@@ -5,7 +5,7 @@
  *
  * @example
  * ```tsx
- * import { generateAccessiblePalette } from '@workday/canvas-kit-react/common';
+ * import { generateAccessiblePalette } from '@workday/canvas-kit-labs-react/common';
  *
  * const palette = generateAccessiblePalette('#0875E1');
  * const primaryColor = palette.getHex(500);
@@ -21,6 +21,8 @@ export {
 export type {
   GamutType,
   PaletteType,
+  AlphaLevel,
+  PaletteStepAlpha,
   RGB,
   OklchColor,
   PaletteStep,

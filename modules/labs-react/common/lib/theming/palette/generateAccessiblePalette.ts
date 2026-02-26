@@ -8,7 +8,7 @@
  *
  * @example
  * ```tsx
- * import { generateAccessiblePalette } from '@workday/canvas-kit-react/common';
+ * import { generateAccessiblePalette } from '@workday/canvas-kit-labs-react/common';
  *
  * // Generate palette from a hex color
  * const palette = generateAccessiblePalette('#0875E1');
@@ -23,23 +23,27 @@
  * console.log(step500?.wcagAA); // true - meets 4.5:1 contrast
  * ```
  */
-
-import type {
-  GamutType,
-  PaletteType,
-  OklchColor,
-  PaletteStep,
-  AccessiblePalette,
-  GeneratePaletteOptions,
-} from './types';
+import {formatRGBA, rgbToHex} from './alpha';
 import {
-  parseColorToOklch,
-  oklchToHex,
   checkContrastRatio,
-  meetsWCAGContrast,
   clamp,
+  hexToRgb,
+  meetsWCAGContrast,
+  oklchToHex,
+  parseColorToOklch,
 } from './conversion';
 import {computeMaxChroma} from './gamut';
+import type {
+  AccessiblePalette,
+  AlphaLevel,
+  GamutType,
+  GeneratePaletteOptions,
+  OklchColor,
+  PaletteStep,
+  PaletteStepAlpha,
+  PaletteType,
+  RGB,
+} from './types';
 
 /**
  * Palette scale steps from lightest to darkest
@@ -70,6 +74,17 @@ const CHROMA_PEAK_POSITION = 0.6;
 const CHROMA_FALLOFF_FACTOR = 0.6;
 
 /**
+ * Alpha channel values for brand tokens (true transparency; matches design tokens)
+ * a100 primary: oklch(0.6225 0.2064 255.9 / 0.17); a50: / 0.11; a25: / 0.08; a200: / 0.31
+ */
+const ALPHA_LEVELS: Record<AlphaLevel, number> = {
+  a25: 0.08,
+  a50: 0.11,
+  a100: 0.17,
+  a200: 0.31,
+};
+
+/**
  * Default palette generation options
  */
 const DEFAULT_OPTIONS: Required<GeneratePaletteOptions> = {
@@ -78,6 +93,21 @@ const DEFAULT_OPTIONS: Required<GeneratePaletteOptions> = {
   backgroundLuminance: 1.0,
   minChroma: 0.02,
   hueShiftAmount: 5,
+};
+
+/**
+ * Parses #RRGGBBAA to RGB (0-1) and alpha (0-1)
+ */
+const parseHexWithAlpha = (hex: string): {color: RGB; alpha: number} => {
+  const s = hex.replace(/^#/, '');
+  if (s.length !== 8) {
+    return {color: hexToRgb(hex) as RGB, alpha: 1};
+  }
+  const r = parseInt(s.slice(0, 2), 16) / 255;
+  const g = parseInt(s.slice(2, 4), 16) / 255;
+  const b = parseInt(s.slice(4, 6), 16) / 255;
+  const a = parseInt(s.slice(6, 8), 16) / 255;
+  return {color: [r, g, b], alpha: a};
 };
 
 /**
@@ -285,6 +315,17 @@ export function generateAccessiblePalette(
     };
   });
 
+  // Compute alpha variants: same step color with alpha channel (true transparency)
+  const alphaLevelKeys = Object.keys(ALPHA_LEVELS) as AlphaLevel[];
+  for (const step of steps) {
+    const stepRgb = hexToRgb(step.hex) as RGB;
+    const alphaRecord: PaletteStepAlpha = {} as PaletteStepAlpha;
+    for (const level of alphaLevelKeys) {
+      alphaRecord[level] = rgbToHex(stepRgb, ALPHA_LEVELS[level]);
+    }
+    step.alpha = alphaRecord;
+  }
+
   const isDarkMode = backgroundLuminance < LUM_THRESHOLD;
 
   return {
@@ -293,6 +334,25 @@ export function generateAccessiblePalette(
     isDarkMode,
     getStep: (step: number) => steps.find(s => s.step === step),
     getHex: (step: number) => steps.find(s => s.step === step)?.hex,
+    getAlphaHex: (step: number, alphaLevel: AlphaLevel) =>
+      steps.find(s => s.step === step)?.alpha?.[alphaLevel],
+    getAlphaRgba: (step: number, alphaLevel: AlphaLevel) => {
+      const hexWithAlpha = steps.find(s => s.step === step)?.alpha?.[alphaLevel];
+      if (!hexWithAlpha) {
+        return undefined;
+      }
+      const {color: rgb, alpha: a} = parseHexWithAlpha(hexWithAlpha);
+      return formatRGBA(rgb, a);
+    },
+    getAlphaOklch: (step: number, alphaLevel: AlphaLevel) => {
+      const s = steps.find(st => st.step === step);
+      if (!s?.alpha?.[alphaLevel]) {
+        return undefined;
+      }
+      const {l, c, h} = s.oklch;
+      const a = ALPHA_LEVELS[alphaLevel];
+      return `oklch(${l.toFixed(4)} ${c.toFixed(4)} ${h.toFixed(2)} / ${a})`;
+    },
   };
 }
 
