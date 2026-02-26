@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/blocks';
+
 import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Installation & Setup" />
@@ -12,10 +13,10 @@ application.
 
 <StorybookInformationHighlight
   emphasis="high"
-  title="Canvas Tokens v3"
-  description="Check out the new v3 tokens package to explore the updated token structure and see how the new CSS variable tokens look in practice. Learn more about how tokens are organized, how to use them in your application, and the benefits of migrating to the new system."
-  link="https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs"
-  linkText="View the Docs"
+  title="Canvas Tokens v4"
+  description="Check out the new v4 tokens package to explore the updated token structure and see how the new CSS variable tokens look in practice. Learn more about how tokens are organized, how to use them in your application, and the benefits of migrating to the new system."
+  link="https://workday.github.io/canvas-tokens/?path=/docs/guides-upgrade-guides-v4-overview--docs"
+  linkText="View v4 Upgrade Guide"
   isExternal
 />
 
@@ -47,8 +48,8 @@ Import the variables at the top level of your application:
 
 ```javascript
 import '@workday/canvas-tokens-web/css/base/_variables.css';
-import '@workday/canvas-tokens-web/css/system/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
 ```
 
 ## Updating Your Styling Approach
@@ -71,7 +72,8 @@ If you're not already using `createStyles`, migrate from style props to the styl
 ```javascript
 // as style props (old)
 import {space, colors} from '@workday/canvas-kit-react/tokens';
-<Component padding={space.s} color={colors.blackPeppers400}>
+
+<Component padding={space.s} color={colors.blackPepper400}>
 ```
 
 **Within Canvas styling functions**
@@ -85,7 +87,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 //
 const styles = createStyles({
-  padding: system.space.x4, // not required in most cases
+  padding: system.padding.md, // not required in most cases
   color: cssVar(system.color.fg.default, '#000') // used to provide fallback
 })
 
@@ -103,7 +105,7 @@ import {cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 <Component style={{
-  padding: cssVar(system.space.x4),
+  padding: cssVar(system.padding.md),
   color: cssVar(system.color.fg.default)
 }}>
 ```
@@ -122,11 +124,11 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) + 0.125rem)'
-  padding: calc.add(system.space.x1, '0.125rem'),
-  // returns 'calc(var(--cnvs-sys-space-x1) - 0.125rem)'
-  margin: calc.subtract(system.space.x1, '0.125rem'),
-  // returns 'calc(var(--cnvs-sys-space-x4) * 3)'
-  maxWidth: calc.multiply(system.space.x4, 3),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) + 0.125rem)'
+  padding: calc.add(system.padding.xxs, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-gap-sm) - 0.125rem)'
+  margin: calc.subtract(system.gap.sm, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-size-xxxs) * 3)'
+  maxWidth: calc.multiply(system.size.xxxs, 3),
 };
 ```

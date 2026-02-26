@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/blocks';
+
 import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 <Meta title="Guides/Tokens Migration/Mapping Tables/System" />
@@ -7,18 +8,22 @@ import {StorybookInformationHighlight} from './StorybookInformationHighlight';
 
 ## Space
 
-| Old Token    | New Token           |
-| ------------ | ------------------- |
-| `space.zero` | `system.space.zero` |
-| `space.xxxs` | `system.space.x1`   |
-| `space.xxs`  | `system.space.x2`   |
-| `space.xs`   | `system.space.x3`   |
-| `space.s`    | `system.space.x4`   |
-| `space.m`    | `system.space.x6`   |
-| `space.l`    | `system.space.x8`   |
-| `space.xl`   | `system.space.x10`  |
-| `space.xxl`  | `system.space.x16`  |
-| `space.xxxl` | `system.space.x20`  |
+- Use `system.size.*` tokens for width or height properties.
+- Use `system.gap.*` tokens for outer spacing, like `gap` or `margin` properties.
+- Use `system.padding.*` tokens for inner spacing, like `padding` properties.
+
+| Old Token    | v2/v3 Token         |  v4 Token :: Size  |  v4 Token :: Gap  |  v4 Token :: Padding  | Raw Value |
+| ------------ | ------------------- | :----------------: | :---------------: | :-------------------: | --------- |
+| `space.zero` | `system.space.zero` |    `base.size0`    | `system.gap.none` | `system.padding.none` | `0`       |
+| `space.xxxs` | `system.space.x1`   |   `base.size50`    |  `system.gap.xs`  | `system.padding.xxs`  | `4px`     |
+| `space.xxs`  | `system.space.x2`   |   `base.size100`   |  `system.gap.sm`  |  `system.padding.xs`  | `8px`     |
+| `space.xs`   | `system.space.x3`   |   `base.size150`   |         -         |  `system.padding.sm`  | `12px`    |
+| `space.s`    | `system.space.x4`   | `system.size.xxxs` |  `system.gap.md`  |  `system.padding.md`  | `16px`    |
+| `space.m`    | `system.space.x6`   |  `system.size.xs`  |  `system.gap.lg`  |  `system.padding.xl`  | `24px`    |
+| `space.l`    | `system.space.x8`   |  `system.size.sm`  |  `system.gap.xl`  | `system.padding.xxl`  | `32px`    |
+| `space.xl`   | `system.space.x10`  |  `system.size.md`  |         -         |           -           | `40px`    |
+| `space.xxl`  | `system.space.x16`  | `system.size.xxl`  | `system.gap.xxl`  |           -           | `64px`    |
+| `space.xxxl` | `system.space.x20`  |  `base.size1000`   |         -         |           -           | `80px`    |
 
 **Example migration**
 
@@ -33,20 +38,20 @@ const styles = createStyles({
 // New
 import {system} from '@workday/canvas-tokens-web';
 const styles = createStyles({
-  padding: system.space.x8,
-  margin: system.space.x6,
+  padding: system.padding.xxl,
+  margin: system.gap.lg,
 });
 ```
 
 ## Shape (Border Radius) Token Migration
 
-| Old Token             | New Token            |
-| --------------------- | -------------------- |
-| `borderRadius.zero`   | `system.shape.zero`  |
-| `borderRadius.s`      | `system.shape.half`  |
-| `borderRadius.m`      | `system.shape.x1`    |
-| `borderRadius.l`      | `system.shape.x2`    |
-| `borderRadius.circle` | `system.shape.round` |
+| Old Token             | v2/v3 Token          | v4 Token            | Raw Value |
+| --------------------- | -------------------- | ------------------- | --------- |
+| `borderRadius.zero`   | `system.shape.zero`  | `system.shape.none` | `0`       |
+| `borderRadius.s`      | `system.shape.half`  | `px2rem(2)`         | `2px`     |
+| `borderRadius.m`      | `system.shape.x1`    | `system.shape.sm`   | `4px`     |
+| `borderRadius.l`      | `system.shape.x2`    | `system.shape.md`   | `8px`     |
+| `borderRadius.circle` | `system.shape.round` | `system.shape.full` | `1000px`  |
 
 **Example migration**
 
@@ -55,7 +60,7 @@ const styles = createStyles({
 borderRadius: borderRadius.m;
 
 // New
-borderRadius: system.shape.x1;
+borderRadius: system.shape.sm;
 ```
 
 ## Typography Token Migration
@@ -69,28 +74,28 @@ borderRadius: system.shape.x1;
 
 ### Font Size
 
-| Old Token                       | New Token                        |
-| ------------------------------- | -------------------------------- |
-| `type.properties.fontSizes[10]` | `system.fontSize.subtext.small`  |
-| `type.properties.fontSizes[12]` | `system.fontSize.subtext.medium` |
-| `type.properties.fontSizes[14]` | `system.fontSize.subtext.large`  |
-| `type.properties.fontSizes[16]` | `system.fontSize.body.small`     |
-| `type.properties.fontSizes[18]` | `system.fontSize.body.medium`    |
-| `type.properties.fontSizes[20]` | `system.fontSize.body.large`     |
-| `type.properties.fontSizes[24]` | `system.fontSize.heading.small`  |
-| `type.properties.fontSizes[28]` | `system.fontSize.heading.medium` |
-| `type.properties.fontSizes[32]` | `system.fontSize.heading.large`  |
-| `type.properties.fontSizes[40]` | `system.fontSize.title.small`    |
-| `type.properties.fontSizes[48]` | `system.fontSize.title.medium`   |
-| `type.properties.fontSizes[56]` | `system.fontSize.title.large`    |
+| Old Token                       | v2/v3 Token                      | v4 Token                     |
+| ------------------------------- | -------------------------------- | ---------------------------- |
+| `type.properties.fontSizes[10]` | `system.fontSize.subtext.small`  | `system.fontSize.subtext.sm` |
+| `type.properties.fontSizes[12]` | `system.fontSize.subtext.medium` | `system.fontSize.subtext.md` |
+| `type.properties.fontSizes[14]` | `system.fontSize.subtext.large`  | `system.fontSize.subtext.lg` |
+| `type.properties.fontSizes[16]` | `system.fontSize.body.small`     | `system.fontSize.body.sm`    |
+| `type.properties.fontSizes[18]` | `system.fontSize.body.medium`    | `system.fontSize.body.md`    |
+| `type.properties.fontSizes[20]` | `system.fontSize.body.large`     | `system.fontSize.body.lg`    |
+| `type.properties.fontSizes[24]` | `system.fontSize.heading.small`  | `system.fontSize.heading.sm` |
+| `type.properties.fontSizes[28]` | `system.fontSize.heading.medium` | `system.fontSize.heading.md` |
+| `type.properties.fontSizes[32]` | `system.fontSize.heading.large`  | `system.fontSize.heading.lg` |
+| `type.properties.fontSizes[40]` | `system.fontSize.title.small`    | `system.fontSize.title.sm`   |
+| `type.properties.fontSizes[48]` | `system.fontSize.title.medium`   | `system.fontSize.title.md`   |
+| `type.properties.fontSizes[56]` | `system.fontSize.title.large`    | `system.fontSize.title.lg`   |
 
 ### Font Weight Mappings
 
-| Old Token                             | New Token                   |
-| ------------------------------------- | --------------------------- |
-| `type.properties.fontWeights.regular` | `system.fontWeight.regular` |
-| `type.properties.fontWeights.medium`  | `system.fontWeight.medium`  |
-| `type.properties.fontWeights.bold`    | `system.fontWeight.bold`    |
+| Old Token                             | New Token                  |
+| ------------------------------------- | -------------------------- |
+| `type.properties.fontWeights.regular` | `system.fontWeight.normal` |
+| `type.properties.fontWeights.medium`  | `system.fontWeight.medium` |
+| `type.properties.fontWeights.bold`    | `system.fontWeight.bold`   |
 
 ### Type Levels (Recommended)
 
@@ -103,18 +108,18 @@ import { type } from '@workday/canvas-kit-react/tokens';
 
 // New
 import { system } from '@workday/canvas-tokens-web';
-...system.type.body.medium
+...system.type.body.md
 ```
 
 ### Type Variants → Text Colors
 
 Type variants are replaced with semantic text color tokens:
 
-| Old Token              | New Token                            |
-| ---------------------- | ------------------------------------ |
-| `type.variant.error`   | `system.color.text.critical.default` |
-| `type.variant.hint`    | `system.color.text.hint`             |
-| `type.variant.inverse` | `system.color.text.inverse`          |
+| Old Token              | v2/v3 Token                          | v4 Token                           |
+| ---------------------- | ------------------------------------ | ---------------------------------- |
+| `type.variant.error`   | `system.color.text.critical.default` | `system.color.fg.critical.default` |
+| `type.variant.hint`    | `system.color.text.hint`             | `system.color.fg.muted.default`    |
+| `type.variant.inverse` | `system.color.text.inverse`          | `system.color.fg.inverse`          |
 
 ### Depth (Shadow) Token Migration
 
@@ -133,157 +138,5 @@ const styles = createStyles({
 // New
 const styles = createStyles({
   boxShadow: system.depth[1],
-});
-```
-
-## Complete Migration Examples
-
-### Example 1: Card Component Migration
-
-#### Before (Old Tokens)
-
-```javascript
-import {colors, space, borderRadius, type, depth} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
-
-const cardStyles = createStyles({
-  padding: space.l,
-  backgroundColor: colors.frenchVanilla100,
-  borderColor: colors.soap500,
-  borderRadius: borderRadius.m,
-  color: colors.blackPepper300,
-  depth: 1,
-  ...type.levels.body.medium,
-});
-
-const headerStyles = createStyles({
-  color: colors.blackPepper500,
-  marginBottom: space.s,
-  ...type.levels.heading.small,
-});
-
-const errorTextStyles = createStyles({
-  color: colors.cinnamon500,
-  ...type.levels.subtext.large,
-});
-```
-
-#### After (New Tokens - Semantic System Approach)
-
-```javascript
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
-const cardStyles = createStyles({
-  padding: system.space.x8,
-  backgroundColor: system.color.bg.default,
-  border: `solid ${px2rem(1)}`,
-  borderColor: system.color.border.container,
-  borderRadius: system.shape.x1,
-  color: system.color.text.default,
-  boxShadow: system.depth[1],
-  ...system.type.body.medium,
-});
-
-const headerStyles = createStyles({
-  color: system.color.text.default,
-  marginBottom: system.space.x4,
-  ...system.type.heading.small,
-});
-
-const errorTextStyles = createStyles({
-  color: system.color.text.critical.default,
-  ...system.type.subtext.large,
-});
-```
-
-### Example 2: Form Input Migration
-
-#### Before (Old Tokens)
-
-```javascript
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-
-const inputStyles = createStyles({
-  padding: `${space.xs} ${space.s}`,
-  backgroundColor: colors.frenchVanilla100,
-  borderColor: colors.soap400,
-  borderRadius: borderRadius.s,
-  color: colors.blackPepper400,
-  '&:focus': {
-    borderColor: colors.blueberry400,
-    backgroundColor: colors.frenchVanilla100,
-  },
-  '&.error': {
-    borderColor: colors.cinnamon500,
-    backgroundColor: colors.cinnamon100,
-  },
-  '&:disabled': {
-    backgroundColor: colors.soap200,
-    color: colors.soap600,
-  },
-});
-```
-
-#### After (New Tokens - System Approach)
-
-```javascript
-import {system} from '@workday/canvas-tokens-web';
-
-const inputStyles = createStyles({
-  padding: `${system.space.x3} ${system.space.x4}`,
-  backgroundColor: system.color.bg.default,
-  borderColor: system.color.border.default,
-  borderRadius: system.shape.half,
-  color: system.color.text.default,
-  '&:focus': {
-    borderColor: system.color.border.contrast,
-    backgroundColor: system.color.bg.default,
-  },
-  '&.error': {
-    borderColor: system.color.border.critical.default,
-    backgroundColor: system.color.bg.critical.subtle,
-  },
-  '&:disabled': {
-    backgroundColor: system.color.bg.disabled,
-    color: system.color.text.disabled,
-  },
-});
-```
-
-### Example 3: Button Migration with Brand Colors
-
-#### Before (Old Tokens)
-
-```javascript
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {theme} from '@emotion/react';
-
-const primaryButtonStyles = createStyles({
-  padding: `${space.xs} ${space.m}`,
-  backgroundColor: theme.canvas.palette.primary.main,
-  borderColor: theme.canvas.palette.primary.main,
-  borderRadius: borderRadius.m,
-  color: theme.canvas.palette.primary.contrast,
-  '&:hover': {
-    backgroundColor: theme.canvas.palette.primary.dark,
-  },
-});
-```
-
-#### After (New Tokens - Brand + System)
-
-```javascript
-import {system, brand} from '@workday/canvas-tokens-web';
-
-const primaryButtonStyles = createStyles({
-  padding: `${system.space.x3} ${system.space.x6}`,
-  backgroundColor: brand.primary.base,
-  borderColor: brand.primary.base,
-  borderRadius: system.shape.x1,
-  color: brand.primary.accent,
-  '&:hover': {
-    backgroundColor: brand.primary.dark,
-  },
 });
 ```
