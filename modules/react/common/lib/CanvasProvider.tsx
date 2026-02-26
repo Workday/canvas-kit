@@ -61,13 +61,13 @@ const brandColorMapping = {
  * Each token references a brand token that can be overridden through the CanvasProvider theme prop.
  *
  * ### Focus Tokens
- * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `focusOutline` (separately from `palette.primary.main`, which controls `brand.primary.600`)
  * - `system.color.brand.focus.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
  * - `system.color.brand.focus.caution.inner` → `brand.caution.400` → Controlled by `palette.alert.main` or `alertInner`
  * - `system.color.brand.focus.caution.outer` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
  *
  * ### Border Tokens
- * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `focusOutline` (separately from `palette.primary.main`, which controls `brand.primary.600`)
  * - `system.color.brand.border.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
  * - `system.color.brand.border.caution` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
  *
