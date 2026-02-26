@@ -110,7 +110,7 @@ async function main() {
   const stories: Record<string, StoryEntry> = {};
   const slugCounts = new Map<string, number>();
 
-  const TITLE_PREFIXES = ['Components/', 'Preview/'];
+  const TITLE_PREFIXES = ['Components/', 'Preview/', 'Labs/'];
   const candidates: Array<{slug: string; title: string; storyFile: string; mdxPath: string}> = [];
 
   for (const storyFile of storyFiles) {
