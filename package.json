@@ -139,6 +139,7 @@
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-system-icons-web": "^3.0.36",
   "@workday/canvas-tokens-web": "4.1.2",
+  "colorjs.io": "^0.6.0",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",

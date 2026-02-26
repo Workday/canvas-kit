@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
+
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
 describe('SidePanel', () => {

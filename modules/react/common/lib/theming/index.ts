@@ -34,3 +34,7 @@ export * from './useIsRTL';
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export * from './getObjectProxy';
+/**
+ * Palette generator has moved to @workday/canvas-kit-labs-react/common.
+ * Import from '@workday/canvas-kit-labs-react/common' for generateAccessiblePalette, palette types, and alpha utilities.
+ */
