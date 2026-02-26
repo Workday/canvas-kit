@@ -1,16 +1,17 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import { Meta } from '@storybook/blocks';
+import { ExampleCodeBlock, SymbolDoc, Specifications } from '@workday/canvas-kit-docs';
 
-import * as InformationHighlight from './InformationHighlight.stories.ts';
-import {Basic} from './examples/Basic';
-import {Body} from './examples/Body';
-import {Heading} from './examples/Heading';
-import {Informational} from './examples/Informational';
-import {Caution} from './examples/Caution';
-import {Critical} from './examples/Critical';
-import {IconCritical} from './examples/CustomIconCritical';
-import {RTL} from './examples/RTL';
+import InformationHighlightStoriesMeta from './InformationHighlight.stories.ts';
+import { Basic } from './examples/Basic';
+import { Body } from './examples/Body';
+import { Heading } from './examples/Heading';
+import { Informational } from './examples/Informational';
+import { Caution } from './examples/Caution';
+import { Critical } from './examples/Critical';
+import { IconCritical } from './examples/CustomIconCritical';
+import { RTL } from './examples/RTL';
 
-<Meta of={InformationHighlight} />
+<Meta of={InformationHighlightStoriesMeta} />
 
 # Canvas Kit Information Highlight
 
@@ -126,4 +127,4 @@ be done with caution to ensure the best accessibility.
 
 ## Specifications
 
-<Specifications file="InformationHighlight.spec.tsx" name="InformationHighlight" />
+<Specifications file="./cypress/component/InformationHighlight.spec.tsx" name="InformationHighlight" />

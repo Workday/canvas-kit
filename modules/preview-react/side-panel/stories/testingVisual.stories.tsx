@@ -2,9 +2,10 @@ import React from 'react';
 
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
+
 import {SidePanel} from '../index';
 
 export default {

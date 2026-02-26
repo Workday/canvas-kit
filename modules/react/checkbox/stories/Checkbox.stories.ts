@@ -1,15 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Checkbox.mdx';
-
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 
-import {Caution as CautionExample} from './examples/Caution';
+import mdxDoc from './Checkbox.mdx';
 import {Basic as BasicExample} from './examples/Basic';
-import {Inverse as InverseExample} from './examples/Inverse';
+import {Caution as CautionExample} from './examples/Caution';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
 import {Indeterminate as IndeterminateExample} from './examples/Indeterminate';
+import {Inverse as InverseExample} from './examples/Inverse';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';

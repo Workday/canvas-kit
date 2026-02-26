@@ -1,8 +1,8 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const Error = () => {
   const [value, setValue] = React.useState('');
@@ -17,7 +17,7 @@ export const Error = () => {
         <FormField.Label>Password</FormField.Label>
         <FormField.Field>
           <FormField.Input as={TextInput} type="password" value={value} onChange={handleChange} />
-          <FormField.Hint>Must Contain a number and a capital letter</FormField.Hint>
+          <FormField.Hint>Error: Must Contain a number and a capital letter</FormField.Hint>
         </FormField.Field>
       </FormField>
     </Flex>

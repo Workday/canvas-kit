@@ -1,9 +1,10 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+
 import {Switch} from '../lib/Switch';
 
 describe('Switch', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
 
   const role = 'switch';
 

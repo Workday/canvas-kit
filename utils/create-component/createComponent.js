@@ -1,15 +1,13 @@
 #!/usr/bin/env node
-'use strict';
+import chalk from 'chalk';
+import inquirer from 'inquirer';
+import {exec} from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
 
-const fs = require('fs');
-const path = require('path');
-const inquirer = require('inquirer');
-const {exec} = require('child_process');
-const chalk = require('chalk');
-const {consoleMessage} = require('./consoleUtils');
-
-const createReactComponent = require('./createReactComponent');
-const addExport = require('./addExport');
+import addExport from './addExport.js';
+import {consoleMessage} from './consoleUtils.js';
+import createReactComponent from './createReactComponent.js';
 
 const cwd = process.cwd();
 
@@ -74,7 +72,7 @@ const createComponent = (componentPath, componentGenerator, answers, prerelease,
   } else {
     componentGenerator(componentPath, name, description, prerelease, category);
 
-    consoleMessage('\nAdding export to', `./modules/${prefix}react/index.ts`)
+    consoleMessage('\nAdding export to', `./modules/${prefix}react/index.ts`);
     addExport(name, prerelease);
 
     console.log('\nBootstrapping dependencies.');

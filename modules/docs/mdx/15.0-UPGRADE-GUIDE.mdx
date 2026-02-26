@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/addon-docs';
+import { Meta } from '@storybook/addon-docs';
 
 <Meta title="Guides/Upgrade Guides/v15.0/Overview" />
 
@@ -8,11 +8,11 @@ This guide contains an overview of the changes in Canvas Kit v15. Please
 [reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
 any questions.
 
-
 ## Why You Should Upgrade
 
-v15.0 and v4.0 Canvas Tokens Web introduces new shape, size, gap, and padding tokens to our components. While we still support our old shape and
-space tokens, the new tokens aim to add more semantic meaning to allow for better use and theming.
+v15.0 and v4.0 Canvas Tokens Web introduces new shape, size, gap, and padding tokens to our
+components. While we still support our old shape and space tokens, the new tokens aim to add more
+semantic meaning to allow for better use and theming.
 
 > **Note:** While v15 and v4 tokens should be backwards compatible with previous versions that use
 > CSS tokens, we strongly advise to migrate both Canvas Kit and Canvas Tokens Web together.
@@ -22,21 +22,38 @@ space tokens, the new tokens aim to add more semantic meaning to allow for bette
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
-  - [Avatar](#avatar-)
-  - [Pill](#pill-)
-  - [Segmented Control](#segmented-control-)
+  - [Avatar](#avatar)
+	- [Structure Changes](#structure-changes)
+	- [API Differences](#api-differences)
+	- [Size Mapping](#api-differences)
+	- [Code Migration](#code-migration)
+  - [Pill](#pill)
   - [Information Highlight](#information-highlight-)
-  - [Segmented Control ⚡️](#segmented-control-️)
+  - [Side Panel](#side-panel)
+    - [Migrating from Preview](#migrating-from-preview)
+    - [Hook API Changes](#hook-api-changes)
+    - [Component API Changes](#component-api-changes)
+	- [Code Migration](#code-migration)
+  - [Segmented Control](#segmented-control)
     - [API Differences](#api-differences)
-      - [Structure Changes](#structure-changes)
-      - [Prop Changes](#prop-changes)
-      - [Code Migration](#code-migration)
-      - [New Features](#new-features)
-  - [Information Highlight ⚡️](#information-highlight-️)
+    - [Structure Changes](#structure-changes)
+    - [Prop Changes](#prop-changes)
+    - [Code Migration](#code-migration)
+    - [New Features](#new-features)
+  - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
+  - [Inputs](#inputs)
+  - [Containers](#containers)
+  - [Indicators](#indicators)
+  - [Navigation](#navigation)
+  - [Popups](#popups)
+- [Deprecations](#deprecations)
+  - [Accent Icon](#accent-icon)
+  - [Applet Icon](#applet-icon)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
+	- [Side Panel (Deprecated)](#side-panel-deprecated)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
@@ -112,11 +129,12 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Promotions
 
-### Avatar ⚡️
+### Avatar
 
 **PR:** [](https://github.com/Workday/canvas-kit/issues/3659)
 
-We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated `Avatar` that was previously in Main.
+We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated
+`Avatar` that was previously in Main.
 
 **Before in v14**
 
@@ -134,42 +152,43 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 #### API Differences
 
-The new `Avatar` is a [compound component](/getting-started/for-developers/resources/compound-components/)
-with a different API than the deprecated version.
+The new `Avatar` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) with a
+different API than the deprecated version.
 
 ##### Structure Changes
 
-| Deprecated (Old Main) | New (Promoted from Preview)         |
-| --------------------- | ----------------------------------- |
-| `Avatar`              | `Avatar`                            |
-| -                     | `BaseAvatar`                        |
-| -                     | `BaseAvatar.Image` / `AvatarImage`  |
-| -                     | `BaseAvatar.Name` / `AvatarName`    |
+| Deprecated (Old Main) | New (Promoted from Preview)        |
+| --------------------- | ---------------------------------- |
+| `Avatar`              | `Avatar`                           |
+| -                     | `BaseAvatar`                       |
+| -                     | `BaseAvatar.Image` / `AvatarImage` |
+| -                     | `BaseAvatar.Name` / `AvatarName`   |
 
 ##### Prop Changes
 
-| Feature              | Deprecated (Old Main)                      | New (Promoted from Preview)                      |
-| -------------------- | ------------------------------------------ | ------------------------------------------------ |
-| Variant              | `variant` (`light`, `dark`)                | `variant` (`blue`, `amber`, `teal`, `purple`)    |
-| Size                 | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (extraExtraSmall=24px to extraExtraLarge=120px) |
-| User identifier      | `altText` prop                             | `name` prop                                      |
-| Custom initials      | Not supported                              | `preferredInitials` prop                         |
-| Decorative mode      | Not supported                              | `isDecorative` prop                              |
-| Image URL            | `url` prop                                 | `url` prop                                       |
-| Object fit           | `objectFit` prop                           | `objectFit` prop                                 |
-| Initials display     | Not supported (shows user icon)            | Shows initials from `name` when no image         |
+| Feature          | Deprecated (Old Main)                             | New (Promoted from Preview)                            |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------ |
+| Variant          | `variant` (`light`, `dark`)                       | `variant` (`blue`, `amber`, `teal`, `purple`)          |
+| Size             | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (extraExtraSmall=24px to extraExtraLarge=120px) |
+| User identifier  | `altText` prop                                    | `name` prop                                            |
+| Custom initials  | Not supported                                     | `preferredInitials` prop                               |
+| Decorative mode  | Not supported                                     | `isDecorative` prop                                    |
+| Image URL        | `url` prop                                        | `url` prop                                             |
+| Object fit       | `objectFit` prop                                  | `objectFit` prop                                       |
+| Initials display | Not supported (shows user icon)                   | Shows initials from `name` when no image               |
 
 ##### Size Mapping
 
-| Size Name        | Deprecated (Old Main) | New (Promoted from Preview) |
-| ---------------- | --------------------- | --------------------------- |
-| extraExtraSmall  | -                     | 24px                        |
-| extraSmall       | 16px                  | 32px                        |
-| small            | 24px                  | 40px                        |
-| medium           | 32px                  | 48px                        |
-| large            | 40px                  | 72px                        |
-| extraLarge       | 64px                  | 96px                        |
-| extraExtraLarge  | 120px                 | 120px                       |
+| Size Name       | Deprecated (Old Main) | New (Promoted from Preview) |
+| --------------- | --------------------- | --------------------------- |
+| extraExtraSmall | -                     | 24px                        |
+| extraSmall      | 16px                  | 32px                        |
+| small           | 24px                  | 40px                        |
+| medium          | 32px                  | 48px                        |
+| large           | 40px                  | 72px                        |
+| extraLarge      | 64px                  | 96px                        |
+| extraExtraLarge | 120px                 | 120px                       |
 
 ##### Code Migration
 
@@ -178,12 +197,7 @@ with a different API than the deprecated version.
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
-<Avatar
-  size="medium"
-  variant="light"
-  url="https://example.com/photo.jpg"
-  altText="John Doe"
-/>
+<Avatar size="medium" variant="light" url="https://example.com/photo.jpg" altText="John Doe" />;
 ```
 
 **New API (v15)**
@@ -191,23 +205,20 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
-<Avatar
-  size="medium"
-  variant="blue"
-  url="https://example.com/photo.jpg"
-  name="John Doe"
-/>
+<Avatar size="medium" variant="blue" url="https://example.com/photo.jpg" name="John Doe" />;
 ```
 
 ##### New Features
 
 The promoted `Avatar` includes several new features:
 
-- **Initials display**: Automatically shows initials from the `name` prop when no image URL is provided
+- **Initials display**: Automatically shows initials from the `name` prop when no image URL is
+  provided
 - **Color variants**: Four color variants (`blue`, `amber`, `teal`, `purple`) instead of light/dark
 - **Custom initials**: Use `preferredInitials` for full control over displayed initials
 - **Decorative mode**: Use `isDecorative` when Avatar is purely decorative (rendered next to a name)
-- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and `BaseAvatar.Name`
+- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and
+  `BaseAvatar.Name`
 - **Utility function**: Use `getInitialsFromName` to extract initials from a name string
 
 ```tsx
@@ -215,7 +226,7 @@ The promoted `Avatar` includes several new features:
 <Avatar name="John Doe" variant="blue" />
 
 // Custom initials
-<Avatar name="John Doe" preferredInitials="JD" />
+<Avatar name="John Smith Doe" preferredInitials="JD" />
 
 // Decorative (next to text name)
 <Avatar name="John Doe" url="..." isDecorative />
@@ -227,12 +238,12 @@ The promoted `Avatar` includes several new features:
 </BaseAvatar>
 ```
 
-### Pill ⚡️
+### Pill
 
 **PR** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
 
 We've promoted `Pill` from [Preview](#preview) to [Main](#main). There are no changes to the
-functionality or styling of the component. The only change required is updating the import
+functionality of the component. The only change required is updating the import
 statement.
 
 **Before in v14**
@@ -249,11 +260,119 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 
 > 🤖 The codemod will handle the change of imports as shown above.
 
-### Segmented Control ⚡️
+### Side Panel
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated `SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
+
+**Before in v14**
+
+```tsx
+import { SidePanel } from "@workday/canvas-kit-labs-react/side-panel";
+```
+
+**After in v15**
+
+```tsx
+import { SidePanel } from "@workday/canvas-kit-react/side-panel";
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### Migrating from Preview
+
+If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API
+changes:
+
+```tsx
+// Before (preview-react)
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+// After (react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+```
+
+#### Hook API Changes
+
+| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
+| -------------------------------- | ------------------------------------------------------- |
+| `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
+| `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
+| Returns `expanded: boolean`      | Returns `model.state.transitionState`                   |
+| Returns `setExpanded(bool)`      | Use `model.events.expand()` / `model.events.collapse()` |
+| Returns `panelProps` to spread   | Props applied automatically via `elemPropsHook`         |
+| Returns `labelProps` to spread   | Use `id={model.state.labelId}` on label element         |
+| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
+
+#### Component API Changes
+
+| Preview                                        | Main                                              |
+| ---------------------------------------------- | ------------------------------------------------- |
+| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>` |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                      |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>`              |
+| `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
+| `touched` prop on SidePanel                    | Managed internally                                |
+| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
+| `onStateTransition` on component               | `onStateTransition` in model config               |
+
+#### Code Migration Example
+
+```tsx
+// Before (in Preview)
+const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+});
+
+<SidePanel {...panelProps} origin="right" onExpandedChange={exp => console.log(exp)}>
+  <SidePanel.ToggleButton {...controlProps} />
+  <Heading {...labelProps}>Panel Title</Heading>
+  {expanded && <Content />}
+</SidePanel>;
+
+// After (in Main)
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: state => {
+    const isExpanded = state === 'expanded' || state === 'expanding';
+    console.log(isExpanded);
+  },
+});
+
+<SidePanel model={model}>
+  <SidePanel.ToggleButton aria-label="Collapse View" />
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
+  {model.state.transitionState === 'expanded' && <Content />}
+</SidePanel>;
+```
+
+### Checking Expanded State
+
+```tsx
+// Before (@workday/canvas-kit-preview-react/side-panel)
+if (expanded) {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - for exact state
+if (model.state.transitionState === 'expanded') {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - including animation states
+const isExpanded =
+  model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
+```
+
+
+### Segmented Control
 
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
-We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the deprecated `SegmentedControl` that was previously in Main.
+We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the
+deprecated `SegmentedControl` that was previously in Main.
 
 **Before in v14**
 
@@ -271,29 +390,30 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 #### API Differences
 
-The new `SegmentedControl` is a [compound component](/getting-started/for-developers/resources/compound-components/)
-with a different API than the deprecated version.
+The new `SegmentedControl` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) with a
+different API than the deprecated version.
 
 ##### Structure Changes
 
-| Deprecated (Old Main) | New (Promoted from Preview)         |
-| --------------------- | ----------------------------------- |
-| `SegmentedControl`    | `SegmentedControl`                  |
+| Deprecated (Old Main)     | New (Promoted from Preview)                       |
+| ------------------------- | ------------------------------------------------- |
+| `SegmentedControl`        | `SegmentedControl`                                |
 | `SegmentedControl.Button` | `SegmentedControl.List` + `SegmentedControl.Item` |
 
 ##### Prop Changes
 
-| Feature          | Deprecated (Old Main)                      | New (Promoted from Preview)                      |
-| ---------------- | ------------------------------------------ | ------------------------------------------------ |
-| Selection        | `value` prop on container                  | `initialValue` prop on container                 |
-| Change handler   | `onChange={(value) => {}}`                 | `onSelect={(data) => setSelected(data.id)}`      |
-| Item identifier  | `value` prop on Button                     | `data-id` prop on Item                           |
-| Disabled (all)   | Not supported                              | `disabled` prop on container model               |
-| Size             | Not supported                              | `size` prop (`small`, `medium`, `large`)         |
-| Orientation      | Not supported                              | `orientation` prop (`horizontal`, `vertical`)    |
-| Text labels      | Not supported                              | `children` on Item                               |
-| Tooltips         | Not supported                              | `tooltipProps` on Item                           |
-| Accessibility    | Manual                                     | Built-in `aria-label` on List                    |
+| Feature         | Deprecated (Old Main)      | New (Promoted from Preview)                   |
+| --------------- | -------------------------- | --------------------------------------------- |
+| Selection       | `value` prop on container  | `initialValue` prop on container              |
+| Change handler  | `onChange={(value) => {}}` | `onSelect={(data) => setSelected(data.id)}`   |
+| Item identifier | `value` prop on Button     | `data-id` prop on Item                        |
+| Disabled (all)  | Not supported              | `disabled` prop on container model            |
+| Size            | Not supported              | `size` prop (`small`, `medium`, `large`)      |
+| Orientation     | Not supported              | `orientation` prop (`horizontal`, `vertical`) |
+| Text labels     | Not supported              | `children` on Item                            |
+| Tooltips        | Not supported              | `tooltipProps` on Item                        |
+| Accessibility   | Manual                     | Built-in `aria-label` on List                 |
 
 ##### Code Migration
 
@@ -308,7 +428,7 @@ const [value, setValue] = React.useState<string | number>('list-view');
   <SegmentedControl.Button icon={listViewIcon} value="list-view" />
   <SegmentedControl.Button icon={worksheetsIcon} value="table-view" />
   <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" />
-</SegmentedControl>
+</SegmentedControl>;
 ```
 
 **New API (v15)**
@@ -321,10 +441,18 @@ const [value, setValue] = React.useState('list-view');
 <SegmentedControl initialValue={value} onSelect={data => setValue(data.id)}>
   <SegmentedControl.List aria-label="View type">
     <SegmentedControl.Item data-id="list-view" icon={listViewIcon} tooltipProps={{title: 'List'}} />
-    <SegmentedControl.Item data-id="table-view" icon={worksheetsIcon} tooltipProps={{title: 'Table'}} />
-    <SegmentedControl.Item data-id="device-view" icon={deviceTabletIcon} tooltipProps={{title: 'Device'}} />
+    <SegmentedControl.Item
+      data-id="table-view"
+      icon={worksheetsIcon}
+      tooltipProps={{title: 'Table'}}
+    />
+    <SegmentedControl.Item
+      data-id="device-view"
+      icon={deviceTabletIcon}
+      tooltipProps={{title: 'Device'}}
+    />
   </SegmentedControl.List>
-</SegmentedControl>
+</SegmentedControl>;
 ```
 
 ##### New Features
@@ -351,11 +479,12 @@ The promoted `SegmentedControl` includes several new features:
 </SegmentedControl>
 ```
 
-### Information Highlight ⚡️
+### Information Highlight
 
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
-We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no changes to the functionality or styling of the component. The only change required is updating the import statement.
+We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
+changes to the functionality or styling of the component. The only change required is updating the import statement.
 
 **Before in v14**
 
@@ -373,29 +502,96 @@ import {InformationHighlight} from '@workday/canvas-kit-react/information-highli
 
 ## Component Updates
 
+The Following components have been updated to use our new `size`, `padding`, `gap` and `shape`
+tokens. These changes are **only visual**.
+
+If you'd like to see the visual differences between `v14` with `v3` tokens and `v15 alpha` with `v4` tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-changes--docs) file.
+
 ### Buttons
 
 **PR:** [#3604](https://github.com/Workday/canvas-kit/pull/3604)
 
-The Following components have been updated to use our new `size`, `padding`, `gap` and `shape`
-tokens. These changes are **only visual**.
-
 `PrimaryButton`, `SecondaryButton`, `DeleteButton`, `TertiaryButton`, `ToolbarButton`,
-`ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink`, and `ActionBar`.
+`ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink` and `ActionBar`.
+
+### Inputs
+
+**PR:** [#3719](https://github.com/Workday/canvas-kit/pull/3719)
+
+`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and `TextInput`
+
+### Containers
+
+**PR:** [#3732](https://github.com/Workday/canvas-kit/pull/3732)
+
+`Card`, `Expandable` and `Tabs`
+
+### Indicators
+
+**PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738)
+
+`StatusIndicator (Preview)`, `Avatar`, `Badge`, `Banner`, `InformationHighlight`, `Pill` and `Skeleton`
+
+### Navigation
+
+**PR:** [#3753](https://github.com/Workday/canvas-kit/pull/3753)
+
+`Breadcrumbs`, `Pagination`, `Hyperlink` and `ExternalHyperlink`
+
+### Popups
+
+**PR:** [#3745](https://github.com/Workday/canvas-kit/pull/3745)
+
+`Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### Accent Icon
+
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Accent Icon set has been **deprecated** and will be removed in a future major version.
+We recommend migrating to **Expressive Icons**, which are more flexible and aligned with our current design direction.
+
+### Applet Icon
+
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Applet Icon set has been **deprecated** and will be removed in a future major version.
+Please migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
 
 ## Removals
 
 ### Avatar (Deprecated)
 
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
+
 The deprecated `Avatar` that was previously in `@workday/canvas-kit-react/avatar`
 has been removed. This was the older implementation that showed a user icon placeholder
 and supported `light`/`dark` variants.
 
-Please migrate to the new `Avatar` component (promoted from Preview) which uses initials
-display, color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components.
-See the [API Differences](#api-differences) section above for migration guidance.
+Please migrate to the new `Avatar` component (promoted from Preview) which uses initials display,
+color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components. See the
+[API Differences](#api-differences) section above for migration guidance.
+
+### Side Panel (Deprecated)
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+The deprecated `SidePanel` that was previously in `@workday/canvas-kit-react/side-panel`
+has been removed. This was the older implementation that used our old patterns.
+
+Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound
+component pattern and `useSidePanelModel`. See the
+[API Differences](#api-differences) section above for migration guidance.
 
 ### Segmented Control (Deprecated)
+
+**PR:** [#3626](https://github.com/Workday/canvas-kit/pull/3626)
 
 The deprecated `SegmentedControl` that was previously in `@workday/canvas-kit-react/segmented-control`
 has been removed. This was the older implementation that used `SegmentedControl.Button` subcomponents.
@@ -408,8 +604,8 @@ component pattern with `SegmentedControl.List` and `SegmentedControl.Item`. See 
 
 **PR:** [#3658](https://github.com/Workday/canvas-kit/pull/3658)
 
-The `Select` component in `@workday/canvas-kit-preview-react/select` has been removed. Please use the
-`Select` component from `@workday/canvas-kit-react/select` instead.
+The `Select` component in `@workday/canvas-kit-preview-react/select` has been removed. Please use
+the `Select` component from `@workday/canvas-kit-react/select` instead.
 
 **Before in v14**
 
@@ -425,27 +621,28 @@ import {Select} from '@workday/canvas-kit-react/select';
 
 #### API Differences
 
-The Main `Select` is a [compound component](/getting-started/for-developers/resources/compound-components/)
-built on top of the Combobox component with a composition-based API, whereas the Preview Select was a
-monolithic class-based component.
+The Main `Select` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) built on top of
+the Combobox component with a composition-based API, whereas the Preview Select was a monolithic
+class-based component.
 
 ##### Structure Changes
 
-| Preview (Removed)           | Main                                                          |
-| --------------------------- | ------------------------------------------------------------- |
+| Preview (Removed)           | Main                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------- |
 | `Select` (single component) | `Select` + `Select.Input` + `Select.Popper` + `Select.Card` + `Select.List` + `Select.Item` |
 
 ##### Prop Changes
 
-| Feature          | Preview (Removed)                          | Main                                             |
-| ---------------- | ------------------------------------------ | ------------------------------------------------ |
-| Options          | `options` prop (array of Option objects)   | `items` prop (array of any type)                 |
-| Selected value   | `value` prop                               | Managed via model (`useSelectModel`)             |
-| Change handler   | `onChange={(e) => {}}`                     | `onChange` on `Select.Input`                     |
-| Error state      | `error={Select.ErrorType.Error}`           | `error="error"` or `error="caution"`             |
-| Custom rendering | `renderOption` / `renderSelected` props    | Composition via `Select.Item` children           |
-| Form integration | Manual                                     | Built-in with `FormField` wrapper                |
-| Accessibility    | Manual ARIA                                | Built-in via Combobox foundation                 |
+| Feature          | Preview (Removed)                        | Main                                   |
+| ---------------- | ---------------------------------------- | -------------------------------------- |
+| Options          | `options` prop (array of Option objects) | `items` prop (array of any type)       |
+| Selected value   | `value` prop                             | Managed via model (`useSelectModel`)   |
+| Change handler   | `onChange={(e) => {}}`                   | `onChange` on `Select.Input`           |
+| Error state      | `error={Select.ErrorType.Error}`         | `error="error"` or `error="caution"`   |
+| Custom rendering | `renderOption` / `renderSelected` props  | Composition via `Select.Item` children |
+| Form integration | Manual                                   | Built-in with `FormField` wrapper      |
+| Accessibility    | Manual ARIA                              | Built-in via Combobox foundation       |
 
 ##### Code Migration
 
@@ -462,33 +659,27 @@ const options = [
 
 const [value, setValue] = React.useState('medium');
 
-<Select
-  options={options}
-  value={value}
-  onChange={e => setValue(e.target.value)}
-/>
+<Select options={options} value={value} onChange={e => setValue(e.target.value)} />;
 ```
 
 **Main API (v15)**
 
 ```tsx
-import {Select} from '@workday/canvas-kit-react/select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select} from '@workday/canvas-kit-react/select';
 
 const items = ['Small', 'Medium', 'Large'];
 
 <Select items={items}>
-  <FormField label="Size">
-    <Select.Input onChange={e => console.log('Selected:', e.target.value)} />
-    <Select.Popper>
-      <Select.Card>
-        <Select.List>
-          {item => <Select.Item>{item}</Select.Item>}
-        </Select.List>
-      </Select.Card>
-    </Select.Popper>
-  </FormField>
-</Select>
+	<FormField label="Size">
+		<FormField.Input as={Select.Input} onChange={(e) => console.log("Selected:", e.target.value)} />
+		<Select.Popper>
+			<Select.Card>
+				<Select.List>{(item) => <Select.Item>{item}</Select.Item>}</Select.List>
+			</Select.Card>
+		</Select.Popper>
+	</FormField>
+</Select>;
 ```
 
 ##### Main Select Features
@@ -498,7 +689,6 @@ The Main `Select` includes features not available in the Preview version:
 - **Composition-based API**: Full control over structure with subcomponents
 - **FormField integration**: Built-in accessibility when wrapped with FormField
 - **Model-based state**: Use `useSelectModel` for advanced state management
-- **Virtualization support**: Enable for large lists via model config
 - **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
 - **Icons in items**: Use `Select.Item.Icon` subcomponent
 
@@ -522,30 +712,35 @@ const model = useSelectModel({
   ...
 </Select>
 ```
+
 ### Search Form (Labs)
 
 The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
 
 The following exports are no longer available:
+
 - `SearchForm`
 - `SearchFormProps`
 - `SearchFormState`
 - `SearchTheme`
 - `SearchThemeAttributes`
 
-Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
 
 ### Combobox (Labs)
 
 The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
 
 The following exports are no longer available:
+
 - `Combobox`
 - `ComboboxProps`
 - `AutocompleteList`
 - `Status`
 
-Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in `@workday/canvas-kit-react`.
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
 
 ## Glossary
 
@@ -560,4 +755,3 @@ Components in the Main package are stable and ready for production use.
 
 Components in the Preview package are mostly stable but may still receive breaking changes before
 being promoted to Main.
-

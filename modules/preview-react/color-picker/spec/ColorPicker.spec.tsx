@@ -1,20 +1,23 @@
-import * as React from 'react';
 import {fireEvent, render, screen} from '@testing-library/react';
-import {colors} from '@workday/canvas-kit-react/tokens';
+
 import {ColorPicker, ColorPickerProps} from '@workday/canvas-kit-preview-react/color-picker';
+
+import {defaultColorSet} from '../lib/defaultColorSet';
 
 describe('Color Picker', () => {
   const renderColorPicker = (props?: Partial<ColorPickerProps>) =>
-    render(<ColorPicker onColorChange={jest.fn()} {...props} />);
+    render(<ColorPicker onColorChange={vi.fn()} {...props} />);
 
   describe('when clicking a color swatch', () => {
     it('should call onColorChange handler when clicking a color swatch', () => {
-      const onColorChange = jest.fn();
+      const onColorChange = vi.fn();
       const {container} = renderColorPicker({onColorChange: onColorChange});
-      const colorSwatch = container.querySelector(`[data-color="${colors.blackPepper400}"]`)!;
+      const colorSwatch = container.querySelector(
+        `[data-color="${defaultColorSet.blackPepper400}"]`
+      )!;
 
       fireEvent.click(colorSwatch);
-      expect(onColorChange).toHaveBeenCalledWith(colors.blackPepper400);
+      expect(onColorChange).toHaveBeenCalledWith(defaultColorSet.blackPepper400);
     });
   });
 
@@ -29,7 +32,7 @@ describe('Color Picker', () => {
 
   it('should NOT display known colors in the custom input', () => {
     const {getByRole} = renderColorPicker({
-      value: colors.blueberry400,
+      value: defaultColorSet.blueberry400,
       showCustomHexInput: true,
     });
     const input = getByRole('textbox');
@@ -53,8 +56,8 @@ describe('Color Picker', () => {
     it('should work with color objects', () => {
       const {getByRole} = renderColorPicker({
         colorSet: [
-          {label: 'Cinnamon', value: colors.cinnamon200},
-          {label: 'Blueberry', value: colors.blueberry400},
+          {label: 'Cinnamon', value: defaultColorSet.cinnamon200},
+          {label: 'Blueberry', value: defaultColorSet.blueberry400},
         ],
         showCustomHexInput: true,
       });
@@ -71,17 +74,17 @@ describe('Color Picker', () => {
     });
 
     it('should render when onColorReset and resetColor props is provided', () => {
-      const onColorReset = jest.fn();
-      const resetColor = colors.berrySmoothie100;
+      const onColorReset = vi.fn();
+      const resetColor = defaultColorSet.cantaloupe200;
       const {getByText} = renderColorPicker({onColorReset, resetColor});
 
       expect(getByText('Reset')).not.toBeNull();
     });
 
     it('should use custom label', () => {
-      const onColorReset = jest.fn();
+      const onColorReset = vi.fn();
       const resetLabel = 'foobarbaz';
-      const resetColor = colors.blueberry400;
+      const resetColor = defaultColorSet.blueberry400;
       const {getByText} = renderColorPicker({onColorReset, resetColor, resetLabel});
 
       expect(getByText(resetLabel)).not.toBeNull();
@@ -89,8 +92,8 @@ describe('Color Picker', () => {
 
     describe('when clicking reset', () => {
       it('should call onColorReset', () => {
-        const onColorReset = jest.fn();
-        const resetColor = colors.blueberry400;
+        const onColorReset = vi.fn();
+        const resetColor = defaultColorSet.blueberry400;
         const {getByText} = renderColorPicker({onColorReset, resetColor});
         const reset = getByText('Reset');
 
@@ -101,7 +104,7 @@ describe('Color Picker', () => {
   });
   describe('accessibility', () => {
     it('should have correct aria attributes', () => {
-      renderColorPicker({value: colors.blueberry400});
+      renderColorPicker({value: defaultColorSet.blueberry400});
       const swatchCinnamon = screen.getByRole('button', {name: /#fcc9c5/});
       const swatchBlueberry = screen.getByRole('button', {name: /#0875e1/});
 
@@ -115,10 +118,10 @@ describe('Color Picker', () => {
     it('should use color labels when provided', () => {
       renderColorPicker({
         colorSet: [
-          {label: 'Cinnamon', value: colors.cinnamon200},
-          {label: 'Blueberry', value: colors.blueberry400},
+          {label: 'Cinnamon', value: defaultColorSet.cinnamon200},
+          {label: 'Blueberry', value: defaultColorSet.blueberry400},
         ],
-        value: colors.cinnamon200,
+        value: defaultColorSet.cinnamon200,
       });
       const swatchCinnamon = screen.getByRole('button', {name: /Cinnamon/});
       const swatchBlueberry = screen.getByRole('button', {name: /Blueberry/});

@@ -1,24 +1,26 @@
-import React from 'react';
-import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
-import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
+import {calc} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export const Color = () => {
   return (
     <Skeleton>
-      <Flex alignItems="center">
+      <Flex cs={{alignItems: 'center'}}>
         <Skeleton.Shape
-          width={space.xl}
-          height={space.xl}
-          borderRadius={borderRadius.circle}
-          backgroundColor={colors.berrySmoothie100}
+          cs={{
+            width: system.size.md,
+            height: system.size.md,
+            borderRadius: system.shape.full,
+            backgroundColor: base.indigo50,
+          }}
         />
-        <Box flex={1} marginLeft="xs">
-          <Skeleton.Header backgroundColor={colors.cantaloupe100} />
+        <Box cs={{flex: 1, marginLeft: calc.add(system.gap.sm, system.gap.xs)}}>
+          <Skeleton.Header cs={{backgroundColor: base.amber50}} />
         </Box>
       </Flex>
       <div>
-        <Skeleton.Text backgroundColor={colors.fruitPunch100} />
+        <Skeleton.Text cs={{backgroundColor: base.red25}} />
       </div>
     </Skeleton>
   );

@@ -1,11 +1,12 @@
-import {focusRing, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {usePillModel} from './usePillModel';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {usePillModel} from './usePillModel';
 
 export interface PillIconButtonProps extends Partial<SystemIconProps> {
   /**
@@ -19,45 +20,50 @@ export const pillIconButtonStencil = createStencil({
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
-    borderRadius: system.shape.half,
-    height: calc.add(system.space.x4, system.space.x1),
-    width: calc.add(system.space.x4, system.space.x1),
-    padding: system.space.zero,
+    borderRadius: px2rem(2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.xxs, px2rem(20)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.xxs, px2rem(20)),
+    padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    [buttonStencil.vars.background]: system.color.bg.alt.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [buttonStencil.vars.background]: cssVar(
+      system.color.surface.transparent,
+      system.color.bg.alt.default
+    ),
     [systemIconStencil.vars.color]: system.color.fg.strong,
-    [systemIconStencil.vars.size]: system.space.x6,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(system.size.xs, system.space.x6),
     '::after': {
       content: '""',
-      height: system.space.x8,
-      width: system.space.x8,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.sm, system.space.x8),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.sm, system.space.x8),
       position: 'absolute',
       left: calc.negate(px2rem(7)),
       bottom: calc.negate(px2rem(7)),
-      margin: system.space.zero,
+      margin: 0,
       pointerEvents: 'all',
     },
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
       ...focusRing({
         innerColor: system.color.border.transparent,
       }),
     },
     '&:hover, &.hover': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.strong,
     },
     '&:active, &.active': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
   },

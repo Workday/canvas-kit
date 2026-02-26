@@ -1,14 +1,14 @@
 import React from 'react';
 
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {
   ListBox,
   useGridModel,
-  useListItemSelect,
-  useListItemRovingFocus,
   useListItemRegister,
+  useListItemRovingFocus,
+  useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
 

@@ -1,15 +1,16 @@
 import * as React from 'react';
-import {system} from '@workday/canvas-tokens-web';
+
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Subtext} from '@workday/canvas-kit-react/text';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 interface AccordionItem {

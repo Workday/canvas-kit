@@ -1,8 +1,7 @@
 import React from 'react';
 
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-
 import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 export default {
   title: 'Testing/Indicators/Avatar',

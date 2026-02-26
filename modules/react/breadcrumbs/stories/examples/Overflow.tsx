@@ -1,7 +1,10 @@
 import * as React from 'react';
+
 import {Breadcrumbs, useBreadcrumbsModel} from '@workday/canvas-kit-react/breadcrumbs';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface Breadcrumb {
   id: string;
@@ -24,7 +27,7 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
   const [containerWidth, setContainerWidth] = React.useState(width);
   return (
     <div>
-      <Box width={containerWidth} marginBottom="xl">
+      <Box cs={{width: containerWidth, marginBottom: system.gap.lg}}>
         <div style={{display: 'flex', flexDirection: 'column'}}>
           <span>Current Container Width: {containerWidth}</span>
           <span>Overflow visibility: {model.menu.state.visibility}</span>
@@ -43,7 +46,7 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
             }
           </Breadcrumbs.List>
           <Breadcrumbs.Menu.Popper>
-            <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+            <Breadcrumbs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
               <Breadcrumbs.Menu.List>
                 {(item: Breadcrumb) => (
                   <Breadcrumbs.Menu.Item href={item.link}>{item.text}</Breadcrumbs.Menu.Item>

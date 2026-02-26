@@ -1,7 +1,7 @@
+import {Avatar, AvatarProps, avatarStencil} from '@workday/canvas-kit-react/avatar';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {Avatar, AvatarProps, avatarStencil} from '../../avatar';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface ExpandableAvatarProps extends AvatarProps {}
 

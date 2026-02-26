@@ -1,7 +1,8 @@
 import React from 'react';
+
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
-import {chartIcon} from '@workday/canvas-system-icons-web';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {chartIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 export const IconCritical = () => {

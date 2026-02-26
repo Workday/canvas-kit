@@ -1,25 +1,16 @@
-import React from 'react';
-import {DocsPage, DocsContainer, Unstyled} from '@storybook/addon-docs';
-import 'cypress-storybook/react';
-import routes from './routes';
+import {DocsContainer, DocsPage} from '@storybook/addon-docs';
 
-import {CanvasProviderDecorator} from '../utils/storybook';
-import theme from './theme';
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 
+import {CanvasProviderDecorator} from '../utils/storybook';
+import routes from './routes';
+import theme from './theme';
+
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
-
-const UnstyledDocsContainer = ({children, ...props}) => {
-  return (
-    <DocsContainer {...props}>
-      <Unstyled>{children}</Unstyled>
-    </DocsContainer>
-  );
-};
 
 export const decorators = [CanvasProviderDecorator];
 
@@ -41,6 +32,7 @@ export const parameters = {
         prefix('welcome-', '0'),
         prefix('guides-', '1'),
         prefix('guides-getting-started', '1'),
+        prefix('ai-for-llms-', '1a'),
         prefix('styling-', '2'),
         prefix('styling-getting-started', '1'),
         prefix('styling-getting-started-overview', '1'),
@@ -79,9 +71,6 @@ export const parameters = {
     container: DocsContainer,
     page: DocsPage,
     theme,
-  },
-  readme: {
-    codeTheme: 'github',
   },
   chromatic: {
     disable: true,

@@ -1,13 +1,14 @@
 import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
 import {
+  ExtractProps,
   createContainer,
   createElemPropsHook,
   createModelHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Card} from '@workday/canvas-kit-react/card';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 

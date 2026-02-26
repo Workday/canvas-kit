@@ -1,9 +1,10 @@
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
 
-import {searchIcon} from '@workday/canvas-system-icons-web';
-import {InputGroup, useInputGroupModel} from '../lib/InputGroup';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {searchIcon} from '@workday/canvas-system-icons-web';
+
+import {InputGroup, useInputGroupModel} from '../lib/InputGroup';
 
 describe('InputGroup', () => {
   verifyComponent(InputGroup, {modelFn: useInputGroupModel});

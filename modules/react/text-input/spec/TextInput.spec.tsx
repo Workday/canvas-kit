@@ -1,5 +1,6 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+
 import {TextInput} from '../lib/TextInput';
 
 const id = 'Test Text Input';
@@ -7,7 +8,7 @@ const placeholder = 'Test Text Input';
 const value = 'Test Text Input';
 
 describe('Text Input', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

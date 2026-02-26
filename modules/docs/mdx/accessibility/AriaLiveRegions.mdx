@@ -1,9 +1,10 @@
+import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {FilterListWithLiveStatus} from './examples/AriaLiveRegions/FilterListWithLiveStatus';
 import {VisibleLiveRegion} from './examples/AriaLiveRegions/VisibleLiveRegion';
 import {HiddenLiveRegion} from './examples/AriaLiveRegions/HiddenLiveRegion';
-import {TextInputWithLiveError} from './examples/AriaLiveRegions/TextInputWithLiveError';
+import {CommentBoxWithCharLimit} from './examples/AriaLiveRegions/CommentBoxWithCharLimit';
 
 <Meta title="Guides/Accessibility/ARIA Live Regions" component={AriaLiveRegion} />
 
@@ -61,21 +62,20 @@ describe how many items in the list are shown.
 
 <ExampleCodeBlock code={FilterListWithLiveStatus} />
 
-## Text input with live inline error
+## Debouncing an `AriaLiveRegion`: `TextArea` with character limit
 
-In this example, a live region is applied to the inline error message that will appear below the
-text input. Listen for the screen reader to automatically describe the error message as you leave
-the input field blank.
+Using a live region to announce the character count of a text area can help screen reader users
+track their progress. However, announcing on every keystroke would be extremely disruptive—imagine
+hearing "5 of 200 characters... 6 of 200 characters... 7 of 200 characters" for each letter typed!
+In this example, we've implemented debouncing to wait 2 seconds after the user stops typing before
+announcing the count.
 
-**Note:** Use this example with discretion. Using live regions for automatically announcing form
-errors to screen reader users can be a nice experience for simple forms with a very limited number
-of error conditions. As forms increase in complexity, live regions on each error message can become
-increasingly distracting and disruptive to the experience, especially if users are trying to first
-understand the information that is required of them to complete the task.
+**Note:** Turn on a screen reader for this experience.
 
-**Note:** The `<AriaLiveRegion>` component is used inside of the `Hint` to ensure the live region
-remains in the browser DOM at all times. The `Hint` is only rendered in the DOM when it contains
-content, so it will not work reliably as a live region for screen readers using the
-`as={AriaLiveRegion}` prop.
+- Used the `as={AccessibleHide}` prop to hide the live region from view with CSS
+- The live region will only update when a 2 second timer expires after the last keystroke
+- If users have reached the maximum number of characters, the live region will update immediately to
+  inform users that they have reached the limit
+- The live region will be cleared on blur events when users leave the field
 
-<ExampleCodeBlock code={TextInputWithLiveError} />
+<ExampleCodeBlock code={CommentBoxWithCharLimit} />

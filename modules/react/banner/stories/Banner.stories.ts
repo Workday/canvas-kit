@@ -1,19 +1,18 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Banner.mdx';
-
 import {Banner} from '@workday/canvas-kit-react/banner';
 
+import mdxDoc from './Banner.mdx';
 import {ActionText as ActionTextExample} from './examples/ActionText';
 import {Basic as BasicExample} from './examples/Basic';
 import {Error as ErrorExample} from './examples/Error';
 import {IconBanner as IconBannerExample} from './examples/IconBanner';
-import {Sticky as StickyExample} from './examples/Sticky';
-import {ThemedAlert as ThemedAlertExample} from './examples/ThemedAlert';
-import {ThemedError as ThemedErrorExample} from './examples/ThemedError';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
+import {Sticky as StickyExample} from './examples/Sticky';
 import {StickyAnimation as StickyAnimationExample} from './examples/StickyAnimation';
 import {StickyRTL as StickyRTLExample} from './examples/StickyRTL';
+import {ThemedAlert as ThemedAlertExample} from './examples/ThemedAlert';
+import {ThemedError as ThemedErrorExample} from './examples/ThemedError';
 
 export default {
   title: 'Components/Indicators/Banner',

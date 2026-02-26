@@ -1,15 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Avatar.mdx';
-
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
+import mdxDoc from './Avatar.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Custom as CustomExample} from './examples/Custom';
+import {Decorative as DecorativeExample} from './examples/Decorative';
 import {Image as ImageExample} from './examples/Image';
 import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
-import {Custom as CustomExample} from './examples/Custom';
-import {Decorative as DecorativeExample} from './examples/Decorative';
 
 export default {
   title: 'Components/Indicators/Avatar (Promoted)',

@@ -1,5 +1,12 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
-import * as SegmentedControlStories from './SegmentedControl.stories';
+import {Meta} from '@storybook/blocks';
+import {
+  ExampleCodeBlock,
+  StorybookStatusIndicator,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
@@ -10,7 +17,9 @@ import {Vertical} from './examples/Vertical';
 import {RTL} from './examples/RTL';
 import {Dynamic} from './examples/Dynamic';
 
-<Meta of={SegmentedControlStories} />
+import SegmentedControlStoriesMeta from './SegmentedControl.stories';
+
+<Meta of={SegmentedControlStoriesMeta} />
 
 # Canvas Kit Segmented Control
 

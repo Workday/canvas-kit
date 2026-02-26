@@ -1,5 +1,6 @@
 // @ts-ignore: Cannot find module error
 import {version} from '../../../../lerna.json';
+
 export const packageJSONFile = `{
   "name": "vite-react-typescript-starter",
   "private": true,

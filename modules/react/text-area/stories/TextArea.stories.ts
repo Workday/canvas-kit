@@ -1,13 +1,10 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './TextArea.mdx';
-
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
-import {Caution as CautionExample} from './examples/Caution';
+import mdxDoc from './TextArea.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
-import {Error as ErrorExample} from './examples/Error';
 import {Grow as GrowExample} from './examples/Grow';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
@@ -28,18 +25,13 @@ export default {
 
 type Story = StoryObj<typeof TextArea>;
 
-export const Caution: Story = {
-  render: CautionExample,
-};
 export const Basic: Story = {
   render: BasicExample,
 };
 export const Disabled: Story = {
   render: DisabledExample,
 };
-export const Error: Story = {
-  render: ErrorExample,
-};
+
 export const Grow: Story = {
   render: GrowExample,
 };

@@ -1,15 +1,15 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './InformationHighlight.mdx';
-
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
+import mdxDoc from './InformationHighlight.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
-import {Heading as HeadingExample} from './examples/Heading';
-import {Critical as CriticalExamples} from './examples/Critical';
 import {Caution as CautionExamples} from './examples/Caution';
-import {Informational as InformationalExamples} from './examples/Informational';
+import {Critical as CriticalExamples} from './examples/Critical';
 import {IconCritical as IconCriticalExamples} from './examples/CustomIconCritical';
+import {Heading as HeadingExample} from './examples/Heading';
+import {Informational as InformationalExamples} from './examples/Informational';
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {

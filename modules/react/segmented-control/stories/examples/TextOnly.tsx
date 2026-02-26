@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const TextOnly = () => (

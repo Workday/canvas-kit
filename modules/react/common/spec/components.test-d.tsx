@@ -1,15 +1,15 @@
-import React from 'react';
 import styled from '@emotion/styled';
 import {expectTypeOf} from 'expect-type';
+import React from 'react';
 
 import {
-  createComponent,
-  createContainer,
-  createSubcomponent,
   ElementComponent,
   ElementComponentM,
   ExtractProps,
   PropsWithModel,
+  createComponent,
+  createContainer,
+  createSubcomponent,
 } from '../lib/utils/components';
 import {createModelHook} from '../lib/utils/models';
 

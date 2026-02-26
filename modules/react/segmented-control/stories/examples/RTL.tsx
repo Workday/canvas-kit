@@ -1,11 +1,11 @@
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {
   gridIcon,
-  listViewIcon,
   listDetailIcon,
+  listViewIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
-import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 export const RTL = () => (
   <CanvasProvider dir="rtl">

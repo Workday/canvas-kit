@@ -4,8 +4,8 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
 import {
   gridIcon,
-  listViewIcon,
   listDetailIcon,
+  listViewIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
 

@@ -2,19 +2,19 @@ import React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {
+  caretDownIcon,
   plusIcon,
   relatedActionsVerticalIcon,
-  caretDownIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 const parentContainerStyles = createStyles({
   gap: system.gap.md,
   padding: system.padding.md,
-  backgroundColor: system.color.bg.primary.default,
+  backgroundColor: system.color.surface.contrast.default,
 });
 
 export const TertiaryInverse = () => (

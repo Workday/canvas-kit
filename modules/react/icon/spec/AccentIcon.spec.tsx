@@ -1,8 +1,9 @@
-import * as React from 'react';
 import {render} from '@testing-library/react';
+import * as React from 'react';
 
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
+import {colors} from '@workday/canvas-kit-react/tokens';
+
 import {AccentIcon, accentIconStyles} from '../lib/AccentIcon';
 
 describe('Accent Icon', () => {

@@ -1,12 +1,13 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
+
 import {
+  SecondaryButtonProps as ButtonProps,
+  DeleteButton,
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,
-  DeleteButton,
-  SecondaryButtonProps as ButtonProps,
 } from '@workday/canvas-kit-react/button';
-import {render, fireEvent} from '@testing-library/react';
 import {ElementComponent} from '@workday/canvas-kit-react/common';
 
 (
@@ -19,7 +20,7 @@ import {ElementComponent} from '@workday/canvas-kit-react/common';
   ] as any[]
 ).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
   describe(ButtonComponent.displayName!, () => {
-    const cb = jest.fn();
+    const cb = vi.fn();
     afterEach(() => {
       cb.mockReset();
     });

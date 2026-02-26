@@ -1,11 +1,10 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
-import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
-import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
+import {handleCreateStencil} from '../../lib/utils/handleCreateStencil';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 function getFile<K extends string, T extends Record<K, any>>(styles: T, name: string): T[K] | void {
   for (const style in styles) {

@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import {createElemPropsHook, composeHooks} from '@workday/canvas-kit-react/common';
 import {
-  useListItemRegister,
   isSelected,
+  useListItemRegister,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
+import {composeHooks, createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {useSegmentedControlModel} from './useSegmentedControlModel';
 
 export const useSegmentedControlItem = composeHooks(

@@ -1,9 +1,10 @@
 import React from 'react';
+
 import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
-import {SegmentedControlList} from './SegmentedControlList';
 import {SegmentedControlItem} from './SegmentedControlItem';
+import {SegmentedControlList} from './SegmentedControlList';
+import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
 export interface SegmentedControlProps {
   children: React.ReactNode;

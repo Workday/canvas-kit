@@ -1,8 +1,8 @@
-import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
 import {Subtext} from '@workday/canvas-kit-react/text';
+import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ResetButtonProps {
   label: string;

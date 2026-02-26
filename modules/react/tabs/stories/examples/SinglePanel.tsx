@@ -1,7 +1,5 @@
-import React from 'react';
-import {space} from '@workday/canvas-kit-react/tokens';
-
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {system} from '@workday/canvas-tokens-web';
 
 export const SinglePanel = () => {
   const model = useTabsModel();
@@ -33,7 +31,7 @@ export const SinglePanel = () => {
           Third Tab
         </Tabs.Item>
       </Tabs.List>
-      <Tabs.Panel style={{marginTop: space.m}} hidden={undefined} id="mytab-panel">
+      <Tabs.Panel cs={{marginTop: system.gap.lg}} hidden={undefined} id="mytab-panel">
         {contents[model.state.selectedIds[0]]}
       </Tabs.Panel>
     </Tabs>
