@@ -61,13 +61,13 @@ const brandColorMapping = {
  * Each token references a brand token that can be overridden through the CanvasProvider theme prop.
  *
  * ### Focus Tokens
- * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `palette.common.focusOutline`. If both are customized, `focusOutline` takes precedence.
  * - `system.color.brand.focus.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
  * - `system.color.brand.focus.caution.inner` → `brand.caution.400` → Controlled by `palette.alert.main` or `alertInner`
  * - `system.color.brand.focus.caution.outer` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
  *
  * ### Border Tokens
- * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `focusOutline`
+ * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `palette.primary.main` or `palette.common.focusOutline`. If both are customized, `focusOutline` takes precedence.
  * - `system.color.brand.border.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
  * - `system.color.brand.border.caution` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
  *
@@ -209,6 +209,18 @@ export const useCanvasThemeToCssVars = (
             // @ts-ignore
             style[system.color.brand.border.caution] = value;
           }
+
+          // Additional system token forwarding for errorInner
+          if (key === 'errorInner') {
+            // Forward errorInner to system.color.brand.focus.critical and system.color.brand.border.critical
+            // These tokens are used by components (e.g., TextInput with error="error", Switch) for critical
+            // focus ring and border styling. Maps to brand.critical500 via brand.common.errorInner.
+            // This ensures backwards compatibility when users customize errorInner in their theme.
+            // @ts-ignore
+            style[system.color.brand.focus.critical] = value;
+            // @ts-ignore
+            style[system.color.brand.border.critical] = value;
+          }
         }
       });
     } else {
@@ -257,15 +269,17 @@ export const useCanvasThemeToCssVars = (
                 }
 
                 // system.color.brand.focus.primary (maps to brand.primary.500 per docs)
-                // For primary only, update focus border when 'main' changes
+                // For primary only, update focus when 'main' changes — unless focusOutline was customized (it takes precedence)
                 if (newBrandColor === 'primary') {
-                  // Calculate a reasonable focus color based on the main color
-                  // We'll use the main value since brand.primary.500 derives from it
-                  // @ts-ignore
-                  const focusToken = system.color.brand.focus.primary;
-                  if (focusToken) {
+                  const focusOutlineCustomized =
+                    palette.common.focusOutline !== defaultCanvasTheme.palette.common.focusOutline;
+                  if (!focusOutlineCustomized) {
                     // @ts-ignore
-                    style[focusToken] = value;
+                    const focusToken = system.color.brand.focus.primary;
+                    if (focusToken) {
+                      // @ts-ignore
+                      style[focusToken] = value;
+                    }
                   }
                 }
               } else if (key === 'dark') {
@@ -284,6 +298,38 @@ export const useCanvasThemeToCssVars = (
                   if (selectedToken) {
                     // @ts-ignore
                     style[selectedToken] = value;
+                  }
+                }
+
+                // system.color.brand.focus.critical & system.color.brand.border.critical -> brand.critical.500 (palette.error.dark)
+                if (newBrandColor === 'critical') {
+                  // @ts-ignore
+                  const focusCriticalToken = system.color.brand.focus.critical;
+                  if (focusCriticalToken) {
+                    // @ts-ignore
+                    style[focusCriticalToken] = value;
+                  }
+                  // @ts-ignore
+                  const borderCriticalToken = system.color.brand.border.critical;
+                  if (borderCriticalToken) {
+                    // @ts-ignore
+                    style[borderCriticalToken] = value;
+                  }
+                }
+
+                // system.color.brand.focus.caution.outer & system.color.brand.border.caution -> brand.caution.500 (palette.alert.dark)
+                if (newBrandColor === 'caution') {
+                  // @ts-ignore
+                  const focusCautionOuterToken = system.color.brand.focus.caution?.outer;
+                  if (focusCautionOuterToken) {
+                    // @ts-ignore
+                    style[focusCautionOuterToken] = value;
+                  }
+                  // @ts-ignore
+                  const borderCautionToken = system.color.brand.border.caution;
+                  if (borderCautionToken) {
+                    // @ts-ignore
+                    style[borderCautionToken] = value;
                   }
                 }
               } else if (key === 'lighter') {

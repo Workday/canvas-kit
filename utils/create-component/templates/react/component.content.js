@@ -1,22 +1,19 @@
 const componentContent = pascalCaseName => `
 import React from 'react';
 
-import {
-  createSubcomponent,
-  ExtractProps,
-  styled,
-  StyledType,
-} from '@workday/canvas-kit-react/common';
-import {colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 import { use${pascalCaseName}Model, use${pascalCaseName}Content } from './hooks';
 
-const StyledContainer = styled(Box)<StyledType>({
-  ...type.levels.subtext.medium,
-  background: colors.frenchVanilla300,
-  padding: space.s,
-  border: \`1px solid \${colors.licorice600}\`,
+const stencil = createStencil({
+  base: {
+    ...system.type.subtext.medium,
+    background: system.color.surface.default,
+    padding: system.padding.sm
+  }
 });
 
 export const ${pascalCaseName}Content = createSubcomponent('p')({
@@ -30,9 +27,9 @@ export const ${pascalCaseName}Content = createSubcomponent('p')({
   }
 
   return (
-    <StyledContainer as={Element} {...elemProps}>
+    <Box as={Element} {...handleCsProp(elemProps, stencil())}>
       {children}
-    </StyledContainer>
+    </Box>
   );
 });
 `;

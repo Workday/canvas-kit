@@ -1,12 +1,9 @@
-import styled from '@emotion/styled';
-import React from 'react';
-
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const StatusIndicators = styled('div')({
+const statusIndicatorsStyles = createStyles({
   '& > *': {
     margin: system.gap.sm,
   },
@@ -14,7 +11,7 @@ const StatusIndicators = styled('div')({
 
 export const MaxWidth = () => {
   return (
-    <StatusIndicators>
+    <div className={statusIndicatorsStyles}>
       <StatusIndicator
         label="Longer Than Normal Ellipsized Status"
         type={StatusIndicator.Type.Blue}
@@ -27,6 +24,6 @@ export const MaxWidth = () => {
           tabIndex={0}
         />
       </OverflowTooltip>
-    </StatusIndicators>
+    </div>
   );
 };

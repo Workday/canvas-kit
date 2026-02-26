@@ -8,11 +8,12 @@ import {
   defaultFallbackPlacements,
   getTransformFromPlacement,
 } from '@workday/canvas-kit-react/popup';
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
 
-export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
+export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'>, CSProps {
   /**
    * This should be a string in most cases. HTML is supported, but only text is understood
    * by assistive technology. This is true for both `label` and `describe` modes.
@@ -153,7 +154,7 @@ export const Tooltip = createComponent('div')({
             return (
               <TooltipContainer
                 transformOrigin={transformOrigin}
-                {...elemProps}
+                {...handleCsProp(elemProps)}
                 {...tooltipProps}
                 elementHasFocus={elementHasFocus}
               >

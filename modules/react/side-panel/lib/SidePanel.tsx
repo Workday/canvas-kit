@@ -1,277 +1,142 @@
-import styled from '@emotion/styled';
 import * as React from 'react';
 
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {Heading} from '@workday/canvas-kit-react/text';
-import {CanvasSpaceValues, colors, space} from '@workday/canvas-kit-react/tokens';
-import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {SidePanelHeading} from './SidePanelHeading';
+import {SidePanelToggleButton} from './SidePanelToggleButton';
+import {useSidePanelModel} from './useSidePanelModel';
 
 /**
- * @deprecated ⚠️ `SidePanelProps` in Main has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) instead.
+ * Adds the necessary props to the SidePanel container element.
+ * This includes the `id` and `aria-labelledby` attributes for accessibility.
  */
-export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * If true, set the SidePanel to the open state.
-   * @default false;
-   */
-  open: boolean;
-  /**
-   * The function called when the toggle button is clicked. The toggle button is only shown if this prop is defined.
-   */
-  onToggleClick?: () => void;
-  /**
-   * The text or element to display as the SidePanel header.
-   */
-  header?: string | React.ReactNode;
-  /**
-   * The side from which the SidePanel opens. Accepts `Left` or `Right`.
-   * @default SidePanelOpenDirection.Left
-   */
-  openDirection?: SidePanelOpenDirection;
-  /**
-   * The function called when the window width changes and reaches a width equivalent to `breakpoint`. For example, if the window is resized from a width of `1000px`, this will be called when the window reaches a width equivalent to `breakpoint`. The `aboveBreakpoint` argument passed to the callback function indicates whether the current window width is above or below `breakpoint` so you can control `open` based on the change.
-   */
-  onBreakpointChange?: (aboveBreakpoint: boolean) => void;
-  /**
-   * The padding of the SidePanel when it's open.
-   */
-  padding?: CanvasSpaceValues;
-  /**
-   * The window width at which the SidePanel triggers `onBreakPointChange`.
-   * @default 768px
-   */
-  breakpoint?: number;
-  /**
-   * The width of the SidePanel when it's open.
-   * @default 300px
-   */
-  openWidth?: number;
-  /**
-   * The background color of the SidePanel when it's open.
-   * @default SidePanelBackgroundColor.White
-   */
-  backgroundColor?: SidePanelBackgroundColor;
-  /**
-   * The `aria-label` that describes closing the navigation.
-   * @default 'close navigation'
-   */
-  closeNavigationAriaLabel?: string;
-  /**
-   * The `aria-label` that describes opening the navigation.
-   * @default 'open navigation'
-   */
-  openNavigationAriaLabel?: string;
-}
-
-/**
- * @deprecated ⚠️ `SidePanelState` in Main has been deprecated and will be removed in a future major version.
- */
-export interface SidePanelState {
-  screenSize: number;
-}
-
-/**
- * @deprecated ⚠️ `SidePanelOpenDirection` in Main has been deprecated and will be removed in a future major version.
- */
-export enum SidePanelOpenDirection {
-  Left,
-  Right,
-}
-
-/**
- * @deprecated ⚠️ `SidePanelBackgroundColor` in Main has been deprecated and will be removed in a future major version.
- */
-export enum SidePanelBackgroundColor {
-  White,
-  Transparent,
-  Gray,
-}
-
-const closedWidth = space.xxl;
-
-const SidePanelContainer = styled('div')<
-  Pick<SidePanelProps, 'open' | 'backgroundColor' | 'padding' | 'openWidth' | 'openDirection'>
->(
-  {
-    overflow: 'hidden',
-    height: '100%',
-    boxSizing: 'border-box',
-    display: 'flex',
-    flexDirection: 'column',
-    transition: 'width 200ms ease',
-    position: 'absolute',
-  },
-  ({open}) => ({
-    alignItems: open ? undefined : 'center',
-    boxShadow: open ? undefined : '0 8px 16px -8px rgba(0, 0, 0, 0.16)',
-  }),
-  ({open, backgroundColor}) => {
-    let openBackgroundColor;
-
-    switch (backgroundColor) {
-      case SidePanelBackgroundColor.Transparent:
-        openBackgroundColor = 'transparent';
-        break;
-      case SidePanelBackgroundColor.Gray:
-        openBackgroundColor = colors.soap100;
-        break;
-      case SidePanelBackgroundColor.White:
-      default:
-        openBackgroundColor = colors.frenchVanilla100;
-        break;
-    }
-
-    return {
-      backgroundColor: open ? openBackgroundColor : colors.frenchVanilla100,
-    };
-  },
-  ({open, openWidth}) => ({
-    width: open ? openWidth : closedWidth,
-  }),
-  ({open, padding}) => ({
-    padding: open ? padding || space.m : `${space.s} 0`,
-  }),
-  ({openDirection}) => ({
-    right: openDirection === SidePanelOpenDirection.Right ? space.zero : undefined,
-    left: openDirection === SidePanelOpenDirection.Left ? space.zero : undefined,
-  })
-);
-
-const ChildrenContainer = styled('div')<Pick<SidePanelProps, 'openWidth' | 'open'>>(
-  {
-    transition: 'none',
-    zIndex: 1, // show above SidePanelFooter when screen is small vertically
-  },
-  ({open, openWidth}) => ({
-    width: open ? openWidth : closedWidth,
-  })
-);
-
-const ToggleButton = styled(TertiaryButton, {shouldForwardProp: prop => prop !== 'openDirection'})<
-  TertiaryButtonProps & Pick<SidePanelProps, 'openDirection'>
->(
-  {
-    position: 'absolute',
-    bottom: space.s,
-  },
-  ({openDirection}) => ({
-    right: openDirection === SidePanelOpenDirection.Left ? space.s : '',
-    left: openDirection === SidePanelOpenDirection.Right ? space.s : '',
-  })
-);
-
-const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>>(
-  {
-    position: 'absolute',
-    bottom: '0',
-    height: 120,
-    left: 0,
-    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0.0001) 0%, #FFFFFF 100%)',
-  },
-  ({open, openWidth}) => ({
-    width: open ? openWidth : space.xxl,
-  })
-);
-
-/**
- * @deprecated ⚠️ `SidePanel` in Main has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) instead.
- */
-export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
-  static OpenDirection = SidePanelOpenDirection;
-  static BackgroundColor = SidePanelBackgroundColor;
-
-  constructor(props: SidePanelProps) {
-    super(props);
-    this.handleResize = this.handleResize.bind(this);
-  }
-
-  state = {
-    screenSize: typeof window !== 'undefined' ? window.innerWidth : 0,
+export const useSidePanelContainer = createElemPropsHook(useSidePanelModel)(({state, events}) => {
+  return {
+    id: state.panelId,
+    'aria-labelledby': state.labelId,
+    onTransitionEnd: events.handleAnimationEnd,
   };
+});
 
-  public componentDidMount() {
-    window.addEventListener('resize', this.handleResize);
-  }
-  public componentWillUnmount() {
-    window.removeEventListener('resize', this.handleResize);
-  }
+export type SidePanelVariant = 'standard' | 'alternate';
 
-  public render() {
-    const {
-      backgroundColor = SidePanelBackgroundColor.White,
-      openNavigationAriaLabel = 'open navigation',
-      closeNavigationAriaLabel = 'close navigation',
-      openDirection = SidePanelOpenDirection.Left,
-      breakpoint = 768,
-      openWidth = 300,
-      header,
-      onToggleClick,
-      open,
-      padding,
-      onBreakpointChange,
+export interface SidePanelProps extends CSProps {
+  /**
+   * The width of the component (in `px` if it's a `number`) when it is collapsed.
+   *
+   * @default 64
+   */
+  collapsedWidth?: number | string;
+  /**
+   * The width of the component (in `px` if it's a `number`) when it is expanded.
+   *
+   * @default 320
+   */
+  expandedWidth?: number | string;
+  /**
+   * The style variant of the side panel. 'standard' uses a lighter gray background (`system.color.bg.alt.softer`), no depth. 'alternate' uses a white background with depth (`system.color.bg.default` and level 3 depth).
+   *
+   * @default 'standard'
+   */
+  variant?: SidePanelVariant;
+  children?: React.ReactNode;
+}
+
+export const panelStencil = createStencil({
+  vars: {
+    expandedWidth: '',
+    collapsedWidth: '',
+  },
+  base: () => ({
+    overflow: 'hidden',
+    position: 'relative',
+    height: '100%',
+    outline: `${px2rem(1)} solid transparent`,
+    transition: 'width ease-out 200ms, max-width ease-out 200ms',
+  }),
+  modifiers: {
+    variant: {
+      alternate: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+        boxShadow: system.depth[3],
+      },
+      standard: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.surface.navigation, system.color.bg.alt.softer),
+      },
+    },
+    expanded: {
+      expanded: ({expandedWidth}) => ({
+        width: expandedWidth,
+        maxWidth: expandedWidth,
+      }),
+      collapsed: ({collapsedWidth}) => ({
+        width: collapsedWidth,
+        maxWidth: collapsedWidth,
+      }),
+      expanding: ({expandedWidth}) => ({
+        width: expandedWidth,
+        maxWidth: expandedWidth,
+      }),
+      collapsing: ({collapsedWidth}) => ({
+        width: collapsedWidth,
+        maxWidth: collapsedWidth,
+      }),
+    },
+  },
+});
+
+export const SidePanel = createContainer('section')({
+  displayName: 'SidePanel',
+  modelHook: useSidePanelModel,
+  elemPropsHook: useSidePanelContainer,
+  subComponents: {
+    /**
+     * `SidePanel.ToggleButton` is a control that toggles between expanded and collapsed states.
+     * It must be used within the `SidePanel` component as a child. For accessibility purposes,
+     * it should be the first focusable element in the panel.
+     *
+     * The button automatically receives `aria-controls`, `aria-expanded`, and `aria-labelledby`
+     * attributes from the model.
+     */
+    ToggleButton: SidePanelToggleButton,
+    /**
+     * `SidePanel.Heading` is a styled heading that provides the accessible name for the SidePanel.
+     * The heading's `id` is automatically linked to the panel's `aria-labelledby` attribute.
+     * By default, the heading is hidden when the panel is collapsed.
+     */
+    Heading: SidePanelHeading,
+  },
+})<SidePanelProps>(
+  (
+    {
+      collapsedWidth = 64,
+      expandedWidth = 320,
+      variant = 'standard',
+      children,
       ...elemProps
-    } = this.props;
-
+    }: SidePanelProps,
+    Element,
+    model
+  ) => {
     return (
-      <SidePanelContainer
-        role="region"
-        padding={padding}
-        openDirection={openDirection}
-        openWidth={openWidth}
-        backgroundColor={backgroundColor}
-        open={open}
-        {...elemProps}
+      <Element
+        {...handleCsProp(elemProps, [
+          panelStencil({
+            expanded: model.state.transitionState,
+            variant,
+            expandedWidth:
+              typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth,
+            collapsedWidth:
+              typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth,
+          }),
+        ])}
       >
-        <ChildrenContainer open={open} openWidth={openWidth}>
-          {header && open ? (
-            <Heading as="h2" size="small" marginTop="zero">
-              {header}
-            </Heading>
-          ) : null}
-          {this.props.children}
-        </ChildrenContainer>
-        <SidePanelFooter openWidth={openWidth} open={open}>
-          {onToggleClick && (
-            <ToggleButton
-              openDirection={openDirection}
-              aria-label={open ? closeNavigationAriaLabel : openNavigationAriaLabel}
-              onClick={this.onToggleClick}
-              icon={this.toggleButtonDirection(open, openDirection)}
-            />
-          )}
-        </SidePanelFooter>
-      </SidePanelContainer>
+        {children}
+      </Element>
     );
   }
-
-  private handleResize = () => {
-    if (!this.props.onBreakpointChange || !this.props.breakpoint) {
-      return;
-    }
-
-    if (window.innerWidth > this.props.breakpoint && !this.props.open) {
-      this.props.onBreakpointChange(true);
-    }
-    if (window.innerWidth <= this.props.breakpoint && this.props.open) {
-      this.props.onBreakpointChange(false);
-    }
-  };
-
-  private onToggleClick = () => {
-    if (this.props.onToggleClick) {
-      this.props.onToggleClick();
-    }
-  };
-
-  private toggleButtonDirection = (
-    open: boolean,
-    openDirection: SidePanelOpenDirection
-  ): CanvasSystemIcon => {
-    if (openDirection !== SidePanelOpenDirection.Right) {
-      return open ? chevronLeftIcon : chevronRightIcon;
-    } else {
-      return open ? chevronRightIcon : chevronLeftIcon;
-    }
-  };
-}
+);

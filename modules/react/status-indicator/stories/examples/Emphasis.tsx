@@ -1,18 +1,16 @@
-import styled from '@emotion/styled';
-import React from 'react';
-
 import {StatusIndicator} from '@workday/canvas-kit-react/status-indicator';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const StatusIndicators = styled('div')({
+const parentContainerStyles = createStyles({
   '& > *': {
-    margin: space.xxs,
+    margin: system.gap.sm,
   },
 });
 
 export const Emphasis = () => {
   return (
-    <StatusIndicators>
+    <div className={parentContainerStyles}>
       <StatusIndicator
         emphasis={StatusIndicator.Emphasis.Low}
         label="unpublished"
@@ -43,6 +41,6 @@ export const Emphasis = () => {
         label="normal"
         type={StatusIndicator.Type.Transparent}
       />
-    </StatusIndicators>
+    </div>
   );
 };

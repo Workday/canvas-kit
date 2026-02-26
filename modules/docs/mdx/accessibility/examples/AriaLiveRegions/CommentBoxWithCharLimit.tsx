@@ -1,7 +1,8 @@
 import React from 'react';
+
+import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
-import {AriaLiveRegion, AccessibleHide} from '@workday/canvas-kit-react/common';
 
 const MAX_CHARACTERS = 200;
 const DEBOUNCE_DELAY = 2000; // 2 seconds after user stops typing
