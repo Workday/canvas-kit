@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Kit Story</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html,
+      body,
+      #root {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial,
+          sans-serif;
+        font-size: 14px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background: var(--color-background-primary, #ffffff);
+        color: var(--color-text-primary, #333333);
+        zoom: 65%;
+      }
+      #root {
+        padding: 24px;
+        overflow: auto;
+      }
+      #root h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 0.5rem;
+        line-height: 1.2;
+      }
+      #root h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin: 2rem 0 0.75rem;
+        padding-bottom: 0.25rem;
+        border-bottom: 1px solid #e8e8e8;
+        line-height: 1.3;
+      }
+      #root h3 {
+        font-size: 1.17rem;
+        font-weight: 700;
+        margin: 1.5rem 0 0.5rem;
+        line-height: 1.3;
+      }
+      #root h4,
+      #root h5,
+      #root h6 {
+        font-weight: 700;
+        margin: 1.25rem 0 0.5rem;
+        line-height: 1.4;
+      }
+      #root p {
+        margin: 0.75rem 0;
+      }
+      #root a {
+        color: #0875e1;
+        text-decoration: none;
+      }
+      #root a:hover {
+        text-decoration: underline;
+      }
+      #root code {
+        font-family: 'Roboto Mono', ui-monospace, Menlo, Monaco, 'Courier New', monospace;
+        font-size: 0.85em;
+        padding: 0.15em 0.4em;
+        background: rgba(0, 0, 0, 0.05);
+        color: rgba(43, 43, 43, 0.9);
+        border-radius: 3px;
+      }
+      #root pre {
+        font-family: 'Roboto Mono', ui-monospace, Menlo, Monaco, 'Courier New', monospace;
+        font-size: 13px;
+        line-height: 1.5;
+        padding: 1rem;
+        margin: 1rem 0;
+        background: #f7f7f7;
+        border-radius: 6px;
+        overflow-x: auto;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+      #root pre code {
+        padding: 0;
+        background: none;
+        font-size: inherit;
+      }
+      #root blockquote {
+        margin: 1rem 0;
+        padding: 0.75rem 1rem;
+        border-left: 4px solid #0875e1;
+        background: #f0f6ff;
+        border-radius: 0 4px 4px 0;
+      }
+      #root blockquote p {
+        margin: 0.25rem 0;
+      }
+      #root ul,
+      #root ol {
+        margin: 0.75rem 0;
+        padding-left: 1.5rem;
+      }
+      #root li {
+        margin: 0.25rem 0;
+      }
+      #root table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1rem 0;
+        font-size: 0.9em;
+      }
+      #root th,
+      #root td {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #e0e0e0;
+        text-align: left;
+      }
+      #root th {
+        background: #f5f5f5;
+        font-weight: 500;
+      }
+      #root hr {
+        border: none;
+        border-top: 1px solid #e0e0e0;
+        margin: 1.5rem 0;
+      }
+      #root img {
+        max-width: 100%;
+        height: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      window.__MCP_BRIDGE__ = (function () {
+        let messageId = 0;
+        const pendingRequests = new Map();
+        const eventListeners = new Map();
+
+        function applyHostStyles(hostContext) {
+          if (!hostContext) return;
+          if (hostContext.styles?.variables) {
+            const vars = hostContext.styles.variables;
+            for (const [key, value] of Object.entries(vars)) {
+              document.documentElement.style.setProperty(key, value);
+            }
+          }
+          if (hostContext.theme) {
+            document.documentElement.setAttribute('data-theme', hostContext.theme);
+          }
+        }
+
+        function request(method, params) {
+          const id = ++messageId;
+          const message = {jsonrpc: '2.0', id, method, params};
+          window.parent.postMessage(message, '*');
+          return new Promise((resolve, reject) => {
+            const timeout = setTimeout(() => {
+              pendingRequests.delete(id);
+              reject(new Error('Request timeout: ' + method));
+            }, 5000);
+            pendingRequests.set(id, {resolve, reject, timeout});
+          });
+        }
+
+        function notify(method, params) {
+          const message = {jsonrpc: '2.0', method, params};
+          window.parent.postMessage(message, '*');
+        }
+
+        function on(event, callback) {
+          if (!eventListeners.has(event)) {
+            eventListeners.set(event, new Set());
+          }
+          eventListeners.get(event).add(callback);
+          return () => eventListeners.get(event).delete(callback);
+        }
+
+        function emit(event, data) {
+          const listeners = eventListeners.get(event);
+          if (listeners) {
+            listeners.forEach(cb => cb(data));
+          }
+        }
+
+        window.addEventListener('message', event => {
+          const data = event.data;
+          if (!data || typeof data !== 'object') return;
+
+          if (data.id !== undefined && pendingRequests.has(data.id)) {
+            const {resolve, reject, timeout} = pendingRequests.get(data.id);
+            clearTimeout(timeout);
+            pendingRequests.delete(data.id);
+            if (data.error) {
+              reject(new Error(data.error.message || 'Unknown error'));
+            } else {
+              resolve(data.result);
+            }
+            return;
+          }
+
+          if (data.method) {
+            if (data.method.includes('tool') && data.method.includes('input')) {
+              emit('tool-input', data.params?.arguments || {});
+            } else if (data.method.includes('tool') && data.method.includes('result')) {
+              try {
+                const content = data.params?.content;
+                const textContent = Array.isArray(content)
+                  ? content.find(c => c.type === 'text')
+                  : null;
+                if (textContent?.text) {
+                  emit('tool-result', JSON.parse(textContent.text));
+                }
+              } catch (e) {
+                console.error('[MCP App] Failed to parse result:', e);
+              }
+            } else if (data.method.includes('context')) {
+              applyHostStyles(data.params);
+              emit('context-changed', data.params);
+            }
+          }
+
+          if (data.arguments || (data.name && !data.method)) {
+            emit('tool-input', data.arguments || data);
+          }
+        });
+
+        async function initialize(appInfo) {
+          try {
+            const result = await request('ui/initialize', {
+              protocolVersion: '2026-01-26',
+              appInfo: appInfo || {name: 'Canvas Kit Story', version: '1.0.0'},
+              appCapabilities: {},
+            });
+            if (result?.hostContext) {
+              applyHostStyles(result.hostContext);
+            }
+            notify('ui/notifications/initialized', {});
+            return result;
+          } catch (e) {
+            console.warn('[MCP App] Initialize failed:', e.message);
+            return null;
+          }
+        }
+
+        function updateModelContext(content) {
+          notify('ui/update-model-context', {content});
+        }
+
+        return {
+          initialize,
+          request,
+          notify,
+          on,
+          updateModelContext,
+          applyHostStyles,
+        };
+      })();
+
+      document.addEventListener('click', function (e) {
+        var anchor = e.target.closest('a[href]');
+        if (!anchor) return;
+        var href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+        e.preventDefault();
+        var url = href;
+        if (href.startsWith('/')) {
+          var slug = href.replace(/^\//, '').replace(/\/$/, '').replace(/\//g, '-');
+          url = 'https://workday.github.io/canvas-kit/?path=/docs/' + slug + '--docs';
+        } else if (!/^https?:\/\//.test(href)) {
+          url = new URL(href, location.href).href;
+        }
+        window.__MCP_BRIDGE__.request('ui/open-link', {url: url});
+      });
+    </script>
+  </body>
+</html>
