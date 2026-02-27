@@ -1,15 +1,15 @@
 import * as React from 'react';
 
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const flexHeadingStyles = createStyles({
   alignItems: 'center',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const viewPortStyles = createStyles({
@@ -17,11 +17,9 @@ const viewPortStyles = createStyles({
 });
 
 export const Basic = () => {
-  const model = useSidePanelModel();
-
   return (
     <Flex cs={viewPortStyles}>
-      <SidePanel model={model}>
+      <SidePanel>
         <SidePanel.Heading size="small">
           <Flex cs={flexHeadingStyles}>
             <AccentIcon icon={rocketIcon} />

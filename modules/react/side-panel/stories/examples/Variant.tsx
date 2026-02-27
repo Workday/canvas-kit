@@ -1,7 +1,7 @@
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -29,16 +29,13 @@ const stylesOverride = {
 
 export const AlternatePanel = () => {
   const {direction, toggleDirection} = useDirection();
-  const model = useSidePanelModel({});
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel model={model} variant="alternate">
+        <SidePanel variant="alternate">
           <SidePanel.ToggleButton aria-label="Collapse View" />
-          <Flex cs={stylesOverride.panel}>
-            <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
-          </Flex>
+          <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">

@@ -1,10 +1,12 @@
+
+import {Meta} from '@storybook/blocks';
 import {
   ExampleCodeBlock,
   SymbolDoc,
   Specifications,
   StorybookStatusIndicator,
 } from '@workday/canvas-kit-docs';
-import * as SidePanelStories from './SidePanel.stories';
+import SidePanelStoriesMeta from './SidePanel.stories';
 
 import {Basic} from './examples/Basic';
 import {Heading} from './examples/Heading';
@@ -14,7 +16,7 @@ import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
 import {OnStateTransition} from './examples/OnStateTransition';
 
-<Meta of={SidePanelStories} />
+<Meta of={SidePanelStoriesMeta} />
 
 # Canvas Kit Side Panel <StorybookStatusIndicator type="new" />
 
@@ -26,7 +28,7 @@ the model pattern for state management and is fully accessible.
 ## Installation
 
 ```sh
-yarn add @workday/canvas-kit-labs-react
+yarn add @workday/canvas-kit-react
 ```
 
 ## Migrating from Preview
@@ -40,13 +42,13 @@ changes:
 // Before (preview-react)
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 
-// After (labs-react)
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+// After (react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 ```
 
 ### Hook API Changes
 
-| Preview (`useSidePanel`)         | Labs (`useSidePanelModel`)                              |
+| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
 | -------------------------------- | ------------------------------------------------------- |
 | `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
 | `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
@@ -58,11 +60,11 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-
 
 ### Component API Changes
 
-| Preview                                        | Labs                                              |
+| Preview                                        | Main                                              |
 | ---------------------------------------------- | ------------------------------------------------- |
 | `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>` |
 | `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                      |
-| `<Heading {...labelProps}>`                    | `<Heading id={model.state.labelId}>`              |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>`              |
 | `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
 | `touched` prop on SidePanel                    | Managed internally                                |
 | `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
@@ -82,7 +84,7 @@ const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
   {expanded && <Content />}
 </SidePanel>;
 
-// After (labs-react)
+// After (react)
 const model = useSidePanelModel({
   initialTransitionState: 'collapsed',
   origin: 'end',
@@ -94,7 +96,7 @@ const model = useSidePanelModel({
 
 <SidePanel model={model}>
   <SidePanel.ToggleButton />
-  <Heading id={model.state.labelId}>Panel Title</Heading>
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
   {model.state.transitionState === 'expanded' && <Content />}
 </SidePanel>;
 ```
@@ -107,12 +109,12 @@ if (expanded) {
   /* ... */
 }
 
-// After (labs-react) - for exact state
+// After (react) - for exact state
 if (model.state.transitionState === 'expanded') {
   /* ... */
 }
 
-// After (labs-react) - including animation states
+// After (react) - including animation states
 const isExpanded =
   model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
 ```
@@ -239,7 +241,7 @@ purpose of the panel.
 
 ## Component API
 
-<SymbolDoc name="SidePanel" fileName="/labs-react/" />
+<SymbolDoc name="SidePanel" fileName="/react/" />
 
 ## Hooks
 
@@ -249,7 +251,7 @@ The `useSidePanelModel` hook creates a model for managing the SidePanel's state 
 pass this model to the `SidePanel` component, or let the component create one internally.
 
 ```tsx
-import {useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
+import {useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 
 // Create a model with custom configuration
 const model = useSidePanelModel({
@@ -269,22 +271,22 @@ model.events.collapse(); // Set to collapsed (no animation)
 model.events.handleAnimationStart(); // Start expand/collapse animation
 ```
 
-<SymbolDoc name="useSidePanelModel" fileName="/labs-react/" />
+<SymbolDoc name="useSidePanelModel" fileName="/react/" />
 
 ### useSidePanelContainer
 
 The `useSidePanelContainer` elemProps hook provides the necessary props for the SidePanel container
 element, including `id`, `aria-labelledby`, and `onTransitionEnd`.
 
-<SymbolDoc name="useSidePanelContainer" fileName="/labs-react/" />
+<SymbolDoc name="useSidePanelContainer" fileName="/react/" />
 
-### useSidePanelToggleButtonElemProps
+### useSidePanelToggleButton
 
-The `useSidePanelToggleButtonElemProps` elemProps hook provides ARIA attributes for the toggle
-button, including `aria-controls`, `aria-expanded`, and `aria-labelledby`.
+The `useSidePanelToggleButton` elemProps hook provides ARIA attributes for the toggle
+button, including `aria-controls`, `aria-pressed`, and `aria-describedby`.
 
-<SymbolDoc name="useSidePanelToggleButtonElemProps" fileName="/labs-react/" />
+<SymbolDoc name="useSidePanelToggleButton" fileName="/react/" />
 
 ## Specifications
 
-<Specifications file="SidePanelLabs.spec.ts" name="Side Panel" />
+<Specifications file="SidePanel.spec.ts" name="Side Panel" />

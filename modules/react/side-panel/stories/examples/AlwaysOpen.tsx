@@ -1,7 +1,7 @@
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-labs-react/side-panel';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -30,11 +30,9 @@ const stylesOverride = {
 };
 
 export const AlwaysOpen = () => {
-  const model = useSidePanelModel();
-
   return (
     <Flex cs={stylesOverride.pageContainer}>
-      <SidePanel model={model}>
+      <SidePanel initialTransitionState="expanded">
         <Flex cs={stylesOverride.panelContainer}>
           <AccentIcon icon={rocketIcon} cs={stylesOverride.accentIcon} />
           <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>

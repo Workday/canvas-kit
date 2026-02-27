@@ -1,12 +1,12 @@
-import React from 'react';
-
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Shape = () => {
   return (
     <Skeleton>
-      <Skeleton.Shape width={space.xxl} height={space.xxl} borderRadius={borderRadius.circle} />
+      <Skeleton.Shape
+        cs={{width: system.size.xxl, height: system.size.xxl, borderRadius: system.shape.full}}
+      />
     </Skeleton>
   );
 };

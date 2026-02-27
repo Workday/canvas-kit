@@ -1,4 +1,3 @@
-import {CanvasSpaceValues} from '@workday/canvas-kit-react/tokens';
 import {calc} from '@workday/canvas-kit-styling';
 
 import {TransformOrigin} from '../types';
@@ -21,6 +20,18 @@ const translateMap: translateMapType = {
   },
 };
 
+type Distance =
+  | '0'
+  | '0.25rem'
+  | '0.5rem'
+  | '0.75rem'
+  | '1rem'
+  | '1.5rem'
+  | '2rem'
+  | '2.5rem'
+  | '4rem'
+  | '5rem';
+
 /**
  * Gets the x and y distance values needed to translate from a given transform origin to 0,0
  * @param {Object} transformOrigin The origin of the transform (i.e. top left)
@@ -28,11 +39,7 @@ const translateMap: translateMapType = {
  * @returns {Object} An object with the x and y distance values needed to translate.
  * @deprecated
  */
-
-export const getTranslateFromOrigin = (
-  transformOrigin: TransformOrigin,
-  distance: CanvasSpaceValues
-) => {
+export const getTranslateFromOrigin = (transformOrigin: TransformOrigin, distance: Distance) => {
   const calculatedDistance = parseFloat(distance) * 16;
   return {
     x: translateMap.x[transformOrigin.horizontal] * calculatedDistance,
@@ -48,7 +55,7 @@ export const getTranslateFromOrigin = (
  */
 export const getTransformOrigin = (
   transformOrigin: TransformOrigin,
-  distance: CanvasSpaceValues | (string & {})
+  distance: Distance | (string & {})
 ) => {
   return {
     x: calc.multiply(distance, translateMap.x[transformOrigin.horizontal]),

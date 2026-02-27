@@ -5,19 +5,34 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {Heading, TypeLevelProps, headingStencil} from '@workday/canvas-kit-react/text';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
 
-export interface SidePanelHeadingProps extends ExtractProps<typeof Heading, never> {
+export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading, never>, 'size'> {
+  /**
+   * The size of the heading.
+   * @default 'small'
+   */
+  size?: TypeLevelProps['size'];
   children?: React.ReactNode;
 }
 
 export const sidePanelHeadingStencil = createStencil({
+  extends: headingStencil,
   base: {
-    padding: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: cssVar(system.padding.xs, system.space.x2),
+  },
+  modifiers: {
+    origin: {
+      end: {
+        paddingInlineStart: px2rem(68),
+      },
+      start: {},
+    },
   },
 });
 
@@ -44,9 +59,12 @@ export const SidePanelHeading = createSubcomponent(Heading)({
   displayName: 'SidePanel.Heading',
   modelHook: useSidePanelModel,
   elemPropsHook: useSidePanelHeading,
-})<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element) => {
+})<SidePanelHeadingProps>(({size = 'small', children, ...elemProps}, Element, model) => {
   return (
-    <Element size={size} {...handleCsProp(elemProps, sidePanelHeadingStencil())}>
+    <Element
+      size={size}
+      {...handleCsProp(elemProps, sidePanelHeadingStencil({size, origin: model.state.origin}))}
+    >
       {children}
     </Element>
   );

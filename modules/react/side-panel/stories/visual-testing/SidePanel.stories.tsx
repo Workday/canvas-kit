@@ -1,12 +1,9 @@
 import React from 'react';
 
-import {
-  SidePanel,
-  SidePanelBackgroundColor,
-  SidePanelOpenDirection,
-} from '@workday/canvas-kit-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Side Panel',
@@ -23,25 +20,25 @@ export const SidePanelStates = {
     <StaticStates>
       <ComponentStatesTable
         rowProps={[
-          {label: 'Default', props: {open: true}},
+          {label: 'Default', props: {initialTransitionState: 'expanded'}},
           {
             label: 'With Heading',
-            props: {header: 'Navigation', open: true},
+            props: {header: 'Navigation', initialTransitionState: 'expanded'},
           },
           {
-            label: 'With Gray Background',
+            label: 'With White Background',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
             },
           },
           {
             label: 'With On Toggle Click',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
             },
           },
@@ -49,37 +46,37 @@ export const SidePanelStates = {
             label: 'With open direction from right',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
-              openDirection: SidePanelOpenDirection.Right,
+              origin: 'end',
             },
           },
           {
             label: 'With custom padding',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
-              padding: space.xxs,
+              padding: cssVar(system.padding.xs),
             },
           },
           {
             label: 'With custom open width',
             props: {
               header: 'Navigation',
-              open: true,
-              backgroundColor: SidePanelBackgroundColor.Gray,
+              initialTransitionState: 'expanded',
+              variant: 'alternate',
               onToggleClick: () => console.log('click toggle button'),
-              openWidth: 350,
+              expandedWidth: 350,
             },
           },
           {
             label: 'When closed',
             props: {
               header: 'Navigation',
-              open: false,
+              initialTransitionState: 'collapsed',
               onToggleClick: () => console.log('click toggle button'),
             },
           },
@@ -88,8 +85,16 @@ export const SidePanelStates = {
       >
         {props => (
           <div style={{position: 'relative', height: 200}}>
-            <SidePanel open={props.open} {...props}>
-              Side Panel Content
+            <SidePanel
+              initialTransitionState={props.initialTransitionState}
+              origin={props.origin}
+              cs={{padding: props.padding ? props.padding : 'none'}}
+              expandedWidth={props.expandedWidth}
+              {...props}
+            >
+              {props.header && <SidePanel.Heading>{props.header}</SidePanel.Heading>}
+              {props.onToggleClick && <SidePanel.ToggleButton aria-label="Collapse View" />}
+              {props.initialTransitionState !== 'collapsed' && 'Panel Content'}
             </SidePanel>
           </div>
         )}

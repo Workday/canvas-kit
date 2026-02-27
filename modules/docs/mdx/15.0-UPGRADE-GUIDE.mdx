@@ -22,17 +22,25 @@ semantic meaning to allow for better use and theming.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
-  - [Avatar](#avatar-)
-  - [Pill](#pill-)
-  - [Segmented Control](#segmented-control-)
+  - [Avatar](#avatar)
+	- [Structure Changes](#structure-changes)
+	- [API Differences](#api-differences)
+	- [Size Mapping](#api-differences)
+	- [Code Migration](#code-migration)
+  - [Pill](#pill)
   - [Information Highlight](#information-highlight-)
-  - [Segmented Control ⚡️](#segmented-control-️)
+  - [Side Panel](#side-panel)
+    - [Migrating from Preview](#migrating-from-preview)
+    - [Hook API Changes](#hook-api-changes)
+    - [Component API Changes](#component-api-changes)
+	- [Code Migration](#code-migration)
+  - [Segmented Control](#segmented-control)
     - [API Differences](#api-differences)
-      - [Structure Changes](#structure-changes)
-      - [Prop Changes](#prop-changes)
-      - [Code Migration](#code-migration)
-      - [New Features](#new-features)
-  - [Information Highlight ⚡️](#information-highlight-️)
+    - [Structure Changes](#structure-changes)
+    - [Prop Changes](#prop-changes)
+    - [Code Migration](#code-migration)
+    - [New Features](#new-features)
+  - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
   - [Inputs](#inputs)
@@ -45,6 +53,7 @@ semantic meaning to allow for better use and theming.
   - [Applet Icon](#applet-icon)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
+	- [Side Panel (Deprecated)](#side-panel-deprecated)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
@@ -120,7 +129,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Promotions
 
-### Avatar ⚡️
+### Avatar
 
 **PR:** [](https://github.com/Workday/canvas-kit/issues/3659)
 
@@ -217,7 +226,7 @@ The promoted `Avatar` includes several new features:
 <Avatar name="John Doe" variant="blue" />
 
 // Custom initials
-<Avatar name="John Doe" preferredInitials="JD" />
+<Avatar name="John Smith Doe" preferredInitials="JD" />
 
 // Decorative (next to text name)
 <Avatar name="John Doe" url="..." isDecorative />
@@ -229,12 +238,12 @@ The promoted `Avatar` includes several new features:
 </BaseAvatar>
 ```
 
-### Pill ⚡️
+### Pill
 
 **PR** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
 
 We've promoted `Pill` from [Preview](#preview) to [Main](#main). There are no changes to the
-functionality or styling of the component. The only change required is updating the import
+functionality of the component. The only change required is updating the import
 statement.
 
 **Before in v14**
@@ -251,7 +260,114 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 
 > 🤖 The codemod will handle the change of imports as shown above.
 
-### Segmented Control ⚡️
+### Side Panel
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated `SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
+
+**Before in v14**
+
+```tsx
+import { SidePanel } from "@workday/canvas-kit-labs-react/side-panel";
+```
+
+**After in v15**
+
+```tsx
+import { SidePanel } from "@workday/canvas-kit-react/side-panel";
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### Migrating from Preview
+
+If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API
+changes:
+
+```tsx
+// Before (preview-react)
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+// After (react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+```
+
+#### Hook API Changes
+
+| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
+| -------------------------------- | ------------------------------------------------------- |
+| `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
+| `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
+| Returns `expanded: boolean`      | Returns `model.state.transitionState`                   |
+| Returns `setExpanded(bool)`      | Use `model.events.expand()` / `model.events.collapse()` |
+| Returns `panelProps` to spread   | Props applied automatically via `elemPropsHook`         |
+| Returns `labelProps` to spread   | Use `id={model.state.labelId}` on label element         |
+| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
+
+#### Component API Changes
+
+| Preview                                        | Main                                              |
+| ---------------------------------------------- | ------------------------------------------------- |
+| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>` |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                      |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>`              |
+| `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
+| `touched` prop on SidePanel                    | Managed internally                                |
+| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
+| `onStateTransition` on component               | `onStateTransition` in model config               |
+
+#### Code Migration Example
+
+```tsx
+// Before (in Preview)
+const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+});
+
+<SidePanel {...panelProps} origin="right" onExpandedChange={exp => console.log(exp)}>
+  <SidePanel.ToggleButton {...controlProps} />
+  <Heading {...labelProps}>Panel Title</Heading>
+  {expanded && <Content />}
+</SidePanel>;
+
+// After (in Main)
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: state => {
+    const isExpanded = state === 'expanded' || state === 'expanding';
+    console.log(isExpanded);
+  },
+});
+
+<SidePanel model={model}>
+  <SidePanel.ToggleButton aria-label="Collapse View" />
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
+  {model.state.transitionState === 'expanded' && <Content />}
+</SidePanel>;
+```
+
+### Checking Expanded State
+
+```tsx
+// Before (@workday/canvas-kit-preview-react/side-panel)
+if (expanded) {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - for exact state
+if (model.state.transitionState === 'expanded') {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - including animation states
+const isExpanded =
+  model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
+```
+
+
+### Segmented Control
 
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
@@ -363,7 +479,7 @@ The promoted `SegmentedControl` includes several new features:
 </SegmentedControl>
 ```
 
-### Information Highlight ⚡️
+### Information Highlight
 
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
@@ -402,7 +518,7 @@ If you'd like to see the visual differences between `v14` with `v3` tokens and `
 
 **PR:** [#3719](https://github.com/Workday/canvas-kit/pull/3719)
 
-`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and `TextInput` 
+`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and `TextInput`
 
 ### Containers
 
@@ -436,32 +552,49 @@ deprecated code is removed.
 
 ### Accent Icon
 
-The Accent Icon set has been **deprecated** and will be removed in a future major version. We
-recommend migrating to **Expressive Icons**, which are more flexible and aligned with our current
-design direction.
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Accent Icon set has been **deprecated** and will be removed in a future major version.
+We recommend migrating to **Expressive Icons**, which are more flexible and aligned with our current design direction.
 
 ### Applet Icon
 
-The Applet Icon set has been **deprecated** and will be removed in a future major version. Please
-migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Applet Icon set has been **deprecated** and will be removed in a future major version.
+Please migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
 
 ## Removals
 
 ### Avatar (Deprecated)
 
-The deprecated `Avatar` that was previously in `@workday/canvas-kit-react/avatar` has been removed.
-This was the older implementation that showed a user icon placeholder and supported `light`/`dark`
-variants.
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
+
+The deprecated `Avatar` that was previously in `@workday/canvas-kit-react/avatar`
+has been removed. This was the older implementation that showed a user icon placeholder
+and supported `light`/`dark` variants.
 
 Please migrate to the new `Avatar` component (promoted from Preview) which uses initials display,
 color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components. See the
 [API Differences](#api-differences) section above for migration guidance.
 
+### Side Panel (Deprecated)
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+The deprecated `SidePanel` that was previously in `@workday/canvas-kit-react/side-panel`
+has been removed. This was the older implementation that used our old patterns.
+
+Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound
+component pattern and `useSidePanelModel`. See the
+[API Differences](#api-differences) section above for migration guidance.
+
 ### Segmented Control (Deprecated)
 
-The deprecated `SegmentedControl` that was previously in
-`@workday/canvas-kit-react/segmented-control` has been removed. This was the older implementation
-that used `SegmentedControl.Button` subcomponents.
+**PR:** [#3626](https://github.com/Workday/canvas-kit/pull/3626)
+
+The deprecated `SegmentedControl` that was previously in `@workday/canvas-kit-react/segmented-control`
+has been removed. This was the older implementation that used `SegmentedControl.Button` subcomponents.
 
 Please migrate to the new `SegmentedControl` component (promoted from Preview) which uses a compound
 component pattern with `SegmentedControl.List` and `SegmentedControl.Item`. See the
@@ -538,14 +671,14 @@ import {Select} from '@workday/canvas-kit-react/select';
 const items = ['Small', 'Medium', 'Large'];
 
 <Select items={items}>
-  <FormField label="Size">
-    <Select.Input onChange={e => console.log('Selected:', e.target.value)} />
-    <Select.Popper>
-      <Select.Card>
-        <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
-      </Select.Card>
-    </Select.Popper>
-  </FormField>
+	<FormField label="Size">
+		<FormField.Input as={Select.Input} onChange={(e) => console.log("Selected:", e.target.value)} />
+		<Select.Popper>
+			<Select.Card>
+				<Select.List>{(item) => <Select.Item>{item}</Select.Item>}</Select.List>
+			</Select.Card>
+		</Select.Popper>
+	</FormField>
 </Select>;
 ```
 
@@ -556,7 +689,6 @@ The Main `Select` includes features not available in the Preview version:
 - **Composition-based API**: Full control over structure with subcomponents
 - **FormField integration**: Built-in accessibility when wrapped with FormField
 - **Model-based state**: Use `useSelectModel` for advanced state management
-- **Virtualization support**: Enable for large lists via model config
 - **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
 - **Icons in items**: Use `Select.Item.Icon` subcomponent
 
