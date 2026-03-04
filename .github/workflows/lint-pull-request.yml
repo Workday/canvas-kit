@@ -15,7 +15,7 @@ jobs:
 
       - name: Get Package Scopes
         id: scope-vars
-        run: echo "::set-output name=scopes::$(node utils/get-package-names.js)"
+        run: echo "scopes=$(node utils/get-package-names.js)" >> "$GITHUB_OUTPUT"
 
       # Please look up the latest version from
       # https://github.com/amannn/action-semantic-pull-request/releases
