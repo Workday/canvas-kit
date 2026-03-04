@@ -42,7 +42,12 @@ const numericalTokenMapping = {
 
 /**
  * Mapping from deprecated theme palette colors to new brand token names.
- * For example: 'primary' -> 'primary', 'error' -> 'critical', 'success' -> 'positive'
+ * For example:
+ * `primary` -> `primary`
+ * `error` -> `critical`
+ * `success` -> `positive`
+ * `alert` -> `caution`
+ * `neutral` -> `neutral`
  */
 const brandColorMapping = {
   primary: 'primary',

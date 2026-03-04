@@ -43,7 +43,6 @@ semantic meaning to allow for better use and theming.
   - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
-  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
   - [Inputs](#inputs)
   - [Containers](#containers)
   - [Indicators](#indicators)
@@ -551,11 +550,18 @@ If you'd like to see the visual differences between `v14` with `v3` tokens and `
 
 ### System Brand Tokens and Brand Tokens
 
-The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and **brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as `base`, `light`, `lighter`, lightest`, `dark` and `darkest` via the `CanvasProvider` theme prop. The mapping inside `CanvasProvider` exists for **backwards compatibility**. When you pass a theme object, we forward those values to both the legacy brand tokens and the system brand tokens so current implementations will continue to work.
+The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and **brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as `base`, `light`, `lighter`, `lightest`, `dark` and `darkest` via the `CanvasProvider` `theme` prop. The mapping inside `CanvasProvider` exists for **backwards compatibility**. When you pass a theme object, we forward those values to both the legacy brand tokens and the system brand tokens so current implementations will continue to work.
 
 For more information on theming, view our [Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) documentation.
 
-For more information on our tokens, view our [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) documentation.
+For more information on our tokens, vie\w our [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) documentation.
+
+```tsx
+// This will set the [brand.primary.**] tokens to shades of purple.
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App />
+</CanvasProvider>
+```
 
 
 ## Deprecations
