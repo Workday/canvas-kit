@@ -8,7 +8,7 @@ import {
 import {CheckboxRipple} from './CheckboxRipple';
 import {CheckboxContainer} from './CheckboxContainer';
 import {CheckboxCheck} from './CheckboxCheck';
-import {CheckboxInput, CheckboxProps} from './CheckboxInput';
+import {CheckboxInput, type CheckboxProps} from './CheckboxInput';
 
 export const Checkbox = createComponent('input')({
   displayName: 'Checkbox',
