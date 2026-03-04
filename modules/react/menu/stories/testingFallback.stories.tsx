@@ -1,5 +1,6 @@
-import {customViewport} from '../../../../utils/storybook';
 import {Menu} from '@workday/canvas-kit-react/menu';
+
+import {customViewport} from '../../../../utils/storybook';
 import {MenuWithFallbackPlacements as MenuWithFallbackPlacementsExample} from './examples/MenuWithFallbackPlacements';
 
 export default {

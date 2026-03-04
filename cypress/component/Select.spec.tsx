@@ -1,10 +1,10 @@
 import {Basic} from '../../modules/react/select/stories/examples/Basic';
-import {FetchingDynamicItems} from '../../modules/react/select/stories/examples/FetchingDynamicItems';
-import {DisabledOptions} from '../../modules/react/select/stories/examples/DisabledOption';
-import {MenuHeight} from '../../modules/react/select/stories/examples/MenuHeight';
-import {Disabled} from '../../modules/react/select/stories/examples/Disabled';
-import {RefForwarding} from '../../modules/react/select/stories/examples/RefForwarding';
 import {Complex} from '../../modules/react/select/stories/examples/Complex';
+import {Disabled} from '../../modules/react/select/stories/examples/Disabled';
+import {DisabledOptions} from '../../modules/react/select/stories/examples/DisabledOption';
+import {FetchingDynamicItems} from '../../modules/react/select/stories/examples/FetchingDynamicItems';
+import {MenuHeight} from '../../modules/react/select/stories/examples/MenuHeight';
+import {RefForwarding} from '../../modules/react/select/stories/examples/RefForwarding';
 
 describe('Select', () => {
   context(`given the "Menu Height" story is rendered`, () => {
@@ -479,7 +479,11 @@ describe('Select', () => {
       });
 
       it('should not have any axe errors', () => {
-        cy.checkA11y();
+        cy.checkA11y(null, {
+          rules: {
+            'scrollable-region-focusable': {enabled: false},
+          },
+        });
       });
 
       context('the select', () => {

@@ -1,4 +1,5 @@
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 import {useSelectionListModel} from './useSelectionListModel';
 
 // This file creates a `ListModel` composing a `BaseListModel`, `CursorListModel`, and

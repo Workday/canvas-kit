@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Box.mdx';
-
 import {Box} from '@workday/canvas-kit-react/layout';
+
+import mdxDoc from './Box.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Box/Basic';
 

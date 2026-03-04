@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {Card} from '@workday/canvas-kit-react/card';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Card} from '@workday/canvas-kit-react/card';
 
 const myStencil = createStencil({
   base: {

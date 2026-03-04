@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 import {useBannerActionText, useBannerModel} from './hooks';
-import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface BannerActionTextProps extends ExtractProps<typeof Box, never> {
   /**

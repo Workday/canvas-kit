@@ -1,15 +1,15 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
+import {ListRenderItemContext} from '@workday/canvas-kit-react/collection';
 import {
-  createSubcomponent,
-  useMountLayout,
-  createElemPropsHook,
   ExtractProps,
   StyledType,
+  createElemPropsHook,
+  createSubcomponent,
   slugify,
+  useMountLayout,
 } from '@workday/canvas-kit-react/common';
-import {ListRenderItemContext} from '@workday/canvas-kit-react/collection';
 import {Box} from '@workday/canvas-kit-react/layout';
 
 import {useTabsModel} from './useTabsModel';
@@ -37,34 +37,36 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
 
 const StyledTabsPanel = styled(Box)<StyledType>();
 
-export const useTabsPanel = createElemPropsHook(useTabsModel)(
-  ({state, events}, _, elemProps: {'data-id'?: string} = {}) => {
-    const {item} = React.useContext(ListRenderItemContext);
-    const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
+export const useTabsPanel = createElemPropsHook(useTabsModel)((
+  {state, events},
+  _,
+  elemProps: {'data-id'?: string} = {}
+) => {
+  const {item} = React.useContext(ListRenderItemContext);
+  const [localId, setLocalId] = React.useState(elemProps['data-id'] || item?.id || '');
 
-    useMountLayout(() => {
-      if (item) {
-        return;
-      }
-      const defaultId = state.panelIndexRef.current;
-      const itemId = localId || String(defaultId);
-      events.registerPanel({id: itemId, textValue: ''});
-      setLocalId(itemId);
+  useMountLayout(() => {
+    if (item) {
+      return;
+    }
+    const defaultId = state.panelIndexRef.current;
+    const itemId = localId || String(defaultId);
+    events.registerPanel({id: itemId, textValue: ''});
+    setLocalId(itemId);
 
-      return () => {
-        events.unregisterPanel({id: itemId});
-      };
-    });
-
-    return {
-      role: 'tabpanel' as const,
-      'aria-labelledby': slugify(`${state.id}-${localId}`),
-      hidden: !!localId && localId !== state.selectedIds[0],
-      id: slugify(`tabpanel-${state.id}-${localId}`),
-      tabIndex: 0 as const,
+    return () => {
+      events.unregisterPanel({id: itemId});
     };
-  }
-);
+  });
+
+  return {
+    role: 'tabpanel' as const,
+    'aria-labelledby': slugify(`${state.id}-${localId}`),
+    hidden: !!localId && localId !== state.selectedIds[0],
+    id: slugify(`tabpanel-${state.id}-${localId}`),
+    tabIndex: 0 as const,
+  };
+});
 
 export const TabsPanel = createSubcomponent('div')({
   displayName: 'Tabs.Panel',

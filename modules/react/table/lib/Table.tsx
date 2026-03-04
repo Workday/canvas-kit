@@ -1,14 +1,15 @@
-import {GridProps, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {baseTableStencil} from './BaseTable';
-import {TableRow} from './parts/css-grid-table/TableRow';
+import {FlexProps, GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {baseTableStencil} from './BaseTable';
 import {baseTableBodyStencil} from './parts/BaseTableBody';
 import {baseTableCaptionStencil} from './parts/BaseTableCaption';
 import {baseTableCellStencil} from './parts/BaseTableCell';
 import {baseTableHeadStencil} from './parts/BaseTableHead';
 import {baseTableHeaderStencil} from './parts/BaseTableHeader';
-import {system} from '@workday/canvas-tokens-web';
+import {TableRow} from './parts/css-grid-table/TableRow';
 
 export interface TableProps extends GridProps {}
 

@@ -1,12 +1,12 @@
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
-  usePopupModel,
+  useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 

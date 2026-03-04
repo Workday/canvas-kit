@@ -20,7 +20,8 @@
   * @param {string} source
   */
 function extractExports(source) {
-  const exportPattern = /export (?:default|const|var|function)(?: class)?(?: function)? ([^:\s<();]*)/;
+  const exportPattern =
+    /export (?:default|const|var|function)(?: class)?(?: function)? ([^:\s<();]*)/;
   const exports = (source.match(new RegExp(exportPattern, 'g')) || [])
     .map(match => match.match(exportPattern)[1] || 'Example') // default export name to "Example"
     .filter(name => name.charAt(0).toUpperCase() === name.charAt(0))

@@ -1,7 +1,7 @@
 import colors from '@workday/canvas-colors-web';
-import {defaultCanvasTheme, PartialCanvasTheme} from '../lib/theming';
-import {shiftColor, createCanvasTheme} from '../lib/theming/createCanvasTheme';
 
+import {PartialCanvasTheme, defaultCanvasTheme} from '../lib/theming';
+import {createCanvasTheme, shiftColor} from '../lib/theming/createCanvasTheme';
 import {deepMerge} from '../lib/utils/deepMerge';
 
 describe('createCanvasTheme', () => {
@@ -96,7 +96,7 @@ describe('createCanvasTheme', () => {
           if (k === 'direction') {
             obj[k] = 'rtl';
           } else {
-            const noop = () => {}; // eslint-disable-line no-empty-function
+            const noop = () => {};
             obj[k] = typeof obj[k] === 'function' ? noop : typeof obj[k] === 'number' ? 0 : 'foo';
           }
         }

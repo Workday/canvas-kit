@@ -1,13 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  createStencil,
-  handleCsProp,
-  px2rem,
-  cssVar,
-  calc,
-  CSProps,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {SkeletonShape} from './SkeletonShape';
 
 export interface SkeletonHeaderProps extends CSProps {
@@ -35,11 +29,18 @@ export const skeletonHeaderStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, backgroundColor, height}) => ({
-    backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
-    borderRadius: 0,
-    height: cssVar(height, calc.multiply(system.space.x1, 7)),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(
+      backgroundColor,
+      cssVar(system.color.surface.loading, system.color.bg.alt.strong)
+    ),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.md, system.shape.zero),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(height, cssVar(system.size.xs, px2rem(28))),
     width: width,
-    marginBottom: system.space.x4,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginBottom: cssVar(system.size.xxxs, system.space.x4),
   }),
 });
 

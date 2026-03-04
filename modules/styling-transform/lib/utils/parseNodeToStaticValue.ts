@@ -4,9 +4,12 @@ import {getErrorMessage} from './getErrorMessage';
 import {TransformerContext} from './types';
 
 function handlePropertyTransforms(node: ts.Node, context: TransformerContext): string | undefined {
-  return context.propertyTransforms.reduce((result, transformer) => {
-    return result || transformer(node, context) || undefined;
-  }, undefined as undefined | string);
+  return context.propertyTransforms.reduce(
+    (result, transformer) => {
+      return result || transformer(node, context) || undefined;
+    },
+    undefined as undefined | string
+  );
 }
 
 /**

@@ -1,11 +1,11 @@
 import ts from 'typescript';
 
-import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
-import {parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {getVarName} from './getVarName';
 import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
+import {getVarName} from './getVarName';
 import {isImportedFromStyling} from './isImportedFromStyling';
+import {parseNodeToStaticValue} from './parseNodeToStaticValue';
 import {parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 
 export const handleKeyframes: NodeTransformer = (node, context) => {
   const {checker} = context;

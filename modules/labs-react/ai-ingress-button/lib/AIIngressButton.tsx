@@ -1,9 +1,11 @@
-import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {BaseButton, BaseButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
-import {createStencil, handleCsProp, calc} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
 import {getAIIngressIcon} from './AIIngressIcon';
+
 export interface AIIngressButtonProps
   extends Omit<
     BaseButtonProps,

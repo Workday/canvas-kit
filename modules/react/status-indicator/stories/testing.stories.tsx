@@ -1,12 +1,11 @@
 import * as React from 'react';
 
+import {StatusIndicator, StatusIndicatorProps} from '@workday/canvas-kit-react/status-indicator';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-
-import {StatusIndicator, StatusIndicatorProps} from '@workday/canvas-kit-react/status-indicator';
 import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default {

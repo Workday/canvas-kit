@@ -192,7 +192,7 @@ const resetItems = (total: number) => Array(total).fill(undefined);
 export function useListLoader<
   T,
   // I cannot get Typescript to accept models that extend from `useListModel` to be considered valid
-  M extends ((...args: any[]) => any) & Omit<typeof useListModel, 'Context'>
+  M extends ((...args: any[]) => any) & Omit<typeof useListModel, 'Context'>,
 >(
   config: AsyncCollectionConfig<T, ReturnType<M>> & M['TConfig'],
   modelHook: M
