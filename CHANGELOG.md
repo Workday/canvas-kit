@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.34](https://github.com/Workday/canvas-kit/releases/tag/v14.2.34) (2026-03-04)
+
+### Infrastructure
+
+- ci: Update `actions/upload-artifact` to `7.0.0`. ([#3813](https://github.com/Workday/canvas-kit/pull/3813)) ([@desrosj](https://github.com/desrosj))
+
+
+## [v14.2.33](https://github.com/Workday/canvas-kit/releases/tag/v14.2.33) (2026-03-04)
+
+### Infrastructure
+
+- ci: Remove use of deprecated `set-output` command. ([#3810](https://github.com/Workday/canvas-kit/pull/3810)) ([@desrosj](https://github.com/desrosj))
+
+
+## [v14.2.32](https://github.com/Workday/canvas-kit/releases/tag/v14.2.32) (2026-03-02)
+
+
+
+
 ## [v14.2.31](https://github.com/Workday/canvas-kit/releases/tag/v14.2.31) (2026-02-23)
 
 ### Components
