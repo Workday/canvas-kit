@@ -1,17 +1,9 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
-
-const customTheme = createStyles({
-  [brand.primary.base]: base.green600,
-  [brand.primary.dark]: base.green700,
-  [brand.primary.darkest]: base.green800,
-  [brand.common.focusOutline]: base.green600,
-  [system.color.fg.strong]: base.indigo900,
-  [system.color.border.container]: base.indigo300,
-});
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {base} from '@workday/canvas-tokens-web';
 
 const App = () => {
   return (
@@ -21,12 +13,15 @@ const App = () => {
           palette: {
             primary: {
               main: base.green600,
-              dark: base.green700,
-              darkest: base.green800,
-              light: base.green200,
-              lighter: base.green50,
-              lightest: base.green25,
-              contrast: base.neutral0,
+            },
+            alert: {
+              main: base.magenta600,
+            },
+            common: {
+              focusOutline: base.purple500,
+              alertInner: base.magenta400,
+              alertOuter: base.magenta500,
+              errorInner: base.red500,
             },
           },
         },
@@ -36,7 +31,12 @@ const App = () => {
         <Card.Heading>Theming</Card.Heading>
         <Card.Body>
           <PrimaryButton>Theming</PrimaryButton>
-          <input />
+          <FormField error="caution">
+            <FormField.Label>Email</FormField.Label>
+            <FormField.Field>
+              <FormField.Input as={TextInput} />
+            </FormField.Field>
+          </FormField>
         </Card.Body>
       </Card>
     </CanvasProvider>
@@ -45,8 +45,8 @@ const App = () => {
 
 export const Theming = () => {
   return (
-    <CanvasProvider className={customTheme}>
+    <div>
       <App />
-    </CanvasProvider>
+    </div>
   );
 };
