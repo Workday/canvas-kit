@@ -1,3 +1,5 @@
+import {system} from '@workday/canvas-tokens-web';
+
 import {calc} from './calc';
 
 /**
@@ -54,6 +56,69 @@ const darken = (color: string, fallback: string, mixinColor: string, mixinValue:
   return `color-mix(in srgb, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
 };
 
+/**
+ * The `colorSpace.hover()` function is used in `hover` interactive states. It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) for interactive states
+ * and takes three parameters: `color`, `fallback` and `colorType`.
+ * ```tsx
+ * '&:hover': {
+ *  backgroundColor: colorSpace.hover(color, fallback, colorType)
+ * }
+ * ```
+ * - `color`: Base color value.
+ * - `fallback`: Fallback color value if the base color is not defined or invalid.
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
+ *
+ * @param color
+ * The value being darkened.
+ *
+ * @param fallback
+ * This is the color that will be used if `color` is not defined.
+ *
+ * @param colorType
+ * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
+ *
+ */
+const hover = (color: string, fallback: string, colorType: 'accent' | 'surface') => {
+  return darken(
+    color,
+    fallback,
+    system.color[colorType].overlay.mixin,
+    system.opacity[colorType].hover
+  );
+};
+
+/**
+ * The `colorSpace.pressed()` function is used in `active` or `pressed` interactive states. It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) for interactive states
+ * and takes three parameters: `color`, `fallback` and `colorType`.
+ * ```tsx
+ * '&:active': {
+ *  backgroundColor: colorSpace.pressed(color, fallback, colorType)
+ * }
+ * ```
+ * - `color`: Base color value.
+ * - `fallback`: Fallback color value if the base color is not defined or invalid.
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+ *
+ * @param color
+ * The value being darkened.
+ *
+ * @param fallback
+ * This is the color that will be used if `color` is not defined.
+ *
+ * @param colorType
+ * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
+ */
+const pressed = (color: string, fallback: string, colorType: 'accent' | 'surface') => {
+  return darken(
+    color,
+    fallback,
+    system.color[colorType].overlay.mixin,
+    system.opacity[colorType].pressed
+  );
+};
+
 export const colorSpace = {
   darken,
+  hover,
+  pressed,
 };

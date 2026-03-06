@@ -11,17 +11,26 @@ export const handleColorSpace = createPropertyTransform((node, context) => {
     ts.isPropertyAccessExpression(node.expression) &&
     ts.isIdentifier(node.expression.expression) &&
     node.expression.expression.text === 'colorSpace' &&
-    ts.isIdentifier(node.expression.name) &&
-    node.expression.name.text === 'darken'
+    ts.isIdentifier(node.expression.name)
   ) {
     const args = node.arguments.map(arg => parseNodeToStaticValue(arg, context));
+    const name = node.expression.name.text;
 
-    return colorSpace.darken(
-      args[0] as string,
-      args[1] as string,
-      args[2] as string,
-      args[3] as string
-    );
+    if (name === 'darken') {
+      return colorSpace.darken(
+        args[0] as string,
+        args[1] as string,
+        args[2] as string,
+        args[3] as string
+      );
+    }
+    if (name === 'hover' || name === 'pressed') {
+      return colorSpace[name](
+        args[0] as string,
+        args[1] as string,
+        args[2] as 'accent' | 'surface'
+      );
+    }
   }
 
   return;
