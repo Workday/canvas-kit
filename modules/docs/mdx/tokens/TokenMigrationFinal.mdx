@@ -43,7 +43,7 @@ semantic meaning and theming support.
 #### Before (Old Tokens)
 
 ```javascript
-import {colors, space, borderRadius, type, depth} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 import {createStyles} from '@workday/canvas-kit-styling';
 
 const cardStyles = createStyles({
@@ -75,25 +75,25 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const cardStyles = createStyles({
-  padding: system.space.x8,
-  backgroundColor: system.color.bg.default,
+  padding: system.padding.xxl,
+  backgroundColor: system.color.surface.default,
   border: `solid ${px2rem(1)}`,
-  borderColor: system.color.border.container,
-  borderRadius: system.shape.x1,
-  color: system.color.text.default,
+  borderColor: system.color.border.strong,
+  borderRadius: system.shape.sm,
+  color: system.color.fg.default,
   boxShadow: system.depth[1],
-  ...system.type.body.medium,
+  ...system.type.body.md,
 });
 
 const headerStyles = createStyles({
-  color: system.color.text.default,
-  marginBottom: system.space.x4,
-  ...system.type.heading.small,
+  color: system.color.fg.default,
+  marginBottom: system.gap.md,
+  ...system.type.heading.sm,
 });
 
 const errorTextStyles = createStyles({
-  color: system.color.text.critical.default,
-  ...system.type.subtext.large,
+  color: system.color.fg.danger.default,
+  ...system.type.subtext.lg,
 });
 ```
 
@@ -102,7 +102,8 @@ const errorTextStyles = createStyles({
 #### Before (Old Tokens)
 
 ```javascript
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const inputStyles = createStyles({
   padding: `${space.xs} ${space.s}`,
@@ -128,25 +129,26 @@ const inputStyles = createStyles({
 #### After (New Tokens - System Approach)
 
 ```javascript
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const inputStyles = createStyles({
-  padding: `${system.space.x3} ${system.space.x4}`,
-  backgroundColor: system.color.bg.default,
+  padding: `${system.padding.sm} ${system.padding.md}`,
+  backgroundColor: system.color.surface.default,
   borderColor: system.color.border.default,
-  borderRadius: system.shape.half,
-  color: system.color.text.default,
+  borderRadius: px2rem(2),
+  color: system.color.fg.default,
   '&:focus': {
-    borderColor: system.color.border.contrast,
-    backgroundColor: system.color.bg.default,
+    borderColor: system.color.border.primary.default,
+    backgroundColor: system.color.surface.default,
   },
   '&.error': {
     borderColor: system.color.border.critical.default,
-    backgroundColor: system.color.bg.critical.subtle,
+    backgroundColor: system.color.surface.critical.default,
   },
   '&:disabled': {
-    backgroundColor: system.color.bg.disabled,
-    color: system.color.text.disabled,
+    backgroundColor: system.color.surface.raised,
+    color: system.color.fg.disabled,
   },
 });
 ```
@@ -156,8 +158,10 @@ const inputStyles = createStyles({
 #### Before (Old Tokens)
 
 ```javascript
-import {colors, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {theme} from '@emotion/react';
+
+import {borderRadius, colors, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const primaryButtonStyles = createStyles({
   padding: `${space.xs} ${space.m}`,
@@ -174,16 +178,17 @@ const primaryButtonStyles = createStyles({
 #### After (New Tokens - Brand + System)
 
 ```javascript
-import {system, brand} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 const primaryButtonStyles = createStyles({
-  padding: `${system.space.x3} ${system.space.x6}`,
-  backgroundColor: brand.primary.base,
-  borderColor: brand.primary.base,
-  borderRadius: system.shape.x1,
-  color: brand.primary.accent,
+  padding: `${system.padding.sm} ${system.padding.xl}`,
+  backgroundColor: brand.primary600,
+  borderColor: brand.common.focus,
+  borderRadius: system.shape.sm,
+  color: system.color.fg.inverse,
   '&:hover': {
-    backgroundColor: brand.primary.dark,
+    backgroundColor: brand.primary800,
   },
 });
 ```
