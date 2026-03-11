@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {BodyText} from '@workday/canvas-kit-react/text';
 
 export const Basic = () => (

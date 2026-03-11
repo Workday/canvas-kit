@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 export interface PaginationNavProps extends Omit<FlexProps, 'as'> {
   'aria-label': string;

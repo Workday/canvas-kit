@@ -1,6 +1,6 @@
 import {createStyles} from '@workday/canvas-kit-styling';
-
 import * as systemIcons from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const buttonLayout = createStyles({
   display: 'flex',
@@ -12,7 +12,7 @@ const blueBackground = createStyles({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: '#0875e1',
+  backgroundColor: system.color.surface.contrast.default,
   padding: '12px',
   borderRadius: '4px',
 });

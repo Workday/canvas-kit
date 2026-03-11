@@ -1,7 +1,8 @@
 import {Identifier, Transform} from 'jscodeshift';
+
 import {addMissingImports, getImports} from '../v13.2/utils';
-import {transformObjectPropertyRecursively} from './utils/transformObjectPropertyRecursively';
 import baseMapping from './baseMapping';
+import {transformObjectPropertyRecursively} from './utils/transformObjectPropertyRecursively';
 
 type DeclarationType = {[key: string]: any};
 

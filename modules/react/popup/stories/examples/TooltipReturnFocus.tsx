@@ -1,13 +1,13 @@
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
-  usePopupModel,
+  useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {menuGroupIcon} from '@workday/canvas-system-icons-web';
 
 export const TooltipReturnFocus = () => {

@@ -1,15 +1,16 @@
 // refactor for v5
 /// <reference types="@types/node" />
-
 import {useTheme as useEmotionTheme} from '@emotion/react';
-import {
-  defaultCanvasTheme,
-  EmotionCanvasTheme,
-  PartialEmotionCanvasTheme,
-  CanvasTheme,
-} from './index';
+
 import {cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+
+import {
+  CanvasTheme,
+  EmotionCanvasTheme,
+  PartialEmotionCanvasTheme,
+  defaultCanvasTheme,
+} from './index';
 
 /**
  * Attempt to match chroma-js's darken/brighten behavior using OKLCH.

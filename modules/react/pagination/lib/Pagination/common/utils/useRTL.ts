@@ -1,7 +1,7 @@
 import {
-  useTheme,
-  PartialEmotionCanvasTheme,
   ContentDirection,
+  PartialEmotionCanvasTheme,
+  useTheme,
 } from '@workday/canvas-kit-react/common';
 
 export const useRTL = (partialTheme?: PartialEmotionCanvasTheme) => {

@@ -1,7 +1,8 @@
 import React from 'react';
+
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

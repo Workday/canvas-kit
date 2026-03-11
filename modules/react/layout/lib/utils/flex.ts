@@ -1,6 +1,6 @@
-import {Property, Globals} from 'csstype';
+import {Globals, Property} from 'csstype';
 
-import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {StyleFnConfig, buildStyleFns, buildStylePropFn} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
 /** style props to for CSS flexbox container properties

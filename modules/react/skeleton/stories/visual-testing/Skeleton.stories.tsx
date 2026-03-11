@@ -1,6 +1,7 @@
-import * as React from 'react';
-import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 import styled from '@emotion/styled';
+import * as React from 'react';
+
+import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
 export default {
   title: 'Testing/Indicators/Skeleton',

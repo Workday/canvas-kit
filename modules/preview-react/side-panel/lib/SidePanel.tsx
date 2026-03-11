@@ -1,9 +1,11 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {SidePanelContext} from './hooks';
+
 import {SidePanelToggleButton} from './SidePanelToggleButton';
+import {SidePanelContext} from './hooks';
 
 /**
  * @deprecated ⚠️ `SidePanelVariant` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.

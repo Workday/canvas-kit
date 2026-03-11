@@ -46,9 +46,7 @@ development engineers can then take care of the implementation.
 ### Outline
 
 - Modal
-
   - when target button is clicked
-
     - should open the modal
     - should move focus to the first focusable element inside the modal
     - should trap focus inside the modal
@@ -114,11 +112,11 @@ describe('Modal', () => {
     });
 
     it('should trap focus inside the modal', () => {
-      cy.tab()
+      cy.realPress('Tab');
         .should('contain', 'Cancel')
-        .tab()
+        .realPress('Tab');
         .should('contain', 'Delete Item')
-        .tab();
+        .realPress('Tab');
 
       h.modal
         .get()

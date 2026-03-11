@@ -1,8 +1,10 @@
-import * as React from 'react';
 import {CSSObject} from '@emotion/styled';
+import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+
 import {svgStencil} from './Svg';
-import {createStencil, CSProps, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 /**
  * @deprecated Interface `GraphicStyles` will be removed in a future version. `grow` prop will be moved inside `GraphicProps`.

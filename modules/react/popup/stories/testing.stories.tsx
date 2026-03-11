@@ -1,24 +1,25 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
+  useCloseOnOutsideClick,
   useFocusTrap,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 
 import {CloseOnTargetHiddenTest as CloseOnTargetHiddenTestExample} from './examples/CloseOnTargetHiddenTest';
-import {ReturnFocusTest as ReturnFocusTestExample} from './examples/ReturnFocusTest';
+import {ComboboxWithinPopup as ComboboxWithinPopupExample} from './examples/ComboboxWithinPopup';
 import {MixedPopupTypes as MixedPopupTypesExample} from './examples/MixedPopupTypes';
 import {PopupWithNonHidablePopup as PopupWithNonHidablePopupExample} from './examples/PopupWithNonHidablePopup';
+import {ReturnFocusTest as ReturnFocusTestExample} from './examples/ReturnFocusTest';
 import {TooltipReturnFocus as TooltipReturnFocusExample} from './examples/TooltipReturnFocus';
-import {ComboboxWithinPopup as ComboboxWithinPopupExample} from './examples/ComboboxWithinPopup';
 
 export default {
   title: 'Testing/Popups/Popup',

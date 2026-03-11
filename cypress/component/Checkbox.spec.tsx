@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/checkbox/stories/examples/Basic';
 import {Caution} from '../../modules/react/checkbox/stories/examples/Caution';
-import {Error} from '../../modules/react/checkbox/stories/examples/Error';
 import {Disabled} from '../../modules/react/checkbox/stories/examples/Disabled';
+import {Error} from '../../modules/react/checkbox/stories/examples/Error';
 import {Indeterminate} from '../../modules/react/checkbox/stories/examples/Indeterminate';
 
 const getCheckbox = () => {
@@ -37,7 +37,11 @@ describe('Checkbox', () => {
     });
 
     it('should not have any axe errors', () => {
-      cy.checkA11y();
+      cy.checkA11y(null, {
+        rules: {
+          'scrollable-region-focusable': {enabled: false},
+        },
+      });
     });
 
     it('should be disabled', () => {

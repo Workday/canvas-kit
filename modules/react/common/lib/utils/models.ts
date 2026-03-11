@@ -21,7 +21,7 @@ type IEvent = {[key: string]: {bivarianceHack(data?: object): void}['bivarianceH
 type EventMap<
   TEvents extends IEvent,
   TGuardMap extends Record<string, keyof TEvents>,
-  TCallbackMap extends Record<string, keyof TEvents>
+  TCallbackMap extends Record<string, keyof TEvents>,
 > = {
   guards: TGuardMap;
   callbacks: TCallbackMap;
@@ -30,7 +30,7 @@ type EventMap<
 type ToGuardConfig<
   TState extends Record<string, any>,
   TEvents extends IEvent,
-  TGuardMap extends Record<string, keyof TEvents>
+  TGuardMap extends Record<string, keyof TEvents>,
 > = {
   [K in keyof TGuardMap]: (event: {
     data: Parameters<TEvents[TGuardMap[K]]>[0];
@@ -41,7 +41,7 @@ type ToGuardConfig<
 type ToCallbackConfig<
   TState extends Record<string, any>,
   TEvents extends IEvent,
-  TCallbackMap extends Record<string, keyof TEvents>
+  TCallbackMap extends Record<string, keyof TEvents>,
 > = {
   [K in keyof TCallbackMap]: (event: {
     data: Parameters<TEvents[TCallbackMap[K]]>[0];
@@ -69,7 +69,7 @@ type ToCallbackConfig<
 export type ToModelConfig<
   TState extends Record<string, any>,
   TEvents extends IEvent,
-  TEventMap extends EventMap<TEvents, any, any>
+  TEventMap extends EventMap<TEvents, any, any>,
 > = ToGuardConfig<TState, TEvents, TEventMap['guards']> &
   ToCallbackConfig<TState, TEvents, TEventMap['callbacks']>;
 
@@ -103,7 +103,7 @@ export const createEventMap =
   <TEvents extends IEvent>() =>
   <
     TGuardMap extends Record<string, keyof TEvents>,
-    TCallbackMap extends Record<string, keyof TEvents>
+    TCallbackMap extends Record<string, keyof TEvents>,
   >(
     config: Partial<EventMap<TEvents, TGuardMap, TCallbackMap>>
   ): EventMap<TEvents, TGuardMap, TCallbackMap> => {
@@ -142,7 +142,7 @@ export const useEventMap = <
   TCallbackMap extends Record<string, keyof TEvents>,
   TConfig extends Partial<
     ToModelConfig<TState, TEvents, EventMap<TEvents, TGuardMap, TCallbackMap>>
-  >
+  >,
 >(
   eventMap: EventMap<TEvents, TGuardMap, TCallbackMap>,
   state: TState,
@@ -213,7 +213,7 @@ export const createEvents =
   <TEvents extends EventCreator>(events: TEvents) =>
   <
     TGuardMap extends Record<string, keyof TEvents>,
-    TCallbackMap extends Record<string, keyof TEvents>
+    TCallbackMap extends Record<string, keyof TEvents>,
   >(
     config?: Partial<EventMap<ToEvent<TEvents>, TGuardMap, TCallbackMap>>
   ) => {
@@ -233,7 +233,7 @@ export type ModelExtras<
   TRequiredConfig,
   TState,
   TEvents extends Record<string, any>,
-  TModel
+  TModel,
 > = {
   /** Default config of the model. Useful when composing models to reused config */
   defaultConfig: TDefaultConfig;
@@ -559,35 +559,38 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     }
 
     const wrappedEvents = React.useMemo(() => {
-      return keys(eventsRef.current).reduce((result, key) => {
-        result[key] = (data?: any) => {
-          // Invoke the configured guard if there is one
-          if (!(eventsRef.current[key] as any)._wrapped) {
-            const guardFnName = getGuardName(key);
+      return keys(eventsRef.current).reduce(
+        (result, key) => {
+          result[key] = (data?: any) => {
+            // Invoke the configured guard if there is one
+            if (!(eventsRef.current[key] as any)._wrapped) {
+              const guardFnName = getGuardName(key);
 
-            if (
-              configRef.current[guardFnName] &&
-              !configRef.current[guardFnName](data, stateRef.current)
-            ) {
-              return;
+              if (
+                configRef.current[guardFnName] &&
+                !configRef.current[guardFnName](data, stateRef.current)
+              ) {
+                return;
+              }
             }
-          }
 
-          // call the event (setter)
-          eventsRef.current[key](data);
+            // call the event (setter)
+            eventsRef.current[key](data);
 
-          const callbackFnName = getCallbackName(key);
-          if (!(eventsRef.current[key] as any)._wrapped) {
-            if (configRef.current[callbackFnName]) {
-              configRef.current[callbackFnName](data, stateRef.current);
+            const callbackFnName = getCallbackName(key);
+            if (!(eventsRef.current[key] as any)._wrapped) {
+              if (configRef.current[callbackFnName]) {
+                configRef.current[callbackFnName](data, stateRef.current);
+              }
             }
-          }
-        };
+          };
 
-        // Mark this function has been wrapped so we can detect wrapped events and not call guards and callbacks multiple times
-        (result[key] as any)._wrapped = true;
-        return result;
-      }, {} as Record<string, any>);
+          // Mark this function has been wrapped so we can detect wrapped events and not call guards and callbacks multiple times
+          (result[key] as any)._wrapped = true;
+          return result;
+        },
+        {} as Record<string, any>
+      );
     }, []);
 
     // The model context is private and should never be used
@@ -604,7 +607,7 @@ export const createModelHook = <TDefaultConfig extends {}, TRequiredConfig exten
     TModelFn extends (config: TDefaultConfig & TRequiredConfig) => {
       state: {};
       events: Record<string, (...args: any) => void>;
-    }
+    },
   >(
     fn: TModelFn
   ): ModelFn<TDefaultConfig, TRequiredConfig, ReturnType<TModelFn>> => {

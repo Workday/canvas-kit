@@ -1,7 +1,7 @@
-import {tokensMap} from './tokensMap';
-import {varToMemberExpression} from '../../v13.2/utils/varToMemberExpression';
 import {systemColors} from '../../v13.2/mapping';
 import {addMissingImports} from '../../v13.2/utils';
+import {varToMemberExpression} from '../../v13.2/utils/varToMemberExpression';
+import {tokensMap} from './tokensMap';
 
 const createSystemToken = (key: any, system: string) =>
   key ? `system.${system}${isNaN(key) ? `.${key}` : `[${key}]`}` : null;

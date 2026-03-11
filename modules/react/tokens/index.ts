@@ -11,31 +11,31 @@ import {
   typeColors,
 } from '@workday/canvas-colors-web';
 
+import {BrandingColor, CanvasColor} from './lib/colors.types';
+import {CanvasDepth, CanvasDepthValues, depth} from './lib/depth';
 import {
-  borderRadius,
   CanvasBorderRadius,
   CanvasBorderRadiusKeys,
   CanvasBorderRadiusValues,
+  borderRadius,
 } from './lib/radius';
-import {BrandingColor, CanvasColor} from './lib/colors.types';
-import {depth, CanvasDepth, CanvasDepthValues} from './lib/depth';
 import {
-  space,
   CanvasSpace,
   CanvasSpaceKeys,
-  CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
+  CanvasSpaceValues,
+  space,
   spaceNumbers,
 } from './lib/space';
 import {
-  type,
-  fontFamily,
-  monoFontFamily,
   CanvasType,
+  CanvasTypeHierarchy,
   CanvasTypeProperties,
   CanvasTypeVariants,
-  CanvasTypeHierarchy,
+  fontFamily,
+  monoFontFamily,
+  type,
 } from './lib/type';
 import {CSSProperties} from './lib/types';
 

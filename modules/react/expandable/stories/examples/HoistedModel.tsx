@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

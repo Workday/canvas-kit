@@ -1,17 +1,17 @@
 import React from 'react';
 
+import {Banner} from '@workday/canvas-kit-react/banner';
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {loopIcon} from '@workday/canvas-system-icons-web';
-import {Banner} from '@workday/canvas-kit-react/banner';
 import {
   createStencil,
   createStyles,
   createVars,
-  keyframes,
-  handleCsProp,
   cssVar,
+  handleCsProp,
+  keyframes,
 } from '@workday/canvas-kit-styling';
+import {loopIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({

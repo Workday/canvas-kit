@@ -10,6 +10,7 @@ export {styleTransformer};
 export {withDefaultContext} from './lib/styleTransform';
 export {getClassName} from './lib/utils/handleCreateStencil';
 export {StylingWebpackPlugin} from './lib/webpackPlugin';
+export {vitePluginTypescriptWithTransformers} from './lib/vitePlugin';
 
 // be compatible with ts-patch which expects a default export
 export default styleTransformer;
