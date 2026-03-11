@@ -25,6 +25,7 @@ const sanitizeMdxFile = (inFile, outFile) => {
     const result = data
       // Remove storybook stuff
       .replace(/import {.*} from '@storybook\/(addon-docs|blocks)';/g, '')
+      .replace(/\n?import \* as \w+Stories from '\.\/\w+\.stories';\n?/g, '')
       .replace(/\n?import \w+ from '\.\/\w+\.stories';\n?/g, '')
       .replace(/<Meta.* \/>\n/g, '')
       .replace(/^\s+|\s+$/g, '')
