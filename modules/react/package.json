@@ -58,6 +58,7 @@
     "@workday/canvas-system-icons-web": "^3.0.36",
     "@workday/canvas-tokens-web": "4.1.2",
     "@workday/design-assets-types": "^0.2.10",
+    "colorjs.io": "^0.6.0",
     "chroma-js": "^2.2.0",
     "csstype": "^3.0.2",
     "react-innertext": "^1.1.5",
