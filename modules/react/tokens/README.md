@@ -202,10 +202,7 @@ There are several important aspects to understand in order to put them to best u
 
 ### Fonts
 
-To use the Canvas Kit font
-[install and import the `@workday/canvas-kit-react-fonts` module](https://github.com/Workday/canvas-kit/tree/master/modules/fonts/react).
-
-> **Note:** This module sources fonts from the Workday CDN.
+To use Canvas fonts for local development, testing, and documentation [install and import the `@workday/canvas-kit-react/fonts` module](https://github.com/Workday/canvas-kit/tree/master/modules/react/fonts).
 
 ### Rem Units
 

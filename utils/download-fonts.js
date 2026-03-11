@@ -1,17 +1,14 @@
 import fs from 'node:fs';
 import https from 'node:https';
-import {dirname, resolve} from 'node:path';
+import {dirname, resolve, parse} from 'node:path';
 import {fileURLToPath} from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-const fontBaseUrl = 'https://design.workdaycdn.com/beta/assets/fonts@1.0.0/roboto/ttf/';
 const fontsToDownload = [
-  'Roboto-Light.ttf',
-  'Roboto-Regular.ttf',
-  'Roboto-Medium.ttf',
-  'Roboto-Bold.ttf',
-  'RobotoMono-Regular.ttf',
+  'https://design.workdaycdn.com/assets/fonts/Inter/Inter.ttf',
+  'https://design.workdaycdn.com/assets/fonts/Inter/Inter-Italic.ttf',
+  'https://design.workdaycdn.com/assets/fonts/Roboto/Roboto-Mono.ttf'
 ];
 
 async function download(url, filePath) {
@@ -55,8 +52,9 @@ async function main() {
     fs.mkdirSync(resolve(__dirname, '../public'));
   }
   await Promise.all(
-    fontsToDownload.map(fileName => {
-      return download(fontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
+    fontsToDownload.map(filePath => {
+      const {base} = parse(filePath);
+      return download(filePath, resolve(__dirname, '../public', base));
     })
   );
 }

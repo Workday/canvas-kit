@@ -2276,7 +2276,7 @@ injectGlobal({
 
 ```tsx
 import {createRoot} from 'react-dom/client';
-import {fonts} from '@workday/canvas-kit-react-fonts';
+import {fonts} from '@workday/canvas-kit-react/fonts';
 import {system} from '@workday/canvas-tokens-web';
 import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
 import {App} from './App';
