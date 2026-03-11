@@ -8,10 +8,10 @@ import {calc} from './calc';
  * string and returns a string with CSS variables wrapped if necessary.
  *
  * ```ts
- * maybeWrapCSSVariables('1rem'); // 1rem
- * maybeWrapCSSVariables('--foo'); // var(--foo)
- * maybeWrapCSSVariables('var(--foo)'); // var(--foo)
- * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
+ * maybeWrapValue('1rem'); // 1rem
+ * maybeWrapValue('--foo'); // var(--foo)
+ * maybeWrapValue('var(--foo)'); // var(--foo)
+ * maybeWrapValue('calc(--foo)'); // calc(var(--foo))
  * ```
  */
 export function maybeWrapValue(input: string, fallback: string): string {
