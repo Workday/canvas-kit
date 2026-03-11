@@ -42,4 +42,15 @@ allFiles.forEach(file => console.log(`  - ${file}`));
 
 allFiles.forEach(file => copyFile(file));
 
+const storyViewerSrc = path.resolve(__dirname, 'story-viewer.html');
+const storyViewerDest = path.resolve(__dirname, '../dist/apps/story-viewer.html');
+if (fs.existsSync(storyViewerSrc)) {
+  const appsDir = path.dirname(storyViewerDest);
+  if (!fs.existsSync(appsDir)) {
+    fs.mkdirSync(appsDir, {recursive: true});
+  }
+  fs.copyFileSync(storyViewerSrc, storyViewerDest);
+  console.log('  - story-viewer.html -> dist/apps/');
+}
+
 console.log('\nCopy completed successfully!');
