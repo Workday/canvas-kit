@@ -27,7 +27,7 @@ const sanitizeMdxFile = (inFile, outFile) => {
       .replace(/import {.*} from '@storybook\/(addon-docs|blocks)';/g, '')
       .replace(/\n?import \* as \w+Stories from '\.\/\w+\.stories';\n?/g, '')
       .replace(/\n?import \w+ from '\.\/\w+\.stories';\n?/g, '')
-      .replace(/<Meta.* \/>\n/g, '')
+      .replace(/<Meta.*\s*\/>\n/g, '')
       .replace(/^\s+|\s+$/g, '')
       // The replace below converts named imports from files in the examples
       // folder to default imports (this is required by canvas-site in order
