@@ -1,17 +1,24 @@
-import { SymbolDoc, Specifications, ExampleCodeBlock, StorybookStatusIndicator } from '@workday/canvas-kit-docs';
+import {
+    ExampleCodeBlock,
+    Specifications,
+    StorybookStatusIndicator,
+    SymbolDoc,
+} from '@workday/canvas-kit-docs';
 
 import { Meta } from '@storybook/blocks';
+
 import { Avatar } from '@workday/canvas-kit-react/avatar';
+
 import { Basic } from './examples/Basic';
+import { Custom } from './examples/Custom';
+import { Decorative } from './examples/Decorative';
 import { Image } from './examples/Image';
 import { Size } from './examples/Size';
 import { Variant } from './examples/Variant';
-import { Custom } from './examples/Custom';
-import { Decorative } from './examples/Decorative';
 
 import AvatarStoriesMeta from './Avatar.stories';
 
-<Meta title="Avatar" component={Avatar} of={AvatarStoriesMeta}/>
+<Meta title="Avatar" component={Avatar} of={AvatarStoriesMeta} />
 
 # Avatar <StorybookStatusIndicator type="promoted" />
 
@@ -21,13 +28,13 @@ import AvatarStoriesMeta from './Avatar.stories';
 yarn add @workday/canvas-kit-react
 ```
 
-
 ## Usage
 
 ### Basic Example
 
 The most basic usage requires only a `name` prop. The component automatically extracts and displays
-the initials. If you want to display a different set of initials, you can use the `preferredInitials` prop.
+the initials. If you want to display a different set of initials, you can use the
+`preferredInitials` prop.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -35,7 +42,8 @@ the initials. If you want to display a different set of initials, you can use th
 
 You can display a profile image by providing the `url` prop.
 
-> Note: The `url` and the `name` prop is required for the image avatar. The `name` is used for the `alt` attribute on the image.
+> Note: The `url` and the `name` prop is required for the image avatar. The `name` is used for the
+> `alt` attribute on the image.
 
 #### Image Fallback Behavior
 
@@ -50,6 +58,7 @@ The Avatar component includes intelligent fallback handling:
 ### Sizes
 
 The Avatar component supports the following sizes:
+
 - `extraExtraSmall` is 24px x 24px
 - `extraSmall` is 32px x 32px
 - `small` is 40px x 40px
@@ -73,7 +82,9 @@ For complete control over styling and behavior, use the `BaseAvatar` component:
 <ExampleCodeBlock code={Custom} />
 
 ### Accessibility
-If the Avatar is purely decorative, you can set the `isDecorative` prop to `true` to prevent the `name` prop from being forwarded to the `alt` attribute of the image.
+
+If the Avatar is purely decorative, you can set the `isDecorative` prop to `true` to prevent the
+`name` prop from being forwarded to the `alt` attribute of the image.
 
 <ExampleCodeBlock code={Decorative} />
 
