@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.36](https://github.com/Workday/canvas-kit/releases/tag/v14.2.36) (2026-03-12)
+
+### Documentation
+
+- fix: Update v4 token migration guide ([#3832](https://github.com/Workday/canvas-kit/pull/3832)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova, [@alanbsmith](https://github.com/alanbsmith), [@Copilot](https://github.com/Copilot))
+
+
 ## [v14.2.35](https://github.com/Workday/canvas-kit/releases/tag/v14.2.35) (2026-03-11)
 
 ### Components
