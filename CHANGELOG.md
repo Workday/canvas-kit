@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.2.37](https://github.com/Workday/canvas-kit/releases/tag/v14.2.37) (2026-03-12)
+
+### Documentation
+
+- fix: Fix formatting ([#3833](https://github.com/Workday/canvas-kit/pull/3833)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+
+
 ## [v14.2.36](https://github.com/Workday/canvas-kit/releases/tag/v14.2.36) (2026-03-12)
 
 ### Documentation
