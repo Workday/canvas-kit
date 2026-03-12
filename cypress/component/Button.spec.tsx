@@ -1,5 +1,5 @@
-import {Primary} from '../../modules/react/button/stories/button/examples/Primary';
 import {Delete} from '../../modules/react/button/stories/button/examples/Delete';
+import {Primary} from '../../modules/react/button/stories/button/examples/Primary';
 
 describe('Button', () => {
   context('given primary buttons are rendered', () => {

@@ -1,9 +1,10 @@
 import React from 'react';
 
 import {createElemPropsHook, useMountLayout} from '@workday/canvas-kit-react/common';
+
 import {orientationKeyMap} from './keyUtils';
-import {useListModel} from './useListModel';
 import {isCursor} from './useCursorListModel';
+import {useListModel} from './useListModel';
 
 /**
  * This elemProps hook resets the cursor when the list looses focus. By default,

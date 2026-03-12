@@ -1,8 +1,8 @@
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 

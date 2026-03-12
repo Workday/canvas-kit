@@ -1,4 +1,4 @@
-import {createContainer, createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent, createContainer} from '@workday/canvas-kit-react/common';
 import {Menu, useMenuModel} from '@workday/canvas-kit-react/menu';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
@@ -25,7 +25,7 @@ export const breadcrumbsMenuCardStencil = createStencil({
   },
 });
 
-export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card, never>) => (
+export const BreadcrumbsMenuCard = (elemProps: ExtractProps<typeof Menu.Card>) => (
   <Menu.Card {...handleCsProp(elemProps, breadcrumbsMenuCardStencil())} />
 );
 

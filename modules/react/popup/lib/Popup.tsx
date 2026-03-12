@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {usePopupModel} from './hooks';
-import {PopupCard} from './PopupCard';
-import {PopupTarget} from './PopupTarget';
-import {PopupPopper} from './PopupPopper';
-import {PopupHeading} from './PopupHeading';
-import {PopupCloseIcon} from './PopupCloseIcon';
-import {PopupCloseButton} from './PopupCloseButton';
 import {PopupBody} from './PopupBody';
+import {PopupCard} from './PopupCard';
+import {PopupCloseButton} from './PopupCloseButton';
+import {PopupCloseIcon} from './PopupCloseIcon';
+import {PopupHeading} from './PopupHeading';
+import {PopupPopper} from './PopupPopper';
+import {PopupTarget} from './PopupTarget';
+import {usePopupModel} from './hooks';
 
 export interface PopupProps {
   /**

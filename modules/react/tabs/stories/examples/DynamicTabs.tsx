@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {slugify} from '@workday/canvas-kit-react/common';
 import {isCursor} from '@workday/canvas-kit-react/collection';
+import {slugify} from '@workday/canvas-kit-react/common';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
 
 type Tab = {
@@ -19,6 +19,7 @@ export const DynamicTabs = () => {
   const addedRef = React.useRef(tabs.length - 1);
   const model = useTabsModel({
     items: tabs,
+    getTextValue: item => item.tab,
     shouldSelect: data => data.id !== 'add',
   });
 

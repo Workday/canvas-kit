@@ -1,17 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './TextInput.mdx';
-
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
+import mdxDoc from './TextInput.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Grow as GrowExample} from './examples/Grow';
+import {Icons as IconsExample} from './examples/Icons';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
-import {Icons as IconsExample} from './examples/Icons';
 
 export default {
   title: 'Components/Inputs/Text Input',

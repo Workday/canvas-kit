@@ -1,9 +1,10 @@
-import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import {validateIconType} from './utils';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {base} from '@workday/canvas-tokens-web';
+import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
+import {validateIconType} from './utils';
 
 export interface SvgProps extends BoxProps {
   src: CanvasIcon;

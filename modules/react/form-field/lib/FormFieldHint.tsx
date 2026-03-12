@@ -1,23 +1,25 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system, brand} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldHint, useFormFieldModel} from './hooks';
 
 export const formFieldHintStencil = createStencil({
   extends: textStencil,
   base: {
-    margin: system.space.zero,
+    margin: 0,
   },
   modifiers: {
     error: {
       error: {
-        color: brand.error.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
       },
       caution: {
-        color: system.color.text.caution.default,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        color: cssVar(system.color.fg.default, system.color.text.caution.default),
       },
     },
   },

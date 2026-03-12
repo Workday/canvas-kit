@@ -1,10 +1,10 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
+import React from 'react';
 
 import {Select} from '../lib/Select';
 
 describe('Select', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
 
   const role = 'combobox';
 

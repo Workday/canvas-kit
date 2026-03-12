@@ -24,8 +24,9 @@ const sanitizeMdxFile = (inFile, outFile) => {
     }
     const result = data
       // Remove storybook stuff
-      .replace(/import {.*} from '@storybook\/addon-docs';/g, '')
+      .replace(/import {.*} from '@storybook\/(addon-docs|blocks)';/g, '')
       .replace(/\n?import \* as \w+Stories from '\.\/\w+\.stories';\n?/g, '')
+      .replace(/\n?import \w+ from '\.\/\w+\.stories';\n?/g, '')
       .replace(/<Meta.* \/>\n/g, '')
       .replace(/^\s+|\s+$/g, '')
       // The replace below converts named imports from files in the examples
@@ -45,7 +46,9 @@ const sanitizeMdxFile = (inFile, outFile) => {
       .replace(/import {\s?(\w+)\s?} from '\.\/examples/g, "import $1 from './examples");
 
     fs.writeFile(outFile, result, 'utf8', err => {
-      if (err) return console.error(err);
+      if (err) {
+        return console.error(err);
+      }
     });
   });
 };

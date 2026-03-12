@@ -1,7 +1,8 @@
 import * as React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
 
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
+
 import {Placement} from '../Popper';
 
 // eslint-disable-next-line no-empty-function

@@ -1,9 +1,10 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Dialog} from '@workday/canvas-kit-react/dialog';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const Basic = () => {
   const [value, setValue] = React.useState('');

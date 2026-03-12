@@ -22,8 +22,8 @@ export type MergeProps<T, U> = {
         : U[K] // `K` is in both `T` and `U`, but isn't `null` in `T[K]`, so return `U[K]`
       : T[K] // `K` is only in `T`, so return `T[K]`
     : K extends keyof U // K is not in `T`, so test if it is in `U`. This should always match at this point, but there's no "else" in type ternaries
-    ? U[K] // K is only in `U`, so return `U[K]`
-    : never; // We should never get here, but type ternaries need all paths defined. `never` is usually used in these cases
+      ? U[K] // K is only in `U`, so return `U[K]`
+      : never; // We should never get here, but type ternaries need all paths defined. `never` is usually used in these cases
 };
 
 // This file suppresses TS errors that come from merging interfaces of elements that aren't

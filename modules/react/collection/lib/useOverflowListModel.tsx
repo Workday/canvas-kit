@@ -1,8 +1,9 @@
 import React from 'react';
 
 import {createModelHook} from '@workday/canvas-kit-react/common';
-import {useSelectionListModel} from './useSelectionListModel';
+
 import {Item} from './useBaseListModel';
+import {useSelectionListModel} from './useSelectionListModel';
 
 export function getHiddenIds(
   containerSize: number,

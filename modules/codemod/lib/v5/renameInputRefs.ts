@@ -1,4 +1,5 @@
-import {API, FileInfo, Options, JSXIdentifier} from 'jscodeshift';
+import {API, FileInfo, JSXIdentifier, Options} from 'jscodeshift';
+
 import {getImportRenameMap} from './getImportRenameMap';
 
 const inputsMap: {

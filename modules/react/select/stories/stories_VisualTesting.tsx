@@ -1,14 +1,14 @@
 import * as React from 'react';
 
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Inputs/Select',

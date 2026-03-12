@@ -1,12 +1,13 @@
 import * as React from 'react';
 
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+
 export const SidePanelContext = React.createContext({
   state: 'expanded',
   origin: 'left' as 'left' | 'right',
   handleAnimationStart: () => undefined,
 });
 
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 /**
  * The optional config options for the `useSidePanel` hook
  * @deprecated ⚠️ `UseSidePanelProps` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead.

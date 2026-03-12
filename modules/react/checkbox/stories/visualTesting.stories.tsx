@@ -1,13 +1,15 @@
 import * as React from 'react';
 
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Checkbox',
@@ -129,7 +131,13 @@ export const InverseCheckboxStates = () => (
       )}
     >
       {props => (
-        <div style={{backgroundColor: '#0875e1', padding: '12px', borderRadius: '4px'}}>
+        <div
+          style={{
+            backgroundColor: cssVar(system.color.surface.contrast.default),
+            padding: cssVar(system.padding.sm),
+            borderRadius: cssVar(system.shape.sm),
+          }}
+        >
           <Checkbox
             {...props}
             onChange={() => {}} // eslint-disable-line no-empty-function

@@ -1,9 +1,11 @@
 import React from 'react';
-import {PopperController} from '../../../../../utils/storybook';
-import {Placement} from '@workday/canvas-kit-react/popup';
-import {Menu} from '@workday/canvas-kit-react/menu';
-import {BodyText} from '@workday/canvas-kit-react/text';
+
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Menu} from '@workday/canvas-kit-react/menu';
+import {Placement} from '@workday/canvas-kit-react/popup';
+import {BodyText} from '@workday/canvas-kit-react/text';
+
+import {PopperController} from '../../../../../utils/storybook';
 
 export const MenuWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');

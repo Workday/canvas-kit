@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {colors} from '@workday/canvas-kit-react/tokens';
+
+import {styled} from '@workday/canvas-kit-react/common';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {styled} from '@workday/canvas-kit-react/common';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 const Container = styled(Box)({
   columnCount: 3,
