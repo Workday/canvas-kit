@@ -704,7 +704,7 @@ consolidate them.
 
 #### System Border Color Tokens
 
-> Important: The `system.color.border.inverse` token is a breaking change. **Important** This is a >
+> Important: The `system.color.border.inverse` token is a breaking change. **Important** This is a
 > breaking change. Teams will have to update their code to use
 > `system.color.border.inverse.default`.
 
