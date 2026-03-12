@@ -76,7 +76,7 @@ export const Placements = {
           }}
         >
           <Card.Body>
-            Target: We set font to sans serif so we don't have to wait for roboto to load
+            Target: We set font to sans serif so we don't have to wait for Inter to load
           </Card.Body>
         </Card>
         {placements.map(placement => (
@@ -154,7 +154,7 @@ export const PlacementsFocus = {
             }}
           >
             <span style={{whiteSpace: 'normal', textOverflow: 'initial', overflow: 'visible'}}>
-              Target: We set font to sans serif so we don't have to wait for roboto to load
+              Target: We set font to sans serif so we don't have to wait for Inter to load
             </span>
           </SecondaryButton>
           {placements.map(placement => (

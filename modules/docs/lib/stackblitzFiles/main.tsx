@@ -1,6 +1,6 @@
 import {createRoot} from 'react-dom/client';
 
-import {fonts} from '@workday/canvas-kit-react-fonts';
+import {fonts} from '@workday/canvas-kit-react/fonts';
 import {injectGlobal} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import '@workday/canvas-tokens-web/css/base/_variables.css';

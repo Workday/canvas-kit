@@ -21,7 +21,7 @@ export const monoFontFamily =
  * ---
  * There are two font family tokens:
  *
- * - `default`: "Roboto" - what you'll almost always want to choose
+ * - `default`: "Inter" - what you'll almost always want to choose
  * - `monospace`: "Roboto Mono" - what you'll want for monospace type
  *
  * You can find more detailed information by inspecting individual families.
@@ -47,7 +47,7 @@ export const fontFamilies: CanvasFontFamilies = {
  */
 export type CanvasFontFamilies = {
   /**
-   * '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif'
+   * '"Inter", "Helvetica Neue", "Helvetica", Arial, sans-serif'
    * unless the font-family is explicitly set in `window.workday.canvas.inheritFontFamily`
    * */
   default: typeof fontFamily;

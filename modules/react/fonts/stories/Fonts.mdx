@@ -1,0 +1,59 @@
+
+
+# Canvas Kit Fonts
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+The fonts package makes importing font files simple so you know you're using the correct font in your environment. We use three main font families at Workday:
+
+* Inter (for most languages we support)
+* Noto Sans CJK (for Chinese, Japanese, and Korean)
+* Roboto Mono (for monospace type)
+
+> Note: If your application environment already provides these fonts, you don't need to inject them as in the example below. But this package is useful for testing, documentation, and development where you don't have those fonts readily available. This package is likely not appropriate to use in production environments due to how these fonts are [hosted](#hosting-fonts).
+
+You can inject our CSS `@font-face` styles into your application by using `injectGlobal`. We prefer this approach over `@emotion/react`'s [Global](https://emotion.sh/docs/globals) component that injects the styles at runtime.
+
+```ts
+import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
+import {fonts} from '@workday/canvas-kit-react/fonts';
+import {system} from '@workday/canvas-tokens-web';
+
+injectGlobal({
+  ...fonts,
+  'html, body': {
+    fontFamily: cssVar(system.fontFamily.default),
+    margin: 0,
+    minHeight: '100vh',
+  },
+  'code, pre': {
+    fontFamily: system.fontFamily.mono??
+  }
+});
+```
+
+## Hosting Fonts
+
+We currently host all our fonts through durable storage, and this package connects `@font-faces` to those font files. This keeps the package size minimal, while ensuring you don't have to worry about the wiring. But because durable storage is regionally-bound, you might consider using a CDN if your environment experiences degraded performance.
+
+## Variable Fonts
+
+Both Inter and Noto Sans CJK are [variable fonts](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts). That means instead of importing multiple static files, you can import a single, dynamic file that supports multiple font weights and styles. They also provide more flexibility and customization than traditional, static fonts. But you should be able to use them identically to how you've been using other fonts.
+
+## Inter
+
+Our default typeface for Workday is [Inter](https://rsms.me/inter/). It's a widely-used, robust typeface that supports 147 languages. It also provides a clean, modern aesthetic.
+
+## Noto Sans CJK
+
+While Inter has robust language support, there are still gaps. Thankfully, we have [Noto Sans CJK](https://github.com/notofonts/noto-cjk/tree/main/Sans) to support Chinese, Japanese, and Korean. Noto covers three Chinese variants: Simplified Chinese, Traditional Chinese (Taiwan), and Traditional Chinese (Hong Kong).
+
+## Roboto Mono
+
+[Roboto Mono](https://fonts.google.com/specimen/Roboto+Mono) is our choice for all monospace (fixed-width) typography. It's widely-used and has robust support. It's handy for long code snippets, single-line scripts,  or `preformatted` text.

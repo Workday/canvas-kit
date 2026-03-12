@@ -16,7 +16,7 @@ describe('Color Style Props Function', () => {
 
   it('should handle generic props', () => {
     const props: TextStyleProps = {
-      fontFamily: 'Roboto',
+      fontFamily: 'Inter',
       fontSize: '14px',
       fontStyle: 'italic',
       fontWeight: 300,
@@ -42,7 +42,7 @@ describe('Color Style Props Function', () => {
       fontWeight: 'regular',
     };
     const expected = {
-      fontFamily: '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif',
+      fontFamily: '"Inter", "Helvetica Neue", "Helvetica", Arial, sans-serif',
       fontSize: '0.875rem',
       fontWeight: 400,
     };

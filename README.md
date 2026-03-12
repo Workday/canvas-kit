@@ -45,8 +45,8 @@ or
 npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
-> **Note:** If your application does not already provide `Roboto` as a font, you can install
-> `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
+> **Note:** If your application does not already provide `Inter` our our other fonts, you can use
+> `@workday/canvas-kit-react/fonts`. The example below shows how to inject the fonts, but you can
 > omit this if you're already loading fonts.
 
 **Usage**
@@ -55,10 +55,9 @@ To ensure fonts are loaded correctly, update your root `index.js` file.
 
 ```jsx
 import {createRoot} from 'react-dom/client';
-import {injectGlobal} from '@emotion/css';
-import {fonts} from '@workday/canvas-kit-react-fonts';
+import {fonts} from '@workday/canvas-kit-react/fonts';
 import {system} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
