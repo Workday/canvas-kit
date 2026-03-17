@@ -9,6 +9,7 @@ import {RTL} from './examples/RTL';
 import {CustomTarget} from './examples/CustomTarget';
 import {ExternalWindow} from './examples/ExternalWindow';
 import {FullScreen} from './examples/FullScreen';
+import {InlinePopup} from './examples/InlinePopup';
 
 import * as PopupStories from './Popup.stories';
 
@@ -98,7 +99,13 @@ element.
 
 ### Inline Popups With `portal={false}`
 
-TODO: Add example of inline popups with `portal={false}`.
+By default, the popup content is rendered in a portal at the end of `document.body`. Set
+`portal={false}` on `Popup.Popper` to render the popup inline in the DOM next to its target. Inline
+popups stay within their parent container and are constrained by ancestor overflow (e.g.
+`overflow: hidden` or scroll containers), which can be useful for scrollable regions or when you
+need the popup to be part of the document flow.
+
+<ExampleCodeBlock code={InlinePopup} />
 
 ### Focus Trapping
 

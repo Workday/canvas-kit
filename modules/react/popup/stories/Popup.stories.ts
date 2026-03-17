@@ -13,6 +13,7 @@ import {FocusTrap as FocusTrapExample} from './examples/FocusTrap';
 import {RTL as RTLExample} from './examples/RTL';
 import {CustomTarget as CustomTargetExample} from './examples/CustomTarget';
 import {FullScreen as FullScreenExample} from './examples/FullScreen';
+import {InlinePopup as InlinePopupExample} from './examples/InlinePopup';
 
 export default {
   title: 'Components/Popups/Popup',
@@ -53,4 +54,7 @@ export const CustomTarget: Story = {
 };
 export const FullScreen: Story = {
   render: FullScreenExample,
+};
+export const InlinePopup: Story = {
+  render: InlinePopupExample,
 };
