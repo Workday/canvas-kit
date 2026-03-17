@@ -65,12 +65,12 @@ const tertiaryButtonStencil = createStencil({
     // Hover Styles
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.transparent,
-        system.color.bg.alt.soft,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.hover
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.surface.transparent,
+        fallback: system.color.bg.alt.soft,
+        mixinColor: system.color.surface.overlay.mixin,
+        mixinValue: system.opacity.surface.hover,
+      }),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
       [systemIconStencil.vars.color]: cssVar(
@@ -82,12 +82,12 @@ const tertiaryButtonStencil = createStencil({
     // Active Styles
     '&:active, &.active': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.transparent,
-        system.color.bg.alt.default,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.pressed
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.surface.transparent,
+        fallback: system.color.bg.alt.default,
+        mixinColor: system.color.surface.overlay.mixin,
+        mixinValue: system.opacity.surface.pressed,
+      }),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
@@ -154,12 +154,12 @@ const tertiaryButtonStencil = createStencil({
         // Hover Styles
         '&:hover, &.hover': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.background]: colorSpace.darken(
-            system.color.surface.transparent,
-            system.color.bg.transparent.strong,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.hover
-          ),
+          [buttonStencil.vars.background]: colorSpace.darken({
+            color: system.color.surface.transparent,
+            fallback: system.color.bg.transparent.strong,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.hover,
+          }),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
@@ -191,12 +191,12 @@ const tertiaryButtonStencil = createStencil({
         // Active Styles
         '&:active, &.active': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.background]: colorSpace.darken(
-            system.color.surface.transparent,
-            system.color.bg.transparent.stronger,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.pressed
-          ),
+          [buttonStencil.vars.background]: colorSpace.darken({
+            color: system.color.surface.transparent,
+            fallback: system.color.bg.transparent.stronger,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.pressed,
+          }),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },

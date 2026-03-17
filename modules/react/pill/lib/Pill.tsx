@@ -78,12 +78,12 @@ export const pillStencil = createStencil({
     },
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.alt.strong,
-        system.color.bg.alt.strong,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.hover
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.surface.alt.strong,
+        fallback: system.color.bg.alt.strong,
+        mixinColor: system.color.surface.overlay.mixin,
+        mixinValue: system.opacity.surface.hover,
+      }),
       [buttonStencil.vars.border]: system.color.border.transparent,
       [buttonStencil.vars.label]: system.color.fg.stronger,
       [systemIconStencil.vars.color]: 'currentColor',
@@ -91,12 +91,12 @@ export const pillStencil = createStencil({
     },
     '&:active, &.active': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.surface.alt.strong,
-        system.color.bg.alt.stronger,
-        system.color.surface.overlay.mixin,
-        system.opacity.surface.pressed
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.surface.alt.strong,
+        fallback: system.color.bg.alt.stronger,
+        mixinColor: system.color.surface.overlay.mixin,
+        mixinValue: system.opacity.surface.pressed,
+      }),
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: 'currentColor',
       [pillCountStencil.vars.borderColor]: 'transparent',
@@ -166,12 +166,12 @@ export const pillStencil = createStencil({
         },
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: colorSpace.darken(
-            system.color.surface.alt.strong,
-            system.color.bg.alt.strong,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.hover
-          ),
+          [buttonStencil.vars.background]: colorSpace.darken({
+            color: system.color.surface.alt.strong,
+            fallback: system.color.bg.alt.strong,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.hover,
+          }),
           [pillCountStencil.vars.backgroundColor]: cssVar(
             system.color.surface.transparent,
             system.color.bg.muted.softer
@@ -179,12 +179,12 @@ export const pillStencil = createStencil({
         },
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:active, &.active': {
-          [buttonStencil.vars.background]: colorSpace.darken(
-            system.color.surface.alt.strong,
-            system.color.bg.alt.stronger,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.pressed
-          ),
+          [buttonStencil.vars.background]: colorSpace.darken({
+            color: system.color.surface.alt.strong,
+            fallback: system.color.bg.alt.stronger,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.pressed,
+          }),
           [pillCountStencil.vars.backgroundColor]: cssVar(
             system.color.surface.transparent,
             system.color.bg.muted.softer

@@ -119,8 +119,14 @@ it takes four parameters:
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    // colorSpace.darken(firstColor, fallbackColor, mixinColor, percentage)
-    backgroundColor: colorSpace.darken(system.color.brand.accent.primary, brand.primary.darkest, system.color.accent.overlay.mixin, system.opacity.accent.hover)
+    backgroundColor: colorSpace.darken(
+      {
+        color: system.color.brand.accent.primary,
+        fallback: brand.primary.darkest,
+        mixinColor: system.color.accent.overlay.mixin,
+        mixinValue: system.opacity.accent.hover
+      }
+    )
   }
 })
 ```
@@ -140,8 +146,13 @@ it takes three parameters:
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    // colorSpace.hover(firstColor, fallbackColor, colorType)
-    backgroundColor: colorSpace.hover(system.color.brand.accent.primary, brand.primary.darkest, 'accent')
+    backgroundColor: colorSpace.hover(
+      {
+        color: system.color.brand.accent.primary,
+        fallback: brand.primary.darkest,
+        colorType: 'accent'
+      }
+    )
   }
 })
 ```
@@ -161,8 +172,11 @@ it takes three parameters:
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    // colorSpace.pressed(firstColor, fallbackColor, colorType)
-    backgroundColor: colorSpace.pressed(system.color.brand.accent.primary, brand.primary.darkest, 'accent')
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent'
+    })
   }
 })
 ```

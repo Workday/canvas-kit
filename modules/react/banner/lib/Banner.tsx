@@ -62,12 +62,12 @@ export const bannerStencil = createStencil({
         color: cssVar(system.color.fg.inverse, brand.error.accent),
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:hover, &.hover': {
-          background: colorSpace.darken(
-            system.color.brand.accent.critical,
-            brand.error.dark,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.hover
-          ),
+          background: colorSpace.darken({
+            color: system.color.brand.accent.critical,
+            fallback: brand.error.dark,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.hover,
+          }),
         },
         '& [data-part="exclamation-circle-icon"]': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -87,12 +87,12 @@ export const bannerStencil = createStencil({
         color: brand.alert.accent,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:hover, &.hover': {
-          background: colorSpace.darken(
-            system.color.brand.accent.caution,
-            brand.alert.dark,
-            system.color.surface.overlay.mixin,
-            system.opacity.surface.hover
-          ),
+          background: colorSpace.darken({
+            color: system.color.brand.accent.caution,
+            fallback: brand.alert.dark,
+            mixinColor: system.color.surface.overlay.mixin,
+            mixinValue: system.opacity.surface.hover,
+          }),
         },
         '& [data-part="exclamation-triangle-icon"]': {
           // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

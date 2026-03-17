@@ -4,6 +4,7 @@ import {colorSpace} from '@workday/canvas-kit-styling';
 
 import {createPropertyTransform} from '../createPropertyTransform';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {parseStyleObjFromType} from './parseObjectToStaticValue';
 
 export const handleColorSpace = createPropertyTransform((node, context) => {
   if (
@@ -13,22 +14,32 @@ export const handleColorSpace = createPropertyTransform((node, context) => {
     node.expression.expression.text === 'colorSpace' &&
     ts.isIdentifier(node.expression.name)
   ) {
-    const args = node.arguments.map(arg => parseNodeToStaticValue(arg, context));
+    const args = node.arguments.map(arg => {
+      if (ts.isObjectLiteralExpression(arg)) {
+        return parseStyleObjFromType(context.checker.getTypeAtLocation(arg), context);
+      }
+      return parseNodeToStaticValue(arg, context);
+    });
     const name = node.expression.name.text;
 
     if (name === 'darken') {
       return colorSpace.darken(
-        args[0] as string,
-        args[1] as string,
-        args[2] as string,
-        args[3] as string
+        args[0] as {
+          color: string;
+          fallback?: string;
+          mixinColor: string;
+          mixinValue: string;
+        }
       );
     }
+
     if (name === 'hover' || name === 'pressed') {
       return colorSpace[name](
-        args[0] as string,
-        args[1] as string,
-        args[2] as 'accent' | 'surface'
+        args[0] as {
+          color: string;
+          fallback?: string;
+          colorType?: 'accent' | 'surface';
+        }
       );
     }
   }

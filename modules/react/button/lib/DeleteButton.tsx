@@ -52,12 +52,12 @@ const deleteButtonStencil = createStencil({
     // Hover Styles
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.brand.accent.critical,
-        brand.error.dark,
-        system.color.accent.overlay.mixin,
-        system.opacity.accent.hover
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.brand.accent.critical,
+        fallback: brand.error.dark,
+        mixinColor: system.color.accent.overlay.mixin,
+        mixinValue: system.opacity.accent.hover,
+      }),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -69,12 +69,12 @@ const deleteButtonStencil = createStencil({
     // Active Styles
     '&:active, &.active': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: colorSpace.darken(
-        system.color.brand.accent.critical,
-        brand.error.darkest,
-        system.color.accent.overlay.mixin,
-        system.opacity.accent.pressed
-      ),
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.color.brand.accent.critical,
+        fallback: brand.error.darkest,
+        mixinColor: system.color.accent.overlay.mixin,
+        mixinValue: system.opacity.accent.pressed,
+      }),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
