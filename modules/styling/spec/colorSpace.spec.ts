@@ -23,7 +23,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.hover({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(system.color.${colorType}.overlay.mixin}, black) calc(var(system.opacity.${colorType}.hover}, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
       );
     });
   });
@@ -36,7 +36,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.pressed({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(system.color.${colorType}.overlay.mixin}, black) calc(var(system.opacity.${colorType}.pressed, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
       );
     });
   });
