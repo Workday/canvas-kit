@@ -1,15 +1,18 @@
+import {useRef} from 'react';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {
   Popup,
   usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
+  useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const headingStyles = createStyles({
   marginTop: system.space.zero,
@@ -22,6 +25,10 @@ const cardStyles = createStyles({
 const flexStyles = createStyles({
   gap: system.space.x4,
   padding: system.space.x2,
+});
+
+const bodyStyles = createStyles({
+  marginY: system.space.zero,
 });
 
 const clipContainerStyles = createStyles({
@@ -62,10 +69,13 @@ function SingleInlinePopup({
   overflowLabel: string;
   containerStyles: string;
 }) {
-  const model = usePopupModel();
+  const messageId = useUniqueId();
+  const initialFocusRef = useRef(null);
+  const model = usePopupModel({initialFocusRef});
 
   useCloseOnOutsideClick(model);
   useCloseOnEscape(model);
+  useInitialFocus(model);
   useReturnFocus(model);
 
   return (
@@ -76,13 +86,15 @@ function SingleInlinePopup({
       <Popup model={model}>
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <Popup.Popper placement="top" portal={false}>
-          <Popup.Card cs={cardStyles}>
+          <Popup.Card cs={cardStyles} aria-describedby={messageId}>
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <Box as="p">Are you sure you'd like to delete the item titled 'My Item'?</Box>
+              <Box as="p" id={messageId} cs={bodyStyles}>
+                Are you sure you'd like to delete the item titled 'My Item'?
+              </Box>
             </Popup.Body>
             <Flex cs={flexStyles}>
-              <Popup.CloseButton>Cancel</Popup.CloseButton>
+              <Popup.CloseButton ref={initialFocusRef}>Cancel</Popup.CloseButton>
               <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
             </Flex>
           </Popup.Card>
