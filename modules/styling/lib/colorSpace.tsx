@@ -1,3 +1,5 @@
+import {system} from '@workday/canvas-tokens-web';
+
 import {calc} from './calc';
 
 /**
@@ -6,13 +8,13 @@ import {calc} from './calc';
  * string and returns a string with CSS variables wrapped if necessary.
  *
  * ```ts
- * maybeWrapCSSVariables('1rem'); // 1rem
- * maybeWrapCSSVariables('--foo'); // var(--foo)
- * maybeWrapCSSVariables('var(--foo)'); // var(--foo)
- * maybeWrapCSSVariables('calc(--foo)'); // calc(var(--foo))
+ * maybeWrapValue('1rem'); // 1rem
+ * maybeWrapValue('--foo'); // var(--foo)
+ * maybeWrapValue('var(--foo)'); // var(--foo)
+ * maybeWrapValue('calc(--foo)'); // calc(var(--foo))
  * ```
  */
-export function maybeWrapValue(input: string, fallback: string): string {
+export function maybeWrapValue(input: string, fallback?: string): string {
   // matches an string starting with `--` that isn't already wrapped in a `var()`. It tries to match
   // any character that isn't a valid separator in CSS
   return input.replace(
@@ -21,9 +23,28 @@ export function maybeWrapValue(input: string, fallback: string): string {
       if (prefix === 'var(') {
         return match;
       }
-      return `${prefix}var(${variable}, ${fallback.startsWith('--') ? `${prefix}var(${fallback})` : fallback})`;
+      return `${prefix}var(${variable}, ${fallback?.startsWith('--') ? `${prefix}var(${fallback})` : fallback})`;
     }
   );
+}
+
+export interface DarkenProps {
+  /**
+   * The value being darkened.
+   */
+  color: string;
+  /**
+   * This is the color that will be used if `color` is not defined.
+   */
+  fallback?: string;
+  /**
+   * The mixinColor is the color that will be mixed in with `color`.
+   */
+  mixinColor: string;
+  /**
+   * The mixinValue is the percent of the `mixinColor` that will be mixed in with `color`.
+   */
+  mixinValue: string;
 }
 
 /**
@@ -50,10 +71,81 @@ export function maybeWrapValue(input: string, fallback: string): string {
  * The mixinValue is the percent of the `mixinColor` that will be mixed in with `color`.
  *
  */
-const darken = (color: string, fallback: string, mixinColor: string, mixinValue: string) => {
+const darken = ({color, fallback, mixinColor, mixinValue}: DarkenProps) => {
   return `color-mix(in srgb, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
+};
+
+export interface InteractiveStateProps {
+  /**
+   * The value being darkened.
+   */
+  color: string;
+  /**
+   * This is the color that will be used if `color` is not defined.
+   */
+  fallback?: string;
+  /**
+   * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
+   *
+   * @default 'accent'
+   */
+  colorType?: 'accent' | 'surface';
+}
+
+/**
+ * The `colorSpace.hover()` function is used in `hover` interactive states. It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) for interactive states
+ * and takes three parameters: `color`, `fallback` and `colorType`.
+ * ```tsx
+ * '&:hover': {
+ *  backgroundColor: colorSpace.hover(color, fallback, colorType)
+ * }
+ * ```
+ * - `color`: Base color value.
+ * - `fallback`: Fallback color value if the base color is not defined or invalid.
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
+ *
+ */
+const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+  return darken({
+    color: color,
+    fallback: fallback,
+    mixinColor: system.color[colorType].overlay.mixin,
+    mixinValue: system.opacity[colorType].hover,
+  });
+};
+
+/**
+ * The `colorSpace.pressed()` function is used in `active` or `pressed` interactive states. It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) for interactive states
+ * and takes three parameters: `color`, `fallback` and `colorType`.
+ * ```tsx
+ * '&:active': {
+ *  backgroundColor: colorSpace.pressed(color, fallback, colorType)
+ * }
+ * ```
+ * - `color`: Base color value.
+ * - `fallback`: Fallback color value if the base color is not defined or invalid.
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+ *
+ * @param color
+ * The value being darkened.
+ *
+ * @param fallback
+ * This is the color that will be used if `color` is not defined.
+ *
+ * @param colorType
+ * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
+ */
+const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+  return darken({
+    color: color,
+    fallback: fallback,
+    mixinColor: system.color[colorType].overlay.mixin,
+    mixinValue: system.opacity[colorType].pressed,
+  });
 };
 
 export const colorSpace = {
   darken,
+  hover,
+  pressed,
 };
