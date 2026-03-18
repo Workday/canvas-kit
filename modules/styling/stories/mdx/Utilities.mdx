@@ -1,6 +1,6 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
-import {CreateStyles} from './examples/CreateStyles';
-import {CreateVars} from './examples/CreateVars';
+import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
+import { CreateStyles } from './examples/CreateStyles';
+import { CreateVars } from './examples/CreateVars';
 
 <Meta title="Styling/Utilities" />
 
@@ -98,6 +98,36 @@ const styles = {
   // returns 'calc(var(--cnvs-sys-space-x4) * -1)'
   margin: calc.negate(system.space.x4),
 };
+```
+
+## colorSpace
+
+### Darken
+
+A utility that should be used for interactive states on buttons and links.
+
+It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+
+it takes four parameters:
+1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or fallback color).
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.darken(
+      {
+        color: system.color.brand.accent.primary,
+        fallback: brand.primary.darkest,
+        mixinColor: system.color.accent.overlay.mixin,
+        mixinValue: system.opacity.accent.hover
+      }
+    )
+  }
+})
 ```
 
 ## keyframes
