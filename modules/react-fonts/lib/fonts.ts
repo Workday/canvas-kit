@@ -1,4 +1,5 @@
 import {CSSObject} from '@emotion/react';
+
 const fontsPath = 'https://design.workdaycdn.com/beta/assets/fonts@1.0.0/roboto/ttf';
 
 export const fonts: CSSObject[] = [

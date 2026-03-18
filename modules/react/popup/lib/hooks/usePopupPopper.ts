@@ -1,7 +1,9 @@
-import {createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
-import {usePopupModel} from './usePopupModel';
 import React from 'react';
+
+import {createElemPropsHook, useForkRef} from '@workday/canvas-kit-react/common';
+
 import {Placement} from '../Popper';
+import {usePopupModel} from './usePopupModel';
 
 /**
  * Adds the necessary props to a {@link Popper} component. Used by the

@@ -1,9 +1,10 @@
 import React from 'react';
-import {breakpoints} from '@workday/canvas-kit-react/common';
+
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+import {breakpoints} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 type MyActionItem = {
   id: string;
@@ -57,7 +58,7 @@ export const OverflowActionBar = () => {
       <footer>
         <h4>Change Action Bar container size</h4>
         <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
-          <SegmentedControl.List role="group" aria-label="container width control" marginBottom="m">
+          <SegmentedControl.List role="group" aria-label="container width control">
             <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
             <SegmentedControl.Item data-id={`${breakpoints.m}px`}>Small</SegmentedControl.Item>
             <SegmentedControl.Item data-id="420px">420px</SegmentedControl.Item>
@@ -66,6 +67,7 @@ export const OverflowActionBar = () => {
             </SegmentedControl.Item>
           </SegmentedControl.List>
         </SegmentedControl>
+        <br />
         <p>Selected: {containerWidth}</p>
       </footer>
     </div>

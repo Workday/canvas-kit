@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
-import {base} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {base} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Popup',
@@ -170,8 +170,8 @@ export const PopupThemed = {
     });
     return (
       <CanvasProvider theme={{canvas: {palette: {primary: {main: base.magenta600}}}}}>
-        <PrimaryButton>Primary Button</PrimaryButton>
         <Popup model={model}>
+          <Popup.Target as={PrimaryButton}>Primary Button</Popup.Target>
           <Popup.Popper>
             <Popup.Card style={{animation: 'none'}} width={300}>
               <Popup.CloseIcon aria-label="" />

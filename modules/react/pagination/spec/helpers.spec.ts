@@ -1,10 +1,11 @@
 import {
   getLastPage,
-  getRangeMin,
   getRangeMax,
-  getVisibleResultsMin,
+  getRangeMin,
   getVisibleResultsMax,
+  getVisibleResultsMin,
 } from '../lib/Pagination/common/utils/helpers';
+
 const context = describe;
 
 describe('Pagination helpers', () => {

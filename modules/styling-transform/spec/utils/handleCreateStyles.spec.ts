@@ -1,5 +1,6 @@
 import ts from 'typescript';
-import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
+
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
 import {handleCreateStyles} from '../../lib/utils/handleCreateStyles';
 import {createProgramFromSource} from '../createProgramFromSource';

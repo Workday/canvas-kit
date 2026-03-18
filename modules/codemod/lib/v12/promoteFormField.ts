@@ -1,4 +1,4 @@
-import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
+import {ASTPath, ImportDeclaration, Transform} from 'jscodeshift';
 
 type SpecifierType = {importedName: string; name?: string};
 

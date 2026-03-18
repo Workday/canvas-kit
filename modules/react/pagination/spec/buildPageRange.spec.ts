@@ -1,4 +1,5 @@
 import {buildPageRange} from '../lib/Pagination/buildPageRange';
+
 const context = describe;
 
 describe('buildPageRange', () => {

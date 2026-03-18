@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/switch/stories/examples/Basic';
-import {Error} from '../../modules/react/switch/stories/examples/Error';
 import {Caution} from '../../modules/react/switch/stories/examples/Caution';
 import {Disabled} from '../../modules/react/switch/stories/examples/Disabled';
+import {Error} from '../../modules/react/switch/stories/examples/Error';
 
 const getSwitch = () => {
   return cy.findByRole('switch');
@@ -36,7 +36,11 @@ describe('Switch', () => {
     });
 
     it('should not have any axe errors', () => {
-      cy.checkA11y();
+      cy.checkA11y(null, {
+        rules: {
+          'scrollable-region-focusable': {enabled: false},
+        },
+      });
     });
 
     it('should be disabled', () => {

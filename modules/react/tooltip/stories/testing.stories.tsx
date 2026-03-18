@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Popper, Placement} from '@workday/canvas-kit-react/popup';
-import {TooltipContainer, Tooltip, OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {resetIcon} from '@workday/canvas-system-icons-web';
-import {Card} from '@workday/canvas-kit-react/card';
+
 import {SecondaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {Placement, Popper} from '@workday/canvas-kit-react/popup';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
+import {OverflowTooltip, Tooltip, TooltipContainer} from '@workday/canvas-kit-react/tooltip';
+import {resetIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Popups/Tooltip',

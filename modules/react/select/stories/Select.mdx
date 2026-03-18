@@ -1,30 +1,33 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  InformationHighlight,
-  SymbolDoc,
   Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
-import { Caution } from './examples/Caution';
-import { Basic } from './examples/Basic';
-import { Complex } from './examples/Complex';
-import { Controlled } from './examples/Controlled';
-import { Disabled } from './examples/Disabled';
-import { DisabledOptions } from './examples/DisabledOption';
-import { Error } from './examples/Error';
-import { Grow } from './examples/Grow';
-import { LabelPosition } from './examples/LabelPosition';
-import { WithIcons } from './examples/WithIcons';
-import { Required } from './examples/Required';
-import { MenuHeight } from './examples/MenuHeight';
-import { HoistedModel } from './examples/HoistedModel';
-import { RefForwarding } from './examples/RefForwarding';
-import { FetchingDynamicItems } from './examples/FetchingDynamicItems';
-import { Placeholder } from './examples/Placeholder';
-import { InitialSelectedItem } from './examples/InitialSelectedItem';
-import * as SelectStories from './Select.stories';
 import {Table} from '@workday/canvas-kit-react/table';
 
-<Meta of={SelectStories} />
+import SelectStoriesMeta from './Select.stories';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Complex} from './examples/Complex';
+import {Controlled} from './examples/Controlled';
+import {Disabled} from './examples/Disabled';
+import {DisabledOptions} from './examples/DisabledOption';
+import {Error} from './examples/Error';
+import {FetchingDynamicItems} from './examples/FetchingDynamicItems';
+import {GroupedItems} from './examples/GroupedItems';
+import {Grow} from './examples/Grow';
+import {HoistedModel} from './examples/HoistedModel';
+import {InitialSelectedItem} from './examples/InitialSelectedItem';
+import {LabelPosition} from './examples/LabelPosition';
+import {MenuHeight} from './examples/MenuHeight';
+import {Placeholder} from './examples/Placeholder';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {WithIcons} from './examples/WithIcons';
+
+<Meta of={SelectStoriesMeta} />
 
 # Canvas Kit Select
 
@@ -169,12 +172,11 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 ### Error States
 
-Set the `error` prop of the wrapping `FormField` to `"caution"` or
-`"error"` to set the `Select` to the caution or error state, respectively. You will
-also need to set the `hintId` and `hintText` props on the `FormField` to meet accessibility
-standards. You must set an `id` attribute on the `Select.Input` element that matches the value of
-`inputId` set on the `FormField` element. These attributes ensure that the caution message is
-associated to the `Select` and read out by voiceover.
+Set the `error` prop of the wrapping `FormField` to `"caution"` or `"error"` to set the `Select` to
+the caution or error state, respectively. You will also need to set the `hintId` and `hintText`
+props on the `FormField` to meet accessibility standards. You must set an `id` attribute on the
+`Select.Input` element that matches the value of `inputId` set on the `FormField` element. These
+attributes ensure that the caution message is associated to the `Select` and read out by voiceover.
 
 **Note: The Select container component, `Select`, must wrap `FormField` to ensure `Select.Input` is
 styled correctly.**
@@ -304,6 +306,12 @@ prop as well as the `value` DOM property and will update the model accordingly.
   </Select>
   ```
 
+### Grouped Items
+
+In order to group items, you have to use the static API in combination of the `Menu.Group` component.
+
+<ExampleCodeBlock code={GroupedItems} />
+
 ### Custom Styles
 
 Select and its subcomponents support custom styling via the `cs` prop. For more information, check
@@ -316,4 +324,4 @@ our
 
 ## Specifications
 
-<Specifications file="Select.spec.ts" name="Select" />
+<Specifications file="./cypress/component/Select.spec.tsx" name="Select" />

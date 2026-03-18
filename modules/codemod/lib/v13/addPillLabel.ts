@@ -1,6 +1,7 @@
 import {API, FileInfo, JSXElement, JSXIdentifier, Options} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
+
 import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 
 const pillPackage = '@workday/canvas-kit-preview-react/pill';
 

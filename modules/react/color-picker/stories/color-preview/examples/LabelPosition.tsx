@@ -1,6 +1,7 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 export const LabelPosition = () => {
   return (

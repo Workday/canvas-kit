@@ -1,11 +1,11 @@
 import {Transform} from 'jscodeshift';
 
-import updateStatusIndicatorPreview from './updateStatusIndicatorPreview';
-import updatePillAvatarProp from './updatePillAvatarProp';
+import renameErrorTypeAlert from './renameErrorTypeAlert';
+import renameErrorTypeAlertOnInputs from './renameErrorTypeAlertOnInputs';
 import updateExpandableAvatarProp from './updateExpandableAvatarProp';
 import updateFormFieldAlert from './updateFormFieldAlert';
-import renameErrorTypeAlertOnInputs from './renameErrorTypeAlertOnInputs';
-import renameErrorTypeAlert from './renameErrorTypeAlert';
+import updatePillAvatarProp from './updatePillAvatarProp';
+import updateStatusIndicatorPreview from './updateStatusIndicatorPreview';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms

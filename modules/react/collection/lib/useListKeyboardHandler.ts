@@ -1,8 +1,9 @@
 import React from 'react';
+
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
+import {useCursorListModel} from './useCursorListModel';
 
 /**
  * This elemProps hook is used to attach keyboard events to handle keyboard navigation

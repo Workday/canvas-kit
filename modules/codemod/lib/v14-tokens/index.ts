@@ -1,10 +1,10 @@
 import {Transform} from 'jscodeshift';
 
-import migrateNewColorTokens from './migrateColorTokens';
 import migrateColorTokens from '../v13.2/migrateColorTokens';
 import migrateDepthTokens from '../v13.2/migrateDepthTokens';
 import migrateOtherTokens from '../v13.2/migrateOtherTokens';
 import migrateTypeTokens from '../v13.2/migrateTypeTokens';
+import migrateNewColorTokens from './migrateColorTokens';
 
 const transform: Transform = (file, api, options) => {
   const fixes = [

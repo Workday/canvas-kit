@@ -1,4 +1,5 @@
 import {createModelHook} from '@workday/canvas-kit-react/common';
+
 import {navigationManager} from './useCursorListModel';
 import {useListModel} from './useListModel';
 

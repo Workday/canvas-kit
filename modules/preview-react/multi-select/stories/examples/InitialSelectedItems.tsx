@@ -1,15 +1,13 @@
 import React, {useEffect} from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
-
-import {createStyles} from '@workday/canvas-kit-styling';
-import {LoadReturn} from '@workday/canvas-kit-react/collection';
-import {CanvasProvider, useMountLayout} from '@workday/canvas-kit-react/common';
-import {useComboboxLoader} from '@workday/canvas-kit-react/combobox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-
 import {MultiSelect, useMultiSelectModel} from '@workday/canvas-kit-preview-react/multi-select';
+import {LoadReturn} from '@workday/canvas-kit-react/collection';
+import {useComboboxLoader} from '@workday/canvas-kit-react/combobox';
+import {CanvasProvider, useMountLayout} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
   padding: system.space.x4,

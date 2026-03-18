@@ -1,13 +1,12 @@
 // @ts-check
+import glob from 'glob';
+import path from 'path';
+import ts from 'typescript';
 
-const ts = require('typescript');
-const glob = require('glob');
-const path = require('path');
+// // we use TS files, so tell node to register them
+// require('ts-node').register({});
 
-// we use TS files, so tell node to register them
-require('ts-node').register({});
-
-const {DocParser} = require('./docParser');
+import {DocParser} from './docParser';
 
 /** @type {ts.CompilerOptions} */
 const defaultTSConfig = {};
@@ -108,14 +107,14 @@ function getFiles(basePath, config) {
   return glob.sync(absolutePath + '/' + config.glob, {ignore: config.ignore || undefined});
 }
 
-function createDocProgram() {
+export function createDocProgram() {
   const {path, config} = getConfig();
   const tsConfig = getTSConfig(path);
 
   const plugins = getPlugins(path, config);
   let files = getFiles(path, config);
-  let program = ts.createProgram(files, tsConfig);
-  let parser = new DocParser(program, plugins);
+  const program = ts.createProgram(files, tsConfig);
+  const parser = new DocParser(program, plugins);
 
   const Doc = {
     parser,
@@ -137,16 +136,32 @@ function createDocProgram() {
   return Doc;
 }
 
-module.exports.createDocProgram = createDocProgram;
-
 /**
  * Gets a configured DocParser. It does not create a TypeScript program and is suitable for watch
  * programs.
  * @param {ts.Program} program
  */
-module.exports.getDocParser = function getDocParser(program) {
+export function getDocParser(program) {
   const {path, config} = getConfig();
 
   const plugins = getPlugins(path, config);
   return new DocParser(program, plugins);
-};
+}
+
+/**
+ * Create a DocParser suitable for watchable mode. The `program` will be the program from a
+ * TypeScript BuildProgram. The `update` method updates the docParser with the updated program that
+ * has updated files.
+ */
+export function createWatchDocProgram() {
+  const {path, config} = getConfig();
+  const plugins = getPlugins(path, config);
+
+  /** @type {DocParser} */
+  let parser; // = new DocParser(program, plugins);
+
+  /**
+   * @param {ts.Program} program The updated program from the BuildProgram
+   */
+  return program => new DocParser(program, plugins);
+}

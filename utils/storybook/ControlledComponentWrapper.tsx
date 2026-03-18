@@ -6,7 +6,7 @@ enum ControlledProp {
 }
 
 export const useControlledValue = <
-  T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement = HTMLInputElement
+  T extends HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement = HTMLInputElement,
 >(
   initialValue = ''
 ) => {

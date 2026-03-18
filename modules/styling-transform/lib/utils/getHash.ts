@@ -1,5 +1,5 @@
-import ts from 'typescript';
 import crypto from 'node:crypto';
+import ts from 'typescript';
 
 import {TransformerContext} from './types';
 

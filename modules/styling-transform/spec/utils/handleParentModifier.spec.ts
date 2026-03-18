@@ -1,9 +1,8 @@
 import ts from 'typescript';
 
-import {createProgramFromSource} from '../createProgramFromSource';
-
-import {transform, withDefaultContext, _reset} from '../../lib/styleTransform';
+import {_reset, transform, withDefaultContext} from '../../lib/styleTransform';
 import {compileCSS} from '../../lib/utils/createStyleObjectNode';
+import {createProgramFromSource} from '../createProgramFromSource';
 
 describe('handleParentModifier', () => {
   let program: ts.Program;

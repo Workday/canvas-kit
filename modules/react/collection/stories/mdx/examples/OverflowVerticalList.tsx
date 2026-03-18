@@ -1,9 +1,10 @@
+import styled from '@emotion/styled';
 import React from 'react';
+
 import {ActionBar, useActionBarModel} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Box} from '@workday/canvas-kit-react/layout';
-import styled from '@emotion/styled';
 import {StyledType} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 type MyActionItem = {
   id: string;

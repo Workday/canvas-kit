@@ -1,20 +1,19 @@
 import React from 'react';
 
-import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {
+  ExtractProps,
   createContainer,
   createElemPropsHook,
   createModelHook,
   createSubcomponent,
   dispatchInputEvent,
-  ExtractProps,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {createStencil, cssVar, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {TextInput} from './TextInput';
 
@@ -41,8 +40,10 @@ export const inputGroupInnerStencil = createStencil({
      * on your own.
      */
     insetInlineEnd: 'initial',
-    width: system.space.x10,
-    height: system.space.x10,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(system.size.md, system.space.x10),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(system.size.md, system.space.x10),
     /**
      * Some inner input group elements are decoration only and should not have pointer events
      */
