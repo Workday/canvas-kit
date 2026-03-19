@@ -14,7 +14,6 @@ import {handleKeyframes} from './utils/handleKeyframes';
 import {handleParentModifier} from './utils/handleParentModifier';
 import {handlePx2Rem} from './utils/handlePx2Rem';
 import {NodeTransformer, ObjectTransform, TransformerContext} from './utils/types';
-import {handleColorSpace} from './utils/handleColorSpace';
 
 export type NestedStyleObject = {[key: string]: string | NestedStyleObject};
 
