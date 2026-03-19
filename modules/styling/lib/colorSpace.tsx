@@ -23,7 +23,9 @@ export function maybeWrapValue(input: string, fallback?: string): string {
       if (prefix === 'var(') {
         return match;
       }
-      return `${prefix}var(${variable}, ${fallback?.startsWith('--') ? `${prefix}var(${fallback})` : fallback})`;
+      return `${prefix}var(${variable}, ${
+        fallback?.startsWith('--') ? `${prefix}var(${fallback})` : fallback
+      })`;
     }
   );
 }
@@ -72,7 +74,10 @@ export interface DarkenProps {
  *
  */
 const darken = ({color, fallback, mixinColor, mixinValue}: DarkenProps) => {
-  return `color-mix(in srgb, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(mixinColor, 'black')} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
+  return `color-mix(in srgb, ${maybeWrapValue(color, fallback)} , ${maybeWrapValue(
+    mixinColor,
+    'black'
+  )} ${calc.multiply(maybeWrapValue(mixinValue, '0'), '100%')})`;
 };
 
 export interface InteractiveStateProps {
