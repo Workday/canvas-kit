@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {usePopupModel} from './usePopupModel';
 
 function getScrollParent(element: HTMLElement): HTMLElement {
@@ -50,7 +51,6 @@ export const useCloseOnTargetHidden = createElemPropsHook(usePopupModel)(model =
     const target = model.state.targetRef.current;
     const scrollParent = getScrollParent(target);
 
-    // eslint-disable-next-line compat/compat
     const observer = new IntersectionObserver(callback, {
       root: scrollParent,
       threshold: 0.5,

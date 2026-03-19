@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Grid, Box} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 
 export const CustomColumnWidth = () => (

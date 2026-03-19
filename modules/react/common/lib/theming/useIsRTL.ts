@@ -1,6 +1,7 @@
-import * as React from 'react';
 import {ThemeContext} from '@emotion/react';
-import {EmotionCanvasTheme, ContentDirection, PartialEmotionCanvasTheme} from './types';
+import * as React from 'react';
+
+import {ContentDirection, EmotionCanvasTheme, PartialEmotionCanvasTheme} from './types';
 
 function useDefaultTheme<T, C>(theme: T | undefined, config: C, fn: (config: C) => T) {
   return theme || fn(config);

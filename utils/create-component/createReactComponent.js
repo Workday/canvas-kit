@@ -1,30 +1,28 @@
-const mkdirp = require('mkdirp');
-const {exec} = require('child_process');
-const {consoleMessage} = require('./consoleUtils');
+import mkdirp from 'mkdirp';
+import {exec} from 'node:child_process';
 
-const writeModuleFiles = require('./writeModuleFiles');
-
-const {getPascalCaseName, getTitleCaseName} = require('./nameUtils');
-
-const model = require('./templates/react/model');
-const component = require('./templates/react/component');
-const componentTarget = require('./templates/react/component.target');
-const componentContent = require('./templates/react/component.content');
-const subcomponentContentHook = require('./templates/react/hook.content');
-const subcomponentTargetHook = require('./templates/react/hook.target');
-const index = require('./templates/react/index');
-const hooksIndex = require('./templates/react/hook.index');
-const mdxStories = require('./templates/react/stories.mdx');
-const basicStories = require('./templates/react/stories.basic');
-const openStories = require('./templates/react/stories.open');
-const testingStories = require('./templates/react/stories.visualTesting');
-const ssr = require('./templates/react/SSR');
-const readme = require('./templates/react/readme');
-const tsconfig = require('./templates/react/tsconfig');
+import {consoleMessage} from './consoleUtils.js';
+import {getPascalCaseName, getTitleCaseName} from './nameUtils.js';
+import ssr from './templates/react/SSR.js';
+import componentContent from './templates/react/component.content.js';
+import component from './templates/react/component.js';
+import componentTarget from './templates/react/component.target.js';
+import subcomponentContentHook from './templates/react/hook.content.js';
+import hooksIndex from './templates/react/hook.index.js';
+import subcomponentTargetHook from './templates/react/hook.target.js';
+import index from './templates/react/index.js';
+import model from './templates/react/model.js';
+import readme from './templates/react/readme.js';
+import basicStories from './templates/react/stories.basic.js';
+import mdxStories from './templates/react/stories.mdx.js';
+import openStories from './templates/react/stories.open.js';
+import testingStories from './templates/react/stories.visualTesting.js';
+import tsconfig from './templates/react/tsconfig.js';
+import writeModuleFiles from './writeModuleFiles.js';
 
 const cwd = process.cwd();
 
-module.exports = (modulePath, name, description, prerelease, category) => {
+const createReactComponent = (modulePath, name, description, prerelease, category) => {
   const moduleName = `@workday/canvas-kit-${prerelease && prerelease + '-'}react/${name}`;
 
   consoleMessage('\nCreating', `${moduleName}\n`);
@@ -73,7 +71,14 @@ module.exports = (modulePath, name, description, prerelease, category) => {
     },
     mdxStories: {
       path: `stories/${pascalCaseName}.stories.mdx`,
-      contents: mdxStories(moduleName, storyPath, pascalCaseName, titleCaseName, prerelease, description),
+      contents: mdxStories(
+        moduleName,
+        storyPath,
+        pascalCaseName,
+        titleCaseName,
+        prerelease,
+        description
+      ),
     },
     basicStories: {
       path: `stories/examples/Basic.tsx`,
@@ -110,3 +115,5 @@ module.exports = (modulePath, name, description, prerelease, category) => {
   consoleMessage('\nCopying License file to', `.${modulePath.replace(cwd, '')}/LICENSE`);
   exec(`cp ${cwd}/LICENSE ${modulePath}/LICENSE`);
 };
+
+export default createReactComponent;

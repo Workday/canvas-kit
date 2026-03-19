@@ -1,14 +1,15 @@
-import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {BaseTableHead} from './parts/BaseTableHead';
-import {BaseTableBody} from './parts/BaseTableBody';
-import {BaseTableRow} from './parts/BaseTableRow';
-import {BaseTableHeader} from './parts/BaseTableHeader';
-import {BaseTableCell} from './parts/BaseTableCell';
-import {BaseTableFooter} from './parts/BaseTableFooter';
-import {BaseTableCaption} from './parts/BaseTableCaption';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {BaseTableBody} from './parts/BaseTableBody';
+import {BaseTableCaption} from './parts/BaseTableCaption';
+import {BaseTableCell} from './parts/BaseTableCell';
+import {BaseTableFooter} from './parts/BaseTableFooter';
+import {BaseTableHead} from './parts/BaseTableHead';
+import {BaseTableHeader} from './parts/BaseTableHeader';
+import {BaseTableRow} from './parts/BaseTableRow';
 
 export interface BaseTableProps extends Omit<BoxProps, 'ref'> {}
 

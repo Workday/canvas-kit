@@ -1,14 +1,12 @@
 #!/usr/bin/env node
-
 /**
  * Canvas Kit Upgrade Guide Migration Script
  *
  * Converts MDX upgrade guides to Markdown format for LLM consumption.
  * Always regenerates all files to ensure consistency.
  */
-
-const fs = require('fs').promises;
-const path = require('path');
+import fs from 'fs/promises';
+import path from 'path';
 
 // Configuration
 const CONFIG = {
@@ -282,8 +280,6 @@ const migrate = async () => {
 };
 
 // Run if called directly
-if (require.main === module) {
-  migrate();
-}
+migrate();
 
-module.exports = {migrate};
+export {migrate};

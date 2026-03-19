@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {usePopupModel} from './usePopupModel';

@@ -1,5 +1,6 @@
 import React from 'react';
-import {createStyles, createModifiers, createVars, cssVar} from '@workday/canvas-kit-styling';
+
+import {createModifiers, createStyles, createVars, cssVar} from '@workday/canvas-kit-styling';
 
 interface ButtonProps {
   variant: 'primary' | 'secondary' | 'danger';

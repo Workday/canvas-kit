@@ -14,4 +14,30 @@ describe('CSS color-mix Functions', () => {
       );
     });
   });
+  describe('hover', () => {
+    it('should return color-mix of hover state', () => {
+      const color = '--cnvs-sys-color-surface-alt-strong';
+      const fallback = '--cnvs-sys-color-bg-alt-strong';
+      const colorType = 'accent';
+
+      const expected = colorSpace.hover({color, fallback, colorType});
+
+      expect(expected).toBe(
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
+      );
+    });
+  });
+  describe('pressed', () => {
+    it('should return color-mix of pressed state', () => {
+      const color = '--cnvs-sys-color-surface-alt-strong';
+      const fallback = '--cnvs-sys-color-bg-alt-strong';
+      const colorType = 'accent';
+
+      const expected = colorSpace.pressed({color, fallback, colorType});
+
+      expect(expected).toBe(
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
+      );
+    });
+  });
 });

@@ -1,4 +1,6 @@
 import {Identifier, Transform} from 'jscodeshift';
+
+import {mapping, paletteNames} from './mapping';
 import {
   addMissingImports,
   filterOutImports,
@@ -6,7 +8,6 @@ import {
   transformObjectPropertyRecursively,
   varToMemberExpression,
 } from './utils';
-import {mapping, paletteNames} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 

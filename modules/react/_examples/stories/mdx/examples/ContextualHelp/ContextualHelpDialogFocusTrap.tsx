@@ -1,11 +1,8 @@
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {infoIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {
   useCloseOnEscape,
   useCloseOnOutsideClick,
@@ -14,8 +11,11 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {infoIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   flexDirection: 'row',

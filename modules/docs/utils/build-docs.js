@@ -4,7 +4,7 @@ const fs = require('fs');
 const {createDocProgram} = require('../docgen/createDocProgram');
 const glob = require('glob');
 
-let {parser} = createDocProgram();
+const {parser} = createDocProgram();
 
 let docs = parser.program.getRootFileNames().flatMap(fileName => {
   return parser.getExportedSymbols(fileName);

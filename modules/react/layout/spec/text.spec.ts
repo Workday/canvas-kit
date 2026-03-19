@@ -1,4 +1,4 @@
-import {text, TextStyleProps} from '@workday/canvas-kit-react/layout';
+import {TextStyleProps, text} from '@workday/canvas-kit-react/layout';
 
 describe('Color Style Props Function', () => {
   it('should ignore non-color props', () => {

@@ -1,7 +1,7 @@
-import React from 'react';
 import {useVirtualizer} from '@tanstack/react-virtual';
+import React from 'react';
 
-import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/common';
+import {Generic, createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export type Orientation = 'horizontal' | 'vertical';
 

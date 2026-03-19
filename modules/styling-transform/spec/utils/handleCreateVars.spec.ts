@@ -1,10 +1,9 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
-import {handleCreateVars} from '../../lib/utils/handleCreateVars';
 import {transform, withDefaultContext} from '../../lib/styleTransform';
+import {handleCreateVars} from '../../lib/utils/handleCreateVars';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 describe('handleCreateVars', () => {
   it('should add a variable to the cache when the arguments are strings', () => {

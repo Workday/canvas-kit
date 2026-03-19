@@ -1,12 +1,12 @@
 import React from 'react';
 
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
-import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {BodyText, Heading} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const fruits = [
   'Apples',

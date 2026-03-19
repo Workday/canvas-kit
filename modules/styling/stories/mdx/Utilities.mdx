@@ -1,3 +1,4 @@
+import { Meta } from '@storybook/blocks';
 import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
 import { CreateStyles } from './examples/CreateStyles';
 import { CreateVars } from './examples/CreateVars';
@@ -129,6 +130,56 @@ const styles = createStyles({
         mixinValue: system.opacity.accent.hover
       }
     )
+  }
+})
+```
+
+### Hover
+
+A utility that should be used for `hover` interactive states on buttons and links.
+
+It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+
+It takes three parameters:
+1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.hover(
+      {
+        color: system.color.brand.accent.primary,
+        fallback: brand.primary.darkest,
+        colorType: 'accent'
+      }
+    )
+  }
+})
+```
+
+### Pressed
+
+A utility that should be used for `active` or `pressed` interactive states on buttons and links.
+
+It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+
+It takes three parameters:
+1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent'
+    })
   }
 })
 ```

@@ -2,14 +2,14 @@ import React from 'react';
 
 import {
   ListBox,
+  LoadReturn,
+  useListItemRovingFocus,
+  useListItemSelect,
   useListLoader,
   useListModel,
-  useListItemSelect,
-  useListItemRovingFocus,
-  LoadReturn,
 } from '@workday/canvas-kit-react/collection';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {composeHooks} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];

@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+const hookTarget = pascalCaseName => `
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {use${pascalCaseName}Model} from './use${pascalCaseName}Model';
 
@@ -19,3 +19,4 @@ export const use${pascalCaseName}Target = createElemPropsHook(use${pascalCaseNam
 });
 `;
 
+export default hookTarget;

@@ -1,4 +1,4 @@
-import {typeColors, statusColors} from '@workday/canvas-colors-web';
+import {statusColors, typeColors} from '@workday/canvas-colors-web';
 
 /** ### Canvas Type Variants
  * [View Storybook Docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs)
