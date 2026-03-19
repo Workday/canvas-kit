@@ -1,19 +1,18 @@
 import ts from 'typescript';
-import {ComponentValue} from './customTypes';
 
 import {
-  createParserPlugin,
   DocParser,
+  createParserPlugin,
   filterObjectProperties,
-  getValueDeclaration,
   getDefaultFromTags,
-  isObject,
-  isExportedSymbol,
   getValidDefaultFromNode,
+  getValueDeclaration,
+  isExportedSymbol,
+  isObject,
 } from '../docParser';
-
-import t from '../traverse';
 import {ObjectProperty, Value} from '../docTypes';
+import t from '../traverse';
+import {ComponentValue} from './customTypes';
 
 export const componentParser = createParserPlugin<ComponentValue>((node, parser) => {
   /**
@@ -215,12 +214,15 @@ export function getDefaultsFromDefaultProps(
   node?: ts.Node
 ): Record<string, Value> {
   if (node && t.isObjectLiteralExpression(node)) {
-    return node.properties.reduce((result, property) => {
-      if (t.isPropertyAssignment(property) && t.isIdentifier(property.name)) {
-        result[property.name.text] = parser.getValueFromNode(property.initializer);
-      }
-      return result;
-    }, {} as Record<string, Value>);
+    return node.properties.reduce(
+      (result, property) => {
+        if (t.isPropertyAssignment(property) && t.isIdentifier(property.name)) {
+          result[property.name.text] = parser.getValueFromNode(property.initializer);
+        }
+        return result;
+      },
+      {} as Record<string, Value>
+    );
   }
   return {};
 }
@@ -236,16 +238,19 @@ export function getDefaultsFromObjectBindingPattern(
   node: ts.Node
 ): Record<string, Value> {
   if (t.isObjectBindingPattern(node)) {
-    return node.elements.reduce((result, element) => {
-      if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
-        const defaultValue = getValidDefaultFromNode(parser, element.initializer);
+    return node.elements.reduce(
+      (result, element) => {
+        if (t.isBindingElement(element) && t.isIdentifier(element.name) && element.initializer) {
+          const defaultValue = getValidDefaultFromNode(parser, element.initializer);
 
-        if (defaultValue) {
-          result[element.name.text] = defaultValue;
+          if (defaultValue) {
+            result[element.name.text] = defaultValue;
+          }
         }
-      }
-      return result;
-    }, {} as Record<string, Value>);
+        return result;
+      },
+      {} as Record<string, Value>
+    );
   }
 
   return {};

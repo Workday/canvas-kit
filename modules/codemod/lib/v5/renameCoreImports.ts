@@ -1,9 +1,9 @@
 import {
   API,
   FileInfo,
+  ImportDefaultSpecifier,
   ImportNamespaceSpecifier,
   ImportSpecifier,
-  ImportDefaultSpecifier,
 } from 'jscodeshift';
 
 const sourceMap = {

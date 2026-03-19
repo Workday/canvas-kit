@@ -1,9 +1,10 @@
-import * as React from 'react';
 import {render} from '@testing-library/react';
+import * as React from 'react';
 
+import {getColor} from '@workday/canvas-kit-react/common';
 import {colors, iconColors} from '@workday/canvas-kit-react/tokens';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
-import {getColor} from '@workday/canvas-kit-react/common';
+
 import {SystemIcon, systemIconStyles} from '../lib/SystemIcon';
 
 describe('System Icon', () => {

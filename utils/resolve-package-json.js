@@ -1,4 +1,4 @@
-const semver = require('semver');
+import semver from 'semver';
 
 function resolvePackageJson(/** @type {string} */ input) {
   const conflictRegex = /<<<<<<< .+\n([\s\S]*?)\n?=======\n([\s\S]*?)\n?>>>>>>> .+\n/;
@@ -61,4 +61,4 @@ function resolvePackageJson(/** @type {string} */ input) {
   }
 }
 
-module.exports = resolvePackageJson;
+export default resolvePackageJson;

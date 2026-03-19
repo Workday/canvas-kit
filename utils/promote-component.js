@@ -1,16 +1,17 @@
 #!/usr/bin/env node
-'use strict';
+import chalk from 'chalk';
+import globPkg from 'glob';
+import inquirer from 'inquirer';
+import {exec as execCallback} from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import {promisify} from 'node:util';
+import replaceInFiles from 'replace-in-files';
 
-const fs = require('fs');
-const {promisify} = require('util');
-const exec = promisify(require('child_process').exec);
-const mkdirp = require('mkdirp');
-const path = require('path');
-const inquirer = require('inquirer');
-const glob = require('glob');
-const replaceInFiles = require('replace-in-files');
-const addExport = require('./create-component/addExport');
-const chalk = require('chalk');
+import addExport from './create-component/addExport.js';
+
+const exec = promisify(execCallback);
+const glob = promisify(globPkg.glob);
 
 const cwd = process.cwd();
 
@@ -69,12 +70,7 @@ inquirer.prompt(questions).then(answers => {
 
     exec(`git mv ${srcPath} ${destModule}`)
       .then(() => {
-        glob(`${destPath}/**/*`, async (err, files) => {
-          if (err) {
-            console.log('Error', err);
-            process.exit(1);
-          }
-
+        glob(`${destPath}/**/*`).then(async files => {
           try {
             console.log(chalk.gray(`Updating file paths and removing labs references\n`));
             await replaceInFiles({

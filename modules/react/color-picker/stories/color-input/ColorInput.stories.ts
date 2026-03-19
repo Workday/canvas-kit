@@ -1,10 +1,10 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './ColorInput.mdx';
 
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 
-import {Caution as CautionExample} from './examples/Caution';
+import mdxDoc from './ColorInput.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Caution as CautionExample} from './examples/Caution';
 import {Checked as CheckedExample} from './examples/Checked';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';

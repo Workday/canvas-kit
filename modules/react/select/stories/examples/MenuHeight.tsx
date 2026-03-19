@@ -1,6 +1,6 @@
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select} from '@workday/canvas-kit-react/select';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {Select} from '@workday/canvas-kit-react/select';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const selectCardStyles = createStyles({

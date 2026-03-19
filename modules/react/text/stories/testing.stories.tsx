@@ -1,9 +1,11 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
+
 import {Box} from '@workday/canvas-kit-react/layout';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
 

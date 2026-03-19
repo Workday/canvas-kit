@@ -1,6 +1,7 @@
-import {API, FileInfo, Options, JSXElement} from 'jscodeshift';
-import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
+import {API, FileInfo, JSXElement, Options} from 'jscodeshift';
+
 import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from '../v7/utils/getImportRenameMap';
 
 const breadcrumbsPackage = '@workday/canvas-kit-react/breadcrumbs';
 

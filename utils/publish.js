@@ -1,13 +1,15 @@
-'use strict';
+import chalk from 'chalk';
+import globPkg from 'glob';
+import fs from 'node:fs';
+import {promisify} from 'node:util';
+import yargs from 'yargs';
+import {hideBin} from 'yargs/helpers';
 
-const {promisify} = require('util');
-const glob = promisify(require('glob'));
-const fs = require('fs');
-const chalk = require('chalk');
+const glob = promisify(globPkg.glob);
 
 let command = '';
 
-const {path} = require('yargs')
+const {path} = yargs(hideBin(process.argv))
   .scriptName('publish')
   // .usage(chalk.blueBright.bold('prepublish [path]'))
   .command('pre [path]', chalk.gray('Create package.json files in module'), argv => {

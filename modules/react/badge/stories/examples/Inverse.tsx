@@ -1,7 +1,8 @@
 import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Text} from '@workday/canvas-kit-react/text';
+
 const containerStyles = createStyles({
   display: 'flex',
   gap: system.space.x2,

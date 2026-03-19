@@ -1,6 +1,6 @@
-import {Box} from '@workday/canvas-kit-react/layout';
 import {Banner} from '@workday/canvas-kit-react/banner';
 import {styled} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
 
 const StyledBanner = styled(Banner)({
   position: 'absolute',

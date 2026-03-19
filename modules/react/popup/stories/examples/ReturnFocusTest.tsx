@@ -1,15 +1,15 @@
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
-  usePopupModel,
+  useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 export const ReturnFocusTest = () => {
   const model = usePopupModel();

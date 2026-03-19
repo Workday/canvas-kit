@@ -1,14 +1,14 @@
 import * as React from 'react';
 
-import {
-  ComponentStatesTable,
-  permutateProps,
-  StaticStates,
-} from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
-
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Color Picker/Color Input',

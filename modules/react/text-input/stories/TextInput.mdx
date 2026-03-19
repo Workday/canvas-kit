@@ -1,21 +1,22 @@
+import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  InformationHighlight,
-  SymbolDoc,
   Specifications,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
 import {Grow} from './examples/Grow';
+import {Icons} from './examples/Icons';
 import {LabelPosition} from './examples/LabelPosition';
 import {Placeholder} from './examples/Placeholder';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
-import {Icons} from './examples/Icons';
 
-import * as TextInputStories from './TextInput.stories';
+import TextInputStoriesMeta from './TextInput.stories';
 
-<Meta of={TextInputStories} />
+<Meta of={TextInputStoriesMeta} />
 
 # Canvas Kit Text Input
 
@@ -152,4 +153,4 @@ When properly implemented with `FormField`, screen readers will announce:
 
 ## Specifications
 
-<Specifications file="TextInput.spec.ts" name="TextInput" />
+<Specifications file="./cypress/component/TextInput.spec.tsx" name="TextInput" />

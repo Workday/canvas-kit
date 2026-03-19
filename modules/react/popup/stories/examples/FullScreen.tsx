@@ -1,21 +1,21 @@
 import * as React from 'react';
+import screenfull from 'screenfull';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {useIsFullscreen} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnEscape,
+  useCloseOnFullscreenExit,
   useCloseOnOutsideClick,
   useFocusTrap,
   useInitialFocus,
-  useReturnFocus,
   usePopupModel,
-  useCloseOnFullscreenExit,
-  useTransferOnFullscreenExit,
+  useReturnFocus,
   useTransferOnFullscreenEnter,
+  useTransferOnFullscreenExit,
 } from '@workday/canvas-kit-react/popup';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {useIsFullscreen} from '@workday/canvas-kit-react/common';
-import screenfull from 'screenfull';
 
 const SelfClosePopup = () => {
   const model = usePopupModel();

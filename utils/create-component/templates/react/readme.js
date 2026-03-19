@@ -1,6 +1,6 @@
-const getTitleCaseName = require('../../nameUtils').getTitleCaseName;
+import {getTitleCaseName} from '../../nameUtils.js';
 
-module.exports = (name, description, prerelease) => {
+const readme = (name, description, prerelease) => {
   const titleCaseName = getTitleCaseName(name);
 
   let prereleaseMsg = '';
@@ -29,5 +29,6 @@ on Storybook.
 
 [> Workday Design Reference: ${titleCaseName}](https://design.workday.com/components/)
 `;
-
 };
+
+export default readme;

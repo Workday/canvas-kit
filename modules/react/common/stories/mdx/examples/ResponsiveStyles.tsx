@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {Box, Grid, Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
-import {useResponsiveContainerStyles, useResizeObserver} from '@workday/canvas-kit-react/common';
+
+import {useResizeObserver, useResponsiveContainerStyles} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
+import {Text} from '@workday/canvas-kit-react/text';
 
 const HeadingText = ({children, ...props}) => (
   <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>

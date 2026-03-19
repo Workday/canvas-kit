@@ -1,8 +1,8 @@
 import {Meta} from '@storybook/react';
-import mdxDoc from './Theming.mdx';
 
-import {Theming as ThemingExample} from './examples/Theming';
+import mdxDoc from './Theming.mdx';
 import {RTL as RTLExample} from './examples/RTL';
+import {Theming as ThemingExample} from './examples/Theming';
 
 export default {
   title: 'Features/Theming',
