@@ -35,6 +35,7 @@ const cardStencil = createStencil({
     '[data-part="example-block-container"]': {
       minWidth: 0,
       overflow: 'auto',
+      padding: system.space.x1,
     },
     '[data-part="code-block"]': {
       display: 'none',
