@@ -1,0 +1,66 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InlinePopupNoPortal} from './examples/Popups/InlinePopupNoPortal';
+import {InlinePortalPopup} from './examples/Popups/InlinePortalPopup';
+import {PopupAriaOwns} from './examples/Popups/PopupAriaOwns';
+
+<Meta title="Guides/Accessibility/Popups" />
+
+# Accessibility for Popups
+
+By default, `Popup.Popper` portals content to the bottom of the `document.body`. Since screen
+readers depend on DOM order, users may hear the rest of the page content under the popup before
+discovering the popup itself and its content. This can represent a significant barrier to users .
+While properly managing the keyboard focus is a good mitigation to help users move forward, it will
+not correct the reading order of content.
+
+**None of these examples use focus traps.** For modal dialogs with overlay and focus trap, check out
+the [**Modal**](?path=/docs/components-popups-modal--docs) component instead.
+
+**`useInitialFocus`:** Each example moves focus into the popup when it opens (typically a Close 'X'
+icon butten near the top of the popup or the least destructive control). Screen readers give **no
+indication that the popup appeared** without moving focus into the popup.
+
+- In some situations, it may be beneficial to add `aria-expanded={true | false}` to the
+  `Popup.Target` for indicating the state of the popup.
+- Adding `aria-haspopup="dialog"` to the `Popup.Target` may be useful for indicating that a button
+  will present a dialog. **However,** screen readers which do not support this `"dialog"` token
+  value will fall back to `true` and in many cases assume a `menu` is attached—not a dialog. For
+  this reason, **we do not recommend adding this attribute to the `Popup.Target`** unless building a
+  [**menu button**](?path=/docs/components-popups-menu--docs) pattern.
+
+## 1. Inline popup with `portal={false}`
+
+Set `portal={false}` on `Popup.Popper` so the popup renders in the DOM next to its target. Reading
+order follows document order. Use **`useInitialFocus`**, **`useReturnFocus`**, and the usual close
+hooks. **Tradeoff:** the popup is constrained by ancestor `overflow` and positioning context.
+
+<ExampleCodeBlock code={InlinePopupNoPortal} />
+
+## 2. Inline portal with `PopupStack`
+
+Keep using a portal (default stacking and positioning) but mount the portal **into a sentinel
+element** placed right after the trigger. Call `PopupStack.pushStackContext(sentinelElement)` while
+the popup is open so new stack items append to that sentinel instead of `body`. **Tradeoff:** You
+still get **ancestor overflow** clipping—the portaled content is a descendant of the sentinel, not
+`document.body`. You must also handle **`PopupStack` context** (push/pop on open/close), which is
+more moving parts than `portal={false}` alone. Use **`useInitialFocus`** so opening the popup is
+announced when focus enters the dialog.
+
+<ExampleCodeBlock code={InlinePortalPopup} />
+
+## 3. Reading order with `aria-owns`
+
+Keep the default portal to the bottom of the document `body`. Add a sibling `<div>` after
+`Popup.Target` with `aria-owns` pointing at the portaled content `Popup.Card`. **Tradeoff:**
+**Assistive technology support for `aria-owns` is uneven**, so logical reading order is not
+guaranteed everywhere. You still need **explicit focus hooks** (e.g. `useFocusRedirect`) because
+**keyboard tab order follows the real DOM**, not the remapped accessibility tree. Combine with
+**`useInitialFocus`** so screen readers announce the popup when it opens.
+
+The Canvas Kit [**Dialog**](?path=/docs/components-popups-dialog--docs) automatically includes this
+pattern in the component.
+
+For another example of using `aria-owns` to manage reading order, see
+[Advanced Tables > Table With Filterable Column Headers](?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
+
+<ExampleCodeBlock code={PopupAriaOwns} />
