@@ -1,9 +1,8 @@
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {InlinePopupNoPortal} from './examples/Popups/InlinePopupNoPortal';
-import {InlinePortalPopup} from './examples/Popups/InlinePortalPopup';
 import {PopupAriaOwns} from './examples/Popups/PopupAriaOwns';
 
-<Meta title="Guides/Accessibility/Popups" />
+<Meta title="Guides/Accessibility/Inline Popups" />
 
 # Accessibility for Popups
 
@@ -36,19 +35,11 @@ hooks. **Tradeoff:** the popup is constrained by ancestor `overflow` and positio
 
 <ExampleCodeBlock code={InlinePopupNoPortal} />
 
-## 2. Inline portal with `PopupStack`
+For the same reading-order goal using a **portaled** popup mounted into a sentinel next to the
+trigger (with `PopupStack.pushStackContext`), see
+[**Testing > Inline Portals**](?path=/docs/guides-accessibility-testing-inline-portals--docs).
 
-Keep using a portal (default stacking and positioning) but mount the portal **into a sentinel
-element** placed right after the trigger. Call `PopupStack.pushStackContext(sentinelElement)` while
-the popup is open so new stack items append to that sentinel instead of `body`. **Tradeoff:** You
-still get **ancestor overflow** clipping—the portaled content is a descendant of the sentinel, not
-`document.body`. You must also handle **`PopupStack` context** (push/pop on open/close), which is
-more moving parts than `portal={false}` alone. Use **`useInitialFocus`** so opening the popup is
-announced when focus enters the dialog.
-
-<ExampleCodeBlock code={InlinePortalPopup} />
-
-## 3. Reading order with `aria-owns`
+## 2. Reading order with `aria-owns`
 
 Keep the default portal to the bottom of the document `body`. Add a sibling `<div>` after
 `Popup.Target` with `aria-owns` pointing at the portaled content `Popup.Card`. **Tradeoff:**

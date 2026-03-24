@@ -68,7 +68,7 @@ of the model. This is useful for popups that don't have a Close icon button near
 the popup. In general, we recommend setting focus to the first interactive component inside the
 popup that is the least destructive action. For another cool example, check out the column header
 popups in the
-[Table with Filterable Column Headers](?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
+[Table with Filterable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
 
 <ExampleCodeBlock code={InitialFocus} />
 
@@ -93,7 +93,7 @@ Tabbing out of the Popup will close the Popup and move focus to an adjacent focu
 > `aria-owns` on a sibling `<div>` element pointing to the `Popup.Card` component. This remaps the
 > hierarchy of the accessibility tree (in supported browsers) to address the reading order problem.
 > For more information, see
-> [Guides > Accessibility > Popups](?path=/docs/guides-accessibility-popups--docs).
+> [Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
 
 ### Focus Trapping
 
@@ -197,7 +197,7 @@ The Popup component automatically handles right-to-left rendering.
 Popup content is usually portaled to the bottom of the `document.body`, which can affect **reading
 order for screen readers** and **keyboard focus order**. For more information about Popup
 accessibility, check out our documentation at
-[Guides > Accessibility > Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-popups--docs).
+[Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
 
 - For non-modal dialogs with `aria-owns` built-in to improve reading order for screen readers (that
   support it), check out the [**Dialog**](/components/popups/dialog/) component.
