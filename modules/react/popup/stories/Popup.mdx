@@ -66,17 +66,17 @@ popup behaviors. For accessibility, these behaviors should be included most of t
 If you want focus to move to a specific element when the popup is opened, set the `initialFocusRef`
 of the model. This is useful for popups that don't have a Close icon button near the top right of
 the popup. In general, we recommend setting focus to the first interactive component inside the
-popup that is the least destructive action. For another cool example, check out the column header
-popups in the
-[Table with Filterable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
+popup that is the least destructive action.
 
 <ExampleCodeBlock code={InitialFocus} />
 
-> **Accessibility Note**: In this example where focus is set to a button near the bottom of the
-> popup, we assign a unique `id` to the message text and applied `aria-describedby` to the
-> `Popup.Card` component. This augments the included `aria-labelledby` reference to the
-> `Popup.Heading` component and will allow screen readers to automatically announce both the popup
-> heading and the message text when focus is moved to the OK button.
+> **Accessibility Note**: When initial focus lands on a control **below** the title (such as the OK
+> button in the example above), assign a unique `id` to supplementary text and pass
+> `aria-describedby` on `Popup.Card`. This augments the included `aria-labelledby` reference to
+> `Popup.Heading` so screen readers can announce both the heading and any supplementary text
+> automatically. When initial focus is on the heading itself, add `tabIndex={-1}` to `Popup.Heading`
+> so the title can receive programmatic focus. Choose where focus goes based on your product and
+> accessibility requirements.
 
 ### Focus Redirect
 
