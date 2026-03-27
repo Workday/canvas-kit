@@ -14,10 +14,9 @@
     "@emotion/react": "^11.7.1",
     "@eslint/js": "^9.39.2",
     "@mdx-js/rollup": "^3.1.0",
-    "@storybook/addon-essentials": "8.4.7",
-    "@storybook/addon-storysource": "8.4.7",
-    "@storybook/builder-vite": "8.4.7",
-    "@storybook/react-vite": "8.4.7",
+    "@storybook/addon-docs": "10.3.3",
+    "@storybook/addon-mcp": "0.4.2",
+    "@storybook/react-vite": "10.3.3",
     "@testing-library/cypress": "^8.0.2",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "16.2.0",
@@ -60,6 +59,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-ssr": "^1.0.3",
+    "eslint-plugin-storybook": "10.3.3",
     "eslint-plugin-workday-custom-rules": "file:./utils/custom-lint-rules",
     "esm": "^3.2.25",
     "expect-type": "^0.11.0",
@@ -81,7 +81,7 @@
     "replace-in-files": "^2.0.3",
     "rimraf": "^2.6.3",
     "semver": "^7.3.2",
-    "storybook": "8.4.7",
+    "storybook": "10.3.3",
     "string-replace-loader": "^3.1.0",
     "ts-loader": "^9.5.1",
     "ts-patch": "^3.2.1",
@@ -92,7 +92,7 @@
     "yargs": "^16.2.0"
   },
   "scripts": {
-    "start": "tsx utils/download-fonts.js && node ./node_modules/storybook/core/cli/bin/index.js dev -p 9001 -c .storybook",
+    "start": "tsx utils/download-fonts.js && storybook dev -p 9001 -c .storybook",
     "watch": "TSC_NONPOLLING_WATCHER=1 lerna run watch --parallel --stream",
     "clean": "lerna run clean",
     "depcheck": "lerna run depcheck",
@@ -132,13 +132,7 @@
     "modules/**"
   ],
   "browserslist": "> 5%, last 2 firefox versions, last 2 chrome versions, last 2 safari versions, last 2 edge versions, Firefox ESR, not ie 11",
-  "@emotion/react": "^11.7.1",
-  "@emotion/styled": "^11.6.0",
-  "@stackblitz/sdk": "^1.11.0",
-  "@workday/canvas-accent-icons-web": "^3.0.17",
-  "@workday/canvas-applet-icons-web": "^2.0.15",
-  "@workday/canvas-system-icons-web": "^3.0.36",
-  "@workday/canvas-tokens-web": "4.1.2",
+  "packageManager": "yarn@4.9.1+sha512.f95ce356460e05be48d66401c1ae64ef84d163dd689964962c6888a9810865e39097a5e9de748876c2e0bf89b232d583c33982773e9903ae7a76257270986538",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
@@ -146,8 +140,15 @@
     "jscodeshift": "0.14.0",
     "puppeteer-core": "^13.7.0",
     "estree-walker": "^2.0.0",
-    "loader-utils": "@1.4.1",
-     "semver": "^7.6.2"
+    "loader-utils": "1.4.1",
+    "semver": "^7.6.2",
+    "@emotion/cache@npm:^11.7.1": "patch:@emotion/cache@npm%3A11.7.1#~/.yarn/patches/@emotion-cache-npm-11.7.1-82b45442ee.patch",
+    "@emotion/sheet@npm:^1.1.0": "patch:@emotion/sheet@npm%3A1.1.0#~/.yarn/patches/@emotion-sheet-npm-1.1.0-40e9c90e06.patch",
+    "@emotion/sheet@npm:^1.0.3": "patch:@emotion/sheet@npm%3A1.1.0#~/.yarn/patches/@emotion-sheet-npm-1.1.0-40e9c90e06.patch",
+    "@emotion/weak-memoize@npm:^0.2.5": "patch:@emotion/weak-memoize@npm%3A0.2.5#~/.yarn/patches/@emotion-weak-memoize-npm-0.2.5-9f2e49e7c8.patch",
+    "@emotion/memoize@npm:^0.8.1": "patch:@emotion/memoize@npm%3A0.7.5#~/.yarn/patches/@emotion-memoize-npm-0.7.5-e5e7e9eeca.patch",
+    "@emotion/memoize@npm:^0.7.4": "patch:@emotion/memoize@npm%3A0.7.5#~/.yarn/patches/@emotion-memoize-npm-0.7.5-e5e7e9eeca.patch",
+    "@emotion/memoize@npm:^0.7.5": "patch:@emotion/memoize@npm%3A0.7.5#~/.yarn/patches/@emotion-memoize-npm-0.7.5-e5e7e9eeca.patch"
   },
   "dependencies": {
     "jsdom": "^27.1.0"

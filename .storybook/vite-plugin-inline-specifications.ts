@@ -1,6 +1,6 @@
 import {type PluginOption} from 'vite';
 
-import {parseSpecFile} from '@workday/canvas-kit-docs/utils/parseSpecFile';
+import {parseSpecFile} from '@workday/canvas-kit-docs/utils/parseSpecFile.ts';
 
 /**
  * Inline specification metadata into MDX files

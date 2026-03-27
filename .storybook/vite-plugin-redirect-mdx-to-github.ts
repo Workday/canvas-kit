@@ -1,9 +1,9 @@
 import path from 'node:path';
 import {type PluginOption} from 'vite';
 
-import routes from './routes';
+import routes from './routes.js';
 
-const basePath = path.resolve(__dirname, '../');
+const basePath = process.cwd();
 
 /**
  * Inlines specification metadata into MDX files

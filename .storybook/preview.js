@@ -1,4 +1,4 @@
-import {DocsContainer, DocsPage} from '@storybook/addon-docs';
+import {DocsContainer} from '@storybook/addon-docs/blocks';
 
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
@@ -69,7 +69,6 @@ export const parameters = {
   },
   docs: {
     container: DocsContainer,
-    page: DocsPage,
     theme,
   },
   chromatic: {

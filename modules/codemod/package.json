@@ -6,9 +6,7 @@
   "description": "A collection of codemods for use on Workday Canvas Kit packages.",
   "main": "dist/es6/index.js",
   "sideEffects": false,
-  "bin": {
-    "canvas-kit-codemod": "index.js"
-  },
+  "bin": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/Workday/canvas-kit.git",

@@ -1,0 +1,20 @@
+diff --git a/package.json b/package.json
+index 437f0bf23db1dbfb007a327777b966264e51e66c..ea5954c773d536919b10a5af1f605bf7697ea6dc 100644
+--- a/package.json
++++ b/package.json
+@@ -4,6 +4,15 @@
+   "description": "emotion's cache",
+   "main": "dist/emotion-cache.cjs.js",
+   "module": "dist/emotion-cache.esm.js",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./dist/emotion-cache.esm.js",
++      "require": "./dist/emotion-cache.cjs.js",
++      "default": "./dist/emotion-cache.cjs.js"
++    },
++    "./package.json": "./package.json"
++  },
+   "browser": {
+     "./dist/emotion-cache.cjs.js": "./dist/emotion-cache.browser.cjs.js",
+     "./dist/emotion-cache.esm.js": "./dist/emotion-cache.browser.esm.js"
