@@ -1,0 +1,26 @@
+diff --git a/package.json b/package.json
+index 45969ee73338ec79e4bffb1952edaabd0cf5060b..f607bfe5f63032c2eb87ba1130eae7cd8173bd97 100644
+--- a/package.json
++++ b/package.json
+@@ -5,6 +5,21 @@
+   "main": "dist/emotion-css.cjs.js",
+   "module": "dist/emotion-css.esm.js",
+   "types": "types/index.d.ts",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./dist/emotion-css.esm.js",
++      "require": "./dist/emotion-css.cjs.js",
++      "default": "./dist/emotion-css.cjs.js"
++    },
++    "./create-instance": {
++      "types": "./types/create-instance.d.ts",
++      "import": "./create-instance/dist/emotion-css-create-instance.esm.js",
++      "require": "./create-instance/dist/emotion-css-create-instance.cjs.js",
++      "default": "./create-instance/dist/emotion-css-create-instance.cjs.js"
++    },
++    "./package.json": "./package.json"
++  },
+   "files": [
+     "src",
+     "dist",

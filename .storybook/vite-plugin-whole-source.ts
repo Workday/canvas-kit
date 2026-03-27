@@ -1,6 +1,6 @@
 import {type PluginOption} from 'vite';
 
-import extractExports from '@workday/canvas-kit-docs/webpack/extract-exports';
+import extractExports from '@workday/canvas-kit-docs/webpack/extract-exports.js';
 
 /**
  * Inline specification metadata into MDX files

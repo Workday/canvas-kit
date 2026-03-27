@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "canvas-kit-storybook": {
+      "url": "http://localhost:9001/mcp"
+    }
+  }
+}

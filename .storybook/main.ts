@@ -1,38 +1,50 @@
-import mdx from '@mdx-js/rollup';
+import crypto from 'node:crypto';
+
 import {StorybookConfig} from '@storybook/react-vite';
 import remarkGfm from 'remark-gfm';
 import ts from 'typescript';
 import {mergeConfig} from 'vite';
 
-// Drop the `/index.ts` if using the published package
-import {styleTransformer} from '@workday/canvas-kit-styling-transform';
-import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
+import {
+  createConfig,
+  styleTransformer,
+  vitePluginTypescriptWithTransformers,
+} from '@workday/canvas-kit-styling-transform';
+import {DocParser} from '@workday/canvas-kit-docs/docgen/docParser.ts';
+import type {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes.ts';
+import {componentParser} from '@workday/canvas-kit-docs/docgen/plugins/componentParser.ts';
+import {enhancedComponentParser} from '@workday/canvas-kit-docs/docgen/plugins/enhancedComponentParser.ts';
+import {modelParser} from '@workday/canvas-kit-docs/docgen/plugins/modelParser.ts';
 
-import {version} from '../lerna.json' assert {type: 'json'};
-import stylingConfig from '../styling.config';
-import { vitePluginInlineSpecifications } from './vite-plugin-inline-specifications';
-import { vitePluginRedirectMDXToGithub } from './vite-plugin-redirect-mdx-to-github';
-import { vitePluginWholeSource } from './vite-plugin-whole-source';
-import { vitePluginTypescriptWithTransformers } from '@workday/canvas-kit-styling-transform';
-import { getDocParser } from '@workday/canvas-kit-docs/docgen/createDocProgram';
+import pkg from '../lerna.json' with {type: 'json'};
+import {vitePluginInlineSpecifications} from './vite-plugin-inline-specifications.ts';
+import {vitePluginRedirectMDXToGithub} from './vite-plugin-redirect-mdx-to-github.ts';
+import {vitePluginWholeSource} from './vite-plugin-whole-source.ts';
 
-// const modulesPath = path.resolve(__dirname, '../modules');
 const processDocs = process.env.SKIP_DOCGEN !== 'true';
-
 const docsMap = new Map<string, ExportedSymbol<Value>[]>();
+
+// Inline styling config to avoid importing handleFocusRing which pulls in
+// @workday/canvas-kit-react/common (a directory subpath that Node ESM can't resolve).
+// focusRing() still works at runtime via Emotion — it's just not statically compiled.
+const stylingConfig = createConfig({
+  prefix: 'cnvs',
+  getPrefix(path) {
+    const match = path.match(/.+modules\/(preview|labs)-react\/([^/]+)\/.+/);
+    if (match) {
+      return `cnvs-${match[1]}`;
+    }
+    return 'cnvs';
+  },
+  seed: crypto.createHash('sha256').update(pkg.version).digest('hex').slice(0, 6),
+  fallbackFiles: [],
+});
 
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   staticDirs: ['../public'],
   stories: ['../modules/**/mdx/**/*.mdx', '../modules/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
-    {
-      name: '@storybook/addon-essentials',
-      options: {
-        actions: false, // Disabled because actions is SLOW
-      },
-    },
-    '@storybook/addon-storysource',
     {
       name: '@storybook/addon-docs',
       options: {
@@ -43,9 +55,9 @@ const config: StorybookConfig = {
         },
       },
     },
+    '@storybook/addon-mcp',
   ],
   core: {
-    builder: '@storybook/builder-vite',
     disableTelemetry: true,
   },
   docs: {
@@ -54,7 +66,7 @@ const config: StorybookConfig = {
   },
   typescript: {
     check: false,
-    reactDocgen: false, // we'll handle this ourselves
+    reactDocgen: false,
   },
   viteFinal(config) {
     return mergeConfig(
@@ -62,14 +74,6 @@ const config: StorybookConfig = {
         plugins: [
           vitePluginInlineSpecifications(),
           vitePluginRedirectMDXToGithub(),
-          {
-            enforce: 'pre',
-            ...mdx({
-              include: '*.md',
-              providerImportSource: '@mdx-js/react',
-              remarkPlugins: [remarkGfm],
-            }),
-          },
           vitePluginWholeSource(),
           vitePluginTypescriptWithTransformers({
             include: /modules\/.+\.tsx?/,
@@ -77,7 +81,11 @@ const config: StorybookConfig = {
             transformers: [
               processDocs
                 ? program => {
-                    const docParser = getDocParser(program);
+                    const docParser = new DocParser(program, [
+                      enhancedComponentParser,
+                      componentParser,
+                      modelParser,
+                    ] as any);
                     return _context => {
                       return node => {
                         if (ts.isSourceFile(node)) {
@@ -85,16 +93,30 @@ const config: StorybookConfig = {
                           const symbols = docParser.getExportedSymbols(fileName);
                           docsMap.set(fileName, symbols);
                         }
-
                         return node;
                       };
                     };
                   }
                 : undefined,
-              program => styleTransformer(program, {...stylingConfig, extractCSS: false}),
+              program => {
+                const transform = styleTransformer(program, {
+                  ...stylingConfig,
+                  extractCSS: false,
+                });
+                return context => {
+                  const visit = transform(context);
+                  return sourceFile => {
+                    try {
+                      return visit(sourceFile);
+                    } catch {
+                      return sourceFile;
+                    }
+                  };
+                };
+              },
             ],
             postTransform(code, id) {
-              let newCode = code.replace('%VERSION%', version);
+              let newCode = code.replace('%VERSION%', pkg.version);
               if (docsMap.get(id) && processDocs) {
                 return (
                   newCode +

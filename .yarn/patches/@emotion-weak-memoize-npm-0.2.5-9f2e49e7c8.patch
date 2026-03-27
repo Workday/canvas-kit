@@ -1,0 +1,20 @@
+diff --git a/package.json b/package.json
+index 1de384f77231e30295e17ebaff7a464cb16bcf38..88fccac7a49d5b420fe742be962f2b47c8a024df 100644
+--- a/package.json
++++ b/package.json
+@@ -4,6 +4,15 @@
+   "description": "A memoization function that uses a WeakMap",
+   "main": "dist/weak-memoize.cjs.js",
+   "module": "dist/weak-memoize.esm.js",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./dist/weak-memoize.esm.js",
++      "require": "./dist/weak-memoize.cjs.js",
++      "default": "./dist/weak-memoize.cjs.js"
++    },
++    "./package.json": "./package.json"
++  },
+   "types": "types/index.d.ts",
+   "license": "MIT",
+   "repository": "https://github.com/emotion-js/emotion/tree/master/packages/weak-memoize",

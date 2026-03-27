@@ -2,8 +2,8 @@ import crypto from 'node:crypto';
 
 import {createConfig} from '@workday/canvas-kit-styling-transform';
 
-import pkg from './lerna.json';
-import {handleFocusRing} from './utils/style-transform/handleFocusRing';
+import pkg from './lerna.json' with {type: 'json'};
+import {handleFocusRing} from './utils/style-transform/handleFocusRing.ts';
 
 const config = createConfig({
   prefix: 'cnvs',

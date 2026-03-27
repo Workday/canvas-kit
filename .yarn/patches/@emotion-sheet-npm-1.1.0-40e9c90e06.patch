@@ -1,0 +1,20 @@
+diff --git a/package.json b/package.json
+index 299529ec484c24f2780817de8661c50b57bd943b..09b307695e487ea9bdb7034758922470ff17f82e 100644
+--- a/package.json
++++ b/package.json
+@@ -4,6 +4,15 @@
+   "description": "emotion's stylesheet",
+   "main": "dist/emotion-sheet.cjs.js",
+   "module": "dist/emotion-sheet.esm.js",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./dist/emotion-sheet.esm.js",
++      "require": "./dist/emotion-sheet.cjs.js",
++      "default": "./dist/emotion-sheet.cjs.js"
++    },
++    "./package.json": "./package.json"
++  },
+   "browser": {
+     "./dist/emotion-sheet.cjs.js": "./dist/emotion-sheet.browser.cjs.js",
+     "./dist/emotion-sheet.esm.js": "./dist/emotion-sheet.browser.esm.js"

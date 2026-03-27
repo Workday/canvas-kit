@@ -10,9 +10,7 @@
     "url": "https://github.com/Workday/canvas-kit.git",
     "directory": "modules/mcp"
   },
-  "bin": {
-    "canvas-kit-mcp": "./dist/cli.js"
-  },
+  "bin": "./dist/cli.js",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",

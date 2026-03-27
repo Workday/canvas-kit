@@ -1,0 +1,20 @@
+diff --git a/package.json b/package.json
+index 3feaa423f3da3b4ae55179aeda2b1f16588d396f..12f4cbe94a32228391c94cef2c3906961b5499ce 100644
+--- a/package.json
++++ b/package.json
+@@ -4,6 +4,15 @@
+   "description": "emotion's memoize utility",
+   "main": "dist/emotion-memoize.cjs.js",
+   "module": "dist/emotion-memoize.esm.js",
++  "exports": {
++    ".": {
++      "types": "./types/index.d.ts",
++      "import": "./dist/emotion-memoize.esm.js",
++      "require": "./dist/emotion-memoize.cjs.js",
++      "default": "./dist/emotion-memoize.cjs.js"
++    },
++    "./package.json": "./package.json"
++  },
+   "types": "types/index.d.ts",
+   "license": "MIT",
+   "repository": "https://github.com/emotion-js/emotion/tree/master/packages/memoize",
