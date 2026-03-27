@@ -1,5 +1,14 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@workday/canvas-kit-react/*": ["modules/react/*/index.ts"],
+      "@workday/canvas-kit-preview-react/*": ["modules/preview-react/*/index.ts"],
+      "@workday/canvas-kit-labs-react/*": ["modules/labs-react/*/index.ts"],
+      "@workday/canvas-kit-styling": ["modules/styling/index.ts"],
+      "@workday/canvas-kit-docs": ["modules/docs/index.ts"],
+      "@workday/canvas-kit-popup-stack": ["modules/popup-stack/index.ts"]
+    },
     "module": "es2020",
     "target": "es2019",
     "allowJs": false,
