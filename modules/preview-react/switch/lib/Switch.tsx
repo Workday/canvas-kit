@@ -137,6 +137,7 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
+    border: `${px2rem(1)} solid transparent`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size225, system.space.x6),
     // This value is in the spec and there is no token for this size.
@@ -171,23 +172,20 @@ const switchCircleStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    border: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
-    transform: `translateX(${px2rem(1)})`,
-    ':dir(rtl)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      transform: `translateX(${px2rem(-1)})`,
-    },
+    transform: 'translateX(0)',
   },
   modifiers: {
     checked: {
       true: {
-        transform: `translateX(${px2rem(17)})`,
+        transform: `translateX(${px2rem(16)})`,
         ':dir(rtl)': {
-          transform: `translateX(${px2rem(-17)})`,
+          transform: `translateX(${px2rem(-16)})`,
         },
       },
     },
@@ -212,21 +210,17 @@ const switchIconStencil = createStencil({
     position: 'absolute',
     transition: 'transform 0ms',
     pointerEvents: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    transform: `translateX(${cssVar(base.size150, system.space.x3)})`,
+    transform: `translateX(${px2rem(11)})`,
     ':dir(rtl)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      transform: `translateX(${calc.negate(cssVar(base.size150, system.space.x3))})`,
+      transform: `translateX(${px2rem(-11)})`,
     },
   },
   modifiers: {
     checked: {
       true: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        transform: `translateX(${calc.negate(cssVar(base.size25, system.space.half))})`,
+        transform: `translateX(${px2rem(-3)})`,
         ':dir(rtl)': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          transform: `translateX(${cssVar(base.size25, system.space.half)})`,
+          transform: `translateX(${px2rem(3)})`,
         },
       },
     },
