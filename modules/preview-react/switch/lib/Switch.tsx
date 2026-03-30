@@ -2,7 +2,14 @@ import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {checkSmallIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
@@ -42,9 +49,9 @@ const switchContainerStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     marginTop: cssVar(system.gap.xs, system.space.x1),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, system.space.x6),
+    height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
     // This value is in the spec and there is no token for this size.
-    // calc() does not work inside of cssVar()
+    // calc() does not work inside of cssVar() as the first value.
     width: '2.125rem',
   },
 });
@@ -67,9 +74,9 @@ const switchInputStencil = createStencil({
     // This allows for the input to be the same size as the clickable area for the Switch
     margin: 0,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, system.space.x6),
+    height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
     // This value is in the spec and there is no token for this size.
-    // calc() does not work inside of cssVar()
+    // calc() does not work inside of cssVar() as the first value.
     width: '2.125rem',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
@@ -136,11 +143,12 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
+    // This is used in "High Contrast Mode" to show a border on the Switch background.
     border: `${px2rem(1)} solid transparent`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, system.space.x6),
+    height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
     // This value is in the spec and there is no token for this size.
-    // calc() does not work inside of cssVar()
+    // calc() does not work inside of cssVar() as the first value.
     width: '2.125rem',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
@@ -170,7 +178,7 @@ const switchCircleStencil = createStencil({
     height: cssVar(base.size150, system.space.x3),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    // This is used in "High Contrast Mode" to show a border on the Switch thumb.
     border: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
