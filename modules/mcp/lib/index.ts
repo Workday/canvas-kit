@@ -8,6 +8,11 @@ import packageJson from '../package.json';
 import fileNames from './config.json';
 import storiesConfig from './stories-config.json';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import {
+  registerAppTool,
+  registerAppResource,
+  RESOURCE_MIME_TYPE,
+} from '@modelcontextprotocol/ext-apps/server';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -487,20 +492,19 @@ Returns links to token documentation resources including migration guides, color
 
     if (appExists) {
       storySlugs.push(slug);
-      server.registerResource(
+      registerAppResource(
+        server,
         story.title,
         `ui://story/${slug}`,
         {
-          title: story.title,
           description: `Interactive preview of the ${story.title} Canvas Kit component`,
-          mimeType: 'text/html;profile=mcp-app',
         },
         async (uri: URL) => ({
           contents: [
             {
               uri: uri.href,
               text: fs.readFileSync(appPath, 'utf8'),
-              mimeType: 'text/html;profile=mcp-app',
+              mimeType: RESOURCE_MIME_TYPE,
               _meta: {
                 ui: {
                   csp: {
@@ -539,20 +543,19 @@ Returns links to token documentation resources including migration guides, color
   if (storySlugs.length > 0 && fs.existsSync(storyViewerPath)) {
     const slugEnum = storySlugs as [string, ...string[]];
 
-    server.registerResource(
+    registerAppResource(
+      server,
       'Canvas Kit Story Viewer',
       'ui://story-viewer',
       {
-        title: 'Canvas Kit Story Viewer',
         description: 'Wrapper app that renders Canvas Kit component story previews.',
-        mimeType: 'text/html;profile=mcp-app',
       },
       async (uri: URL) => ({
         contents: [
           {
             uri: uri.href,
             text: fs.readFileSync(storyViewerPath, 'utf8'),
-            mimeType: 'text/html;profile=mcp-app',
+            mimeType: RESOURCE_MIME_TYPE,
             _meta: {
               ui: {
                 csp: {
@@ -596,13 +599,14 @@ Returns links to token documentation resources including migration guides, color
               ]
             : []),
         ],
-        _meta: {
+        structuredContent: {
           storyHtml,
         },
       };
     };
 
-    (server.registerTool as Function)(
+    registerAppTool(
+      server,
       'fetch-component-documentation-example',
       {
         title: 'Fetch Canvas Kit Component Documentation and Storybook example',

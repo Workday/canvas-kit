@@ -1,18 +1,14 @@
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
+import type {App} from '@modelcontextprotocol/ext-apps';
 
-declare global {
-  interface Window {
-    __MCP_BRIDGE__?: {
-      request(method: string, params: unknown): Promise<unknown>;
-      notify(method: string, params: unknown): void;
-      on(event: string, callback: (data: unknown) => void): () => void;
-      initialize(appInfo?: unknown): Promise<unknown>;
-      updateModelContext(content: unknown): void;
-      applyHostStyles(hostContext: unknown): void;
-    };
-  }
+const McpAppContext = React.createContext<App | null>(null);
+
+export const McpAppProvider = McpAppContext.Provider;
+
+export function useMcpApp(): App | null {
+  return React.useContext(McpAppContext);
 }
 
 interface ExampleComponent extends React.ComponentType {
@@ -23,29 +19,32 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
   const [showCode, setShowCode] = React.useState(false);
   const [sent, setSent] = React.useState(false);
   const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
+  const app = useMcpApp();
   const raw = code?.__RAW__;
 
   const handleSendToLLM = () => {
-    if (!raw) {
+    if (!raw || !app) {
       return;
     }
     if (timerRef.current) {
       clearTimeout(timerRef.current);
     }
-    setSent(true);
-    timerRef.current = setTimeout(() => setSent(false), 2000);
 
-    const bridge = window.__MCP_BRIDGE__;
-    if (!bridge) {
-      return;
-    }
+    const text = `Here is a Canvas Kit code example:\n\n\`\`\`tsx\n${raw}\n\`\`\``;
 
-    bridge.request('ui/message', {
-      role: 'user',
-      content: [
-        {type: 'text', text: `Here is a Canvas Kit code example:\n\n\`\`\`tsx\n${raw}\n\`\`\``},
-      ],
-    });
+    void app
+      .sendMessage({
+        role: 'user',
+        content: [{type: 'text', text}],
+      })
+      .then(() => {
+        setSent(true);
+        timerRef.current = setTimeout(() => setSent(false), 2000);
+      })
+      .catch((err: unknown) => {
+        const message = err instanceof Error ? err.message : String(err);
+        console.warn('[ExampleCodeBlock] sendMessage failed:', message);
+      });
   };
 
   const Component = code;
@@ -141,6 +140,28 @@ export function SymbolDescription(_props: {name?: string; fileName?: string}) {
 
 export function Specifications(_props: {file?: string; name?: string}) {
   return null;
+}
+
+const statusColors = {new: '#16826a', deprecated: '#c25100', ai: '#6648c7'};
+export function StorybookStatusIndicator({type}: {type: 'ai' | 'deprecated' | 'new'}) {
+  const labels = {ai: 'AI Content', deprecated: 'Deprecated', new: 'New'};
+  return (
+    <span
+      style={{
+        display: 'inline-block',
+        fontSize: '12px',
+        fontWeight: 600,
+        padding: '1px 8px',
+        borderRadius: '999px',
+        color: statusColors[type] ?? '#333',
+        border: `1px solid ${statusColors[type] ?? '#ccc'}`,
+        verticalAlign: 'middle',
+        marginLeft: '8px',
+      }}
+    >
+      {labels[type] ?? type}
+    </span>
+  );
 }
 
 export function InformationHighlight({

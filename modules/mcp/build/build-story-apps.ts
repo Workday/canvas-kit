@@ -5,11 +5,14 @@ import mdx from '@mdx-js/rollup';
 import remarkGfm from 'remark-gfm';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import * as os from 'node:os';
 import {fileURLToPath} from 'node:url';
 import {canvasKitSourceResolver} from './vite-plugins';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+const CONCURRENCY = Math.max(1, os.cpus().length);
 
 interface StoriesConfig {
   stories: Record<
@@ -70,21 +73,65 @@ function generateEntryTsx(mdxRelativePath: string): string {
   return `import React from 'react';
 import {createRoot} from 'react-dom/client';
 import {MDXProvider} from '@mdx-js/react';
+import type {App as McpApp} from '@modelcontextprotocol/ext-apps';
+import {useApp, useHostStyles} from '@modelcontextprotocol/ext-apps/react';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 import MDXContent from '${mdxRelativePath}';
 import {Meta} from '@storybook/blocks';
-import {ExampleCodeBlock, SymbolDoc, SymbolDescription, Specifications, InformationHighlight} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc, SymbolDescription, Specifications, InformationHighlight, StorybookStatusIndicator, McpAppProvider} from '@workday/canvas-kit-docs';
 
-const mdxComponents = {Meta, ExampleCodeBlock, SymbolDoc, SymbolDescription, Specifications, InformationHighlight};
+const mdxComponents = {Meta, ExampleCodeBlock, SymbolDoc, SymbolDescription, Specifications, InformationHighlight, StorybookStatusIndicator};
+
+const parentApp = (window as any).__MCP_APP_PARENT__ as McpApp | undefined;
+
+function StoryContent({app}: {app: McpApp | null}) {
+  useHostStyles(app, app?.getHostContext());
+
+  React.useEffect(() => {
+    if (!app) return;
+    const handleClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element).closest('a[href]');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href');
+      if (!href || href.startsWith('#') || href.startsWith('javascript:')) return;
+      e.preventDefault();
+      let url = href;
+      if (href.startsWith('/')) {
+        const slug = href.replace(/^\\//,'').replace(/\\/$/,'').replace(/\\//g, '-');
+        url = 'https://workday.github.io/canvas-kit/?path=/docs/' + slug + '--docs';
+      } else if (!/^https?:\\/\\//.test(href)) {
+        url = new URL(href, location.href).href;
+      }
+      void app.openLink({url});
+    };
+    document.addEventListener('click', handleClick);
+    return () => document.removeEventListener('click', handleClick);
+  }, [app]);
+
+  return (
+    <McpAppProvider value={app}>
+      <MDXProvider components={mdxComponents}>
+        <MDXContent />
+      </MDXProvider>
+    </McpAppProvider>
+  );
+}
+
+function StandaloneApp() {
+  const {app} = useApp({
+    appInfo: {name: 'Canvas Kit Story', version: '1.0.0'},
+    capabilities: {},
+  });
+  return <StoryContent app={app} />;
+}
 
 function App() {
-  return (
-    <MDXProvider components={mdxComponents}>
-      <MDXContent />
-    </MDXProvider>
-  );
+  if (parentApp) {
+    return <StoryContent app={parentApp} />;
+  }
+  return <StandaloneApp />;
 }
 
 createRoot(document.getElementById('root')!).render(
@@ -93,6 +140,140 @@ createRoot(document.getElementById('root')!).render(
   </React.StrictMode>
 );
 `;
+}
+
+async function runWithConcurrency<T>(tasks: (() => Promise<T>)[], limit: number): Promise<T[]> {
+  const results: T[] = [];
+  let index = 0;
+
+  async function worker() {
+    while (index < tasks.length) {
+      const i = index++;
+      results[i] = await tasks[i]();
+    }
+  }
+
+  await Promise.all(Array.from({length: Math.min(limit, tasks.length)}, () => worker()));
+  return results;
+}
+
+async function buildStoryApp(
+  slug: string,
+  story: StoriesConfig['stories'][string],
+  repoRoot: string,
+  outDir: string,
+  stubsDir: string
+): Promise<boolean> {
+  const mdxAbsPath = path.resolve(repoRoot, story.mdxPath);
+
+  if (!fs.existsSync(mdxAbsPath)) {
+    console.warn(`  SKIP ${slug}: MDX not found at ${mdxAbsPath}`);
+    return false;
+  }
+
+  const mdxDir = path.dirname(mdxAbsPath);
+  const tempEntryPath = path.join(mdxDir, `__mcp_entry_${slug}.tsx`);
+  const tempHtmlPath = path.join(mdxDir, `__mcp_index_${slug}.html`);
+
+  const mdxBaseName = path.basename(mdxAbsPath);
+  const entryTsx = generateEntryTsx(`./${mdxBaseName}`);
+  const entryHtml = generateEntryHtml(`__mcp_entry_${slug}.tsx`);
+
+  fs.writeFileSync(tempEntryPath, entryTsx);
+  fs.writeFileSync(tempHtmlPath, entryHtml);
+
+  try {
+    await build({
+      root: mdxDir,
+      base: './',
+      plugins: [
+        canvasKitSourceResolver(repoRoot),
+        wholeSourcePlugin(),
+        {
+          enforce: 'pre',
+          ...mdx({remarkPlugins: [remarkGfm], providerImportSource: '@mdx-js/react'}),
+        },
+        react({include: /\.(mdx|js|jsx|ts|tsx)$/}),
+        viteSingleFile(),
+      ],
+      resolve: {
+        alias: {
+          '@workday/canvas-kit-docs': path.join(stubsDir, 'canvas-kit-docs.tsx'),
+          '@storybook/blocks': path.join(stubsDir, 'storybook-blocks.tsx'),
+          '@storybook/react': path.join(stubsDir, 'storybook-react.tsx'),
+        },
+      },
+      build: {
+        outDir,
+        emptyOutDir: false,
+        rollupOptions: {
+          input: tempHtmlPath,
+          output: {
+            entryFileNames: `${slug}.js`,
+            assetFileNames: `${slug}.[ext]`,
+          },
+        },
+        minify: true,
+        sourcemap: false,
+      },
+      logLevel: 'silent',
+    });
+
+    const outputHtml = path.join(outDir, `__mcp_index_${slug}.html`);
+    const finalHtml = path.join(outDir, `${slug}.html`);
+    if (fs.existsSync(outputHtml)) {
+      fs.renameSync(outputHtml, finalHtml);
+    }
+
+    console.log(`  OK ${slug}`);
+    return true;
+  } catch (error) {
+    console.error(`  FAIL ${slug}:`, error instanceof Error ? error.message : error);
+    return false;
+  } finally {
+    try {
+      fs.unlinkSync(tempEntryPath);
+    } catch {
+      // Ignore
+    }
+    try {
+      fs.unlinkSync(tempHtmlPath);
+    } catch {
+      // Ignore
+    }
+  }
+}
+
+async function buildStoryViewer(outDir: string) {
+  const storyViewerHtml = path.join(__dirname, 'story-viewer.html');
+  if (!fs.existsSync(storyViewerHtml)) {
+    return;
+  }
+
+  console.log('Building story-viewer...');
+  try {
+    await build({
+      root: __dirname,
+      base: './',
+      plugins: [viteSingleFile()],
+      build: {
+        outDir,
+        emptyOutDir: false,
+        rollupOptions: {
+          input: storyViewerHtml,
+          output: {
+            entryFileNames: 'story-viewer.js',
+          },
+        },
+        minify: true,
+        sourcemap: false,
+      },
+      logLevel: 'silent',
+    });
+    console.log('  OK story-viewer');
+  } catch (error) {
+    console.error('  FAIL story-viewer:', error instanceof Error ? error.message : error);
+  }
 }
 
 async function buildStoryApps() {
@@ -110,95 +291,19 @@ async function buildStoryApps() {
   fs.mkdirSync(outDir, {recursive: true});
 
   const slugs = Object.keys(config.stories);
-  console.log(`Building ${slugs.length} story apps...`);
+  console.log(`Building ${slugs.length} story apps (concurrency: ${CONCURRENCY})...`);
 
-  let built = 0;
-  let failed = 0;
+  const tasks = slugs.map(
+    slug => () => buildStoryApp(slug, config.stories[slug], repoRoot, outDir, stubsDir)
+  );
 
-  for (const slug of slugs) {
-    const story = config.stories[slug];
-    const mdxAbsPath = path.resolve(repoRoot, story.mdxPath);
-
-    if (!fs.existsSync(mdxAbsPath)) {
-      console.warn(`  SKIP ${slug}: MDX not found at ${mdxAbsPath}`);
-      failed++;
-      continue;
-    }
-
-    const mdxDir = path.dirname(mdxAbsPath);
-    const tempEntryPath = path.join(mdxDir, `__mcp_entry_${slug}.tsx`);
-    const tempHtmlPath = path.join(mdxDir, `__mcp_index_${slug}.html`);
-
-    const mdxBaseName = path.basename(mdxAbsPath);
-    const entryTsx = generateEntryTsx(`./${mdxBaseName}`);
-    const entryHtml = generateEntryHtml(`__mcp_entry_${slug}.tsx`);
-
-    fs.writeFileSync(tempEntryPath, entryTsx);
-    fs.writeFileSync(tempHtmlPath, entryHtml);
-
-    try {
-      await build({
-        root: mdxDir,
-        base: './',
-        plugins: [
-          canvasKitSourceResolver(repoRoot),
-          wholeSourcePlugin(),
-          {
-            enforce: 'pre',
-            ...mdx({remarkPlugins: [remarkGfm], providerImportSource: '@mdx-js/react'}),
-          },
-          react({include: /\.(mdx|js|jsx|ts|tsx)$/}),
-          viteSingleFile(),
-        ],
-        resolve: {
-          alias: {
-            '@workday/canvas-kit-docs': path.join(stubsDir, 'canvas-kit-docs.tsx'),
-            '@storybook/blocks': path.join(stubsDir, 'storybook-blocks.tsx'),
-            '@storybook/react': path.join(stubsDir, 'storybook-react.tsx'),
-          },
-        },
-        build: {
-          outDir,
-          emptyOutDir: false,
-          rollupOptions: {
-            input: tempHtmlPath,
-            output: {
-              entryFileNames: `${slug}.js`,
-              assetFileNames: `${slug}.[ext]`,
-            },
-          },
-          minify: true,
-          sourcemap: false,
-        },
-        logLevel: 'silent',
-      });
-
-      const outputHtml = path.join(outDir, `__mcp_index_${slug}.html`);
-      const finalHtml = path.join(outDir, `${slug}.html`);
-      if (fs.existsSync(outputHtml)) {
-        fs.renameSync(outputHtml, finalHtml);
-      }
-
-      built++;
-      console.log(`  OK ${slug}`);
-    } catch (error) {
-      failed++;
-      console.error(`  FAIL ${slug}:`, error instanceof Error ? error.message : error);
-    } finally {
-      try {
-        fs.unlinkSync(tempEntryPath);
-      } catch {
-        // Ignore
-      }
-      try {
-        fs.unlinkSync(tempHtmlPath);
-      } catch {
-        // Ignore
-      }
-    }
-  }
+  const results = await runWithConcurrency(tasks, CONCURRENCY);
+  const built = results.filter(Boolean).length;
+  const failed = slugs.length - built;
 
   console.log(`\nBuild complete: ${built} succeeded, ${failed} failed out of ${slugs.length}`);
+
+  await buildStoryViewer(outDir);
 }
 
 buildStoryApps().catch((error: unknown) => {
