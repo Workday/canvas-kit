@@ -2,12 +2,11 @@ import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing, useUniqueId} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-export interface SwitchProps {
+export interface SwitchProps extends CSProps {
   /**
    * If true, set the Switch to the on state.
    * @default false
@@ -54,7 +53,7 @@ const SwitchContainer = createComponent('div')({
   displayName: 'SwitchContainer',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}>
+      <Element ref={ref} {...handleCsProp(elemProps, switchContainerStencil())}>
         {children}
       </Element>
     );
@@ -127,7 +126,7 @@ const switchInputStencil = createStencil({
 const SwitchInput = createComponent('input')<SwitchProps>({
   displayName: 'SwitchInput',
   Component: ({error, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />;
+    return <Element ref={ref} {...handleCsProp(elemProps, switchInputStencil({error}))} />;
   },
 });
 
@@ -156,7 +155,7 @@ const SwitchBackground = createComponent('div')({
   displayName: 'SwitchBackground',
   Component: ({children, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}>
+      <Element ref={ref} {...handleCsProp(elemProps, switchBackgroundStencil())}>
         {children}
       </Element>
     );
@@ -192,10 +191,10 @@ const switchCircleStencil = createStencil({
   },
 });
 
-const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
+const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'> & CSProps>({
   displayName: 'SwitchCircle',
   Component: ({checked, ...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />;
+    return <Element ref={ref} {...handleCsProp(elemProps, switchCircleStencil({checked}))} />;
   },
 });
 
@@ -227,14 +226,14 @@ const switchIconStencil = createStencil({
   },
 });
 
-const SwitchIcon = createComponent('div')<Pick<SwitchProps, 'checked'>>({
+const SwitchIcon = createComponent('div')<Pick<SwitchProps, 'checked'> & CSProps>({
   displayName: 'SwitchIcon',
   Component: ({checked, ...elemProps}, ref) => {
     return (
       <SystemIcon
         icon={checked ? checkSmallIcon : xSmallIcon}
         ref={ref}
-        {...mergeStyles(elemProps, switchIconStencil({checked}))}
+        {...handleCsProp(elemProps, switchIconStencil({checked}))}
       />
     );
   },
