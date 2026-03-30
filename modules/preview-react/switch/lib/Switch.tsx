@@ -82,6 +82,10 @@ const switchInputStencil = createStencil({
     borderRadius: cssVar(system.shape.full, system.shape.round),
     opacity: '0',
     cursor: 'pointer',
+    // This is used in "High Contrast Mode" to show an outline on the Switch background.
+    '& ~ div:first-of-type': {
+      outlineOffset: px2rem(2),
+    },
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
@@ -102,6 +106,8 @@ const switchInputStencil = createStencil({
     '&:focus-visible, &:focus, &.focus': {
       outline: 'none',
       '& ~ div:first-of-type': {
+        // This is used in "High Contrast Mode" to show an outline on the Switch background.
+        outline: `${px2rem(1)} solid transparent`,
         ...focusRing({separation: 2, animate: false}),
       },
     },
