@@ -3,7 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Switch} from '@workday/canvas-kit-preview-react/switch';
 
 import mdxDoc from './Switch.mdx';
-import {Basic as BasicExample2} from './examples/Basic';
+import {Basic as BasicExample} from './examples/Basic';
 import {Caution as CautionExample} from './examples/Caution';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
@@ -27,7 +27,7 @@ export const Caution: Story = {
   render: CautionExample,
 };
 export const Basic: Story = {
-  render: BasicExample2,
+  render: BasicExample,
 };
 export const Disabled: Story = {
   render: DisabledExample,
