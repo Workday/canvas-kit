@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const switchBackgroundStencil = createStencil({
   base: {
@@ -11,7 +11,7 @@ const switchBackgroundStencil = createStencil({
     // This is used in "High Contrast Mode" to show a border on the Switch background.
     border: `${px2rem(1)} solid transparent`,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
+    height: px2rem(18),
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),

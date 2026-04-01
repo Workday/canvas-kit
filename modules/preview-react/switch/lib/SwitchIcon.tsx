@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
 
@@ -34,7 +34,7 @@ const switchIconStencil = createStencil({
   },
 });
 
-export const SwitchIcon = createComponent('div')<Pick<SwitchProps, 'checked'> & CSProps>({
+export const SwitchIcon = createComponent('div')<SwitchProps>({
   displayName: 'SwitchIcon',
   Component: ({checked, ...elemProps}, ref) => {
     return (

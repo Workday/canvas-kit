@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
@@ -33,7 +33,7 @@ const switchCircleStencil = createStencil({
   },
 });
 
-export const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'> & CSProps>({
+export const SwitchCircle = createComponent('div')<SwitchProps>({
   displayName: 'SwitchCircle',
   Component: ({checked, ...elemProps}, ref, Element) => {
     return <Element ref={ref} {...handleCsProp(elemProps, switchCircleStencil({checked}))} />;

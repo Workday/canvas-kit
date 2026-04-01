@@ -35,10 +35,7 @@ export const SwitchStates = () => (
           ],
         },
         props => {
-          if (props.indeterminate && !props.checked) {
-            return false;
-          }
-          return true;
+          return !(props.indeterminate && !props.checked);
         }
       )}
       columnProps={permutateProps(
@@ -57,10 +54,7 @@ export const SwitchStates = () => (
           ],
         },
         props => {
-          if (props.disabled && !['', 'hover'].includes(props.className)) {
-            return false;
-          }
-          return true;
+          return !(props.disabled && !['', 'hover'].includes(props.className));
         }
       )}
     >
