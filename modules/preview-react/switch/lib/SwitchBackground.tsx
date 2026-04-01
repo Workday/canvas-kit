@@ -14,7 +14,7 @@ const switchBackgroundStencil = createStencil({
     height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
-    width: '2.125rem',
+    width: px2rem(34),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderRadius: cssVar(system.shape.full, system.shape.round),
     padding: `0 ${px2rem(2)}`,
