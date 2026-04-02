@@ -1,8 +1,7 @@
-import React from 'react';
-
-import {space} from '@workday/canvas-kit-react/tokens';
-import {starIcon, searchIcon, selectIcon, shareIcon} from '@workday/canvas-system-icons-web';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {searchIcon, selectIcon, shareIcon, starIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Icons = () => {
   return (
@@ -25,7 +24,7 @@ export const Icons = () => {
           <Tabs.Item.Text>Fourth Tab</Tabs.Item.Text>
         </Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: space.m}}>
+      <div style={{marginTop: cssVar(system.gap.lg)}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>

@@ -1,15 +1,15 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './MultiSelect.mdx';
-
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+
+import mdxDoc from './MultiSelect.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Complex as ComplexExample} from './examples/Complex';
+import {Controlled as ControlledExample} from './examples/Controlled';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
 import {Icons as IconsExample} from './examples/Icons';
 import {InitialSelectedItems as InitialSelectedItemsExample} from './examples/InitialSelectedItems';
-import {Complex as ComplexExample} from './examples/Complex';
-import {Controlled as ControlledExample} from './examples/Controlled';
 import {Searching as SearchingExample} from './examples/Searching';
 
 export default {

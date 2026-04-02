@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../renameDubLogosImports';
 import {stripIndent} from 'common-tags';
+
+import transformer from '../renameDubLogosImports';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transformer);
 

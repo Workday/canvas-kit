@@ -1,4 +1,5 @@
 import {API, FileInfo, Identifier, ObjectPattern, Options} from 'jscodeshift';
+
 import {getImportRenameMap} from './utils/getImportRenameMap';
 
 const keys = <T extends object>(input: T) => Object.keys(input) as (keyof T)[];
@@ -21,10 +22,13 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
   ] as const;
 
   // inverse the import map. It is more useful this way for this function
-  const imports = Object.keys(importMap).reduce((result, key) => {
-    result[importMap[key]] = key;
-    return result;
-  }, {} as Record<string, any>);
+  const imports = Object.keys(importMap).reduce(
+    (result, key) => {
+      result[importMap[key]] = key;
+      return result;
+    },
+    {} as Record<string, any>
+  );
 
   root.find(j.CallExpression).forEach(nodePath => {
     const {value} = nodePath;
@@ -57,8 +61,8 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
                 property.type === 'ObjectMethod'
                   ? property.params
                   : property.value.type === 'ArrowFunctionExpression'
-                  ? property.value.params
-                  : [];
+                    ? property.value.params
+                    : [];
 
               // create a mapping for param names of callbacks and guards. This makes the logic more
               // difficult to follow, but decreases duplication

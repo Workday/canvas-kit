@@ -1,4 +1,4 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
 
 import {useFormFieldInput, useFormFieldModel} from './hooks';

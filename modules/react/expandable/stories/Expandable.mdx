@@ -1,3 +1,4 @@
+import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {StartIcon} from './examples/StartIcon';
@@ -8,9 +9,9 @@ import {RTL} from './examples/RTL';
 import {LongTitle} from './examples/LongTitle';
 import {HoistedModel} from './examples/HoistedModel';
 
-import * as ExpandableStories from './Expandable.stories';
+import ExpandableStoriesMeta from './Expandable.stories';
 
-<Meta of={ExpandableStories} />
+<Meta of={ExpandableStoriesMeta} />
 
 # Canvas Kit Expandable
 
@@ -48,6 +49,11 @@ To include an avatar image, `Expandable.Avatar` should be placed between `Expand
 `Expandable.Title`. An `iconPosition` prop with a value of either `start` or `end` should be passed
 to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before or after
 `Expandable.Title`.
+
+**Note:** If using an avatar image, do not also include an Icon component in addition to the Expandable.Icon.
+This component is meant to have either an avatar image or an icon in addition to the Expandable.Icon, or neither
+an avatar image nor an extra icon.
+
 
 <ExampleCodeBlock code={Avatar} />
 

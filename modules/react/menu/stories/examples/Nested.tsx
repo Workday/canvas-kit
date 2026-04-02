@@ -1,8 +1,8 @@
 import React from 'react';
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 export const Nested = () => {
   const [selected, setSelected] = React.useState('');

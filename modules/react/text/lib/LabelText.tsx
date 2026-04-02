@@ -1,7 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {textStencil} from './Text';
 
 /**

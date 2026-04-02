@@ -1,24 +1,23 @@
 import * as React from 'react';
 
-import {checkSmallIcon} from '@workday/canvas-system-icons-web';
-
-import {
-  createSubcomponent,
-  composeHooks,
-  createElemPropsHook,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
   isSelected,
   useListItemActiveDescendant,
   useListItemRegister,
 } from '@workday/canvas-kit-react/collection';
+import {
+  composeHooks,
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 
+import {MenuItem, MenuItemProps, menuItemStencil} from './MenuItem';
 import {useMenuModel} from './useMenuModel';
-import {menuItemStencil, MenuItem, MenuItemProps} from './MenuItem';
 
 const MenuOptionText = createComponent('span')({
   Component: ({...elemProps}, ref, Element) => {

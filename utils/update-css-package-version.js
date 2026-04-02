@@ -1,14 +1,13 @@
 // TODO: This file is needed until v11 is released. We only run lerna bump on support and master,
 // but not prerelease/major. Lerna pre-releases only update version strings on latest versions. This
 // file keeps the CSS packages up to date with the `lerna.json` version.
+import fs from 'node:fs/promises';
+import {createRequire} from 'node:module';
 
-const fs = require('node:fs/promises');
-const path = require('node:path');
+const require = createRequire(import.meta.url);
+const lernaConfig = require('../lerna.json');
 
 async function main() {
-  // Read lerna.json version for the version number
-  const lernaConfig = require('../lerna.json');
-
   // Update each package.json file
   const packagePath = `${process.cwd()}/package.json`;
   const contents = (await fs.readFile(packagePath)).toString();

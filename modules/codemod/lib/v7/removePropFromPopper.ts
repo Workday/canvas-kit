@@ -1,6 +1,7 @@
-import {API, FileInfo, Options, JSXElement} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
+import {API, FileInfo, JSXElement, Options} from 'jscodeshift';
+
 import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 
 const popupBarPackage = '@workday/canvas-kit-react/popup';
 

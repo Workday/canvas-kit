@@ -1,13 +1,14 @@
 import React from 'react';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-import {trashIcon} from '@workday/canvas-system-icons-web';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Table} from '@workday/canvas-kit-react/table';
-import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {trashIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const rowStyles = createStyles({
   gridTemplateColumns: '24rem 12rem 7rem 7rem',

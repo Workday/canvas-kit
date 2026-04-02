@@ -1,6 +1,6 @@
-import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
 import {enhancedComponentParser} from '../plugins/enhancedComponentParser';
+import {createProgramFromSource} from './createProgramFromSource';
 
 // prettier-ignore
 describe('enhancedComponentParser', () => {
@@ -557,6 +557,7 @@ describe('enhancedComponentParser', () => {
           modelHook: useMyModel,
           elemPropsHook: useMyComponent,
           subComponents: {
+            /** {@link MyComponentItem MyComponent.Item} */
             Item: MyComponentItem
           }
         })<MyComponentProps>((elemProps, Element) => {
@@ -592,6 +593,7 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.model', 'MyModel');
       expect(symbols).toHaveProperty('0.type.subComponents.0.name', 'Item');
       expect(symbols).toHaveProperty('0.type.subComponents.0.symbol', 'MyComponentItem');
+      expect(symbols).toHaveProperty('0.type.subComponents.0.description', '{@link MyComponentItem MyComponent.Item}');
     });
 
     it('should handle "elemPropsHook" that is aliased', () => {

@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../updateModelSignatures';
 import {stripIndent} from 'common-tags';
+
+import transform from '../updateModelSignatures';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

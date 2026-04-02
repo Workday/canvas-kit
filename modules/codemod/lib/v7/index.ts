@@ -2,15 +2,15 @@ import {Transform} from 'jscodeshift';
 
 import compoundActionBar from './compoundActionBar';
 import compoundBanner from './compoundBanner';
+import recategorizeIconButtons from './recategorizeIconButtons';
 import removePropFromPopper from './removePropFromPopper';
+import renameIconPosition from './renameIconPosition';
 import renameIconRef from './renameIconRef';
 import renameLayoutImports from './renameLayoutImports';
-import updateSegmentedControl from './updateSegmentedControl';
-import renameIconPosition from './renameIconPosition';
-import recategorizeIconButtons from './recategorizeIconButtons';
-import updateModelSignatures from './updateModelSignatures';
-import updateTabs from './updateTabs';
 import updateDisclosureShowHide from './updateDisclosureShowHide';
+import updateModelSignatures from './updateModelSignatures';
+import updateSegmentedControl from './updateSegmentedControl';
+import updateTabs from './updateTabs';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms

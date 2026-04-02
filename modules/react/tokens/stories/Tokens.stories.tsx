@@ -1,15 +1,14 @@
 import {Meta} from '@storybook/react';
 
 import mdxDoc from './Tokens.mdx';
-
+import {Overview} from './examples/Overview';
 import {
   BorderRadius as BorderRadiusExample,
-  Space as SpaceExample,
-  Depth as DepthExample,
   Colors as ColorsExample,
+  Depth as DepthExample,
+  Space as SpaceExample,
   Type as TypeExample,
 } from './examples/Tokens';
-import {Overview} from './examples/Overview';
 
 export default {
   title: 'Tokens/Tokens (deprecated)',

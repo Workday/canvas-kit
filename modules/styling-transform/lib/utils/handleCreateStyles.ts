@@ -1,11 +1,12 @@
 import ts from 'typescript';
 
-import {parseObjectToStaticValue, parseStyleObjFromType} from './parseObjectToStaticValue';
-import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
-import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
-import {isImportedFromStyling} from './isImportedFromStyling';
-import {getVarName} from './getVarName';
 import {slugify} from '@workday/canvas-kit-styling';
+
+import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
+import {getVarName} from './getVarName';
+import {isImportedFromStyling} from './isImportedFromStyling';
+import {parseObjectToStaticValue, parseStyleObjFromType} from './parseObjectToStaticValue';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 
 export const handleCreateStyles: NodeTransformer = (node, context) => {
   const {checker, prefix} = context;

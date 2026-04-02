@@ -1,18 +1,21 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
 import {Basic} from './examples/Basic';
+import {CustomTarget} from './examples/CustomTarget';
+import {ExternalWindow} from './examples/ExternalWindow';
+import {FocusRedirect} from './examples/FocusRedirect';
+import {FocusTrap} from './examples/FocusTrap';
+import {FullScreen} from './examples/FullScreen';
 import {InitialFocus} from './examples/InitialFocus';
 import {MultiplePopups} from './examples/MultiplePopups';
 import {NestedPopups} from './examples/NestedPopups';
-import {FocusRedirect} from './examples/FocusRedirect';
-import {FocusTrap} from './examples/FocusTrap';
 import {RTL} from './examples/RTL';
-import {CustomTarget} from './examples/CustomTarget';
-import {ExternalWindow} from './examples/ExternalWindow';
-import {FullScreen} from './examples/FullScreen';
 
-import * as PopupStories from './Popup.stories';
+import PopupStoriesMeta from './Popup.stories';
 
-<Meta of={PopupStories} />
+<Meta of={PopupStoriesMeta} />
 
 # Canvas Kit Popups
 
@@ -244,4 +247,4 @@ The Popup component automatically handles right-to-left rendering.
 
 ## Specifications
 
-<Specifications file="Popup.spec.ts" name="Popup" />
+<Specifications file="./cypress/component/Popup.spec.tsx" name="Popup" />
