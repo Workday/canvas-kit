@@ -8,6 +8,7 @@ import {Caution as CautionExample} from './examples/Caution';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
+import {RTL as RTLExample} from './examples/RTL';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 
 export default {
@@ -40,4 +41,7 @@ export const LabelPosition: Story = {
 };
 export const RefForwarding: Story = {
   render: RefForwardingExample,
+};
+export const RTL: Story = {
+  render: RTLExample,
 };
