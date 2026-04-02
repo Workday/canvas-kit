@@ -4384,10 +4384,15 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.5.tgz#d571d55fa05475807295cefffcc1783d3459c7a4"
   integrity sha512-kGZj8Tw4kzcTZsHdqP1PPVZRZdjvxK00KHqn98lT8a3hHbBBLg2crmJNn1p22I3EA3iY/yZz9pGhjv6+xPpqqw==
 
-"@workday/canvas-system-icons-web@4.0.0-alpha.12":
-  version "4.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.0-alpha.12.tgz#09589ace1f69623be40208dedc7a74605958cf23"
-  integrity sha512-KtQykyJm8fpByV7UFwY91d7HRJ0nAavPCW+DAURsDbZCPFo2JjHm2BumvkHErTvGKpaZc3Ppox+dvLfgWxniEw==
+"@workday/canvas-expressive-icons-web@1.0.0-alpha.6":
+  version "1.0.0-alpha.6"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.6.tgz#d3304f46f75d492cae4600782f5ce95b9ed3c7e3"
+  integrity sha512-2ZW79p3TBRh/mln9R2E83fNm2C3mBzPsYIW7pTufZOi4UyNMlk+jRDMvgTj70yoGMnqI2JzkNButzYCkTOJCtQ==
+
+"@workday/canvas-system-icons-web@4.0.0-alpha.13":
+  version "4.0.0-alpha.13"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.0-alpha.13.tgz#99bd2b7b0b7f94ee04df6b2b6de1dc4f642eddfb"
+  integrity sha512-+oEvFkfdtRa7dYf6ygIydc1vgc7aqB/ma1YuEk8r3Pi5/BEPD6FFSUamkFU1cu9sBE1bW7V2tJnIXyk6visAQA==
 
 "@workday/canvas-tokens-web@4.1.2":
   version "4.1.2"
