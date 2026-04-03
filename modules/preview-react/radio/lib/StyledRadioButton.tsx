@@ -27,7 +27,7 @@ export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;
 }
 
-const radioInputStencil = createStencil({
+export const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
     height: px2rem(radioHeight),
@@ -183,7 +183,7 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
   },
 });
 
-const radioInputWrapperStyles = createStencil({
+export const radioInputWrapperStyles = createStencil({
   base: {
     height: px2rem(radioHeight),
     width: px2rem(radioWidth),
