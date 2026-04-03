@@ -4,7 +4,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
-const switchCircleStencil = createStencil({
+export const switchCircleStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     width: cssVar(base.size150, system.space.x3),

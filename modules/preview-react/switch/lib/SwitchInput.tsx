@@ -4,7 +4,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
-const switchInputStencil = createStencil({
+export const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',

@@ -2,7 +2,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const switchBackgroundStencil = createStencil({
+export const switchBackgroundStencil = createStencil({
   base: {
     position: 'absolute',
     display: 'flex',

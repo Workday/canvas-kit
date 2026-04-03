@@ -6,7 +6,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
-const switchIconStencil = createStencil({
+export const switchIconStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),

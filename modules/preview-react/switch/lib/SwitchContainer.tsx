@@ -2,7 +2,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const switchContainerStencil = createStencil({
+export const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
