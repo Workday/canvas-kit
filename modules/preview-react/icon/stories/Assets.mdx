@@ -1,0 +1,26 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
+import * as IconStories from './Assets.stories';
+
+import {SystemIconList} from './examples/IconList';
+import {Overview} from './examples/Overview';
+
+<Meta of={IconStories} />
+
+# Assets
+
+Assets are graphics which help communicate meaning or highlight areas of interaction to our users.
+These may be presented individually or as part of a group with related information in components and
+patterns.
+
+<ExampleCodeBlock code={Overview} />
+
+## System Icon List
+
+System Icons are symbols used to convey simple actions and functions, they are the most common icons
+encountered in products and help communicate metaphors at a glance.
+
+<ExampleCodeBlock code={SystemIconList} />
