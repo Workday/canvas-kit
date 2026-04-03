@@ -9,9 +9,13 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
+import {
+  CanvasSystemIcon,
+  birthdayIcon,
+  checkIcon,
+  ribbonIcon,
+} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 interface AccordionItem {
   icon: CanvasSystemIcon;

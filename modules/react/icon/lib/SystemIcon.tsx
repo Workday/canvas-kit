@@ -3,8 +3,8 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {iconColors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, createVars, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-import {CanvasIconTypes, CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
 
