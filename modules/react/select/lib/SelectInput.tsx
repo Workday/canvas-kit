@@ -2,9 +2,8 @@ import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon, caretDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {brand, system} from '@workday/canvas-tokens-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
