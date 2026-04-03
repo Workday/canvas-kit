@@ -4379,20 +4379,15 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-colors-web/-/canvas-colors-web-2.0.0.tgz#1e50e4ab70a00d8ba6037536a328ac227ce2274f"
   integrity sha512-1gqf/oLeJSqrma0xQxOhWNWky+0JxJ/vbBy3A7VG8m51CJzraTLwKN7HViqJiZM4xHjy61kK9e42IJKVEeLO2Q==
 
-"@workday/canvas-expressive-icons-web@1.0.0-alpha.5":
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.5.tgz#d571d55fa05475807295cefffcc1783d3459c7a4"
-  integrity sha512-kGZj8Tw4kzcTZsHdqP1PPVZRZdjvxK00KHqn98lT8a3hHbBBLg2crmJNn1p22I3EA3iY/yZz9pGhjv6+xPpqqw==
+"@workday/canvas-expressive-icons-web@1.0.0-alpha.7":
+  version "1.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.7.tgz#b9a49b8151e16d5eb70b2182b5cc0eea8d44f970"
+  integrity sha512-9XyfJOWdOetkSZ0pTYnXMXuCUIBauXKgpPEeBBbWmuKFikqE4PNt/b6EydV+WSMVLsmw48cPbFyPJTqrQ2tT2g==
 
-"@workday/canvas-expressive-icons-web@1.0.0-alpha.6":
-  version "1.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.6.tgz#d3304f46f75d492cae4600782f5ce95b9ed3c7e3"
-  integrity sha512-2ZW79p3TBRh/mln9R2E83fNm2C3mBzPsYIW7pTufZOi4UyNMlk+jRDMvgTj70yoGMnqI2JzkNButzYCkTOJCtQ==
-
-"@workday/canvas-system-icons-web@4.0.0-alpha.13":
-  version "4.0.0-alpha.13"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.0-alpha.13.tgz#99bd2b7b0b7f94ee04df6b2b6de1dc4f642eddfb"
-  integrity sha512-+oEvFkfdtRa7dYf6ygIydc1vgc7aqB/ma1YuEk8r3Pi5/BEPD6FFSUamkFU1cu9sBE1bW7V2tJnIXyk6visAQA==
+"@workday/canvas-system-icons-web@4.0.0-alpha.14":
+  version "4.0.0-alpha.14"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.0-alpha.14.tgz#223f3bef7efb553eb4c410bb481324221b8bd9a5"
+  integrity sha512-fIz8nfbf41ZDm9AWvgLfHn7Sbn7k0Jj8BxHUdBLRdZcTHvGp7njLB+qfnZHKiWvkRkrrEegUHQIp7MlkkDTx/Q==
 
 "@workday/canvas-tokens-web@4.1.2":
   version "4.1.2"
