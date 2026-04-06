@@ -16,8 +16,12 @@ import * as ModalStories from './Modal.stories';
 
 A Modal component is a type of Dialog that renders a translucent overlay that prevents user
 interaction with the rest of the page. A Modal will render the rest of the page inert until the
-Modal is dismissed. A Modal should be used when the user needs to presented with important
+Modal is dismissed. A Modal should be used when the user needs to be presented with important
 information that must be interacted with before continuing interaction with the rest of the page.
+
+For tasks that do not require blocking the rest of the page, consider the non-modal
+[**Dialog**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs)
+component instead.
 
 ## Installation
 
@@ -37,7 +41,7 @@ dialog.
 ### Without Close Icon
 
 If you wish to remove the close icon button, you can simply omit the `Modal.CloseButton`
-subcomponent. If you have a modal dialog that requires the user to accept instead of dismiss though
+subcomponent. If you have a modal dialog that requires the user to accept instead of dismiss through
 an escape key or clicking outside the modal, you must create a new `PopupModel` without those
 behaviors and hand that model to the Modal dialog component.
 
@@ -55,17 +59,28 @@ element receives focus when the modal opens.
 
 <ExampleCodeBlock code={CustomFocus} />
 
+> **Accessibility Note**: When initial focus lands on a control **below** the heading (for example,
+> a text field instead of the close button), give supplementary copy a unique `id` and pass
+> **`aria-describedby`** on **`Modal.Card`** so screen readers can announce both the dialog name and
+> that text. For more examples of custom focus techniques, see
+> [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus).
+
 ### Return Focus
 
-By default, the Modal will return focus to the `Modal.Target` element, but it is possible the Modal
-was triggered by an element that won't exist when the modal is closed. An example might be a Modal
-that was opened from an Menu item and the act of opening the Modal also closes the Menu, meaning the
-Menu item can no longer receive focus. The also probably means the `Modal.Target` component might
-not suite your needs. The `Modal.Target` adds both a `ref` and an `onClick`. If you provide a
-`returnFocusRef`, you only need to worry about the `onClick`. If you're using a menu, you might need
-to use a different callback. Calling `model.events.show()` will show the Modal.
+By default, the Modal will return focus to the `Modal.Target` element. When you open the modal with
+`model.events.show()` (without `Modal.Target`), set **`returnFocusRef`** on the model to the element
+that should receive focus when the modal closes—for example the button that opened it. That covers
+cancel, Escape, and the close icon: focus returns to the control the user activated.
+
+If confirming an action **removes** that control from the document (such as deleting the row that
+held the delete button), `returnFocusRef` alone cannot land on a **new** target. The example below
+uses **`useLayoutEffect`** after the list updates to move focus to another row’s delete control, or
+to empty-state text when no files remain.
 
 <ExampleCodeBlock code={ReturnFocus} />
+
+> **Accessibility Note**: After an item is deleted, focus is returned to the next item in the list
+> or to the empty state text when no items remain.
 
 ### Custom Target
 
@@ -82,6 +97,12 @@ requires a `label` prop.
 
 <ExampleCodeBlock code={CustomTarget} />
 
+> **Accessibility Note**: Custom targets must be keyboard focusable, otherwise users will not be
+> able to access the modal. Bear in mind that click handlers only work with the keyboard when
+> applied to HTML `<button>` elements and it is **strongly recommended** to base your custom target
+> on a `<button>` element. Otherwise, you will be required to build in your own custom keyboard
+> event handlers for invoking the modal.
+
 ### Body Content Overflow
 
 The Modal automatically handles overflowing content inside the `Modal.Body` element. If contents are
@@ -89,6 +110,11 @@ larger than the browser's height will allow, the content will overflow with a sc
 need to restrict the height of your browser to observe the overflow.
 
 <ExampleCodeBlock code={BodyOverflow} />
+
+> **Accessibility Note**: When body content overflows, ensure users can scroll that region **using
+> only the keyboard**. Mouse users can drag scrollbars, but keyboard users need another path. In
+> this example, **`tabIndex={0}`** is set on **`Modal.Body`** so the scrollable area can receive
+> focus; once focused, **arrow keys** move the viewport within the overflowing content.
 
 ### Full overlay scrolling
 
@@ -107,6 +133,59 @@ The `Modal.Card` can be turned into a `form` element to make a form modal. The `
 hoisted to allow for form validation and allow you to control when the modal closes.
 
 <ExampleCodeBlock code={FormModal} />
+
+## Accessibility
+
+`Modal` uses the default modal model (`useModalModel`), which composes **`useInitialFocus`**,
+**`useReturnFocus`**, **`useCloseOnOverlayClick`**, **`useCloseOnEscape`**, **`useFocusTrap`**,
+**`useAssistiveHideSiblings`**, and **`useDisableBodyScroll`**.
+
+**`Modal.Card`** exposes **`role="dialog"`** and **`aria-labelledby`** referencing the `id` on
+**`Modal.Heading`**, so the dialog has an accessible name that matches the visible heading. If you
+do not use **`Modal.Heading`**, add an **`aria-label`** on **`Modal.Card`** instead.
+
+**`aria-modal`:** The card sets **`aria-modal="false"`**. When **`aria-modal`** is `true`, some
+assistive technologies hide everything outside the dialog—including portaled UI owned by the dialog
+(such as a Select menu rendered as a sibling of the modal). Canvas Kit keeps
+**`aria-modal="false"`** for a better VoiceOver experience while **`useAssistiveHideSiblings`**
+applies **`aria-hidden`** to siblings of the modal stack so background content stays hidden from
+assistive technology while the modal is open.
+
+Unlike
+[**Dialog**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs), Modal
+does **not** add the sibling **`aria-owns`** pattern used to remap reading order for portaled
+non-modal dialogs. Focus moves into the modal when it opens, and sibling hiding reduces exposure to
+content behind the overlay. For portals, reading order, and related tradeoffs, see
+[Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
+
+[Modal Dialog Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+
+- Prefer **`Modal.Heading`** so the dialog is properly labelled; avoid leaving a dialog without an
+  accessible name.
+- Ensure icon-only controls such as **`Modal.CloseIcon`** include an accessible name. Prefer the
+  `Tooltip` component to provide a visible label, or a translated `aria-label` string is acceptable.
+
+### Navigation
+
+- **Enter** / **Space**: Open the modal (standard button behavior on the trigger). When it opens,
+  focus moves to the **first focusable element** inside the modal in DOM order—often the close
+  control—or to the element referenced by **`initialFocusRef`** on the model when set.
+- **Tab** / **Shift + Tab**: Move through focusable elements inside the modal; focus **stays**
+  within the modal (**focus trap**).
+- **Escape**: Closes the modal and returns focus to **`Modal.Target`** (or the configured return
+  target, such as **`returnFocusRef`**).
+
+### Screen Reader Experience
+
+- **When the modal opens:** Screen readers should announce the first focused control (often the
+  close button), the dialog's name (**`Modal.Heading`**) and role.
+- **Background content:** Sibling elements of the modal stack receive **`aria-hidden="true"`** while
+  the modal is visible, which hides the rest of the page from many assistive technologies. Mouse
+  users are blocked by the overlay and inert interaction expectations; always verify behavior in
+  your supported browser and screen reader combinations.
+- **Focus trap limits:** Trapping **keyboard** focus does not stop mouse users from interacting
+  outside the dialog card, and some screen reader users can move a virtual cursor outside the
+  trapped region. Treat the trap as the primary keyboard affordance, not a hard security boundary.
 
 ## Component API
 
