@@ -12,7 +12,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchThemes, SearchTheme, SearchThemeAttributes} from './themes';
 import chroma from 'chroma-js';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 /**
  * @deprecated ⚠️ `SearchFormProps` is deprecated and will be removed in a future major version. Please reference our [Autocomplete example](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#usage).
@@ -359,7 +359,11 @@ export const searchFormStencil = createStencil({
           },
           '&:is(:focus-visible, &.focus):where(:not([disabled]))': {
             background: system.color.bg.alt.soft,
-            boxShadow: `0 0 0 0px ${system.color.border.inverse}, 0 0 0 2px ${brand.common.focusOutline}`,
+
+            boxShadow: `0 0 0 0px ${
+              /* TODO: Update to `system.color.border.inverse.default` in v15. */
+              cssVar(system.color.border.inverse, base.neutral0)
+            }, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },
       }),

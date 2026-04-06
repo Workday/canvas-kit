@@ -20,10 +20,10 @@ export const toolbarIconButtonStencil = createStencil({
     padding: system.space.zero,
     height: system.space.x8,
     [buttonStencil.vars.borderRadius]: system.shape.x1,
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+      [systemIconStencil.vars.color]: system.color.fg.default,
       ...focusRing({
         width: 2,
         separation: 0,

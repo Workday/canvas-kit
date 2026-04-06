@@ -19,22 +19,20 @@ accessibility compliance while preserving vibrancy.
 
 ![Perceptual uniformity demonstration showing how step 500 appears equally bright across all color families](color-scale-500.png)
 
-<Do>
+**Do:**
 
 - Apply consistent steps for similar UI elements across all color families
 - When choosing color combinations, use the [contrast framework](/guidelines/color/color-contrast)
   to ensure accessible contrast ratios
 - Use steps to create visual hierarchy
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use steps for different purposes
 - Mix steps randomly, always consider visual hierarchy
 - Ignore contrast requirements when choosing steps
 
-</Dont>
 
 ![Visual hierarchy example showing how step 100 applies consistently to secondary buttons across blue, green, and red color families](color-scale-100-to-300.png)
 
@@ -70,20 +68,18 @@ Use the default page background for most use cases, especially if colors will be
 
 A secondary option is needed when subtle differentiaton is needed against the background.
 
-<Do>
+**Do:**
 
 - Use default background for most page layouts
 - Choose subtle alternatives when background differentiation is needed
 - Apply very light backgrounds for disabled and error states
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use subtle backgrounds when color overlays will be present
 - Apply alternative backgrounds without clear purpose
 
-</Dont>
 
 | **Color**  | **Usage**                          |
 | ---------- | ---------------------------------- |
@@ -96,20 +92,18 @@ Light surfaces that don't compete with primary content.
 
 ![Step 50 subtle background examples](color-scale-50.png)
 
-<Do>
+**Do:**
 
 - Use for low emphasis status indicators
 - Create subtle content zones that don't compete with primary content
 - Apply when minimal visual presence is desired
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use when content needs to stand out or grab attention
 - Apply to elements requiring clear visibility
 
-</Dont>
 
 ### Step 100 - Secondary Backgrounds
 
@@ -117,20 +111,18 @@ Clear hierarchy between subtle and primary content.
 
 ![Step 100 secondary background examples](color-scale-100-to-300.png)
 
-<Do>
+**Do:**
 
 - Use for secondary button backgrounds
 - Apply to hover states for light content
 - Choose for UI elements needing moderate prominence
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for primary actions or main content
 - Apply when subtle emphasis is sufficient
 
-</Dont>
 
 ### Step 200, 300 - Surface Borders
 
@@ -148,20 +140,18 @@ Visual structures for non-interactive surfaces.
 
 </FormattedImage>
 
-<Do>
+**Do:**
 
 - Use lighter borders for list dividers and lightweight boundaries
 - Apply stronger borders for container definition and modular sections
 - Choose based on visual separation needs
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for interactive elements requiring higher contrast
 - Apply to elements needing accessibility compliance
 
-</Dont>
 
 ### Step 400, 500 - Interactive Elements
 
@@ -177,22 +167,20 @@ Visual structures for non-interactive surfaces.
 
 </FormattedImage>
 
-<Do>
+**Do:**
 
 - Use reduced contrast for disabled states and non-interactive elements
 - Apply accessible contrast for input borders and interactive elements
 - Meet minimum WCAG 2.1 AA compliance requirements
 - Leverage peak saturation for vibrant accent colors
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use disabled state colors for interactive elements
 - Apply interactive colors below minimum contrast requirements
 - Use low contrast colors for accessibility-critical elements
 
-</Dont>
 
 ### Step 600, 700 - Accent Backgrounds
 
@@ -202,19 +190,17 @@ backgrounds (4.5:1 contrast).
 ![Step 600–800 accents and 700 hover examples](color-scale-600-800.png)
 ![Step 700 hover examples](color-scale-700-hover.png)
 
-<Do>
+**Do:**
 
 - Use for interactive accent colors, like PrimaryButton backgrounds
 - Apply to link text, error text, and hint text on default backgrounds
 - Use the next step (700) for hover states and 800 for active states
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Apply to secondary UI or prose text - Use when something more subtle is more appropriate
 
-</Dont>
 
 ### Step 800, 900, 950 - Text Hierarchy
 
@@ -226,19 +212,17 @@ Text contrast levels for content hierarchy and readability.
 contrast for headings and important text. **Step 950** - Maximum contrast for display text and hero
 headlines.
 
-<Do>
+**Do:**
 
 - Use on prose content
 - Match level of contrast to typographic hierarchy
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use for secondary or instructional text (use 600 instead)
 - Use for accent text, like links (use 600 intead)
 
-</Dont>
 
 ### Step 975 - Dark Mode Backgrounds
 
@@ -246,17 +230,15 @@ Reserved for dark mode page backgrounds to maintain consistent color relationshi
 
 ![Step 975 dark mode backgrounds](color-scale-975.png)
 
-<Do>
+**Do:**
 
 - Use exclusively for dark mode page backgrounds
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use in light mode interfaces
 
-</Dont>
 
 ### Step 1000 - Overlay Backgrounds
 
@@ -264,14 +246,12 @@ Strongest emphasis color for alpha overlays and modal dialogs.
 
 ![Step 1000 overlay backgrounds](color-scale-1000.png)
 
-<Do>
+**Do:**
 
 - Use for alpha overlays and modal dialog scrims
 
-</Do>
 
-<Dont>
+**Dont:**
 
 - Use as solid color in interfaces
 
-</Dont>

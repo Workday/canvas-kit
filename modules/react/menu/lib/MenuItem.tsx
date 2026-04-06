@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {CSProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
 import {
@@ -149,8 +149,8 @@ const MenuItemIcon = (elemProps: SystemIconProps) => {
 };
 
 const MenuItemText = createComponent('span')({
-  Component: ({...elemProps}, ref, Element) => {
-    return <Element ref={ref} {...menuItemStencil.parts.text} {...elemProps} />;
+  Component: ({...elemProps}: CSProps, ref, Element) => {
+    return <Element ref={ref} {...menuItemStencil.parts.text} {...handleCsProp(elemProps)} />;
   },
 });
 

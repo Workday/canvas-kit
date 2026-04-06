@@ -6,7 +6,7 @@ import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -152,7 +152,10 @@ export const buttonStencil = createStencil({
     position: 'relative',
     verticalAlign: 'middle',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, system.color.fg.strong),
+    [systemIconStencil.vars.color]: cssVar(
+      buttonColorPropVars.default.icon,
+      system.color.fg.strong
+    ),
     transition:
       'box-shadow 120ms linear, border 120ms linear, background-color 120ms linear, color 120ms linear',
     '&:disabled, &:disabled:active, &.disabled': {
@@ -179,7 +182,8 @@ export const buttonStencil = createStencil({
         separation: 2,
         innerColor: cssVar(
           buttonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, system.color.border.inverse)
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          cssVar(boxShadowInner, cssVar(system.color.border.inverse, base.neutral0))
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,

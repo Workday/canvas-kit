@@ -1,8 +1,15 @@
 import * as React from 'react';
 import {createComponent, focusRing, ErrorType} from '@workday/canvas-kit-react/common';
 
-import {calc, createStencil, handleCsProp, px2rem, CSProps} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {
+  calc,
+  cssVar,
+  createStencil,
+  handleCsProp,
+  px2rem,
+  CSProps,
+} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {checkboxBackgroundStencil} from './CheckBackground';
 
 export interface CheckboxProps extends CSProps {
@@ -154,7 +161,8 @@ const checkboxInputStencil = createStencil({
             separation: 0,
             animate: false,
             innerColor: system.color.border.contrast.default,
-            outerColor: system.color.border.inverse,
+            /* TODO: Update to `system.color.border.inverse.default` in v15. */
+            outerColor: cssVar(system.color.border.inverse, base.neutral0),
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -165,9 +173,11 @@ const checkboxInputStencil = createStencil({
                 separation: 2,
                 animate: false,
                 innerColor: system.color.border.contrast.default,
-                outerColor: system.color.border.inverse,
+                /* TODO: Update to `system.color.border.inverse.default` in v15. */
+                outerColor: cssVar(system.color.border.inverse, base.neutral0),
               }),
-              borderColor: system.color.border.inverse,
+              /* TODO: Update to `system.color.border.inverse.default` in v15. */
+              borderColor: cssVar(system.color.border.inverse, base.neutral0),
             },
           },
       },
@@ -190,7 +200,10 @@ const checkboxInputStencil = createStencil({
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${system.color.border.inverse},
+            0 0 0 ${px2rem(2)} ${
+            /* TODO: Update to `system.color.border.inverse.default` in v15. */
+            cssVar(system.color.border.inverse, base.neutral0)
+          },
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },

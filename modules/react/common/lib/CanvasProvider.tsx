@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Theme, ThemeProvider, CacheProvider} from '@emotion/react';
 import {defaultCanvasTheme, PartialEmotionCanvasTheme, useTheme} from './theming';
 import {brand, base} from '@workday/canvas-tokens-web';
-import {getCache, maybeWrapCSSVariables, createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
 
 export interface CanvasProviderProps {
   /**

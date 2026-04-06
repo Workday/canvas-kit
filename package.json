@@ -141,7 +141,7 @@
     "@workday/canvas-accent-icons-web": "^3.0.17",
     "@workday/canvas-applet-icons-web": "^2.0.15",
     "@workday/canvas-system-icons-web": "^3.0.36",
-    "@workday/canvas-tokens-web": "^3.1.1",
+    "@workday/canvas-tokens-web": "^3.1.6",
     "jest-environment-jsdom": "^29.7.0",
     "ts-jest": "^29.2.4",
   "resolutions": {
@@ -150,6 +150,7 @@
     "micromatch": "4.0.6",
     "jscodeshift": "0.14.0",
     "puppeteer-core": "^13.7.0",
-    "loader-utils": "@1.4.1"
+    "loader-utils": "@1.4.1",
+    "semver": "^7.6.2"
   }
 }

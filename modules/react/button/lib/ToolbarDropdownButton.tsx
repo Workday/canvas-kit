@@ -23,14 +23,14 @@ export const toolbarDropdownButtonStencil = createStencil({
     [buttonStencil.vars.borderRadius]: system.shape.x1,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
-      system.color.fg.muted.soft
+      system.color.fg.default
     ),
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.bg.transparent.default,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        system.color.fg.muted.soft
+        system.color.fg.default
       ),
       ...focusRing({
         width: 2,

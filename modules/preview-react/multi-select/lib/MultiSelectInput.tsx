@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 
 import {
@@ -9,7 +9,14 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, handleCsProp, px2rem, calc} from '@workday/canvas-kit-styling';
+import {
+  createStencil,
+  CSProps,
+  cssVar,
+  handleCsProp,
+  px2rem,
+  calc,
+} from '@workday/canvas-kit-styling';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {getCursor} from '@workday/canvas-kit-react/collection';
@@ -109,7 +116,8 @@ export const multiSelectInputStencil = createStencil({
         '&:has(:focus-visible:not([disabled])), &.focus': {
           borderColor: brand.common.errorInner,
           boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
-            system.color.border.inverse
+            /* TODO: Update to `system.color.border.inverse.default` in v15. */
+            cssVar(system.color.border.inverse, base.neutral0)
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
@@ -125,7 +133,10 @@ export const multiSelectInputStencil = createStencil({
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${system.color.border.inverse},
+        0 0 0 2px ${
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          cssVar(system.color.border.inverse, base.neutral0)
+        },
         0 0 0 4px ${brand.common.focusOutline}`,
         },
         outlineOffset: px2rem(2),

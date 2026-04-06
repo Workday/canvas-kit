@@ -19,6 +19,8 @@ import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
 import {brand} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {ModalWithPopupRTL as ModalWithPopupRTLExample} from './examples/ModalWithPopupRTL';
+import {NoTargetRTL as NoTargetRTLExample} from './examples/NoTargetRTL';
 
 export default {
   title: 'Testing/Popups/Modal',
@@ -108,6 +110,14 @@ export const StackedModals = {
 
 export const ModalWithPopup = {
   render: ModalWithPopupExample,
+};
+
+export const ModalWithPopupRTL = {
+  render: ModalWithPopupRTLExample,
+};
+
+export const NoTargetRTL = {
+  render: NoTargetRTLExample,
 };
 
 export const WithTooltips = {

@@ -88,11 +88,23 @@ export const usePopupStack = <E extends HTMLElement>(
   }, [localRef, target, popupRef]);
 
   // The direction will properly follow the theme via React context, but portals lose the `dir`
-  // hierarchy, so we'll add it back here.
+  // hierarchy, so we'll add it back here. When there's no target (e.g. consumer doesn't use
+  // Popup.Target), find the nearest element with a `dir` attribute: start from the focused element
+  // (the trigger) or body, then use closest('[dir]'). Prefer reading getAttribute('dir') when
+  // present to avoid getComputedStyle.
   React.useLayoutEffect(() => {
     const targetEl = target ? ('current' in target ? target.current : target) : undefined;
-    if (targetEl) {
-      const isRTL = isElementRTL(targetEl);
+    let elementToCheck: Element | undefined = targetEl ?? undefined;
+    if (elementToCheck == null && typeof document !== 'undefined') {
+      const active = document.activeElement;
+      const container = localRef.current;
+      const start = active && container && !container.contains(active) ? active : document.body;
+      elementToCheck = start.closest('[dir]') ?? document.documentElement;
+    }
+    if (elementToCheck) {
+      const explicitDir = elementToCheck.getAttribute('dir');
+      const isRTL =
+        explicitDir != null ? explicitDir.toLowerCase() === 'rtl' : isElementRTL(elementToCheck);
       if (isRTL) {
         localRef.current?.setAttribute('dir', 'rtl');
       } else {

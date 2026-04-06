@@ -8,7 +8,7 @@ export const forwardFitTokens = {
   system: {
     shape: {
       //TODO: in v4 Tokens and v15, we should replace this forward fit token with the actual token value
-      sm: cssVar('--cnvs-sys-shape-sm', system.shape.x1Half),
+      sm: cssVar('--cnvs-sys-shape-md', system.shape.x1Half),
     },
   },
 } as const;
