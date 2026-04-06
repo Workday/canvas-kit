@@ -151,11 +151,10 @@ assistive technologies hide everything outside the dialog—including portaled U
 applies **`aria-hidden`** to siblings of the modal stack so background content stays hidden from
 assistive technology while the modal is open.
 
-Unlike
-[**Dialog**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs), Modal
-does **not** add the sibling **`aria-owns`** pattern used to remap reading order for portaled
-non-modal dialogs. Focus moves into the modal when it opens, and sibling hiding reduces exposure to
-content behind the overlay. For portals, reading order, and related tradeoffs, see
+Unlike [**Dialog**](/components/popups/dialog/), Modal does **not** add the sibling **`aria-owns`**
+pattern used to remap reading order for portaled non-modal dialogs. Focus moves into the modal when
+it opens, and sibling hiding reduces exposure to content behind the overlay. For portals, reading
+order, and related tradeoffs, see
 [Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
 
 [Modal Dialog Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
