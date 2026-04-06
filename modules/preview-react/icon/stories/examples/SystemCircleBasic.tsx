@@ -1,8 +1,4 @@
-import {
-  SystemIcon,
-  SystemIconCircle,
-  systemIconCircleStencil,
-} from '@workday/canvas-kit-preview-react/icon';
+import {SystemIconCircle, systemIconCircleStencil} from '@workday/canvas-kit-preview-react/icon';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {imageIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';

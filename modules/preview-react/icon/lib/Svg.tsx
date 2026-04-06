@@ -1,4 +1,3 @@
-import DOMPurify from 'dompurify';
 import parse from 'html-react-parser';
 
 import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
@@ -66,14 +65,12 @@ export const SVG = createComponent('span')({
       return null;
     }
 
-    const sanitizedSvg = DOMPurify.sanitize(src.svg);
-
     return (
       <Element
         ref={ref}
         {...handleCsProp(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
       >
-        {parse(sanitizedSvg)}
+        {parse(src.svg)}
       </Element>
     );
   },

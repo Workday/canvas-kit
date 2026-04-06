@@ -146,13 +146,13 @@ import { SVGIcon } from '@workday/canvas-kit-preview-react/icon';
 
 **Props**
 
-| Prop              | Type                                     | Description                                             |
-| ----------------- | ---------------------------------------- | ------------------------------------------------------- |
-| `src`             | CanvasSystemIcon or CanvasExpressiveIcon | SVG string or element                                   |
-| `size`            | string, number                           | Size                                                    |
-| `color`           | string                                   | Fill color                                              |
-| `shouldMirror`    | boolean                                  | If `true`, mirrors (flips) the SVG horizontally         |
-| `shouldMirrorRtl` | boolean                                  | If `true`, mirrors the SVG only in right-to-left layout |
+| Prop                | Type                                     | Description                                             |
+| ------------------- | ---------------------------------------- | ------------------------------------------------------- |
+| `src`               | CanvasSystemIcon or CanvasExpressiveIcon | Canvas Icon object                                      |
+| `size`              | string, number                           | Size                                                    |
+| `color`             | string                                   | Fill color                                              |
+| `shouldMirror`      | boolean                                  | If `true`, mirrors (flips) the SVG horizontally         |
+| `shouldMirrorInRTL` | boolean                                  | If `true`, mirrors the SVG only in right-to-left layout |
 
 ---
 
