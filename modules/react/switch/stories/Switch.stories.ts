@@ -11,7 +11,7 @@ import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 
 export default {
-  title: 'Components/Inputs/Switch',
+  title: 'Components/Inputs/Switch (deprecated)',
   component: Switch,
   tags: ['autodocs'],
   parameters: {
