@@ -1,0 +1,52 @@
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand, base, system} from '@workday/canvas-tokens-web';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Card} from '@workday/canvas-kit-react/card';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+
+const customTheme = createStyles({
+  [brand.primary.base]: base.green600,
+  [brand.primary.dark]: base.green700,
+  [brand.primary.darkest]: base.green800,
+  [brand.common.focusOutline]: base.green600,
+  [system.color.fg.strong]: base.indigo900,
+  [system.color.border.container]: base.indigo300,
+});
+
+const App = () => {
+  return (
+    <CanvasProvider
+      theme={{
+        canvas: {
+          palette: {
+            primary: {
+              main: base.green600,
+              dark: base.green700,
+              darkest: base.green800,
+              light: base.green200,
+              lighter: base.green50,
+              lightest: base.green25,
+              contrast: base.neutral0,
+            },
+          },
+        },
+      }}
+    >
+      <Card>
+        <Card.Heading>Theming</Card.Heading>
+        <Card.Body>
+          <PrimaryButton>Theming</PrimaryButton>
+          <input />
+        </Card.Body>
+      </Card>
+    </CanvasProvider>
+  );
+};
+
+export const Theming = () => {
+  return (
+    <CanvasProvider className={customTheme}>
+      <App />
+    </CanvasProvider>
+  );
+};

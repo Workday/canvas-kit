@@ -8,8 +8,9 @@ import {BreadcrumbsItem} from './BreadcrumbsItem';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 import {BreadcrumbsMenu} from './BreadcrumbsMenu';
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
-export interface BreadcrumbsProps {
+export interface BreadcrumbsProps extends CSProps {
   /**
    * The accessibility label for the nav element.
    * It's required to be provided by a11y guidance.
@@ -164,7 +165,7 @@ export const Breadcrumbs = createContainer('nav')({
 })<BreadcrumbsProps>(({children, ...elemProps}, _, model) => {
   return (
     <Menu model={model.menu}>
-      <nav role="navigation" {...elemProps}>
+      <nav role="navigation" {...handleCsProp(elemProps)}>
         {children}
       </nav>
     </Menu>

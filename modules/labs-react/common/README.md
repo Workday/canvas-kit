@@ -14,9 +14,6 @@ a collection of shared components used across canvas-kit-react
 yarn add @workday/canvas-kit-labs-react
 ```
 
-For more detailed information on this component, please refer to the
-[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/labs-common)
-
 ## useThemeRTL
 
 This is a way to automatically transform CSS, applied using either Emotion's css attribute or by a

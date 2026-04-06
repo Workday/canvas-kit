@@ -1,22 +1,22 @@
-import { ExampleCodeBlock, Specifications, SymbolDoc } from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 import * as FormFieldStories from './FormField.stories';
 
-import { Basic } from './examples/Basic';
-import { Alert } from './examples/Alert';
-import { Error } from './examples/Error';
-import { Disabled } from './examples/Disabled';
-import { HiddenLabel } from './examples/HiddenLabel';
-import { LabelPositionHorizontalStart } from './examples/LabelPositionHorizontalStart';
-import { LabelPositionHorizontalEnd } from './examples/LabelPositionHorizontalEnd';
-import { RefForwarding } from './examples/RefForwarding';
-import { Required } from './examples/Required';
-import { Custom } from './examples/Custom';
-import { CustomId } from './examples/CustomId';
-import { AllFields } from './examples/AllFields';
-import { Hint } from './examples/Hint';
-import { Grow } from './examples/Grow';
-import { ThemedError } from './examples/ThemedErrors';
-import { GroupedInputs } from './examples/GroupedInputs';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Error} from './examples/Error';
+import {Disabled} from './examples/Disabled';
+import {HiddenLabel} from './examples/HiddenLabel';
+import {LabelPositionHorizontalStart} from './examples/LabelPositionHorizontalStart';
+import {LabelPositionHorizontalEnd} from './examples/LabelPositionHorizontalEnd';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {Custom} from './examples/Custom';
+import {CustomId} from './examples/CustomId';
+import {AllFields} from './examples/AllFields';
+import {Hint} from './examples/Hint';
+import {Grow} from './examples/Grow';
+import {ThemedError} from './examples/ThemedErrors';
+import {GroupedInputs} from './examples/GroupedInputs';
 
 <Meta of={FormFieldStories} />
 
@@ -30,43 +30,6 @@ by passing in `TextInput`, `Select`, `RadioGroup` and other form elements to `Fo
 ```sh
 yarn add @workday/canvas-kit-react
 ```
-
-## Accessibility
-
-The `FormField` adds a `for` attribute to the `FormField.Label` (`<label>` element) element that
-matches the `id` attribute of the `FormField.Input` which is usually a `input` element. This both
-labels the input for screen readers and other assitive technology as well as will focus on the input
-when the user clicks on the label. If your form field input component is more complicated, the
-`FormField` will also add an `id` to the `FormField.Label` and an `aria-labelledby` to the
-`FormField.Input` component. You can then forward the `aria-labelledby` to whatever elements you
-need for the proper accessibility.
-
-For example, the DOM will look something like this:
-
-```html
-<div>
-  <label id="label-abc" for="input-abc">First Name</label>
-  <input id="input-abc" aria-labelledby="label-abc" />
-</div>
-```
-
-Some components, like `MultiSelect`, have an additional `role=listbox` element that also needs to
-link to the `label` element. The resulting DOM will look something like:
-
-```html
-<div>
-  <label id="label-abc" for="input-abc">States you've lived in</label>
-  <input id="input-abc" aria-labelledby="label-abc" role="combobox" ... />
-  <ul role="listbox" aria-labelledby="label-abc">
-    <li>Texas</li>
-    <li>California</li>
-  </ul>
-</div>
-```
-
-The `MultiSelect` component gets the `aria-labelledby` from the `FormField.Input` and forwards it to
-both the `input[role=combobox]` element and the `ul[role=listbox]` element so the screen reader
-knows the label for both is "States you've lived in".
 
 ## Usage
 
@@ -82,13 +45,16 @@ accessibility standards. The orientation of the label by default is `vertical`.
 Set the `error` prop of the Form Field or define it in the model to indicate it has an error.
 `error` accepts the following values:
 
-`"error" | "alert" | undefined`
+`"error" | "caution" | undefined`
 
-### Alert
+### Caution
 
-Use the alert state when a value is valid but there is additional information.
+Use the caution state when a value is valid but there is additional information.
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
+
+> **Accessibility Note**: Caution state **will not** include the `aria-invalid` attribute on the
+> input for screen readers. Use error states when values are not valid.
 
 ### Error
 
@@ -96,11 +62,10 @@ Use the error state when the value is no longer valid.
 
 <ExampleCodeBlock code={Error} />
 
-### Disabled
-
-Set the `disabled` prop of `FormField.Input` to prevent users from interacting with it.
-
-<ExampleCodeBlock code={Disabled} />
+> **Accessibility Note**: Error states include visual color changes to the input border and
+> **require** supplemental "error" text for colorblind users to distinguish between fields in an
+> error state from fields with standard hint text. Read more about
+> [Failure of Success Criterion 1.4.1 due to identifying required or error fields using color differences only](https://www.w3.org/WAI/WCAG22/Techniques/failures/F81)
 
 ### Hint
 
@@ -108,6 +73,22 @@ Use `FormField.Hint` to display a short message below the input component and `F
 ensure proper alignment.
 
 <ExampleCodeBlock code={Hint} />
+
+> **Accessibility Note**: Hints are automatically associated to the input field with the
+> `aria-describedby` attribute. This ensures that screen readers can automatically announce the hint
+> text to users when the input field is focused.
+
+### Disabled
+
+Set the `disabled` prop of `FormField.Input` to prevent users from interacting with it.
+
+<ExampleCodeBlock code={Disabled} />
+
+> **Accessibility Note**: Disabled form elements are exempt from
+> [WCAG minimum contrast guidelines](https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html).
+> Despite this exemption, disabled fields are more difficult for low vision and colorblind users to
+> perceive and may harm the usability of the form. Consider using text elements instead, or
+> read-only fields if users cannot modify data.
 
 ### Label Position
 
@@ -149,20 +130,29 @@ for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
+> **Accessibility Note**: The HTML `required` attribute will be added to the input field and
+> announced by screen readers. Consider adding a note at the top of your form indicating that fields
+> marked with an asterisk (\*) are required. This provides context for all users.
+
 ### Grouped Inputs
 
 Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
 `RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
-`FormFieldGroup.Label` renders a `legend` element. These elements will allow for correct
-accessibility of grouped inputs.
+`FormFieldGroup.Label` renders a `legend` element. These elements will allow screen readers to
+automatically announce the legend's context when focusing on the inputs in the group.
 
 `FormFieldGroup` supports the same props of `FormField`:
 
-- `error`: `"alert" | "error"` Defines the error around the whole group of inputs.
+- `error`: `"caution" | "error"` Defines the error around the whole group of inputs.
 - `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
 <ExampleCodeBlock code={GroupedInputs} />
+
+> **Accessibility Note**: In addition to radio button and checkbox groups, `FormFieldGroup` can be
+> useful in any situation where the form needs to have multiple sets of identical input fields. For
+> example, a form with identical fields for a Shipping address and a Billing address. The legend
+> provides critical context for screen reader users in these situations.
 
 ### Custom
 
@@ -194,6 +184,10 @@ In cases where you want to hide the label while still meeting accessibility stan
 
 <ExampleCodeBlock code={HiddenLabel} />
 
+> **Accessibility Note**: Hidden labels are typically not recommended. In this example, a
+> universally recognizable icon like a magnifying glass signaling "search" may be a suitable
+> alternative to visible text labels.
+
 ### Themed Errors
 
 You can theme your error rings by wrapping an input in a `CanvasProvider` and defining
@@ -205,7 +199,65 @@ You can theme your error rings by wrapping an input in a `CanvasProvider` and de
 
 Form Field and its subcomponents support custom styling via the `cs` prop. For more information,
 check our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+`FormField` provides essential accessibility features to ensure form inputs are properly labeled and
+described for all users, including those using assistive technologies. This section covers both the
+technical implementation and best practices for creating accessible forms.
+
+### Label Association
+
+The `FormField` adds a `for` attribute to the `FormField.Label` (`<label>` element) element that
+matches the `id` attribute of the `FormField.Input` which is usually a `input` element. This both
+labels the input for screen readers and other assistive technology as well as will focus on the
+input when the user clicks on the label. If your form field input component is more complicated, the
+`FormField` will also add an `id` to the `FormField.Label` and an `aria-labelledby` to the
+`FormField.Input` component. You can then forward the `aria-labelledby` to whatever elements you
+need for the proper accessibility.
+
+For example, the DOM will look something like this:
+
+```html
+<div>
+  <label id="label-abc" for="input-abc">First Name</label>
+  <input id="input-abc" aria-labelledby="label-abc" />
+</div>
+```
+
+Some components, like `MultiSelect`, have an additional `role=listbox` element that also needs to
+link to the `label` element. The resulting DOM will look something like:
+
+```html
+<div>
+  <label id="label-abc" for="input-abc">States you've lived in</label>
+  <input id="input-abc" aria-labelledby="label-abc" role="combobox" ... />
+  <ul role="listbox" aria-labelledby="label-abc">
+    <li>Texas</li>
+    <li>California</li>
+  </ul>
+</div>
+```
+
+The `MultiSelect` component gets the `aria-labelledby` from the `FormField.Input` and forwards it to
+both the `input[role=combobox]` element and the `ul[role=listbox]` element so the screen reader
+knows the label for both is "States you've lived in".
+
+### Label Text Best Practices
+
+- **Be Clear and Concise**: Labels should clearly describe the purpose of the input field.
+- **Use Visible Labels Instead of Only Placeholders**: Always provide a persistent and accessible
+  label with `FormField.Label`. Do not rely solely on placeholder text, as it can disappear while
+  typing and may not be accessible to assistive technologies. Use the `isHidden` prop on
+  `FormField.Label` if a hidden label is required for visual design.
+
+### Screen Reader Experience
+
+- The label is announced when the input receives focus.
+- Required, disabled, and invalid statuses are announced automatically.
+- Help text and error messages are announced automatically when focused.
+- For grouped inputs, the group label (`legend`) is announced automatically when focused.
 
 ## Component API
 

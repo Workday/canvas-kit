@@ -2,36 +2,49 @@ import {Property} from 'csstype';
 
 import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
 
-/** style props to set CSS border properties */
+/** style props to set CSS border properties
+ * @deprecated
+ */
 export type BorderShorthandStyleProps = {
-  /** sets [CSS border property](https://developer.mozilla.org/en-US/docs/Web/CSS/border) */
+  /** sets [CSS border property](https://developer.mozilla.org/en-US/docs/Web/CSS/border)
+   * @deprecated
+   */
   border?: Property.Border;
-  /** sets [CSS border-top property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top) */
+  /** sets [CSS border-top property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-top)
+   * @deprecated
+   */
   borderTop?: Property.BorderTop;
   /**
    * - sets [CSS border-right property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-right)
    * - no bidirectional support
-   * */
+   * @deprecated
+   */
   borderRight?: Property.BorderRight;
-  /** sets [CSS border-bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom) */
+  /** sets [CSS border-bottom property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-bottom)
+   * @deprecated
+   */
   borderBottom?: Property.BorderBottom;
   /**
    * - sets [CSS border-left property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-left)
    * - no bidirectional support
-   * */
+   * @deprecated
+   */
   borderLeft?: Property.BorderLeft;
   /**
    * - sets [CSS border-inline-start property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-start)
    * - bidirectional support
-   * */
+   * @deprecated
+   */
   borderInlineStart?: Property.BorderInlineStart;
   /**
    * - sets [CSS border-inline-end property](https://developer.mozilla.org/en-US/docs/Web/CSS/border-inline-end)
    * - bidirectional support
-   * */
+   * @deprecated
+   */
   borderInlineEnd?: Property.BorderInlineEnd;
 };
 
+/** @deprecated */
 export const borderShorthandStyleFnConfigs: StyleFnConfig[] = [
   {
     name: 'border',
@@ -70,4 +83,5 @@ export const borderShorthandStyleFnConfigs: StyleFnConfig[] = [
   },
 ];
 
+/** @deprecated */
 export const borderShorthandFns = buildStyleFns(borderShorthandStyleFnConfigs);

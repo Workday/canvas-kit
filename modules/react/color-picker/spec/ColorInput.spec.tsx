@@ -38,16 +38,6 @@ describe('ColorInput', () => {
       });
     });
 
-    describe('with a value and background', () => {
-      test('should render a ColorInput with a value and the value as a background', () => {
-        const {container} = render(<ColorInput value={value} />);
-
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
-      });
-    });
-
     describe('with disabled attribute', () => {
       test('should render a disabled ColorInput', () => {
         const {getByRole} = render(<ColorInput disabled={true} />);

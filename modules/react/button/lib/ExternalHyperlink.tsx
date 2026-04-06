@@ -15,11 +15,12 @@ export interface ExternalHyperlinkProps extends HyperlinkProps {
 
 export const externalHyperlinkStencil = createStencil({
   extends: hyperlinkStencil,
-  base: {
-    display: 'inline-flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    '& [data-part="external-hyperlink-icon"]': {
+  parts: {
+    externalHyperlinkIcon: 'external-hyperlink-icon',
+  },
+  base: ({externalHyperlinkIconPart}) => ({
+    [externalHyperlinkIconPart]: {
+      verticalAlign: 'text-top',
       [systemIconStencil.vars.color]: 'currentColor',
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
@@ -33,7 +34,7 @@ export const externalHyperlinkStencil = createStencil({
         transform: 'rotate(270deg)',
       },
     },
-  },
+  }),
 });
 
 /**
@@ -58,7 +59,7 @@ export const ExternalHyperlink = createComponent('a')({
         icon={extLinkIcon}
         role="img"
         aria-label={iconLabel}
-        data-part="external-hyperlink-icon"
+        {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
       />
     </Element>
   ),

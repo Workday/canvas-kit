@@ -115,52 +115,6 @@ describe('SearchForm', () => {
     expect(openButton).toHaveFocus();
   });
 
-  test('SearchForm can accept custom themes', () => {
-    const inputLabelText = `label`;
-    render(
-      <SearchForm
-        onSubmit={jest.fn()}
-        inputLabel={inputLabelText}
-        searchTheme={{
-          background: 'black',
-          backgroundFocus: 'white',
-          color: 'black',
-          colorFocus: 'white',
-          boxShadow: '0 0 0 1px black',
-          boxShadowFocus: '0 0 0 1px white',
-        }}
-      />
-    );
-
-    const input = screen.getByRole('combobox', {name: inputLabelText});
-    const style = window.getComputedStyle(input);
-
-    expect(style.background).toBe('black');
-    expect(style.color).toBe('black');
-    expect(style.boxShadow).toBe('0 0 0 1px black');
-    // Checking placeholder programmatically currently only works in Firefox
-
-    fireEvent.focus(input);
-    const styleFocused = window.getComputedStyle(input);
-
-    expect(styleFocused.background).toBe('white');
-    expect(styleFocused.color).toBe('white');
-    expect(styleFocused.boxShadow).toBe('0 0 0 1px white');
-  });
-
-  test('SearchForm can accept default themes', () => {
-    const inputLabelText = `label`;
-    const theme = SearchTheme.Dark;
-    render(<SearchForm onSubmit={jest.fn()} inputLabel={inputLabelText} searchTheme={theme} />);
-
-    const input = screen.getByRole('combobox', {name: inputLabelText});
-    const style = window.getComputedStyle(input);
-
-    expect(style.background).toBe(searchThemes[theme].background);
-    expect(chroma(style.color || '').hex()).toBe(searchThemes[theme].color);
-    expect(style.boxShadow).toBe(searchThemes[theme].boxShadow);
-  });
-
   test('SearchForm should spread extra props', () => {
     const cb = jest.fn();
     const data = 'test';

@@ -18,7 +18,7 @@ export const getIndexByValue = (options: NormalizedOption[], value: string | und
 
 // If the value doesn't exist in the options, return index 0
 /**
- * @deprecated ⚠️ `getCorrectedIndexByValue` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--basic) instead.
+ * @deprecated ⚠️ `getCorrectedIndexByValue` in Preview has been deprecated and will be removed in a future major version. Please use [`Select` in Main](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) instead.
  */
 export const getCorrectedIndexByValue = (
   options: NormalizedOption[],

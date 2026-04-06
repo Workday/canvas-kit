@@ -241,13 +241,13 @@ export const PortalTest = () => (
         to extend downwards. As you scroll down and space becomes available, the Menu will flip back
         downwards.
       </p>
-      <FormField id="select-alert-top-label" error="alert">
+      <FormField id="select-alert-top-label" error="caution">
         <FormField.Label>Label</FormField.Label>
         <FormField.Field>
           {controlComponent(<FormField.Input as={Select} name="contact" options={options} />)}
         </FormField.Field>
       </FormField>
-      <FormField id="select-alert-top-label-grow" error="alert" grow={true}>
+      <FormField id="select-alert-top-label-grow" error="caution" grow={true}>
         <FormField.Label>Label (Grow)</FormField.Label>
         <FormField.Field>
           {controlComponent(<Select grow={true} name="city" options={manyOptions} />)}

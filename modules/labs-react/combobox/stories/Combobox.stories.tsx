@@ -11,7 +11,7 @@ import {NoClearButton as NoClearButtonExample} from './examples/NoClearButton';
 import {RTL as RTLExample} from './examples/RTL';
 
 const meta: Meta<typeof Combobox> = {
-  title: 'Labs/Combobox',
+  title: 'Labs/Combobox (deprecated)',
   component: Combobox,
   tags: ['autodocs'],
   parameters: {

@@ -7,14 +7,15 @@ import index from '../lib/config.json';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const sourceDir = path.resolve(__dirname, '../../docs/llm');
+const llmSourceDir = path.resolve(__dirname, '../../docs/llm');
 const targetDir = path.resolve(__dirname, '../dist/lib');
 
 /**
  * Copy a specific file from source to destination, creating directories as needed
  */
 function copyFile(relativePath: string): void {
-  const srcPath = path.resolve(sourceDir, relativePath);
+  // All files are now in the llm source directory
+  const srcPath = path.resolve(llmSourceDir, relativePath);
   const destPath = path.resolve(targetDir, relativePath);
 
   // Check if source file exists
@@ -33,11 +34,12 @@ function copyFile(relativePath: string): void {
 }
 
 // Get file list from index.json and copy only those files
-const filesToCopy = index.upgradeGuideFiles;
+// Combine upgradeGuideFiles and tokenFiles, removing duplicates
+const allFiles = [...new Set([...index.upgradeGuideFiles, ...index.tokenFiles])];
 
-console.log(`Found ${filesToCopy.length} files to copy:`);
-filesToCopy.forEach(file => console.log(`  - ${file}`));
+console.log(`Found ${allFiles.length} files to copy:`);
+allFiles.forEach(file => console.log(`  - ${file}`));
 
-filesToCopy.forEach(file => copyFile(file));
+allFiles.forEach(file => copyFile(file));
 
 console.log('\nCopy completed successfully!');

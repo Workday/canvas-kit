@@ -1,9 +1,9 @@
-import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
-import { Basic } from './examples/Basic';
-import { BasicWithHeading } from './examples/BasicWithHeading';
-import { FixedColumn } from './examples/FixedColumn';
-import { RightToLeft } from './examples/RightToLeft';
-import { BaseHtmlTable } from './examples/BaseHtmlTable'
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import {Basic} from './examples/Basic';
+import {BasicWithHeading} from './examples/BasicWithHeading';
+import {FixedColumn} from './examples/FixedColumn';
+import {RightToLeft} from './examples/RightToLeft';
+import {BaseHtmlTable} from './examples/BaseHtmlTable';
 import * as TableStories from './Table.stories';
 
 <Meta of={TableStories} />
@@ -13,7 +13,8 @@ import * as TableStories from './Table.stories';
 `Table` is a simple styled compound component that renders a
 [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) element. It is used to
 present information in a two-dimensional table comprised of rows and columns of cells containing
-data. `Table` is built off of `BaseTable` and is using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features.
+data. `Table` is built off of `BaseTable` and is using
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features.
 
 ## Installation
 
@@ -25,9 +26,10 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-Users may not want to use a `caption` so they can import [Heading](/components/text/heading/) or
-[Text](/components/text/text/) instead. This will give the user more flexibility around the
-customization of the title/heading of their table.
+Users may not want to use a `caption` so they can import
+[Heading](https://workday.github.io/canvas-kit/?path=/docs/components-text-heading--docs) or
+[Text](https://workday.github.io/canvas-kit/?path=/docs/components-text-text--docs) instead. This
+will give the user more flexibility around the customization of the title/heading of their table.
 
 <ExampleCodeBlock code={BasicWithHeading} />
 
@@ -56,29 +58,40 @@ Users may add styles to the `Table.Header` to render a fixed column. The example
 
 ### Base Html Table Example
 
-If a user needs a standard HTML [table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) with no [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features, then they can use the `BaseTable` component. 
+If a user needs a standard HTML
+[table](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) with no
+[CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features, then they can
+use the `BaseTable` component.
 
 <ExampleCodeBlock code={BaseHtmlTable} />
 
 ### Which Component Should I Use?
 
-> If a user wants [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features with their Table, then use the [Table](/components/containers/table/) component.
+> If a user wants [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout)
+> features with their Table, then use the
+> [Table](https://workday.github.io/canvas-kit/?path=/docs/components-containers-table--docs#basic-example)
+> component.
 
-> If a user __does not__ want [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features with their Table, then use the [BaseTable](/components/text/heading/) component. 
+> If a user **does not** want
+> [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_grid_layout) features with their
+> Table, then use the
+> [BaseTable](https://workday.github.io/canvas-kit/?path=/docs/components-containers-table--docs#base-html-table-example)
+> component.
 
 ### Advanced
 
 You can also find several advanced Table examples in our Storybook Examples section.
 
-- [Expandable Rows](/docs/examples-tables-advanced--expandable-rows)
-- [Selectable Rows ](/docs/examples-tables-advanced--selectable-rows)
-- [Sortable Column Headers](/docs/examples-tables-advanced--sortable-column-headers)
+- [Expandable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#expandable-rows)
+- [Selectable Rows ](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#selectable-rows)
+- [Filterable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers)
+- [Sortable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-advanced-tables--docs#sortable-column-headers)
 
 ### Custom Styles
 
 Table and its subcomponents support custom styling via the `cs` prop. For more information, check
 our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
 
 ## Component API
 

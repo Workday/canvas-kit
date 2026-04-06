@@ -1,0 +1,59 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {LandmarkRegaions} from './examples/PageStructure/LandmarkRegions';
+import {FullPageDemo} from './examples/PageStructure/FullPageDemo';
+
+<Meta title="Guides/Accessibility/Page Structure" />
+
+## Making Webpages Easy to Use for Everyone
+
+Making a webpage easy to understand is important for everyone, especially for people with
+disabilities. We do this by giving the page a clear and meaningful structure. This guide explains
+how to use landmark regions, headings, lists, and tables to organize a page.
+
+### Organizing Your Page with Landmark Regions
+
+Imagine a webpage is like a house. It has different rooms for different purposes; a kitchen, a
+bedroom, a living room, and so on. A good webpage is set up the same way. It has different sections,
+like a header at the top, a main content area, and a footer at the bottom.
+
+These sections are called landmark regions. They act like signs that tell a screen reader user where
+they are on the page.
+
+A screen reader user can quickly jump to a specific section, like the main content, without having
+to listen to the whole page.
+
+The most common landmark regions are:
+
+- `<header>`: The top of the page.
+- `<nav>`: The main navigation menu.
+- `<main>`: The most important content on the page.
+- `<footer>`: The bottom of the page.
+
+All the content on the page should be inside one of these landmark regions. If you have two
+navigation sections, make sure to give them different names so a screen reader can tell them apart.
+For example, a global navigation region should be distinguishable from a bread crumb navigation
+region.
+
+<ExampleCodeBlock code={LandmarkRegaions} />
+
+### Using Headings to Outline Your Content
+
+Headings are like the chapters and subheadings in a book. They create a clear outline for the page.
+Just like you can scan a book's table of contents to see what it's about, a screen reader user can
+get a list of all the headings on a page to understand its structure.
+
+- Start your page's main content with a single `<h1>` heading. This is the most important title on
+  the page.
+- Use other headings (`<h2>`, `<h3>`, etc.) to create a clear order. Don't skip levels if possible.
+  For example, don't jump straight from an `<h1>` to an `<h4>` heading unless the content design
+  hierarchy leaves no other options.
+- The heading levels should match how important the text looks on the page. The biggest, boldest
+  titles should be `<h1>`, and so on.
+
+## Full Page Demo
+
+Further reading:
+[Examples > Page Header](?path=/docs/guides-accessibility-examples-page-header--docs) and
+[Examples > Side Panel Navigation](?path=/docs/guides-accessibility-examples-side-panel-navigation--docs)
+
+<ExampleCodeBlock code={FullPageDemo} />

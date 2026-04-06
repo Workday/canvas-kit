@@ -1,7 +1,8 @@
 import React from 'react';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 export interface InstallBlockProps {
   command?: string;
@@ -23,15 +24,22 @@ export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
   return (
     <Flex
       padding="xs"
-      backgroundColor={colors.licorice500}
+      backgroundColor={system.color.bg.contrast.default}
       borderRadius="m"
       justifyContent="space-between"
       alignItems="center"
-      flexWrap='wrap'
+      flexWrap="wrap"
     >
       <pre ref={commandRef}>
-        <span style={{color: colors.blueberry200}}>{command}</span>{' '}
-        <span style={{color: colors.frenchVanilla100}}>{packageName}</span>
+        <span
+          style={{
+            color: cssVar(system.color.fg.primary.soft),
+            marginInlineEnd: cssVar(system.space.x2),
+          }}
+        >
+          {command}
+        </span>
+        <span style={{color: cssVar(system.color.fg.inverse)}}>{packageName}</span>
       </pre>
       <PrimaryButton variant="inverse" onClick={handleCopy} size="small">
         {copied ? 'Copied' : 'Copy'}

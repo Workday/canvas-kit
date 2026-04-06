@@ -2,6 +2,9 @@ import {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import {accessibleHide} from '@workday/canvas-kit-react/common';
 
+/**
+ * @deprecated ⚠️ `StatusProps` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export interface StatusProps {
   ariaLive?: 'polite' | 'assertive' | 'off';
   role?: 'log' | 'status' | 'alert' | 'progressbar' | 'marquee' | 'timer';
@@ -13,6 +16,9 @@ export interface StatusProps {
 
 const Container = styled('div')(accessibleHide);
 
+/**
+ * @deprecated ⚠️ `Status` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const Status = ({
   ariaLive = 'polite',
   role = 'status',

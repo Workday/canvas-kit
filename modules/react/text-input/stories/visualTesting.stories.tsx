@@ -34,7 +34,7 @@ export const TextInputStates = () => (
           placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
           error: [
             {value: undefined, label: ''},
-            {value: TextInput.ErrorType.Alert, label: 'Alert'},
+            {value: TextInput.ErrorType.Caution, label: 'Caution'},
             {value: TextInput.ErrorType.Error, label: 'Error'},
           ],
         },
@@ -201,7 +201,7 @@ export const InputGroupStates = () => (
       ]}
     >
       {({value, placeholder, ...props}) => (
-        <CanvasProvider theme={{canvas: {direction: props.dir}}}>
+        <CanvasProvider dir={props.dir}>
           <InputGroup width={300}>
             {props.start}
             <InputGroup.Input

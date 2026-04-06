@@ -1,10 +1,13 @@
 import {
   ExampleCodeBlock,
-  InformationHighlight,
+  StorybookStatusIndicator,
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
-import {Alert} from './examples/Alert';
+
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+
+import {Caution} from './examples/Caution';
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
 import {Inverse} from './examples/Inverse';
@@ -18,7 +21,18 @@ import * as RadioStories from './Radio.stories';
 
 <Meta of={RadioStories} />
 
-# Canvas Kit Radio
+# Canvas Kit Radio <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `Radio` in Main has been deprecated and will be removed in a future major version. Please use
+    `Radio` in Preview instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs">
+    Radio Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 Radio Buttons allow a user to select one value from a predefined list of 7 or fewer options.
 
@@ -85,14 +99,14 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the Radio Group to the Alert or Error state, respectively. You
+Set the `error` prop of the wrapping Form Field to `"caution"` or
+`"error"` to set the Radio Group to the Caution or Error state, respectively. You
 will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
 standards.
 
-#### Alert
+#### Caution
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 #### Error
 

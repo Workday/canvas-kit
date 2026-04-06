@@ -1,5 +1,5 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
+import {createElemPropsHook, slugify} from '@workday/canvas-kit-react/common';
 
 import {getCursor, isCursor, useCursorListModel} from './useCursorListModel';
 import {keyboardEventToCursorEvents} from './keyUtils';
@@ -36,7 +36,6 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
     stateRef.current = model.state;
 
     const keyElementRef = React.useRef<Element | null>(null);
-    const isRTL = useIsRTL();
 
     React.useEffect(() => {
       if (keyElementRef.current) {
@@ -81,7 +80,7 @@ export const useListItemRemove = createElemPropsHook(useCursorListModel)(
 
     return {
       onKeyDown(event: React.KeyboardEvent) {
-        const handled = keyboardEventToCursorEvents(event, model, isRTL);
+        const handled = keyboardEventToCursorEvents(event, model);
         if (handled) {
           event.preventDefault();
           keyElementRef.current = event.currentTarget;

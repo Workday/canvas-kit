@@ -1,4 +1,4 @@
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import * as TokenStories from './Tokens.stories';
 import {BorderRadius, Space, Depth, Colors, Type} from './examples/Tokens';
@@ -6,11 +6,10 @@ import {Overview} from './examples/Overview';
 
 <Meta of={TokenStories} />
 
-# Tokens
+# Tokens <StorybookStatusIndicator type="deprecated" />
 
 <InformationHighlight variant="caution" className="sb-unstyled" cs={{p: {margin: 0}}}>
   <InformationHighlight.Icon />
-  <InformationHighlight.Heading>React tokens have been deprecated!</InformationHighlight.Heading>
   <InformationHighlight.Body>
     The tokens documented below are deprecated and will be removed in a future release. You must
     migrate to the new Canvas Tokens Web package to ensure continued support and access to the
@@ -25,6 +24,8 @@ Tokens are the smallest pieces of our Design System with the primary function of
 information. They enable building components and patterns with consistency across our platforms.
 
 <ExampleCodeBlock code={Overview} />
+
+<br />
 
 ## Border Radius
 

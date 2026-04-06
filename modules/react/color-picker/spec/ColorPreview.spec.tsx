@@ -23,15 +23,6 @@ describe('ColorPreview', () => {
       });
     });
 
-    describe('with a value', () => {
-      test('should render ColorPreview with the value as a background', () => {
-        const {container} = render(<ColorPreview value={value} data-testid={id} />);
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
-      });
-    });
-
     describe('with disabled attribute', () => {
       test('should render a disabled ColorPreview', () => {
         const {getByTestId} = render(

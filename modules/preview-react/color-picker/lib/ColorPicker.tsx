@@ -1,13 +1,13 @@
-import {colors, space} from '@workday/canvas-kit-react/tokens';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import styled from '@emotion/styled';
 
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -58,95 +58,99 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   resetLabel?: string;
 }
 
-const defaultColorSet = [
-  colors.blueberry600,
-  colors.grapeSoda600,
-  colors.pomegranate600,
-  colors.cinnamon600,
-  colors.cantaloupe600,
-  colors.sourLemon600,
-  colors.greenApple600,
-  colors.jewel600,
+const defaultColorSet = {
+  blueberry600: '#004387',
+  grapeSoda600: '#7c3882',
+  pomegranate600: '#99003a',
+  cinnamon600: '#a31b12',
+  cantaloupe600: '#c06c00',
+  sourLemon600: '#bd9100',
+  greenApple600: '#217a37',
+  jewel600: '#156973',
 
-  colors.blueberry500,
-  colors.grapeSoda500,
-  colors.pomegranate500,
-  colors.cinnamon500,
-  colors.cantaloupe500,
-  colors.sourLemon500,
-  colors.greenApple500,
-  colors.jewel500,
+  blueberry500: '#005cb9',
+  grapeSoda500: '#97499e',
+  pomegranate500: '#c70550',
+  cinnamon500: '#de2e21',
+  cantaloupe500: '#f38b00',
+  sourLemon500: '#ebb400',
+  greenApple500: '#319c4c',
+  jewel500: '#1a818c',
 
-  colors.blueberry400,
-  colors.grapeSoda400,
-  colors.pomegranate400,
-  colors.cinnamon400,
-  colors.cantaloupe400,
-  colors.sourLemon400,
-  colors.greenApple400,
-  colors.jewel400,
+  blueberry400: '#0875e1',
+  grapeSoda400: '#c860d1',
+  pomegranate400: '#f31167',
+  cinnamon400: '#ff5347',
+  cantaloupe400: '#ffa126',
+  sourLemon400: '#ffc629',
+  greenApple400: '#43c463',
+  jewel400: '#1ea4b3',
 
-  colors.blueberry300,
-  colors.grapeSoda300,
-  colors.pomegranate300,
-  colors.cinnamon300,
-  colors.cantaloupe300,
-  colors.sourLemon300,
-  colors.greenApple300,
-  colors.jewel300,
+  blueberry300: '#40a0ff',
+  grapeSoda300: '#de8ae6',
+  pomegranate300: '#ff5c9a',
+  cinnamon300: '#ff867d',
+  cantaloupe300: '#ffbc63',
+  sourLemon300: '#ffda61',
+  greenApple300: '#5fe380',
+  jewel300: '#44c8d7',
 
-  colors.blueberry200,
-  colors.grapeSoda200,
-  colors.pomegranate200,
-  colors.cinnamon200,
-  colors.cantaloupe200,
-  colors.sourLemon200,
-  colors.greenApple200,
-  colors.jewel200,
+  blueberry200: '#a6d2ff',
+  grapeSoda200: '#fac0ff',
+  pomegranate200: '#ffbdd6',
+  cinnamon200: '#fcc9c5',
+  cantaloupe200: '#fcd49f',
+  sourLemon200: '#ffecab',
+  greenApple200: '#acf5be',
+  jewel200: '#acecf3',
 
-  colors.blueberry100,
-  colors.grapeSoda100,
-  colors.pomegranate100,
-  colors.cinnamon100,
-  colors.cantaloupe100,
-  colors.sourLemon100,
-  colors.greenApple100,
-  colors.jewel100,
+  blueberry100: '#d7eafc',
+  grapeSoda100: '#feebff',
+  pomegranate100: '#ffebf3',
+  cinnamon100: '#ffefee',
+  cantaloupe100: '#ffeed9',
+  sourLemon100: '#fff9e6',
+  greenApple100: '#ebfff0',
+  jewel100: '#ebfdff',
 
-  colors.blackPepper600,
-  colors.blackPepper400,
-  colors.blackPepper300,
-  colors.blackPepper100,
-  colors.frenchVanilla500,
-  colors.frenchVanilla400,
-  colors.frenchVanilla200,
-  colors.frenchVanilla100,
-];
+  blackPepper600: '#000000',
+  blackPepper400: '#333333',
+  blackPepper300: '#494949',
+  blackPepper100: '#787878',
+  frenchVanilla500: '#a6a6a6',
+  frenchVanilla400: '#bdbdbd',
+  frenchVanilla200: '#ebebeb',
+  frenchVanilla100: '#ffffff',
+};
 
-const ColorPickerContainer = styled('div')({
-  width: 216,
-});
-
-const ColorInputWrapper = styled('form')({
-  width: '100%',
-  marginTop: space.s,
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-});
-
-const ColorInputAndLabel = styled(FormField)({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: 0,
-});
-
-const CheckButton = styled(SecondaryButton)({
-  alignSelf: 'flex-end',
-});
-
-const HexColorInput = styled(ColorInput)({
-  width: '168px',
+export const colorPickerStencil = createStencil({
+  parts: {
+    button: 'color-picker-button',
+    form: 'color-picker-form',
+    hexInput: 'color-picker-hex-input',
+    inputWrapper: 'color-picker-input-wrapper',
+  },
+  base: ({buttonPart, formPart, hexInputPart, inputWrapperPart}) => ({
+    width: px2rem(216),
+    [formPart]: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBlockStart: system.space.x4,
+    },
+    [inputWrapperPart]: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: system.space.zero,
+    },
+    [buttonPart]: {
+      alignSelf: 'flex-end',
+    },
+    [hexInputPart]: {
+      width: px2rem(168),
+    },
+  }),
 });
 
 const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: string) => {
@@ -165,7 +169,7 @@ const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: str
 };
 
 export const ColorPicker = ({
-  colorSet = defaultColorSet,
+  colorSet = Object.values(defaultColorSet),
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
   onColorChange,
@@ -203,32 +207,34 @@ export const ColorPicker = ({
   };
 
   return (
-    <ColorPickerContainer {...elemProps}>
+    <div {...handleCsProp(elemProps, colorPickerStencil())}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
-        <ColorInputWrapper onSubmit={onSubmit}>
-          <ColorInputAndLabel>
+        <form onSubmit={onSubmit} {...colorPickerStencil.parts.form}>
+          <FormField {...colorPickerStencil.parts.inputWrapper}>
             <FormField.Label>{customHexInputLabel}</FormField.Label>
             <FormField.Input
-              as={HexColorInput}
+              as={ColorInput}
               onChange={onCustomHexChange}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
               showCheck={value === validHexValue || value === customHexValue}
+              {...colorPickerStencil.parts.hexInput}
             />
-          </ColorInputAndLabel>
-          <CheckButton
+          </FormField>
+          <SecondaryButton
             aria-label={submitLabel}
             icon={checkIcon}
             type="submit"
             disabled={disabled}
+            {...colorPickerStencil.parts.button}
           />
-        </ColorInputWrapper>
+        </form>
       )}
-    </ColorPickerContainer>
+    </div>
   );
 };
 

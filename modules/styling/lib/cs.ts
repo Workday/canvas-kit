@@ -76,6 +76,81 @@ export type StyleProps =
   | SerializedStyles
   | CSSObjectWithVars;
 
+/**
+ * Prettify object types. @see https://www.totaltypescript.com/concepts/the-prettify-helper
+ */
+export type Prettify<T> = {
+  [K in keyof T]: T[K];
+} & {};
+
+/**
+ * Extract all the modifiers from a stencil. Usually you'll want to use {@link ExtractStencilProps}
+ * instead.
+ */
+export type ExtractStencilModifiers<T extends BaseStencil<any, any, any, any, any>> = {
+  [K in keyof T['__modifiers']]?: MaybeBoolean<keyof T['__modifiers'][K]>;
+};
+
+/**
+ * Recursively extract all the modifiers from a stencil and its extended stencils. Usually you'll
+ * want to use {@link ExtractStencilProps} instead.
+ */
+export type ExtractExtendedStencilModifiers<T extends BaseStencil<any, any, any, any, any>> =
+  T extends BaseStencil<any, any, any, infer E>
+    ? [E] extends [never]
+      ? ExtractStencilModifiers<T>
+      : ExtractExtendedStencilModifiers<E> & ExtractStencilModifiers<T>
+    : {};
+
+/**
+ * Extract all the variables from a stencil. Usually you'll want to use {@link ExtractStencilProps}
+ * instead.
+ */
+export type ExtractStencilVars<T extends BaseStencil<any, any, any, any, any>> = {
+  [K in keyof T['__vars']]?: string;
+};
+
+/**
+ * Recursively extract all the variables from a stencil and its extended stencils. Usually you'll
+ * want to use {@link ExtractStencilProps} instead.
+ */
+export type ExtractExtendedStencilVars<T extends BaseStencil<any, any, any, any, any>> =
+  T extends BaseStencil<any, any, any, infer E>
+    ? [E] extends [never]
+      ? ExtractStencilVars<T>
+      : ExtractExtendedStencilVars<E> & ExtractStencilVars<T>
+    : {};
+
+/**
+ * Returns an interface containing all the modifiers and variables from a stencil to be used in a
+ * component's prop interface.
+ *
+ * ```ts
+ * interface MyComponentProps extends ExtractStencilProps<typeof myComponentStencil> {
+ *   // other props
+ * }
+ * ```
+ */
+export type ExtractStencilProps<T extends BaseStencil<any, any, any, any, any>> = Prettify<
+  ExtractStencilModifiers<T> & ExtractStencilVars<T>
+>;
+
+/**
+ * Returns an interface containing all the modifiers and variables from a stencil, including
+ * extended stencils, to be used in a component's prop interface. If your component's props already
+ * extend another component's props that already include stencil props, use `ExtractStencilProps`
+ * instead.
+ *
+ * ```ts
+ * interface MyComponentProps extends ExtractExtendedStencilProps<typeof myComponentStencil> {
+ *   // other props
+ * }
+ * ```
+ */
+export type ExtractExtendedStencilProps<T extends BaseStencil<any, any, any, any, any>> = Prettify<
+  ExtractExtendedStencilModifiers<T> & ExtractExtendedStencilVars<T>
+>;
+
 // Casting the types here for internal use only.
 // We can remove this when CSSType supports CSS custom properties
 type CastStyleProps = Exclude<StyleProps, CSSObjectWithVars> | CSSObject;

@@ -1,0 +1,37 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {ContextualHelpTooltip} from './examples/ContextualHelp/ContextualHelpTooltip';
+import {ContextualHelpDialogFocusRedirect} from './examples/ContextualHelp/ContextualHelpDialogFocusRedirect';
+import {ContextualHelpDialogFocusTrap} from './examples/ContextualHelp/ContextualHelpDialogFocusTrap';
+
+<Meta title="Guides/Accessibility/Examples/Contextual Help" />
+
+
+## Contextual Help
+
+### Tooltip
+A Canvas Kit `Tooltip` can be used to provide additional information about why an element is disabled. 
+We should not, however, put one directly onto a disabled element because disabled elements do not receive focus
+(meaning the tooltip content is not accessible to keyboard users). Instead, we should provide a button next to the disabled
+element and apply the `Tooltip` to the button.
+
+**Note: We should avoid passing the `type` prop to the `Tooltip`. The default behavior is to assign an `aria-label` to the button
+(which is what we want)**
+<ExampleCodeBlock code={ContextualHelpTooltip} />
+
+### Contextual Help Popup Without Focus Trap
+If one would like to provide a bit more content than a `Tooltip` will allow (such as buttons or links) a popup should be used.
+In this example, a `Dialog` is used in conjunction with the `useFocusRedirect` hook to display some text and a link. It will
+not trap focus; instead, it will close and focus the next element if the user tabs out or clicks away. A `Tooltip` is still
+used on the `Dialog.Target` component so that it remains accessible for screen readers.
+
+`Dialog` inserts an invisible `<div>` element right after the button with an `aria-owns` attribute pointing to the 
+`Dialog.Card`. This allows screen readers to read the popup contents in a logical order with the target. In other words, the 
+screen reader will announce the `Dialog` right after the open button instead of out of order.
+
+Additionally, we apply `aria-describedby` to our `Dialog.Target` to associate it with the `FormField.Label`.
+<ExampleCodeBlock code={ContextualHelpDialogFocusRedirect} />
+
+### Contextual Help Dialog With Focus Trap
+The `useFocusTrap` hook can be used in contextual help where trapping focus within the `Dialog` is the goal. In this case, 
+focus will remain in the `Dialog` until it is closed. This example is otherwise identical to the one above.
+<ExampleCodeBlock code={ContextualHelpDialogFocusTrap} />

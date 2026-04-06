@@ -11,7 +11,6 @@ export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, ne
 export const modalHeadingStencil = createStencil({
   base: {
     '@media screen and (max-width: 768px)': {
-      marginBlockEnd: system.space.zero,
       padding: `${system.space.x2} ${system.space.x2} ${system.space.x1}`,
     },
   },

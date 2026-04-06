@@ -24,19 +24,19 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="orange">
+        <StatusIndicator variant="caution">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="blue">
+        <StatusIndicator variant="info">
           <StatusIndicator.Label>Lorem ipsum dolor </StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="green">
+        <StatusIndicator variant="positive">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator variant="red">
+        <StatusIndicator variant="critical">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
@@ -50,19 +50,19 @@ export const Variants = () => {
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="orange">
+        <StatusIndicator emphasis="high" variant="caution">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="blue">
+        <StatusIndicator emphasis="high" variant="info">
           <StatusIndicator.Label>Lorem ipsum dolor </StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="green">
+        <StatusIndicator emphasis="high" variant="positive">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>
-        <StatusIndicator emphasis="high" variant="red">
+        <StatusIndicator emphasis="high" variant="critical">
           <StatusIndicator.Label>Lorem ipsum dolor</StatusIndicator.Label>
           <StatusIndicator.Icon icon={uploadCloudIcon} />
         </StatusIndicator>

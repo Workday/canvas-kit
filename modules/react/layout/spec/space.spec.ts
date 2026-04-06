@@ -71,11 +71,10 @@ describe('Space Style Props Function', () => {
         paddingY: 'm',
       };
       const expected = {
-        paddingTop: '1.5rem',
-        paddingRight: '1rem',
-        paddingBottom: '1.5rem',
-        paddingLeft: '1rem',
+        paddingBlock: '1.5rem',
+        paddingInline: '1rem',
       };
+
       const spaceStyles = space(props);
 
       expect(spaceStyles).toEqual(expected);
@@ -87,10 +86,8 @@ describe('Space Style Props Function', () => {
         marginY: 'xl',
       };
       const expected = {
-        marginTop: '2.5rem',
-        marginRight: '2rem',
-        marginBottom: '2.5rem',
-        marginLeft: '2rem',
+        marginBlock: '2.5rem',
+        marginInline: '2rem',
       };
       const spaceStyles = space(props);
 

@@ -4,7 +4,7 @@ import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, cssVar, px2rem, CSProps} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {transformColorNameToToken} from './Svg';
 
 export enum SystemIconCircleSize {
@@ -38,10 +38,19 @@ export interface SystemIconCircleProps extends CSProps {
    */
   size?: SystemIconCircleSize | number;
   /**
-   * If set to `true`, transform the SVG's x-axis to mirror the graphic
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
+   * always mirror the icon regardless of the content direction. If the SVG should mirror only when
+   * in an right-to-left language, use `shouldMirrorInRTL` instead.
    * @default false
    */
   shouldMirror?: boolean;
+  /**
+   * If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction
+   * is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases.
+   * Setting this to `true` indicates the icon should be mirrored in right-to-left languages.
+   * @default false
+   */
+  shouldMirrorInRTL?: boolean;
 }
 
 export const systemIconCircleStencil = createStencil({
@@ -51,7 +60,7 @@ export const systemIconCircleStencil = createStencil({
     color: '',
   },
   base: ({background, containerSize, color}) => ({
-    background: cssVar(background, base.soap200),
+    background: cssVar(background, system.color.bg.alt.soft),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -73,7 +82,15 @@ export const systemIconCircleStencil = createStencil({
 export const SystemIconCircle = createComponent('span')({
   displayName: 'SystemIconCircle',
   Component: (
-    {background, color, size, icon, shouldMirror, ...elemProps}: SystemIconCircleProps,
+    {
+      background,
+      color,
+      size,
+      icon,
+      shouldMirror,
+      shouldMirrorInRTL,
+      ...elemProps
+    }: SystemIconCircleProps,
     ref,
     Element
   ) => {
@@ -98,7 +115,13 @@ export const SystemIconCircle = createComponent('span')({
           })
         )}
       >
-        <SystemIcon as={Element} ref={ref} icon={icon} shouldMirror={shouldMirror} />
+        <SystemIcon
+          as={Element}
+          ref={ref}
+          icon={icon}
+          shouldMirror={shouldMirror}
+          shouldMirrorInRTL={shouldMirrorInRTL}
+        />
       </div>
     );
   },

@@ -39,7 +39,7 @@ export const SelectStates = () => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Caution', props: {error: 'caution'}},
           {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={permutateProps(
@@ -90,7 +90,7 @@ export const SelectOpenMenuStates = () => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Caution', props: {error: 'caution'}},
           {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={[{label: 'Default', props: {}}]}

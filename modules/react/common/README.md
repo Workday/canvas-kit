@@ -104,8 +104,34 @@ Theming documentation has its own README. You can find it [here](./lib/theming/R
 
 ## Bidirectionality
 
-Bidirectionality is provided by Theming. You can find Theming documentation
-[here](./lib/theming/README.md#bidirectionality).
+We strongly encourage the use of
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+for styling. For keyboard events, the right arrow should still move a cursor to the right of the
+cursor's current position. For left-to-right languages, this means "move to the next item" while in
+right-to-left languages, this means "move to the previous item". The directionality of an element
+can be retrieved from the [isElementRTL](#iselementrtl) function. This should be done inside an
+event handler.
+
+## `useElementRTL`
+
+Returns `true` if the element has a content direction of `rtl`. This is most useful in event
+handlers like an `onKeyDown`.
+
+```ts
+onKeyDown(event: React.KeyboardEvent) {
+  const isRTL = isElementRTL(event.currentTarget);
+
+  if (event.key === 'ArrowRight') {
+    if (isRTL) {
+      // Right arrow moves to the right even on RTL languages, but "right" doesn't mean
+      //"advance" in RTL. Previous is to the right of the current in RTL.
+      model.events.goToPreviousRow();
+    } else {
+      model.events.goToNextRow();
+    }
+  }
+}
+```
 
 ## Component Functions
 

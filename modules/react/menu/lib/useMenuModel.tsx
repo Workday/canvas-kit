@@ -24,6 +24,7 @@ export const useMenuModel = createModelHook({
     ...useListModel.requiredConfig,
     ...usePopupModel.requiredConfig,
   },
+  contextOverride: usePopupModel.Context,
 })(config => {
   const list = useListModel(
     useListModel.mergeConfig(config, {

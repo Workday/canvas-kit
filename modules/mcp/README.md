@@ -1,8 +1,10 @@
 # Canvas Kit MCP
 
-Our MCP server provides resources to help you upgrade Canvas Kit.
+Model Context Protocol (MCP) server that provides Canvas Kit upgrade guides and design token migration documentation to AI assistants.
 
-## Cursor Quick Install
+## Installation
+
+### Cursor Quick Install
 
 <a href="https://cursor.com/en-US/install-mcp?name=canvas-kit-mcp&config=eyJjb21tYW5kIjoibnB4IC15IEB3b3JrZGF5L2NhbnZhcy1raXQtbWNwIn0%3D">
   <picture>
@@ -12,64 +14,155 @@ Our MCP server provides resources to help you upgrade Canvas Kit.
   </picture>
 </a>
 
----
+### Other IDEs (Windsurf, VS Code, etc.)
 
-## Not Running Cursor?
-
-You will need to check how to install MCP servers, but the config will look something like:
+Add to your MCP servers configuration file:
 
 ```json
 {
   "mcpServers": {
-    {
-      "canvas-kit-mcp": {
-        "command": "npx",
-        "args": [
-          "-y",
-          "@workday/canvas-kit-mcp"
-        ]
-      }
+    "canvas-kit-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ]
     }
   }
 }
 ```
 
+Configuration file locations:
+- **Cursor**: `~/.cursor-tutor/config.json` (macOS/Linux) or `%APPDATA%\cursor-tutor\config.json` (Windows)
+- **Windsurf**: Settings → MCP Servers
+- **VS Code**: Cline/Continue extension settings
+
+### Claude Code CLI
+
+```sh
+claude mcp add --scope project --transport stdio canvas-kit -- npx -y @workday/canvas-kit-mcp
+```
+
+### Claude Desktop
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ]
+    }
+  }
+}
+```
+
+## Tools
+
+This MCP server provides the following tools:
+
+### `get-canvas-kit-upgrade-guides`
+
+Retrieves Canvas Kit version upgrade documentation covering major version migrations.
+
+**Use cases:**
+- Upgrading Canvas Kit to a new major version
+- Understanding breaking changes between versions
+- Finding migration paths for deprecated components
+- Learning about new features and components
+
+**Returns:** Links to upgrade guide resources including version-specific migration steps, deprecation notices, theming guides, and styling migration documentation.
+
+### `get-canvas-kit-tokens`
+
+Retrieves Canvas Kit design token migration documentation for transitioning to the modern `@workday/canvas-tokens-web` package.
+
+**Use cases:**
+- Migrating from old token systems to `@workday/canvas-tokens-web`
+- Converting deprecated color tokens to the new token system
+- Understanding token hierarchy: base tokens, system tokens, and brand tokens
+- Finding correct system token replacements
+- Learning token naming patterns and semantic color roles
+- Migrating spacing, shape, typography, opacity, and depth tokens
+- Ensuring WCAG accessibility compliance with color contrast requirements
+
+**Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
+
+## Resources
+
+The server exposes documentation resources organized into two categories:
+
+### Upgrade Guides
+Version-specific migration documentation covering:
+- Breaking changes and deprecations
+- New components and features
+- Styling system migrations (Emotion, CSS variables, `@workday/canvas-kit-styling`)
+- Theming and component refactoring
+- Accessibility improvements
+
+### Token Documentation
+Design token migration and usage guides covering:
+- Token system migrations (v2 → v3 → v4)
+- Color palette and semantic color roles
+- Token naming conventions and hierarchy
+- Accessibility and contrast guidelines
+- Spacing, shape, size, opacity, and depth tokens
+- OKLCH color space implementation
+
+All resources are available to AI assistants through MCP resource URIs.
+
+## Source Documentation
+
+The documentation files served by this MCP server are maintained in the Canvas Kit repository at [`modules/docs/llm`](../../docs/llm). This directory contains:
+
+- **Upgrade Guides** (`upgrade-guides/`) - Version-specific migration documentation
+- **Token Documentation** (`tokens/`) - Design token guides and migration resources
+- **LLM-Optimized Files** - Specialized documentation formatted for AI assistants
+
+To update the documentation served by this MCP server, modify the files in `modules/docs/llm` and rebuild the MCP package.
+
 ## Contributing
 
-Canvas Kit MCP is has two exports.
+Canvas Kit MCP has two exports:
 
-`src/cli.js` is a node server that can be invoked via npx for local stdio.
-
-`src/index.js` provides low level module exports. You can use these extend the sever or host it
-using other transports.
+- `src/cli.js` - Node server that can be invoked via npx for local stdio
+- `src/index.js` - Low-level module exports for extending the server or hosting with other transports
 
 ### Testing Locally
 
 #### MCP Inspector
 
-The inspector requires node > 22 so you will need to temporary switch:
+The inspector requires Node.js v22+:
 
 ```bash
 nvm use 22
 yarn build
-npx @modelcontextprotocol/inspector node dist/cli.js"
+npx @modelcontextprotocol/inspector node dist/cli.js
 ```
 
-#### Local IDE
+#### Local IDE Testing
 
-Add an entry to your MCP servers list:
+Add an entry to your MCP servers configuration pointing to your local build:
 
 ```json
 {
   "mcpServers": {
-    {
-      "canvas-kit-mcp": {
-        "command": "node",
-        "args": [
-          "~/path/to/canvas/kit/modules/mcp/dist/cli.js"
-        ]
-      }
+    "canvas-kit-mcp-local": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"
+      ]
     }
   }
 }
+```
+
+Rebuild the server after changes:
+
+```bash
+yarn build
 ```

@@ -72,10 +72,9 @@ export const popupCardStencil = createStencil({
   },
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
     ...system.type.subtext.large,
-    display: 'flex',
     position: 'relative',
     maxWidth: `calc(100vw - ${system.space.x8})`,
-    flexDirection: 'column',
+    gap: system.space.x2,
     boxShadow: system.depth[5],
     minHeight: system.space.zero,
     padding: system.space.x6,

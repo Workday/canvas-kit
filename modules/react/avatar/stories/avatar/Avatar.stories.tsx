@@ -10,7 +10,7 @@ import {ObjectFit as ObjectFitExample} from './examples/ObjectFit';
 import {Variant as VariantExample} from './examples/Variant';
 
 export default {
-  title: 'Components/Indicators/Avatar',
+  title: 'Components/Indicators/Avatar (deprecated)',
   tags: ['autodocs'],
   parameters: {
     docs: {

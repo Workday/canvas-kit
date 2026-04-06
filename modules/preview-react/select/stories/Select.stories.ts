@@ -7,7 +7,7 @@ import {DefaultWithCustomOptions as DefaultWithCustomOptionsExample} from './exa
 import {DefaultWithSimpleOptions as DefaultWithSimpleOptionsExample} from './examples/Top Label/DefaultWithSimpleOptions';
 import {Scrollable as ScrollableExample} from './examples/Top Label/Scrollable';
 import {Disabled as DisabledExample} from './examples/Top Label/Disabled';
-import {Alert as AlertExample} from './examples/Top Label/Alert';
+import {Caution as CautionExample} from './examples/Top Label/Caution';
 import {Error as ErrorExample} from './examples/Top Label/Error';
 import {Grow as GrowExample} from './examples/Top Label/Grow';
 
@@ -22,7 +22,7 @@ import {ErrorLeft as ErrorExampleLeft} from './examples/Left Label/ErrorLeft';
 import {GrowLeft as GrowExampleLeft} from './examples/Left Label/GrowLeft';
 
 export default {
-  title: 'Preview/Select',
+  title: 'Preview/Select (deprecated)',
   component: Select,
   tags: ['autodocs'],
   parameters: {
@@ -54,8 +54,8 @@ export const Disabled: Story = {
   render: DisabledExample,
 };
 
-export const Alert: Story = {
-  render: AlertExample,
+export const Caution: Story = {
+  render: CautionExample,
 };
 
 export const Error: Story = {

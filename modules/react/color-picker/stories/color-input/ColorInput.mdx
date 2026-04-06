@@ -4,7 +4,7 @@ import {
   SymbolDoc,
   Specifications,
 } from '@workday/canvas-kit-docs';
-import {Alert} from './examples/Alert';
+import {Caution} from './examples/Caution';
 import {Basic} from './examples/Basic';
 import {Checked} from './examples/Checked';
 import {Disabled} from './examples/Disabled';
@@ -93,14 +93,14 @@ Labels for required fields are suffixed by a red asterisk.
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `FormField.ErrorType.Alert` or
-`FormField.ErrorType.Error` to set the Color Input to the Alert or Error state, respectively. You
+Set the `error` prop of the wrapping Form Field to `"caution"` or
+`"error"` to set the Color Input to the Caution or Error state, respectively. You
 will also need to set the `hintId` and `hintText` props on the Form Field to meet accessibility
 standards.
 
-#### Alert
+#### Caution
 
-<ExampleCodeBlock code={Alert} />
+<ExampleCodeBlock code={Caution} />
 
 #### Error
 

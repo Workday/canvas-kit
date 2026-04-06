@@ -13,9 +13,9 @@ here are the following options:
 
 ### Using `createStyles` with `cs` prop
 
-Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small modifications to an
-existing Canvas Kit component like padding, color and flex properties. Take our `Text` component as
-an example.
+Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small
+modifications to an existing Canvas Kit component like padding, color and flex properties. Take our
+`Text` component as an example.
 
 ```tsx
 import {createStyles} from '@Workday/canvas-kit-styling';
@@ -47,8 +47,8 @@ const uppercaseTextStyles = createStyles({
 <Text className={uppercaseTextStyles}>My uppercased text</Text>;
 ```
 
-If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils) instead.
-
+If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils)
+instead.
 
 ## Stencils
 
@@ -56,8 +56,8 @@ Stencils can be useful when applying dynamic styles or building your own reusabl
 
 ### Extending Stencils
 
-[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil) help you
-organize the styling of reusable components into base styles, modifiers, and variables. The
+[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-stencil--docs)
+help you organize the styling of reusable components into base styles, modifiers, and variables. The
 organization makes it more natural to produce static and clean CSS with optional extraction into CSS
 files.
 
@@ -177,5 +177,5 @@ const NavIcon = ({
 ```
 
 Another example of Stencil extension and customization is our
-[CustomButton](https://workday.github.io/canvas-kit/?path=/story/components-buttons--custom-styles)
+[CustomButton](https://workday.github.io/canvas-kit/?path=/story/components-buttons--docs#custom-styles)
 example. This example highlights the power of inheritance that you get from extending stencils.

@@ -7,6 +7,9 @@ import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/but
 import {chevronLeftIcon, chevronRightIcon} from '@workday/canvas-system-icons-web';
 import {Heading} from '@workday/canvas-kit-react/text';
 
+/**
+ * @deprecated ⚠️ `SidePanelProps` in Main has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) instead.
+ */
 export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * If true, set the SidePanel to the open state.
@@ -61,15 +64,24 @@ export interface SidePanelProps extends React.HTMLAttributes<HTMLDivElement> {
   openNavigationAriaLabel?: string;
 }
 
+/**
+ * @deprecated ⚠️ `SidePanelState` in Main has been deprecated and will be removed in a future major version.
+ */
 export interface SidePanelState {
   screenSize: number;
 }
 
+/**
+ * @deprecated ⚠️ `SidePanelOpenDirection` in Main has been deprecated and will be removed in a future major version.
+ */
 export enum SidePanelOpenDirection {
   Left,
   Right,
 }
 
+/**
+ * @deprecated ⚠️ `SidePanelBackgroundColor` in Main has been deprecated and will be removed in a future major version.
+ */
 export enum SidePanelBackgroundColor {
   White,
   Transparent,
@@ -162,6 +174,9 @@ const SidePanelFooter = styled('div')<Pick<SidePanelProps, 'open' | 'openWidth'>
   })
 );
 
+/**
+ * @deprecated ⚠️ `SidePanel` in Main has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-side-panel--docs) instead.
+ */
 export class SidePanel extends React.Component<SidePanelProps, SidePanelState> {
   static OpenDirection = SidePanelOpenDirection;
   static BackgroundColor = SidePanelBackgroundColor;

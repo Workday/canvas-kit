@@ -1,7 +1,7 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
 import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {
@@ -17,6 +17,10 @@ import {StackedModals as StackedModalsExample} from './examples/StackedModals';
 import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
 import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
+import {brand} from '@workday/canvas-tokens-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {ModalWithPopupRTL as ModalWithPopupRTLExample} from './examples/ModalWithPopupRTL';
+import {NoTargetRTL as NoTargetRTLExample} from './examples/NoTargetRTL';
 
 export default {
   title: 'Testing/Popups/Modal',
@@ -108,6 +112,14 @@ export const ModalWithPopup = {
   render: ModalWithPopupExample,
 };
 
+export const ModalWithPopupRTL = {
+  render: ModalWithPopupRTLExample,
+};
+
+export const NoTargetRTL = {
+  render: NoTargetRTLExample,
+};
+
 export const WithTooltips = {
   render: WithTooltipsExample,
 };
@@ -152,7 +164,7 @@ const TestModal = () => {
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Flex gap="s" padding="xxs">
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -180,13 +192,13 @@ export const ModalRTL = {
     },
   },
   render: () => {
-    const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
     const model = useModalModel({
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={theme}>
+      <CanvasProvider dir="rtl">
         <Modal model={model}>
+          <Modal.Target style={{display: 'none'}}></Modal.Target>
           <Modal.Overlay style={{animation: 'none'}}>
             <Modal.Card style={{animation: 'none'}} width={300}>
               <Modal.CloseIcon aria-label="" />
@@ -200,6 +212,16 @@ export const ModalRTL = {
   },
 };
 
+const customTheme = createStyles({
+  [brand.primary.base]: 'purple',
+  [brand.primary.accent]: 'turquoise',
+  [brand.common.focusOutline]: 'turquoise',
+  [brand.common.alertInner]: 'coral',
+  [brand.common.errorInner]: 'crimson',
+  [brand.success.base]: 'aquamarine',
+  [brand.neutral.base]: 'gray',
+});
+
 export const CustomThemeModal = {
   parameters: {
     chromatic: {
@@ -211,9 +233,10 @@ export const CustomThemeModal = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: customColorTheme}}>
+      <CanvasProvider>
         <Modal model={model}>
-          <Modal.Overlay style={{animation: 'none'}}>
+          {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
+          <Modal.Overlay style={{animation: 'none'}} className={customTheme}>
             <Modal.Card style={{animation: 'none'}}>
               <Modal.CloseIcon aria-label="Close" />
               <Modal.Heading>MIT License</Modal.Heading>
@@ -223,7 +246,7 @@ export const CustomThemeModal = {
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex gap="s" padding="xxs">
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>

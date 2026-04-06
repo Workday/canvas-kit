@@ -2,8 +2,6 @@ import * as React from 'react';
 import {shieldIcon} from '@workday/canvas-accent-icons-web';
 import {benefitsIcon} from '@workday/canvas-applet-icons-web';
 import {CanvasIconTypes, CanvasGraphic} from '@workday/design-assets-types';
-
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {
   AccentIcon,
   AppletIcon,
@@ -15,7 +13,7 @@ import {
 } from '../index';
 import {activityStreamIcon} from '@workday/canvas-system-icons-web';
 
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 
 const graphicExample: CanvasGraphic = {
@@ -45,15 +43,15 @@ export const AccentIconStory = {
   render: () => (
     <div className="story">
       <AccentIcon icon={shieldIcon} />
-      <AccentIcon icon={shieldIcon} color={colors.pomegranate500} />
+      <AccentIcon icon={shieldIcon} color={system.color.static.red.strong} />
       <span
         style={{
-          backgroundColor: colors.blueberry500,
+          backgroundColor: cssVar(system.color.bg.primary.default),
           display: 'inline-block',
           verticalAlign: 'top',
         }}
       >
-        <AccentIcon icon={shieldIcon} color={colors.frenchVanilla100} transparent={true} />
+        <AccentIcon icon={shieldIcon} color={system.color.fg.inverse} transparent={true} />
       </span>
       <br />
       <AccentIcon icon={shieldIcon} size={80} />
@@ -82,36 +80,36 @@ export const SystemIconStory = {
   render: () => (
     <div className="story">
       <SystemIcon icon={activityStreamIcon} />
-      <SystemIcon icon={activityStreamIcon} color={base.berrySmoothie400} />
+      <SystemIcon icon={activityStreamIcon} color={system.color.static.green.default} />
       <SystemIcon
         icon={activityStreamIcon}
-        color={base.berrySmoothie400}
-        colorHover={base.berrySmoothie600}
+        color={system.color.static.green.default}
+        colorHover={system.color.static.green.stronger}
       />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={base.frenchVanilla100}
-        fill={base.blueberry500}
-        background={base.blueberry500}
+        accent={system.color.fg.primary.default}
+        fill={system.color.fg.primary.default}
+        background={system.color.fg.inverse}
       />
       <br />
-      <SystemIcon icon={activityStreamIcon} colorHover={base.cinnamon300} />
+      <SystemIcon icon={activityStreamIcon} colorHover={system.color.fg.critical.default} />
       <SystemIcon
         icon={activityStreamIcon}
-        color={base.blueberry500}
-        fillHover={base.chiliMango200}
-        accentHover={base.chiliMango400}
+        color={system.color.static.blue.default}
+        fillHover={system.color.static.amber.default}
+        accentHover={system.color.static.amber.default}
       />
       <SystemIcon
         className="custom-class"
         icon={activityStreamIcon}
-        accent={base.frenchVanilla100}
-        fill={base.blueberry500}
-        background={base.blueberry500}
-        fillHover={base.cantaloupe500}
-        accentHover={base.frenchVanilla100}
-        backgroundHover={base.cantaloupe500}
+        accent={system.color.static.blue.default}
+        fill={system.color.static.blue.default}
+        background={system.color.static.blue.default}
+        fillHover={system.color.static.amber.default}
+        accentHover={system.color.static.blue.default}
+        backgroundHover={system.color.static.amber.default}
       />
       <br />
       <SystemIcon icon={activityStreamIcon} size={48} />
@@ -125,7 +123,8 @@ export const SystemIconStory = {
       />
       <SystemIconCircle
         icon={activityStreamIcon}
-        background={base.blueberry400}
+        background={system.color.bg.primary.default}
+        color={system.color.fg.inverse}
         shouldMirror={true}
         cs={{[systemIconCircleStencil.vars.color]: cssVar(system.color.fg.inverse)}}
       />

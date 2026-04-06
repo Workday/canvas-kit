@@ -63,7 +63,7 @@ export const modalOverlayContainerStencil = createStencil({
 
 export const useModalOverlay = createElemPropsHook(usePopupModel)(({state}, ref) => {
   const elementRef = useForkRef(ref, state.stackRef);
-  usePopupStack(elementRef);
+  usePopupStack(elementRef, state.targetRef);
 
   return {
     // The ref should not be applied to an element. The passed ref will apply to the stackRef instead

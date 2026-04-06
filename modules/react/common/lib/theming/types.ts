@@ -6,6 +6,7 @@ import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
 
 export type CanvasThemePalette = {
   lightest: string;
+  lighter: string;
   light: string;
   main: string;
   dark: string;
@@ -15,10 +16,14 @@ export type CanvasThemePalette = {
 
 type CanvasThemeCommonPalette = {
   focusOutline: string;
+  alertInner: string;
+  alertOuter: string;
+  errorInner: string;
 };
 
 /**
  * Direction of page content for internationalization
+ * @deprecated ⚠️ `ContentDirection` is deprecated. Use the `:dir()` CSS pseudo-class selector and CSS logical properties instead. For more information, see [MDN :dir()](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) and [CSS Logical Properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values).
  */
 export enum ContentDirection {
   LTR = 'ltr',
@@ -27,8 +32,8 @@ export enum ContentDirection {
 
 /**
  * The format of a Canvas theme for components that support it.
+ * @deprecated ⚠️ `CanvasTheme` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
-
 export interface CanvasTheme {
   palette: {
     common: CanvasThemeCommonPalette;
@@ -248,17 +253,31 @@ export interface Themeable {
 
 /**
  * For custom themes that do not overwrite every default.
+ * @deprecated ⚠️ `RecursivePartial` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 type RecursivePartial<T> = {
   [P in keyof T]?: RecursivePartial<T[P]>;
 };
 
+/**
+ * @deprecated ⚠️ `PartialCanvasTheme` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+ */
 export type PartialCanvasTheme = RecursivePartial<CanvasTheme>;
+
+/**
+ * @deprecated ⚠️ `PartialCanvasThemePalette` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+ */
 export type PartialCanvasThemePalette = RecursivePartial<CanvasThemePalette>;
+
 export type PartialEmotionCanvasTheme = {canvas?: PartialCanvasTheme};
+
 declare module '@emotion/react' {
   export interface Theme {
     canvas: CanvasTheme;
   }
 }
+
+/**
+ * @deprecated ⚠️ `EmotionCanvasTheme` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+ */
 export type EmotionCanvasTheme = {canvas: CanvasTheme};

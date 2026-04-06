@@ -1,5 +1,5 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
-import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {ExampleCodeBlock, StorybookStatusIndicator, SymbolDoc} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
 import {Basic} from './examples/LabelText/Basic';
 import {Cursor} from './examples/LabelText/Cursor';
 import {Disabled} from './examples/LabelText/Disabled';
@@ -7,15 +7,18 @@ import * as LabelTextStories from './LabelText.stories';
 
 <Meta of={LabelTextStories} />
 
-# Canvas Kit Label Text
+# Canvas Kit Label Text <StorybookStatusIndicator type="deprecated" />
 
-<StatusIndicator variant="red">
-  <StatusIndicator.Label>Deprecated</StatusIndicator.Label>
-</StatusIndicator>
-
-`LabelText` has been deprecated and will be removed in a future major version. Please use
-[FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-form-field--basic)
-from Preview instead.
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `LabelText` has been deprecated and will be removed in a future major version. Please use
+    `FormField.Label` instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/story/components-inputs-form-field--docs">
+    Form Field Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 `LabelText` provides a simple way to render a label with built-in support for Canvas type tokens.
 

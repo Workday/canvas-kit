@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {CSSProperties, space} from '@workday/canvas-kit-react/tokens';
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {loopIcon} from '@workday/canvas-system-icons-web';
@@ -32,7 +31,7 @@ const stickAnimationKeyframes = keyframes({
 
 const stickyAnimationStencil = createStencil({
   base: {
-    marginY: system.space.x1,
+    marginBlock: system.space.x1,
     marginInlineStart: system.space.x1,
     marginInlineEnd: 0,
     animationName: stickAnimationKeyframes,
@@ -45,7 +44,6 @@ export const StickyAnimation = () => {
   const theme = useTheme();
   const bannerRef = React.useRef<HTMLButtonElement>(null);
   const containerRef = React.useRef<HTMLDivElement>(null);
-  const [styles, setStyles] = React.useState<CSSProperties>();
   const [bannerWidth, setBannerWidth] = React.useState(0);
 
   const [rerun, setRerun] = React.useState(1); // Only needed for demo purposes

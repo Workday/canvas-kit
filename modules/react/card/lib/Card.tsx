@@ -13,16 +13,34 @@ export interface CardProps extends BoxProps {
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
   children?: React.ReactNode;
+  /**
+   * The variant of the Card. Can be `default`, `borderless` or `filled`.
+   * @default 'default'
+   */
+  variant?: 'borderless' | 'filled';
 }
 
 // .cnvs-card
 export const cardStencil = createStencil({
   base: {
-    boxShadow: system.depth[1],
+    display: 'flex',
+    flexDirection: 'column',
+    gap: system.space.x6,
     padding: system.space.x8,
     backgroundColor: system.color.bg.default,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
     borderRadius: system.shape.x2,
+    border: `${px2rem(1)} solid ${system.color.border.container}`,
+  },
+  modifiers: {
+    variant: {
+      borderless: {
+        borderColor: 'transparent',
+      },
+      filled: {
+        backgroundColor: system.color.bg.alt.soft,
+        borderColor: system.color.border.transparent,
+      },
+    },
   },
 });
 
@@ -40,9 +58,9 @@ export const cardStencil = createStencil({
  */
 export const Card = createComponent('div')({
   displayName: 'Card',
-  Component: ({children, ...elemProps}: CardProps, ref, Element) => {
+  Component: ({children, variant, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, cardStencil({variant}))}>
         {children}
       </Element>
     );

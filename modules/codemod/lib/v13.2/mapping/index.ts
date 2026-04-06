@@ -228,7 +228,7 @@ export const systemColors = {
     soap400: 'system.color.bg.alt.strong',
     soap500: 'system.color.bg.alt.stronger',
   },
-  'color,fill,colorFocus,colorHover,colorActive,icon,iconColor': {
+  'color,fill,colorFocus,colorHover,colorActive,icon,iconColor,textShadow': {
     blackPepper300: 'system.color.fg.default',
     blackPepper400: 'system.color.fg.strong',
     blackPepper500: 'system.color.fg.stronger',

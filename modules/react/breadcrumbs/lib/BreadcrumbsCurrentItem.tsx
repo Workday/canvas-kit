@@ -10,12 +10,30 @@ import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsCurrentItemProps extends TextProps {
   tooltipProps?: OverflowTooltipProps;
 }
+
+export const breadcrumbsCurrentItemStencil = createStencil({
+  vars: {
+    maxWidth: '',
+  },
+  base: ({maxWidth}) => ({
+    ...system.type.subtext.large,
+    fontWeight: system.fontWeight.medium,
+    color: system.color.text.default,
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    maxWidth,
+  }),
+});
 
 export const useBreadcrumbsItem = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any, elemProps) => {
@@ -47,14 +65,12 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
       <OverflowTooltip {...tooltipProps}>
         <Text
           as={Element}
-          typeLevel="subtext.large"
-          fontWeight="medium"
-          display="inline-block"
-          maxWidth={maxWidth}
-          whiteSpace="nowrap"
-          textOverflow="ellipsis"
-          overflow="hidden"
-          {...elemProps}
+          {...handleCsProp(
+            elemProps,
+            breadcrumbsCurrentItemStencil({
+              maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
+            })
+          )}
         >
           {children}
         </Text>

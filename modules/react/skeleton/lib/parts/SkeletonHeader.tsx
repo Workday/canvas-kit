@@ -57,7 +57,7 @@ export const SkeletonHeader = createComponent('div')<SkeletonHeaderProps>({
         elemProps,
         skeletonHeaderStencil({
           width: typeof width === 'number' ? px2rem(width) : width,
-          backgroundColor: backgroundColor,
+          backgroundColor,
           height: typeof height === 'number' ? px2rem(height) : height,
         })
       )}

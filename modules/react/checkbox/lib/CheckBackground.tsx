@@ -30,12 +30,14 @@ export const checkboxBackgroundStencil = createStencil({
   modifiers: {
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: brand.error.base,
+        [errorRingColorInner]: brand.common.errorInner,
         [errorRingColorOuter]: 'transparent',
+        backgroundColor: brand.error.lightest,
       }),
-      alert: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: brand.alert.base,
-        [errorRingColorOuter]: brand.alert.darkest,
+      caution: ({errorRingColorInner, errorRingColorOuter}) => ({
+        [errorRingColorInner]: brand.common.alertInner,
+        [errorRingColorOuter]: brand.common.alertOuter,
+        backgroundColor: brand.alert.lightest,
       }),
     },
   },

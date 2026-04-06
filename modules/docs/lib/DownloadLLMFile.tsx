@@ -58,7 +58,7 @@ export const DownloadLLMFile = ({rawFileLink, filename}: DownloadLLMFileProps) =
           <code>{filename}</code>
         </div>
         <div {...flexBlock({gap: system.space.x4})}>
-          <ExternalHyperlink href={rawFileLink}>See raw file</ExternalHyperlink>
+          <ExternalHyperlink href={rawFileLink}>View raw file</ExternalHyperlink>
           <SecondaryButton icon={downloadIcon} size="small" onClick={handleDownload}>
             Download LLM File
           </SecondaryButton>

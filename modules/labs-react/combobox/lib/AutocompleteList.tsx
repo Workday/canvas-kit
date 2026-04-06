@@ -45,6 +45,9 @@ interface AutocompleteListProps {
   showGroupText: boolean;
 }
 
+/**
+ * @deprecated ⚠️ `AutocompleteList` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const AutocompleteList = ({
   autocompleteItems,
   comboboxId,
@@ -125,10 +128,8 @@ export const AutocompleteList = ({
   } else {
     return (
       <Autocomplete {...listBoxProps}>
-        {(autocompleteItems as React.ReactElement<
-          any
-        >[]).map((listboxItem: React.ReactElement, index: number) =>
-          createListItem(listboxItem, index)
+        {(autocompleteItems as React.ReactElement<any>[]).map(
+          (listboxItem: React.ReactElement, index: number) => createListItem(listboxItem, index)
         )}
       </Autocomplete>
     );

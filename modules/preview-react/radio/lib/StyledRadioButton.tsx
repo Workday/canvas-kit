@@ -8,8 +8,15 @@ import {
 } from '@workday/canvas-kit-react/common';
 
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {
+  CSProps,
+  calc,
+  cssVar,
+  createStencil,
+  px2rem,
+  handleCsProp,
+} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
 
@@ -20,7 +27,7 @@ export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;
 }
 
-const radioInputStencil = createStencil({
+export const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
     height: px2rem(radioHeight),
@@ -77,7 +84,8 @@ const radioInputStencil = createStencil({
         width: 1,
         separation: 0,
         animate: false,
-        innerColor: system.color.border.inverse,
+        /* TODO: Update to `system.color.border.inverse.default` in v15. */
+        innerColor: cssVar(system.color.border.inverse, base.neutral0),
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -100,7 +108,8 @@ const radioInputStencil = createStencil({
           width: 2,
           separation: 2,
           animate: false,
-          innerColor: system.color.border.inverse,
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          innerColor: cssVar(system.color.border.inverse, base.neutral0),
           outerColor: brand.common.focusOutline,
         }),
       },
@@ -124,7 +133,8 @@ const radioInputStencil = createStencil({
           // The borderColor represents the border around the middle dot of the radio.
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
             backgroundColor: brand.primary.base, // inner circle background color
-            borderColor: system.color.border.inverse, // inner circle border color
+            /* TODO: Update to `system.color.border.inverse.default` in v15. */
+            borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
           },
         },
         '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
@@ -138,7 +148,8 @@ const radioInputStencil = createStencil({
         // The borderColor represents the border around the middle dot of the radio.
         '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
           backgroundColor: brand.primary.base, // inner circle background color
-          borderColor: system.color.border.inverse, // inner circle border color
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
         },
         '&:focus-visible + .cnvs-radio-check, &:focus-visible:hover + .cnvs-radio-check, &.focus + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check':
           {
@@ -146,7 +157,8 @@ const radioInputStencil = createStencil({
               width: 2,
               separation: 0,
               innerColor: system.color.border.contrast.default,
-              outerColor: system.color.border.inverse,
+              /* TODO: Update to `system.color.border.inverse.default` in v15. */
+              outerColor: cssVar(system.color.border.inverse, base.neutral0),
             }),
           },
         '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -155,7 +167,8 @@ const radioInputStencil = createStencil({
               width: 2,
               separation: 2,
               innerColor: system.color.border.contrast.default,
-              outerColor: system.color.border.inverse,
+              /* TODO: Update to `system.color.border.inverse.default` in v15. */
+              outerColor: cssVar(system.color.border.inverse, base.neutral0),
             }),
           },
       },
@@ -170,7 +183,7 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
   },
 });
 
-const radioInputWrapperStyles = createStencil({
+export const radioInputWrapperStencil = createStencil({
   base: {
     height: px2rem(radioHeight),
     width: px2rem(radioWidth),
@@ -216,7 +229,10 @@ const RadioInputWrapper = createComponent(Flex)<
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     const {disabled} = React.useContext(RadioLabelContext);
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, radioInputWrapperStyles({variant, disabled}))}>
+      <Element
+        ref={ref}
+        {...handleCsProp(elemProps, radioInputWrapperStencil({variant, disabled}))}
+      >
         {children}
       </Element>
     );

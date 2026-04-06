@@ -38,20 +38,12 @@ export const SkeletonText = createComponent('div')({
   displayName: 'Skeleton.Text',
   Component: ({backgroundColor, lineCount = 2, ...elemProps}: SkeletonTextProps, ref, Element) => {
     const lines = new Array(lineCount).fill(null);
-    return lineCount <= 0 ? null : (
-      <Element
-        ref={ref}
-        {...handleCsProp(
-          elemProps,
-          skeletonTextStencil({
-            backgroundColor,
-          })
-        )}
-      >
+    return lineCount > 0 ? (
+      <Element ref={ref} {...handleCsProp(elemProps, skeletonTextStencil({backgroundColor}))}>
         {lines.map((_value, index) => (
           <div data-part={'skeleton-text-lines'} key={index}></div>
         ))}
       </Element>
-    );
+    ) : null;
   },
 });

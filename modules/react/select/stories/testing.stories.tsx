@@ -10,6 +10,8 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {brand} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Inputs/Select',
@@ -45,7 +47,7 @@ export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},
-          {label: 'Alert', props: {error: 'alert'}},
+          {label: 'Caution', props: {error: 'caution'}},
           {label: 'Error', props: {error: 'error'}},
         ]}
         columnProps={permutateProps(
@@ -96,7 +98,19 @@ export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
   );
 };
 
-export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
+const customTheme = createStyles({
+  [brand.primary.base]: 'purple',
+  [brand.primary.accent]: 'turquoise',
+  [brand.common.focusOutline]: 'turquoise',
+  [brand.common.alertInner]: 'coral',
+  [brand.common.errorInner]: 'crimson',
+  [brand.success.base]: 'aquamarine',
+  [brand.neutral.base]: 'gray',
+});
+
+export const SelectOpenMenuStates = (selectProps: {
+  className?: React.HTMLAttributes<HTMLDivElement>['className'];
+}) => {
   const model = useSelectModel({
     items: options,
     nonInteractiveIds: disabledItems,
@@ -104,12 +118,12 @@ export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme})
   });
   return (
     <div style={{height: 400}}>
-      <StaticStates theme={props.theme}>
+      <StaticStates>
         <ComponentStatesTable
           rowProps={[{label: '', props: {}}]}
           columnProps={[
             {label: 'Default', props: {}},
-            {label: 'Alert', props: {error: 'alert'}},
+            {label: 'Caution', props: {error: 'caution'}},
             {label: 'Error', props: {error: 'error'}},
           ]}
         >
@@ -119,7 +133,8 @@ export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme})
               <Select model={model}>
                 <FormField.Input as={Select.Input} {...props} id="contact-select" />
                 <Select.Popper>
-                  <Select.Card maxHeight="200px">
+                  {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
+                  <Select.Card maxHeight="200px" className={selectProps.className}>
                     {!!model.state.items.length && (
                       <Select.List>
                         {item => {
@@ -142,19 +157,10 @@ export const SelectOpenMenuStates = (props: {theme?: PartialEmotionCanvasTheme})
   );
 };
 
-const themedParameters = {
-  parameters: {
-    canvasProviderDecorator: {
-      theme: customColorTheme,
-    },
-  },
-};
-
 export const SelectThemedStates = {
   render: () => <SelectStates theme={{canvas: customColorTheme}} />,
 };
 
 export const SelectOpenMenuThemedStates = {
-  parameters: themedParameters,
-  render: () => <SelectOpenMenuStates theme={{canvas: customColorTheme}} />,
+  render: () => <SelectOpenMenuStates className={customTheme} />,
 };

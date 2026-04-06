@@ -1,4 +1,4 @@
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
@@ -33,7 +33,7 @@ export const StartIcon = () => {
           {label: 'No Avatar', props: {}},
           {label: 'Avatar', props: {avatar: true}},
           {label: 'Depth', props: {depth: 3}},
-          {label: 'RTL', props: {direction: ContentDirection.RTL}},
+          {label: 'RTL', props: {dir: 'rtl'}},
         ]}
         columnProps={[
           {
@@ -50,11 +50,11 @@ export const StartIcon = () => {
           const state = {visibility: props.visibility, id: props.id};
 
           return (
-            <CanvasProvider theme={{canvas: {direction: props?.direction}}}>
+            <CanvasProvider dir={props?.dir}>
               <Expandable depth={props?.depth} model={{...model, state}}>
                 <Expandable.Target headingLevel="h2">
                   <Expandable.Icon iconPosition="start" />
-                  {props.avatar && <Expandable.Avatar />}
+                  {props.avatar && <Expandable.Avatar name="Logan McNeil" />}
                   <Expandable.Title>Hello</Expandable.Title>
                 </Expandable.Target>
                 <Expandable.Content>Content</Expandable.Content>
@@ -77,7 +77,7 @@ export const EndIcon = () => {
           {label: 'No Avatar', props: {}},
           {label: 'Avatar', props: {avatar: true}},
           {label: 'Depth', props: {depth: 3}},
-          {label: 'RTL', props: {direction: ContentDirection.RTL}},
+          {label: 'RTL', props: {dir: 'rtl'}},
         ]}
         columnProps={[
           {
@@ -94,10 +94,10 @@ export const EndIcon = () => {
           const state = {visibility: props.visibility, id: props.id};
 
           return (
-            <CanvasProvider theme={{canvas: {direction: props?.direction}}}>
+            <CanvasProvider dir={props?.dir}>
               <Expandable depth={props?.depth} model={{...model, state}}>
                 <Expandable.Target headingLevel="h3">
-                  {props?.avatar && <Expandable.Avatar />}
+                  {props?.avatar && <Expandable.Avatar name="Logan McNeil" />}
                   <Expandable.Title>Hello</Expandable.Title>
                   <Expandable.Icon iconPosition="end" />
                 </Expandable.Target>

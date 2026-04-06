@@ -4,7 +4,6 @@ import {
   SecondaryButton,
   TertiaryButton,
   DeleteButton,
-  deprecated_Button as DeprecatedButton,
   SecondaryButtonProps as ButtonProps,
 } from '@workday/canvas-kit-react/button';
 import {render, fireEvent} from '@testing-library/react';
@@ -16,7 +15,6 @@ import {ElementComponent} from '@workday/canvas-kit-react/common';
     SecondaryButton,
     TertiaryButton,
     DeleteButton,
-    DeprecatedButton,
     // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
   ] as any[]
 ).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {

@@ -25,7 +25,7 @@ export const WithRemovable = () => {
           />
         </Pill>
         <Pill variant="removable">
-          <Pill.Avatar altText="Avatar" url={testAvatar} />
+          <Pill.Avatar name="Avatar" url={testAvatar} />
           <Pill.Label>Carolyn Grimaldi</Pill.Label>
           <Pill.IconButton
             aria-label="Remove"

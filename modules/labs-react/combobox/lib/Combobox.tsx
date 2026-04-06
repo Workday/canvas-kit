@@ -4,7 +4,6 @@ import {
   GrowthBehavior,
   useForkRef,
   styled,
-  useIsRTL,
   useUniqueId,
   filterOutProps,
 } from '@workday/canvas-kit-react/common';
@@ -17,6 +16,9 @@ import flatten from 'lodash.flatten';
 import {AutocompleteList} from './AutocompleteList';
 import {Status} from './Status';
 
+/**
+ * @deprecated ⚠️ `ComboBoxMenuItemGroup` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export interface ComboBoxMenuItemGroup {
   // A non intractable header that logically separates autocomplete items
   header: React.ReactElement<any>;
@@ -24,6 +26,9 @@ export interface ComboBoxMenuItemGroup {
   items: React.ReactElement<any>[];
 }
 
+/**
+ * @deprecated ⚠️ `ComboboxProps` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export interface ComboboxProps extends GrowthBehavior, React.HTMLAttributes<HTMLElement> {
   /**
    * The TextInput child of the Combobox.
@@ -132,11 +137,20 @@ const ResetButton = styled(TertiaryButton, {
   })
 );
 
+/**
+ * @deprecated ⚠️ `listBoxIdPart` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const listBoxIdPart = `listbox`;
 const optionIdPart = `option`;
+/**
+ * @deprecated ⚠️ `getOptionId` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const getOptionId = (baseId?: string, index?: number) =>
   `${baseId}-${optionIdPart}-${index}`;
 
+/**
+ * @deprecated ⚠️ `getTextFromElement` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const getTextFromElement = (children?: React.ReactNode) => {
   let text = '';
   React.Children.map(children, child => {
@@ -163,6 +177,9 @@ const isValidSingleChild = (child: React.ReactNode) => {
   return React.isValidElement(child) && React.Children.only(child);
 };
 
+/**
+ * @deprecated ⚠️ `Combobox` in Labs has been deprecated and will be removed in a future major version. Please use [`Combobox` in Main](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+ */
 export const Combobox = ({
   autocompleteItems,
   children,
@@ -221,9 +238,6 @@ export const Combobox = ({
       setAnnouncementText(getStatusText(interactiveAutocompleteItems.length));
     }
   }, [getStatusText, interactiveAutocompleteItems, isOpened]);
-
-  // Used to set the position of the reset button and the padding direction inside the input container
-  const isRTL = useIsRTL();
 
   const setInputValue = useCallback(
     (newValue: string) => {
@@ -416,10 +430,9 @@ export const Combobox = ({
   const renderChildren = (inputElement: React.ReactElement<TextInputProps>): React.ReactNode => {
     let cssOverride: CSSObject = {':focus': {zIndex: 2}};
     if (showClearButton) {
-      const paddingDirection = isRTL ? 'paddingLeft' : 'paddingRight';
       cssOverride = {
         ...cssOverride,
-        [paddingDirection]: space.xl,
+        paddingInlineEnd: space.xl,
       };
     }
     const newTextInputProps: Partial<
@@ -466,6 +479,7 @@ export const Combobox = ({
             variant={clearButtonVariant}
             onClick={resetSearchInput}
             onBlur={handleBlur}
+            data-part="combobox-reset-button"
             size="small"
             type="button"
           />

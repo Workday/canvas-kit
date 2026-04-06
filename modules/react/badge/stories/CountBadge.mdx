@@ -1,8 +1,10 @@
-import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
-import { Basic } from './examples/Basic';
-import { CustomLimit } from './examples/CustomLimit';
-import { NotificationBadge } from './examples/NotificationBadge';
+import {Basic} from './examples/Basic';
+import {Emphasis} from './examples/Emphasis';
+import {Inverse} from './examples/Inverse';
+import {CustomLimit} from './examples/CustomLimit';
+import {NotificationBadge} from './examples/NotificationBadge';
 
 import * as CountBadgeStories from './CountBadge.stories';
 
@@ -25,10 +27,30 @@ Accessibility section below.
 
 ### Basic
 
-In the example below, we're rendering a basic `CountBadge` with its `default` and `inverse`
-variants. The `inverse` variant is intended for darker backgrounds to create more contrast.
+Use the default `CountBadge` variant for most situations. The default `high` emphasis is ideal for
+drawing attention to important or primary information.
 
 <ExampleCodeBlock code={Basic} />
+
+### Emphasis
+
+Select the `low` emphasis option for less prominent or secondary information. This is useful when
+you want the badge to be visible but not distracting.
+
+`high` emphasis is ideal for drawing attention to important or primary information.
+
+<ExampleCodeBlock code={Emphasis} />
+
+### Inverse
+
+Apply the `inverse` variant when displaying the badge on dark or accent backgrounds to maintain
+proper contrast and readability. This ensures the badge remains legible in visually dense or colored
+areas. The same rules apply for `low` and `high` emphasis. Only use this combination on backgrounds with
+[a token of 600 or greater](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs)
+to ensure sufficient contrast and accessibility.
+
+<ExampleCodeBlock code={Inverse} />
+
 
 ### Custom Limit
 
@@ -41,14 +63,14 @@ messages on their first day back.
 
 <ExampleCodeBlock code={CustomLimit} />
 
-### Notification Badge
+### Accessibility
+
+#### Notification Badge
 
 Notifications are a major use case for `CountBadge`. When the `CountBadge` value is updated in
 real-time, screen readers must be supported with an `AriaLiveRegion` that will automatically
 describe the change in the number of notifications. If the web app only updates `CountBadge` as part
 of another screen update, then this use of `AriaLiveRegion` is unnecessary and not recommended.
-
-#### Notes on accessibility for the example below
 
 - `Tooltip` is set on the `SecondaryButton` automatically applying the `aria-label` to the button.
 - `aria-describedby` property is conditionally set on the `SecondaryButton` when greater than zero
@@ -63,7 +85,7 @@ of another screen update, then this use of `AriaLiveRegion` is unnecessary and n
 ### Custom Styles
 
 Count Badge supports custom styling via the `cs` prop. For more information, check our
-["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-how-to-customize-styles--docs).
+["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
 
 ## Component API
 

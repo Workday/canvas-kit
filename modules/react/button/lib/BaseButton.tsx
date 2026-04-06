@@ -6,7 +6,7 @@ import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {createComponent, GrowthBehavior, focusRing} from '@workday/canvas-kit-react/common';
 import {cssVar, createStencil, px2rem, createVars, calc} from '@workday/canvas-kit-styling';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {ButtonColors, ButtonSizes, IconPositions} from './types';
 import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
@@ -40,11 +40,6 @@ export interface ButtonContainerProps extends Partial<SystemIconProps>, GrowthBe
    * @default 'start'
    */
   iconPosition?: IconPositions;
-  /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
-   * @default false
-   */
-  shouldMirrorIcon?: boolean;
   children?: React.ReactNode;
 }
 
@@ -187,7 +182,8 @@ export const buttonStencil = createStencil({
         separation: 2,
         innerColor: cssVar(
           buttonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, system.color.border.inverse)
+          /* TODO: Update to `system.color.border.inverse.default` in v15. */
+          cssVar(boxShadowInner, cssVar(system.color.border.inverse, base.neutral0))
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,
@@ -406,7 +402,6 @@ export const BaseButton = createComponent('button')({
       iconPosition,
       icon,
       colors,
-      shouldMirrorIcon = false,
       ...elemProps
     }: ButtonContainerProps,
     ref,

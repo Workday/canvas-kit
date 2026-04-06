@@ -1,5 +1,4 @@
-import React from 'react';
-import {LoadingDots, loadingDotsStencil} from '@workday/canvas-kit-react/loading-dots';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {system} from '@workday/canvas-tokens-web';
 import {createStyles, createStencil} from '@workday/canvas-kit-styling';
 
@@ -13,20 +12,19 @@ const styleOverrides = {
 const loadingStencil = createStencil({
   base: {
     borderRadius: system.shape.round,
-    backgroundColor: system.color.bg.overlay,
+    backgroundColor: system.color.bg.contrast.strong,
     height: 80,
     width: 80,
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',
-    [loadingDotsStencil.vars.loadingDotColor]: system.color.icon.inverse,
   },
 });
 
 export const CustomShape = () => {
   return (
     <div className={styleOverrides.parentContainer}>
-      <LoadingDots cs={loadingStencil()} />
+      <LoadingDots variant="inverse" cs={loadingStencil()} />
     </div>
   );
 };

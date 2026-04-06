@@ -1,5 +1,6 @@
 import colors from '@workday/canvas-colors-web';
 
+/** @deprecated ⚠️ `BrandingColor` has been deprecated in a future major version. Please use our css var based [`brand colors`](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) tokens. */
 export enum BrandingColor {
   Cinnamon = 'cinnamon',
   Peach = 'peach',
@@ -31,4 +32,5 @@ type RemoveIndex<T> = {
   [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
 };
 
+/** @deprecated ⚠️ `CanvasColor` has been deprecated in a future major version. Please use our css var based [`color tokens`](https://workday.github.io/canvas-tokens/?path=/docs/docs-base-tokens--docs) tokens. */
 export type CanvasColor = keyof RemoveIndex<typeof colors>;

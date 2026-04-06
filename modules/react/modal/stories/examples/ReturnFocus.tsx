@@ -50,7 +50,7 @@ export const ReturnFocus = () => {
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs" marginTop="xxs">
+          <Flex gap="s" padding="xxs">
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>

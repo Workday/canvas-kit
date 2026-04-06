@@ -9,7 +9,7 @@ yarn add @workday/canvas-kit-react/layout
 ```
 
 For more detailed information on this component, please refer to the
-[storybook documentation](http://workday.github.io/canvas-kit/?path=/docs/components-containers-layout-react-column-and-layout--page-layout)
+[storybook documentation](https://workday.github.io/canvas-kit/?path=/docs/components-layout-grid--docs)
 
 # Canvas Kit Layout
 
@@ -141,11 +141,11 @@ Default: `12`
 # Flex
 
 View the
-[documentation for Flex](https://workday.github.io/canvas-kit/?path=/docs/components-containers-flex--basic)
+[documentation for Flex](https://workday.github.io/canvas-kit/?path=/docs/components-layout-flex--docs)
 on Storybook.
 
 # Box
 
 View the
-[documentation for Box](https://workday.github.io/canvas-kit/?path=/docs/components-containers-box--basic)
+[documentation for Box](https://workday.github.io/canvas-kit/?path=/docs/components-layout-box--docs)
 on Storybook.

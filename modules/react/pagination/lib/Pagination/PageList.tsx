@@ -2,32 +2,35 @@ import * as React from 'react';
 
 import {PaginationModel} from './types';
 import {ListItem, ListItemProps} from './common/List';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {PaginationContext} from './usePaginationModel';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
   model?: PaginationModel;
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
+export const paginationPageListStencil = createStencil({
+  base: {
+    display: 'flex',
+    margin: system.space.zero,
+    paddingInlineStart: system.space.zero,
+    paddingInlineEnd: system.space.zero,
+    gap: system.space.x1,
+  },
+});
+
 export const PageList = createComponent('ol')({
   displayName: 'Pagination.PageList',
   Component({children, ...elemProps}: PageListProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     return (
-      <Flex
-        ref={ref}
-        as={Element}
-        margin="zero"
-        role="list"
-        paddingLeft="zero"
-        paddingRight="zero"
-        gap="xxxs"
-        {...elemProps}
-      >
+      <Element ref={ref} role="list" {...mergeStyles(elemProps, paginationPageListStencil())}>
         {typeof children === 'function' ? children(model) : children}
-      </Flex>
+      </Element>
     );
   },
 });

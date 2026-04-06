@@ -9,8 +9,12 @@ function useDefaultTheme<T, C>(theme: T | undefined, config: C, fn: (config: C) 
 /**
  * This is a small hook to support right-to-left logic.
  * It returns a boolean
- * @example
+ *
+ * ```ts
  * const isRTL = useIsRTL();
+ * ```
+ *
+ * @deprecated ⚠️ `useIsRTL` is deprecated and will be removed in a future major version. Please use `isElementRTL` instead.
  */
 
 export const useIsRTL = (partialTheme?: PartialEmotionCanvasTheme) => {

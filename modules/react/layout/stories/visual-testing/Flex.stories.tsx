@@ -1,7 +1,6 @@
 import React from 'react';
 
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
 
 export default {
@@ -19,7 +18,7 @@ export const FlexLTRStates = {
     return (
       <>
         <h2>Flex LTR States</h2>
-        <StaticStates theme={{canvas: {direction: ContentDirection.LTR}}}>
+        <StaticStates dir="ltr">
           <ComponentStatesTable
             columnProps={[{label: 'Default', props: {}}]}
             rowProps={[
@@ -107,7 +106,7 @@ export const FlexRTLStates = {
     return (
       <>
         <h2>Flex RTL States</h2>
-        <StaticStates theme={{canvas: {direction: ContentDirection.RTL}}}>
+        <StaticStates dir="rtl">
           <ComponentStatesTable
             columnProps={[{label: 'Default', props: {}}]}
             rowProps={[

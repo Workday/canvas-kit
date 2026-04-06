@@ -1,7 +1,7 @@
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 import {Button, ButtonProps} from './Button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
@@ -25,7 +25,8 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.background]: brand.error.base,
       [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.error.accent),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
+      /* TODO: Update to `system.color.border.inverse.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
     // Hover Styles

@@ -4,7 +4,7 @@ import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const stylesOverride = {
@@ -21,7 +21,7 @@ const stylesOverride = {
     paddingX: system.space.x4,
   }),
   panelHeading: createStyles({
-    color: base.licorice500,
+    color: system.color.fg.default,
   }),
   mainContent: createStyles({
     alignItems: 'center',

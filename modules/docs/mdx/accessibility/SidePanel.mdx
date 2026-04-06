@@ -1,0 +1,25 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {WithNavigation} from './examples/SidePanelWithNavigation';
+
+<Meta title="Guides/Accessibility/Examples/Side Panel Navigation" />
+
+## Side Panel As Navigation
+
+This example demonstrates SidePanel as a navigation system that can be reduced into a "compact view"
+to save horizontal space on screen. It combines semantic HTML nested list markup with Canvas Kit's
+`<Expandable>` component to create an accordion. When in compact view, the Canvas Kit `<Menu>`
+component is used to create the fly-out menus. Both of these components are implemented according to
+the [W3C ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/patterns/) to provide a
+wide range of support for accessibility.
+
+- The `<SidePanel>` uses the `as` prop to render with a semantic HTML `<nav>` element
+- The SidePanel's heading element with the `labelProps` must remain in the DOM even while the
+  component is in compact view, else the `aria-labelledby` reference for the toggle button will
+  become invalid. The `hidden` attribute is conditionally set on the heading based on the `expanded`
+  state of the SidePanel provided by the `useSidePanel` hook.
+- The semantic HTML nested list markup helps support non-visual screen reader users understand the
+  nested hierarchy of the elements inside the expandable containers
+- In the compact view, the `<Tooltip>` component is used to provide an accessible name to the icon
+  button menu targets
+
+<ExampleCodeBlock code={WithNavigation} />

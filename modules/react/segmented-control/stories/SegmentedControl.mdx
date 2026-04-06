@@ -1,10 +1,29 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {
+  ExampleCodeBlock,
+  StorybookStatusIndicator,
+  SymbolDoc,
+  Specifications,
+} from '@workday/canvas-kit-docs';
+
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+
 import {Basic} from './examples/Basic';
 import * as SegmentedControlStories from './SegmentedControl.stories';
 
 <Meta of={SegmentedControlStories} />
 
-# Canvas Kit Segmented Control
+# Canvas Kit Segmented Control <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `SegmentedControl` in Main has been deprecated and will be removed in a future major version.
+    Please use `Segmented Control` in Preview instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-segmented-control--docs">
+    Segmented Control Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 A linear set of two or more segments, each of which functions as a mutually exclusive button. This
 is a [_controlled_](https://reactjs.org/docs/forms.html#controlled-components) component.

@@ -32,7 +32,7 @@ export const SelectStates = () => (
     <ComponentStatesTable
       rowProps={[
         {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+        {label: 'Caution', props: {error: Select.ErrorType.Caution}},
         {label: 'Error', props: {error: Select.ErrorType.Error}},
       ]}
       columnProps={permutateProps(
@@ -74,7 +74,7 @@ export const SelectStatesMenuOn = () => (
     <ComponentStatesTable
       rowProps={[
         {label: 'Default', props: {}},
-        {label: 'Alert', props: {error: Select.ErrorType.Alert}},
+        {label: 'Caution', props: {error: Select.ErrorType.Caution}},
         {label: 'Error', props: {error: Select.ErrorType.Error}},
       ]}
       columnProps={[
