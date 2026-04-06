@@ -7,6 +7,7 @@ import {MixedPopupTypes} from '../../modules/react/popup/stories/examples/MixedP
 import {PopupWithNonHidablePopup} from '../../modules/react/popup/stories/examples/PopupWithNonHidablePopup';
 import {ReturnFocusTest} from '../../modules/react/popup/stories/examples/ReturnFocusTest';
 import {MultiplePopups} from '../../modules/react/popup/stories/examples/MultiplePopups';
+import {InitialFocus} from '../../modules/react/popup/stories/examples/InitialFocus';
 import {CloseOnTargetHiddenTest} from '../../modules/react/popup/stories/examples/CloseOnTargetHiddenTest';
 import {TooltipReturnFocus} from '../../modules/react/popup/stories/examples/TooltipReturnFocus';
 import {ComboboxWithinPopup} from '../../modules/react/popup/stories/examples/ComboboxWithinPopup';
@@ -84,27 +85,133 @@ describe('Popup', () => {
       cy.mount(<MultiplePopups />);
     });
 
-    context('when Open Popup 1 button is clicked', () => {
+    context('when the Focus Redirect Popup target is clicked', () => {
       beforeEach(() => {
-        cy.findByRole('button', {name: 'Open Popup 1'}).click();
+        cy.findByRole('button', {name: 'Focus Redirect Popup'}).click();
       });
 
-      it('should open Popup 1', () => {
-        cy.findByRole('dialog', {name: 'Popup 1'}).should('be.visible');
+      it('should open the Focus Redirect Popup dialog', () => {
+        cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('be.visible');
       });
 
-      context('then Open Popup 2 button is clicked', () => {
+      context('and the Focus Trap Popup target is clicked', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Open Popup 2'}).click();
+          cy.findByRole('button', {name: 'Focus Trap Popup'}).click();
         });
 
-        it('should open Popup 2', () => {
-          cy.findByRole('dialog', {name: 'Popup 2'}).should('be.visible');
+        it('should open the Focus Trap Popup dialog', () => {
+          cy.findByRole('dialog', {name: 'Focus Trap Popup'}).should('be.visible');
         });
 
-        it('should close Popup 1', () => {
-          cy.findByRole('dialog', {name: 'Popup 1'}).should('not.exist');
+        it('should keep the Focus Redirect Popup dialog open', () => {
+          cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('be.visible');
         });
+      });
+    });
+
+    context('when the Focus Trap Popup target is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Focus Trap Popup'}).click();
+      });
+
+      it('should open the Focus Trap Popup dialog', () => {
+        cy.findByRole('dialog', {name: 'Focus Trap Popup'}).should('be.visible');
+      });
+
+      context('when the Close button has focus and the Tab key is pressed twice', () => {
+        beforeEach(() => {
+          cy.findByRole('dialog', {name: 'Focus Trap Popup'})
+            .findByRole('button', {name: 'Close'})
+            .focus()
+            .realPress('Tab');
+          cy.findByRole('button', {name: 'OK'}).should('have.focus');
+          cy.realPress('Tab');
+        });
+
+        it('should cycle focus back to the Close button', () => {
+          cy.findByRole('dialog', {name: 'Focus Trap Popup'})
+            .findByRole('button', {name: 'Close'})
+            .should('have.focus');
+        });
+      });
+    });
+
+    context('when the Focus Redirect Popup is open', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Focus Redirect Popup'}).click();
+      });
+
+      context('when the Close button has focus and the Tab key is pressed', () => {
+        beforeEach(() => {
+          cy.findByRole('dialog', {name: 'Focus Redirect Popup'})
+            .findByRole('button', {name: 'Close'})
+            .focus()
+            .realPress('Tab');
+        });
+
+        it('should hide the Focus Redirect Popup', () => {
+          cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('not.exist');
+        });
+
+        it('should move focus to the Focus Trap Popup target', () => {
+          cy.findByRole('button', {name: 'Focus Trap Popup'}).should('have.focus');
+        });
+      });
+    });
+  });
+
+  context('given the InitialFocus example is rendered', () => {
+    beforeEach(() => {
+      cy.mount(<InitialFocus />);
+    });
+
+    context('when the "Initial focus: OK button" target is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Initial focus: OK button'}).click();
+      });
+
+      it('should show the Confirmation dialog', () => {
+        cy.findByRole('dialog', {name: 'Confirmation'}).should('be.visible');
+      });
+
+      it('should move initial focus to the OK button', () => {
+        cy.findByRole('button', {name: 'OK'}).should('have.focus');
+      });
+
+      it('should set aria-describedby on the dialog for supplementary text', () => {
+        cy.findByRole('dialog', {name: 'Confirmation'}).should('have.attr', 'aria-describedby');
+      });
+    });
+
+    context('when the "Initial focus: text input" target is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Initial focus: text input'}).click();
+      });
+
+      it('should show the Quick reply dialog', () => {
+        cy.findByRole('dialog', {name: 'Quick reply'}).should('be.visible');
+      });
+
+      it('should move initial focus to the Message field', () => {
+        cy.findByRole('textbox', {name: 'Message'}).should('have.focus');
+      });
+
+      it('should set aria-describedby on the dialog', () => {
+        cy.findByRole('dialog', {name: 'Quick reply'}).should('have.attr', 'aria-describedby');
+      });
+    });
+
+    context('when the "Initial focus: heading" target is clicked', () => {
+      beforeEach(() => {
+        cy.findByRole('button', {name: 'Initial focus: heading'}).click();
+      });
+
+      it('should show the Important notice dialog', () => {
+        cy.findByRole('dialog', {name: 'Important notice'}).should('be.visible');
+      });
+
+      it('should move initial focus to the heading', () => {
+        cy.findByRole('heading', {name: 'Important notice'}).should('have.focus');
       });
     });
   });

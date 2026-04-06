@@ -43,7 +43,7 @@ export const MultiplePopups = () => {
             <Popup.Body>
               <p>
                 This popup uses the modal model and will trap keyboard focus when users press Tab or
-                Shift + Tab..
+                Shift + Tab.
               </p>
             </Popup.Body>
             <Flex>

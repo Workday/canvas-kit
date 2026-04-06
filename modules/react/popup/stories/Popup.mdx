@@ -109,10 +109,10 @@ modal dialogs where users must focus on the contents of the dialog before procee
 
 ### Multiple Popups
 
-If you need multiple Popups within the same component, you can create multiple models and pass a
-unique model to each Popup. Below is an example of 2 different popups within the same component.
-Since each Popup gets its own model, each Popup behaves independently. The same technique can be
-used for nested Popups.
+You can render more than one `Popup` in the same view by giving each its own model. This example
+pairs `Popup` with `useDialogModel` and `useModalModel` so you can compare **focus redirection**
+(Tab / Shift + Tab can move focus out of the first popup) and **focus trapping** (focus stays
+inside the second popup until it closes). Opening one does not close the other.
 
 <ExampleCodeBlock code={MultiplePopups} />
 

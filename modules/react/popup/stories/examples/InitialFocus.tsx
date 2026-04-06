@@ -9,7 +9,7 @@ import {
   useReturnFocus,
   useFocusRedirect,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
