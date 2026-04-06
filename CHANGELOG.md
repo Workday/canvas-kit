@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v13.2.57](https://github.com/Workday/canvas-kit/releases/tag/v13.2.57) (2026-04-06)
+
+### Infrastructure
+
+- fix: Pin npm version to 11.10.1 ([#3856](https://github.com/Workday/canvas-kit/pull/3856)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v13.2.56](https://github.com/Workday/canvas-kit/releases/tag/v13.2.56) (2026-02-19)
 
 ### Components
