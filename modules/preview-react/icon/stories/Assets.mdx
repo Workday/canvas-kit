@@ -1,26 +1,143 @@
 import {Meta} from '@storybook/blocks';
 
-import {ExampleCodeBlock, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
-import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
-import * as IconStories from './Assets.stories';
-
-import {SystemIconList} from './examples/IconList';
-import {Overview} from './examples/Overview';
+import IconStories from './Assets.stories';
+import {ExpressiveBasic} from './examples/ExpressiveBasic';
+import {ExpressiveCustomStyles} from './examples/ExpressiveCustomStyles';
+import {SVGBasic} from './examples/SVGBasic';
+import {SystemBasic} from './examples/SystemBasic';
+import {SystemCircleBasic} from './examples/SystemCircleBasic';
+import {SystemCustomStyles} from './examples/SystemCustomStyles';
 
 <Meta of={IconStories} />
 
 # Assets
 
-Assets are graphics which help communicate meaning or highlight areas of interaction to our users.
-These may be presented individually or as part of a group with related information in components and
-patterns.
+Assets are graphics used to communicate meaning or highlight areas of interaction within user
+interfaces. They enhance usability, reinforce metaphors, and bring clarity to components and
+patterns. Assets may be presented individually or grouped with related information in components.
 
-<ExampleCodeBlock code={Overview} />
+## Types of Assets
 
-## System Icon List
+Assets in the Canvas Kit design system are organized into two primary types:
 
-System Icons are symbols used to convey simple actions and functions, they are the most common icons
-encountered in products and help communicate metaphors at a glance.
+- **System Icons:** Utility icons intended for use in UI actions and functional controls.
+- **Expressive Icons:** Decorative icons used to add additional context.
 
-<ExampleCodeBlock code={SystemIconList} />
+## System Icons
+
+System Icons are small symbols used to convey simple actions and functions. They are the most common
+icons encountered in products and help communicate metaphors at a glance.
+
+For detailed documentation, refer to the
+[System Icon Docs](https://canvas.workdaydesign.com/styles/assets/system-icons).
+
+### Install
+
+To use System Icons, install the following packages:
+
+```sh
+npm install @workday/canvas-kit-preview-react @workday/canvas-system-icons-web
+```
+
+### System Icon Component
+
+<ExampleCodeBlock code={SystemBasic} />
+
+<br />
+
+**Props**
+
+| Prop                  | Type               | Description                                                                                                                                                                                                                                                                       |
+| --------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasSystemIcon` | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                                                           |
+| `color`               | string             | Sets the main icon’s (fill and accent layers) color.                                                                                                                                                                                                                              |
+| `accent`              | string             | Accent layer color for the system icon.                                                                                                                                                                                                                                           |
+| `inverse`             | `boolean`          | If set to `true`, the icon will be displayed in inverse variant.                                                                                                                                                                                                                  |
+| `size`                | `string`, `number` | The size of the icon circle wrapper                                                                                                                                                                                                                                               |
+| `shouldMirror`        | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead.                         |
+| `shouldMirrorInRTL`   | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. |
+
+#### Custom Styles
+
+<ExampleCodeBlock code={SystemCustomStyles} />
+
+<br />
+
+#### Difference from `SystemIcon` (main)
+
+- `size` prop is limited to `xxs`, `xs`, `sm`, `md`, `lg`, `xl` to match token sizes. To set custom
+  size, use stecil variable: `systemIconStencil.vars.size` and `cs` prop (use Custom Styles example
+  as reference).
+- Preview component doesn't have hover color props, like `colorHover`, `accentHover`. Use css
+  selectors in `cs` prop to specify hover behaviour (use Custom Styles example as reference).
+
+### System Icon Circle Component
+
+// TODO: add small description
+
+> Note: If you need to define custom colors, set `background` and `color` props to ensure a correct
+> contrast.
+
+| Prop                  | Type               | Description                                                                                                                                                                                                                                                                       |
+| --------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasSystemIcon` | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                                                           |
+| `color`               | string             | Sets the icon color.                                                                                                                                                                                                                                                              |
+| `background`          | string             | Sets background color of the icon circle wrapper.                                                                                                                                                                                                                                 |
+| `inverse`             | `boolean`          | If set to `true`, the icon will be displayed in inverse variant.                                                                                                                                                                                                                  |
+| `size`                | `string`, `number` | The size of the icon circle wrapper                                                                                                                                                                                                                                               |
+| `shouldMirror`        | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead.                         |
+| `shouldMirrorInRTL`   | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. |
+
+<ExampleCodeBlock code={SystemCircleBasic} />
+
+<br />
+
+#### Difference from `SystemIconCircle` (main)
+
+- `size` prop is string or number value.
+- The preview component has `inverse` prop for inverse variant.
+- The `backround` prop is required `color` prop to maintain proper contrast between a circle and an
+  icon.
+
+## Expressive Icons
+
+Expressive Icons are designed for decorative or illustrative purposes, bringing extra visual
+interest and meaning to the UI beyond functional system icons.
+
+### Install
+
+To use Expressive Icons, install the following packages:
+
+```sh
+npm install @workday/canvas-kit-preview-react @workday/canvas-expressive-icons-web
+```
+
+### Expressive Icon Component
+
+<ExampleCodeBlock code={ExpressiveBasic} />
+
+<br />
+
+| Prop                  | Type                                   | Description                                                           |
+| --------------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasExpressiveIcon`                 | The icon asset from `@workday/canvas-expressive-icons-web`.           |
+| `color`               | string                                 | Sets the icon ouline main color.                                      |
+| `accent`              | string                                 | Sets the icon accent color for accent layer (`wd-icon-accent`).       |
+| `size`                | `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'` | The size of the icon. Can use any of the available token size values. |
+
+#### Custom Styles
+
+<ExampleCodeBlock code={ExpressiveCustomStyles} />
+
+<br />
+
+## SVG Icon Component
+
+The `SVG` component enables you to render SVG-based icons from Canvas assets with complete control
+over their appearance and behavior. Use this component when you need advanced customization—such as
+applying unique styles, implementing animations, or composing icons in complex ways not supported by
+higher-level icon components.
+
+<ExampleCodeBlock code={SVGBasic} />

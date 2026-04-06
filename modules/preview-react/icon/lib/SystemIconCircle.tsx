@@ -12,25 +12,16 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {SystemIcon, systemIconStencil} from './SystemIcon';
 
-export enum SystemIconCircleSize {
-  xs = 16,
-  s = 24,
-  m = 32,
-  l = 40,
-  xl = 64,
-  xxl = 120,
-}
-
 type SystemIconCircleCommonProps = {
   /**
    * The icon to display from `@workday/canvas-accent-icons-web`.
    */
   icon: CanvasSystemIcon;
   /**
-   * The size of the SystemIconCircle.
+   * The size token of the SystemIconCircle.
    * @default SystemIconCircleSize.l
    */
-  size?: SystemIconCircleSize | number;
+  size?: string | number;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
    * always mirror the icon regardless of the content direction. If the SVG should mirror only when
@@ -67,17 +58,28 @@ export const systemIconCircleStencil = createStencil({
     size: '',
   },
   base: ({background, color, size}) => ({
-    background: cssVar(background, system.color.surface.alt.default),
+    // TODO: Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(
+      background,
+      cssVar(system.color.surface.alt.default, system.color.bg.alt.soft)
+    ),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
     border: 'none',
-    borderRadius: system.shape.full,
+    // TODO: Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.full, system.shape.round),
     overflow: 'hidden',
-    width: cssVar(size, system.size.md),
-    height: cssVar(size, system.size.md),
-    [systemIconStencil.vars.size]: calc.multiply(cssVar(size, system.size.md), 0.625),
+    // TODO: Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(size, cssVar(system.size.md, system.space.x10)),
+    // TODO: Revisit token, using v4 token and fallback to v3 token
+    height: cssVar(size, cssVar(system.size.md, system.space.x10)),
+    // TODO: Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: calc.multiply(
+      cssVar(size, cssVar(system.size.md, system.space.x10)),
+      0.625
+    ),
     [systemIconStencil.vars.color]: color,
     '& img': {
       width: '100%',
@@ -86,8 +88,12 @@ export const systemIconCircleStencil = createStencil({
   }),
   modifiers: {
     inverse: {
-      true: ({background, color, size}) => ({
-        background: cssVar(background, system.color.accent.info),
+      true: ({background, color}) => ({
+        // TODO: Revisit token, using v4 token and fallback to v3 token
+        background: cssVar(
+          background,
+          cssVar(system.color.accent.info, system.color.bg.primary.default)
+        ),
         [systemIconStencil.vars.color]: cssVar(color, system.color.fg.inverse),
       }),
     },

@@ -2,18 +2,18 @@ import {render} from '@testing-library/react';
 
 import {CanvasIconTypes, sendIcon} from '@workday/canvas-system-icons-web';
 
-import {Svg} from '../lib/Svg';
+import {SVG} from '../lib/SVG';
 
 describe('Icon component', () => {
   test('Mismatched icon types catches error and returns null', () => {
     const consoleErrorSpy = vi.spyOn(global.console, 'error');
-    render(<Svg src={sendIcon} type={CanvasIconTypes.System} />);
+    render(<SVG src={{type: 'expressive'} as any} type={CanvasIconTypes.System} />);
 
-    expect(consoleErrorSpy).toHaveBeenCalled();
+    expect(consoleErrorSpy).toHaveBeenCalledTimes(1);
   });
 
   test('SVG is set in innerHTML', () => {
-    const {container} = render(<Svg src={sendIcon} type={CanvasIconTypes.System} />);
+    const {container} = render(<SVG src={sendIcon} type={CanvasIconTypes.System} />);
     // container is not a semantic element
     expect(container.firstChild).toContainHTML('<svg');
   });

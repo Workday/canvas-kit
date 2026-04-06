@@ -1,8 +1,8 @@
 import {Meta} from '@storybook/react';
 
 import mdxDoc from './Assets.mdx';
-import {SystemIconList as SystemIconListExample} from './examples/IconList';
-import {Overview} from './examples/Overview';
+import {SystemBasic} from './examples/SystemBasic';
+import {SystemCustomStyles} from './examples/SystemCustomStyles';
 
 export default {
   title: 'Assets/Preview/Icons',
@@ -14,10 +14,10 @@ export default {
   },
 } as Meta;
 
-export const Docs = {
-  render: Overview,
+export const SystemIcons = {
+  render: SystemBasic,
 };
 
-export const SystemIconList = {
-  render: SystemIconListExample,
+export const SystemIconsCustomStyles = {
+  render: SystemCustomStyles,
 };

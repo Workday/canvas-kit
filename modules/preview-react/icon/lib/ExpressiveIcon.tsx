@@ -1,11 +1,11 @@
 import {CanvasExpressiveIcon, CanvasIconTypes} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {Svg, SvgProps, svgStencil} from './Svg';
+import {SVG, SVGProps, svgStencil} from './SVG';
 
-export interface ExpressiveIconProps extends Omit<SvgProps, 'src' | 'type'> {
+export interface ExpressiveIconProps extends Omit<SVGProps, 'src' | 'type'> {
   /**
    * The accent color of the ExpressiveIcon.
    * @default base.neutralA200
@@ -40,14 +40,18 @@ export const expressiveIconStencil = createStencil({
   },
   base: ({size, accentColor, color}) => ({
     '& svg': {
-      width: cssVar(size, system.size.xl),
-      height: cssVar(size, system.size.xl),
+      // TODO: Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(size, cssVar(system.size.xl, px2rem(56))),
+      // TODO: Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(size, cssVar(system.size.xl, px2rem(56))),
     },
     '.wd-expressive .wd-icon-fill': {
+      // TODO: Revisit token, use base tokens instead of icon tokens
       fill: cssVar(color, base.neutral800),
     },
     '.wd-expressive .wd-icon-accent': {
-      fill: cssVar(accentColor, cssVar(color, base.neutral800)),
+      // TODO: Revisit token, use base tokens instead of icon tokens
+      fill: cssVar(accentColor, base.neutralA200),
     },
     // for Windows high contrast desktop themes
     '@media (prefers-contrast: more)': {
@@ -61,12 +65,8 @@ export const expressiveIconStencil = createStencil({
 
 export const ExpressiveIcon = createComponent('span')({
   displayName: 'ExpressiveIcon',
-  Component: (
-    {size = 'md', color, icon, accent, ...elemProps}: ExpressiveIconProps,
-    ref,
-    Element
-  ) => {
-    // TODO: Replace with icon tokens
+  Component: ({size, color, icon, accent, ...elemProps}: ExpressiveIconProps, ref, Element) => {
+    // TODO: Revisit token, using base tokens instead of icon tokens
     const sizeToken = {
       xs: base.size500,
       sm: base.size600,
@@ -76,14 +76,14 @@ export const ExpressiveIcon = createComponent('span')({
     } as const;
 
     return (
-      <Svg
+      <SVG
         as={Element}
         src={icon}
-        type={CanvasIconTypes.System}
+        type={CanvasIconTypes.Expressive}
         ref={ref}
         {...handleCsProp(
           elemProps,
-          expressiveIconStencil({size: sizeToken[size], color, accentColor: accent})
+          expressiveIconStencil({size: size ? sizeToken[size] : '', color, accentColor: accent})
         )}
       />
     );

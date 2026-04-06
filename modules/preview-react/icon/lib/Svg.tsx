@@ -6,7 +6,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 
-export interface SvgProps extends CSProps {
+export interface SVGProps extends CSProps {
   src: CanvasSystemIcon | CanvasExpressiveIcon;
   type: CanvasIconTypes;
   /**
@@ -54,15 +54,16 @@ export const svgStencil = createStencil({
   },
 });
 
-export const Svg = createComponent('span')({
-  displayName: 'Svg',
+export const SVG = createComponent('span')({
+  displayName: 'SVG',
   Component: (
-    {shouldMirror, shouldMirrorInRTL, src, type, ...elemProps}: SvgProps,
+    {shouldMirror, shouldMirrorInRTL, src, type, ...elemProps}: SVGProps,
     ref,
     Element
   ) => {
     if (src.type !== type) {
-      throw new Error(`Icon type "${src.type}" does not match expected type "${type}"`);
+      console.error(`Icon type "${src.type}" does not match expected type "${type}"`);
+      return null;
     }
 
     const sanitizedSvg = DOMPurify.sanitize(src.svg);

@@ -1,11 +1,11 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {Svg, SvgProps, svgStencil} from './Svg';
+import {SVG, SVGProps, svgStencil} from './SVG';
 
-export interface SystemIconProps extends Omit<SvgProps, 'src' | 'type'> {
+export interface SystemIconProps extends Omit<SVGProps, 'src' | 'type'> {
   /**
    * The accent color of the SystemIcon. This overrides `color`.
    * @default base.neutral800
@@ -52,16 +52,21 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      width: cssVar(size, system.size.xs),
-      height: cssVar(size, system.size.xs),
+      // TODO: Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(size, cssVar(system.size.xs, px2rem(24))),
+      // TODO: Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(size, cssVar(system.size.xs, px2rem(24))),
     },
     '.wd-icon .wd-icon-fill': {
+      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(color, base.neutral800),
     },
     '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
+      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(accentColor, cssVar(color, base.neutral800)),
     },
     '.wd-icon .wd-icon-background': {
+      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(backgroundColor, 'transparent'),
     },
     // for Windows high contrast desktop themes
@@ -81,7 +86,7 @@ export const SystemIcon = createComponent('span')({
     ref,
     Element
   ) => {
-    // TODO: Replace with icon tokens
+    // TODO: Revisit token, using base tokens instead of icon tokens
     const sizeToken = {
       xxs: base.size175,
       xs: base.size200,
@@ -92,7 +97,7 @@ export const SystemIcon = createComponent('span')({
     } as const;
 
     return (
-      <Svg
+      <SVG
         as={Element}
         src={icon}
         type={CanvasIconTypes.System}
