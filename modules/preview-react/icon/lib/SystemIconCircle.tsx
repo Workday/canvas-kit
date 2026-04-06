@@ -103,12 +103,19 @@ export const systemIconCircleStencil = createStencil({
 export const SystemIconCircle = createComponent('span')({
   displayName: 'SystemIconCircle',
   Component: (
-    {size, icon, shouldMirror, shouldMirrorInRTL, inverse, ...elemProps}: SystemIconCircleProps,
+    {
+      background,
+      color,
+      size,
+      icon,
+      shouldMirror,
+      shouldMirrorInRTL,
+      inverse,
+      ...elemProps
+    }: SystemIconCircleProps,
     ref,
     Element
   ) => {
-    const {background, color} = elemProps;
-
     return (
       <div
         {...handleCsProp(

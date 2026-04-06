@@ -50,7 +50,6 @@
     "cypress-real-events": "^1.15.0",
     "cz-conventional-changelog": "^2.1.0",
     "depcheck": "^0.9.2",
-    "dompurify": "^3.3.3",
     "emoji-js": "^3.4.1",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",

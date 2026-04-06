@@ -49,15 +49,15 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-system-icons-web
 
 **Props**
 
-| Prop                  | Type               | Description                                                                                                                                                                                                                                                                       |
-| --------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`icon` (required)** | `CanvasSystemIcon` | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                                                           |
-| `color`               | string             | Sets the main icon’s (fill and accent layers) color.                                                                                                                                                                                                                              |
-| `accent`              | string             | Accent layer color for the system icon.                                                                                                                                                                                                                                           |
-| `inverse`             | `boolean`          | If set to `true`, the icon will be displayed in inverse variant.                                                                                                                                                                                                                  |
-| `size`                | `string`, `number` | The size of the icon circle wrapper                                                                                                                                                                                                                                               |
-| `shouldMirror`        | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead.                         |
-| `shouldMirrorInRTL`   | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. |
+| Prop                  | Type                                            | Description                                                                                                                                                                                                                                 |
+| --------------------- | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasSystemIcon`                              | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                     |
+| `color`               | string                                          | Sets the main icon’s (fill and accent layers) color.                                                                                                                                                                                        |
+| `accent`              | string                                          | Accent layer color for the system icon.                                                                                                                                                                                                     |
+| `inverse`             | boolean                                         | If set to `true`, the icon will be displayed in the inverse variant.                                                                                                                                                                        |
+| `size`                | `'xxs'`, `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'` | The size of the icon. Must match one of the allowed token sizes. For custom sizes, use stencil variable `systemIconStencil.vars.size` with the `cs` prop (see Custom Styles example).                                                       |
+| `shouldMirror`        | boolean                                         | If set to `true`, transforms the SVG's x-axis to mirror the graphic. Use if you want to always mirror the icon regardless of content direction. If the SVG should mirror only in a right-to-left language, use `shouldMirrorInRTL` instead. |
+| `shouldMirrorInRTL`   | boolean                                         | If set to `true`, transforms the SVG's x-axis to mirror the graphic when the content direction is `rtl`. This indicates the icon should be mirrored in right-to-left languages.                                                             |
 
 #### Custom Styles
 
@@ -67,28 +67,28 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-system-icons-web
 
 #### Difference from `SystemIcon` (main)
 
-- `size` prop is limited to `xxs`, `xs`, `sm`, `md`, `lg`, `xl` to match token sizes. To set custom
-  size, use stecil variable: `systemIconStencil.vars.size` and `cs` prop (use Custom Styles example
-  as reference).
-- Preview component doesn't have hover color props, like `colorHover`, `accentHover`. Use css
-  selectors in `cs` prop to specify hover behaviour (use Custom Styles example as reference).
+- The `size` prop is limited to the preset size values (`xxs`, `xs`, `sm`, `md`, `lg`, `xl`). For
+  custom sizes, use the stencil variable `systemIconStencil.vars.size` with the `cs` prop (see
+  Custom Styles for reference).
+- The preview component does **not** have hover color props like `colorHover` or `accentHover`—use
+  CSS selectors in the `cs` prop to specify hover styling (see Custom Styles for reference).
 
 ### System Icon Circle Component
 
-// TODO: add small description
+Provides a circular background for icons with configurable color and contrast.
 
-> Note: If you need to define custom colors, set `background` and `color` props to ensure a correct
-> contrast.
+> **Note:** If you need to define custom colors, set both `background` and `color` props to ensure
+> proper contrast.
 
-| Prop                  | Type               | Description                                                                                                                                                                                                                                                                       |
-| --------------------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`icon` (required)** | `CanvasSystemIcon` | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                                                           |
-| `color`               | string             | Sets the icon color.                                                                                                                                                                                                                                                              |
-| `background`          | string             | Sets background color of the icon circle wrapper.                                                                                                                                                                                                                                 |
-| `inverse`             | `boolean`          | If set to `true`, the icon will be displayed in inverse variant.                                                                                                                                                                                                                  |
-| `size`                | `string`, `number` | The size of the icon circle wrapper                                                                                                                                                                                                                                               |
-| `shouldMirror`        | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead.                         |
-| `shouldMirrorInRTL`   | boolean            | If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. |
+| Prop                  | Type               | Description                                                                                                                                                                                                                               |
+| --------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasSystemIcon` | The icon asset from `@workday/canvas-system-icons-web`.                                                                                                                                                                                   |
+| `color`               | string             | Sets the icon color.                                                                                                                                                                                                                      |
+| `background`          | string             | Sets the background color of the icon circle wrapper.                                                                                                                                                                                     |
+| `inverse`             | boolean            | If set to `true`, the icon will be displayed in the inverse variant.                                                                                                                                                                      |
+| `size`                | string, number     | The size of the icon circle wrapper. Can use any valid value (token or px/rem) as a string or number.                                                                                                                                     |
+| `shouldMirror`        | boolean            | If set to `true`, transforms the SVG's x-axis to mirror the graphic. Use if you want to always mirror the icon regardless of content direction. If the SVG should mirror only in right-to-left language, use `shouldMirrorInRTL` instead. |
+| `shouldMirrorInRTL`   | boolean            | If set to `true`, transforms the SVG's x-axis to mirror the graphic when the content direction is `rtl`.                                                                                                                                  |
 
 <ExampleCodeBlock code={SystemCircleBasic} />
 
@@ -96,9 +96,9 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-system-icons-web
 
 #### Difference from `SystemIconCircle` (main)
 
-- `size` prop is string or number value.
-- The preview component has `inverse` prop for inverse variant.
-- The `backround` prop is required `color` prop to maintain proper contrast between a circle and an
+- `size` prop accepts both string and numeric values.
+- The preview component has an `inverse` prop for the inverse variant.
+- Ensure to set both `background` and `color` props to maintain contrast between the circle and the
   icon.
 
 ## Expressive Icons
@@ -120,12 +120,12 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-expressive-icons-w
 
 <br />
 
-| Prop                  | Type                                   | Description                                                           |
-| --------------------- | -------------------------------------- | --------------------------------------------------------------------- |
-| **`icon` (required)** | `CanvasExpressiveIcon`                 | The icon asset from `@workday/canvas-expressive-icons-web`.           |
-| `color`               | string                                 | Sets the icon ouline main color.                                      |
-| `accent`              | string                                 | Sets the icon accent color for accent layer (`wd-icon-accent`).       |
-| `size`                | `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'` | The size of the icon. Can use any of the available token size values. |
+| Prop                  | Type                                   | Description                                                               |
+| --------------------- | -------------------------------------- | ------------------------------------------------------------------------- |
+| **`icon` (required)** | `CanvasExpressiveIcon`                 | The icon asset from `@workday/canvas-expressive-icons-web`.               |
+| `color`               | string                                 | Sets the icon outline main color.                                         |
+| `accent`              | string                                 | Sets the icon accent color for the accent layer (`wd-icon-accent`).       |
+| `size`                | `'xs'`, `'sm'`, `'md'`, `'lg'`, `'xl'` | The size of the icon. You can use any of the available token size values. |
 
 #### Custom Styles
 
@@ -136,8 +136,8 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-expressive-icons-w
 ## SVG Icon Component
 
 The `SVG` component enables you to render SVG-based icons from Canvas assets with complete control
-over their appearance and behavior. Use this component when you need advanced customization—such as
-applying unique styles, implementing animations, or composing icons in complex ways not supported by
+over their appearance and behavior. Use this component for advanced customization such as applying
+unique styles, implementing animations, or composing icons in complex ways not supported by
 higher-level icon components.
 
 <ExampleCodeBlock code={SVGBasic} />

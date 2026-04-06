@@ -47,14 +47,14 @@ import { SystemIcon } from '@workday/canvas-kit-preview-react/icon';
 import { activityStreamIcon } from '@workday/canvas-system-icons-web';
 
 <SystemIcon icon={activityStreamIcon} />
-<SystemIcon icon={activityStreamIcon} color={colors.blueberry500} />
+<SystemIcon icon={activityStreamIcon} color={system.color.accent.info} />
 <SystemIcon
   icon={activityStreamIcon}
-  accent={colors.frenchVanilla100}
-  fill={colors.blueberry500}
-  background={colors.blueberry500}
+  accent={system.color.accent.info}
+  color={system.color.accent.info}
+  background={system.color.surface.info.default}
 />
-<SystemIcon icon={activityStreamIcon} size={48} />
+<SystemIcon icon={activityStreamIcon} size="xl" />
 ```
 
 **Props**
@@ -84,7 +84,7 @@ import { SystemIconCircle } from '@workday/canvas-kit-preview-react/icon';
 import { shieldIcon } from '@workday/canvas-accent-icons-web';
 
 <SystemIconCircle icon={shieldIcon} />
-<SystemIconCircle icon={shieldIcon} background={colors.pomegranate500} />
+<SystemIconCircle icon={shieldIcon} background={system.color.accent.warning} />
 <SystemIconCircle icon={shieldIcon} shouldMirror={true} />
 ```
 
@@ -117,8 +117,8 @@ import { ExpressiveIcon } from '@workday/canvas-kit-preview-react/icon';
 import { astronomyIcon } from '@workday/canvas-expressive-icons-web';
 
 <ExpressiveIcon icon={astronomyIcon} />
-<ExpressiveIcon icon={astronomyIcon} size={64} />
-<ExpressiveIcon icon={astronomyIcon} color="#0768DD" />
+<ExpressiveIcon icon={astronomyIcon} size="xl" />
+<ExpressiveIcon icon={astronomyIcon} color="system.color.accent.info" />
 ```
 
 **Props**
@@ -141,7 +141,7 @@ import { SVGIcon } from '@workday/canvas-kit-preview-react/icon';
 
 <SVGIcon src={mySVG} />
 <SVGIcon src={mySVG} size={32} />
-<SVGIcon src={mySVG} color="#1768AA" />
+<SVGIcon src={mySVG} color="system.color.accent.info" />
 ```
 
 **Props**
