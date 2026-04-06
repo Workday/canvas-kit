@@ -13,7 +13,7 @@ import {
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {useUniqueId} from '../../../common';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const cardStyles = createStyles({
   width: px2rem(400),

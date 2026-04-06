@@ -8,7 +8,7 @@ import {PopupAriaOwns} from './examples/Popups/PopupAriaOwns';
 
 By default, `Popup.Popper` portals content to the bottom of the `document.body`. Since screen
 readers depend on DOM order, users may hear the rest of the page content under the popup before
-discovering the popup itself and its content. This can represent a significant barrier to users .
+discovering the popup itself and its content. This can represent a significant barrier to users.
 While properly managing the keyboard focus is a good mitigation to help users move forward, it will
 not correct the reading order of content.
 
@@ -16,7 +16,7 @@ not correct the reading order of content.
 the [**Modal**](?path=/docs/components-popups-modal--docs) component instead.
 
 **`useInitialFocus`:** Each example moves focus into the popup when it opens (typically a Close 'X'
-icon butten near the top of the popup or the least destructive control). Screen readers give **no
+icon button near the top of the popup or the least destructive control). Screen readers give **no
 indication that the popup appeared** without moving focus into the popup.
 
 - In some situations, it may be beneficial to add `aria-expanded={true | false}` to the
