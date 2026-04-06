@@ -4,7 +4,7 @@ import * as React from 'react';
 import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CSSProperties, borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 
 /**
  * @deprecated ⚠️ Status Indicator has been deprecated and will be removed in a future major version. Please use [`Status Indicator`](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--docs) in Preview instead.

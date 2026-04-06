@@ -3,9 +3,8 @@ import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {chevronUpIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon, chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {useExpandableIcon} from './hooks/useExpandableIcon';
 import {useExpandableModel} from './hooks/useExpandableModel';

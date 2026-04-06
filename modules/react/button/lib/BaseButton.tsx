@@ -4,8 +4,8 @@ import {GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common'
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {base, brand, system} from '@workday/canvas-tokens-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';

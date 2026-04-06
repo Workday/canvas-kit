@@ -2,8 +2,8 @@ import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/co
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 
 import {transformColorNameToToken} from './Svg';
 import {SystemIcon, systemIconStencil} from './SystemIcon';
