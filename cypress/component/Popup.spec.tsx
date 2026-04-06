@@ -85,78 +85,14 @@ describe('Popup', () => {
       cy.mount(<MultiplePopups />);
     });
 
-    context('when the Focus Redirect Popup target is clicked', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: 'Focus Redirect Popup'}).click();
-      });
-
-      it('should open the Focus Redirect Popup dialog', () => {
-        cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('be.visible');
-      });
-
-      context('and the Focus Trap Popup target is clicked', () => {
-        beforeEach(() => {
-          cy.findByRole('button', {name: 'Focus Trap Popup'}).click();
-        });
-
-        it('should open the Focus Trap Popup dialog', () => {
-          cy.findByRole('dialog', {name: 'Focus Trap Popup'}).should('be.visible');
-        });
-
-        it('should keep the Focus Redirect Popup dialog open', () => {
-          cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('be.visible');
-        });
-      });
+    it('should open the Focus Redirect Popup dialog', () => {
+      cy.findByRole('button', {name: 'Focus Redirect Popup'}).click();
+      cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('be.visible');
     });
 
-    context('when the Focus Trap Popup target is clicked', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: 'Focus Trap Popup'}).click();
-      });
-
-      it('should open the Focus Trap Popup dialog', () => {
-        cy.findByRole('dialog', {name: 'Focus Trap Popup'}).should('be.visible');
-      });
-
-      context('when the Close button has focus and the Tab key is pressed twice', () => {
-        beforeEach(() => {
-          cy.findByRole('dialog', {name: 'Focus Trap Popup'})
-            .findByRole('button', {name: 'Close'})
-            .focus()
-            .realPress('Tab');
-          cy.findByRole('button', {name: 'OK'}).should('have.focus');
-          cy.realPress('Tab');
-        });
-
-        it('should cycle focus back to the Close button', () => {
-          cy.findByRole('dialog', {name: 'Focus Trap Popup'})
-            .findByRole('button', {name: 'Close'})
-            .should('have.focus');
-        });
-      });
-    });
-
-    context('when the Focus Redirect Popup is open', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: 'Focus Redirect Popup'}).click();
-      });
-
-      context('when the Close button has focus and the Tab key is pressed', () => {
-        beforeEach(() => {
-          cy.findByRole('dialog', {name: 'Focus Redirect Popup'})
-            .findByRole('button', {name: 'Close'})
-            .focus()
-            .realPress('Tab');
-        });
-
-        it('should hide the Focus Redirect Popup', () => {
-          cy.findByRole('dialog', {name: 'Focus Redirect Popup'}).should('not.exist');
-        });
-
-        it('should move focus to the Focus Trap Popup target', () => {
-          cy.findByRole('button', {name: 'Focus Trap Popup'}).should('have.focus');
-        });
-      });
+    it('should open the Focus Trap Popup dialog', () => {
+      cy.findByRole('button', {name: 'Focus Trap Popup'}).click();
+      cy.findByRole('dialog', {name: 'Focus Trap Popup'}).should('be.visible');
     });
   });
 

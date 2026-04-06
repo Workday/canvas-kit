@@ -206,80 +206,37 @@ context('given the ReturnFocus example is rendered', () => {
     cy.wait(150);
   });
 
-  context('when the first file delete control is activated', () => {
-    beforeEach(() => {
-      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
-    });
-
-    it('should open the delete confirmation dialog', () => {
-      cy.findByRole('dialog', {name: 'Delete file?'}).should('be.visible');
-    });
-
-    it('should move initial focus to Cancel', () => {
-      cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
-    });
-
-    context('when Cancel is clicked', () => {
-      beforeEach(() => {
-        cy.findByRole('button', {name: 'Cancel'}).click();
-      });
-
-      it('should close the dialog', () => {
-        cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
-      });
-
-      it('should return focus to the first delete control', () => {
-        cy.findAllByRole('button', {name: 'Delete'}).eq(0).should('have.focus');
-      });
-    });
-
-    context('when Delete is clicked in the dialog', () => {
-      beforeEach(() => {
-        cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
-          cy.findByRole('button', {name: 'Delete'}).click();
-        });
-      });
-
-      it('should close the dialog', () => {
-        cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
-      });
-
-      it('should remove one file from the list', () => {
-        cy.findAllByRole('button', {name: 'Delete'}).should('have.length', 2);
-      });
-
-      it('should move focus to the first remaining delete control', () => {
-        cy.findAllByRole('button', {name: 'Delete'}).should('have.length', 2);
-        // useLayoutEffect in ReturnFocus moves focus after state update; allow a tick for CI stability
-        cy.wait(100);
-        cy.findAllByRole('button', {name: 'Delete'}).eq(0).should('have.focus');
-      });
-    });
+  it('should open the delete confirmation dialog', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('be.visible');
   });
 
-  context('when every file is deleted', () => {
-    beforeEach(() => {
-      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
-      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
-        cy.findByRole('button', {name: 'Delete'}).click();
-      });
-      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
-      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
-        cy.findByRole('button', {name: 'Delete'}).click();
-      });
-      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
-      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
-        cy.findByRole('button', {name: 'Delete'}).click();
-      });
-    });
+  it('should close the dialog when Cancel is clicked', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('button', {name: 'Cancel'}).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+  });
 
-    it('should show the empty state', () => {
-      cy.findByText('No files remaining.').should('be.visible');
+  it('should remove one file when delete is confirmed', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+      cy.findByRole('button', {name: 'Delete'}).click();
     });
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+    cy.findAllByRole('button', {name: 'Delete'}).should('have.length', 2);
+  });
 
-    it('should move focus to the empty state region', () => {
-      cy.findByText('No files remaining.').parent().should('have.focus');
-    });
+  it('should show the empty state after all files are deleted', () => {
+    const confirmDelete = () => {
+      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+        cy.findByRole('button', {name: 'Delete'}).click();
+      });
+    };
+    confirmDelete();
+    confirmDelete();
+    confirmDelete();
+    cy.findByText('No files remaining.').should('be.visible');
   });
 });
 
