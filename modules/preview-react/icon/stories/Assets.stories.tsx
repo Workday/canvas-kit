@@ -1,6 +1,8 @@
 import {Meta} from '@storybook/react';
 
 import mdxDoc from './Assets.mdx';
+import {ExpressiveBasic} from './examples/ExpressiveBasic';
+import {ExpressiveCustomStyles} from './examples/ExpressiveCustomStyles';
 import {SystemBasic} from './examples/SystemBasic';
 import {SystemCustomStyles} from './examples/SystemCustomStyles';
 
@@ -20,4 +22,12 @@ export const SystemIcons = {
 
 export const SystemIconsCustomStyles = {
   render: SystemCustomStyles,
+};
+
+export const ExpressiveIcons = {
+  render: ExpressiveBasic,
+};
+
+export const ExpressiveIconsCustomStyles = {
+  render: ExpressiveCustomStyles,
 };
