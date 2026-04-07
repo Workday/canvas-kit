@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -10,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {searchIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 
@@ -183,13 +182,22 @@ export const InputGroupStates = () => (
           label: 'Variable Width',
           props: {
             end: [
-              <InputGroup.InnerEnd width="10px" backgroundColor="blueberry200">
+              <InputGroup.InnerEnd
+                width="10px"
+                cs={{background: system.color.surface.success.default}}
+              >
                 <span>1</span>
               </InputGroup.InnerEnd>,
-              <InputGroup.InnerEnd width="20px" backgroundColor="cantaloupe200">
+              <InputGroup.InnerEnd
+                width="20px"
+                cs={{background: system.color.surface.success.default}}
+              >
                 <span>2</span>
               </InputGroup.InnerEnd>,
-              <InputGroup.InnerEnd width="30px" backgroundColor="greenApple200">
+              <InputGroup.InnerEnd
+                width="30px"
+                cs={{background: system.color.surface.success.default}}
+              >
                 <span>3</span>
               </InputGroup.InnerEnd>,
             ],

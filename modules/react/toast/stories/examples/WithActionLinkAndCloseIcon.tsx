@@ -7,7 +7,7 @@ export const WithActionLinkAndCloseIcon = () => {
 
   return (
     <Toast mode="dialog" aria-label="notification">
-      <Toast.Icon icon={checkIcon} cs={{color: system.color.fg.success.default}} />
+      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully</Toast.Message>
         <Toast.Link href="#hyperlink">Custom Link</Toast.Link>

@@ -69,7 +69,7 @@ const toastStencil = createStencil({
  *
  * const MyToast = (props: CardProps) => (
  *    <Toast mode="dialog" aria-label="notifcation">
- *      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+ *      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
  *      <Toast.Body>
  *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
  *        <Toast.Link href="#hreflink">Custom Link</Toast.Link>
