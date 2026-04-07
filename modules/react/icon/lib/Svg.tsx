@@ -83,7 +83,7 @@ export const Svg = createComponent('span')({
     ref,
     Element
   ) => {
-    if (src.type !== type) {
+    if (src?.type !== type) {
       console.error(`Icon type "${src.type}" does not match expected type "${type}"`);
       return null;
     }
