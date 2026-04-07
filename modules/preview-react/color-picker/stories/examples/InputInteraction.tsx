@@ -1,4 +1,5 @@
 import * as React from 'react';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
 
 export const InputInteraction = () => {

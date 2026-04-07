@@ -1,7 +1,6 @@
 // gets all the versions of a given dependency by pattern matching the yarn.lock file. Lists out versions as a comma-delimited string
-
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 const dependency = 'cypress';
 

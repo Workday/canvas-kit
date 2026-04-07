@@ -1,18 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 import {
   Popup,
-  useCloseOnOutsideClick,
+  useBringToTopOnClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
   usePopupModel,
   usePopupStack,
-  useBringToTopOnClick,
-  useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 interface WindowProps {
   top: number;

@@ -1,15 +1,14 @@
 import React from 'react';
 
-import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {FormFieldGroupList} from './FormFieldGroupList';
+import {FormField} from './FormField';
 import {FormFieldGroupInput} from './FormFieldGroupInput';
 import {FormFieldGroupLabel} from './FormFieldGroupLabel';
-import {FormField} from './FormField';
-
-import {useFormFieldModel} from './hooks';
+import {FormFieldGroupList} from './FormFieldGroupList';
 import {formFieldStencil} from './formFieldStencil';
+import {useFormFieldModel} from './hooks';
 
 //TODO: Remove `horizontal` option in v13 and the console warn message.
 export interface FormFieldGroupProps extends FlexProps, GrowthBehavior {

@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './LabelText.mdx';
-
 import {LabelText} from '@workday/canvas-kit-react/text';
+
+import mdxDoc from './LabelText.mdx';
 import {Basic as BasicExample} from './examples/LabelText/Basic';
 import {Cursor as CursorExample} from './examples/LabelText/Cursor';
 import {Disabled as DisabledExample} from './examples/LabelText/Disabled';

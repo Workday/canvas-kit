@@ -1,9 +1,10 @@
 import * as React from 'react';
-import {createStencil} from '@workday/canvas-kit-styling';
+
 import {Card} from '@workday/canvas-kit-react/card';
-import {system} from '@workday/canvas-tokens-web';
-import {Switch} from '@workday/canvas-kit-react/switch';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Switch} from '@workday/canvas-kit-react/switch';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const themedCardStencil = createStencil({
   vars: {

@@ -1,11 +1,12 @@
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon, systemIconStencil} from './SystemIcon';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, px2rem, CSProps} from '@workday/canvas-kit-styling';
+import {colors} from '@workday/canvas-kit-react/tokens';
+import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+
 import {transformColorNameToToken} from './Svg';
+import {SystemIcon, systemIconStencil} from './SystemIcon';
 
 export enum SystemIconCircleSize {
   xs = 16,

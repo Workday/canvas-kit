@@ -1,16 +1,16 @@
 import React from 'react';
 
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-
-import {ExpandableContent} from './ExpandableContent';
-import {ExpandableTarget} from './ExpandableTarget';
-import {ExpandableIcon} from './ExpandableIcon';
-import {ExpandableTitle} from './ExpandableTitle';
-import {ExpandableAvatar} from './ExpandableAvatar';
-import {useExpandableModel} from './hooks/useExpandableModel';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {ExpandableAvatar} from './ExpandableAvatar';
+import {ExpandableContent} from './ExpandableContent';
+import {ExpandableIcon} from './ExpandableIcon';
+import {ExpandableTarget} from './ExpandableTarget';
+import {ExpandableTitle} from './ExpandableTitle';
+import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableProps extends ExtractProps<typeof Flex, never> {
   /**

@@ -1,16 +1,17 @@
 import * as React from 'react';
 
-import {
-  ComponentStatesTable,
-  permutateProps,
-  StaticStates,
-} from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {searchIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {searchIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Text Input',

@@ -1,17 +1,17 @@
 #!/usr/bin/env node
 // @ts-check
-'use strict';
+import globPkg from 'glob';
+import orderBy from 'lodash/orderBy.js';
+import {spawn as nodeSpawn, exec as originalExec} from 'node:child_process';
+import fs from 'node:fs/promises';
+import {promisify} from 'node:util';
 
-const fs = require('node:fs/promises');
-const orderBy = require('lodash/orderBy');
-const {promisify} = require('node:util');
-const {exec: originalExec} = require('node:child_process');
+import fixPackageJsonVersions from './fix-package-json-versions.js';
+import getNextBranch from './get-forward-merge-branch.js';
+import resolvePackageJson from './resolve-package-json.js';
+
 const exec = promisify(originalExec);
-const getNextBranch = require('./get-forward-merge-branch');
-const nodeSpawn = require('node:child_process').spawn;
-const resolvePackageJson = require('./resolve-package-json');
-const fixPackageJsonVersions = require('./fix-package-json-versions');
-const glob = promisify(require('glob'));
+const glob = promisify(globPkg.glob);
 
 // Tokenize and parse command arguments and be aware that anything in quotes is part of a single argument
 // For example: `echo "hello there" bob` returns args like `['"hello there"', 'bob']
@@ -60,7 +60,6 @@ async function spawn(/** @type {string} */ cmd, /** @type {object} */ opts = und
     error += chunk.toString();
   }
 
-  // eslint-disable-next-line compat/compat
   const exitCode = await new Promise((resolve, reject) => {
     child.on('close', resolve);
   });

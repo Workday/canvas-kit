@@ -1,12 +1,12 @@
-import {
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  useFocusRedirect,
-} from '@workday/canvas-kit-react/popup';
 import {createModelHook} from '@workday/canvas-kit-react/common';
+import {
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useFocusRedirect,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
 
 export const useDialogModel = createModelHook({
   defaultConfig: usePopupModel.defaultConfig,

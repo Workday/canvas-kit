@@ -1,7 +1,7 @@
 import React from 'react';
 
-import {Table} from '@workday/canvas-kit-react/table';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

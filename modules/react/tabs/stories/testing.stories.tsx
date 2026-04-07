@@ -1,14 +1,13 @@
 import React from 'react';
 
-import {setupIcon} from '@workday/canvas-system-icons-web';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
-
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {setupIcon} from '@workday/canvas-system-icons-web';
 
+import {customColorTheme} from '../../../../utils/storybook';
 import {Basic} from './examples/Basic';
 import {RightToLeft} from './examples/RightToLeft';
-import {Box} from '@workday/canvas-kit-react/layout';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 

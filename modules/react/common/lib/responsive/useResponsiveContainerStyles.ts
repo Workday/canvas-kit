@@ -1,12 +1,12 @@
-import { useTheme, breakpointKeys, CanvasBreakpoints } from "@workday/canvas-kit-react/common";
-import type {AllStyleProps} from "@workday/canvas-kit-react/layout";
-import {isWithinBreakpoint} from '../utils/isWithinBreakpoint'
+import {CanvasBreakpoints, breakpointKeys, useTheme} from '@workday/canvas-kit-react/common';
+import type {AllStyleProps} from '@workday/canvas-kit-react/layout';
 
-export type BreakpointKeys = typeof breakpointKeys[number];
+import {isWithinBreakpoint} from '../utils/isWithinBreakpoint';
+
+export type BreakpointKeys = (typeof breakpointKeys)[number];
 
 type ResponsiveCSSObject<T> = {
-  [P in keyof T]: Partial<Record<BreakpointKeys, AllStyleProps>> &
-    AllStyleProps;
+  [P in keyof T]: Partial<Record<BreakpointKeys, AllStyleProps>> & AllStyleProps;
 };
 type CSSObject<T> = {
   [P in keyof T]: AllStyleProps;
@@ -15,15 +15,18 @@ type CSSObject<T> = {
 // Takes in CanvasBreakpoint keys and returns current breakpoint key. Current breakpoint key is determined by the `width` of the container
 
 const getSize = (width: number, breakpoints: CanvasBreakpoints) => {
-  const ranges: {[key: string ]: [number, number?]} = {
-    'zero': [0, breakpoints.s],
-    's': [breakpoints.s, breakpoints.m],
-    'm': [breakpoints.m, breakpoints.l],
-    'l': [breakpoints.l, breakpoints.xl],
-    'xl': [breakpoints.xl]
+  const ranges: {[key: string]: [number, number?]} = {
+    zero: [0, breakpoints.s],
+    s: [breakpoints.s, breakpoints.m],
+    m: [breakpoints.m, breakpoints.l],
+    l: [breakpoints.l, breakpoints.xl],
+    xl: [breakpoints.xl],
   };
-  return breakpointKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size])) || 'zero';
-}
+  return (
+    breakpointKeys.find((size: BreakpointKeys) => isWithinBreakpoint(width, ...ranges[size])) ||
+    'zero'
+  );
+};
 
 // Returns responsive style objects that are within the current CanvasBreakpoint size
 
@@ -33,15 +36,14 @@ function getStyles<T>(key: BreakpointKeys, styles: ResponsiveCSSObject<T>) {
   for (let i = 0; i <= breakpointSize; i++) {
     const breakpointName = breakpointKeys[i];
     // property is key of the style object
-    Object.keys(styles).forEach((property) => {
-      const { zero, s, m, l, xl, ...base } = styles[property as keyof T];
-      const currentBreakpointStyles =
-        styles[property as keyof T][breakpointName] ?? {};
+    Object.keys(styles).forEach(property => {
+      const {zero, s, m, l, xl, ...base} = styles[property as keyof T];
+      const currentBreakpointStyles = styles[property as keyof T][breakpointName] ?? {};
       const previousBreakpointStyles = responsiveStyles[property as keyof T] ?? {};
       responsiveStyles[property as keyof T] = {
         ...base,
         ...previousBreakpointStyles,
-        ...currentBreakpointStyles
+        ...currentBreakpointStyles,
       };
     });
   }

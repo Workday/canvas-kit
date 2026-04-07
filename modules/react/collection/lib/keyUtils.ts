@@ -1,7 +1,8 @@
 import React from 'react';
-import {useCursorListModel} from './useCursorListModel';
 
 import {isElementRTL} from '@workday/canvas-kit-react/common';
+
+import {useCursorListModel} from './useCursorListModel';
 
 export const orientationKeyMap = {
   horizontal: {

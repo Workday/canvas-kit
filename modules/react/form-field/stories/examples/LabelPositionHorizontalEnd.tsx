@@ -1,12 +1,13 @@
 import React from 'react';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
   display: 'flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
   flexDirection: 'column',
 });
 

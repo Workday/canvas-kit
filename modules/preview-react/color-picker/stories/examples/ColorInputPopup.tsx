@@ -1,20 +1,23 @@
 import React from 'react';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {
-  Popup,
-  usePopupModel,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  useInitialFocus,
-  useReturnFocus,
-} from '@workday/canvas-kit-react/popup';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {changeFocus} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+import {system} from '@workday/canvas-tokens-web';
+
+import {defaultColorSet} from '../../lib/defaultColorSet';
 
 export const ColorInputPopup = () => {
-  const defaultColor = colors.blueberry400;
+  const defaultColor = defaultColorSet.blueberry400;
 
   const [color, setColor] = React.useState(defaultColor);
   const [colorInputValidColor, setColorInputValidColor] = React.useState(defaultColor);
@@ -35,23 +38,18 @@ export const ColorInputPopup = () => {
   };
 
   const colorSet = [
-    colors.cinnamon400,
-    colors.cantaloupe400,
-    colors.sourLemon400,
-    colors.greenApple400,
-    colors.blueberry400,
-    colors.islandPunch400,
-    colors.pomegranate400,
-    colors.toastedMarshmallow400,
-
-    colors.frenchVanilla100,
-    colors.frenchVanilla200,
-    colors.frenchVanilla300,
-    colors.frenchVanilla400,
-    colors.blackPepper100,
-    colors.blackPepper200,
-    colors.blackPepper400,
-    colors.blackPepper600,
+    defaultColorSet.cinnamon400,
+    defaultColorSet.cantaloupe400,
+    defaultColorSet.sourLemon400,
+    defaultColorSet.greenApple400,
+    defaultColorSet.blueberry400,
+    defaultColorSet.pomegranate400,
+    defaultColorSet.frenchVanilla100,
+    defaultColorSet.frenchVanilla200,
+    defaultColorSet.frenchVanilla400,
+    defaultColorSet.blackPepper100,
+    defaultColorSet.blackPepper400,
+    defaultColorSet.blackPepper600,
   ];
 
   const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -81,10 +79,12 @@ export const ColorInputPopup = () => {
           onBlur={onBlur}
         />
         <Popup.Popper>
-          <Popup.Card style={{marginTop: 8}} padding="s" depth={3}>
+          <Popup.Card
+            cs={{marginTop: system.gap.sm, padding: system.padding.md, boxShadow: system.depth[3]}}
+          >
             <Popup.Body>
               <ColorPicker
-                resetColor={colors.blueberry400}
+                resetColor={defaultColorSet.blueberry400}
                 resetLabel={'Reset'}
                 onColorChange={color => {
                   setColorInputValue(color.toUpperCase());

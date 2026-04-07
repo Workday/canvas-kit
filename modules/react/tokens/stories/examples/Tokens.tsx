@@ -1,10 +1,10 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
-import {pickForegroundColor} from '@workday/canvas-kit-react/common';
+import * as React from 'react';
 
-import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {Text} from '@workday/canvas-kit-react/text';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Text} from '@workday/canvas-kit-react/text';
+import {borderRadius, colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 const DepthCard = ({depth, children}) => {
   return (

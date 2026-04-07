@@ -1,4 +1,4 @@
-import {API, FileInfo, Options, ImportDeclaration, ASTPath} from 'jscodeshift';
+import {API, ASTPath, FileInfo, ImportDeclaration, Options} from 'jscodeshift';
 
 // List of import paths and the named export
 // before: import Button from '@workday/canvas-kit-react/button

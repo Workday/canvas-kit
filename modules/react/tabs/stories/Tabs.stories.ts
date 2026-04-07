@@ -1,19 +1,18 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Tabs.mdx';
-
 import {Tabs} from '@workday/canvas-kit-react/tabs';
 
-import {Basic as BasicExample} from './examples/Basic';
-import {NamedTabs as NamedTabsExample} from './examples/NamedTabs';
-import {RightToLeft as RightToLeftExample} from './examples/RightToLeft';
-import {OverflowTabs as OverflowTabsExample} from './examples/OverflowTabs';
-import {DisabledTab as DisabledTabExample} from './examples/DisabledTab';
-import {Icons as IconsExample} from './examples/Icons';
-import {SinglePanel as SinglePanelExample} from './examples/SinglePanel';
+import mdxDoc from './Tabs.mdx';
 import {AlternativeTabStop as AlternativeTabStopExample} from './examples/AlternativeTabStop';
-import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
+import {Basic as BasicExample} from './examples/Basic';
+import {DisabledTab as DisabledTabExample} from './examples/DisabledTab';
 import {DynamicTabs as DynamicTabsExample} from './examples/DynamicTabs';
+import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
+import {Icons as IconsExample} from './examples/Icons';
+import {NamedTabs as NamedTabsExample} from './examples/NamedTabs';
+import {OverflowTabs as OverflowTabsExample} from './examples/OverflowTabs';
+import {RightToLeft as RightToLeftExample} from './examples/RightToLeft';
+import {SinglePanel as SinglePanelExample} from './examples/SinglePanel';
 
 export default {
   title: 'Components/Containers/Tabs',

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Modal} from '@workday/canvas-kit-react/modal';
 
 export const FullOverflow = () => {
   const handleAcknowledge = () => {

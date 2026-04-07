@@ -3,7 +3,8 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {LabelText, Text, BodyText, Heading, Subtext, Title} from '../';
+
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 
 describe('Text', () => {
   it('should render Label on a server without crashing', () => {

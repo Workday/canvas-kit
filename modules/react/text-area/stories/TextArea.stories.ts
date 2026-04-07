@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './TextArea.mdx';
-
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
+import mdxDoc from './TextArea.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Grow as GrowExample} from './examples/Grow';

@@ -1,4 +1,4 @@
-import {CanvasSystemIcon, CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasIconTypes, CanvasSystemIcon} from '@workday/design-assets-types';
 
 export const sparkleIcon: CanvasSystemIcon = {
   name: 'sparkle',

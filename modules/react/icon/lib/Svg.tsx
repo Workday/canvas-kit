@@ -1,12 +1,15 @@
-import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
-import {validateIconType} from './utils';
+import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {base} from '@workday/canvas-tokens-web';
+import {CanvasIcon} from '@workday/design-assets-types';
+
+import {validateIconType} from './utils';
 
 export interface SvgProps extends BoxProps {
-  src: CanvasIcon;
+  src: CanvasIcon | CanvasSystemIcon | CanvasExpressiveIcon;
   type: CanvasIconTypes;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to

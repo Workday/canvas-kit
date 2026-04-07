@@ -1,28 +1,26 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
-import {PaginationModel} from './types';
-import {
-  usePaginationModel,
-  UsePaginationModelConfig,
-  PaginationContext,
-} from './usePaginationModel';
-
+import {AdditionalDetails} from './AdditionalDetails';
 import {
   JumpToFirstButton,
-  StepToPreviousButton,
-  StepToNextButton,
   JumpToLastButton,
   PaginationControls,
+  StepToNextButton,
+  StepToPreviousButton,
 } from './Controls';
-
-import {PageList, PageListItem} from './PageList';
-import {PageButton} from './PageButton';
-import {AdditionalDetails} from './AdditionalDetails';
 import {GoToForm} from './GoTo/Form';
-import {GoToTextInput} from './GoTo/TextInput';
 import {GoToLabel} from './GoTo/Label';
+import {GoToTextInput} from './GoTo/TextInput';
+import {PageButton} from './PageButton';
+import {PageList, PageListItem} from './PageList';
+import {PaginationModel} from './types';
+import {
+  PaginationContext,
+  UsePaginationModelConfig,
+  usePaginationModel,
+} from './usePaginationModel';
 
 export {PaginationContext};
 

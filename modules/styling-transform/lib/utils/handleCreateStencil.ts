@@ -2,13 +2,13 @@ import ts from 'typescript';
 
 import {slugify} from '@workday/canvas-kit-styling';
 
-import {getVarName} from './getVarName';
-import {maybeWrapCSSVariables, parseObjectToStaticValue} from './parseObjectToStaticValue';
 import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
-import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
-import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
-import {isImportedFromStyling} from './isImportedFromStyling';
 import {getHash} from './getHash';
+import {getVarName} from './getVarName';
+import {isImportedFromStyling} from './isImportedFromStyling';
+import {getValueFromAliasedSymbol, parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {maybeWrapCSSVariables, parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 
 /**
  * Handle all arguments of the CallExpression `createStencil()`

@@ -1,12 +1,14 @@
 import React from 'react';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
+
 import {
+  DeleteButton,
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,
-  DeleteButton,
 } from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Buttons/Button/Grow',
