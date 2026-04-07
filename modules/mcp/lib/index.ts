@@ -3,9 +3,16 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
 
+import {z} from 'zod';
 import packageJson from '../package.json';
 import fileNames from './config.json';
+import storiesConfig from './stories-config.json';
 import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
+import {
+  registerAppTool,
+  registerAppResource,
+  RESOURCE_MIME_TYPE,
+} from '@modelcontextprotocol/ext-apps/server';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -468,5 +475,160 @@ Returns links to token documentation resources including migration guides, color
       };
     }
   );
+
+  interface StoryConfig {
+    title: string;
+    storybookUrl: string;
+    mdxPath: string;
+    mdxProse: string;
+  }
+
+  const stories = storiesConfig.stories as Record<string, StoryConfig>;
+  const storySlugs: string[] = [];
+
+  for (const [slug, story] of Object.entries(stories)) {
+    const appPath = path.resolve(__dirname, 'apps', `${slug}.html`);
+    const appExists = fs.existsSync(appPath);
+
+    if (appExists) {
+      storySlugs.push(slug);
+      registerAppResource(
+        server,
+        story.title,
+        `ui://story/${slug}`,
+        {
+          description: `Interactive preview of the ${story.title} Canvas Kit component`,
+        },
+        async (uri: URL) => ({
+          contents: [
+            {
+              uri: uri.href,
+              text: fs.readFileSync(appPath, 'utf8'),
+              mimeType: RESOURCE_MIME_TYPE,
+              _meta: {
+                ui: {
+                  csp: {
+                    resourceDomains: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+                  },
+                },
+              },
+            },
+          ],
+        })
+      );
+    }
+
+    if (story.mdxProse) {
+      server.registerResource(
+        `${story.title} Documentation & Sample Code`,
+        `docs://examples/${slug}`,
+        {
+          title: `${story.title} Documentation & Sample Code`,
+          description: `Documentation and source code for all ${story.title} component examples.`,
+          mimeType: 'text/markdown',
+        },
+        async (uri: URL) => ({
+          contents: [
+            {
+              uri: uri.href,
+              text: story.mdxProse,
+            },
+          ],
+        })
+      );
+    }
+  }
+
+  const storyViewerPath = path.resolve(__dirname, 'apps', 'story-viewer.html');
+  if (storySlugs.length > 0 && fs.existsSync(storyViewerPath)) {
+    const slugEnum = storySlugs as [string, ...string[]];
+
+    registerAppResource(
+      server,
+      'Canvas Kit Story Viewer',
+      'ui://story-viewer',
+      {
+        description: 'Wrapper app that renders Canvas Kit component story previews.',
+      },
+      async (uri: URL) => ({
+        contents: [
+          {
+            uri: uri.href,
+            text: fs.readFileSync(storyViewerPath, 'utf8'),
+            mimeType: RESOURCE_MIME_TYPE,
+            _meta: {
+              ui: {
+                csp: {
+                  resourceDomains: ['https://fonts.googleapis.com', 'https://fonts.gstatic.com'],
+                },
+              },
+            },
+          },
+        ],
+      })
+    );
+
+    const fetchStoryHandler = async ({story}: {story: string}) => {
+      const config = stories[story];
+      if (!config) {
+        throw new Error(`Unknown story "${story}". Valid stories: ${storySlugs.join(', ')}`);
+      }
+      const appPath = path.resolve(__dirname, 'apps', `${story}.html`);
+      const storyHtml = fs.readFileSync(appPath, 'utf8');
+      const hasDocs = !!config.mdxProse;
+      return {
+        content: [
+          {
+            type: 'text' as const,
+            text: JSON.stringify({
+              displayGuide:
+                'Present the Storybook URL as a markdown link. If you need code examples, read the resource_link.',
+              title: config.title,
+              storybookUrl: config.storybookUrl,
+            }),
+          },
+          ...(hasDocs
+            ? [
+                {
+                  type: 'resource_link' as const,
+                  uri: `docs://examples/${story}`,
+                  name: `${config.title} Documentation & Sample Code`,
+                  mimeType: 'text/markdown',
+                  description: `Documentation and code examples for ${config.title}. Read this if you need to write code.`,
+                },
+              ]
+            : []),
+        ],
+        structuredContent: {
+          storyHtml,
+        },
+      };
+    };
+
+    registerAppTool(
+      server,
+      'fetch-component-documentation-example',
+      {
+        title: 'Fetch Canvas Kit Component Documentation and Storybook example',
+        description:
+          'Renders an interactive Canvas Kit component story inline for the user to see.\n\n' +
+          'Before Calling:\n' +
+          '1. Read the docs://examples/{story} resource for documentation and code examples\n' +
+          '2. Only call this tool if the user needs to see the documentation or code examples\n' +
+          '3. Do not call this tool just to learn about a component — read the resource instead',
+        inputSchema: {
+          story: z.enum(slugEnum).describe('The component story slug to preview'),
+        },
+        annotations: {
+          readOnlyHint: true,
+        },
+        _meta: {
+          ui: {resourceUri: 'ui://story-viewer'},
+        },
+      },
+      fetchStoryHandler
+    );
+  }
+
   return server;
 }

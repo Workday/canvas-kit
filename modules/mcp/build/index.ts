@@ -42,4 +42,6 @@ allFiles.forEach(file => console.log(`  - ${file}`));
 
 allFiles.forEach(file => copyFile(file));
 
+// story-viewer.html is now built by build-story-apps.ts through Vite (not copied raw).
+
 console.log('\nCopy completed successfully!');
