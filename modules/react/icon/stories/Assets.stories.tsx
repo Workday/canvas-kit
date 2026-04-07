@@ -1,13 +1,13 @@
 import {Meta} from '@storybook/react';
 
 import mdxDoc from './Assets.mdx';
-import {AccentIconList as AccentIconListExample} from './examples/AccentIconList';
-import {AppletIconList as AppletIconListExample} from './examples/AppletIconList';
-import {SystemIconList as SystemIconListExample} from './examples/IconList';
-import {Overview} from './examples/Overview';
+import {ExpressiveBasic} from './examples/ExpressiveBasic';
+import {ExpressiveCustomStyles} from './examples/ExpressiveCustomStyles';
+import {SystemBasic} from './examples/SystemBasic';
+import {SystemCustomStyles} from './examples/SystemCustomStyles';
 
 export default {
-  title: 'Assets/Icons',
+  title: 'Assets/Icon Components',
   tags: ['autodocs'],
   parameters: {
     docs: {
@@ -16,16 +16,18 @@ export default {
   },
 } as Meta;
 
-export const Docs = {
-  render: Overview,
+export const SystemIcons = {
+  render: SystemBasic,
 };
 
-export const SystemIconList = {
-  render: SystemIconListExample,
+export const SystemIconsCustomStyles = {
+  render: SystemCustomStyles,
 };
-export const AppletIconList = {
-  render: AppletIconListExample,
+
+export const ExpressiveIcons = {
+  render: ExpressiveBasic,
 };
-export const AccentIconList = {
-  render: AccentIconListExample,
+
+export const ExpressiveIconsCustomStyles = {
+  render: ExpressiveCustomStyles,
 };

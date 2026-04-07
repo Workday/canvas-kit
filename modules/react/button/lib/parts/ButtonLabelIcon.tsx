@@ -1,6 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {ButtonSizes} from '../types';
 
@@ -27,12 +28,35 @@ export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   shouldMirrorIconInRTL?: boolean;
 }
 
-const iconSizes: Record<ButtonSizes, number> = {
-  extraSmall: 18,
-  small: 20,
-  medium: 20,
-  large: 24,
-};
+const buttonIconStencil = createStencil({
+  base: {
+    display: 'inline-block',
+  },
+  modifiers: {
+    size: {
+      extraSmall: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        // TODO (icon token): Revisit size variable to icon size token
+        [systemIconStencil.vars.size]: cssVar(base.size225, px2rem(18)),
+      },
+      small: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        // TODO (icon token): Revisit size variable to icon size token
+        [systemIconStencil.vars.size]: cssVar(base.size250, system.space.x5),
+      },
+      medium: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        // TODO (icon token): Revisit size variable to icon size token
+        [systemIconStencil.vars.size]: cssVar(base.size250, system.space.x5),
+      },
+      large: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        // TODO (icon token): Revisit size variable to icon size token
+        [systemIconStencil.vars.size]: cssVar(base.size300, system.space.x6),
+      },
+    },
+  },
+});
 
 export const ButtonLabelIcon = createComponent('span')({
   Component: (
@@ -50,20 +74,14 @@ export const ButtonLabelIcon = createComponent('span')({
       return null;
     }
 
-    const iconSize = iconSizes[size];
-
     return (
       <SystemIcon
         ref={ref}
         as={Element}
-        size={iconSize}
         icon={icon}
-        width={px2rem(iconSize)}
-        height={px2rem(iconSize)}
-        display="inline-block"
         shouldMirror={shouldMirrorIcon}
         shouldMirrorInRTL={shouldMirrorIconInRTL}
-        {...elemProps}
+        {...handleCsProp(elemProps, buttonIconStencil({size}))}
       />
     );
   },

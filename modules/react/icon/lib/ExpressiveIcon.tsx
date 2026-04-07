@@ -3,9 +3,11 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {SVG, SVGProps, svgStencil} from './SVG';
+import {Svg, SvgProps, resolveSize, svgStencil} from './Svg';
 
-export interface ExpressiveIconProps extends Omit<SVGProps, 'src' | 'type'> {
+type ExpressiveSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+
+export interface ExpressiveIconProps extends Omit<SvgProps, 'src' | 'type'> {
   /**
    * The accent color of the ExpressiveIcon.
    * @default base.neutralA200
@@ -21,9 +23,9 @@ export interface ExpressiveIconProps extends Omit<SVGProps, 'src' | 'type'> {
    */
   icon: CanvasExpressiveIcon;
   /**
-   * The size of the SystemIcon.
+   * The size of the SystemIcon in size variants or string / numeric (px) values.
    */
-  size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+  size?: ExpressiveSize | string | number;
 }
 
 export const expressiveIconStencil = createStencil({
@@ -76,14 +78,18 @@ export const ExpressiveIcon = createComponent('span')({
     } as const;
 
     return (
-      <SVG
+      <Svg
         as={Element}
         src={icon}
         type={CanvasIconTypes.Expressive}
         ref={ref}
         {...handleCsProp(
           elemProps,
-          expressiveIconStencil({size: size ? sizeToken[size] : '', color, accentColor: accent})
+          expressiveIconStencil({
+            size: resolveSize(size, sizeToken),
+            color,
+            accentColor: accent,
+          })
         )}
       />
     );

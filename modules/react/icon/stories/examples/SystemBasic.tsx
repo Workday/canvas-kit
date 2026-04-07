@@ -1,4 +1,4 @@
-import {SystemIcon} from '@workday/canvas-kit-preview-react/icon';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {imageIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';

@@ -11,7 +11,7 @@ import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
-   * Icon to display from `@workday/canvas-accent-icons-web`
+   * Icon to display from `@workday/canvas-system-icons-web`
    * @default chevronUpIcon
    */
   icon?: CanvasSystemIcon;

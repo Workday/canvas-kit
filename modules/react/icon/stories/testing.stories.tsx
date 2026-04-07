@@ -1,11 +1,11 @@
 import {searchIcon} from '@workday/canvas-expressive-icons-web';
-import {ExpressiveIcon, SystemIcon} from '@workday/canvas-kit-preview-react/icon';
+import {ExpressiveIcon, SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {imageIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
-  title: 'Testing/Preview/Icons',
+  title: 'Testing/Icons',
   component: SystemIcon,
   parameters: {
     chromatic: {

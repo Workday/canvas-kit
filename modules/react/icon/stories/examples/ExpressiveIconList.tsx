@@ -1,21 +1,21 @@
 import React from 'react';
 
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import * as CanvasIcons from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Subtext} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
-import * as CanvasIcons from '@workday/canvas-system-icons-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const ImportedIcons = Object.keys(CanvasIcons);
-
-const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasSystemIcons');
+const allIcons = ImportedIcons.filter(icon => !icon.startsWith('Canvas') && icon.endsWith('Icon'));
 
 const styleOverrides = {
   parentContainer: createStyles({
     flexDirection: 'column',
     alignItems: 'center',
-    gap: system.space.x6,
+    gap: system.gap.lg,
   }),
   firstChildContainer: createStyles({
     flexWrap: 'wrap',
@@ -24,12 +24,18 @@ const styleOverrides = {
     alignItems: 'center',
     width: `max(320px,20%)`,
     flexDirection: 'row',
-    gap: system.space.x3,
-    padding: system.space.x3,
+    gap: px2rem(12),
+    padding: system.padding.sm,
+  }),
+  text: createStyles({
+    fontFamily: system.fontFamily.mono,
+    padding: system.padding.xxs,
+    backgroundColor: system.color.surface.alt.default,
+    borderRadius: system.shape.sm,
   }),
 };
 
-export const SystemIconList = () => {
+export const ExpressiveIconList = () => {
   const [value, setValue] = React.useState('');
 
   const handleSearch = (e: any) => {
@@ -51,10 +57,10 @@ export const SystemIconList = () => {
           .map((singleIcon, index) => {
             return (
               <Flex cs={styleOverrides.secondChildContainer} key={index}>
-                <Box>
-                  <SystemIcon icon={CanvasIcons[singleIcon]} />
-                </Box>
-                <Box>{singleIcon}</Box>
+                <ExpressiveIcon icon={CanvasIcons[singleIcon]} />
+                <Subtext as="code" size="large" cs={styleOverrides.text}>
+                  {singleIcon}
+                </Subtext>
               </Flex>
             );
           })}

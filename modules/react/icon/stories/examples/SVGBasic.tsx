@@ -1,4 +1,4 @@
-import {SVG} from '@workday/canvas-kit-preview-react/icon';
+import {Svg} from '@workday/canvas-kit-react/icon';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, imageIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -25,5 +25,5 @@ const styles = createStencil({
 });
 
 export const SVGBasic = () => {
-  return <SVG src={imageIcon} type={CanvasIconTypes.System} cs={styles({size: system.size.xs})} />;
+  return <Svg src={imageIcon} type={CanvasIconTypes.System} cs={styles({size: system.size.xs})} />;
 };

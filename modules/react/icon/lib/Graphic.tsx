@@ -105,7 +105,9 @@ export const graphicStencil = createStencil({
     grow: {
       true: {
         width: '100%',
-        [svgStencil.vars.width]: '100%',
+        '& svg': {
+          width: '100%',
+        },
       },
     },
   },

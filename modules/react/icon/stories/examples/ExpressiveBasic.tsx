@@ -1,5 +1,5 @@
 import {searchIcon} from '@workday/canvas-expressive-icons-web';
-import {ExpressiveIcon} from '@workday/canvas-kit-preview-react/icon';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
