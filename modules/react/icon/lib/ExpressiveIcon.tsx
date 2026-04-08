@@ -45,11 +45,11 @@ export const expressiveIconStencil = createStencil({
       // TODO: Revisit token, using v4 token and fallback to v3 token
       height: cssVar(size, cssVar(component.expressiveIcon.size.md, px2rem(56))),
     },
-    '.wd-expressive .wd-icon-fill': {
+    '.wd-expressive .wd-expressive-fill': {
       // TODO: Revisit token, use base tokens instead of icon tokens
       fill: cssVar(color, component.expressiveIcon.color.fill),
     },
-    '.wd-expressive .wd-icon-accent': {
+    '.wd-expressive .wd-expressive-accent': {
       // TODO: Revisit token, use base tokens instead of icon tokens
       fill: cssVar(accentColor, component.expressiveIcon.color.accent),
     },
