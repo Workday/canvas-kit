@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.3](https://github.com/Workday/canvas-kit/releases/tag/v14.3.3) (2026-04-06)
+
+### Components
+
+- chore: Export `StyledRadioButton` stencils ([#3850](https://github.com/Workday/canvas-kit/pull/3850)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  `StyledRadioButton` stencils are now exported.
+
+### Infrastructure
+
+- fix: Pin npm version to 11.10.1 ([#3856](https://github.com/Workday/canvas-kit/pull/3856)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v13.2.57](https://github.com/Workday/canvas-kit/releases/tag/v13.2.57) (2026-04-06)
+
+### Infrastructure
+
+- fix: Pin npm version to 11.10.1 ([#3856](https://github.com/Workday/canvas-kit/pull/3856)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v14.3.2](https://github.com/Workday/canvas-kit/releases/tag/v14.3.2) (2026-04-03)
+
+
+
+
 ## [v14.3.1](https://github.com/Workday/canvas-kit/releases/tag/v14.3.1) (2026-04-02)
 
 
@@ -82,6 +106,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
+## [v13.2.56](https://github.com/Workday/canvas-kit/releases/tag/v13.2.56) (2026-02-19)
 ## [v14.2.27](https://github.com/Workday/canvas-kit/releases/tag/v14.2.27) (2026-02-19)
 
 ### Components
