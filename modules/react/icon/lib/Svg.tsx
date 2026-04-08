@@ -3,7 +3,7 @@ import {HTMLAttributes} from 'react';
 
 import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {CanvasIcon} from '@workday/design-assets-types';
 
@@ -28,15 +28,23 @@ export interface SvgProps extends CSProps, HTMLAttributes<HTMLSpanElement> {
 
 export const svgStencil = createStencil({
   vars: {
+    /** sets width of svg element
+     * @deprecated use size instead or svg selector
+     */
+    width: '',
+    /** sets height of svg element
+     * @deprecated use size instead or svg selector
+     */
+    height: '',
     /** sets width and height of svg element */
     size: '',
   },
-  base: ({size}) => ({
+  base: ({height, size, width}) => ({
     display: 'inline-block',
     '> svg': {
       display: 'block',
-      width: size,
-      height: size,
+      width: cssVar(width, size),
+      height: cssVar(height, size),
     },
   }),
   modifiers: {
