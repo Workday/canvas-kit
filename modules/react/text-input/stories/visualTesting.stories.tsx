@@ -182,21 +182,18 @@ export const InputGroupStates = () => (
           label: 'Variable Width',
           props: {
             end: [
-              <InputGroup.InnerEnd
-                width="10px"
-                cs={{background: system.color.surface.success.default}}
-              >
+              <InputGroup.InnerEnd width="10px" cs={{background: system.color.surface.info.strong}}>
                 <span>1</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
                 width="20px"
-                cs={{background: system.color.surface.success.default}}
+                cs={{background: system.color.surface.warning.strong}}
               >
                 <span>2</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
                 width="30px"
-                cs={{background: system.color.surface.success.default}}
+                cs={{background: system.color.surface.success.strong}}
               >
                 <span>3</span>
               </InputGroup.InnerEnd>,
