@@ -85,7 +85,6 @@ export const SystemIcon = createComponent('span')({
     ref,
     Element
   ) => {
-    console.log('size', resolveSize(size, component.systemIcon.size));
     return (
       <Svg
         as={Element}
