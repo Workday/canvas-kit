@@ -1,12 +1,7 @@
-import * as expressivePackage from '@workday/canvas-expressive-icons-web';
-import {
-  ExpressiveIcon,
-  ExpressiveIconProps,
-  SystemIcon,
-  SystemIconProps,
-} from '@workday/canvas-kit-react/icon';
+import {searchIcon} from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon, SystemIcon} from '@workday/canvas-kit-react/icon';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import * as systemPackage from '@workday/canvas-system-icons-web';
+import {imageIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
@@ -19,17 +14,16 @@ export default {
   },
 };
 
-const {CanvasIconTypes, ...allSystemIcons} = systemPackage;
-const {CanvasIconTypes: _, ...allExpressiveIcons} = expressivePackage;
-
 export const SystemIconStates = {
   render: () => (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={Object.keys(allSystemIcons).map(icon => ({
-          label: icon,
-          props: {icon: allSystemIcons[icon as keyof typeof allSystemIcons]},
-        }))}
+        rowProps={[
+          {
+            label: 'Default',
+            props: {},
+          },
+        ]}
         columnProps={[
           {
             label: 'Default',
@@ -41,28 +35,31 @@ export const SystemIconStates = {
           },
         ]}
       >
-        {(props: SystemIconProps) => (
+        {props => (
           <div style={{display: 'flex', alignItems: 'center', gap: system.gap.md}}>
-            <SystemIcon size="xl" {...props} />
-            <SystemIcon size="lg" {...props} />
-            <SystemIcon size="md" {...props} />
-            <SystemIcon size="sm" {...props} />
-            <SystemIcon size="xs" {...props} />
-            <SystemIcon size="xxs" {...props} />
-            <SystemIcon {...props} />
-            <SystemIcon color={system.color.fg.success.default} {...props} />
+            <SystemIcon icon={imageIcon} size="xl" {...props} />
+            <SystemIcon icon={imageIcon} size="lg" {...props} />
+            <SystemIcon icon={imageIcon} size="md" {...props} />
+            <SystemIcon icon={imageIcon} size="sm" {...props} />
+            <SystemIcon icon={imageIcon} size="xs" {...props} />
+            <SystemIcon icon={imageIcon} size="xxs" {...props} />
+            <SystemIcon icon={imageIcon} {...props} />
+            <SystemIcon icon={imageIcon} color={system.color.fg.success.default} {...props} />
             <SystemIcon
+              icon={imageIcon}
               color={system.color.fg.success.default}
               accent={system.color.fg.success.strong}
               {...props}
             />
             <SystemIcon
+              icon={imageIcon}
               color={system.color.fg.warning.default}
               accent={system.color.fg.warning.strong}
               background={system.color.surface.warning.default}
               {...props}
             />
             <SystemIcon
+              icon={imageIcon}
               cs={{
                 '&.hover .wd-icon-fill': {
                   fill: system.color.fg.success.default,
@@ -87,10 +84,12 @@ export const ExpressiveIconStates = {
   render: () => (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={Object.keys(allExpressiveIcons).map(icon => ({
-          label: icon,
-          props: {icon: allExpressiveIcons[icon as keyof typeof allExpressiveIcons]},
-        }))}
+        rowProps={[
+          {
+            label: 'Default',
+            props: {},
+          },
+        ]}
         columnProps={[
           {
             label: 'Default',
@@ -102,21 +101,23 @@ export const ExpressiveIconStates = {
           },
         ]}
       >
-        {(props: ExpressiveIconProps) => (
+        {props => (
           <div style={{display: 'flex', alignItems: 'center', gap: system.gap.md}}>
-            <ExpressiveIcon size="xl" {...props} />
-            <ExpressiveIcon size="lg" {...props} />
-            <ExpressiveIcon size="md" {...props} />
-            <ExpressiveIcon size="sm" {...props} />
-            <ExpressiveIcon size="xs" {...props} />
-            <ExpressiveIcon {...props} />
-            <ExpressiveIcon color={system.color.fg.success.default} {...props} />
+            <ExpressiveIcon icon={searchIcon} size="xl" {...props} />
+            <ExpressiveIcon icon={searchIcon} size="lg" {...props} />
+            <ExpressiveIcon icon={searchIcon} size="md" {...props} />
+            <ExpressiveIcon icon={searchIcon} size="sm" {...props} />
+            <ExpressiveIcon icon={searchIcon} size="xs" {...props} />
+            <ExpressiveIcon icon={searchIcon} {...props} />
+            <ExpressiveIcon icon={searchIcon} color={system.color.fg.success.default} {...props} />
             <ExpressiveIcon
+              icon={searchIcon}
               color={system.color.fg.success.default}
               accent={system.color.surface.success.strong}
               {...props}
             />
             <ExpressiveIcon
+              icon={searchIcon}
               cs={{
                 '&.hover .wd-expressive-fill': {
                   fill: system.color.fg.success.default,
