@@ -15,6 +15,9 @@ export interface StyledRadioButtonProps extends CSProps {
 }
 
 export const radioInputStencil = createStencil({
+  parts: {
+    check: 'cnvs-radio-check',
+  },
   base: {
     cursor: 'pointer',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
