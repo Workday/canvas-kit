@@ -99,10 +99,9 @@ export const Svg = createComponent('span')({
     return (
       <Element
         ref={ref}
+        dangerouslySetInnerHTML={{__html: src.svg}}
         {...handleCsProp(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
-      >
-        {parse(src.svg)}
-      </Element>
+      />
     );
   },
 });
