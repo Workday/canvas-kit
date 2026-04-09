@@ -1,4 +1,3 @@
-import parse from 'html-react-parser';
 import {HTMLAttributes} from 'react';
 
 import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
