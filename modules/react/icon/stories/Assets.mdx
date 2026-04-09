@@ -25,6 +25,13 @@ Assets in the Canvas Kit design system are organized into two primary types:
 - **System Icons:** Utility icons intended for use in UI actions and functional controls.
 - **Expressive Icons:** Decorative icons used to add additional context.
 
+⚠️ Deprected:
+
+- **Accent Icons:** larger secondary icons used to add visual interest and delight to by
+  communicating the overall tone and meaning of a page.
+- **Applet Icons:** convey entry points, categories of actions, or information sources on the
+  Workday homepage.
+
 ## System Icons
 
 System Icons are small symbols used to convey simple actions and functions. They are the most common
@@ -38,7 +45,7 @@ For detailed documentation, refer to the
 To use System Icons, install the following packages:
 
 ```sh
-npm install @workday/canvas-kit-preview-react @workday/canvas-system-icons-web
+npm install @workday/canvas-kit-react @workday/canvas-system-icons-web
 ```
 
 ### System Icon Component
@@ -111,7 +118,7 @@ interest and meaning to the UI beyond functional system icons.
 To use Expressive Icons, install the following packages:
 
 ```sh
-npm install @workday/canvas-kit-preview-react @workday/canvas-expressive-icons-web
+npm install @workday/canvas-kit-react @workday/canvas-expressive-icons-web
 ```
 
 ### Expressive Icon Component
@@ -132,6 +139,64 @@ npm install @workday/canvas-kit-preview-react @workday/canvas-expressive-icons-w
 <ExampleCodeBlock code={ExpressiveCustomStyles} />
 
 <br />
+
+## Accent Icon <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `AccentIcon` in main has been deprecated and will be removed in a future major version. Please
+    use [ExpressiveIcon](https://canvas.workdaydesign.com/styles/assets/expressive-icons) instead.
+  </InformationHighlight.Body>
+</InformationHighlight>
+
+Accent Icons add clarity, and visual interest, they bring delight to the experience by communicating
+the overall tone and meaning of a page.
+
+### Install
+
+To use Accent Icons, install the following packages:
+
+```sh
+npm install @workday/canvas-kit-react @workday/canvas-accent-icons-web
+```
+
+### Usage
+
+```jsx
+import {apiIcon} from '@workday/canvas-accent-icons-web';
+
+<AccentIcon icon={apiIcon} />;
+```
+
+## Applet Icon <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `AppletIcon` in main has been deprecated and will be removed in a future major version. Please
+    use [ExpressiveIcon](https://canvas.workdaydesign.com/styles/assets/expressive-icons) instead.
+  </InformationHighlight.Body>
+</InformationHighlight>
+
+Applet Icons convey entry points, categories of actions, or information sources on the Workday
+homepage.
+
+### Install
+
+To use Applet Icons, install the following packages:
+
+```sh
+npm install @workday/canvas-kit-react @workday/canvas-applet-icons-web
+```
+
+### Usage
+
+```jsx
+import {gigsIcon} from '@workday/canvas-applet-icons-web';
+
+<AppletIcon icon={gigsIcon} />;
+```
 
 ## SVG Icon Component
 
