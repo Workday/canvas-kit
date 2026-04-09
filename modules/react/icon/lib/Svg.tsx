@@ -1,15 +1,13 @@
+import {HTMLAttributes} from 'react';
+
 import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {base} from '@workday/canvas-tokens-web';
 import {CanvasIcon} from '@workday/design-assets-types';
 
-import {validateIconType} from './utils';
-
-export interface SvgProps extends BoxProps {
-  src: CanvasIcon | CanvasSystemIcon | CanvasExpressiveIcon;
+export interface SvgProps extends CSProps, HTMLAttributes<HTMLSpanElement> {
+  src: CanvasSystemIcon | CanvasExpressiveIcon | CanvasIcon;
   type: CanvasIconTypes;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
@@ -29,14 +27,18 @@ export interface SvgProps extends BoxProps {
 
 export const svgStencil = createStencil({
   vars: {
-    /** sets width of svg element */
+    /** sets width of svg element
+     * @deprecated use size instead or svg selector
+     */
     width: '',
-    /** sets height of svg element */
+    /** sets height of svg element
+     * @deprecated use size instead or svg selector
+     */
     height: '',
     /** sets width and height of svg element */
     size: '',
   },
-  base: ({width, height, size}) => ({
+  base: ({height, size, width}) => ({
     display: 'inline-block',
     '> svg': {
       display: 'block',
@@ -60,17 +62,25 @@ export const svgStencil = createStencil({
   },
 });
 
-/** @deprecated */
-export const transformColorNameToToken = (color?: string) => {
-  if (color && color in base) {
-    return cssVar(base[color as keyof typeof base]);
+/**
+ * Resolves the size of the SVG based on the size token or string / numeric (px) value.
+ * @param size - The size variant or string / numeric (px) value.
+ * @param tokens - The tokens to use to resolve the size.
+ * @returns The resolved size.
+ */
+export const resolveSize = <T extends string>(
+  size: T | string | number | undefined,
+  tokens: Record<T, string>
+): string => {
+  if (size) {
+    return size in tokens
+      ? tokens[size as keyof typeof tokens]
+      : typeof size === 'number'
+        ? px2rem(size)
+        : size;
   }
 
-  if (color?.startsWith('--')) {
-    return cssVar(color);
-  }
-
-  return color;
+  return '';
 };
 
 export const Svg = createComponent('span')({
@@ -80,10 +90,8 @@ export const Svg = createComponent('span')({
     ref,
     Element
   ) => {
-    try {
-      validateIconType(src, type);
-    } catch (e) {
-      console.error(e);
+    if (src?.type !== type) {
+      console.error(`Icon type "${src.type}" does not match expected type "${type}"`);
       return null;
     }
 
@@ -91,7 +99,7 @@ export const Svg = createComponent('span')({
       <Element
         ref={ref}
         dangerouslySetInnerHTML={{__html: src.svg}}
-        {...mergeStyles(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
+        {...handleCsProp(elemProps, svgStencil({shouldMirror, shouldMirrorInRTL}))}
       />
     );
   },

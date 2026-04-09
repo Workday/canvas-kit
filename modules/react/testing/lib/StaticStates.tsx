@@ -41,7 +41,7 @@ export const StaticStates: React.FC<
 > = ({children, theme, className, ...elemProps}) => {
   const localTheme: EmotionCanvasTheme & {_styleRewriteFn?: StyleRewriteFn} = useTheme(theme);
   localTheme._styleRewriteFn = convertToStaticStates;
-  console.log('className', className);
+
   return (
     <CanvasProvider theme={localTheme} className={className} {...elemProps}>
       {children}

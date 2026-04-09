@@ -1,7 +1,9 @@
-import { Meta } from '@storybook/blocks';
-import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
-import { CreateStyles } from './examples/CreateStyles';
-import { CreateVars } from './examples/CreateVars';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
 
 <Meta title="Styling/Utilities" />
 
@@ -107,69 +109,85 @@ const styles = {
 
 A utility that should be used for interactive states on buttons and links.
 
-It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in a given colorspace by a
+given amount.
 
 It takes a single options object with four fields:
-1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
 2. `fallback`: A fallback color if the first color is not valid or not defined.
 3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
-4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or
+   fallback color).
 
 ```tsx
 import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    backgroundColor: colorSpace.darken(
-      {
-        color: system.color.brand.accent.primary,
-        fallback: brand.primary.darkest,
-        mixinColor: system.color.accent.overlay.mixin,
-        mixinValue: system.opacity.accent.hover
-      }
-    )
-  }
-})
+    backgroundColor: colorSpace.darken({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      mixinColor: system.color.accent.overlay.mixin,
+      mixinValue: system.opacity.accent.hover,
+    }),
+  },
+});
 ```
 
 ### Hover
 
 A utility that should be used for `hover` interactive states on buttons and links.
 
-It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in a given colorspace by a
+given amount.
 
 It takes three parameters:
-1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
 2. `fallback`: A fallback color if the first color is not valid or not defined.
-3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
 
 ```tsx
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    backgroundColor: colorSpace.hover(
-      {
-        color: system.color.brand.accent.primary,
-        fallback: brand.primary.darkest,
-        colorType: 'accent'
-      }
-    )
-  }
-})
+    backgroundColor: colorSpace.hover({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
 ```
 
 ### Pressed
 
 A utility that should be used for `active` or `pressed` interactive states on buttons and links.
 
-It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in a given colorspace by a
+given amount.
 
 It takes three parameters:
-1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
 2. `fallback`: A fallback color if the first color is not valid or not defined.
-3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
 
 ```tsx
 const styles = createStyles({
@@ -178,10 +196,10 @@ const styles = createStyles({
     backgroundColor: colorSpace.pressed({
       color: system.color.brand.accent.primary,
       fallback: brand.primary.darkest,
-      colorType: 'accent'
-    })
-  }
-})
+      colorType: 'accent',
+    }),
+  },
+});
 ```
 
 ## keyframes
@@ -193,16 +211,16 @@ transformer.
 ### Example
 
 ```tsx
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
+  CSProps,
+  calc,
+  createStencil,
   handleCsProp,
   keyframes,
-  createStencil,
-  calc,
   px2rem,
-  CSProps,
 } from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Keyframe for the dots loading animation.
@@ -250,7 +268,8 @@ export const LoadingDot = createComponent('div')({
 
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
-compatible with a custom Emotion instance and is understood by the Static style transformer. It will also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
+compatible with a custom Emotion instance and is understood by the Static style transformer. It will
+also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
 
 ```tsx
 injectGlobal({
@@ -271,14 +290,16 @@ injectGlobal({
 
 ```tsx
 import {createRoot} from 'react-dom/client';
-import {fonts} from '@workday/canvas-kit-react-fonts';
-import {system} from '@workday/canvas-tokens-web';
-import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
-import {App} from './App';
 
+import {fonts} from '@workday/canvas-kit-react-fonts';
+import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
+import {App} from './App';
 
 //@ts-ignore
 injectGlobal({

@@ -132,6 +132,7 @@ CSS:
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
 
 :root {
   /* Override brand primary colors */
@@ -150,7 +151,8 @@ CSS:
 // You can import the CSS variables in a ts file or an index.css file. You do not need to do both.
 import '@workday/canvas-tokens-web/css/base/\_variables.css'; import
 '@workday/canvas-tokens-web/css/system/\_variables.css'; import
-'@workday/canvas-tokens-web/css/brand/\_variables.css';
+'@workday/canvas-tokens-web/css/brand/\_variables.css'; import
+'@workday/canvas-tokens-web/css/component/\_variables.css';
 
 // Generate a class name that defines CSS variables const themedBrand = createStyles({
 [brand.primary.accent]: base.neutral0, [brand.primary.darkest]: base.blue800, [brand.primary.dark]:
@@ -238,6 +240,7 @@ System tokens define component-specific values.
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
 
 :root {
   /* Primary brand colors */
@@ -252,11 +255,11 @@ System tokens define component-specific values.
 ```
 
 ```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-import {brand, base, system} from '@workday/canvas-tokens-web';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {Card} from '@workday/canvas-kit-react/card';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 const customTheme = createStyles({
   [brand.primary.base]: base.green600,
@@ -387,13 +390,13 @@ const rtlButtonStyles = createStyles({
 
 ```tsx
 import React from 'react';
-import {createStyles} from '@workday/canvas-kit-styling';
 
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {Card} from '@workday/canvas-kit-react/card';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {arrowRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -610,6 +613,7 @@ Ensure CSS variable files are imported in the correct order.
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
 
 /* Your overrides after imports */
 :root {
