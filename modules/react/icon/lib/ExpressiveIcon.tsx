@@ -17,11 +17,11 @@ export interface ExpressiveIconProps extends Omit<SvgProps, 'src' | 'type'> {
    */
   color?: string;
   /**
-   * The icon to display from `@workday/canvas-system-icons-web`.
+   * The icon to display from `@workday/canvas-expressive-icons-web`.
    */
   icon: CanvasExpressiveIcon;
   /**
-   * The size of the SystemIcon in size variants or string / numeric (px) values.
+   * The size of the ExpressiveIcon in size variants or string / numeric (px) values.
    */
   size?: ExpressiveSize | string | number;
 }
@@ -30,11 +30,11 @@ export const expressiveIconStencil = createStencil({
   extends: svgStencil,
   vars: {
     /**
-     * This will set the icon's outline color for the `.wd-icon-fill` SVG layer.
+     * This will set the icon's outline color for the `.wd-expressive-fill` SVG layer.
      */
     color: '',
     /**
-     * This will set the icon's accent color for the `.wd-icon-accent` SVG layer.
+     * This will set the icon's accent color for the `.wd-expressive-accent` SVG layer.
      */
     accentColor: '',
   },
@@ -55,9 +55,13 @@ export const expressiveIconStencil = createStencil({
     },
     // for Windows high contrast desktop themes
     '@media (prefers-contrast: more)': {
-      '.wd-expressive .wd-icon-fill, .wd-expressive .wd-icon-accent': {
+      '.wd-expressive .wd-expressive-fill': {
         color: 'currentColor',
         fill: 'currentColor',
+      },
+      '.wd-expressive .wd-expressive-accent': {
+        color: 'transparent',
+        fill: 'transparent',
       },
     },
   }),

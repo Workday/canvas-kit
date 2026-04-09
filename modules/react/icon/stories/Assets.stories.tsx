@@ -25,6 +25,7 @@ export const SystemIconsCustomStyles = {
 };
 
 export const ExpressiveIcons = {
+  name: 'Expressive Icons (new)',
   render: ExpressiveBasic,
 };
 
