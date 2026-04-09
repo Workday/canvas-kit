@@ -33,7 +33,7 @@ export interface SystemIconProps extends Omit<SvgProps, 'src' | 'type'> {
    * - `md`: 20px / 1.25rem
    * - `lg`: 24px / 1.5rem
    * - `xl`: 32px / 2rem
-   * Default icons size iis `24px`
+   * @default `24px`
    */
   size?: SystemSize | string | number;
 }

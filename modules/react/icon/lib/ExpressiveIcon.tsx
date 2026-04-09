@@ -28,7 +28,7 @@ export interface ExpressiveIconProps extends Omit<SvgProps, 'src' | 'type'> {
    * - `md`: 56px / 3.5rem
    * - `lg`: 64px / 4rem
    * - `xl`: 96px / 6rem
-   * Default icons size is `56px`
+   * @default `56px`
    */
   size?: ExpressiveSize | string | number;
 }
