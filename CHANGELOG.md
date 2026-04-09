@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.4](https://github.com/Workday/canvas-kit/releases/tag/v14.3.4) (2026-04-09)
+
+### Components
+
+- fix: Fix system icon types in hooks ([#3862](https://github.com/Workday/canvas-kit/pull/3862)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+
+### Infrastructure
+
+- chore: Bump @workday/design-assets-types to latest ([#3860](https://github.com/Workday/canvas-kit/pull/3860)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+
+
 ## [v14.3.3](https://github.com/Workday/canvas-kit/releases/tag/v14.3.3) (2026-04-06)
 
 ### Components
