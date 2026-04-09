@@ -6405,7 +6405,7 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-3.1.6.tgz#ccd6fe7a7fd7b5547486f3816c386d856308d7bb"
   integrity sha512-f0GAEiM0Q4T1hijWjLWET54iMCcz6Y/54GbekvcVIaJyjOnChEvGFFbOfiKV9ii5jakDLSHgJ56vu+71EY0EuA==
 
-"@workday/design-assets-types@0.2.10", "@workday/design-assets-types@^0.2.10":
+"@workday/design-assets-types@0.2.10":
   version "0.2.10"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.10.tgz#ebcc16377951cd0449b885a467eb68c9e715e05f"
   integrity sha512-8Za1aBNP5wIQrwOd/CrbFzlsfDLRP0yWTD6nGCR4+UFx5Dw4tEcQIQ01waW/CurBv9zDUxeWged4ld1rQkfQcg==
@@ -6414,6 +6414,11 @@
   version "0.2.8"
   resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.2.8.tgz#54026b4e6ea79861b12837a7deb83db9a16caad4"
   integrity sha512-5rYCg67W43ueng4KgRC69ZKbzl7EfO8Y3uSbs+pYJO3Qbb65yRF841Fz9SZTyuHrDpEiFMAI9s1laqLG56Bb1w==
+
+"@workday/design-assets-types@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@workday/design-assets-types/-/design-assets-types-0.3.0.tgz#9d8e16d40d9f9000ba931fcf7b92bc0ba859edbd"
+  integrity sha512-L6csmeDMShEastEy80ywDz6y8yLbA4gvmiF8Rsm5Mmw7UUaHyz9gN7Ek6PD4vOLOxN8LjKOWCxR1bQ1NOa37Nw==
 
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
