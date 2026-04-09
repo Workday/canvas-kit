@@ -6,7 +6,7 @@ export interface StatusIndicatorIconProps extends SystemIconProps {}
 export const StatusIndicatorIcon = createComponent('span')({
   displayName: 'StatusIndicatorIcon',
   Component: (elemProps: SystemIconProps, ref, Element) => {
-    if (!elemProps.icon || !elemProps.icon.type) {
+    if (!elemProps.icon?.type) {
       return null;
     }
 

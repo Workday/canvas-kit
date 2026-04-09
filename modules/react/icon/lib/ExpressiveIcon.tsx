@@ -22,6 +22,13 @@ export interface ExpressiveIconProps extends Omit<SvgProps, 'src' | 'type'> {
   icon: CanvasExpressiveIcon;
   /**
    * The size of the ExpressiveIcon in size variants or string / numeric (px) values.
+   * **Expressive icon sizes**
+   * - `xs`: 40px / 2.5rem
+   * - `sm`: 48px / 3rem
+   * - `md`: 56px / 3.5rem
+   * - `lg`: 64px / 4rem
+   * - `xl`: 96px / 6rem
+   * Default icons size is `56px`
    */
   size?: ExpressiveSize | string | number;
 }

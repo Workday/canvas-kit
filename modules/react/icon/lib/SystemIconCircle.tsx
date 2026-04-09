@@ -13,7 +13,7 @@ import {system} from '@workday/canvas-tokens-web';
 import {resolveSize} from './Svg';
 import {SystemIcon, systemIconStencil} from './SystemIcon';
 
-/* @deprecated Use tokens instead */
+/* @deprecated Use tokens instead. Deprecated in v15.0.0. */
 export enum SystemIconCircleSize {
   xs = 16,
   s = 24,
@@ -23,7 +23,9 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-/** Mapping utility for the SystemIconCircleSize enum to the system size tokens */
+/** Mapping utility for the SystemIconCircleSize enum to the system size tokens.
+ * @deprecated Use tokens instead. Deprecated in v15.0.0.
+ * */
 const sizes = {
   xs: system.size.xxxs,
   s: system.size.xs,

@@ -21,12 +21,15 @@ patterns. Assets may be presented individually or grouped with related informati
 
 ## Types of Assets
 
-Assets in the Canvas Kit design system are organized into two primary types:
+Assets in the Canvas design system are organized into two primary types:
 
 - **System Icons:** Utility icons intended for use in UI actions and functional controls.
 - **Expressive Icons:** Decorative icons used to add additional context.
 
-⚠️ Deprected:
+⚠️ Deprecated:
+
+> **Note:** These asset types are now replaced by [Expressive Icon components](#expressive-icons)
+> for enhanced flexibility and consistency.
 
 - **Accent Icons:** larger secondary icons used to add visual interest and delight to by
   communicating the overall tone and meaning of a page.
@@ -73,14 +76,6 @@ npm install @workday/canvas-kit-react @workday/canvas-system-icons-web
 
 <br />
 
-#### Difference from `SystemIcon` (main)
-
-- The `size` prop is limited to the preset size values (`xxs`, `xs`, `sm`, `md`, `lg`, `xl`). For
-  custom sizes, use the stencil variable `systemIconStencil.vars.size` with the `cs` prop (see
-  Custom Styles for reference).
-- The preview component does **not** have hover color props like `colorHover` or `accentHover`—use
-  CSS selectors in the `cs` prop to specify hover styling (see Custom Styles for reference).
-
 ### System Icon Circle Component
 
 Provides a circular background for icons with configurable color and contrast.
@@ -101,13 +96,6 @@ Provides a circular background for icons with configurable color and contrast.
 <ExampleCodeBlock code={SystemCircleBasic} />
 
 <br />
-
-#### Difference from `SystemIconCircle` (main)
-
-- `size` prop accepts both string and numeric values.
-- The preview component has an `inverse` prop for the inverse variant.
-- Ensure to set both `background` and `color` props to maintain contrast between the circle and the
-  icon.
 
 ## Expressive Icons
 
@@ -199,9 +187,9 @@ import {gigsIcon} from '@workday/canvas-applet-icons-web';
 <AppletIcon icon={gigsIcon} />;
 ```
 
-## SVG Icon Component
+## Svg Component
 
-The `SVG` component enables you to render SVG-based icons from Canvas assets with complete control
+The `Svg` component enables you to render SVG-based icons from Canvas assets with complete control
 over their appearance and behavior. Use this component for advanced customization such as applying
 unique styles, implementing animations, or composing icons in complex ways not supported by
 higher-level icon components.

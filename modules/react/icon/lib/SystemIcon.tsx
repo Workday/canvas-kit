@@ -26,6 +26,14 @@ export interface SystemIconProps extends Omit<SvgProps, 'src' | 'type'> {
   icon: CanvasSystemIcon;
   /**
    * The size of the SystemIcon in size variants or string / numeric (px) values.
+   * **System icon sizes**
+   * - `xxs`: 14px / 0.875rem
+   * - `xs`: 16px / 1rem
+   * - `sm`: 18px / 1.125rem
+   * - `md`: 20px / 1.25rem
+   * - `lg`: 24px / 1.5rem
+   * - `xl`: 32px / 2rem
+   * Default icons size iis `24px`
    */
   size?: SystemSize | string | number;
 }
