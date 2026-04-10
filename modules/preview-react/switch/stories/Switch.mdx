@@ -1,19 +1,15 @@
-import { Meta } from '@storybook/blocks';
+import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import SwitchStoriesMeta from './Switch.stories';
-import { Basic } from './examples/Basic';
-import { Caution } from './examples/Caution';
-import { Disabled } from './examples/Disabled';
-import { Error } from './examples/Error';
-import { LabelPosition } from './examples/LabelPosition';
-import { RefForwarding } from './examples/RefForwarding';
-import { RTL } from './examples/RTL';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {LabelPosition} from './examples/LabelPosition';
+import {RTL} from './examples/RTL';
+import {RefForwarding} from './examples/RefForwarding';
 
 <Meta of={SwitchStoriesMeta} />`
 
@@ -59,7 +55,8 @@ input component. By default, the orientation will be set to `vertical`.
 ### Error States
 
 Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Switch to the
-Caution or Error state, respectively. You will also need to use `<FormField.Hint/>` for hint or error text to meet accessibility standards.
+Caution or Error state, respectively. You will also need to use `<FormField.Hint/>` for hint or
+error text to meet accessibility standards.
 
 The `error` prop may be applied directly to the Switch with a value of `Switch.ErrorType.Caution` or
 `Switch.ErrorType.Error` if Form Field is not being used.
