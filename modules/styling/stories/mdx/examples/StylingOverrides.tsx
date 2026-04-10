@@ -89,7 +89,7 @@ export const StylingOverrides = () => {
           <PrimaryButton cs={styles}>createStyles</PrimaryButton>
           {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
           <StyledPrimaryButton>Styled Component</StyledPrimaryButton>
-          <PrimaryButton backgroundColor={backgroundColors.styleProps}>Style Props</PrimaryButton>
+          <PrimaryButton background={backgroundColors.styleProps}>Style Props</PrimaryButton>
         </Flex>
         <div>
           {jsx(
@@ -105,12 +105,12 @@ export const StylingOverrides = () => {
           <StyledPrimaryButton cs={styles}>createStyles + Styled Component</StyledPrimaryButton>
         </div>
         <div>
-          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
+          <PrimaryButton cs={styles} background={backgroundColors.styleProps}>
             createStyles + Style Props
           </PrimaryButton>
         </div>
         <div>
-          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
+          <StyledPrimaryButton background={backgroundColors.styleProps} cs={styles}>
             createStyles + Styled Component + Style Props
           </StyledPrimaryButton>
         </div>
@@ -119,7 +119,7 @@ export const StylingOverrides = () => {
             StyledPrimaryButton,
             {
               ...cssProp,
-              backgroundColor: backgroundColors.styleProps,
+              background: backgroundColors.styleProps,
               cs: styles,
             },
             'createStyles + CSS Prop + Styled Component + Style Props'
@@ -131,13 +131,13 @@ export const StylingOverrides = () => {
             PrimaryButton,
             {
               ...cssProp,
-              backgroundColor: backgroundColors.styleProps,
+              background: backgroundColors.styleProps,
             },
             'CSS Prop + Style Props'
           )}
         </div>
         <div>
-          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
+          <StyledPrimaryButton background={backgroundColors.styleProps}>
             Styled Component + Style Props
           </StyledPrimaryButton>
         </div>

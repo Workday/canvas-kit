@@ -34,6 +34,7 @@ export const multiSelectInputStencil = createStencil({
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:hover, &.hover': {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

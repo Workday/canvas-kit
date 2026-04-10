@@ -1,12 +1,14 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Toast} from '@workday/canvas-kit-react/toast';
+
 import {Basic} from './examples/Basic';
+import {RTL} from './examples/RTL';
 import {ToastAlert} from './examples/ToastAlert';
 import {ToastDialog} from './examples/ToastDialog';
 import {WithActionLinkAndCloseIcon} from './examples/WithActionLinkAndCloseIcon';
 import {WithPopper} from './examples/WithPopper';
-import {RTL} from './examples/RTL';
 import * as ToastStories from './toast.stories';
 
 <Meta of={ToastStories} />
@@ -81,7 +83,7 @@ export const CustomIDToast = () => {
   });
   return (
     <Toast model={model}>
-      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
         <Toast.Link href="#href">View More Details</Toast.Link>

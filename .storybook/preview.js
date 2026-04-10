@@ -3,6 +3,7 @@ import {DocsContainer, DocsPage} from '@storybook/addon-docs';
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
@@ -38,23 +39,23 @@ export const parameters = {
         prefix('styling-getting-started-overview', '1'),
         prefix('styling-getting-started-create-styles', '2'),
         prefix('features-', '3'),
+        prefix('assets-', '33'),
         prefix('tokens-', '4'),
         prefix('overview', 'a'),
         prefix('components-', '5'),
-        prefix('hooks-and-utilities-', '6'),
+        prefix('hooks-and-utilities-', '33'),
         prefix('preview-', '7'),
         prefix('labs-', '8'),
-        prefix('assets-', '9'),
         prefix('overview', 'a'),
-        prefix('css-', 'zzzz'),
+        prefix('css-', 'zzzzzz'),
         prefix('css-overview-page', 'zzza'),
         prefix('getting-started', 'aaabc'),
         prefix('stencils', 'aabcd'),
         prefix('functions', 'abcde'),
         prefix('basic', 'aa'),
         prefix('default', 'ab'),
-        prefix('testing', 'zzz'),
-        prefix('examples', 'zz'),
+        prefix('testing', 'zzzzz'),
+        prefix('examples', 'zzzz'),
         // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
         value => value.replace(/v([1-9]\-0)/, '0$1'),
         // Make sure docs stories goes first

@@ -14,7 +14,7 @@ export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;
 }
 
-const radioInputStencil = createStencil({
+export const radioInputStencil = createStencil({
   parts: {
     check: 'cnvs-radio-check',
   },
@@ -156,7 +156,7 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
   },
 });
 
-const radioInputWrapperStencil = createStencil({
+export const radioInputWrapperStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size225, px2rem(radioHeight)),

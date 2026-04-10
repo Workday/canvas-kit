@@ -9,7 +9,7 @@ export const RTL = () => {
   return (
     <CanvasProvider dir="rtl">
       <Toast>
-        <Toast.Icon icon={checkIcon} cs={{color: system.color.fg.success.default}} />
+        <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
         <Toast.Body>
           <Toast.Message>Your workbook was successfully processed.</Toast.Message>
         </Toast.Body>

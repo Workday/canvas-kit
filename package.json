@@ -137,9 +137,9 @@
   "@stackblitz/sdk": "^1.11.0",
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
-  "@workday/canvas-expressive-icons-web": "1.0.0-alpha.9",
+  "@workday/canvas-expressive-icons-web": "1.0.0-alpha.11",
   "@workday/canvas-system-icons-web": "4.0.0-alpha.16",
-  "@workday/canvas-tokens-web": "4.1.2",
+  "@workday/canvas-tokens-web": "4.2.0",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
@@ -148,7 +148,7 @@
     "puppeteer-core": "^13.7.0",
     "estree-walker": "^2.0.0",
     "loader-utils": "@1.4.1",
-     "semver": "^7.6.2"
+    "semver": "^7.6.2"
   },
   "dependencies": {
     "jsdom": "^27.1.0"

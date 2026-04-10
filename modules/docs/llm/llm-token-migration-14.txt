@@ -54,6 +54,7 @@ In a CSS file:
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 ```
 
 In a JavaScript/TypeScript file:
@@ -61,6 +62,7 @@ In a JavaScript/TypeScript file:
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 ```
 
 3. Update Styling Approach

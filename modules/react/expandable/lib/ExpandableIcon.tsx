@@ -4,14 +4,14 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon, chevronUpIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {useExpandableIcon} from './hooks/useExpandableIcon';
 import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
-   * Icon to display from `@workday/canvas-accent-icons-web`
+   * Icon to display from `@workday/canvas-system-icons-web`
    * @default chevronUpIcon
    */
   icon?: CanvasSystemIcon;
@@ -28,6 +28,9 @@ export const expandableIconStencil = createStencil({
   base: {
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     padding: cssVar(system.padding.xxs, system.space.x1),
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.xs, px2rem(16)),
   },
   modifiers: {
     isExpanded: {
@@ -88,7 +91,6 @@ export const ExpandableIcon = createSubcomponent('span')({
     <SystemIcon
       as={Element}
       icon={icon || chevronUpIcon}
-      size={px2rem(16)}
       {...mergeStyles(
         elementProps,
         expandableIconStencil({position: iconPosition, isExpanded: visible})

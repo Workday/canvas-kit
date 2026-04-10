@@ -5,6 +5,7 @@ import {injectGlobal} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 import {App} from './App';

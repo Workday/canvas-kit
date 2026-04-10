@@ -4,13 +4,13 @@ import {createComponent, getColor} from '@workday/canvas-kit-react/common';
 import {SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 
-import {Svg, SvgProps, svgStencil, transformColorNameToToken} from './Svg';
+import {Svg, SvgProps, svgStencil} from './Svg';
 
 /**
- * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`.
+ * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`. Deprecated in v15.0.0.
  */
 export interface AccentIconStyles {
   /**
@@ -29,7 +29,18 @@ export interface AccentIconStyles {
 /**
  *  @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
  */
-export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' | 'type'> {
+export interface AccentIconProps extends Omit<SvgProps, 'src' | 'type'> {
+  /**
+   * The fill color of the AccentIcon.
+   * @default system.color.bg.primary.strong
+   */
+  color?: SystemPropValues['color'];
+  /**
+   * If true, set the background fill of the AccentIcon to `transparent`.
+   * If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`.
+   * @default false
+   */
+  transparent?: boolean;
   /**
    *  The icon to display from `@workday/canvas-accent-icons-web`.
    */
@@ -42,7 +53,7 @@ export interface AccentIconProps extends AccentIconStyles, Omit<SvgProps, 'src' 
 }
 
 /**
- * @deprecated `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `accentIconStencil` instead.
+ * @deprecated `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `accentIconStencil` instead. Deprecated in v11.0.0.
  */
 export const accentIconStyles = ({
   color = colors.blueberry500,
@@ -83,6 +94,19 @@ export const accentIconStencil = createStencil({
     },
   },
 });
+
+/** @deprecated Deprecated in v11 */
+const transformColorNameToToken = (color?: string) => {
+  if (color && color in base) {
+    return cssVar(base[color as keyof typeof base]);
+  }
+
+  if (color?.startsWith('--')) {
+    return cssVar(color);
+  }
+
+  return color;
+};
 
 /**
  *  @deprecated ⚠️ `AccentIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.

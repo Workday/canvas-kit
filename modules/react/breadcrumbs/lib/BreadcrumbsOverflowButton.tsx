@@ -15,7 +15,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
-export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
+export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
    * style prop applies styles to the whole Flex component,

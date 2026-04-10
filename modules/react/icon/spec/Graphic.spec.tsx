@@ -1,5 +1,4 @@
 import {render} from '@testing-library/react';
-import * as React from 'react';
 
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
 
