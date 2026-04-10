@@ -48,8 +48,6 @@ semantic meaning to allow for better use and theming.
   - [Indicators](#indicators)
   - [Navigation](#navigation)
   - [Popups](#popups)
-- [Deprecations](#deprecations)
-  - [Switch (Main)](#switch-main)
 - [New Components](#new-components)
   - [Switch (Preview)](#switch-preview)
 - [Theming](#theming)
@@ -57,6 +55,7 @@ semantic meaning to allow for better use and theming.
 - [Deprecations](#deprecations)
   - [Accent Icon](#accent-icon)
   - [Applet Icon](#applet-icon)
+  - [Switch (Main)](#switch-main)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
 	- [Side Panel (Deprecated)](#side-panel-deprecated)
@@ -550,21 +549,6 @@ If you'd like to see the visual differences between `v14` with `v3` tokens and `
 
 `Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
 
-## Deprecations
-
-We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
-in a future major release. This signals consumers to migrate to a more stable alternative before the
-deprecated code is removed.
-
-### Switch (Main)
-
-**PR:** [#3854](https://github.com/Workday/canvas-kit/pull/3854)
-
-We've deprecated the `Switch` component in `@workday/canvas-kit-react` Main package. Please use the
-`Switch` component in our Preview package `@workday/canvas-kit-preview-react`.
-
-> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however, the styles have changed.
-
 ## New Components
 
 ### Switch (Preview)
@@ -616,6 +600,15 @@ We recommend migrating to **Expressive Icons**, which are more flexible and alig
 
 The Applet Icon set has been **deprecated** and will be removed in a future major version.
 Please migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
+
+### Switch (Main)
+
+**PR:** [#3854](https://github.com/Workday/canvas-kit/pull/3854)
+
+We've deprecated the `Switch` component in `@workday/canvas-kit-react` Main package. Please use the
+`Switch` component in our Preview package `@workday/canvas-kit-preview-react`.
+
+> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however, the styles have changed.
 
 ## Removals
 
