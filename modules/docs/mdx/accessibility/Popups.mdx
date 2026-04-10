@@ -4,28 +4,37 @@ import {PopupAriaOwns} from './examples/Popups/PopupAriaOwns';
 
 <Meta title="Guides/Accessibility/Inline Popups" />
 
-# Accessibility for Popups
+# How screen readers read Popups
 
-By default, `Popup.Popper` portals content to the bottom of the `document.body`. Since screen
-readers depend on DOM order, users may hear the rest of the page content under the popup before
-discovering the popup itself and its content. This can represent a significant barrier to users.
-While properly managing the keyboard focus is a good mitigation to help users move forward, it will
-not correct the reading order of content.
+A **screen reader** is software that reads the page out loud and lets people navigate with the
+keyboard (and sometimes a braille display). It does not “see” the layout the way sighted users do.
+It walks through the page in a sequence that usually matches the **order of elements in the
+DOM**—roughly, the order nodes appear in the HTML tree.
 
-**None of these examples use focus traps.** For modal dialogs with overlay and focus trap, check out
+That matters for popups: if the popup’s markup is **far away** from the control that opened it in
+the DOM, the screen reader may read a lot of other page content **before** it reaches the popup. The
+user might not realize the popup is there, or they might hear unrelated content mixed in with the
+popup experience.
+
+**Moving keyboard focus** into the popup when it opens helps people continue interacting, but it
+does **not** change that underlying reading sequence. So focus management and reading order are
+related problems; you often need to address both.
+
+**None of these examples use focus traps.** For modal dialogs with an overlay and focus trap, use
 the [**Modal**](?path=/docs/components-popups-modal--docs) component instead.
 
-**`useInitialFocus`:** Each example moves focus into the popup when it opens (typically a Close 'X'
-icon button near the top of the popup or the least destructive control). Screen readers give **no
-indication that the popup appeared** without moving focus into the popup.
+**`useInitialFocus`:** When the popup opens, each example moves focus into the popup (often to a
+Close control or another safe first stop). That matters because **many screen readers only announce
+new content when focus moves**. If focus stays on the trigger, the user may get **no cue** that a
+popup appeared. When choosing not to use `useInitialFocus`, consider the following:
 
-- In some situations, it may be beneficial to add `aria-expanded={true | false}` to the
-  `Popup.Target` for indicating the state of the popup.
-- Adding `aria-haspopup="dialog"` to the `Popup.Target` may be useful for indicating that a button
-  will present a dialog. **However,** screen readers which do not support this `"dialog"` token
-  value will fall back to `true` and in many cases assume a `menu` is attached—not a dialog. For
-  this reason, **we do not recommend adding this attribute to the `Popup.Target`** unless building a
-  [**menu button**](?path=/docs/components-popups-menu--docs) pattern.
+- Use `aria-expanded={true | false}` on `Popup.Target` so assistive tech can report whether the
+  popup is open or closed.
+- Use `aria-haspopup="dialog"` on `Popup.Target` as a hint that the control opens a dialog.
+  **Caveat:** some older screen readers do not understand the `"dialog"` value. They may treat it
+  like a generic popup and **announce “menu”** even when you built a dialog. For that reason, we
+  **strongly recommend** testing with your supported browsers and screen reader combinations during
+  development.
 
 ## 1. Inline popup with `portal={false}`
 
@@ -41,17 +50,23 @@ trigger (with `PopupStack.pushStackContext`), see
 
 ## 2. Reading order with `aria-owns`
 
-Keep the default portal to the bottom of the document `body`. Add a sibling `<div>` after
-`Popup.Target` with `aria-owns` pointing at the portaled content `Popup.Card`. **Tradeoff:**
-**Assistive technology support for `aria-owns` is uneven**, so logical reading order is not
-guaranteed everywhere. You still need **explicit focus hooks** (e.g. `useFocusRedirect`) because
-**keyboard tab order follows the real DOM**, not the remapped accessibility tree. Combine with
-**`useInitialFocus`** so screen readers announce the popup when it opens.
+You can keep the default portal (content at the bottom of `body`) and still try to **re-parent** the
+popup in the **accessibility tree**: add a sibling element after `Popup.Target` and set
+**`aria-owns`** to the id of the portaled `Popup.Card`. Some assistive technologies will then treat
+that card as “owned” by the trigger for browsing and announcements.
 
-The Canvas Kit [**Dialog**](?path=/docs/components-popups-dialog--docs) automatically includes this
-pattern in the component.
+**Tradeoffs:**
 
-For another example of using `aria-owns` to manage reading order, see
+- **Support for `aria-owns` varies.** Do not assume every combination of browser and screen reader
+  will honor it the same way.
+- **Tab order still follows the real DOM.** `aria-owns` does not move focus targets. You may still
+  need helpers like **`useFocusRedirect`** so keyboard users can reach the popup predictably.
+- Combine with **`useInitialFocus`** so opening the popup still moves focus and gives a clear
+  announcement where supported.
+
+The Canvas Kit [**Dialog**](?path=/docs/components-popups-dialog--docs) builds this pattern in.
+
+Another `aria-owns` example:
 [Advanced Tables > Table With Filterable Column Headers](?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
 
 <ExampleCodeBlock code={PopupAriaOwns} />
