@@ -64,52 +64,56 @@ popup behaviors. For accessibility, these behaviors should be included most of t
 ### Initial Focus
 
 If you want focus to move to a specific element when the popup is opened, set the `initialFocusRef`
-of the model. Check with accessibility before doing this. The following example sets the focus on
-the "OK" button with an `aria-describedby` pointing to the model's `id` state so screen readers
-properly announce the message of the popup when focus is changed to the button. By default, focus
-will be placed on the first focusable element when the popup is opened.
+of the model. This is useful for popups that don't have a Close icon button near the top right of
+the popup. In general, we recommend setting focus to the first interactive component inside the
+popup that is the least destructive action.
 
 <ExampleCodeBlock code={InitialFocus} />
+
+> **Accessibility Note**: When initial focus lands on a control **below** the title (such as the OK
+> button in the example above), assign a unique `id` to supplementary text and pass
+> `aria-describedby` on `Popup.Card`. This augments the included `aria-labelledby` reference to
+> `Popup.Heading` so screen readers can announce both the heading and any supplementary text
+> automatically. When initial focus is on the heading itself, add `tabIndex={-1}` to `Popup.Heading`
+> so the title can receive programmatic focus. Choose where focus goes based on your product and
+> accessibility requirements.
 
 ### Focus Redirect
 
 Focus management is important to accessibility of popup contents. The following example shows
 `useFocusRedirect` being used to manage focus in and out of a Popup. This is very useful for
-Dialog-style popups. Since `Popup.Popper` renders contents to the bottom of the document body,
-`aria-owns` is used for screen readers that support it. This effectively treats a Popup like it
-exists in between the buttons while it is opened. Screen readers will navigate the content as if the
-content was not portalled to the bottom of the document body. Focus redirection tries to treat the
-Popup as if it were inline to the document. Tabbing out of the Popup will close the Popup and move
-focus to the next appropriate element.
-
-> **Note**: Safari does not support `aria-owns`. This means that the contents of the Popup will
-> appears out of order to Safari + VoiceOver users. We render popups at the bottom of the
-> document.body to ensure proper rendering. You could use `portal=false` on the `Popper` component,
-> but that would risk incorrect rendering in all browsers.
+non-modal popups. Focus redirection tries to treat the Popup as if it were inline to the document.
+Tabbing out of the Popup will close the Popup and move focus to an adjacent focusable element.
 
 <ExampleCodeBlock code={FocusRedirect} />
+
+> **Accessibility Note**: The `useFocusRedirect` hook **will not** have any effect on the reading
+> order of a screen reader. Screen reader users may get confused or disoriented when popups are
+> portalled to the bottom of the document body. In this example, we're testing the use of
+> `aria-owns` on a sibling `<div>` element pointing to the `Popup.Card` component. This remaps the
+> hierarchy of the accessibility tree (in supported browsers) to address the reading order problem.
+> For more information, see
+> [Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
 
 ### Focus Trapping
 
 Focus trapping is similar to the [Focus Redirect](#focus-redirect) example, but will trap focus
-inside the popup instead of redirecting focus, it will be trapped inside the Popup. This is most
-useful for modal dialogs where the modal must be interacted with before normal interaction can
-continue.
-
-> **Note**: Using focus trapping outside a Modal context can give users a different experience
-> depending on how they interact with your application. Focus trapping will not prevent mouse users
-> from breaking out of a focus trap, nor will it prevent screen reader users from using virtual
-> cursors from breaking out. Modals should use additional techniques to truely "trap" focus into the
-> Popup to provide a consistent experience for all users.
+inside the popup instead of redirecting focus to adjacent focusable elements. This is necessary for
+modal dialogs where users must focus on the contents of the dialog before proceeding.
 
 <ExampleCodeBlock code={FocusTrap} />
 
+> **Accessibility Note**: Focus trapping will not prevent mouse users from breaking out of a focus
+> trap, nor will it prevent screen reader users from using virtual reading cursors from breaking
+> out. Consider using [Modal](/components/popups/modal/) instead when you need to focus users'
+> attention on a specific task inside of a popup..
+
 ### Multiple Popups
 
-If you need multiple Popups within the same component, you can create multiple models and pass a
-unique model to each Popup. Below is an example of 2 different popups within the same component.
-Since each Popup gets its own model, each Popup behaves independently. The same technique can be
-used for nested Popups.
+You can render more than one `Popup` in the same view by giving each its own model. This example
+pairs `Popup` with `useDialogModel` and `useModalModel` so you can compare **focus redirection**
+(Tab / Shift + Tab can move focus out of the first popup) and **focus trapping** (focus stays inside
+the second popup until it closes). Opening one does not close the other.
 
 <ExampleCodeBlock code={MultiplePopups} />
 
@@ -126,6 +130,11 @@ preserved.
 
 <ExampleCodeBlock code={NestedPopups} />
 
+> **Accessibility Note**: In this example, observe how users can traverse both opened popups using
+> the keyboard. This is likely to be a confusing experience for users and may necessitate focus
+> trapping inside each popup with careful consideration for setting initial focus and returning
+> focus.
+
 ### Custom Target
 
 It is common to have a custom target for your popup. Use the `as` prop to use your custom component.
@@ -140,6 +149,12 @@ requires a `label` prop.
 > Without this, the Popup will open at the top-left of the window instead of around the target.
 
 <ExampleCodeBlock code={CustomTarget} />
+
+> **Accessibility Note**: Custom targets must be keyboard focusable, otherwise users will not be
+> able to access the popup. Bear in mind that click handlers only work with the keyboard when
+> applied to HTML `<button>` elements and it is **strongly recommended** to base your custom target
+> on a `<button>` element. Otherwise, you will be required to build in your own custom keyboard
+> event handlers for invoking the popup.
 
 ### Full Screen API
 
@@ -177,6 +192,18 @@ The Popup component automatically handles right-to-left rendering.
 > **Note:** This example shows an inaccessible open card for demonstration purposes.
 
 <ExampleCodeBlock code={RTL} />
+
+## Accessibility
+
+Popup content is usually portaled to the bottom of the `document.body`, which can affect **reading
+order for screen readers** and **keyboard focus order**. For more information about Popup
+accessibility, check out our documentation at
+[Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
+
+- For non-modal dialogs with `aria-owns` built-in to improve reading order for screen readers (that
+  support it), check out the [**Dialog**](/components/popups/dialog/) component.
+- For modal dialogs with built-in overlays and focus traps, check out the
+  [**Modal**](/components/popups/modal/) component.
 
 ## Component API
 

@@ -1,0 +1,72 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InlinePopupNoPortal} from './examples/Popups/InlinePopupNoPortal';
+import {PopupAriaOwns} from './examples/Popups/PopupAriaOwns';
+
+<Meta title="Guides/Accessibility/Inline Popups" />
+
+# How screen readers read Popups
+
+A **screen reader** is software that reads the page out loud and lets people navigate with the
+keyboard (and sometimes a braille display). It does not “see” the layout the way sighted users do.
+It walks through the page in a sequence that usually matches the **order of elements in the
+DOM**—roughly, the order nodes appear in the HTML tree.
+
+That matters for popups: if the popup’s markup is **far away** from the control that opened it in
+the DOM, the screen reader may read a lot of other page content **before** it reaches the popup. The
+user might not realize the popup is there, or they might hear unrelated content mixed in with the
+popup experience.
+
+**Moving keyboard focus** into the popup when it opens helps people continue interacting, but it
+does **not** change that underlying reading sequence. So focus management and reading order are
+related problems; you often need to address both.
+
+**None of these examples use focus traps.** For modal dialogs with an overlay and focus trap, use
+the [**Modal**](?path=/docs/components-popups-modal--docs) component instead.
+
+**`useInitialFocus`:** When the popup opens, each example moves focus into the popup (often to a
+Close control or another safe first stop). That matters because **many screen readers only announce
+new content when focus moves**. If focus stays on the trigger, the user may get **no cue** that a
+popup appeared. When choosing not to use `useInitialFocus`, consider the following:
+
+- Use `aria-expanded={true | false}` on `Popup.Target` so assistive tech can report whether the
+  popup is open or closed.
+- Use `aria-haspopup="dialog"` on `Popup.Target` as a hint that the control opens a dialog.
+  **Caveat:** some older screen readers do not understand the `"dialog"` value. They may treat it
+  like a generic popup and **announce “menu”** even when you built a dialog. For that reason, we
+  **strongly recommend** testing with your supported browsers and screen reader combinations during
+  development.
+
+## 1. Inline popup with `portal={false}`
+
+Set `portal={false}` on `Popup.Popper` so the popup renders in the DOM next to its target. Reading
+order follows document order. Use **`useInitialFocus`**, **`useReturnFocus`**, and the usual close
+hooks. **Tradeoff:** the popup is constrained by ancestor `overflow` and positioning context.
+
+<ExampleCodeBlock code={InlinePopupNoPortal} />
+
+For the same reading-order goal using a **portaled** popup mounted into a sentinel next to the
+trigger (with `PopupStack.pushStackContext`), see
+[**Testing > Inline Portals**](?path=/docs/guides-accessibility-testing-inline-portals--docs).
+
+## 2. Reading order with `aria-owns`
+
+You can keep the default portal (content at the bottom of `body`) and still try to **re-parent** the
+popup in the **accessibility tree**: add a sibling element after `Popup.Target` and set
+**`aria-owns`** to the id of the portaled `Popup.Card`. Some assistive technologies will then treat
+that card as “owned” by the trigger for browsing and announcements.
+
+**Tradeoffs:**
+
+- **Support for `aria-owns` varies.** Do not assume every combination of browser and screen reader
+  will honor it the same way.
+- **Tab order still follows the real DOM.** `aria-owns` does not move focus targets. You may still
+  need helpers like **`useFocusRedirect`** so keyboard users can reach the popup predictably.
+- Combine with **`useInitialFocus`** so opening the popup still moves focus and gives a clear
+  announcement where supported.
+
+The Canvas Kit [**Dialog**](?path=/docs/components-popups-dialog--docs) builds this pattern in.
+
+Another `aria-owns` example:
+[Advanced Tables > Table With Filterable Column Headers](?path=/docs/guides-accessibility-examples-advanced-tables--docs#filterable-column-headers).
+
+<ExampleCodeBlock code={PopupAriaOwns} />

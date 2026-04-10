@@ -1,0 +1,21 @@
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import {InlinePortalPopup} from './examples/Popups/InlinePortalPopup';
+
+<Meta title="Guides/Accessibility/Testing/Inline Portals" />
+
+## Inline portal with `PopupStack`
+
+This example builds on the patterns described in
+[Guides > Accessibility > Inline Popups](?path=/docs/guides-accessibility-inline-popups--docs).
+It does **not** use a focus trap. For modal dialogs with overlay and focus trap, use the
+[**Modal**](?path=/docs/components-popups-modal--docs) component instead.
+
+Keep using a portal (default stacking and positioning) but mount the portal **into a sentinel
+element** placed right after the trigger. Call `PopupStack.pushStackContext(sentinelElement)` while
+the popup is open so new stack items append to that sentinel instead of `body`. **Tradeoff:** You
+still get **ancestor overflow** clipping—the portaled content is a descendant of the sentinel, not
+`document.body`. You must also handle **`PopupStack` context** (push/pop on open/close), which is
+more moving parts than `portal={false}` alone. Use **`useInitialFocus`** so opening the popup is
+announced when focus enters the dialog.
+
+<ExampleCodeBlock code={InlinePortalPopup} />

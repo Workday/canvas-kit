@@ -11,6 +11,22 @@ import {
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+
+const cardStyles = createStyles({
+  width: px2rem(400),
+});
+
+const bodyStyles = createStyles({
+  marginY: system.space.zero,
+});
+
+const flexStyles = createStyles({
+  gap: system.space.x4,
+  padding: system.space.x2,
+});
 
 export const FocusRedirect = () => {
   const model = usePopupModel();
@@ -25,34 +41,33 @@ export const FocusRedirect = () => {
     console.log('Delete Item');
   };
 
-  const popupId = 'popup-test-id';
+  const popupId = useUniqueId();
   const visible = model.state.visibility !== 'hidden';
   React.useLayoutEffect(() => {
     if (visible && model.state.stackRef.current) {
       model.state.stackRef.current.setAttribute('id', popupId);
     }
-  }, [model.state.stackRef, visible]);
+  }, [model.state.stackRef, visible, popupId]);
 
   return (
     <Popup model={model}>
-      <Flex gap="s">
+      <Flex cs={flexStyles}>
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
-        <div aria-owns={popupId} style={{position: 'absolute'}} />
+        <div aria-owns={popupId} style={{position: 'absolute'}}></div>
         <Popup.Popper>
-          <Popup.Card width={400}>
+          <Popup.Card cs={cardStyles}>
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <Box as="p" marginY="zero">
+              <Box as="p" cs={bodyStyles}>
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
             </Popup.Body>
-            <Flex gap="s" padding="xxs">
+            <Flex cs={flexStyles}>
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>
-              {/* Disabled elements should not be focusable and focus should move to the next focusable element */}
-              <Popup.CloseButton disabled>Cancel</Popup.CloseButton>
+              <Popup.CloseButton>Cancel</Popup.CloseButton>
             </Flex>
           </Popup.Card>
         </Popup.Popper>
