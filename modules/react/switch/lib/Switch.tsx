@@ -6,6 +6,9 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {mergeStyles} from '../../layout';
 
+/**
+ * @deprecated ⚠️ `SwitchProps` in Main has been deprecated in v15 and will be removed in a future major version. Please use [`Switch` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) instead.
+ */
 export interface SwitchProps {
   /**
    * If true, set the Switch to the on state.
@@ -193,6 +196,9 @@ const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({
   },
 });
 
+/**
+ * @deprecated ⚠️ `Switch` in Main has been deprecated in v15 and will be removed in a future major version. Please use [`Switch` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) instead.
+ */
 export const Switch = createComponent('input')({
   displayName: 'Switch',
   Component: (

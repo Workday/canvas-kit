@@ -3,8 +3,11 @@ import {Meta} from '@storybook/blocks';
 import {
   ExampleCodeBlock,
   Specifications,
+  StorybookStatusIndicator,
   SymbolDoc,
 } from '@workday/canvas-kit-docs';
+
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 import SwitchStoriesMeta from './Switch.stories';
 import {Basic} from './examples/Basic';
@@ -16,7 +19,18 @@ import {RefForwarding} from './examples/RefForwarding';
 
 <Meta of={SwitchStoriesMeta} />
 
-# Canvas Kit Switch
+# Canvas Kit Switch <StorybookStatusIndicator type="deprecated" />
+
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{p: {marginBlock: 0}}}>
+  <InformationHighlight.Icon />
+  <InformationHighlight.Body>
+    `Switch` in Main has been deprecated and will be removed in a future major version. Please use
+    `Switch` in Preview instead.
+  </InformationHighlight.Body>
+  <InformationHighlight.Link href="https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs">
+    Switch Docs
+  </InformationHighlight.Link>
+</InformationHighlight>
 
 Switch is a selection control that is used to switch between two potential states.
 
