@@ -171,6 +171,15 @@ export const useOverflowListModel = createModelHook({
       overflowTargetSizeRef.current =
         model.state.orientation === 'horizontal' ? data.width || 0 : data.height || 0;
       setOverflowTargetWidth(overflowTargetSizeRef.current);
+      const ids = getHiddenIds(
+        containerSizeRef.current,
+        containerGap,
+        overflowTargetSizeRef.current,
+        itemSizeCacheRef.current,
+        state.selectedIds,
+        config.items
+      );
+      setHiddenIds(ids);
     },
 
     /**
