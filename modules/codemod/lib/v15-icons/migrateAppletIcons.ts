@@ -6,7 +6,7 @@ const SYSTEM_ICONS_PACKAGE = '@workday/canvas-system-icons-web';
 const ICON_MODULE = '@workday/canvas-kit-react/icon';
 const MAIN_REACT_PACKAGE = '@workday/canvas-kit-react';
 
-function importsAccentIconsPackage(j: JSCodeshift, root: ReturnType<JSCodeshift>) {
+function importsAppletIconsPackage(j: JSCodeshift, root: ReturnType<JSCodeshift>) {
   return (
     root.find(j.ImportDeclaration, {
       source: {value: APPLET_ICONS_PACKAGE},
@@ -24,7 +24,7 @@ function importsSystemIconsWithExports(j: JSCodeshift, root: ReturnType<JSCodesh
 }
 
 function fileUsesMigratableIconImports(j: JSCodeshift, root: ReturnType<JSCodeshift>) {
-  if (importsAccentIconsPackage(j, root)) {
+  if (importsAppletIconsPackage(j, root)) {
     return true;
   }
   return importsSystemIconsWithExports(j, root);

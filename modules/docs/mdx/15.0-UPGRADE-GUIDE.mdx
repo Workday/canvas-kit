@@ -26,7 +26,7 @@ semantic meaning to allow for better use and theming.
   - [Avatar](#avatar)
     - [Structure Changes](#structure-changes)
     - [API Differences](#api-differences)
-    - [Size Mapping](#api-differences)
+    - [Size Mapping](#size-mapping)
     - [Code Migration](#code-migration)
   - [Pill](#pill)
   - [Information Highlight](#information-highlight-)
@@ -45,7 +45,7 @@ semantic meaning to allow for better use and theming.
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
   - [Containers](#containers)
-  - [Icons](#icons)
+  - [Icons Updates](#icons-updates)
     - [Svg](#svg)
     - [System Icon](#system-icon)
     - [System Icon Circle](#system-icon-circle)
@@ -140,11 +140,11 @@ yarn remove @workday/canvas-kit-codemod
 
 #### Icon Codemod
 
-For v15, there is a **separated codemod** called `v15-icons` that updates Canvas Kit icons usage
+For v15, there is a **separate codemod** called `v15-icons` that updates Canvas Kit icons usage
 across your codebase. This codemod will:
 
 - For **system icons**:
-  - Replace all **deprecated system icon** from `@workday/canvas-system-icons-web` with the correct
+  - Replace all **deprecated system icons** from `@workday/canvas-system-icons-web` with the correct
     new icon name.
 
 - For **accent and applet icons**:
@@ -568,9 +568,9 @@ tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-
 
 `Card`, `Expandable` and `Tabs`
 
-### Icons
+### Icons Updates
 
-**PR:** [#3732](https://github.com/Workday/canvas-kit/pull/3851)
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
 #### Svg
 
@@ -639,7 +639,7 @@ clarity:
 
 ### Expressive Icon
 
-**PR:** [#3732](https://github.com/Workday/canvas-kit/pull/3851)
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
 The new **Expressive Icon** component brings expressive icons to Canvas Kit. This component replaces
 the previous usage of `Accent` and `Applet` icons
@@ -694,7 +694,7 @@ For more information on theming, view our
 [Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs)
 documentation.
 
-For more information on our tokens, vie\w our
+For more information on our tokens, view our
 [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
 documentation.
 
@@ -711,7 +711,9 @@ We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to co
 in a future major release. This signals consumers to migrate to a more stable alternative before the
 deprecated code is removed.
 
-### Accent Icon
+### Icons
+
+#### Accent Icon
 
 **PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
 
@@ -719,12 +721,18 @@ The Accent Icon set has been **deprecated** and will be removed in a future majo
 recommend migrating to **Expressive Icons**, which are more flexible and aligned with our current
 design direction.
 
-### Applet Icon
+#### Applet Icon
 
 **PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
 
 The Applet Icon set has been **deprecated** and will be removed in a future major version. Please
 migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
+
+#### Other icon utilities
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+`validateIconType` and `SpanProps` are deprecated.
 
 ### Switch (Main)
 

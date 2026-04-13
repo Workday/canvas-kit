@@ -49,21 +49,34 @@ export default function transformer(file: FileInfo, api: API) {
           namespaceImportNames.add(specifier.local.name);
         }
       });
-      nodePath.value.specifiers = nodePath.value.specifiers?.map(specifier => {
-        if (specifier.type === 'ImportSpecifier') {
-          const migration = systemIconMigration.find(migration =>
-            compareIconNames(specifier.imported.name, migration.deprecated)
-          );
+      const seenImportedNames = new Set<string>();
+      nodePath.value.specifiers = nodePath.value.specifiers
+        ?.map(specifier => {
+          if (specifier.type === 'ImportSpecifier') {
+            const migration = systemIconMigration.find(migration =>
+              compareIconNames(specifier.imported.name, migration.deprecated)
+            );
 
-          if (migration) {
-            const newLocal =
-              specifier.local?.name !== specifier.imported.name ? specifier.local : null;
-            return j.importSpecifier(j.identifier(toCamelCase(migration.fallback)), newLocal);
+            if (migration) {
+              const newLocal =
+                specifier.local?.name !== specifier.imported.name ? specifier.local : null;
+              return j.importSpecifier(j.identifier(toCamelCase(migration.fallback)), newLocal);
+            }
           }
-        }
 
-        return specifier;
-      });
+          return specifier;
+        })
+        .filter(specifier => {
+          if (specifier.type !== 'ImportSpecifier') {
+            return true;
+          }
+          const name = specifier.imported.name;
+          if (seenImportedNames.has(name)) {
+            return false;
+          }
+          seenImportedNames.add(name);
+          return true;
+        });
     });
 
   root

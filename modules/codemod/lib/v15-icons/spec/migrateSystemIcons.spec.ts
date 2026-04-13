@@ -5,7 +5,7 @@ import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe('updateCardVariant', () => {
+describe('migrateSystemIcons', () => {
   it('should not update other icons', () => {
     const input = stripIndent`
       import {accountsIcon} from 'other-package'
@@ -81,6 +81,28 @@ describe('updateCardVariant', () => {
       import * as canvasIcons from '@workday/canvas-system-icons-web'
 
       <SystemIcon icon={canvasIcons.catalogIcon} />
+    `;
+
+    expectTransform(input, expected);
+  });
+
+  it('should correctly update multiple imports', () => {
+    const input = stripIndent`
+      import {accountsIcon, catalogIcon} from '@workday/canvas-system-icons-web';
+      
+      <>
+        <SystemIcon icon={accountsIcon} />
+        <SystemIcon icon={catalogIcon} />
+      </>
+    `;
+
+    const expected = stripIndent`
+      import { catalogIcon } from '@workday/canvas-system-icons-web';
+
+      <>
+        <SystemIcon icon={catalogIcon} />
+        <SystemIcon icon={catalogIcon} />
+      </>
     `;
 
     expectTransform(input, expected);
