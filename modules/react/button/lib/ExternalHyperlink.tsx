@@ -23,6 +23,7 @@ export const externalHyperlinkStencil = createStencil({
     [externalHyperlinkIconPart]: {
       verticalAlign: 'text-top',
       [systemIconStencil.vars.color]: 'currentColor',
+      // This is still going to be `1em` to stay consistent with the font-size of the link.
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

@@ -9,9 +9,9 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
@@ -35,7 +35,8 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
     display: 'flex',
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
-    [systemIconStencil.vars.size]: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
     [chevronRightIconPart]: {
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       height: cssVar(system.size.sm, system.space.x8),
