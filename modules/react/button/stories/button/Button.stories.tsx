@@ -8,6 +8,7 @@ import {PrimaryInverse as PrimaryInverseExample} from './examples/PrimaryInverse
 import {Secondary as SecondaryExample} from './examples/Secondary';
 import {SecondaryInverse as SecondaryInverseExample} from './examples/SecondaryInverse';
 import {Tertiary as TertiaryExample} from './examples/Tertiary';
+import {TertiaryDSROff as TertiaryDSROffExample} from './examples/TertiaryDSROff';
 import {TertiaryInverse as TertiaryInverseExample} from './examples/TertiaryInverse';
 import {ThemeOverrides as ThemeOverridesExample} from './examples/ThemeOverrides';
 
@@ -39,13 +40,15 @@ export const Tertiary = {
 export const TertiaryInverse = {
   render: TertiaryInverseExample,
 };
+export const TertiaryDSROff = {
+  render: TertiaryDSROffExample,
+};
 export const Delete = {
   render: DeleteExample,
 };
 export const CustomStyles = {
   render: CustomStylesExample,
 };
-
 export const ThemeOverrides = {
   render: ThemeOverridesExample,
 };
