@@ -2168,8 +2168,8 @@ export const expressiveIconMigration = [
     ],
   },
   {
-    newName: 'Life Saver',
-    newIcon: 'life-saver',
+    newName: 'Lifesaver',
+    newIcon: 'lifesaver',
     oldNames: [
       {
         icon: 'life-saver',
