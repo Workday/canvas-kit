@@ -5,6 +5,7 @@ import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
+import {v13TertiaryButtonStencil} from './deprecated/v13TertiaryButtonStencil';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -16,6 +17,10 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
+  /**
+   * @default true
+   */
+  'data-dsr'?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
@@ -316,6 +321,13 @@ const tertiaryButtonStencil = createStencil({
   ],
 });
 
+function setStencil(stencilConfig: {}, dataDSR: boolean) {
+  if (dataDSR) {
+    return tertiaryButtonStencil(stencilConfig);
+  }
+  return v13TertiaryButtonStencil(stencilConfig);
+}
+
 export const TertiaryButton = createComponent('button')({
   displayName: 'TertiaryButton',
   Component: (
@@ -327,6 +339,7 @@ export const TertiaryButton = createComponent('button')({
       iconPosition,
       grow,
       cs,
+      'data-dsr': dataDSR = true,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -349,12 +362,15 @@ export const TertiaryButton = createComponent('button')({
         iconPosition={iconPosition}
         grow={grow}
         cs={[
-          tertiaryButtonStencil({
-            size,
-            variant,
-            grow,
-            iconPosition: baseIconPosition,
-          }),
+          setStencil(
+            {
+              grow,
+              iconPosition: baseIconPosition,
+              size,
+              variant,
+            },
+            dataDSR
+          ),
           cs,
         ]}
         {...elemProps}
