@@ -12,7 +12,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, cssVar, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {TextInput} from './TextInput';
