@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {createComponent, styled, StyledType} from '@workday/canvas-kit-react/common';
-import {colors, commonColors, depth, type, space} from '@workday/canvas-kit-react/tokens';
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {StyledType, createComponent, styled} from '@workday/canvas-kit-react/common';
+import {colors, commonColors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 const CookieBannerItem = createComponent('div')({
   displayName: 'CookieBanner.Item',

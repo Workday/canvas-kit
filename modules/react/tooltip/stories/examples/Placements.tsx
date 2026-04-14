@@ -1,7 +1,8 @@
 import React from 'react';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {Card} from '@workday/canvas-kit-react/card';
 import {Placement} from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

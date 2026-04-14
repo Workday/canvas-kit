@@ -1,5 +1,5 @@
 import {QualifiedNameValue} from '../../docgen/docTypes';
-import {registerWidget, Value} from '../Value';
+import {Value, registerWidget} from '../Value';
 
 registerWidget<QualifiedNameValue>('qualifiedName', ({value}) => {
   return (

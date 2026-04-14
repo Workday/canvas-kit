@@ -1,6 +1,8 @@
-import React from 'react';
 import {render} from '@testing-library/react';
+import React from 'react';
+
 import {CountBadge, CountBadgeProps} from '../index';
+
 const context = describe;
 
 describe('CountBadge', () => {

@@ -1,5 +1,5 @@
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';

@@ -1,18 +1,18 @@
-import React from 'react';
 import {keyframes} from '@emotion/react';
+import React from 'react';
 
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SystemIconCircle} from '@workday/canvas-kit-react/icon';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
-import {patternIcon} from '@workday/canvas-system-icons-web';
-import {styled, StyledType} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {patternIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const fadeOut = keyframes`
   from {
@@ -24,8 +24,21 @@ const fadeOut = keyframes`
   }
 `;
 
-const StyledSimulation = styled(Box)<StyledType>({
-  pointerEvents: 'none',
+const boxStencil = createStencil({
+  base: {
+    pointerEvents: 'none',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+  },
+  modifiers: {
+    loading: {
+      true: {
+        animation: `${fadeOut} 150ms ease-out forwards`,
+      },
+    },
+  },
 });
 
 export const Simulation = () => {
@@ -63,7 +76,7 @@ export const Simulation = () => {
 
   return (
     <Box>
-      <Box marginBottom="l">
+      <Box cs={{marginBottom: system.gap.xl}}>
         <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />
@@ -76,34 +89,36 @@ export const Simulation = () => {
       </Box>
       <Card>
         <Card.Body>
-          <Box minHeight={180} position="relative">
+          <Box cs={{minHeight: px2rem(180), position: 'relative'}}>
             {loading ? (
-              <StyledSimulation
-                position="absolute"
-                top={0}
-                left={0}
-                width="100%"
-                animation={!loading ? `${fadeOut} 150ms ease-out forwards` : undefined}
-              >
+              <Box cs={boxStencil({loading})}>
                 <Skeleton>
-                  <Flex alignItems="center">
+                  <Flex cs={{alignItems: 'center'}}>
                     <Skeleton.Shape
-                      width={space.xl}
-                      height={space.xl}
-                      borderRadius={borderRadius.circle}
+                      cs={{
+                        width: system.size.md,
+                        height: system.size.md,
+                        borderRadius: system.shape.full,
+                      }}
                     />
-                    <Box flex={1} marginLeft="xs">
+                    <Box cs={{flex: 1, marginLeft: calc.add(system.gap.sm, system.gap.xs)}}>
                       <Skeleton.Header />
                     </Box>
                   </Flex>
                   <Skeleton.Text lineCount={3} />
                 </Skeleton>
-              </StyledSimulation>
+              </Box>
             ) : (
               <Box>
-                <Flex alignItems="center" display="inline-flex" marginBottom="s">
+                <Flex
+                  cs={{
+                    marginBottom: calc.add(system.gap.sm, system.gap.xs),
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                  }}
+                >
                   <SystemIconCircle icon={patternIcon} />
-                  <Heading as="h3" size="small" margin={`0 0 0 ${space.xxs}`}>
+                  <Heading as="h3" size="small" cs={{margin: `0 0 0 ${system.gap.sm}`}}>
                     Patterns
                   </Heading>
                 </Flex>

@@ -1,8 +1,8 @@
 import React from 'react';
 
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -113,8 +113,8 @@ export const FixedColumn = () => {
           </Table.Row>
         </Table.Head>
         <Table.Body>
-          {exampleData.map(item => (
-            <>
+          {exampleData.map((item, index) => (
+            <React.Fragment key={index}>
               <Table.Row>
                 <Table.Header scope="row" cs={styleOverrides.tableHeaderStyles}>
                   {item.make}
@@ -128,7 +128,7 @@ export const FixedColumn = () => {
                 <Table.Cell>{item.torque}</Table.Cell>
                 <Table.Cell>{item.curbWeight}</Table.Cell>
               </Table.Row>
-            </>
+            </React.Fragment>
           ))}
         </Table.Body>
       </Table>

@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+const model = pascalCaseName => `
 import React from 'react';
 import {createModelHook} from '@workday/canvas-kit-react/common';
 
@@ -40,3 +40,5 @@ export const use${pascalCaseName}Model = createModelHook({
   return {state, events};
 });
 `;
+
+export default model;

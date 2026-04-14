@@ -1,6 +1,7 @@
-import {API, FileInfo, Options, JSXElement, ImportDeclaration, ASTPath} from 'jscodeshift';
-import {getImportRenameMap} from './utils/getImportRenameMap';
+import {API, ASTPath, FileInfo, ImportDeclaration, JSXElement, Options} from 'jscodeshift';
+
 import {hasImportSpecifiers} from '../v6/utils';
+import {getImportRenameMap} from './utils/getImportRenameMap';
 
 const actionBarPackage = '@workday/canvas-kit-react/action-bar';
 
