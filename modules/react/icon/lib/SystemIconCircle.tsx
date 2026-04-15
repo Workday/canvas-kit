@@ -99,7 +99,7 @@ export const systemIconCircleStencil = createStencil({
     // TODO: Revisit token, using v4 token and fallback to v3 token
     height: cssVar(size, cssVar(system.size.md, system.space.x10)),
     // TODO: Revisit token, using v4 token and fallback to v3 token
-    // There is no `component.size` token for `40px` so leaving `size` here.
+    // There is no `component.systemIcon.size.*` token for `40px` so leaving `size` here.
     [systemIconStencil.vars.size]: calc.multiply(
       cssVar(size, cssVar(system.size.md, system.space.x10)),
       0.625
