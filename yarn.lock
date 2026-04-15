@@ -4379,15 +4379,15 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-colors-web/-/canvas-colors-web-2.0.0.tgz#1e50e4ab70a00d8ba6037536a328ac227ce2274f"
   integrity sha512-1gqf/oLeJSqrma0xQxOhWNWky+0JxJ/vbBy3A7VG8m51CJzraTLwKN7HViqJiZM4xHjy61kK9e42IJKVEeLO2Q==
 
-"@workday/canvas-expressive-icons-web@1.0.0-alpha.11":
-  version "1.0.0-alpha.11"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.0-alpha.11.tgz#8920f8a85b1e3f6c097c9843e7ee57d8dea4d5ee"
-  integrity sha512-zRjjJD1DDwF7Y3b9qFk8yPdG3leaBW+EUXSSjUcvW+ibKpVzMyZI4dkHDCLESm/ZResFruRyxiv14Zc6QO1idA==
+"@workday/canvas-expressive-icons-web@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.1.tgz#3cf637ff529d78e28d24123448ed66cf5d3a869d"
+  integrity sha512-TKeJnp2Bjto84XsiFNtq4hGhT18UdbMDT3ylxy1LKG1JBrhPiRCEV9mTgD0zDLsyksMeIFmrS//8ddvoTaA69w==
 
-"@workday/canvas-system-icons-web@4.0.0-alpha.16":
-  version "4.0.0-alpha.16"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.0-alpha.16.tgz#24568bf27f263c74863b72817cee98a2f38d667a"
-  integrity sha512-ZYJF6GI+RuOWsqNcehsvdLlEcOQ6j+sOvdQ5ToxuFEOFeXKBOnHh0rBraqTH6qTgqDIUlr8/45UEacY8emKPCw==
+"@workday/canvas-system-icons-web@4.0.2":
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.2.tgz#39cb8a9178924b32eca6dec8b3d68161a595a534"
+  integrity sha512-KnX04PqCkGAlno+4icGXDXEKp//otcaJwXnCege+Sgarfbk5GihkCiUra8b/wPeiiflIKHGsTHJjshWTesgNcA==
 
 "@workday/canvas-tokens-web@4.2.0":
   version "4.2.0"
