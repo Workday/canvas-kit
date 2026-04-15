@@ -50,7 +50,7 @@
     "@emotion/styled": "^11.6.0",
     "@workday/canvas-kit-react": "^14.3.5",
     "@workday/canvas-kit-styling": "^14.3.5",
-    "@workday/canvas-system-icons-web": "4.0.0-alpha.16",
+    "@workday/canvas-system-icons-web": "4.0.2",
     "@workday/canvas-tokens-web": "4.2.0",
     "@workday/design-assets-types": "^0.3.0"
   },
