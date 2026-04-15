@@ -221,7 +221,7 @@ export const systemIconMigration = [
   },
   {
     deprecated: 'cell-template',
-    fallback: 'dashboard-grid',
+    fallback: 'dashboard-grid-fill',
   },
   {
     deprecated: 'chart',
@@ -1855,9 +1855,9 @@ export const expressiveIconMigration = [
     newIcon: 'receipt-account',
     oldNames: [
       {
-        icon: 'expense-links',
+        icon: 'invoices',
         type: 'applet',
-        name: 'Expense-Links',
+        name: 'Invoices',
       },
     ],
   },
@@ -1866,9 +1866,9 @@ export const expressiveIconMigration = [
     newIcon: 'receipt-forward',
     oldNames: [
       {
-        icon: 'invoices',
+        icon: 'expense-links',
         type: 'applet',
-        name: 'Invoices',
+        name: 'Expense-Links',
       },
     ],
   },
@@ -1951,6 +1951,11 @@ export const expressiveIconMigration = [
         icon: 'scroll-coin',
         type: 'accent',
         name: 'Scroll Coin',
+      },
+      {
+        icon: 'payroll',
+        type: 'applet',
+        name: 'Payroll',
       },
     ],
   },
@@ -3403,9 +3408,9 @@ export const expressiveIconMigration = [
     newIcon: 'document-stack-loop',
     oldNames: [
       {
-        icon: 'papers',
+        icon: 'papers-update',
         type: 'accent',
-        name: 'Papers',
+        name: 'Papers Update',
       },
     ],
   },
@@ -3534,11 +3539,6 @@ export const expressiveIconMigration = [
     newIcon: 'scroll-coin',
     oldNames: [
       {
-        icon: 'payroll',
-        type: 'applet',
-        name: 'Payroll',
-      },
-      {
         icon: 'scroll-seal',
         type: 'accent',
         name: 'Scroll Seal',
@@ -3582,6 +3582,11 @@ export const expressiveIconMigration = [
     newIcon: 'document-stack',
     oldNames: [
       {
+        icon: 'papers',
+        type: 'accent',
+        name: 'Papers',
+      },
+      {
         icon: 'docs',
         type: 'applet',
         name: 'Docs',
@@ -3592,11 +3597,6 @@ export const expressiveIconMigration = [
     newName: 'Document Stack User',
     newIcon: 'document-stack-user',
     oldNames: [
-      {
-        icon: 'papers-update',
-        type: 'accent',
-        name: 'Papers Update',
-      },
       {
         icon: 'not-issued-to-a-product',
         type: 'applet',
@@ -3740,9 +3740,9 @@ export const expressiveIconMigration = [
     newIcon: 'card-chart-user',
     oldNames: [
       {
-        icon: 'time-charts',
-        type: 'accent',
-        name: 'Time Charts',
+        icon: 'custom-dashboards-labor-cost-analysis',
+        type: 'applet',
+        name: 'Custom-Dashboards-Labor-Cost-Analysis',
       },
     ],
   },
@@ -3947,6 +3947,11 @@ export const expressiveIconMigration = [
         type: 'accent',
         name: 'Person Search',
       },
+      {
+        icon: 'hr-recruiting',
+        type: 'applet',
+        name: 'HR-Recruiting',
+      },
     ],
   },
   {
@@ -3965,9 +3970,9 @@ export const expressiveIconMigration = [
     newIcon: 'card-chart-clock',
     oldNames: [
       {
-        icon: 'custom-dashboards-labor-cost-analysis',
-        type: 'applet',
-        name: 'Custom-Dashboards-Labor-Cost-Analysis',
+        icon: 'time-charts',
+        type: 'accent',
+        name: 'Time Charts',
       },
     ],
   },
@@ -5275,13 +5280,7 @@ export const expressiveIconMigration = [
   {
     newName: 'Search',
     newIcon: 'search',
-    oldNames: [
-      {
-        icon: 'hr-recruiting',
-        type: 'applet',
-        name: 'HR-Recruiting',
-      },
-    ],
+    oldNames: [],
   },
   {
     newName: 'Tag Lock',
@@ -5815,9 +5814,9 @@ export const expressiveIconMigration = [
     newIcon: 'card-tools',
     oldNames: [
       {
-        icon: 'guidance-workspace',
+        icon: 'people-workspace',
         type: 'applet',
-        name: 'Guidance-Workspace',
+        name: 'Pex-Workspace',
       },
     ],
   },
@@ -5826,9 +5825,9 @@ export const expressiveIconMigration = [
     newIcon: 'guidance-question',
     oldNames: [
       {
-        icon: 'people-workspace',
+        icon: 'guidance-workspace',
         type: 'applet',
-        name: 'Pex-Workspace',
+        name: 'Guidance-Workspace',
       },
     ],
   },
