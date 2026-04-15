@@ -134,11 +134,13 @@ Add an entry to your MCP servers configuration pointing to your local build:
   "mcpServers": {
     "canvas-kit-mcp-local": {
       "command": "node",
-    }
       "args": ["/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"]
+    }
   }
 }
 ```
+
+In **Cursor**, put the JSON in `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` at the repo root (this project only). Restart Cursor or reload MCP after edits.
 
 Rebuild the server after changes:
 

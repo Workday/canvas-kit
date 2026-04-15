@@ -2,7 +2,7 @@
 
 # Canvas Kit MCP
 
-This Model Context Protocol (MCP) server provides Canvas Kit upgrade guides and design token migration documentation to AI assistants.
+This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, **design token** documentation, and **per-component docs with sample code** (plus optional interactive previews) to AI assistants.
 
 ## Table of Contents
 
@@ -12,9 +12,13 @@ This Model Context Protocol (MCP) server provides Canvas Kit upgrade guides and 
 - [Tools](#tools)
   - [`get-canvas-kit-upgrade-guides`](#get-canvas-kit-upgrade-guides)
   - [`get-canvas-kit-tokens`](#get-canvas-kit-tokens)
+  - [`fetch-component-documentation-example`](#fetch-component-documentation-example)
 - [Resources](#resources)
   - [Upgrade Guides](#upgrade-guides)
   - [Token Documentation](#token-documentation)
+  - [Component examples (`docs://examples/{slug}`)](#component-examples-docsexamplesslug)
+  - [Interactive story previews (`ui://story/{slug}`)](#interactive-story-previews-uistoryslug)
+- [How assistants should use tools vs resources](#how-assistants-should-use-tools-vs-resources)
 - [Source Documentation](#source-documentation)
 - [Contributing](#contributing)
   - [Testing Locally](#testing-locally)
@@ -53,7 +57,7 @@ Add to your MCP servers configuration file:
 ```
 
 Configuration file locations:
-- **Cursor**: `~/.cursor-tutor/config.json` (macOS/Linux) or `%APPDATA%\cursor-tutor\config.json` (Windows)
+- **Cursor**: `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` at a repository root (project only); restart Cursor or reload MCP after changes
 - **Windsurf**: Settings → MCP Servers
 - **VS Code**: Cline/Continue extension settings
 
@@ -112,13 +116,35 @@ Retrieves Canvas Kit design token migration documentation for transitioning to t
 
 **Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
 
+### `fetch-component-documentation-example`
+
+Opens a **Canvas Kit component** in Storybook (URL returned to the user) and returns metadata for assistants, including a link to the full markdown doc for that component.
+
+**Parameters:**
+
+- `story` (required) — Component slug from the tool’s enum (e.g. `buttons`, `menu`, `pill`, `modal`, `tabs`).
+
+**Returns:**
+
+- **Storybook URL** for the component’s docs page (shareable with humans)
+- A **`resource_link`** to `docs://examples/{story}` — prose plus code examples (built from MDX + example sources)
+- Inline preview metadata for clients that support MCP App rendering (`text/html;profile=mcp-app`)
+
+**Use cases:**
+
+- “Show me the Menu / Button / Modal docs” with a live doc link
+- Driving the assistant toward the correct **`docs://examples/{slug}`** resource for copy-pasteable samples
+
 ## Resources
 
-The server exposes documentation resources organized into two categories:
+The server exposes documentation resources in these categories:
 
 ### Upgrade Guides
 
+URI prefix: `docs://upgrade-guides/*`
+
 Version-specific migration documentation covering:
+
 - Breaking changes and deprecations
 - New components and features
 - Styling system migrations (Emotion, CSS variables, `@workday/canvas-kit-styling`)
@@ -127,7 +153,10 @@ Version-specific migration documentation covering:
 
 ### Token Documentation
 
+URI prefix: `docs://tokens/*`
+
 Design token migration and usage guides covering:
+
 - Token system migrations (v2 → v3 → v4)
 - Color palette and semantic color roles
 - Token naming conventions and hierarchy
@@ -135,24 +164,32 @@ Design token migration and usage guides covering:
 - Spacing, shape, size, opacity, and depth tokens
 - OKLCH color space implementation
 
+### Component examples (`docs://examples/{slug}`)
+
+Markdown documentation and **inline code** for each discovered component story. Content is produced at build time from MDX story files (with `ExampleCodeBlock` replaced by real example source). Use these when implementing or explaining APIs.
+
+### Interactive story previews (`ui://story/{slug}`)
+
+Self-contained HTML apps for inline preview where the client supports MCP App resources (`text/html;profile=mcp-app`).
+
 All resources are available to AI assistants through MCP resource URIs.
+
+## How assistants should use tools vs resources
+
+1. **Prefer reading `docs://examples/{slug}`** for prose and sample code when answering implementation questions.
+2. **Call `fetch-component-documentation-example`** when the user should see the Storybook page and/or an interactive preview — not as a substitute for reading the markdown resource when only code is needed.
 
 ## Source Documentation
 
-The documentation files served by this MCP server are maintained in the Canvas Kit repository at [`modules/docs/llm`](../../docs/llm). This directory contains:
-
-- **Upgrade Guides** (`upgrade-guides/`) - Version-specific migration documentation
-- **Token Documentation** (`tokens/`) - Design token guides and migration resources
-- **LLM-Optimized Files** - Specialized documentation formatted for AI assistants
-
-To update the documentation served by this MCP server, modify the files in `modules/docs/llm` and rebuild the MCP package.
+- **Upgrade guides and token LLM docs** live under [`modules/docs/llm`](../../docs/llm) (upgrade guides, token guides, and other LLM-oriented files). Update those files and rebuild the MCP package to refresh bundled resources.
+- **Component example markdown** is generated from Canvas Kit story MDX and example files under `modules/react` and `modules/preview-react` via the MCP build (`build:discover`, `build:apps`). See [`modules/mcp/README.md`](../../README.md) for the pipeline.
 
 ## Contributing
 
 Canvas Kit MCP has two exports:
 
-- `src/cli.js` - Node server that can be invoked via npx for local stdio
-- `src/index.js` - Low-level module exports for extending the server or hosting with other transports
+- `dist/cli.js` — Node server invoked via `npx` for local stdio
+- `dist/index.js` — Module exports for extending the server or hosting with other transports
 
 ### Testing Locally
 
@@ -165,6 +202,8 @@ nvm use 22
 yarn build
 npx @modelcontextprotocol/inspector node dist/cli.js
 ```
+
+Run these commands from the `modules/mcp` package after `yarn build`.
 
 #### Local IDE Testing
 
