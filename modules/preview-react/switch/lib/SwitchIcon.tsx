@@ -11,7 +11,7 @@ export const switchIconStencil = createStencil({
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, system.space.x5),
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
     position: 'absolute',
     transition: 'transform 0ms',
     pointerEvents: 'none',
