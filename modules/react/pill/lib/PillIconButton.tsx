@@ -36,7 +36,7 @@ export const pillIconButtonStencil = createStencil({
     ),
     [systemIconStencil.vars.color]: system.color.fg.strong,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.lg, system.space.x6),
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
     '::after': {
       content: '""',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

@@ -37,7 +37,7 @@ const buttonIconStencil = createStencil({
       extraSmall: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
+        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.xs, px2rem(18)),
       },
       small: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
