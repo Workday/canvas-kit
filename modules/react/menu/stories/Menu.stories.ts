@@ -10,6 +10,7 @@ import {Icons as IconsExample} from './examples/Icons';
 import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 import {Nested as NestedExample} from './examples/Nested';
 import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
+import {MultipleSubmenus as MultipleSubmenusExample} from './examples/MultipleSubmenus';
 
 export default {
   title: 'Components/Popups/Menu',
@@ -44,4 +45,7 @@ export const Nested: Story = {
 };
 export const NestedDynamic: Story = {
   render: NestedDynamicExample,
+};
+export const MultipleSubmenus: Story = {
+  render: MultipleSubmenusExample,
 };

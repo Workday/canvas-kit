@@ -34,9 +34,39 @@ export interface SubmenuProps
   children: React.ReactNode;
 }
 
+const useSubmenuPopperEvents = createElemPropsHook(useMenuModel)((model, ref) => {
+  // We need to share the timer with the target item, but they're different components
+  // Store the timer on the model itself
+  if (!(model as any).UNSTABLE_hideTimer) {
+    (model as any).UNSTABLE_hideTimer = {cancel: () => undefined};
+  }
+
+  const mouseLeaveTimer = useIntentTimer(() => {
+    model.events.hide();
+  }, 300);
+
+  // Store the popper's leave timer cancel function
+  if (!(model as any).UNSTABLE_popperLeaveTimer) {
+    (model as any).UNSTABLE_popperLeaveTimer = {cancel: () => undefined};
+  }
+  (model as any).UNSTABLE_popperLeaveTimer.cancel = () => mouseLeaveTimer.clear();
+
+  return {
+    onMouseEnter() {
+      // Cancel both the target's hide timer and any pending popper leave timer
+      if ((model as any).UNSTABLE_hideTimer) {
+        (model as any).UNSTABLE_hideTimer.cancel();
+      }
+      mouseLeaveTimer.clear();
+    },
+    // Don't use onMouseLeave on the popper - it fires when entering child elements
+    // Instead rely on the target's leave timer and menu items cancelling it
+  };
+});
+
 export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
-  elemPropsHook: useMenuPopper,
+  elemPropsHook: composeHooks(useMenuPopper, useSubmenuPopperEvents),
 })<ExtractProps<typeof Popper>>(({children, ...elemProps}) => {
   return (
     <Popper placement="right-start" popperOptions={defaultMenuPopperOptions} {...elemProps}>
@@ -83,10 +113,23 @@ export const useSubmenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
     const currentTargetIdRef = React.useRef<string>();
+
     const mouseEnterTimer = useIntentTimer(() => {
       model.UNSTABLE_parentModel.events.goTo({id: currentTargetIdRef.current || ''});
       model.events.show(event);
     }, 300);
+
+    const mouseLeaveTimer = useIntentTimer(() => {
+      if (model.state.visibility === 'visible') {
+        model.events.hide();
+      }
+    }, 300);
+
+    // Store the hide timer cancel function on the model so the popper can access it
+    if (!(model as any).UNSTABLE_hideTimer) {
+      (model as any).UNSTABLE_hideTimer = {cancel: () => undefined};
+    }
+    (model as any).UNSTABLE_hideTimer.cancel = () => mouseLeaveTimer.clear();
     return {
       id: model.state.id,
       role: 'menuitem',
@@ -97,10 +140,19 @@ export const useSubmenuTargetItem = composeHooks(
       },
       onMouseEnter(event: React.MouseEvent) {
         currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
+
+        // Clear any pending hide timer
+        mouseLeaveTimer.clear();
+
+        // Start the timer to show this submenu
         mouseEnterTimer.start();
       },
       onMouseLeave() {
+        // Clear the show timer if we leave before it fires
         mouseEnterTimer.clear();
+
+        // Start a timer to hide the submenu
+        mouseLeaveTimer.start();
       },
       onClick(event: React.MouseEvent) {
         // If we're wrapping a target component that doesn't handle ref forwarding, update the

@@ -217,6 +217,26 @@ export const useMenuItem = composeHooks(
       onMouseDown(event: React.MouseEvent) {
         model.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
+      onMouseEnter() {
+        // Cancel the popper leave timer if we're inside a submenu
+        // This prevents the submenu from closing when hovering items inside it
+        if ((model as any).UNSTABLE_popperLeaveTimer) {
+          (model as any).UNSTABLE_popperLeaveTimer.cancel();
+        }
+
+        // Also cancel the target's hide timer
+        if ((model as any).UNSTABLE_hideTimer) {
+          (model as any).UNSTABLE_hideTimer.cancel();
+        }
+
+        // Close any open submenu when hovering over a regular menu item at the parent level
+        if ((model as any).UNSTABLE_openSubmenuRef?.current) {
+          const openSubmenu = (model as any).UNSTABLE_openSubmenuRef.current;
+          // Always try to hide, regardless of current visibility state
+          openSubmenu.events.hide();
+          (model as any).UNSTABLE_openSubmenuRef.current = null;
+        }
+      },
       onClick:
         model.state.mode === 'single'
           ? (event: React.SyntheticEvent) => {
