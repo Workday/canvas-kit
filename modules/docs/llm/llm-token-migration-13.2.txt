@@ -336,21 +336,21 @@ underlying base palette has been updated and the color mappings do not have exac
 Please note that the new chart colors may appear visually different from the previous ones, as the
 underlying base palette has been updated and the color mappings do not have exact equivalents.
 
-| Old Token                           | Old Value                      | New Value    |
-| ----------------------------------- | ------------------------------ | ------------ |
-| `chartingColors[1]`                 | `colors.watermelon200`         | `teal100`    |
-| `chartingColors[2]`                 | `colors.watermelon300`         | `green100`   |
-| `chartingColors[3]`                 | `colors.jewel200`              | `teal200`    |
-| `chartingColors[4]`                 | `colors.jewel300`              | `teal400`    |
-| `chartingColors[5]`                 | `colors.plum200`               | `blue200`    |
-| `chartingColors[6]`                 | `colors.plum300`               | `blue400`    |
-| `chartingColors[7]`                 | `colors.islandPunch200`        | `purple200`  |
-| `chartingColors[8]`                 | `colors.islandPunch300`        | `purple500`  |
-| `chartingColors[9]`                 | `colors.pomegranate200`        | `magenta100` |
-| `chartingColors[10]`                | `colors.pomegranate300`        | `magenta500` |
-| `chartingColors[11]`                | `colors.peach200`              | `coral200`   |
-| `chartingColors[12]`                | `colors.peach400`              | `coral300`   |
-| `chartingColors[13]`                | `colors.cantaloupe200`         | `amber200`   |
+| Old Token                           | Old Value                      | New Value        |
+| ----------------------------------- | ------------------------------ | ---------------- |
+| `chartingColors[1]`                 | `colors.watermelon200`         | `base.teal100`   |
+| `chartingColors[2]`                 | `colors.watermelon300`         | `base.green100`  |
+| `chartingColors[3]`                 | `colors.jewel200`              | `base.teal200`   |
+| `chartingColors[4]`                 | `colors.jewel300`              | `base.teal400`   |
+| `chartingColors[5]`                 | `colors.plum200`               | `base.blue200`   |
+| `chartingColors[6]`                 | `colors.plum300`               | `base.blue400`   |
+| `chartingColors[7]`                 | `colors.islandPunch200`        | `base.purple200` |
+| `chartingColors[8]`                 | `colors.islandPunch300`        | `base.purple500` |
+| `chartingColors[9]`                 | `colors.pomegranate200`        | `base.magenta100` |
+| `chartingColors[10]`                | `colors.pomegranate300`        | `base.magenta500` |
+| `chartingColors[11]`                | `colors.peach200`              | `base.coral200`  |
+| `chartingColors[12]`                | `colors.peach400`              | `base.coral300`  |
+| `chartingColors[13]`                | `colors.cantaloupe200`         | `base.amber200`  |
 | `chartingColors[14]`                | `colors.cantaloupe400`         | `amber300`   |
 | `chartingColors[15]`                | `colors.sourLemon200`          | `amber100`   |
 | `chartingColors[16]`                | `colors.sourLemon400`          | `amber200`   |
