@@ -297,7 +297,8 @@ themeable, understandable, and consistent.
 ## Other Mapping
 
 Certain old tokens have been deprecated without direct replacements. In these cases, we recommend
-using raw color values.
+using the closest available base palette or gradient token references shown below rather than
+semantic aliases; only use literal raw color values if no tokenized option exists.
 
 ### Gradients
 
