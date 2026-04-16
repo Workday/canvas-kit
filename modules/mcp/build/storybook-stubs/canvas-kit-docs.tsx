@@ -131,10 +131,12 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
 }
 
 export function SymbolDoc(_props: {name?: string; fileName?: string}) {
+  console.log('SymbolDoc', _props);
   return null;
 }
 
 export function SymbolDescription(_props: {name?: string; fileName?: string}) {
+  console.log('SymbolDescription', _props);
   return null;
 }
 
