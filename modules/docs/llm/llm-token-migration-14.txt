@@ -422,8 +422,9 @@ themeable, understandable, and consistent.
 
 ## Other Mapping
 
-Certain old tokens have been deprecated without direct replacements. In these cases, we recommend
-using raw color values.
+Certain old tokens have been deprecated without direct one-to-one replacements. In these cases, we
+recommend using the closest available token references, such as base palette tokens or gradient
+tokens, rather than legacy token names.
 
 ### Gradients
 
