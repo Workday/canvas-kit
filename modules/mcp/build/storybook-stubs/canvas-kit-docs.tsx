@@ -105,6 +105,7 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
             {raw}
           </SyntaxHighlighter>
           <button
+            type="button"
             title={sent ? 'Sent!' : 'Send code to LLM'}
             onClick={handleSendToLLM}
             style={{
@@ -135,7 +136,6 @@ export function SymbolDoc(_props: {name?: string; fileName?: string}) {
 }
 
 export function SymbolDescription(_props: {name?: string; fileName?: string}) {
-  console.log('SymbolDescription', _props);
   return null;
 }
 
