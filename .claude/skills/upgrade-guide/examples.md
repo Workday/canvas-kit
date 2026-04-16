@@ -7,7 +7,7 @@
 ```mdx
 ### Avatar
 
-**PR:** [#3659](https://github.com/Workday/canvas-kit/issues/3659)
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
 
 We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated
 `Avatar` that was previously in Main.
@@ -43,12 +43,12 @@ different API than the deprecated version.
 
 ##### Prop Changes
 
-| Feature          | Deprecated (Old Main)                             | New (Promoted from Preview)              |
-| ---------------- | ------------------------------------------------- | ---------------------------------------- |
-| Variant          | `variant` (`light`, `dark`)                       | `variant` (`blue`, `amber`, `teal`)      |
-| Size             | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (xxs=24px to xxl=120px)           |
-| User identifier  | `altText` prop                                    | `name` prop                              |
-| Custom initials  | Not supported                                     | `preferredInitials` prop                 |
+| Feature         | Deprecated (Old Main)                             | New (Promoted from Preview)         |
+| --------------- | ------------------------------------------------- | ----------------------------------- |
+| Variant         | `variant` (`light`, `dark`)                       | `variant` (`blue`, `amber`, `teal`) |
+| Size            | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (xxs=24px to xxl=120px)      |
+| User identifier | `altText` prop                                    | `name` prop                         |
+| Custom initials | Not supported                                     | `preferredInitials` prop            |
 
 ##### Code Migration
 
@@ -70,12 +70,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 \`\`\`tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
-<Avatar
-  size="medium"
-  variant="blue"
-  name="John Doe"
-  url="/path/to/image.jpg"
-/>
+<Avatar size="medium" variant="blue" name="John Doe" url="/path/to/image.jpg" />
 \`\`\`
 ```
 
@@ -155,7 +150,7 @@ import {Select} from '@workday/canvas-kit-react/select';
     <Select.Input />
     <Select.Popper>
       <Select.List>
-        {item => <Select.Item>{item.text}</Select.Item>}
+        {(item) => <Select.Item>{item.text}</Select.Item>}
       </Select.List>
     </Select.Popper>
   </Select.Card>
@@ -170,7 +165,7 @@ See the [Select documentation](/components/select) for complete usage examples.
 ### New Major Version Template
 
 ```mdx
-import {Meta} from '@storybook/blocks';
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Guides/Upgrade Guides/v[X].0/Overview" />
 
@@ -235,6 +230,7 @@ Components in Preview are...
 ## Common Phrases and Patterns
 
 ### Helpful Phrases
+
 - "We've provided a codemod..."
 - "We highly recommend..."
 - "Please reach out if you have any questions"
@@ -243,12 +239,14 @@ Components in Preview are...
 - "For more information, see..."
 
 ### Transition Phrases
+
 - "To migrate..."
 - "Moving forward..."
 - "In this version..."
 - "Starting in v[X]..."
 
 ### Warning Phrases
+
 - "⚠️ Breaking Change:"
 - "> **Note:**"
 - "> **Important:**"
@@ -257,22 +255,26 @@ Components in Preview are...
 ## Formatting Patterns
 
 ### PR Links
+
 ```mdx
 **PR:** [#3659](https://github.com/Workday/canvas-kit/issues/3659)
 ```
 
 ### Version References
+
 ```mdx
 **Before in v14**
 **After in v15**
 ```
 
 ### Codemod Indicators
+
 ```mdx
 > 🤖 The codemod will handle this change automatically.
 ```
 
 ### Internal Links
+
 ```mdx
 See [Component Name](#component-name) for more details.
 [Preview](#preview)
@@ -280,11 +282,13 @@ See [Component Name](#component-name) for more details.
 ```
 
 ### External Links
+
 ```mdx
 See the [Component documentation](/components/component-name) for complete usage.
 ```
 
 ### Section Headers with PRs
+
 ```mdx
 ### Component Name
 
@@ -296,14 +300,16 @@ See the [Component documentation](/components/component-name) for complete usage
 ## Table Templates
 
 ### Prop Comparison Table
+
 ```mdx
-| Feature    | Old API         | New API         | Notes           |
-| ---------- | --------------- | --------------- | --------------- |
-| Size       | `size="large"`  | `size="lg"`     | Shortened names |
-| Variant    | `variant=""`    | `appearance=""` | Renamed prop    |
+| Feature | Old API        | New API         | Notes           |
+| ------- | -------------- | --------------- | --------------- |
+| Size    | `size="large"` | `size="lg"`     | Shortened names |
+| Variant | `variant=""`   | `appearance=""` | Renamed prop    |
 ```
 
 ### Size Mapping Table
+
 ```mdx
 | Size Name | Old Size | New Size |
 | --------- | -------- | -------- |
@@ -313,9 +319,10 @@ See the [Component documentation](/components/component-name) for complete usage
 ```
 
 ### Token Mapping Table
+
 ```mdx
-| Old Token           | New Token            | Notes                |
-| ------------------- | -------------------- | -------------------- |
-| `system.space.x4`   | `system.padding.md`  | Use padding for CSS  |
-| `system.space.x2`   | `system.gap.sm`      | Use gap for spacing  |
+| Old Token         | New Token           | Notes               |
+| ----------------- | ------------------- | ------------------- |
+| `system.space.x4` | `system.padding.md` | Use padding for CSS |
+| `system.space.x2` | `system.gap.sm`     | Use gap for spacing |
 ```

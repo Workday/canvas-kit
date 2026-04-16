@@ -85,9 +85,9 @@ any questions.
 
 ### Consistent Terminology
 - Use "deprecated" not "old" or "removed"
-- Use "promoted" for Preview → Main
+- Use "promoted" for component promotions (Preview → Main, Labs → Main, Labs → Preview)
 - Use "Main", "Preview", "Labs" consistently (capitalized)
-- Use exact package names: `@workday/canvas-kit-react`, `@workday/canvas-kit-preview-react`
+- Use exact package names: `@workday/canvas-kit-react`, `@workday/canvas-kit-preview-react`, `@workday/canvas-kit-labs-react`
 
 ## Standard Sections
 
@@ -247,11 +247,12 @@ Use this format for component structure changes:
 ## Section Organization
 
 ### Component Promotions
-List components promoted from Preview → Main
+List components promoted to Main (from Preview or Labs)
 - Include PR links
-- Show before/after imports
+- Show before/after imports with correct package names
 - Document API differences
 - Provide code migration examples
+- If promoting from Labs, may include a subsection for migrating from Preview if both exist
 
 ### Component Updates
 Group by category:
@@ -329,13 +330,14 @@ Before finalizing any upgrade guide, verify:
 ## Common Patterns
 
 ### Promoting Components
-When documenting a component promotion from Preview → Main:
-1. Show import change
+When documenting a component promotion (Preview → Main or Labs → Main):
+1. Show import change with correct source package (labs-react or preview-react)
 2. Note codemod handling
 3. Document structure changes
 4. List prop changes
 5. Show code migration examples
 6. Explain new features if any
+7. If promoting from Labs but Preview version also exists, include a "Migrating from Preview" subsection
 
 ### Breaking Changes
 - Lead with impact

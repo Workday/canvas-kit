@@ -1,4 +1,4 @@
-import { Meta } from '@storybook/addon-docs';
+import {Meta} from '@storybook/addon-docs';
 
 <Meta title="Guides/Upgrade Guides/v15.0/Overview" />
 
@@ -23,24 +23,23 @@ semantic meaning to allow for better use and theming.
   - [Instructions](#instructions)
 - [Component Promotions](#component-promotions)
   - [Avatar](#avatar)
-	- [Structure Changes](#structure-changes)
-	- [API Differences](#api-differences)
-	- [Size Mapping](#api-differences)
-	- [Code Migration](#code-migration)
+    - [Structure Changes](#structure-changes)
+    - [API Differences](#api-differences)
+    - [Size Mapping](#size-mapping)
+    - [Code Migration](#code-migration)
   - [Pill](#pill)
-  - [Information Highlight](#information-highlight-)
   - [Side Panel](#side-panel)
     - [Migrating from Preview](#migrating-from-preview)
     - [Hook API Changes](#hook-api-changes)
     - [Component API Changes](#component-api-changes)
-	- [Code Migration](#code-migration)
+    - [Code Migration](#code-migration-example)
   - [Segmented Control](#segmented-control)
-    - [API Differences](#api-differences)
-    - [Structure Changes](#structure-changes)
+    - [API Differences](#api-differences-1)
+    - [Structure Changes](#structure-changes-1)
     - [Prop Changes](#prop-changes)
-    - [Code Migration](#code-migration)
+    - [Code Migration](#code-migration-1)
     - [New Features](#new-features)
-  - [Information Highlight](#information-highlight-)
+  - [Information Highlight](#information-highlight)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
   - [Inputs](#inputs)
@@ -66,11 +65,6 @@ semantic meaning to allow for better use and theming.
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
-- [Codemod Reference](#codemod-reference)
-  - [What is a Codemod?](#what-is-a-codemod)
-  - [Running a Codemod](#running-a-codemod)
-    - [Instructions](#instructions-1)
-  - [Codemod Transformations for v15](#codemod-transformations-for-v15)
 
 ## Codemod
 
@@ -136,7 +130,7 @@ yarn remove @workday/canvas-kit-codemod
 
 ### Avatar
 
-**PR:** [](https://github.com/Workday/canvas-kit/issues/3659)
+**PR:** [#3659](https://github.com/Workday/canvas-kit/pull/3659)
 
 We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated
 `Avatar` that was previously in Main.
@@ -269,7 +263,7 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 
 **PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
 
-We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated `SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
+We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated `SidePanel` that was previously in Main.
 
 **Before in v14**
 
@@ -571,7 +565,7 @@ The relationship between **system brand tokens** (e.g. `system.color.brand.accen
 
 For more information on theming, view our [Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) documentation.
 
-For more information on our tokens, vie\w our [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) documentation.
+For more information on our tokens, view our [Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs) documentation.
 
 ```tsx
 // This will set the [brand.primary.**] tokens to shades of purple.
