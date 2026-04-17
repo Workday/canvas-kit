@@ -422,9 +422,9 @@ themeable, understandable, and consistent.
 
 ## Other Mapping
 
-Certain old tokens have been deprecated without direct one-to-one replacements. In these cases, we
-recommend using the closest available token references, such as base palette tokens or gradient
-tokens, rather than legacy token names.
+Certain old tokens have been deprecated without direct replacements. In these cases, we recommend
+using the closest available base palette or gradient token references shown below rather than
+semantic aliases; only use literal raw color values if no tokenized option exists.
 
 ### Gradients
 
@@ -478,83 +478,83 @@ underlying base palette has been updated and the color mappings do not have exac
 | `chartingColors[11]`                | `colors.peach200`              | `base.coral200`   |
 | `chartingColors[12]`                | `colors.peach400`              | `base.coral300`   |
 | `chartingColors[13]`                | `colors.cantaloupe200`         | `base.amber200`   |
-| `chartingColors[14]`                | `colors.cantaloupe400`         | `amber300`   |
-| `chartingColors[15]`                | `colors.sourLemon200`          | `amber100`   |
-| `chartingColors[16]`                | `colors.sourLemon400`          | `amber200`   |
-| `chartingColors[17]`                | `colors.watermelon400`         | `green600`   |
-| `chartingColors[18]`                | `colors.watermelon500`         | `green700`   |
-| `chartingColors[19]`                | `colors.jewel400`              | `teal500`    |
-| `chartingColors[20]`                | `colors.jewel500`              | `teal600`    |
-| `chartingColors[21]`                | `colors.plum400`               | `blue600`    |
-| `chartingColors[22]`                | `colors.plum500`               | `blue700`    |
-| `chartingColors[23]`                | `colors.islandPunch400`        | `purple500`  |
-| `chartingColors[24]`                | `colors.islandPunch500`        | `purple600`  |
-| `chartingColors[25]`                | `colors.pomegranate400`        | `magenta500` |
-| `chartingColors[26]`                | `colors.pomegranate600`        | `red700`     |
-| `chartingColors[27]`                | `colors.peach500`              | `coral600`   |
-| `chartingColors[28]`                | `colors.peach600`              | `coral700`   |
-| `chartingColors[29]`                | `colors.cantaloupe500`         | `amber500`   |
-| `chartingColors[30]`                | `colors.cantaloupe600`         | `amber600`   |
-| `chartingColors[31]`                | `colors.sourLemon500`          | `amber300`   |
-| `chartingColors[32]`                | `colors.sourLemon600`          | `amber500`   |
-| `chartingColors[33]`                | `colors.greenApple200`         | `green100`   |
-| `chartingColors[34]`                | `colors.greenApple300`         | `green200`   |
-| `chartingColors[35]`                | `colors.toothpaste200`         | `azure200`   |
-| `chartingColors[36]`                | `colors.toothpaste300`         | `azure300`   |
-| `chartingColors[37]`                | `colors.blueberry200`          | `blue100`    |
-| `chartingColors[38]`                | `colors.blueberry300`          | `blue400`    |
-| `chartingColors[39]`                | `colors.berrySmoothie200`      | `indigo200`  |
-| `chartingColors[40]`                | `colors.blackberry300`         | `indigo400`  |
-| `chartingColors[41]`                | `colors.fruitPunch200`         | `red200`     |
-| `chartingColors[42]`                | `colors.fruitPunch300`         | `red300`     |
-| `chartingColors[43]`                | `colors.rootBeer200`           | `coral100`   |
-| `chartingColors[44]`                | `colors.rootBeer300`           | `coral200`   |
-| `chartingColors[45]`                | `colors.toastedMarshmallow200` | `orange100`  |
-| `chartingColors[46]`                | `colors.toastedMarshmallow400` | `orange200`  |
-| `chartingColors[47]`                | `colors.chiliMango200`         | `coral200`   |
-| `chartingColors[48]`                | `colors.chiliMango400`         | `coral300`   |
-| `chartingColors[49]`                | `colors.greenApple400`         | `green600`   |
-| `chartingColors[50]`                | `colors.greenApple600`         | `green700`   |
-| `chartingColors[51]`                | `colors.toothpaste400`         | `azure500`   |
-| `chartingColors[52]`                | `colors.toothpaste600`         | `azure800`   |
-| `chartingColors[53]`                | `colors.blueberry400`          | `blue600`    |
-| `chartingColors[54]`                | `colors.blueberry600`          | `blue800`    |
-| `chartingColors[55]`                | `colors.blackberry400`         | `indigo500`  |
-| `chartingColors[56]`                | `colors.blackberry600`         | `indigo900`  |
-| `chartingColors[57]`                | `colors.fruitPunch400`         | `red400`     |
-| `chartingColors[58]`                | `colors.fruitPunch600`         | `red700`     |
-| `chartingColors[59]`                | `colors.rootBeer500`           | `amber900`   |
-| `chartingColors[60]`                | `colors.rootBeer600`           | `amber950`   |
-| `chartingColors[61]`                | `colors.toastedMarshmallow500` | `amber500`   |
-| `chartingColors[62]`                | `colors.toastedMarshmallow600` | `amber600`   |
-| `chartingColors[63]`                | `colors.chiliMango500`         | `orange500`  |
-| `chartingColors[64]`                | `colors.chiliMango600`         | `orange600`  |
-| `chartingColors[65]`                | `colors.kiwi200`               | `green100`   |
-| `chartingColors[66]`                | `colors.kiwi400`               | `green500`   |
-| `chartingColors[67]`                | `colors.berrySmoothie200`      | `indigo200`  |
-| `chartingColors[68]`                | `colors.berrySmoothie300`      | `indigo400`  |
-| `chartingColors[69]`                | `colors.grapeSoda200`          | `magenta200` |
-| `chartingColors[70]`                | `colors.grapeSoda300`          | `magenta400` |
-| `chartingColors[71]`                | `colors.cinnamon200`           | `red100`     |
-| `chartingColors[72]`                | `colors.cinnamon300`           | `red300`     |
-| `chartingColors[73]`                | `colors.sourLemon300`          | `amber200`   |
-| `chartingColors[74]`                | `colors.toastedMarshmallow300` | `orange200`  |
-| `chartingColors[75]`                | `colors.peach300`              | `coral300`   |
-| `chartingColors[76]`                | `colors.cinnamon500`           | `red600`     |
-| `chartingColors[77]`                | `colors.cantaloupe300`         | `amber300`   |
-| `chartingColors[78]`                | `colors.chiliMango300`         | `coral300`   |
-| `chartingColors[79]`                | `colors.kiwi300`               | `green200`   |
-| `chartingColors[80]`                | `colors.kiwi500`               | `green500`   |
-| `chartingColors[81]`                | `colors.berrySmoothie400`      | `blue500`    |
-| `chartingColors[82]`                | `colors.berrySmoothie500`      | `blue700`    |
-| `chartingColors[83]`                | `colors.grapeSoda400`          | `purple500`  |
-| `chartingColors[84]`                | `colors.grapeSoda500`          | `purple600`  |
-| `chartingColors[85]`                | `colors.cinnamon400`           | `red400`     |
-| `chartingColors[86]`                | `colors.cinnamon500`           | `red600`     |
-| `chartingColorOffsets.barAndColumn` | `colors.watermelon200`         | `teal100`    |
-| `chartingColorOffsets.pie`          | `colors.jewel300`              | `teal400`    |
-| `chartingColorOffsets.lineAndArea`  | `colors.islandPunch200`        | `purple200`  |
-| `chartingColorOffsets.bubble`       | `colors.peach200`              | `coral200`   |
+| `chartingColors[14]`                | `colors.cantaloupe400`         | `base.amber300`   |
+| `chartingColors[15]`                | `colors.sourLemon200`          | `base.amber100`   |
+| `chartingColors[16]`                | `colors.sourLemon400`          | `base.amber200`   |
+| `chartingColors[17]`                | `colors.watermelon400`         | `base.green600`   |
+| `chartingColors[18]`                | `colors.watermelon500`         | `base.green700`   |
+| `chartingColors[19]`                | `colors.jewel400`              | `base.teal500`    |
+| `chartingColors[20]`                | `colors.jewel500`              | `base.teal600`    |
+| `chartingColors[21]`                | `colors.plum400`               | `base.blue600`    |
+| `chartingColors[22]`                | `colors.plum500`               | `base.blue700`    |
+| `chartingColors[23]`                | `colors.islandPunch400`        | `base.purple500`  |
+| `chartingColors[24]`                | `colors.islandPunch500`        | `base.purple600`  |
+| `chartingColors[25]`                | `colors.pomegranate400`        | `base.magenta500` |
+| `chartingColors[26]`                | `colors.pomegranate600`        | `base.red700`     |
+| `chartingColors[27]`                | `colors.peach500`              | `base.coral600`   |
+| `chartingColors[28]`                | `colors.peach600`              | `base.coral700`   |
+| `chartingColors[29]`                | `colors.cantaloupe500`         | `base.amber500`   |
+| `chartingColors[30]`                | `colors.cantaloupe600`         | `base.amber600`   |
+| `chartingColors[31]`                | `colors.sourLemon500`          | `base.amber300`   |
+| `chartingColors[32]`                | `colors.sourLemon600`          | `base.amber500`   |
+| `chartingColors[33]`                | `colors.greenApple200`         | `base.green100`   |
+| `chartingColors[34]`                | `colors.greenApple300`         | `base.green200`   |
+| `chartingColors[35]`                | `colors.toothpaste200`         | `base.azure200`   |
+| `chartingColors[36]`                | `colors.toothpaste300`         | `base.azure300`   |
+| `chartingColors[37]`                | `colors.blueberry200`          | `base.blue100`    |
+| `chartingColors[38]`                | `colors.blueberry300`          | `base.blue400`    |
+| `chartingColors[39]`                | `colors.berrySmoothie200`      | `base.indigo200`  |
+| `chartingColors[40]`                | `colors.blackberry300`         | `base.indigo400`  |
+| `chartingColors[41]`                | `colors.fruitPunch200`         | `base.red200`     |
+| `chartingColors[42]`                | `colors.fruitPunch300`         | `base.red300`     |
+| `chartingColors[43]`                | `colors.rootBeer200`           | `base.coral100`   |
+| `chartingColors[44]`                | `colors.rootBeer300`           | `base.coral200`   |
+| `chartingColors[45]`                | `colors.toastedMarshmallow200` | `base.orange100`  |
+| `chartingColors[46]`                | `colors.toastedMarshmallow400` | `base.orange200`  |
+| `chartingColors[47]`                | `colors.chiliMango200`         | `base.coral200`   |
+| `chartingColors[48]`                | `colors.chiliMango400`         | `base.coral300`   |
+| `chartingColors[49]`                | `colors.greenApple400`         | `base.green600`   |
+| `chartingColors[50]`                | `colors.greenApple600`         | `base.green700`   |
+| `chartingColors[51]`                | `colors.toothpaste400`         | `base.azure500`   |
+| `chartingColors[52]`                | `colors.toothpaste600`         | `base.azure800`   |
+| `chartingColors[53]`                | `colors.blueberry400`          | `base.blue600`    |
+| `chartingColors[54]`                | `colors.blueberry600`          | `base.blue800`    |
+| `chartingColors[55]`                | `colors.blackberry400`         | `base.indigo500`  |
+| `chartingColors[56]`                | `colors.blackberry600`         | `base.indigo900`  |
+| `chartingColors[57]`                | `colors.fruitPunch400`         | `base.red400`     |
+| `chartingColors[58]`                | `colors.fruitPunch600`         | `base.red700`     |
+| `chartingColors[59]`                | `colors.rootBeer500`           | `base.amber900`   |
+| `chartingColors[60]`                | `colors.rootBeer600`           | `base.amber950`   |
+| `chartingColors[61]`                | `colors.toastedMarshmallow500` | `base.amber500`   |
+| `chartingColors[62]`                | `colors.toastedMarshmallow600` | `base.amber600`   |
+| `chartingColors[63]`                | `colors.chiliMango500`         | `base.orange500`  |
+| `chartingColors[64]`                | `colors.chiliMango600`         | `base.orange600`  |
+| `chartingColors[65]`                | `colors.kiwi200`               | `base.green100`   |
+| `chartingColors[66]`                | `colors.kiwi400`               | `base.green500`   |
+| `chartingColors[67]`                | `colors.berrySmoothie200`      | `base.indigo200`  |
+| `chartingColors[68]`                | `colors.berrySmoothie300`      | `base.indigo400`  |
+| `chartingColors[69]`                | `colors.grapeSoda200`          | `base.magenta200` |
+| `chartingColors[70]`                | `colors.grapeSoda300`          | `base.magenta400` |
+| `chartingColors[71]`                | `colors.cinnamon200`           | `base.red100`     |
+| `chartingColors[72]`                | `colors.cinnamon300`           | `base.red300`     |
+| `chartingColors[73]`                | `colors.sourLemon300`          | `base.amber200`   |
+| `chartingColors[74]`                | `colors.toastedMarshmallow300` | `base.orange200`  |
+| `chartingColors[75]`                | `colors.peach300`              | `base.coral300`   |
+| `chartingColors[76]`                | `colors.cinnamon500`           | `base.red600`     |
+| `chartingColors[77]`                | `colors.cantaloupe300`         | `base.amber300`   |
+| `chartingColors[78]`                | `colors.chiliMango300`         | `base.coral300`   |
+| `chartingColors[79]`                | `colors.kiwi300`               | `base.green200`   |
+| `chartingColors[80]`                | `colors.kiwi500`               | `base.green500`   |
+| `chartingColors[81]`                | `colors.berrySmoothie400`      | `base.blue500`    |
+| `chartingColors[82]`                | `colors.berrySmoothie500`      | `base.blue700`    |
+| `chartingColors[83]`                | `colors.grapeSoda400`          | `base.purple500`  |
+| `chartingColors[84]`                | `colors.grapeSoda500`          | `base.purple600`  |
+| `chartingColors[85]`                | `colors.cinnamon400`           | `base.red400`     |
+| `chartingColors[86]`                | `colors.cinnamon500`           | `base.red600`     |
+| `chartingColorOffsets.barAndColumn` | `colors.watermelon200`         | `base.teal100`    |
+| `chartingColorOffsets.pie`          | `colors.jewel300`              | `base.teal400`    |
+| `chartingColorOffsets.lineAndArea`  | `colors.islandPunch200`        | `base.purple200`  |
+| `chartingColorOffsets.bubble`       | `colors.peach200`              | `base.coral200`   |
 
 Migration Examples
 ==================
