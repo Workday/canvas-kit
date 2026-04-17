@@ -11,6 +11,14 @@ on:
           - '@workday/canvas-tokens-web'
           - '@workday/canvas-system-icons-web'
           - all
+      branch:
+        description: 'Target branch (master, prerelease/minor, or prerelease/major)'
+        required: true
+        type: choice
+        options:
+          - master
+          - prerelease/minor
+          - prerelease/major
 
 permissions:
   contents: write
@@ -23,6 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
+          ref: ${{ inputs.branch }}
           persist-credentials: true
           fetch-depth: 0
 
@@ -44,5 +53,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync ${{ inputs.package }}"
           title: "chore: sync ${{ inputs.package }}"
-          branch: "chore/sync-${{ inputs.package }}"
+          branch: "chore/sync-${{ inputs.package }}-${{ inputs.branch }}"
+          base: ${{ inputs.branch }}
           labels: dependencies

@@ -1,9 +1,57 @@
 version: 2
 updates:
+  # Monitor master branch
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
     allow:
       - dependency-name: "@workday/canvas-tokens-web"
       - dependency-name: "@workday/canvas-system-icons-web"
