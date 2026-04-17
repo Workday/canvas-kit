@@ -137,8 +137,8 @@
   "@stackblitz/sdk": "^1.11.0",
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
-  "@workday/canvas-expressive-icons-web": "1.0.0-alpha.11",
-  "@workday/canvas-system-icons-web": "4.0.0-alpha.16",
+  "@workday/canvas-expressive-icons-web": "1.0.1",
+  "@workday/canvas-system-icons-web": "4.0.2",
   "@workday/canvas-tokens-web": "4.2.0",
   "resolutions": {
     "ansi-regex": "3.0.1",
