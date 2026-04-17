@@ -1,7 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './StatusIndicator.mdx';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+
+import mdxDoc from './StatusIndicator.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Emphasis as EmphasisExample} from './examples/Emphasis';
 import {Icon as IconExample} from './examples/Icon';

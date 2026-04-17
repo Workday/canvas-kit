@@ -1,6 +1,6 @@
-import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
 import {componentParser} from '../plugins/componentParser';
+import {createProgramFromSource} from './createProgramFromSource';
 
 describe('componentParser', () => {
   describe('React.Component', () => {

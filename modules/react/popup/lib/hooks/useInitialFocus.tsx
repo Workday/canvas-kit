@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
-  changeFocus,
   assert,
-  getFirstFocusableElement,
+  changeFocus,
   createElemPropsHook,
+  getFirstFocusableElement,
 } from '@workday/canvas-kit-react/common';
 
 import {usePopupModel} from './usePopupModel';

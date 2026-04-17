@@ -1,13 +1,15 @@
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {checkIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {defaultColorSet} from './defaultColorSet';
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -58,71 +60,6 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   resetLabel?: string;
 }
 
-const defaultColorSet = {
-  blueberry600: '#004387',
-  grapeSoda600: '#7c3882',
-  pomegranate600: '#99003a',
-  cinnamon600: '#a31b12',
-  cantaloupe600: '#c06c00',
-  sourLemon600: '#bd9100',
-  greenApple600: '#217a37',
-  jewel600: '#156973',
-
-  blueberry500: '#005cb9',
-  grapeSoda500: '#97499e',
-  pomegranate500: '#c70550',
-  cinnamon500: '#de2e21',
-  cantaloupe500: '#f38b00',
-  sourLemon500: '#ebb400',
-  greenApple500: '#319c4c',
-  jewel500: '#1a818c',
-
-  blueberry400: '#0875e1',
-  grapeSoda400: '#c860d1',
-  pomegranate400: '#f31167',
-  cinnamon400: '#ff5347',
-  cantaloupe400: '#ffa126',
-  sourLemon400: '#ffc629',
-  greenApple400: '#43c463',
-  jewel400: '#1ea4b3',
-
-  blueberry300: '#40a0ff',
-  grapeSoda300: '#de8ae6',
-  pomegranate300: '#ff5c9a',
-  cinnamon300: '#ff867d',
-  cantaloupe300: '#ffbc63',
-  sourLemon300: '#ffda61',
-  greenApple300: '#5fe380',
-  jewel300: '#44c8d7',
-
-  blueberry200: '#a6d2ff',
-  grapeSoda200: '#fac0ff',
-  pomegranate200: '#ffbdd6',
-  cinnamon200: '#fcc9c5',
-  cantaloupe200: '#fcd49f',
-  sourLemon200: '#ffecab',
-  greenApple200: '#acf5be',
-  jewel200: '#acecf3',
-
-  blueberry100: '#d7eafc',
-  grapeSoda100: '#feebff',
-  pomegranate100: '#ffebf3',
-  cinnamon100: '#ffefee',
-  cantaloupe100: '#ffeed9',
-  sourLemon100: '#fff9e6',
-  greenApple100: '#ebfff0',
-  jewel100: '#ebfdff',
-
-  blackPepper600: '#000000',
-  blackPepper400: '#333333',
-  blackPepper300: '#494949',
-  blackPepper100: '#787878',
-  frenchVanilla500: '#a6a6a6',
-  frenchVanilla400: '#bdbdbd',
-  frenchVanilla200: '#ebebeb',
-  frenchVanilla100: '#ffffff',
-};
-
 export const colorPickerStencil = createStencil({
   parts: {
     button: 'color-picker-button',
@@ -137,12 +74,13 @@ export const colorPickerStencil = createStencil({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBlockStart: system.space.x4,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      marginBlockStart: cssVar(system.gap.md, system.space.x4),
     },
     [inputWrapperPart]: {
       display: 'flex',
       flexDirection: 'column',
-      margin: system.space.zero,
+      margin: 0,
     },
     [buttonPart]: {
       alignSelf: 'flex-end',

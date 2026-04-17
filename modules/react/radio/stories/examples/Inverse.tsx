@@ -1,7 +1,8 @@
 import React from 'react';
-import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {Box} from '@workday/canvas-kit-react/layout';
+
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
 export const Inverse = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');

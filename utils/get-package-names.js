@@ -1,8 +1,8 @@
-const fs = require('fs');
-const path = require('path');
-const util = require('util');
+import fs from 'node:fs';
+import path from 'node:path';
+import {promisify} from 'node:util';
 
-const readdir = util.promisify(fs.readdir);
+const readdir = promisify(fs.readdir);
 
 // Extra scopes supported outside the `modules` folder
 const scopes = ['labs'];
@@ -30,4 +30,6 @@ function getPackages(context) {
 // To test the output of this function, run the following:
 // node -p "require('./commitlint.config.js').rules['scope-enum']().then(val => console.log(val))"
 
-module.exports = getPackages();
+getPackages();
+
+export default getPackages;

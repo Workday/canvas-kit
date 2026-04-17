@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableContent} from './hooks/useExpandableContent';
 import {useExpandableModel} from './hooks/useExpandableModel';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface ExpandableContentProps extends ExtractProps<typeof Box, never> {
   /**
@@ -18,8 +18,10 @@ export interface ExpandableContentProps extends ExtractProps<typeof Box, never> 
 
 export const expandableContentStencil = createStencil({
   base: {
-    background: system.color.bg.transparent.default,
-    padding: `${system.space.x4} ${system.space.x2} ${system.space.x2}`,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.xs, system.space.x2)}`,
   },
 });
 

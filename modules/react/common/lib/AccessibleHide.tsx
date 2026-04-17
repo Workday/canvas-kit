@@ -1,4 +1,5 @@
-import {createStyles, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStyles, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {createComponent} from './utils/components';
 
 /**

@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  composeHooks,
-  createElemPropsHook,
-  useLocalRef,
-  useResizeObserver,
-} from '@workday/canvas-kit-react/common';
+
 import {getCursor} from '@workday/canvas-kit-react/collection';
 import {
   useComboboxInput,
@@ -13,6 +8,13 @@ import {
   useComboboxMoveCursorToSelected,
   useComboboxResetCursorToSelected,
 } from '@workday/canvas-kit-react/combobox';
+import {
+  composeHooks,
+  createElemPropsHook,
+  useLocalRef,
+  useResizeObserver,
+} from '@workday/canvas-kit-react/common';
+
 import {useSelectModel} from './useSelectModel';
 
 /**

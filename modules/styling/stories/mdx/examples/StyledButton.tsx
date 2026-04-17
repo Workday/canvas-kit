@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
-import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {buttonStencil, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {caretDownIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const varStyles = createStyles({
   [buttonStencil.vars.background]: system.color.static.gray.soft,
