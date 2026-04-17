@@ -56,7 +56,6 @@ export const v14TertiaryButtonStencil = createStencil({
     iconPosition: {
       only: {
         padding: 0,
-        [systemIconStencil.vars.color]: system.color.fg.default,
         [systemIconStencil.vars.color]: cssVar(
           v14ButtonColorPropVars.default.icon,
           system.color.fg.strong
