@@ -4,7 +4,7 @@ import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-ki
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {usePillModel} from './usePillModel';
 
@@ -36,7 +36,7 @@ export const pillIconButtonStencil = createStencil({
     ),
     [systemIconStencil.vars.color]: system.color.fg.strong,
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.size]: cssVar(system.size.xs, system.space.x6),
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
     '::after': {
       content: '""',
       // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

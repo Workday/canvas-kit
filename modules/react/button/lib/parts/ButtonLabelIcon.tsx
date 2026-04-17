@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {component, system} from '@workday/canvas-tokens-web';
 
 import {ButtonSizes} from '../types';
@@ -37,7 +37,7 @@ const buttonIconStencil = createStencil({
       extraSmall: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
+        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.xs, system.space.x4),
       },
       small: {
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token

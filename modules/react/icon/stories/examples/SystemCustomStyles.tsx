@@ -42,6 +42,7 @@ export const SystemCustomStyles = () => {
             [systemIconStencil.vars.color]: system.color.fg.success.default,
             [systemIconStencil.vars.accentColor]: system.color.fg.success.strong,
             [systemIconStencil.vars.backgroundColor]: system.color.surface.success.default,
+            // No `component.systemIcon.size.*` token for `40px`. Keeping `size` here for now.
             [systemIconStencil.vars.size]: system.size.lg,
 
             '&:hover .wd-icon-fill': {

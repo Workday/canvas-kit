@@ -7,9 +7,9 @@ import {
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {BreadcrumbsLink} from './BreadcrumbsLink';
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
@@ -39,7 +39,8 @@ export const breadcrumbsItemStencil = createStencil({
     alignItems: 'center',
     display: 'inline-flex',
     whiteSpace: 'nowrap',
-    [systemIconStencil.vars.size]: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
     // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
     [chevronRightIconPart]: {
