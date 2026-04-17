@@ -62,7 +62,7 @@ semantic meaning to allow for better use and theming.
   - [Icons](#icons)
     - [Accent Icon](#accent-icon)
     - [Applet Icon](#applet-icon)
-    - [Other icon utilities][#other-icon-utilities]
+    - [Other icon utilities](#other-icon-utilities)
   - [Switch (Main)](#switch-main)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
@@ -72,6 +72,11 @@ semantic meaning to allow for better use and theming.
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
+- [New Utilities](#new-utilities)
+  - [colorSpace](#colorspace)
+      - [Darken](#darken)
+      - [Hover](#hover)
+      - [Pressed](#pressed)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -922,6 +927,98 @@ The following exports are no longer available:
 
 Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
 `@workday/canvas-kit-react`.
+
+## New Utilities
+
+### colorSpace
+
+We have added a new utility called [colorSpace](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#colorspace) and it has three functions: [darken](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#darken), [hover](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#hover) and [pressed](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#pressed).
+
+These utilities are meant to be used for interactive states (i.e. `:hover`, `:active` on buttons, links, etc.).
+
+These will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+
+#### Darken
+
+This is the core function that is used under the hood for the `hover` and `pressed` functions.
+
+It takes a single options object with four fields:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined. This is optional, however, we recommend providing one.
+3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or
+   fallback color).
+
+```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.darken({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      mixinColor: system.color.accent.overlay.mixin,
+      mixinValue: system.opacity.accent.hover,
+    }),
+  },
+});
+```
+
+#### Hover
+
+This function is used specifically for hover states.
+
+It takes three parameters:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined. This is optional, however, we recommend providing one.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.hover({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
+
+#### Pressed
+
+This function is used specifically for pressed/active states.
+
+It takes three parameters:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined. This is optional, however, we recommend providing one.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:active': {
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
 
 ## Glossary
 
