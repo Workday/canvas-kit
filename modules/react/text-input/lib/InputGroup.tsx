@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {
@@ -15,7 +16,6 @@ import {
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
-
 import {TextInput} from './TextInput';
 
 export const useInputGroupModel = createModelHook({})(() => {
@@ -162,7 +162,7 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
     role: 'presentation',
     // A clear input button doesn't need focus. There's already keyboard keys to clear an input
     tabIndex: -1,
-    icon: xSmallIcon,
+    icon: xSmallIcon as CanvasSystemIcon,
     // "small" is needed to render correctly within a `TextInput`
     size: 'small',
     // prevent a focus change to the button. Focus should stay in the input.

@@ -27,7 +27,7 @@ export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;
 }
 
-const radioInputStencil = createStencil({
+export const radioInputStencil = createStencil({
   base: {
     cursor: 'pointer',
     height: px2rem(radioHeight),
@@ -183,7 +183,7 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
   },
 });
 
-const radioInputWrapperStyles = createStencil({
+export const radioInputWrapperStencil = createStencil({
   base: {
     height: px2rem(radioHeight),
     width: px2rem(radioWidth),
@@ -229,7 +229,10 @@ const RadioInputWrapper = createComponent(Flex)<
   Component: ({children, variant, ...elemProps}: StyledRadioButtonProps, ref, Element) => {
     const {disabled} = React.useContext(RadioLabelContext);
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, radioInputWrapperStyles({variant, disabled}))}>
+      <Element
+        ref={ref}
+        {...handleCsProp(elemProps, radioInputWrapperStencil({variant, disabled}))}
+      >
         {children}
       </Element>
     );
