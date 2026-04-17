@@ -257,7 +257,7 @@ Components in Preview are...
 ### PR Links
 
 ```mdx
-**PR:** [#3659](https://github.com/Workday/canvas-kit/issues/3659)
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
 ```
 
 ### Version References
