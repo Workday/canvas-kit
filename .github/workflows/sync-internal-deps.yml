@@ -1,0 +1,48 @@
+name: Sync Internal Deps
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to update'
+        required: true
+        type: choice
+        options:
+          - '@workday/canvas-tokens-web'
+          - '@workday/canvas-system-icons-web'
+          - all
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - uses: Workday/canvas-kit-actions/install@v1
+        with:
+          node_version: 22.x
+
+      - name: Update package(s)
+        run: |
+          if [ "${{ inputs.package }}" == "all" ]; then
+            yarn upgrade @workday/canvas-tokens-web @workday/canvas-system-icons-web
+          else
+            yarn upgrade ${{ inputs.package }}
+          fi
+
+      - name: Open PR
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: sync ${{ inputs.package }}"
+          title: "chore: sync ${{ inputs.package }}"
+          branch: "chore/sync-${{ inputs.package }}"
+          labels: dependencies

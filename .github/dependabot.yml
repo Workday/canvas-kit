@@ -1,0 +1,22 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
