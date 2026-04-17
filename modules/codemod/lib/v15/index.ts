@@ -5,6 +5,7 @@ import promoteInformationHighlight from './promoteInformationHighlight';
 import promotePill from './promotePill';
 import promoteSegmentedControl from './promoteSegmentedControl';
 import promoteSidePanel from './promoteSidePanel';
+import replaceFormFieldContainer from './replaceFormFieldContainer';
 import updateCardVariant from './updateCardVariant';
 import updateSwitchToPreview from './updateSwitchToPreview';
 
@@ -16,6 +17,7 @@ const transform: Transform = (file, api, options) => {
     promotePill,
     promoteAvatar,
     promoteSidePanel,
+    replaceFormFieldContainer,
     updateCardVariant,
     updateSwitchToPreview,
   ];

@@ -67,6 +67,7 @@ semantic meaning to allow for better use and theming.
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
   - [Combobox (Labs)](#combobox-labs)
+	- [Form Field Container (Deprecated)](#form-field-container-deprecated)
   - [Icons](#icons)
   - [Side Panel (Deprecated)](#side-panel-deprecated)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
@@ -922,6 +923,49 @@ The following exports are no longer available:
 
 Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
 `@workday/canvas-kit-react`.
+
+### Form Field Container (Deprecated)
+
+**PR:** [#2910](https://github.com/Workday/canvas-kit/issues/2910)
+
+The deprecated `FormField.Container` has been removed from `@workday/canvas-kit-react/form-field`.
+This component was deprecated in v12 and has now been fully removed in v15.
+
+Please use `FormField.Field` instead, which ensures proper label alignment and spacing of inputs and
+hint text regardless of the orientation.
+
+**Before in v14**
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+**After in v15**
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Field>
+</FormField>;
+```
+
+> 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
+> throughout your codebase.
 
 ## Glossary
 
