@@ -296,6 +296,142 @@ themeable, understandable, and consistent.
 | Transparent                            | system.color.static.transparent        |                             | Invisible backgrounds                        |
 +----------------------------------------+----------------------------------------+-----------------------------+----------------------------------------------+
 
+## Other Mapping
+
+Certain old tokens have been deprecated without direct replacements. In these cases, we recommend
+using the closest available base palette or gradient token references shown below rather than
+semantic aliases; only use literal raw color values if no tokenized option exists.
+
+### Gradients
+
+Please note that the new gradients may appear visually different from the previous ones, as the
+underlying base palette has been updated and the color mappings do not have exact equivalents.
+
+| Gradient Name      | Old Value                                                                                                    | New Value                                                                                      |
+| ------------------ | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| cinnamon           | "linear-gradient(to bottom right," + colors.cinnamon500 + "," + colors.cinnamon400 + ")"                     | "linear-gradient(to bottom right, var(" + base.red600 + "), var(" + base.red400 + "))"         |
+| peach              | "linear-gradient(to bottom right," + colors.peach500 + "," + colors.peach400 + ")"                           | "linear-gradient(to bottom right, var(" + base.coral600 + "), var(" + base.red400 + "))"       |
+| chiliMango         | "linear-gradient(to bottom right," + colors.chiliMango500 + "," + colors.chiliMango400 + ")"                 | "linear-gradient(to bottom right, var(" + base.orange500 + "), var(" + base.orange400 + "))"   |
+| cantaloupe         | "linear-gradient(to bottom right," + colors.cantaloupe500 + "," + colors.cantaloupe400 + ")"                 | "linear-gradient(to bottom right, var(" + base.amber500 + "), var(" + base.amber400 + "))"     |
+| sourLemon          | "linear-gradient(to bottom right," + colors.sourLemon500 + "," + colors.sourLemon400 + ")"                   | "linear-gradient(to bottom right, var(" + base.amber300 + "), var(" + base.amber200 + "))"     |
+| juicyPear          | "linear-gradient(to bottom right," + colors.juicyPear500 + "," + colors.juicyPear400 + ")"                   | "linear-gradient(to bottom right, var(" + base.green500 + "), var(" + base.green400 + "))"     |
+| kiwi               | "linear-gradient(to bottom right," + colors.kiwi500 + "," + colors.kiwi400 + ")"                             | "linear-gradient(to bottom right, var(" + base.green500 + "), var(" + base.green400 + "))"     |
+| greenApple         | "linear-gradient(to bottom right," + colors.greenApple500 + "," + colors.greenApple400 + ")"                 | "linear-gradient(to bottom right, var(" + base.green700 + "), var(" + base.green600 + "))"     |
+| watermelon         | "linear-gradient(to bottom right," + colors.watermelon500 + "," + colors.watermelon400 + ")"                 | "linear-gradient(to bottom right, var(" + base.green700 + "), var(" + base.green600 + "))"     |
+| jewel              | "linear-gradient(to bottom right," + colors.jewel500 + "," + colors.jewel400 + ")"                           | "linear-gradient(to bottom right, var(" + base.teal600 + "), var(" + base.teal500 + "))"       |
+| toothpaste         | "linear-gradient(to bottom right," + colors.toothpaste500 + "," + colors.toothpaste400 + ")"                 | "linear-gradient(to bottom right, var(" + base.azure700 + "), var(" + base.azure500 + "))"     |
+| blueberry          | "linear-gradient(to bottom right," + colors.blueberry500 + "," + colors.blueberry400 + ")"                   | `brand.gradient.primary`                                                                       |
+| plum               | "linear-gradient(to bottom right," + colors.plum500 + "," + colors.plum400 + ")"                             | "linear-gradient(to bottom right, var(" + base.blue700 + "), var(" + base.blue600 + "))"       |
+| berrySmoothie      | "linear-gradient(to bottom right," + colors.berrySmoothie500 + "," + colors.berrySmoothie400 + ")"           | "linear-gradient(to bottom right, var(" + base.blue700 + "), var(" + base.blue500 + "))"       |
+| blackberry         | "linear-gradient(to bottom right," + colors.blackberry500 + "," + colors.blackberry400 + ")"                 | "linear-gradient(to bottom right, var(" + base.indigo700 + "), var(" + base.indigo500 + "))"   |
+| islandPunch        | "linear-gradient(to bottom right," + colors.islandPunch500 + "," + colors.islandPunch400 + ")"               | "linear-gradient(to bottom right, var(" + base.purple700 + "), var(" + base.purple500 + "))"   |
+| grapeSoda          | "linear-gradient(to bottom right," + colors.grapeSoda500 + "," + colors.grapeSoda400 + ")"                   | "linear-gradient(to bottom right, var(" + base.purple600 + "), var(" + base.purple500 + "))"   |
+| pomegranate        | "linear-gradient(to bottom right," + colors.pomegranate500 + "," + colors.pomegranate400 + ")"               | "linear-gradient(to bottom right, var(" + base.red700 + "), var(" + base.red600 + "))"         |
+| fruitPunch         | "linear-gradient(to bottom right," + colors.fruitPunch500 + "," + colors.fruitPunch400 + ")"                 | "linear-gradient(to bottom right, var(" + base.red400 + "), var(" + base.red300 + "))"         |
+| rootBeer           | "linear-gradient(to bottom right," + colors.rootBeer600 + "," + colors.rootBeer500 + ")"                     | "linear-gradient(to bottom right, var(" + base.amber950 + "), var(" + base.amber900 + "))"     |
+| toastedMarshmallow | "linear-gradient(to bottom right," + colors.toastedMarshmallow500 + "," + colors.toastedMarshmallow400 + ")" | "linear-gradient(to bottom right, var(" + base.amber500 + "), var(" + base.amber400 + "))"     |
+| cappuccino         | "linear-gradient(to bottom right," + colors.cappuccino400 + "," + colors.cappuccino300 + ")"                 | "linear-gradient(to bottom right, var(" + base.amber500 + "), var(" + base.amber400 + "))"     |
+| licorice           | "linear-gradient(to bottom right," + colors.licorice500 + "," + colors.licorice400 + ")"                     | "linear-gradient(to bottom right, var(" + base.slate800 + "), var(" + base.slate700 + "))"     |
+| blackPepper        | "linear-gradient(to bottom right," + colors.blackPepper400 + "," + colors.blackPepper300 + ")"               | "linear-gradient(to bottom right, var(" + base.neutral900 + "), var(" + base.neutral800 + "))" |
+
+### Chart Colors
+
+Please note that the new chart colors may appear visually different from the previous ones, as the
+underlying base palette has been updated and the color mappings do not have exact equivalents.
+
+| Old Token                           | Old Value                      | New Value         |
+| ----------------------------------- | ------------------------------ | ----------------- |
+| `chartingColors[1]`                 | `colors.watermelon200`         | `base.teal100`    |
+| `chartingColors[2]`                 | `colors.watermelon300`         | `base.green100`   |
+| `chartingColors[3]`                 | `colors.jewel200`              | `base.teal200`    |
+| `chartingColors[4]`                 | `colors.jewel300`              | `base.teal400`    |
+| `chartingColors[5]`                 | `colors.plum200`               | `base.blue200`    |
+| `chartingColors[6]`                 | `colors.plum300`               | `base.blue400`    |
+| `chartingColors[7]`                 | `colors.islandPunch200`        | `base.purple200`  |
+| `chartingColors[8]`                 | `colors.islandPunch300`        | `base.purple500`  |
+| `chartingColors[9]`                 | `colors.pomegranate200`        | `base.magenta100` |
+| `chartingColors[10]`                | `colors.pomegranate300`        | `base.magenta500` |
+| `chartingColors[11]`                | `colors.peach200`              | `base.coral200`   |
+| `chartingColors[12]`                | `colors.peach400`              | `base.coral300`   |
+| `chartingColors[13]`                | `colors.cantaloupe200`         | `base.amber200`   |
+| `chartingColors[14]`                | `colors.cantaloupe400`         | `base.amber300`   |
+| `chartingColors[15]`                | `colors.sourLemon200`          | `base.amber100`   |
+| `chartingColors[16]`                | `colors.sourLemon400`          | `base.amber200`   |
+| `chartingColors[17]`                | `colors.watermelon400`         | `base.green600`   |
+| `chartingColors[18]`                | `colors.watermelon500`         | `base.green700`   |
+| `chartingColors[19]`                | `colors.jewel400`              | `base.teal500`    |
+| `chartingColors[20]`                | `colors.jewel500`              | `base.teal600`    |
+| `chartingColors[21]`                | `colors.plum400`               | `base.blue600`    |
+| `chartingColors[22]`                | `colors.plum500`               | `base.blue700`    |
+| `chartingColors[23]`                | `colors.islandPunch400`        | `base.purple500`  |
+| `chartingColors[24]`                | `colors.islandPunch500`        | `base.purple600`  |
+| `chartingColors[25]`                | `colors.pomegranate400`        | `base.magenta500` |
+| `chartingColors[26]`                | `colors.pomegranate600`        | `base.red700`     |
+| `chartingColors[27]`                | `colors.peach500`              | `base.coral600`   |
+| `chartingColors[28]`                | `colors.peach600`              | `base.coral700`   |
+| `chartingColors[29]`                | `colors.cantaloupe500`         | `base.amber500`   |
+| `chartingColors[30]`                | `colors.cantaloupe600`         | `base.amber600`   |
+| `chartingColors[31]`                | `colors.sourLemon500`          | `base.amber300`   |
+| `chartingColors[32]`                | `colors.sourLemon600`          | `base.amber500`   |
+| `chartingColors[33]`                | `colors.greenApple200`         | `base.green100`   |
+| `chartingColors[34]`                | `colors.greenApple300`         | `base.green200`   |
+| `chartingColors[35]`                | `colors.toothpaste200`         | `base.azure200`   |
+| `chartingColors[36]`                | `colors.toothpaste300`         | `base.azure300`   |
+| `chartingColors[37]`                | `colors.blueberry200`          | `base.blue100`    |
+| `chartingColors[38]`                | `colors.blueberry300`          | `base.blue400`    |
+| `chartingColors[39]`                | `colors.berrySmoothie200`      | `base.indigo200`  |
+| `chartingColors[40]`                | `colors.blackberry300`         | `base.indigo400`  |
+| `chartingColors[41]`                | `colors.fruitPunch200`         | `base.red200`     |
+| `chartingColors[42]`                | `colors.fruitPunch300`         | `base.red300`     |
+| `chartingColors[43]`                | `colors.rootBeer200`           | `base.coral100`   |
+| `chartingColors[44]`                | `colors.rootBeer300`           | `base.coral200`   |
+| `chartingColors[45]`                | `colors.toastedMarshmallow200` | `base.orange100`  |
+| `chartingColors[46]`                | `colors.toastedMarshmallow400` | `base.orange200`  |
+| `chartingColors[47]`                | `colors.chiliMango200`         | `base.coral200`   |
+| `chartingColors[48]`                | `colors.chiliMango400`         | `base.coral300`   |
+| `chartingColors[49]`                | `colors.greenApple400`         | `base.green600`   |
+| `chartingColors[50]`                | `colors.greenApple600`         | `base.green700`   |
+| `chartingColors[51]`                | `colors.toothpaste400`         | `base.azure500`   |
+| `chartingColors[52]`                | `colors.toothpaste600`         | `base.azure800`   |
+| `chartingColors[53]`                | `colors.blueberry400`          | `base.blue600`    |
+| `chartingColors[54]`                | `colors.blueberry600`          | `base.blue800`    |
+| `chartingColors[55]`                | `colors.blackberry400`         | `base.indigo500`  |
+| `chartingColors[56]`                | `colors.blackberry600`         | `base.indigo900`  |
+| `chartingColors[57]`                | `colors.fruitPunch400`         | `base.red400`     |
+| `chartingColors[58]`                | `colors.fruitPunch600`         | `base.red700`     |
+| `chartingColors[59]`                | `colors.rootBeer500`           | `base.amber900`   |
+| `chartingColors[60]`                | `colors.rootBeer600`           | `base.amber950`   |
+| `chartingColors[61]`                | `colors.toastedMarshmallow500` | `base.amber500`   |
+| `chartingColors[62]`                | `colors.toastedMarshmallow600` | `base.amber600`   |
+| `chartingColors[63]`                | `colors.chiliMango500`         | `base.orange500`  |
+| `chartingColors[64]`                | `colors.chiliMango600`         | `base.orange600`  |
+| `chartingColors[65]`                | `colors.kiwi200`               | `base.green100`   |
+| `chartingColors[66]`                | `colors.kiwi400`               | `base.green500`   |
+| `chartingColors[67]`                | `colors.berrySmoothie200`      | `base.indigo200`  |
+| `chartingColors[68]`                | `colors.berrySmoothie300`      | `base.indigo400`  |
+| `chartingColors[69]`                | `colors.grapeSoda200`          | `base.magenta200` |
+| `chartingColors[70]`                | `colors.grapeSoda300`          | `base.magenta400` |
+| `chartingColors[71]`                | `colors.cinnamon200`           | `base.red100`     |
+| `chartingColors[72]`                | `colors.cinnamon300`           | `base.red300`     |
+| `chartingColors[73]`                | `colors.sourLemon300`          | `base.amber200`   |
+| `chartingColors[74]`                | `colors.toastedMarshmallow300` | `base.orange200`  |
+| `chartingColors[75]`                | `colors.peach300`              | `base.coral300`   |
+| `chartingColors[76]`                | `colors.cinnamon500`           | `base.red600`     |
+| `chartingColors[77]`                | `colors.cantaloupe300`         | `base.amber300`   |
+| `chartingColors[78]`                | `colors.chiliMango300`         | `base.coral300`   |
+| `chartingColors[79]`                | `colors.kiwi300`               | `base.green200`   |
+| `chartingColors[80]`                | `colors.kiwi500`               | `base.green500`   |
+| `chartingColors[81]`                | `colors.berrySmoothie400`      | `base.blue500`    |
+| `chartingColors[82]`                | `colors.berrySmoothie500`      | `base.blue700`    |
+| `chartingColors[83]`                | `colors.grapeSoda400`          | `base.purple500`  |
+| `chartingColors[84]`                | `colors.grapeSoda500`          | `base.purple600`  |
+| `chartingColors[85]`                | `colors.cinnamon400`           | `base.red400`     |
+| `chartingColors[86]`                | `colors.cinnamon500`           | `base.red600`     |
+| `chartingColorOffsets.barAndColumn` | `colors.watermelon200`         | `base.teal100`    |
+| `chartingColorOffsets.pie`          | `colors.jewel300`              | `base.teal400`    |
+| `chartingColorOffsets.lineAndArea`  | `colors.islandPunch200`        | `base.purple200`  |
+| `chartingColorOffsets.bubble`       | `colors.peach200`              | `base.coral200`   |
+
 Migration Examples
 ==================
 
