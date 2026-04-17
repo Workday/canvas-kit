@@ -36,10 +36,12 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         memberExpr.object.type === 'JSXIdentifier' ? memberExpr.object.name : undefined;
       const propertyName =
         memberExpr.property.type === 'JSXIdentifier' ? memberExpr.property.name : undefined;
+      const styledFormFieldName =
+        styledMap[importMap.FormField as keyof typeof styledMap] || styledMap.FormField;
 
       return (
         propertyName === 'Container' &&
-        (objectName === importMap.FormField || objectName === styledMap.FormField)
+        (objectName === importMap.FormField || objectName === styledFormFieldName)
       );
     })
     .forEach(path => {
