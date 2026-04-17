@@ -144,7 +144,7 @@ describe('Menu', () => {
 
       context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.focused().tab();
+          cy.focused().realPress('Tab');
         });
 
         it('should have aria-expanded set to false', () => {

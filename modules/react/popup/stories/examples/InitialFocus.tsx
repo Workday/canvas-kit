@@ -1,14 +1,14 @@
 import React from 'react';
 
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
+  Popup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
-  Popup,
-  usePopupModel,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 
 export const InitialFocus = () => {
   const initialFocusRef = React.useRef(null);

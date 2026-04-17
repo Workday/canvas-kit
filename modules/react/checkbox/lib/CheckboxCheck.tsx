@@ -1,8 +1,9 @@
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {CheckBackground} from './CheckBackground';
 
 interface CheckboxCheckProps {
@@ -29,7 +30,8 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        [systemIconStencil.vars.color]: brand.primary.accent,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
         opacity: system.opacity.full,
         transform: 'scale(1)',
       },
@@ -42,9 +44,14 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        [systemIconStencil.vars.color]: brand.primary.base,
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        [systemIconStencil.vars.color]: cssVar(
+          system.color.brand.fg.primary.default,
+          brand.primary.base
+        ),
         '& > div': {
-          backgroundColor: brand.primary.base,
+          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+          backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
         },
       },
     },
@@ -54,8 +61,17 @@ const checkboxCheckStencil = createStencil({
 const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
-    height: calc.divide(system.space.x1, 2),
-    backgroundColor: brand.primary.accent,
+    height: px2rem(2),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
+  },
+  modifiers: {
+    variant: {
+      inverse: {
+        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+      },
+    },
   },
 });
 
@@ -63,10 +79,10 @@ export const CheckboxCheck = createComponent('div')({
   displayName: 'CheckboxCheck',
   Component: ({checked, error, indeterminate, variant}: CheckboxCheckProps) => {
     return (
-      <CheckBackground error={error}>
+      <CheckBackground error={error} variant={variant}>
         <div {...checkboxCheckStencil({checked, indeterminate, variant})}>
           {indeterminate ? (
-            <div {...indeterminateBoxStencil()} />
+            <div {...indeterminateBoxStencil({variant})} />
           ) : (
             checked && <SystemIcon icon={checkSmallIcon} />
           )}

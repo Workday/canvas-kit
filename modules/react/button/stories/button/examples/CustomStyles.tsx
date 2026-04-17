@@ -1,13 +1,13 @@
-import {buttonStencil, PrimaryButton, PrimaryButtonProps} from '@workday/canvas-kit-react/button';
-import {Grid} from '@workday/canvas-kit-react/layout';
-import {plusIcon} from '@workday/canvas-system-icons-web';
+import {PrimaryButton, PrimaryButtonProps, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {Grid} from '@workday/canvas-kit-react/layout';
 import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {plusIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const customContainer = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   maxWidth: 'max-content',
 });
 
@@ -47,7 +47,7 @@ const MyCustomButton = createComponent('button')({
 });
 
 const myCustomStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
   textTransform: 'uppercase',
   [buttonStencil.vars.background]: system.color.static.gray.soft,
   [buttonStencil.vars.label]: system.color.static.gray.strong,

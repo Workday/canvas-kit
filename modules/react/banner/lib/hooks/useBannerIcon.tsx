@@ -1,6 +1,7 @@
-import {CanvasSystemIcon} from '@workday/design-assets-types';
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 import {exclamationCircleIcon, exclamationTriangleIcon} from '@workday/canvas-system-icons-web';
+import {CanvasSystemIcon} from '@workday/design-assets-types';
+
 import {useBannerModel} from './useBannerModel';
 
 /**

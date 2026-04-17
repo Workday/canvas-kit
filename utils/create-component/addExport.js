@@ -1,10 +1,10 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'node:fs';
+import path from 'node:path';
 
 /**
  * Add export * from './<MODULE_NAME>' to modules/react/index.ts so that consumers can use.
  */
-module.exports = (componentName, prerelease) => {
+const addExport = (componentName, prerelease) => {
   const sortExports = lines => {
     const exportsAsObj = lines
       // Ignore last line in file :)
@@ -38,3 +38,5 @@ module.exports = (componentName, prerelease) => {
 
   fs.writeFileSync(indexPath, sortedExports.join('\n'), 'utf8');
 };
+
+export default addExport;

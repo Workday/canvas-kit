@@ -1,17 +1,17 @@
 import * as React from 'react';
 
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {brand} from '@workday/canvas-tokens-web';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Select',

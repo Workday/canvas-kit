@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   Pagination,

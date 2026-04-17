@@ -12,13 +12,13 @@ yarn add @workday/canvas-kit-docs
 
 ## Usage
 
-The `Specifications` component is meant to be used in MDX files by file name and top-level `describe`
-name:
+The `Specifications` component is meant to be used in MDX files by file name and top-level
+`describe` name:
 
 ```mdx
 import {Specifications} from '@workday/canvas-kit-docs';
 
-<Specifications file="Tooltip.spec.tsx" name="Tooltip">
+<Specifications file="./cypress/component/Tooltip.spec.tsx" name="Tooltip">
 ```
 
 ## Component Props
@@ -53,15 +53,15 @@ import {StorybookURL} from '@workday/canvas-kit-docs';
 
 <StorybookURL.Provider value="https://workday.github.io/canvas-kit/">
   <Specifications file="Tooltip.spec.ts" />
-</StorybookURL.Provider>
+</StorybookURL.Provider>;
 ```
 
 This provider should be defined high up in the React tree and not directly in MDX files.
 
 # GithubBranch
 
-The `GithubBranch` is used for links to source code files in documentation. The default is `master` which
-works for mainline development, but could also point to a specific branch or tag.
+The `GithubBranch` is used for links to source code files in documentation. The default is `master`
+which works for mainline development, but could also point to a specific branch or tag.
 
 ## Usage
 

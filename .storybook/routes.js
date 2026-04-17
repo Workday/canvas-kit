@@ -1,5 +1,5 @@
 // List of routes The key is the Canvas Site URL The value is the first Storybook example ID. This
-// prevents odd scrolling. This file is used by the `webpack-loader-redirect-mdx-to-github` loader
+// prevents odd scrolling. This file is used by the `vite-plugin-redirect-mdx-to-github` loader
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
@@ -79,6 +79,9 @@ const routes = {
   '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
   '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
     'guides-upgrade-guides-v14-0-visual-changes--docs',
+  '/help/upgrade-guides/canvas-v15-upgrade-guide/': 'guides-upgrade-guides-v15-0-overview--docs',
+  '/help/upgrade-guides/canvas-v15-upgrade-guide/#tab=visual-changes':
+    'guides-upgrade-guides-v15-0-visual-changes--docs',
 };
 
-module.exports = routes;
+export default routes;

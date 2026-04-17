@@ -2,9 +2,9 @@ import ts from 'typescript';
 
 import {slugify} from '@workday/canvas-kit-styling';
 
+import {getHash} from './getHash';
 import {getVarName} from './getVarName';
 import {NodeTransformer, TransformerContext} from './types';
-import {getHash} from './getHash';
 
 export const handleCreateVars: NodeTransformer = (node, context) => {
   /**

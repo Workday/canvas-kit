@@ -1,6 +1,6 @@
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {createStyles, createStencil} from '@workday/canvas-kit-styling';
 
 const styleOverrides = {
   parentContainer: createStyles({

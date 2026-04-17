@@ -14,7 +14,7 @@ export const useModalHeading = composeHooks(
     const {elementRef, localRef} = useLocalRef(ref as React.Ref<HTMLElement>);
 
     useMountLayout(() => {
-      if (localRef.current?.parentElement?.querySelector('button')?.textContent) {
+      if (localRef.current?.parentElement?.querySelector('button')?.textContent?.trim()) {
         // First button is not a close icon button, set tabindex on the heading to capture initial focus
         localRef.current.setAttribute('tabindex', '0');
       }

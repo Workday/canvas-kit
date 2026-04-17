@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+const ssr = pascalCaseName => `
 /**
  * @jest-environment node
  */
@@ -19,3 +19,5 @@ describe('${pascalCaseName}', () => {
 });
 
 `;
+
+export default ssr;

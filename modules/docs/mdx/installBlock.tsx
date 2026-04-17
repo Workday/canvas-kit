@@ -1,8 +1,9 @@
 import React from 'react';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface InstallBlockProps {
   command?: string;

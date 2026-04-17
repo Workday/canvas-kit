@@ -1,6 +1,6 @@
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
-import {notificationsIcon, alarmClockIcon} from '@workday/canvas-system-icons-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {alarmClockIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 export const Icons = () => {
   return (

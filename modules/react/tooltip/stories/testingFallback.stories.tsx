@@ -1,6 +1,6 @@
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 

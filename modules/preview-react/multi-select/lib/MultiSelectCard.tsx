@@ -1,12 +1,12 @@
 import {
+  ExtractProps,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
+import {calc, px2rem} from '@workday/canvas-kit-styling';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
-import {calc, px2rem} from '@workday/canvas-kit-styling';
 
 export interface MultiSelectCardProps extends ExtractProps<typeof Menu.Card> {}
 

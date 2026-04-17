@@ -1,4 +1,5 @@
 import {CSToPropsInput, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {boxStyleFn} from '../Box';
 import {backgroundStyleFnConfigs} from './background';
 import {borderStyleFnConfigs} from './border';
@@ -30,11 +31,14 @@ const stylePropHash = [
   ...positionStyleFnConfigs,
   ...spaceStyleFnConfigs,
   ...textStyleFnConfigs,
-].reduce((result, prop) => {
-  //@ts-ignore
-  result[prop.name] = true;
-  return result;
-}, {} as Record<string, boolean>);
+].reduce(
+  (result, prop) => {
+    //@ts-ignore
+    result[prop.name] = true;
+    return result;
+  },
+  {} as Record<string, boolean>
+);
 
 function isStyleProps(prop: string): boolean {
   return stylePropHash[prop] || false;

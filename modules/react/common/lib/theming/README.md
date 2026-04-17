@@ -22,6 +22,7 @@ values in your root CSS:
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
 
 :root {
   /* Override brand primary colors */
@@ -34,9 +35,9 @@ values in your root CSS:
 Or use `createStyles` to generate themed class names:
 
 ```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-import {brand, base} from '@workday/canvas-tokens-web';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 const themedBrand = createStyles({
   [brand.primary.base]: base.magenta600,
@@ -177,7 +178,6 @@ import {ContentDirection} from '@workday/canvas-kit-react/common';
 ```tsx
 // DEPRECATED - Use defaultBranding instead
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
-
 // NEW - Use defaultBranding
 import {defaultBranding} from '@workday/canvas-kit-react/common';
 ```

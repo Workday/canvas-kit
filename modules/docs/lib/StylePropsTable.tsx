@@ -1,5 +1,6 @@
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {ExternalHyperlink} from '@workday/canvas-kit-react';
+
 import {Table} from './Table';
 
 type StyleProp = {
