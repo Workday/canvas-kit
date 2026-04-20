@@ -31,34 +31,41 @@ function extractTitle(filePath: string): string | null {
   return match ? match[1] : null;
 }
 
+/** Doc-only JSX removed from MDX when building plain markdown for MCP. */
+const SELF_CLOSING_DOC_TAGS = ['Meta', 'SymbolDoc', 'SymbolDescription', 'Specifications'] as const;
+
+function stripDocOnlyJsxBlocks(mdx: string): string {
+  let result = mdx;
+  // Root <InformationHighlight>, not subcomponents (<InformationHighlight.Icon>, etc.)
+  result = result.replace(/<InformationHighlight(?=[\s/>])[\s\S]*?<\/InformationHighlight>/g, '');
+  for (const tag of SELF_CLOSING_DOC_TAGS) {
+    const re = new RegExp(`<${tag}\\b[\\s\\S]*?\\/>`, 'g');
+    result = result.replace(re, '');
+  }
+  return result;
+}
+
 function extractMdxProse(mdxFilePath: string, exampleSources: Record<string, string>): string {
   const content = fs.readFileSync(mdxFilePath, 'utf8');
   const withoutImports = content.replace(
     /import\s+(?:(?:\{[\s\S]*?\}|\*\s+as\s+\w+|[\w]+)\s+from\s+)?['"][^'"]+['"];?\n?/g,
     ''
   );
-  return withoutImports
-    .split('\n')
-    .map(line => {
-      const codeBlockMatch = line.match(/^\s*<ExampleCodeBlock\s+code=\{(\w+)\}\s*\/>/);
-      if (codeBlockMatch) {
-        const name = codeBlockMatch[1];
-        const source = exampleSources[name];
-        if (source) {
-          return `\`\`\`tsx\n${source.trimEnd()}\n\`\`\``;
-        }
-        return '';
+
+  let prose = stripDocOnlyJsxBlocks(withoutImports);
+
+  prose = prose.replace(
+    /^\s*<ExampleCodeBlock\s+code=\{(\w+)\}\s*\/>/gm,
+    (_match, name: string) => {
+      const source = exampleSources[name];
+      if (source) {
+        return `\`\`\`tsx\n${source.trimEnd()}\n\`\`\``;
       }
-      if (
-        /^\s*<(Meta|SymbolDoc|SymbolDescription|Specifications|InformationHighlight)\b/.test(line)
-      ) {
-        return '';
-      }
-      return line;
-    })
-    .join('\n')
-    .replace(/^\n+/, '')
-    .replace(/\n{3,}/g, '\n\n');
+      return '';
+    }
+  );
+
+  return prose.replace(/^\n+/, '').replace(/\n{3,}/g, '\n\n');
 }
 
 function findExampleSources(mdxFilePath: string): Record<string, string> {

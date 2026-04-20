@@ -11,14 +11,22 @@ export function useMcpApp(): App | null {
   return React.useContext(McpAppContext);
 }
 
-interface ExampleComponent extends React.ComponentType {
+type ExampleComponent = React.ComponentType & {
   __RAW__?: string;
-}
+};
 
 export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
   const [showCode, setShowCode] = React.useState(false);
   const [sent, setSent] = React.useState(false);
-  const timerRef = React.useRef<ReturnType<typeof setTimeout>>();
+  const timerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  React.useEffect(() => {
+    return () => {
+      if (timerRef.current !== null) {
+        clearTimeout(timerRef.current);
+        timerRef.current = null;
+      }
+    };
+  }, []);
   const app = useMcpApp();
   const raw = code?.__RAW__;
 
@@ -26,7 +34,7 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
     if (!raw || !app) {
       return;
     }
-    if (timerRef.current) {
+    if (timerRef.current !== null) {
       clearTimeout(timerRef.current);
     }
 

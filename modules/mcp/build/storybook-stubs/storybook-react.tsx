@@ -1,3 +1,5 @@
+import type {ComponentType} from 'react';
+
 export type Meta<T = unknown> = {
   title?: string;
   component?: T;
@@ -6,6 +8,6 @@ export type Meta<T = unknown> = {
 };
 
 export type StoryObj<T = unknown> = {
-  render?: React.ComponentType;
+  render?: ComponentType;
   args?: Partial<T>;
 };
