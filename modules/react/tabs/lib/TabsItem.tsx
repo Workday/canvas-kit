@@ -20,6 +20,7 @@ import {
   isSelected,
   useListItemSelect,
   useOverflowListItemMeasure,
+  ListRenderItemContext,
 } from '@workday/canvas-kit-react/collection';
 import {calc, cssVar, createStencil, px2rem} from '@workday/canvas-kit-styling';
 
@@ -169,6 +170,36 @@ export const StyledTabItem = createComponent('button')<TabsItemProps>({
   },
 });
 
+/**
+ * When the selected tab receives ArrowDown, move focus to its tab panel.
+ * Only applies to the selected tab; returning null from onKeyDown prevents the roving
+ * focus handler from also handling the key. Tabs.OverflowButton does not use this hook.
+ * Uses ListRenderItemContext for the item id since this hook runs before useListItemRegister
+ * merges in data-id.
+ */
+const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)(
+  ({state}, _, elemProps: {'data-id'?: string} = {}) => {
+    const {item} = React.useContext(ListRenderItemContext);
+    const name = elemProps['data-id'] || item?.id || '';
+    const selected = !!name && isSelected(name, state);
+
+    return {
+      onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+        if (!selected || event.key !== 'ArrowDown') {
+          return;
+        }
+        event.preventDefault();
+        const panelId = slugify(`tabpanel-${state.id}-${name}`);
+        const panel = document.getElementById(panelId);
+        if (panel) {
+          (panel as HTMLElement).focus();
+        }
+        return null as unknown as void; // prevent roving focus from handling this key
+      },
+    };
+  }
+);
+
 export const useTabsItem = composeHooks(
   createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'] || '';
@@ -185,7 +216,8 @@ export const useTabsItem = composeHooks(
   useListItemSelect,
   useOverflowListItemMeasure,
   useListItemRovingFocus,
-  useListItemRegister
+  useListItemRegister,
+  useTabsItemFocusPanelOnArrowDown
 );
 
 export const TabsItem = createSubcomponent('button')({
