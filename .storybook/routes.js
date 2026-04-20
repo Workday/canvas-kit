@@ -32,6 +32,7 @@ const routes = {
   '/components/layout/grid/': 'components-layout-grid--docs',
   '/components/navigation/breadcrumbs/': 'components-navigation-breadcrumbs--docs',
   '/components/navigation/pagination/': 'components-navigation-pagination--docs',
+  '/components/popups/dialog/': 'components-popups-dialog--docs',
   '/components/popups/menu/': 'components-popups-menu--docs',
   '/components/popups/modal/': 'components-popups-modal--docs',
   '/components/popups/popup/': 'components-popups-popup--docs',
