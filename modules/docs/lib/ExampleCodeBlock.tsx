@@ -3,7 +3,7 @@ import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
@@ -22,14 +22,20 @@ import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common'
 
 const cardStencil = createStencil({
   base: {
+    // Lets the block shrink inside flex/grid doc layouts so content width does not force overflow.
+    minWidth: 0,
+    maxWidth: '100%',
     '[data-part="example-block"]': {
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
       position: 'relative',
+      minWidth: 0,
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
     },
     '[data-part="example-block-container"]': {
+      minWidth: 0,
       overflow: 'auto',
+      padding: system.space.x1,
     },
     '[data-part="code-block"]': {
       display: 'none',
@@ -38,8 +44,9 @@ const cardStencil = createStencil({
     },
     '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
-      right: calc.negate(px2rem(1)),
-      bottom: calc.negate(px2rem(1)),
+      // Keep inside the padding box; negative inset was expanding scroll overflow by ~1px.
+      right: system.space.zero,
+      bottom: system.space.zero,
       display: 'flex',
       gap: system.space.x2,
     },
@@ -161,6 +168,8 @@ export const ExampleCodeBlock = ({code}: any) => {
                     lineHeight: cssVar(system.lineHeight.subtext.large),
                     margin: '0',
                     padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                    boxSizing: 'border-box',
+                    maxWidth: '100%',
                   }}
                   children={code.__RAW__}
                 />

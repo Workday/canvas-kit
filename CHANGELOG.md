@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.10](https://github.com/Workday/canvas-kit/releases/tag/v14.3.10) (2026-04-20)
+
+### Documentation
+
+- docs: Upgrade overlay accessibility docs and examples ([#3853](https://github.com/Workday/canvas-kit/pull/3853)) ([@williamjstanton](https://github.com/williamjstanton), [@Copilot](https://github.com/Copilot))
+  Documents Popup, Modal, and Dialog accessibility patterns; adds accessibility guide pages for popups and inline portals with examples; improves related Storybook examples and Dialog doc routing/links. Call out **`ExampleCodeBlock`** / **Utilities** / **v4 migration** changes here only if they remain in this PR.
+
+
+## [v14.3.9](https://github.com/Workday/canvas-kit/releases/tag/v14.3.9) (2026-04-20)
+
+
+
+
+## [v14.3.8](https://github.com/Workday/canvas-kit/releases/tag/v14.3.8) (2026-04-20)
+
+
+
+
+## [v14.3.7](https://github.com/Workday/canvas-kit/releases/tag/v14.3.7) (2026-04-17)
+
+### Documentation
+
+- docs: Update tokens replacement guides ([#3878](https://github.com/Workday/canvas-kit/pull/3878)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v14.3.6](https://github.com/Workday/canvas-kit/releases/tag/v14.3.6) (2026-04-17)
+
+
+
+
 ## [v14.3.5](https://github.com/Workday/canvas-kit/releases/tag/v14.3.5) (2026-04-10)
 
 

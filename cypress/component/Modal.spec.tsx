@@ -9,6 +9,8 @@ import {StackedModals} from '../../modules/react/modal/stories/examples/StackedM
 import {WithTooltips} from '../../modules/react/modal/stories/examples/WithTooltips';
 import {ModalWithPopup} from '../../modules/react/modal/stories/examples/ModalWithPopup';
 import {IframeTest} from '../../modules/react/modal/stories/examples/IframeTest';
+import {FormModal} from '../../modules/react/modal/stories/examples/FormModal';
+import {ReturnFocus} from '../../modules/react/modal/stories/examples/ReturnFocus';
 
 describe('Modal', () => {
   context(`given the Basic example is rendered`, () => {
@@ -169,6 +171,75 @@ describe('Modal', () => {
   });
 });
 
+context('given the FormModal example is rendered', () => {
+  beforeEach(() => {
+    cy.mount(<FormModal />);
+    cy.wait(150);
+  });
+
+  context('when Create New User is clicked', () => {
+    beforeEach(() => {
+      cy.findByRole('button', {name: 'Create New User'}).click();
+    });
+
+    it('should open the New User dialog', () => {
+      cy.findByRole('dialog', {name: 'New User'}).should('be.visible');
+    });
+
+    context('when the form is filled out and submitted', () => {
+      beforeEach(() => {
+        cy.findByRole('textbox', {name: 'First Name'}).type('Ada');
+        cy.findByRole('textbox', {name: 'Last Name'}).type('Lovelace');
+        cy.findByRole('button', {name: 'Submit'}).click();
+      });
+
+      it('should close the modal', () => {
+        cy.findByRole('dialog', {name: 'New User'}).should('not.exist');
+      });
+    });
+  });
+});
+
+context('given the ReturnFocus example is rendered', () => {
+  beforeEach(() => {
+    cy.mount(<ReturnFocus />);
+    cy.wait(150);
+  });
+
+  it('should open the delete confirmation dialog', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('be.visible');
+  });
+
+  it('should close the dialog when Cancel is clicked', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('button', {name: 'Cancel'}).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+  });
+
+  it('should remove one file when delete is confirmed', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+      cy.findByRole('button', {name: 'Delete'}).click();
+    });
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+    cy.findAllByRole('button', {name: 'Delete'}).should('have.length', 2);
+  });
+
+  it('should show the empty state after all files are deleted', () => {
+    const confirmDelete = () => {
+      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+        cy.findByRole('button', {name: 'Delete'}).click();
+      });
+    };
+    confirmDelete();
+    confirmDelete();
+    confirmDelete();
+    cy.findByText('No files remaining.').should('be.visible');
+  });
+});
+
 context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<WithTooltips />);
@@ -219,10 +290,26 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
 
       context(`when the 'OK' button is focused`, () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'OK'}).focus();
+          // Scope to this popup so we don't hit the other Popup's OK; use Tab from Close so focus
+          // matches :focus-visible (programmatic .focus() on OK alone may not show the tooltip in Electron).
+          cy.findByRole('dialog', {name: 'Hidable Popup'}).within(() => {
+            cy.findByRole('button', {name: 'Close'}).focus();
+          });
+          cy.realPress('Tab');
+          cy.findByRole('dialog', {name: 'Hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
         it(`should open the 'OK' tooltip`, () => {
-          cy.get('[role="tooltip"]').should('be.visible');
+          cy.findByRole('dialog', {name: 'Hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
+          // useTooltip default showDelay is 300ms
+          cy.wait(350);
+          cy.findByRole('tooltip', {
+            name: 'Really, Really, Really, Really, Really sure',
+            timeout: 10000,
+          }).should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
@@ -258,17 +345,30 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
 
       context(`when the 'OK' button is focused`, () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'OK'}).focus();
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'}).within(() => {
+            cy.findByRole('button', {name: 'Close'}).focus();
+          });
+          cy.realPress('Tab');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
 
         it(`should be focused`, () => {
-          cy.findByRole('button', {name: 'OK'}).should('have.focus');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
 
         it(`should open the 'OK' tooltip`, () => {
-          cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'})
-            .wait(50)
-            .should('be.visible');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
+          cy.wait(350);
+          cy.findByRole('tooltip', {
+            name: 'Really, Really, Really, Really, Really sure',
+            timeout: 10000,
+          }).should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
@@ -281,7 +381,7 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
           });
 
           it(`should close the modal`, () => {
-            cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.exist');
+            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.exist');
           });
 
           it(`should close the 'OK' tooltip`, () => {
