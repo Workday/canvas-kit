@@ -320,6 +320,18 @@ describe('Replace FormField.Container with FormField.Field', () => {
     expectTransform(input, expected);
   });
 
+  it('should NOT change imports from non Canvas imports', () => {
+    const input = stripIndent`
+      import {FormField} from '@other-package';
+    `;
+
+    const expected = stripIndent`
+      import {FormField} from '@other-package';
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should handle FormField.Container from main package import', () => {
     const input = stripIndent`
       import {FormField} from '@workday/canvas-kit-react';
