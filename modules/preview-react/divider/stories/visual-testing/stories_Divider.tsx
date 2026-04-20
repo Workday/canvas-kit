@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {system} from '@workday/canvas-tokens-web';
+
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Preview/Divider',

@@ -1,7 +1,8 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import styled from '@emotion/styled';
+import * as React from 'react';
+
+import {StyledType, createComponent, useConstant} from '@workday/canvas-kit-react/common';
 import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
 // style props
@@ -15,8 +16,8 @@ import {layout} from './utils/layout';
 import {other} from './utils/other';
 import {position} from './utils/position';
 import {space} from './utils/space';
-import {text} from './utils/text';
 import {CommonStyleProps} from './utils/styleProps';
+import {text} from './utils/text';
 
 /**
  * Box Props

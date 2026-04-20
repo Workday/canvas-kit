@@ -1,18 +1,17 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Modal.mdx';
-
 import {Modal} from '@workday/canvas-kit-react/modal';
 
+import mdxDoc from './Modal.mdx';
 import {Basic as BasicExample} from './examples/Basic';
-import {WithoutCloseIcon as WithoutCloseIconExample} from './examples/WithoutCloseIcon';
-import {CustomFocus as CustomFocusExample} from './examples/CustomFocus';
-import {ReturnFocus as ReturnFocusExample} from './examples/ReturnFocus';
-import {CustomTarget as CustomTargetExample} from './examples/CustomTarget';
 import {BodyOverflow as BodyOverflowExample} from './examples/BodyOverflow';
-import {FullOverflow as FullOverflowExample} from './examples/FullOverflow';
+import {CustomFocus as CustomFocusExample} from './examples/CustomFocus';
+import {CustomTarget as CustomTargetExample} from './examples/CustomTarget';
 import {FormModal as FormModalExample} from './examples/FormModal';
+import {FullOverflow as FullOverflowExample} from './examples/FullOverflow';
 import {IframeTest as IFrameExample} from './examples/IframeTest';
+import {ReturnFocus as ReturnFocusExample} from './examples/ReturnFocus';
+import {WithoutCloseIcon as WithoutCloseIconExample} from './examples/WithoutCloseIcon';
 
 export default {
   title: 'Components/Popups/Modal',

@@ -1,6 +1,6 @@
 import {Property} from 'csstype';
 
-import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {StyleFnConfig, buildStyleFns, buildStylePropFn} from './buildStyleFns';
 
 /**
  * style props to for other CSS properties

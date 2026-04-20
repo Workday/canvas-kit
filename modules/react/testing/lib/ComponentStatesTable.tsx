@@ -1,5 +1,7 @@
 import React from 'react';
+
 import {styled} from '@workday/canvas-kit-react/common';
+
 import {PropCombination, Props} from './propTypes';
 
 /**

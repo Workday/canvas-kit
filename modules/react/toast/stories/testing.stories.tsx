@@ -1,9 +1,7 @@
-import React from 'react';
-
-import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
-
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {Toast} from '@workday/canvas-kit-react/toast';
+import {checkIcon, exclamationCircleIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Toast',
@@ -26,7 +24,7 @@ export const ToastStates = {
               props: {
                 mode: 'polite',
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -35,7 +33,7 @@ export const ToastStates = {
               props: {
                 mode: 'polite',
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -45,7 +43,7 @@ export const ToastStates = {
                 mode: 'alert',
                 hasCloseIcon: true,
                 icon: exclamationCircleIcon,
-                iconColor: 'cinnamon500',
+                iconColor: system.color.fg.danger.default,
                 message: 'Your workbook has an error.',
               },
             },
@@ -55,7 +53,7 @@ export const ToastStates = {
                 mode: 'dialog',
                 hasAction: true,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -64,9 +62,9 @@ export const ToastStates = {
               props: {
                 mode: 'polite',
                 hasCloseIcon: true,
-                padding: 's',
+                padding: '0px',
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -77,7 +75,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 'none',
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -88,7 +86,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 1,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -99,7 +97,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 2,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -110,7 +108,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 3,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -121,7 +119,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 4,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -132,7 +130,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 5,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -143,7 +141,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 depth: 6,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -154,7 +152,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 width: 300,
                 icon: checkIcon,
-                iconColor: 'greenApple400',
+                iconColor: system.color.fg.success.default,
                 message: 'Your workbook was successfully processed.',
               },
             },
@@ -165,7 +163,7 @@ export const ToastStates = {
                 hasCloseIcon: true,
                 width: 300,
                 icon: exclamationCircleIcon,
-                iconColor: 'cinnamon500',
+                iconColor: system.color.fg.danger.default,
                 message: 'There was an error',
               },
             },

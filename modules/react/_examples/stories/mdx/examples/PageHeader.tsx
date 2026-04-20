@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
-import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
-
-import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
+import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
+import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 interface HeaderItemProps extends FlexProps {}
 

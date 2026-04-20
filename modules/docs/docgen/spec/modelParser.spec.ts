@@ -1,6 +1,6 @@
-import {createProgramFromSource} from './createProgramFromSource';
 import {parse} from '../docParser';
 import {modelParser} from '../plugins/modelParser';
+import {createProgramFromSource} from './createProgramFromSource';
 
 describe('modelParser', () => {
   it('should handle models', () => {

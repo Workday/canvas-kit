@@ -1,5 +1,5 @@
-import {expectTransformFactory} from './expectTransformFactory';
 import transformer from '../moveInputProvider';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transformer);
 

@@ -56,13 +56,13 @@ describe('Breadcrumbs', () => {
 
       context('when the tab key is pressed', () => {
         beforeEach(() => {
-          cy.tab();
+          cy.realPress('Tab');
         });
 
         it('should move focus to the next link', () => {
           cy.findByRole('link', {name: 'Lunch'}).focus();
           cy.findByRole('link', {name: 'Lunch'}).should('have.focus');
-          cy.tab();
+          cy.realPress('Tab');
           cy.findByRole('link', {name: 'House Specialty Pies'}).focus();
           cy.findByRole('link', {name: 'House Specialty Pies'}).should('have.focus');
         });

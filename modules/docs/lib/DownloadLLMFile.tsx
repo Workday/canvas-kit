@@ -1,8 +1,8 @@
-import {Card} from '@workday/canvas-kit-react/card';
 import {ExternalHyperlink, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {downloadIcon, fileIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon} from '@workday/canvas-kit-react';
+import {Card} from '@workday/canvas-kit-react/card';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {createStencil} from '@workday/canvas-kit-styling';
+import {downloadIcon, fileIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 type DownloadLLMFileProps = {

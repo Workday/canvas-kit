@@ -1,11 +1,12 @@
 import * as React from 'react';
+
 import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {PaginationModel} from './types';
 import {useLiveRegion} from './common/useLiveRegion';
+import {PaginationModel} from './types';
 import {PaginationContext} from './usePaginationModel';
 
 export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {

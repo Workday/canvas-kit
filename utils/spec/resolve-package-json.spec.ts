@@ -1,5 +1,6 @@
-import resolvePackageJson from '../resolve-package-json';
 import {stripIndent} from 'common-tags';
+
+import resolvePackageJson from '../resolve-package-json';
 
 describe('updatePackageJson', () => {
   it('should update version strings to the latest', () => {

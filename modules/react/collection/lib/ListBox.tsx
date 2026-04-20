@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   createContainer,
   createElemPropsHook,
@@ -6,11 +7,10 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
+import {useListItemRegister} from './useListItemRegister';
 import {useListModel} from './useListModel';
 import {useListRenderItems} from './useListRenderItem';
-import {useListItemRegister} from './useListItemRegister';
 
 export interface ListBoxProps<T = any> extends Omit<FlexProps, 'children'> {
   children?: React.ReactNode | ((item: T, index: number) => React.ReactNode);
@@ -52,12 +52,14 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
 });
 
 const listBoxContainerStencil = createStencil({
+  parts: {
+    listBoxContainer: 'list-box-container',
+  },
   base: {
     '& :where([data-part="list"])': {
       display: 'flex',
       flexDirection: 'column',
-      marginBlockStart: system.space.zero,
-      marginBlockEnd: system.space.zero,
+      marginBlock: 0,
     },
   },
   modifiers: {
@@ -119,6 +121,7 @@ export const ListBox = createContainer('ul')({
     return (
       <div
         ref={model.state.containerRef}
+        {...listBoxContainerStencil.parts.listBoxContainer}
         {...handleCsProp(
           {
             style: {

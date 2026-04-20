@@ -8,7 +8,7 @@ export * from './types';
  * @deprecated ⚠️ `styled` is deprecated. Use `createStyles` or `createStencil` from `@workday/canvas-kit-styling` instead.
  * For more information, view our [Styling Docs](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--docs).
  */
-export {default as styled, StyleRewriteFn, filterOutProps} from './styled';
+export {default as styled, type StyleRewriteFn, filterOutProps} from './styled';
 /**
  * @deprecated ⚠️ `defaultCanvasTheme` is deprecated. Use `defaultBranding` from `@workday/canvas-kit-react/common` instead.
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).

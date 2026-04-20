@@ -1,7 +1,7 @@
-import * as React from 'react';
 import {render} from '@testing-library/react';
 
 import {CanvasGraphic, CanvasIconTypes} from '@workday/design-assets-types';
+
 import {Graphic, graphicStyles} from '../lib/Graphic';
 
 const mockGraphic: CanvasGraphic = {

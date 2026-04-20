@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Skeleton.mdx';
-
 import {Skeleton} from '@workday/canvas-kit-react/skeleton';
 
+import mdxDoc from './Skeleton.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Color as ColorExample} from './examples/Color';
 import {Header as HeaderExample} from './examples/Header';

@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../recategorizeIconButtons';
 import {stripIndent} from 'common-tags';
+
+import transform from '../recategorizeIconButtons';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 
@@ -96,7 +97,7 @@ describe('recategorizeIconButtons', () => {
   });
 
   it('should not error when variant prop is an expression', () => {
-    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {
       //No op
     });
 

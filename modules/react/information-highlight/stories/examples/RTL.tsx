@@ -1,0 +1,39 @@
+import React from 'react';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+
+export const RTL = () => {
+  return (
+    <Flex flexDirection={'column'} gap={system.space.x2}>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant={'caution'} emphasis={'low'}>
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant={'caution'} emphasis={'high'}>
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+    </Flex>
+  );
+};

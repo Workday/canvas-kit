@@ -1,5 +1,6 @@
-import {getTransformFromPlacement} from '../lib/getTransformFromPlacement';
 import {Placement} from '@popperjs/core';
+
+import {getTransformFromPlacement} from '../lib/getTransformFromPlacement';
 
 describe('getTransformFromPlacement', () => {
   const io = {

@@ -1,1 +1,1 @@
-export {CountBadge, CountBadgeProps} from './lib/CountBadge';
+export {CountBadge, type CountBadgeProps} from './lib/CountBadge';

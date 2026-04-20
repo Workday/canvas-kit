@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {useMount} from './useMount';
 
 const getFromWindow = <T extends any>(property: string, defaultValue: T): T => {
