@@ -20,34 +20,65 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-[Modal](/components/popups/modal/) and Dialog are very similar: most of the examples from Modal can
-be adapted to Dialog by changing `Modal` to `Dialog` and replacing `Modal.Overlay` with
-`Dialog.Popper`.
-
-Unlike Modal, Dialog does _not_ render the rest of the page inert while it is active. Dialog should
-be used in situations where the task does not require immediate attention such as in the example
-below.
+Unlike Modal, Dialog **does not** render the rest of the page inert while it is active. Dialog
+should be used in situations where the task does not require immediate attention.
 
 <ExampleCodeBlock code={Basic} />
 
 ### Focus Redirect
 
-Since Modal requires immediate attention, it will trap the keyboard focus inside the Modal until an
-action is taken. Dialog manages focus differently, however, since it does not require immediate
-attention.
-
-The following example shows how Dialog manages focus in and out of the component.
+Dialog **does not** trap keyboard focus like the Modal component does. Instead, it allows focus to
+move freely in and out of the dialog, supporting more flexible navigation. The following example
+shows how Dialog manages focus in and out of the component.
 
 <ExampleCodeBlock code={Focus} />
 
-Instead of trapping focus within the Dialog, it is effectively treated as an inline element next to
-its triggering `Dialog.Target` button. Tabbing out of the Dialog will close the popup and move focus
-to the next button.
+> **Accessibility Note**: Focus redirect **will not** have any effect on the reading order of a
+> screen reader.
 
-Dialog also adds an `aria-owns` to a `<div>` element which is rendered as a sibling of the
-`Dialog.Target` button. The `aria-owns` references the `Dialog.Card` and allows screen readers which
-[support aria-owns](/components/popups/popup/#focus-redirect) to navigate the Dialog as if it
-weren't portalled to the bottom of the document body.
+## Accessibility
+
+`Dialog` composes the popup stack with `useInitialFocus`, `useReturnFocus`, `useCloseOnEscape`,
+`useCloseOnOutsideClick`, and `useFocusRedirect`. The card container includes an ARIA
+**`role="dialog"`** that is **non-modal**: the rest of the page stays available. The card also
+includes an **`aria-labelledby`** attribute referencing the `id` on `Dialog.Heading`, so the dialog
+has an accessible name that matches the visible heading.
+
+The Dialog component includes a `<div>` element (sibling to the `Dialog.Target`) with `aria-owns`
+pointing to the `Dialog.Card`. This remaps the hierarchy of the accessibility tree to improve
+sequential reading order in supported browsers. For more information, see
+[Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).
+
+[Dialog Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)
+
+- Prefer **`Dialog.Heading`** so the dialog is properly labelled; avoid leaving a dialog without an
+  accessible name.
+- Ensure icon-only controls such as **`Dialog.CloseIcon`** include an accessible name. Prefer the
+  `Tooltip` component to provide a visible label, or a translated `aria-label` string is acceptable.
+
+### Navigation
+
+- **Enter** / **Space**: Open the dialog (standard button behavior on the trigger). When it opens,
+  focus moves to the **first focusable element** inside the dialog in DOM order—often the close
+  control—or to the element referenced by **`initialFocusRef`** on the dialog model when set.
+- **Tab** / **Shift + Tab**: Move through focusable elements inside the dialog; leaving the first or
+  last focusable element **closes** the dialog and moves focus to the next or previous focusable
+  element on the page (non-modal focus redirect behavior).
+- **Escape**: Closes the dialog and returns focus to the `Dialog.Target` (or configured return
+  target).
+
+### Screen Reader Experience
+
+- **When the dialog opens:** Screen readers should announce the name and role of the first focused
+  control (often the close button), the dialog's name (`Dialog.Heading`) and role.
+- **Reading order:** The dialog contents should be read in the same order as it appears on screen
+  for browsers and screen readers that support `aria-owns`. Results vary, so always test with your
+  supported browsers and screen reader combinations.
+- **Expanded or collapsed state:** The `Dialog.Target` does not include an expanded or collapsed
+  state by default, but it can be added if the interaction design isn't using an initial focus for
+  the Dialog. See
+  [Guides > Accessibility > Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs)
+  for more information.
 
 ## Component API
 
