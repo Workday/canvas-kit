@@ -12,7 +12,7 @@ import {RTL as RTLExample} from './examples/RTL';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 
 export default {
-  title: 'Preview/Inputs/Switch',
+  title: 'Preview/Inputs/Switch (new)',
   component: Switch,
   tags: ['autodocs'],
   parameters: {

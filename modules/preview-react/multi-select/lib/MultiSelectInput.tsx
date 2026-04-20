@@ -255,7 +255,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             {...elemProps}
           />
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} />
+            <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList disabled={disabled} removeLabel={removeLabel} />
@@ -306,7 +306,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} />
+            <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList removeLabel={removeLabel} disabled={disabled} />
