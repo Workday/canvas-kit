@@ -1,8 +1,33 @@
 version: 2
 updates:
-  # Monitor master branch
+  # Monitor master branch - root
   - package-ecosystem: "npm"
     directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor master branch - modules/docs
+  - package-ecosystem: "npm"
+    directory: "/modules/docs"
     schedule:
       interval: "weekly"
     target-branch: "master"
@@ -23,9 +48,151 @@ updates:
     assignees:
       - "manuel.carrera"
 
-  # Monitor prerelease/minor branch
+  # Monitor master branch - modules/labs-react
+  - package-ecosystem: "npm"
+    directory: "/modules/labs-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor master branch - modules/preview-react
+  - package-ecosystem: "npm"
+    directory: "/modules/preview-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor master branch - modules/react
+  - package-ecosystem: "npm"
+    directory: "/modules/react"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor master branch - modules/styling-transform
+  - package-ecosystem: "npm"
+    directory: "/modules/styling-transform"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor master branch - modules/styling
+  - package-ecosystem: "npm"
+    directory: "/modules/styling"
+    schedule:
+      interval: "weekly"
+    target-branch: "master"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - root
   - package-ecosystem: "npm"
     directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - modules/docs
+  - package-ecosystem: "npm"
+    directory: "/modules/docs"
     schedule:
       interval: "weekly"
     target-branch: "prerelease/minor"
@@ -46,9 +213,268 @@ updates:
     assignees:
       - "manuel.carrera"
 
-  # Monitor prerelease/major branch
+  # Monitor prerelease/minor branch - modules/labs-react
+  - package-ecosystem: "npm"
+    directory: "/modules/labs-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - modules/preview-react
+  - package-ecosystem: "npm"
+    directory: "/modules/preview-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - modules/react
+  - package-ecosystem: "npm"
+    directory: "/modules/react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - modules/styling-transform
+  - package-ecosystem: "npm"
+    directory: "/modules/styling-transform"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/minor branch - modules/styling
+  - package-ecosystem: "npm"
+    directory: "/modules/styling"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/minor"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - root
   - package-ecosystem: "npm"
     directory: "/"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/docs
+  - package-ecosystem: "npm"
+    directory: "/modules/docs"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/labs-react
+  - package-ecosystem: "npm"
+    directory: "/modules/labs-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/preview-react
+  - package-ecosystem: "npm"
+    directory: "/modules/preview-react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/react
+  - package-ecosystem: "npm"
+    directory: "/modules/react"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+      - dependency-name: "@workday/canvas-system-icons-web"
+      - dependency-name: "@workday/canvas-accent-icons-web"
+      - dependency-name: "@workday/canvas-applet-icons-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/styling-transform
+  - package-ecosystem: "npm"
+    directory: "/modules/styling-transform"
+    schedule:
+      interval: "weekly"
+    target-branch: "prerelease/major"
+    allow:
+      - dependency-name: "@workday/canvas-tokens-web"
+    commit-message:
+      prefix: "chore"
+      prefix-development: "chore"
+      include: "scope"
+    pull-request-branch-name:
+      separator: "-"
+    labels:
+      - "dependencies"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "manuel.carrera"
+    assignees:
+      - "manuel.carrera"
+
+  # Monitor prerelease/major branch - modules/styling
+  - package-ecosystem: "npm"
+    directory: "/modules/styling"
     schedule:
       interval: "weekly"
     target-branch: "prerelease/major"
