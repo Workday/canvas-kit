@@ -1,16 +1,16 @@
 import React from 'react';
 
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import * as types from '../docgen/docTypes';
-import {MdxJSToJSX} from './MDXElements';
-import {Table} from '@workday/canvas-kit-react';
-import {capitalize, IndentLevelContext, RenderContext, indent} from './widgetUtils';
 import {DescriptionTooltip} from './DescriptionTooltip';
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {Flex} from '@workday/canvas-kit-react';
+import {MdxJSToJSX} from './MDXElements';
+import {IndentLevelContext, RenderContext, capitalize, indent} from './widgetUtils';
 
 const widgets: Record<string, React.FC<ValueProps>> = {};
 
@@ -45,6 +45,7 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
   if (properties.length === 0) {
     return <span className="token punctuation">&#123;&#125;</span>;
   }
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const level = React.useContext(IndentLevelContext);
 
   return (
@@ -58,20 +59,22 @@ export const PropertiesInline = ({properties}: {properties: types.ObjectProperty
             {p.description || p.tags.deprecated ? (
               <DescriptionTooltip
                 type="describe"
-                style={{maxWidth: '50em'}}
+                cs={{maxWidth: '50em'}}
                 title={<MdxJSToJSX>{p.description || p.tags.deprecated}</MdxJSToJSX>}
               >
-                <span
+                <Text
                   className="token property"
-                  style={{
+                  cs={{
                     cursor: 'pointer',
                     textDecoration: p.tags.deprecated ? 'line-through' : 'underline',
                     textDecorationStyle: 'dotted',
-                    color: p.tags.deprecated ? colors.cinnamon600 : colors.plum600,
+                    color: p.tags.deprecated
+                      ? system.color.fg.danger.default
+                      : system.color.fg.info.default,
                   }}
                 >
                   {p.name}
-                </span>
+                </Text>
               </DescriptionTooltip>
             ) : (
               <span className="token property">{p.name}</span>
@@ -105,16 +108,20 @@ function getTableRows(
     const title = property.declarations?.[0]?.filePath;
 
     const propName = (
-      <Text as="code" whiteSpace={'nowrap !important' as any}>
+      <Text as="code" cs={{whiteSpace: 'nowrap !important'}}>
         {indent(level)}
         {level > 0 && '\u2514\u00A0'}
         {property.name}
-        {showRequired && property.required ? <Text color="chiliMango600">*</Text> : ''}
+        {showRequired && property.required ? (
+          <Text cs={{color: system.color.fg.danger.default}}>*</Text>
+        ) : (
+          ''
+        )}
       </Text>
     );
     return [
       <Table.Row key={index + i}>
-        <Table.Cell color="plum600">
+        <Table.Cell cs={{color: base.blue800}}>
           {/* Use a tooltip to help with debugging where the type sources are coming from */}
           {title ? (
             <Tooltip type="describe" title={title}>

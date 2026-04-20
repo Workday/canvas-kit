@@ -1,9 +1,9 @@
 import React from 'react';
 
-import {Table} from '@workday/canvas-kit-react/table';
-import {Heading} from '@workday/canvas-kit-react/text';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
+import {Heading} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';

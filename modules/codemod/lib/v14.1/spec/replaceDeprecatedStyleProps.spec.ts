@@ -1,10 +1,11 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../replaceDeprecatedStyleProps';
 import {stripIndent} from 'common-tags';
+
+import transform from '../replaceDeprecatedStyleProps';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 
-describe.only('replace deprecated style props', () => {
+describe('replace deprecated style props', () => {
   it('should not change non-canvas imports', () => {
     const input = stripIndent`
       import {Flex} from "any-other-package";

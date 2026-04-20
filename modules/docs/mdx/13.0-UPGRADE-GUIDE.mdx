@@ -1,9 +1,10 @@
-import {Meta} from '@storybook/addon-docs';
-import {Table} from '@workday/canvas-kit-react/table';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {Meta} from '@storybook/blocks';
+
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
-import {cssVar} from '@workday/canvas-kit-styling';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {Table} from '@workday/canvas-kit-react/table';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {base, brand, system} from '@workday/canvas-tokens-web';
 
 <Meta title="Guides/Upgrade Guides/v13.0" />
 
@@ -44,18 +45,18 @@ dependencies to a minimum version of `17.0.0`.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [Component Updates](#component-updates)
-	- [Styling API and CSS Tokens](#styling-api-and-canvas-tokens-)
-	- [Avatar](#avatar-)
-	- [Expandable](#expandable-)
-	- [External Hyperlink](#external-hyperlink-)
-	- [Form Field and Form Field Group](#form-field-and-form-field-group-)
-	- [Pill (Preview)](#pill-preview-)
-	- [SidePanel (Preview)](#side-panel-preview-)
-	- [Tabs](#tabs-)
+  - [Styling API and CSS Tokens](#styling-api-and-canvas-tokens-)
+  - [Avatar](#avatar-)
+  - [Expandable](#expandable-)
+  - [External Hyperlink](#external-hyperlink-)
+  - [Form Field and Form Field Group](#form-field-and-form-field-group-)
+  - [Pill (Preview)](#pill-preview-)
+  - [SidePanel (Preview)](#side-panel-preview-)
+  - [Tabs](#tabs-)
 - [Brand Refresh](#brand-refresh)
   - [Logo Updates](#logo-updates-)
 - [Infrastructure](#infrastructure)
-	- [Supporting react-jsx](#supporting-react-jsx-)
+  - [Supporting react-jsx](#supporting-react-jsx-)
 - [Troubleshooting](#troubleshooting)
 - [Contributors](#contributors)
 - [Glossary](#glossary)
@@ -113,7 +114,7 @@ The following components have been updated:
 
 - `ActionBar` [#3205](https://github.com/Workday/canvas-kit/pull/3205)
 - `Banner` [#3210](https://github.com/Workday/canvas-kit/pull/3210)
-- `Expandable` [#3128](https://github.com/Workday/canvas-kit/pull/3128	)
+- `Expandable` [#3128](https://github.com/Workday/canvas-kit/pull/3128)
 - `ExternalHyperlink` [#3101](https://github.com/Workday/canvas-kit/pull/3101)
 - `LoadingSparkles` [#3120](https://github.com/Workday/canvas-kit/pull/3120)
 - `Menu` [#3114](https://github.com/Workday/canvas-kit/pull/3114)
@@ -180,8 +181,9 @@ The following change has been made to `ExternalHyperlink` to ensure proper acces
 - The `iconLabel` prop no longer has a default value of `"Opens link in new window"`. This default
   phrase caused some to accidentally omit translations which caused translation issues.
 
-> **Note:** While the prop is not required, you _must_ provide an `iconLabel` for `<ExternalHyperlink />` to ensure proper
-> accessibility. Our examples have been updated to reflect this change.
+> **Note:** While the prop is not required, you _must_ provide an `iconLabel` for
+> `<ExternalHyperlink />` to ensure proper accessibility. Our examples have been updated to reflect
+> this change.
 
 **Before in v12**
 
@@ -227,7 +229,6 @@ dropped `horizontal` as a value, and it now requires an update.
 	<FormField.Field>
 </FormField>
 ```
-
 
 ### Pill (Preview) 🚨
 
@@ -297,8 +298,13 @@ import {Pill} from '@workday/canvas-kit-preview-react/pill';
 
 **PR:** [#3258](https://github.com/Workday/canvas-kit/pull/3258)
 
-When we supported IE 11 we needed to use  [CSS Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations) to support animation events. Since we dropped support for IE11, we can now use [CSS Transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions) to animate the `width` of the `SidePanel` when it's expanding or collapsing.
-As part of this change, we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support `onTransitionStart`, therefore the prop is no longer needed.
+When we supported IE 11 we needed to use
+[CSS Animation](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations)
+to support animation events. Since we dropped support for IE11, we can now use
+[CSS Transitions](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_transitions/Using_CSS_transitions)
+to animate the `width` of the `SidePanel` when it's expanding or collapsing. As part of this change,
+we also removed the `onAnimationStart` prop. Since moving to transitions, React doesn't support
+`onTransitionStart`, therefore the prop is no longer needed.
 
 ### Tabs 💅
 
@@ -405,6 +411,7 @@ Here's an example Babel config. Your configuration may vary based on your applic
 ## Contributors
 
 This release was made possible by the following contributors:
+
 - [@williamjstanton](https://github.com/williamjstanton)
 - [@NehaAhujaa](https://github.com/NehaAhujaa)
 - [@JaredMaione](https://github.com/JaredMaione)

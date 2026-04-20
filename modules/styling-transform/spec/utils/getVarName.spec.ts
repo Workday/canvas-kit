@@ -1,9 +1,8 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
 import {getVarName} from '../../lib/utils/getVarName';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 describe('getVarName', () => {
   it('should get the correct CSS variable name of a single VariableDeclaration', () => {

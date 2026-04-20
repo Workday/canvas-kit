@@ -1,13 +1,14 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const model = usePopupModel();
@@ -29,11 +30,11 @@ export const Basic = () => {
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>
-            <Box as="p" marginY="zero">
+            <Box as="p" cs={{marginBlock: 0}}>
               Are you sure you'd like to delete the item titled 'My Item'?
             </Box>
           </Popup.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{paddingInline: system.padding.xs, gap: system.gap.sm}}>
             <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Popup.CloseButton>

@@ -32,6 +32,16 @@ export const handleColorSpace = createPropertyTransform((node, context) => {
         }
       );
     }
+
+    if (name === 'hover' || name === 'pressed') {
+      return colorSpace[name](
+        args[0] as {
+          color: string;
+          fallback?: string;
+          colorType?: 'accent' | 'surface';
+        }
+      );
+    }
   }
 
   return;

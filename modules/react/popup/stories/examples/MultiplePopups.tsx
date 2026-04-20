@@ -1,10 +1,10 @@
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {Flex} from '@workday/canvas-kit-react/layout';
 
 export const MultiplePopups = () => {
   const popup1 = usePopupModel();

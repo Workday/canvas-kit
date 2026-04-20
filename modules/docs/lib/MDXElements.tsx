@@ -1,9 +1,10 @@
-//@ts-ignore
 import {useMDXComponents} from '@mdx-js/react';
-import React from 'react';
 import MarkdownToJSX from 'markdown-to-jsx';
+import React from 'react';
 
-import {Box, createComponent} from '@workday/canvas-kit-react';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Box} from '@workday/canvas-kit-react/layout';
+
 import {HeadingLevelContext, SymbolDialog} from './widgetUtils';
 
 /**
@@ -39,7 +40,7 @@ const Button = (props: any) => {
       </code>
     );
   }
-  return React.createElement(components['button'] || 'button', props, props.children);
+  return React.createElement(components.button || 'button', props, props.children);
 };
 
 /**
@@ -48,7 +49,7 @@ const Button = (props: any) => {
  */
 function convertLinkToSymbolLinks(input: string): string {
   return input.replace(
-    /{@link ([a-z0-9.]+)( [a-z0-9.]+)?}/gi,
+    /{@link\s+([^\s}]+)(?:\s+([^}]+))?\s?}/gi,
     (_substr, symbol, text = '') =>
       `<button data-symbol="${text.trim()}" className="token symbol">${symbol}</button>`
   );

@@ -1,12 +1,13 @@
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {ModalOverlay} from './ModalOverlay';
+
+import {ModalBody} from './ModalBody';
 import {ModalCard} from './ModalCard';
-import {useModalModel} from './hooks';
 import {ModalHeading} from './ModalHeading';
 import {ModalOverflowOverlay} from './ModalOverflowOverlay';
-import {ModalBody} from './ModalBody';
+import {ModalOverlay} from './ModalOverlay';
+import {useModalModel} from './hooks';
 
 /**
  * This component is the container component and does not render any semantic elements. It provides

@@ -1,5 +1,5 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Popper, usePopupPopper} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
 

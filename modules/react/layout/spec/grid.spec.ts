@@ -1,4 +1,4 @@
-import {grid, GridStyleProps} from '../lib/utils/grid';
+import {GridStyleProps, grid} from '../lib/utils/grid';
 
 describe('Grid Style Props Function', () => {
   it('should ignore non-grid props', () => {

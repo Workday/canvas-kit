@@ -1,7 +1,7 @@
 import {Transform} from 'jscodeshift';
 
-import renameFormFieldHorizontal from './renameFormFieldHorizontal';
 import promoteFormField from './promoteFormField';
+import renameFormFieldHorizontal from './renameFormFieldHorizontal';
 
 const transform: Transform = (file, api, options) => {
   // These will run in order. If your transform depends on others, place yours after dependent transforms

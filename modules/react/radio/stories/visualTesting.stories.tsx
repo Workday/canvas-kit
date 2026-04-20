@@ -1,14 +1,14 @@
 import * as React from 'react';
 
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
 
-import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Radio',

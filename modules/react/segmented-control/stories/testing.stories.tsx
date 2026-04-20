@@ -1,73 +1,71 @@
-import * as React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-
-import {
-  listViewIcon,
-  worksheetsIcon,
-  deviceTabletIcon,
-  percentageIcon,
-  cColumnClusteredIcon,
-} from '@workday/canvas-system-icons-web';
+import React from 'react';
 
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {
+  ComponentStatesTable,
+  StaticStates,
+  permutateProps,
+} from '@workday/canvas-kit-react/testing';
+import {gridIcon, listDetailIcon, listViewIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Buttons/Segmented Control',
   component: SegmentedControl,
   parameters: {
-    ReadmePath: 'labs-react/header',
     chromatic: {
       disable: false,
     },
   },
 };
 
-export const SegmentedControlStates = {
+const stateTableColumnProps = [
+  {label: 'Default ', props: {}},
+  {label: 'Default Disabled', props: {disabled: true}},
+  {label: 'Hover ', props: {itemProps: {className: 'hover'}}},
+  {label: 'Hover Disabled', props: {disabled: true, itemProps: {className: 'hover'}}},
+  {label: 'Focus ', props: {itemProps: {className: 'focus'}}},
+  {label: 'Focus Hover ', props: {itemProps: {className: 'focus hover'}}},
+  {label: 'Active/Pressed', props: {itemProps: {className: 'active'}}},
+];
+
+export const IconOnlyHorizontalStates = {
   render: () => (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[
-          {label: 'First Item Selected', props: {value: 'list-view'}},
-          {label: 'Middle Item Selected', props: {value: 'device-view'}},
-          {label: 'Last Item Selected', props: {value: 'percent-view'}},
-        ]}
-        columnProps={[
-          {label: 'Default', props: {className: ''}},
-          {label: 'Focus', props: {className: 'focus'}}, // Test changing border radius for focused button
-          {label: 'Small', props: {size: 'small'}},
-          {label: 'Large', props: {size: 'large'}},
-        ]}
+        rowProps={permutateProps({
+          size: [
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          initialValue: [
+            {value: 'table', label: ' with first item selected'},
+            {value: 'list', label: ' with second item selected'},
+            {value: 'detail', label: ' with third item selected'},
+          ],
+        })}
+        columnProps={stateTableColumnProps}
       >
-        {props => (
-          <SegmentedControl value={props.value}>
-            <SegmentedControl.Button
-              size={props.size}
-              icon={listViewIcon}
-              value="list-view"
-              aria-label="List View"
-              className={props.value === 'list-view' ? props.className : undefined}
-            />
-            <SegmentedControl.Button
-              size={props.size}
-              icon={worksheetsIcon}
-              value="table-view"
-              aria-label="Table View"
-              disabled={true}
-            />
-            <SegmentedControl.Button
-              size={props.size}
-              icon={deviceTabletIcon}
-              value="device-view"
-              aria-label="Device View"
-              className={props.value === 'device-view' ? props.className : undefined}
-            />
-            <SegmentedControl.Button
-              size={props.size}
-              icon={percentageIcon}
-              value="percent-view"
-              aria-label="Percent View"
-              className={props.value === 'percent-view' ? props.className : undefined}
-            />
+        {({itemProps, ...props}) => (
+          <SegmentedControl shouldSelect={() => false} {...props}>
+            <SegmentedControl.List aria-label="View type">
+              <SegmentedControl.Item
+                data-id="table"
+                icon={gridIcon}
+                tooltipProps={{title: 'Table'}}
+              />
+              <SegmentedControl.Item
+                data-id="list"
+                icon={listViewIcon}
+                tooltipProps={{title: 'List'}}
+                {...itemProps}
+              />
+              <SegmentedControl.Item
+                data-id="detail"
+                icon={listDetailIcon}
+                tooltipProps={{title: 'Detail'}}
+              />
+            </SegmentedControl.List>
           </SegmentedControl>
         )}
       </ComponentStatesTable>
@@ -75,34 +73,116 @@ export const SegmentedControlStates = {
   ),
 };
 
-export const SegmentedControlButtonStates = {
+export const IconOnlyVerticalStates = {
   render: () => (
     <StaticStates>
       <ComponentStatesTable
-        rowProps={[
-          {label: 'Bar Chart', props: {value: 'off', icon: cColumnClusteredIcon}},
-          {label: 'Bar Chart Selected', props: {value: 'on', icon: cColumnClusteredIcon}},
-          {label: 'Device Tablet', props: {value: 'off', icon: deviceTabletIcon}},
-          {label: 'Bar Chart Selected', props: {value: 'on', icon: deviceTabletIcon}},
-          {label: 'Worksheet', props: {value: 'off', icon: worksheetsIcon}},
-          {label: 'Bar Chart Selected', props: {value: 'on', icon: worksheetsIcon}},
-        ]}
-        columnProps={[
-          {label: 'Default', props: {className: ''}},
-          {label: 'Focus', props: {className: 'focus'}},
-          {label: 'Active', props: {className: 'active'}},
-        ]}
+        rowProps={permutateProps({
+          size: [
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          initialValue: [
+            {value: 'table', label: ' with first item selected'},
+            {value: 'list', label: ' with second item selected'},
+            {value: 'detail', label: ' with third item selected'},
+          ],
+        })}
+        columnProps={stateTableColumnProps}
       >
-        {props => (
-          <SegmentedControl value={props.value}>
-            <SegmentedControl.Button
-              size={props.size}
-              icon={props.icon}
-              value="on"
-              aria-label="Clustered"
-              className={props.className}
-            />
-            <></>
+        {({itemProps, ...props}) => (
+          <SegmentedControl shouldSelect={() => false} orientation="vertical" {...props}>
+            <SegmentedControl.List aria-label="View type">
+              <SegmentedControl.Item
+                data-id="table"
+                icon={gridIcon}
+                tooltipProps={{title: 'Table'}}
+              />
+              <SegmentedControl.Item
+                data-id="list"
+                icon={listViewIcon}
+                tooltipProps={{title: 'List'}}
+                {...itemProps}
+              />
+              <SegmentedControl.Item
+                data-id="detail"
+                icon={listDetailIcon}
+                tooltipProps={{title: 'Detail'}}
+              />
+            </SegmentedControl.List>
+          </SegmentedControl>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ),
+};
+
+export const TextAndIconStates = {
+  render: () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps({
+          size: [
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          initialValue: [
+            {value: 'table', label: ' with first item selected'},
+            {value: 'list', label: ' with second item selected'},
+            {value: 'detail', label: ' with third item selected'},
+          ],
+        })}
+        columnProps={stateTableColumnProps}
+      >
+        {({itemProps, ...props}) => (
+          <SegmentedControl shouldSelect={() => false} {...props}>
+            <SegmentedControl.List aria-label="View type">
+              <SegmentedControl.Item data-id="table" icon={gridIcon}>
+                Table
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="list" icon={listViewIcon} {...itemProps}>
+                List
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="detail" icon={listDetailIcon}>
+                Detail
+              </SegmentedControl.Item>
+            </SegmentedControl.List>
+          </SegmentedControl>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  ),
+};
+
+export const TextOnlyStates = {
+  render: () => (
+    <StaticStates>
+      <ComponentStatesTable
+        rowProps={permutateProps({
+          size: [
+            {value: 'small', label: 'Small'},
+            {value: 'medium', label: 'Medium'},
+            {value: 'large', label: 'Large'},
+          ],
+          initialValue: [
+            {value: 'table', label: ' with first item selected'},
+            {value: 'list', label: ' with second item selected'},
+            {value: 'detail', label: ' with third item selected'},
+          ],
+        })}
+        columnProps={stateTableColumnProps}
+      >
+        {({itemProps, ...props}) => (
+          <SegmentedControl shouldSelect={() => false} {...props}>
+            <SegmentedControl.List aria-label="View type">
+              <SegmentedControl.Item data-id="table">Table</SegmentedControl.Item>
+              <SegmentedControl.Item data-id="list" {...itemProps}>
+                List
+              </SegmentedControl.Item>
+              <SegmentedControl.Item data-id="detail">Detail</SegmentedControl.Item>
+            </SegmentedControl.List>
           </SegmentedControl>
         )}
       </ComponentStatesTable>

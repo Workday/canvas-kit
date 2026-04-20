@@ -1,20 +1,21 @@
-import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {FlexProps} from '@workday/canvas-kit-react/layout';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
 } from '@workday/canvas-kit-react/common';
-import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
-import {system} from '@workday/canvas-tokens-web';
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {component, system} from '@workday/canvas-tokens-web';
+
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
-export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
+export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
    * style prop applies styles to the whole Flex component,
@@ -32,11 +33,15 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
   base: ({chevronRightIconPart}) => ({
     alignItems: 'center',
     display: 'flex',
-    [systemIconStencil.vars.color]: system.color.icon.default,
-    [systemIconStencil.vars.size]: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
     [chevronRightIconPart]: {
-      height: system.space.x8,
-      width: system.space.x8,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.sm, system.space.x8),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      width: cssVar(system.size.sm, system.space.x8),
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',

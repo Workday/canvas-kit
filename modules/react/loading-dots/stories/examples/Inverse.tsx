@@ -1,7 +1,7 @@
+import {Graphic} from '@workday/canvas-kit-react/icon';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Graphic} from '@workday/canvas-kit-react/icon';
 
 const loadingStencil = createStencil({
   base: {

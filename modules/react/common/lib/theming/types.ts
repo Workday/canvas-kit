@@ -1,4 +1,4 @@
-import {CanvasBreakpoints, BreakpointFnParam} from './breakpoints';
+import {BreakpointFnParam, CanvasBreakpoints} from './breakpoints';
 
 /**
  * A single palette within a Canvas theme

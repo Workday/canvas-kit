@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-import {
-  Popup,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  usePopupModel,
-  usePopupCloseButton,
-  useInitialFocus,
-  useReturnFocus,
-} from '@workday/canvas-kit-react/popup';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  usePopupCloseButton,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
 
 export const NestedPopups = () => {
   const popup1 = usePopupModel();

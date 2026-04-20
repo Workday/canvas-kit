@@ -1,8 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SkeletonTextProps {
+export interface SkeletonTextProps extends CSProps {
   /**
    * The number of "lines" that SkeletonText will display. If there is more than one line, the last line will have a width of `60%`.
    * @default 2
@@ -20,12 +20,21 @@ export const skeletonTextStencil = createStencil({
     backgroundColor: '',
   },
   base: ({backgroundColor}) => ({
-    marginBottom: system.space.x6,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginBottom: cssVar(system.size.xs, system.space.x6),
     '& [data-part="skeleton-text-lines"]': {
-      backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
-      height: px2rem(21),
-      marginBlockEnd: system.space.x3,
-      borderRadius: system.shape.half,
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      backgroundColor: cssVar(
+        backgroundColor,
+        cssVar(system.color.surface.loading, system.color.bg.alt.strong)
+      ),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      height: cssVar(system.size.xxxs, px2rem(21)),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      // We do not have a `gap` token for 0.75renm so `padding` is being used here
+      marginBlockEnd: cssVar(system.padding.sm, system.space.x3),
+      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      borderRadius: cssVar(system.shape.md, system.shape.half),
       width: '100%',
     },
     '& [data-part="skeleton-text-lines"]:last-child': {
