@@ -5,12 +5,17 @@ import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
+import {
+  CanvasProvider,
+  defaultBranding,
+  defaultCanvasTheme,
+} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
+import {customColorTheme} from '../../../utils/storybook/customThemes';
 import eslintrc from './stackblitzFiles/.eslintrc.cjs.txt?raw';
 import appFile from './stackblitzFiles/App.tsx?raw';
 import indexHTMLFile from './stackblitzFiles/index.html?raw';
