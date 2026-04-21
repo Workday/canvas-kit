@@ -157,6 +157,49 @@ export const defaultBranding = createStyles({
   [brand.primary.lightest]: base.blue25,
   [brand.gradient.primary]:
     `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
+
+  /**
+   * Default `system.color.brand.*` values on the provider scope so components that read
+   * system tokens first (e.g. `cssVar(system.color.brand.accent.primary, brand.primary.base)`)
+   * still resolve to the same branding as legacy `brand.*` vars when globals define system
+   * tokens differently, or when consumers override `brand.*` via `className`.
+   */
+  [system.color.brand.focus.primary]: brand.common.focusOutline,
+  [system.color.brand.border.primary]: brand.common.focusOutline,
+  [system.color.brand.accent.primary]: brand.primary.base,
+  ...(system.color.brand.accent.action
+    ? {[system.color.brand.accent.action]: brand.primary.base}
+    : {}),
+  [system.color.brand.accent.critical]: brand.error.base,
+  [system.color.brand.accent.caution]: brand.alert.base,
+  [system.color.brand.accent.positive]: brand.success.base,
+  [system.color.brand.fg.primary.default]: brand.primary.base,
+  [system.color.brand.fg.primary.strong]: brand.primary.dark,
+  [system.color.brand.fg.critical.default]: brand.error.base,
+  [system.color.brand.fg.critical.strong]: brand.error.dark,
+  [system.color.brand.fg.caution.default]: brand.alert.darkest,
+  [system.color.brand.fg.caution.strong]: brand.alert.dark,
+  [system.color.brand.fg.positive.default]: brand.success.base,
+  [system.color.brand.fg.positive.strong]: brand.success.dark,
+  [system.color.brand.fg.selected]: brand.primary.dark,
+  [system.color.brand.focus.critical]: brand.error.dark,
+  [system.color.brand.border.critical]: brand.error.dark,
+  ...(system.color.brand.focus.caution
+    ? {
+        [system.color.brand.focus.caution.inner]: brand.common.alertInner,
+        [system.color.brand.focus.caution.outer]: brand.alert.dark,
+      }
+    : {}),
+  [system.color.brand.border.caution]: brand.alert.dark,
+  [system.color.brand.surface.primary.default]: brand.primary.lightest,
+  [system.color.brand.surface.primary.strong]: brand.primary.lighter,
+  [system.color.brand.surface.critical.default]: brand.error.lightest,
+  [system.color.brand.surface.critical.strong]: brand.error.lighter,
+  [system.color.brand.surface.caution.default]: brand.alert.lightest,
+  [system.color.brand.surface.caution.strong]: brand.alert.lighter,
+  [system.color.brand.surface.positive.default]: brand.success.lightest,
+  [system.color.brand.surface.positive.strong]: brand.success.lighter,
+  [system.color.brand.surface.selected]: brand.primary.lighter,
 });
 
 export const useCanvasThemeToCssVars = (
