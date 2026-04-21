@@ -81,29 +81,18 @@ export const systemIconCircleStencil = createStencil({
     size: '',
   },
   base: ({background, color, size}) => ({
-    // TODO: Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(
-      background,
-      cssVar(system.color.surface.alt.default, system.color.bg.alt.soft)
-    ),
+    background: cssVar(background, system.color.surface.alt.default),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
     border: 'none',
-    // TODO: Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
+    borderRadius: system.shape.full,
     overflow: 'hidden',
-    // TODO: Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(size, cssVar(system.size.md, system.space.x10)),
-    // TODO: Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(size, cssVar(system.size.md, system.space.x10)),
-    // TODO: Revisit token, using v4 token and fallback to v3 token
+    width: cssVar(size, system.size.md),
+    height: cssVar(size, system.size.md),
     // There is no `component.systemIcon.size.*` token for `40px` so leaving `size` here.
-    [systemIconStencil.vars.size]: calc.multiply(
-      cssVar(size, cssVar(system.size.md, system.space.x10)),
-      0.625
-    ),
+    [systemIconStencil.vars.size]: calc.multiply(cssVar(size, system.size.md), 0.625),
     [systemIconStencil.vars.color]: color,
     '& img': {
       width: '100%',
@@ -113,11 +102,7 @@ export const systemIconCircleStencil = createStencil({
   modifiers: {
     inverse: {
       true: ({background, color}) => ({
-        // TODO: Revisit token, using v4 token and fallback to v3 token
-        background: cssVar(
-          background,
-          cssVar(system.color.accent.info, system.color.bg.primary.default)
-        ),
+        background: cssVar(background, system.color.accent.info),
         [systemIconStencil.vars.color]: cssVar(color, system.color.fg.inverse),
       }),
     },

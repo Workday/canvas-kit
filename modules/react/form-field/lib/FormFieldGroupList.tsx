@@ -18,11 +18,9 @@ const formFieldGroupListStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
-    padding: `${px2rem(10)} ${cssVar(base.size150, system.space.x3)} ${cssVar(system.padding.xs, system.space.x2)}`,
+    borderRadius: system.shape.md,
+    gap: system.gap.sm,
+    padding: `${px2rem(10)} ${cssVar(base.size150, system.space.x3)} ${system.padding.xs}`,
     margin: `0 ${calc.negate(cssVar(base.size150, system.space.x3))}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
@@ -30,15 +28,11 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)}`,
       },
       caution: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}, inset 0 0 0 ${px2rem(3)} ${cssVar(
           system.color.brand.focus.caution.inner,
           brand.common.alertInner

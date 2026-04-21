@@ -18,9 +18,7 @@ export interface ColorPreviewProps extends TextInputProps {
 
 export const colorPreviewStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
     pointerEvents: 'none',
   },

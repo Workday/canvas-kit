@@ -33,11 +33,8 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    top: cssVar(system.gap.lg, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.gap.lg, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    top: system.gap.lg,
+    width: system.gap.lg,
     insetInlineEnd: cssVar(base.size150, system.space.x3),
   },
   modifiers: {
@@ -96,11 +93,9 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(1)`,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },
@@ -109,11 +104,9 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },
@@ -122,11 +115,9 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         insetInlineStart: cssVar(base.size150, system.space.x3),
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           insetInlineEnd: cssVar(base.size150, system.space.x3),
         },
       },

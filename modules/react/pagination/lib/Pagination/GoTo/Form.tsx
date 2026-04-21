@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {PaginationContext} from '../usePaginationModel';
@@ -16,11 +16,9 @@ export const paginationGoToFormStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
+    gap: system.gap.sm,
     ':dir(rtl)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      paddingInline: cssVar(system.padding.xs, system.space.x2),
+      paddingInline: system.padding.xs,
     },
   },
 });

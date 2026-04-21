@@ -35,20 +35,15 @@ export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[2],
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.md, system.space.x4),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: system.gap.md,
     background: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderBlockStart: `solid ${px2rem(1)}  ${cssVar(system.color.border.default, system.color.border.divider)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(base.size500, system.space.x10)} `,
+    padding: `${system.padding.md} ${cssVar(base.size500, system.space.x10)} `,
     position: 'fixed',
     insetBlockEnd: 0,
     insetInline: 0,
     '@media (max-width: 767.5px)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      padding: cssVar(system.size.xxxs, system.space.x4),
+      padding: system.size.xxxs,
       '> *': {
         flex: 1,
       },

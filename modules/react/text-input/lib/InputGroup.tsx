@@ -11,7 +11,7 @@ import {
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -40,10 +40,8 @@ export const inputGroupInnerStencil = createStencil({
      * on your own.
      */
     insetInlineEnd: 'initial',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.md, system.space.x10),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.md, system.space.x10),
+    width: system.size.md,
+    height: system.size.md,
     /**
      * Some inner input group elements are decoration only and should not have pointer events
      */

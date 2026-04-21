@@ -21,28 +21,22 @@ export const pillIconButtonStencil = createStencil({
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
     borderRadius: px2rem(2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xxs, px2rem(20)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xxs, px2rem(20)),
+    height: system.size.xxs,
+    width: system.size.xxs,
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.background]: cssVar(
       system.color.surface.transparent,
       system.color.bg.alt.default
     ),
     [systemIconStencil.vars.color]: system.color.fg.strong,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
     '::after': {
       content: '""',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.sm, system.space.x8),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.sm, system.space.x8),
+      height: system.size.sm,
+      width: system.size.sm,
       position: 'absolute',
       left: calc.negate(px2rem(7)),
       bottom: calc.negate(px2rem(7)),

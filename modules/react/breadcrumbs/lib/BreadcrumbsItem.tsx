@@ -39,15 +39,11 @@ export const breadcrumbsItemStencil = createStencil({
     alignItems: 'center',
     display: 'inline-flex',
     whiteSpace: 'nowrap',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
     [chevronRightIconPart]: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.sm, system.space.x8),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.sm, system.space.x8),
+      height: system.size.sm,
+      width: system.size.sm,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',

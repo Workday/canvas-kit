@@ -10,20 +10,16 @@ export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {
 
 export const modalCardStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     margin: cssVar(base.size500, system.space.x10),
     width: px2rem(440),
     border: '0',
     outline: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[5],
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxxl, system.shape.x6),
+    borderRadius: system.shape.xxxl,
     '@media screen and (max-width: 768px)': {
       gap: 0,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: cssVar(system.gap.md, system.space.x4), // 16px all around margin on smaller screen sizes
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      padding: cssVar(system.gap.md, system.space.x4), // brings total padding between edge and content to 24px
+      margin: system.gap.md, // 16px all around margin on smaller screen sizes
+      padding: system.gap.md, // brings total padding between edge and content to 24px
     },
   },
 });

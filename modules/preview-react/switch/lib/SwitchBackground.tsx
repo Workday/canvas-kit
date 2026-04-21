@@ -10,16 +10,13 @@ export const switchBackgroundStencil = createStencil({
     pointerEvents: 'none',
     // This is used in "High Contrast Mode" to show a border on the Switch background.
     border: `${px2rem(1)} solid transparent`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: px2rem(18),
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
+    borderRadius: system.shape.full,
     padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),
   },
 });

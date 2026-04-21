@@ -16,10 +16,8 @@ export const expandableTitleStencil = createStencil({
   base: {
     ...system.type.body.medium,
     fontWeight: system.fontWeight.bold,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.strong, system.color.text.strong),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${px2rem(2)} ${cssVar(system.padding.xs, system.space.x2)}`,
+    padding: `${px2rem(2)} ${system.padding.xs}`,
     textAlign: 'left',
   },
 });

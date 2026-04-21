@@ -48,7 +48,6 @@ export interface LoadingDotsProps extends CSProps {
 export const loadingDotsStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     loadingDotColor: cssVar(system.color.accent.muted.default, system.color.bg.muted.strong),
   },
   parts: {
@@ -56,17 +55,13 @@ export const loadingDotsStencil = createStencil({
   },
   base: ({loadingDotColor, animationDurationMs, loadingAnimationDotPart}) => ({
     display: 'inline-flex',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
+    gap: system.gap.sm,
     [loadingAnimationDotPart]: {
       backgroundColor: loadingDotColor,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.xxxs, system.space.x4),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.xxxs, system.space.x4),
+      width: system.size.xxxs,
+      height: system.size.xxxs,
       fontSize: 0,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderRadius: cssVar(system.shape.full, system.shape.round),
+      borderRadius: system.shape.full,
       outline: `${px2rem(2)} solid transparent`,
       transform: 'scale(0)',
       display: 'inline-block',

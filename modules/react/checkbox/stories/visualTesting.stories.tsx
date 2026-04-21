@@ -134,8 +134,8 @@ export const InverseCheckboxStates = () => (
         <div
           style={{
             backgroundColor: cssVar(system.color.surface.contrast.default),
-            padding: cssVar(system.padding.sm),
-            borderRadius: cssVar(system.shape.sm),
+            padding: system.padding.sm,
+            borderRadius: system.shape.sm,
           }}
         >
           <Checkbox

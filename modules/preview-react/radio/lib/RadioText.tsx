@@ -17,7 +17,6 @@ const radioTextStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.inverse, system.color.text.inverse),
       },
     },

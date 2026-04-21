@@ -7,12 +7,9 @@ export const checkboxRippleStencil = createStencil({
     ripple: 'checkbox-ripple',
   },
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
+    borderRadius: system.shape.full,
     boxShadow: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     height: cssVar(base.size225, px2rem(18)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     width: cssVar(base.size225, px2rem(18)),
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',

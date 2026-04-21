@@ -1,4 +1,4 @@
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const formFieldStencil = createStencil({
@@ -6,8 +6,7 @@ export const formFieldStencil = createStencil({
     display: 'flex',
     border: 'none',
     padding: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    margin: `0 0 ${cssVar(system.gap.lg, system.space.x6)}`,
+    margin: `0 0 ${system.gap.lg}`,
   },
   modifiers: {
     grow: {
@@ -24,20 +23,17 @@ export const formFieldStencil = createStencil({
     orientation: {
       horizontalStart: {
         flexDirection: 'row',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.xl, system.space.x8),
+        gap: system.gap.xl,
         width: '100%',
       },
       horizontalEnd: {
         flexDirection: 'row',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.xl, system.space.x8),
+        gap: system.gap.xl,
         width: '100%',
       },
       vertical: {
         flexDirection: 'column',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.xs, system.space.x1),
+        gap: system.gap.xs,
         alignItems: 'flex-start',
       },
     },

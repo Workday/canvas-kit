@@ -59,12 +59,10 @@ export const panelStencil = createStencil({
   modifiers: {
     variant: {
       alternate: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
         boxShadow: system.depth[3],
       },
       standard: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.navigation, system.color.bg.alt.softer),
       },
     },

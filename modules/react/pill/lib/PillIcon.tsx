@@ -12,9 +12,7 @@ export interface PillIconProps extends Partial<SystemIconProps> {}
 export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginInlineStart: calc.negate(cssVar(system.gap.xs, system.space.x1)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginInlineStart: calc.negate(system.gap.xs),
     [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
     flex: '0 0 auto',
   },

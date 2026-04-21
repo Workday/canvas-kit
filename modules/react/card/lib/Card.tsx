@@ -25,15 +25,10 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.lg, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xl, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: system.gap.lg,
+    padding: system.padding.xl,
     backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: system.shape.xxl,
     border: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
   },
   modifiers: {
@@ -42,7 +37,6 @@ export const cardStencil = createStencil({
         borderColor: 'transparent',
       },
       tonal: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
         borderColor: system.color.border.transparent,
       },

@@ -20,17 +20,11 @@ export const segmentedControlListStencil = createStencil({
   },
   base: {
     display: 'inline-grid',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.surface.alt.strong, system.color.bg.alt.soft),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     border: `${cssVar(base.size0, px2rem(1))} solid ${cssVar(system.color.border.transparent, system.color.border.input.default)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.lg, system.shape.x2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xxs, px2rem(3)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gridGap: cssVar(system.gap.sm, system.space.x2),
+    borderRadius: system.shape.lg,
+    padding: system.padding.xxs,
+    gridGap: system.gap.sm,
   },
   modifiers: {
     orientation: {

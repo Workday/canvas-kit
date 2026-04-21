@@ -44,22 +44,15 @@ const fadeIn = keyframes({
 function getSpace(value?: string | number) {
   // TODO (deprecated tokens): Revisit tokens after removal of style props
   const spaceMap = {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    zero: cssVar(system.gap.none, '0'),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    xxxs: cssVar(system.gap.xs, system.space.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    xxs: cssVar(system.gap.sm, system.space.x2),
+    zero: system.gap.none,
+    xxxs: system.gap.xs,
+    xxs: system.gap.sm,
     xs: px2rem(12),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    s: cssVar(system.gap.md, system.space.x4),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    m: cssVar(system.gap.lg, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    l: cssVar(system.gap.xl, system.space.x8),
+    s: system.gap.md,
+    m: system.gap.lg,
+    l: system.gap.xl,
     xl: px2rem(40),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    xxl: cssVar(system.gap.xxl, system.space.x16),
+    xxl: system.gap.xxl,
     xxxl: px2rem(80),
   };
 
@@ -72,7 +65,6 @@ function getSpace(value?: string | number) {
 
 function getMaxHeight(margin?: string | number) {
   // set the default margin offset to 40px
-  // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
   let marginOffset: string | number = cssVar(base.size500, system.space.x10);
 
   if (margin) {
@@ -101,23 +93,16 @@ export const popupCardStencil = createStencil({
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
     color: cssVar(system.color.fg.default, system.color.text.default),
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    maxWidth: calc.subtract('100vw', cssVar(system.size.sm, system.space.x8)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.lg, system.space.x2),
+    maxWidth: calc.subtract('100vw', system.size.sm),
+    gap: system.gap.lg,
     boxShadow: system.depth[3],
     minHeight: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xl, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxxl, system.shape.x6),
+    padding: system.padding.xl,
+    borderRadius: system.shape.xxxl,
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,
@@ -142,8 +127,7 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
-  // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-  const translate = getTransformOrigin(transformOrigin, cssVar(system.gap.sm, system.space.x2));
+  const translate = getTransformOrigin(transformOrigin, system.gap.sm);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
 
   return (

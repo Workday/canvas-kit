@@ -10,16 +10,13 @@ import {PaginationContext} from './usePaginationModel';
 export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.size.sm, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.sm, system.space.x8),
+    minWidth: system.size.sm,
+    height: system.size.sm,
     padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: cssVar(
         system.color.surface.alt.default,
         system.color.bg.alt.soft
@@ -39,7 +36,6 @@ export const paginationPageButtonStencil = createStencil({
     toggled: {
       true: {
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [buttonStencil.vars.background]: cssVar(
           system.color.brand.accent.primary,
           brand.primary.base
@@ -47,7 +43,6 @@ export const paginationPageButtonStencil = createStencil({
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [buttonStencil.vars.background]: cssVar(
             system.color.brand.accent.primary,
             brand.primary.base

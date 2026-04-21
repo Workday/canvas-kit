@@ -3,7 +3,7 @@ import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
 import {PillCount, pillCountStencil} from './PillCount';
@@ -34,38 +34,29 @@ export const pillStencil = createStencil({
     display: 'initial',
     flexDirection: 'row',
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.sm, system.shape.x1),
+    borderRadius: system.shape.sm,
     fontFamily: system.fontFamily.default,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.sm, system.lineHeight.subtext.small), // ensure correct line height when there's no elements and just text
+    fontSize: system.fontSize.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
+    lineHeight: system.lineHeight.subtext.sm, // ensure correct line height when there's no elements and just text
     boxShadow: 'none',
     outline: 'none',
     fontWeight: system.fontWeight.medium,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     width: 'fit-content',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${px2rem(2)} ${cssVar(system.padding.xs, system.space.x2)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xs, system.space.x6),
+    padding: `${px2rem(2)} ${system.padding.xs}`,
+    height: system.size.xs,
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
+    gap: system.gap.xs,
     maxWidth,
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.background]: cssVar(
       system.color.surface.alt.strong,
       system.color.bg.alt.default
     ),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
@@ -73,11 +64,9 @@ export const pillStencil = createStencil({
 
     '&:has(span)': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large), // ensure correct line height
+      lineHeight: system.lineHeight.subtext.lg, // ensure correct line height
     },
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.color.surface.alt.strong,
         fallback: system.color.bg.alt.strong,
@@ -90,7 +79,6 @@ export const pillStencil = createStencil({
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.color.surface.alt.strong,
         fallback: system.color.bg.alt.stronger,
@@ -102,34 +90,28 @@ export const pillStencil = createStencil({
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.border]: cssVar(
         system.color.brand.border.primary,
         system.color.border.primary.default
       ),
       [buttonStencil.vars.label]: system.color.fg.strong,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
       [systemIconStencil.vars.color]: 'currentColor',
 
       ...focusRing({
         width: 0,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         innerColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         outerColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
         separation: 1,
       }),
     },
     '&:disabled, &.disabled': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: cssVar(
         system.color.surface.alt.strong,
         system.color.bg.alt.default
       ),
       [buttonStencil.vars.label]: system.color.fg.disabled,
       [systemIconStencil.vars.color]: 'currentColor',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [pillCountStencil.vars.backgroundColor]: cssVar(
         system.color.surface.alt.strong,
         system.color.bg.alt.strong
@@ -164,7 +146,6 @@ export const pillStencil = createStencil({
           [buttonStencil.vars.label]: system.color.fg.strong,
           boxShadow: 'none',
         },
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.color.surface.alt.strong,
@@ -177,7 +158,6 @@ export const pillStencil = createStencil({
             system.color.bg.muted.softer
           ),
         },
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.color.surface.alt.strong,

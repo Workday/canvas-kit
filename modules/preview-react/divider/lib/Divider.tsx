@@ -1,17 +1,10 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
   vars: {
-    space: cssVar(system.space.x4),
+    space: system.space.x4,
   },
   base: ({space}) => {
     return {

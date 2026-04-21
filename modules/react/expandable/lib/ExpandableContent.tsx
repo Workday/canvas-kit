@@ -18,10 +18,8 @@ export interface ExpandableContentProps extends ExtractProps<typeof Box, never> 
 
 export const expandableContentStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.xs, system.space.x2)}`,
+    padding: `${system.padding.md} ${system.padding.xs} ${system.padding.xs}`,
   },
 });
 

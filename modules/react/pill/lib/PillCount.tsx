@@ -11,34 +11,23 @@ export const pillCountStencil = createStencil({
     borderColor: '',
   },
   base: ({backgroundColor, borderColor}) => ({
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderStartStartRadius: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderStartEndRadius: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderStartEndRadius: system.shape.sm,
     borderEndStartRadius: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderEndEndRadius: cssVar(system.shape.sm, system.shape.x1),
+    borderEndEndRadius: system.shape.sm,
     borderWidth: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     borderInlineStartWidth: 0,
     borderStyle: 'solid',
     borderColor: cssVar(borderColor, system.color.border.transparent),
     display: 'inline-flex',
     alignItems: 'center',
     justifyContent: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.xs, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(system.size.xs, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `0 ${cssVar(system.padding.xxs, system.space.x1)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    height: system.size.xs,
+    width: system.size.xs,
+    padding: `0 ${system.padding.xxs}`,
     // Using the `padding` token here as we don't have a `margin` token
-    marginInlineEnd: calc.negate(cssVar(system.gap.sm, system.space.x3)),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    marginInlineStart: cssVar(system.gap.xs, system.space.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    marginInlineEnd: calc.negate(system.gap.sm),
+    marginInlineStart: system.gap.xs,
     backgroundColor: cssVar(
       backgroundColor,
       cssVar(system.color.surface.alt.strong, system.color.bg.alt.stronger)

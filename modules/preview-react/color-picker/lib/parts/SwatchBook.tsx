@@ -18,7 +18,6 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     shadow: `${cssVar(system.color.border.inverse.default, base.neutral0)} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
@@ -29,20 +28,15 @@ const colorPickerSwatchBookStencil = createStencil({
   base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    margin: `0 ${calc.negate(cssVar(system.gap.sm, system.space.x2))} ${calc.negate(cssVar(system.gap.sm, system.space.x2))} 0`,
+    margin: `0 ${calc.negate(system.gap.sm)} ${calc.negate(system.gap.sm)} 0`,
     [tilePart]: {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.xxs, px2rem(20)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.xxs, px2rem(20)),
+      width: system.size.xxs,
+      height: system.size.xxs,
       cursor: 'pointer',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderRadius: cssVar(system.shape.sm, system.shape.half),
+      borderRadius: system.shape.sm,
       transition: 'box-shadow 120ms ease',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      margin: `0px ${cssVar(system.gap.sm, system.space.x2)} ${cssVar(system.gap.sm, system.space.x2)} 0px`,
+      margin: `0px ${system.gap.sm} ${system.gap.sm} 0px`,
 
       '&:hover': {
         boxShadow: shadow,

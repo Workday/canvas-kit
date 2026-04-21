@@ -55,13 +55,10 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       color: cssVar(system.color.fg.default, system.color.text.default),
       cursor: 'default',
       '&::placeholder': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         color: cssVar(system.color.fg.default, system.color.text.default),
       },
       '&::selection': {
@@ -81,7 +78,6 @@ export const selectInputStencil = createStencil({
     error: {
       error: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(
             system.color.brand.surface.critical.default,
             brand.error.lightest
@@ -90,7 +86,6 @@ export const selectInputStencil = createStencil({
       }),
       caution: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
         },
       }),

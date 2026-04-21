@@ -34,7 +34,6 @@ export const modalOverlayContainerStencil = createStencil({
     left: 0,
     width: '100vw',
     height: '100vh',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
     animationDuration: '0.3s',
     animationName: fadeIn,

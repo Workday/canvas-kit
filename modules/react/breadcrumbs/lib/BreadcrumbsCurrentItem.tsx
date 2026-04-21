@@ -12,7 +12,7 @@ import {
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
@@ -26,16 +26,11 @@ export const breadcrumbsCurrentItemStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     fontFamily: system.fontFamily.default,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
+    fontSize: system.fontSize.subtext.lg,
     fontWeight: system.fontWeight.medium,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    letterSpacing: system.letterSpacing.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
     color: cssVar(system.color.fg.default, system.color.text.default),
     display: 'inline-block',
     whiteSpace: 'nowrap',

@@ -4,7 +4,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
@@ -24,8 +24,7 @@ export const useComboboxCard = createElemPropsHook(useComboboxModel)(model => {
 export const comboboxCardStencil = createStencil({
   base: {
     '& :where([data-part="list-box-container"])': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      borderRadius: cssVar(system.shape.xxl, system.shape.x2),
+      borderRadius: system.shape.xxl,
     },
   },
 });

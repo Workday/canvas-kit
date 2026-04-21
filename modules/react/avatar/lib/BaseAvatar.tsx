@@ -47,17 +47,12 @@ export const baseAvatarStencil = createStencil({
     size: '',
   },
   base: ({backgroundColor, color, size}) => ({
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: system.shape.full,
     // These are the fallbacks if "size" is not defined
-    width: cssVar(size, cssVar(system.size.lg, px2rem(48))),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(size, cssVar(system.size.lg, px2rem(48))),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(size, cssVar(system.size.lg, px2rem(48))),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(size, cssVar(system.size.lg, px2rem(48))),
+    width: cssVar(size, system.size.lg),
+    height: cssVar(size, system.size.lg),
+    minWidth: cssVar(size, system.size.lg),
+    minHeight: cssVar(size, system.size.lg),
     backgroundColor: cssVar(backgroundColor, base.blue300),
     color: cssVar(color, base.blue800),
     display: 'flex',
@@ -67,10 +62,8 @@ export const baseAvatarStencil = createStencil({
     border: 'none',
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.body.md, system.lineHeight.body.medium),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.body.md, system.fontSize.body.medium),
+    lineHeight: system.lineHeight.body.md,
+    fontSize: system.fontSize.body.md,
   }),
   modifiers: {
     variant: {
@@ -94,68 +87,45 @@ export const baseAvatarStencil = createStencil({
     },
     size: {
       extraExtraSmall: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: cssVar(system.size.xs, system.space.x6),
-        lineHeight: cssVar(system.lineHeight.subtext.sm, system.lineHeight.subtext.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.sm, system.fontSize.subtext.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.sm, base.letterSpacing50),
+        [size]: system.size.xs,
+        lineHeight: system.lineHeight.subtext.sm,
+        fontSize: system.fontSize.subtext.sm,
+        letterSpacing: system.letterSpacing.subtext.sm,
       }),
       extraSmall: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: cssVar(system.size.sm, system.space.x8),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
+        [size]: system.size.sm,
+        lineHeight: system.lineHeight.subtext.md,
+        fontSize: system.fontSize.subtext.md,
+        letterSpacing: system.letterSpacing.subtext.md,
       }),
       small: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [size]: cssVar(system.size.md, system.space.x10),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
+        [size]: system.size.md,
+        lineHeight: system.lineHeight.body.sm,
+        fontSize: system.fontSize.body.sm,
+        letterSpacing: system.letterSpacing.body.sm,
       }),
       medium: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(base.size600, px2rem(48)),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.md, system.lineHeight.body.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.md, system.fontSize.body.medium),
+        lineHeight: system.lineHeight.body.md,
+        fontSize: system.fontSize.body.md,
       }),
       large: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(base.size900, px2rem(72)),
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.heading.md, system.lineHeight.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.heading.md, system.fontSize.subtext.medium),
+        lineHeight: system.lineHeight.heading.md,
+        fontSize: system.fontSize.heading.md,
       }),
       extraLarge: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: cssVar(base.size1200, px2rem(96)),
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.title.sm, system.lineHeight.title.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.title.sm, system.fontSize.title.small),
+        lineHeight: system.lineHeight.title.sm,
+        fontSize: system.fontSize.title.sm,
       }),
       extraExtraLarge: ({size}) => ({
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [size]: px2rem(120),
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.title.md, system.lineHeight.title.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.title.md, system.fontSize.title.medium),
+        lineHeight: system.lineHeight.title.md,
+        fontSize: system.fontSize.title.md,
       }),
     },
   },

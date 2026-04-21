@@ -7,7 +7,7 @@ import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -160,10 +160,10 @@ export const ExampleCodeBlock = ({code}: any) => {
                   language="jsx"
                   style={vscDarkPlus}
                   customStyle={{
-                    fontSize: cssVar(system.fontSize.subtext.large),
-                    lineHeight: cssVar(system.lineHeight.subtext.large),
+                    fontSize: system.fontSize.subtext.large,
+                    lineHeight: system.lineHeight.subtext.large,
                     margin: '0',
-                    padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                    padding: `${system.space.x8} ${system.space.x10}`,
                   }}
                   children={code.__RAW__}
                 />

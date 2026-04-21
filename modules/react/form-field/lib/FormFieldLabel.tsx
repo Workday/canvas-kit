@@ -25,7 +25,6 @@ export const formFieldLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     color: cssVar(system.color.fg.default, system.color.text.default),
     paddingInlineStart: 0,
     display: 'flex',
@@ -37,14 +36,11 @@ export const formFieldLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
+          fontSize: system.fontSize.body.lg,
           fontWeight: system.fontWeight.normal,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
           textDecoration: 'unset',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
+          marginInlineStart: system.gap.xs,
         },
       },
     },
@@ -52,12 +48,10 @@ export const formFieldLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        maxHeight: cssVar(system.size.md, system.space.x10),
+        maxHeight: system.size.md,
       },
       horizontalEnd: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        maxHeight: cssVar(system.size.md, system.space.x10),
+        maxHeight: system.size.md,
         float: 'left',
         justifyContent: 'flex-end',
       },

@@ -30,7 +30,6 @@ const checkboxCheckStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
         opacity: system.opacity.full,
         transform: 'scale(1)',
@@ -44,13 +43,11 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [systemIconStencil.vars.color]: cssVar(
           system.color.brand.fg.primary.default,
           brand.primary.base
         ),
         '& > div': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
         },
       },
@@ -62,13 +59,11 @@ const indeterminateBoxStencil = createStencil({
   base: {
     width: px2rem(10),
     height: px2rem(2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
   },
   modifiers: {
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
       },
     },

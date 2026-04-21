@@ -8,7 +8,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {invisibleIcon, visibleIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -150,7 +150,7 @@ export const TextInputWithReactHookForm = () => {
           error={!!errors.password ? 'error' : undefined}
         >
           <FormField.Label>Password</FormField.Label>
-          <Flex cs={{gap: cssVar(system.space.x2)}}>
+          <Flex cs={{gap: system.space.x2}}>
             <FormField.Field>
               <FormField.Input
                 as={TextInput}

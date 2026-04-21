@@ -22,8 +22,8 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, component, system} from '@workday/canvas-tokens-web';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -85,125 +85,79 @@ export interface TabsItemProps
 const tabItemStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.medium,
     border: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
+    backgroundColor: system.color.surface.transparent,
     flex: '0 0 auto',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minWidth: 0,
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `0 ${cssVar(system.padding.md, system.space.x4)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.lg, px2rem(48)),
+    padding: `0 ${system.padding.md}`,
+    height: system.size.lg,
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: `${cssVar(system.shape.md, system.space.x2)} ${cssVar(system.shape.md, system.space.x2)} ${cssVar(system.shape.none, system.space.zero)} ${cssVar(system.shape.zero, system.space.zero)}`,
+    borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.zero}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: 'currentColor',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
 
     '&:has(span)': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      gap: cssVar(system.gap.sm, system.space.x2),
+      gap: system.gap.sm,
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(
-        system.color.surface.overlay.hover.default,
-        system.color.bg.alt.default
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.muted.strong, system.color.fg.contrast.default),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.muted.strong,
-        system.color.fg.contrast.default
-      ),
+      backgroundColor: system.color.surface.overlay.hover.default,
+      color: system.color.fg.muted.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:focus-visible, &.focus': {
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.focus.inverse, base.neutral0),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowOuter]: cssVar(
-        system.color.brand.focus.primary,
-        brand.common.focusOutline
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.strong, system.color.fg.contrast.default),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.icon.strong),
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
+      color: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     // Using opacity token applied to container to achieve disabled state instead of 'disabled" color tokens for
     // icon and text colors
     '&:disabled, &.disabled, &[aria-disabled]': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      opacity: cssVar(system.opacity.disabled, '0.4'),
+      opacity: system.opacity.disabled,
       '&:hover': {
         cursor: 'auto',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(
-          system.color.surface.transparent,
-          system.color.bg.transparent.default
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.fg.muted.default,
-          system.color.fg.disabled
-        ),
+        backgroundColor: system.color.surface.transparent,
+        [systemIconStencil.vars.color]: system.color.fg.muted.default,
       },
     },
 
     '&[aria-selected=true]': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.brand.fg.primary.default, brand.primary.base),
+      color: system.color.brand.fg.primary.default,
       cursor: 'default',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.brand.fg.primary.default,
-        brand.primary.base
-      ),
+      [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
         borderBottom: `${system.space.x1} solid transparent`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderRadius: `${cssVar(system.shape.md, system.space.x2)} ${cssVar(system.shape.md, system.space.x2)} ${cssVar(system.shape.none, system.space.zero)} ${cssVar(system.shape.zero, system.space.zero)}`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.fg.primary.default, brand.primary.base),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        bottom: cssVar(system.padding.none, system.space.zero),
+        borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.zero}`,
+        backgroundColor: system.color.brand.fg.primary.default,
+        bottom: system.padding.none,
         content: `''`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        left: cssVar(system.padding.none, system.space.zero),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        marginBlockStart: `${calc.negate(calc.divide(cssVar(system.padding.xs, system.space.x2), cssVar(system.padding.xxs, system.space.x1)))}`,
+        left: system.padding.none,
+        marginBlockStart: `${calc.negate(calc.divide(system.padding.xs, system.padding.xxs))}`,
         width: '100%',
       },
       '&:hover, &.hover, &:focus-visible, &.focus': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(
-          system.color.surface.transparent,
-          system.color.bg.transparent.default
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.brand.fg.primary.default, brand.primary.base),
+        backgroundColor: system.color.surface.transparent,
+        color: system.color.brand.fg.primary.default,
       },
     },
   },

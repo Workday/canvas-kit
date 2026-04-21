@@ -35,7 +35,7 @@ export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
         <span
           style={{
             color: cssVar(system.color.fg.primary.soft),
-            marginInlineEnd: cssVar(system.space.x2),
+            marginInlineEnd: system.space.x2,
           }}
         >
           {command}

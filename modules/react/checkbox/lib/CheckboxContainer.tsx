@@ -17,7 +17,6 @@ const checkboxContainerStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(base.size225, system.space.x6),
     position: 'relative',
     /**
@@ -27,16 +26,13 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       height: cssVar(base.size225, px2rem(18)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       minWidth: cssVar(base.size225, px2rem(18)),
       alignSelf: 'flex-start',
       position: 'relative',
     },
     '& > label': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+      paddingInlineStart: system.padding.sm,
     },
   },
 });

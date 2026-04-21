@@ -19,12 +19,12 @@ export const CSProp = () => {
         cs={{
           color: cssVar(system.color.text.inverse),
           background: cssVar(system.color.bg.primary.default),
-          padding: cssVar(system.space.x3),
+          padding: system.space.x3,
         }}
       >
         The Future of Styling
       </Card.Heading>
-      <Card.Body cs={{padding: cssVar(system.space.x3)}}>
+      <Card.Body cs={{padding: system.space.x3}}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin egestas blandit consectetur.
         Nam in congue mauris. Ut non metus a arcu rutrum accumsan. Duis luctus, diam vitae iaculis
         semper, nibh nisl varius erat, vitae dapibus velit lacus blandit tellus. Aenean vestibulum

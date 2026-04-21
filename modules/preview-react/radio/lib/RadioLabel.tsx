@@ -28,11 +28,9 @@ export interface RadioLabelProps
 const radioLabelStencil = createStencil({
   base: {
     alignItems: 'flex-start',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
     minHeight: cssVar(base.size225, system.space.x6),
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x3),
+    gap: system.gap.sm,
   },
 });
 
