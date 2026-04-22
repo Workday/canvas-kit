@@ -85,8 +85,8 @@ const checkboxInputStencil = createStencil({
 
     [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        borderColor: cssVar(system.color.brand.accent.primary, brand.common.focusOutline),
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        borderColor: system.color.brand.accent.primary,
+        backgroundColor: system.color.brand.accent.primary,
       },
 
     [`&:where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
@@ -101,7 +101,7 @@ const checkboxInputStencil = createStencil({
     // When not checked, the border is within the input
     [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        borderColor: cssVar(system.color.brand.border.primary, brand.primary.base),
+        borderColor: system.color.brand.border.primary,
         borderWidth: px2rem(2),
         ...focusRing({
           width: 0,
@@ -117,9 +117,9 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 2,
             animate: false,
-            outerColor: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+            outerColor: system.color.brand.border.primary,
           }),
-          borderColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+          borderColor: system.color.brand.accent.primary,
           borderWidth: px2rem(2),
         },
       },

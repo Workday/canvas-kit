@@ -28,15 +28,12 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.common.errorInner)}`,
+        backgroundColor: system.color.brand.surface.critical.default,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.border.critical}`,
       },
       caution: {
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}, inset 0 0 0 ${px2rem(3)} ${cssVar(
-          system.color.brand.focus.caution.inner,
-          brand.common.alertInner
-        )}`,
+        backgroundColor: system.color.brand.surface.caution.default,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.color.brand.border.caution}, inset 0 0 0 ${px2rem(3)} ${system.color.brand.focus.caution.inner}`,
       },
     },
   },

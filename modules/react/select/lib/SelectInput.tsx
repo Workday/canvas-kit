@@ -78,15 +78,12 @@ export const selectInputStencil = createStencil({
     error: {
       error: ({visualInputPart}) => ({
         [visualInputPart]: {
-          backgroundColor: cssVar(
-            system.color.brand.surface.critical.default,
-            brand.error.lightest
-          ),
+          backgroundColor: system.color.brand.surface.critical.default,
         },
       }),
       caution: ({visualInputPart}) => ({
         [visualInputPart]: {
-          backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+          backgroundColor: system.color.brand.surface.caution.default,
         },
       }),
     },

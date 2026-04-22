@@ -46,8 +46,8 @@ export const bannerStencil = createStencil({
   modifiers: {
     hasErrors: {
       true: {
-        backgroundColor: cssVar(system.color.brand.accent.critical, brand.error.base),
-        color: cssVar(system.color.fg.inverse, brand.error.accent),
+        backgroundColor: system.color.brand.accent.critical,
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
           background: colorSpace.darken({
             color: system.color.brand.accent.critical,
@@ -57,17 +57,14 @@ export const bannerStencil = createStencil({
           }),
         },
         '& [data-part="exclamation-circle-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.brand.accent.critical,
-            'currentColor'
-          ),
-          [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, 'currentColor'),
-          [systemIconStencil.vars.backgroundColor]: cssVar(system.color.fg.inverse, 'none'),
+          [systemIconStencil.vars.accentColor]: system.color.brand.accent.critical,
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.inverse,
         },
       },
       false: {
-        backgroundColor: cssVar(system.color.brand.accent.caution, brand.alert.base),
-        color: brand.alert.accent,
+        backgroundColor: system.color.brand.accent.caution,
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
           background: colorSpace.darken({
             color: system.color.brand.accent.caution,
@@ -78,14 +75,9 @@ export const bannerStencil = createStencil({
         },
         '& [data-part="exclamation-triangle-icon"]': {
           [systemIconStencil.vars.accentColor]: cssVar(system.color.fg.inverse, 'currentColor'),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.brand.fg.caution.strong,
-            'currentColor'
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.brand.fg.caution.strong,
-            'none'
-          ),
+          [systemIconStencil.vars.color]: system.color.brand.fg.caution.strong,
+
+          [systemIconStencil.vars.backgroundColor]: system.color.brand.fg.caution.strong,
         },
       },
     },

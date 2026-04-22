@@ -87,12 +87,9 @@ export const pillStencil = createStencil({
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.border]: cssVar(
-        system.color.brand.border.primary,
-        system.color.border.primary.default
-      ),
+      [buttonStencil.vars.border]: system.color.brand.border.primary,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
+      borderColor: system.color.brand.border.primary,
       [systemIconStencil.vars.color]: 'currentColor',
 
       ...focusRing({

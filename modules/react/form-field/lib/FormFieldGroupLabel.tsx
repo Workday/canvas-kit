@@ -3,8 +3,8 @@ import React from 'react';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 
@@ -34,7 +34,7 @@ export const formFieldGroupLabelStencil = createStencil({
           content: '"*"',
           fontSize: system.fontSize.body.lg,
           fontWeight: system.fontWeight.normal,
-          color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
+          color: system.color.brand.fg.critical.default,
           textDecoration: 'unset',
           marginInlineStart: system.gap.xs,
         },
