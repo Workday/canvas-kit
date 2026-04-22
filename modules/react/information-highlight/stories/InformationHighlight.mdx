@@ -26,34 +26,11 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-`InformationHighlight` should be used to call out important information to the user and are paired
-with a meaningful icon and color to differentiate information type. It should not be removed from
-the interface until some system or admin level action has been taken to do so.
-
-You can use an `InformationHighlight` to:
-
-- Prevent unwanted consequences from destructive actions
-- Reassure users in their next steps
-- Provide detail into information on the page
-- Show changes in page content
-
-### When to Consider Something Else
-
-- Consider a
-  [Banner](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-banner--docs) if
-  the message is about system-wide errors or alerts, or if the message appears in response to user
-  action.
-- Consider a
-  [Dialog](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs) if the
-  message is critical and requires user action or decision before proceeding
-- Consider a [Toast](https://workday.github.io/canvas-kit/?path=/docs/components-popups-toast--docs)
-  if the message is timely, such as communicating updates on the process of an application.
-
 ### Basic Example
 
 <ExampleCodeBlock code={Basic} />
 
-## Variants
+### Variants
 
 `InformationHighlight` has three variants and each `variant` has two types of `emphasis`.
 
@@ -70,21 +47,21 @@ will be shown first and should be used when there is other more important inform
 `high` Emphasis will be shown second, and should be used when the highlight is not competing with
 other, more important information.
 
-### Informational
+#### Informational
 
 The informational variant is for _nice to have_ information, such as related features or
 opportunities.
 
 <ExampleCodeBlock code={Informational} />
 
-### Caution
+#### Caution
 
 The caution variant is for _important to know_ information, such as the potential consequences of
 specific actions.
 
 <ExampleCodeBlock code={Caution} />
 
-### Critical
+#### Critical
 
 The critical variant is for _must know_ information that could otherwise cause failure if the user
 is unaware.
@@ -98,28 +75,21 @@ parent dom element that renders your application.
 
 <ExampleCodeBlock code={RTL} />
 
-## Partial and Custom Information Highlights
+### Partial and Custom Information Highlights
 
 `InformationHighlight` can use custom icons or be designed to only use some of its components.
 
-### Custom Icon: Critical
+#### Custom Icon: Critical
 
 <ExampleCodeBlock code={IconCritical} />
 
-### Body Only Example
+#### Body Only Example
 
 <ExampleCodeBlock code={Body} />
 
-### Heading Only Example
+#### Heading Only Example
 
 <ExampleCodeBlock code={Heading} />
-
-### Accessible Use of the `as` Prop
-
-Like many of our components, `InformationHighlight` and its subcomponents accept an `as` prop,
-which lets you change the underlying semantic element. For `InformationHighlight.Heading`, you can
-change the heading level if you were needing to define a different level of importance. This should
-be done with caution to ensure the best accessibility.
 
 ## Component API
 
