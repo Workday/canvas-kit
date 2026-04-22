@@ -46,10 +46,7 @@ export const multiSelectInputStencil = createStencil({
       fontSize: system.fontSize.subtext.lg,
       fontWeight: system.fontWeight.normal,
       lineHeight: system.lineHeight.subtext.lg,
-      backgroundColor: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
+      backgroundColor: system.color.surface.transparent,
       borderRadius: system.shape.md,
 
       // collapse the height of the input by the border width so that an empty multi-select
@@ -99,7 +96,7 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '& :where([data-part="separator"])': {
-      backgroundColor: cssVar(system.color.border.default, system.color.border.divider),
+      backgroundColor: system.color.border.default,
       height: 1,
       margin: `0 ${system.gap.sm}`,
     },
@@ -122,10 +119,9 @@ export const multiSelectInputStencil = createStencil({
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
           borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}, 0 0 0 2px ${cssVar(
-            system.color.focus.inverse,
-            cssVar(system.color.border.inverse.default, base.neutral0)
-          )}, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}, 0 0 0 2px ${
+            system.color.focus.inverse
+          }, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
           outlineOffset: px2rem(2),
         },
       },
@@ -143,7 +139,7 @@ export const multiSelectInputStencil = createStencil({
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
-        0 0 0 2px ${cssVar(system.color.focus.inverse, system.color.border.inverse.default)},
+        0 0 0 2px ${system.color.focus.inverse},
         0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
         },
         outlineOffset: px2rem(2),

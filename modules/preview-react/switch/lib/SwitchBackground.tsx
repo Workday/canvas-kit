@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export const switchBackgroundStencil = createStencil({

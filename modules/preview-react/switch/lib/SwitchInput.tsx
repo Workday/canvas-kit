@@ -1,5 +1,5 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
@@ -10,7 +10,7 @@ export const switchInputStencil = createStencil({
     position: 'absolute',
     // This allows for the input to be the same size as the clickable area for the Switch
     margin: 0,
-    height: cssVar(base.size225, calc.add(system.space.x4, system.space.half)),
+    height: base.size225,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),

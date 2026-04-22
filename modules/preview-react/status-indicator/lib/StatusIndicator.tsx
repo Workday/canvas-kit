@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {ExtractStencilProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
@@ -90,36 +90,27 @@ const statusIndicatorStencil = createStencil({
       },
       positive: {
         color: system.color.fg.success.strong,
-        backgroundColor: cssVar(
-          system.color.surface.success.strong,
-          system.color.fg.positive.softer
-        ),
+        backgroundColor: system.color.surface.success.strong,
       },
       caution: {
-        color: cssVar(system.color.fg.warning.strong, system.color.fg.caution.softer),
-        backgroundColor: cssVar(
-          system.color.surface.warning.strong,
-          system.color.bg.caution.softer
-        ),
+        color: system.color.fg.warning.strong,
+        backgroundColor: system.color.surface.warning.strong,
       },
       critical: {
-        color: cssVar(system.color.fg.danger.strong, system.color.fg.critical.strong),
-        backgroundColor: cssVar(
-          system.color.surface.danger.strong,
-          system.color.bg.critical.softer
-        ),
+        color: system.color.fg.danger.strong,
+        backgroundColor: system.color.surface.danger.strong,
       },
       neutral: {
         color: system.color.fg.muted.strong,
-        backgroundColor: cssVar(system.color.surface.alt.strong, system.color.bg.alt.default),
+        backgroundColor: system.color.surface.alt.strong,
       },
       ai: {
         color: system.color.fg.ai,
-        backgroundColor: cssVar(system.color.surface.ai.default, system.color.bg.ai.default),
+        backgroundColor: system.color.surface.ai.default,
       },
       transparent: {
         color: system.color.fg.inverse,
-        backgroundColor: cssVar(system.color.surface.contrast.default, system.color.bg.translucent),
+        backgroundColor: system.color.surface.contrast.default,
       },
     },
     /**
@@ -144,7 +135,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: cssVar(system.color.accent.info, system.color.bg.info.default),
+        backgroundColor: system.color.accent.info,
         color: system.color.fg.inverse,
       },
     },
@@ -154,7 +145,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: cssVar(system.color.accent.success, system.color.bg.positive.default),
+        backgroundColor: system.color.accent.success,
         color: system.color.fg.inverse,
       },
     },
@@ -164,8 +155,8 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: cssVar(system.color.accent.warning, system.color.bg.caution.default),
-        color: cssVar(system.color.fg.contrast.default, system.color.fg.caution.strong),
+        backgroundColor: system.color.accent.warning,
+        color: system.color.fg.contrast.default,
       },
     },
     {
@@ -174,7 +165,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: cssVar(system.color.accent.danger, system.color.bg.critical.default),
+        backgroundColor: system.color.accent.danger,
         color: system.color.fg.inverse,
       },
     },
@@ -184,7 +175,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: cssVar(system.color.accent.muted.default, system.color.bg.muted.default),
+        backgroundColor: system.color.accent.muted.default,
         color: system.color.fg.inverse,
       },
     },

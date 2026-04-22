@@ -11,7 +11,7 @@ export const dividerStencil = createStencil({
       display: 'block',
       height: px2rem(1),
       border: 'none',
-      borderTop: `1px solid ${system.color.border.divider}`,
+      borderTop: `1px solid ${system.color.border.default}`,
       margin: `${calc.divide(space, 2)} 0`,
     };
   },
