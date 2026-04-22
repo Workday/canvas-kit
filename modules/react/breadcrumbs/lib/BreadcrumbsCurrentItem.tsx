@@ -11,7 +11,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
@@ -31,7 +31,7 @@ export const breadcrumbsCurrentItemStencil = createStencil({
     fontWeight: system.fontWeight.medium,
     letterSpacing: system.letterSpacing.subtext.lg,
     lineHeight: system.lineHeight.subtext.lg,
-    color: cssVar(system.color.fg.default, system.color.text.default),
+    color: system.color.fg.default,
     display: 'inline-block',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
