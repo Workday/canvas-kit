@@ -12,7 +12,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
@@ -111,36 +111,36 @@ export const multiSelectInputStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}`,
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
+        borderColor: system.color.brand.border.critical,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}`,
+        backgroundColor: system.color.brand.surface.critical.default,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
+          borderColor: system.color.brand.border.critical,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          borderColor: cssVar(system.color.brand.border.critical, brand.common.errorInner),
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)}, 0 0 0 2px ${
+          borderColor: system.color.brand.border.critical,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}, 0 0 0 2px ${
             system.color.focus.inverse
-          }, 0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+          }, 0 0 0 4px ${system.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)}`,
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+        borderColor: system.color.brand.border.caution,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner}`,
+        backgroundColor: system.color.brand.surface.caution.default,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
+            borderColor: system.color.brand.border.caution,
           },
         '&:hover, &.hover': {
-          borderColor: cssVar(system.color.brand.border.caution, brand.common.alertOuter),
+          borderColor: system.color.brand.border.caution,
         },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner},
         0 0 0 2px ${system.color.focus.inverse},
-        0 0 0 4px ${cssVar(system.color.brand.border.primary, brand.common.focusOutline)}`,
+        0 0 0 4px ${system.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
       },
