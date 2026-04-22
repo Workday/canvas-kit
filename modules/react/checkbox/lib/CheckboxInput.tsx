@@ -61,8 +61,8 @@ export interface CheckboxProps extends CSProps {
 const checkboxInputStencil = createStencil({
   base: {
     borderRadius: system.shape.half,
-    width: cssVar(base.size300, system.space.x6),
-    height: cssVar(base.size300, system.space.x6),
+    width: base.size300,
+    height: base.size300,
     margin: 0,
     marginTop: calc.negate(px2rem(3)),
     marginInlineStart: calc.negate(px2rem(3)),
@@ -74,13 +74,13 @@ const checkboxInputStencil = createStencil({
     },
 
     [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]: {
-      boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft)}`,
+      boxShadow: `0 0 0 ${px2rem(7)} ${system.color.surface.overlay.hover.default}`,
     },
 
     // Hover state and not disabled
     [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
+        borderColor: system.color.border.input.hover,
       },
 
     [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
@@ -128,22 +128,22 @@ const checkboxInputStencil = createStencil({
     variant: {
       inverse: {
         [`& ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
-          borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+          borderColor: system.color.focus.inverse,
         },
 
         // Hover state and not disabled
         [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+            borderColor: system.color.focus.inverse,
           },
         [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]:
           {
-            boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.default)}`,
+            boxShadow: `0 0 0 ${px2rem(7)} ${system.color.surface.overlay.hover.inverse}`,
           },
         [`&:where(:checked, :indeterminate):not(:disabled):not(.disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
-            backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
+            borderColor: system.color.focus.inverse,
+            backgroundColor: system.color.surface.inverse,
           },
         // Disabled State for inverse variant (applies to all disabled states: unchecked, checked, and indeterminate)
         [`&:disabled ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
@@ -159,12 +159,12 @@ const checkboxInputStencil = createStencil({
         [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
             borderColor: system.color.border.contrast.default,
-            boxShadow: `0 0 0 ${px2rem(0)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
+            boxShadow: `0 0 0 ${px2rem(0)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(2)}  ${system.color.focus.inverse} `,
           },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
           {
             '& ~ div:first-of-type': {
-              boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
+              boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${system.color.focus.inverse} `,
               borderColor: system.color.focus.inverse,
             },
           },
@@ -204,14 +204,14 @@ const checkboxInputStencil = createStencil({
       modifiers: {variant: 'inverse', error: true},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          border: `${px2rem(1)} solid ${cssVar(system.color.focus.inverse, base.neutral0)}`,
+          border: `${px2rem(1)} solid ${system.color.focus.inverse}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+            borderColor: system.color.focus.inverse,
           },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
-          borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+          borderColor: system.color.focus.inverse,
         },
       },
     },

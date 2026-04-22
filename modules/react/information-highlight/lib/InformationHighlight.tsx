@@ -1,6 +1,6 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
@@ -19,136 +19,67 @@ export const informationHighlightStencil = createStencil({
     padding: system.padding.md,
     borderRadius: system.shape.sm,
     outline: `${px2rem(1)} solid transparent`,
-    borderInlineStart: `${cssVar(base.size50, system.space.x1)} solid transparent`,
+    borderInlineStart: `${base.size50} solid transparent`,
   },
   modifiers: {
     informational: {
       low: {
         borderInlineStartColor: system.color.border.info.default,
-        backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.inverse
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.info.default,
-            system.color.icon.info.default
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.info.default,
-            system.color.icon.info.default
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.info.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.info.default,
         },
       },
       high: {
         borderInlineStartColor: system.color.border.info.default,
-        backgroundColor: cssVar(system.color.surface.info.default, system.color.bg.info.softest),
+        backgroundColor: system.color.surface.info.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.inverse
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.info.default,
-            system.color.icon.info.default
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.info.default,
-            system.color.icon.info.default
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.info.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.info.default,
         },
       },
     },
     caution: {
       low: {
-        borderInlineStartColor: cssVar(
-          system.color.border.warning,
-          system.color.border.caution.default
-        ),
-        backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        borderInlineStartColor: system.color.border.warning,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.inverse
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.warning.default,
-            system.color.icon.caution.softer
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.warning.default,
-            system.color.icon.caution.softer
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.warning.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.warning.default,
         },
       },
       high: {
-        borderInlineStartColor: cssVar(
-          system.color.border.warning,
-          system.color.border.caution.default
-        ),
-        backgroundColor: cssVar(
-          system.color.surface.warning.default,
-          system.color.bg.caution.softest
-        ),
+        borderInlineStartColor: system.color.border.warning,
+        backgroundColor: system.color.surface.warning.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.inverse
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.warning.default,
-            system.color.icon.caution.softer
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.warning.default,
-            system.color.icon.caution.softer
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.warning.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.warning.default,
         },
       },
     },
     critical: {
       low: {
-        borderInlineStartColor: cssVar(
-          system.color.border.danger,
-          system.color.border.critical.default
-        ),
-        backgroundColor: cssVar(system.color.surface.danger.default, system.color.bg.alt.soft),
+        borderInlineStartColor: system.color.border.danger,
+        backgroundColor: system.color.surface.danger.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.critical.default
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.danger.default,
-            system.color.icon.critical.default
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.danger.default,
           // The fallback is set to 'transparent' as this will be the same transparent background icon used with v3 tokens
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.danger.default,
-            'transparent'
-          ),
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.danger.default,
         },
       },
       high: {
-        borderInlineStartColor: cssVar(
-          system.color.border.danger,
-          system.color.border.critical.default
-        ),
-        backgroundColor: cssVar(system.color.surface.danger.default, system.color.bg.alt.soft),
+        borderInlineStartColor: system.color.border.danger,
+        backgroundColor: system.color.surface.danger.default,
         '& [data-part="information-highlight-icon"]': {
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.fg.inverse,
-            system.color.icon.inverse
-          ),
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.fg.danger.default,
-            system.color.icon.critical.default
-          ),
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.fg.danger.default,
-            system.color.icon.critical.default
-          ),
+          [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
+          [systemIconStencil.vars.color]: system.color.fg.danger.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.danger.default,
         },
       },
     },

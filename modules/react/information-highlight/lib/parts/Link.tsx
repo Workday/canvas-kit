@@ -13,7 +13,7 @@ const informationHighlightLinkStencil = createStencil({
       letterSpacing: system.letterSpacing.subtext.lg,
       gridColumn: '2',
       justifySelf: 'start',
-      color: cssVar(system.color.fg.default, system.color.text.strong),
+      color: system.color.fg.default,
     };
   },
 });

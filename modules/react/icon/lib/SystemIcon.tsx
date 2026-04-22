@@ -62,11 +62,9 @@ export const systemIconStencil = createStencil({
       height: cssVar(size, component.systemIcon.size.lg),
     },
     '.wd-icon .wd-icon-fill': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(color, component.systemIcon.color.fill),
     },
     '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(accentColor, cssVar(color, component.systemIcon.color.accent)),
     },
     '.wd-icon .wd-icon-background': {

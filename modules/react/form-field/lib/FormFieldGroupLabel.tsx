@@ -21,7 +21,7 @@ export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    color: cssVar(system.color.fg.default, system.color.text.default),
+    color: system.color.fg.default,
     paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
@@ -47,10 +47,10 @@ export const formFieldGroupLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        maxHeight: system.space.x10,
+        maxHeight: system.size.md,
       },
       horizontalEnd: {
-        maxHeight: system.space.x10,
+        maxHeight: system.size.md,
         float: 'left',
         justifyContent: 'flex-end',
       },

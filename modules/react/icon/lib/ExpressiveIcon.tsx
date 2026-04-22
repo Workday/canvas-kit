@@ -51,11 +51,9 @@ export const expressiveIconStencil = createStencil({
       height: cssVar(size, component.expressiveIcon.size.md),
     },
     '.wd-expressive .wd-expressive-fill': {
-      // TODO: Revisit token, use base tokens instead of icon tokens
       fill: cssVar(color, component.expressiveIcon.color.fill),
     },
     '.wd-expressive .wd-expressive-accent': {
-      // TODO: Revisit token, use base tokens instead of icon tokens
       fill: cssVar(accentColor, component.expressiveIcon.color.accent),
     },
     // for Windows high contrast desktop themes

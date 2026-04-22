@@ -1,6 +1,6 @@
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightHeadingStencil = createStencil({
@@ -11,7 +11,7 @@ const informationHighlightHeadingStencil = createStencil({
       lineHeight: system.lineHeight.body.sm,
       fontSize: system.fontSize.body.sm,
       letterSpacing: system.letterSpacing.body.sm,
-      color: cssVar(system.color.fg.default, system.color.text.strong),
+      color: system.color.fg.default,
       gridColumn: '2',
       margin: 0,
     };

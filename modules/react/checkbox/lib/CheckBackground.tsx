@@ -20,23 +20,23 @@ export const checkboxBackgroundStencil = createStencil({
   },
   base: {
     alignItems: 'center',
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    backgroundColor: system.color.surface.default,
     borderRadius: system.shape.sm,
     boxSizing: 'border-box',
     display: 'flex',
-    height: cssVar(base.size225, px2rem(18)),
+    height: base.size225,
     justifyContent: 'center',
     padding: `0 ${px2rem(2)}`,
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: cssVar(base.size225, px2rem(18)),
+    width: base.size225,
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
     variant: {
       inverse: {
-        backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
+        backgroundColor: system.color.surface.inverse,
       },
     },
     error: {

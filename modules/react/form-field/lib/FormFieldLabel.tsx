@@ -25,7 +25,7 @@ export const formFieldLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    color: cssVar(system.color.fg.default, system.color.text.default),
+    color: system.color.fg.default,
     paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',

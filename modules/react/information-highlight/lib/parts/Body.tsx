@@ -1,6 +1,6 @@
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Text} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightBodyStencil = createStencil({
@@ -11,7 +11,7 @@ const informationHighlightBodyStencil = createStencil({
       lineHeight: system.lineHeight.subtext.lg,
       fontSize: system.fontSize.subtext.lg,
       letterSpacing: system.letterSpacing.subtext.lg,
-      color: cssVar(system.color.fg.default, system.color.text.strong),
+      color: system.color.fg.default,
       gridColumn: '2',
       marginBlockEnd: system.gap.sm,
     };
