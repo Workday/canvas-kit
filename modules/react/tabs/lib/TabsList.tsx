@@ -15,7 +15,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -119,7 +119,7 @@ export const tabsListStencil = createStencil({
     borderBottom: `${px2rem(1)} solid ${system.color.border.default}`,
     gap: system.gap.xs,
     // TODO: update this to use a grid token if we make those available as tokens
-    paddingInline: px2rem(40),
+    paddingInline: base.size500,
 
     '@media screen and (max-width: 768px)': {
       paddingInline: system.padding.md,

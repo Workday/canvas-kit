@@ -23,7 +23,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {component, system} from '@workday/canvas-tokens-web';
+import {base, component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -99,7 +99,7 @@ const tabItemStencil = createStencil({
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
-    borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.zero}`,
+    borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.none}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -146,12 +146,12 @@ const tabItemStencil = createStencil({
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
-        borderBottom: `${system.space.x1} solid transparent`,
-        borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.zero}`,
+        borderBottom: `${base.size50} solid transparent`,
+        borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.none}`,
         backgroundColor: system.color.brand.fg.primary.default,
-        bottom: system.padding.none,
+        bottom: 0,
         content: `''`,
-        left: system.padding.none,
+        left: 0,
         marginBlockStart: `${calc.negate(calc.divide(system.padding.xs, system.padding.xxs))}`,
         width: '100%',
       },

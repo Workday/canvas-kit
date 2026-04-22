@@ -28,7 +28,7 @@ const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
       display: 'flex',
-      gap: system.gap.none,
+      gap: 0,
     },
   },
 });
