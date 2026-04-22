@@ -954,6 +954,10 @@ These utilities are meant to be used for interactive states (i.e. `:hover`, `:ac
 
 These will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
 
+Why did we create this utility?
+
+With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions of their solid counterparts. Solid colors are designed for white backgrounds and can lose contrast on other surfaces. Alpha colors adapt via transparency, so they match the appearance of solid colors on the default page background while remaining legible on any surface.
+
 #### Darken
 
 This is the core function that is used under the hood for the `hover` and `pressed` functions.
