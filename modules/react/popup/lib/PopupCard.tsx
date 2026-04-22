@@ -65,7 +65,7 @@ function getSpace(value?: string | number) {
 
 function getMaxHeight(margin?: string | number) {
   // set the default margin offset to 40px
-  let marginOffset: string | number = cssVar(base.size500, system.space.x10);
+  let marginOffset: string | number = cssVar(base.size500);
 
   if (margin) {
     // parse the margin prop
@@ -95,7 +95,7 @@ export const popupCardStencil = createStencil({
     fontWeight: system.fontWeight.normal,
     fontSize: system.fontSize.subtext.lg,
     lineHeight: system.lineHeight.subtext.lg,
-    color: cssVar(system.color.fg.default, system.color.text.default),
+    color: system.color.fg.default,
     position: 'relative',
     maxWidth: calc.subtract('100vw', system.size.sm),
     gap: system.gap.lg,

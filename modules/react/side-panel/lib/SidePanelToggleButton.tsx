@@ -7,7 +7,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {transformationImportIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -35,7 +35,7 @@ export const sidePanelToggleButtonStencil = createStencil({
     position: 'absolute',
     top: system.gap.lg,
     width: system.gap.lg,
-    insetInlineEnd: cssVar(base.size150, system.space.x3),
+    insetInlineEnd: base.size150,
   },
   modifiers: {
     state: {
@@ -93,10 +93,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: cssVar(base.size150, system.space.x3),
+        insetInlineStart: base.size150,
         ':dir(rtl)': {
           transform: `scaleX(1)`,
-          insetInlineEnd: cssVar(base.size150, system.space.x3),
+          insetInlineEnd: base.size150,
         },
       },
     },
@@ -104,10 +104,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: cssVar(base.size150, system.space.x3),
+        insetInlineStart: base.size150,
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: cssVar(base.size150, system.space.x3),
+          insetInlineEnd: base.size150,
         },
       },
     },
@@ -115,10 +115,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: cssVar(base.size150, system.space.x3),
+        insetInlineStart: base.size150,
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: cssVar(base.size150, system.space.x3),
+          insetInlineEnd: base.size150,
         },
       },
     },

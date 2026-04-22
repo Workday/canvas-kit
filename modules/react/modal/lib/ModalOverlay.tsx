@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {usePopupModel, usePopupStack} from '@workday/canvas-kit-react/popup';
-import {createStencil, cssVar, keyframes} from '@workday/canvas-kit-styling';
+import {createStencil, keyframes} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useModalModel} from './hooks';
@@ -20,7 +20,7 @@ const fadeIn = keyframes({
     background: 'none',
   },
   '100%': {
-    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
+    background: system.color.surface.overlay.scrim,
   },
 });
 
@@ -34,7 +34,7 @@ export const modalOverlayContainerStencil = createStencil({
     left: 0,
     width: '100vw',
     height: '100vh',
-    background: cssVar(system.color.surface.overlay.scrim, system.color.bg.overlay),
+    background: system.color.surface.overlay.scrim,
     animationDuration: '0.3s',
     animationName: fadeIn,
     // Allow overriding of animation in special cases

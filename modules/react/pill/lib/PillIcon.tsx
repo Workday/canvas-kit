@@ -1,7 +1,7 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil} from '@workday/canvas-kit-styling';
 import {plusIcon} from '@workday/canvas-system-icons-web';
 import {component, system} from '@workday/canvas-tokens-web';
 
@@ -13,7 +13,7 @@ export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
     marginInlineStart: calc.negate(system.gap.xs),
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
+    [systemIconStencil.vars.size]: component.systemIcon.size.sm,
     flex: '0 0 auto',
   },
 });

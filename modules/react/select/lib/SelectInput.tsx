@@ -55,11 +55,11 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
-      backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-      color: cssVar(system.color.fg.default, system.color.text.default),
+      backgroundColor: system.color.surface.default,
+      color: system.color.fg.default,
       cursor: 'default',
       '&::placeholder': {
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        color: system.color.fg.default,
       },
       '&::selection': {
         backgroundColor: 'transparent',

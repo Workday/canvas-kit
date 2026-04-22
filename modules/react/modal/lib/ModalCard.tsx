@@ -1,7 +1,7 @@
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useModalCard, useModalModel} from './hooks';
@@ -10,7 +10,7 @@ export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {
 
 export const modalCardStencil = createStencil({
   base: {
-    margin: cssVar(base.size500, system.space.x10),
+    margin: base.size500,
     width: px2rem(440),
     border: '0',
     outline: `${px2rem(1)} solid transparent`,

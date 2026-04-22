@@ -27,12 +27,10 @@ export const pillIconButtonStencil = createStencil({
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.alt.default
-    ),
+    [buttonStencil.vars.background]: system.color.surface.transparent,
+
     [systemIconStencil.vars.color]: system.color.fg.strong,
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.sm, px2rem(18)),
+    [systemIconStencil.vars.size]: component.systemIcon.size.sm,
     '::after': {
       content: '""',
       height: system.size.sm,

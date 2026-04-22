@@ -22,10 +22,7 @@ export const skeletonTextStencil = createStencil({
   base: ({backgroundColor}) => ({
     marginBottom: system.size.xs,
     '& [data-part="skeleton-text-lines"]': {
-      backgroundColor: cssVar(
-        backgroundColor,
-        cssVar(system.color.surface.loading, system.color.bg.alt.strong)
-      ),
+      backgroundColor: cssVar(backgroundColor, system.color.surface.loading),
       height: system.size.xxxs,
       // We do not have a `gap` token for 0.75renm so `padding` is being used here
       marginBlockEnd: system.padding.sm,

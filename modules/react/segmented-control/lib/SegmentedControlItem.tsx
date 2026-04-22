@@ -63,11 +63,8 @@ export const segmentedControlItemStencil = createStencil({
     gap: system.gap.xs,
 
     [buttonStencil.vars.borderRadius]: system.shape.md,
-    [buttonStencil.vars.label]: cssVar(system.color.fg.muted.default, system.color.fg.muted.strong),
-    [systemIconStencil.vars.color]: cssVar(
-      system.color.fg.muted.default,
-      system.color.fg.muted.strong
-    ),
+    [buttonStencil.vars.label]: system.color.fg.muted.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
@@ -76,8 +73,8 @@ export const segmentedControlItemStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.hover,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
@@ -87,8 +84,8 @@ export const segmentedControlItemStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.pressed,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:focus-visible, &.focus': {
@@ -98,22 +95,13 @@ export const segmentedControlItemStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
-      [buttonStencil.vars.label]: cssVar(
-        system.color.fg.muted.default,
-        system.color.fg.muted.strong
-      ),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.muted.default,
-        system.color.fg.muted.strong
-      ),
+      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.label]: system.color.fg.muted.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.default,
     },
 
     "&[aria-pressed='true']": {
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.default,
-        system.color.bg.default
-      ),
+      [buttonStencil.vars.background]: system.color.surface.default,
       [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,

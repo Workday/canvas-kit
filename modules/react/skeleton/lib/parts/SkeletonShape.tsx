@@ -33,10 +33,7 @@ export const skeletonShapeStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, height, borderRadius, backgroundColor}) => ({
-    backgroundColor: cssVar(
-      backgroundColor,
-      cssVar(system.color.surface.loading, system.color.bg.alt.strong)
-    ),
+    backgroundColor: cssVar(backgroundColor, system.color.surface.loading),
     borderRadius: cssVar(borderRadius, '0'),
     height: cssVar(height, '100%'),
     width: width,

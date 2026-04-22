@@ -28,10 +28,7 @@ export const pillCountStencil = createStencil({
     // Using the `padding` token here as we don't have a `margin` token
     marginInlineEnd: calc.negate(system.gap.sm),
     marginInlineStart: system.gap.xs,
-    backgroundColor: cssVar(
-      backgroundColor,
-      cssVar(system.color.surface.alt.strong, system.color.bg.alt.stronger)
-    ),
+    backgroundColor: cssVar(backgroundColor, system.color.surface.alt.strong),
     flex: '0 0 auto',
   }),
 });
