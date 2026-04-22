@@ -51,6 +51,9 @@ export const useMenuOption = composeHooks(
       // Only left mouse button
       if (event.button === 0) {
         if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
+          // Keep the list cursor in sync with pointer selection so dependent UI (for example
+          // `aria-activedescendant` and scroll-into-view in combobox) targets the clicked option.
+          model.events.goTo({id});
           model.events.select({id});
 
           if (model.state.mode === 'single') {
