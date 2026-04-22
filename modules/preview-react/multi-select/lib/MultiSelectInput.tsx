@@ -23,7 +23,7 @@ export const multiSelectInputStencil = createStencil({
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
+    backgroundColor: system.color.surface.default,
     borderRadius: system.shape.md,
     boxSizing: 'border-box',
     minHeight: system.size.md,
@@ -33,12 +33,12 @@ export const multiSelectInputStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
+      borderColor: system.color.border.input.hover,
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: cssVar(system.color.brand.border.primary, system.color.border.primary.default),
-      boxShadow: `inset 0 0 0 1px ${cssVar(system.color.brand.focus.primary, system.color.border.primary.default)}`,
+      borderColor: system.color.brand.border.primary,
+      boxShadow: `inset 0 0 0 1px ${system.color.brand.focus.primary}`,
     },
 
     '& [data-part="user-input"]': {

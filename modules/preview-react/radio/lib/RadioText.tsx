@@ -17,7 +17,7 @@ const radioTextStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.fg.inverse,
       },
     },
     disabled: {

@@ -86,10 +86,10 @@ const statusIndicatorStencil = createStencil({
     variant: {
       info: {
         color: system.color.fg.info.strong,
-        backgroundColor: cssVar(system.color.surface.info.strong, system.color.bg.info.softer),
+        backgroundColor: system.color.surface.info.strong,
       },
       positive: {
-        color: cssVar(system.color.fg.success.strong, system.color.fg.positive.strong),
+        color: system.color.fg.success.strong,
         backgroundColor: cssVar(
           system.color.surface.success.strong,
           system.color.fg.positive.softer

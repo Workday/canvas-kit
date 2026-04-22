@@ -17,7 +17,7 @@ export const switchBackgroundStencil = createStencil({
     borderRadius: system.shape.full,
     padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: cssVar(system.color.accent.muted.soft, system.color.bg.muted.soft),
+    backgroundColor: system.color.accent.muted.soft,
   },
 });
 
