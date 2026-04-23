@@ -1,15 +1,15 @@
+import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {
-  createSubcomponent,
-  createElemPropsHook,
   ExtractProps,
   composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
-import {useReturnFocus, useFocusRedirect} from '@workday/canvas-kit-react/popup';
-
-import {useMenuModel} from './useMenuModel';
+import {useFocusRedirect, useReturnFocus} from '@workday/canvas-kit-react/popup';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useMenuModel} from './useMenuModel';
 
 export interface MenuListProps<T = any>
   extends Omit<ExtractProps<typeof ListBox, never>, 'children'> {
@@ -33,10 +33,13 @@ export const useMenuList = composeHooks(
 
 export const menuListStencil = createStencil({
   base: {
-    background: system.color.bg.default,
-    borderRadius: system.shape.zero,
-    padding: system.space.zero,
-    gap: system.space.zero,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    background: cssVar(system.color.surface.popover, system.color.bg.default),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    borderRadius: cssVar(system.shape.xxl, '0'),
+    padding: 0,
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    gap: cssVar(system.gap.xs, '0'),
   },
   modifiers: {
     orientation: {
@@ -59,7 +62,7 @@ export const MenuList = createSubcomponent('div')({
     <ListBox
       as={Element}
       model={model}
-      marginY={cssVar(system.space.x2)}
+      marginY={cssVar(system.gap.none, system.space.x2)}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}

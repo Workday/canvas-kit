@@ -2,8 +2,8 @@ import React from 'react';
 
 import {
   ListBox,
-  useListItemRegister,
   useListItemAllowChildStrings,
+  useListItemRegister,
   useListItemSelect,
   useListModel,
 } from '@workday/canvas-kit-react/collection';

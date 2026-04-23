@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {mailIcon} from '@workday/canvas-system-icons-web';
 import {
   FormField,
-  useFormFieldModel,
   useFormFieldInput,
+  useFormFieldModel,
 } from '@workday/canvas-kit-react/form-field';
-import {InputGroup} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {InputGroup} from '@workday/canvas-kit-react/text-input';
+import {mailIcon} from '@workday/canvas-system-icons-web';
 
 /**
  * Using `as={InputGroup}` on `FormField.Input` will break the label associations necessary for accessibility.

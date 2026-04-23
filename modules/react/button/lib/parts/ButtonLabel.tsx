@@ -1,4 +1,4 @@
-import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {StyledType, createComponent, styled} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 
 export interface ButtonLabelProps extends BoxProps {}

@@ -1,6 +1,7 @@
 import React from 'react';
-import {Dialog} from '@workday/canvas-kit-react/dialog';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';

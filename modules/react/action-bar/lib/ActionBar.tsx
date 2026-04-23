@@ -1,10 +1,12 @@
 import * as React from 'react';
+
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {useActionBarModel} from './useActionBarModel';
+
+import {ActionBarItem} from './ActionBarItem';
 import {ActionBarList} from './ActionBarList';
 import {ActionBarOverflowButton} from './ActionBarOverflowButton';
-import {ActionBarItem} from './ActionBarItem';
+import {useActionBarModel} from './useActionBarModel';
 
 export interface ActionBarProps {
   /**

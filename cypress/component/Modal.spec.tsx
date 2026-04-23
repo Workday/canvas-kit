@@ -1,16 +1,15 @@
-import * as h from '../helpers';
 import {Basic} from '../../modules/react/modal/stories/examples/Basic';
-import {WithoutCloseIcon} from '../../modules/react/modal/stories/examples/WithoutCloseIcon';
 import {CustomFocus} from '../../modules/react/modal/stories/examples/CustomFocus';
 import {CustomTarget} from '../../modules/react/modal/stories/examples/CustomTarget';
-
-import {WithRadioButtons} from '../../modules/react/modal/stories/examples/WithRadioButtons';
-import {StackedModals} from '../../modules/react/modal/stories/examples/StackedModals';
-import {WithTooltips} from '../../modules/react/modal/stories/examples/WithTooltips';
-import {ModalWithPopup} from '../../modules/react/modal/stories/examples/ModalWithPopup';
-import {IframeTest} from '../../modules/react/modal/stories/examples/IframeTest';
 import {FormModal} from '../../modules/react/modal/stories/examples/FormModal';
+import {IframeTest} from '../../modules/react/modal/stories/examples/IframeTest';
+import {ModalWithPopup} from '../../modules/react/modal/stories/examples/ModalWithPopup';
 import {ReturnFocus} from '../../modules/react/modal/stories/examples/ReturnFocus';
+import {StackedModals} from '../../modules/react/modal/stories/examples/StackedModals';
+import {WithRadioButtons} from '../../modules/react/modal/stories/examples/WithRadioButtons';
+import {WithTooltips} from '../../modules/react/modal/stories/examples/WithTooltips';
+import {WithoutCloseIcon} from '../../modules/react/modal/stories/examples/WithoutCloseIcon';
+import * as h from '../helpers';
 
 describe('Modal', () => {
   context(`given the Basic example is rendered`, () => {
@@ -103,7 +102,11 @@ describe('Modal', () => {
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.tab().should('contain', 'Acknowledge').tab().should('contain', 'Cancel').tab();
+          cy.realPress('Tab');
+          cy.focused().should('contain', 'Acknowledge');
+          cy.realPress('Tab');
+          cy.focused().should('contain', 'Cancel');
+          cy.realPress('Tab');
           cy.findByRole('dialog', {name: 'MIT License'})
             .findByRole('button', {name: 'Close'})
             .should('have.focus');
@@ -414,12 +417,10 @@ context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`
     it('should trap focus inside the modal element', () => {
       cy.findByLabelText('Select Item').should('be.visible');
 
-      cy.focused()
-        .tab()
-        .should('have.attr', 'value', 'email')
-        .tab()
-        .should('have.attr', 'aria-label', 'Close')
-        .tab();
+      cy.realPress('Tab');
+      cy.focused().should('have.attr', 'value', 'email');
+      cy.realPress('Tab');
+      cy.focused().should('have.attr', 'aria-label', 'Close');
     });
   });
 });
@@ -517,13 +518,12 @@ context(`given the [Components/Popups/Modal, Without close icon] story is render
 
       it('should trap focus inside the modal element', () => {
         cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
-        cy.tab()
-          .should('contain', 'Delete')
-          .tab()
-          .should('contain', 'Delete Item')
-          .tab()
-          .should('contain', 'Cancel');
-        cy.focused().should('have.text', 'Cancel');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Delete');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Delete Item');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Cancel');
       });
     });
 
@@ -617,14 +617,13 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
       });
 
       it('should trap focus inside the modal element', () => {
-        cy.focused()
-          .tab()
-          .should('contain', 'Acknowledge')
-          .tab()
-          .should('contain', 'Cancel')
-          .tab()
-          .should('have.attr', 'aria-label', 'Close')
-          .tab();
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Acknowledge');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Cancel');
+        cy.realPress('Tab');
+        cy.focused().should('have.attr', 'aria-label', 'Close');
+        cy.realPress('Tab');
         cy.findByLabelText('Initials').should('have.focus');
       });
     });
@@ -778,7 +777,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
 
     context('when Shift + Tab key is pressed', () => {
       beforeEach(() => {
-        cy.focused().tab({shift: true});
+        cy.focused().realPress(['Shift', 'Tab']);
       });
 
       it('should focus in the iframe', () => {
@@ -794,10 +793,10 @@ context(`given the 'Iframe Test' story is rendered`, () => {
           .should('have.focus');
       });
 
-      // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually
+      // skipping because cypress may not be capable of starting inside an iframe. We have to test this manually
       context.skip('when the Tab key is pressed', () => {
         beforeEach(() => {
-          cy.get('iframe').its('0.contentDocument.body').then(cy.wrap).focused().tab();
+          cy.get('iframe').its('0.contentDocument.body').then(cy.wrap).focused().realPress('Tab');
         });
 
         it('should focus on the close button', () => {

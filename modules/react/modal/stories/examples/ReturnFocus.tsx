@@ -1,12 +1,13 @@
 import React from 'react';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {trashIcon} from '@workday/canvas-system-icons-web';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {trashIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const INITIAL_FILES = ['Resume.docx', 'Cover_Letter.docx', 'References.docx'];

@@ -1,9 +1,9 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {system} from '@workday/canvas-tokens-web';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Card',
@@ -22,7 +22,7 @@ export const CardStates = {
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
           {label: 'Borderless', props: {variant: 'borderless'}},
-          {label: 'Filled', props: {variant: 'filled'}},
+          {label: 'Tonal', props: {variant: 'tonal'}},
           {label: 'With Heading', props: {}},
           {
             label: 'With custom padding (0px)',
@@ -55,7 +55,7 @@ export const CardStates = {
           <div
             style={{
               background:
-                props.variant !== 'filled' ? cssVar(system.color.bg.alt.softer) : undefined,
+                props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
               padding: cssVar(system.space.x4),
             }}
           >
