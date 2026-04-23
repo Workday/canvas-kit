@@ -1,7 +1,7 @@
+import type {App} from '@modelcontextprotocol/ext-apps';
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
 import {vscDarkPlus} from 'react-syntax-highlighter/dist/esm/styles/prism';
-import type {App} from '@modelcontextprotocol/ext-apps';
 
 const McpAppContext = React.createContext<App | null>(null);
 
