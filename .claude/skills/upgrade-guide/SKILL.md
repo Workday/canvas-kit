@@ -100,7 +100,7 @@ Example:
 ```mdx
 ## Why You Should Upgrade
 
-v15.0 and v4.0 Canvas Tokens Web introduces new shape, size, gap, and padding tokens to our
+v15.0 and v4.0 Canvas Tokens Web introduce new shape, size, gap, and padding tokens to our
 components. While we still support our old shape and space tokens, the new tokens aim to add more
 semantic meaning to allow for better use and theming.
 

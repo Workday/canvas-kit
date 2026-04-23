@@ -81,7 +81,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 ### Avatar (Main)
 
-**PR:** [#3659](https://github.com/Workday/canvas-kit/issues/3659)
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
 
 We've deprecated `Avatar` in [Main](#main) in favor of the newly promoted `Avatar` from
 [Preview](#preview). The deprecated `Avatar` will be removed in the next major version.
