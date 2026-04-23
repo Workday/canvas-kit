@@ -23,14 +23,19 @@ import viteConfigFile from './stackblitzFiles/vite.config.ts?raw';
 
 const cardStencil = createStencil({
   base: {
+    // Lets the block shrink inside flex/grid doc layouts so content width does not force overflow.
+    minWidth: 0,
+    maxWidth: '100%',
     '[data-part="example-block"]': {
       boxShadow: system.depth[1],
       borderRadius: system.shape.x1,
       padding: system.padding.md,
       position: 'relative',
+      minWidth: 0,
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
     },
     '[data-part="example-block-container"]': {
+      minWidth: 0,
       overflow: 'auto',
       padding: system.padding.md,
     },
@@ -164,6 +169,8 @@ export const ExampleCodeBlock = ({code}: any) => {
                     lineHeight: cssVar(system.lineHeight.subtext.large),
                     margin: '0',
                     padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                    boxSizing: 'border-box',
+                    maxWidth: '100%',
                   }}
                   children={code.__RAW__}
                 />
