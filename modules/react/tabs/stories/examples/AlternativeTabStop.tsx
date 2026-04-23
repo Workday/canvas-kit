@@ -10,7 +10,7 @@ export const AlternativeTabStop = () => {
         <Tabs.Item>Second Tab</Tabs.Item>
         <Tabs.Item>Third Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: system.gap.lg}}>
+      <div style={{marginTop: cssVar(system.gap.lg)}}>
         <Tabs.Panel tabIndex={undefined}>
           <button>Focusable button</button>
           <br />

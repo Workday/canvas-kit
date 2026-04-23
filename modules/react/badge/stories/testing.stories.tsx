@@ -41,7 +41,7 @@ export const CountBadgeStates = {
         {props => (
           <div
             style={{
-              padding: system.space.x2,
+              padding: cssVar(system.space.x2),
               backgroundColor: cssVar(
                 props.variant === 'inverse'
                   ? system.color.bg.primary.default
@@ -89,7 +89,7 @@ export const CountBadgeInverseBgTest = {
           <div
             style={{
               backgroundColor: cssVar(base[`${color}${colorScale}`]),
-              padding: system.space.x4,
+              padding: cssVar(system.space.x4),
             }}
           >
             <CountBadge {...props} />

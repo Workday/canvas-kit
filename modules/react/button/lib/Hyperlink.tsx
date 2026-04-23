@@ -23,7 +23,7 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: cssVar(system.color.fg.info.default, system.color.text.primary.default),
+    color: system.color.text.primary.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
@@ -35,7 +35,7 @@ export const hyperlinkStencil = createStencil({
       background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
@@ -93,3 +93,46 @@ export const Hyperlink = createComponent('a')({
     </Element>
   ),
 });
+
+const stencil1 = createStencil({
+  vars: {
+    color: '',
+  },
+  base: ({color}) => ({
+    color: color,
+  }),
+  modifiers: {
+    variant: {
+      inverse: {
+        color: 'red',
+      },
+    },
+  },
+});
+
+const stencil2 = createStencil({
+  extends: stencil1,
+  vars: {
+    color: '',
+  },
+  base: ({color}) => ({
+    background: color,
+  }),
+  modifiers: {
+    size: {
+      small: {},
+    },
+  },
+});
+
+const test = stencil2({size: 'small', color: 'blue', variant: 'inverse'});
+
+const Test = () => {
+  return (
+    <div>
+      <button {...stencil2({size: 'small', color: 'blue', variant: 'inverse'})}>
+        <span>Test</span>
+      </button>
+    </div>
+  );
+};

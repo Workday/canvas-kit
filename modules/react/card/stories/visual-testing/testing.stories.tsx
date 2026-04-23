@@ -56,7 +56,7 @@ export const CardStates = {
             style={{
               background:
                 props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
-              padding: system.space.x4,
+              padding: cssVar(system.space.x4),
             }}
           >
             <Card {...props}>

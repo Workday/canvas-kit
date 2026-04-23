@@ -24,7 +24,7 @@ export const Icons = () => {
           <Tabs.Item.Text>Fourth Tab</Tabs.Item.Text>
         </Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: system.gap.lg}}>
+      <div style={{marginTop: cssVar(system.gap.lg)}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>
