@@ -27,7 +27,7 @@ export const externalHyperlinkStencil = createStencil({
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
       minWidth: calc.subtract(system.size.xxxs, px2rem(1)),
-      marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
+      marginInlineStart: calc.subtract(system.gap.xs, px2rem(2)),
       '& > svg': {
         minWidth: system.size.xxxs,
         minHeight: system.size.xxxs,

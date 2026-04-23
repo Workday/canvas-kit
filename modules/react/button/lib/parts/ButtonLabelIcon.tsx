@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {component, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {component} from '@workday/canvas-tokens-web';
 
 import {ButtonSizes} from '../types';
 
@@ -35,20 +35,16 @@ const buttonIconStencil = createStencil({
   modifiers: {
     size: {
       extraSmall: {
-        // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.xs, system.space.x4),
+        [systemIconStencil.vars.size]: component.systemIcon.size.xs,
       },
       small: {
-        // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
+        [systemIconStencil.vars.size]: component.systemIcon.size.md,
       },
       medium: {
-        // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
+        [systemIconStencil.vars.size]: component.systemIcon.size.md,
       },
       large: {
-        // TODO (icon token): Revisit size variable to icon size token
-        [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.lg, system.space.x6),
+        [systemIconStencil.vars.size]: component.systemIcon.size.lg,
       },
     },
   },

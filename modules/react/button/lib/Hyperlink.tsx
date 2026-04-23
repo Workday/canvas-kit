@@ -23,7 +23,7 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: system.color.text.primary.default,
+    color: system.color.fg.info.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
@@ -31,32 +31,32 @@ export const hyperlinkStencil = createStencil({
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
     '&:hover, &.hover': {
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.strong),
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+      color: system.color.fg.info.strong,
+      background: system.color.surface.alt.default,
     },
     '&:focus, &.focus, &:focus-visible': {
       boxShadow: `0 0 0 ${px2rem(2)} ${system.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.stronger),
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.default),
+      color: system.color.fg.info.strong,
+      background: system.color.surface.alt.default,
     },
   },
   modifiers: {
     variant: {
       inverse: {
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.fg.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.fg.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.fg.inverse}`,
         },
         '&:active, &.active': {
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.color.fg.info.strong,
+          background: system.color.surface.navigation,
         },
       },
       standalone: {
@@ -64,17 +64,17 @@ export const hyperlinkStencil = createStencil({
       },
       standaloneInverse: {
         textDecoration: 'none',
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.fg.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.focus.inverse}`,
         },
         '&:active, &.active': {
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.color.fg.info.strong,
+          background: system.color.surface.navigation,
         },
       },
     },

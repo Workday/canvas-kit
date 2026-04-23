@@ -178,10 +178,10 @@ export const buttonStencil = createStencil({
       outlineOffset: px2rem(2),
       boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(
         buttonColorPropVars.focus.boxShadowInner,
-        cssVar(boxShadowInner, cssVar(system.color.border.inverse.default, base.neutral0))
+        cssVar(boxShadowInner, system.color.border.inverse.default)
       )},0 0 0 ${px2rem(4)} ${cssVar(
         buttonColorPropVars.focus.boxShadowOuter,
-        cssVar(boxShadowOuter, cssVar(system.color.brand.focus.primary, brand.common.focusOutline))
+        cssVar(boxShadowOuter, system.color.brand.focus.primary)
       )}`,
     },
     // Hover Styles

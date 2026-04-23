@@ -17,29 +17,20 @@ const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+    [buttonStencil.vars.background]: system.color.brand.accent.critical,
     [buttonStencil.vars.borderRadius]: system.shape.full,
-    [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+    [buttonStencil.vars.label]: system.color.fg.inverse,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
-      cssVar(system.color.fg.inverse, brand.error.accent)
+      system.color.fg.inverse
     ),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
-      [systemIconStencil.vars.color]: cssVar(
-        buttonColorPropVars.focus.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
-      ),
-      [buttonStencil.vars.boxShadowInner]: cssVar(
-        system.color.focus.inverse,
-        cssVar(system.color.border.inverse.default, base.neutral0)
-      ),
-      [buttonStencil.vars.boxShadowOuter]: cssVar(
-        system.color.brand.focus.primary,
-        brand.common.focusOutline
-      ),
+      [buttonStencil.vars.background]: system.color.brand.accent.critical,
+      [buttonStencil.vars.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: buttonColorPropVars.focus.icon,
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
     },
     // Hover Styles
     '&:hover, &.hover': {
@@ -49,10 +40,10 @@ const deleteButtonStencil = createStencil({
         mixinColor: system.color.accent.overlay.mixin,
         mixinValue: system.opacity.accent.hover,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
     },
     // Active Styles
@@ -63,21 +54,21 @@ const deleteButtonStencil = createStencil({
         mixinColor: system.color.accent.overlay.mixin,
         mixinValue: system.opacity.accent.pressed,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+      [buttonStencil.vars.background]: system.color.brand.accent.critical,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      [buttonStencil.vars.label]: system.color.fg.inverse,
     },
   },
 });
