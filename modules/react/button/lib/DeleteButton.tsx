@@ -28,7 +28,10 @@ const deleteButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.color.brand.accent.critical,
       [buttonStencil.vars.label]: system.color.fg.inverse,
-      [systemIconStencil.vars.color]: buttonColorPropVars.focus.icon,
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.focus.icon,
+        system.color.fg.inverse
+      ),
       [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
       [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
     },
