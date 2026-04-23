@@ -49,6 +49,7 @@ semantic meaning to allow for better use and theming.
     - [Svg](#svg)
     - [System Icon](#system-icon)
     - [System Icon Circle](#system-icon-circle)
+  - [Icon Size Updates](#icon-size-updates)
   - [Indicators](#indicators)
   - [Inputs](#inputs)
   - [Navigation](#navigation)
@@ -62,7 +63,7 @@ semantic meaning to allow for better use and theming.
   - [Icons Updates](#icons-updates)
     - [Accent Icon](#accent-icon)
     - [Applet Icon](#applet-icon)
-    - [Other icon utilities][#other-icon-utilities]
+    - [Other icon utilities](#other-icon-utilities)
   - [Switch (Main)](#switch-main)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
@@ -72,6 +73,10 @@ semantic meaning to allow for better use and theming.
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
+- [New Utilities](#new-utilities)
+  - [colorSpace](#colorspace)
+      - [Darken](#darken)
+      - [Hover and Pressed](#hover-and-pressed)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -530,8 +535,7 @@ The promoted `SegmentedControl` includes several new features:
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
 We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
-changes to the functionality or styling of the component. The only change required is updating the
-import statement.
+changes to the functionality or styling of the component. The only change required is updating the import statement.
 
 **Before in v14**
 
@@ -608,6 +612,22 @@ clarity:
 - The `background` prop and a `color` prop must be provided together to ensure optimal contrast and
   compliance with accessibility standards between the icon and its circular background.
 - `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
+
+### Icon Size Updates
+
+**PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
+
+Canvas v15 is optimized to look best when using the latest version of v4 tokens (`"@workday/canvas-tokens-web"`) and the latest version of v4 system icons (`"@workday/canvas-system-icons-web"`). It is designed to be backwards-compatible with v3 tokens and v3 system icons — nothing should break. But you might see minor imperfections when using v3 system icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4 icons `"@workday/canvas-system-icons-web"` and latest version of v4 tokens `"@workday/canvas-tokens-web"`.
+
+The size of the icons in some components have been updated. This is the reflected in the following components:
+
+- `MultiSelect` | `1.5rem` → `1.25rem`
+- `Switch (Preview)` | `1.25rem` → `1.125rem`
+- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)` | `1.125rem` → `1rem`
+- `Pill.Icon` | `1.25rem` → `1.125rem`
+- `Pill.IconButton` | `1.5rem` → `1.125rem`
+
+> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the icon will still be updated as part of the upgrade.
 
 ### Indicators
 
@@ -965,6 +985,95 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 > 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
 > throughout your codebase.
+
+## New Utilities
+
+### colorSpace
+
+We have added a new utility called [colorSpace](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#colorspace) and it has three functions: [darken](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#darken), [hover](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#hover) and [pressed](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#pressed).
+
+These utilities are meant to be used for interactive states (i.e. `:hover`, `:active` on buttons, links, etc.).
+
+These will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in the srgb colorspace by a given amount.
+
+Why did we create this utility?
+
+With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions of their solid counterparts. Solid colors are designed for white backgrounds and can lose contrast on other surfaces. Alpha colors adapt via transparency, so they match the appearance of solid colors on the default page background while remaining legible on any surface.
+
+#### Darken
+
+This is the core function that is used under the hood for the `hover` and `pressed` functions.
+
+It takes a single options object with four properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or
+   fallback color).
+
+```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.darken({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      mixinColor: system.color.accent.overlay.mixin,
+      mixinValue: system.opacity.accent.hover,
+    }),
+  },
+});
+```
+
+#### Hover and Pressed
+
+For the `hover` and `pressed` functions, they take a single options object with three properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+##### Hover
+
+This function is used specifically for hover states.
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.hover({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
+
+##### Pressed
+
+This function is used specifically for pressed/active states.
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:active': {
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
 
 ## Glossary
 

@@ -23,7 +23,7 @@ import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {base, brand, component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -110,7 +110,8 @@ const tabItemStencil = createStencil({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: 'currentColor',
-    [systemIconStencil.vars.size]: px2rem(20),
+    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
 
     '&:has(span)': {
       display: 'flex',

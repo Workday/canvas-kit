@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.9](https://github.com/Workday/canvas-kit/releases/tag/v14.3.9) (2026-04-20)
+
+
+
+
+## [v14.3.8](https://github.com/Workday/canvas-kit/releases/tag/v14.3.8) (2026-04-20)
+
+
+
+
+## [v14.3.7](https://github.com/Workday/canvas-kit/releases/tag/v14.3.7) (2026-04-17)
+
+### Documentation
+
+- docs: Update tokens replacement guides ([#3878](https://github.com/Workday/canvas-kit/pull/3878)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v14.3.6](https://github.com/Workday/canvas-kit/releases/tag/v14.3.6) (2026-04-17)
+
+
+
+
 ## [v14.3.5](https://github.com/Workday/canvas-kit/releases/tag/v14.3.5) (2026-04-10)
 
 
