@@ -1,6 +1,6 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightLinkStencil = createStencil({

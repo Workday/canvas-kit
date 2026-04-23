@@ -1,14 +1,7 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 

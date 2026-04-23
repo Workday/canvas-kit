@@ -7,7 +7,7 @@ import {
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {component, system} from '@workday/canvas-tokens-web';
 

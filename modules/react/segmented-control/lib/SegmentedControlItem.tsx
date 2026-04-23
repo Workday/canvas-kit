@@ -5,7 +5,7 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {colorSpace, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 

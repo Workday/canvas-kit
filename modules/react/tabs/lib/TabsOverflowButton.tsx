@@ -12,7 +12,6 @@ import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
 
 import {StyledTabItem} from './TabsItem';
 import {useTabsModel} from './useTabsModel';

@@ -1,15 +1,8 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
 import {checkboxRippleStencil} from './CheckboxRipple';

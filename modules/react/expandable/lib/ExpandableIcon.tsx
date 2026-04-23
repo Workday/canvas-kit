@@ -2,7 +2,7 @@ import {IconPositions} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon, chevronUpIcon} from '@workday/canvas-system-icons-web';
 import {component, system} from '@workday/canvas-tokens-web';
 

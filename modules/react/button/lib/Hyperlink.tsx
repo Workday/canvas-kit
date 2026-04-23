@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
@@ -93,46 +93,3 @@ export const Hyperlink = createComponent('a')({
     </Element>
   ),
 });
-
-const stencil1 = createStencil({
-  vars: {
-    color: '',
-  },
-  base: ({color}) => ({
-    color: color,
-  }),
-  modifiers: {
-    variant: {
-      inverse: {
-        color: 'red',
-      },
-    },
-  },
-});
-
-const stencil2 = createStencil({
-  extends: stencil1,
-  vars: {
-    color: '',
-  },
-  base: ({color}) => ({
-    background: color,
-  }),
-  modifiers: {
-    size: {
-      small: {},
-    },
-  },
-});
-
-const test = stencil2({size: 'small', color: 'blue', variant: 'inverse'});
-
-const Test = () => {
-  return (
-    <div>
-      <button {...stencil2({size: 'small', color: 'blue', variant: 'inverse'})}>
-        <span>Test</span>
-      </button>
-    </div>
-  );
-};

@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {

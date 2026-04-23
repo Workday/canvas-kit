@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, StyledType, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
 

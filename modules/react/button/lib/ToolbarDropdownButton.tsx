@@ -9,7 +9,7 @@ import {
   px2rem,
 } from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';

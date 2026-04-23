@@ -2,7 +2,7 @@ import React from 'react';
 
 import {ExtractProps, Themeable, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioInput} from './RadioInput';

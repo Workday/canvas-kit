@@ -1,7 +1,7 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';

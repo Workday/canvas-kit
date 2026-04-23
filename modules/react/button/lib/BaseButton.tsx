@@ -5,7 +5,7 @@ import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';

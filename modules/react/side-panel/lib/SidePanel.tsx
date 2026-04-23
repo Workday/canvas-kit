@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {createContainer, createElemPropsHook} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {SidePanelHeading} from './SidePanelHeading';

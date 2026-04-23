@@ -10,9 +10,9 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';

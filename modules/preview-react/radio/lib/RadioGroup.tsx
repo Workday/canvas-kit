@@ -1,7 +1,7 @@
 import {ErrorType, Themeable, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioButton} from './RadioButton';
 import {RadioLabel} from './RadioLabel';
