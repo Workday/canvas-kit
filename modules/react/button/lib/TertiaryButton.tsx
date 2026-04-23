@@ -26,30 +26,24 @@ const tertiaryButtonStencil = createStencil({
     minWidth: 'auto',
     borderWidth: px2rem(2),
     [buttonStencil.vars.borderRadius]: system.shape.full,
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
-    [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+    [buttonStencil.vars.background]: system.color.surface.transparent,
+
+    [buttonStencil.vars.label]: system.color.fg.default,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+      [buttonStencil.vars.background]: system.color.surface.transparent,
+
+      [buttonStencil.vars.label]: system.color.fg.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [buttonStencil.vars.label]: cssVar(system.color.fg.contrast.default, system.color.fg.inverse),
+      [buttonStencil.vars.label]: system.color.fg.contrast.default,
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: cssVar(
-          system.color.focus.inverse,
-          cssVar(system.color.border.inverse.default, base.neutral0)
-        ),
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        innerColor: system.color.focus.inverse,
+
+        outerColor: system.color.brand.focus.primary,
       }),
     },
     // Hover Styles
@@ -60,11 +54,8 @@ const tertiaryButtonStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.hover,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        cssVar(buttonColorPropVars.hover.icon, 'currentColor')
-      ),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
       textDecoration: 'underline',
     },
     // Active Styles
@@ -75,18 +66,16 @@ const tertiaryButtonStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.pressed,
       }),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
       textDecoration: 'underline',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
+      textDecoration: 'none',
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.label]: system.color.fg.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
@@ -97,7 +86,7 @@ const tertiaryButtonStencil = createStencil({
         padding: 0,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
-          cssVar(system.color.fg.default, system.color.fg.strong)
+          system.color.fg.default
         ),
         '&:focus-visible, &.focus': {
           [systemIconStencil.vars.color]: cssVar(
@@ -147,23 +136,15 @@ const tertiaryButtonStencil = createStencil({
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: cssVar(
-            system.color.surface.inverse,
-            system.color.bg.translucent
-          ),
-          [buttonStencil.vars.label]: cssVar(
-            system.color.fg.contrast.default,
-            system.color.fg.inverse
-          ),
+          [buttonStencil.vars.background]: system.color.surface.inverse,
+
+          [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
           ...focusRing({
             width: 2,
             separation: 2,
             innerColor: system.color.border.contrast.default,
-            outerColor: cssVar(
-              system.color.focus.inverse,
-              cssVar(system.color.border.inverse.default, base.neutral0)
-            ),
+            outerColor: system.color.focus.inverse,
           }),
         },
         // Active Styles

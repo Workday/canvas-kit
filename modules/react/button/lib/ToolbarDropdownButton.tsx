@@ -30,30 +30,23 @@ export const toolbarDropdownButtonStencil = createStencil({
     [buttonStencil.vars.borderRadius]: system.shape.sm,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
-      cssVar(system.color.fg.default, system.color.fg.muted.soft)
+      system.color.fg.default
     ),
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
+    [buttonStencil.vars.background]: system.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
+      [buttonStencil.vars.background]: system.color.surface.transparent,
+
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        cssVar(system.color.fg.strong, system.color.fg.muted.soft)
+        system.color.fg.strong
       ),
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: cssVar(
-          system.color.focus.inverse,
-          cssVar(system.color.border.inverse.default, base.neutral0)
-        ),
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        innerColor: system.color.focus.inverse,
+
+        outerColor: system.color.brand.focus.primary,
       }),
     },
 
@@ -66,7 +59,7 @@ export const toolbarDropdownButtonStencil = createStencil({
       }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
-        cssVar(system.color.fg.default, system.color.fg.muted.soft)
+        system.color.fg.default
       ),
     },
 
@@ -79,7 +72,7 @@ export const toolbarDropdownButtonStencil = createStencil({
       }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
-        cssVar(system.color.fg.strong, system.color.fg.muted.stronger)
+        system.color.fg.strong
       ),
     },
 
@@ -88,11 +81,11 @@ export const toolbarDropdownButtonStencil = createStencil({
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        cssVar(system.color.fg.default, system.color.fg.disabled)
+        system.color.fg.default
       ),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        cssVar(system.color.fg.default, system.color.fg.muted.soft)
+        system.color.fg.default
       ),
     },
 

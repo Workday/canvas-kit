@@ -22,19 +22,16 @@ export const toolbarIconButtonStencil = createStencil({
     padding: 0,
     height: system.size.sm,
     [buttonStencil.vars.borderRadius]: system.shape.sm,
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.muted.soft),
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [buttonStencil.vars.background]: system.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.soft),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
       ...focusRing({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        outerColor: system.color.brand.focus.primary,
       }),
     },
 
@@ -45,10 +42,7 @@ export const toolbarIconButtonStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.hover,
       }),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
@@ -58,33 +52,22 @@ export const toolbarIconButtonStencil = createStencil({
         mixinColor: system.color.surface.overlay.mixin,
         mixinValue: system.opacity.surface.pressed,
       }),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [buttonStencil.vars.background]: system.color.surface.transparent,
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.disabled),
+      [systemIconStencil.vars.color]: system.color.fg.default,
     },
 
     "&[aria-pressed='true']": {
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.brand.fg.primary.default,
-        brand.primary.base
-      ),
-      [buttonStencil.vars.background]: cssVar(
-        system.color.brand.surface.primary.default,
-        brand.primary.lightest
-      ),
+      [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
+
+      [buttonStencil.vars.background]: system.color.brand.surface.primary.default,
 
       '&:focus-visible, &.focus': {
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
 
       '&:hover, &.hover': {
@@ -94,10 +77,7 @@ export const toolbarIconButtonStencil = createStencil({
           mixinColor: system.color.surface.overlay.mixin,
           mixinValue: system.opacity.surface.hover,
         }),
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
 
       '&:active, &.active': {
@@ -107,10 +87,7 @@ export const toolbarIconButtonStencil = createStencil({
           mixinColor: system.color.surface.overlay.mixin,
           mixinValue: system.opacity.surface.pressed,
         }),
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
     },
   },
