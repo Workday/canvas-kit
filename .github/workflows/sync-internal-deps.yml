@@ -47,12 +47,23 @@ jobs:
             yarn upgrade ${{ inputs.package }}
           fi
 
+      - name: Sanitize PR branch name inputs
+        id: sanitize_branch_name
+        shell: bash
+        run: |
+          sanitize() {
+            printf '%s' "$1" | sed -E 's/[@\/]+/-/g; s/[^A-Za-z0-9._-]+/-/g; s/-+/-/g; s/^-+//; s/-+$//'
+          }
+
+          echo "package=$(sanitize "${{ inputs.package }}")" >> "$GITHUB_OUTPUT"
+          echo "branch=$(sanitize "${{ inputs.branch }}")" >> "$GITHUB_OUTPUT"
+
       - name: Open PR
         uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: "chore: sync ${{ inputs.package }}"
           title: "chore: sync ${{ inputs.package }}"
-          branch: "chore/sync-${{ inputs.package }}-${{ inputs.branch }}"
+          branch: "chore/sync-${{ steps.sanitize_branch_name.outputs.package }}-${{ steps.sanitize_branch_name.outputs.branch }}"
           base: ${{ inputs.branch }}
           labels: dependencies
