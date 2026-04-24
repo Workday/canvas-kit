@@ -45,15 +45,15 @@ semantic meaning to allow for better use and theming.
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
   - [Containers](#containers)
-  - [Icons Updates](#icons-updates)
-    - [Svg](#svg)
-    - [System Icon](#system-icon)
-    - [System Icon Circle](#system-icon-circle)
-  - [Icon Size Updates](#icon-size-updates)
   - [Indicators](#indicators)
   - [Inputs](#inputs)
   - [Navigation](#navigation)
   - [Popups](#popups)
+- [Icon Updates](#icon-updates)
+  - [Svg](#svg)
+  - [System Icon](#system-icon)
+  - [System Icon Circle](#system-icon-circle)
+	- [Icon Size Updates](#icon-size-updates)
 - [New Components](#new-components)
   - [Expressive Icon](#expressive-icon)
   - [Switch (Preview)](#switch-preview)
@@ -571,7 +571,33 @@ tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-
 
 `Card`, `Expandable` and `Tabs`
 
-### Icons Updates
+### Indicators
+
+**PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738)
+
+`StatusIndicator (Preview)`, `Avatar`, `Badge`, `Banner`, `InformationHighlight`, `Pill` and
+`Skeleton`
+
+### Inputs
+
+**PR:** [#3719](https://github.com/Workday/canvas-kit/pull/3719)
+
+`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and
+`TextInput`
+
+### Navigation
+
+**PR:** [#3753](https://github.com/Workday/canvas-kit/pull/3753)
+
+`Breadcrumbs`, `Pagination`, `Hyperlink` and `ExternalHyperlink`
+
+### Popups
+
+**PR:** [#3745](https://github.com/Workday/canvas-kit/pull/3745)
+
+`Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
+
+## Icons Updates
 
 **PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
@@ -612,7 +638,7 @@ clarity:
   compliance with accessibility standards between the icon and its circular background.
 - `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
 
-### Icon Size Updates
+#### Icon Size Updates
 
 **PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
 
@@ -627,32 +653,6 @@ The size of the icons in some components have been updated. This is the reflecte
 - `Pill.IconButton` | `1.5rem` → `1.125rem`
 
 > **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the icon will still be updated as part of the upgrade.
-
-### Indicators
-
-**PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738)
-
-`StatusIndicator (Preview)`, `Avatar`, `Badge`, `Banner`, `InformationHighlight`, `Pill` and
-`Skeleton`
-
-### Inputs
-
-**PR:** [#3719](https://github.com/Workday/canvas-kit/pull/3719)
-
-`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and
-`TextInput`
-
-### Navigation
-
-**PR:** [#3753](https://github.com/Workday/canvas-kit/pull/3753)
-
-`Breadcrumbs`, `Pagination`, `Hyperlink` and `ExternalHyperlink`
-
-### Popups
-
-**PR:** [#3745](https://github.com/Workday/canvas-kit/pull/3745)
-
-`Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
 
 ## New Components
 
