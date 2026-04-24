@@ -35,8 +35,9 @@ export const bannerStencil = createStencil({
     borderStartEndRadius: system.shape.sm,
     borderEndStartRadius: system.shape.sm,
     borderEndEndRadius: system.shape.sm,
+    gap: system.gap.sm,
     cursor: 'pointer',
-    transition: 'background-color 120ms',
+    transition: 'background-color 120ms linear',
     outline: `${system.gap.xs} solid transparent`,
     '&:focus-visible, &.focus': {
       outline: `${system.gap.xs} double transparent`,
@@ -52,8 +53,8 @@ export const bannerStencil = createStencil({
           background: colorSpace.darken({
             color: system.color.brand.accent.critical,
             fallback: brand.error.dark,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            mixinColor: system.color.accent.overlay.mixin,
+            mixinValue: system.opacity.accent.hover,
           }),
         },
         '& [data-part="exclamation-circle-icon"]': {
@@ -64,19 +65,18 @@ export const bannerStencil = createStencil({
       },
       false: {
         backgroundColor: system.color.brand.accent.caution,
-        color: system.color.fg.inverse,
+        color: system.color.fg.contrast.default,
         '&:hover, &.hover': {
           background: colorSpace.darken({
             color: system.color.brand.accent.caution,
             fallback: brand.alert.dark,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            mixinColor: system.color.accent.overlay.mixin,
+            mixinValue: system.opacity.accent.hover,
           }),
         },
         '& [data-part="exclamation-triangle-icon"]': {
           [systemIconStencil.vars.accentColor]: cssVar(system.color.fg.inverse, 'currentColor'),
           [systemIconStencil.vars.color]: system.color.brand.fg.caution.strong,
-
           [systemIconStencil.vars.backgroundColor]: system.color.brand.fg.caution.strong,
         },
       },

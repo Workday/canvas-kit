@@ -24,7 +24,7 @@ export const skeletonTextStencil = createStencil({
     '& [data-part="skeleton-text-lines"]': {
       backgroundColor: cssVar(backgroundColor, system.color.surface.loading),
       height: system.size.xxxs,
-      // We do not have a `gap` token for 0.75renm so `padding` is being used here
+      // We do not have a `gap` token for 0.75rem so `padding` is being used here
       marginBlockEnd: system.padding.sm,
       borderRadius: system.shape.md,
       width: '100%',

@@ -48,7 +48,7 @@ export interface LoadingDotsProps extends CSProps {
 export const loadingDotsStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
-    loadingDotColor: system.color.accent.muted.default,
+    loadingDotColor: '',
   },
   parts: {
     loadingAnimationDot: 'loading-animation-dot',
@@ -57,7 +57,7 @@ export const loadingDotsStencil = createStencil({
     display: 'inline-flex',
     gap: system.gap.sm,
     [loadingAnimationDotPart]: {
-      backgroundColor: loadingDotColor,
+      backgroundColor: cssVar(loadingDotColor, system.color.accent.muted.default),
       width: system.size.xxxs,
       height: system.size.xxxs,
       fontSize: 0,

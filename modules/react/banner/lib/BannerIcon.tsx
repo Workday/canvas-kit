@@ -15,7 +15,7 @@ export interface BannerIconProps extends Omit<ExtractProps<typeof SystemIcon, ne
 
 export const bannerIconStencil = createStencil({
   base: {
-    marginInlineEnd: system.space.x3,
+    marginInlineEnd: 0,
   },
 });
 
