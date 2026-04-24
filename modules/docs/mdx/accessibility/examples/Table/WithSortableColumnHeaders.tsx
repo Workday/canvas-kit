@@ -6,7 +6,7 @@ import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {sortDownIcon, sortUpIcon} from '@workday/canvas-system-icons-web';
+import {arrowDownSmallIcon, arrowUpSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 interface CountryData {
@@ -116,9 +116,9 @@ interface SortableColumnHeaderProps {
 
 const getSortIcon = (sortOrder?: SortOrder) => {
   if (sortOrder === 'ascending') {
-    return sortUpIcon;
+    return arrowUpSmallIcon;
   } else if (sortOrder === 'descending') {
-    return sortDownIcon;
+    return arrowDownSmallIcon;
   } else {
     return undefined;
   }

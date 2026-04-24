@@ -2,7 +2,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {extLinkIcon} from '@workday/canvas-system-icons-web';
+import {externalLinkIcon} from '@workday/canvas-system-icons-web';
 
 export const NoTargetRTL = () => {
   const model = useModalModel();
@@ -32,7 +32,7 @@ export const NoTargetRTL = () => {
               <Modal.CloseButton
                 as={PrimaryButton}
                 onClick={handleAcknowledge}
-                icon={extLinkIcon}
+                icon={externalLinkIcon}
                 iconPosition="end"
                 shouldMirrorIconInRTL
               >

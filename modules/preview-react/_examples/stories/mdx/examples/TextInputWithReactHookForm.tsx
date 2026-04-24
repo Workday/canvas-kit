@@ -9,7 +9,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {invisibleIcon, visibleIcon} from '@workday/canvas-system-icons-web';
+import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
@@ -163,7 +163,7 @@ export const TextInputWithReactHookForm = () => {
             </FormField.Field>
             <TertiaryButton
               type="button"
-              icon={showPassword ? invisibleIcon : visibleIcon}
+              icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
               aria-label={showPassword ? 'Hide Password' : 'Show Password'}
               aria-controls={`input-${passwordId}`}
               onClick={() => {
