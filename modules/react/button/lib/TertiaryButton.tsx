@@ -349,7 +349,7 @@ export const TertiaryButton = createComponent('button')({
           ? 'start'
           : 'only'
         : undefined;
-    const tertiaryStencil = dataDSROff ? tertiaryButtonStencil : v14TertiaryButtonStencil;
+    const tertiaryStencil = dataDSROff ? v14TertiaryButtonStencil : tertiaryButtonStencil;
 
     return (
       <Button
