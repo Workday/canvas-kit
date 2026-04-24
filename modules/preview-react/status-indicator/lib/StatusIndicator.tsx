@@ -19,7 +19,6 @@ export type StatusIndicatorVariant =
   | 'caution'
   | 'positive'
   | 'critical'
-  | 'ai'
   | 'transparent'
   | 'blue'
   | 'green'
@@ -124,11 +123,6 @@ const statusIndicatorStencil = createStencil({
         color: system.color.fg.muted.strong,
         // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         backgroundColor: cssVar(system.color.surface.alt.strong, system.color.bg.alt.default),
-      },
-      ai: {
-        color: system.color.fg.ai,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.surface.ai.default, system.color.bg.ai.default),
       },
       transparent: {
         color: system.color.fg.inverse,
