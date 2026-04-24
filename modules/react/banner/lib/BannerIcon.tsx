@@ -2,7 +2,6 @@ import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
 
 import {useBannerIcon, useBannerModel} from './hooks';
 
