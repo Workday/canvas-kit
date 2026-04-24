@@ -49,7 +49,7 @@ semantic meaning to allow for better use and theming.
   - [Inputs](#inputs)
   - [Navigation](#navigation)
   - [Popups](#popups)
-- [Icon Updates](#icons-updates)
+- [Icon Updates](#icon-updates)
   - [Svg](#svg)
   - [System Icon](#system-icon)
   - [System Icon Circle](#system-icon-circle)
@@ -597,7 +597,7 @@ tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-
 
 `Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
 
-## Icons Updates
+## Icon Updates
 
 **PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
@@ -950,6 +950,8 @@ This component was deprecated in v12 and has now been fully removed in v15.
 Please use `FormField.Field` instead, which ensures proper label alignment, spacing of inputs and
 hint text regardless of the orientation.
 
+`formFieldContainerStencil` has been removed from `@workday/canvas-kit-react/form-field` as well.
+
 **Before in v14**
 
 ```tsx
@@ -963,6 +965,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
     <FormField.Hint>You must provide an email</FormField.Hint>
   </FormField.Container>
 </FormField>
+```
 
 > 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
 > throughout your codebase.
