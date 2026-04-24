@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.11](https://github.com/Workday/canvas-kit/releases/tag/v14.3.11) (2026-04-20)
+
+### Infrastructure
+
+- chore: Storybook and code examples over mcp ([#3805](https://github.com/Workday/canvas-kit/pull/3805)) ([@vibdev](https://github.com/vibdev), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4), [@Copilot](https://github.com/Copilot))
+  The Canvas Kit MCP server now includes component story previews. A new `fetch-component-documentation-example` tool lets AI assistants render interactive Canvas Kit component examples inline, with documentation and code snippets available as MCP resources (`docs://examples/{slug}` and `ui://story/{slug}`).
+
+
+## [v14.3.10](https://github.com/Workday/canvas-kit/releases/tag/v14.3.10) (2026-04-20)
+
+### Documentation
+
+- docs: Upgrade overlay accessibility docs and examples ([#3853](https://github.com/Workday/canvas-kit/pull/3853)) ([@williamjstanton](https://github.com/williamjstanton), [@Copilot](https://github.com/Copilot))
+  Documents Popup, Modal, and Dialog accessibility patterns; adds accessibility guide pages for popups and inline portals with examples; improves related Storybook examples and Dialog doc routing/links. Call out **`ExampleCodeBlock`** / **Utilities** / **v4 migration** changes here only if they remain in this PR.
+
+
 ## [v14.3.9](https://github.com/Workday/canvas-kit/releases/tag/v14.3.9) (2026-04-20)
 
 
