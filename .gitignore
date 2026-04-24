@@ -17,6 +17,9 @@ modules/**/ts-tmp
 build/*
 *.tsbuildinfo
 
+# generated at build time by build:discover
+modules/mcp/lib/stories-config.json
+
 # intellij
 .idea
 junit.xml
