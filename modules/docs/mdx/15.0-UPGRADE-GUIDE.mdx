@@ -43,6 +43,7 @@ semantic meaning to allow for better use and theming. Our old shape and space to
   - [Information Highlight](#information-highlight-)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
+    - [Tertiary Button v14 Style Toggle](#tertiary-button-v14-style-toggle)
   - [Containers](#containers)
   - [Icons Updates](#icons-updates)
     - [Svg](#svg)
@@ -565,6 +566,16 @@ tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-
 
 `PrimaryButton`, `SecondaryButton`, `DeleteButton`, `TertiaryButton`, `ToolbarButton`,
 `ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink` and `ActionBar`.
+
+#### Tertiary Button v14 Style Toggle
+
+**PR:** [#3875](https://github.com/Workday/canvas-kit/pull/3875)
+
+For Canvas Kit v15, `TertiaryButton` supports an optional data attribute, `data-dsr-off`, that
+reverts the component to v14 styles. This allows consumers to more gradually transition
+between major versions for this component if needed. By default, this toggle is set to `undefined`. It must be
+explicitly set to `true` to revert styles. Support for `data-dsr-off` is **temporary** and will become inert
+in the next major release.
 
 ### Containers
 
