@@ -58,6 +58,7 @@ const primaryButtonStencil = createStencil({
         brand.common.focusOutline
       ),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
+      width: system.size.xxl,
     },
     // Hover Styles
     '&:hover, &.hover': {
