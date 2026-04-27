@@ -39,7 +39,6 @@ export const StatusIndicatorStates = () => (
           {value: 'caution', label: 'Caution'},
           {value: 'positive', label: 'Positive'},
           {value: 'critical', label: 'Critical'},
-          {value: 'ai', label: 'AI'},
           {value: 'transparent', label: 'Transparent'},
         ],
       })}
