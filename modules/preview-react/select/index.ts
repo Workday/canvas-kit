@@ -1,6 +1,6 @@
 export * from './lib/Select';
 
-export {
+export type {
   Option,
   RenderableOption,
   RenderOptionFunction,
