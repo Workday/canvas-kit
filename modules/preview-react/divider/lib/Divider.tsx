@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
   vars: {
-    space: system.space.x4,
+    space: system.size.xxxs,
   },
   base: ({space}) => {
     return {
