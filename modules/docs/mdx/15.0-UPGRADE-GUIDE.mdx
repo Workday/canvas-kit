@@ -12,7 +12,8 @@ any questions.
 
 v15.0 and v4.0 Canvas Tokens Web introduce new shape, size, gap, and padding tokens to our
 components. While we still support our old shape and space tokens, the new tokens aim to add more
-semantic meaning to allow for better use and theming. Our old shape and space tokens are now deprecated and will be removed in a future version.
+semantic meaning to allow for better use and theming. Our old shape and space tokens are now
+deprecated and will be removed in a future version.
 
 > **Note:** While v15 and v4 tokens should be backwards compatible with previous versions that use
 > CSS tokens, we strongly advise migrating both Canvas Kit and Canvas Tokens Web together.
@@ -60,9 +61,9 @@ semantic meaning to allow for better use and theming. Our old shape and space to
 - [Theming](#theming)
   - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
 - [Deprecations](#deprecations)
-    - [Accent Icon](#accent-icon)
-    - [Applet Icon](#applet-icon)
-    - [Other icon utilities](#other-icon-utilities)
+  - [Accent Icon](#accent-icon)
+  - [Applet Icon](#applet-icon)
+  - [Other icon utilities](#other-icon-utilities)
   - [Switch (Main)](#switch-main)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
@@ -74,8 +75,8 @@ semantic meaning to allow for better use and theming. Our old shape and space to
   - [Search Form (Labs)](#search-form-labs)
 - [New Utilities](#new-utilities)
   - [colorSpace](#colorspace)
-      - [Darken](#darken)
-      - [Hover and Pressed](#hover-and-pressed)
+    - [Darken](#darken)
+    - [Hover and Pressed](#hover-and-pressed)
 - [Glossary](#glossary)
   - [Main](#main)
   - [Preview](#preview)
@@ -535,7 +536,8 @@ The promoted `SegmentedControl` includes several new features:
 **PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
 
 We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
-changes to the functionality or styling of the component. The only change required is updating the import statement.
+changes to the functionality or styling of the component. The only change required is updating the
+import statement.
 
 **Before in v14**
 
@@ -571,10 +573,10 @@ tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-
 **PR:** [#3875](https://github.com/Workday/canvas-kit/pull/3875)
 
 For Canvas Kit v15, `TertiaryButton` supports an optional data attribute, `data-dsr-off`, that
-reverts the component to v14 styles. This allows consumers to more gradually transition
-between major versions for this component if needed. By default, this toggle is set to `undefined`. It must be
-explicitly set to `true` to revert styles. Support for `data-dsr-off` is **temporary** and will become inert
-in the next major release.
+reverts the component to v14 styles. This allows consumers to more gradually transition between
+major versions for this component if needed. By default, this toggle is set to `undefined`. It must
+be explicitly set to `true` to revert styles. Support for `data-dsr-off` is **temporary** and will
+become inert in the next major release.
 
 ### Containers
 
@@ -645,25 +647,34 @@ clarity:
 
 - Added a new `inverse` prop, enabling an inverse color variant for better adaptability across
   backgrounds.
-- The `background` prop and the `color` prop must be provided together to ensure optimal contrast and
-  compliance with accessibility standards between the icon and its circular background.
+- The `background` prop and the `color` prop must be provided together to ensure optimal contrast
+  and compliance with accessibility standards between the icon and its circular background.
 - `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
 
 #### Icon Size Updates
 
 **PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
 
-Canvas v15 is optimized to look best when using the latest version of v4 tokens (`"@workday/canvas-tokens-web"`) and the latest version of v4 system icons (`"@workday/canvas-system-icons-web"`). It is designed to be backwards-compatible with v3 tokens and v3 system icons — nothing should break. But you might see minor imperfections when using v3 system icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4 icons `"@workday/canvas-system-icons-web"` and the latest version of v4 tokens `"@workday/canvas-tokens-web"`.
+Canvas v15 is optimized to look best when using the latest version of v4 tokens
+(`"@workday/canvas-tokens-web"`) and the latest version of v4 system icons
+(`"@workday/canvas-system-icons-web"`). It is designed to be backwards-compatible with v3 tokens and
+v3 system icons — nothing should break. But you might see minor imperfections when using v3 system
+icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4
+icons `"@workday/canvas-system-icons-web"` and the latest version of v4 tokens
+`"@workday/canvas-tokens-web"`.
 
-The size of icons in some components have been updated. This is reflected in the following components:
+The size of icons in some components have been updated. This is reflected in the following
+components:
 
 - `MultiSelect` | `1.5rem` → `1.25rem`
 - `Switch (Preview)` | `1.25rem` → `1.125rem`
-- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)` | `1.125rem` → `1rem`
+- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)`
+  | `1.125rem` → `1rem`
 - `Pill.Icon` | `1.25rem` → `1.125rem`
 - `Pill.IconButton` | `1.5rem` → `1.125rem`
 
-> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the icon will still be updated as part of the upgrade.
+> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the
+> icon will still be updated as part of the upgrade.
 
 ## New Components
 
@@ -975,7 +986,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
     <FormField.Input as={TextInput} />
     <FormField.Hint>You must provide an email</FormField.Hint>
   </FormField.Container>
-</FormField>
+</FormField>;
 ```
 
 > 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
@@ -985,15 +996,28 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 ### colorSpace
 
-We have added a new utility called [colorSpace](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#colorspace) which has three functions: [darken](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#darken), [hover](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#hover) and [pressed](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#pressed).
+We have added a new utility called
+[colorSpace](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#colorspace)
+which has three functions:
+[darken](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#darken),
+[hover](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#hover) and
+[pressed](https://workday.github.io/canvas-kit/?path=/docs/styling-utilities--docs#pressed).
 
-These utilities are meant to be used for interactive states (i.e. `:hover`, `:active` on buttons, links, etc.).
+These utilities are meant to be used for interactive states (i.e. `:hover`, `:active` on buttons,
+links, etc.).
 
-These will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is a mix of the first color and the mixin color together in the srgb colorspace by a given amount.
+These will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is a mix of the first color and the mixin color together in the srgb colorspace by a
+given amount.
 
 Why did we create this utility?
 
-With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions of their solid counterparts. Solid colors are designed for white backgrounds and can lose contrast on other surfaces. Alpha colors adapt via transparency, so they match the appearance of solid colors on the default page background while remaining legible on any surface.
+With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use
+the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions
+of their solid counterparts. Solid colors are designed for white backgrounds and can lose contrast
+on other surfaces. Alpha colors adapt via transparency, so they match the appearance of solid colors
+on the default page background while remaining legible on any surface.
 
 #### Darken
 
