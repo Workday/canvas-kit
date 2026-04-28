@@ -6,7 +6,7 @@ import {
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
+import {cloudArrowUpIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Indicators/Status Indicator',
@@ -29,7 +29,7 @@ export const StatusIndicatorStates = {
           ],
           icon: [
             {value: undefined, label: ''},
-            {value: uploadCloudIcon, label: 'With Icon'},
+            {value: cloudArrowUpIcon, label: 'With Icon'},
           ],
         })}
         columnProps={permutateProps({

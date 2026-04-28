@@ -4,11 +4,14 @@ import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {CanvasIcon} from '@workday/design-assets-types';
+import {
+  CanvasIcon as LegacyCanvasIcon,
+  CanvasIconTypes as LegacyIconTypes,
+} from '@workday/design-assets-types';
 
 export interface SvgProps extends CSProps, HTMLAttributes<HTMLSpanElement> {
-  src: CanvasSystemIcon | CanvasExpressiveIcon | CanvasIcon;
-  type: CanvasIconTypes;
+  src: CanvasSystemIcon | CanvasExpressiveIcon | LegacyCanvasIcon;
+  type: CanvasIconTypes | LegacyIconTypes;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
    * always mirror the icon regardless of the content direction. If the SVG should mirror only when

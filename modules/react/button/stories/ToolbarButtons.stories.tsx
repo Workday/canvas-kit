@@ -4,7 +4,7 @@ import * as React from 'react';
 import {ToolbarDropdownButton, ToolbarIconButton} from '@workday/canvas-kit-react/button';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {activityStreamIcon, zoominIcon} from '@workday/canvas-system-icons-web';
+import {commentIcon, zoomInIcon} from '@workday/canvas-system-icons-web';
 
 const meta: Meta<typeof ToolbarIconButton> = {
   title: 'Components/Buttons/Toolbar',
@@ -26,12 +26,12 @@ export const ToolbarIconButtonStory: StoryObj = {
     return (
       <div className="story">
         <h3>Toolbar Icon Button</h3>
-        <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} />
-        <ToolbarIconButton aria-label="Activity Stream" icon={activityStreamIcon} disabled={true} />
+        <ToolbarIconButton aria-label="Activity Stream" icon={commentIcon} />
+        <ToolbarIconButton aria-label="Activity Stream" icon={commentIcon} disabled={true} />
         <h3>Toggleable Toolbar Icon Button</h3>
         <ToolbarIconButton
           aria-label="Activity Stream"
-          icon={activityStreamIcon}
+          icon={commentIcon}
           toggled={toggled}
           onClick={handleToggle}
         />
@@ -48,7 +48,7 @@ export const ToolbarDropdownButtonStory: StoryObj = {
         <Tooltip title="Expand">
           <Menu.Target
             as={ToolbarDropdownButton}
-            icon={zoominIcon}
+            icon={zoomInIcon}
             onClick={() => {
               console.log('Expand icon clicked');
             }}

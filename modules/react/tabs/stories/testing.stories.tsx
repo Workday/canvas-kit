@@ -3,7 +3,7 @@ import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {setupIcon} from '@workday/canvas-system-icons-web';
+import {configureIcon} from '@workday/canvas-system-icons-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 import {Basic} from './examples/Basic';
@@ -49,7 +49,7 @@ const TabsExample = (props: React.ComponentProps<typeof StaticStates> = {}) => {
           {({hasIcon, ...props}) =>
             hasIcon ? (
               <Tabs.Item {...props}>
-                <Tabs.Item.Icon icon={setupIcon} />
+                <Tabs.Item.Icon icon={configureIcon} />
                 <Tabs.Item.Text>Icon</Tabs.Item.Text>
               </Tabs.Item>
             ) : (
