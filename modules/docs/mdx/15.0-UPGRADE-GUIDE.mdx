@@ -823,6 +823,37 @@ import {Select} from '@workday/canvas-kit-preview-react/select';
 import {Select} from '@workday/canvas-kit-react/select';
 ```
 
+#### Main Select Features
+
+The Main `Select` includes features not available in the Preview version:
+
+- **Composition-based API**: Full control over structure with subcomponents
+- **FormField integration**: Built-in accessibility when wrapped with FormField
+- **Model-based state**: Use `useSelectModel` for advanced state management
+- **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
+- **Icons in items**: Use `Select.Item.Icon` subcomponent
+
+```tsx
+// With icons
+<Select.Input inputStartIcon={myIcon} />
+
+// With item icons
+<Select.Item>
+  <Select.Item.Icon icon={starIcon} />
+  Favorite
+</Select.Item>
+
+// With model for controlled state
+const model = useSelectModel({
+  items: myItems,
+  onSelect: ({id}) => console.log('Selected:', id),
+});
+
+<Select model={model}>
+  ...
+</Select>
+```
+
 #### API Differences
 
 The Main `Select` is a
@@ -884,37 +915,6 @@ const items = ['Small', 'Medium', 'Large'];
     </Select.Popper>
   </FormField>
 </Select>;
-```
-
-##### Main Select Features
-
-The Main `Select` includes features not available in the Preview version:
-
-- **Composition-based API**: Full control over structure with subcomponents
-- **FormField integration**: Built-in accessibility when wrapped with FormField
-- **Model-based state**: Use `useSelectModel` for advanced state management
-- **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
-- **Icons in items**: Use `Select.Item.Icon` subcomponent
-
-```tsx
-// With icons
-<Select.Input inputStartIcon={myIcon} />
-
-// With item icons
-<Select.Item>
-  <Select.Item.Icon icon={starIcon} />
-  Favorite
-</Select.Item>
-
-// With model for controlled state
-const model = useSelectModel({
-  items: myItems,
-  onSelect: ({id}) => console.log('Selected:', id),
-});
-
-<Select model={model}>
-  ...
-</Select>
 ```
 
 ### Search Form (Labs)
