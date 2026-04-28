@@ -280,7 +280,7 @@ import * as React from 'react';
 import {bookOpenIcon} from '@workday/canvas-expressive-icons-web';
 import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
 
-<ExpressiveIcon icon={bookOpenIcon} />
+<ExpressiveIcon icon={bookOpenIcon} />;
 ```
 
 ### Switch (Preview)
@@ -397,7 +397,7 @@ different API than the deprecated version.
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
-<Avatar size="medium" variant="light" url="https://example.com/photo.jpg" altText="John Doe" />
+<Avatar size="medium" variant="light" url="https://example.com/photo.jpg" altText="John Doe" />;
 ```
 
 **New API (v15)**
@@ -405,7 +405,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 ```tsx
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
-<Avatar size="medium" variant="blue" url="https://example.com/photo.jpg" name="John Doe" />
+<Avatar size="medium" variant="blue" url="https://example.com/photo.jpg" name="John Doe" />;
 ```
 
 ### Information Highlight
@@ -536,7 +536,7 @@ const [value, setValue] = React.useState<string | number>('list-view');
   <SegmentedControl.Button icon={listViewIcon} value="list-view" />
   <SegmentedControl.Button icon={worksheetsIcon} value="table-view" />
   <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" />
-</SegmentedControl>
+</SegmentedControl>;
 ```
 
 **New API (v15)**
@@ -560,7 +560,7 @@ const [value, setValue] = React.useState('list-view');
       tooltipProps={{title: 'Device'}}
     />
   </SegmentedControl.List>
-</SegmentedControl>
+</SegmentedControl>;
 ```
 
 ### Side Panel
@@ -633,7 +633,7 @@ const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
   <SidePanel.ToggleButton {...controlProps} />
   <Heading {...labelProps}>Panel Title</Heading>
   {expanded && <Content />}
-</SidePanel>
+</SidePanel>;
 
 // After (in Main)
 const model = useSidePanelModel({
@@ -649,7 +649,7 @@ const model = useSidePanelModel({
   <SidePanel.ToggleButton aria-label="Collapse View" />
   <SidePanel.Heading>Panel Title</SidePanel.Heading>
   {model.state.transitionState === 'expanded' && <Content />}
-</SidePanel>
+</SidePanel>;
 ```
 
 #### Checking Expanded State
@@ -818,7 +818,7 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
     <FormField.Input as={TextInput} />
     <FormField.Hint>You must provide an email</FormField.Hint>
   </FormField.Container>
-</FormField>
+</FormField>;
 ```
 
 > 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
@@ -943,7 +943,7 @@ const options = [
 
 const [value, setValue] = React.useState('medium');
 
-<Select options={options} value={value} onChange={e => setValue(e.target.value)} />
+<Select options={options} value={value} onChange={e => setValue(e.target.value)} />;
 ```
 
 **Main API (v15)**
@@ -963,7 +963,7 @@ const items = ['Small', 'Medium', 'Large'];
       </Select.Card>
     </Select.Popper>
   </FormField>
-</Select>
+</Select>;
 ```
 
 ### Side Panel (Deprecated)
