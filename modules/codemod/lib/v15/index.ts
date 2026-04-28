@@ -5,6 +5,7 @@ import promoteInformationHighlight from './promoteInformationHighlight';
 import promotePill from './promotePill';
 import promoteSegmentedControl from './promoteSegmentedControl';
 import promoteSidePanel from './promoteSidePanel';
+import removeStatusIndicatorAIVariant from './removeStatusIndicatorAIVariant';
 import replaceFormFieldContainer from './replaceFormFieldContainer';
 import updateCardVariant from './updateCardVariant';
 import updateSwitchToPreview from './updateSwitchToPreview';
@@ -20,6 +21,7 @@ const transform: Transform = (file, api, options) => {
     replaceFormFieldContainer,
     updateCardVariant,
     updateSwitchToPreview,
+    removeStatusIndicatorAIVariant,
   ];
   return fixes.reduce((source, fix) => fix({...file, source}, api, options) as string, file.source);
 };

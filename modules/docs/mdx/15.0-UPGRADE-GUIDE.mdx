@@ -59,6 +59,7 @@ will be removed in a future version.
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Side Panel (Deprecated)](#side-panel-deprecated)
+  - [Status Indicator AI Variant](#status-indicator-ai-variant)
 - [New Utilities](#new-utilities)
   - [colorSpace](#colorspace)
 - [Glossary](#glossary)
@@ -976,6 +977,17 @@ removed. This was the older implementation that used our old patterns.
 Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound component
 pattern and `useSidePanelModel`. See the [API Differences](#api-differences) section above for
 migration guidance.
+
+### Status Indicator AI Variant
+
+**PR:** [#3899](https://github.com/Workday/canvas-kit/pull/3899)
+
+We've removed the `ai` variant from the `StatusIndicator` component in `Preview`. This pattern is no
+longer supported. If you wish to create your own custom variant you can customize both the icon and
+color of the `StatusIndicator`.
+
+> 🤖 The codemod will automatically handle replacing `ai` variant with `variant="blue`. You can
+> manually change the color if you wish.
 
 ## New Utilities
 
