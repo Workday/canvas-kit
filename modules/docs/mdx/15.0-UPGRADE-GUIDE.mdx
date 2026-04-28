@@ -55,10 +55,10 @@ deprecated and will be removed in a future version.
   - [Avatar (Deprecated)](#avatar-deprecated)
   - [Combobox (Labs)](#combobox-labs)
   - [Form Field Container (Deprecated)](#form-field-container-deprecated)
-  - [Side Panel (Deprecated)](#side-panel-deprecated)
+  - [Search Form (Labs)](#search-form-labs)
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
-  - [Search Form (Labs)](#search-form-labs)
+  - [Side Panel (Deprecated)](#side-panel-deprecated)
 - [New Utilities](#new-utilities)
   - [colorSpace](#colorspace)
 - [Glossary](#glossary)
@@ -453,7 +453,7 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 
 ### Segmented Control
 
-**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
+**PR:** [#3626](https://github.com/Workday/canvas-kit/pull/3626)
 
 We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the
 deprecated `SegmentedControl` that was previously in Main.
@@ -778,16 +778,68 @@ Please migrate to the new `Avatar` component (promoted from Preview) which uses 
 color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components. See the
 [API Differences](#api-differences) section above for migration guidance.
 
-### Side Panel (Deprecated)
+### Combobox (Labs)
 
-**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+**PR:** [#3661](https://github.com/Workday/canvas-kit/pull/3661)
 
-The deprecated `SidePanel` that was previously in `@workday/canvas-kit-react/side-panel` has been
-removed. This was the older implementation that used our old patterns.
+The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
 
-Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound component
-pattern and `useSidePanelModel`. See the [API Differences](#api-differences) section above for
-migration guidance.
+The following exports are no longer available:
+
+- `Combobox`
+- `ComboboxProps`
+- `AutocompleteList`
+- `Status`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
+
+### Form Field Container (Deprecated)
+
+**PR:** [#3882](https://github.com/Workday/canvas-kit/pull/3882)
+
+The deprecated `FormField.Container` has been removed from `@workday/canvas-kit-react/form-field`.
+This component was deprecated in v12 and has now been fully removed in v15.
+
+Please use `FormField.Field` instead, which ensures proper label alignment, spacing of inputs and
+hint text regardless of the orientation.
+
+`formFieldContainerStencil` has been removed from `@workday/canvas-kit-react/form-field` as well.
+
+**Before in v14**
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+> 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
+> throughout your codebase.
+
+### Search Form (Labs)
+
+**PR:** [#3661](https://github.com/Workday/canvas-kit/pull/3661)
+
+The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+
+- `SearchForm`
+- `SearchFormProps`
+- `SearchFormState`
+- `SearchTheme`
+- `SearchThemeAttributes`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
 
 ### Segmented Control (Deprecated)
 
@@ -914,64 +966,16 @@ const items = ['Small', 'Medium', 'Large'];
 </Select>;
 ```
 
-### Search Form (Labs)
+### Side Panel (Deprecated)
 
-The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
 
-The following exports are no longer available:
+The deprecated `SidePanel` that was previously in `@workday/canvas-kit-react/side-panel` has been
+removed. This was the older implementation that used our old patterns.
 
-- `SearchForm`
-- `SearchFormProps`
-- `SearchFormState`
-- `SearchTheme`
-- `SearchThemeAttributes`
-
-Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
-`@workday/canvas-kit-react`.
-
-### Combobox (Labs)
-
-The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
-
-The following exports are no longer available:
-
-- `Combobox`
-- `ComboboxProps`
-- `AutocompleteList`
-- `Status`
-
-Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
-`@workday/canvas-kit-react`.
-
-### Form Field Container (Deprecated)
-
-**PR:** [#3882](https://github.com/Workday/canvas-kit/pull/3882)
-
-The deprecated `FormField.Container` has been removed from `@workday/canvas-kit-react/form-field`.
-This component was deprecated in v12 and has now been fully removed in v15.
-
-Please use `FormField.Field` instead, which ensures proper label alignment, spacing of inputs and
-hint text regardless of the orientation.
-
-`formFieldContainerStencil` has been removed from `@workday/canvas-kit-react/form-field` as well.
-
-**Before in v14**
-
-```tsx
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-
-<FormField>
-  <FormField.Label>Email</FormField.Label>
-  <FormField.Container>
-    <FormField.Input as={TextInput} />
-    <FormField.Hint>You must provide an email</FormField.Hint>
-  </FormField.Container>
-</FormField>;
-```
-
-> 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
-> throughout your codebase.
+Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound component
+pattern and `useSidePanelModel`. See the [API Differences](#api-differences) section above for
+migration guidance.
 
 ## New Utilities
 
