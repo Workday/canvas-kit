@@ -10,10 +10,10 @@ any questions.
 
 ## Why You Should Upgrade
 
-v15.0 and v4.0 Canvas Tokens Web introduce new shape, size, gap, and padding tokens to our
-components. While we still support our old shape and space tokens, the new tokens aim to add more
-semantic meaning to allow for better use and theming. Our old shape and space tokens are now
-deprecated and will be removed in a future version.
+v15 and v4 Canvas Tokens Web introduce new shape, size, gap, and padding tokens to our components.
+While we still support our old shape and space tokens, the new tokens aim to add more semantic
+meaning to allow for better use and theming. Our old shape and space tokens are now deprecated and
+will be removed in a future version.
 
 > **Note:** While v15 and v4 tokens should be backwards compatible with previous versions that use
 > CSS tokens, **we strongly advise migrating both Canvas Kit and Canvas Tokens Web together**.
@@ -984,7 +984,7 @@ migration guidance.
 **PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738),
 [#3818](https://github.com/Workday/canvas-kit/pull/3818)
 
-We have added a new utility called
+We've added a new utility called
 [colorSpace](/get-started/for-developers/styling/utilities/#colorspace) which has three functions:
 [darken](/get-started/for-developers/styling/utilities/#darken),
 [hover](/get-started/for-developers/styling/utilities/#hover) and
@@ -997,8 +997,6 @@ These will return
 [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
 and the result is a mix of the first color and the mixin color together in the srgb colorspace by a
 given amount.
-
-Why did we create this utility?
 
 With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use
 the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions
