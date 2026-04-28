@@ -11,7 +11,7 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {bgColorIcon} from '@workday/canvas-system-icons-web';
+import {backgroundColorIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {defaultColorSet} from '../../lib/defaultColorSet';
@@ -36,7 +36,11 @@ export const IconButtonPopup = () => {
 
   return (
     <Popup model={model}>
-      <Popup.Target as={TertiaryButton} icon={bgColorIcon} aria-label="Select Background Color" />
+      <Popup.Target
+        as={TertiaryButton}
+        icon={backgroundColorIcon}
+        aria-label="Select Background Color"
+      />
       <Popup.Popper>
         <Popup.Card
           cs={{marginTop: system.gap.sm, padding: system.padding.md, boxShadow: system.depth[3]}}
