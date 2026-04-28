@@ -28,8 +28,8 @@ import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   assistantIcon,
+  hamburgerIcon,
   inboxIcon,
-  justifyIcon,
   notificationsIcon,
   searchIcon,
 } from '@workday/canvas-system-icons-web';
@@ -144,7 +144,7 @@ export const GlobalHeader = createComponent('div')({
     <div className={styleOverrides.headerWrapper}>
       <Flex cs={styleOverrides.flexItems}>
         <Tooltip title="Global Navigation" type="describe">
-          <TertiaryButton icon={justifyIcon} cs={styleOverrides.menuButtonStyles}>
+          <TertiaryButton icon={hamburgerIcon} cs={styleOverrides.menuButtonStyles}>
             MENU
           </TertiaryButton>
         </Tooltip>

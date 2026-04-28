@@ -4,12 +4,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {
-  activityStreamIcon,
-  avatarIcon,
-  uploadCloudIcon,
-  userIcon,
-} from '@workday/canvas-system-icons-web';
+import {cloudArrowUpIcon, cloudIcon, commentIcon, userIcon} from '@workday/canvas-system-icons-web';
 
 const styleOverrides = {
   formfieldInputStyles: createStyles({
@@ -21,9 +16,9 @@ const styleOverrides = {
 };
 
 const customOptions = [
-  {text: 'Activity Stream', id: 'activity-stream', icon: activityStreamIcon},
-  {text: 'Avatar', id: 'avatar', icon: avatarIcon},
-  {text: 'Upload Cloud', id: 'upload-cloud', icon: uploadCloudIcon},
+  {text: 'Activity Stream', id: 'activity-stream', icon: commentIcon},
+  {text: 'Avatar', id: 'avatar', icon: cloudIcon},
+  {text: 'Upload Cloud', id: 'upload-cloud', icon: cloudArrowUpIcon},
   {text: 'User', id: 'user', icon: userIcon},
 ];
 

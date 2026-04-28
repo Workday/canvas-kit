@@ -9,6 +9,7 @@ import {
 } from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+import {CanvasSystemIcon as LegacyCanvasSystemIcon} from '@workday/design-assets-types';
 
 import {resolveSize} from './Svg';
 import {SystemIcon, systemIconStencil} from './SystemIcon';
@@ -37,9 +38,9 @@ const sizes = {
 
 type SystemIconCircleCommonProps = {
   /**
-   * The icon to display from `@workday/canvas-accent-icons-web`.
+   * The icon to display from `@workday/canvas-system-icons-web`.
    */
-  icon: CanvasSystemIcon;
+  icon: CanvasSystemIcon | LegacyCanvasSystemIcon;
   /**
    * The size token of the SystemIconCircle.
    * @default SystemIconCircleSize.l

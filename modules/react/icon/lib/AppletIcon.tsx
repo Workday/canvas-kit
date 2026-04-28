@@ -3,7 +3,7 @@ import {CSSObject} from '@emotion/styled';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BrandingColor, CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {base as baseTokens, system} from '@workday/canvas-tokens-web';
 import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {Svg, SvgProps, svgStencil} from './Svg';
@@ -98,19 +98,19 @@ export const appletIconStencil = createStencil({
       fill: system.color.fg.inverse,
     },
     '& .color-200': {
-      fill: cssVar(color200, base.blue200),
+      fill: cssVar(color200, baseTokens.legacy.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blue400),
+      fill: cssVar(color300, baseTokens.legacy.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blue700),
+      fill: cssVar(color500, baseTokens.legacy.blue700),
     },
   }),
 });
@@ -122,10 +122,10 @@ export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
-      color200: base.legacy[`${color}200` as keyof typeof base.legacy],
-      color300: base.legacy[`${color}300` as keyof typeof base.legacy],
-      color400: base.legacy[`${color}400` as keyof typeof base.legacy],
-      color500: base.legacy[`${color}500` as keyof typeof base.legacy],
+      color200: baseTokens.legacy[`${color}200` as keyof typeof baseTokens.legacy],
+      color300: baseTokens.legacy[`${color}300` as keyof typeof baseTokens.legacy],
+      color400: baseTokens.legacy[`${color}400` as keyof typeof baseTokens.legacy],
+      color500: baseTokens.legacy[`${color}500` as keyof typeof baseTokens.legacy],
     };
 
     return (
