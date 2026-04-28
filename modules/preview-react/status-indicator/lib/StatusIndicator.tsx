@@ -19,7 +19,6 @@ export type StatusIndicatorVariant =
   | 'caution'
   | 'positive'
   | 'critical'
-  | 'ai'
   | 'transparent'
   | 'blue'
   | 'green'
@@ -103,10 +102,6 @@ const statusIndicatorStencil = createStencil({
       neutral: {
         color: system.color.fg.muted.strong,
         backgroundColor: system.legacy.color.surface.alt.strong,
-      },
-      ai: {
-        color: system.color.fg.ai,
-        backgroundColor: system.legacy.color.surface.ai.default,
       },
       transparent: {
         color: system.color.fg.inverse,
