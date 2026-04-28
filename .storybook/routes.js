@@ -24,7 +24,7 @@ const routes = {
   '/components/inputs/form-field/': 'components-inputs-form-field--docs',
   '/components/inputs/radio/': 'preview-inputs-radio--docs',
   '/components/inputs/select/': 'components-inputs-select--docs',
-  '/components/inputs/switch/': 'components-inputs-switch--docs',
+  '/components/inputs/switch/': 'preview-inputs-switch-new--docs',
   '/components/inputs/text-area/': 'components-inputs-textarea--docs',
   '/components/inputs/text-input/': 'components-inputs-text-input--docs',
   '/components/layout/box/': 'components-layout-box--docs',
@@ -62,6 +62,7 @@ const routes = {
   '/get-started/for-developers/documentation/testing#visual-tests':
     'hooks-and-utilities-testing--docs',
   '/get-started/introduction/': 'guides-getting-started--docs',
+  '/get-started/for-developers/styling/utilities/': 'styling-utilities--docs',
   // Tokens
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
