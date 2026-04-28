@@ -3,16 +3,16 @@ import React from 'react';
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {
-  mediaPauseIcon,
-  mediaPlayIcon,
-  mediaTopicsIcon,
+  dashboardGridFillIcon,
+  pauseIcon,
+  playIcon,
   previousIcon,
   skipIcon,
 } from '@workday/canvas-system-icons-web';
 
 const items = [
-  {id: '1', text: 'Pause', icon: mediaPauseIcon},
-  {id: '2', text: 'Play', icon: mediaPlayIcon},
+  {id: '1', text: 'Pause', icon: pauseIcon},
+  {id: '2', text: 'Play', icon: playIcon},
   {id: '3', text: 'Skip', icon: skipIcon},
   {id: '4', text: 'Previous', icon: previousIcon},
 ];
@@ -34,7 +34,7 @@ export const Icons = () => {
                 <MultiSelect.Item data-id={item.id}>
                   <MultiSelect.Item.Icon icon={item.icon} />
                   <MultiSelect.Item.Text>{item.text}</MultiSelect.Item.Text>
-                  <MultiSelect.Item.Icon icon={mediaTopicsIcon} />
+                  <MultiSelect.Item.Icon icon={dashboardGridFillIcon} />
                 </MultiSelect.Item>
               )}
             </MultiSelect.List>

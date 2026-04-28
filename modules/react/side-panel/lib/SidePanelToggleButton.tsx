@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {extendIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
@@ -150,7 +150,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
   (
     {
       variant = undefined,
-      icon = transformationImportIcon,
+      icon = extendIcon,
       tooltipTextExpand = 'Expand View',
       tooltipTextCollapse = 'Collapse View',
       tooltipProps,

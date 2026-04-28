@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {extLinkIcon} from '@workday/canvas-system-icons-web';
+import {externalLinkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {HyperlinkProps, hyperlinkStencil} from './Hyperlink';
@@ -62,7 +62,7 @@ export const ExternalHyperlink = createComponent('a')({
     >
       <span data-part="external-hyperlink-children">{children}</span>
       <SystemIcon
-        icon={extLinkIcon}
+        icon={externalLinkIcon}
         role="img"
         aria-label={iconLabel}
         {...externalHyperlinkStencil.parts.externalHyperlinkIcon}
