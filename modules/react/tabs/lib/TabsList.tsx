@@ -14,8 +14,8 @@ import {
   useModalityType,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
 
@@ -116,23 +116,19 @@ export const tabsListStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderBottom: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
+    borderBottom: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    gap: system.legacy.gap.xs,
     // TODO: update this to use a grid token if we make those available as tokens
-    paddingInline: px2rem(40),
+    paddingInline: base.legacy.size500,
 
     '@media screen and (max-width: 768px)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      paddingInline: cssVar(system.padding.md, system.space.x4),
+      paddingInline: system.legacy.padding.md,
     },
   },
   modifiers: {
     modality: {
       touch: {
         overflowX: 'auto',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         paddingInline: 0,
         // data attributes are needed until scroll-driven animations are supported. Once they are,
         // we can use a CSS-only solution:

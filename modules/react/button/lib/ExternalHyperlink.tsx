@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {externalLinkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -26,15 +26,11 @@ export const externalHyperlinkStencil = createStencil({
       // This is still going to be `1em` to stay consistent with the font-size of the link.
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      minWidth: calc.subtract(cssVar(system.size.xxxs, system.space.x4), px2rem(1)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      marginInlineStart: calc.subtract(system.space.x1, px2rem(2)),
+      minWidth: calc.subtract(system.legacy.size.xxxs, px2rem(1)),
+      marginInlineStart: calc.subtract(system.legacy.gap.xs, px2rem(2)),
       '& > svg': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.xxxs, system.space.x4),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minHeight: cssVar(system.size.xxxs, system.space.x4),
+        minWidth: system.legacy.size.xxxs,
+        minHeight: system.legacy.size.xxxs,
       },
       ':dir(rtl)': {
         transform: 'rotate(270deg)',

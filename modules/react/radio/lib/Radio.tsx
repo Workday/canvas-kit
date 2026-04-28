@@ -243,7 +243,7 @@ const RadioBackground = styled('div')<RadioProps>(
     backgroundColor: checked
       ? variant === 'inverse'
         ? colors.frenchVanilla100
-        : themePrimary.main
+        : maybeWrapCSSVariables(themePrimary.main)
       : disabled
         ? inputColors.disabled.background
         : 'white',

@@ -83,7 +83,7 @@ export const colorPickerHexInputStencil = createStencil({
     [swatchPart]: {
       position: 'absolute',
       top: px2rem(10),
-      left: system.space.x2,
+      left: system.legacy.gap.sm,
       boxShadow: `inset 0 0 0 ${px2rem(1)} rgba(0,0,0,0.25)`,
       pointerEvents: 'none',
     },
@@ -104,14 +104,9 @@ export const colorPickerHexInputStencil = createStencil({
       }),
     },
     disabled: {
-      true: ({inputPart, poundSignPart}) => ({
-        [inputPart]: {
-          borderColor: system.color.border.input.disabled,
-          backgroundColor: system.color.bg.alt.soft,
-          color: system.color.text.disabled,
-        },
+      true: ({poundSignPart}) => ({
         [poundSignPart]: {
-          color: system.color.text.disabled,
+          opacity: system.opacity.disabled,
         },
       }),
     },

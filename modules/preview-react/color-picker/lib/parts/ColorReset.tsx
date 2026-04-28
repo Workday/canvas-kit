@@ -2,7 +2,7 @@ import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {calc, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export interface ResetButtonProps {
   label: string;
@@ -18,10 +18,10 @@ export const resetButtonStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: calc.add('100%', system.space.x8),
-    height: system.space.x8,
-    margin: `${calc.negate(system.space.x2)} ${calc.negate(system.space.x4)} ${system.space.x2}`,
-    padding: `0 ${system.space.x4}`,
+    width: calc.add('100%', system.legacy.size.sm),
+    height: system.legacy.size.sm,
+    margin: `${calc.negate(base.legacy.size100)} ${calc.negate(system.legacy.size.xxxs)} ${base.legacy.size100}`,
+    padding: `0 ${system.legacy.padding.md}`,
     whiteSpace: 'nowrap',
     border: 'none',
     outline: 'none',
@@ -40,7 +40,7 @@ export const resetButtonStencil = createStencil({
       ...focusRing(),
     },
     [labelPart]: {
-      marginLeft: system.space.x2,
+      marginLeft: system.legacy.gap.sm,
     },
   }),
 });

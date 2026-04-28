@@ -1,7 +1,7 @@
 import {ErrorType, Themeable, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioButton} from './RadioButton';
 import {RadioLabel} from './RadioLabel';
@@ -21,32 +21,22 @@ const radioGroupStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.md, system.shape.x1Half),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${px2rem(10)} ${cssVar(base.size150, system.space.x3)} ${cssVar(system.padding.xs, system.space.x2)}`,
-    margin: `0 ${calc.negate(cssVar(base.size150, system.space.x3))}`,
+    borderRadius: system.legacy.shape.md,
+    gap: system.legacy.gap.sm,
+    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.border.critical, brand.error.base)}`,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.critical.default, brand.error.lightest),
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
       },
       caution: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)}, inset 0 0 0 ${px2rem(3)} ${cssVar(
-          system.color.brand.border.caution,
-          brand.common.alertOuter
-        )}`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.border.caution}`,
       },
     },
   },

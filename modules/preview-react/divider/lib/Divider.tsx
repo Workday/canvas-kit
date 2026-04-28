@@ -11,15 +11,15 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
   vars: {
-    space: cssVar(system.space.x4),
+    space: '',
   },
   base: ({space}) => {
     return {
       display: 'block',
       height: px2rem(1),
       border: 'none',
-      borderTop: `1px solid ${system.color.border.divider}`,
-      margin: `${calc.divide(space, 2)} 0`,
+      borderTop: `1px solid ${system.legacy.color.border.default}`,
+      margin: `${calc.divide(cssVar(space, system.legacy.size.xxxs), 2)} 0`,
     };
   },
 });
@@ -45,7 +45,7 @@ export interface DividerProps extends CSProps {
  * @example
  * ```tsx
  * import { Divider } from '@workday/canvas-kit-preview-react/divider';
- * import {system} from '@workday/canvas-tokens-web';
+ *
  *
  * <Divider space={system.space.x2} />
  *

@@ -7,7 +7,7 @@ import {
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {component, system} from '@workday/canvas-tokens-web';
 
@@ -39,15 +39,11 @@ export const breadcrumbsItemStencil = createStencil({
     alignItems: 'center',
     display: 'inline-flex',
     whiteSpace: 'nowrap',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.size]: cssVar(component.systemIcon.size.md, system.space.x5),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.icon.default),
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.color]: system.color.fg.default,
     [chevronRightIconPart]: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(system.size.sm, system.space.x8),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(system.size.sm, system.space.x8),
+      height: system.legacy.size.sm,
+      width: system.legacy.size.sm,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',

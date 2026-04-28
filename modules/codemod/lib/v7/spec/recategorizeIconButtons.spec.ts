@@ -149,7 +149,6 @@ describe('recategorizeIconButtons', () => {
 
       <StyledIconButton variant="circleFilled" icon={plusIcon} />
 
-
     `;
 
     const expected = stripIndent`

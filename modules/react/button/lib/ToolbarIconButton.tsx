@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {colorSpace, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
@@ -18,117 +18,72 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minWidth: cssVar(system.size.sm, system.space.x8),
+    minWidth: system.legacy.size.sm,
     padding: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(system.size.sm, system.space.x8),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.borderRadius]: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.muted.soft),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
+    height: system.legacy.size.sm,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.soft),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
       ...focusRing({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
-        fallback: system.color.bg.alt.default,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
-        fallback: system.color.bg.alt.stronger,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        system.color.fg.muted.stronger
-      ),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.default, system.color.fg.disabled),
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [systemIconStencil.vars.color]: system.color.fg.default,
     },
 
     "&[aria-pressed='true']": {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.brand.fg.primary.default,
-        brand.primary.base
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(
-        system.color.brand.surface.primary.default,
-        brand.primary.lightest
-      ),
+      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
+
+      [buttonStencil.vars.background]: system.legacy.color.brand.surface.primary.default,
 
       '&:focus-visible, &.focus': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
 
       '&:hover, &.hover': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.color.brand.surface.primary.default,
-          fallback: system.color.bg.alt.default,
-          mixinColor: system.color.surface.overlay.mixin,
-          mixinValue: system.opacity.surface.hover,
+          color: system.legacy.color.brand.surface.primary.default,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.hover,
         }),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
 
       '&:active, &.active': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.color.brand.surface.primary.default,
-          fallback: system.color.bg.alt.stronger,
-          mixinColor: system.color.surface.overlay.mixin,
-          mixinValue: system.opacity.surface.pressed,
+          color: system.legacy.color.brand.surface.primary.default,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.pressed,
         }),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.strong,
-          brand.primary.dark
-        ),
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
     },
   },

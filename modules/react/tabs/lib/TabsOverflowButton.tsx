@@ -10,9 +10,8 @@ import {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
 
 import {StyledTabItem} from './TabsItem';
 import {useTabsModel} from './useTabsModel';
@@ -28,8 +27,7 @@ const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      gap: cssVar(system.gap.none, system.space.zero),
+      gap: 0,
     },
   },
 });

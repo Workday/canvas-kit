@@ -8,8 +8,6 @@ import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 
 import {Svg, SvgProps, svgStencil} from './Svg';
 
-const {legacy, ...base} = baseTokens;
-
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
  */
@@ -100,19 +98,19 @@ export const appletIconStencil = createStencil({
       fill: system.color.fg.inverse,
     },
     '& .color-200': {
-      fill: cssVar(color200, base.blue200),
+      fill: cssVar(color200, baseTokens.legacy.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blue400),
+      fill: cssVar(color300, baseTokens.legacy.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blue700),
+      fill: cssVar(color500, baseTokens.legacy.blue700),
     },
   }),
 });
@@ -124,10 +122,10 @@ export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
-      color200: base[`${color}200` as keyof typeof base],
-      color300: base[`${color}300` as keyof typeof base],
-      color400: base[`${color}400` as keyof typeof base],
-      color500: base[`${color}500` as keyof typeof base],
+      color200: baseTokens.legacy[`${color}200` as keyof typeof baseTokens.legacy],
+      color300: baseTokens.legacy[`${color}300` as keyof typeof baseTokens.legacy],
+      color400: baseTokens.legacy[`${color}400` as keyof typeof baseTokens.legacy],
+      color500: baseTokens.legacy[`${color}500` as keyof typeof baseTokens.legacy],
     };
 
     return (

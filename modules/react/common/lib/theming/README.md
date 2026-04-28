@@ -40,8 +40,8 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
 const themedBrand = createStyles({
-  [brand.primary.base]: base.magenta600,
-  [brand.primary.dark]: base.magenta700,
+  [brand.primary.base]: base.legacy.magenta600,
+  [brand.primary.dark]: base.legacy.magenta700,
 });
 
 <CanvasProvider className={themedBrand}>

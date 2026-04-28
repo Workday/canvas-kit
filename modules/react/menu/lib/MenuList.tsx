@@ -6,7 +6,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {useFocusRedirect, useReturnFocus} from '@workday/canvas-kit-react/popup';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -33,13 +33,10 @@ export const useMenuList = composeHooks(
 
 export const menuListStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(system.color.surface.popover, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, '0'),
+    background: system.legacy.color.surface.popover,
+    borderRadius: system.legacy.shape.xxl,
     padding: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, '0'),
+    gap: system.legacy.gap.xs,
   },
   modifiers: {
     orientation: {
@@ -62,7 +59,7 @@ export const MenuList = createSubcomponent('div')({
     <ListBox
       as={Element}
       model={model}
-      marginY={cssVar(system.gap.none, system.space.x2)}
+      marginY={system.legacy.gap.none}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}

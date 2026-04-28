@@ -1,15 +1,8 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {
-  CSProps,
-  calc,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
 import {checkboxRippleStencil} from './CheckboxRipple';
@@ -60,11 +53,9 @@ export interface CheckboxProps extends CSProps {
 
 const checkboxInputStencil = createStencil({
   base: {
-    borderRadius: system.shape.half,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(base.size300, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size300, system.space.x6),
+    borderRadius: system.legacy.shape.sm,
+    width: base.legacy.size300,
+    height: base.legacy.size300,
     margin: 0,
     marginTop: calc.negate(px2rem(3)),
     marginInlineStart: calc.negate(px2rem(3)),
@@ -76,28 +67,23 @@ const checkboxInputStencil = createStencil({
     },
 
     [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft)}`,
+      boxShadow: `0 0 0 ${px2rem(7)} ${system.legacy.color.surface.overlay.hover.default}`,
     },
 
     // Hover state and not disabled
     [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderColor: cssVar(system.color.border.input.hover, system.color.border.input.strong),
+        borderColor: system.legacy.color.border.input.hover,
       },
 
     [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderColor: cssVar(system.color.brand.accent.primary, brand.common.focusOutline),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        borderColor: system.legacy.color.brand.accent.primary,
+        backgroundColor: system.legacy.color.brand.accent.primary,
       },
 
     [`&:where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
         opacity: system.opacity.disabled,
       },
 
@@ -108,8 +94,7 @@ const checkboxInputStencil = createStencil({
     // When not checked, the border is within the input
     [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        borderColor: cssVar(system.color.brand.border.primary, brand.primary.base),
+        borderColor: system.legacy.color.brand.border.primary,
         borderWidth: px2rem(2),
         ...focusRing({
           width: 0,
@@ -125,11 +110,9 @@ const checkboxInputStencil = createStencil({
             width: 2,
             separation: 2,
             animate: false,
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            outerColor: cssVar(system.color.brand.border.primary, brand.common.focusOutline),
+            outerColor: system.legacy.color.brand.border.primary,
           }),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+          borderColor: system.legacy.color.brand.accent.primary,
           borderWidth: px2rem(2),
         },
       },
@@ -138,27 +121,22 @@ const checkboxInputStencil = createStencil({
     variant: {
       inverse: {
         [`& ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+          borderColor: system.legacy.color.focus.inverse,
         },
 
         // Hover state and not disabled
         [`&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+            borderColor: system.legacy.color.focus.inverse,
           },
         [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]:
           {
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            boxShadow: `0 0 0 ${px2rem(7)} ${cssVar(system.color.surface.overlay.hover.inverse, system.color.bg.default)}`,
+            boxShadow: `0 0 0 ${px2rem(7)} ${system.legacy.color.surface.overlay.hover.inverse}`,
           },
         [`&:where(:checked, :indeterminate):not(:disabled):not(.disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            backgroundColor: cssVar(system.color.surface.inverse, system.color.bg.default),
+            borderColor: system.legacy.color.focus.inverse,
+            backgroundColor: system.legacy.color.surface.inverse,
           },
         // Disabled State for inverse variant (applies to all disabled states: unchecked, checked, and indeterminate)
         [`&:disabled ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
@@ -167,22 +145,20 @@ const checkboxInputStencil = createStencil({
         // Disabled + checked/indeterminate state for inverse variant
         [`&:where(:checked, :indeterminate):where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
-            backgroundColor: system.color.surface.inverse,
+            backgroundColor: system.legacy.color.surface.inverse,
           },
 
         // Focus state for inverse variant
         [`&:where(:focus-visible, .focus) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
             borderColor: system.color.border.contrast.default,
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            boxShadow: `0 0 0 ${px2rem(0)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
+            boxShadow: `0 0 0 ${px2rem(0)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(2)}  ${system.legacy.color.focus.inverse} `,
           },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
           {
             '& ~ div:first-of-type': {
-              // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-              boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${cssVar(system.color.focus.inverse, base.neutral0)} `,
-              borderColor: system.color.focus.inverse,
+              boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.border.contrast.default} ,0 0 0 ${px2rem(4)}  ${system.legacy.color.focus.inverse} `,
+              borderColor: system.legacy.color.focus.inverse,
             },
           },
       },
@@ -205,7 +181,7 @@ const checkboxInputStencil = createStencil({
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
-            0 0 0 ${px2rem(2)} ${system.color.focus.inverse},
+            0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
@@ -221,17 +197,14 @@ const checkboxInputStencil = createStencil({
       modifiers: {variant: 'inverse', error: true},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          border: `${px2rem(1)} solid ${cssVar(system.color.focus.inverse, base.neutral0)}`,
+          border: `${px2rem(1)} solid ${system.legacy.color.focus.inverse}`,
         },
         '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+            borderColor: system.legacy.color.focus.inverse,
           },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          borderColor: cssVar(system.color.focus.inverse, base.neutral0),
+          borderColor: system.legacy.color.focus.inverse,
         },
       },
     },

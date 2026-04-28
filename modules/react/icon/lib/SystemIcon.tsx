@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {component} from '@workday/canvas-tokens-web';
 import {CanvasSystemIcon as LegacyCanvasSystemIcon} from '@workday/design-assets-types';
@@ -59,17 +59,13 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(size, cssVar(component.systemIcon.size.lg, px2rem(24))),
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(size, cssVar(component.systemIcon.size.lg, px2rem(24))),
+      width: cssVar(size, component.systemIcon.size.lg),
+      height: cssVar(size, component.systemIcon.size.lg),
     },
     '.wd-icon .wd-icon-fill': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(color, component.systemIcon.color.fill),
     },
     '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
       fill: cssVar(accentColor, cssVar(color, component.systemIcon.color.accent)),
     },
     '.wd-icon .wd-icon-background': {

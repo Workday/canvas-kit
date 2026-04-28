@@ -1,24 +1,20 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
 export const switchCircleStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    width: cssVar(base.size150, system.space.x3),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    height: cssVar(base.size150, system.space.x3),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.full, system.shape.round),
+    width: base.legacy.size150,
+    height: base.legacy.size150,
+    borderRadius: system.legacy.shape.full,
     // This is used in "High Contrast Mode" to show a border on the Switch thumb.
     border: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
+    backgroundColor: system.color.fg.inverse,
     transform: 'translateX(0)',
   },
   modifiers: {

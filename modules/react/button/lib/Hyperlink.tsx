@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
@@ -23,8 +23,7 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    color: cssVar(system.color.fg.info.default, system.color.text.primary.default),
+    color: system.legacy.color.fg.info.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
@@ -32,42 +31,32 @@ export const hyperlinkStencil = createStencil({
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.strong),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
     '&:focus, &.focus, &:focus-visible': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(system.color.brand.focus.primary, brand.common.focusOutline)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.info.strong, system.color.text.primary.stronger),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      background: cssVar(system.color.surface.alt.default, system.color.bg.alt.default),
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
   },
   modifiers: {
     variant: {
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.fg.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token.
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.fg.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.fg.inverse}`,
         },
         '&:active, &.active': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
         },
       },
       standalone: {
@@ -75,22 +64,17 @@ export const hyperlinkStencil = createStencil({
       },
       standaloneInverse: {
         textDecoration: 'none',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.fg.inverse, system.color.text.inverse),
+          color: system.color.fg.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          boxShadow: `0 0 0 ${px2rem(2)}  ${cssVar(system.color.focus.inverse, system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.legacy.color.focus.inverse}`,
         },
         '&:active, &.active': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.primary.strong, system.color.text.primary.stronger),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          background: cssVar(system.color.surface.navigation, system.color.bg.alt.soft),
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
         },
       },
     },
