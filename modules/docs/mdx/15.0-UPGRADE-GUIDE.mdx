@@ -73,6 +73,7 @@ semantic meaning to allow for better use and theming.
   - [Segmented Control (Deprecated)](#segmented-control-deprecated)
   - [Select (Deprecated)](#select-deprecated)
   - [Search Form (Labs)](#search-form-labs)
+  - [Status Indicator AI Variant](#status-indicator-ai-variant)
 - [New Utilities](#new-utilities)
   - [colorSpace](#colorspace)
       - [Darken](#darken)
@@ -950,6 +951,14 @@ The following exports are no longer available:
 
 Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
 `@workday/canvas-kit-react`.
+
+### Status Indicator AI Variant
+
+**PR:** [3899](https://github.com/Workday/canvas-kit/pull/3899)
+
+We've removed the `ai` variant from the `StatusIndicator` component in `Preview`. This pattern is no longer supported. If you wish to create your own custom variant you can customize both the icon and color of the `StatusIndicator`.
+
+> 🤖 The codemod will automatically handle replacing `ai` variant with `variant="blue`. You can manually change the color if you wish.
 
 ### Form Field Container (Deprecated)
 
