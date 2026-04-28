@@ -514,7 +514,6 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.props.0.defaultValue', undefined);
     });
 
-
     it('should not default props in the JSX by detecting a self-referenced prop', () => {
       const program = createProgramFromSource(
         'test.tsx',
@@ -633,7 +632,6 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.model', 'MyModel');
     });
 
-
     it('should handle "subComponents"', () => {
       const program = createProgramFromSource(
         'test.tsx',
@@ -675,7 +673,6 @@ describe('enhancedComponentParser', () => {
       expect(symbols).toHaveProperty('0.type.subComponents.0.name', 'SubComponent');
       expect(symbols).toHaveProperty('0.type.subComponents.0.symbol', 'MySubcomponent');
     });
-
 
     it('should add subcomponent source symbol to the declaration array so we can filter the symbol properly', () => {
       const program = createProgramFromSource([

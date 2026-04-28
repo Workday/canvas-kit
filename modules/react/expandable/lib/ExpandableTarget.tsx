@@ -26,30 +26,23 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 export const expandableTargetStencil = createStencil({
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    background: cssVar(system.color.surface.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderColor: cssVar(system.color.border.transparent, system.color.bg.transparent.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
+    background: system.legacy.color.surface.transparent,
+    borderColor: system.color.border.transparent,
+    borderRadius: system.legacy.shape.xxl,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.none, system.space.zero),
+    gap: system.legacy.gap.none,
     justifyContent: 'start',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xs, system.space.x2),
+    padding: system.legacy.padding.xs,
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.overlay.hover.default, system.color.bg.alt.soft),
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      outline: `${cssVar(system.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
+      outline: `${cssVar(system.legacy.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
     },
   },
 });

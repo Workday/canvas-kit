@@ -1,9 +1,9 @@
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {CSProps, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon, caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
@@ -55,14 +55,11 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.default, system.color.text.default),
+      backgroundColor: system.legacy.color.surface.default,
+      color: system.color.fg.default,
       cursor: 'default',
       '&::placeholder': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        color: system.color.fg.default,
       },
       '&::selection': {
         backgroundColor: 'transparent',
@@ -81,17 +78,12 @@ export const selectInputStencil = createStencil({
     error: {
       error: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(
-            system.color.brand.surface.critical.default,
-            brand.error.lightest
-          ),
+          backgroundColor: system.legacy.color.brand.surface.critical.default,
         },
       }),
       caution: ({visualInputPart}) => ({
         [visualInputPart]: {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          backgroundColor: cssVar(system.color.brand.surface.caution.default, brand.alert.lightest),
+          backgroundColor: system.legacy.color.brand.surface.caution.default,
         },
       }),
     },

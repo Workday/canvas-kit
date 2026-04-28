@@ -5,9 +5,9 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {colorSpace, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
@@ -54,55 +54,38 @@ export const segmentedControlItemStencil = createStencil({
   extends: buttonStencil,
   base: {
     fontFamily: system.fontFamily.default,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.bold,
     textAlign: 'start',
     paddingInline: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
+    gap: system.legacy.gap.xs,
 
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.borderRadius]: cssVar(system.shape.md, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.label]: cssVar(system.color.fg.muted.default, system.color.fg.muted.strong),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [systemIconStencil.vars.color]: cssVar(
-      system.color.fg.muted.default,
-      system.color.fg.muted.strong
-    ),
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.md,
+    [buttonStencil.vars.label]: system.color.fg.muted.default,
+    [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.alt.strong,
+        color: system.legacy.color.surface.alt.strong,
         fallback: system.color.bg.alt.strong,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.alt.strong,
+        color: system.legacy.color.surface.alt.strong,
         fallback: system.color.bg.alt.strong,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(system.color.fg.strong, system.color.fg.muted.strong),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:focus-visible, &.focus': {
@@ -112,26 +95,13 @@ export const segmentedControlItemStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(
-        system.color.fg.muted.default,
-        system.color.fg.muted.strong
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.muted.default,
-        system.color.fg.muted.strong
-      ),
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.label]: system.color.fg.muted.default,
+      [systemIconStencil.vars.color]: system.color.fg.muted.default,
     },
 
     "&[aria-pressed='true']": {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.default,
-        system.color.bg.default
-      ),
+      [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
@@ -154,26 +124,19 @@ export const segmentedControlItemStencil = createStencil({
   modifiers: {
     size: {
       large: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.md, system.space.x10),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.sm, system.space.x2),
+        height: system.legacy.size.md,
+        gap: system.legacy.gap.sm,
       },
       medium: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.sm, system.space.x8),
+        height: system.legacy.size.sm,
       },
       small: {
         fontFamily: system.fontFamily.default,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.xs, system.space.x6),
+        height: system.legacy.size.xs,
       },
     },
     variant: {
@@ -186,64 +149,55 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'large', variant: 'iconOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.md, system.space.x10),
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'large', variant: 'iconWithText'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: `${cssVar(system.padding.lg, px2rem(20))} ${cssVar(system.padding.xl, system.space.x6)}`,
+        paddingInline: `${system.legacy.padding.lg} ${system.legacy.padding.xl}`,
       },
     },
     {
       modifiers: {size: 'large', variant: 'textOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.xl, system.space.x6),
+        paddingInline: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'iconOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.sm, system.space.x8),
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'iconWithText'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: `${cssVar(system.padding.md, system.space.x4)} ${cssVar(system.padding.lg, px2rem(20))}`,
+        paddingInline: `${system.legacy.padding.md} ${system.legacy.padding.lg}`,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'textOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.lg, px2rem(20)),
+        paddingInline: system.legacy.padding.lg,
       },
     },
     {
       modifiers: {size: 'small', variant: 'iconOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.xs, system.space.x6),
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'small', variant: 'iconWithText'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: `${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.sm, system.space.x3)}`,
+        paddingInline: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
       },
     },
     {
       modifiers: {size: 'small', variant: 'textOnly'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.sm, system.space.x3),
+        paddingInline: system.legacy.padding.sm,
       },
     },
   ],

@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
@@ -17,83 +17,59 @@ const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+    [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
+    [buttonStencil.vars.label]: system.color.fg.inverse,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
-      cssVar(system.color.fg.inverse, brand.error.accent)
+      system.color.fg.inverse
     ),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowInner]: cssVar(
-        system.color.focus.inverse,
-        cssVar(system.color.border.inverse.default, base.neutral0)
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.boxShadowOuter]: cssVar(
-        system.color.brand.focus.primary,
-        brand.common.focusOutline
-      ),
+      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
     },
     // Hover Styles
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.brand.accent.critical,
-        fallback: brand.error.dark,
-        mixinColor: system.color.accent.overlay.mixin,
-        mixinValue: system.opacity.accent.hover,
+        color: system.legacy.color.brand.accent.critical,
+        mixinColor: system.legacy.color.accent.overlay.mixin,
+        mixinValue: system.legacy.opacity.accent.hover,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
     },
     // Active Styles
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.brand.accent.critical,
-        fallback: brand.error.darkest,
-        mixinColor: system.color.accent.overlay.mixin,
-        mixinValue: system.opacity.accent.pressed,
+        color: system.legacy.color.brand.accent.critical,
+        mixinColor: system.legacy.color.accent.overlay.mixin,
+        mixinValue: system.legacy.opacity.accent.pressed,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+      [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(system.color.brand.accent.critical, brand.error.base),
+      [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        cssVar(system.color.fg.inverse, brand.error.accent)
+        system.color.fg.inverse
       ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.inverse, brand.error.accent),
+      [buttonStencil.vars.label]: system.color.fg.inverse,
     },
   },
 });

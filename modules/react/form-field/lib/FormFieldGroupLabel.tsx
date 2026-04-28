@@ -3,8 +3,8 @@ import React from 'react';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 
@@ -21,8 +21,7 @@ export const formFieldGroupLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    color: cssVar(system.color.fg.default, system.color.text.default),
+    color: system.color.fg.default,
     paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
@@ -33,14 +32,11 @@ export const formFieldGroupLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
+          fontSize: system.legacy.fontSize.body.lg,
           fontWeight: system.fontWeight.normal,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          color: cssVar(system.color.brand.fg.critical.default, brand.error.base),
+          color: system.legacy.color.brand.fg.critical.default,
           textDecoration: 'unset',
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          marginInlineStart: cssVar(system.gap.xs, system.space.x1),
+          marginInlineStart: system.legacy.gap.xs,
         },
       },
     },
@@ -51,10 +47,10 @@ export const formFieldGroupLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        maxHeight: system.space.x10,
+        maxHeight: system.legacy.size.md,
       },
       horizontalEnd: {
-        maxHeight: system.space.x10,
+        maxHeight: system.legacy.size.md,
         float: 'left',
         justifyContent: 'flex-end',
       },

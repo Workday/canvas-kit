@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {ListItem, ListItemProps} from './common/List';
@@ -19,8 +19,7 @@ export const paginationPageListStencil = createStencil({
     display: 'flex',
     margin: 0,
     paddingInline: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.xs, system.space.x1),
+    gap: system.legacy.gap.xs,
   },
 });
 

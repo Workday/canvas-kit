@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
@@ -25,16 +25,11 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.lg, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: cssVar(system.padding.xl, system.space.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    backgroundColor: cssVar(system.color.surface.default, system.color.bg.default),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, system.shape.x6),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    border: `${px2rem(1)} solid ${cssVar(system.color.border.default, system.color.border.divider)}`,
+    gap: system.legacy.gap.lg,
+    padding: system.legacy.padding.xl,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.xxl,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
   },
   modifiers: {
     variant: {
@@ -42,8 +37,7 @@ export const cardStencil = createStencil({
         borderColor: 'transparent',
       },
       tonal: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.surface.alt.default, system.color.bg.alt.soft),
+        backgroundColor: system.legacy.color.surface.alt.default,
         borderColor: system.color.border.transparent,
       },
     },

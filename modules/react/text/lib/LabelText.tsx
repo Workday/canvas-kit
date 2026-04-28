@@ -32,7 +32,7 @@ const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
     ...system.type.subtext.large,
-    color: system.color.text.default,
+    color: system.color.fg.default,
   },
   modifiers: {
     disabled: {

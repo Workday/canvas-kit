@@ -1,10 +1,10 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 type TypeSize = 'large' | 'medium' | 'small';
-type TokenName = `${keyof typeof system.type}.${TypeSize}`;
+type TokenName = `${keyof typeof system.legacy.type}.${TypeSize}`;
 
 export interface TextProps extends BoxProps {
   /**
@@ -34,143 +34,101 @@ export const textStencil = createStencil({
       'title.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.title.lg, system.fontSize.title.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.title.lg, system.lineHeight.title.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        fontSize: system.legacy.fontSize.title.lg,
+        lineHeight: system.legacy.lineHeight.title.lg,
+        color: system.color.fg.strong,
       },
       'title.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.title.md, system.fontSize.title.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.title.md, system.lineHeight.title.medium),
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        fontSize: system.legacy.fontSize.title.md,
+        lineHeight: system.legacy.lineHeight.title.md,
+        color: system.color.fg.strong,
       },
       'title.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.title.sm, system.lineHeight.title.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.title.sm, system.fontSize.title.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        lineHeight: system.legacy.lineHeight.title.sm,
+        fontSize: system.legacy.fontSize.title.sm,
+        color: system.color.fg.strong,
       },
       // Heading level styles
       'heading.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.heading.lg, system.fontSize.heading.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.heading.lg, system.lineHeight.heading.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        fontSize: system.legacy.fontSize.heading.lg,
+        lineHeight: system.legacy.lineHeight.heading.lg,
+        color: system.color.fg.strong,
       },
       'heading.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.heading.md, system.fontSize.heading.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.heading.md, system.lineHeight.heading.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        fontSize: system.legacy.fontSize.heading.md,
+        lineHeight: system.legacy.lineHeight.heading.md,
+        color: system.color.fg.strong,
       },
       'heading.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.heading.sm, system.fontSize.heading.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.heading.sm, system.lineHeight.heading.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.strong, system.color.text.strong),
+        fontSize: system.legacy.fontSize.heading.sm,
+        lineHeight: system.legacy.lineHeight.heading.sm,
+        color: system.color.fg.strong,
       },
       // Body level styles
       'body.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.lg, system.fontSize.body.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.lg, system.lineHeight.body.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.body.lg,
+        lineHeight: system.legacy.lineHeight.body.lg,
+        color: system.color.fg.default,
       },
       'body.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.md, system.fontSize.body.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.md, system.lineHeight.body.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.body.md,
+        lineHeight: system.legacy.lineHeight.body.md,
+        color: system.color.fg.default,
       },
       'body.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.body.sm,
+        lineHeight: system.legacy.lineHeight.body.sm,
+        letterSpacing: system.legacy.letterSpacing.body.sm,
+        color: system.color.fg.default,
       },
       // Subtext level styles
       'subtext.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        color: system.color.fg.default,
       },
       'subtext.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
+        color: system.color.fg.default,
       },
       'subtext.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.sm, system.fontSize.subtext.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.sm, system.lineHeight.subtext.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.sm, base.letterSpacing50),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.default, system.color.text.default),
+        fontSize: system.legacy.fontSize.subtext.sm,
+        lineHeight: system.legacy.lineHeight.subtext.sm,
+        letterSpacing: system.legacy.letterSpacing.subtext.sm,
+        color: system.color.fg.default,
       },
     },
     variant: {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       error: {
-        color: cssVar(system.color.brand.fg.critical.default, system.color.text.critical.default),
+        color: system.legacy.color.brand.fg.critical.default,
       },
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      hint: {color: cssVar(system.color.fg.muted.default, system.color.text.hint)},
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      inverse: {color: cssVar(system.color.fg.inverse, system.color.text.inverse)},
+      hint: {color: system.color.fg.muted.default},
+      inverse: {color: system.color.fg.inverse},
     },
   },
 });
