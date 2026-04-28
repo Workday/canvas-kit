@@ -4,7 +4,7 @@ import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-reac
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BannerActionText} from './BannerActionText';
 import {BannerIcon} from './BannerIcon';
