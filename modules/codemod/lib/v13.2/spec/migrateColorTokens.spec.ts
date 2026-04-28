@@ -1,6 +1,7 @@
 import {stripIndent} from 'common-tags';
-import {expectTransformFactory} from '../utils';
+
 import transform from '../migrateColorTokens';
+import {expectTransformFactory} from '../utils';
 
 const expectTransform = expectTransformFactory(transform);
 

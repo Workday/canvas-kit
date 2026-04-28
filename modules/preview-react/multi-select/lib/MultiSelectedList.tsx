@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {ListBox} from '@workday/canvas-kit-react/collection';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
-import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectedItem, MultiSelectedItemProps} from './MultiSelectedItem';
+import {useMultiSelectModel} from './useMultiSelectModel';
 
 export interface MultiSelectedListProps
   extends MultiSelectedItemProps,

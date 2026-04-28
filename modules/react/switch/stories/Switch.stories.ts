@@ -1,18 +1,17 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Switch.mdx';
-
 import {Switch} from '@workday/canvas-kit-react/switch';
 
-import {Caution as CautionExample} from './examples/Caution';
+import mdxDoc from './Switch.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Caution as CautionExample} from './examples/Caution';
 import {Disabled as DisabledExample} from './examples/Disabled';
 import {Error as ErrorExample} from './examples/Error';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 
 export default {
-  title: 'Components/Inputs/Switch',
+  title: 'Components/Inputs/Switch (deprecated)',
   component: Switch,
   tags: ['autodocs'],
   parameters: {

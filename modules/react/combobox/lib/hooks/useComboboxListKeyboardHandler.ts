@@ -1,6 +1,7 @@
 import React from 'react';
-import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {keyboardEventToCursorEvents} from '@workday/canvas-kit-react/collection';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
 import {useComboboxModel} from './useComboboxModel';
 

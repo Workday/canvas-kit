@@ -1,7 +1,7 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
+import {Placement, Popper, PopperOptions, PopperProps} from './Popper';
 import {usePopupModel, usePopupPopper} from './hooks';
-import {Placement, PopperOptions, Popper, PopperProps} from './Popper';
 
 export interface PopupPopperProps extends PopperProps {
   /**

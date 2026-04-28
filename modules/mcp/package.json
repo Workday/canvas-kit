@@ -4,7 +4,6 @@
   "description": "MCP package for Canvas Kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "type": "module",
   "sideEffects": false,
   "repository": {
     "type": "git",

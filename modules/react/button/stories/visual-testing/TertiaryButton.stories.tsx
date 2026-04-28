@@ -1,12 +1,13 @@
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+import {customColorTheme} from '../../../../../utils/storybook';
 import {Container, stateTableColumnProps} from './utils';
 
 export default {
@@ -24,6 +25,10 @@ const TertiaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
+          'data-dsr-off': [
+            {value: undefined, label: ''},
+            {value: true, label: 'DSR Off'},
+          ],
           variant: [
             {value: undefined, label: ''},
             {value: 'inverse', label: 'Inverse'},
@@ -63,6 +68,10 @@ const TertiaryIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
+        'data-dsr-off': [
+          {value: undefined, label: ''},
+          {value: true, label: 'DSR Off'},
+        ],
         variant: [
           {value: undefined, label: ''},
           {value: 'inverse', label: 'Inverse'},

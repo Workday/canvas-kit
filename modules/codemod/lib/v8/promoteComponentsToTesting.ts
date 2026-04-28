@@ -1,4 +1,4 @@
-import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
+import {ASTPath, ImportDeclaration, Transform} from 'jscodeshift';
 
 const specifiersToMove = [
   'ComponentStatesTable',
@@ -60,7 +60,7 @@ const transform: Transform = (file, api) => {
     source: {value: '@workday/canvas-kit-react/testing'},
   });
 
-  const mapToSpecifiers = (specifier: typeof commonLabsSpecifiers[0]) => {
+  const mapToSpecifiers = (specifier: (typeof commonLabsSpecifiers)[0]) => {
     return j.importSpecifier(
       j.identifier(specifier.name),
       specifier.importedName ? j.identifier(specifier.importedName) : undefined

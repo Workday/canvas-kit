@@ -57,7 +57,8 @@ export class StylingWebpackPlugin {
     return this;
   }
 
-  apply(compiler: import('webpack').Compiler) {
+  // We don't include webpack types. Be careful changing this code.
+  apply(compiler: any) {
     // We must close down the watch program when the compiler shuts down. This doesn't happen
     // automatically when using the watch program and the watch will shut down from a SIGINT. When a
     // webpack production build is initiated, the shutdown signifies the build is complete and we

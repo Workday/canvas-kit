@@ -1,6 +1,7 @@
-import * as React from 'react';
-import {screen, render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {renderHook} from '@testing-library/react-hooks';
+import * as React from 'react';
+
 import {CanvasProvider} from '../index';
 import {defaultCanvasTheme, useTheme} from '../lib/theming';
 

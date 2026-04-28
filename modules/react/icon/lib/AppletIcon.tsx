@@ -1,10 +1,14 @@
-import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/tokens';
-import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps, svgStencil} from './Svg';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {BrandingColor, CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base as baseTokens, system} from '@workday/canvas-tokens-web';
+import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
+import {Svg, SvgProps, svgStencil} from './Svg';
+
+const {legacy, ...base} = baseTokens;
 
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
@@ -62,6 +66,9 @@ export const appletIconStyles = ({
   };
 };
 
+/**
+ *  @deprecated ⚠️ `AppletIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export interface AppletIconProps
   extends AppletIconStyles,
     Pick<SvgProps, 'shouldMirror' | 'shouldMirrorInRTL' | 'cs'> {
@@ -76,6 +83,9 @@ export interface AppletIconProps
   size?: number;
 }
 
+/**
+ *  @deprecated ⚠️ `appletIconStencil` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const appletIconStencil = createStencil({
   extends: svgStencil,
   vars: {
@@ -107,6 +117,9 @@ export const appletIconStencil = createStencil({
   }),
 });
 
+/**
+ *  @deprecated ⚠️ `AppletIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
@@ -124,7 +137,10 @@ export const AppletIcon = createComponent('span')({
         as={Element}
         ref={ref}
         {...handleCsProp(elemProps, [
-          appletIconStencil({...colors, size: size ? px2rem(size) : undefined}),
+          appletIconStencil({
+            ...colors,
+            size: size ? px2rem(size) : undefined,
+          }),
         ])}
       />
     );

@@ -1,4 +1,4 @@
-import {Collection, JSCodeshift, CallExpression} from 'jscodeshift';
+import {CallExpression, Collection, JSCodeshift} from 'jscodeshift';
 
 export function getImportRenameMap(j: JSCodeshift, root: Collection<any>, packageName = '') {
   let containsCanvasImports = false;

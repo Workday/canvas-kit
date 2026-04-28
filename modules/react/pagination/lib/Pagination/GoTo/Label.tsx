@@ -1,9 +1,11 @@
 import * as React from 'react';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {Subtext} from '@workday/canvas-kit-react/text';
-import {PaginationContext} from '../usePaginationModel';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {PaginationModel} from '../types';
+import {PaginationContext} from '../usePaginationModel';
 
 export interface GoToLabelProps {
   /**

@@ -1,8 +1,10 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
+
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Buttons/ActionBar',
@@ -33,13 +35,13 @@ export const ActionBarStates = {
         {props => (
           <div
             style={{
-              background: colors.soap100,
+              background: cssVar(base.slate25),
               position: 'relative',
-              height: `calc(${space.xxl} + 2.25rem)`,
-              marginBottom: space.xs,
+              height: px2rem(100),
+              marginBottom: px2rem(12),
             }}
           >
-            <p style={{padding: space.xs}}>Outer Block</p>
+            <p style={{padding: px2rem(12)}}>Outer Block</p>
             <ActionBar>
               <ActionBar.List {...props}>
                 <PrimaryButton>First Action</PrimaryButton>
@@ -99,9 +101,9 @@ export const ActionBarWithOverflowMenuStates = {
           {({containerWidth, maximumVisible}) => (
             <ActionBar items={items} maximumVisible={maximumVisible}>
               <ActionBar.List
-                width={containerWidth}
                 position="relative"
                 overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
+                cs={{width: px2rem(containerWidth)}}
               >
                 {(item: MyActionItem, index: number) => (
                   <ActionBar.Item as={index === 0 ? PrimaryButton : undefined}>
@@ -110,7 +112,7 @@ export const ActionBarWithOverflowMenuStates = {
                 )}
               </ActionBar.List>
               <ActionBar.Menu.Popper>
-                <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+                <ActionBar.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
                   <ActionBar.Menu.List>
                     {(item: MyActionItem) => <ActionBar.Menu.Item>{item.text}</ActionBar.Menu.Item>}
                   </ActionBar.Menu.List>

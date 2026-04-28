@@ -1,7 +1,8 @@
 import React from 'react';
+
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 
 const options = [
   'E-mail',

@@ -22,12 +22,12 @@ building components, styling, and implementing accessibility features.
 ### Token Import Pattern
 
 ```tsx
-import {system, brand, base} from '@workday/canvas-tokens-web';
-
+import {base, brand, system} from '@workday/canvas-tokens-web';
 // Import CSS variables once at app root level
 import '@workday/canvas-tokens-web/css/base/_variables.css';
-import '@workday/canvas-tokens-web/css/system/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
 ```
 
 ### Token Usage Examples
@@ -89,9 +89,9 @@ props:
 - Styling tokens-based components
 
 ```tsx
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Text} from '@workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
@@ -178,7 +178,7 @@ const styles = createStyles({
 - **`calc`** - Math operations with CSS calc() and variables
 
 ```tsx
-import {px2rem, cssVar, calc} from '@workday/canvas-kit-styling';
+import {calc, cssVar, px2rem} from '@workday/canvas-kit-styling';
 
 const styles = createStyles({
   margin: px2rem(8), // Converts 8px to rem
@@ -518,8 +518,9 @@ Apply theming at the global level using CSS variables:
 ```css
 /* index.css */
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 :root {
   --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);

@@ -1,12 +1,11 @@
 import * as React from 'react';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
 
-import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
-
-import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {justifyIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {createComponent, styled} from '@workday/canvas-kit-react/common';
+import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
+import {hamburgerIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
 
 interface HeaderItemProps extends FlexProps {}
 
@@ -15,7 +14,7 @@ export const Basic = () => (
     <PageHeader.Title>Page Header</PageHeader.Title>
     <PageHeader.Item>
       <TertiaryButton aria-label="notifications" icon={notificationsIcon} variant="inverse" />
-      <TertiaryButton aria-label="menu" icon={justifyIcon} variant="inverse" />
+      <TertiaryButton aria-label="menu" icon={hamburgerIcon} variant="inverse" />
     </PageHeader.Item>
   </PageHeader>
 );

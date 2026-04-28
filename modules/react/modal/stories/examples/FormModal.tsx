@@ -1,13 +1,13 @@
 import React from 'react';
 
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Select} from '@workday/canvas-kit-react/select';
-import {plusIcon} from '@workday/canvas-system-icons-web';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {plusIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const FAVORITE_COLOR_OPTIONS = ['Blue', 'Yellow'];

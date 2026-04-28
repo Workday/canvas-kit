@@ -1,5 +1,5 @@
-import {Link} from '../../modules/react/button/stories/button/examples/Hyperlink';
 import {ExternalLink} from '../../modules/react/button/stories/button/examples/ExternalHyperlink';
+import {Link} from '../../modules/react/button/stories/button/examples/Hyperlink';
 
 describe('Hyperlink', () => {
   context('given internal hyperlinks are rendered', () => {

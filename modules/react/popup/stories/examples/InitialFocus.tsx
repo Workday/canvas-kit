@@ -1,22 +1,22 @@
 import React from 'react';
 
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
+  Popup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
-  Popup,
-  usePopupModel,
-  useInitialFocus,
-  useReturnFocus,
   useFocusRedirect,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Text} from '@workday/canvas-kit-react/text';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const cardStyles = createStyles({
   width: px2rem(400),

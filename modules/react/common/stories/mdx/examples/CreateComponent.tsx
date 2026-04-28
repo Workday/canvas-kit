@@ -1,5 +1,6 @@
 import React from 'react';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {colors} from '@workday/canvas-kit-react/tokens';

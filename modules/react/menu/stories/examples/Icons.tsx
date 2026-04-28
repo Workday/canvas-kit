@@ -1,12 +1,13 @@
 import React from 'react';
-import {
-  setupIcon,
-  uploadCloudIcon,
-  userIcon,
-  taskContactIcon,
-} from '@workday/canvas-system-icons-web';
+
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {
+  bookUserIcon,
+  cloudArrowUpIcon,
+  configureIcon,
+  userIcon,
+} from '@workday/canvas-system-icons-web';
 
 export const Icons = () => {
   const [selected, setSelected] = React.useState('');
@@ -17,17 +18,17 @@ export const Icons = () => {
         <Menu.Card>
           <Menu.List>
             <Menu.Item data-text="First Item">
-              <Menu.Item.Icon icon={uploadCloudIcon} />
+              <Menu.Item.Icon icon={cloudArrowUpIcon} />
               <Menu.Item.Text>First Item</Menu.Item.Text>
             </Menu.Item>
             <Menu.Item data-text="Second Item (with a really really really long label)">
-              <Menu.Item.Icon icon={setupIcon} />
+              <Menu.Item.Icon icon={configureIcon} />
               <Menu.Item.Text>Second Item (with a really really really long label)</Menu.Item.Text>
             </Menu.Item>
             <Menu.Item aria-disabled data-text="Third Item">
-              <Menu.Item.Icon icon={uploadCloudIcon} />
+              <Menu.Item.Icon icon={cloudArrowUpIcon} />
               <Menu.Item.Text>Third Item</Menu.Item.Text>
-              <Menu.Item.Icon icon={taskContactIcon} />
+              <Menu.Item.Icon icon={bookUserIcon} />
             </Menu.Item>
             <Menu.Item data-text="User">
               <Menu.Item.Icon icon={userIcon} />
@@ -35,7 +36,7 @@ export const Icons = () => {
             </Menu.Item>
             <Menu.Divider />
             <Menu.Item data-text="Fifth Item (with divider)">
-              <Menu.Item.Icon icon={taskContactIcon} />
+              <Menu.Item.Icon icon={bookUserIcon} />
               <Menu.Item.Text>Fifth Item (with divider)</Menu.Item.Text>
             </Menu.Item>
           </Menu.List>

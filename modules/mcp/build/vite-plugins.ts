@@ -1,6 +1,6 @@
-import type {Plugin} from 'vite';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import type {Plugin} from 'vite';
 
 export const CANVAS_KIT_PACKAGE_MAP: Record<string, string> = {
   '@workday/canvas-kit-react': 'modules/react',

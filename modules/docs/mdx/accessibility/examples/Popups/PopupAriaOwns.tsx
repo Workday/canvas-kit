@@ -1,18 +1,19 @@
 import * as React from 'react';
+
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
-  useInitialFocus,
-  useReturnFocus,
   useFocusRedirect,
+  useInitialFocus,
   usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 const cardStyles = createStyles({
   width: px2rem(400),

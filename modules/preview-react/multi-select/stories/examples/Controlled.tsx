@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
-
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 
 const items = [
   {id: '1', text: 'Cheese'},

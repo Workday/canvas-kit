@@ -1,4 +1,4 @@
-import {flexItem, FlexItemStyleProps} from '@workday/canvas-kit-react/layout';
+import {FlexItemStyleProps, flexItem} from '@workday/canvas-kit-react/layout';
 
 describe('FlexItem Style Props Function', () => {
   it('should ignore non-flex-item props', () => {
