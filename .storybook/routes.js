@@ -24,7 +24,7 @@ const routes = {
   '/components/inputs/form-field/': 'components-inputs-form-field--docs',
   '/components/inputs/radio/': 'preview-inputs-radio--docs',
   '/components/inputs/select/': 'components-inputs-select--docs',
-  '/components/inputs/switch/': 'components-inputs-switch--docs',
+  '/components/inputs/switch/': 'preview-inputs-switch-new--docs',
   '/components/inputs/text-area/': 'components-inputs-textarea--docs',
   '/components/inputs/text-input/': 'components-inputs-text-input--docs',
   '/components/layout/box/': 'components-layout-box--docs',
