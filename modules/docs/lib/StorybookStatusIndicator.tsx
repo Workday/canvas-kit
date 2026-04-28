@@ -41,7 +41,7 @@ export const StorybookStatusIndicator = ({
 }) => {
   const {icon, label} = content[type];
   const variantMapping = {
-    info,
+    info: 'info',
     deprecated: 'caution',
     new: 'positive',
     promoted: 'info',
