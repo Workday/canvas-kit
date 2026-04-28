@@ -25,23 +25,10 @@ deprecated and will be removed in a future version.
   - [Codemod Transformations for Icons](#codemod-transformations-for-icons)
 - [Component Promotions](#component-promotions)
   - [Avatar](#avatar)
-    - [Structure Changes](#structure-changes)
-    - [API Differences](#api-differences)
-    - [Size Mapping](#size-mapping)
-    - [Code Migration](#code-migration)
   - [Information Highlight](#information-highlight)
   - [Pill](#pill)
   - [Segmented Control](#segmented-control)
-    - [API Differences](#api-differences-1)
-    - [Structure Changes](#structure-changes)
-    - [Prop Changes](#prop-changes)
-    - [Code Migration](#code-migration)
-    - [New Features](#new-features)
   - [Side Panel](#side-panel)
-    - [Migrating from Preview](#migrating-from-preview)
-    - [Hook API Changes](#hook-api-changes)
-    - [Component API Changes](#component-api-changes)
-    - [Code Migration](#code-migration)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
     - [Tertiary Button v14 Style Toggle](#tertiary-button-v14-style-toggle)
@@ -203,6 +190,36 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 > 🤖 The codemod will handle the change of imports as shown above.
 
+#### New Features
+
+The promoted `Avatar` includes several new features:
+
+- **Initials display**: Automatically shows initials from the `name` prop when no image URL is
+  provided
+- **Color variants**: Four color variants (`blue`, `amber`, `teal`, `purple`) instead of light/dark
+- **Custom initials**: Use `preferredInitials` for full control over displayed initials
+- **Decorative mode**: Use `isDecorative` when Avatar is purely decorative (rendered next to a name)
+- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and
+  `BaseAvatar.Name`
+- **Utility function**: Use `getInitialsFromName` to extract initials from a name string
+
+```tsx
+// With initials (no image)
+<Avatar name="John Doe" variant="blue" />
+
+// Custom initials
+<Avatar name="John Smith Doe" preferredInitials="JD" />
+
+// Decorative (next to text name)
+<Avatar name="John Doe" url="..." isDecorative />
+
+// Using compound components for custom layouts
+<BaseAvatar variant="teal" size="large">
+  <BaseAvatar.Image src="..." alt="John Doe" />
+  <BaseAvatar.Name name="John Doe" />
+</BaseAvatar>
+```
+
 #### API Differences
 
 The new `Avatar` is a
@@ -259,36 +276,6 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 <Avatar size="medium" variant="blue" url="https://example.com/photo.jpg" name="John Doe" />;
-```
-
-##### New Features
-
-The promoted `Avatar` includes several new features:
-
-- **Initials display**: Automatically shows initials from the `name` prop when no image URL is
-  provided
-- **Color variants**: Four color variants (`blue`, `amber`, `teal`, `purple`) instead of light/dark
-- **Custom initials**: Use `preferredInitials` for full control over displayed initials
-- **Decorative mode**: Use `isDecorative` when Avatar is purely decorative (rendered next to a name)
-- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and
-  `BaseAvatar.Name`
-- **Utility function**: Use `getInitialsFromName` to extract initials from a name string
-
-```tsx
-// With initials (no image)
-<Avatar name="John Doe" variant="blue" />
-
-// Custom initials
-<Avatar name="John Smith Doe" preferredInitials="JD" />
-
-// Decorative (next to text name)
-<Avatar name="John Doe" url="..." isDecorative />
-
-// Using compound components for custom layouts
-<BaseAvatar variant="teal" size="large">
-  <BaseAvatar.Image src="..." alt="John Doe" />
-  <BaseAvatar.Name name="John Doe" />
-</BaseAvatar>
 ```
 
 ### Information Highlight
@@ -355,6 +342,30 @@ import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 
 > 🤖 The codemod will handle the change of imports as shown above.
 
+#### New Features
+
+The promoted `SegmentedControl` includes several new features:
+
+- **Text and icon support**: Items can display text, icons, or both
+- **Size variants**: `small`, `medium`, and `large` sizes
+- **Vertical orientation**: Use `orientation="vertical"` for vertical layouts
+- **Built-in tooltips**: Add tooltips via `tooltipProps` on items
+- **Disabled state**: Disable all items via the model or individual items
+- **Dynamic items**: Render items dynamically using the collection API
+
+```tsx
+// Text only
+<SegmentedControl.Item data-id="yearly">Yearly</SegmentedControl.Item>
+
+// Icon with text
+<SegmentedControl.Item data-id="list" icon={listViewIcon}>List View</SegmentedControl.Item>
+
+// With size and orientation
+<SegmentedControl size="large" orientation="vertical">
+  ...
+</SegmentedControl>
+```
+
 #### API Differences
 
 The new `SegmentedControl` is a
@@ -420,30 +431,6 @@ const [value, setValue] = React.useState('list-view');
     />
   </SegmentedControl.List>
 </SegmentedControl>;
-```
-
-##### New Features
-
-The promoted `SegmentedControl` includes several new features:
-
-- **Text and icon support**: Items can display text, icons, or both
-- **Size variants**: `small`, `medium`, and `large` sizes
-- **Vertical orientation**: Use `orientation="vertical"` for vertical layouts
-- **Built-in tooltips**: Add tooltips via `tooltipProps` on items
-- **Disabled state**: Disable all items via the model or individual items
-- **Dynamic items**: Render items dynamically using the collection API
-
-```tsx
-// Text only
-<SegmentedControl.Item data-id="yearly">Yearly</SegmentedControl.Item>
-
-// Icon with text
-<SegmentedControl.Item data-id="list" icon={listViewIcon}>List View</SegmentedControl.Item>
-
-// With size and orientation
-<SegmentedControl size="large" orientation="vertical">
-  ...
-</SegmentedControl>
 ```
 
 ### Side Panel
@@ -535,7 +522,7 @@ const model = useSidePanelModel({
 </SidePanel>;
 ```
 
-### Checking Expanded State
+#### Checking Expanded State
 
 ```tsx
 // Before (@workday/canvas-kit-preview-react/side-panel)
