@@ -25,6 +25,10 @@ const TertiaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
+          'data-dsr-off': [
+            {value: undefined, label: ''},
+            {value: true, label: 'DSR Off'},
+          ],
           variant: [
             {value: undefined, label: ''},
             {value: 'inverse', label: 'Inverse'},
@@ -64,6 +68,10 @@ const TertiaryIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
+        'data-dsr-off': [
+          {value: undefined, label: ''},
+          {value: true, label: 'DSR Off'},
+        ],
         variant: [
           {value: undefined, label: ''},
           {value: 'inverse', label: 'Inverse'},

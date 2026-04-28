@@ -54,7 +54,7 @@ export const AllFields = () => {
       </FormField>
       <FormField as="fieldset" isRequired={true} error={'error'} orientation="horizontalStart" grow>
         <FormField.Label as="legend">Radio Group Legend</FormField.Label>
-        <FormField.Container>
+        <FormField.Field>
           <FormField.Input as={RadioGroup}>
             <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
             <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
@@ -65,7 +65,7 @@ export const AllFields = () => {
             </RadioGroup.RadioButton>
           </FormField.Input>
           <FormField.Hint>Error Message</FormField.Hint>
-        </FormField.Container>
+        </FormField.Field>
       </FormField>
       <FormField as="fieldset" grow>
         <FormField.Label as="legend">Checkbox Legend</FormField.Label>

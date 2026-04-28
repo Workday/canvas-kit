@@ -140,9 +140,9 @@ export const RadioStates = () => (
             <FormField.Label>{props.label}</FormField.Label>
             {testGroup}
             {props.orientation === 'horizontal' && (
-              <FormField.Container>
+              <FormField.Field>
                 {testGroup} {props.error && <FormField.Hint>hintText</FormField.Hint>}
-              </FormField.Container>
+              </FormField.Field>
             )}
             {props.error && <FormField.Hint>hintText</FormField.Hint>}
           </FormField>
