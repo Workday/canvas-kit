@@ -62,6 +62,7 @@ const routes = {
   '/get-started/for-developers/documentation/testing#visual-tests':
     'hooks-and-utilities-testing--docs',
   '/get-started/introduction/': 'guides-getting-started--docs',
+  '/get-started/for-developers/styling/utilities/': 'styling-utilities--docs',
   // Tokens
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
