@@ -960,18 +960,27 @@ export type StencilCompoundConfig<
   modifiers: [E] extends [never]
     ? MappedBoolean<M>
     : [E] extends [BaseStencil<infer ME, any, any, any, any>]
-    ? MappedBoolean<ME & M>
+    ? MappedBoolean<MergeModifiers<ME, M>>
     : never;
   styles: StylesReturn<P, V, E>;
 };
 
 export type MappedBoolean<T> = {[K in keyof T]?: MaybeBoolean<keyof T[K]>};
 
+// Remove index signatures from a type, keeping only explicitly defined properties.
+// This is used to fix inference when combining modifier types where one side is an empty Record.
+type RemoveIndexSignature<T> = {
+  [K in keyof T as string extends K ? never : number extends K ? never : K]: T[K];
+};
+
+// Merge two modifier configs, filtering out index signatures from empty Records
+type MergeModifiers<A, B> = RemoveIndexSignature<A> & RemoveIndexSignature<B>;
+
 type ModifierValuesStencil<
   M extends StencilModifierConfig<any, any, any> = {},
   V extends DefaultedVarsShape = {}
 > = {
-  [K in keyof M]?: K extends keyof V
+  [K in keyof RemoveIndexSignature<M>]?: K extends keyof V
     ? MaybeBoolean<keyof M[K]> | (string & {}) // If both modifiers and variables define the same key, the value can be either a modifier or a string
     : MaybeBoolean<keyof M[K]>;
 };
@@ -1181,7 +1190,7 @@ export interface StencilConfig<
   defaultModifiers?: [E] extends [never]
     ? StencilDefaultModifierReturn<M>
     : E extends BaseStencil<infer ME, any, any, any, any>
-    ? StencilDefaultModifierReturn<ME & M>
+    ? StencilDefaultModifierReturn<MergeModifiers<ME, M>>
     : undefined;
 }
 
@@ -1222,7 +1231,7 @@ export interface Stencil<
     options?: [E] extends [never]
       ? ModifierValuesStencil<M, V> & VariableValuesStencil<V>
       : E extends BaseStencil<infer ME, any, infer VE, any, any>
-      ? ModifierValuesStencil<ME & M, VE & V> & VariableValuesStencil<VE & V>
+      ? ModifierValuesStencil<MergeModifiers<ME, M>, VE & V> & VariableValuesStencil<VE & V>
       : never
   ): {
     className: string;
@@ -1234,10 +1243,10 @@ export interface Stencil<
   vars: StencilDefaultVars<V, E, ID>;
   base: string;
   modifiers: [E] extends [BaseStencil<infer ME, any, infer VE, any, any>]
-    ? StencilModifierReturn<ME & M, VE & V>
+    ? StencilModifierReturn<MergeModifiers<ME, M>, VE & V>
     : StencilModifierReturn<M, V>;
   defaultModifiers: [E] extends [BaseStencil<infer ME, any, any, any, any>]
-    ? StencilDefaultModifierReturn<ME & M>
+    ? StencilDefaultModifierReturn<MergeModifiers<ME, M>>
     : StencilDefaultModifierReturn<M>;
 }
 
@@ -1320,7 +1329,7 @@ function makePartProps<const T extends Record<string, string>>(parts?: T): Stenc
  * compound modifiers.
  */
 export function createStencil<
-  M extends StencilModifierConfig<P, V, E>, // TODO: default to `{}` and fix inference in `StylesReturn` types so that modifier style return functions give correct inference to variables
+  M extends StencilModifierConfig<P, V, E>,
   const P extends Record<string, string> = {},
   V extends DefaultedVarsShape = {},
   E extends BaseStencil<any, any, any, any, any> = never, // use BaseStencil to avoid infinite loops
