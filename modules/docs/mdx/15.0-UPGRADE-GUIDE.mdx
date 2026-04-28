@@ -29,19 +29,19 @@ deprecated and will be removed in a future version.
     - [API Differences](#api-differences)
     - [Size Mapping](#size-mapping)
     - [Code Migration](#code-migration)
+  - [Information Highlight](#information-highlight)
   - [Pill](#pill)
+  - [Segmented Control](#segmented-control)
+    - [API Differences](#api-differences-1)
+    - [Structure Changes](#structure-changes)
+    - [Prop Changes](#prop-changes)
+    - [Code Migration](#code-migration)
+    - [New Features](#new-features)
   - [Side Panel](#side-panel)
     - [Migrating from Preview](#migrating-from-preview)
     - [Hook API Changes](#hook-api-changes)
     - [Component API Changes](#component-api-changes)
     - [Code Migration](#code-migration)
-  - [Segmented Control](#segmented-control)
-    - [API Differences](#api-differences)
-    - [Structure Changes](#structure-changes)
-    - [Prop Changes](#prop-changes)
-    - [Code Migration](#code-migration)
-    - [New Features](#new-features)
-  - [Information Highlight](#information-highlight)
 - [Component Updates](#component-updates)
   - [Buttons](#buttons)
     - [Tertiary Button v14 Style Toggle](#tertiary-button-v14-style-toggle)
@@ -291,6 +291,28 @@ The promoted `Avatar` includes several new features:
 </BaseAvatar>
 ```
 
+### Information Highlight
+
+**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
+
+We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
+changes to the functionality or styling of the component. The only change required is updating the
+import statement.
+
+**Before in v14**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+```
+
+**After in v15**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
 ### Pill
 
 **PR:** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
@@ -311,113 +333,6 @@ import {Pill} from '@workday/canvas-kit-react/pill';
 ```
 
 > 🤖 The codemod will handle the change of imports as shown above.
-
-### Side Panel
-
-**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
-
-We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated
-`SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
-
-**Before in v14**
-
-```tsx
-import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
-```
-
-**After in v15**
-
-```tsx
-import {SidePanel} from '@workday/canvas-kit-react/side-panel';
-```
-
-> 🤖 The codemod will handle the change of imports as shown above.
-
-#### Migrating from Preview
-
-If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API
-changes:
-
-```tsx
-// Before (preview-react)
-import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-
-// After (react)
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
-```
-
-#### Hook API Changes
-
-| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
-| -------------------------------- | ------------------------------------------------------- |
-| `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
-| `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
-| Returns `expanded: boolean`      | Returns `model.state.transitionState`                   |
-| Returns `setExpanded(bool)`      | Use `model.events.expand()` / `model.events.collapse()` |
-| Returns `panelProps` to spread   | Props applied automatically via `elemPropsHook`         |
-| Returns `labelProps` to spread   | Use `id={model.state.labelId}` on label element         |
-| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
-
-#### Component API Changes
-
-| Preview                                        | Main                                                 |
-| ---------------------------------------------- | ---------------------------------------------------- |
-| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>`    |
-| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                         |
-| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>` |
-| `expanded` prop on SidePanel                   | Managed by model's `transitionState`                 |
-| `touched` prop on SidePanel                    | Managed internally                                   |
-| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state    |
-| `onStateTransition` on component               | `onStateTransition` in model config                  |
-
-#### Code Migration Example
-
-```tsx
-// Before (in Preview)
-const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
-  initialExpanded: false,
-});
-
-<SidePanel {...panelProps} origin="right" onExpandedChange={exp => console.log(exp)}>
-  <SidePanel.ToggleButton {...controlProps} />
-  <Heading {...labelProps}>Panel Title</Heading>
-  {expanded && <Content />}
-</SidePanel>;
-
-// After (in Main)
-const model = useSidePanelModel({
-  initialTransitionState: 'collapsed',
-  origin: 'end',
-  onStateTransition: state => {
-    const isExpanded = state === 'expanded' || state === 'expanding';
-    console.log(isExpanded);
-  },
-});
-
-<SidePanel model={model}>
-  <SidePanel.ToggleButton aria-label="Collapse View" />
-  <SidePanel.Heading>Panel Title</SidePanel.Heading>
-  {model.state.transitionState === 'expanded' && <Content />}
-</SidePanel>;
-```
-
-### Checking Expanded State
-
-```tsx
-// Before (@workday/canvas-kit-preview-react/side-panel)
-if (expanded) {
-  /* ... */
-}
-
-// After (@workday/canvas-kit-react/side-panel) - for exact state
-if (model.state.transitionState === 'expanded') {
-  /* ... */
-}
-
-// After (@workday/canvas-kit-react/side-panel) - including animation states
-const isExpanded =
-  model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
-```
 
 ### Segmented Control
 
@@ -531,27 +446,112 @@ The promoted `SegmentedControl` includes several new features:
 </SegmentedControl>
 ```
 
-### Information Highlight
+### Side Panel
 
-**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
 
-We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
-changes to the functionality or styling of the component. The only change required is updating the
-import statement.
+We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated
+`SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
 
 **Before in v14**
 
 ```tsx
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
 ```
 
 **After in v15**
 
 ```tsx
-import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 ```
 
 > 🤖 The codemod will handle the change of imports as shown above.
+
+#### Migrating from Preview
+
+If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API
+changes:
+
+```tsx
+// Before (preview-react)
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+// After (react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+```
+
+#### Hook API Changes
+
+| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
+| -------------------------------- | ------------------------------------------------------- |
+| `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
+| `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
+| Returns `expanded: boolean`      | Returns `model.state.transitionState`                   |
+| Returns `setExpanded(bool)`      | Use `model.events.expand()` / `model.events.collapse()` |
+| Returns `panelProps` to spread   | Props applied automatically via `elemPropsHook`         |
+| Returns `labelProps` to spread   | Use `id={model.state.labelId}` on label element         |
+| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
+
+#### Component API Changes
+
+| Preview                                        | Main                                                 |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>`    |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                         |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>` |
+| `expanded` prop on SidePanel                   | Managed by model's `transitionState`                 |
+| `touched` prop on SidePanel                    | Managed internally                                   |
+| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state    |
+| `onStateTransition` on component               | `onStateTransition` in model config                  |
+
+#### Code Migration Example
+
+```tsx
+// Before (in Preview)
+const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+});
+
+<SidePanel {...panelProps} origin="right" onExpandedChange={exp => console.log(exp)}>
+  <SidePanel.ToggleButton {...controlProps} />
+  <Heading {...labelProps}>Panel Title</Heading>
+  {expanded && <Content />}
+</SidePanel>;
+
+// After (in Main)
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: state => {
+    const isExpanded = state === 'expanded' || state === 'expanding';
+    console.log(isExpanded);
+  },
+});
+
+<SidePanel model={model}>
+  <SidePanel.ToggleButton aria-label="Collapse View" />
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
+  {model.state.transitionState === 'expanded' && <Content />}
+</SidePanel>;
+```
+
+### Checking Expanded State
+
+```tsx
+// Before (@workday/canvas-kit-preview-react/side-panel)
+if (expanded) {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - for exact state
+if (model.state.transitionState === 'expanded') {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - including animation states
+const isExpanded =
+  model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
+```
 
 ## Component Updates
 
