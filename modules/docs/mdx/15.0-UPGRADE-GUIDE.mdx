@@ -598,7 +598,7 @@ become inert in the next major release.
 
 **PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
-#### Svg
+### Svg
 
 The `Svg` component has been improved to align with our latest token system and usage patterns:
 
@@ -609,7 +609,7 @@ The `Svg` component has been improved to align with our latest token system and 
 - The `transformColorNameToToken` utility has been fully removed; replace it with direct usage of
   the new token values.
 
-#### System Icon
+### System Icon
 
 The `SystemIcon` component has been improved to align with our latest token system and usage
 patterns:
@@ -624,7 +624,7 @@ patterns:
 - Deprecated functionality, like `systemIconStyles`, `SystemIconStyles`, `deprecatedSystemIconVars`,
   has been fully removed to reduce complexity and encourage best practices.
 
-#### System Icon Circle
+### System Icon Circle
 
 The `SystemIconCircle` component has received important updates for improved accessibility and
 clarity:
@@ -635,17 +635,17 @@ clarity:
   and compliance with accessibility standards between the icon and its circular background.
 - `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
 
-#### Icon Size Updates
+### Icon Size Updates
 
 **PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
 
 Canvas v15 is optimized to look best when using the latest version of v4 tokens
-(`"@workday/canvas-tokens-web"`) and the latest version of v4 system icons
-(`"@workday/canvas-system-icons-web"`). It is designed to be backwards-compatible with v3 tokens and
+(`@workday/canvas-tokens-web`) and the latest version of v4 system icons
+(`@workday/canvas-system-icons-web`). It is designed to be backwards-compatible with v3 tokens and
 v3 system icons — nothing should break. But you might see minor imperfections when using v3 system
 icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4
-icons `"@workday/canvas-system-icons-web"` and the latest version of v4 tokens
-`"@workday/canvas-tokens-web"`.
+icons `@workday/canvas-system-icons-web` and the latest version of v4 tokens
+`@workday/canvas-tokens-web`.
 
 The size of icons in some components have been updated. This is reflected in the following
 components:
