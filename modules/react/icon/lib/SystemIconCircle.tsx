@@ -38,7 +38,7 @@ const sizes = {
 
 type SystemIconCircleCommonProps = {
   /**
-   * The icon to display from `@workday/canvas-accent-icons-web`.
+   * The icon to display from `@workday/canvas-system-icons-web`.
    */
   icon: CanvasSystemIcon | LegacyCanvasSystemIcon;
   /**
