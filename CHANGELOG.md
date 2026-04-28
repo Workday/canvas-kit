@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.12](https://github.com/Workday/canvas-kit/releases/tag/v14.3.12) (2026-04-28)
+
+### Components
+
+- fix: Updated Radio in Main to use MaybeWrapCSSVariables ([#3905](https://github.com/Workday/canvas-kit/pull/3905)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  Fixes colors on `Radio` in `main` to show colors when selected.
+
+
 ## [v14.3.11](https://github.com/Workday/canvas-kit/releases/tag/v14.3.11) (2026-04-20)
 
 ### Infrastructure
