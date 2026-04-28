@@ -23,6 +23,16 @@ deprecated and will be removed in a future version.
 - [Codemod](#codemod)
   - [Instructions](#instructions)
   - [Codemod Transformations for Icons](#codemod-transformations-for-icons)
+- [Theming](#theming)
+  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
+- [Icon Updates](#icon-updates)
+  - [Svg](#svg)
+  - [System Icon](#system-icon)
+  - [System Icon Circle](#system-icon-circle)
+  - [Icon Size Updates](#icon-size-updates)
+- [New Components](#new-components)
+  - [Expressive Icon](#expressive-icon)
+  - [Switch (Preview)](#switch-preview)
 - [Component Promotions](#component-promotions)
   - [Avatar](#avatar)
   - [Information Highlight](#information-highlight)
@@ -36,20 +46,10 @@ deprecated and will be removed in a future version.
   - [Inputs](#inputs)
   - [Navigation](#navigation)
   - [Popups](#popups)
-- [Icon Updates](#icon-updates)
-  - [Svg](#svg)
-  - [System Icon](#system-icon)
-  - [System Icon Circle](#system-icon-circle)
-  - [Icon Size Updates](#icon-size-updates)
-- [New Components](#new-components)
-  - [Expressive Icon](#expressive-icon)
-  - [Switch (Preview)](#switch-preview)
-- [Theming](#theming)
-  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
 - [Deprecations](#deprecations)
   - [Accent Icon](#accent-icon)
   - [Applet Icon](#applet-icon)
-  - [Other Icon Utilities](#other-icon-utilities)
+  - [Icon Utilities](#icon-utilities)
   - [Switch (Main)](#switch-main)
 - [Removals](#removals)
   - [Avatar (Deprecated)](#avatar-deprecated)
@@ -163,6 +163,142 @@ npx @workday/canvas-kit-codemod v15-icons [path]
 > 🤖 The `v15-icons` codemod automates the majority of icon migration work, but _always_ review the
 > PR for any remaining icons or component usages that the codemod could not address, especially in
 > tricky cases or heavily customized usages.
+
+## Theming
+
+### System Brand Tokens and Brand Tokens
+
+The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and
+**brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as
+`base`, `light`, `lighter`, `lightest`, `dark` and `darkest` via the `CanvasProvider` `theme` prop.
+The mapping inside `CanvasProvider` exists for **backwards compatibility**. When you pass a theme
+object, we forward those values to both the legacy brand tokens and the system brand tokens so
+current implementations will continue to work.
+
+For more information on theming, view our
+[Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs)
+documentation.
+
+For more information on our tokens, view our
+[Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+documentation.
+
+```tsx
+// This will set the [brand.primary.**] tokens to shades of purple.
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App />
+</CanvasProvider>
+```
+
+## Icon Updates
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+### Svg
+
+The `Svg` component has been improved to align with our latest token system and usage patterns:
+
+- `SvgProps` no longer extends `BoxProps`, which means Icon components may not accept Box-related
+  style props. Switch to use the `cs` prop instead. Use the `v14.1 codemod` to migrate style props
+  automatically.
+- The stencil variables for `width` and `height` are now deprecated; use the `size` prop instead.
+- The `transformColorNameToToken` utility has been fully removed; replace it with direct usage of
+  the new token values.
+
+### System Icon
+
+The `SystemIcon` component has been improved to align with our latest token system and usage
+patterns:
+
+- The `size` prop now accepts updated size token values: `xxs` (14px), `xs` (16px), `sm` (18px),
+  `md` (20px), `lg` (24px), and `xl` (32px), for consistent sizing across your application.
+- The `color` prop now only supports direct color values (tokens such as `blueberry400` are no
+  longer accepted). Use the component icon or system color tokens directly instead.
+- Hover-related props (`colorHover`, `accentHover`, `backgroundHover`) have been removed for a
+  cleaner and more predictable API. Instead, use new styling approaches if you need hover state
+  modifications.
+- Deprecated functionality, like `systemIconStyles`, `SystemIconStyles`, `deprecatedSystemIconVars`,
+  has been fully removed to reduce complexity and encourage best practices.
+
+### System Icon Circle
+
+The `SystemIconCircle` component has received important updates for improved accessibility and
+clarity:
+
+- Added a new `inverse` prop, enabling an inverse color variant for better adaptability across
+  backgrounds.
+- The `background` prop and the `color` prop must be provided together to ensure optimal contrast
+  and compliance with accessibility standards between the icon and its circular background.
+- `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
+
+### Icon Size Updates
+
+**PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
+
+Canvas v15 is optimized to look best when using the latest version of v4 tokens
+(`@workday/canvas-tokens-web`) and the latest version of v4 system icons
+(`@workday/canvas-system-icons-web`). It is designed to be backwards-compatible with v3 tokens and
+v3 system icons — nothing should break. But you might see minor imperfections when using v3 system
+icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4
+icons `@workday/canvas-system-icons-web` and the latest version of v4 tokens
+`@workday/canvas-tokens-web`.
+
+The size of icons in some components have been updated. This is reflected in the following
+components:
+
+- `MultiSelect` | `1.5rem` → `1.25rem`
+- `Switch (Preview)` | `1.25rem` → `1.125rem`
+- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)`
+  | `1.125rem` → `1rem`
+- `Pill.Icon` | `1.25rem` → `1.125rem`
+- `Pill.IconButton` | `1.5rem` → `1.125rem`
+
+> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the
+> icon will still be updated as part of the upgrade.
+
+## New Components
+
+### Expressive Icon
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+The new `ExpressiveIcon` component brings expressive icons to Canvas Kit. This component replaces
+the previous usage of `Accent` and `Applet` icons.
+
+The `ExpressiveIcon` component requires an `icon` prop, which should be an icon object imported from
+the
+[`@workday/canvas-expressive-icons-web`](https://www.npmjs.com/package/@workday/canvas-expressive-icons-web)
+package.
+
+> **Note**: If you previously used `Accent` or `Applet` icons, update your usage to import icons
+> from `@workday/canvas-expressive-icons-web` and pass them to `ExpressiveIcon` as the `icon` prop.
+> This can be done through a `v15-icons codemod` for auto-replacement or by following
+> [a migration table](https://canvas.workdaydesign.com/styles/assets/expressive-icons#tab=migration-guide).
+
+```tsx
+import * as React from 'react';
+
+import {bookOpenIcon} from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
+
+<ExpressiveIcon icon={bookOpenIcon} />;
+```
+
+### Switch (Preview)
+
+**PR:** [#3842](https://github.com/Workday/canvas-kit/pull/3842)
+
+We've created a new version of the
+[Switch](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) component in
+`Preview`.
+
+Accessibility improvements include:
+
+- An icon to show the `unchecked` and `checked` state.
+- Visible borders when "High Contrast Mode" is enabled.
+
+> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however,
+> the styles have changed.
 
 ## Component Promotions
 
@@ -594,142 +730,6 @@ become inert in the next major release.
 
 `Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
 
-## Icon Updates
-
-**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
-
-### Svg
-
-The `Svg` component has been improved to align with our latest token system and usage patterns:
-
-- `SvgProps` no longer extends `BoxProps`, which means Icon components may not accept Box-related
-  style props. Switch to use the `cs` prop instead. Use the `v14.1 codemod` to migrate style props
-  automatically.
-- The stencil variables for `width` and `height` are now deprecated; use the `size` prop instead.
-- The `transformColorNameToToken` utility has been fully removed; replace it with direct usage of
-  the new token values.
-
-### System Icon
-
-The `SystemIcon` component has been improved to align with our latest token system and usage
-patterns:
-
-- The `size` prop now accepts updated size token values: `xxs` (14px), `xs` (16px), `sm` (18px),
-  `md` (20px), `lg` (24px), and `xl` (32px), for consistent sizing across your application.
-- The `color` prop now only supports direct color values (tokens such as `blueberry400` are no
-  longer accepted). Use the component icon or system color tokens directly instead.
-- Hover-related props (`colorHover`, `accentHover`, `backgroundHover`) have been removed for a
-  cleaner and more predictable API. Instead, use new styling approaches if you need hover state
-  modifications.
-- Deprecated functionality, like `systemIconStyles`, `SystemIconStyles`, `deprecatedSystemIconVars`,
-  has been fully removed to reduce complexity and encourage best practices.
-
-### System Icon Circle
-
-The `SystemIconCircle` component has received important updates for improved accessibility and
-clarity:
-
-- Added a new `inverse` prop, enabling an inverse color variant for better adaptability across
-  backgrounds.
-- The `background` prop and the `color` prop must be provided together to ensure optimal contrast
-  and compliance with accessibility standards between the icon and its circular background.
-- `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
-
-### Icon Size Updates
-
-**PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
-
-Canvas v15 is optimized to look best when using the latest version of v4 tokens
-(`@workday/canvas-tokens-web`) and the latest version of v4 system icons
-(`@workday/canvas-system-icons-web`). It is designed to be backwards-compatible with v3 tokens and
-v3 system icons — nothing should break. But you might see minor imperfections when using v3 system
-icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4
-icons `@workday/canvas-system-icons-web` and the latest version of v4 tokens
-`@workday/canvas-tokens-web`.
-
-The size of icons in some components have been updated. This is reflected in the following
-components:
-
-- `MultiSelect` | `1.5rem` → `1.25rem`
-- `Switch (Preview)` | `1.25rem` → `1.125rem`
-- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)`
-  | `1.125rem` → `1rem`
-- `Pill.Icon` | `1.25rem` → `1.125rem`
-- `Pill.IconButton` | `1.5rem` → `1.125rem`
-
-> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the
-> icon will still be updated as part of the upgrade.
-
-## New Components
-
-### Expressive Icon
-
-**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
-
-The new **Expressive Icon** component brings expressive icons to Canvas Kit. This component replaces
-the previous usage of `Accent` and `Applet` icons.
-
-The `ExpressiveIcon` component requires an `icon` prop, which should be an icon object imported from
-the
-[`@workday/canvas-expressive-icons-web`](https://www.npmjs.com/package/@workday/canvas-expressive-icons-web)
-package.
-
-> **Note**: If you previously used `Accent` or `Applet` icons, update your usage to import icons
-> from `@workday/canvas-expressive-icons-web` and pass them to `ExpressiveIcon` as the `icon` prop.
-> This can be done through a `v15-icons codemod` for auto-replacement or by following
-> [a migration table](https://canvas.workdaydesign.com/styles/assets/expressive-icons#tab=migration-guide).
-
-```tsx
-import * as React from 'react';
-
-import {bookOpenIcon} from '@workday/canvas-expressive-icons-web';
-import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
-
-<ExpressiveIcon icon={bookOpenIcon} />;
-```
-
-### Switch (Preview)
-
-**PR:** [#3842](https://github.com/Workday/canvas-kit/pull/3842)
-
-We've created a new version of the
-[Switch](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) component in
-`Preview`.
-
-Accessibility improvements include:
-
-- Added an icon to show the `unchecked` and `checked` state.
-- Added visible borders when "High Contrast Mode" is enabled.
-
-> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however,
-> the styles have changed.
-
-## Theming
-
-### System Brand Tokens and Brand Tokens
-
-The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and
-**brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as
-`base`, `light`, `lighter`, `lightest`, `dark` and `darkest` via the `CanvasProvider` `theme` prop.
-The mapping inside `CanvasProvider` exists for **backwards compatibility**. When you pass a theme
-object, we forward those values to both the legacy brand tokens and the system brand tokens so
-current implementations will continue to work.
-
-For more information on theming, view our
-[Theming](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs)
-documentation.
-
-For more information on our tokens, view our
-[Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
-documentation.
-
-```tsx
-// This will set the [brand.primary.**] tokens to shades of purple.
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-  <App />
-</CanvasProvider>
-```
-
 ## Deprecations
 
 We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
@@ -751,7 +751,7 @@ design direction.
 The Applet Icon set has been **deprecated** and will be removed in a future major version. Please
 migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
 
-### Other Icon Utilities
+### Icon Utilities
 
 **PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
 
