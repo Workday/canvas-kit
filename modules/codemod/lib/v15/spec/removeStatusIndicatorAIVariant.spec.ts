@@ -10,19 +10,17 @@ describe('removeStatusIndicatorAIVariant', () => {
     const input = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator variant="ai">
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant="ai">
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
 
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator variant="blue">
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant="blue">
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
     expectTransform(input, expected);
   });
@@ -31,19 +29,17 @@ describe('removeStatusIndicatorAIVariant', () => {
     const input = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react'
 
-        <StatusIndicator variant="ai">
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant="ai">
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
 
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react'
 
-        <StatusIndicator variant="blue">
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant="blue">
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
     expectTransform(input, expected);
   });
@@ -52,19 +48,17 @@ describe('removeStatusIndicatorAIVariant', () => {
     const input = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator variant={'ai'}>
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant={'ai'}>
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
 
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator variant="blue">
-          <StatusIndicator.Label>AI Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator variant="blue">
+        <StatusIndicator.Label>AI Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
     expectTransform(input, expected);
   });
@@ -73,15 +67,17 @@ describe('removeStatusIndicatorAIVariant', () => {
     const input = stripIndent`
       import {Divider} from '@workday/canvas-kit-preview-react/divider'
 
-        <Divider></Divider>
-
+      <>
+       <Divider></Divider>
+      </>
     `;
 
     const expected = stripIndent`
       import {Divider} from '@workday/canvas-kit-preview-react/divider'
 
-        <Divider></Divider>
-
+      <>
+       <Divider></Divider>
+      </>
     `;
     expectTransform(input, expected);
   });
@@ -90,19 +86,17 @@ describe('removeStatusIndicatorAIVariant', () => {
     const input = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator>
-          <StatusIndicator.Label>Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator>
+        <StatusIndicator.Label>Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
 
     const expected = stripIndent`
       import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator'
 
-        <StatusIndicator>
-          <StatusIndicator.Label>Content</StatusIndicator.Label>
-        </StatusIndicator>
-
+      <StatusIndicator>
+        <StatusIndicator.Label>Content</StatusIndicator.Label>
+      </StatusIndicator>
     `;
     expectTransform(input, expected);
   });
