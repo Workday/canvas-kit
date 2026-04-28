@@ -6,7 +6,7 @@ export const formFieldStencil = createStencil({
     display: 'flex',
     border: 'none',
     padding: 0,
-    margin: `0 0 ${system.gap.lg}`,
+    margin: `0 0 ${system.legacy.gap.lg}`,
   },
   modifiers: {
     grow: {

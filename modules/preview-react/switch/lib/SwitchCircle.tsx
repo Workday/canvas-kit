@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
@@ -14,7 +14,7 @@ export const switchCircleStencil = createStencil({
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
-    backgroundColor: cssVar(system.color.fg.inverse, brand.primary.accent),
+    backgroundColor: system.color.fg.inverse,
     transform: 'translateX(0)',
   },
   modifiers: {

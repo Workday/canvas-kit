@@ -242,7 +242,7 @@ export const buttonStencil = createStencil({
   }),
   modifiers: {
     /**
-     * Button modifiers that will overwrite the baseLegacy styles of Buttons.
+     * Button modifiers that will overwrite the base styles of Buttons.
      * - `Size`: These modifiers will dictate a size of a Button and has a set of styles to associated with it.
      * - `iconPosition`: These modifiers will override the existing `Size` styles. These are specific to icon locations
      * within a button or if there is only an icon and no text.

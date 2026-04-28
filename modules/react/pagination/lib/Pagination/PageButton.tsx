@@ -2,8 +2,8 @@ import * as React from 'react';
 
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {PaginationContext} from './usePaginationModel';
 

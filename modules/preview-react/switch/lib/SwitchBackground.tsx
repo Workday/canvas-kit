@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export const switchBackgroundStencil = createStencil({
   base: {
@@ -10,7 +10,7 @@ export const switchBackgroundStencil = createStencil({
     pointerEvents: 'none',
     // This is used in "High Contrast Mode" to show a border on the Switch background.
     border: `${px2rem(1)} solid transparent`,
-    height: px2rem(18),
+    height: base.legacy.size225,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),

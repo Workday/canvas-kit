@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;

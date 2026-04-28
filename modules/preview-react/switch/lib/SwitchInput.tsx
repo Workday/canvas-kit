@@ -1,6 +1,6 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
@@ -51,15 +51,15 @@ export const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-              0 0 0 ${system.space.x1} ${system.legacy.color.brand.focus.critical},
+              0 0 0 ${base.legacy.size25} ${system.legacy.color.focus.inverse},
+              0 0 0 ${base.legacy.size50} ${system.legacy.color.brand.focus.critical},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
+          0 0 0 ${base.legacy.size25} ${system.legacy.color.focus.inverse},
           0 0 0 ${base.legacy.size50} ${system.legacy.color.brand.focus.caution.inner},
           0 0 0 ${px2rem(5)} ${system.legacy.color.brand.border.caution}`,
         },

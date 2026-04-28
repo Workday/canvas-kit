@@ -2,13 +2,10 @@ import React from 'react';
 
 import {ExtractProps, StyledType, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
-
-const radioWidth = 18;
-const radioHeight = 18;
 
 export interface StyledRadioButtonProps extends CSProps {
   variant?: 'inverse' | undefined;

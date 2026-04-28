@@ -18,7 +18,7 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
-   * style prop applies styles to the whole Flex componentLegacy,
+   * style prop applies styles to the whole Flex component,
    * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
    * style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore
    */

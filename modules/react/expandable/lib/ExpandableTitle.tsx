@@ -17,7 +17,7 @@ export const expandableTitleStencil = createStencil({
     ...system.type.body.medium,
     fontWeight: system.fontWeight.bold,
     color: system.color.fg.strong,
-    padding: `${px2rem(2)} ${system.padding.xs}`,
+    padding: `${px2rem(2)} ${system.legacy.padding.xs}`,
     textAlign: 'left',
   },
 });

@@ -32,13 +32,13 @@ export interface StatusIndicatorProps
     Omit<ExtractStencilProps<typeof statusIndicatorStencil>, 'variant'> {
   /**
    * Defines the color of the `StatusIndicator`.
-   * * `info` | `blue` - Uses the info systemLegacy color and is used for informational status indications
-   * * `positive` | `green` - Uses the positive systemLegacy color and is used for positive status indications
-   * * `caution` | `orange` - Uses the caution systemLegacy color and is used for warnings or required actions
-   * * `critical` | `red` - Uses the error systemLegacy color and is used for critical or negative status indications
-   * * `neutral` | `gray` - Uses the neutral systemLegacy color and generally doesn't have positive or negative connotations
-   * * `illuminate` - Uses the AI systemLegacy color and is used for AI generated content
-   * * `transparent` - Uses the transparent systemLegacy color and is used for overlays on top of images or videos
+   * * `info` | `blue` - Uses the info system color and is used for informational status indications
+   * * `positive` | `green` - Uses the positive system color and is used for positive status indications
+   * * `caution` | `orange` - Uses the caution system color and is used for warnings or required actions
+   * * `critical` | `red` - Uses the error system color and is used for critical or negative status indications
+   * * `neutral` | `gray` - Uses the neutral system color and generally doesn't have positive or negative connotations
+   * * `illuminate` - Uses the AI system color and is used for AI generated content
+   * * `transparent` - Uses the transparent system color and is used for overlays on top of images or videos
    *
    * @default 'neutral'
    */
@@ -73,13 +73,13 @@ const statusIndicatorStencil = createStencil({
   modifiers: {
     /**
      * Defines the color of the `StatusIndicator`.
-     * * `info` | `blue` - Uses the info systemLegacy color and is used for informational status indications
-     * * `positive` | `green` - Uses the positive systemLegacy color and is used for positive status indications
-     * * `caution` | `orange` - Uses the caution systemLegacy color and is used for warnings or required actions
-     * * `critical` | `red` - Uses the error systemLegacy color and is used for critical or negative status indications
-     * * `neutral` | `gray` - Uses the neutral systemLegacy color and generally doesn't have positive or negative connotations
-     * * `illuminate` - Uses the AI systemLegacy color and is used for AI generated content
-     * * `transparent` - Uses the transparent systemLegacy color and is used for overlays on top of images or videos
+     * * `info` | `blue` - Uses the info system color and is used for informational status indications
+     * * `positive` | `green` - Uses the positive system color and is used for positive status indications
+     * * `caution` | `orange` - Uses the caution system color and is used for warnings or required actions
+     * * `critical` | `red` - Uses the error system color and is used for critical or negative status indications
+     * * `neutral` | `gray` - Uses the neutral system color and generally doesn't have positive or negative connotations
+     * * `illuminate` - Uses the AI system color and is used for AI generated content
+     * * `transparent` - Uses the transparent system color and is used for overlays on top of images or videos
      *
      * @default 'neutral'
      */
