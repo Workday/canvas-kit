@@ -41,29 +41,17 @@ export const checkboxBackgroundStencil = createStencil({
     },
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: cssVar(
-          system.legacy.color.brand.border.critical,
-          brand.common.errorInner
-        ),
+        [errorRingColorInner]: system.legacy.color.brand.border.critical,
+
         [errorRingColorOuter]: 'transparent',
-        backgroundColor: cssVar(
-          system.legacy.color.brand.surface.critical.default,
-          brand.error.lightest
-        ),
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
       }),
       caution: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: cssVar(
-          system.legacy.color.brand.focus.caution.inner,
-          brand.common.alertInner
-        ),
-        [errorRingColorOuter]: cssVar(
-          system.legacy.color.brand.border.caution,
-          brand.common.alertOuter
-        ),
-        backgroundColor: cssVar(
-          system.legacy.color.brand.surface.caution.default,
-          brand.alert.lightest
-        ),
+        [errorRingColorInner]: system.legacy.color.brand.focus.caution.inner,
+
+        [errorRingColorOuter]: system.legacy.color.brand.border.caution,
+
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
       }),
     },
   },
@@ -71,13 +59,13 @@ export const checkboxBackgroundStencil = createStencil({
     {
       modifiers: {variant: 'inverse', error: 'error'},
       styles: {
-        backgroundColor: cssVar(system.legacy.color.surface.inverse, brand.error.lightest),
+        backgroundColor: system.legacy.color.surface.inverse,
       },
     },
     {
       modifiers: {variant: 'inverse', error: 'caution'},
       styles: {
-        backgroundColor: cssVar(system.legacy.color.surface.inverse, brand.alert.lightest),
+        backgroundColor: system.legacy.color.surface.inverse,
       },
     },
   ],

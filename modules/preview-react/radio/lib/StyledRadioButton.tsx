@@ -20,8 +20,8 @@ export const radioInputStencil = createStencil({
   },
   base: {
     cursor: 'pointer',
-    height: cssVar(base.legacy.size225, px2rem(radioHeight)),
-    width: cssVar(base.legacy.size225, px2rem(radioWidth)),
+    height: base.legacy.size225,
+    width: base.legacy.size225,
     borderRadius: system.legacy.shape.full,
     position: 'absolute',
     margin: 0,
@@ -48,8 +48,8 @@ export const radioInputStencil = createStencil({
       backgroundColor: system.color.bg.default,
       boxSizing: 'border-box',
       border: `${px2rem(1)} solid ${system.color.border.input.default}`,
-      height: cssVar(base.legacy.size225, px2rem(radioHeight)),
-      width: cssVar(base.legacy.size225, px2rem(radioWidth)),
+      height: base.legacy.size225,
+      width: base.legacy.size225,
       borderRadius: system.legacy.shape.full,
       justifyContent: 'center',
       pointerEvents: 'none',
@@ -138,17 +138,17 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
 
 export const radioInputWrapperStencil = createStencil({
   base: {
-    height: cssVar(base.legacy.size225, px2rem(radioHeight)),
-    width: cssVar(base.legacy.size225, px2rem(radioWidth)),
+    height: base.legacy.size225,
+    width: base.legacy.size225,
     flex: '0 0 auto',
     // Hover Ripple element
     '::before': {
       content: "''",
       position: 'absolute',
       borderRadius: system.legacy.shape.full,
-      height: cssVar(base.legacy.size225, px2rem(radioHeight)),
+      height: base.legacy.size225,
       transition: 'box-shadow 150ms ease-out',
-      width: cssVar(base.legacy.size225, px2rem(radioWidth)),
+      width: base.legacy.size225,
       pointerEvents: 'none',
       opacity: system.opacity.full,
     },

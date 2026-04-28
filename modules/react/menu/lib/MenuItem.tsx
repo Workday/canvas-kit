@@ -95,11 +95,8 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: cssVar(system.legacy.color.brand.fg.primary.strong, brand.primary.dark),
-      backgroundColor: cssVar(
-        system.legacy.color.brand.surface.primary.strong,
-        brand.primary.lightest
-      ),
+      color: system.legacy.color.brand.fg.primary.strong,
+      backgroundColor: system.legacy.color.brand.surface.primary.strong,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
@@ -107,7 +104,7 @@ export const menuItemStencil = createStencil({
       '&:where(.focus, :focus-visible)': {
         [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
-        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: system.legacy.color.brand.accent.primary,
         color: cssVar(system.color.fg.inverse, brand.primary.accent),
       },
     },
@@ -115,16 +112,13 @@ export const menuItemStencil = createStencil({
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: cssVar(
-        system.legacy.color.surface.overlay.hover.default,
-        brand.neutral.lightest
-      ),
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
       color: cssVar(system.color.fg.inverse, brand.primary.accent),
-      backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
+      backgroundColor: system.legacy.color.brand.accent.primary,
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
@@ -139,7 +133,7 @@ export const menuItemStencil = createStencil({
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.light),
+        backgroundColor: system.legacy.color.brand.accent.primary,
         opacity: system.opacity.disabled,
       },
     },

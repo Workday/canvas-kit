@@ -23,7 +23,7 @@ export const switchInputStencil = createStencil({
     },
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: system.legacy.color.brand.accent.primary,
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
@@ -51,17 +51,17 @@ export const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${cssVar(system.legacy.color.focus.inverse, base.legacy.neutral0)},
-              0 0 0 ${system.space.x1} ${cssVar(system.legacy.color.brand.focus.critical, brand.common.errorInner)},
+              0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
+              0 0 0 ${system.space.x1} ${system.legacy.color.brand.focus.critical},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${cssVar(system.legacy.color.focus.inverse, base.legacy.neutral0)},
-          0 0 0 ${system.space.x1} ${cssVar(system.legacy.color.brand.focus.caution.inner, brand.common.alertInner)},
-          0 0 0 ${px2rem(5)} ${cssVar(system.legacy.color.brand.border.caution, brand.common.alertOuter)}`,
+          0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
+          0 0 0 ${base.legacy.size50} ${system.legacy.color.brand.focus.caution.inner},
+          0 0 0 ${px2rem(5)} ${system.legacy.color.brand.border.caution}`,
         },
       },
     },

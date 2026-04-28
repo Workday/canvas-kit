@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
@@ -39,7 +39,6 @@ const secondaryButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: base.legacy.slate100,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.hover,
       }),
@@ -51,7 +50,6 @@ const secondaryButtonStencil = createStencil({
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: system.color.bg.alt.strong,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.pressed,
       }),
@@ -80,7 +78,6 @@ const secondaryButtonStencil = createStencil({
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.legacy.color.surface.transparent,
-            fallback: system.color.bg.transparent.strong,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.hover,
           }),
@@ -102,7 +99,6 @@ const secondaryButtonStencil = createStencil({
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.legacy.color.surface.transparent,
-            fallback: system.color.bg.transparent.stronger,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.pressed,
           }),

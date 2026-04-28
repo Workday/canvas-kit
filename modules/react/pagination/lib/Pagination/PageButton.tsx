@@ -33,17 +33,13 @@ export const paginationPageButtonStencil = createStencil({
     toggled: {
       true: {
         fontWeight: system.fontWeight.bold,
-        [buttonStencil.vars.background]: cssVar(
-          system.legacy.color.brand.accent.primary,
-          brand.primary.base
-        ),
+        [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: cssVar(
-            system.legacy.color.brand.accent.primary,
-            brand.primary.base
-          ),
+          [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+
           [buttonStencil.vars.label]: system.color.fg.inverse,
         },
 

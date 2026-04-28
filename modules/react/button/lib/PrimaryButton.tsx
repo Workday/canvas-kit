@@ -86,11 +86,7 @@ const primaryButtonStencil = createStencil({
         // Hover Styles
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: brand.action.lightest,
-            fallback: cssVar(
-              system.legacy.color.surface.inverse,
-              cssVar(brand.action.lighter, brand.primary.lighter)
-            ),
+            color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
             mixinColor: system.legacy.color.accent.overlay.mixin,
             mixinValue: system.legacy.opacity.accent.hover,
           }),
@@ -101,10 +97,7 @@ const primaryButtonStencil = createStencil({
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: cssVar(
             brand.action.lightest,
-            cssVar(
-              system.legacy.color.surface.inverse,
-              cssVar(brand.action.lightest, brand.primary.lightest)
-            )
+            system.legacy.color.surface.inverse
           ),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
@@ -115,11 +108,7 @@ const primaryButtonStencil = createStencil({
         // Active Styles
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: brand.action.lightest,
-            fallback: cssVar(
-              system.legacy.color.surface.inverse,
-              cssVar(brand.action.light, brand.primary.light)
-            ),
+            color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
             mixinColor: system.legacy.color.accent.overlay.mixin,
             mixinValue: system.legacy.opacity.accent.pressed,
           }),
