@@ -124,7 +124,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
   ) => {
     const translate = getTransformOrigin(
       transformOrigin || defaultTransformOrigin,
-      system.space.x2
+      system.legacy.gap.sm
     );
 
     return (

@@ -34,7 +34,7 @@ const keyframesLoading = keyframes({
 export interface LoadingDotsProps extends CSProps {
   /**
    * Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds.
-   * @default `system.legacy.color.accent.muted.default`
+   * @default `system.color.accent.muted.default`
    */
   loadingDotColor?: string;
   /**

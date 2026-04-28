@@ -23,17 +23,17 @@ export const formFieldStencil = createStencil({
     orientation: {
       horizontalStart: {
         flexDirection: 'row',
-        gap: system.gap.xl,
+        gap: system.legacy.gap.xl,
         width: '100%',
       },
       horizontalEnd: {
         flexDirection: 'row',
-        gap: system.gap.xl,
+        gap: system.legacy.gap.xl,
         width: '100%',
       },
       vertical: {
         flexDirection: 'column',
-        gap: system.gap.xs,
+        gap: system.legacy.gap.xs,
         alignItems: 'flex-start',
       },
     },

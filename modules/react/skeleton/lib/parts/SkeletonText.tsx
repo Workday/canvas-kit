@@ -10,7 +10,7 @@ export interface SkeletonTextProps extends CSProps {
   lineCount?: number;
   /**
    * The background color of the skeleton
-   * @default `system.legacy.color.bg.alt.strong`
+   * @default `system.color.bg.alt.strong`
    */
   backgroundColor?: string;
 }

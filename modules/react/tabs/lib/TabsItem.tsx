@@ -59,20 +59,20 @@ export interface TabsItemProps
    */
   'data-id'?: string;
   /**
-   * Optional id. If not set, it will inherit the ID passed to the `Tabs` componentLegacy and append the
+   * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
    * index at the end. Only set this for advanced cases.
    */
   id?: string;
   /**
    * Part of the ARIA specification for tabs. This attributes links a `role=tab` to a
    * `role=tabpanel`. This value must be the same as the associated `id` attribute of the tab panel.
-   * This is automatically set by the componentLegacy and should only be used in advanced cases.
+   * This is automatically set by the component and should only be used in advanced cases.
    */
   'aria-controls'?: string;
   /**
    * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
    * should either be `true` or `undefined` and never `false`. This is automatically set by the
-   * componentLegacy and should only be used in advanced cases.
+   * component and should only be used in advanced cases.
    */
   'aria-selected'?: boolean;
   /**

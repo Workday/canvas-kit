@@ -3,8 +3,8 @@ import * as React from 'react';
 import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Grid} from '@workday/canvas-kit-react/layout';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
@@ -21,7 +21,7 @@ export const segmentedControlListStencil = createStencil({
   base: {
     display: 'inline-grid',
     backgroundColor: system.legacy.color.surface.alt.strong,
-    border: `${cssVar(base.legacy.size0, px2rem(1))} solid ${system.color.border.transparent}`,
+    border: `0 solid ${system.color.border.transparent}`,
     borderRadius: system.legacy.shape.lg,
     padding: system.legacy.padding.xxs,
     gridGap: system.legacy.gap.sm,

@@ -20,7 +20,7 @@ export interface SkeletonShapeProps extends CSProps {
   borderRadius?: number | string;
   /**
    * The background color of the skeleton
-   * @default `system.legacy.color.bg.alt.strong`
+   * @default `system.color.bg.alt.strong`
    */
   backgroundColor?: string;
 }

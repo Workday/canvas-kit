@@ -59,7 +59,7 @@ export const SidePanelStates = {
               initialTransitionState: 'expanded',
               variant: 'standard',
               onToggleClick: () => console.log('click toggle button'),
-              padding: system.padding.xs,
+              padding: system.legacy.padding.xs,
             },
           },
           {

@@ -7,7 +7,7 @@ import {SkeletonShape} from './SkeletonShape';
 export interface SkeletonHeaderProps extends CSProps {
   /**
    * The background color of the skeleton
-   * @default `system.legacy.color.bg.alt.strong`
+   * @default `system.color.bg.alt.strong`
    */
   backgroundColor?: string;
   /**

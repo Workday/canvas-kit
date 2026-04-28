@@ -20,7 +20,7 @@ export const resetButtonStencil = createStencil({
     justifyContent: 'flex-start',
     width: calc.add('100%', system.legacy.size.sm),
     height: system.legacy.size.sm,
-    margin: `${calc.negate(base.legacy.size100)} ${calc.negate(system.size.xxxs)} ${base.legacy.size100}`,
+    margin: `${calc.negate(base.legacy.size100)} ${calc.negate(system.legacy.size.xxxs)} ${base.legacy.size100}`,
     padding: `0 ${system.legacy.padding.md}`,
     whiteSpace: 'nowrap',
     border: 'none',
