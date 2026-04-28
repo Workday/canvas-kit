@@ -8,7 +8,7 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {menuGroupIcon} from '@workday/canvas-system-icons-web';
+import {stackIcon} from '@workday/canvas-system-icons-web';
 
 export const TooltipReturnFocus = () => {
   const model = usePopupModel();
@@ -21,7 +21,7 @@ export const TooltipReturnFocus = () => {
   return (
     <Popup model={model}>
       <Tooltip title="Open Popup">
-        <Popup.Target as={TertiaryButton} icon={menuGroupIcon} />
+        <Popup.Target as={TertiaryButton} icon={stackIcon} />
       </Tooltip>
       <Popup.Popper>
         <Popup.Card>
