@@ -52,7 +52,6 @@ export const bannerStencil = createStencil({
         '&:hover, &.hover': {
           background: colorSpace.darken({
             color: system.legacy.color.brand.accent.critical,
-            fallback: brand.error.dark,
             mixinColor: system.legacy.color.accent.overlay.mixin,
             mixinValue: system.legacy.opacity.accent.hover,
           }),
@@ -69,7 +68,6 @@ export const bannerStencil = createStencil({
         '&:hover, &.hover': {
           background: colorSpace.darken({
             color: system.legacy.color.brand.accent.caution,
-            fallback: brand.alert.dark,
             mixinColor: system.legacy.color.accent.overlay.mixin,
             mixinValue: system.legacy.opacity.accent.hover,
           }),

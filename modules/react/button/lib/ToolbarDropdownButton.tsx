@@ -53,7 +53,6 @@ export const toolbarDropdownButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: system.color.bg.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.hover,
       }),
@@ -66,7 +65,6 @@ export const toolbarDropdownButtonStencil = createStencil({
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: system.color.bg.alt.stronger,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.pressed,
       }),

@@ -39,7 +39,6 @@ const deleteButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.brand.accent.critical,
-        fallback: brand.error.dark,
         mixinColor: system.legacy.color.accent.overlay.mixin,
         mixinValue: system.legacy.opacity.accent.hover,
       }),
@@ -53,7 +52,6 @@ const deleteButtonStencil = createStencil({
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.brand.accent.critical,
-        fallback: brand.error.darkest,
         mixinColor: system.legacy.color.accent.overlay.mixin,
         mixinValue: system.legacy.opacity.accent.pressed,
       }),

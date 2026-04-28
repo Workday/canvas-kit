@@ -38,7 +38,6 @@ export const toolbarIconButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: system.color.bg.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.hover,
       }),
@@ -48,7 +47,6 @@ export const toolbarIconButtonStencil = createStencil({
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.transparent,
-        fallback: system.color.bg.alt.stronger,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.pressed,
       }),
@@ -73,7 +71,6 @@ export const toolbarIconButtonStencil = createStencil({
       '&:hover, &.hover': {
         [buttonStencil.vars.background]: colorSpace.darken({
           color: system.legacy.color.brand.surface.primary.default,
-          fallback: system.color.bg.alt.default,
           mixinColor: system.legacy.color.surface.overlay.mixin,
           mixinValue: system.legacy.opacity.surface.hover,
         }),
@@ -83,7 +80,6 @@ export const toolbarIconButtonStencil = createStencil({
       '&:active, &.active': {
         [buttonStencil.vars.background]: colorSpace.darken({
           color: system.legacy.color.brand.surface.primary.default,
-          fallback: system.color.bg.alt.stronger,
           mixinColor: system.legacy.color.surface.overlay.mixin,
           mixinValue: system.legacy.opacity.surface.pressed,
         }),
