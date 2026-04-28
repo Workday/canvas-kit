@@ -2,6 +2,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {component} from '@workday/canvas-tokens-web';
+import {CanvasSystemIcon as LegacyCanvasSystemIcon} from '@workday/design-assets-types';
 
 import {Svg, SvgProps, resolveSize, svgStencil} from './Svg';
 
@@ -23,7 +24,7 @@ export interface SystemIconProps extends Omit<SvgProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
-  icon: CanvasSystemIcon;
+  icon: CanvasSystemIcon | LegacyCanvasSystemIcon;
   /**
    * The size of the SystemIcon in size variants or string / numeric (px) values.
    * **System icon sizes**

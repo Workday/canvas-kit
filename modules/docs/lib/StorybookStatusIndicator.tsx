@@ -4,7 +4,7 @@ import {
 } from '@workday/canvas-kit-preview-react/status-indicator';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {sparkleSingleSmallIcon} from '@workday/canvas-system-icons-web';
+import {sparkleIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const storybookStatusIndicatorStencil = createStencil({
@@ -17,7 +17,7 @@ const storybookStatusIndicatorStencil = createStencil({
 
 const content = {
   ai: {
-    icon: sparkleSingleSmallIcon,
+    icon: sparkleIcon,
     label: 'AI Content',
   },
   deprecated: {
