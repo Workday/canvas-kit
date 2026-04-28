@@ -40,8 +40,8 @@ export const inputGroupInnerStencil = createStencil({
      * on your own.
      */
     insetInlineEnd: 'initial',
-    width: system.size.md,
-    height: system.size.md,
+    width: system.legacy.size.md,
+    height: system.legacy.size.md,
     /**
      * Some inner input group elements are decoration only and should not have pointer events
      */

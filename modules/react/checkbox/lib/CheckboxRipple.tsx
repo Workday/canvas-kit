@@ -7,10 +7,10 @@ export const checkboxRippleStencil = createStencil({
     ripple: 'checkbox-ripple',
   },
   base: {
-    borderRadius: system.shape.full,
+    borderRadius: system.legacy.shape.full,
     boxShadow: 'none',
-    height: base.size225,
-    width: base.size225,
+    height: base.legacy.size225,
+    width: base.legacy.size225,
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',
     pointerEvents: 'none',

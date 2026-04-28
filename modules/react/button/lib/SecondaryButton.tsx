@@ -22,47 +22,47 @@ const secondaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: system.color.surface.transparent,
-    [buttonStencil.vars.borderRadius]: system.shape.full,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
     [buttonStencil.vars.border]: system.color.border.input.default,
     [buttonStencil.vars.label]: system.color.fg.default,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.surface.default,
+      [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
+      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
     // Hover Styles
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
-        fallback: base.slate100,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        color: system.legacy.color.surface.transparent,
+        fallback: base.legacy.slate100,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.color.border.input.hover,
+      [buttonStencil.vars.border]: system.legacy.color.border.input.hover,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
     },
     // Active Styles
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
+        color: system.legacy.color.surface.transparent,
         fallback: system.color.bg.alt.strong,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.color.border.input.hover,
+      [buttonStencil.vars.border]: system.legacy.color.border.input.hover,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
       [buttonStencil.vars.label]: system.color.fg.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
@@ -72,48 +72,48 @@ const secondaryButtonStencil = createStencil({
     variant: {
       inverse: {
         // Default Styles
-        [buttonStencil.vars.background]: system.color.surface.transparent,
-        [buttonStencil.vars.border]: system.color.border.inverse.default,
+        [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+        [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
         [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.color.surface.transparent,
+            color: system.legacy.color.surface.transparent,
             fallback: system.color.bg.transparent.strong,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinValue: system.legacy.opacity.surface.hover,
           }),
-          [buttonStencil.vars.border]: system.color.border.inverse.default,
+          [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.color.surface.inverse,
+          [buttonStencil.vars.background]: system.legacy.color.surface.inverse,
 
           [buttonStencil.vars.border]: system.color.border.transparent,
           [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.focus.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.color.surface.transparent,
+            color: system.legacy.color.surface.transparent,
             fallback: system.color.bg.transparent.stronger,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.pressed,
+            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinValue: system.legacy.opacity.surface.pressed,
           }),
-          [buttonStencil.vars.border]: system.color.border.inverse.default,
+          [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
-          [buttonStencil.vars.background]: system.color.surface.transparent,
+          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         },

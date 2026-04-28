@@ -34,7 +34,7 @@ const keyframesLoading = keyframes({
 export interface LoadingDotsProps extends CSProps {
   /**
    * Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds.
-   * @default `system.color.accent.muted.default`
+   * @default `system.legacy.color.accent.muted.default`
    */
   loadingDotColor?: string;
   /**
@@ -55,13 +55,13 @@ export const loadingDotsStencil = createStencil({
   },
   base: ({loadingDotColor, animationDurationMs, loadingAnimationDotPart}) => ({
     display: 'inline-flex',
-    gap: system.gap.sm,
+    gap: system.legacy.gap.sm,
     [loadingAnimationDotPart]: {
-      backgroundColor: cssVar(loadingDotColor, system.color.accent.muted.default),
-      width: system.size.xxxs,
-      height: system.size.xxxs,
+      backgroundColor: cssVar(loadingDotColor, system.legacy.color.accent.muted.default),
+      width: system.legacy.size.xxxs,
+      height: system.legacy.size.xxxs,
       fontSize: 0,
-      borderRadius: system.shape.full,
+      borderRadius: system.legacy.shape.full,
       outline: `${px2rem(2)} solid transparent`,
       transform: 'scale(0)',
       display: 'inline-block',

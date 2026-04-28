@@ -44,11 +44,11 @@ const checkboxCheckStencil = createStencil({
     variant: {
       inverse: {
         [systemIconStencil.vars.color]: cssVar(
-          system.color.brand.fg.primary.default,
+          system.legacy.color.brand.fg.primary.default,
           brand.primary.base
         ),
         '& > div': {
-          backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+          backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
         },
       },
     },
@@ -64,7 +64,7 @@ const indeterminateBoxStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
       },
     },
   },

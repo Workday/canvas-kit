@@ -10,16 +10,16 @@ export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {
 
 export const modalCardStencil = createStencil({
   base: {
-    margin: base.size500,
+    margin: base.legacy.size500,
     width: px2rem(440),
     border: '0',
     outline: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[5],
-    borderRadius: system.shape.xxxl,
+    borderRadius: system.legacy.shape.xxxl,
     '@media screen and (max-width: 768px)': {
       gap: 0,
-      margin: system.gap.md, // 16px all around margin on smaller screen sizes
-      padding: system.gap.md, // brings total padding between edge and content to 24px
+      margin: system.legacy.gap.md, // 16px all around margin on smaller screen sizes
+      padding: system.legacy.gap.md, // brings total padding between edge and content to 24px
     },
   },
 });

@@ -24,20 +24,20 @@ export interface AIIngressButtonProps
 /**
  * Icon gradient colors
  */
-const illuminateStopColor1 = base.red200; //'#FFA198'
-const illuminateStopColor2 = base.orange200; //'#FFCAA0'
-const illuminateStopColor3 = base.orange200; //'#FFCA79'
-const illuminateStopColor4 = base.amber200; //'#FDCA44'
-const illuminateStopColor5 = base.amber300; //'#FFB74D';
+const illuminateStopColor1 = base.legacy.red200; //'#FFA198'
+const illuminateStopColor2 = base.legacy.orange200; //'#FFCAA0'
+const illuminateStopColor3 = base.legacy.orange200; //'#FFCA79'
+const illuminateStopColor4 = base.legacy.amber200; //'#FDCA44'
+const illuminateStopColor5 = base.legacy.amber300; //'#FFB74D';
 
 /**
  * Box shadow glow colors
  */
-const glowEraser = base.magenta200; //'#FFC2FD';
-const glowHighlighter = base.amber100; //'#FFF3A8';
-const glowLunchBreak = base.amber300; //'#FEC10B';
-const glowHappyHour = base.orange400; //'#FD7E00';
-const glowThumbtack = base.coral500; //'#FC5B05';
+const glowEraser = base.legacy.magenta200; //'#FFC2FD';
+const glowHighlighter = base.legacy.amber100; //'#FFF3A8';
+const glowLunchBreak = base.legacy.amber300; //'#FEC10B';
+const glowHappyHour = base.legacy.orange400; //'#FD7E00';
+const glowThumbtack = base.legacy.coral500; //'#FC5B05';
 
 export const AIIngressButtonStencil = createStencil({
   extends: buttonStencil,

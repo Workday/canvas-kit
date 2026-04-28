@@ -59,20 +59,20 @@ export interface TabsItemProps
    */
   'data-id'?: string;
   /**
-   * Optional id. If not set, it will inherit the ID passed to the `Tabs` component and append the
+   * Optional id. If not set, it will inherit the ID passed to the `Tabs` componentLegacy and append the
    * index at the end. Only set this for advanced cases.
    */
   id?: string;
   /**
    * Part of the ARIA specification for tabs. This attributes links a `role=tab` to a
    * `role=tabpanel`. This value must be the same as the associated `id` attribute of the tab panel.
-   * This is automatically set by the component and should only be used in advanced cases.
+   * This is automatically set by the componentLegacy and should only be used in advanced cases.
    */
   'aria-controls'?: string;
   /**
    * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
    * should either be `true` or `undefined` and never `false`. This is automatically set by the
-   * component and should only be used in advanced cases.
+   * componentLegacy and should only be used in advanced cases.
    */
   'aria-selected'?: boolean;
   /**
@@ -85,35 +85,35 @@ export interface TabsItemProps
 const tabItemStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.lg,
-    letterSpacing: system.letterSpacing.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.medium,
     border: 'none',
-    backgroundColor: system.color.surface.transparent,
+    backgroundColor: system.legacy.color.surface.transparent,
     flex: '0 0 auto',
     minWidth: 0,
     alignItems: 'center',
-    padding: `0 ${system.padding.md}`,
-    height: system.size.lg,
+    padding: `0 ${system.legacy.padding.md}`,
+    height: system.legacy.size.lg,
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
-    borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.none}`,
+    borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: 'currentColor',
-    [systemIconStencil.vars.size]: component.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
 
     '&:has(span)': {
       display: 'flex',
-      gap: system.gap.sm,
+      gap: system.legacy.gap.sm,
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
-      backgroundColor: system.color.surface.overlay.hover.default,
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
       color: system.color.fg.muted.strong,
       [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
@@ -122,8 +122,8 @@ const tabItemStencil = createStencil({
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
+      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
       color: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
@@ -134,30 +134,30 @@ const tabItemStencil = createStencil({
       opacity: system.opacity.disabled,
       '&:hover': {
         cursor: 'auto',
-        backgroundColor: system.color.surface.transparent,
+        backgroundColor: system.legacy.color.surface.transparent,
         [systemIconStencil.vars.color]: system.color.fg.muted.default,
       },
     },
 
     '&[aria-selected=true]': {
-      color: system.color.brand.fg.primary.default,
+      color: system.legacy.color.brand.fg.primary.default,
       cursor: 'default',
-      [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
+      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
-        borderBottom: `${base.size50} solid transparent`,
-        borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.none}`,
-        backgroundColor: system.color.brand.fg.primary.default,
+        borderBottom: `${base.legacy.size50} solid transparent`,
+        borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
+        backgroundColor: system.legacy.color.brand.fg.primary.default,
         bottom: 0,
         content: `''`,
         left: 0,
-        marginBlockStart: `${calc.negate(calc.divide(system.padding.xs, system.padding.xxs))}`,
+        marginBlockStart: `${calc.negate(calc.divide(system.legacy.padding.xs, system.legacy.padding.xxs))}`,
         width: '100%',
       },
       '&:hover, &.hover, &:focus-visible, &.focus': {
-        backgroundColor: system.color.surface.transparent,
-        color: system.color.brand.fg.primary.default,
+        backgroundColor: system.legacy.color.surface.transparent,
+        color: system.legacy.color.brand.fg.primary.default,
       },
     },
   },

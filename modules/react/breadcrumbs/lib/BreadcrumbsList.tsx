@@ -25,11 +25,11 @@ export interface BreadcrumbsListProps<T = any>
 
 export const breadcrumbsListStencil = createStencil({
   base: {
-    padding: `${system.padding.xs} 0`,
+    padding: `${system.legacy.padding.xs} 0`,
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
-    minHeight: system.size.lg,
+    minHeight: system.legacy.size.lg,
     listStyle: 'none',
     width: '100%',
   },

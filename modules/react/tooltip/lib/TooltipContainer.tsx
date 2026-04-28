@@ -57,7 +57,7 @@ export const tooltipContainerStencil = createStencil({
     ...system.type.subtext.medium,
     display: 'inline-flex',
     position: 'relative',
-    padding: system.padding.sm,
+    padding: system.legacy.padding.sm,
     color: system.color.fg.inverse,
     animationName: tooltipAnimation,
     animationDuration: '150ms',
@@ -70,12 +70,12 @@ export const tooltipContainerStencil = createStencil({
     // use :before vs margin to increase the tooltip hit-box
     '&:before': {
       content: '""',
-      borderRadius: system.shape.md,
+      borderRadius: system.legacy.shape.md,
       outline: `${px2rem(1)} solid transparent`,
       outlineOffset: `-${px2rem(1)}`,
       zIndex: -1,
-      margin: system.gap.xs,
-      backgroundColor: system.color.surface.contrast.default,
+      margin: system.legacy.gap.xs,
+      backgroundColor: system.legacy.color.surface.contrast.default,
       position: 'absolute',
       top: 0,
       left: 0,
@@ -91,24 +91,24 @@ export const tooltipContainerStencil = createStencil({
 
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
-      left: calc.negate(base.size50),
+      left: calc.negate(base.legacy.size50),
     },
     '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
-      right: calc.negate(base.size50),
+      right: calc.negate(base.legacy.size50),
     },
     '[data-popper-placement="left-start"] &, [data-popper-placement="right-start"] &': {
-      top: calc.negate(base.size50),
+      top: calc.negate(base.legacy.size50),
     },
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
-      bottom: calc.negate(base.size50),
+      bottom: calc.negate(base.legacy.size50),
     },
   }),
   modifiers: {
     elementHasFocus: {
       true: {
-        padding: calc.subtract(system.padding.md, calc.divide(system.padding.xxs, 2)),
+        padding: calc.subtract(system.legacy.padding.md, calc.divide(system.legacy.padding.xxs, 2)),
         '&:before': {
-          margin: base.size75,
+          margin: base.legacy.size75,
         },
       },
     },

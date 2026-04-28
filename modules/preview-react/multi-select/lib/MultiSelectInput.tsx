@@ -23,31 +23,31 @@ export const multiSelectInputStencil = createStencil({
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: system.color.surface.default,
-    borderRadius: system.shape.md,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.md,
     boxSizing: 'border-box',
-    minHeight: system.size.md,
+    minHeight: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
     [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      borderColor: system.color.border.input.hover,
+      borderColor: system.legacy.color.border.input.hover,
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: system.color.brand.border.primary,
-      boxShadow: `inset 0 0 0 1px ${system.color.brand.focus.primary}`,
+      borderColor: system.legacy.color.brand.border.primary,
+      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
     },
 
     '& [data-part="user-input"]': {
       fontFamily: system.fontFamily.default,
-      fontSize: system.fontSize.subtext.lg,
+      fontSize: system.legacy.fontSize.subtext.lg,
       fontWeight: system.fontWeight.normal,
-      lineHeight: system.lineHeight.subtext.lg,
-      backgroundColor: system.color.surface.transparent,
-      borderRadius: system.shape.md,
+      lineHeight: system.legacy.lineHeight.subtext.lg,
+      backgroundColor: system.legacy.color.surface.transparent,
+      borderRadius: system.legacy.shape.md,
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
@@ -96,51 +96,51 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '& :where([data-part="separator"])': {
-      backgroundColor: system.color.border.default,
+      backgroundColor: system.legacy.color.border.default,
       height: 1,
-      margin: `0 ${system.gap.sm}`,
+      margin: `0 ${system.legacy.gap.sm}`,
     },
 
     '& :where([data-part="list"])': {
       display: 'flex',
-      gap: system.gap.sm,
-      padding: system.padding.xs,
+      gap: system.legacy.gap.sm,
+      padding: system.legacy.padding.xs,
       flexWrap: 'wrap',
     },
   },
   modifiers: {
     error: {
       error: {
-        borderColor: system.color.brand.border.critical,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}`,
-        backgroundColor: system.color.brand.surface.critical.default,
+        borderColor: system.legacy.color.brand.border.critical,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: system.color.brand.border.critical,
+          borderColor: system.legacy.color.brand.border.critical,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          borderColor: system.color.brand.border.critical,
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}, 0 0 0 2px ${
-            system.color.focus.inverse
-          }, 0 0 0 4px ${system.color.brand.border.primary}`,
+          borderColor: system.legacy.color.brand.border.critical,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}, 0 0 0 2px ${
+            system.legacy.color.focus.inverse
+          }, 0 0 0 4px ${system.legacy.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        borderColor: system.color.brand.border.caution,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner}`,
-        backgroundColor: system.color.brand.surface.caution.default,
+        borderColor: system.legacy.color.brand.border.caution,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner}`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: system.color.brand.border.caution,
+            borderColor: system.legacy.color.brand.border.caution,
           },
         '&:hover, &.hover': {
-          borderColor: system.color.brand.border.caution,
+          borderColor: system.legacy.color.brand.border.caution,
         },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner},
-        0 0 0 2px ${system.color.focus.inverse},
-        0 0 0 4px ${system.color.brand.border.primary}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner},
+        0 0 0 2px ${system.legacy.color.focus.inverse},
+        0 0 0 4px ${system.legacy.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
       },

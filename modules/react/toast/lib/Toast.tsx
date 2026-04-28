@@ -53,8 +53,8 @@ const toastStencil = createStencil({
     flexDirection: 'row',
     width: px2rem(360),
     padding: 0,
-    gap: system.gap.xs,
-    borderRadius: system.shape.xl,
+    gap: system.legacy.gap.xs,
+    borderRadius: system.legacy.shape.xl,
   },
 });
 
@@ -66,7 +66,7 @@ const toastStencil = createStencil({
  *
  * const MyToast = (props: CardProps) => (
  *    <Toast mode="dialog" aria-label="notifcation">
- *      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
+ *      <Toast.Icon icon={checkIcon} color={system.legacy.color.fg.success.default} />
  *      <Toast.Body>
  *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
  *        <Toast.Link href="#hreflink">Custom Link</Toast.Link>

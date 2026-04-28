@@ -19,7 +19,7 @@ export const paginationPageListStencil = createStencil({
     display: 'flex',
     margin: 0,
     paddingInline: 0,
-    gap: system.gap.xs,
+    gap: system.legacy.gap.xs,
   },
 });
 

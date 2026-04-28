@@ -20,7 +20,7 @@ const fadeIn = keyframes({
     background: 'none',
   },
   '100%': {
-    background: system.color.surface.overlay.scrim,
+    background: system.legacy.color.surface.overlay.scrim,
   },
 });
 
@@ -34,7 +34,7 @@ export const modalOverlayContainerStencil = createStencil({
     left: 0,
     width: '100vw',
     height: '100vh',
-    background: system.color.surface.overlay.scrim,
+    background: system.legacy.color.surface.overlay.scrim,
     animationDuration: '0.3s',
     animationName: fadeIn,
     // Allow overriding of animation in special cases

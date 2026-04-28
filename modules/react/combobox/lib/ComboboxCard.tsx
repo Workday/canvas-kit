@@ -24,7 +24,7 @@ export const useComboboxCard = createElemPropsHook(useComboboxModel)(model => {
 export const comboboxCardStencil = createStencil({
   base: {
     '& :where([data-part="list-box-container"])': {
-      borderRadius: system.shape.xxl,
+      borderRadius: system.legacy.shape.xxl,
     },
   },
 });

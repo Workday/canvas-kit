@@ -9,7 +9,7 @@ import {textStencil} from './Text';
  * @deprecated ⚠️ `TypeLabelProps` has been deprecated and will be removed in a future major version.
  */
 export interface TypeLabelProps extends BoxProps {
-  typeLevel?: `${keyof typeof system.type}.${'large' | 'medium' | 'small'}`;
+  typeLevel?: `${keyof typeof system.legacy.type}.${'large' | 'medium' | 'small'}`;
   /**
    * Disabled state as a boolean
    *
@@ -32,7 +32,7 @@ const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
     ...system.type.subtext.large,
-    color: system.color.text.default,
+    color: system.color.fg.default,
   },
   modifiers: {
     disabled: {

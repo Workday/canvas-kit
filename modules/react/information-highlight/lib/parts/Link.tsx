@@ -8,9 +8,9 @@ const informationHighlightLinkStencil = createStencil({
     return {
       fontFamily: system.fontFamily.default,
       fontWeight: system.fontWeight.bold,
-      lineHeight: system.lineHeight.subtext.lg,
-      fontSize: system.fontSize.subtext.lg,
-      letterSpacing: system.letterSpacing.subtext.lg,
+      lineHeight: system.legacy.lineHeight.subtext.lg,
+      fontSize: system.legacy.fontSize.subtext.lg,
+      letterSpacing: system.legacy.letterSpacing.subtext.lg,
       gridColumn: '2',
       justifySelf: 'start',
       color: system.color.fg.default,

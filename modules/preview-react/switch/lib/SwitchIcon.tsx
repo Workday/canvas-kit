@@ -9,7 +9,7 @@ import {SwitchProps} from './Switch';
 export const switchIconStencil = createStencil({
   base: {
     [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, brand.primary.accent),
-    [systemIconStencil.vars.size]: component.systemIcon.size.sm,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
     position: 'absolute',
     transition: 'transform 0ms',
     pointerEvents: 'none',

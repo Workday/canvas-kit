@@ -10,14 +10,14 @@ import {PaginationContext} from './usePaginationModel';
 export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.size.sm,
-    height: system.size.sm,
+    minWidth: system.legacy.size.sm,
+    height: system.legacy.size.sm,
     padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.surface.alt.default,
+      [buttonStencil.vars.background]: system.legacy.color.surface.alt.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
     },
 
@@ -34,14 +34,14 @@ export const paginationPageButtonStencil = createStencil({
       true: {
         fontWeight: system.fontWeight.bold,
         [buttonStencil.vars.background]: cssVar(
-          system.color.brand.accent.primary,
+          system.legacy.color.brand.accent.primary,
           brand.primary.base
         ),
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
           [buttonStencil.vars.background]: cssVar(
-            system.color.brand.accent.primary,
+            system.legacy.color.brand.accent.primary,
             brand.primary.base
           ),
           [buttonStencil.vars.label]: system.color.fg.inverse,

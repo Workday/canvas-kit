@@ -116,13 +116,13 @@ export const tabsListStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
-    borderBottom: `${px2rem(1)} solid ${system.color.border.default}`,
-    gap: system.gap.xs,
+    borderBottom: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    gap: system.legacy.gap.xs,
     // TODO: update this to use a grid token if we make those available as tokens
-    paddingInline: base.size500,
+    paddingInline: base.legacy.size500,
 
     '@media screen and (max-width: 768px)': {
-      paddingInline: system.padding.md,
+      paddingInline: system.legacy.padding.md,
     },
   },
   modifiers: {

@@ -23,15 +23,15 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-/** Mapping utility for the SystemIconCircleSize enum to the system size tokens.
+/** Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens.
  * @deprecated Use tokens instead. Deprecated in v15.0.0.
  * */
 const sizes = {
-  xs: system.size.xxxs,
-  s: system.size.xs,
-  m: system.size.sm,
-  l: system.size.md,
-  xl: system.size.xxl,
+  xs: system.legacy.size.xxxs,
+  s: system.legacy.size.xs,
+  m: system.legacy.size.sm,
+  l: system.legacy.size.md,
+  xl: system.legacy.size.xxl,
   xxl: px2rem(120),
 };
 
@@ -81,18 +81,18 @@ export const systemIconCircleStencil = createStencil({
     size: '',
   },
   base: ({background, color, size}) => ({
-    background: cssVar(background, system.color.surface.alt.default),
+    background: cssVar(background, system.legacy.color.surface.alt.default),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0,
     border: 'none',
-    borderRadius: system.shape.full,
+    borderRadius: system.legacy.shape.full,
     overflow: 'hidden',
-    width: cssVar(size, system.size.md),
-    height: cssVar(size, system.size.md),
+    width: cssVar(size, system.legacy.size.md),
+    height: cssVar(size, system.legacy.size.md),
     // There is no `component.systemIcon.size.*` token for `40px` so leaving `size` here.
-    [systemIconStencil.vars.size]: calc.multiply(cssVar(size, system.size.md), 0.625),
+    [systemIconStencil.vars.size]: calc.multiply(cssVar(size, system.legacy.size.md), 0.625),
     [systemIconStencil.vars.color]: color,
     '& img': {
       width: '100%',
@@ -102,7 +102,7 @@ export const systemIconCircleStencil = createStencil({
   modifiers: {
     inverse: {
       true: ({background, color}) => ({
-        background: cssVar(background, system.color.accent.info),
+        background: cssVar(background, system.legacy.color.accent.info),
         [systemIconStencil.vars.color]: cssVar(color, system.color.fg.inverse),
       }),
     },

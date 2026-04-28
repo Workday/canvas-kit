@@ -23,7 +23,7 @@ export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading,
 export const sidePanelHeadingStencil = createStencil({
   extends: headingStencil,
   base: {
-    padding: system.padding.xs,
+    padding: system.legacy.padding.xs,
   },
   modifiers: {
     origin: {

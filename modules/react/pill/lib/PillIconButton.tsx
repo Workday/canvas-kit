@@ -21,20 +21,20 @@ export const pillIconButtonStencil = createStencil({
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
     borderRadius: px2rem(2),
-    height: system.size.xxs,
-    width: system.size.xxs,
+    height: system.legacy.size.xxs,
+    width: system.legacy.size.xxs,
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    [buttonStencil.vars.background]: system.color.surface.transparent,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     [systemIconStencil.vars.color]: system.color.fg.strong,
-    [systemIconStencil.vars.size]: component.systemIcon.size.sm,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
     '::after': {
       content: '""',
-      height: system.size.sm,
-      width: system.size.sm,
+      height: system.legacy.size.sm,
+      width: system.legacy.size.sm,
       position: 'absolute',
       left: calc.negate(px2rem(7)),
       bottom: calc.negate(px2rem(7)),

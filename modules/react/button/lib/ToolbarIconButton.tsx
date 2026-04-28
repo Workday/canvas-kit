@@ -18,12 +18,12 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.size.sm,
+    minWidth: system.legacy.size.sm,
     padding: 0,
-    height: system.size.sm,
-    [buttonStencil.vars.borderRadius]: system.shape.sm,
+    height: system.legacy.size.sm,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [buttonStencil.vars.background]: system.color.surface.transparent,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
       [systemIconStencil.vars.color]: system.color.fg.strong,
@@ -31,63 +31,63 @@ export const toolbarIconButtonStencil = createStencil({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        outerColor: system.color.brand.focus.primary,
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
+        color: system.legacy.color.surface.transparent,
         fallback: system.color.bg.alt.default,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
+        color: system.legacy.color.surface.transparent,
         fallback: system.color.bg.alt.stronger,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
       [systemIconStencil.vars.color]: system.color.fg.default,
     },
 
     "&[aria-pressed='true']": {
-      [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
+      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
 
-      [buttonStencil.vars.background]: system.color.brand.surface.primary.default,
+      [buttonStencil.vars.background]: system.legacy.color.brand.surface.primary.default,
 
       '&:focus-visible, &.focus': {
-        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
 
       '&:hover, &.hover': {
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.color.brand.surface.primary.default,
+          color: system.legacy.color.brand.surface.primary.default,
           fallback: system.color.bg.alt.default,
-          mixinColor: system.color.surface.overlay.mixin,
-          mixinValue: system.opacity.surface.hover,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.hover,
         }),
-        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
 
       '&:active, &.active': {
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.color.brand.surface.primary.default,
+          color: system.legacy.color.brand.surface.primary.default,
           fallback: system.color.bg.alt.stronger,
-          mixinColor: system.color.surface.overlay.mixin,
-          mixinValue: system.opacity.surface.pressed,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.pressed,
         }),
-        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
     },
   },

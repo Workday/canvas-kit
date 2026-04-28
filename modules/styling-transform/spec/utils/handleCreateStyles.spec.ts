@@ -509,7 +509,6 @@ describe('createStyles', () => {
     const program = createProgramFromSource(`
       import {createStyles, CsVars, createVars} from '@workday/canvas-kit-styling';
 
-
       const styles = createStyles({
         backgroundColor: cssVar('--var-1')
       })

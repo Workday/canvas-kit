@@ -7,7 +7,7 @@ import {SkeletonShape} from './SkeletonShape';
 export interface SkeletonHeaderProps extends CSProps {
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default `system.legacy.color.bg.alt.strong`
    */
   backgroundColor?: string;
   /**
@@ -29,11 +29,11 @@ export const skeletonHeaderStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, backgroundColor, height}) => ({
-    backgroundColor: cssVar(backgroundColor, system.color.surface.loading),
-    borderRadius: system.shape.md,
-    height: cssVar(height, system.size.xs),
+    backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
+    borderRadius: system.legacy.shape.md,
+    height: cssVar(height, system.legacy.size.xs),
     width: width,
-    marginBottom: system.size.xxxs,
+    marginBottom: system.legacy.size.xxxs,
   }),
 });
 

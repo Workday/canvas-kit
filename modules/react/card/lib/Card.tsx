@@ -25,11 +25,11 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.gap.lg,
-    padding: system.padding.xl,
-    backgroundColor: system.color.surface.default,
-    borderRadius: system.shape.xxl,
-    border: `${px2rem(1)} solid ${system.color.border.default}`,
+    gap: system.legacy.gap.lg,
+    padding: system.legacy.padding.xl,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.xxl,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
   },
   modifiers: {
     variant: {
@@ -37,7 +37,7 @@ export const cardStencil = createStencil({
         borderColor: 'transparent',
       },
       tonal: {
-        backgroundColor: system.color.surface.alt.default,
+        backgroundColor: system.legacy.color.surface.alt.default,
         borderColor: system.color.border.transparent,
       },
     },

@@ -17,7 +17,7 @@ const checkboxContainerStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    minHeight: base.size225,
+    minHeight: base.legacy.size225,
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -26,13 +26,13 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      height: base.size225,
-      minWidth: base.size225,
+      height: base.legacy.size225,
+      minWidth: base.legacy.size225,
       alignSelf: 'flex-start',
       position: 'relative',
     },
     '& > label': {
-      paddingInlineStart: system.padding.sm,
+      paddingInlineStart: system.legacy.padding.sm,
     },
   },
 });

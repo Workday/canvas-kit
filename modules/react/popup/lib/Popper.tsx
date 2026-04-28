@@ -86,7 +86,7 @@ export interface PopperProps {
 
 /**
  * A thin wrapper component around the Popper.js positioning engine. For reference:
- * https://popper.js.org/. `Popper` also automatically works with the {@link PopupStack} system.
+ * https://popper.js.org/. `Popper` also automatically works with the {@link PopupStack} system.legacy.
  * `Popper` has no UI and will render any children to the `body` element and position around a
  * provided `anchorElement`.
  *

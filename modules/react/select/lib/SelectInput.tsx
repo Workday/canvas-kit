@@ -55,7 +55,7 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
-      backgroundColor: system.color.surface.default,
+      backgroundColor: system.legacy.color.surface.default,
       color: system.color.fg.default,
       cursor: 'default',
       '&::placeholder': {
@@ -78,12 +78,12 @@ export const selectInputStencil = createStencil({
     error: {
       error: ({visualInputPart}) => ({
         [visualInputPart]: {
-          backgroundColor: system.color.brand.surface.critical.default,
+          backgroundColor: system.legacy.color.brand.surface.critical.default,
         },
       }),
       caution: ({visualInputPart}) => ({
         [visualInputPart]: {
-          backgroundColor: system.color.brand.surface.caution.default,
+          backgroundColor: system.legacy.color.brand.surface.caution.default,
         },
       }),
     },

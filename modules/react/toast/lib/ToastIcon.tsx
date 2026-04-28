@@ -8,7 +8,7 @@ export interface ToastIconProps extends Omit<SystemIconProps, 'colorHover'> {}
 export const toastIconStencil = createStencil({
   base: {
     alignSelf: 'start',
-    margin: `${system.gap.md} ${base.size150}`,
+    margin: `${system.legacy.gap.md} ${base.legacy.size150}`,
   },
 });
 

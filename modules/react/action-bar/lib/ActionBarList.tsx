@@ -35,15 +35,15 @@ export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
     boxShadow: system.depth[2],
-    gap: system.gap.md,
-    background: system.color.surface.default,
-    borderBlockStart: `solid ${px2rem(1)}  ${system.color.border.default}`,
-    padding: `${system.padding.md} ${base.size500} `,
+    gap: system.legacy.gap.md,
+    background: system.legacy.color.surface.default,
+    borderBlockStart: `solid ${px2rem(1)}  ${system.legacy.color.border.default}`,
+    padding: `${system.legacy.padding.md} ${base.legacy.size500} `,
     position: 'fixed',
     insetBlockEnd: 0,
     insetInline: 0,
     '@media (max-width: 767.5px)': {
-      padding: system.size.xxxs,
+      padding: system.legacy.size.xxxs,
       '> *': {
         flex: 1,
       },

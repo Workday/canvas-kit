@@ -44,15 +44,15 @@ const fadeIn = keyframes({
 function getSpace(value?: string | number) {
   // TODO (deprecated tokens): Revisit tokens after removal of style props
   const spaceMap = {
-    zero: system.gap.none,
-    xxxs: system.gap.xs,
-    xxs: system.gap.sm,
+    zero: system.legacy.gap.none,
+    xxxs: system.legacy.gap.xs,
+    xxs: system.legacy.gap.sm,
     xs: px2rem(12),
-    s: system.gap.md,
-    m: system.gap.lg,
-    l: system.gap.xl,
+    s: system.legacy.gap.md,
+    m: system.legacy.gap.lg,
+    l: system.legacy.gap.xl,
     xl: px2rem(40),
-    xxl: system.gap.xxl,
+    xxl: system.legacy.gap.xxl,
     xxxl: px2rem(80),
   };
 
@@ -65,7 +65,7 @@ function getSpace(value?: string | number) {
 
 function getMaxHeight(margin?: string | number) {
   // set the default margin offset to 40px
-  let marginOffset: string | number = cssVar(base.size500);
+  let marginOffset: string | number = cssVar(base.legacy.size500);
 
   if (margin) {
     // parse the margin prop
@@ -93,16 +93,16 @@ export const popupCardStencil = createStencil({
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    fontSize: system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
     color: system.color.fg.default,
     position: 'relative',
-    maxWidth: calc.subtract('100vw', system.size.sm),
-    gap: system.gap.lg,
+    maxWidth: calc.subtract('100vw', system.legacy.size.sm),
+    gap: system.legacy.gap.lg,
     boxShadow: system.depth[3],
     minHeight: 0,
-    padding: system.padding.xl,
-    borderRadius: system.shape.xxxl,
+    padding: system.legacy.padding.xl,
+    borderRadius: system.legacy.shape.xxxl,
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,
@@ -127,7 +127,7 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
-  const translate = getTransformOrigin(transformOrigin, system.gap.sm);
+  const translate = getTransformOrigin(transformOrigin, system.legacy.gap.sm);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
 
   return (

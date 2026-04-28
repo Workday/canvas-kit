@@ -23,7 +23,7 @@ export interface PaginationControlsProps {}
 export const paginationControlsStencil = createStencil({
   base: {
     display: 'flex',
-    gap: system.gap.xs,
+    gap: system.legacy.gap.xs,
     alignItems: 'center',
   },
 });

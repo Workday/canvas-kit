@@ -16,13 +16,13 @@ export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') 
   if (orientation === 'horizontal') {
     layoutProps = {
       flexDirection: 'row',
-      gap: system.gap.xl,
+      gap: system.legacy.gap.xl,
       alignItems: undefined,
     };
   } else {
     layoutProps = {
       flexDirection: 'column',
-      gap: system.gap.xs,
+      gap: system.legacy.gap.xs,
       alignItems: 'flex-start',
     };
   }

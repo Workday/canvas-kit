@@ -122,9 +122,9 @@ export const buttonStencil = createStencil({
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // Default Styles
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.lg,
-    letterSpacing: system.letterSpacing.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.bold,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
@@ -133,7 +133,7 @@ export const buttonStencil = createStencil({
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    gap: system.gap.sm,
+    gap: system.legacy.gap.sm,
     borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -146,7 +146,7 @@ export const buttonStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
-      cssVar(borderRadius, system.shape.full)
+      cssVar(borderRadius, system.legacy.shape.full)
     ),
     position: 'relative',
     verticalAlign: 'middle',
@@ -178,10 +178,10 @@ export const buttonStencil = createStencil({
       outlineOffset: px2rem(2),
       boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(
         buttonColorPropVars.focus.boxShadowInner,
-        cssVar(boxShadowInner, system.color.border.inverse.default)
+        cssVar(boxShadowInner, system.legacy.color.border.inverse.default)
       )},0 0 0 ${px2rem(4)} ${cssVar(
         buttonColorPropVars.focus.boxShadowOuter,
-        cssVar(boxShadowOuter, system.color.brand.focus.primary)
+        cssVar(boxShadowOuter, system.legacy.color.brand.focus.primary)
       )}`,
     },
     // Hover Styles
@@ -242,45 +242,45 @@ export const buttonStencil = createStencil({
   }),
   modifiers: {
     /**
-     * Button modifiers that will overwrite the base styles of Buttons.
+     * Button modifiers that will overwrite the baseLegacy styles of Buttons.
      * - `Size`: These modifiers will dictate a size of a Button and has a set of styles to associated with it.
      * - `iconPosition`: These modifiers will override the existing `Size` styles. These are specific to icon locations
      * within a button or if there is only an icon and no text.
      */
     size: {
       large: {
-        fontSize: system.fontSize.body.sm,
-        lineHeight: system.lineHeight.body.sm,
-        letterSpacing: system.letterSpacing.body.sm,
-        height: system.size.lg,
-        paddingInline: system.padding.xxl,
-        minWidth: base.size1400,
+        fontSize: system.legacy.fontSize.body.sm,
+        lineHeight: system.legacy.lineHeight.body.sm,
+        letterSpacing: system.legacy.letterSpacing.body.sm,
+        height: system.legacy.size.lg,
+        paddingInline: system.legacy.padding.xxl,
+        minWidth: base.legacy.size1400,
       },
       medium: {
-        fontSize: system.fontSize.subtext.lg,
-        lineHeight: system.lineHeight.subtext.lg,
-        letterSpacing: system.letterSpacing.subtext.lg,
-        minWidth: base.size1200,
-        paddingInline: system.padding.xl,
-        height: system.size.md,
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        minWidth: base.legacy.size1200,
+        paddingInline: system.legacy.padding.xl,
+        height: system.legacy.size.md,
       },
       small: {
-        fontSize: system.fontSize.subtext.lg,
-        lineHeight: system.lineHeight.subtext.lg,
-        letterSpacing: system.letterSpacing.subtext.lg,
-        height: system.size.sm,
-        minWidth: base.size1000,
-        paddingInline: system.padding.md,
-        gap: system.gap.xs,
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        height: system.legacy.size.sm,
+        minWidth: base.legacy.size1000,
+        paddingInline: system.legacy.padding.md,
+        gap: system.legacy.gap.xs,
       },
       extraSmall: {
-        fontSize: system.fontSize.subtext.md,
-        lineHeight: system.lineHeight.subtext.md,
-        letterSpacing: system.letterSpacing.subtext.md,
-        height: system.size.xs,
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
+        height: system.legacy.size.xs,
         minWidth: 'auto',
-        paddingInline: system.padding.sm,
-        gap: system.gap.xs,
+        paddingInline: system.legacy.padding.sm,
+        gap: system.legacy.gap.xs,
       },
     },
     grow: {
@@ -301,88 +301,88 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: system.size.lg,
+        minWidth: system.legacy.size.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.padding.xl,
-        paddingInlineEnd: system.padding.xxl,
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: system.legacy.padding.xxl,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.padding.xxl,
-        paddingInlineEnd: system.padding.xl,
+        paddingInlineStart: system.legacy.padding.xxl,
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.size.md,
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.padding.lg,
-        paddingInlineEnd: system.padding.xl,
+        paddingInlineStart: system.legacy.padding.lg,
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.padding.xl,
-        paddingInlineEnd: system.padding.lg,
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: system.legacy.padding.lg,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.size.sm,
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.padding.sm,
-        paddingInlineEnd: system.padding.md,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.padding.md,
-        paddingInlineEnd: system.padding.sm,
+        paddingInlineStart: system.legacy.padding.md,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.size.xs,
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.padding.xs,
-        paddingInlineEnd: system.padding.sm,
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.padding.sm,
-        paddingInlineEnd: system.padding.xs,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
   ],
 });
 
 /**
- * The base button which which is the foundation of all Button variants (`PrimaryButton`,
+ * The baseLegacy button which which is the foundation of all Button variants (`PrimaryButton`,
  * `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `ToolbarIconButton` and `ToolbarDropdownButton`).
  */
 export const BaseButton = createComponent('button')({

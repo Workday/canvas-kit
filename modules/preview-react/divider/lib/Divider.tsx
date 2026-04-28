@@ -4,14 +4,14 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
   vars: {
-    space: system.size.xxxs,
+    space: system.legacy.size.xxxs,
   },
   base: ({space}) => {
     return {
       display: 'block',
       height: px2rem(1),
       border: 'none',
-      borderTop: `1px solid ${system.color.border.default}`,
+      borderTop: `1px solid ${system.legacy.color.border.default}`,
       margin: `${calc.divide(space, 2)} 0`,
     };
   },
@@ -38,7 +38,7 @@ export interface DividerProps extends CSProps {
  * @example
  * ```tsx
  * import { Divider } from '@workday/canvas-kit-preview-react/divider';
- * import {system} from '@workday/canvas-tokens-web';
+ *
  *
  * <Divider space={system.space.x2} />
  *

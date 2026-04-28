@@ -11,9 +11,9 @@ export const toastBodyStencil = createStencil({
     alignItems: 'flex-start',
     flexDirection: 'column',
     justifyContent: 'center',
-    paddingBlock: system.padding.md,
+    paddingBlock: system.legacy.padding.md,
     flexGrow: 1,
-    gap: system.gap.xs,
+    gap: system.legacy.gap.xs,
   },
 });
 

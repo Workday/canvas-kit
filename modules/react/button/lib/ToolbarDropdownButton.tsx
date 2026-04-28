@@ -25,17 +25,17 @@ export const toolbarDropdownButtonStencil = createStencil({
   },
   base: ({chevronPart, customIconPart}) => ({
     padding: 0,
-    minWidth: system.size.sm,
+    minWidth: system.legacy.size.sm,
     gap: 0,
-    [buttonStencil.vars.borderRadius]: system.shape.sm,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
       system.color.fg.default
     ),
-    [buttonStencil.vars.background]: system.color.surface.transparent,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
@@ -44,18 +44,18 @@ export const toolbarDropdownButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.focus.inverse,
+        innerColor: system.legacy.color.focus.inverse,
 
-        outerColor: system.color.brand.focus.primary,
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
+        color: system.legacy.color.surface.transparent,
         fallback: system.color.bg.alt.default,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
@@ -65,10 +65,10 @@ export const toolbarDropdownButtonStencil = createStencil({
 
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
+        color: system.legacy.color.surface.transparent,
         fallback: system.color.bg.alt.stronger,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
@@ -77,7 +77,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
@@ -90,7 +90,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     [customIconPart]: {
-      marginInlineStart: system.padding.xxs,
+      marginInlineStart: system.legacy.padding.xxs,
       marginInlineEnd: calc.negate(px2rem(2)),
     },
 

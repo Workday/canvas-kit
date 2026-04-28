@@ -42,33 +42,33 @@ const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    borderRadius: system.shape.full,
+    borderRadius: system.legacy.shape.full,
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.md,
+    fontSize: system.legacy.fontSize.subtext.md,
     fontWeight: system.fontWeight.bold,
     height: px2rem(20),
     justifyContent: 'center',
-    lineHeight: system.lineHeight.subtext.lg,
-    letterSpacing: system.letterSpacing.subtext.md,
-    minWidth: system.size.xxs,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.md,
+    minWidth: system.legacy.size.xxs,
     padding: `0 ${px2rem(6.5)}`,
-    background: system.color.accent.danger,
+    background: system.legacy.color.accent.danger,
     color: system.color.fg.inverse,
   },
   modifiers: {
     variant: {
       // .cnvs-count-badge--variant-inverse
       inverse: {
-        background: system.color.surface.inverse,
-        color: system.color.fg.info.strong,
+        background: system.legacy.color.surface.inverse,
+        color: system.legacy.color.fg.info.strong,
       },
     },
     emphasis: {
       high: {},
       low: {
-        background: system.color.surface.info.strong,
-        color: system.color.fg.info.strong,
+        background: system.legacy.color.surface.info.strong,
+        color: system.legacy.color.fg.info.strong,
       },
     },
   },
@@ -76,7 +76,7 @@ const countBadgeStencil = createStencil({
     {
       modifiers: {variant: 'inverse', emphasis: 'low'},
       styles: {
-        background: system.color.surface.overlay.hover.inverse,
+        background: system.legacy.color.surface.overlay.hover.inverse,
         color: system.color.fg.inverse,
       },
     },

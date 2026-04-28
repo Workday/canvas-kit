@@ -59,11 +59,11 @@ export const panelStencil = createStencil({
   modifiers: {
     variant: {
       alternate: {
-        backgroundColor: system.color.surface.default,
+        backgroundColor: system.legacy.color.surface.default,
         boxShadow: system.depth[3],
       },
       standard: {
-        backgroundColor: system.color.surface.navigation,
+        backgroundColor: system.legacy.color.surface.navigation,
       },
     },
     expanded: {

@@ -14,10 +14,10 @@ export const switchBackgroundStencil = createStencil({
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),
-    borderRadius: system.shape.full,
+    borderRadius: system.legacy.shape.full,
     padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: system.color.accent.muted.soft,
+    backgroundColor: system.legacy.color.accent.muted.soft,
   },
 });
 

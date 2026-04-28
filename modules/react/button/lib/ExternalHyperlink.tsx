@@ -26,11 +26,11 @@ export const externalHyperlinkStencil = createStencil({
       // This is still going to be `1em` to stay consistent with the font-size of the link.
       [systemIconStencil.vars.size]: '1em',
       width: calc.subtract('1em', px2rem(1)),
-      minWidth: calc.subtract(system.size.xxxs, px2rem(1)),
-      marginInlineStart: calc.subtract(system.gap.xs, px2rem(2)),
+      minWidth: calc.subtract(system.legacy.size.xxxs, px2rem(1)),
+      marginInlineStart: calc.subtract(system.legacy.gap.xs, px2rem(2)),
       '& > svg': {
-        minWidth: system.size.xxxs,
-        minHeight: system.size.xxxs,
+        minWidth: system.legacy.size.xxxs,
+        minHeight: system.legacy.size.xxxs,
       },
       ':dir(rtl)': {
         transform: 'rotate(270deg)',

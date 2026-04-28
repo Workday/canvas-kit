@@ -21,22 +21,22 @@ const radioGroupStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.shape.md,
-    gap: system.gap.sm,
-    padding: `${px2rem(10)} ${base.size150} ${system.padding.xs}`,
-    margin: `0 ${calc.negate(base.size150)}`,
+    borderRadius: system.legacy.shape.md,
+    gap: system.legacy.gap.sm,
+    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.border.critical}`,
-        backgroundColor: system.color.brand.surface.critical.default,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
       },
       caution: {
-        backgroundColor: system.color.brand.surface.caution.default,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.color.brand.border.caution}`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.border.caution}`,
       },
     },
   },

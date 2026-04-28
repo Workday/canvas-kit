@@ -10,11 +10,11 @@ export const switchInputStencil = createStencil({
     position: 'absolute',
     // This allows for the input to be the same size as the clickable area for the Switch
     margin: 0,
-    height: base.size225,
+    height: base.legacy.size225,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),
-    borderRadius: system.shape.full,
+    borderRadius: system.legacy.shape.full,
     opacity: '0',
     cursor: 'pointer',
     // This is used in "High Contrast Mode" to show an outline on the Switch background.
@@ -23,7 +23,7 @@ export const switchInputStencil = createStencil({
     },
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
@@ -51,17 +51,17 @@ export const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
-              0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.critical, brand.common.errorInner)},
+              0 0 0 ${px2rem(2)} ${cssVar(system.legacy.color.focus.inverse, base.legacy.neutral0)},
+              0 0 0 ${system.space.x1} ${cssVar(system.legacy.color.brand.focus.critical, brand.common.errorInner)},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${cssVar(system.color.focus.inverse, base.neutral0)},
-          0 0 0 ${system.space.x1} ${cssVar(system.color.brand.focus.caution.inner, brand.common.alertInner)},
-          0 0 0 ${px2rem(5)} ${cssVar(system.color.brand.border.caution, brand.common.alertOuter)}`,
+          0 0 0 ${px2rem(2)} ${cssVar(system.legacy.color.focus.inverse, base.legacy.neutral0)},
+          0 0 0 ${system.space.x1} ${cssVar(system.legacy.color.brand.focus.caution.inner, brand.common.alertInner)},
+          0 0 0 ${px2rem(5)} ${cssVar(system.legacy.color.brand.border.caution, brand.common.alertOuter)}`,
         },
       },
     },

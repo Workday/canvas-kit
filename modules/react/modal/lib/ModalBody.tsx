@@ -11,7 +11,7 @@ export interface ModalBodyProps extends ExtractProps<typeof Popup.Body, never> {
 export const modalBodyStencil = createStencil({
   base: {
     '@media screen and (max-width: 768px)': {
-      padding: `${system.padding.xxs} ${system.padding.xs} ${system.padding.xs}`,
+      padding: `${system.legacy.padding.xxs} ${system.legacy.padding.xs} ${system.legacy.padding.xs}`,
     },
   },
 });

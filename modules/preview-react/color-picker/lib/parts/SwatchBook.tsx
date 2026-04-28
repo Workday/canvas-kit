@@ -18,7 +18,7 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
-    shadow: `${cssVar(system.color.border.inverse.default, base.neutral0)} 0 0 0 ${px2rem(2)}, ${
+    shadow: `${cssVar(system.legacy.color.border.inverse.default, base.legacy.neutral0)} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
   },
@@ -28,15 +28,15 @@ const colorPickerSwatchBookStencil = createStencil({
   base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: `0 ${calc.negate(system.gap.sm)} ${calc.negate(system.gap.sm)} 0`,
+    margin: `0 ${calc.negate(system.legacy.gap.sm)} ${calc.negate(system.legacy.gap.sm)} 0`,
     [tilePart]: {
       display: 'flex',
-      width: system.size.xxs,
-      height: system.size.xxs,
+      width: system.legacy.size.xxs,
+      height: system.legacy.size.xxs,
       cursor: 'pointer',
-      borderRadius: system.shape.sm,
+      borderRadius: system.legacy.shape.sm,
       transition: 'box-shadow 120ms ease',
-      margin: `0px ${system.gap.sm} ${system.gap.sm} 0px`,
+      margin: `0px ${system.legacy.gap.sm} ${system.legacy.gap.sm} 0px`,
 
       '&:hover': {
         boxShadow: shadow,

@@ -23,7 +23,7 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: system.color.fg.info.default,
+    color: system.legacy.color.fg.info.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)} `,
@@ -31,16 +31,16 @@ export const hyperlinkStencil = createStencil({
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
     '&:hover, &.hover': {
-      color: system.color.fg.info.strong,
-      background: system.color.surface.alt.default,
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 ${px2rem(2)} ${system.color.brand.focus.primary}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
-      color: system.color.fg.info.strong,
-      background: system.color.surface.alt.default,
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
   },
   modifiers: {
@@ -55,8 +55,8 @@ export const hyperlinkStencil = createStencil({
           boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.fg.inverse}`,
         },
         '&:active, &.active': {
-          color: system.color.fg.info.strong,
-          background: system.color.surface.navigation,
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
         },
       },
       standalone: {
@@ -70,11 +70,11 @@ export const hyperlinkStencil = createStencil({
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.focus.inverse}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.legacy.color.focus.inverse}`,
         },
         '&:active, &.active': {
-          color: system.color.fg.info.strong,
-          background: system.color.surface.navigation,
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
         },
       },
     },

@@ -18,7 +18,7 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
-   * style prop applies styles to the whole Flex component,
+   * style prop applies styles to the whole Flex componentLegacy,
    * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
    * style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore
    */
@@ -34,10 +34,10 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
     alignItems: 'center',
     display: 'flex',
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [systemIconStencil.vars.size]: component.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
     [chevronRightIconPart]: {
-      height: system.size.sm,
-      width: system.size.sm,
+      height: system.legacy.size.sm,
+      width: system.legacy.size.sm,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',

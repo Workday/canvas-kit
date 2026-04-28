@@ -14,7 +14,7 @@ export const formFieldHintStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        color: system.color.brand.fg.critical.default,
+        color: system.legacy.color.brand.fg.critical.default,
       },
       caution: {
         color: system.color.fg.default,

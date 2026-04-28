@@ -4,7 +4,7 @@ import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 type TypeSize = 'large' | 'medium' | 'small';
-type TokenName = `${keyof typeof system.type}.${TypeSize}`;
+type TokenName = `${keyof typeof system.legacy.type}.${TypeSize}`;
 
 export interface TextProps extends BoxProps {
   /**
@@ -34,98 +34,98 @@ export const textStencil = createStencil({
       'title.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        fontSize: system.fontSize.title.lg,
-        lineHeight: system.lineHeight.title.lg,
+        fontSize: system.legacy.fontSize.title.lg,
+        lineHeight: system.legacy.lineHeight.title.lg,
         color: system.color.fg.strong,
       },
       'title.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        fontSize: system.fontSize.title.md,
-        lineHeight: system.lineHeight.title.md,
+        fontSize: system.legacy.fontSize.title.md,
+        lineHeight: system.legacy.lineHeight.title.md,
         color: system.color.fg.strong,
       },
       'title.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        lineHeight: system.lineHeight.title.sm,
-        fontSize: system.fontSize.title.sm,
+        lineHeight: system.legacy.lineHeight.title.sm,
+        fontSize: system.legacy.fontSize.title.sm,
         color: system.color.fg.strong,
       },
       // Heading level styles
       'heading.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        fontSize: system.fontSize.heading.lg,
-        lineHeight: system.lineHeight.heading.lg,
+        fontSize: system.legacy.fontSize.heading.lg,
+        lineHeight: system.legacy.lineHeight.heading.lg,
         color: system.color.fg.strong,
       },
       'heading.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        fontSize: system.fontSize.heading.md,
-        lineHeight: system.lineHeight.heading.md,
+        fontSize: system.legacy.fontSize.heading.md,
+        lineHeight: system.legacy.lineHeight.heading.md,
         color: system.color.fg.strong,
       },
       'heading.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.bold,
-        fontSize: system.fontSize.heading.sm,
-        lineHeight: system.lineHeight.heading.sm,
+        fontSize: system.legacy.fontSize.heading.sm,
+        lineHeight: system.legacy.lineHeight.heading.sm,
         color: system.color.fg.strong,
       },
       // Body level styles
       'body.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.body.lg,
-        lineHeight: system.lineHeight.body.lg,
+        fontSize: system.legacy.fontSize.body.lg,
+        lineHeight: system.legacy.lineHeight.body.lg,
         color: system.color.fg.default,
       },
       'body.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.body.md,
-        lineHeight: system.lineHeight.body.md,
+        fontSize: system.legacy.fontSize.body.md,
+        lineHeight: system.legacy.lineHeight.body.md,
         color: system.color.fg.default,
       },
       'body.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.body.sm,
-        lineHeight: system.lineHeight.body.sm,
-        letterSpacing: system.letterSpacing.body.sm,
+        fontSize: system.legacy.fontSize.body.sm,
+        lineHeight: system.legacy.lineHeight.body.sm,
+        letterSpacing: system.legacy.letterSpacing.body.sm,
         color: system.color.fg.default,
       },
       // Subtext level styles
       'subtext.large': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.subtext.lg,
-        lineHeight: system.lineHeight.subtext.lg,
-        letterSpacing: system.letterSpacing.subtext.lg,
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
         color: system.color.fg.default,
       },
       'subtext.medium': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.subtext.md,
-        lineHeight: system.lineHeight.subtext.md,
-        letterSpacing: system.letterSpacing.subtext.md,
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
         color: system.color.fg.default,
       },
       'subtext.small': {
         fontFamily: system.fontFamily.default,
         fontWeight: system.fontWeight.normal,
-        fontSize: system.fontSize.subtext.sm,
-        lineHeight: system.lineHeight.subtext.sm,
-        letterSpacing: system.letterSpacing.subtext.sm,
+        fontSize: system.legacy.fontSize.subtext.sm,
+        lineHeight: system.legacy.lineHeight.subtext.sm,
+        letterSpacing: system.legacy.letterSpacing.subtext.sm,
         color: system.color.fg.default,
       },
     },
     variant: {
       error: {
-        color: system.color.brand.fg.critical.default,
+        color: system.legacy.color.brand.fg.critical.default,
       },
       hint: {color: system.color.fg.muted.default},
       inverse: {color: system.color.fg.inverse},

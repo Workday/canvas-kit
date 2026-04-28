@@ -54,24 +54,24 @@ export const segmentedControlItemStencil = createStencil({
   extends: buttonStencil,
   base: {
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.lg,
-    letterSpacing: system.letterSpacing.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.bold,
     textAlign: 'start',
     paddingInline: 0,
-    gap: system.gap.xs,
+    gap: system.legacy.gap.xs,
 
-    [buttonStencil.vars.borderRadius]: system.shape.md,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.md,
     [buttonStencil.vars.label]: system.color.fg.muted.default,
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.alt.strong,
+        color: system.legacy.color.surface.alt.strong,
         fallback: system.color.bg.alt.strong,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
@@ -79,10 +79,10 @@ export const segmentedControlItemStencil = createStencil({
 
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.alt.strong,
+        color: system.legacy.color.surface.alt.strong,
         fallback: system.color.bg.alt.strong,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
@@ -95,13 +95,13 @@ export const segmentedControlItemStencil = createStencil({
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.color.surface.transparent,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
       [buttonStencil.vars.label]: system.color.fg.muted.default,
       [systemIconStencil.vars.color]: system.color.fg.muted.default,
     },
 
     "&[aria-pressed='true']": {
-      [buttonStencil.vars.background]: system.color.surface.default,
+      [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
@@ -124,19 +124,19 @@ export const segmentedControlItemStencil = createStencil({
   modifiers: {
     size: {
       large: {
-        height: system.size.md,
-        gap: system.gap.sm,
+        height: system.legacy.size.md,
+        gap: system.legacy.gap.sm,
       },
       medium: {
-        height: system.size.sm,
+        height: system.legacy.size.sm,
       },
       small: {
         fontFamily: system.fontFamily.default,
-        fontSize: system.fontSize.subtext.md,
-        lineHeight: system.lineHeight.subtext.md,
-        letterSpacing: system.letterSpacing.subtext.md,
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
         fontWeight: system.fontWeight.bold,
-        height: system.size.xs,
+        height: system.legacy.size.xs,
       },
     },
     variant: {
@@ -149,55 +149,55 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'large', variant: 'iconOnly'},
       styles: {
-        minWidth: system.size.md,
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'large', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.padding.lg} ${system.padding.xl}`,
+        paddingInline: `${system.legacy.padding.lg} ${system.legacy.padding.xl}`,
       },
     },
     {
       modifiers: {size: 'large', variant: 'textOnly'},
       styles: {
-        paddingInline: system.padding.xl,
+        paddingInline: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'iconOnly'},
       styles: {
-        minWidth: system.size.sm,
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.padding.md} ${system.padding.lg}`,
+        paddingInline: `${system.legacy.padding.md} ${system.legacy.padding.lg}`,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'textOnly'},
       styles: {
-        paddingInline: system.padding.lg,
+        paddingInline: system.legacy.padding.lg,
       },
     },
     {
       modifiers: {size: 'small', variant: 'iconOnly'},
       styles: {
-        minWidth: system.size.xs,
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'small', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.padding.xs} ${system.padding.sm}`,
+        paddingInline: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
       },
     },
     {
       modifiers: {size: 'small', variant: 'textOnly'},
       styles: {
-        paddingInline: system.padding.sm,
+        paddingInline: system.legacy.padding.sm,
       },
     },
   ],

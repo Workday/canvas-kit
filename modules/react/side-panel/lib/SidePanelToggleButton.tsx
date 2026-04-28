@@ -33,9 +33,9 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.gap.lg,
-    width: system.gap.lg,
-    insetInlineEnd: base.size150,
+    top: system.legacy.gap.lg,
+    width: system.legacy.gap.lg,
+    insetInlineEnd: base.legacy.size150,
   },
   modifiers: {
     state: {
@@ -93,10 +93,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: base.size150,
+        insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
           transform: `scaleX(1)`,
-          insetInlineEnd: base.size150,
+          insetInlineEnd: base.legacy.size150,
         },
       },
     },
@@ -104,10 +104,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: base.size150,
+        insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: base.size150,
+          insetInlineEnd: base.legacy.size150,
         },
       },
     },
@@ -115,10 +115,10 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: base.size150,
+        insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
           transform: `scaleX(-1)`,
-          insetInlineEnd: base.size150,
+          insetInlineEnd: base.legacy.size150,
         },
       },
     },

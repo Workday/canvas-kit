@@ -20,11 +20,11 @@ export const segmentedControlListStencil = createStencil({
   },
   base: {
     display: 'inline-grid',
-    backgroundColor: system.color.surface.alt.strong,
-    border: `${cssVar(base.size0, px2rem(1))} solid ${system.color.border.transparent}`,
-    borderRadius: system.shape.lg,
-    padding: system.padding.xxs,
-    gridGap: system.gap.sm,
+    backgroundColor: system.legacy.color.surface.alt.strong,
+    border: `${cssVar(base.legacy.size0, px2rem(1))} solid ${system.color.border.transparent}`,
+    borderRadius: system.legacy.shape.lg,
+    padding: system.legacy.padding.xxs,
+    gridGap: system.legacy.gap.sm,
   },
   modifiers: {
     orientation: {

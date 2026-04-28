@@ -8,9 +8,9 @@ const informationHighlightHeadingStencil = createStencil({
     return {
       fontFamily: system.fontFamily.default,
       fontWeight: system.fontWeight.bold,
-      lineHeight: system.lineHeight.body.sm,
-      fontSize: system.fontSize.body.sm,
-      letterSpacing: system.letterSpacing.body.sm,
+      lineHeight: system.legacy.lineHeight.body.sm,
+      fontSize: system.legacy.fontSize.body.sm,
+      letterSpacing: system.legacy.letterSpacing.body.sm,
       color: system.color.fg.default,
       gridColumn: '2',
       margin: 0,

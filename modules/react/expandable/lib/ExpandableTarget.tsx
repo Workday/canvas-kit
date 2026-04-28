@@ -26,23 +26,23 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 
 export const expandableTargetStencil = createStencil({
   base: {
-    background: system.color.surface.transparent,
+    background: system.legacy.color.surface.transparent,
     borderColor: system.color.border.transparent,
-    borderRadius: system.shape.xxl,
+    borderRadius: system.legacy.shape.xxl,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    gap: system.gap.none,
+    gap: system.legacy.gap.none,
     justifyContent: 'start',
-    padding: system.padding.xs,
+    padding: system.legacy.padding.xs,
     cursor: 'pointer',
     width: '100%',
     '&:hover, &.hover': {
-      backgroundColor: system.color.surface.overlay.hover.default,
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus-visible, &.focus': {
-      outline: `${cssVar(system.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
+      outline: `${cssVar(system.legacy.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
     },
   },
 });

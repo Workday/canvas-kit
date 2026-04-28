@@ -14,9 +14,9 @@ export const pillAvatarStencil = createStencil({
     flex: '0 0 auto',
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    lineHeight: system.lineHeight.subtext.sm,
-    fontSize: system.fontSize.subtext.sm,
-    letterSpacing: system.letterSpacing.subtext.sm,
+    lineHeight: system.legacy.lineHeight.subtext.sm,
+    fontSize: system.legacy.fontSize.subtext.sm,
+    letterSpacing: system.legacy.letterSpacing.subtext.sm,
     '&:disabled, &.disabled': {
       opacity: system.opacity.disabled,
     },

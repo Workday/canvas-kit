@@ -10,7 +10,7 @@ export interface SkeletonTextProps extends CSProps {
   lineCount?: number;
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default `system.legacy.color.bg.alt.strong`
    */
   backgroundColor?: string;
 }
@@ -20,13 +20,13 @@ export const skeletonTextStencil = createStencil({
     backgroundColor: '',
   },
   base: ({backgroundColor}) => ({
-    marginBottom: system.size.xs,
+    marginBottom: system.legacy.size.xs,
     '& [data-part="skeleton-text-lines"]': {
-      backgroundColor: cssVar(backgroundColor, system.color.surface.loading),
-      height: system.size.xxxs,
+      backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
+      height: system.legacy.size.xxxs,
       // We do not have a `gap` token for 0.75rem so `padding` is being used here
-      marginBlockEnd: system.padding.sm,
-      borderRadius: system.shape.md,
+      marginBlockEnd: system.legacy.padding.sm,
+      borderRadius: system.legacy.shape.md,
       width: '100%',
     },
     '& [data-part="skeleton-text-lines"]:last-child': {

@@ -26,9 +26,9 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
 export const expandableIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    padding: system.padding.xxs,
+    padding: system.legacy.padding.xxs,
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [systemIconStencil.vars.size]: component.systemIcon.size.xs,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
   },
   modifiers: {
     isExpanded: {
@@ -47,20 +47,20 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingInlineEnd: system.padding.sm,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginInlineStart: 'auto',
-        paddingInlineStart: system.padding.sm,
+        paddingInlineStart: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {position: 'start', isExpanded: false},
       styles: {
-        marginInlineEnd: system.padding.xs,
+        marginInlineEnd: system.legacy.padding.xs,
         transform: 'rotate(90deg)',
         ':dir(rtl)': {
           transform: 'rotate(-90deg)',
@@ -70,7 +70,7 @@ export const expandableIconStencil = createStencil({
     {
       modifiers: {position: 'start', isExpanded: true},
       styles: {
-        marginInlineEnd: system.padding.xs,
+        marginInlineEnd: system.legacy.padding.xs,
         transform: 'rotate(180deg)',
       },
     },

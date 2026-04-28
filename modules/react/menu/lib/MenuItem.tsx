@@ -61,23 +61,23 @@ export const menuItemStencil = createStencil({
   base: ({textPart, iconPart, selectedPart}) => ({
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    fontSize: system.fontSize.subtext.lg,
-    lineHeight: system.lineHeight.subtext.lg,
-    letterSpacing: system.letterSpacing.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.gap.md,
-    padding: `${system.padding.sm} ${system.padding.md}`,
+    gap: system.legacy.gap.md,
+    padding: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
-    borderRadius: system.shape.xxl,
+    borderRadius: system.legacy.shape.xxl,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
-    minHeight: system.size.md,
+    minHeight: system.legacy.size.md,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -95,8 +95,11 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: cssVar(system.color.brand.fg.primary.strong, brand.primary.dark),
-      backgroundColor: cssVar(system.color.brand.surface.primary.strong, brand.primary.lightest),
+      color: cssVar(system.legacy.color.brand.fg.primary.strong, brand.primary.dark),
+      backgroundColor: cssVar(
+        system.legacy.color.brand.surface.primary.strong,
+        brand.primary.lightest
+      ),
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
@@ -104,7 +107,7 @@ export const menuItemStencil = createStencil({
       '&:where(.focus, :focus-visible)': {
         [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
         color: cssVar(system.color.fg.inverse, brand.primary.accent),
       },
     },
@@ -112,13 +115,16 @@ export const menuItemStencil = createStencil({
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      backgroundColor: cssVar(system.color.surface.overlay.hover.default, brand.neutral.lightest),
+      backgroundColor: cssVar(
+        system.legacy.color.surface.overlay.hover.default,
+        brand.neutral.lightest
+      ),
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
       color: cssVar(system.color.fg.inverse, brand.primary.accent),
-      backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+      backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.base),
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
@@ -133,7 +139,7 @@ export const menuItemStencil = createStencil({
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.light),
+        backgroundColor: cssVar(system.legacy.color.brand.accent.primary, brand.primary.light),
         opacity: system.opacity.disabled,
       },
     },
