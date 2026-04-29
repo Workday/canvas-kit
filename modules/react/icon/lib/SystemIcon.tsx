@@ -59,16 +59,16 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      width: cssVar(size, component.systemIcon.size.lg),
-      height: cssVar(size, component.systemIcon.size.lg),
+      width: cssVar(size, component.legacy.systemIcon.size.lg),
+      height: cssVar(size, component.legacy.systemIcon.size.lg),
     },
-    '.wd-icon .wd-icon-fill': {
-      fill: cssVar(color, component.systemIcon.color.fill),
+    '& .wd-icon .wd-icon-fill': {
+      fill: cssVar(color, component.legacy.systemIcon.color.fill),
     },
-    '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
-      fill: cssVar(accentColor, cssVar(color, component.systemIcon.color.accent)),
+    '& .wd-icon .wd-icon-accent, & .wd-icon-accent2': {
+      fill: cssVar(accentColor, cssVar(color, component.legacy.systemIcon.color.accent)),
     },
-    '.wd-icon .wd-icon-background': {
+    '& .wd-icon .wd-icon-background': {
       fill: cssVar(backgroundColor, 'transparent'),
     },
     // for Windows high contrast desktop themes
