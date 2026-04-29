@@ -37,7 +37,7 @@ export const AccessibilityTest = {
               <Modal.Heading>Delete Item</Modal.Heading>
               <Modal.Body>
                 <p>Are you sure you want to delete the item?</p>
-                <Flex gap="s">
+                <Flex cs={{gap: system.gap.sm}}>
                   <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
                   <Modal.CloseButton>Cancel</Modal.CloseButton>
                 </Flex>
@@ -157,7 +157,7 @@ const TestModal = () => {
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
+            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xs}}>
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -239,7 +239,7 @@ export const CustomThemeModal = {
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
+              <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xs}}>
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>
