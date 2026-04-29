@@ -59,14 +59,14 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      width: cssVar(size, component.systemIcon.size.lg),
-      height: cssVar(size, component.systemIcon.size.lg),
+      width: cssVar(size, component.legacy.systemIcon.size.lg),
+      height: cssVar(size, component.legacy.systemIcon.size.lg),
     },
     '.wd-icon .wd-icon-fill': {
-      fill: cssVar(color, component.systemIcon.color.fill),
+      fill: cssVar(color, component.legacy.systemIcon.color.fill),
     },
     '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
-      fill: cssVar(accentColor, cssVar(color, component.systemIcon.color.accent)),
+      fill: cssVar(accentColor, cssVar(color, component.legacy.systemIcon.color.accent)),
     },
     '.wd-icon .wd-icon-background': {
       fill: cssVar(backgroundColor, 'transparent'),
@@ -99,7 +99,7 @@ export const SystemIcon = createComponent('span')({
         {...handleCsProp(
           elemProps,
           systemIconStencil({
-            size: resolveSize(size, component.systemIcon.size),
+            size: resolveSize(size, component.legacy.systemIcon.size),
             color,
             accentColor: accent,
             backgroundColor: background,

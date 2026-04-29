@@ -35,16 +35,16 @@ const buttonIconStencil = createStencil({
   modifiers: {
     size: {
       extraSmall: {
-        [systemIconStencil.vars.size]: component.systemIcon.size.xs,
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
       },
       small: {
-        [systemIconStencil.vars.size]: component.systemIcon.size.md,
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
       },
       medium: {
-        [systemIconStencil.vars.size]: component.systemIcon.size.md,
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
       },
       large: {
-        [systemIconStencil.vars.size]: component.systemIcon.size.lg,
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.lg,
       },
     },
   },

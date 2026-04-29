@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const baseTableHeadStencil = createStencil({
   base: {
-    backgroundColor: system.color.surface.raised,
+    backgroundColor: system.legacy.color.surface.raised,
     minHeight: calc.subtract(system.legacy.size.xxl, system.legacy.size.xxxs),
     'th ': {
       '&:first-of-type': {
