@@ -1,0 +1,1 @@
+var i={},t;function u(){return t||(t=1,(function(r){Object.defineProperty(r,"__esModule",{value:!0}),(function(e){e.Accent="accent",e.Applet="applet",e.Expressive="expressive",e.System="system",e.Graphic="graphic"})(r.CanvasIconTypes||(r.CanvasIconTypes={}))})(i)),i}var c=u();export{c as l};
