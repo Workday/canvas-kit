@@ -15,11 +15,11 @@ export interface BaseTableProps extends Omit<BoxProps, 'ref'> {}
 
 export const baseTableStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderRadius: system.shape.x2,
+    ...system.legacy.type.subtext.lg,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.strong}`,
+    borderRadius: system.legacy.shape.md,
     overflow: 'auto',
-    color: system.color.text.default,
+    color: system.color.fg.default,
   },
 });
 

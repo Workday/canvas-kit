@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
@@ -18,11 +16,10 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   accentIcon: createStyles({
-    marginInlineEnd: system.space.x4,
+    marginInlineEnd: system.gap.md,
   }),
   mainContent: createStyles({
     alignItems: 'center',

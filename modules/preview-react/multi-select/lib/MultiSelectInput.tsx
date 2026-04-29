@@ -80,7 +80,7 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '&:has(:disabled, .disabled) :where([data-part="form-input"])': {
-      opacity: system.opacity.zero,
+      opacity: 0,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
@@ -90,7 +90,7 @@ export const multiSelectInputStencil = createStencil({
       bottom: 0,
       left: 0,
       right: 0,
-      opacity: system.opacity.zero,
+      opacity: 0,
       cursor: 'default',
       pointerEvents: 'none',
     },
@@ -256,8 +256,8 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
         <InputGroup>
-          <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
-            <SystemIcon icon={searchIcon} size={system.space.x4} />
+          <InputGroup.InnerStart pointerEvents="none" width={system.legacy.size.sm}>
+            <SystemIcon icon={searchIcon} size="xxs" />
           </InputGroup.InnerStart>
           <InputGroup.Input
             data-part="form-input"
@@ -272,7 +272,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             error={error}
             {...elemProps}
           />
-          <InputGroup.InnerEnd width={system.space.x4}>
+          <InputGroup.InnerEnd width={system.legacy.size.xxxs}>
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">

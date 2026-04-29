@@ -7,7 +7,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
   backgroundColor: system.color.surface.contrast.default,
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 export const Inverse = () => {

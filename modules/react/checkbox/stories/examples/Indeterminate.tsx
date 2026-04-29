@@ -6,8 +6,8 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
-  marginInlineLeft: system.space.x8,
-  marginTop: system.space.x2,
+  marginInlineStart: system.gap.xl,
+  marginTop: system.gap.sm,
 });
 
 export const Indeterminate = () => {

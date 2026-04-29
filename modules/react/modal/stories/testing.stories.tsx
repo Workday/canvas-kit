@@ -1,12 +1,11 @@
-import * as React from 'react';
 import ReactDOM from 'react-dom';
 
 import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {brand} from '@workday/canvas-tokens-web';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
 import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
@@ -153,12 +152,12 @@ const TestModal = () => {
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Small Width Modal</Modal.Heading>
             <Modal.Body>
-              <Box as="p" marginY="zero">
+              <Box as="p" cs={{marginBlock: '0'}}>
                 This modal should appear on the bottom of the screen for mobile devices. Chromatic
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex gap="s" padding="xxs">
+            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -194,7 +193,7 @@ export const ModalRTL = {
         <Modal model={model}>
           <Modal.Target style={{display: 'none'}}></Modal.Target>
           <Modal.Overlay style={{animation: 'none'}}>
-            <Modal.Card style={{animation: 'none'}} width={300}>
+            <Modal.Card style={{animation: 'none'}} cs={{width: px2rem(300)}}>
               <Modal.CloseIcon aria-label="" />
               <Modal.Heading>למחוק פריט</Modal.Heading>
               <Modal.Body>האם ברצונך למחוק פריט זה</Modal.Body>
@@ -235,12 +234,12 @@ export const CustomThemeModal = {
               <Modal.CloseIcon aria-label="Close" />
               <Modal.Heading>MIT License</Modal.Heading>
               <Modal.Body>
-                <Box as="p" marginY="zero">
+                <Box as="p" cs={{marginBlock: '0'}}>
                   Permission is hereby granted, free of charge, to any person obtaining a copy of
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>

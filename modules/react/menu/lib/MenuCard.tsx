@@ -25,8 +25,8 @@ export const menuCardStencil = createStencil({
     maxHeight: '',
   },
   base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
-    ...system.type.subtext.large,
-    color: system.color.text.default,
+    ...system.legacy.type.subtext.lg,
+    color: system.color.fg.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',

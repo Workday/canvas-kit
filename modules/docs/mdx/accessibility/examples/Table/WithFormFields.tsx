@@ -27,17 +27,17 @@ const currencyInputContainer = createStyles({
 
 const dollarPrefix = createStyles({
   position: 'absolute',
-  left: system.space.x2,
+  left: system.gap.sm,
   top: '50%',
   transform: 'translateY(-50%)',
-  color: system.color.text.default,
+  color: system.color.fg.default,
   pointerEvents: 'none',
   zIndex: 1,
-  ...system.type.subtext.large,
+  ...system.type.subtext.lg,
 });
 
 const currencyInput = createStyles({
-  paddingLeft: system.space.x4, // Make room for dollar sign
+  paddingInlineStart: system.padding.md, // Make room for dollar sign
 });
 
 const expensesData = [

@@ -7,7 +7,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
   display: 'flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
   flexDirection: 'column',
 });
 

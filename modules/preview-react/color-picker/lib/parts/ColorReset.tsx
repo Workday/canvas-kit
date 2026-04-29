@@ -34,7 +34,7 @@ export const resetButtonStencil = createStencil({
     },
 
     '&:active, &.active': {
-      backgroundColor: system.color.bg.alt.strong,
+      backgroundColor: system.legacy.color.surface.default,
     },
     '&:focus-visible, &.focus': {
       ...focusRing(),

@@ -9,8 +9,8 @@ import {system} from '@workday/canvas-tokens-web';
 
 const storybookStatusIndicatorStencil = createStencil({
   base: {
-    borderRadius: system.shape.round,
-    padding: `${system.space.zero} ${system.space.x2}`,
+    borderRadius: system.shape.full,
+    padding: `0 ${system.padding.xs}`,
     [systemIconStencil.vars.color]: 'currentColor',
   },
 });
@@ -46,7 +46,7 @@ export const StorybookStatusIndicator = ({
     new: 'positive',
     promoted: 'info',
   };
-  console.log(variantMapping[type]);
+
   return (
     <StatusIndicator
       className="sb-unstyled cnvs-title-status-indicator"

@@ -19,7 +19,6 @@ tricky mental division or write irrational numbers.
 
 ```ts
 import {px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
   // returns '0.0625rem'
@@ -41,8 +40,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) + 0.125rem)'
-  padding: calc.add(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) + 0.125rem)'
+  padding: calc.add(system.padding.xxs, '0.125rem'),
 };
 ```
 
@@ -55,8 +54,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) - 0.125rem)'
-  padding: calc.subtract(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) - 0.125rem)'
+  padding: calc.subtract(system.padding.xxs, '0.125rem'),
 };
 ```
 
@@ -69,8 +68,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) * 3)'
-  padding: calc.multiply(system.space.x1, 3),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) * 3)'
+  padding: calc.multiply(system.padding.xxs, 3),
 };
 ```
 
@@ -83,8 +82,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) / 2)'
-  padding: calc.divide(system.space.x1, 2),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) / 2)'
+  padding: calc.divide(system.padding.xxs, 2),
 };
 ```
 
@@ -98,8 +97,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x4) * -1)'
-  margin: calc.negate(system.space.x4),
+  // returns 'calc(var(--cnvs-sys-gap-md) * -1)'
+  margin: calc.negate(system.gap.md),
 };
 ```
 
@@ -159,12 +158,15 @@ It takes a single options object with three properties:
    `system.opacity.accent....` or `system.opacity.surface....`).
 
 ```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
     backgroundColor: colorSpace.hover({
       color: system.color.brand.accent.primary,
-      fallback: brand.primary.darkest,
+      fallback: brand.primary800,
       colorType: 'accent',
     }),
   },
@@ -190,12 +192,15 @@ It takes a single options object with three properties:
    `system.opacity.accent....` or `system.opacity.surface....`).
 
 ```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
-  '&:active': {
+  '&:hover': {
     backgroundColor: colorSpace.pressed({
       color: system.color.brand.accent.primary,
-      fallback: brand.primary.darkest,
+      fallback: brand.primary800,
       colorType: 'accent',
     }),
   },
@@ -237,12 +242,12 @@ const keyframesLoading = keyframes({
 export const loadingStencil = createStencil({
   base: {
     display: 'inline-flex',
-    gap: system.space.x2,
-    width: system.space.x4,
-    height: system.space.x4,
-    fontSize: system.space.zero,
-    borderRadius: system.shape.round,
-    backgroundColor: system.color.bg.muted.softer,
+    gap: system.gap.sm,
+    width: system.size.xxxs,
+    height: system.size.xxxs,
+    fontSize: '0',
+    borderRadius: system.shape.full,
+    backgroundColor: system.color.accent.muted.soft,
     outline: `${px2rem(2)} solid transparent`,
     transform: 'scale(0)',
     animationName: keyframesLoading,
@@ -278,7 +283,7 @@ injectGlobal({
     fontFamily: system.fontFamily.default,
     margin: 0,
     minHeight: '100vh',
-    ...system.type.heading.large,
+    ...system.type.heading.lg,
   },
   '#root, #root < div': {
     minHeight: '100vh',
@@ -311,7 +316,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 

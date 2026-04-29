@@ -1,11 +1,9 @@
-import React from 'react';
-
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
-  background: system.color.bg.primary.default,
-  color: system.color.text.inverse,
+  background: system.color.brand.accent.primary,
+  color: system.color.fg.inverse,
 });
 
 export const CreateStyles = () => {

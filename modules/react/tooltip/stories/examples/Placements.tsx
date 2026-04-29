@@ -1,19 +1,24 @@
-import React from 'react';
-
 import {Card} from '@workday/canvas-kit-react/card';
 import {Placement} from '@workday/canvas-kit-react/popup';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const placementCardStyles = createStyles({
   boxShadow: system.depth[2],
   display: 'flex',
-  width: 100,
-  height: 100,
+  width: base.size100,
+  height: base.size100,
   justifyContent: 'space-around',
   alignItems: 'center',
-  padding: system.space.x1,
+  padding: system.padding.xxs,
+});
+
+const blockStyles = createStyles({
+  padding: base.size100, // give enough room for the tooltips to fit around their targets
+  display: 'grid',
+  gridTemplateColumns: '100px 320px 100px',
+  gridTemplateRows: '100px 320px 100px',
 });
 
 export const Placements = () => {
@@ -33,14 +38,7 @@ export const Placements = () => {
   };
 
   return (
-    <div
-      style={{
-        padding: 100, // give enough room for the tooltips to fit around their targets
-        display: 'grid',
-        gridTemplateColumns: '100px 320px 100px',
-        gridTemplateRows: '100px 320px 100px',
-      }}
-    >
+    <div className={blockStyles}>
       <div />
       <div style={{...placementStyles, flexDirection: 'row'}}>
         {['top-start', 'top', 'top-end'].map(createPlacement)}

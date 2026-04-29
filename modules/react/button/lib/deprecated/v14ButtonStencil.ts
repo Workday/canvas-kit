@@ -87,7 +87,7 @@ export const v14ButtonStencil = createStencil({
     color: cssVar(v14ButtonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    gap: system.space.x2,
+    gap: system.legacy.gap.sm,
     borderColor: cssVar(v14ButtonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -101,7 +101,7 @@ export const v14ButtonStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     borderRadius: cssVar(
       v14ButtonColorPropVars.default.borderRadius,
-      cssVar(borderRadius, system.shape.round)
+      cssVar(borderRadius, system.legacy.shape.full)
     ),
     position: 'relative',
     verticalAlign: 'middle',
@@ -136,11 +136,14 @@ export const v14ButtonStencil = createStencil({
         separation: 2,
         innerColor: cssVar(
           v14ButtonColorPropVars.focus.boxShadowInner,
-          cssVar(boxShadowInner, cssVar(system.color.border.inverse.default, base.neutral0))
+          cssVar(
+            boxShadowInner,
+            cssVar(system.legacy.color.border.inverse.default, base.legacy.neutral0)
+          )
         ),
         outerColor: cssVar(
           v14ButtonColorPropVars.focus.boxShadowOuter,
-          cssVar(boxShadowOuter, brand.common.focusOutline)
+          cssVar(boxShadowOuter, brand.legacy.common.focus)
         ),
       }),
     },
@@ -212,34 +215,34 @@ export const v14ButtonStencil = createStencil({
      */
     size: {
       large: {
-        ...system.type.body.small,
+        ...system.legacy.type.body.sm,
         fontWeight: system.fontWeight.bold,
-        height: px2rem(48),
-        paddingInline: system.space.x8,
+        height: system.legacy.size.lg,
+        paddingInline: system.legacy.padding.xxl,
         minWidth: px2rem(112),
       },
       medium: {
-        ...system.type.subtext.large,
+        ...system.legacy.type.subtext.lg,
         fontWeight: system.fontWeight.bold,
         minWidth: px2rem(96),
-        paddingInline: system.space.x6,
-        height: system.space.x10,
+        paddingInline: system.legacy.padding.xl,
+        height: system.legacy.size.md,
       },
       small: {
-        ...system.type.subtext.large,
+        ...system.legacy.type.subtext.lg,
         fontWeight: system.fontWeight.bold,
-        height: system.space.x8,
-        minWidth: system.space.x20,
-        paddingInline: system.space.x4,
-        gap: system.space.x1,
+        height: system.legacy.size.sm,
+        minWidth: px2rem(80),
+        paddingInline: system.legacy.padding.md,
+        gap: system.legacy.gap.xs,
       },
       extraSmall: {
-        ...system.type.subtext.medium,
+        ...system.legacy.type.subtext.md,
         fontWeight: system.fontWeight.bold,
-        height: system.space.x6,
+        height: system.legacy.size.xs,
         minWidth: 'auto',
-        paddingInline: system.space.x3,
-        gap: system.space.x1,
+        paddingInline: system.legacy.padding.sm,
+        gap: system.legacy.gap.xs,
       },
     },
     grow: {
@@ -250,7 +253,7 @@ export const v14ButtonStencil = createStencil({
     },
     // IconPosition Styles
     iconPosition: {
-      only: {padding: system.space.zero},
+      only: {padding: '0'},
       start: {},
       end: {},
     },
@@ -260,81 +263,81 @@ export const v14ButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: calc.multiply(system.space.x4, 3),
+        minWidth: calc.multiply(system.legacy.size.xxxs, 3),
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x6,
-        paddingInlineEnd: system.space.x8,
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: system.legacy.padding.xxl,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x8,
-        paddingInlineEnd: system.space.x6,
+        paddingInlineStart: system.legacy.padding.xxl,
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x10,
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: calc.multiply(system.space.x1, 5),
-        paddingInlineEnd: system.space.x6,
+        paddingInlineStart: calc.multiply(system.legacy.padding.xxs, 5),
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x6,
-        paddingInlineEnd: calc.multiply(system.space.x1, 5),
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: calc.multiply(system.legacy.padding.xxs, 5),
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x8,
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x4,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x4,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: system.legacy.padding.md,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.space.x6,
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.space.x2,
-        paddingInlineEnd: system.space.x3,
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.space.x3,
-        paddingInlineEnd: system.space.x2,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
   ],

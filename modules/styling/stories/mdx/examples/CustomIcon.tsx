@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {component, system} from '@workday/canvas-tokens-web';
@@ -7,8 +5,8 @@ import {component, system} from '@workday/canvas-tokens-web';
 const myIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    [systemIconStencil.vars.color]: system.color.icon.primary.default,
-    [systemIconStencil.vars.accentColor]: system.color.icon.critical.default,
+    [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
+    [systemIconStencil.vars.accentColor]: system.color.brand.fg.critical.default,
     [systemIconStencil.vars.size]: component.systemIcon.size.xs,
   },
 });

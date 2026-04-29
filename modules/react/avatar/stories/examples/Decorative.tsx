@@ -8,7 +8,7 @@ import nicholasAvatar from './nicholas-avatar.jpg';
 
 const containerStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
   alignItems: 'center',
 });
 export const Decorative = () => {

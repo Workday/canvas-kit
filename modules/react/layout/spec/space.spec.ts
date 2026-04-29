@@ -69,8 +69,8 @@ describe('Space Style Props Function', () => {
 
     it('should properly set paddingX and paddingY values', () => {
       const props = {
-        paddingX: 's',
-        paddingY: 'm',
+        paddingInline: 's',
+        paddingBlock: 'm',
       };
       const expected = {
         paddingBlock: '1.5rem',

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -8,7 +6,7 @@ import {system} from '@workday/canvas-tokens-web';
 const sectionStyles = createStyles({
   display: 'flex',
   flexDirection: 'column',
-  gap: system.space.x4,
+  gap: system.gap.md,
   maxWidth: '40rem',
 });
 
@@ -19,7 +17,7 @@ export const Basic = () => {
       {maintainerList.map((maintainerData, index) => (
         <>
           <ProfileCard {...maintainerData} />
-          {index !== lastIndex && <Divider space={system.space.x1} />}
+          {index !== lastIndex && <Divider space={system.gap.xs} />}
         </>
       ))}
     </section>
@@ -72,7 +70,7 @@ const profileCardAvatarStyles = createStyles({
 });
 
 const profileCardHeadingStyles = createStyles({
-  ...system.type.body.large,
+  ...system.type.body.lg,
   fontWeight: system.fontWeight.bold,
   gridColumn: '2/3',
   gridRow: '1',
@@ -80,7 +78,7 @@ const profileCardHeadingStyles = createStyles({
 });
 
 const profileCardBodyStyles = createStyles({
-  ...system.type.body.small,
+  ...system.type.body.sm,
   gridColumn: '2',
   gridRow: '2',
   margin: 0,

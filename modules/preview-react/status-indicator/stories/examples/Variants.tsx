@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -8,11 +6,11 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
     flexDirection: 'column',
   }),
   innerContainerStyles: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
 };
 

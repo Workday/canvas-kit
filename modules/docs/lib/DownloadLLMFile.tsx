@@ -1,7 +1,7 @@
 import {ExternalHyperlink, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {documentIcon, downloadIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -12,12 +12,12 @@ type DownloadLLMFileProps = {
 
 const flexBlock = createStencil({
   vars: {
-    gap: system.space.x1,
+    gap: '',
   },
   base: ({gap}) => ({
     display: 'flex',
     alignItems: 'center',
-    gap,
+    gap: cssVar(gap, system.gap.xs),
     code: {
       fontFamily: system.fontFamily.mono,
       padding: system.padding.xxs,
@@ -57,7 +57,7 @@ export const DownloadLLMFile = ({rawFileLink, filename}: DownloadLLMFileProps) =
           <SystemIcon icon={documentIcon} />
           <code>{filename}</code>
         </div>
-        <div {...flexBlock({gap: system.space.x4})}>
+        <div {...flexBlock({gap: system.gap.md})}>
           <ExternalHyperlink href={rawFileLink}>View raw file</ExternalHyperlink>
           <SecondaryButton icon={downloadIcon} size="small" onClick={handleDownload}>
             Download LLM File

@@ -6,7 +6,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 const popupStyles = createStyles({

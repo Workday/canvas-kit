@@ -54,7 +54,7 @@ export const tooltipContainerStencil = createStencil({
     tooltipTransformOriginVertical: '',
   },
   base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical}) => ({
-    ...system.type.subtext.medium,
+    ...system.legacy.type.subtext.md,
     display: 'inline-flex',
     position: 'relative',
     padding: system.legacy.padding.sm,

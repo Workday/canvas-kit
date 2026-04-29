@@ -6,7 +6,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
+  backgroundColor: system.color.brand.accent.primary,
   padding: system.padding.md,
   display: 'inline-flex',
   gap: system.gap.md,

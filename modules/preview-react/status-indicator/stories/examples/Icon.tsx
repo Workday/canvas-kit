@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
@@ -7,7 +5,7 @@ import {cloudArrowUpIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 export const Icon = () => {

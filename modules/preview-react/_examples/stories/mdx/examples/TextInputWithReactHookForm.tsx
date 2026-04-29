@@ -8,12 +8,12 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
-  gap: system.space.x3,
+  gap: system.gap.md,
   flexDirection: 'column',
   alignItems: 'flex-start',
 });
@@ -150,7 +150,7 @@ export const TextInputWithReactHookForm = () => {
           error={!!errors.password ? 'error' : undefined}
         >
           <FormField.Label>Password</FormField.Label>
-          <Flex cs={{gap: system.space.x2}}>
+          <Flex cs={{gap: system.gap.md}}>
             <FormField.Field>
               <FormField.Input
                 as={TextInput}

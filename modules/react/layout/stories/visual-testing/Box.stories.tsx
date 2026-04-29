@@ -18,7 +18,7 @@ const cellDefaultProps = {
   backgroundColor: 'soap400',
   depth: 2,
   display: 'inline-block',
-  paddingY: 'xxs',
+  paddingBlock: 'xxs',
   position: 'relative',
 };
 

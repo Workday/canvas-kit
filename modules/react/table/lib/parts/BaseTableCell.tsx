@@ -11,7 +11,7 @@ export const baseTableCellStencil = createStencil({
     gridTemplateColumns: '1fr',
     justifyContent: 'start',
     minHeight: '3.5rem',
-    padding: `${system.space.x2} ${system.space.x4}`,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
     wordBreak: 'break-word',
   },
 });

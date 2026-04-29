@@ -188,7 +188,7 @@ export const buttonStencil = createStencil({
     '&:hover, &.hover': {
       backgroundColor: cssVar(
         buttonColorPropVars.hover.background,
-        cssVar(background, system.color.bg.contrast.strong)
+        cssVar(background, system.legacy.color.surface.contrast.strong)
       ),
       borderColor: cssVar(buttonColorPropVars.hover.border, cssVar(border, 'transparent')),
       color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),

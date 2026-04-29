@@ -3,14 +3,14 @@ import React, {useEffect} from 'react';
 import {MultiSelect, useMultiSelectModel} from '@workday/canvas-kit-preview-react/multi-select';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {useComboboxLoader} from '@workday/canvas-kit-react/combobox';
-import {CanvasProvider, useMountLayout} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
@@ -104,7 +104,7 @@ export const InitialSelectedItems = () => {
                       <StyledMenuItem as="span">No Results Found</StyledMenuItem>
                     )}
                     {model.state.items.length > 0 && (
-                      <MultiSelect.List maxHeight={200}>
+                      <MultiSelect.List cs={{maxHeight: 200}}>
                         {item =>
                           item ? (
                             <MultiSelect.Item data-id={item.id}>

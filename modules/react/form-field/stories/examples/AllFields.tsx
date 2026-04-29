@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {FormField, FormFieldGroup} from '@workday/canvas-kit-react/form-field';
@@ -9,13 +7,13 @@ import {Switch} from '@workday/canvas-kit-react/switch';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
-  gap: calc.subtract(system.space.x6, system.space.x1),
-  padding: calc.subtract(system.space.x10, system.space.x1),
-  borderRadius: system.space.x1,
+  gap: calc.subtract(system.gap.lg, system.gap.xs),
+  padding: calc.subtract(base.size500, system.padding.xxs),
+  borderRadius: system.shape.sm,
 });
 
 export const AllFields = () => {

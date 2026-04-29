@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Expandable, useExpandableModel} from '@workday/canvas-kit-react/expandable';
@@ -9,10 +7,10 @@ import {system} from '@workday/canvas-tokens-web';
 
 const listStyles = createStyles({
   flexDirection: 'column',
-  gap: system.space.x2,
-  padding: system.space.zero,
-  marginX: system.space.x4,
-  marginY: system.space.zero,
+  gap: system.gap.sm,
+  padding: '0',
+  marginInline: system.padding.md,
+  marginBlock: '0',
 });
 
 export const HoistedModel = () => {
@@ -37,12 +35,12 @@ export const HoistedModel = () => {
   };
 
   return (
-    <Flex gap={system.space.x6} flexDirection="column">
-      <Flex gap={system.space.x4}>
+    <Flex cs={{gap: system.gap.lg, flexDirection: 'column'}}>
+      <Flex cs={{gap: system.gap.md}}>
         <SecondaryButton onClick={handleExpandAll}>Expand All</SecondaryButton>
         <SecondaryButton onClick={handleCollapseAll}>Collapse All</SecondaryButton>
       </Flex>
-      <Flex flexDirection="column">
+      <Flex cs={{flexDirection: 'column'}}>
         <Expandable model={modelOne}>
           <Expandable.Target headingLevel="h4">
             <Expandable.Title id={idOne}>Usage Guidance</Expandable.Title>

@@ -31,20 +31,20 @@ export interface TypeLabelProps extends BoxProps {
 const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
-    ...system.type.subtext.large,
+    ...system.legacy.type.subtext.lg,
     color: system.color.fg.default,
   },
   modifiers: {
     disabled: {
       true: {
         cursor: 'default',
-        color: system.color.text.disabled,
+        color: system.color.fg.disabled,
       },
     },
     variant: {
-      inverse: {color: system.color.text.inverse},
-      error: {color: system.color.text.critical.default},
-      hint: {color: system.color.text.hint},
+      inverse: {color: system.color.fg.inverse},
+      error: {color: system.legacy.color.brand.fg.critical.default},
+      hint: {color: system.color.fg.muted.default},
     },
   },
   compound: [
@@ -52,7 +52,7 @@ const labelTextStencil = createStencil({
       modifiers: {variant: 'inverse', disabled: true},
       styles: {
         opacity: system.opacity.disabled,
-        color: system.color.text.inverse,
+        color: system.color.fg.inverse,
       },
     },
   ],

@@ -42,10 +42,10 @@ const glowThumbtack = base.legacy.coral500; //'#FC5B05';
 export const AIIngressButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    [buttonStencil.vars.background]: system.color.bg.ai.strongest,
-    borderRadius: system.shape.round,
-    height: calc.add(system.space.x10, system.space.x1),
-    width: calc.add(system.space.x10, system.space.x1),
+    [buttonStencil.vars.background]: system.legacy.color.accent.ai,
+    borderRadius: system.legacy.shape.full,
+    height: calc.add(system.legacy.size.md, base.legacy.size50),
+    width: calc.add(system.legacy.size.md, base.legacy.size50),
     transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
 
     '.wd-icon-ai-ingress-button': {
@@ -118,7 +118,7 @@ export const AIIngressButtonStencil = createStencil({
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
-          border: `2px solid ${system.color.border.ai} `,
+          border: `2px solid ${system.legacy.color.accent.ai} `,
         },
       },
     },
@@ -143,7 +143,7 @@ export const AIIngressButtonStencil = createStencil({
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 2}),
-          border: `1px solid ${system.color.border.container} `,
+          border: `1px solid ${system.legacy.color.border.strong} `,
         },
       },
       false: {
@@ -155,7 +155,7 @@ export const AIIngressButtonStencil = createStencil({
     {
       modifiers: {toggled: true, variant: 'inverse'},
       styles: {
-        [buttonStencil.vars.background]: system.color.bg.ai.strongest,
+        [buttonStencil.vars.background]: system.legacy.color.accent.ai,
         '.wd-icon-ai-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',

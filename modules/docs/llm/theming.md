@@ -396,12 +396,12 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {arrowRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const rtlStyles = createStyles({
-  paddingInlineStart: system.space.x16,
+  paddingInlineStart: px2rem(64),
 });
 
 const rtlButtonStyles = createStyles({
@@ -481,8 +481,8 @@ const theme = {
   canvas: {
     palette: {
       primary: {
-        main: colors.greenApple400,
-        dark: colors.greenApple500,
+        main: colors.green400,
+        dark: colors.green500,
       }
     }
   }

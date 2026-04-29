@@ -63,11 +63,11 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, width, height, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      width: cssVar(width, cssVar(size, system.space.x6)),
-      height: cssVar(height, cssVar(size, system.space.x6)),
+      width: cssVar(width, cssVar(size, system.legacy.size.xs)),
+      height: cssVar(height, cssVar(size, system.legacy.size.xs)),
     },
     '& .wd-icon-fill': {
-      fill: cssVar(color, system.color.icon.default),
+      fill: cssVar(color, system.color.fg.default),
     },
     '& .wd-icon-accent, & .wd-icon-accent2': {
       fill: cssVar(accentColor, cssVar(color, system.color.fg.default)),

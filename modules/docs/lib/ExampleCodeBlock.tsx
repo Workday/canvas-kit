@@ -9,7 +9,7 @@ import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common'
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import eslintrc from './stackblitzFiles/.eslintrc.cjs.txt?raw';
 import appFile from './stackblitzFiles/App.tsx?raw';
@@ -28,7 +28,7 @@ const cardStencil = createStencil({
     maxWidth: '100%',
     '[data-part="example-block"]': {
       boxShadow: system.depth[1],
-      borderRadius: system.shape.x1,
+      borderRadius: system.shape.sm,
       padding: system.padding.md,
       position: 'relative',
       minWidth: 0,
@@ -42,21 +42,21 @@ const cardStencil = createStencil({
     '[data-part="code-block"]': {
       display: 'none',
       boxShadow: system.depth[1],
-      borderRadius: system.shape.x1,
+      borderRadius: system.shape.sm,
     },
     '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
       right: calc.negate(px2rem(1)),
       bottom: calc.negate(px2rem(4)),
       display: 'flex',
-      gap: system.space.x2,
+      gap: system.gap.sm,
     },
     '[data-part="copy-btn"]': {
       position: 'absolute',
-      bottom: system.space.zero,
-      right: system.space.zero,
-      borderRadius: system.shape.zero,
-      borderTopLeftRadius: system.shape.x1,
+      bottom: '0',
+      right: '0',
+      borderRadius: system.shape.none,
+      borderTopLeftRadius: system.shape.sm,
     },
   },
   modifiers: {
@@ -64,12 +64,12 @@ const cardStencil = createStencil({
       true: {
         '[data-part="code-block"]': {
           display: 'block',
-          borderTopLeftRadius: system.shape.zero,
-          borderTopRightRadius: system.shape.zero,
+          borderTopLeftRadius: system.shape.none,
+          borderTopRightRadius: system.shape.none,
         },
         '[data-part="example-block"]': {
-          borderBottomLeftRadius: system.shape.zero,
-          borderBottomRightRadius: system.shape.zero,
+          borderBottomLeftRadius: system.shape.none,
+          borderBottomRightRadius: system.shape.none,
         },
       },
     },
@@ -165,10 +165,10 @@ export const ExampleCodeBlock = ({code}: any) => {
                   language="jsx"
                   style={vscDarkPlus}
                   customStyle={{
-                    fontSize: cssVar(system.fontSize.subtext.large),
-                    lineHeight: cssVar(system.lineHeight.subtext.large),
+                    fontSize: cssVar(system.fontSize.subtext.lg),
+                    lineHeight: cssVar(system.lineHeight.subtext.lg),
                     margin: '0',
-                    padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                    padding: `${cssVar(system.padding.xxl)} ${cssVar(base.size500)}`,
                     boxSizing: 'border-box',
                     maxWidth: '100%',
                   }}

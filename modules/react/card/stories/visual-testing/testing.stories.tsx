@@ -26,15 +26,15 @@ export const CardStates = {
           {label: 'With Heading', props: {}},
           {
             label: 'With custom padding (0px)',
-            props: {cs: {padding: system.space.zero}},
+            props: {cs: {padding: '0'}},
           },
           {
             label: 'With custom padding (16px)',
-            props: {cs: {padding: system.space.x4}},
+            props: {cs: {padding: system.padding.md}},
           },
           {
             label: 'With custom gap (0px)',
-            props: {cs: {gap: system.space.zero}},
+            props: {cs: {gap: '0'}},
           },
           {
             label: 'With custom box shadow (system.depth[1])',
@@ -56,7 +56,7 @@ export const CardStates = {
             style={{
               background:
                 props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
-              padding: cssVar(system.space.x4),
+              padding: cssVar(system.padding.md),
             }}
           >
             <Card {...props}>

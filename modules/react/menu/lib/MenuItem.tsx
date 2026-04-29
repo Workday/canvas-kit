@@ -16,8 +16,8 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -105,7 +105,7 @@ export const menuItemStencil = createStencil({
         [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
         backgroundColor: system.legacy.color.brand.accent.primary,
-        color: cssVar(system.color.fg.inverse, brand.primary.accent),
+        color: system.color.fg.inverse,
       },
     },
 
@@ -117,7 +117,7 @@ export const menuItemStencil = createStencil({
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      color: cssVar(system.color.fg.inverse, brand.primary.accent),
+      color: system.color.fg.inverse,
       backgroundColor: system.legacy.color.brand.accent.primary,
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
