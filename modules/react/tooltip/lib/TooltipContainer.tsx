@@ -143,7 +143,6 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
             elementHasFocus,
           }),
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
-          {visibility: 'visible'},
         ])}
       >
         {children}
