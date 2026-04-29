@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
@@ -18,7 +16,7 @@ const cellDefaultProps = {
   backgroundColor: 'soap400',
   depth: 2,
   display: 'inline-block',
-  paddingBlock: 'xxs',
+  paddingY: 'xxs',
   position: 'relative',
 };
 

@@ -15,12 +15,13 @@ const gridStyles = createStencil({
   vars: {
     gridArea: '',
   },
-  base: {
+  base: ({gridArea}) => ({
     backgroundColor: system.color.brand.accent.primary,
     borderRadius: system.shape.sm,
     boxShadow: system.depth[1],
     padding: system.padding.md,
-  },
+    gridArea,
+  }),
 });
 
 const headingStyles = createStyles({

@@ -257,7 +257,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
         <InputGroup>
           <InputGroup.InnerStart pointerEvents="none" width={system.legacy.size.sm}>
-            <SystemIcon icon={searchIcon} size="xxs" />
+            <SystemIcon icon={searchIcon} size="xs" />
           </InputGroup.InnerStart>
           <InputGroup.Input
             data-part="form-input"
