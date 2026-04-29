@@ -21,7 +21,7 @@ const headingStyles = createStyles({
   margin: system.space.zero,
 });
 
-export const LandmarkRegaions = () => {
+export const LandmarkRegions = () => {
   return (
     <Grid cs={gridLayoutStyles}>
       <Grid as="header" gridArea="Header" cs={regionStyles}>
