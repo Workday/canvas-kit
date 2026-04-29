@@ -61,7 +61,7 @@ export function removePackageDistTags(packages, distTag) {
   });
 }
 
-exec('yarn lerna ls --json')
+exec('yarn -s lerna ls --json')
   .then(({stdout}) => {
     const packages = JSON.parse(stdout);
     if (!VERSION || !DIST_TAG) {
