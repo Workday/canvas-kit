@@ -7,15 +7,15 @@ import {base, system} from '@workday/canvas-tokens-web';
 const placementCardStyles = createStyles({
   boxShadow: system.depth[2],
   display: 'flex',
-  width: base.size100,
-  height: base.size100,
+  width: base.size1300,
+  height: base.size1300,
   justifyContent: 'space-around',
   alignItems: 'center',
   padding: system.padding.xxs,
 });
 
 const blockStyles = createStyles({
-  padding: base.size100, // give enough room for the tooltips to fit around their targets
+  padding: base.size1300, // give enough room for the tooltips to fit around their targets
   display: 'grid',
   gridTemplateColumns: '100px 320px 100px',
   gridTemplateRows: '100px 320px 100px',

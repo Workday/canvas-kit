@@ -1,5 +1,3 @@
-import {ContentDirection} from '@workday/canvas-kit-react/common';
-
 import {space} from '../lib/utils/space';
 
 const context = describe;
@@ -69,8 +67,8 @@ describe('Space Style Props Function', () => {
 
     it('should properly set paddingX and paddingY values', () => {
       const props = {
-        paddingInline: 's',
-        paddingBlock: 'm',
+        paddingX: 's',
+        paddingY: 'm',
       };
       const expected = {
         paddingBlock: '1.5rem',

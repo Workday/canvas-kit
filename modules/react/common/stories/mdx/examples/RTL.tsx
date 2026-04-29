@@ -9,7 +9,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {arrowRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 const rtlStyles = createStyles({
-  paddingInlineStart: px2rem(2),
+  paddingInlineStart: px2rem(64),
 });
 
 const rtlButtonStyles = createStyles({
