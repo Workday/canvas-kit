@@ -5,7 +5,6 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
-import {v14TertiaryButtonStencil} from './deprecated/v14TertiaryButtonStencil';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -17,14 +16,6 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-  /**
-   * This data attributes affords toggling Tertiary Button styles to pre-DSR styles
-   * to look like the former v14 Tertiary Buttons.
-   *
-   * This functionality is temporary and will be removed in the next major version of Canvas Kit.
-   * @default undefined
-   */
-  'data-dsr-off'?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
@@ -269,7 +260,6 @@ export const TertiaryButton = createComponent('button')({
       iconPosition,
       grow,
       cs,
-      'data-dsr-off': dataDSROff,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -282,7 +272,6 @@ export const TertiaryButton = createComponent('button')({
           ? 'start'
           : 'only'
         : undefined;
-    const tertiaryStencil = dataDSROff ? v14TertiaryButtonStencil : tertiaryButtonStencil;
 
     return (
       <Button
@@ -292,13 +281,12 @@ export const TertiaryButton = createComponent('button')({
         size={size}
         iconPosition={iconPosition}
         grow={grow}
-        data-dsr-off={dataDSROff}
         cs={[
-          tertiaryStencil({
-            grow,
-            iconPosition: baseIconPosition,
+          tertiaryButtonStencil({
             size,
             variant,
+            grow,
+            iconPosition: baseIconPosition,
           }),
           cs,
         ]}

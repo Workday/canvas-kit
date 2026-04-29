@@ -15,7 +15,6 @@ import {PrimaryInverse} from './examples/PrimaryInverse';
 import {Secondary} from './examples/Secondary';
 import {SecondaryInverse} from './examples/SecondaryInverse';
 import {Tertiary} from './examples/Tertiary';
-import {TertiaryDSROff} from './examples/TertiaryDSROff';
 import {TertiaryInverse} from './examples/TertiaryInverse';
 import {ThemeOverrides} from './examples/ThemeOverrides';
 
@@ -76,18 +75,6 @@ Tertiary Buttons also have an `inverse` variant. Use this when you need to place
 on a dark or colorful background such as `blueberry400`.
 
 <ExampleCodeBlock code={TertiaryInverse} />
-
-### Tertiary DSR Off
-
-For Canvas Kit v15, `TertiaryButton` supports an optional data attribute, `data-dsr-off`, that
-reverts the component to pre-DSR (v14) styles. This allows consumers to more gradually transition
-between major versions if needed. By default, this toggle is off. It must be
-explicitly set to `true` to revert styles. Support for `data-dsr-off` is **temporary** and will become inert
-in the next major release.
-
-The examples below show the `TertiaryButton` with `data-dsr-off` set to `true`.
-
-<ExampleCodeBlock code={TertiaryDSROff} />
 
 ### DeleteButton
 
