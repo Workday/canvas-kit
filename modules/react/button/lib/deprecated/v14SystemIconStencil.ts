@@ -49,7 +49,7 @@ const deprecatedSystemIconVars = createVars(
   'backgroundHover'
 );
 
-export const systemIconStencil = createStencil({
+export const v14SystemIconStencil = createStencil({
   extends: v14SvgStencil,
   vars: {
     /**

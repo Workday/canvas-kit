@@ -2,7 +2,7 @@ import {focusRing} from '@workday/canvas-kit-react/common';
 import {calc, createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-import {systemIconStencil} from './v14SystemIconStencil';
+import {v14SystemIconStencil} from './v14SystemIconStencil';
 
 /**
  * The purpose of this object is for the `colors` prop - to provide backwards compatibility with how we allowed color overrides in Emotion.
@@ -106,7 +106,7 @@ export const v14ButtonStencil = createStencil({
     position: 'relative',
     verticalAlign: 'middle',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: cssVar(
+    [v14SystemIconStencil.vars.color]: cssVar(
       v14ButtonColorPropVars.default.icon,
       system.color.fg.strong
     ),
@@ -125,7 +125,7 @@ export const v14ButtonStencil = createStencil({
       ),
       borderColor: cssVar(v14ButtonColorPropVars.focus.border, cssVar(border, 'transparent')),
       color: cssVar(v14ButtonColorPropVars.focus.label, cssVar(label, system.color.fg.strong)),
-      [systemIconStencil.vars.color]: cssVar(
+      [v14SystemIconStencil.vars.color]: cssVar(
         v14ButtonColorPropVars.focus.icon,
         system.color.fg.strong
       ),
@@ -152,7 +152,7 @@ export const v14ButtonStencil = createStencil({
       ),
       borderColor: cssVar(v14ButtonColorPropVars.hover.border, cssVar(border, 'transparent')),
       color: cssVar(v14ButtonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),
-      [systemIconStencil.vars.color]: cssVar(
+      [v14SystemIconStencil.vars.color]: cssVar(
         v14ButtonColorPropVars.hover.icon,
         system.color.fg.stronger
       ),
@@ -166,7 +166,7 @@ export const v14ButtonStencil = createStencil({
       ),
       borderColor: cssVar(v14ButtonColorPropVars.active.border, cssVar(border, 'transparent')),
       color: cssVar(v14ButtonColorPropVars.active.label, cssVar(label, system.color.fg.strong)),
-      [systemIconStencil.vars.color]: cssVar(
+      [v14SystemIconStencil.vars.color]: cssVar(
         v14ButtonColorPropVars.active.icon,
         system.color.fg.strong
       ),
@@ -179,7 +179,7 @@ export const v14ButtonStencil = createStencil({
       ),
       borderColor: cssVar(v14ButtonColorPropVars.disabled.border, cssVar(border, 'transparent')),
       color: cssVar(v14ButtonColorPropVars.disabled.label, cssVar(label, system.color.fg.strong)),
-      [systemIconStencil.vars.color]: cssVar(
+      [v14SystemIconStencil.vars.color]: cssVar(
         v14ButtonColorPropVars.disabled.icon,
         system.color.fg.strong
       ),
