@@ -1,7 +1,5 @@
-import React from 'react';
-
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {CountBadge} from '../index';
@@ -64,11 +62,12 @@ export const CountBadgeStates = {
 
 const innerBlockStyles = createStencil({
   vars: {
-    color: '',
+    backgroundColor: '',
   },
-  base: {
+  base: ({backgroundColor}) => ({
     padding: system.padding.md,
-  },
+    backgroundColor,
+  }),
 });
 
 export const CountBadgeInverseBgTest = {
@@ -100,7 +99,7 @@ export const CountBadgeInverseBgTest = {
     return (
       <ComponentStatesTable columnProps={colorScaleProps} rowProps={colorProps}>
         {({color, colorScale, ...props}) => (
-          <div {...innerBlockStyles({color: base[`${color}${colorScale}`]})}>
+          <div {...innerBlockStyles({backgroundColor: base[`${color}${colorScale}`]})}>
             <CountBadge {...props} />
           </div>
         )}

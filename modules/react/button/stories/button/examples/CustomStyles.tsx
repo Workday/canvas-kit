@@ -27,7 +27,7 @@ const myButtonStencil = createStencil({
     '&:hover': {
       [buttonStencil.vars.background]: base.green600,
       border: `${px2rem(3)} dotted ${base.green700}`,
-      [systemIconStencil.vars.color]: base.green700,
+      [buttonStencil.vars.label]: base.green700,
       [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
     '&:active': {
@@ -63,7 +63,7 @@ const myCustomStyles = createStyles({
   '&:hover': {
     [buttonStencil.vars.background]: base.slate600,
     [buttonStencil.vars.border]: `${px2rem(3)} dotted ${base.slate700}`,
-    [systemIconStencil.vars.color]: base.slate700,
+    [buttonStencil.vars.label]: base.slate700,
     [systemIconStencil.vars.color]: system.color.fg.inverse,
     border: `${px2rem(3)} dotted ${base.slate700}`,
   },

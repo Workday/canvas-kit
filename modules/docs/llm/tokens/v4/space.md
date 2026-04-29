@@ -7,8 +7,8 @@ create a consistent foundation for responsive design and UI density.
 
 1. **Variant**: Type of space token (padding or gap)
 2. **Size**: T-shirt size used in the scale
-3. **Value**: Reference to a base size tokenvides spacing tokens to create a consistent foundation
-   for responsive design and UI density.
+3. **Value**: Reference to a base size tokens to create a consistent foundation for responsive
+   design and UI density.
 
 ### 8pt grid
 

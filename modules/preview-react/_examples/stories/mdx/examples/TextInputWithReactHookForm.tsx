@@ -8,7 +8,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
