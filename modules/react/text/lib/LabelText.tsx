@@ -31,7 +31,13 @@ export interface TypeLabelProps extends BoxProps {
 const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
-    ...system.legacy.type.subtext.lg,
+    // ...system.legacy.type.subtext.lg,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     color: system.color.fg.default,
   },
   modifiers: {

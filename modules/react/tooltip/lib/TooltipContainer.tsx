@@ -54,7 +54,13 @@ export const tooltipContainerStencil = createStencil({
     tooltipTransformOriginVertical: '',
   },
   base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical}) => ({
-    ...system.legacy.type.subtext.md,
+    // ...system.legacy.type.subtext.md
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.md,
+    lineHeight: system.legacy.lineHeight.subtext.md,
+    letterSpacing: system.legacy.letterSpacing.subtext.md,
     display: 'inline-flex',
     position: 'relative',
     padding: system.legacy.padding.sm,
@@ -137,6 +143,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
             elementHasFocus,
           }),
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
+          {visibility: 'visible'},
         ])}
       >
         {children}

@@ -2264,7 +2264,7 @@ injectGlobal({
     fontFamily: system.fontFamily.default,
     margin: 0,
     minHeight: '100vh',
-    ...system.type.heading.large,
+    ...system.type.heading.lg,
   },
   '#root, #root < div': {
     minHeight: '100vh',
@@ -2296,7 +2296,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 
