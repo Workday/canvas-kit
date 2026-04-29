@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.13](https://github.com/Workday/canvas-kit/releases/tag/v14.3.13) (2026-04-29)
+
+### Documentation
+
+- docs: Fix typo ([#3912](https://github.com/Workday/canvas-kit/pull/3912)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v14.3.12](https://github.com/Workday/canvas-kit/releases/tag/v14.3.12) (2026-04-28)
 
 ### Components
