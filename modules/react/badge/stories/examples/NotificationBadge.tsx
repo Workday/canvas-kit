@@ -16,13 +16,13 @@ function negate(value: string, fallback?: string) {
 const container = createStyles({
   boxSizing: 'border-box',
   flexDirection: 'column',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  gap: system.space.x2,
-  padding: system.space.x1,
+  gap: system.gap.sm,
+  padding: system.padding.xxs,
 });
 
 const notificationContainerStyles = createStyles({
@@ -33,8 +33,8 @@ const notificationContainerStyles = createStyles({
 const countBadgeStyles = createStyles({
   boxSizing: 'border-box',
   position: 'absolute',
-  top: negate(system.space.x1),
-  insetInlineEnd: negate(system.space.x1),
+  top: negate(system.gap.xs),
+  insetInlineEnd: negate(system.gap.xs),
 });
 
 // Testing notes (Aug. 30, 2024):

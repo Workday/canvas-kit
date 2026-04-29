@@ -32,7 +32,7 @@ const LOADING_ANIMATION = keyframes({
  * An individual loading sparkle. ✨
  */
 const Sparkle = () => {
-  return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={system.space.x3} />;
+  return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={px2rem(12)} />;
 };
 
 export const loadingSparklesStencil = createStencil({

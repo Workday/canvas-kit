@@ -21,7 +21,7 @@ const data = [
 const flexWrapStyles = createStyles({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 export const WithList = () => {

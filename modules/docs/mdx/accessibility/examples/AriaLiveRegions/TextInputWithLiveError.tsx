@@ -8,8 +8,9 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const hintStyles = createStyles({
-  height: system.space.x6,
+  height: system.size.xs,
 });
+
 export const TextInputWithLiveError = () => {
   const errMsg = 'Error: First name is required.';
   const [hasError, setHasError] = React.useState('no');

@@ -15,7 +15,7 @@ const styleOverrides = {
   parentContainer: createStyles({
     flexDirection: 'column',
     alignItems: 'center',
-    gap: system.space.x6,
+    gap: system.gap.lg,
   }),
   iconGroupContainer: createStyles({
     flexWrap: 'wrap',
@@ -24,8 +24,8 @@ const styleOverrides = {
     alignItems: 'center',
     width: `max(${px2rem(320)},20%)`,
     flexDirection: 'row',
-    gap: system.space.x3,
-    padding: system.space.x3,
+    gap: px2rem(12),
+    padding: system.padding.sm,
   }),
 };
 

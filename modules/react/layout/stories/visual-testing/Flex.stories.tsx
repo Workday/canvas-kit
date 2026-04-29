@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 

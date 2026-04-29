@@ -1,20 +1,20 @@
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainer: createStyles({
     display: 'flex',
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
 };
 
 const loadingStencil = createStencil({
   base: {
-    borderRadius: system.shape.round,
-    backgroundColor: system.color.bg.contrast.strong,
-    height: 80,
-    width: 80,
+    borderRadius: system.shape.full,
+    backgroundColor: system.color.surface.contrast.strong,
+    height: base.size1000,
+    width: base.size1000,
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',

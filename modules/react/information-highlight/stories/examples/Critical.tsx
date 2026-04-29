@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const Critical = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
       <InformationHighlight variant={'critical'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>

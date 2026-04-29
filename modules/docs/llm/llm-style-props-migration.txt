@@ -740,7 +740,7 @@ The `cs` prop takes in a single, or an array of values that are created by the `
 > babel plugin to extract these styles statically in a future version.
 
 ```tsx
-import {system} from '@workday/canvas-tokens-webs';
+import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 const styles = createStyles({color: system.color.static.red.default});
@@ -791,7 +791,7 @@ export const CreateStyles = () => {
 
 ```tsx
 // Bad example (inside render function)
-import {system} from '@workday/canvas-tokens-webs';
+import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 function MyComponent() {
@@ -812,7 +812,7 @@ You should use [stencils](/docs/styling-getting-started-stencils--docs) when sty
 
 ```tsx
 // Bad example (inside render function)
-import {system} from '@workday/canvas-tokens-webs';
+import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 function MyComponent() {
@@ -821,7 +821,7 @@ function MyComponent() {
 }
 
 // Good example (outside render function)
-import {system} from '@workday/canvas-tokens-webs';
+import {system} from '@workday/canvas-tokens-web';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 const styles = createStyles({color: system.color.static.red.default});
@@ -2264,7 +2264,7 @@ injectGlobal({
     fontFamily: system.fontFamily.default,
     margin: 0,
     minHeight: '100vh',
-    ...system.type.heading.large,
+    ...system.type.heading.lg,
   },
   '#root, #root < div': {
     minHeight: '100vh',
@@ -2296,7 +2296,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 

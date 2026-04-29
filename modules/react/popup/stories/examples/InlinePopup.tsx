@@ -16,7 +16,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const headingStyles = createStyles({
-  marginTop: system.space.zero,
+  marginTop: '0',
 });
 
 const cardStyles = createStyles({
@@ -24,12 +24,12 @@ const cardStyles = createStyles({
 });
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.xs,
 });
 
 const clipContainerStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
   border: `${px2rem(2)} dashed ${system.color.border.info.default}`,
   height: px2rem(200),
   position: 'relative',
@@ -37,7 +37,7 @@ const clipContainerStyles = createStyles({
 });
 
 const visibleContainerStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
   border: `${px2rem(2)} dashed ${system.color.border.info.default}`,
   height: px2rem(200),
   position: 'relative',
@@ -45,7 +45,7 @@ const visibleContainerStyles = createStyles({
 });
 
 const scrollContainerStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
   border: `${px2rem(2)} dashed ${system.color.border.info.default}`,
   height: px2rem(200),
   position: 'relative',
@@ -55,8 +55,8 @@ const scrollContainerStyles = createStyles({
 const comparisonLayoutStyles = createStyles({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-  gap: system.space.x6,
-  marginBottom: system.space.x4,
+  gap: system.gap.lg,
+  marginBottom: system.gap.lg,
 });
 
 function SingleInlinePopup({

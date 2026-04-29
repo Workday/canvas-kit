@@ -9,11 +9,11 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainer: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
   loadingStyles: createStyles({
-    backgroundColor: system.color.bg.muted.default,
-    padding: system.space.x3,
+    backgroundColor: system.color.accent.muted.default,
+    padding: system.padding.sm,
   }),
 };
 

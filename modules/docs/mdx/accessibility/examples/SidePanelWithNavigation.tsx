@@ -46,37 +46,37 @@ const stylesOverride = {
     backgroundColor: system.color.bg.alt.default,
   }),
   heading: createStyles({
-    margin: system.space.zero,
+    margin: '0',
   }),
   toggleBtn: createStyles({
-    top: system.space.zero,
+    top: '0',
   }),
   accordionContainer: createStyles({
     listStyle: 'none',
     flexDirection: 'column',
-    rowGap: system.space.zero,
-    paddingInlineStart: system.space.zero,
+    rowGap: '0',
+    paddingInlineStart: '0',
   }),
   accordionIcon: createStyles({
     verticalAlign: 'middle',
-    padding: system.space.x1,
+    padding: system.padding.xxs,
   }),
   accordionSubText: createStyles({
-    margin: system.space.zero,
+    margin: '0',
   }),
   listContainer: createStyles({
     listStyle: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   compactListContainer: createStyles({
     listStyle: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
     flexDirection: 'column',
-    marginTop: system.space.x8,
+    marginTop: system.gap.xl,
   }),
   links: createStyles({
     textDecoration: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   linkCheck: createStyles({
     marginLeft: 'auto',

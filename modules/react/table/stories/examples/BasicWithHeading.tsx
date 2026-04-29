@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
@@ -8,10 +6,10 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
-    marginBottom: system.space.x4,
+    marginBottom: system.gap.md,
   }),
   tableHeaderStyles: createStyles({
-    backgroundColor: system.color.bg.alt.softer,
+    backgroundColor: system.color.surface.raised,
   }),
 };
 

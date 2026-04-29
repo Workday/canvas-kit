@@ -1,11 +1,10 @@
-import * as React from 'react';
-
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createComponent, styled} from '@workday/canvas-kit-react/common';
-import {Flex, FlexProps, SystemPropValues} from '@workday/canvas-kit-react/layout';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors, gradients, space} from '@workday/canvas-kit-react/tokens';
+import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 import {hamburgerIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 interface HeaderItemProps extends FlexProps {}
 
@@ -21,9 +20,15 @@ export const Basic = () => (
 
 const PageHeaderItem = createComponent('div')({
   displayName: 'PageHeader.Item',
-  Component: ({gap = 'xxs', ...props}: HeaderItemProps, ref, Element) => (
-    <Flex gap={gap} ref={ref} as={Element} {...props} />
+  Component: (props: HeaderItemProps, ref, Element) => (
+    <Flex ref={ref} as={Element} {...handleCsProp(props, [{gap: system.gap.xs}])} />
   ),
+});
+
+const pageHeaderTitleStyles = createStyles({
+  padding: `${system.padding.xs} 0`,
+  margin: 0,
+  whiteSpace: 'nowrap',
 });
 
 const PageHeaderTitle = createComponent('h2')({
@@ -34,10 +39,7 @@ const PageHeaderTitle = createComponent('h2')({
       ref={ref}
       size="medium"
       variant="inverse"
-      padding={`${space.xs} 0`}
-      margin={0}
-      whiteSpace="nowrap"
-      {...props}
+      {...handleCsProp(props, pageHeaderTitleStyles)}
     >
       {children}
     </Heading>
@@ -46,14 +48,16 @@ const PageHeaderTitle = createComponent('h2')({
 
 const PageHeader = createComponent('header')({
   displayName: 'PageHeader',
-  Component: (props, ref, Element) => <Header ref={ref} as={Element} {...props} />,
+  Component: (props: any, ref, Element) => (
+    <Element ref={ref} {...handleCsProp(props, pageHeaderStyles)} />
+  ),
   subComponents: {Item: PageHeaderItem, Title: PageHeaderTitle},
 });
 
-const Header = styled('header')({
-  padding: `${space.xs} ${space.xl}`,
-  backgroundImage: gradients.blueberry,
-  color: colors.frenchVanilla100,
+const pageHeaderStyles = createStyles({
+  padding: `${system.padding.xs} ${system.padding.xl}`,
+  backgroundImage: brand.gradient.primary,
+  color: system.color.fg.inverse,
   WebkitFontSmoothing: 'antialiased',
   MozOsxFontSmoothing: 'grayscale',
   display: 'flex',

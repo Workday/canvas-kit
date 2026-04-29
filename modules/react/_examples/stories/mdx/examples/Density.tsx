@@ -7,12 +7,12 @@ import {Switch} from '@workday/canvas-kit-react/switch';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {calc, createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
-  margin: `${system.space.x3} ${system.space.zero}`,
+  margin: `${px2rem(12)} ${'0'}`,
   maxWidth: px2rem(600),
-  minWidth: system.space.zero,
+  minWidth: '0',
 });
 
 const formFieldGroupListStyles = createStyles({
@@ -24,7 +24,7 @@ const formFieldGroupListStyles = createStyles({
 const sideBySideInputs = createStencil({
   base: {
     display: 'inline-flex',
-    gap: system.space.x2,
+    gap: system.gap.sm,
     justifyContent: 'space-between',
   },
   modifiers: {
@@ -51,37 +51,37 @@ const sideBySideInputs = createStencil({
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'high'},
       styles: {
-        gap: system.space.x4,
+        gap: system.gap.md,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'medium'},
       styles: {
-        gap: system.space.x6,
+        gap: system.gap.lg,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'low'},
       styles: {
-        gap: system.space.x8,
+        gap: system.gap.xl,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'high'},
       styles: {
-        gap: system.space.x4,
+        gap: system.gap.md,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'medium'},
       styles: {
-        gap: system.space.x6,
+        gap: system.gap.lg,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'low'},
       styles: {
-        gap: system.space.x8,
+        gap: system.gap.xl,
       },
     },
   ],
@@ -92,7 +92,7 @@ const zipCodeInput = createStyles({
 });
 
 const zipCodeContainerStyles = createStyles({
-  minWidth: system.space.zero,
+  minWidth: '0',
 });
 
 const formFieldStencil = createStencil({
@@ -103,10 +103,10 @@ const formFieldStencil = createStencil({
         gap: px2rem(2),
       },
       medium: {
-        gap: system.space.x1,
+        gap: system.gap.xs,
       },
       low: {
-        gap: system.space.x2,
+        gap: system.gap.sm,
       },
     },
     labelOrientation: {
@@ -119,37 +119,37 @@ const formFieldStencil = createStencil({
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'high'},
       styles: {
-        gap: system.space.x4,
+        gap: system.gap.md,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'medium'},
       styles: {
-        gap: system.space.x6,
+        gap: system.gap.lg,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalStart', density: 'low'},
       styles: {
-        gap: system.space.x8,
+        gap: system.gap.xl,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'high'},
       styles: {
-        gap: system.space.x4,
+        gap: system.gap.md,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'medium'},
       styles: {
-        gap: system.space.x6,
+        gap: system.gap.lg,
       },
     },
     {
       modifiers: {labelOrientation: 'horizontalEnd', density: 'low'},
       styles: {
-        gap: system.space.x8,
+        gap: system.gap.xl,
       },
     },
   ],
@@ -160,21 +160,21 @@ const selectStencil = createStencil({
   modifiers: {
     density: {
       high: {
-        height: system.space.x8,
-        padding: `${system.space.x1} ${system.space.x2}`,
+        height: system.size.sm,
+        padding: `${system.padding.xxs} ${system.padding.xs}`,
         '& + div': {
-          height: system.space.x8,
+          height: system.size.sm,
         },
       },
       medium: {
-        height: system.space.x10,
-        padding: `${system.space.x2}`,
+        height: system.size.md,
+        padding: `${system.padding.xs}`,
       },
       low: {
-        height: calc.add(system.space.x10, system.space.x2),
-        padding: `${system.space.x3} ${system.space.x2}`,
+        height: calc.add(system.size.md, base.size100),
+        padding: `${system.padding.sm} ${system.padding.xs}`,
         '& + div': {
-          height: calc.add(system.space.x10, system.space.x2),
+          height: calc.add(system.size.md, base.size100),
         },
       },
     },
@@ -188,17 +188,17 @@ const inputStencil = createStencil({
   modifiers: {
     density: {
       high: {
-        height: system.space.x8,
-        padding: `${system.space.x1} ${system.space.x2}`,
+        height: system.size.sm,
+        padding: `${system.padding.xxs} ${system.padding.xs}`,
       },
       medium: {
-        height: system.space.x10,
-        padding: `${system.space.x2}`,
+        height: system.size.md,
+        padding: `${system.padding.xs}`,
       },
 
       low: {
-        height: calc.add(system.space.x10, system.space.x2),
-        padding: `${system.space.x3} ${system.space.x2}`,
+        height: calc.add(system.size.md, base.size100),
+        padding: `${system.padding.sm} ${system.padding.xs}`,
       },
     },
   },
@@ -207,8 +207,8 @@ const inputStencil = createStencil({
 const creditCardInputStencil = createStencil({
   extends: inputStencil,
   base: {
-    width: calc.add(system.space.x10, system.space.x10),
-    minWidth: calc.add(system.space.x10, system.space.x10),
+    width: calc.add(system.size.md, system.size.md),
+    minWidth: calc.add(system.size.md, system.size.md),
     textAlign: 'center',
   },
 });
@@ -222,13 +222,13 @@ const flexContainerStencil = createStencil({
   modifiers: {
     density: {
       high: {
-        gap: system.space.x4,
+        gap: system.gap.md,
       },
       medium: {
-        gap: system.space.x6,
+        gap: system.gap.lg,
       },
       low: {
-        gap: system.space.x8,
+        gap: system.gap.xl,
       },
     },
   },
@@ -252,14 +252,14 @@ const containerAlignmentStencil = createStencil({
 
 const optionStyles = createStyles({
   display: 'flex',
-  gap: system.space.x3,
+  gap: px2rem(12),
   flexDirection: 'column',
 });
 
 const optionItemStyles = createStyles({
   display: 'flex',
   flexDirection: 'column',
-  gap: system.space.x3,
+  gap: px2rem(12),
   maxWidth: 'fit-content',
 });
 

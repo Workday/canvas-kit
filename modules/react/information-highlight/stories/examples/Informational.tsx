@@ -10,14 +10,14 @@ const contentTextStyles = createStyles({
 const contentListStyles = createStyles({
   listStyle: 'inside',
   marginInlineStart: 0,
-  marginBlockStart: system.space.x2,
+  marginBlockStart: system.gap.sm,
   marginBlockEnd: 0,
   padding: 0,
 });
 
 export const Informational = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
       <InformationHighlight variant={'informational'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>

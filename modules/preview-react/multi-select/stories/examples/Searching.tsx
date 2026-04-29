@@ -10,7 +10,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 const colors = ['Red', 'Blue', 'Purple', 'Green', 'Pink'];
@@ -99,7 +99,7 @@ export const Searching = () => {
                       <StyledMenuItem as="span">No Results Found</StyledMenuItem>
                     )}
                     {model.state.items.length > 0 && (
-                      <MultiSelect.List maxHeight={200}>
+                      <MultiSelect.List cs={{maxHeight: 200}}>
                         {item =>
                           item ? (
                             <MultiSelect.Item data-id={item.id}>

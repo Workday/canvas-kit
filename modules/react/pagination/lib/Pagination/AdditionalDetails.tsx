@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useLiveRegion} from './common/useLiveRegion';
@@ -18,15 +18,21 @@ export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
 export const paginationAdditionalDetailsStencil = createStencil({
   base: {
     display: 'flex',
-    ...system.type.subtext.medium,
-    color: system.color.text.hint,
-    marginBlockStart: system.space.x3,
+    // ...system.legacy.type.subtext.md,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.md,
+    lineHeight: system.legacy.lineHeight.subtext.md,
+    letterSpacing: system.legacy.letterSpacing.subtext.md,
+    color: system.color.fg.muted.default,
+    marginBlockStart: px2rem(12),
   },
   modifiers: {
     shouldHideDetails: {
       true: {
         ...accessibleHide,
-        marginBlockStart: system.space.zero,
+        marginBlockStart: '0',
       },
     },
   },

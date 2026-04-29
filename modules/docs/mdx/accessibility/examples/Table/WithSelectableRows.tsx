@@ -16,14 +16,14 @@ const selectableRowStencil = createStencil({
   modifiers: {
     isSelected: {
       true: {
-        backgroundColor: system.color.bg.primary.soft,
+        backgroundColor: system.color.brand.surface.primary.default,
       },
     },
   },
 });
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: system.color.bg.alt.soft,
+  backgroundColor: system.color.surface.alt.default,
 });
 
 const tableCellStyles = createStyles({

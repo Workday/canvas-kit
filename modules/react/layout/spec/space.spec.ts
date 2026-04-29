@@ -1,5 +1,3 @@
-import {ContentDirection} from '@workday/canvas-kit-react/common';
-
 import {space} from '../lib/utils/space';
 
 const context = describe;

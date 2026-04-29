@@ -50,26 +50,26 @@ const styleOverrides = {
     alignItems: 'center',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    ...system.type.subtext.large,
+    ...system.type.subtext.lg,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     backgroundColor: system.color.bg.default,
-    padding: system.space.x1,
+    padding: system.padding.xxs,
   }),
   flexItems: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
     alignItems: 'center',
-    marginX: system.space.x3,
+    marginInline: px2rem(12),
   }),
   inputGroupInner: createStyles({
-    marginLeft: '1rem',
+    marginInline: system.gap.md,
     width: px2rem(20),
     transition: 'opacity 100ms ease',
   }),
   comboboxContainer: createStyles({
     margin: 'auto',
     width: '100%',
-    maxWidth: calc.multiply(system.space.x20, 6),
+    maxWidth: calc.multiply(px2rem(80), 6),
   }),
   comboboxInput: createStyles({
     borderRadius: px2rem(1000),
@@ -89,12 +89,12 @@ const styleOverrides = {
   countBadgeStyles: createStyles({
     boxSizing: 'border-box',
     position: 'absolute',
-    top: calc.negate(system.space.x1),
-    insetInlineEnd: calc.negate(system.space.x1),
+    top: calc.negate(system.gap.xs),
+    insetInlineEnd: calc.negate(system.gap.xs),
   }),
   actionButtonStyles: createStyles({
-    gap: system.space.x4,
-    margin: system.space.x4,
+    gap: system.gap.md,
+    margin: system.gap.md,
   }),
 };
 
@@ -140,7 +140,7 @@ export const Basic = () => {
 
 export const GlobalHeader = createComponent('div')({
   displayName: 'GlobalHeader',
-  Component: ({notifications, ...props}: GlobalHeaderProps) => (
+  Component: ({notifications}: GlobalHeaderProps) => (
     <div className={styleOverrides.headerWrapper}>
       <Flex cs={styleOverrides.flexItems}>
         <Tooltip title="Global Navigation" type="describe">

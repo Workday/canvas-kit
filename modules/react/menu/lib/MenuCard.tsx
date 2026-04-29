@@ -25,8 +25,14 @@ export const menuCardStencil = createStencil({
     maxHeight: '',
   },
   base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
-    ...system.type.subtext.large,
-    color: system.color.text.default,
+    // ...system.legacy.type.subtext.lg,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    color: system.color.fg.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',

@@ -95,7 +95,7 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           boxShadow: `
               0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-              0 0 0 ${system.space.x1} ${system.legacy.color.brand.focus.critical},
+              0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.critical},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
@@ -103,7 +103,7 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           boxShadow: `
           0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-          0 0 0 ${system.space.x1} ${system.legacy.color.brand.focus.caution.inner},
+          0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.caution.inner},
           0 0 0 ${px2rem(5)} ${system.legacy.color.brand.border.caution}`,
         },
       },
@@ -154,7 +154,7 @@ const switchCircleStencil = createStencil({
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
     backgroundColor: system.color.fg.inverse,
-    transform: `translateX(${system.space.zero})`,
+    transform: `translateX(0)`,
   },
   modifiers: {
     checked: {

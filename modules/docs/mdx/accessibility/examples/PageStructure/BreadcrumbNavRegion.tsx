@@ -4,8 +4,8 @@ import {system} from '@workday/canvas-tokens-web';
 
 const regionStyles = createStyles({
   border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
-  borderRadius: system.shape.x2,
-  paddingLeft: system.space.x4,
+  borderRadius: system.shape.md,
+  paddingInlineStart: system.padding.md,
 });
 
 export const BreadcrumbNavRegion = () => {

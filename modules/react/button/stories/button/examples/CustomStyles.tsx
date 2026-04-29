@@ -4,7 +4,7 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {plusIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const customContainer = createStyles({
   gap: system.gap.md,
@@ -13,25 +13,25 @@ const customContainer = createStyles({
 
 const myButtonStencil = createStencil({
   base: {
-    [buttonStencil.vars.background]: system.color.static.green.soft,
-    [buttonStencil.vars.label]: system.color.static.green.strong,
-    [systemIconStencil.vars.color]: system.color.static.green.strong,
-    [buttonStencil.vars.borderRadius]: system.shape.half,
+    [buttonStencil.vars.background]: base.green100,
+    [buttonStencil.vars.label]: base.green700,
+    [systemIconStencil.vars.color]: base.green700,
+    [buttonStencil.vars.borderRadius]: px2rem(2),
     border: `${px2rem(3)} solid transparent`,
     '&:focus-visible': {
-      [buttonStencil.vars.background]: system.color.static.green.strong,
-      [buttonStencil.vars.boxShadowInner]: system.color.static.green.soft,
-      [buttonStencil.vars.boxShadowOuter]: system.color.static.green.strong,
-      [systemIconStencil.vars.color]: system.color.icon.inverse,
+      [buttonStencil.vars.background]: base.green700,
+      [buttonStencil.vars.boxShadowInner]: base.green100,
+      [buttonStencil.vars.boxShadowOuter]: base.green700,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
     '&:hover': {
-      [buttonStencil.vars.background]: system.color.static.green.default,
-      border: `${px2rem(3)} dotted ${system.color.static.green.strong}`,
-      [systemIconStencil.vars.color]: system.color.static.green.strong,
-      [systemIconStencil.vars.color]: system.color.icon.inverse,
+      [buttonStencil.vars.background]: base.green600,
+      border: `${px2rem(3)} dotted ${base.green700}`,
+      [buttonStencil.vars.label]: base.green700,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
     '&:active': {
-      [buttonStencil.vars.background]: system.color.static.green.strong,
+      [buttonStencil.vars.background]: base.green700,
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
@@ -49,26 +49,26 @@ const MyCustomButton = createComponent('button')({
 const myCustomStyles = createStyles({
   padding: system.padding.md,
   textTransform: 'uppercase',
-  [buttonStencil.vars.background]: system.color.static.gray.soft,
-  [buttonStencil.vars.label]: system.color.static.gray.strong,
-  [systemIconStencil.vars.color]: system.color.static.gray.strong,
-  [buttonStencil.vars.borderRadius]: system.shape.x2,
-  [buttonStencil.vars.border]: system.color.static.gray.stronger,
+  [buttonStencil.vars.background]: base.slate200,
+  [buttonStencil.vars.label]: base.slate700,
+  [systemIconStencil.vars.color]: base.slate700,
+  [buttonStencil.vars.borderRadius]: system.shape.md,
+  [buttonStencil.vars.border]: base.slate800,
   '&:focus-visible': {
-    [buttonStencil.vars.background]: system.color.static.gray.strong,
-    [buttonStencil.vars.boxShadowInner]: system.color.static.gray.soft,
-    [buttonStencil.vars.boxShadowOuter]: system.color.static.gray.strong,
-    [systemIconStencil.vars.color]: system.color.icon.inverse,
+    [buttonStencil.vars.background]: base.slate700,
+    [buttonStencil.vars.boxShadowInner]: base.slate200,
+    [buttonStencil.vars.boxShadowOuter]: base.slate700,
+    [systemIconStencil.vars.color]: system.color.fg.inverse,
   },
   '&:hover': {
-    [buttonStencil.vars.background]: system.color.static.gray.default,
-    [buttonStencil.vars.border]: `${px2rem(3)} dotted ${system.color.static.gray.strong}`,
-    [systemIconStencil.vars.color]: system.color.static.gray.strong,
-    [systemIconStencil.vars.color]: system.color.icon.inverse,
-    border: `${px2rem(3)} dotted ${system.color.static.gray.strong}`,
+    [buttonStencil.vars.background]: base.slate600,
+    [buttonStencil.vars.border]: `${px2rem(3)} dotted ${base.slate700}`,
+    [buttonStencil.vars.label]: base.slate700,
+    [systemIconStencil.vars.color]: system.color.fg.inverse,
+    border: `${px2rem(3)} dotted ${base.slate700}`,
   },
   '&:active': {
-    [buttonStencil.vars.background]: system.color.static.gray.strong,
+    [buttonStencil.vars.background]: base.slate700,
     [buttonStencil.vars.label]: system.color.fg.inverse,
     [systemIconStencil.vars.color]: system.color.fg.inverse,
   },
@@ -76,21 +76,21 @@ const myCustomStyles = createStyles({
 
 const customColors = {
   default: {
-    background: system.color.static.amber.soft,
-    icon: system.color.static.amber.strong,
-    label: system.color.static.amber.strong,
+    background: base.amber100,
+    icon: base.amber500,
+    label: base.amber500,
   },
   focus: {
-    background: system.color.static.amber.strong,
-    boxShadowInner: system.color.static.amber.soft,
-    boxShadowOuter: system.color.static.amber.strong,
+    background: base.amber500,
+    boxShadowInner: base.amber100,
+    boxShadowOuter: base.amber500,
   },
   hover: {
-    background: system.color.static.amber.default,
-    icon: system.color.icon.inverse,
+    background: base.amber400,
+    icon: system.color.fg.inverse,
   },
   active: {
-    background: system.color.static.amber.strong,
+    background: base.amber500,
   },
   disabled: {},
 };

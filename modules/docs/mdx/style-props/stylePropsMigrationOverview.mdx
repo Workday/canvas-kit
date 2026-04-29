@@ -1,6 +1,7 @@
 import {Meta} from '@storybook/addon-docs';
+
+import {DownloadLLMFile, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
-import {StorybookStatusIndicator, DownloadLLMFile} from '@workday/canvas-kit-docs';
 
 <Meta title="Guides/Style Props Migration/Overview" />
 
@@ -102,8 +103,8 @@ will trigger component re-render.
 ```tsx
 // `createStyles` returns a string of className
 const buttonStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  color: system.color.text.inverse,
+  backgroundColor: system.color.brand.accent.primary,
+  color: system.color.fg.inverse,
 });
 
 export const MyButton = () => <button className={buttonStyles}>Click me</button>;
@@ -137,8 +138,8 @@ import {BaseButton} from '@workday/canvas-kit-react/button';
 import {createStyles} from '@workday/canvas-kit-styling';
 // `createStyles` returns a string of className
 const buttonStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  color: system.color.text.inverse,
+  backgroundColor: system.color.brand.accent.primary,
+  color: system.color.fg.inverse,
 });
 
 export const MyButton = () => <BaseButton cs={buttonStyles}>Click me</button>;
@@ -160,13 +161,13 @@ Examples:
 const buttonStencil = createStencil({
   vars: {color: '', background: ''},
   base: ({color, backgroundColor}) => ({
-    color: cssVar(color, system.color.text.default),
+    color: cssVar(color, system.color.fg.default),
     backgroundColor: cssVar(backgroundColor, system.color.bg.default),
   }),
   modifiers: {
     variant: {
-      primary: {background: system.color.bg.primary.default},
-      secondary: {background: system.color.bg.muted.default},
+      primary: {background: system.color.brand.accent.primary},
+      secondary: {background: system.color.accent.muted.default},
     },
   },
 });
@@ -179,7 +180,7 @@ const buttonStencil = createStencil({
 const customButtonStencil = createStencil({
   base: {
     // Set the color variable to the primary color
-    [buttonStencil.vars.color]: system.color.fg.primary.default,
+    [buttonStencil.vars.color]: system.color.brand.fg.primary.default,
   },
 });
 ```
@@ -239,7 +240,7 @@ from scratch.
 const customIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    margin: system.space.x2,
+    margin: system.gap.sm,
   },
 });
 ```
@@ -257,8 +258,8 @@ logic.
 const badgeStencil = createStencil({
   modifiers: {
     status: {
-      success: {background: system.color.bg.success.default},
-      error: {background: system.color.bg.negative.default},
+      success: {background: system.color.accent.success},
+      error: {background: system.color.brand.accent.critical},
     },
   },
 });
@@ -291,7 +292,7 @@ const myCustomStencil = createStencil({
     {
       // apply styles when the variant is primary AND the size is large
       modifiers: {variant: 'primary', size: 'large'},
-      styles: {paddingInline: system.space.x5},
+      styles: {paddingInline: system.padding.xl},
     },
   ],
 });
@@ -330,8 +331,8 @@ more information.
 ✅ **Do**
 
 ```tsx
-color: system.color.text.default;
-margin: system.space.x2;
+color: system.color.fg.default;
+margin: system.gap.md;
 ```
 
 ❌ **Don’t**
@@ -413,13 +414,13 @@ const StyledButton = styled('button')({
 #### After (Canvas Kit Styling)
 
 ```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const primaryButtonStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  color: system.color.text.inverse,
+  backgroundColor: system.color.brand.accent.primary,
+  color: system.color.fg.inverse,
 });
 
 <PrimaryButton cs={primaryButtonStyles}>Click me</PrimaryButton>;

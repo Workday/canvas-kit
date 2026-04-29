@@ -10,7 +10,7 @@ import testAvatar from './test-avatar.png';
 
 const flexStyles = createStyles({
   display: 'flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 export const WithRemovable = () => {

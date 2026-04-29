@@ -1,7 +1,5 @@
-import React from 'react';
-
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {CountBadge} from '../index';
@@ -16,6 +14,20 @@ export default {
     },
   },
 };
+
+const blockStyles = createStencil({
+  base: {
+    padding: system.padding.xs,
+    backgroundColor: system.color.surface.alt.default,
+  },
+  modifiers: {
+    variant: {
+      inverse: {
+        backgroundColor: system.color.brand.accent.primary,
+      },
+    },
+  },
+});
 
 export const CountBadgeStates = {
   render: () => {
@@ -39,16 +51,7 @@ export const CountBadgeStates = {
         ]}
       >
         {props => (
-          <div
-            style={{
-              padding: cssVar(system.space.x2),
-              backgroundColor: cssVar(
-                props.variant === 'inverse'
-                  ? system.color.bg.primary.default
-                  : system.color.bg.alt.soft
-              ),
-            }}
-          >
+          <div {...blockStyles({variant: props.variant})}>
             <CountBadge {...props} />
           </div>
         )}
@@ -56,6 +59,16 @@ export const CountBadgeStates = {
     );
   },
 };
+
+const innerBlockStyles = createStencil({
+  vars: {
+    backgroundColor: '',
+  },
+  base: ({backgroundColor}) => ({
+    padding: system.padding.md,
+    backgroundColor,
+  }),
+});
 
 export const CountBadgeInverseBgTest = {
   render: () => {
@@ -86,12 +99,7 @@ export const CountBadgeInverseBgTest = {
     return (
       <ComponentStatesTable columnProps={colorScaleProps} rowProps={colorProps}>
         {({color, colorScale, ...props}) => (
-          <div
-            style={{
-              backgroundColor: cssVar(base[`${color}${colorScale}`]),
-              padding: cssVar(system.space.x4),
-            }}
-          >
+          <div {...innerBlockStyles({backgroundColor: base[`${color}${colorScale}`]})}>
             <CountBadge {...props} />
           </div>
         )}

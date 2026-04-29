@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const loadingStencil = createStencil({
   base: {
-    background: system.color.bg.overlay,
+    background: system.color.surface.overlay.scrim,
     alignItems: 'center',
     justifyContent: 'center',
     display: 'flex',

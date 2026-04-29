@@ -10,7 +10,7 @@ import { use${pascalCaseName}Model, use${pascalCaseName}Content } from './hooks'
 
 const stencil = createStencil({
   base: {
-    ...system.type.subtext.medium,
+    ...system.type.subtext.md,
     background: system.color.surface.default,
     padding: system.padding.sm
   }

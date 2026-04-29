@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
@@ -18,8 +16,7 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   main: createStyles({
     alignItems: 'center',

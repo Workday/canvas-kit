@@ -1,40 +1,40 @@
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Pill, pillCountStencil, pillStencil} from '@workday/canvas-kit-react/pill';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const customPillStencil = createStencil({
   base: {
-    [pillStencil.vars.background]: system.color.static.green.default,
-    [pillStencil.vars.border]: system.color.static.green.stronger,
-    [pillStencil.vars.label]: system.color.static.white,
-    [systemIconStencil.vars.color]: system.color.static.white,
-    [pillCountStencil.vars.backgroundColor]: system.color.static.green.default,
-    [pillCountStencil.vars.borderColor]: system.color.static.green.default,
+    [pillStencil.vars.background]: base.green600,
+    [pillStencil.vars.border]: base.green800,
+    [pillStencil.vars.label]: system.color.fg.inverse,
+    [systemIconStencil.vars.color]: system.color.fg.inverse,
+    [pillCountStencil.vars.backgroundColor]: base.green600,
+    [pillCountStencil.vars.borderColor]: base.green600,
 
     '&:hover, &.hover': {
-      [pillStencil.vars.background]: system.color.static.green.stronger,
-      [pillStencil.vars.label]: system.color.static.white,
-      [pillCountStencil.vars.backgroundColor]: system.color.static.green.stronger,
-      [systemIconStencil.vars.color]: system.color.static.white,
-      [pillCountStencil.vars.borderColor]: system.color.static.green.stronger,
+      [pillStencil.vars.background]: base.green800,
+      [pillStencil.vars.label]: system.color.fg.inverse,
+      [pillCountStencil.vars.backgroundColor]: base.green800,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
+      [pillCountStencil.vars.borderColor]: base.green800,
     },
     '&:active, &.active': {
-      [pillStencil.vars.background]: system.color.static.green.stronger,
-      [pillStencil.vars.label]: system.color.static.white,
-      [systemIconStencil.vars.color]: system.color.static.white,
-      [pillCountStencil.vars.backgroundColor]: system.color.static.green.stronger,
+      [pillStencil.vars.background]: base.green800,
+      [pillStencil.vars.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
+      [pillCountStencil.vars.backgroundColor]: base.green800,
     },
     '&:focus, &.focus, &:focus-visible': {
-      [pillStencil.vars.background]: system.color.static.green.stronger,
-      [pillStencil.vars.label]: system.color.static.white,
-      [systemIconStencil.vars.color]: system.color.static.white,
-      [pillCountStencil.vars.backgroundColor]: system.color.static.green.stronger,
+      [pillStencil.vars.background]: base.green800,
+      [pillStencil.vars.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
+      [pillCountStencil.vars.backgroundColor]: base.green800,
     },
     '&:disabled, &.disabled': {
-      [pillStencil.vars.background]: system.color.static.green.default,
-      [pillStencil.vars.label]: system.color.static.white,
-      [systemIconStencil.vars.color]: system.color.static.white,
+      [pillStencil.vars.background]: base.green600,
+      [pillStencil.vars.label]: system.color.fg.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.inverse,
     },
   },
 });

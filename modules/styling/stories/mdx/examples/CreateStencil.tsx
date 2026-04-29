@@ -17,10 +17,10 @@ const themedCardStencil = createStencil({
     body: 'themed-card-body',
   },
   base: ({headerPart, headerColor}) => ({
-    padding: system.space.x4,
+    padding: system.padding.md,
     boxShadow: system.depth[2],
     backgroundColor: system.color.bg.default,
-    color: system.color.text.default,
+    color: system.color.fg.default,
     // Targets the header part via [data-part="themed-card-header"]"]
     [headerPart]: {
       color: headerColor,
@@ -30,17 +30,17 @@ const themedCardStencil = createStencil({
     isDarkTheme: {
       // If the prop `isDarkTheme` is true, style the component and it's parts
       true: ({headerPart, bodyPart}) => ({
-        backgroundColor: system.color.bg.contrast.default,
-        color: system.color.text.inverse,
+        backgroundColor: system.color.surface.contrast.default,
+        color: system.color.fg.inverse,
         [`${headerPart}, ${bodyPart}`]: {
-          color: system.color.text.inverse,
+          color: system.color.fg.inverse,
         },
       }),
     },
   },
 });
 
-export const CreateStencil = ({isDarkTheme, headerColor, elemProps}) => {
+export const CreateStencil = ({headerColor, elemProps}) => {
   const [darkTheme, setIsDarkTheme] = React.useState(false);
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setIsDarkTheme(event.target.checked);

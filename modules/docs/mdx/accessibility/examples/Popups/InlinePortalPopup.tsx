@@ -19,18 +19,18 @@ const cardStyles = createStyles({
 });
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.xs,
 });
 
 const layoutStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   alignItems: 'flex-start',
   flexDirection: 'column',
 });
 
 const bodyStyles = createStyles({
-  marginY: system.space.zero,
+  marginBlock: '0',
 });
 
 /**

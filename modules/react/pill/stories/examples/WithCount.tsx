@@ -7,7 +7,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const flexStyles = createStyles({
   display: 'flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 export const WithCount = () => {

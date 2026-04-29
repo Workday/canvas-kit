@@ -1,8 +1,8 @@
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -16,7 +16,7 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   main: createStyles({
     alignItems: 'center',

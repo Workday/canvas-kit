@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const Caution = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
       <InformationHighlight variant={'caution'}>
         <InformationHighlight.Icon />
         <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>

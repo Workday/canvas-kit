@@ -7,20 +7,19 @@ import {system} from '@workday/canvas-tokens-web';
 const stylesOverride = {
   panelContainer: createStyles({
     height: px2rem(320),
-    backgroundColor: system.color.bg.alt.soft,
+    backgroundColor: system.color.surface.alt.default,
     position: 'relative',
   }),
   panelContent: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   panel: createStyles({
     zIndex: 1,
   }),
   overlay: createStyles({
     position: 'absolute',
-    background: system.color.bg.overlay,
+    background: system.color.surface.overlay.scrim,
     height: '100%',
     width: '100%',
   }),

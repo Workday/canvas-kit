@@ -19,7 +19,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   flexDirection: 'row',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const labelStyles = createStyles({
@@ -56,12 +56,14 @@ export function ContextualHelpDialogFocusTrap() {
             <Dialog.Popper placement="right">
               <Dialog.Card>
                 <Dialog.CloseIcon aria-label="Close" />
-                <Dialog.Heading paddingTop={system.space.x6}>Information</Dialog.Heading>
+                <Dialog.Heading cs={{paddingTop: system.padding.xl}}>Information</Dialog.Heading>
                 <Dialog.Body>
                   This dialog traps focus. Focus will only return to the rest of the page when the
                   dialog is closed
                 </Dialog.Body>
-                <Flex gap={system.space.x4} padding={system.space.x2} marginTop={system.space.x2}>
+                <Flex
+                  cs={{gap: system.gap.md, padding: system.padding.xs, marginTop: system.gap.sm}}
+                >
                   <Hyperlink href="/">Link</Hyperlink>
                 </Flex>
               </Dialog.Card>

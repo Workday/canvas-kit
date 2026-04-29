@@ -47,14 +47,14 @@ export const expressiveIconStencil = createStencil({
   },
   base: ({size, accentColor, color}) => ({
     '& svg': {
-      width: cssVar(size, component.expressiveIcon.size.md),
-      height: cssVar(size, component.expressiveIcon.size.md),
+      width: cssVar(size, component.legacy.expressiveIcon.size.md),
+      height: cssVar(size, component.legacy.expressiveIcon.size.md),
     },
     '.wd-expressive .wd-expressive-fill': {
-      fill: cssVar(color, component.expressiveIcon.color.fill),
+      fill: cssVar(color, component.legacy.expressiveIcon.color.fill),
     },
     '.wd-expressive .wd-expressive-accent': {
-      fill: cssVar(accentColor, component.expressiveIcon.color.accent),
+      fill: cssVar(accentColor, component.legacy.expressiveIcon.color.accent),
     },
     // for Windows high contrast desktop themes
     '@media (prefers-contrast: more)': {
@@ -82,7 +82,7 @@ export const ExpressiveIcon = createComponent('span')({
         {...handleCsProp(
           elemProps,
           expressiveIconStencil({
-            size: resolveSize(size, component.expressiveIcon.size),
+            size: resolveSize(size, component.legacy.expressiveIcon.size),
             color,
             accentColor: accent,
           })

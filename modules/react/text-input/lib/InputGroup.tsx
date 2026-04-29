@@ -278,11 +278,11 @@ export const InputGroup = createContainer('div')({
   // `offsetEnd` arrays
   React.Children.forEach(children, child => {
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
-      const width = wrapProperty(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.legacy.size.md);
       offsetsStart.push(width);
     }
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
-      const width = wrapProperty(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.legacy.size.md);
       offsetsEnd.push(width);
     }
   });

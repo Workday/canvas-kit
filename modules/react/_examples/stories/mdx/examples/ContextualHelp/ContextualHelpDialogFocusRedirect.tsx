@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
@@ -18,7 +20,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   flexDirection: 'row',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const labelStyles = createStyles({
@@ -55,11 +57,13 @@ export function ContextualHelpDialogFocusRedirect() {
             <Dialog.Popper placement="right">
               <Dialog.Card>
                 <Dialog.CloseIcon aria-label="Close" />
-                <Dialog.Heading paddingTop={system.space.x6}>Information</Dialog.Heading>
+                <Dialog.Heading cs={{paddingTop: system.padding.xxl}}>Information</Dialog.Heading>
                 <Dialog.Body>
                   This dialog does not trap focus, so tabbing out of it will cause it to close
                 </Dialog.Body>
-                <Flex gap={system.space.x4} padding={system.space.x2} marginTop={system.space.x2}>
+                <Flex
+                  cs={{gap: system.gap.md, padding: system.padding.xs, marginTop: system.gap.sm}}
+                >
                   <Hyperlink href="/">Link</Hyperlink>
                 </Flex>
               </Dialog.Card>

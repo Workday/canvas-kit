@@ -8,16 +8,16 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
-    marginBottom: system.space.x4,
+    marginBottom: system.gap.md,
   }),
   tableStyles: createStyles({
     width: px2rem(690),
   }),
   tableHeaderStyles: createStyles({
     position: 'sticky',
-    left: system.space.zero,
-    backgroundColor: system.color.bg.alt.softer,
-    borderRight: `2px solid ${system.color.border.divider}`,
+    left: '0',
+    backgroundColor: system.color.surface.raised,
+    borderRight: `${px2rem(2)} solid ${system.color.border.default}`,
   }),
 };
 

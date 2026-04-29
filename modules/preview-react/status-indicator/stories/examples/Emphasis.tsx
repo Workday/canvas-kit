@@ -5,7 +5,7 @@ import {cloudArrowUpIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 export const Emphasis = () => {

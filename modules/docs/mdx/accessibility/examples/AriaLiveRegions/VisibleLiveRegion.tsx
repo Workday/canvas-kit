@@ -10,17 +10,16 @@ import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.caution.strong}`,
-  backgroundColor: system.color.bg.caution.softer,
-  padding: system.space.x4,
+  border: `${px2rem(1)} solid ${system.color.brand.focus.caution.outer}`,
+  backgroundColor: system.color.brand.surface.caution.strong,
+  padding: system.padding.md,
   display: 'block',
-  marginBlockStart: system.space.x4,
-  marginBlockEnd: system.space.x4,
-  width: calc.multiply(system.space.x16, 7),
+  marginBlock: system.gap.md,
+  width: calc.multiply(system.size.xxl, 7),
 });
 
 const flexGapStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   alignItems: 'center',
 });
 
