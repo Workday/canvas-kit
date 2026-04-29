@@ -16,7 +16,7 @@ const storybookStatusIndicatorStencil = createStencil({
 });
 
 const content = {
-  info: {
+  ai: {
     icon: sparkleIcon,
     label: 'AI Content',
   },
@@ -37,11 +37,11 @@ const content = {
 export const StorybookStatusIndicator = ({
   type,
 }: {
-  type: 'info' | 'deprecated' | 'new' | 'promoted';
+  type: 'ai' | 'deprecated' | 'new' | 'promoted';
 }) => {
   const {icon, label} = content[type];
   const variantMapping = {
-    info: 'info',
+    ai: 'info',
     deprecated: 'caution',
     new: 'positive',
     promoted: 'info',
