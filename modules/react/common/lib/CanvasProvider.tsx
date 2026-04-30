@@ -183,7 +183,7 @@ export const defaultBranding = createStyles({
   [system.color.brand.fg.positive.strong]: brand.success.dark,
   [system.color.brand.fg.selected]: brand.primary.dark,
   [system.color.brand.focus.critical]: brand.error.dark,
-  [system.color.brand.border.critical]: brand.error.dark,
+  [system.color.brand.border.critical]: brand.error.base,
   ...(system.color.brand.focus.caution
     ? {
         [system.color.brand.focus.caution.inner]: brand.common.alertInner,
