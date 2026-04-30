@@ -24,28 +24,28 @@ export interface AIIngressButtonProps
 /**
  * Icon gradient colors
  */
-const illuminateStopColor1 = base.red200; //'#FFA198'
-const illuminateStopColor2 = base.orange200; //'#FFCAA0'
-const illuminateStopColor3 = base.orange200; //'#FFCA79'
-const illuminateStopColor4 = base.amber200; //'#FDCA44'
-const illuminateStopColor5 = base.amber300; //'#FFB74D';
+const illuminateStopColor1 = base.legacy.red200; //'#FFA198'
+const illuminateStopColor2 = base.legacy.orange200; //'#FFCAA0'
+const illuminateStopColor3 = base.legacy.orange200; //'#FFCA79'
+const illuminateStopColor4 = base.legacy.amber200; //'#FDCA44'
+const illuminateStopColor5 = base.legacy.amber300; //'#FFB74D';
 
 /**
  * Box shadow glow colors
  */
-const glowEraser = base.magenta200; //'#FFC2FD';
-const glowHighlighter = base.amber100; //'#FFF3A8';
-const glowLunchBreak = base.amber300; //'#FEC10B';
-const glowHappyHour = base.orange400; //'#FD7E00';
-const glowThumbtack = base.coral500; //'#FC5B05';
+const glowEraser = base.legacy.magenta200; //'#FFC2FD';
+const glowHighlighter = base.legacy.amber100; //'#FFF3A8';
+const glowLunchBreak = base.legacy.amber300; //'#FEC10B';
+const glowHappyHour = base.legacy.orange400; //'#FD7E00';
+const glowThumbtack = base.legacy.coral500; //'#FC5B05';
 
 export const AIIngressButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    [buttonStencil.vars.background]: system.color.bg.ai.strongest,
-    borderRadius: system.shape.round,
-    height: calc.add(system.space.x10, system.space.x1),
-    width: calc.add(system.space.x10, system.space.x1),
+    [buttonStencil.vars.background]: system.legacy.color.accent.ai,
+    borderRadius: system.legacy.shape.full,
+    height: calc.add(system.legacy.size.md, base.legacy.size50),
+    width: calc.add(system.legacy.size.md, base.legacy.size50),
     transition: 'box-shadow 300ms ease-out, background 300ms ease-out',
 
     '.wd-icon-ai-ingress-button': {
@@ -118,7 +118,7 @@ export const AIIngressButtonStencil = createStencil({
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 0, outerColor: system.color.fg.inverse}),
-          border: `2px solid ${system.color.border.ai} `,
+          border: `2px solid ${system.legacy.color.accent.ai} `,
         },
       },
     },
@@ -143,7 +143,7 @@ export const AIIngressButtonStencil = createStencil({
         },
         '&:is(:focus-visible, .focus):not(:disabled, .disabled)': {
           ...focusRing({width: 2, separation: 2}),
-          border: `1px solid ${system.color.border.container} `,
+          border: `1px solid ${system.legacy.color.border.strong} `,
         },
       },
       false: {
@@ -155,7 +155,7 @@ export const AIIngressButtonStencil = createStencil({
     {
       modifiers: {toggled: true, variant: 'inverse'},
       styles: {
-        [buttonStencil.vars.background]: system.color.bg.ai.strongest,
+        [buttonStencil.vars.background]: system.legacy.color.accent.ai,
         '.wd-icon-ai-ingress-button': {
           '.wd-icon-fill': {
             transition: 'fill 300ms ease-out',

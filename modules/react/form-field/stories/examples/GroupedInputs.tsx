@@ -6,16 +6,16 @@ import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
 import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
-  margin: `${system.space.zero} ${system.space.x3}`,
+  margin: `0 ${px2rem(12)}`,
 });
 
 const formButtonStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const toppings = [

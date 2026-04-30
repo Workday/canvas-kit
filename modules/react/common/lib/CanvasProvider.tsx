@@ -178,12 +178,12 @@ export const defaultBranding = createStyles({
   [system.color.brand.fg.critical.default]: brand.error.base,
   [system.color.brand.fg.critical.strong]: brand.error.dark,
   [system.color.brand.fg.caution.default]: brand.alert.darkest,
-  [system.color.brand.fg.caution.strong]: brand.alert.dark,
+  [system.color.brand.fg.caution.strong]: brand.alert.darkest,
   [system.color.brand.fg.positive.default]: brand.success.base,
   [system.color.brand.fg.positive.strong]: brand.success.dark,
   [system.color.brand.fg.selected]: brand.primary.dark,
   [system.color.brand.focus.critical]: brand.error.dark,
-  [system.color.brand.border.critical]: brand.error.dark,
+  [system.color.brand.border.critical]: brand.error.base,
   ...(system.color.brand.focus.caution
     ? {
         [system.color.brand.focus.caution.inner]: brand.common.alertInner,

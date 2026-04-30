@@ -6,7 +6,7 @@ import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {sortDownIcon, sortUpIcon} from '@workday/canvas-system-icons-web';
+import {arrowDownSmallIcon, arrowUpSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 interface CountryData {
@@ -116,9 +116,9 @@ interface SortableColumnHeaderProps {
 
 const getSortIcon = (sortOrder?: SortOrder) => {
   if (sortOrder === 'ascending') {
-    return sortUpIcon;
+    return arrowUpSmallIcon;
   } else if (sortOrder === 'descending') {
-    return sortDownIcon;
+    return arrowDownSmallIcon;
   } else {
     return undefined;
   }
@@ -147,7 +147,7 @@ const SortableColumnHeader = createComponent('th')({
 });
 
 const textStyles = createStyles({
-  paddingInlineStart: system.space.x3,
+  paddingInlineStart: system.padding.sm,
 });
 
 export const SortableColumnHeaders = () => {
@@ -164,7 +164,7 @@ export const SortableColumnHeaders = () => {
   }
 
   return (
-    <Table maxHeight="40rem">
+    <Table cs={{maxHeight: '40rem'}}>
       <Table.Caption>Population Listed by Country (2021)</Table.Caption>
       <Table.Head>
         <Table.Row>

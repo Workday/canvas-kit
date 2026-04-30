@@ -13,8 +13,8 @@ import {system} from '@workday/canvas-tokens-web';
 const FAVORITE_COLOR_OPTIONS = ['Blue', 'Yellow'];
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.xs,
 });
 
 export const FormModal = () => {

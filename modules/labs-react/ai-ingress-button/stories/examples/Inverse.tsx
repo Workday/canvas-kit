@@ -5,8 +5,8 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const darkBackground = createStyles({
-  background: system.color.bg.contrast.strong,
-  padding: system.space.x8,
+  background: system.color.surface.contrast.strong,
+  padding: system.padding.xxl,
 });
 
 export const Inverse = () => {

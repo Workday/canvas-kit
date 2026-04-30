@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Flex} from '@workday/canvas-kit-react/layout';
 // unreleased path
 import {Table} from '@workday/canvas-kit-react/table';
@@ -71,8 +69,8 @@ const exampleData = [
 
 const tableHeaderStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.alt.softer,
-    borderRight: `${px2rem(1)} solid ${system.color.border.divider}`,
+    backgroundColor: system.color.surface.raised,
+    borderRight: `${px2rem(1)} solid ${system.color.border.default}`,
   },
   modifiers: {
     variant: {
@@ -123,7 +121,7 @@ export const TableStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs" flexDirection="column">
+        <Flex cs={{gap: system.gap.xs, flexDirection: 'column'}}>
           <div>
             <h3>Standard</h3>
             <Standard />

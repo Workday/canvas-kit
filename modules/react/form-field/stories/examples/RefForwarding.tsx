@@ -9,7 +9,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x1,
+  gap: system.gap.xs,
   alignItems: 'flex-start',
   flexDirection: 'column',
 });

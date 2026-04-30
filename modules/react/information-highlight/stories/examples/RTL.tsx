@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {Flex} from '@workday/canvas-kit-react/layout';
@@ -7,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const RTL = () => {
   return (
-    <Flex flexDirection={'column'} gap={system.space.x2}>
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
       <CanvasProvider dir="rtl">
         <InformationHighlight variant={'caution'} emphasis={'low'}>
           <InformationHighlight.Icon />

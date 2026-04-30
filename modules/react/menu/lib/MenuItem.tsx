@@ -16,8 +16,8 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -61,30 +61,23 @@ export const menuItemStencil = createStencil({
   base: ({textPart, iconPart, selectedPart}) => ({
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.md, system.space.x4),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.sm, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
+    gap: system.legacy.gap.md,
+    padding: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.default,
     borderWidth: 0,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderRadius: cssVar(system.shape.xxl, '0'),
+    borderRadius: system.legacy.shape.xxl,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(system.size.md, system.space.x10),
+    minHeight: system.legacy.size.md,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -102,10 +95,8 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.brand.fg.primary.strong, brand.primary.dark),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.brand.surface.primary.strong, brand.primary.lightest),
+      color: system.legacy.color.brand.fg.primary.strong,
+      backgroundColor: system.legacy.color.brand.surface.primary.strong,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
@@ -113,25 +104,21 @@ export const menuItemStencil = createStencil({
       '&:where(.focus, :focus-visible)': {
         [systemIconStencil.vars.color]: 'currentColor',
         outline: 'none',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
-        color: cssVar(system.color.fg.inverse, brand.primary.accent),
+        backgroundColor: system.legacy.color.brand.accent.primary,
+        color: system.color.fg.inverse,
       },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
       color: system.color.fg.strong,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.surface.overlay.hover.default, brand.neutral.lightest),
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.inverse, brand.primary.accent),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.base),
+      color: system.color.fg.inverse,
+      backgroundColor: system.legacy.color.brand.accent.primary,
       outline: `${px2rem(2)} solid transparent`,
       outlineOffset: `-${px2rem(2)}`,
     },
@@ -146,8 +133,7 @@ export const menuItemStencil = createStencil({
       },
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.primary, brand.primary.light),
+        backgroundColor: system.legacy.color.brand.accent.primary,
         opacity: system.opacity.disabled,
       },
     },

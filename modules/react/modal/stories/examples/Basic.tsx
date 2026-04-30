@@ -1,6 +1,7 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const handleAcknowledge = () => {
@@ -19,12 +20,12 @@ export const Basic = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body>
-            <Box as="p" marginY="zero">
+            <Box as="p" cs={{marginBlock: '0'}}>
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software").
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

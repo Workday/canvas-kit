@@ -8,12 +8,12 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {invisibleIcon, visibleIcon} from '@workday/canvas-system-icons-web';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
-  gap: system.space.x3,
+  gap: system.gap.md,
   flexDirection: 'column',
   alignItems: 'flex-start',
 });
@@ -150,7 +150,7 @@ export const TextInputWithReactHookForm = () => {
           error={!!errors.password ? 'error' : undefined}
         >
           <FormField.Label>Password</FormField.Label>
-          <Flex cs={{gap: cssVar(system.space.x2)}}>
+          <Flex cs={{gap: system.gap.md}}>
             <FormField.Field>
               <FormField.Input
                 as={TextInput}
@@ -163,7 +163,7 @@ export const TextInputWithReactHookForm = () => {
             </FormField.Field>
             <TertiaryButton
               type="button"
-              icon={showPassword ? invisibleIcon : visibleIcon}
+              icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
               aria-label={showPassword ? 'Hide Password' : 'Show Password'}
               aria-controls={`input-${passwordId}`}
               onClick={() => {

@@ -1,8 +1,8 @@
 import {ExternalHyperlink, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {downloadIcon, fileIcon} from '@workday/canvas-system-icons-web';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {documentIcon, downloadIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 type DownloadLLMFileProps = {
@@ -12,18 +12,18 @@ type DownloadLLMFileProps = {
 
 const flexBlock = createStencil({
   vars: {
-    gap: system.space.x1,
+    gap: '',
   },
   base: ({gap}) => ({
     display: 'flex',
     alignItems: 'center',
-    gap,
+    gap: cssVar(gap, system.gap.xs),
     code: {
       fontFamily: system.fontFamily.mono,
-      padding: system.space.x1,
-      paddingInline: system.space.x2,
-      backgroundColor: system.color.bg.alt.softer,
-      borderRadius: system.shape.half,
+      padding: system.padding.xxs,
+      paddingInline: system.padding.xs,
+      backgroundColor: system.color.surface.alt.default,
+      borderRadius: px2rem(2),
     },
   }),
 });
@@ -54,10 +54,10 @@ export const DownloadLLMFile = ({rawFileLink, filename}: DownloadLLMFileProps) =
     <Card className="sb-unstyled" cs={{boxShadow: 'none', borderStyle: 'dashed'}}>
       <Card.Body cs={{display: 'grid', gridTemplateColumns: '1fr auto', alignItems: 'center'}}>
         <div {...flexBlock()}>
-          <SystemIcon icon={fileIcon} />
+          <SystemIcon icon={documentIcon} />
           <code>{filename}</code>
         </div>
-        <div {...flexBlock({gap: system.space.x4})}>
+        <div {...flexBlock({gap: system.gap.md})}>
           <ExternalHyperlink href={rawFileLink}>View raw file</ExternalHyperlink>
           <SecondaryButton icon={downloadIcon} size="small" onClick={handleDownload}>
             Download LLM File

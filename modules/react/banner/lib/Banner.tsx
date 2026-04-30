@@ -4,7 +4,7 @@ import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-reac
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BannerActionText} from './BannerActionText';
 import {BannerIcon} from './BannerIcon';
@@ -23,90 +23,59 @@ export const bannerStencil = createStencil({
     // TODO: Need to update fontFamily token [#3221](https://github.com/Workday/canvas-kit/issues/3221).
     fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
     fontWeight: system.fontWeight.medium,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    padding: `${cssVar(system.padding.xs, system.space.x2)} ${cssVar(system.padding.md, system.space.x4)}`,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
     border: '0',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'left',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderStartStartRadius: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderStartEndRadius: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderEndStartRadius: cssVar(system.shape.sm, system.shape.x1),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    borderEndEndRadius: cssVar(system.shape.sm, system.shape.x1),
+    borderStartStartRadius: system.legacy.shape.sm,
+    borderStartEndRadius: system.legacy.shape.sm,
+    borderEndStartRadius: system.legacy.shape.sm,
+    borderEndEndRadius: system.legacy.shape.sm,
+    gap: system.legacy.gap.sm,
     cursor: 'pointer',
-    transition: 'background-color 120ms',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    outline: `${cssVar(system.gap.xs, system.space.x1)} solid transparent`,
+    transition: 'background-color 120ms linear',
+    outline: `${system.legacy.gap.xs} solid transparent`,
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      outline: `${cssVar(system.gap.xs, system.shape.x1)} double transparent`,
+      outline: `${system.legacy.gap.xs} double transparent`,
       ...focusRing({separation: 2}),
     },
   },
   modifiers: {
     hasErrors: {
       true: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.critical, brand.error.base),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        color: cssVar(system.color.fg.inverse, brand.error.accent),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: system.legacy.color.brand.accent.critical,
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
           background: colorSpace.darken({
-            color: system.color.brand.accent.critical,
-            fallback: brand.error.dark,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            color: system.legacy.color.brand.accent.critical,
+            mixinColor: system.legacy.color.accent.overlay.mixin,
+            mixinValue: system.legacy.opacity.accent.hover,
           }),
         },
         '& [data-part="exclamation-circle-icon"]': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [systemIconStencil.vars.accentColor]: cssVar(
-            system.color.brand.accent.critical,
-            'currentColor'
-          ),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [systemIconStencil.vars.color]: cssVar(system.color.fg.inverse, 'currentColor'),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [systemIconStencil.vars.backgroundColor]: cssVar(system.color.fg.inverse, 'none'),
+          [systemIconStencil.vars.accentColor]: system.legacy.color.brand.accent.critical,
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.inverse,
         },
       },
       false: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        backgroundColor: cssVar(system.color.brand.accent.caution, brand.alert.base),
-        color: brand.alert.accent,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
+        backgroundColor: system.legacy.color.brand.accent.caution,
+        color: system.color.fg.contrast.default,
         '&:hover, &.hover': {
           background: colorSpace.darken({
-            color: system.color.brand.accent.caution,
-            fallback: brand.alert.dark,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            color: system.legacy.color.brand.accent.caution,
+            mixinColor: system.legacy.color.accent.overlay.mixin,
+            mixinValue: system.legacy.opacity.accent.hover,
           }),
         },
         '& [data-part="exclamation-triangle-icon"]': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [systemIconStencil.vars.accentColor]: cssVar(system.color.fg.inverse, 'currentColor'),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [systemIconStencil.vars.color]: cssVar(
-            system.color.brand.fg.caution.strong,
-            'currentColor'
-          ),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [systemIconStencil.vars.backgroundColor]: cssVar(
-            system.color.brand.fg.caution.strong,
-            'none'
-          ),
+          [systemIconStencil.vars.color]: system.legacy.color.brand.fg.caution.strong,
+          [systemIconStencil.vars.backgroundColor]: system.legacy.color.brand.fg.caution.strong,
         },
       },
     },

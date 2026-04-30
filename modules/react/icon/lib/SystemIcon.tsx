@@ -1,7 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {component} from '@workday/canvas-tokens-web';
+import {CanvasSystemIcon as LegacyCanvasSystemIcon} from '@workday/design-assets-types';
 
 import {Svg, SvgProps, resolveSize, svgStencil} from './Svg';
 
@@ -23,7 +24,7 @@ export interface SystemIconProps extends Omit<SvgProps, 'src' | 'type'> {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`.
    */
-  icon: CanvasSystemIcon;
+  icon: CanvasSystemIcon | LegacyCanvasSystemIcon;
   /**
    * The size of the SystemIcon in size variants or string / numeric (px) values.
    * **System icon sizes**
@@ -58,18 +59,14 @@ export const systemIconStencil = createStencil({
   },
   base: ({size, accentColor, backgroundColor, color}) => ({
     '& svg': {
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(size, cssVar(component.systemIcon.size.lg, px2rem(24))),
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(size, cssVar(component.systemIcon.size.lg, px2rem(24))),
+      width: cssVar(size, component.legacy.systemIcon.size.lg),
+      height: cssVar(size, component.legacy.systemIcon.size.lg),
     },
     '.wd-icon .wd-icon-fill': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
-      fill: cssVar(color, component.systemIcon.color.fill),
+      fill: cssVar(color, component.legacy.systemIcon.color.fill),
     },
     '.wd-icon .wd-icon-accent, & .wd-icon-accent2': {
-      // TODO: Revisit token, using base tokens instead of icon tokens
-      fill: cssVar(accentColor, cssVar(color, component.systemIcon.color.accent)),
+      fill: cssVar(accentColor, cssVar(color, component.legacy.systemIcon.color.accent)),
     },
     '.wd-icon .wd-icon-background': {
       fill: cssVar(backgroundColor, 'transparent'),
@@ -102,7 +99,7 @@ export const SystemIcon = createComponent('span')({
         {...handleCsProp(
           elemProps,
           systemIconStencil({
-            size: resolveSize(size, component.systemIcon.size),
+            size: resolveSize(size, component.legacy.systemIcon.size),
             color,
             accentColor: accent,
             backgroundColor: background,

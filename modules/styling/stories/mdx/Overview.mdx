@@ -1,6 +1,7 @@
 import {Meta} from '@storybook/blocks';
-import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
 import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {system} from '@workday/canvas-tokens-web';
 
 <Meta title="Styling/Getting Started/Overview" />
@@ -284,10 +285,10 @@ components extend the `cs` prop so that you can statically apply styles to them.
 > babel plugin to extract these styles statically in a future version.
 
 ```tsx
-import {system} from '@workday/canvas-tokens-webs';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {base} from '@workday/canvas-tokens-webs';
 
-const styles = createStyles({color: system.color.static.red.default});
+const styles = createStyles({color: base.red600});
 
 function MyComponent() {
   return <PrimaryButton cs={styles}>Text</PrimaryButton>;
@@ -302,19 +303,19 @@ hashing, caching, and style injection.
 
 ```tsx
 // Bad example (inside render function)
-import {system} from '@workday/canvas-tokens-webs';
+import {base} from '@workday/canvas-tokens-webs';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 function MyComponent() {
-  const styles = createStyles({color: system.color.static.red.default}); // Don't do this
+  const styles = createStyles({color: base.red600}); // Don't do this
   return <PrimaryButton cs={styles}>Text</PrimaryButton>;
 }
 
 // Good example (outside render function)
-import {system} from '@workday/canvas-tokens-webs';
+import {base} from '@workday/canvas-tokens-webs';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
-const styles = createStyles({color: system.color.static.red.default});
+const styles = createStyles({color: base.red600});
 
 function MyComponent() {
   return <PrimaryButton cs={styles}>Text</PrimaryButton>;
@@ -324,7 +325,7 @@ function MyComponent() {
 Most of our components support using the `cs` prop to apply the static styles. It merges everything
 together and applies `className` and `style` attributes to a React element.
 
-<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4}}>
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.gap.md}}>
   <InformationHighlight.Icon />
   <InformationHighlight.Heading>Information</InformationHighlight.Heading>
   <InformationHighlight.Body>
@@ -346,7 +347,7 @@ In the example below, we leverage `parts`, `vars`, `base` and `modifiers` to cre
 ```tsx
 import {createStencil}from '@workday/canvas-kit-styling';
 import {Card} from '@workday/canvas-kit-react/card';
-import {system} from '@workday/canvas-tokens-webs';
+import {system} from '@workday/canvas-tokens-web';
 
 const themedCardStencil = createStencil({
   vars: {
@@ -358,10 +359,10 @@ const themedCardStencil = createStencil({
     header: 'themed-card-header'
   },
   base: ({headerPart, headerColor}) => ({
-    padding: system.space.x4,
+    padding: system.padding.md,
     boxShadow: system.depth[2],
     backgroundColor: system.color.bg.default,
-    color: system.color.text.default,
+    color: system.color.fg.default,
     // Targets the header part via [data-part="themed-card-header"]"]
     [headerPart]: {
       color: headerColor
@@ -371,10 +372,10 @@ const themedCardStencil = createStencil({
     isDarkTheme: {
     // If the prop `isDarkTheme` is true, style the component and it's parts
       true: ({headerPart}) => ({
-        backgroundColor: system.color.bg.contrast.default,
-        color: system.color.text.inverse
+        backgroundColor: system.color.surface.contrast.default,
+        color: system.color.fg.inverse
         [headerPart]: {
-          color: system.color.text.inverse
+          color: system.color.fg.inverse
         }
       })
     }
@@ -396,7 +397,7 @@ const ThemedCard = ({isDarkTheme, headerColor, elemProps}) => {
 };
 ```
 
-<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.space.x4}}>
+<InformationHighlight className="sb-unstyled" cs={{marginBlock: system.gap.md}}>
   <InformationHighlight.Icon />
   <InformationHighlight.Heading>Information</InformationHighlight.Heading>
   <InformationHighlight.Body>

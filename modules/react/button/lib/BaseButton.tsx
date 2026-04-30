@@ -5,7 +5,7 @@ import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {ButtonLabel} from '../lib/parts/ButtonLabel';
 import {ButtonLabelIcon} from '../lib/parts/ButtonLabelIcon';
@@ -122,12 +122,9 @@ export const buttonStencil = createStencil({
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // Default Styles
     fontFamily: system.fontFamily.default,
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.bold,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
@@ -136,8 +133,7 @@ export const buttonStencil = createStencil({
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    gap: cssVar(system.gap.sm, system.space.x2),
+    gap: system.legacy.gap.sm,
     borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -150,7 +146,7 @@ export const buttonStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
-      cssVar(borderRadius, cssVar(system.shape.full, system.shape.round))
+      cssVar(borderRadius, system.legacy.shape.full)
     ),
     position: 'relative',
     verticalAlign: 'middle',
@@ -182,17 +178,17 @@ export const buttonStencil = createStencil({
       outlineOffset: px2rem(2),
       boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(
         buttonColorPropVars.focus.boxShadowInner,
-        cssVar(boxShadowInner, cssVar(system.color.border.inverse.default, base.neutral0))
+        cssVar(boxShadowInner, system.legacy.color.border.inverse.default)
       )},0 0 0 ${px2rem(4)} ${cssVar(
         buttonColorPropVars.focus.boxShadowOuter,
-        cssVar(boxShadowOuter, cssVar(system.color.brand.focus.primary, brand.common.focusOutline))
+        cssVar(boxShadowOuter, system.legacy.color.brand.focus.primary)
       )}`,
     },
     // Hover Styles
     '&:hover, &.hover': {
       backgroundColor: cssVar(
         buttonColorPropVars.hover.background,
-        cssVar(background, system.color.bg.contrast.strong)
+        cssVar(background, system.legacy.color.surface.contrast.strong)
       ),
       borderColor: cssVar(buttonColorPropVars.hover.border, cssVar(border, 'transparent')),
       color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),
@@ -253,63 +249,38 @@ export const buttonStencil = createStencil({
      */
     size: {
       large: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.lg, px2rem(48)),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.xxl, system.space.x8),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(base.size1400, px2rem(112)),
+        fontSize: system.legacy.fontSize.body.sm,
+        lineHeight: system.legacy.lineHeight.body.sm,
+        letterSpacing: system.legacy.letterSpacing.body.sm,
+        height: system.legacy.size.lg,
+        paddingInline: system.legacy.padding.xxl,
+        minWidth: base.legacy.size1400,
       },
       medium: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(base.size1200, px2rem(96)),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.xl, system.space.x6),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.md, system.space.x10),
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        minWidth: base.legacy.size1200,
+        paddingInline: system.legacy.padding.xl,
+        height: system.legacy.size.md,
       },
       small: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.lg, system.fontSize.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.lg, system.lineHeight.subtext.large),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.lg, base.letterSpacing150),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.sm, system.space.x8),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(base.size1000, system.space.x20),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.md, system.space.x4),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.xs, system.space.x1),
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        height: system.legacy.size.sm,
+        minWidth: base.legacy.size1000,
+        paddingInline: system.legacy.padding.md,
+        gap: system.legacy.gap.xs,
       },
       extraSmall: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        fontSize: cssVar(system.fontSize.subtext.md, system.fontSize.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        lineHeight: cssVar(system.lineHeight.subtext.md, system.lineHeight.subtext.medium),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        letterSpacing: cssVar(system.letterSpacing.subtext.md, base.letterSpacing100),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        height: cssVar(system.size.xs, system.space.x6),
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
+        height: system.legacy.size.xs,
         minWidth: 'auto',
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInline: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        gap: cssVar(system.gap.xs, system.space.x1),
+        paddingInline: system.legacy.padding.sm,
+        gap: system.legacy.gap.xs,
       },
     },
     grow: {
@@ -330,108 +301,88 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.lg, px2rem(48)),
+        minWidth: system.legacy.size.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xl, system.space.x6),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xxl, system.space.x8),
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: system.legacy.padding.xxl,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xxl, system.space.x8),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xl, system.space.x6),
+        paddingInlineStart: system.legacy.padding.xxl,
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.md, system.space.x10),
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.lg, px2rem(20)),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xl, system.space.x6),
+        paddingInlineStart: system.legacy.padding.lg,
+        paddingInlineEnd: system.legacy.padding.xl,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xl, system.space.x6),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.lg, px2rem(20)),
+        paddingInlineStart: system.legacy.padding.xl,
+        paddingInlineEnd: system.legacy.padding.lg,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.sm, system.space.x8),
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.md, system.space.x4),
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.md,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.md, system.space.x4),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineStart: system.legacy.padding.md,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.xs, system.space.x6),
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
   ],
 });
 
 /**
- * The base button which which is the foundation of all Button variants (`PrimaryButton`,
+ * The baseLegacy button which which is the foundation of all Button variants (`PrimaryButton`,
  * `SecondaryButton`, `TertiaryButton`, `DeleteButton`, `ToolbarIconButton` and `ToolbarDropdownButton`).
  */
 export const BaseButton = createComponent('button')({

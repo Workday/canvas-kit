@@ -5,10 +5,10 @@ import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-d
 import {ExternalLink} from './examples/ExternalHyperlink';
 import {ExternalLinkInverse} from './examples/ExternalHyperlinkInverse';
 import {ExternalLinkRTL} from './examples/ExternalHyperlinkRTL';
-import {StandaloneLink} from './examples/StandaloneHyperlink';
 import {Link} from './examples/Hyperlink';
 import {InBodyText} from './examples/HyperlinkInBodyText';
 import {LinkInverse} from './examples/HyperlinkInverse';
+import {StandaloneLink} from './examples/StandaloneHyperlink';
 
 import HyperlinkStoriesMeta from './Hyperlink.stories';
 
@@ -94,7 +94,7 @@ links with the Enter key is standard expected behavior, while Space is only expe
 ### ExternalHyperlink
 
 If your link should open in a new tab or window use the `ExternalHyperlink` component. It will let
-users know about the behavior by adding an icon, `extLinkIcon`.
+users know about the behavior by adding an icon, `externalLinkIcon`.
 
 > **Accessibility Note:** Providing a label to the icon via the `iconLabel` prop is required for
 > accessibility because the icon adds meaning to the link text. We recommend keeping the alt text as

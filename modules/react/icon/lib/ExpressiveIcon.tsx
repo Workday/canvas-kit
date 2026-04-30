@@ -1,6 +1,6 @@
 import {CanvasExpressiveIcon, CanvasIconTypes} from '@workday/canvas-expressive-icons-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {component} from '@workday/canvas-tokens-web';
 
 import {Svg, SvgProps, resolveSize, svgStencil} from './Svg';
@@ -47,18 +47,14 @@ export const expressiveIconStencil = createStencil({
   },
   base: ({size, accentColor, color}) => ({
     '& svg': {
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      width: cssVar(size, cssVar(component.expressiveIcon.size.md, px2rem(56))),
-      // TODO: Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(size, cssVar(component.expressiveIcon.size.md, px2rem(56))),
+      width: cssVar(size, component.legacy.expressiveIcon.size.md),
+      height: cssVar(size, component.legacy.expressiveIcon.size.md),
     },
     '.wd-expressive .wd-expressive-fill': {
-      // TODO: Revisit token, use base tokens instead of icon tokens
-      fill: cssVar(color, component.expressiveIcon.color.fill),
+      fill: cssVar(color, component.legacy.expressiveIcon.color.fill),
     },
     '.wd-expressive .wd-expressive-accent': {
-      // TODO: Revisit token, use base tokens instead of icon tokens
-      fill: cssVar(accentColor, component.expressiveIcon.color.accent),
+      fill: cssVar(accentColor, component.legacy.expressiveIcon.color.accent),
     },
     // for Windows high contrast desktop themes
     '@media (prefers-contrast: more)': {
@@ -86,7 +82,7 @@ export const ExpressiveIcon = createComponent('span')({
         {...handleCsProp(
           elemProps,
           expressiveIconStencil({
-            size: resolveSize(size, component.expressiveIcon.size),
+            size: resolveSize(size, component.legacy.expressiveIcon.size),
             color,
             accentColor: accent,
           })

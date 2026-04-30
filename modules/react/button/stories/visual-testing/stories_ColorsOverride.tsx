@@ -1,6 +1,3 @@
-import {CSSObject} from '@emotion/react';
-import React from 'react';
-
 import {
   DeleteButton,
   PrimaryButton,

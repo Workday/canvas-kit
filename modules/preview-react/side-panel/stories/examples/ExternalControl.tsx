@@ -17,11 +17,10 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   panelHeading: createStyles({
-    color: system.color.fg.muted.stronger,
+    color: system.color.fg.muted.strong,
   }),
   main: createStyles({
     alignItems: 'center',

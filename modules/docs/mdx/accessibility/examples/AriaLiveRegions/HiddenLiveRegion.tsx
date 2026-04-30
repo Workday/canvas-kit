@@ -12,7 +12,7 @@ import {system} from '@workday/canvas-tokens-web';
 let liveRegionStr = '';
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   alignItems: 'center',
 });
 

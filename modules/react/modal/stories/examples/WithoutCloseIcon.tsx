@@ -12,6 +12,7 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {system} from '@workday/canvas-tokens-web';
 
 export const WithoutCloseIcon = () => {
   const longDescId = useUniqueId();
@@ -37,11 +38,11 @@ export const WithoutCloseIcon = () => {
         <Modal.Card aria-describedby={longDescId}>
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
-            <Box as="p" id={longDescId} marginY="zero">
+            <Box as="p" id={longDescId} cs={{marginBlock: '0'}}>
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
             <Modal.CloseButton ref={cancelBtnRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete

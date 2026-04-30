@@ -43,7 +43,7 @@ export const HyperlinkStates = {
       >
         {(props: any) => (
           <Container blue={props.variant === 'inverse'}>
-            <Box cs={{...system.type.subtext.large}}>
+            <Box cs={{...system.type.subtext.lg}}>
               <Box
                 as="span"
                 cs={{color: props.variant === 'inverse' ? system.color.fg.inverse : undefined}}

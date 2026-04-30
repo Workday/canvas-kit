@@ -15,7 +15,7 @@ const outerContainerStyles = createStyles({
 
 const buttonContainerStyles = createStyles({
   flexDirection: 'row',
-  gap: system.space.x1,
+  gap: system.gap.xs,
   alignItems: 'center',
 });
 

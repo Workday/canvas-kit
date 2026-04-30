@@ -1,11 +1,10 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {base, brand, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
-import {v14TertiaryButtonStencil} from './deprecated/v14TertiaryButtonStencil';
 
 /**
  * Extends all the style properties from Box to our buttons as well as props from ButtonProps.
@@ -17,101 +16,64 @@ export interface TertiaryButtonProps extends ButtonProps {
    * Variant has an option for `inverse` which will inverse the styling
    */
   variant?: 'inverse';
-  /**
-   * This data attributes affords toggling Tertiary Button styles to pre-DSR styles
-   * to look like the former v14 Tertiary Buttons.
-   *
-   * This functionality is temporary and will be removed in the next major version of Canvas Kit.
-   * @default undefined
-   */
-  'data-dsr-off'?: boolean;
 }
 
 const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    paddingInline: cssVar(system.padding.xs, system.space.x2),
+    paddingInline: system.legacy.padding.xs,
     minWidth: 'auto',
     borderWidth: px2rem(2),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.borderRadius]: cssVar(system.shape.full, system.shape.round),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.background]: cssVar(
-      system.color.surface.transparent,
-      system.color.bg.transparent.default
-    ),
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+
+    [buttonStencil.vars.label]: system.color.fg.default,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+
+      [buttonStencil.vars.label]: system.color.fg.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.border]: cssVar(system.color.border.transparent, 'transparent'),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.contrast.default, system.color.fg.inverse),
+      [buttonStencil.vars.border]: system.color.border.transparent,
+      [buttonStencil.vars.label]: system.color.fg.contrast.default,
       ...focusRing({
         width: 2,
         separation: 0,
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        innerColor: cssVar(
-          system.color.focus.inverse,
-          cssVar(system.color.border.inverse.default, base.neutral0)
-        ),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        outerColor: cssVar(system.color.brand.focus.primary, brand.common.focusOutline),
+        innerColor: system.legacy.color.focus.inverse,
+
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
-        fallback: system.color.bg.alt.soft,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.hover,
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
-      [systemIconStencil.vars.color]: cssVar(
-        system.color.fg.strong,
-        cssVar(buttonColorPropVars.hover.icon, 'currentColor')
-      ),
+      [buttonStencil.vars.label]: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
       textDecoration: 'underline',
     },
     // Active Styles
     '&:active, &.active': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.color.surface.transparent,
-        fallback: system.color.bg.alt.default,
-        mixinColor: system.color.surface.overlay.mixin,
-        mixinValue: system.opacity.surface.pressed,
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
       }),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.strong, brand.primary.dark),
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
       textDecoration: 'underline',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
+      textDecoration: 'none',
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.background]: cssVar(
-        system.color.surface.transparent,
-        system.color.bg.transparent.default
-      ),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      [buttonStencil.vars.label]: cssVar(system.color.fg.default, brand.primary.base),
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.label]: system.color.fg.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
@@ -122,7 +84,7 @@ const tertiaryButtonStencil = createStencil({
         padding: 0,
         [systemIconStencil.vars.color]: cssVar(
           buttonColorPropVars.default.icon,
-          cssVar(system.color.fg.default, system.color.fg.strong)
+          system.color.fg.default
         ),
         '&:focus-visible, &.focus': {
           [systemIconStencil.vars.color]: cssVar(
@@ -156,55 +118,38 @@ const tertiaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
+        [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
         [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.color.surface.transparent,
-            fallback: system.color.bg.transparent.strong,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.hover,
+            color: system.legacy.color.surface.transparent,
+            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinValue: system.legacy.opacity.surface.hover,
           }),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.background]: cssVar(
-            system.color.surface.inverse,
-            system.color.bg.translucent
-          ),
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.label]: cssVar(
-            system.color.fg.contrast.default,
-            system.color.fg.inverse
-          ),
+          [buttonStencil.vars.background]: system.legacy.color.surface.inverse,
+
+          [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
           ...focusRing({
             width: 2,
             separation: 2,
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
             innerColor: system.color.border.contrast.default,
-            // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-            outerColor: cssVar(
-              system.color.focus.inverse,
-              cssVar(system.color.border.inverse.default, base.neutral0)
-            ),
+            outerColor: system.legacy.color.focus.inverse,
           }),
         },
         // Active Styles
         '&:active, &.active': {
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.color.surface.transparent,
-            fallback: system.color.bg.transparent.stronger,
-            mixinColor: system.color.surface.overlay.mixin,
-            mixinValue: system.opacity.surface.pressed,
+            color: system.legacy.color.surface.transparent,
+            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinValue: system.legacy.opacity.surface.pressed,
           }),
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
@@ -212,8 +157,7 @@ const tertiaryButtonStencil = createStencil({
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
-          // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-          [buttonStencil.vars.background]: cssVar(system.color.surface.transparent, 'transparent'),
+          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         },
@@ -225,101 +169,81 @@ const tertiaryButtonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.lg, px2rem(48)),
+        minWidth: system.legacy.size.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.md, system.space.x10),
+        minWidth: system.legacy.size.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.sm, system.space.x8),
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.sm, system.space.x3),
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        minWidth: cssVar(system.size.xs, system.space.x6),
+        minWidth: system.legacy.size.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xxs, system.space.x1),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xs, system.space.x2),
+        paddingInlineStart: system.legacy.padding.xxs,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineStart: cssVar(system.padding.xs, system.space.x2),
-        // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-        paddingInlineEnd: cssVar(system.padding.xxs, system.space.x1),
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.xxs,
       },
     },
   ],
@@ -336,7 +260,6 @@ export const TertiaryButton = createComponent('button')({
       iconPosition,
       grow,
       cs,
-      'data-dsr-off': dataDSROff,
       ...elemProps
     }: TertiaryButtonProps,
     ref,
@@ -349,7 +272,6 @@ export const TertiaryButton = createComponent('button')({
           ? 'start'
           : 'only'
         : undefined;
-    const tertiaryStencil = dataDSROff ? v14TertiaryButtonStencil : tertiaryButtonStencil;
 
     return (
       <Button
@@ -359,13 +281,12 @@ export const TertiaryButton = createComponent('button')({
         size={size}
         iconPosition={iconPosition}
         grow={grow}
-        data-dsr-off={dataDSROff}
         cs={[
-          tertiaryStencil({
-            grow,
-            iconPosition: baseIconPosition,
+          tertiaryButtonStencil({
             size,
             variant,
+            grow,
+            iconPosition: baseIconPosition,
           }),
           cs,
         ]}

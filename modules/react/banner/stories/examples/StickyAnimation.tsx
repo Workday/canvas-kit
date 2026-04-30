@@ -31,8 +31,8 @@ const stickAnimationKeyframes = keyframes({
 
 const stickyAnimationStencil = createStencil({
   base: {
-    marginBlock: system.space.x1,
-    marginInlineStart: system.space.x1,
+    marginBlock: system.gap.xs,
+    marginInlineStart: system.gap.xs,
     marginInlineEnd: 0,
     animationName: stickAnimationKeyframes,
     animationDuration: '.3s',
@@ -54,7 +54,7 @@ export const StickyAnimation = () => {
   }, [theme.canvas.direction, rerun]);
 
   return (
-    <Box height={64}>
+    <Box cs={{height: system.size.xxl}}>
       <div className={containerStyles} ref={containerRef}>
         <div
           key={rerun}

@@ -1,21 +1,17 @@
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightHeadingStencil = createStencil({
   base: () => {
     return {
       fontFamily: system.fontFamily.default,
       fontWeight: system.fontWeight.bold,
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      lineHeight: cssVar(system.lineHeight.body.sm, system.lineHeight.body.small),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      fontSize: cssVar(system.fontSize.body.sm, system.fontSize.body.small),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      letterSpacing: cssVar(system.letterSpacing.body.sm, base.letterSpacing200),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      color: cssVar(system.color.fg.default, system.color.text.strong),
+      lineHeight: system.legacy.lineHeight.body.sm,
+      fontSize: system.legacy.fontSize.body.sm,
+      letterSpacing: system.legacy.letterSpacing.body.sm,
+      color: system.color.fg.default,
       gridColumn: '2',
       margin: 0,
     };

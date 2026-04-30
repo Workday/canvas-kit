@@ -138,14 +138,14 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
       backgroundColor: checked
         ? variant === 'inverse'
           ? colors.frenchVanilla100
-          : themePrimary.main
+          : maybeWrapCSSVariables(themePrimary.main)
         : disabled
           ? inputColors.disabled.background
           : 'white',
       borderColor: checked
         ? variant === 'inverse'
           ? colors.soap300
-          : themePrimary.main
+          : maybeWrapCSSVariables(themePrimary.main)
         : disabled
           ? inputColors.disabled.border
           : variant === 'inverse'
@@ -175,7 +175,8 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         innerColor: variant === 'inverse' ? colors.blackPepper400 : undefined,
         outerColor: variant === 'inverse' ? colors.frenchVanilla100 : themeFocusOutline,
       }),
-      borderColor: variant === 'inverse' ? colors.frenchVanilla100 : themePrimary.main,
+      borderColor:
+        variant === 'inverse' ? colors.frenchVanilla100 : maybeWrapCSSVariables(themePrimary.main),
       borderWidth: '2px',
     },
     ...mouseFocusBehavior({
@@ -188,14 +189,14 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
         borderColor: checked
           ? variant === 'inverse'
             ? colors.soap300
-            : themePrimary.main
+            : maybeWrapCSSVariables(themePrimary.main)
           : inputColors.border,
       },
       '&:focus:hover ~ div:first-of-type, &:focus:active ~ div:first-of-type': {
         borderColor: checked
           ? variant === 'inverse'
             ? colors.soap300
-            : themePrimary.main
+            : maybeWrapCSSVariables(themePrimary.main)
           : variant === 'inverse'
             ? colors.soap300
             : inputColors.hoverBorder,
@@ -234,7 +235,7 @@ const RadioBackground = styled('div')<RadioProps>(
     borderColor: checked
       ? variant === 'inverse'
         ? colors.soap300
-        : themePrimary.main
+        : maybeWrapCSSVariables(themePrimary.main)
       : disabled
         ? colors.licorice100
         : variant === 'inverse'
@@ -243,7 +244,7 @@ const RadioBackground = styled('div')<RadioProps>(
     backgroundColor: checked
       ? variant === 'inverse'
         ? colors.frenchVanilla100
-        : themePrimary.main
+        : maybeWrapCSSVariables(themePrimary.main)
       : disabled
         ? inputColors.disabled.background
         : 'white',

@@ -19,7 +19,7 @@ const stylesOverride = {
   panel: createStyles({
     alignItems: 'center',
     justifyContent: 'flex-end',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   main: createStyles({
     alignItems: 'center',

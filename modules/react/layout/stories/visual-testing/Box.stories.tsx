@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';

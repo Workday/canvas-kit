@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 export const Size = () => {

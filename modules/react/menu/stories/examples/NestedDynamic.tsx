@@ -97,7 +97,7 @@ export const NestedDynamic = () => {
           <Menu.List>{renderItem}</Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <BodyText size="small" cs={{marginBlockStart: system.space.x4}}>
+      <BodyText size="small" cs={{marginTop: system.gap.md}}>
         Selected: <span data-testid="output">{selected}</span>
       </BodyText>
     </Menu>

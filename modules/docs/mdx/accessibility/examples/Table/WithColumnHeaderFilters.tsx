@@ -58,7 +58,7 @@ const countryData: CountryData[] = [
 ];
 
 const textStyles = createStyles({
-  paddingInlineStart: system.space.x3,
+  paddingInlineStart: system.padding.md,
 });
 
 interface FilterableColumnHeaderProps {
@@ -172,7 +172,7 @@ export const FilterableColumnHeaders = () => {
   }
 
   return (
-    <Table maxHeight="40rem">
+    <Table cs={{maxHeight: '40rem'}}>
       <Table.Caption>
         Population Listed by Country (2021)
         <AriaLiveRegion cs={textStyles}>

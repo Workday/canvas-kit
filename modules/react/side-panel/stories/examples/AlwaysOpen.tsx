@@ -8,15 +8,15 @@ import {system} from '@workday/canvas-tokens-web';
 
 const stylesOverride = {
   accentIcon: createStyles({
-    marginRight: system.space.x4,
+    marginInlineEnd: system.gap.md,
   }),
   pageContainer: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
     height: px2rem(320),
   }),
   panelContainer: createStyles({
     alignItems: 'center',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   panelHeading: createStyles({
     color: system.color.fg.default,

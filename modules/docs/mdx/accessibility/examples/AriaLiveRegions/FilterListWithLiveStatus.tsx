@@ -20,22 +20,22 @@ const fruits = [
 ];
 
 const liveRegionStyle = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.caution.strong}`,
-  backgroundColor: system.color.bg.caution.softer,
-  padding: system.space.x2,
+  border: `${px2rem(1)} solid ${system.color.brand.focus.caution.outer}`,
+  backgroundColor: system.color.brand.surface.caution.strong,
+  padding: system.padding.xs,
 });
 
 const listStyles = createStyles({
-  paddingLeft: system.space.zero,
+  paddingLeft: '0',
 });
 
 const listItemStyles = createStyles({
   listStyle: 'none',
-  paddingLeft: system.space.zero,
+  paddingLeft: '0',
 });
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 let filteredFruits = fruits;

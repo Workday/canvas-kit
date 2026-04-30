@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -7,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 const styleOverrides = {
   parentContainer: createStyles({
     display: 'flex',
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
 };
 

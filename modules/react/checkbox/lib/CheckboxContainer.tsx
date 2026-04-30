@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {LabelText} from '@workday/canvas-kit-react/text';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
@@ -17,8 +17,7 @@ const checkboxContainerStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-    minHeight: cssVar(base.size225, system.space.x6),
+    minHeight: base.legacy.size225,
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -27,16 +26,13 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      height: cssVar(base.size225, px2rem(18)),
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      minWidth: cssVar(base.size225, px2rem(18)),
+      height: base.legacy.size225,
+      minWidth: base.legacy.size225,
       alignSelf: 'flex-start',
       position: 'relative',
     },
     '& > label': {
-      // TODO (forwardfit token): Revisit token, using v4 token and fallback to v3 token
-      paddingInlineStart: cssVar(system.padding.sm, system.space.x3),
+      paddingInlineStart: system.legacy.padding.sm,
     },
   },
 });

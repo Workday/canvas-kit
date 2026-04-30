@@ -7,7 +7,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 const items = [

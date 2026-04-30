@@ -233,7 +233,7 @@ const symbolDocStencil = createStencil({
       fontFamily: 'inherit',
     },
     code: {
-      ...system.type.subtext.large,
+      ...system.type.subtext.lg,
       fontFamily: system.fontFamily.mono,
       whiteSpace: 'nowrap',
       '.token': {
