@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.14](https://github.com/Workday/canvas-kit/releases/tag/v14.3.14) (2026-04-30)
+
+### Infrastructure
+
+- chore: Fix lerna dist tag ([#3913](https://github.com/Workday/canvas-kit/pull/3913)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
 ## [v14.3.13](https://github.com/Workday/canvas-kit/releases/tag/v14.3.13) (2026-04-29)
 
 ### Documentation
