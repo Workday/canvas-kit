@@ -105,18 +105,18 @@ export const baseAvatarStencil = createStencil({
         letterSpacing: system.legacy.letterSpacing.body.sm,
       }),
       medium: ({size}) => ({
-        [size]: cssVar(base.legacy.size600, px2rem(48)),
+        [size]: base.legacy.size600,
         lineHeight: system.legacy.lineHeight.body.md,
         fontSize: system.legacy.fontSize.body.md,
       }),
       large: ({size}) => ({
-        [size]: cssVar(base.legacy.size900, px2rem(72)),
+        [size]: base.legacy.size900,
         fontWeight: system.fontWeight.bold,
         lineHeight: system.legacy.lineHeight.heading.md,
         fontSize: system.legacy.fontSize.heading.md,
       }),
       extraLarge: ({size}) => ({
-        [size]: cssVar(base.legacy.size1200, px2rem(96)),
+        [size]: base.legacy.size1200,
         fontWeight: system.fontWeight.bold,
         lineHeight: system.legacy.lineHeight.title.sm,
         fontSize: system.legacy.fontSize.title.sm,

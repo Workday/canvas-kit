@@ -65,7 +65,7 @@ export const informationHighlightStencil = createStencil({
     critical: {
       low: {
         borderInlineStartColor: system.legacy.color.border.danger,
-        backgroundColor: system.legacy.color.surface.danger.default,
+        backgroundColor: system.legacy.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: system.legacy.color.fg.danger.default,

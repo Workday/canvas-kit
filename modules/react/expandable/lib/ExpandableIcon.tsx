@@ -28,7 +28,7 @@ export const expandableIconStencil = createStencil({
   base: {
     padding: system.legacy.padding.xxs,
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
   },
   modifiers: {
     isExpanded: {
