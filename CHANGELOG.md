@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.1](https://github.com/Workday/canvas-kit/releases/tag/v15.0.1) (2026-04-30)
+
+### Components
+
+- fix: Update storybook links and fix sparkle icon ([#3915](https://github.com/Workday/canvas-kit/pull/3915)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v15.0.0](https://github.com/Workday/canvas-kit/releases/tag/v15.0.0) (2026-04-29)
 
 ### BREAKING CHANGES
