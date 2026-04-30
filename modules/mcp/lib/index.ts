@@ -1,18 +1,18 @@
 // @ts-nocheck
+import {
+  RESOURCE_MIME_TYPE,
+  registerAppResource,
+  registerAppTool,
+} from '@modelcontextprotocol/ext-apps/server';
+import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
-
 import {z} from 'zod';
+
 import packageJson from '../package.json';
 import fileNames from './config.json';
 import storiesConfig from './stories-config.json';
-import {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
-import {
-  registerAppTool,
-  registerAppResource,
-  RESOURCE_MIME_TYPE,
-} from '@modelcontextprotocol/ext-apps/server';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -135,6 +135,20 @@ In this release, we:
 - improved token system and theming capabilities`,
           mimeType: 'text/markdown',
           uri: 'docs://upgrade-guides/14.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'upgrade-guides/15.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 15.0 Upgrade Guide',
+          description: `# Canvas Kit 15.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v15.
+
+In this release, we:
+- introduced new shape, size, gap, and padding tokens to our components
+- deprecated old shape and space tokens
+- introduced new tokens to our components`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/15.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       case 'theming.md':

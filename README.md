@@ -62,7 +62,9 @@ import {cssVar} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
 
 import {App} from './App';
 
@@ -75,7 +77,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 

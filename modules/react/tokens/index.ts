@@ -11,31 +11,31 @@ import {
   typeColors,
 } from '@workday/canvas-colors-web';
 
+import {BrandingColor, CanvasColor} from './lib/colors.types';
+import {CanvasDepth, CanvasDepthValues, depth} from './lib/depth';
 import {
-  borderRadius,
   CanvasBorderRadius,
   CanvasBorderRadiusKeys,
   CanvasBorderRadiusValues,
+  borderRadius,
 } from './lib/radius';
-import {BrandingColor, CanvasColor} from './lib/colors.types';
-import {depth, CanvasDepth, CanvasDepthValues} from './lib/depth';
 import {
-  space,
   CanvasSpace,
   CanvasSpaceKeys,
-  CanvasSpaceValues,
   CanvasSpaceNumberValues,
   CanvasSpaceNumbers,
+  CanvasSpaceValues,
+  space,
   spaceNumbers,
 } from './lib/space';
 import {
-  type,
-  fontFamily,
-  monoFontFamily,
   CanvasType,
+  CanvasTypeHierarchy,
   CanvasTypeProperties,
   CanvasTypeVariants,
-  CanvasTypeHierarchy,
+  fontFamily,
+  monoFontFamily,
+  type,
 } from './lib/type';
 import {CSSProperties} from './lib/types';
 
@@ -167,7 +167,7 @@ export const canvas = {
    * // before
    * import { type } from '@workday/canvas-kit-react/tokens';
    * const styles = css({
-   *   ...type.levels.body.large,
+   *   ...type.levels.body.lg,
    *   fontWeight: type.properties.fontWeights.bold,
    *   color: type.variants.error,
    * })
@@ -176,7 +176,7 @@ export const canvas = {
    * import { system } from '@workday/canvas-tokens-web';
    * import { createStyles } from '@workday/canvas-kit-styling';
    * const styles = createStyles({
-   *   ...system.type.body.large,
+   *   ...system.type.body.lg,
    *   fontWeight: system.fontWeight.bold,
    *   color: system.color.fg.critical.default,
    * })
@@ -396,7 +396,7 @@ export {
    * import { system } from '@workday/canvas-tokens-web';
    * import { createStyles } from '@workday/canvas-kit-styling';
    * const styles = createStyles({
-   *   ...system.type.body.large,
+   *   ...system.type.body.lg,
    *   fontWeight: system.fontWeight.bold,
    *   color: system.color.fg.critical.default,
    * })

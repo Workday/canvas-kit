@@ -1,4 +1,4 @@
-import {PopupStack, PopupStackItem, resetStack, getValue} from '../lib/PopupStack';
+import {PopupStack, PopupStackItem, getValue, resetStack} from '../lib/PopupStack';
 
 describe('PopupStack', () => {
   afterEach(() => {
@@ -25,9 +25,10 @@ describe('PopupStack', () => {
 
   describe('isTopmost()', () => {
     describe('with elements', () => {
-      const elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
+      let elements: HTMLElement[] = [];
 
       beforeEach(() => {
+        elements = [1, 2, 3, 4].map(_ => document.createElement('div'));
         elements.forEach(element => PopupStack.add({element}));
       });
 
@@ -53,9 +54,11 @@ describe('PopupStack', () => {
     });
 
     describe('without elements', () => {
-      const element = document.createElement('div');
+      it('should return false if there are no items in the stack', () => {
+        const element = document.createElement('div');
 
-      expect(PopupStack.isTopmost(element)).toEqual(false);
+        expect(PopupStack.isTopmost(element)).toEqual(false);
+      });
     });
   });
 
@@ -216,7 +219,11 @@ describe('PopupStack', () => {
   });
 
   describe('z-index', () => {
-    const elements = [1, 2].map(_ => document.createElement('div'));
+    let elements: HTMLElement[] = [];
+
+    beforeEach(() => {
+      elements = [1, 2].map(_ => document.createElement('div'));
+    });
 
     it('should set an element to a z-index of 30 when added', () => {
       PopupStack.add({element: elements[0]});

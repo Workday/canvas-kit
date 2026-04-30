@@ -1,9 +1,8 @@
-import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -20,8 +19,7 @@ const stylesOverride = {
   panel: createStyles({
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   main: createStyles({
     alignItems: 'center',
@@ -61,7 +59,6 @@ export const RightOrigin = () => {
             Set to {direction === 'ltr' ? 'Right-to-Left' : 'Left-to-Right'}
           </SecondaryButton>
         </Flex>
-
         <RightPanel />
       </Flex>
     </CanvasProvider>

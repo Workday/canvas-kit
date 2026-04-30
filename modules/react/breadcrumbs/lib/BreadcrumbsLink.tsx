@@ -1,8 +1,8 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface BreadcrumbsLinkProps extends HyperlinkProps {
   /**
@@ -14,7 +14,7 @@ export interface BreadcrumbsLinkProps extends HyperlinkProps {
    *
    * @default 350px
    */
-  maxWidth?: number;
+  maxWidth?: string | number;
   tooltipProps?: OverflowTooltipProps | {};
 }
 
@@ -23,7 +23,11 @@ export const breadcrumbsLinkStencil = createStencil({
     maxWidth: '',
   },
   base: ({maxWidth}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    fontWeight: system.fontWeight.normal,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',

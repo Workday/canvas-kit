@@ -1,8 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export interface SkeletonTextProps {
+export interface SkeletonTextProps extends CSProps {
   /**
    * The number of "lines" that SkeletonText will display. If there is more than one line, the last line will have a width of `60%`.
    * @default 2
@@ -20,12 +20,13 @@ export const skeletonTextStencil = createStencil({
     backgroundColor: '',
   },
   base: ({backgroundColor}) => ({
-    marginBottom: system.space.x6,
+    marginBottom: system.legacy.size.xs,
     '& [data-part="skeleton-text-lines"]': {
-      backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
-      height: px2rem(21),
-      marginBlockEnd: system.space.x3,
-      borderRadius: system.shape.half,
+      backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
+      height: system.legacy.size.xxxs,
+      // We do not have a `gap` token for 0.75rem so `padding` is being used here
+      marginBlockEnd: system.legacy.padding.sm,
+      borderRadius: system.legacy.shape.md,
       width: '100%',
     },
     '& [data-part="skeleton-text-lines"]:last-child': {

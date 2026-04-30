@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from './Box';
 
-import {grid, GridStyleProps} from './utils/grid';
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
+
+import {Box, BoxProps} from './Box';
+import {GridStyleProps, grid} from './utils/grid';
 
 export type GridProps = Omit<BoxProps, 'display'> & GridStyleProps;
 export type GridItemProps = BoxProps;

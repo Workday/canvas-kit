@@ -1,21 +1,22 @@
 import React from 'react';
+
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const headingStyles = createStyles({
-  ...system.type.body.large,
+  ...system.type.body.lg,
   fontWeight: system.fontWeight.bold,
   margin: 0,
 });
 
 const bodyStyles = createStyles({
-  ...system.type.body.small,
+  ...system.type.body.sm,
   margin: 0,
 });
 
 const customDividerSpace = createStyles({
-  margin: `0 0 ${system.space.x4}`,
+  margin: `0 0 ${system.gap.md}`,
 });
 
 export const CustomSpace = () => {

@@ -120,9 +120,10 @@ describe('changeToStaticStates', () => {
 
   it('should remove data-whatinput modifiers', () => {
     const input = {
-      '[data-whatinput="mouse"], [data-whatinput=keyboard], [data-whatinput="pointer"], [data-whatinput="touch"]': {
-        outline: 'none',
-      },
+      '[data-whatinput="mouse"], [data-whatinput=keyboard], [data-whatinput="pointer"], [data-whatinput="touch"]':
+        {
+          outline: 'none',
+        },
     };
     const expected = {};
     expect(convertToStaticStates(input)).toEqual(expected);

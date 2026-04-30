@@ -1,24 +1,25 @@
+import sdk from '@stackblitz/sdk';
 import React from 'react';
 import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter';
+import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
-import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import sdk from '@stackblitz/sdk';
-import tsconfigFile from '!!raw-loader!./stackblitzFiles/tsconfig.json';
-import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
-import indexHTMLFile from '!!raw-loader!./stackblitzFiles/index.html';
-import mainFile from '!!raw-loader!./stackblitzFiles/main.tsx';
-import viteConfigFile from '!!raw-loader!./stackblitzFiles/vite.config.ts';
-import eslintrc from '!!raw-loader!./stackblitzFiles/.eslintrc.cjs.txt';
-import tsconfigNodeFile from '!!raw-loader!./stackblitzFiles/tsconfig.node.json';
-import appFile from '!!raw-loader!./stackblitzFiles/App.tsx';
-import viteEnvFile from '!!raw-loader!./stackblitzFiles/vite-env.d.ts';
 import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import eslintrc from './stackblitzFiles/.eslintrc.cjs.txt?raw';
+import appFile from './stackblitzFiles/App.tsx?raw';
+import indexHTMLFile from './stackblitzFiles/index.html?raw';
+import mainFile from './stackblitzFiles/main.tsx?raw';
+import {packageJSONFile} from './stackblitzFiles/packageJSONFile';
+import tsconfigFile from './stackblitzFiles/tsconfig.json?raw';
+import tsconfigNodeFile from './stackblitzFiles/tsconfig.node.json?raw';
+import viteEnvFile from './stackblitzFiles/vite-env.d.ts?raw';
+import viteConfigFile from './stackblitzFiles/vite.config.ts?raw';
 
 const cardStencil = createStencil({
   base: {
@@ -27,7 +28,8 @@ const cardStencil = createStencil({
     maxWidth: '100%',
     '[data-part="example-block"]': {
       boxShadow: system.depth[1],
-      borderRadius: system.shape.x1,
+      borderRadius: system.shape.sm,
+      padding: system.padding.md,
       position: 'relative',
       minWidth: 0,
       overflow: 'auto', // This allows for the entire ExampleCodeBlock to scroll on smaller viewports
@@ -35,27 +37,26 @@ const cardStencil = createStencil({
     '[data-part="example-block-container"]': {
       minWidth: 0,
       overflow: 'auto',
-      padding: system.space.x1,
+      padding: system.padding.md,
     },
     '[data-part="code-block"]': {
       display: 'none',
       boxShadow: system.depth[1],
-      borderRadius: system.shape.x1,
+      borderRadius: system.shape.sm,
     },
     '[data-part="code-toggle-stackblitz-btn-container"]': {
       position: 'absolute',
-      // Keep inside the padding box; negative inset was expanding scroll overflow by ~1px.
-      right: system.space.zero,
-      bottom: system.space.zero,
+      right: calc.negate(px2rem(1)),
+      bottom: calc.negate(px2rem(4)),
       display: 'flex',
-      gap: system.space.x2,
+      gap: system.gap.sm,
     },
     '[data-part="copy-btn"]': {
       position: 'absolute',
-      bottom: system.space.zero,
-      right: system.space.zero,
-      borderRadius: system.shape.zero,
-      borderTopLeftRadius: system.shape.x1,
+      bottom: '0',
+      right: '0',
+      borderRadius: system.shape.none,
+      borderTopLeftRadius: system.shape.sm,
     },
   },
   modifiers: {
@@ -63,12 +64,12 @@ const cardStencil = createStencil({
       true: {
         '[data-part="code-block"]': {
           display: 'block',
-          borderTopLeftRadius: system.shape.zero,
-          borderTopRightRadius: system.shape.zero,
+          borderTopLeftRadius: system.shape.none,
+          borderTopRightRadius: system.shape.none,
         },
         '[data-part="example-block"]': {
-          borderBottomLeftRadius: system.shape.zero,
-          borderBottomRightRadius: system.shape.zero,
+          borderBottomLeftRadius: system.shape.none,
+          borderBottomRightRadius: system.shape.none,
         },
       },
     },
@@ -164,10 +165,10 @@ export const ExampleCodeBlock = ({code}: any) => {
                   language="jsx"
                   style={vscDarkPlus}
                   customStyle={{
-                    fontSize: cssVar(system.fontSize.subtext.large),
-                    lineHeight: cssVar(system.lineHeight.subtext.large),
+                    fontSize: cssVar(system.fontSize.subtext.lg),
+                    lineHeight: cssVar(system.lineHeight.subtext.lg),
                     margin: '0',
-                    padding: `${cssVar(system.space.x8)} ${cssVar(system.space.x10)}`,
+                    padding: `${cssVar(system.padding.xxl)} ${cssVar(base.size500)}`,
                     boxSizing: 'border-box',
                     maxWidth: '100%',
                   }}

@@ -1,6 +1,6 @@
+import {fireEvent, render, screen} from '@testing-library/react';
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
-import {screen, render, fireEvent} from '@testing-library/react';
 
 import {Tabs} from '../lib/Tabs';
 
@@ -23,7 +23,7 @@ describe('Tabs', () => {
   // intent tab is covered by visual and Cypress tests
 
   it('should call "onSelect" when tab is selected', () => {
-    const cb = jest.fn();
+    const cb = vi.fn();
     const {container} = render(
       <Tabs onSelect={cb} initialSelectedIds={['first']}>
         <Tabs.List>

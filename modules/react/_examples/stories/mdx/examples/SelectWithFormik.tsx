@@ -1,31 +1,27 @@
-import * as React from 'react';
 import {useFormik} from 'formik';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import * as React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  activityStreamIcon,
-  avatarIcon,
-  uploadCloudIcon,
-  userIcon,
-} from '@workday/canvas-system-icons-web';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {cloudArrowUpIcon, cloudIcon, commentIcon, userIcon} from '@workday/canvas-system-icons-web';
 
 export const customOptionsMain = [
   {
     label: 'Dessert Person by Claire Saffitz',
     serverId: 1,
-    icon: activityStreamIcon,
+    icon: commentIcon,
   },
   {
     label: 'Elements of Pizza by Ken Forkish',
     serverId: 2,
-    icon: avatarIcon,
+    icon: cloudIcon,
   },
   {
     label: 'Flour Water Salt Yeast by Ken Forkish',
     serverId: 3,
-    icon: uploadCloudIcon,
+    icon: cloudArrowUpIcon,
   },
   {label: 'Mastering Pasta by Marc Verti', serverId: 4, icon: userIcon},
 ];

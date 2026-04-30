@@ -1,5 +1,5 @@
 import {space} from '../lib/utils/space';
-import {ContentDirection} from '@workday/canvas-kit-react/common';
+
 const context = describe;
 
 describe('Space Style Props Function', () => {

@@ -1,10 +1,11 @@
-import {createContainer, Themeable, ErrorType} from '@workday/canvas-kit-react/common';
-import {useRadioModel} from './hooks/useRadioModel';
+import {ErrorType, Themeable, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {RadioLabel} from './RadioLabel';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
 import {RadioButton} from './RadioButton';
-import {createStencil, CSProps, calc, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {RadioLabel} from './RadioLabel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 export interface RadioGroupProps extends Themeable, CSProps, FlexProps {
   /**
@@ -20,24 +21,22 @@ const radioGroupStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.shape.x1Half,
-    gap: system.space.x2,
-    padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
-    margin: `0 ${calc.negate(system.space.x3)}`,
+    borderRadius: system.legacy.shape.md,
+    gap: system.legacy.gap.sm,
+    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.error.base}`,
-        backgroundColor: brand.error.lightest,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
       },
       caution: {
-        backgroundColor: brand.alert.lightest,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.alertInner}, inset 0 0 0 ${px2rem(3)} ${
-          brand.common.alertOuter
-        }`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.border.caution}`,
       },
     },
   },

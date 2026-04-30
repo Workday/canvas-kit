@@ -1,17 +1,16 @@
-import * as h from '../helpers';
-
 import {Basic} from '../../modules/react/popup/stories/examples/Basic';
+import {CloseOnTargetHiddenTest} from '../../modules/react/popup/stories/examples/CloseOnTargetHiddenTest';
+import {ComboboxWithinPopup} from '../../modules/react/popup/stories/examples/ComboboxWithinPopup';
 import {CustomTarget} from '../../modules/react/popup/stories/examples/CustomTarget';
 import {FocusRedirect} from '../../modules/react/popup/stories/examples/FocusRedirect';
+import {InitialFocus} from '../../modules/react/popup/stories/examples/InitialFocus';
 import {MixedPopupTypes} from '../../modules/react/popup/stories/examples/MixedPopupTypes';
+import {MultiplePopups} from '../../modules/react/popup/stories/examples/MultiplePopups';
+import {PopupWithFallbackPlacements} from '../../modules/react/popup/stories/examples/PopupWithFallbackPlacements';
 import {PopupWithNonHidablePopup} from '../../modules/react/popup/stories/examples/PopupWithNonHidablePopup';
 import {ReturnFocusTest} from '../../modules/react/popup/stories/examples/ReturnFocusTest';
-import {MultiplePopups} from '../../modules/react/popup/stories/examples/MultiplePopups';
-import {InitialFocus} from '../../modules/react/popup/stories/examples/InitialFocus';
-import {CloseOnTargetHiddenTest} from '../../modules/react/popup/stories/examples/CloseOnTargetHiddenTest';
 import {TooltipReturnFocus} from '../../modules/react/popup/stories/examples/TooltipReturnFocus';
-import {ComboboxWithinPopup} from '../../modules/react/popup/stories/examples/ComboboxWithinPopup';
-import {PopupWithFallbackPlacements} from '../../modules/react/popup/stories/examples/PopupWithFallbackPlacements';
+import * as h from '../helpers';
 
 describe('Popup', () => {
   context(`given the Basic example is rendered`, () => {
@@ -608,7 +607,7 @@ describe('Popup', () => {
       [
         {
           property: 'scrollTop',
-          value: 70,
+          value: 65,
         },
         {
           property: 'scrollTop',
@@ -616,7 +615,7 @@ describe('Popup', () => {
         },
         {
           property: 'scrollLeft',
-          value: 70,
+          value: 65,
         },
         {
           property: 'scrollLeft',

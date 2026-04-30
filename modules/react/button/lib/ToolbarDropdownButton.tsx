@@ -1,8 +1,15 @@
-import {brand, system} from '@workday/canvas-tokens-web';
-import {calc, createStencil, handleCsProp, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {
+  calc,
+  colorSpace,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
+import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonColorPropVars, buttonStencil} from './BaseButton';
 import {ToolbarIconButtonProps} from './ToolbarIconButton';
@@ -17,55 +24,71 @@ export const toolbarDropdownButtonStencil = createStencil({
     customIcon: 'toolbar-dropdown-btn-custom-icon',
   },
   base: ({chevronPart, customIconPart}) => ({
-    padding: system.space.zero,
-    minWidth: system.space.x8,
-    gap: system.space.zero,
-    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    padding: 0,
+    minWidth: system.legacy.size.sm,
+    gap: 0,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
       system.color.fg.default
     ),
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
-        system.color.fg.default
+        system.color.fg.strong
       ),
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.color.border.transparent,
-        outerColor: brand.common.focusOutline,
+        innerColor: system.legacy.color.focus.inverse,
+
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
+      }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
-        system.color.fg.muted.stronger
+        system.color.fg.default
       ),
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
+      }),
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
-        system.color.fg.muted.stronger
+        system.color.fg.strong
       ),
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
-        system.color.fg.disabled
+        system.color.fg.default
+      ),
+      [systemIconStencil.vars.color]: cssVar(
+        buttonColorPropVars.disabled.icon,
+        system.color.fg.default
       ),
     },
 
     [customIconPart]: {
-      marginInlineStart: system.space.x1,
+      marginInlineStart: system.legacy.padding.xxs,
       marginInlineEnd: calc.negate(px2rem(2)),
     },
 

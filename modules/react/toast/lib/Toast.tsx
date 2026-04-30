@@ -1,17 +1,17 @@
 import React from 'react';
 
-import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
+import {ToastBody} from './ToastBody';
 import {ToastCloseIcon} from './ToastCloseIcon';
 import {ToastIcon} from './ToastIcon';
-import {ToastMessage} from './ToastMessage';
 import {ToastLink} from './ToastLink';
-import {ToastBody} from './ToastBody';
+import {ToastMessage} from './ToastMessage';
 import {useToastModel} from './hooks/useToastModel';
-import {calc, createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ToastProps extends Omit<ExtractProps<typeof Popup.Card, never>, 'model'> {}
 
@@ -51,9 +51,10 @@ const toastStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'row',
-    width: calc.add(calc.multiply(system.space.x20, 4), system.space.x10),
-    padding: system.space.zero,
-    gap: system.space.x1,
+    width: px2rem(360),
+    padding: 0,
+    gap: system.legacy.gap.xs,
+    borderRadius: system.legacy.shape.xl,
   },
 });
 
@@ -65,7 +66,7 @@ const toastStencil = createStencil({
  *
  * const MyToast = (props: CardProps) => (
  *    <Toast mode="dialog" aria-label="notifcation">
- *      <Toast.Icon icon={checkIcon} color={colors.greenApple400} />
+ *      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
  *      <Toast.Body>
  *        <Toast.Message>Your workbook was successfully processed.</Toast.Message>
  *        <Toast.Link href="#hreflink">Custom Link</Toast.Link>

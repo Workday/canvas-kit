@@ -1,16 +1,21 @@
 import * as React from 'react';
-import {system} from '@workday/canvas-tokens-web';
+
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Subtext} from '@workday/canvas-kit-react/text';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {birthdayIcon, checkIcon, ribbonIcon} from '@workday/canvas-system-icons-web';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CanvasSystemIcon,
+  birthdayIcon,
+  checkIcon,
+  ribbonIcon,
+} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 interface AccordionItem {
   icon: CanvasSystemIcon;
@@ -41,37 +46,37 @@ const stylesOverride = {
     backgroundColor: system.color.bg.alt.default,
   }),
   heading: createStyles({
-    margin: system.space.zero,
+    margin: '0',
   }),
   toggleBtn: createStyles({
-    top: system.space.zero,
+    top: '0',
   }),
   accordionContainer: createStyles({
     listStyle: 'none',
     flexDirection: 'column',
-    rowGap: system.space.zero,
-    paddingInlineStart: system.space.zero,
+    rowGap: '0',
+    paddingInlineStart: '0',
   }),
   accordionIcon: createStyles({
     verticalAlign: 'middle',
-    padding: system.space.x1,
+    padding: system.padding.xxs,
   }),
   accordionSubText: createStyles({
-    margin: system.space.zero,
+    margin: '0',
   }),
   listContainer: createStyles({
     listStyle: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   compactListContainer: createStyles({
     listStyle: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
     flexDirection: 'column',
-    marginTop: system.space.x8,
+    marginTop: system.gap.xl,
   }),
   links: createStyles({
     textDecoration: 'none',
-    padding: system.space.x4,
+    padding: system.padding.md,
   }),
   linkCheck: createStyles({
     marginLeft: 'auto',

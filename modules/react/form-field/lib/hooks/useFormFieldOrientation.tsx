@@ -1,5 +1,5 @@
 import {FlexProps} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Adds the necessary layout props to a `FormField` component.
@@ -16,13 +16,13 @@ export const useFormFieldOrientation = (orientation: 'horizontal' | 'vertical') 
   if (orientation === 'horizontal') {
     layoutProps = {
       flexDirection: 'row',
-      gap: space.l,
+      gap: system.legacy.gap.xl,
       alignItems: undefined,
     };
   } else {
     layoutProps = {
       flexDirection: 'column',
-      gap: space.xxxs,
+      gap: system.legacy.gap.xs,
       alignItems: 'flex-start',
     };
   }

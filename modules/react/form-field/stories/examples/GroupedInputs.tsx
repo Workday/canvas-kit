@@ -1,21 +1,21 @@
 import React from 'react';
-import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {system} from '@workday/canvas-tokens-web';
-import {Banner} from '@workday/canvas-kit-react/banner';
 
-import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {Banner} from '@workday/canvas-kit-react/banner';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const formStyles = createStyles({
-  margin: `${system.space.zero} ${system.space.x3}`,
+  margin: `0 ${px2rem(12)}`,
 });
 
 const formButtonStyles = createStyles({
   display: 'inline-flex',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const toppings = [
@@ -126,10 +126,10 @@ export const GroupedInputs = () => {
                 {error && radioError
                   ? 'At least one topping and crust selection is required'
                   : error
-                  ? 'You must choose at least one topping'
-                  : radioError
-                  ? 'You must choose a crust'
-                  : ''}
+                    ? 'You must choose at least one topping'
+                    : radioError
+                      ? 'You must choose a crust'
+                      : ''}
               </Banner.Label>
             </Banner>
           ) : null}

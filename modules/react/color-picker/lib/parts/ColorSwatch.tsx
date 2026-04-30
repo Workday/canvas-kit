@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
-import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -18,9 +18,9 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
   base: ({color, iconColor}) => ({
     [systemIconStencil.vars.color]: iconColor,
-    width: px2rem(20),
-    height: px2rem(20),
-    borderRadius: system.shape.half,
+    width: system.legacy.size.xxs,
+    height: system.legacy.size.xxs,
+    borderRadius: system.legacy.shape.sm,
     backgroundColor: color,
     display: 'flex',
     alignItems: 'center',

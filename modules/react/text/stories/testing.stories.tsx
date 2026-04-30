@@ -1,14 +1,14 @@
-import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {BodyText, Heading, LabelText, Subtext, Text, Title} from '../';
 
 type TypeStateProp = {size: 'small' | 'medium' | 'large'; variant?: 'error' | 'hint' | 'inverse'};
 
 const inverseBackground = createStyles({
-  backgroundColor: system.color.bg.primary.strong,
+  backgroundColor: system.color.brand.accent.primary,
 });
 
 export default {
@@ -52,7 +52,7 @@ export const TextStates = {
           },
           {
             label: 'With color',
-            props: {color: system.color.static.blue.soft},
+            props: {color: base.blue100},
           },
           {
             label: 'With color as color token name',
@@ -84,7 +84,7 @@ export const TextStates = {
           },
           {
             label: 'With text-shadow',
-            props: {textShadow: `2px 2px ${system.color.static.blue.soft}`},
+            props: {textShadow: `2px 2px ${base.blue100}`},
           },
           {
             label: 'With white-space changed to nowrap',
@@ -98,7 +98,7 @@ export const TextStates = {
         columnProps={[{label: 'Examples', props: {}}]}
       >
         {props => (
-          <Box width={350}>
+          <Box cs={{width: px2rem(350)}}>
             <Text as="p" {...props}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit.
             </Text>

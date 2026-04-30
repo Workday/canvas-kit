@@ -15,7 +15,7 @@ const cacheFolder = path.join(__dirname, '../../.cache');
 
 const srcFolders = ['react', 'labs-react', 'preview-react', 'docs/mdx/style-props'];
 
-let props = {};
+const props = {};
 let modules = [];
 
 async function getComponentPropMap() {

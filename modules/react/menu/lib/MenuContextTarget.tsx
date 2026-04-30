@@ -1,11 +1,11 @@
 import * as React from 'react';
 
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   composeHooks,
-  createSubcomponent,
   createElemPropsHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {usePopupTarget, usePopupTargetContext} from '@workday/canvas-kit-react/popup';
 
 import {useMenuModel} from './useMenuModel';
