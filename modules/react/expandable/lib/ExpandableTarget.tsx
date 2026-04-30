@@ -42,7 +42,7 @@ export const expandableTargetStencil = createStencil({
       backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus-visible, &.focus': {
-      outline: `${cssVar(system.legacy.color.brand.border.primary, brand.common.focusOutline)} solid ${px2rem(2)}`,
+      outline: `${cssVar(system.legacy.color.brand.border.primary, brand.legacy.common.focus)} solid ${px2rem(2)}`,
     },
   },
 });
@@ -56,7 +56,7 @@ export const ExpandableTarget = createSubcomponent('button')({
   );
 
   return headingLevel ? (
-    <Heading size="small" as={headingLevel} margin="0">
+    <Heading size="small" as={headingLevel} cs={{margin: 0}}>
       {button}
     </Heading>
   ) : (

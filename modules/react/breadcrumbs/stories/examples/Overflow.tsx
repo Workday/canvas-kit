@@ -64,7 +64,10 @@ export const OverflowBreadcrumbs = ({width = '100%'}) => {
           setContainerWidth(data.id);
         }}
       >
-        <SegmentedControl.List aria-label="container width control" marginBottom="m">
+        <SegmentedControl.List
+          aria-label="container width control"
+          cs={{marginBottom: system.gap.lg}}
+        >
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
           <SegmentedControl.Item data-id="480px">480px</SegmentedControl.Item>
           <SegmentedControl.Item data-id="250px">250px</SegmentedControl.Item>

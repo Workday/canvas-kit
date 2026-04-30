@@ -37,7 +37,7 @@ export const AccessibilityTest = {
               <Modal.Heading>Delete Item</Modal.Heading>
               <Modal.Body>
                 <p>Are you sure you want to delete the item?</p>
-                <Flex cs={{gap: system.gap.sm}}>
+                <Flex cs={{gap: system.gap.md}}>
                   <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
                   <Modal.CloseButton>Cancel</Modal.CloseButton>
                 </Flex>
@@ -147,8 +147,8 @@ const TestModal = () => {
     <>
       <TestContent />
       <Modal model={model}>
-        <Modal.Overlay style={{animation: 'none'}}>
-          <Modal.Card style={{animation: 'none'}}>
+        <Modal.Overlay cs={{animation: 'none'}}>
+          <Modal.Card cs={{animation: 'none'}}>
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Small Width Modal</Modal.Heading>
             <Modal.Body>
@@ -157,7 +157,7 @@ const TestModal = () => {
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
+            <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -191,9 +191,9 @@ export const ModalRTL = {
     return (
       <CanvasProvider dir="rtl">
         <Modal model={model}>
-          <Modal.Target style={{display: 'none'}}></Modal.Target>
-          <Modal.Overlay style={{animation: 'none'}}>
-            <Modal.Card style={{animation: 'none'}} cs={{width: px2rem(300)}}>
+          <Modal.Target cs={{display: 'none'}}></Modal.Target>
+          <Modal.Overlay cs={{animation: 'none'}}>
+            <Modal.Card cs={{animation: 'none', width: px2rem(300)}}>
               <Modal.CloseIcon aria-label="" />
               <Modal.Heading>למחוק פריט</Modal.Heading>
               <Modal.Body>האם ברצונך למחוק פריט זה</Modal.Body>
@@ -229,8 +229,8 @@ export const CustomThemeModal = {
       <CanvasProvider>
         <Modal model={model}>
           {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
-          <Modal.Overlay style={{animation: 'none'}} className={customTheme}>
-            <Modal.Card style={{animation: 'none'}}>
+          <Modal.Overlay cs={{animation: 'none'}} className={customTheme}>
+            <Modal.Card cs={{animation: 'none'}}>
               <Modal.CloseIcon aria-label="Close" />
               <Modal.Heading>MIT License</Modal.Heading>
               <Modal.Body>
@@ -239,7 +239,7 @@ export const CustomThemeModal = {
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
+              <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>

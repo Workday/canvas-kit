@@ -3,7 +3,9 @@ import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {Tabs} from '@workday/canvas-kit-react/tabs';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {px2rem} from '@workday/canvas-kit-styling';
 import {configureIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 import {Basic} from './examples/Basic';
@@ -110,14 +112,16 @@ const OverflowTabs = () => {
         {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
       </Tabs.List>
       <Tabs.Menu.Popper>
-        <Tabs.Menu.Card maxWidth={300} maxHeight={200}>
+        <Tabs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
           <Tabs.Menu.List>
             {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
           </Tabs.Menu.List>
         </Tabs.Menu.Card>
       </Tabs.Menu.Popper>
       <Tabs.Panels>
-        {(item: MyTabItem) => <Tabs.Panel marginTop="m">{item.contents}</Tabs.Panel>}
+        {(item: MyTabItem) => (
+          <Tabs.Panel cs={{marginTop: system.gap.md}}>{item.contents}</Tabs.Panel>
+        )}
       </Tabs.Panels>
     </Tabs>
   );
@@ -131,7 +135,7 @@ export const Overflow = {
   },
   render: () => {
     return (
-      <Box width="360px">
+      <Box cs={{width: px2rem(360)}}>
         <OverflowTabs />
       </Box>
     );
@@ -152,7 +156,7 @@ export const ContainerWidth = {
           columnProps={[{label: 'Overflow Tabs', props: {}}]}
         >
           {({width}) => (
-            <Box width={width}>
+            <Box cs={{width}}>
               <OverflowTabs />
             </Box>
           )}

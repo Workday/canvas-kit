@@ -1,11 +1,10 @@
 import {jsx} from '@emotion/react';
 import styled from '@emotion/styled';
-import * as React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
-import {base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const backgroundColors = {
   cssProp: cssVar(base.orange500),
@@ -82,10 +81,10 @@ const cssProp = {css: {backgroundColor: backgroundColors.cssProp}} as {};
 
 export const StylingOverrides = () => {
   return (
-    <Flex flexDirection="column" minHeight="100vh" gap="s">
-      <Flex flexDirection="column" gap="s">
+    <Flex cs={{flexDirection: 'column', minHeight: '100vh', gap: system.gap.md}}>
+      <Flex cs={{flexDirection: 'column', gap: system.gap.md}}>
         <h2>Buttons</h2>
-        <Flex flexDirection="row" gap="s">
+        <Flex cs={{flexDirection: 'row', gap: system.gap.md}}>
           <PrimaryButton cs={styles}>createStyles</PrimaryButton>
           {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
           <StyledPrimaryButton>Styled Component</StyledPrimaryButton>

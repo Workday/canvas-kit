@@ -14,6 +14,7 @@ import {
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
 import {playCircleIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {customColorTheme, withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {stateTableColumnProps} from './utils';
@@ -24,7 +25,7 @@ export default withSnapshotsEnabled({
 
 const ColorOverrideContainer = props => {
   return (
-    <Flex flexDirection="column" gap="m" alignItems="center">
+    <Flex cs={{flexDirection: 'column', gap: system.gap.md, alignItems: 'center'}}>
       {props.children}
     </Flex>
   );

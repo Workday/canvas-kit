@@ -7,6 +7,7 @@ import {
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {px2rem} from '@workday/canvas-kit-styling';
 import {searchIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -71,7 +72,7 @@ export const TextInputStates = () => (
       {props => (
         <TextInput
           {...props}
-          style={{minWidth: 60, width: 100}}
+          cs={{minWidth: px2rem(60), width: px2rem(100)}}
           onChange={() => {}} // eslint-disable-line no-empty-function
         />
       )}
@@ -95,7 +96,7 @@ export const InputGroupStates = () => (
           props: {
             start: [
               <InputGroup.InnerStart>
-                <SystemIcon icon={searchIcon} size="small" />
+                <SystemIcon icon={searchIcon} size="sm" />
               </InputGroup.InnerStart>,
             ],
           },
@@ -115,7 +116,7 @@ export const InputGroupStates = () => (
           props: {
             start: [
               <InputGroup.InnerStart>
-                <SystemIcon icon={searchIcon} size="small" />
+                <SystemIcon icon={searchIcon} size="sm" />
               </InputGroup.InnerStart>,
             ],
             end: [
@@ -182,18 +183,18 @@ export const InputGroupStates = () => (
           label: 'Variable Width',
           props: {
             end: [
-              <InputGroup.InnerEnd width="10px" cs={{background: system.color.surface.info.strong}}>
+              <InputGroup.InnerEnd
+                cs={{background: system.color.surface.info.strong, width: px2rem(10)}}
+              >
                 <span>1</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
-                width="20px"
-                cs={{background: system.color.surface.warning.strong}}
+                cs={{background: system.color.surface.warning.strong, width: px2rem(20)}}
               >
                 <span>2</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
-                width="30px"
-                cs={{background: system.color.surface.success.strong}}
+                cs={{background: system.color.surface.success.strong, width: px2rem(30)}}
               >
                 <span>3</span>
               </InputGroup.InnerEnd>,
@@ -208,7 +209,7 @@ export const InputGroupStates = () => (
     >
       {({value, placeholder, ...props}) => (
         <CanvasProvider dir={props.dir}>
-          <InputGroup width={300}>
+          <InputGroup cs={{width: px2rem(300)}}>
             {props.start}
             <InputGroup.Input
               placeholder={placeholder}

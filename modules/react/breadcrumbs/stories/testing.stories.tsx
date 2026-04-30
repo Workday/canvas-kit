@@ -3,6 +3,7 @@ import React from 'react';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Navigation/Breadcrumbs',
@@ -33,11 +34,16 @@ export const DefaultStates = {
                     <Breadcrumbs.Link href="#">Home</Breadcrumbs.Link>
                   </Breadcrumbs.Item>
                   <Breadcrumbs.Item>
-                    <Breadcrumbs.Link href="#" maxWidth={props.isTruncated ? 100 : undefined}>
+                    <Breadcrumbs.Link
+                      href="#"
+                      cs={{maxWidth: props.isTruncated ? px2rem(100) : undefined}}
+                    >
                       Breakfast Menus
                     </Breadcrumbs.Link>
                   </Breadcrumbs.Item>
-                  <Breadcrumbs.CurrentItem maxWidth={props.isTruncated ? 100 : undefined}>
+                  <Breadcrumbs.CurrentItem
+                    cs={{maxWidth: props.isTruncated ? px2rem(100) : undefined}}
+                  >
                     House Specialty Pies
                   </Breadcrumbs.CurrentItem>
                 </Breadcrumbs.List>
@@ -82,7 +88,7 @@ export const WithOverflowMenu = {
             return (
               <Breadcrumbs items={items} aria-label="Breadcrumbs">
                 <Breadcrumbs.List
-                  maxWidth={props.maxWidth}
+                  cs={{maxWidth: props.maxWidth}}
                   overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
                 >
                   {item =>
@@ -96,7 +102,7 @@ export const WithOverflowMenu = {
                   }
                 </Breadcrumbs.List>
                 <Breadcrumbs.Menu.Popper>
-                  <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+                  <Breadcrumbs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
                     <Breadcrumbs.Menu.List>
                       {(item: Breadcrumb) => (
                         <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>
@@ -145,7 +151,7 @@ export const WithOverflowMenuHavingTwoItems = {
             return (
               <Breadcrumbs items={props.items} aria-label="Breadcrumbs">
                 <Breadcrumbs.List
-                  maxWidth={props.maxWidth}
+                  cs={{maxWidth: props.maxWidth}}
                   overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
                 >
                   {item =>
@@ -159,7 +165,7 @@ export const WithOverflowMenuHavingTwoItems = {
                   }
                 </Breadcrumbs.List>
                 <Breadcrumbs.Menu.Popper>
-                  <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+                  <Breadcrumbs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
                     <Breadcrumbs.Menu.List>
                       {(item: Breadcrumb) => (
                         <Breadcrumbs.Menu.Item>{item.text}</Breadcrumbs.Menu.Item>

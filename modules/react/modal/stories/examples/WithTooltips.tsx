@@ -4,6 +4,7 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {system} from '@workday/canvas-tokens-web';
 
 export const WithTooltips = () => {
   const modal = useModalModel();
@@ -18,12 +19,12 @@ export const WithTooltips = () => {
       <Modal model={modal}>
         <Modal.Target>Open Modal</Modal.Target>
         <Modal.Overlay>
-          <Modal.Card width={'auto'}>
+          <Modal.Card cs={{width: 'auto'}}>
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Open Modal</Modal.Heading>
             <Modal.Body>
               <p>Open a hidable and non-hidable popups</p>
-              <Flex gap="s">
+              <Flex cs={{gap: system.gap.md}}>
                 <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
                 <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
                 <Tooltip title="Not so sure" type="muted">

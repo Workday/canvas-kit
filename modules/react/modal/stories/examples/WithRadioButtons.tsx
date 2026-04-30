@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 
+// TODO: Use a not deprecated radio button
 export const WithRadioButtons = () => {
   const [value, setValue] = React.useState('');
 

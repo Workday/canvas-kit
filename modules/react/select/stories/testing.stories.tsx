@@ -8,7 +8,7 @@ import {
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {brand} from '@workday/canvas-tokens-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
@@ -76,7 +76,7 @@ export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
             <Select model={model}>
               <FormField.Input as={Select.Input} {...props} id="contact-select" />
               <Select.Popper>
-                <Select.Card maxHeight="200px">
+                <Select.Card cs={{maxHeight: px2rem(200)}}>
                   {model.state.items.length > 0 && (
                     <Select.List>
                       {item => {
@@ -134,7 +134,7 @@ export const SelectOpenMenuStates = (selectProps: {
                 <FormField.Input as={Select.Input} {...props} id="contact-select" />
                 <Select.Popper>
                   {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
-                  <Select.Card maxHeight="200px" className={selectProps.className}>
+                  <Select.Card cs={{maxHeight: px2rem(200)}} className={selectProps.className}>
                     {!!model.state.items.length && (
                       <Select.List>
                         {item => {

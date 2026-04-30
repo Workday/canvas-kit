@@ -9,6 +9,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
 
@@ -39,7 +40,11 @@ export const BasicGrid = () => {
   });
 
   return (
-    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+    <ListBox
+      model={model}
+      as={Flex}
+      cs={{flexDirection: 'row', flexWrap: 'wrap', width: px2rem(200)}}
+    >
       {item => <Item>{item.id}</Item>}
     </ListBox>
   );

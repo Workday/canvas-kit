@@ -1,8 +1,7 @@
-import React from 'react';
-
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
+import {system} from '@workday/canvas-tokens-web';
 
 export const BodyOverflow = () => {
   const handleAcknowledge = () => {
@@ -81,7 +80,7 @@ export const BodyOverflow = () => {
               ut aliquam purus sit.
             </p>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

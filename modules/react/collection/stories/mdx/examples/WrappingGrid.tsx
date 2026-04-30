@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   ListBox,
   useGridModel,
@@ -10,8 +8,21 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
+
+const wrappingGridStencil = createStencil({
+  vars: {
+    background: '',
+  },
+  base: ({background}) => ({
+    width: system.size.md,
+    border: `${px2rem(1)} solid black`,
+    background,
+  }),
+});
 
 const Item = createSubcomponent('button')({
   modelHook: useGridModel,
@@ -21,11 +32,9 @@ const Item = createSubcomponent('button')({
     <Box
       as={Element}
       {...elemProps}
-      width={40}
-      border="solid 1px black"
-      style={{
+      cs={wrappingGridStencil({
         background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
-      }}
+      })}
     />
   );
 });
@@ -41,7 +50,11 @@ export const WrappingGrid = () => {
   });
 
   return (
-    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+    <ListBox
+      model={model}
+      as={Flex}
+      cs={{flexDirection: 'row', flexWrap: 'wrap', width: px2rem(200)}}
+    >
       {item => <Item>{item.id}</Item>}
     </ListBox>
   );

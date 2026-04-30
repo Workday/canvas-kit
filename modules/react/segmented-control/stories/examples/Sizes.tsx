@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {Box} from '@workday/canvas-kit-react/layout';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {BodyText} from '@workday/canvas-kit-react/text';
@@ -9,11 +7,12 @@ import {
   listViewIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Sizes = () => (
   <>
     <Box>
-      <BodyText size="medium" fontWeight="bold" marginTop={0}>
+      <BodyText size="medium" cs={{marginTop: 0, fontWeight: system.fontWeight.bold}}>
         Small
       </BodyText>
       <SegmentedControl size="small">

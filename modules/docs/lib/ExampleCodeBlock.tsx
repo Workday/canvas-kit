@@ -155,7 +155,7 @@ export const ExampleCodeBlock = ({code}: any) => {
           </CanvasProvider>
         </Card.Body>
       </Card>
-      <Card data-part="code-block" padding={0}>
+      <Card data-part="code-block" cs={{padding: 0}}>
         <Card.Body cs={{position: 'relative'}}>
           <CanvasProvider className={defaultBranding}>
             {code && (

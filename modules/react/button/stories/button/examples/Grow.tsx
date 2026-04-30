@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {
   DeleteButton,
   PrimaryButton,
@@ -7,9 +5,18 @@ import {
   TertiaryButton,
 } from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const baseStyles = {
+  gap: system.gap.md,
+  padding: system.padding.md,
+  flexDirection: 'column',
+  maxWidth: px2rem(300),
+};
 
 export const Grow = () => (
-  <Flex gap="s" padding="s" flexDirection="column" maxWidth={300}>
+  <Flex cs={baseStyles}>
     <PrimaryButton size="small" grow={true}>
       Primary
     </PrimaryButton>

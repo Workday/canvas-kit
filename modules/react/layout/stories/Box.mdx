@@ -1,11 +1,18 @@
-import { Meta } from '@storybook/blocks';
-import { ExampleCodeBlock } from '@workday/canvas-kit-docs';
-import { Basic } from './examples/Box/Basic';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
 import * as BoxStories from './Box.stories';
+import {Basic} from './examples/Box/Basic';
 
 <Meta of={BoxStories} />
 
 # Box
+
+> **Note**: Some of the content on this page may be outdated and may not follow the latest CK style
+> guidance. Please use care when making updates and carefully review any changes. Prefer using the
+> `createStyles` or `createStencil` utilities along with the latest design tokens to set styles.
+> This page will be updated soon.
 
 `Box` is a primitive component that provides a common, ergonomic API around Canvas design tokens. It
 is highly flexible, and its primary purpose is to build other components.

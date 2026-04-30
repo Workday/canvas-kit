@@ -1,6 +1,8 @@
 import {render, screen} from '@testing-library/react';
 import React from 'react';
 
+import {px2rem} from '@workday/canvas-kit-styling';
+
 import {Select} from '../lib/Select';
 
 describe('Select', () => {
@@ -18,7 +20,7 @@ describe('Select', () => {
         <Select items={['Foo']} initialVisibility="visible">
           <Select.Input id="contact-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card cs={{maxHeight: px2rem(200)}}>
               <Select.List>
                 {item => {
                   return <Select.Item>{item}</Select.Item>;
@@ -37,7 +39,7 @@ describe('Select', () => {
           <Select items={['Foo']} initialVisibility="visible">
             <Select.Input id="contact-select" />
             <Select.Popper>
-              <Select.Card maxHeight="200px">
+              <Select.Card cs={{maxHeight: px2rem(200)}}>
                 <Select.List>
                   {item => {
                     return <Select.Item>{item}</Select.Item>;
@@ -57,7 +59,7 @@ describe('Select', () => {
         <Select items={['Foo']}>
           <Select.Input disabled id="contact-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card cs={{maxHeight: px2rem(200)}}>
               <Select.List>
                 {item => {
                   return <Select.Item>{item}</Select.Item>;
@@ -78,7 +80,7 @@ describe('Select', () => {
         <Select items={['Foo']} initialSelectedIds={['Foo']}>
           <Select.Input id="contact-select" />
           <Select.Popper>
-            <Select.Card maxHeight="200px">
+            <Select.Card cs={{maxHeight: px2rem(200)}}>
               <Select.List>
                 {item => {
                   return <Select.Item>{item}</Select.Item>;

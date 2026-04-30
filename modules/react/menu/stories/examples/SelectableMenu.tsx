@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * The `Menu.Item` renders a `role=menuitem` element, and `aria-selected` is not a valid attribute for
@@ -30,7 +31,7 @@ export const SelectableMenu = () => {
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <BodyText size="small" marginTop="s">
+      <BodyText size="small" cs={{marginTop: system.gap.md}}>
         Selected: <span data-testid="output">{selected}</span>
       </BodyText>
     </Menu>

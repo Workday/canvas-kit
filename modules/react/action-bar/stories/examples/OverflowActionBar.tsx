@@ -5,6 +5,8 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {breakpoints} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 type MyActionItem = {
   id: string;
@@ -25,7 +27,7 @@ export const OverflowActionBar = () => {
 
   return (
     <div>
-      <Box maxWidth={containerWidth} marginBottom="xl">
+      <Box cs={{maxWidth: containerWidth, marginBottom: system.gap.xxl}}>
         <ActionBar model={model}>
           <ActionBar.List
             position="relative"
@@ -43,7 +45,7 @@ export const OverflowActionBar = () => {
             )}
           </ActionBar.List>
           <ActionBar.Menu.Popper>
-            <ActionBar.Menu.Card maxWidth={300} maxHeight={200}>
+            <ActionBar.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
               <ActionBar.Menu.List>
                 {(item: MyActionItem) => (
                   <ActionBar.Menu.Item onClick={() => console.log(item.id)}>

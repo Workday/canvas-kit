@@ -2,45 +2,42 @@ import React, {useEffect, useRef, useState} from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
   arrowDownIcon,
   arrowLeftIcon,
   arrowRightIcon,
   arrowUpIcon,
 } from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+const baseStyles = createStyles({
+  padding: system.gap.sm,
+  backgroundColor: system.color.surface.alt.default,
+  color: system.color.fg.default,
+  borderRadius: system.shape.md,
+  alignContent: 'center',
+  justifyContent: 'center',
+});
 
 const Cell = (props: {children: React.ReactNode}) => {
-  return (
-    <Grid
-      alignContent="center"
-      padding="xs"
-      justifyContent="center"
-      backgroundColor="soap500"
-      color="blackPepper500"
-      borderRadius="m"
-    >
-      {props.children}
-    </Grid>
-  );
+  return <Grid cs={baseStyles}>{props.children}</Grid>;
 };
 
+const cellItemStyles = createStyles({
+  alignContent: 'center',
+  gridAutoColumns: 'max-content',
+  height: '100%',
+  gridAutoFlow: 'column',
+  padding: system.gap.sm,
+  justifyContent: 'center',
+  backgroundColor: system.color.surface.alt.default,
+  color: system.color.fg.default,
+  borderRadius: system.shape.md,
+});
+
 const CellItem = (props: {children: React.ReactNode}) => {
-  return (
-    <Grid
-      alignContent="center"
-      gridAutoColumns="max-content"
-      gridGap="xs"
-      height="100%"
-      gridAutoFlow="column"
-      padding="xs"
-      justifyContent="center"
-      backgroundColor="peach300"
-      color="frenchVanilla100"
-      borderRadius="m"
-    >
-      {props.children}
-    </Grid>
-  );
+  return <Grid cs={cellItemStyles}>{props.children}</Grid>;
 };
 
 export const GridLayoutInteractive = () => {
@@ -70,15 +67,17 @@ export const GridLayoutInteractive = () => {
   };
 
   return (
-    <Grid gridAutoFlow="row" padding="xs">
+    <Grid cs={{gridAutoFlow: 'row', padding: system.gap.sm}}>
       <Grid
-        gridTemplateColumns="repeat(3, 1fr)"
-        gridTemplateRows="repeat(3, 1fr)"
-        gridGap="xs"
-        padding="xs"
-        border="5px solid #c860d1"
+        cs={{
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateRows: 'repeat(3, 1fr)',
+          gridGap: system.gap.sm,
+          padding: system.gap.sm,
+          border: `${px2rem(5)} solid ${base.magenta600}`,
+        }}
       >
-        <Grid.Item gridRowStart={rowCount} gridColumnStart={colCount}>
+        <Grid.Item cs={{gridRowStart: rowCount, gridColumnStart: colCount}}>
           <CellItem>
             <PrimaryButton
               size="extraSmall"

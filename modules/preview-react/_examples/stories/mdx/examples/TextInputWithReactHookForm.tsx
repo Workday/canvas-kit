@@ -8,7 +8,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -114,7 +114,7 @@ export const TextInputWithReactHookForm = () => {
         >
           <Select items={options} getTextValue={item => item.label}>
             <FormField.Label>What is your role?</FormField.Label>
-            <FormField.Input as={Select.Input} {...register('role')} width="280px" />
+            <FormField.Input as={Select.Input} {...register('role')} cs={{width: px2rem(280)}} />
             <Select.Popper>
               <Select.Card>
                 <Select.List maxHeight={200}>

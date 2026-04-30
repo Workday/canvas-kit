@@ -2,6 +2,7 @@ import React from 'react';
 
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const [selected, setSelected] = React.useState('');
@@ -19,7 +20,7 @@ export const Basic = () => {
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <BodyText size="small" marginTop="s">
+      <BodyText size="small" cs={{marginTop: system.gap.md}}>
         Selected: <span data-testid="output">{selected}</span>
       </BodyText>
     </Menu>

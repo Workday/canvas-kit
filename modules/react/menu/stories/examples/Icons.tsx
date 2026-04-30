@@ -8,6 +8,7 @@ import {
   configureIcon,
   userIcon,
 } from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Icons = () => {
   const [selected, setSelected] = React.useState('');
@@ -42,7 +43,7 @@ export const Icons = () => {
           </Menu.List>
         </Menu.Card>
       </Menu.Popper>
-      <BodyText size="small" marginTop="s">
+      <BodyText size="small" cs={{marginTop: system.gap.md}}>
         Selected: <span data-testid="output">{selected}</span>
       </BodyText>
     </Menu>

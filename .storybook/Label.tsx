@@ -34,6 +34,11 @@ const getColors = (type: string) => {
         backgroundColor: 'rgba(234, 237, 240, 1)',
         color: 'rgba(77, 86, 98, 1)',
       };
+    case 'outdated':
+      return {
+        backgroundColor: 'rgba(234, 237, 240, 1)',
+        color: 'rgba(77, 86, 98, 1)',
+      };
     default:
       return {
         backgroundColor: 'rgba(227, 241, 255, 1)',

@@ -1,8 +1,6 @@
 import React from 'react';
 
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Combobox} from '@workday/canvas-kit-react/combobox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
@@ -13,6 +11,8 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {CloseOnTargetHiddenTest as CloseOnTargetHiddenTestExample} from './examples/CloseOnTargetHiddenTest';
 import {ComboboxWithinPopup as ComboboxWithinPopupExample} from './examples/ComboboxWithinPopup';
@@ -133,17 +133,17 @@ export const PopupWithBodyScroll = {
           <br />
           <br />
         </div>
-        <Flex gap="s">
+        <Flex cs={{gap: system.gap.md}}>
           <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
           <div aria-owns={popupId} style={{position: 'absolute'}} />
           <Popup.Popper>
-            <Popup.Card width={400} padding="s">
+            <Popup.Card cs={{width: px2rem(400), padding: system.padding.md}}>
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading>Delete Item</Popup.Heading>
               <Popup.Body>
                 <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
               </Popup.Body>
-              <Flex gap="s">
+              <Flex cs={{gap: system.gap.md}}>
                 <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
                 <Popup.CloseButton>Cancel</Popup.CloseButton>
               </Flex>
