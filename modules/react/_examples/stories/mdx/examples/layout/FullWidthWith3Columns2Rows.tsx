@@ -7,7 +7,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const gridStyles = createStyles({
   gridTemplateAreas: "'Heading Heading Heading'",
-  gridColumn: 'repeat(3, 1fr)',
+  gridTemplateColumns: 'repeat(3, 1fr)',
   gridAutoRows: 'min-content',
   gridRowGap: system.gap.sm,
   gridColumnGap: system.gap.xl,

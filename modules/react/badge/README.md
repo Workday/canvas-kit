@@ -21,7 +21,7 @@ accessibility concerns you'll want to keep in mind:
 ### Notification Example
 
 ```tsx
-import styled from '@emotion/styled';
+import { createStyles } from '@workday/canvas-kit-styling';
 import { accessibleHide } from "@workday/canvas-kit-react";
 
 ...

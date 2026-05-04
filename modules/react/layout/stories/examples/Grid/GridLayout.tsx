@@ -6,7 +6,7 @@ import {base, system} from '@workday/canvas-tokens-web';
 
 const baseStyles = createStyles({
   alignContent: 'center',
-  padding: system.gap.sm,
+  padding: system.padding.sm,
   justifyContent: 'center',
   backgroundColor: system.color.surface.alt.default,
   color: system.color.fg.default,
@@ -22,7 +22,7 @@ const cellItemStyles = createStyles({
   gridAutoColumns: 'max-content',
   height: '100%',
   gridAutoFlow: 'column',
-  padding: system.gap.sm,
+  padding: system.padding.sm,
   justifyContent: 'center',
   backgroundColor: system.color.surface.alt.default,
   color: system.color.fg.default,
@@ -35,13 +35,13 @@ const CellItem = (props: {children: React.ReactNode}) => {
 
 export const GridLayout = () => {
   return (
-    <Box cs={{padding: system.gap.sm}}>
+    <Box cs={{padding: system.padding.sm}}>
       <Grid
         cs={{
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gridGap: system.gap.sm,
           border: `${px2rem(5)} solid ${base.magenta600}`,
-          padding: system.gap.sm,
+          padding: system.padding.sm,
         }}
       >
         <Grid.Item cs={{gridRowStart: '2'}}>

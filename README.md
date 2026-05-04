@@ -27,7 +27,7 @@ implement user experiences consistent with
 
 The following are supported versions of dependencies.
 
-- React: >=17.0
+- React: >=18.0
 - Typescript: >=5.0 (optional)
 - Emotion: ^11.7.0
 

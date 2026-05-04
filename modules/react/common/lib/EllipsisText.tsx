@@ -15,6 +15,10 @@ interface EllipsisTextProps extends CSProps {
 export const EllipsisText = createComponent('span')({
   displayName: 'EllipsisText',
   Component({children, ...elemProps}: EllipsisTextProps, ref, Element) {
-    return <Element ref={ref} {...handleCsProp(elemProps, ellipsisStyles)} />;
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, ellipsisStyles)}>
+        {children}
+      </Element>
+    );
   },
 });

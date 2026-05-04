@@ -12,7 +12,7 @@ import {
 import {base, system} from '@workday/canvas-tokens-web';
 
 const baseStyles = createStyles({
-  padding: system.gap.sm,
+  padding: system.padding.sm,
   backgroundColor: system.color.surface.alt.default,
   color: system.color.fg.default,
   borderRadius: system.shape.md,
@@ -29,7 +29,7 @@ const cellItemStyles = createStyles({
   gridAutoColumns: 'max-content',
   height: '100%',
   gridAutoFlow: 'column',
-  padding: system.gap.sm,
+  padding: system.padding.sm,
   justifyContent: 'center',
   backgroundColor: system.color.surface.alt.default,
   color: system.color.fg.default,
@@ -67,13 +67,13 @@ export const GridLayoutInteractive = () => {
   };
 
   return (
-    <Grid cs={{gridAutoFlow: 'row', padding: system.gap.sm}}>
+    <Grid cs={{gridAutoFlow: 'row', padding: system.padding.sm}}>
       <Grid
         cs={{
           gridTemplateColumns: 'repeat(3, 1fr)',
           gridTemplateRows: 'repeat(3, 1fr)',
           gridGap: system.gap.sm,
-          padding: system.gap.sm,
+          padding: system.padding.sm,
           border: `${px2rem(5)} solid ${base.magenta600}`,
         }}
       >

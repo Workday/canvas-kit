@@ -56,7 +56,7 @@ export const TextStates = {
           },
           {
             label: 'With variant',
-            props: {cs: {variant: 'error'}},
+            props: {variant: 'error'},
           },
           {
             label: 'With letter-spacing of 0.5rem',
