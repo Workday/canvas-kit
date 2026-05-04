@@ -42,7 +42,7 @@ export const OverflowTabs = () => {
           </Tabs.Menu.Popper>
           <Tabs.Panels>
             {(item: MyTabItem) => (
-              <Tabs.Panel cs={{marginTop: system.gap.md}}>{item.contents}</Tabs.Panel>
+              <Tabs.Panel cs={{marginTop: system.gap.lg}}>{item.contents}</Tabs.Panel>
             )}
           </Tabs.Panels>
         </Tabs>

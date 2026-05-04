@@ -72,7 +72,7 @@ export const MenuItemStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex cs={{gap: system.gap.sm}}>
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Normal</h3>
             <AllStatesMenuItem />
@@ -99,7 +99,7 @@ export const MenuItemStatesCustomTheme = {
   render: () => {
     return (
       <StaticStates>
-        <Flex cs={{gap: system.gap.sm}}>
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Custom Themed</h3>
             <CanvasProvider
@@ -211,7 +211,7 @@ export const MenuOptionStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex cs={{gap: system.gap.sm}}>
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Normal</h3>
             <AllStatesMenuOption />
@@ -238,7 +238,7 @@ export const MenuGroups = {
   render: () => {
     return (
       <StaticStates>
-        <Flex cs={{gap: system.gap.sm}}>
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>LTR</h3>
             <MenuWithGroups />

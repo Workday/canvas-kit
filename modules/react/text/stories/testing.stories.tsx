@@ -43,12 +43,12 @@ export const TextStates = {
             props: {cs: {fontWeight: 400}},
           },
           {
-            label: 'With font-weigth as a token value of regular',
-            props: {cs: {fontWeight: 'regular'}, as: 'h3'},
+            label: 'With font-weigth as a token value of normal',
+            props: {cs: {fontWeight: system.fontWeight.normal}, as: 'h3'},
           },
           {
             label: 'With monospace font-family value',
-            props: {cs: {fontFamily: 'monospace'}},
+            props: {cs: {fontFamily: system.fontFamily.mono}},
           },
           {
             label: 'With color',

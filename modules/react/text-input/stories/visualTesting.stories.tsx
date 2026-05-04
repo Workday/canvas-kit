@@ -183,18 +183,18 @@ export const InputGroupStates = () => (
           label: 'Variable Width',
           props: {
             end: [
-              <InputGroup.InnerEnd
-                cs={{background: system.color.surface.info.strong, width: px2rem(10)}}
-              >
+              <InputGroup.InnerEnd width="10px" cs={{background: system.color.surface.info.strong}}>
                 <span>1</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
-                cs={{background: system.color.surface.warning.strong, width: px2rem(20)}}
+                width="20px"
+                cs={{background: system.color.surface.warning.strong}}
               >
                 <span>2</span>
               </InputGroup.InnerEnd>,
               <InputGroup.InnerEnd
-                cs={{background: system.color.surface.success.strong, width: px2rem(30)}}
+                width="30px"
+                cs={{background: system.color.surface.success.strong}}
               >
                 <span>3</span>
               </InputGroup.InnerEnd>,
@@ -209,7 +209,7 @@ export const InputGroupStates = () => (
     >
       {({value, placeholder, ...props}) => (
         <CanvasProvider dir={props.dir}>
-          <InputGroup cs={{width: px2rem(300)}}>
+          <InputGroup cs={{width: px2rem(300), justifyContent: 'end'}}>
             {props.start}
             <InputGroup.Input
               placeholder={placeholder}
