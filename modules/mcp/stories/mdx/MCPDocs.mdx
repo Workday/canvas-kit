@@ -9,6 +9,8 @@ This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, 
 - [Installation](#installation)
   - [Cursor Quick Install](#cursor-quick-install)
   - [Other IDEs (Windsurf, VS Code, etc.)](#other-ides-windsurf-vs-code-etc)
+  - [Explicit Node path (nvm / GUI editors)](#explicit-node-path-nvm--gui-editors)
+  - [Troubleshooting: stale npx installs](#troubleshooting-stale-npx-installs)
 - [Tools](#tools)
   - [`get-canvas-kit-upgrade-guides`](#get-canvas-kit-upgrade-guides)
   - [`get-canvas-kit-tokens`](#get-canvas-kit-tokens)
@@ -60,6 +62,46 @@ Configuration file locations:
 - **Cursor**: `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` at a repository root (project only); restart Cursor or reload MCP after changes
 - **Windsurf**: Settings → MCP Servers
 - **VS Code**: Cline/Continue extension settings
+
+The examples above use `command: "npx"` on purpose: they are short, copy-pasteable, and work when your editor inherits the same `PATH` as your terminal (system Node, Homebrew, etc.).
+
+### Explicit Node path (nvm / GUI editors)
+
+Cursor and other desktop apps are often **not** started from a login shell, so they do not load `~/.zshrc` / `~/.bashrc`. Tools installed with **nvm**, **fnm**, or similar then disappear from `PATH`, and `"command": "npx"` fails even though `npx` works in Terminal.
+
+When Cursor’s MCP installer (or support) expands the config, you may see a resolved form like this — same package, but **absolute** paths to Node, npm’s `npx-cli.js`, and a minimal `PATH`:
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp": {
+      "command": "/Users/you/.nvm/versions/node/v22.12.0/bin/node",
+      "args": [
+        "/Users/you/.nvm/versions/node/v22.12.0/lib/node_modules/npm/bin/npx-cli.js",
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ],
+      "env": {
+        "PATH": "/Users/you/.nvm/versions/node/v22.12.0/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    }
+  }
+}
+```
+
+Replace `/Users/you/.nvm/versions/node/v22.12.0` with the output of `dirname "$(which node)"` (or `nvm which current`) from the Node version you want MCP to use. JSON configs typically need **real absolute paths**, not `~`.
+
+The npm package scope is **`@workday`** (all lowercase on npm).
+
+### Troubleshooting: stale npx installs
+
+If MCP starts but behaves oddly, fails after an upgrade, or errors in ways that suggest an old cached copy of the package, clear **npx’s install cache** and restart the editor:
+
+```bash
+rm -rf ~/.npm/_npx
+```
+
+Then reload MCP or restart Cursor. As a broader step (optional), you can also run `npm cache clean --force`; that clears more of npm’s cache, not only npx.
 
 ### Claude Code CLI
 
