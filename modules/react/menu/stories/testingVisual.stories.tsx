@@ -72,7 +72,7 @@ export const MenuItemStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs">
+        <Flex cs={{gap: system.gap.sm}}>
           <div>
             <h3>Normal</h3>
             <AllStatesMenuItem />
@@ -106,8 +106,8 @@ export const MenuItemStatesCustomTheme = {
               theme={{
                 canvas: {
                   palette: {
-                    primary: {main: base.blackberry600},
-                    common: {focusOutline: base.blackPepper600},
+                    primary: {main: base.indigo500},
+                    common: {focusOutline: base.magenta900},
                   },
                 },
               }}

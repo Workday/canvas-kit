@@ -54,6 +54,7 @@ export interface RadioProps extends Themeable {
 
 const radioBorderRadius = 9;
 
+// Ignore all `styled` as component is deprecated in v15
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',

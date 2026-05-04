@@ -1,10 +1,10 @@
-import React from 'react';
-
 import {Banner} from '@workday/canvas-kit-react/banner';
-import {CanvasProvider, styled} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const StyledStickyBanner = styled(Banner)({
+const containerStyles = createStyles({
   position: 'absolute',
   right: 0,
 });
@@ -12,12 +12,12 @@ const StyledStickyBanner = styled(Banner)({
 export const StickyRTL = () => {
   return (
     <CanvasProvider dir="rtl">
-      <Box height={64}>
-        <StyledStickyBanner isSticky={true}>
+      <Box cs={{height: system.size.xxl}}>
+        <Banner isSticky={true} cs={containerStyles}>
           <Banner.Icon />
           <Banner.Label>3 אזהרות</Banner.Label>
           <Banner.ActionText />
-        </StyledStickyBanner>
+        </Banner>
       </Box>
     </CanvasProvider>
   );

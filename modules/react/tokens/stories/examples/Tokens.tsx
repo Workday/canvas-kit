@@ -46,6 +46,7 @@ export const Depth = () => (
   </Flex>
 );
 
+// Ignore all `styled` as tokens are deprecated and will be removed in the future major version.
 const StyledLargeTitle = styled('h3')({
   ...type.levels.title.large,
 });

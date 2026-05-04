@@ -146,6 +146,7 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   icon?: CanvasSystemIcon;
 }
 
+// Ignore all `styled` as component is deprecated in v15
 const Container = styled('span')<
   PickRequired<StatusIndicatorProps, 'emphasis' | 'maxWidth', 'type'>
 >(statusIndicatorStyles.styles, ({type, emphasis, maxWidth}) => ({

@@ -8,6 +8,7 @@ import {GridStyleProps, grid} from './utils/grid';
 export type GridProps = Omit<BoxProps, 'display'> & GridStyleProps;
 export type GridItemProps = BoxProps;
 
+// TODO: Update this to use the new styling approach.
 const StyledGrid = styled(Box)<StyledType & GridProps>(
   {
     display: 'grid',

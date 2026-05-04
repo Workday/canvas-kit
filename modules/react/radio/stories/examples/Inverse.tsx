@@ -13,10 +13,7 @@ export const Inverse = () => {
   };
 
   return (
-    <Box
-      backgroundColor="blueberry400"
-      cs={{padding: system.padding.md, backgroundColor: system.color.accent.info}}
-    >
+    <Box cs={{padding: system.padding.md, backgroundColor: system.color.accent.info}}>
       <RadioGroup name={useUniqueId()} onChange={handleChange} value={value}>
         <Radio variant="inverse" label="Deep dish" value="deep-dish" />
         <Radio variant="inverse" label="Thin" value="thin" />

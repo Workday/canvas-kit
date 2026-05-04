@@ -13,6 +13,7 @@ const backgroundColors = {
   createStyles: cssVar(base.purple500),
 };
 
+// Showcase of old Emotion approach
 const StyledPrimaryButton = styled(PrimaryButton)({
   backgroundColor: backgroundColors.styledComponent,
 });

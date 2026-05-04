@@ -36,6 +36,7 @@ const Footer = ({children, ...props}) => (
   </Grid>
 );
 
+// Showcase of old Emotion approach, it is not recommended in v15
 export const ResponsiveContainer = () => {
   const ref = React.useRef(null);
   const [width, setWidth] = React.useState(0);

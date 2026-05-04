@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import * as React from 'react';
 
 import {getTheme} from '@workday/canvas-kit-react/common';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
@@ -153,6 +152,9 @@ const Circle = styled(Box)({
   transform: 'translate(-50%, 0)',
 });
 
+/* Example is outdated in v15 as we are moving away from styled-components.
+ * TODO: Update this example to use the new styling approach.
+ */
 export const ResponsiveViewport = () => {
   return (
     <ParentCont>
