@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.3](https://github.com/Workday/canvas-kit/releases/tag/v15.0.3) (2026-05-04)
+
+### Components
+
+- fix: Remove duplicate resource to fix MCP ([#3928](https://github.com/Workday/canvas-kit/pull/3928)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.0.2](https://github.com/Workday/canvas-kit/releases/tag/v15.0.2) (2026-05-04)
+
+### Components
+
+- fix: Make sure mixed keyboard and mouse use doesn't scroll away from currently selected item in menus ([#3917](https://github.com/Workday/canvas-kit/pull/3917)) ([@ahayes91](https://github.com/ahayes91))
+
+
 ## [v15.0.1](https://github.com/Workday/canvas-kit/releases/tag/v15.0.1) (2026-04-30)
 
 ### Components
