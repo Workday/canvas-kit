@@ -1,16 +1,15 @@
 import * as React from 'react';
 
-import {createContainer, ExtractProps, focusRing} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-import {useBannerModel} from './hooks';
-
+import {BannerActionText} from './BannerActionText';
 import {BannerIcon} from './BannerIcon';
 import {BannerLabel} from './BannerLabel';
-import {BannerActionText} from './BannerActionText';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {useBannerModel} from './hooks';
 
 export interface BannerProps extends ExtractProps<typeof Flex, never> {
   /**
@@ -21,51 +20,62 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 
 export const bannerStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
     // TODO: Need to update fontFamily token [#3221](https://github.com/Workday/canvas-kit/issues/3221).
     fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
     fontWeight: system.fontWeight.medium,
-    padding: `${system.space.x2} ${system.space.x4}`,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
     border: '0',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'left',
-    borderStartStartRadius: system.shape.x1,
-    borderStartEndRadius: system.shape.x1,
-    borderEndStartRadius: system.shape.x1,
-    borderEndEndRadius: system.shape.x1,
+    borderStartStartRadius: system.legacy.shape.sm,
+    borderStartEndRadius: system.legacy.shape.sm,
+    borderEndStartRadius: system.legacy.shape.sm,
+    borderEndEndRadius: system.legacy.shape.sm,
+    gap: system.legacy.gap.sm,
     cursor: 'pointer',
-    transition: 'background-color 120ms',
-    outline: `${system.space.x1} solid transparent`,
+    transition: 'background-color 120ms linear',
+    outline: `${system.legacy.gap.xs} solid transparent`,
     '&:focus-visible, &.focus': {
-      outline: `${system.shape.x1} double transparent`,
+      outline: `${system.legacy.gap.xs} double transparent`,
       ...focusRing({separation: 2}),
     },
   },
   modifiers: {
     hasErrors: {
       true: {
-        backgroundColor: brand.error.base,
-        color: brand.error.accent,
+        backgroundColor: system.legacy.color.brand.accent.critical,
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          background: brand.error.dark,
+          background: colorSpace.darken({
+            color: system.legacy.color.brand.accent.critical,
+            mixinColor: system.legacy.color.accent.overlay.mixin,
+            mixinValue: system.legacy.opacity.accent.hover,
+          }),
         },
         '& [data-part="exclamation-circle-icon"]': {
-          [systemIconStencil.vars.accentColor]: 'currentColor',
-          [systemIconStencil.vars.color]: 'currentColor',
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: system.legacy.color.brand.accent.critical,
+          [systemIconStencil.vars.color]: system.color.fg.inverse,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.inverse,
         },
       },
       false: {
-        backgroundColor: brand.alert.base,
-        color: brand.alert.accent,
+        backgroundColor: system.legacy.color.brand.accent.caution,
+        color: system.color.fg.contrast.default,
         '&:hover, &.hover': {
-          background: brand.alert.dark,
+          background: colorSpace.darken({
+            color: system.legacy.color.brand.accent.caution,
+            mixinColor: system.legacy.color.accent.overlay.mixin,
+            mixinValue: system.legacy.opacity.accent.hover,
+          }),
         },
         '& [data-part="exclamation-triangle-icon"]': {
-          [systemIconStencil.vars.accentColor]: 'currentColor',
-          [systemIconStencil.vars.color]: 'currentColor',
-          [systemIconStencil.vars.backgroundColor]: 'none',
+          [systemIconStencil.vars.accentColor]: cssVar(system.color.fg.inverse, 'currentColor'),
+          [systemIconStencil.vars.color]: system.legacy.color.brand.fg.caution.strong,
+          [systemIconStencil.vars.backgroundColor]: system.legacy.color.brand.fg.caution.strong,
         },
       },
     },

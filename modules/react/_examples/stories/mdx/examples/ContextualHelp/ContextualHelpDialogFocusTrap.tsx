@@ -1,11 +1,8 @@
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {infoIcon} from '@workday/canvas-system-icons-web';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {
   useCloseOnEscape,
   useCloseOnOutsideClick,
@@ -14,12 +11,15 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Dialog} from '@workday/canvas-kit-react/dialog';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {infoIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
   flexDirection: 'row',
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 const labelStyles = createStyles({
@@ -56,12 +56,14 @@ export function ContextualHelpDialogFocusTrap() {
             <Dialog.Popper placement="right">
               <Dialog.Card>
                 <Dialog.CloseIcon aria-label="Close" />
-                <Dialog.Heading paddingTop={system.space.x6}>Information</Dialog.Heading>
+                <Dialog.Heading cs={{paddingTop: system.padding.xl}}>Information</Dialog.Heading>
                 <Dialog.Body>
                   This dialog traps focus. Focus will only return to the rest of the page when the
                   dialog is closed
                 </Dialog.Body>
-                <Flex gap={system.space.x4} padding={system.space.x2} marginTop={system.space.x2}>
+                <Flex
+                  cs={{gap: system.gap.md, padding: system.padding.xs, marginTop: system.gap.sm}}
+                >
                   <Hyperlink href="/">Link</Hyperlink>
                 </Flex>
               </Dialog.Card>

@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
-import {system} from '@workday/canvas-tokens-web';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsListProps<T = any>
@@ -24,11 +25,11 @@ export interface BreadcrumbsListProps<T = any>
 
 export const breadcrumbsListStencil = createStencil({
   base: {
-    padding: 0,
+    padding: `${system.legacy.padding.xs} 0`,
     margin: 0,
     display: 'inline-flex',
     alignItems: 'center',
-    minHeight: system.space.x10,
+    minHeight: system.legacy.size.lg,
     listStyle: 'none',
     width: '100%',
   },

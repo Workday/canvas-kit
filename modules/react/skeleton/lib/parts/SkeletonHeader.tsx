@@ -1,13 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {
-  createStencil,
-  handleCsProp,
-  px2rem,
-  cssVar,
-  calc,
-  CSProps,
-} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
 import {SkeletonShape} from './SkeletonShape';
 
 export interface SkeletonHeaderProps extends CSProps {
@@ -35,11 +29,11 @@ export const skeletonHeaderStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, backgroundColor, height}) => ({
-    backgroundColor: cssVar(backgroundColor, system.color.bg.alt.strong),
-    borderRadius: 0,
-    height: cssVar(height, calc.multiply(system.space.x1, 7)),
+    backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
+    borderRadius: system.legacy.shape.md,
+    height: cssVar(height, system.legacy.size.xs),
     width: width,
-    marginBottom: system.space.x4,
+    marginBottom: system.legacy.size.xxxs,
   }),
 });
 

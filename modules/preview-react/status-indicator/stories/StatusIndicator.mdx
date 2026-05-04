@@ -1,14 +1,16 @@
-import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+import { Meta } from '@storybook/blocks';
+import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
 
-import {Basic} from './examples/Basic';
-import {Emphasis} from './examples/Emphasis';
-import {Icon} from './examples/Icon';
-import {Overflow} from './examples/Overflow';
-import {Variants} from './examples/Variants';
+import { Basic } from './examples/Basic';
+import { Custom } from './examples/Custom';
+import { Emphasis } from './examples/Emphasis';
+import { Icon } from './examples/Icon';
+import { Overflow } from './examples/Overflow';
+import { Variants } from './examples/Variants';
 
-import * as StatusIndicatorStories from './StatusIndicator.stories';
+import StatusIndicatorStoriesMeta from './StatusIndicator.stories';
 
-<Meta of={StatusIndicatorStories} />
+<Meta of={StatusIndicatorStoriesMeta} />
 
 # Canvas Kit Status Indicator
 
@@ -73,6 +75,12 @@ following values:
 The background color dictated by the `variant` will be dark or light based on the `emphasis`.
 
 <ExampleCodeBlock code={Variants} />
+
+### Custom Example
+
+You can customize both the icon and color of the `StatusIndicator` to create a custom variant.
+
+<ExampleCodeBlock code={Custom} />
 
 ### Custom Styles
 

@@ -1,6 +1,6 @@
-import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
+
+import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 
@@ -38,10 +38,10 @@ export const getPaletteColors = (
 
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(palette, {contrast: colors.frenchVanilla100});
+      return getPaletteColorsFromTheme(palette, {contrast: '#FFFFFF'});
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(palette, {contrast: colors.blackPepper400});
+      return getPaletteColorsFromTheme(palette, {contrast: '#333333'});
     }
     default: {
       return getPaletteColorsFromTheme(palette);

@@ -1,62 +1,58 @@
 import React from 'react';
 
-import {base, brand, system} from '@workday/canvas-tokens-web';
-import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
-
+import {getCursor} from '@workday/canvas-kit-react/collection';
+import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
 import {
   ErrorType,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {
-  createStencil,
-  CSProps,
-  cssVar,
-  handleCsProp,
-  px2rem,
-  calc,
-} from '@workday/canvas-kit-styling';
-import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {getCursor} from '@workday/canvas-kit-react/collection';
-import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit-react/combobox';
+import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
-import {useMultiSelectModel} from './useMultiSelectModel';
 import {MultiSelectedItemProps} from './MultiSelectedItem';
 import {MultiSelectedList} from './MultiSelectedList';
+import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectInputStencil = createStencil({
   base: {
     border: `1px solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1Half,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.md,
     boxSizing: 'border-box',
-    minHeight: system.space.x10,
+    minHeight: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
+    [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      borderColor: system.color.border.input.strong,
+      borderColor: system.legacy.color.border.input.hover,
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: system.color.border.primary.default,
-      boxShadow: `inset 0 0 0 1px ${system.color.border.primary.default}`,
+      borderColor: system.legacy.color.brand.border.primary,
+      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
     },
 
     '& [data-part="user-input"]': {
-      ...system.type.subtext.large,
-      backgroundColor: system.color.bg.transparent.default,
-      borderRadius: system.shape.x1,
+      fontFamily: system.fontFamily.default,
+      fontSize: system.legacy.fontSize.subtext.lg,
+      fontWeight: system.fontWeight.normal,
+      lineHeight: system.legacy.lineHeight.subtext.lg,
+      backgroundColor: system.legacy.color.surface.transparent,
+      borderRadius: system.legacy.shape.md,
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
       '&:where([data-part="user-input"], [data-part="form-input"])': {
-        height: calc.subtract(system.space.x10, px2rem(2)),
+        height: px2rem(38),
       },
 
       // Remove the focus ring - it is handled at the container level
@@ -73,71 +69,78 @@ export const multiSelectInputStencil = createStencil({
       },
     },
 
+    '&:has(:disabled, .disabled) :where([data-part="user-input"])': {
+      opacity: system.opacity.disabled,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
+    },
+
     '&:has(:disabled, .disabled)': {
-      borderColor: system.color.border.input.disabled,
-      color: system.color.text.disabled,
-      backgroundColor: system.color.bg.alt.softer,
+      opacity: system.opacity.disabled,
+      [systemIconStencil.vars.color]: system.color.fg.disabled,
+    },
+
+    '&:has(:disabled, .disabled) :where([data-part="form-input"])': {
+      opacity: 0,
       [systemIconStencil.vars.color]: system.color.fg.disabled,
     },
 
     '& :where([data-part="form-input"])': {
       position: 'absolute',
-      top: system.space.zero,
-      bottom: system.space.zero,
-      left: system.space.zero,
-      right: system.space.zero,
-      opacity: system.opacity.zero,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      opacity: 0,
       cursor: 'default',
       pointerEvents: 'none',
     },
 
     '& :where([data-part="separator"])': {
-      backgroundColor: system.color.border.divider,
+      backgroundColor: system.legacy.color.border.default,
       height: 1,
-      margin: `${system.space.zero} ${system.space.x2}`,
+      margin: `0 ${system.legacy.gap.sm}`,
     },
 
     '& :where([data-part="list"])': {
       display: 'flex',
-      gap: system.space.x2,
-      padding: system.space.x2,
+      gap: system.legacy.gap.sm,
+      padding: system.legacy.padding.xs,
       flexWrap: 'wrap',
     },
   },
   modifiers: {
     error: {
       error: {
-        borderColor: brand.common.errorInner,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}`,
-        backgroundColor: brand.error.lightest,
+        borderColor: system.legacy.color.brand.border.critical,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: brand.common.errorInner,
+          borderColor: system.legacy.color.brand.border.critical,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          borderColor: brand.common.errorInner,
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.common.errorInner}, 0 0 0 2px ${
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            cssVar(system.color.border.inverse, base.neutral0)
-          }, 0 0 0 4px ${brand.common.focusOutline}`,
+          borderColor: system.legacy.color.brand.border.critical,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}, 0 0 0 2px ${
+            system.legacy.color.focus.inverse
+          }, 0 0 0 4px ${system.legacy.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        borderColor: brand.common.alertOuter,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner}`,
-        backgroundColor: brand.alert.lightest,
+        borderColor: system.legacy.color.brand.border.caution,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner}`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: brand.common.alertOuter,
+            borderColor: system.legacy.color.brand.border.caution,
           },
+        '&:hover, &.hover': {
+          borderColor: system.legacy.color.brand.border.caution,
+        },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
-        0 0 0 2px ${
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          cssVar(system.color.border.inverse, base.neutral0)
-        },
-        0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner},
+        0 0 0 2px ${system.legacy.color.focus.inverse},
+        0 0 0 4px ${system.legacy.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
       },
@@ -222,7 +225,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             {...elemProps}
           />
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} />
+            <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList disabled={disabled} removeLabel={removeLabel} />
@@ -253,8 +256,8 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
         <InputGroup>
-          <InputGroup.InnerStart pointerEvents="none" width={system.space.x8}>
-            <SystemIcon icon={searchIcon} size={system.space.x4} />
+          <InputGroup.InnerStart pointerEvents="none" width={system.legacy.size.sm}>
+            <SystemIcon icon={searchIcon} size="xs" />
           </InputGroup.InnerStart>
           <InputGroup.Input
             data-part="form-input"
@@ -269,11 +272,11 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             error={error}
             {...elemProps}
           />
-          <InputGroup.InnerEnd width={system.space.x4}>
+          <InputGroup.InnerEnd width={system.legacy.size.xxxs}>
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} />
+            <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList removeLabel={removeLabel} disabled={disabled} />

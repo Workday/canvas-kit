@@ -1,10 +1,11 @@
 import * as React from 'react';
-import {Modal} from '@workday/canvas-kit-react/modal';
-import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
-import {Text} from '@workday/canvas-kit-react/text';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {Box, BoxProps, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {Text} from '@workday/canvas-kit-react/text';
+import {space} from '@workday/canvas-kit-react/tokens';
 
 const MediaImage = createComponent('img')({
   displayName: 'Media.Image',

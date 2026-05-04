@@ -1,13 +1,32 @@
 import React from 'react';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {cssVar} from '@workday/canvas-kit-styling';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface InstallBlockProps {
   command?: string;
   packageName?: string;
 }
+
+const blockStyles = createStyles({
+  padding: system.padding.xs,
+  backgroundColor: system.color.surface.contrast.default,
+  borderRadius: system.shape.md,
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+});
+
+const codeCommandStyles = createStyles({
+  color: system.color.fg.info.default,
+  marginInlineEnd: system.gap.sm,
+});
+
+const codePackageStyles = createStyles({
+  color: system.color.fg.inverse,
+});
 
 export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
   const commandRef = React.useRef<HTMLPreElement>(null);
@@ -22,24 +41,10 @@ export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
     }
   };
   return (
-    <Flex
-      padding="xs"
-      backgroundColor={system.color.bg.contrast.default}
-      borderRadius="m"
-      justifyContent="space-between"
-      alignItems="center"
-      flexWrap="wrap"
-    >
+    <Flex cs={blockStyles}>
       <pre ref={commandRef}>
-        <span
-          style={{
-            color: cssVar(system.color.fg.primary.soft),
-            marginInlineEnd: cssVar(system.space.x2),
-          }}
-        >
-          {command}
-        </span>
-        <span style={{color: cssVar(system.color.fg.inverse)}}>{packageName}</span>
+        <span className={codeCommandStyles}>{command}</span>
+        <span className={codePackageStyles}>{packageName}</span>
       </pre>
       <PrimaryButton variant="inverse" onClick={handleCopy} size="small">
         {copied ? 'Copied' : 'Copy'}

@@ -1,12 +1,13 @@
-import {build, type Plugin} from 'vite';
-import react from '@vitejs/plugin-react';
-import {viteSingleFile} from 'vite-plugin-singlefile';
 import mdx from '@mdx-js/rollup';
-import remarkGfm from 'remark-gfm';
+import react from '@vitejs/plugin-react';
 import * as fs from 'node:fs';
-import * as path from 'node:path';
 import * as os from 'node:os';
+import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
+import remarkGfm from 'remark-gfm';
+import {type Plugin, build} from 'vite';
+import {viteSingleFile} from 'vite-plugin-singlefile';
+
 import {canvasKitSourceResolver} from './vite-plugins';
 
 const __filename = fileURLToPath(import.meta.url);

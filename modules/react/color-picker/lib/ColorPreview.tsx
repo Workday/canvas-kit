@@ -1,8 +1,9 @@
-import {ColorInput} from './ColorInput';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {cssVar, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {ColorInput} from './ColorInput';
 
 export interface ColorPreviewProps extends TextInputProps {
   /**
@@ -17,9 +18,8 @@ export interface ColorPreviewProps extends TextInputProps {
 
 export const colorPreviewStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.default,
-    /* TODO: Update to `system.color.border.inverse.default` in v15. */
-    borderColor: cssVar(system.color.border.inverse, base.neutral0),
+    backgroundColor: system.legacy.color.surface.default,
+    borderColor: system.legacy.color.border.inverse.default,
     pointerEvents: 'none',
   },
 });

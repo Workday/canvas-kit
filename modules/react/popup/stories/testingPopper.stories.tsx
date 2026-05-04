@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {SecondaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Popup, Popper, Placement} from '@workday/canvas-kit-react/popup';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Placement, Popper, Popup} from '@workday/canvas-kit-react/popup';
 
 export default {
   title: 'Testing/Popups/Popper',

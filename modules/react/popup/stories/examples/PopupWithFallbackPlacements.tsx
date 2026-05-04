@@ -1,15 +1,15 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useInitialFocus,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Flex, Grid} from '@workday/canvas-kit-react/layout';
-import {createStyles, calc} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {calc, createStyles} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export const PopupWithFallbackPlacements = () => {
   const model = usePopupModel();
@@ -25,8 +25,8 @@ export const PopupWithFallbackPlacements = () => {
 
   const grid = createStyles({
     gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
-    height: calc.subtract('100vh', system.space.x16),
-    width: calc.subtract('100vw', system.space.x20),
+    height: calc.subtract('100vh', system.size.xxl),
+    width: calc.subtract('100vw', base.size1000),
   });
 
   const topButton = createStyles({
@@ -57,11 +57,13 @@ export const PopupWithFallbackPlacements = () => {
             Placement Top
           </Popup.Target>
           <Popup.Popper placement="top">
-            <Popup.Card width={400}>
+            <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+                This is Popup heading
+              </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -75,11 +77,13 @@ export const PopupWithFallbackPlacements = () => {
             Placement Left
           </Popup.Target>
           <Popup.Popper placement="left">
-            <Popup.Card width={400}>
+            <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+                This is Popup heading
+              </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -93,11 +97,13 @@ export const PopupWithFallbackPlacements = () => {
             Placement Right
           </Popup.Target>
           <Popup.Popper placement="right">
-            <Popup.Card width={400}>
+            <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+                This is Popup heading
+              </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>
@@ -111,11 +117,13 @@ export const PopupWithFallbackPlacements = () => {
             Placement Bottom
           </Popup.Target>
           <Popup.Popper placement="bottom">
-            <Popup.Card width={400}>
+            <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading paddingTop="m">This is Popup heading</Popup.Heading>
+              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+                This is Popup heading
+              </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
-              <Flex gap="s" padding="xxs">
+              <Flex cs={{gap: system.gap.sm, padding: system.padding.xs}}>
                 <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                   Delete
                 </Popup.CloseButton>

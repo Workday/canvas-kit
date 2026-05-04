@@ -1,6 +1,8 @@
-import {API, FileInfo, Options, JSXOpeningElement, JSXIdentifier} from 'jscodeshift';
+import {API, FileInfo, JSXIdentifier, JSXOpeningElement, Options} from 'jscodeshift';
+
 import {hasImportSpecifiers} from '../v6/utils';
 import {getImportRenameMap} from './utils/getImportRenameMap';
+
 const textInputPackage = '@workday/canvas-kit-preview-react/text-input';
 const textAreaPackage = '@workday/canvas-kit-preview-react/text-area';
 const formFieldPackage = '@workday/canvas-kit-preview-react/form-field';

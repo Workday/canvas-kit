@@ -20,7 +20,7 @@ export const cardHeadingStencil = createStencil({
   base: {
     color: system.color.fg.strong,
     fontWeight: system.fontWeight.bold,
-    marginBlock: system.space.zero,
+    marginBlock: system.legacy.padding.none,
   },
   defaultModifiers: {typeLevel: 'body.large'},
 });

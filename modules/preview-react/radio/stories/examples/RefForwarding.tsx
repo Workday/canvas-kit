@@ -1,7 +1,8 @@
 import React from 'react';
+
+import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
-import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');

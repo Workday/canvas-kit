@@ -1,13 +1,11 @@
-import React from 'react';
 import {LabelText} from '@workday/canvas-kit-react/text';
-
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const inverseBackground = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  padding: system.space.x4,
-  marginTop: system.space.x4,
+  backgroundColor: system.color.brand.accent.primary,
+  padding: system.padding.md,
+  marginTop: system.gap.md,
 });
 
 export const Disabled = () => {

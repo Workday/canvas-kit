@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
@@ -11,7 +12,7 @@ export const Grow = () => {
 
   return (
     <FormField grow>
-      <FormField.Label>Leave a Review foo</FormField.Label>
+      <FormField.Label>Leave a Review</FormField.Label>
       <FormField.Field>
         <FormField.Input as={TextArea} onChange={handleChange} value={value} />
       </FormField.Field>

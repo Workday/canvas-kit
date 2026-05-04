@@ -1,14 +1,14 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
-  useInitialFocus,
-  useReturnFocus,
   useFocusRedirect,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -17,12 +17,12 @@ const cardStyles = createStyles({
 });
 
 const bodyStyles = createStyles({
-  marginY: system.space.zero,
+  marginBlock: '0',
 });
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.xs,
 });
 
 export const Basic = () => {

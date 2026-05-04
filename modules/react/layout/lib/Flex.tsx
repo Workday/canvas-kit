@@ -1,8 +1,9 @@
 import styled from '@emotion/styled';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from './Box';
 
-import {flex, FlexStyleProps} from './utils/flex';
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
+
+import {Box, BoxProps} from './Box';
+import {FlexStyleProps, flex} from './utils/flex';
 
 export type FlexProps = Omit<BoxProps, 'display'> & FlexStyleProps;
 

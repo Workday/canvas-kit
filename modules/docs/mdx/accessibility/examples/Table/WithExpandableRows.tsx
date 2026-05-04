@@ -1,13 +1,12 @@
 import React from 'react';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
-import {Table} from '@workday/canvas-kit-react/table';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {generateUniqueId} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
 import {Heading, Subtext} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-
 import {chevronDownSmallIcon, chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -114,8 +113,8 @@ interface RowProps {
 const expandableSectionStyles = createStyles({
   alignItems: 'flex-start',
   display: 'flex',
-  gap: system.space.x4,
-  padding: system.space.x8,
+  gap: system.gap.md,
+  padding: system.padding.xxl,
 });
 
 const expandableHeadingStyles = createStyles({
@@ -127,7 +126,7 @@ const expandableListStyles = createStyles({
   listStyle: 'none',
   margin: 0,
   padding: 0,
-  gap: system.space.x2,
+  gap: system.gap.sm,
 });
 
 function ExpandableRow({data}: RowProps) {
@@ -135,7 +134,7 @@ function ExpandableRow({data}: RowProps) {
 
   return (
     <>
-      <Table.Row gridTemplateColumns="4rem repeat(4, 1fr)">
+      <Table.Row cs={{gridTemplateColumns: '4rem repeat(4, 1fr)'}}>
         <Table.Cell>
           <Tooltip title={`${data.brand} ${data.model}`}>
             <TertiaryButton
@@ -197,7 +196,7 @@ export const ExpandableRows = () => {
       </Heading>
       <Table aria-labelledby={headingID}>
         <Table.Head>
-          <Table.Row gridTemplateColumns="4rem repeat(4, 1fr)">
+          <Table.Row cs={{gridTemplateColumns: '4rem repeat(4, 1fr)'}}>
             <Table.Cell></Table.Cell>
             <Table.Header scope="col">Make</Table.Header>
             <Table.Header scope="col">Model</Table.Header>

@@ -1,15 +1,15 @@
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
 
-import {
-  usePopupModel,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  useInitialFocus,
-  useReturnFocus,
-  Popup,
-} from '@workday/canvas-kit-react/popup';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
 
 describe('Popup', () => {
   it('should render on a server without crashing', () => {
