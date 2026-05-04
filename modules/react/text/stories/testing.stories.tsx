@@ -39,11 +39,11 @@ export const TextStates = {
             props: {cs: {fontSize: '1.25rem'}},
           },
           {
-            label: 'With regular font-weigth value of 400',
+            label: 'With regular font-weight value of 400',
             props: {cs: {fontWeight: 400}},
           },
           {
-            label: 'With font-weigth as a token value of normal',
+            label: 'With font-weight as a token value of normal',
             props: {cs: {fontWeight: system.fontWeight.normal}, as: 'h3'},
           },
           {

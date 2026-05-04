@@ -63,7 +63,7 @@ export const Controlled = () => {
             </MultiSelect.Popper>
           </FormField>
         </MultiSelect>
-        <Flex gap="s">
+        <Flex cs={{gap: system.gap.md}}>
           <SecondaryButton
             onClick={e => {
               setValue('1, 2, 3');
