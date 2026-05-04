@@ -63,7 +63,7 @@ Configuration file locations:
 - **Windsurf**: Settings → MCP Servers
 - **VS Code**: Cline/Continue extension settings
 
-The examples above use `command: "npx"` on purpose: they are short, copy-pasteable, and work when your editor inherits the same `PATH` as your terminal (system Node, Homebrew, etc.).
+The examples above use `"command": "npx"` on purpose: they are short, copy-pasteable, and work when your editor inherits the same `PATH` as your terminal (system Node, Homebrew, etc.).
 
 ### Explicit Node path (nvm / GUI editors)
 
@@ -89,7 +89,7 @@ When Cursor’s MCP installer (or support) expands the config, you may see a res
 }
 ```
 
-Replace `/Users/you/.nvm/versions/node/v22.12.0` with the output of `dirname "$(which node)"` (or `nvm which current`) from the Node version you want MCP to use. JSON configs typically need **real absolute paths**, not `~`.
+Replace `/Users/you/.nvm/versions/node/v22.12.0` with the **version root** for the Node you want MCP to use, for example `dirname "$(dirname "$(command -v node)")"`. If you use `nvm which current`, it returns the full path to the `node` binary, so use its parent’s parent directory as the replacement value. JSON configs typically need **real absolute paths**, not `~`.
 
 The npm package scope is **`@workday`** (all lowercase on npm).
 
