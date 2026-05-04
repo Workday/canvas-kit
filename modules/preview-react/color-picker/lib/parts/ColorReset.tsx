@@ -40,7 +40,7 @@ export const resetButtonStencil = createStencil({
       ...focusRing(),
     },
     [labelPart]: {
-      marginLeft: system.legacy.gap.sm,
+      marginInlineStart: system.legacy.gap.sm,
     },
   }),
 });

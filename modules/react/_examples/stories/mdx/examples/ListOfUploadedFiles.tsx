@@ -14,7 +14,7 @@ const listStyles = createStyles({
 });
 
 const deleteBtnStyle = createStyles({
-  marginLeft: 'auto',
+  marginInlineStart: 'auto',
 });
 
 export const ListOfUploadedFiles = () => {

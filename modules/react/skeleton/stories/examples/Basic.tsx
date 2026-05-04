@@ -10,7 +10,7 @@ export const Basic = () => {
         <Skeleton.Shape
           cs={{width: system.size.md, height: system.size.md, borderRadius: system.shape.full}}
         />
-        <Box cs={{flex: 1, marginLeft: calc.add(system.gap.sm, system.gap.xs)}}>
+        <Box cs={{flex: 1, marginInlineStart: calc.add(system.gap.sm, system.gap.xs)}}>
           <Skeleton.Header />
         </Box>
       </Flex>

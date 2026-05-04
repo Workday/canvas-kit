@@ -165,7 +165,7 @@ export function StorybookStatusIndicator({type}: {type: 'ai' | 'deprecated' | 'n
         color: statusColors[type] ?? '#333',
         border: `1px solid ${statusColors[type] ?? '#ccc'}`,
         verticalAlign: 'middle',
-        marginLeft: '8px',
+        marginInlineStart: '8px',
       }}
     >
       {labels[type] ?? type}

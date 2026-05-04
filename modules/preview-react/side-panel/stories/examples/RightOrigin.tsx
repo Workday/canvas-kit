@@ -14,7 +14,7 @@ const stylesOverride = {
     height: px2rem(320),
   }),
   panelContainer: createStyles({
-    marginLeft: 'auto',
+    marginInlineStart: 'auto',
   }),
   panel: createStyles({
     alignItems: 'center',

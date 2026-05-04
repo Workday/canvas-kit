@@ -44,7 +44,7 @@ const MediaImage = createComponent('img')({
 
 const mediaStyles = createStyles({
   width: calc.add('100%', calc.multiply(system.size.sm, 2)),
-  marginLeft: calc.negate(system.gap.xl),
+  marginInlineStart: calc.negate(system.gap.xl),
   marginTop: system.gap.lg,
   marginBottom: system.gap.md,
 });

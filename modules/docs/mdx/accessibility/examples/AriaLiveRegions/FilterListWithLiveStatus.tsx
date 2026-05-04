@@ -26,12 +26,12 @@ const liveRegionStyle = createStyles({
 });
 
 const listStyles = createStyles({
-  paddingLeft: '0',
+  paddingInlineStart: '0',
 });
 
 const listItemStyles = createStyles({
   listStyle: 'none',
-  paddingLeft: '0',
+  paddingInlineStart: '0',
 });
 
 const flexStyles = createStyles({

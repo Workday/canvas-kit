@@ -28,11 +28,11 @@ export const ReturnFocusTest = () => {
         <p style={{marginBottom: 400}}>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <FormField id="return-focus-text-input" cs={{marginLeft: 400}}>
+          <FormField id="return-focus-text-input" cs={{marginInlineStart: 400}}>
             <FormField.Label>Name</FormField.Label>
             <FormField.Input as={TextInput} />
           </FormField>
-          <Flex style={{marginBottom: 400, marginLeft: 410}}>
+          <Flex style={{marginBottom: 400, marginInlineStart: 410}}>
             <SecondaryButton id="return-focus-button-tabindex" tabIndex={-1}>
               Button with TabIndex=-1
             </SecondaryButton>

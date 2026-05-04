@@ -49,7 +49,7 @@ export const PopupStates = {
             props: {
               heading: 'Delete Item',
               hasCloseIcon: true,
-              cs: {padding: system.padding.sm},
+              cs: {padding: system.padding.md},
             },
           },
           {

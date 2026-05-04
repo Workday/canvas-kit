@@ -44,7 +44,7 @@ export const GridCard = () => {
         <Body>Complete this task when you have a functional understanding of Grid.</Body>
       </Box>
       <Grid cs={{gridTemplate: 'auto / 1fr auto', justifyItems: 'end'}}>
-        <Box cs={{marginRight: system.gap.sm}}>
+        <Box cs={{marginInlineEnd: system.gap.sm}}>
           <PrimaryButton onClick={() => setIsComplete(true)}>Complete</PrimaryButton>
         </Box>
         <SecondaryButton onClick={() => setIsComplete(false)}>Cancel</SecondaryButton>

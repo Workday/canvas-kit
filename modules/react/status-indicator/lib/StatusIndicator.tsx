@@ -184,7 +184,12 @@ export class StatusIndicator extends React.Component<StatusIndicatorProps> {
     return (
       <Container type={type} emphasis={emphasis} maxWidth={maxWidth} {...elemProps}>
         {icon && (
-          <SystemIcon color={variant.color} icon={icon} size={14} cs={{paddingRight: space.xxxs}} />
+          <SystemIcon
+            color={variant.color}
+            icon={icon}
+            size={14}
+            cs={{paddingInlineEnd: space.xxxs}}
+          />
         )}
         <StatusLabel>{label}</StatusLabel>
       </Container>

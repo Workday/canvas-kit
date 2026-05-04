@@ -71,7 +71,7 @@ const TempPopup = ({
 
   return (
     <Popup model={model}>
-      <Popup.Target as={DeleteButton} cs={{marginRight: system.gap.md}}>
+      <Popup.Target as={DeleteButton} cs={{marginInlineEnd: system.gap.md}}>
         {deleteText}
       </Popup.Target>
       <Popup.Popper>
@@ -127,7 +127,7 @@ export const MixedPopupTypes = () => {
                           Are you REALLY sure you'd like to delete the item titled 'My Item'?
                         </div>
 
-                        <DeleteButton cs={{marginRight: system.gap.md}} onClick={onClose}>
+                        <DeleteButton cs={{marginInlineEnd: system.gap.md}} onClick={onClose}>
                           Really Delete
                         </DeleteButton>
                         <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>

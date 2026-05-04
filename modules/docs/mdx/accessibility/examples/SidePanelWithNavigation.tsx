@@ -79,7 +79,7 @@ const stylesOverride = {
     padding: system.padding.md,
   }),
   linkCheck: createStyles({
-    marginLeft: 'auto',
+    marginInlineStart: 'auto',
   }),
   flyOut: createStyles({
     marginTop: '8rem',

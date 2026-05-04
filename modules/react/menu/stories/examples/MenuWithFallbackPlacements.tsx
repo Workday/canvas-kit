@@ -47,7 +47,7 @@ export const MenuWithFallbackPlacements = () => {
           }}
         >
           <Menu onSelect={data => setSelected(data.id)}>
-            <Menu.Target cs={{marginLeft: marginLeftBtn, marginRight: marginRightBtn}}>
+            <Menu.Target cs={{marginInlineStart: marginLeftBtn, marginInlineEnd: marginRightBtn}}>
               Open Menu
             </Menu.Target>
             <Menu.Popper placement={placement}>
@@ -61,7 +61,7 @@ export const MenuWithFallbackPlacements = () => {
                 </Menu.List>
               </Menu.Card>
             </Menu.Popper>
-            <BodyText size="small" cs={{marginTop: system.gap.md, marginLeft: px2rem(20)}}>
+            <BodyText size="small" cs={{marginTop: system.gap.md, marginInlineStart: px2rem(20)}}>
               Selected: <span data-testid="output">{selected}</span>
             </BodyText>
           </Menu>
