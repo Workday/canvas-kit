@@ -60,7 +60,7 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
         overflow: 'scroll',
       }}
     >
-      <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
+      <Flex cs={{gap: system.gap.lg, padding: system.padding.xs}}>
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('top')}>
             top

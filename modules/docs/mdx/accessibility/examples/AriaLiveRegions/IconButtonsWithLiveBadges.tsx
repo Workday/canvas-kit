@@ -4,7 +4,6 @@ import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-// import {space} from '@workday/canvas-kit-react/tokens';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {assistantIcon, inboxIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
@@ -88,7 +87,7 @@ export const IconButtonsWithLiveBadges = () => {
   const handleAddTask = () => setCounter(prev => prev + 1);
   const handleAddNotification = () => setNotifications(prev => prev + 1);
   const handleAssistant = () => setAssistant(prev => prev + 1);
-  // padding={space.s} gap={space.s}
+
   return (
     <>
       <Flex as="header" cs={containerStyles}>

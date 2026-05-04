@@ -15,7 +15,7 @@ const gridStyles = createStyles({
   gridRowGap: system.gap.sm,
   gridColumnGap: system.gap.xxl,
   '> *:first-child': {
-    paddingX: system.padding.sm,
+    paddingInline: system.padding.sm,
     border: `${px2rem(1)} solid ${system.color.brand.border.primary}`,
     gridArea: 'Heading',
   },

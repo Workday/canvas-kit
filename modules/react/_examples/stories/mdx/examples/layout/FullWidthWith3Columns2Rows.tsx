@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -16,7 +15,7 @@ const gridStyles = createStyles({
 
 const headingStyles = createStyles({
   gridArea: 'Heading',
-  paddingX: system.padding.sm,
+  paddingInline: system.padding.sm,
   border: `${px2rem(1)} solid ${system.color.brand.border.primary}`,
 });
 
@@ -56,7 +55,7 @@ const itemStyles = createStyles({
 
 const FormSkeleton = props => (
   <Box cs={boxStyles} {...props}>
-    <BodyText size="small" fontWeight="bold">
+    <BodyText size="small" cs={{fontWeight: system.fontWeight.bold}}>
       Form Block
     </BodyText>
     {Array.from({length: 3}).map(() => (
