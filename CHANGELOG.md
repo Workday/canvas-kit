@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v14.3.15](https://github.com/Workday/canvas-kit/releases/tag/v14.3.15) (2026-05-04)
+
+### Documentation
+
+- docs: Update mcp docs ([#3921](https://github.com/Workday/canvas-kit/pull/3921)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+
 ## [v14.3.14](https://github.com/Workday/canvas-kit/releases/tag/v14.3.14) (2026-04-30)
 
 ### Infrastructure
