@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "modules/**"
-  ],
+  "packages": ["modules/**"],
   "version": "15.0.1",
   "npmClient": "yarn",
   "command": {
