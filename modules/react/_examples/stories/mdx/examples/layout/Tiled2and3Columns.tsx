@@ -50,7 +50,7 @@ const boxStencil = createStencil({
 
 const innerGridStyles = createStyles({
   gridGap: system.gap.sm,
-  marginBottom: system.gap.xl,
+  marginBlockEnd: system.gap.xl,
   '> *:first-child': {
     width: px2rem(120),
     height: system.size.xxs,

@@ -76,7 +76,7 @@ export const Simulation = () => {
 
   return (
     <Box>
-      <Box cs={{marginBottom: system.gap.xl}}>
+      <Box cs={{marginBlockEnd: system.gap.xl}}>
         <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />
@@ -112,7 +112,7 @@ export const Simulation = () => {
               <Box>
                 <Flex
                   cs={{
-                    marginBottom: calc.add(system.gap.sm, system.gap.xs),
+                    marginBlockEnd: calc.add(system.gap.sm, system.gap.xs),
                     display: 'inline-flex',
                     alignItems: 'center',
                   }}

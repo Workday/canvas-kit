@@ -16,10 +16,8 @@ const styles = {
       gridTemplateRows: 'auto',
       border: '10px solid',
       borderRadius: 30,
-      paddingLeft: space.s,
-      paddingRight: space.s,
-      paddingTop: space.l,
-      paddingBottom: space.l,
+      paddingInline: space.s,
+      paddingBlock: space.l,
     },
     [medium]: {
       gridTemplateAreas: "'Header Header' 'SmallContainer BodyContent' 'Footer Footer'",

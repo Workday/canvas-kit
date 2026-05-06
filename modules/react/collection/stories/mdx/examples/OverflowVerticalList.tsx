@@ -36,7 +36,7 @@ export const OverflowVerticalList = () => {
 
   return (
     <>
-      <Box cs={{marginBottom: system.gap.xxl, height: '50vh'}}>
+      <Box cs={{marginBlockEnd: system.gap.xxl, height: '50vh'}}>
         <ActionBar model={model}>
           <ActionBar.List
             position="relative"

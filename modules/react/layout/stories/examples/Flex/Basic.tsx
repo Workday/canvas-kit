@@ -10,7 +10,7 @@ const baseStyles = createStencil({
     color: system.color.fg.default,
     minHeight: system.size.xl,
     minWidth: system.size.sm,
-    padding: system.gap.sm,
+    padding: system.padding.sm,
     textAlign: 'center',
     backgroundColor,
   }),

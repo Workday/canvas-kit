@@ -7,7 +7,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
   marginInlineStart: system.gap.xl,
-  marginTop: system.gap.sm,
+  marginBlockStart: system.gap.sm,
 });
 
 export const Indeterminate = () => {

@@ -40,7 +40,7 @@ export const MenuWithFallbackPlacements = () => {
         <Flex
           cs={{
             width: '100%',
-            marginTop: px2rem(240),
+            marginBlockStart: px2rem(240),
             justifyContent: 'center',
             alignItems: 'center',
             flexDirection: 'column',
@@ -61,7 +61,10 @@ export const MenuWithFallbackPlacements = () => {
                 </Menu.List>
               </Menu.Card>
             </Menu.Popper>
-            <BodyText size="small" cs={{marginTop: system.gap.md, marginInlineStart: px2rem(20)}}>
+            <BodyText
+              size="small"
+              cs={{marginBlockStart: system.gap.md, marginInlineStart: px2rem(20)}}
+            >
               Selected: <span data-testid="output">{selected}</span>
             </BodyText>
           </Menu>

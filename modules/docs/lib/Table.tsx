@@ -65,7 +65,7 @@ const TableData = createComponent('td')({
 const tableCaptionStencil = createStencil({
   base: {
     borderCollapse: 'collapse',
-    marginBottom: system.gap.md,
+    marginBlockEnd: system.gap.md,
     width: '100%',
   },
 });

@@ -33,7 +33,7 @@ export const skeletonHeaderStencil = createStencil({
     borderRadius: system.legacy.shape.md,
     height: cssVar(height, system.legacy.size.xs),
     width: width,
-    marginBottom: system.legacy.size.xxxs,
+    marginBlockEnd: system.legacy.size.xxxs,
   }),
 });
 

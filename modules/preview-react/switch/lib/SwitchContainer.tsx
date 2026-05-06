@@ -5,7 +5,7 @@ import {base, system} from '@workday/canvas-tokens-web';
 export const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
-    marginTop: system.legacy.gap.xs,
+    marginBlockStart: system.legacy.gap.xs,
     height: base.legacy.size225,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.

@@ -117,13 +117,13 @@ export const MixedPopupTypes = () => {
             <TempPopup heading="Delete Item" deleteText="Delete Item">
               {({onClose}) => (
                 <>
-                  <div style={{marginBottom: cssVar(system.gap.xl)}}>
+                  <div style={{marginBlockEnd: cssVar(system.gap.xl)}}>
                     Are you sure you'd like to delete the item titled 'My Item'?
                   </div>
                   <TempPopup heading="Really Delete Item" deleteText="Delete">
                     {({onClose}) => (
                       <>
-                        <div style={{marginBottom: cssVar(system.gap.xl)}}>
+                        <div style={{marginBlockEnd: cssVar(system.gap.xl)}}>
                           Are you REALLY sure you'd like to delete the item titled 'My Item'?
                         </div>
 

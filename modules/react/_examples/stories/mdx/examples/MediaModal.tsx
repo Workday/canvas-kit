@@ -45,8 +45,8 @@ const MediaImage = createComponent('img')({
 const mediaStyles = createStyles({
   width: calc.add('100%', calc.multiply(system.size.sm, 2)),
   marginInlineStart: calc.negate(system.gap.xl),
-  marginTop: system.gap.lg,
-  marginBottom: system.gap.md,
+  marginBlockStart: system.gap.lg,
+  marginBlockEnd: system.gap.md,
 });
 
 const Media = createComponent('div')({
@@ -76,7 +76,7 @@ export const BasicExample = () => {
           </Media>
           <Modal.Heading>TED's Secret to Public Speaking</Modal.Heading>
           <Modal.Body>
-            <Text as="p" cs={{marginTop: 0, marginBottom: system.gap.lg}}>
+            <Text as="p" cs={{marginBlockStart: 0, marginBlockEnd: system.gap.lg}}>
               The secret to great public speaking, according to former actor Martin Danielson, is as
               simple as one, two, three.
             </Text>

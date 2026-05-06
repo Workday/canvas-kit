@@ -24,7 +24,7 @@ export const Grouping = () => {
             </Menu.List>
           </Menu.Card>
         </Menu.Popper>
-        <BodyText size="small" cs={{marginTop: system.gap.md}}>
+        <BodyText size="small" cs={{marginBlockStart: system.gap.md}}>
           Selected: <span data-testid="output">{selected}</span>
         </BodyText>
       </Menu>

@@ -35,7 +35,7 @@ export const NestedPopups = () => {
           <Popup.Card aria-label="Popup 1">
             <Popup.CloseIcon aria-label="Close" size="small" />
             <Popup.Body>
-              <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 1</p>
+              <p style={{marginBlockStart: 0, marginBlockEnd: 0}}>Contents of Popup 1</p>
             </Popup.Body>
             <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
               <Popup model={popup2}>
@@ -44,7 +44,7 @@ export const NestedPopups = () => {
                   <Popup.Card aria-label="Popup 2">
                     <Popup.CloseIcon aria-label="Close" size="small" />
                     <Popup.Body>
-                      <p style={{marginTop: 0, marginBottom: 0}}>Contents of Popup 2</p>
+                      <p style={{marginBlockStart: 0, marginBlockEnd: 0}}>Contents of Popup 2</p>
                     </Popup.Body>
                     <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
                       <Popup.CloseButton as={Popup.CloseButton} model={popup1}>

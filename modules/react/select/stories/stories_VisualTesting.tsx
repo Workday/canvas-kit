@@ -97,7 +97,7 @@ export const SelectOpenMenuStates = () => {
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <FormField cs={{marginBottom: px2rem(250)}}>
+          <FormField cs={{marginBlockEnd: px2rem(250)}}>
             <FormField.Label>Contact</FormField.Label>
             <Select items={options} nonInteractiveIds={disabledItems} initialVisibility="visible">
               <FormField.Input as={Select.Input} {...props} id="contact-select" />

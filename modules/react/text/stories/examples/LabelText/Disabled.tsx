@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 const inverseBackground = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   padding: system.padding.md,
-  marginTop: system.gap.md,
+  marginBlockStart: system.gap.md,
 });
 
 export const Disabled = () => {

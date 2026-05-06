@@ -59,7 +59,7 @@ export const PopupWithFallbackPlacements = () => {
           <Popup.Popper placement="top">
             <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+              <Popup.Heading cs={{paddingBlockStart: system.padding.md}}>
                 This is Popup heading
               </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
@@ -79,7 +79,7 @@ export const PopupWithFallbackPlacements = () => {
           <Popup.Popper placement="left">
             <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+              <Popup.Heading cs={{paddingBlockStart: system.padding.md}}>
                 This is Popup heading
               </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
@@ -99,7 +99,7 @@ export const PopupWithFallbackPlacements = () => {
           <Popup.Popper placement="right">
             <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+              <Popup.Heading cs={{paddingBlockStart: system.padding.md}}>
                 This is Popup heading
               </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>
@@ -119,7 +119,7 @@ export const PopupWithFallbackPlacements = () => {
           <Popup.Popper placement="bottom">
             <Popup.Card cs={{width: 400}}>
               <Popup.CloseIcon aria-label="Close" />
-              <Popup.Heading cs={{paddingTop: system.padding.md}}>
+              <Popup.Heading cs={{paddingBlockStart: system.padding.md}}>
                 This is Popup heading
               </Popup.Heading>
               <Popup.Body>Are you sure you'd like to delete the item titled 'My Item'?</Popup.Body>

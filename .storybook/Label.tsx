@@ -14,7 +14,7 @@ const boxStyles = {
   borderRadius: '40px',
   fontSize: '12px',
   fontWeight: 'bold',
-  marginTop: '2px',
+  marginBlockStart: '2px',
   textTransform: 'capitalize',
 } as const;
 

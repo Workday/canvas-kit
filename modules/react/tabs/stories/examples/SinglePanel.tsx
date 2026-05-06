@@ -31,7 +31,7 @@ export const SinglePanel = () => {
           Third Tab
         </Tabs.Item>
       </Tabs.List>
-      <Tabs.Panel cs={{marginTop: system.gap.lg}} hidden={undefined} id="mytab-panel">
+      <Tabs.Panel cs={{marginBlockStart: system.gap.lg}} hidden={undefined} id="mytab-panel">
         {contents[model.state.selectedIds[0]]}
       </Tabs.Panel>
     </Tabs>

@@ -7,7 +7,7 @@ import {createStyles, cssVar} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 const formFieldHintStyles = createStyles({
-  paddingTop: system.padding.xs,
+  paddingBlockStart: system.padding.xs,
 });
 
 export const ThemedError = () => {

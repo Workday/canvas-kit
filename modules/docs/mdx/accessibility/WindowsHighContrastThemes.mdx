@@ -36,7 +36,7 @@ focusable components inside popup containers like the `<Menu>` component to ensu
 indicator isn’t clipped off the edge. (For example:
 [MenuItem](https://github.com/Workday/canvas-kit/blob/master/modules/react/menu/lib/MenuItem.tsx).)
 
-<Flex cs={{justifyContent: 'space-evenly', paddingBottom: system.padding.md}}>
+<Flex cs={{justifyContent: 'space-evenly', paddingBlockEnd: system.padding.md}}>
   <img src={buttonFocus} alt="Primary button with outline offset 2 pixels" />
   <img src={menuFocus} alt="Menu item with outline offset -2 pixels" />
 </Flex>
@@ -66,7 +66,7 @@ If you use a meaningful image with a transparent background, it could become dif
 against some background colors. Be careful when using such images for conveying information to
 users.
 
-<Flex cs={{justifyContent: 'space-evenly', paddingBottom: system.padding.md}}>
+<Flex cs={{justifyContent: 'space-evenly', paddingBlockEnd: system.padding.md}}>
   <img src={checkMark} alt="Check mark images highly visible on white background" />
   <img src={checkMarkWhcm} alt="Check mark images have poor contrast on dark background" />
 </Flex>

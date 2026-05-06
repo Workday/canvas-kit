@@ -57,12 +57,18 @@ export function ContextualHelpDialogFocusRedirect() {
             <Dialog.Popper placement="right">
               <Dialog.Card>
                 <Dialog.CloseIcon aria-label="Close" />
-                <Dialog.Heading cs={{paddingTop: system.padding.xxl}}>Information</Dialog.Heading>
+                <Dialog.Heading cs={{paddingBlockStart: system.padding.xxl}}>
+                  Information
+                </Dialog.Heading>
                 <Dialog.Body>
                   This dialog does not trap focus, so tabbing out of it will cause it to close
                 </Dialog.Body>
                 <Flex
-                  cs={{gap: system.gap.md, padding: system.padding.xs, marginTop: system.gap.sm}}
+                  cs={{
+                    gap: system.gap.md,
+                    padding: system.padding.xs,
+                    marginBlockStart: system.gap.sm,
+                  }}
                 >
                   <Hyperlink href="/">Link</Hyperlink>
                 </Flex>

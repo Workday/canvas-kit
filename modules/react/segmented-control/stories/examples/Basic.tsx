@@ -35,7 +35,7 @@ export const Basic = () => {
           />
         </SegmentedControl.List>
       </SegmentedControl>
-      <BodyText size="small" cs={{marginTop: system.gap.md}}>
+      <BodyText size="small" cs={{marginBlockStart: system.gap.md}}>
         Selected: {viewType}
       </BodyText>
     </>

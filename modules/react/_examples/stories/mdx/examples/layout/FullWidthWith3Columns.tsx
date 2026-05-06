@@ -51,7 +51,7 @@ const FormSkeleton = ({area, text}) => (
       {text}
     </BodyText>
     {Array.from({length: 5}).map(() => (
-      <Grid cs={{gridGap: system.gap.sm, marginBottom: px2rem(20)}}>
+      <Grid cs={{gridGap: system.gap.sm, marginBlockEnd: px2rem(20)}}>
         <Box
           cs={{
             backgroundColor: system.color.surface.default,

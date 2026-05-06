@@ -40,7 +40,7 @@ const boxStyles = createStyles({
 
 const itemStyles = createStyles({
   gridGap: system.gap.md,
-  marginBottom: system.gap.lg,
+  marginBlockEnd: system.gap.lg,
   '> *:first-child': {
     width: px2rem(120),
     height: system.size.xxs,

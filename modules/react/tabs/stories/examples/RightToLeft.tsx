@@ -14,7 +14,7 @@ export const RightToLeft = () => {
           <Tabs.Item>רביעי</Tabs.Item>
           <Tabs.Item>חמישי</Tabs.Item>
         </Tabs.List>
-        <div style={{marginTop: cssVar(system.gap.lg)}}>
+        <div style={{marginBlockStart: cssVar(system.gap.lg)}}>
           <Tabs.Panel>תוכן הראשון</Tabs.Panel>
           <Tabs.Panel>תוכן השני</Tabs.Panel>
           <Tabs.Panel>תוכן השלישי</Tabs.Panel>

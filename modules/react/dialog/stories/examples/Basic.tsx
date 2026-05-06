@@ -24,7 +24,7 @@ export const Basic = () => {
       <Dialog.Popper>
         <Dialog.Card>
           <Dialog.CloseIcon aria-label="Close" />
-          <Dialog.Heading cs={{paddingTop: system.padding.md}}>
+          <Dialog.Heading cs={{paddingBlockStart: system.padding.md}}>
             Sign Up for 15% Off Your Next Order
           </Dialog.Heading>
           <Dialog.Body>
@@ -33,7 +33,9 @@ export const Basic = () => {
               <FormField.Input as={TextInput} onChange={handleChange} value={value} />
             </FormField>
           </Dialog.Body>
-          <Flex cs={{padding: system.padding.xxs, marginTop: system.gap.xs, gap: system.gap.md}}>
+          <Flex
+            cs={{padding: system.padding.xxs, marginBlockStart: system.gap.xs, gap: system.gap.md}}
+          >
             <Dialog.CloseButton as={PrimaryButton} onClick={handleEmail}>
               Submit
             </Dialog.CloseButton>

@@ -28,7 +28,7 @@ export const OverflowTabs = () => {
   const [containerWidth, setContainerWidth] = React.useState('100%');
   return (
     <div>
-      <Box cs={{width: containerWidth, marginBottom: system.gap.xl}}>
+      <Box cs={{width: containerWidth, marginBlockEnd: system.gap.xl}}>
         <Tabs model={model}>
           <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
             {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
@@ -42,7 +42,7 @@ export const OverflowTabs = () => {
           </Tabs.Menu.Popper>
           <Tabs.Panels>
             {(item: MyTabItem) => (
-              <Tabs.Panel cs={{marginTop: system.gap.lg}}>{item.contents}</Tabs.Panel>
+              <Tabs.Panel cs={{marginBlockStart: system.gap.lg}}>{item.contents}</Tabs.Panel>
             )}
           </Tabs.Panels>
         </Tabs>

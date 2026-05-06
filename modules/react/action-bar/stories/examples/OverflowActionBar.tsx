@@ -27,7 +27,7 @@ export const OverflowActionBar = () => {
 
   return (
     <div>
-      <Box cs={{maxWidth: containerWidth, marginBottom: system.gap.xxl}}>
+      <Box cs={{maxWidth: containerWidth, marginBlockEnd: system.gap.xxl}}>
         <ActionBar model={model}>
           <ActionBar.List
             position="relative"

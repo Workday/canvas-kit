@@ -28,10 +28,10 @@ export const CustomFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Acknowledge License</Modal.Heading>
           <Modal.Body>
-            <Box as="p" id={longDescID} cs={{marginTop: 0, marginBottom: system.gap.md}}>
+            <Box as="p" id={longDescID} cs={{marginBlockStart: 0, marginBlockEnd: system.gap.md}}>
               Enter your initials to acknowledge the license.
             </Box>
-            <FormField cs={{marginBottom: 0}}>
+            <FormField cs={{marginBlockEnd: 0}}>
               <FormField.Label>Initials</FormField.Label>
               <FormField.Input
                 as={TextInput}

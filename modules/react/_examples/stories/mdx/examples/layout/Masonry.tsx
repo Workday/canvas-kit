@@ -13,13 +13,13 @@ const containerStyles = createStyles({
 const cardStyles = createStyles({
   breakInside: 'avoid',
   border: `${px2rem(2)} dashed ${system.color.brand.border.primary}`,
-  marginBottom: system.gap.sm,
+  marginBlockEnd: system.gap.sm,
   padding: system.padding.md,
 });
 
 const gridStyles = createStyles({
   gridGap: system.gap.md,
-  marginBottom: system.gap.xl,
+  marginBlockEnd: system.gap.xl,
   '> *:first-child': {
     width: px2rem(120),
     height: system.size.xxs,

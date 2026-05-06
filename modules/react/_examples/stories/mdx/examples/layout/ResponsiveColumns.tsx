@@ -14,7 +14,7 @@ export const ResponsiveColumns = () => {
       <Heading size="medium">Responsive Columns</Heading>
       <BodyText size="small">Choose screen size to see changes</BodyText>
       <SegmentedControl initialValue={screen} onSelect={data => setScreen(data.id)}>
-        <SegmentedControl.List aria-label="screen-size" cs={{marginBottom: system.gap.lg}}>
+        <SegmentedControl.List aria-label="screen-size" cs={{marginBlockEnd: system.gap.lg}}>
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
           <SegmentedControl.Item data-id="75%">75%</SegmentedControl.Item>
           <SegmentedControl.Item data-id="50%">50%</SegmentedControl.Item>

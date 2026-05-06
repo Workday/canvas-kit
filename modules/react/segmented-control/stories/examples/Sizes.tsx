@@ -12,7 +12,7 @@ import {system} from '@workday/canvas-tokens-web';
 export const Sizes = () => (
   <>
     <Box>
-      <BodyText size="medium" cs={{marginTop: 0, fontWeight: system.fontWeight.bold}}>
+      <BodyText size="medium" cs={{marginBlockStart: 0, fontWeight: system.fontWeight.bold}}>
         Small
       </BodyText>
       <SegmentedControl size="small">

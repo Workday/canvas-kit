@@ -97,7 +97,7 @@ export const DynamicTabs = () => {
       </Tabs.Menu.Popper>
       <Tabs.Panels>
         {(item: Tab) => (
-          <Tabs.Panel cs={{marginTop: system.gap.lg}}>Contents of {item.tab}</Tabs.Panel>
+          <Tabs.Panel cs={{marginBlockStart: system.gap.lg}}>Contents of {item.tab}</Tabs.Panel>
         )}
       </Tabs.Panels>
     </Tabs>

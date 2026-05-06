@@ -238,7 +238,7 @@ export const MenuGroups = {
   render: () => {
     return (
       <StaticStates>
-        <Flex cs={{gap: system.gap.md}}>
+        <Flex cs={{gap: system.gap.lg}}>
           <div>
             <h3>LTR</h3>
             <MenuWithGroups />

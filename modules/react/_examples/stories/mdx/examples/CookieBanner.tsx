@@ -60,7 +60,7 @@ const bannerItemStyles = createStencil({
     marginInline: system.gap.md,
     '@media (max-width: 450px)': {
       '&:not(:first-of-type)': {
-        marginTop: system.gap.md,
+        marginBlockStart: system.gap.md,
         '> *': {
           flex: 1,
         },

@@ -12,7 +12,7 @@ export const Basic = () => {
         <Tabs.Item>Fourth Tab</Tabs.Item>
         <Tabs.Item>Fifth Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: cssVar(system.gap.lg)}}>
+      <div style={{marginBlockStart: cssVar(system.gap.lg)}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>

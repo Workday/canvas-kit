@@ -10,6 +10,21 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const containerStyles = createStyles({
+  width: px2rem(400),
+  height: px2rem(400),
+  overflow: 'scroll',
+  padding: system.padding.xxs,
+  '& > div': {
+    width: px2rem(950),
+    '& > p:first-child': {
+      marginBlockEnd: px2rem(400),
+    },
+  },
+});
 
 export const ReturnFocusTest = () => {
   const model = usePopupModel();
@@ -20,19 +35,16 @@ export const ReturnFocusTest = () => {
   useReturnFocus(model);
 
   return (
-    <div
-      style={{width: 400, height: 400, overflow: 'scroll', padding: 4}}
-      data-testid="scroll-area"
-    >
-      <div style={{width: 950}}>
-        <p style={{marginBottom: 400}}>Scroll down</p>
+    <div className={containerStyles} data-testid="scroll-area">
+      <div>
+        <p>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <FormField id="return-focus-text-input" cs={{marginInlineStart: 400}}>
+          <FormField id="return-focus-text-input" cs={{marginInlineStart: px2rem(400)}}>
             <FormField.Label>Name</FormField.Label>
             <FormField.Input as={TextInput} />
           </FormField>
-          <Flex style={{marginBottom: 400, marginInlineStart: 410}}>
+          <Flex cs={{marginBlockEnd: px2rem(400), marginInlineStart: px2rem(410)}}>
             <SecondaryButton id="return-focus-button-tabindex" tabIndex={-1}>
               Button with TabIndex=-1
             </SecondaryButton>

@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
-    marginBottom: system.gap.md,
+    marginBlockEnd: system.gap.md,
   }),
   tableStyles: createStyles({
     width: px2rem(690),

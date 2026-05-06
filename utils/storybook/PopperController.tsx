@@ -83,7 +83,12 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
         </Flex.Item>
       </Flex>
       <Flex
-        cs={{gap: system.gap.xs, width: px2rem(420), marginTop: system.gap.lg, textAlign: 'left'}}
+        cs={{
+          gap: system.gap.xs,
+          width: px2rem(420),
+          marginBlockStart: system.gap.lg,
+          textAlign: 'left',
+        }}
       >
         <Flex.Item>
           <input
@@ -102,7 +107,12 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
         </Flex.Item>
       </Flex>
       <Flex
-        cs={{gap: system.gap.xs, width: px2rem(420), marginTop: system.gap.lg, textAlign: 'left'}}
+        cs={{
+          gap: system.gap.xs,
+          width: px2rem(420),
+          marginBlockStart: system.gap.lg,
+          textAlign: 'left',
+        }}
       >
         <Flex.Item>
           <input
@@ -122,7 +132,11 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
       </Flex>
       <BodyText
         size="small"
-        cs={{marginTop: system.gap.lg, textAlign: 'center', fontWeight: system.fontWeight.bold}}
+        cs={{
+          marginBlockStart: system.gap.lg,
+          textAlign: 'center',
+          fontWeight: system.fontWeight.bold,
+        }}
       >
         Placement: {placement}
       </BodyText>
