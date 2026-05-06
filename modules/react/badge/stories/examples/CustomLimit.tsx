@@ -14,7 +14,7 @@ const columnStyles = createStyles({
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  borderBottom: `solid 1px ${system.color.border.divider}`,
+  borderBlockEnd: `solid 1px ${system.color.border.strong}`,
   display: 'flex',
   gap: system.gap.xs,
   padding: system.padding.xxs,

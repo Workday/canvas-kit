@@ -83,8 +83,8 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
               style={{
                 background: 'none',
                 border: '1px solid #c4c4c4',
-                borderRight: 'none',
-                borderBottom: 'none',
+                borderInlineEnd: 'none',
+                borderBlockEnd: 'none',
                 borderRadius: '8px 0 0 0',
                 padding: '4px 12px',
                 fontSize: '12px',

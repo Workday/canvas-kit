@@ -17,7 +17,7 @@ const styleOverrides = {
     position: 'sticky',
     left: '0',
     backgroundColor: system.color.surface.raised,
-    borderRight: `${px2rem(2)} solid ${system.color.border.default}`,
+    borderInlineEnd: `${px2rem(2)} solid ${system.color.border.default}`,
   }),
 };
 

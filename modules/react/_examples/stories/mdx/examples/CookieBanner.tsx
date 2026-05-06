@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
@@ -25,9 +27,9 @@ const exampleContainerStyles = createStyles({
 
 const bannerStyles = createStencil({
   base: {
-    ...system.type.subtext.medium,
+    ...system.type.subtext.md,
     backgroundColor: system.color.surface.default,
-    borderTop: `1px solid ${system.color.border.default}`,
+    borderBlockStart: `1px solid ${system.color.border.default}`,
     display: 'flex',
     boxShadow: system.depth[1],
     padding: system.padding.lg,

@@ -3,8 +3,8 @@ import React from 'react';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
 import {useExpandableTarget} from './hooks/useExpandableTarget';
@@ -42,7 +42,7 @@ export const expandableTargetStencil = createStencil({
       backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus-visible, &.focus': {
-      outline: `${cssVar(system.legacy.color.brand.border.primary, brand.legacy.common.focus)} solid ${px2rem(2)}`,
+      outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
     },
   },
 });

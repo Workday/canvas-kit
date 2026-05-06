@@ -70,7 +70,7 @@ const exampleData = [
 const tableHeaderStencil = createStencil({
   base: {
     backgroundColor: system.color.surface.raised,
-    borderRight: `${px2rem(1)} solid ${system.color.border.default}`,
+    borderInlineEnd: `${px2rem(1)} solid ${system.color.border.default}`,
   },
   modifiers: {
     variant: {

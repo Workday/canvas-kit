@@ -146,7 +146,7 @@ const tabItemStencil = createStencil({
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
-        borderBottom: `${base.legacy.size50} solid transparent`,
+        borderBlockEnd: `${base.legacy.size50} solid transparent`,
         borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
         backgroundColor: system.legacy.color.brand.fg.primary.default,
         bottom: 0,

@@ -3,7 +3,7 @@ import React from 'react';
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Navigation/Breadcrumbs',
@@ -14,6 +14,17 @@ export default {
     },
   },
 };
+
+const breadcrumbsItemStencil = createStencil({
+  base: {},
+  modifiers: {
+    isTruncated: {
+      true: {
+        maxWidth: px2rem(100),
+      },
+    },
+  },
+});
 
 export const DefaultStates = {
   render: () => {
@@ -36,13 +47,13 @@ export const DefaultStates = {
                   <Breadcrumbs.Item>
                     <Breadcrumbs.Link
                       href="#"
-                      cs={{maxWidth: props.isTruncated ? px2rem(100) : undefined}}
+                      cs={breadcrumbsItemStencil({isTruncated: props.isTruncated})}
                     >
                       Breakfast Menus
                     </Breadcrumbs.Link>
                   </Breadcrumbs.Item>
                   <Breadcrumbs.CurrentItem
-                    cs={{maxWidth: props.isTruncated ? px2rem(100) : undefined}}
+                    cs={breadcrumbsItemStencil({isTruncated: props.isTruncated})}
                   >
                     House Specialty Pies
                   </Breadcrumbs.CurrentItem>
@@ -55,6 +66,15 @@ export const DefaultStates = {
     );
   },
 };
+
+const breadcrumbsListStencil = createStencil({
+  vars: {
+    maxWidth: '',
+  },
+  base: ({maxWidth}) => ({
+    maxWidth,
+  }),
+});
 
 export const WithOverflowMenu = {
   render: () => {
@@ -88,7 +108,7 @@ export const WithOverflowMenu = {
             return (
               <Breadcrumbs items={items} aria-label="Breadcrumbs">
                 <Breadcrumbs.List
-                  cs={{maxWidth: props.maxWidth}}
+                  cs={breadcrumbsListStencil({maxWidth: px2rem(props.maxWidth)})}
                   overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}
                 >
                   {item =>

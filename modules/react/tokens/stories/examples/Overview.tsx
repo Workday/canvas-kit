@@ -3,7 +3,7 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const cardStyles = createStyles({
-  ...system.type.body.medium,
+  ...system.type.body.md,
   boxShadow: system.depth[3],
   padding: system.padding.lg,
   borderRadius: system.shape.md,
