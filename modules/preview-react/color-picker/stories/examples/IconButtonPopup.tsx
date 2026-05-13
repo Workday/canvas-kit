@@ -43,7 +43,11 @@ export const IconButtonPopup = () => {
       />
       <Popup.Popper>
         <Popup.Card
-          cs={{marginTop: system.gap.sm, padding: system.padding.md, boxShadow: system.depth[3]}}
+          cs={{
+            marginBlockStart: system.gap.sm,
+            padding: system.padding.md,
+            boxShadow: system.depth[3],
+          }}
         >
           <Popup.Body>
             <ColorPicker

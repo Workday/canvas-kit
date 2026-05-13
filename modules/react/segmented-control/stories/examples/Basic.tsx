@@ -8,6 +8,7 @@ import {
   listViewIcon,
   pieChartIcon,
 } from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const [viewType, setViewType] = React.useState('table');
@@ -34,7 +35,7 @@ export const Basic = () => {
           />
         </SegmentedControl.List>
       </SegmentedControl>
-      <BodyText size="small" marginTop="s">
+      <BodyText size="small" cs={{marginBlockStart: system.gap.md}}>
         Selected: {viewType}
       </BodyText>
     </>

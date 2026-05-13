@@ -16,7 +16,7 @@ import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const headingStyles = createStyles({
-  marginTop: '0',
+  marginBlockStart: '0',
 });
 
 const cardStyles = createStyles({
@@ -56,7 +56,7 @@ const comparisonLayoutStyles = createStyles({
   display: 'grid',
   gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
   gap: system.gap.lg,
-  marginBottom: system.gap.lg,
+  marginBlockEnd: system.gap.lg,
 });
 
 function SingleInlinePopup({

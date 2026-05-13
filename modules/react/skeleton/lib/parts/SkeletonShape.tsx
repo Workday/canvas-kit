@@ -37,7 +37,7 @@ export const skeletonShapeStencil = createStencil({
     borderRadius: cssVar(borderRadius, '0'),
     height: cssVar(height, '100%'),
     width: width,
-    marginBottom: system.legacy.size.xxxs,
+    marginBlockEnd: system.legacy.size.xxxs,
   }),
 });
 

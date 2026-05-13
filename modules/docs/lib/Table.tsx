@@ -18,7 +18,7 @@ const TableBody = createComponent('tbody')({
 
 const tableRowStencil = createStencil({
   base: {
-    borderBottom: `${px2rem(1)} solid ${system.color.border.strong}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.color.border.strong}`,
   },
 });
 
@@ -65,7 +65,7 @@ const TableData = createComponent('td')({
 const tableCaptionStencil = createStencil({
   base: {
     borderCollapse: 'collapse',
-    marginBottom: system.gap.md,
+    marginBlockEnd: system.gap.md,
     width: '100%',
   },
 });

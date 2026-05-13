@@ -32,31 +32,27 @@ export const TextStates = {
           },
           {
             label: 'With font-size as a token value of 8',
-            props: {fontSize: 8},
+            props: {cs: {fontSize: 8}},
           },
           {
             label: 'With regular font-size value of 1.25rem',
-            props: {fontSize: '1.25rem'},
+            props: {cs: {fontSize: '1.25rem'}},
           },
           {
-            label: 'With regular font-weigth value of 400',
-            props: {fontWeight: 400},
+            label: 'With regular font-weight value of 400',
+            props: {cs: {fontWeight: 400}},
           },
           {
-            label: 'With font-weigth as a token value of regular',
-            props: {fontWeight: 'regular', as: 'h3'},
+            label: 'With font-weight as a token value of normal',
+            props: {cs: {fontWeight: system.fontWeight.normal}, as: 'h3'},
           },
           {
             label: 'With monospace font-family value',
-            props: {fontFamily: 'monospace'},
+            props: {cs: {fontFamily: system.fontFamily.mono}},
           },
           {
             label: 'With color',
-            props: {color: base.blue100},
-          },
-          {
-            label: 'With color as color token name',
-            props: {color: 'blueberry300'},
+            props: {cs: {color: base.blue100}},
           },
           {
             label: 'With variant',
@@ -64,35 +60,35 @@ export const TextStates = {
           },
           {
             label: 'With letter-spacing of 0.5rem',
-            props: {letterSpacing: '0.5rem'},
+            props: {cs: {letterSpacing: '0.5rem'}},
           },
           {
             label: 'With line-height of 2.5rem',
-            props: {lineHeight: '2.5rem'},
+            props: {cs: {lineHeight: '2.5rem'}},
           },
           {
             label: 'Aligned to the right',
-            props: {textAlign: 'right'},
+            props: {cs: {textAlign: 'right'}},
           },
           {
             label: 'With text-decoration',
-            props: {textDecoration: 'underline'},
+            props: {cs: {textDecoration: 'underline'}},
           },
           {
             label: 'Transformed to uppercase',
-            props: {textTransform: 'uppercase'},
+            props: {cs: {textTransform: 'uppercase'}},
           },
           {
             label: 'With text-shadow',
-            props: {textShadow: `2px 2px ${base.blue100}`},
+            props: {cs: {textShadow: `2px 2px ${base.blue100}`}},
           },
           {
             label: 'With white-space changed to nowrap',
-            props: {whiteSpace: 'nowrap'},
+            props: {cs: {whiteSpace: 'nowrap'}},
           },
           {
             label: 'With word-break changed to break-all',
-            props: {wordBreak: 'break-all'},
+            props: {cs: {wordBreak: 'break-all'}},
           },
         ]}
         columnProps={[{label: 'Examples', props: {}}]}

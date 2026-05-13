@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -40,19 +39,19 @@ export const FullWidthWith3Columns = () => (
     <Box cs={boxHeadingStyles({gridArea: 'Heading'})}>
       <Heading size="medium">Full Width With 3 Columns</Heading>
     </Box>
-    <FormSkeleton gridArea="FormLeft" text="Form - Left Third" />
-    <FormSkeleton gridArea="FormCenter" text="Form - Center Third" />
-    <FormSkeleton gridArea="FormRight" text="Form - Right Third" />
+    <FormSkeleton area="FormLeft" text="Form - Left Third" />
+    <FormSkeleton area="FormCenter" text="Form - Center Third" />
+    <FormSkeleton area="FormRight" text="Form - Right Third" />
   </Grid>
 );
 
-const FormSkeleton = ({gridArea, text}) => (
-  <Box cs={boxStyles({gridArea})}>
+const FormSkeleton = ({area, text}) => (
+  <Box cs={boxStyles({gridArea: area})}>
     <BodyText size="small" fontWeight="bold">
       {text}
     </BodyText>
     {Array.from({length: 5}).map(() => (
-      <Grid cs={{gridGap: system.gap.sm, marginBottom: px2rem(20)}}>
+      <Grid cs={{gridGap: system.gap.sm, marginBlockEnd: px2rem(20)}}>
         <Box
           cs={{
             backgroundColor: system.color.surface.default,

@@ -1,3 +1,5 @@
+import React from 'react';
+
 import {Hyperlink, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
@@ -56,13 +58,19 @@ export function ContextualHelpDialogFocusTrap() {
             <Dialog.Popper placement="right">
               <Dialog.Card>
                 <Dialog.CloseIcon aria-label="Close" />
-                <Dialog.Heading cs={{paddingTop: system.padding.xl}}>Information</Dialog.Heading>
+                <Dialog.Heading cs={{paddingBlockStart: system.padding.xl}}>
+                  Information
+                </Dialog.Heading>
                 <Dialog.Body>
                   This dialog traps focus. Focus will only return to the rest of the page when the
                   dialog is closed
                 </Dialog.Body>
                 <Flex
-                  cs={{gap: system.gap.md, padding: system.padding.xs, marginTop: system.gap.sm}}
+                  cs={{
+                    gap: system.gap.md,
+                    padding: system.padding.xs,
+                    marginBlockStart: system.gap.sm,
+                  }}
                 >
                   <Hyperlink href="/">Link</Hyperlink>
                 </Flex>

@@ -38,6 +38,7 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
   onChange?: (value: string | number) => void;
 }
 
+// Ignore all `styled` as component is deprecated in v15
 const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'>>(
   {
     display: 'inline-block',

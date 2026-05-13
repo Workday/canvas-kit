@@ -22,7 +22,7 @@ const parentFlexStyles = createStyles({
   display: 'flex',
   flexDirection: 'column',
   gap: system.gap.md,
-  marginBottom: system.gap.lg,
+  marginBlockEnd: system.gap.lg,
 });
 
 const bannerTextStyles = createStyles({
@@ -49,7 +49,7 @@ const gridStyles = createStyles({
 
 const linkStyles = createStyles({
   alignSelf: 'end',
-  marginTop: px2rem(12),
+  marginBlockStart: px2rem(12),
 });
 
 export const WelcomePage = () => {

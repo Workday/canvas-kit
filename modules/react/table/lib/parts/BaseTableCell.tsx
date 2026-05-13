@@ -7,7 +7,7 @@ export const baseTableCellStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.color.bg.default,
-    borderBottom: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
     gridTemplateColumns: '1fr',
     justifyContent: 'start',
     minHeight: '3.5rem',

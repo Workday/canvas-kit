@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import * as React from 'react';
 
 import {getTheme} from '@workday/canvas-kit-react/common';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
@@ -17,10 +16,8 @@ const styles = {
       gridTemplateRows: 'auto',
       border: '10px solid',
       borderRadius: 30,
-      paddingLeft: space.s,
-      paddingRight: space.s,
-      paddingTop: space.l,
-      paddingBottom: space.l,
+      paddingInline: space.s,
+      paddingBlock: space.l,
     },
     [medium]: {
       gridTemplateAreas: "'Header Header' 'SmallContainer BodyContent' 'Footer Footer'",
@@ -153,6 +150,9 @@ const Circle = styled(Box)({
   transform: 'translate(-50%, 0)',
 });
 
+/* Example is outdated in v15 as we are moving away from styled-components.
+ * TODO: Update this example to use the new styling approach.
+ */
 export const ResponsiveViewport = () => {
   return (
     <ParentCont>

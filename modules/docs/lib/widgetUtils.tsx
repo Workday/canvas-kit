@@ -225,7 +225,7 @@ export const SymbolDialog = ({value}: SymbolDialogProps) => {
 
 const symbolDocStencil = createStencil({
   base: {
-    marginBottom: system.gap.lg,
+    marginBlockEnd: system.gap.lg,
     'button[data-symbol]': {
       border: 'none',
       background: 'transparent',

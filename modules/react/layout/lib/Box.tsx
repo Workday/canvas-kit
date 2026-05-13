@@ -117,9 +117,11 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
 };
 
 // Meant to be used with elements. The `shouldForwardProps` will remove all style props
+// TODO: Update this to use the new styling approach.
 const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(boxStyleFn);
 
 // Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
+// TODO: Update this to use the new styling approach.
 const StyledBoxComponent = styled('div')<StyledType & BoxProps>(boxStyleFn);
 
 /**

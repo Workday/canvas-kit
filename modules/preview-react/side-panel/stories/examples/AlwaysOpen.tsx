@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const stylesOverride = {
   accentIcon: createStyles({
-    marginRight: system.gap.md,
+    marginInlineEnd: system.gap.md,
   }),
   pageContainer: createStyles({
     gap: system.gap.md,

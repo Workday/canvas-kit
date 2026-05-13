@@ -38,7 +38,7 @@ export const ActionBarStates = {
               background: cssVar(base.slate25),
               position: 'relative',
               height: px2rem(100),
-              marginBottom: px2rem(12),
+              marginBlockEnd: px2rem(12),
             }}
           >
             <p style={{padding: px2rem(12)}}>Outer Block</p>

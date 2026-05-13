@@ -10,7 +10,7 @@ export const DisabledTab = () => {
         <Tabs.Item aria-disabled>Disabled Tab</Tabs.Item>
         <Tabs.Item>Third Tab</Tabs.Item>
       </Tabs.List>
-      <div style={{marginTop: cssVar(system.gap.lg)}}>
+      <div style={{marginBlockStart: cssVar(system.gap.lg)}}>
         <Tabs.Panel>Contents of First Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Disabled Tab</Tabs.Panel>
         <Tabs.Panel>Contents of Third Tab</Tabs.Panel>

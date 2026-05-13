@@ -8,7 +8,7 @@ import {resetIcon} from '@workday/canvas-system-icons-web';
 const CustomContent = ({...elemProps}) => (
   <button
     style={{
-      marginTop: px2rem(12),
+      marginBlockStart: px2rem(12),
       maxWidth: px2rem(200),
       overflow: 'hidden',
       textOverflow: 'ellipsis',
@@ -39,7 +39,7 @@ export const Ellipsis = () => {
       <OverflowTooltip>
         <button
           style={{
-            marginTop: px2rem(12),
+            marginBlockStart: px2rem(12),
             maxWidth: px2rem(200),
             overflow: 'hidden',
             textOverflow: 'ellipsis',

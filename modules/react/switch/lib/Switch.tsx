@@ -124,7 +124,7 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginTop: system.legacy.gap.xs,
+    marginBlockStart: system.legacy.gap.xs,
     width: system.legacy.size.sm,
     height: system.legacy.size.xxxs,
     borderRadius: system.legacy.shape.full,

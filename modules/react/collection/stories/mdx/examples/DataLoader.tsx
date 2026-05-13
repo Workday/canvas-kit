@@ -10,6 +10,8 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 function pickRandom<T>(arr: T[]): T {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -28,7 +30,7 @@ const options = Array(1000)
 export const DataLoader = () => {
   const [messages, setMessages] = React.useState<string[]>([]);
 
-  const {model, loader} = useListLoader(
+  const {model} = useListLoader(
     {
       getId: (item: string) => item,
       getTextValue: (item: string) => item,
@@ -61,10 +63,10 @@ export const DataLoader = () => {
   );
 
   return (
-    <Flex gap="xl">
-      <Flex flexDirection="column" gap="zero">
+    <Flex cs={{gap: system.gap.xl}}>
+      <Flex cs={{flexDirection: 'column', gap: 0}}>
         <p>Scroll or focus and use keys to navigate</p>
-        <ListBox model={model} maxHeight={400} width={300}>
+        <ListBox model={model} cs={{maxHeight: px2rem(400), width: px2rem(300)}}>
           {item => (
             <ListBox.Item
               as="button"
@@ -79,9 +81,9 @@ export const DataLoader = () => {
           )}
         </ListBox>
       </Flex>
-      <Flex flexDirection="column" gap="zero">
+      <Flex cs={{flexDirection: 'column', gap: 0}}>
         <p>Events:</p>
-        <Box as="ul" maxHeight={400} overflowY="auto">
+        <Box as="ul" cs={{maxHeight: px2rem(400), overflowY: 'auto'}}>
           {messages.map(message => (
             <li key={message}>{message}</li>
           ))}

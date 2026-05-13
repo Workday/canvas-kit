@@ -14,6 +14,8 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 // Create a custom hook for our item
 const useItem = composeHooks(
@@ -21,7 +23,9 @@ const useItem = composeHooks(
     return {
       role: 'listitem',
       style: {
-        background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
+        background: model.state.selectedIds.includes(elemProps['data-id'])
+          ? cssVar(system.color.surface.alt.default)
+          : cssVar(system.color.surface.default),
       },
     };
   }),

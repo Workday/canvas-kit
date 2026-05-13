@@ -83,8 +83,8 @@ export function ExampleCodeBlock({code}: {code: ExampleComponent}) {
               style={{
                 background: 'none',
                 border: '1px solid #c4c4c4',
-                borderRight: 'none',
-                borderBottom: 'none',
+                borderInlineEnd: 'none',
+                borderBlockEnd: 'none',
                 borderRadius: '8px 0 0 0',
                 padding: '4px 12px',
                 fontSize: '12px',
@@ -165,7 +165,7 @@ export function StorybookStatusIndicator({type}: {type: 'ai' | 'deprecated' | 'n
         color: statusColors[type] ?? '#333',
         border: `1px solid ${statusColors[type] ?? '#ccc'}`,
         verticalAlign: 'middle',
-        marginLeft: '8px',
+        marginInlineStart: '8px',
       }}
     >
       {labels[type] ?? type}

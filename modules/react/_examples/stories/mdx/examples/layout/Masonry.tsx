@@ -1,54 +1,55 @@
 import * as React from 'react';
 
-import {styled} from '@workday/canvas-kit-react/common';
 import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const Container = styled(Box)({
+const containerStyles = createStyles({
   columnCount: 3,
-  columnGap: '12px',
+  columnGap: system.gap.md,
 });
 
-const StyledCard = styled(Box)({
+const cardStyles = createStyles({
   breakInside: 'avoid',
+  border: `${px2rem(2)} dashed ${system.color.brand.border.primary}`,
+  marginBlockEnd: system.gap.sm,
+  padding: system.padding.md,
+});
+
+const gridStyles = createStyles({
+  gridGap: system.gap.md,
+  marginBlockEnd: system.gap.xl,
+  '> *:first-child': {
+    width: px2rem(120),
+    height: system.size.xxs,
+    backgroundColor: system.color.surface.alt.default,
+  },
+  '> *:last-child': {
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
+    width: '100%',
+    height: system.size.xxs,
+  },
 });
 
 export const Masonry = () => (
   <>
     <Heading size="medium">Masonry Layout</Heading>
-    <Container>
+    <Box cs={containerStyles}>
       {Array.from({length: 8}).map((_, ind) => (
-        <StyledCard
-          key={ind}
-          border={`2px dashed ${colors.blueberry400}`}
-          marginBottom="xs"
-          padding="s"
-        >
-          <Grid gridGap="s" marginBottom="xl">
-            <Box backgroundColor="soap500" width="120px" height="s" />
-            <Box
-              borderWidth="1px"
-              borderStyle="solid"
-              borderColor="soap500"
-              width="100%"
-              height="xl"
-            />
+        <Box key={ind} cs={cardStyles}>
+          <Grid cs={gridStyles}>
+            <Box />
+            <Box />
           </Grid>
           {ind % 2 === 0 && (
-            <Grid gridGap="s" marginBottom="xl">
-              <Box backgroundColor="soap500" width="120px" height="s" />
-              <Box
-                borderWidth="1px"
-                borderStyle="solid"
-                borderColor="soap500"
-                width="100%"
-                height="xl"
-              />
+            <Grid cs={gridStyles}>
+              <Box />
+              <Box />
             </Grid>
           )}
-        </StyledCard>
+        </Box>
       ))}
-    </Container>
+    </Box>
   </>
 );

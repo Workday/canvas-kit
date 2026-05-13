@@ -4,6 +4,8 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Placement} from '@workday/canvas-kit-react/popup';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface PopperControllerProps {
   marginLeftBtn: number;
@@ -50,8 +52,15 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
   } = props;
 
   return (
-    <Flex padding={4} alignItems="center" flexDirection="column" overflow="scroll">
-      <Flex gap="m" padding="xxs">
+    <Flex
+      cs={{
+        padding: system.padding.xxs,
+        alignItems: 'center',
+        flexDirection: 'column',
+        overflow: 'scroll',
+      }}
+    >
+      <Flex cs={{gap: system.gap.lg, padding: system.padding.xs}}>
         <Flex.Item>
           <SecondaryButton size="small" onClick={() => onSetPlacement('top')}>
             top
@@ -73,7 +82,14 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
           </SecondaryButton>
         </Flex.Item>
       </Flex>
-      <Flex gap="xs" width={420} marginTop={20} textAlign="left">
+      <Flex
+        cs={{
+          gap: system.gap.xs,
+          width: px2rem(420),
+          marginBlockStart: system.gap.lg,
+          textAlign: 'left',
+        }}
+      >
         <Flex.Item>
           <input
             type="range"
@@ -90,7 +106,14 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
           <label htmlFor="margin-left">Move the trigger to the right-hand side</label>
         </Flex.Item>
       </Flex>
-      <Flex gap="xs" width={420} marginTop={20} textAlign="left">
+      <Flex
+        cs={{
+          gap: system.gap.xs,
+          width: px2rem(420),
+          marginBlockStart: system.gap.lg,
+          textAlign: 'left',
+        }}
+      >
         <Flex.Item>
           <input
             type="range"
@@ -107,7 +130,14 @@ export const PopperController = ({children, ...props}: PopperControllerProps) =>
           <label htmlFor="margin-right">Move the trigger to the left-hand side</label>
         </Flex.Item>
       </Flex>
-      <BodyText size="small" marginTop={20} textAlign="center" fontWeight="bold">
+      <BodyText
+        size="small"
+        cs={{
+          marginBlockStart: system.gap.lg,
+          textAlign: 'center',
+          fontWeight: system.fontWeight.bold,
+        }}
+      >
         Placement: {placement}
       </BodyText>
       {children}

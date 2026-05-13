@@ -20,7 +20,7 @@ export const skeletonTextStencil = createStencil({
     backgroundColor: '',
   },
   base: ({backgroundColor}) => ({
-    marginBottom: system.legacy.size.xs,
+    marginBlockEnd: system.legacy.size.xs,
     '& [data-part="skeleton-text-lines"]': {
       backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
       height: system.legacy.size.xxxs,

@@ -15,7 +15,7 @@ export const Color = () => {
             backgroundColor: base.indigo50,
           }}
         />
-        <Box cs={{flex: 1, marginLeft: calc.add(system.gap.sm, system.gap.xs)}}>
+        <Box cs={{flex: 1, marginInlineStart: calc.add(system.gap.sm, system.gap.xs)}}>
           <Skeleton.Header cs={{backgroundColor: base.amber50}} />
         </Box>
       </Flex>

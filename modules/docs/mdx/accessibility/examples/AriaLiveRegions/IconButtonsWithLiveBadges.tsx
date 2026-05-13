@@ -4,9 +4,10 @@ import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {AccessibleHide, AriaLiveRegion, useUniqueId} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {assistantIcon, inboxIcon, notificationsIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const MyTasksLiveBadge = ({cnt}: {cnt: number}) => {
   // use tooltip to assign name,
@@ -73,6 +74,11 @@ const AssistantLiveBadge = ({cnt}: {cnt: number}) => {
   );
 };
 
+const containerStyles = createStyles({
+  padding: system.padding.md,
+  gap: system.gap.md,
+});
+
 export const IconButtonsWithLiveBadges = () => {
   const [counter, setCounter] = React.useState(0);
   const [notifications, setNotifications] = React.useState(0);
@@ -84,12 +90,12 @@ export const IconButtonsWithLiveBadges = () => {
 
   return (
     <>
-      <Flex padding={space.s} gap={space.s} as="header">
+      <Flex as="header" cs={containerStyles}>
         <AssistantLiveBadge cnt={assistant} />
         <NotificationsLiveBadge cnt={notifications} />
         <MyTasksLiveBadge cnt={counter} />
       </Flex>
-      <Flex padding={space.s} gap={space.s} as="main">
+      <Flex as="main" cs={containerStyles}>
         <SecondaryButton onClick={handleAssistant}>Add a Message</SecondaryButton>
         <SecondaryButton onClick={handleAddNotification}>Add a Notification</SecondaryButton>
         <SecondaryButton onClick={handleAddTask}>Add an item to My Tasks</SecondaryButton>

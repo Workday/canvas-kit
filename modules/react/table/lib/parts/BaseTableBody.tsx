@@ -7,12 +7,12 @@ export const baseTableBodyStencil = createStencil({
     'tr ': {
       '&:last-of-type': {
         'td, th': {
-          borderBottom: 'none',
+          borderBlockEnd: 'none',
         },
       },
       '&:first-of-type': {
         'td, th': {
-          borderTop: 'none',
+          borderBlockStart: 'none',
         },
       },
     },

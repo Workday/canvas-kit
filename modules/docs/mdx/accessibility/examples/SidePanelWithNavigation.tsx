@@ -72,17 +72,17 @@ const stylesOverride = {
     listStyle: 'none',
     padding: system.padding.md,
     flexDirection: 'column',
-    marginTop: system.gap.xl,
+    marginBlockStart: system.gap.xl,
   }),
   links: createStyles({
     textDecoration: 'none',
     padding: system.padding.md,
   }),
   linkCheck: createStyles({
-    marginLeft: 'auto',
+    marginInlineStart: 'auto',
   }),
   flyOut: createStyles({
-    marginTop: '8rem',
+    marginBlockStart: '8rem',
   }),
 };
 

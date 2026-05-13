@@ -57,7 +57,7 @@ const checkboxInputStencil = createStencil({
     width: base.legacy.size300,
     height: base.legacy.size300,
     margin: 0,
-    marginTop: calc.negate(px2rem(3)),
+    marginBlockStart: calc.negate(px2rem(3)),
     marginInlineStart: calc.negate(px2rem(3)),
     position: 'absolute',
     opacity: system.opacity.zero,

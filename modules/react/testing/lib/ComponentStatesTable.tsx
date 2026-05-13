@@ -1,6 +1,7 @@
 import React from 'react';
 
-import {styled} from '@workday/canvas-kit-react/common';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {PropCombination, Props} from './propTypes';
 
@@ -27,16 +28,16 @@ export interface ComponentStatesTableProps {
   children(props: Props): React.ReactNode;
 }
 
-const Table = styled('table')({
+const tableStyles = createStyles({
   width: '100%',
   thead: {
     textAlign: 'start',
-    paddingBlockEnd: 16,
+    paddingBlockEnd: system.padding.md,
   },
   'td, th': {
-    minWidth: 100,
-    paddingBlockEnd: 16,
-    paddingInlineEnd: 16,
+    minWidth: px2rem(100),
+    paddingBlockEnd: system.padding.md,
+    paddingInlineEnd: system.padding.md,
     textAlign: 'start',
   },
 });
@@ -47,7 +48,7 @@ export const ComponentStatesTable = ({
   children,
 }: ComponentStatesTableProps) => {
   return (
-    <Table>
+    <table className={tableStyles}>
       <thead>
         <tr>
           <th>Variants</th>
@@ -81,6 +82,6 @@ export const ComponentStatesTable = ({
           );
         })}
       </tbody>
-    </Table>
+    </table>
   );
 };

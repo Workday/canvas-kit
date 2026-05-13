@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainerStyles: createStyles({
-    marginBottom: system.gap.md,
+    marginBlockEnd: system.gap.md,
   }),
   tableStyles: createStyles({
     width: px2rem(690),
@@ -17,7 +17,7 @@ const styleOverrides = {
     position: 'sticky',
     left: '0',
     backgroundColor: system.color.surface.raised,
-    borderRight: `${px2rem(2)} solid ${system.color.border.default}`,
+    borderInlineEnd: `${px2rem(2)} solid ${system.color.border.default}`,
   }),
 };
 

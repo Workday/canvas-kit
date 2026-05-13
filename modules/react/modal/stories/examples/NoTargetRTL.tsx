@@ -29,7 +29,7 @@ export const NoTargetRTL = () => {
                 ("התוכנה").
               </Box>
             </Modal.Body>
-            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
+            <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
               <Modal.CloseButton
                 as={PrimaryButton}
                 onClick={handleAcknowledge}

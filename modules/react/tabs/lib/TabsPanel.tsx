@@ -1,10 +1,8 @@
-import styled from '@emotion/styled';
 import React from 'react';
 
 import {ListRenderItemContext} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
-  StyledType,
   createElemPropsHook,
   createSubcomponent,
   slugify,
@@ -34,8 +32,6 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
    */
   tabIndex?: number;
 }
-
-const StyledTabsPanel = styled(Box)<StyledType>();
 
 export const useTabsPanel = createElemPropsHook(useTabsModel)((
   {state, events},
@@ -74,8 +70,8 @@ export const TabsPanel = createSubcomponent('div')({
   elemPropsHook: useTabsPanel,
 })<TabPanelProps>(({children, ...elemProps}, Element) => {
   return (
-    <StyledTabsPanel as={Element} {...elemProps}>
+    <Box as={Element} {...elemProps}>
       {children}
-    </StyledTabsPanel>
+    </Box>
   );
 });

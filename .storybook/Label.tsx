@@ -14,7 +14,7 @@ const boxStyles = {
   borderRadius: '40px',
   fontSize: '12px',
   fontWeight: 'bold',
-  marginTop: '2px',
+  marginBlockStart: '2px',
   textTransform: 'capitalize',
 } as const;
 
@@ -30,6 +30,11 @@ const getColors = (type: string) => {
         color: 'rgba(2, 32, 67, 1)',
       };
     case 'deprecated':
+      return {
+        backgroundColor: 'rgba(234, 237, 240, 1)',
+        color: 'rgba(77, 86, 98, 1)',
+      };
+    case 'outdated':
       return {
         backgroundColor: 'rgba(234, 237, 240, 1)',
         color: 'rgba(77, 86, 98, 1)',
