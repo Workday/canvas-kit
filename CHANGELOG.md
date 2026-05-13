@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.4](https://github.com/Workday/canvas-kit/releases/tag/v15.0.4) (2026-05-05)
+
+### Documentation
+
+- docs: Fix typo ([#3912](https://github.com/Workday/canvas-kit/pull/3912)) ([@alanbsmith](https://github.com/alanbsmith))
+- docs: Update mcp docs ([#3921](https://github.com/Workday/canvas-kit/pull/3921)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+### Infrastructure
+
+- chore: Fix lerna dist tag ([#3913](https://github.com/Workday/canvas-kit/pull/3913)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
+## [v14.3.15](https://github.com/Workday/canvas-kit/releases/tag/v14.3.15) (2026-05-04)
+
+### Documentation
+
+- docs: Update mcp docs ([#3921](https://github.com/Workday/canvas-kit/pull/3921)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+
+
+## [v14.3.14](https://github.com/Workday/canvas-kit/releases/tag/v14.3.14) (2026-04-30)
+
+### Infrastructure
+
+- chore: Fix lerna dist tag ([#3913](https://github.com/Workday/canvas-kit/pull/3913)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
 ## [v15.0.3](https://github.com/Workday/canvas-kit/releases/tag/v15.0.3) (2026-05-04)
 
 ### Components
@@ -24,6 +48,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Update storybook links and fix sparkle icon ([#3915](https://github.com/Workday/canvas-kit/pull/3915)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
 
 
+## [v14.3.13](https://github.com/Workday/canvas-kit/releases/tag/v14.3.13) (2026-04-29)
+
+### Documentation
+
+- docs: Fix typo ([#3912](https://github.com/Workday/canvas-kit/pull/3912)) ([@alanbsmith](https://github.com/alanbsmith))
 ## [v15.0.0](https://github.com/Workday/canvas-kit/releases/tag/v15.0.0) (2026-04-29)
 
 ### BREAKING CHANGES
