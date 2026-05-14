@@ -50,6 +50,9 @@ jobs:
         with:
           node_version: 22.x
 
+      - name: Build
+        run: yarn build
+
       - name: Build Storybook
         run: yarn build-storybook --quiet
 

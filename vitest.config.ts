@@ -15,6 +15,14 @@ export default defineConfig({
         find: /^@workday\/canvas-kit-docs$/,
         replacement: '@workday/canvas-kit-docs/index.ts',
       },
+      {
+        find: /^@workday\/canvas-kit-react$/,
+        replacement: '@workday/canvas-kit-react/index.ts',
+      },
+      {
+        find: /^@workday\/canvas-kit-react\/(.+)$/,
+        replacement: '@workday/canvas-kit-react/$1/index.ts',
+      },
     ],
   },
   test: {
@@ -28,6 +36,7 @@ export default defineConfig({
           '@workday/canvas-kit-styling',
           '@workday/canvas-kit-popup-stack',
           '@workday/canvas-kit-docs',
+          '@workday/canvas-kit-react',
         ],
       },
     },

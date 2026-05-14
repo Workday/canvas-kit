@@ -127,6 +127,9 @@ jobs:
       - name: Unit tests
         run: yarn test
 
+      - name: Build
+        run: yarn build
+
       - name: Build Storybook
         run: yarn build-storybook --quiet
 

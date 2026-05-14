@@ -70,7 +70,7 @@
     "@workday/canvas-accent-icons-web": "^3.0.0",
     "@workday/canvas-applet-icons-web": "^2.0.0"
   },
-  "exports": {
+    "exports": {
     ".": {
       "types": "./dist/es6/index.d.ts",
       "import": "./dist/es6/index.js",

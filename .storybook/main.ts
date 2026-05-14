@@ -8,7 +8,7 @@ import {mergeConfig} from 'vite';
 import {styleTransformer} from '@workday/canvas-kit-styling-transform';
 import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 
-import {version} from '../lerna.json' assert {type: 'json'};
+import {version} from '../lerna.json' with {type: 'json'};
 import stylingConfig from '../styling.config';
 import { vitePluginInlineSpecifications } from './vite-plugin-inline-specifications';
 import { vitePluginRedirectMDXToGithub } from './vite-plugin-redirect-mdx-to-github';

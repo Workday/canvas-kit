@@ -38,17 +38,17 @@ jobs:
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      ## Build Storybook for Chromatic rebaselining and publishing to GH Pages.
-      ## Should be before `yarn build` since built assets mess up this command.
-      ## Note: Storybook 8 automatically generates index.json during build.
-      - name: Build Storybook
-        run: yarn build-storybook --quiet
-
-      ## Build for packaging.
+      ## Build for packaging. Must be before Build Storybook since the exports field
+      ## in package.json requires dist files to be present for module resolution.
       - name: Build
         run: yarn build
         env:
           TSP_SKIP_CACHE: true
+
+      ## Build Storybook for Chromatic rebaselining and publishing to GH Pages.
+      ## Note: Storybook 8 automatically generates index.json during build.
+      - name: Build Storybook
+        run: yarn build-storybook --quiet
 
       ## Publish prerelease to npm. Must be run after a build
       - name: Publish
