@@ -1,4 +1,8 @@
+import path from 'path';
+import {fileURLToPath} from 'url';
 import {defineConfig} from 'vitest/config';
+
+const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default defineConfig({
   resolve: {
@@ -17,11 +21,19 @@ export default defineConfig({
       },
       {
         find: /^@workday\/canvas-kit-react$/,
-        replacement: '@workday/canvas-kit-react/index.ts',
+        replacement: path.resolve(__dirname, 'modules/react/index.ts'),
       },
       {
         find: /^@workday\/canvas-kit-react\/(.+)$/,
-        replacement: '@workday/canvas-kit-react/$1/index.ts',
+        replacement: path.resolve(__dirname, 'modules/react') + '/$1/index.ts',
+      },
+      {
+        find: /^@workday\/canvas-kit-preview-react$/,
+        replacement: path.resolve(__dirname, 'modules/preview-react/index.ts'),
+      },
+      {
+        find: /^@workday\/canvas-kit-preview-react\/(.+)$/,
+        replacement: path.resolve(__dirname, 'modules/preview-react') + '/$1/index.ts',
       },
     ],
   },
@@ -37,6 +49,7 @@ export default defineConfig({
           '@workday/canvas-kit-popup-stack',
           '@workday/canvas-kit-docs',
           '@workday/canvas-kit-react',
+          '@workday/canvas-kit-preview-react',
         ],
       },
     },

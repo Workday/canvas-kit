@@ -1,11 +1,12 @@
 import ts from 'typescript';
 
-import {focusRing} from '@workday/canvas-kit-react/common';
 import {
   NestedStyleObject,
   createObjectTransform,
   parseNodeToStaticValue,
 } from '@workday/canvas-kit-styling-transform';
+
+import {focusRing} from '../../modules/react/common/lib/styles/focusRing';
 
 export const handleFocusRing = createObjectTransform((node, context) => {
   if (
