@@ -23,17 +23,29 @@ export default defineConfig({
         find: /^@workday\/canvas-kit-react$/,
         replacement: path.resolve(__dirname, 'modules/react/index.ts'),
       },
+      // Single-segment subpaths (e.g. /common, /button) always have an index.ts
+      {
+        find: /^@workday\/canvas-kit-react\/([^/]+)$/,
+        replacement: path.resolve(__dirname, 'modules/react') + '/$1/index.ts',
+      },
+      // Deep subpaths (e.g. /button/stories/visual-testing/utils) resolve directly to the file
       {
         find: /^@workday\/canvas-kit-react\/(.+)$/,
-        replacement: path.resolve(__dirname, 'modules/react') + '/$1/index.ts',
+        replacement: path.resolve(__dirname, 'modules/react') + '/$1',
       },
       {
         find: /^@workday\/canvas-kit-preview-react$/,
         replacement: path.resolve(__dirname, 'modules/preview-react/index.ts'),
       },
+      // Single-segment subpaths for preview-react
+      {
+        find: /^@workday\/canvas-kit-preview-react\/([^/]+)$/,
+        replacement: path.resolve(__dirname, 'modules/preview-react') + '/$1/index.ts',
+      },
+      // Deep subpaths for preview-react
       {
         find: /^@workday\/canvas-kit-preview-react\/(.+)$/,
-        replacement: path.resolve(__dirname, 'modules/preview-react') + '/$1/index.ts',
+        replacement: path.resolve(__dirname, 'modules/preview-react') + '/$1',
       },
     ],
   },

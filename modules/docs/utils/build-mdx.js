@@ -65,6 +65,13 @@ glob(inputPath + '/**/*.md?(x)', {}, (err, files) => {
   });
 });
 
+// Copy images directory so MDX relative image references resolve correctly
+const imagesDir = path.join(inputPath, 'images');
+if (fs.existsSync(imagesDir)) {
+  const relativeInputPath = inputPath.replace(path.join(__dirname, '../'), '');
+  fse.copySync(imagesDir, path.join(distFolder, relativeInputPath, 'images'));
+}
+
 /**
  * Build component files in react module, and copy them into the dist folder of the docs module
  */
