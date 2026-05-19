@@ -65,7 +65,7 @@ function getSpace(value?: string | number) {
 
 function getMaxHeight(margin?: string | number) {
   // set the default margin offset to 40px
-  let marginOffset: string | number = cssVar(base.legacy.size500);
+  let marginOffset: string | number = base.legacy.size500;
 
   if (margin) {
     // parse the margin prop
