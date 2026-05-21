@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.6](https://github.com/Workday/canvas-kit/releases/tag/v15.0.6) (2026-05-21)
+
+### Components
+
+- fix: Remove cssVar around legacy token to allow variable being set ([#3952](https://github.com/Workday/canvas-kit/pull/3952)) ([@mannycarrera4](https://github.com/mannycarrera4))
+
+
 ## [v15.0.5](https://github.com/Workday/canvas-kit/releases/tag/v15.0.5) (2026-05-21)
 
 ### Components
