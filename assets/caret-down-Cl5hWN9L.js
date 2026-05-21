@@ -1,2 +1,0 @@
-import{C as a}from"./types-wqmYQQWa.js";const t={name:"caret-down",type:a.System,svg:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="wd-icon wd-icon-caret-down" viewBox="0 0 24 24" role="presentation" focusable="false"><path fill="oklch(0.3523 0 0 / 1)" d="M19.066 8a.5.5 0 0 1 .416.777l-7.067 10.599a.5.5 0 0 1-.832 0L4.518 8.777A.5.5 0 0 1 4.934 8z" class="wd-icon-fill"/>
-</svg>`,filename:"wd-icon-caret-down.svg",category:"Navigation",tags:["navigation","arrow","triangle","data","table","grid"]};export{t as c};

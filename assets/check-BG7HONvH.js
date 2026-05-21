@@ -1,2 +1,0 @@
-import{C as c}from"./types-wqmYQQWa.js";const s={name:"check",type:c.System,svg:`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" class="wd-icon wd-icon-check" viewBox="0 0 24 24" role="presentation" focusable="false"><path fill="oklch(0.3523 0 0 / 1)" d="M18.94 6.646a.5.5 0 0 1 .706 0l.707.707a.5.5 0 0 1 0 .707l-9.646 9.647a1 1 0 0 1-1.414 0L4.646 13.06a.5.5 0 0 1 0-.707l.707-.707a.5.5 0 0 1 .707 0l3.94 3.94z" class="wd-icon-fill"/>
-</svg>`,filename:"wd-icon-check.svg",category:"Notification",tags:["success","complete","check mark"]};export{s as c};
