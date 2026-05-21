@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.5](https://github.com/Workday/canvas-kit/releases/tag/v15.0.5) (2026-05-21)
+
+### Components
+
+- chore: Bump canvas icon versions ([#3954](https://github.com/Workday/canvas-kit/pull/3954)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+- chore: Fix issue with tabs ([#3957](https://github.com/Workday/canvas-kit/pull/3957)) ([@RayRedGoose](https://github.com/RayRedGoose), Raisa Primerova)
+
+### Documentation
+
+- fix: Remove old patterns ([#3916](https://github.com/Workday/canvas-kit/pull/3916)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+
+
 ## [v15.0.4](https://github.com/Workday/canvas-kit/releases/tag/v15.0.4) (2026-05-05)
 
 ### Documentation
