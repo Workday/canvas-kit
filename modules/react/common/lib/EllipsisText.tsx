@@ -8,7 +8,7 @@ const ellipsisStyles = createStyles({
   overflow: 'hidden',
 });
 
-interface EllipsisTextProps extends CSProps {
+export interface EllipsisTextProps extends CSProps {
   children: React.ReactNode;
 }
 
