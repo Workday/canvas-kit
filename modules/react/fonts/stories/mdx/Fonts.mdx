@@ -1,0 +1,31 @@
+import {Meta} from '@storybook/blocks';
+
+<Meta title="React/Fonts" />
+
+# Sana Sans Fonts
+
+This module provides `@font-face` definitions for **Sana Sans**, the variable font used by Sana-aligned Canvas components.
+
+## Usage
+
+Import the `fonts` array and apply it globally using Emotion's `Global` component:
+
+```tsx
+import {Global, css} from '@emotion/react';
+import {fonts} from '@workday/canvas-kit-react/fonts';
+
+const App = () => (
+  <>
+    <Global styles={css(fonts)} />
+    {/* your app */}
+  </>
+);
+```
+
+## Font Details
+
+- **Family**: Sana Sans
+- **Format**: TrueType variable font
+- **Weight range**: 100–700 (Regular through Bold)
+- **Styles**: normal, italic
+- **Source**: `https://design.workdaycdn.com/assets/fonts/Sana-Sans/SanaSansLCG05-Variable.ttf`

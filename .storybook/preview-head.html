@@ -2,10 +2,19 @@
   document.title = 'Canvas Kit Storybook';
 </script>
 
+<link rel="stylesheet" href="/updated-type.css" />
+
 <style type="text/css">
+  /* Define before preview.js so var() resolves in static head styles and components. */
+  :root {
+    --cnvs-sys-font-family-default: 'Sana Sans', sans-serif;
+    --cnvs-sys-font-family-mono: 'Roboto Mono', monospace;
+  }
+
+  html,
   body {
     padding: 0 !important;
-    font-family: sans-serif;
+    font-family: var(--cnvs-sys-font-family-default);
   }
 
   .story > * {
@@ -34,6 +43,7 @@
   }
 </style>
 <!-- preload fonts for Chromatic -->
+<link rel="preload" href="SanaSansLCG05-Variable.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Light.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Medium.ttf" as="font" type="font/ttf" crossorigin />

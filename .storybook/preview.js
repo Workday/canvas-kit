@@ -5,6 +5,8 @@ import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+// After tokens so Sana Sans overrides token font-family defaults in the preview iframe
+import './updated-type.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';
