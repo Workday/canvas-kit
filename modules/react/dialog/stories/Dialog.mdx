@@ -51,15 +51,22 @@ composed hooks when you need a custom popup stack or behavior (for example omitt
 
 ### Minimum accessible structure
 
+The following matches the [Basic Example](#basic-example) layout: **`Dialog.CloseIcon`** before
+**`Dialog.Heading`** so open focus lands on the dismiss control first; primary actions use
+**`Dialog.CloseButton`** (which closes the dialog on activate).
+
 ```tsx
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 <Dialog>
-  <Dialog.Target>Open</Dialog.Target>
+  <Dialog.Target as={PrimaryButton}>Open</Dialog.Target>
   <Dialog.Popper>
     <Dialog.Card>
+      <Dialog.CloseIcon aria-label="Close" />
       <Dialog.Heading>Title</Dialog.Heading>
       <Dialog.Body>
         <FormField>
@@ -67,7 +74,10 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
           <FormField.Input as={TextInput} />
         </FormField>
       </Dialog.Body>
-      <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+      <Flex>
+        <Dialog.CloseButton as={PrimaryButton}>Submit</Dialog.CloseButton>
+        <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+      </Flex>
     </Dialog.Card>
   </Dialog.Popper>
 </Dialog>;
@@ -75,8 +85,9 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 Include a dismiss control: **`Dialog.CloseButton`** with visible text (for example "Cancel" or
 "Close"), and/or **`Dialog.CloseIcon`** when the design uses an icon-only dismiss (requires
-**`aria-label`** or **`Tooltip`**). Add other actions with **`Dialog.CloseButton`** or buttons as
-needed.
+**`aria-label`** or **`Tooltip`**). Use **`Dialog.CloseButton`** for primary actions that should
+also close the dialog (for example "Submit"). Add other actions with **`Dialog.CloseButton`** or
+buttons as needed.
 
 ### Built-in Behaviors
 
@@ -106,9 +117,8 @@ duplicate them** in consuming code.
 **Keyboard** (_trigger is `Dialog.Target`, default `SecondaryButton`_):
 
 - <kbd>Enter</kbd> / <kbd>Space</kbd> on the trigger opens the dialog (standard button behavior)
-- On open, focus moves to the first focusable element in DOM order inside the dialog (often a
-  dismiss control such as **`Dialog.CloseIcon`** or **`Dialog.CloseButton`**), or to
-  `initialFocusRef` on the model when set
+- On open and close, focus is managed by **`useInitialFocus`** and **`useReturnFocus`** (application
+  overrides: see **Focus management** in Accessibility Requirements)
 - <kbd>Escape</kbd> closes the dialog and returns focus per `useReturnFocus`
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
@@ -127,14 +137,17 @@ Required in application code for an accessible Dialog. Hoist **`useDialogModel`*
 configure focus targets or open without **`Dialog.Target`**. Rows marked _(conditional)_ apply only
 when the situation matches—otherwise omit.
 
+**If no design spec is provided:** use default focus behavior; omit **`initialFocusRef`**,
+**`returnFocusRef`**, **`aria-expanded`**, and **`aria-haspopup`**.
+
 **Focus management — defaults and developer prompts:** Canvas Kit handles open and close focus
 automatically. **State the default to the developer first.** Only set **`initialFocusRef`** or
 **`returnFocusRef`** after the developer (or an explicit design spec) chooses a non-default target.
 **Do not generate focus refs by default.**
 
-| When              | Default behavior                                                                                                                                                                            | Ask the developer before overriding                                                                                                                                                                 |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Dialog **opens**  | **`useInitialFocus`** moves focus to the **first focusable element** in DOM order inside the dialog (often **`Dialog.CloseIcon`** or **`Dialog.CloseButton`**). Omit **`initialFocusRef`**. | _Which element should receive focus when the dialog opens?_ (Only when the default first focusable element is wrong for the design.) Attach **`initialFocusRef`** to that element on **`useDialogModel`**. |
+| When              | Default behavior                                                                                                                                                                            | Ask the developer before overriding                                                                                                                                                                                  |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Dialog **opens**  | **`useInitialFocus`** moves focus to the **first focusable element** in DOM order inside the dialog (often **`Dialog.CloseIcon`** or **`Dialog.CloseButton`**). Omit **`initialFocusRef`**. | _Which element should receive focus when the dialog opens?_ (Only when the default first focusable element is wrong for the design.) Attach **`initialFocusRef`** to that element on **`useDialogModel`**.           |
 | Dialog **closes** | **`useReturnFocus`** moves focus to **`Dialog.Target`**. Omit **`returnFocusRef`**.                                                                                                         | _Which element should receive focus when the dialog closes?_ (When there is no **`Dialog.Target`**, set **`returnFocusRef`** on **`useDialogModel({returnFocusRef})`**, or when return focus should land elsewhere.) |
 
 If close **removes the trigger from the DOM**, **`returnFocusRef`** alone is not enough—move focus
@@ -144,27 +157,116 @@ after the UI updates (for example with **`useLayoutEffect`**). See
 **Custom targets and programmatic open** _(conditional)_: Apply when using a custom **`as`**
 component on **`Dialog.Target`**, opening via **`model.events.show()`**, or opening without
 **`Dialog.Target`**. **`Dialog.Target`** adds **`onClick`** and **`ref`** to the rendered control.
-Custom targets must forward both to a **keyboard-focusable** element (prefer a native
-**`<button>`** or **`as={SecondaryButton}`**). Use **`React.forwardRef`** when the dialog may open
-programmatically before the user activates the target—without **`forwardRef`**, the dialog can open
-at the top-left of the viewport instead of anchored to the target.
+Custom targets must forward both to a **keyboard-focusable** element (prefer a native **`<button>`**
+or **`as={SecondaryButton}`**). Use **`React.forwardRef`** when the dialog may open programmatically
+before the user activates the target—without **`forwardRef`**, the dialog can open at the top-left
+of the viewport instead of anchored to the target.
 
-| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                                                                                                                                                                                                                                                                                                                                          |
-| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                                                                                                                                                                                                                                                                             |
-| Keyboard-operable trigger                                     | **`Dialog.Target`** must forward `onClick` and `ref` to a focusable control (prefer a **`<button>`** or `as={SecondaryButton}`). See **Custom targets and programmatic open** above when using a custom `as` component or programmatic open.                                                                                                                                                                                                                                                                                                                                                                              |
-| Labeled inputs in the body                                    | When the body contains inputs, associate each with a visible label (for example **`FormField`** + **`FormField.Label`**).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus).                                                                                                                                                                                                                                                                                                                   |
-| Open/closed state on the trigger _(conditional)_              | On **`Dialog.Target`**, set **`aria-expanded={model.state.visibility !== 'hidden'}`** and **`aria-haspopup="dialog"`** only when a product or accessibility review deliberately keeps open focus on the trigger on open. **Default:** omit both—`useDialogModel` composes **`useInitialFocus`**, which moves focus into the dialog. See **Wiring aria-expanded** below and [Inline Popups](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-inline-popups--docs).                                                                                                                                     |
+**Programmatic open without `Dialog.Target`:**
+
+```tsx
+import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
+
+const openButtonRef = React.useRef<HTMLButtonElement>(null);
+const model = useDialogModel({returnFocusRef: openButtonRef});
+
+<PrimaryButton ref={openButtonRef} onClick={() => model.events.show()}>
+  Open
+</PrimaryButton>
+<Dialog model={model}>
+  <Dialog.Popper>
+    <Dialog.Card>
+      <Dialog.Heading>Title</Dialog.Heading>
+      <Dialog.Body>Content</Dialog.Body>
+      <Dialog.CloseButton>Close</Dialog.CloseButton>
+    </Dialog.Card>
+  </Dialog.Popper>
+</Dialog>;
+```
+
+**Custom target with `forwardRef`** _(when the dialog may open before the user clicks the target)_:
+
+```tsx
+import React from 'react';
+
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+
+interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+}
+
+const MyTarget = React.forwardRef<HTMLButtonElement, MyTargetProps>(
+  ({label, ...props}, ref) => (
+    <button ref={ref} type="button" {...props}>
+      {label}
+    </button>
+  )
+);
+
+<Dialog>
+  <Dialog.Target as={MyTarget} label="Open" />
+  <Dialog.Popper>{/* ... */}</Dialog.Popper>
+</Dialog>;
+```
+
+| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                                                                                                                                                                                                      |
+| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                                                                                                                                         |
+| Keyboard-operable trigger                                     | See **Custom targets and programmatic open** above.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Labeled inputs in the body                                    | When the body contains inputs, associate each with a visible label (for example **`FormField`** + **`FormField.Label`**).                                                                                                                                                                                                                                                                                                                                                              |
+| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus).                                                                                                                                                                               |
+| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                                                                     |
+
+**Open focus below the heading** _(conditional; see supplementary copy row above)_:
+
+```tsx
+import React from 'react';
+
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+const descriptionId = useUniqueId();
+const inputRef = React.useRef<HTMLInputElement>(null);
+const model = useDialogModel({initialFocusRef: inputRef});
+
+<Dialog model={model}>
+  <Dialog.Target>Open</Dialog.Target>
+  <Dialog.Popper>
+    <Dialog.Card aria-describedby={descriptionId}>
+      <Dialog.Heading>Title</Dialog.Heading>
+      <Dialog.Body>
+        <p id={descriptionId}>Enter your email to continue.</p>
+        <FormField>
+          <FormField.Label>Email</FormField.Label>
+          <FormField.Input as={TextInput} ref={inputRef} />
+        </FormField>
+      </Dialog.Body>
+      <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+    </Dialog.Card>
+  </Dialog.Popper>
+</Dialog>;
+```
+
+**Summary for code generation:**
+
+- **REQUIRED:** accessible name, dismiss control, keyboard-operable trigger, labeled inputs
+- **CONDITIONAL:** **`initialFocusRef`**, **`returnFocusRef`**, **`aria-describedby`**, **`aria-expanded`**
+  / **`aria-haspopup`**, **`forwardRef`** on custom **`Dialog.Target`**
 
 **Wiring aria-expanded** _(conditional)_:
 
-`useDialogModel` always composes **`useInitialFocus`**, so Dialog **moves focus into the dialog on
-open by default**. The **`aria-expanded`** pattern is **uncommon** for Dialog. Use it only when a
-review deliberately keeps open focus on the trigger—for example by setting **`initialFocusRef`** to
-the trigger per design spec. Otherwise omit **`aria-expanded`** and **`aria-haspopup`**. If the
-design should not move focus into the dialog on open, evaluate
+The **`aria-expanded`** pattern is **uncommon** for Dialog—omit **`aria-expanded`** and
+**`aria-haspopup`** unless a review deliberately keeps open focus on the trigger (for example
+**`initialFocusRef`** on the trigger per design spec). When required, on **`Dialog.Target`** set
+**`aria-expanded={model.state.visibility !== 'hidden'}`** and **`aria-haspopup="dialog"`**. See
+**Focus management** and the open/closed-state row above. If the design should not move focus into
+the dialog on open, use
 [**Popup**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs) with
 composed hooks instead of overriding Dialog defaults.
 
@@ -177,8 +279,8 @@ to supply instead):
   **`Dialog.Popper`**, or **`Dialog.Heading`** — Canvas Kit hooks wire these
 - Omit **`Dialog.Popper`**, render **`Dialog.Card`** outside it, or add a custom portal/restructure
   instead of **`Dialog` → `Dialog.Popper` → `Dialog.Card`**
-- Use **`open`** / **`onClose`** (or similar controlled visibility props) on **`Dialog`** instead of
-  **`useDialogModel`** and **`model.events.show()`** / **`model.events.hide()`**
+- Use **`open`** / **`onClose`** props on **`Dialog`** — Dialog has no controlled visibility props;
+  use **`useDialogModel`** and **`model.events.show()`** / **`model.events.hide()`**
 - Add **`useFocusTrap`**, **`aria-modal="true"`**, or **`aria-hidden`** on page siblings expecting
   modal behavior — Dialog is intentionally non-modal
 - Use **Modal** when the task is non-critical or the rest of the page must stay operable
