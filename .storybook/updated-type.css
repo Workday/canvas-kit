@@ -3,7 +3,7 @@
   font-style: normal;
   font-weight: 100 700;
   src: local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'),
-    url(/SanaSansLCG05-Variable.ttf) format('truetype');
+    url(/SanaSans-Variable.woff2) format('woff2');
 }
 
 @font-face {
@@ -11,7 +11,7 @@
   font-style: italic;
   font-weight: 100 700;
   src: local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'),
-    url(/SanaSansLCG05-Variable.ttf) format('truetype');
+    url(/SanaSans-Variable.woff2) format('woff2');
 }
 
 /* TODO: Remove this when tokens are available */

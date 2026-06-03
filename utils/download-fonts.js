@@ -15,7 +15,7 @@ const fontsToDownload = [
 ];
 
 const sanaFontBaseUrl = 'https://design.workdaycdn.com/assets/fonts/Sana-Sans/';
-const sanaFontsToDownload = ['SanaSansLCG05-Variable.ttf'];
+const sanaFontsToDownload = ['SanaSans-Variable.woff2'];
 
 async function download(url, filePath) {
   return new Promise((resolve, reject) => {
