@@ -2,6 +2,8 @@
   font-family: 'Sana Sans';
   font-style: normal;
   font-weight: 100 700;
+  ascent-override: 90%;
+  descent-override: 20%;
   src: local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'),
     url(/SanaSans-Variable.woff2) format('woff2');
 }
@@ -10,6 +12,8 @@
   font-family: 'Sana Sans';
   font-style: italic;
   font-weight: 100 700;
+  ascent-override: 90%;
+  descent-override: 20%;
   src: local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'),
     url(/SanaSans-Variable.woff2) format('woff2');
 }
