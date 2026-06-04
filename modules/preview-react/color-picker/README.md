@@ -20,10 +20,11 @@ preview-react add @workday/canvas-kit-preview-react
 
 ```tsx
 import * as React from 'react';
+
 import {ColorPicker} from '@workday/canvas-kit-preview-react/color-picker';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Popper, Popup} from '@workday/canvas-kit-react/popup';
+import {colors} from '@workday/canvas-kit-react/tokens';
 
 const MyComponent: React.FunctionComponent = () => {
   const [isOpen, setIsOpen] = React.useState(false);
@@ -46,7 +47,7 @@ const MyComponent: React.FunctionComponent = () => {
         Toggle Color Picker
       </SecondaryButton>
       <Popper placement={'bottom'} open={isOpen} anchorElement={ref.current!}>
-        <Popup style={{marginTop: 8}} padding={PopupPadding.s}>
+        <Popup cs={{marginBlockStart: 8}}>
           <ColorPicker
             resetColor={colors.blueberry400}
             resetLabel={'Reset'}

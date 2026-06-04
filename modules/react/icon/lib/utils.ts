@@ -1,6 +1,11 @@
-import {CanvasIcon, CanvasIconTypes} from '@workday/design-assets-types';
+import {CanvasExpressiveIcon} from '@workday/canvas-expressive-icons-web';
+import {CanvasIconTypes, CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 
-export function validateIconType(icon: CanvasIcon, expectedType: CanvasIconTypes) {
+/** @deprecated Deprecated in v15.0.0. */
+export function validateIconType(
+  icon: CanvasSystemIcon | CanvasExpressiveIcon,
+  expectedType: CanvasIconTypes
+) {
   if (icon.type !== expectedType) {
     throw `${icon.name}: Icon type "${icon.type}" does not match expected type "${expectedType}"`;
   }

@@ -1,8 +1,7 @@
-import React from 'react';
-
-import {Modal} from '@workday/canvas-kit-react/modal';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Modal} from '@workday/canvas-kit-react/modal';
+import {system} from '@workday/canvas-tokens-web';
 
 export const FullOverflow = () => {
   const handleAcknowledge = () => {
@@ -17,11 +16,11 @@ export const FullOverflow = () => {
     <Modal>
       <Modal.Target as={PrimaryButton}>Open License</Modal.Target>
       <Modal.OverflowOverlay>
-        <Modal.Card maxHeight="inherit" height="inherit">
+        <Modal.Card cs={{maxHeight: 'inherit', height: 'inherit'}}>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>MIT License</Modal.Heading>
           <Modal.Body tabIndex={0}>
-            <p style={{marginTop: 0}}>
+            <p style={{marginBlockStart: 0}}>
               Permission is hereby granted, free of charge, to any person obtaining a copy of this
               software and associated documentation files (the "Software"), to deal in the Software
               without restriction, including without limitation the rights to use, copy, modify,
@@ -67,7 +66,7 @@ export const FullOverflow = () => {
               suspendisse interdum consectetur libero id faucibus. Morbi tincidunt augue interdum
               velit. Nullam non nisi est sit amet.
             </p>
-            <p style={{marginBottom: 0}}>
+            <p style={{marginBlockEnd: 0}}>
               Aliquet enim tortor at auctor urna nunc id cursus metus. Leo urna molestie at
               elementum eu facilisis. Consectetur purus ut faucibus pulvinar elementum integer.
               Volutpat est velit egestas dui id ornare arcu odio. At consectetur lorem donec massa
@@ -81,7 +80,7 @@ export const FullOverflow = () => {
               ut aliquam purus sit.
             </p>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

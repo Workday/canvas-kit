@@ -1,10 +1,10 @@
 import React from 'react';
 
-import {createSubcomponent, ExtractProps, accessibleHide} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {ExtractProps, accessibleHide, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {Text, textStencil} from '@workday/canvas-kit-react/text';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldLabel, useFormFieldModel} from './hooks';
 
@@ -25,8 +25,8 @@ export const formFieldLabelStencil = createStencil({
   extends: textStencil,
   base: {
     fontWeight: system.fontWeight.medium,
-    color: system.color.text.default,
-    paddingInlineStart: system.space.zero,
+    color: system.color.fg.default,
+    paddingInlineStart: 0,
     display: 'flex',
     alignItems: 'center',
     minWidth: px2rem(180),
@@ -36,11 +36,11 @@ export const formFieldLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          fontSize: system.fontSize.body.large,
+          fontSize: system.legacy.fontSize.body.lg,
           fontWeight: system.fontWeight.normal,
-          color: brand.error.base,
+          color: system.legacy.color.brand.fg.critical.default,
           textDecoration: 'unset',
-          marginInlineStart: system.space.x1,
+          marginInlineStart: system.legacy.gap.xs,
         },
       },
     },
@@ -48,10 +48,10 @@ export const formFieldLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        maxHeight: system.space.x10,
+        maxHeight: system.legacy.size.md,
       },
       horizontalEnd: {
-        maxHeight: system.space.x10,
+        maxHeight: system.legacy.size.md,
         float: 'left',
         justifyContent: 'flex-end',
       },

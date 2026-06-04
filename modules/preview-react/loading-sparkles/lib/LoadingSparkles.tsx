@@ -1,7 +1,7 @@
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {sparkleIcon} from './sparkleIcon';
 
@@ -32,7 +32,7 @@ const LOADING_ANIMATION = keyframes({
  * An individual loading sparkle. ✨
  */
 const Sparkle = () => {
-  return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={system.space.x3} />;
+  return <SystemIcon data-part="sparkle" icon={sparkleIcon} size={px2rem(12)} />;
 };
 
 export const loadingSparklesStencil = createStencil({

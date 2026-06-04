@@ -1,5 +1,5 @@
-import {expectTransformFactory} from './expectTransformFactory';
 import transform from '../recategorizeButtons';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

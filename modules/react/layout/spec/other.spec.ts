@@ -1,4 +1,4 @@
-import {other, OtherStyleProps} from '@workday/canvas-kit-react/layout';
+import {OtherStyleProps, other} from '@workday/canvas-kit-react/layout';
 
 describe('Other Style Props Function', () => {
   it('should ignore non-other props', () => {

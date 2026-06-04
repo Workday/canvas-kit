@@ -1,8 +1,9 @@
 import React from 'react';
+
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {GlobalHeader} from '../GlobalHeader';
@@ -13,24 +14,30 @@ const gridLayoutStyles = createStyles({
   gridTemplateAreas: `'Header Header Header Header'
     'SideBar BodyContent BodyContent BodyContent'
     'Footer Footer Footer Footer'`,
-  gridGap: system.space.x4,
+  gridGap: system.gap.md,
   gridTemplateColumns: '1fr 9fr',
   gridTemplateRows: `auto ${px2rem(800)} auto`,
 });
 
-const regionStyles = createStyles({
-  border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
-  borderRadius: system.shape.x2,
-  padding: system.space.x4,
+const regionStencil = createStencil({
+  vars: {
+    gridArea: '',
+  },
+  base: ({gridArea}) => ({
+    border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
+    borderRadius: system.shape.md,
+    padding: system.padding.md,
+    gridArea,
+  }),
 });
 
 const verticalFlexStyles = createStyles({
   flexDirection: 'column',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 const headingStyles = createStyles({
-  margin: system.space.zero,
+  margin: '0',
 });
 
 export const FullPageDemo = () => {
@@ -46,18 +53,18 @@ export const FullPageDemo = () => {
 
   return (
     <Grid cs={gridLayoutStyles}>
-      <Grid as="header" gridArea="Header" cs={regionStyles}>
+      <Grid as="header" cs={regionStencil({gridArea: 'Header'})}>
         <GlobalHeader notifications={notifications} />
       </Grid>
-      <Grid as="nav" gridArea="SideBar" cs={regionStyles}>
+      <Grid as="nav" cs={regionStencil({gridArea: 'SideBar'})}>
         <Flex cs={verticalFlexStyles}>
           <SideBarContent />
         </Flex>
       </Grid>
-      <Grid as="main" gridArea="BodyContent" cs={regionStyles}>
+      <Grid as="main" cs={regionStencil({gridArea: 'BodyContent'})}>
         <Flex cs={verticalFlexStyles}>
           <BreadcrumbNavRegion />
-          <Flex gap={system.space.x4}>
+          <Flex cs={{gap: system.gap.md}}>
             <SecondaryButton onClick={handleAdd}>Add notification</SecondaryButton>
             <TertiaryButton onClick={handleClear}>Clear</TertiaryButton>
           </Flex>
@@ -72,7 +79,7 @@ export const FullPageDemo = () => {
           </Heading>
         </Flex>
       </Grid>
-      <Grid as="footer" gridArea="Footer" cs={regionStyles}>
+      <Grid as="footer" cs={regionStencil({gridArea: 'Footer'})}>
         <Heading size="small" cs={headingStyles}>
           Page Footer
         </Heading>

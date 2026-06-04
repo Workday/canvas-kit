@@ -1,9 +1,10 @@
-import {styled, createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {Box, BoxProps} from '@workday/canvas-kit-react/layout';
+import {createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 
 export interface ButtonLabelProps extends BoxProps {}
 
-const StyledButtonLabel = styled(Box.as('span'))<StyledType>({
+const buttonLabelStyles = createStyles({
   position: 'relative', // Fixes an IE issue with text within button moving on click
   textOverflow: 'ellipsis',
   overflow: 'hidden',
@@ -14,9 +15,9 @@ export const ButtonLabel = createComponent('span')({
   displayName: 'ButtonLabel',
   Component: ({children, ...elemProps}: ButtonLabelProps, ref, Element) => {
     return (
-      <StyledButtonLabel as={Element} ref={ref} {...elemProps}>
+      <Box as={Element} ref={ref} {...handleCsProp(elemProps, buttonLabelStyles)}>
         {children}
-      </StyledButtonLabel>
+      </Box>
     );
   },
 });

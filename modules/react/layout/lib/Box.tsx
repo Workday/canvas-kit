@@ -1,7 +1,8 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
 import isPropValid from '@emotion/is-prop-valid';
-import {createComponent, StyledType, useConstant} from '@workday/canvas-kit-react/common';
+import styled from '@emotion/styled';
+import * as React from 'react';
+
+import {StyledType, createComponent, useConstant} from '@workday/canvas-kit-react/common';
 import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
 
 // style props
@@ -15,8 +16,8 @@ import {layout} from './utils/layout';
 import {other} from './utils/other';
 import {position} from './utils/position';
 import {space} from './utils/space';
-import {text} from './utils/text';
 import {CommonStyleProps} from './utils/styleProps';
+import {text} from './utils/text';
 
 /**
  * Box Props
@@ -116,9 +117,11 @@ export const boxStyleFn = <P extends BoxProps>(props: P) => {
 };
 
 // Meant to be used with elements. The `shouldForwardProps` will remove all style props
+// TODO: Update this to use the new styling approach.
 const StyledBoxElement = styled('div', {shouldForwardProp})<StyledType & BoxProps>(boxStyleFn);
 
 // Meant to be used with components. There is no `shouldForwardProps` - all props will be forwarded to the component
+// TODO: Update this to use the new styling approach.
 const StyledBoxComponent = styled('div')<StyledType & BoxProps>(boxStyleFn);
 
 /**

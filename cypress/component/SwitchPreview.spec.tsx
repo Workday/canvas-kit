@@ -1,0 +1,50 @@
+import {Basic} from '../../modules/preview-react/switch/stories/examples/Basic';
+import {Caution} from '../../modules/preview-react/switch/stories/examples/Caution';
+import {Disabled} from '../../modules/preview-react/switch/stories/examples/Disabled';
+import {Error} from '../../modules/preview-react/switch/stories/examples/Error';
+
+const getSwitch = () => {
+  return cy.findByRole('switch');
+};
+
+describe('Switch', () => {
+  [Basic, Caution, Error].forEach(Example => {
+    context(`given the '${Example.name}' story is rendered`, () => {
+      beforeEach(() => {
+        cy.mount(<Example />);
+      });
+
+      it('should not have any axe errors', () => {
+        cy.checkA11y();
+      });
+
+      context('when clicked', () => {
+        beforeEach(() => {
+          getSwitch().click();
+        });
+
+        it('should be checked', () => {
+          getSwitch().should('be.checked');
+        });
+      });
+    });
+  });
+
+  context(`given the 'Disabled' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<Disabled />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y(null, {
+        rules: {
+          'scrollable-region-focusable': {enabled: false},
+        },
+      });
+    });
+
+    it('should be disabled', () => {
+      getSwitch().should('be.disabled');
+    });
+  });
+});

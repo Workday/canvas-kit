@@ -1,12 +1,14 @@
 import styled from '@emotion/styled';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
-import {Box, BoxProps} from './Box';
 
-import {grid, GridStyleProps} from './utils/grid';
+import {StyledType, createComponent} from '@workday/canvas-kit-react/common';
+
+import {Box, BoxProps} from './Box';
+import {GridStyleProps, grid} from './utils/grid';
 
 export type GridProps = Omit<BoxProps, 'display'> & GridStyleProps;
 export type GridItemProps = BoxProps;
 
+// TODO: Update this to use the new styling approach.
 const StyledGrid = styled(Box)<StyledType & GridProps>(
   {
     display: 'grid',

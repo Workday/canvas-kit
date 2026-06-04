@@ -1,32 +1,45 @@
-import React from 'react';
-
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {
   ListBox,
   useGridModel,
-  useListItemSelect,
-  useListItemRovingFocus,
   useListItemRegister,
+  useListItemRovingFocus,
+  useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {createStencil, createStyles, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const useItem = composeHooks(useListItemSelect, useListItemRovingFocus, useListItemRegister);
+
+const itemStencil = createStencil({
+  vars: {
+    background: '',
+  },
+  base: ({background}) => ({
+    background,
+    width: system.size.md,
+    border: `${px2rem(1)} solid ${system.color.border.strong}`,
+  }),
+});
 
 const Item = createSubcomponent('button')({
   modelHook: useGridModel,
   elemPropsHook: useItem,
 })((elemProps, Element, model) => {
+  const backgroundColor = model.state.selectedIds.includes(elemProps['data-id'])
+    ? system.color.surface.alt.default
+    : system.color.surface.default;
+
   return (
-    <Box
-      as={Element}
-      {...elemProps}
-      width={40}
-      border="solid 1px black"
-      style={{
-        background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
-      }}
-    />
+    <Box as={Element} {...handleCsProp(elemProps, itemStencil({background: backgroundColor}))} />
   );
+});
+
+const listBoxStencil = createStyles({
+  flexDirection: 'row',
+  flexWrap: 'wrap',
+  width: px2rem(200),
 });
 
 export const BasicGrid = () => {
@@ -39,7 +52,7 @@ export const BasicGrid = () => {
   });
 
   return (
-    <ListBox model={model} as={Flex} flexDirection="row" flexWrap="wrap" width={200}>
+    <ListBox model={model} as={Flex} cs={listBoxStencil}>
       {item => <Item>{item.id}</Item>}
     </ListBox>
   );

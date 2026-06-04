@@ -1,5 +1,5 @@
-import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 
 export const baseTableBodyStencil = createStencil({
@@ -7,12 +7,12 @@ export const baseTableBodyStencil = createStencil({
     'tr ': {
       '&:last-of-type': {
         'td, th': {
-          borderBottom: 'none',
+          borderBlockEnd: 'none',
         },
       },
       '&:first-of-type': {
         'td, th': {
-          borderTop: 'none',
+          borderBlockStart: 'none',
         },
       },
     },

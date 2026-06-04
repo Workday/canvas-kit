@@ -1,12 +1,13 @@
 import * as React from 'react';
 
-import {PaginationModel} from './types';
-import {ListItem, ListItemProps} from './common/List';
-import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {PaginationContext} from './usePaginationModel';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {ListItem, ListItemProps} from './common/List';
+import {PaginationModel} from './types';
+import {PaginationContext} from './usePaginationModel';
 
 export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
   model?: PaginationModel;
@@ -16,10 +17,9 @@ export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
 export const paginationPageListStencil = createStencil({
   base: {
     display: 'flex',
-    margin: system.space.zero,
-    paddingInlineStart: system.space.zero,
-    paddingInlineEnd: system.space.zero,
-    gap: system.space.x1,
+    margin: 0,
+    paddingInline: 0,
+    gap: system.legacy.gap.xs,
   },
 });
 
@@ -35,13 +35,13 @@ export const PageList = createComponent('ol')({
   },
 });
 
-export interface PageListItemProps extends ListItemProps {}
+export interface PageListItemProps extends ListItemProps, CSProps {}
 
 export const PageListItem = createComponent('li')({
   displayName: 'Pagination.PageListItem',
   Component({children, ...elemProps}: PageListItemProps, ref, Element) {
     return (
-      <ListItem ref={ref} as={Element} {...elemProps}>
+      <ListItem ref={ref} as={Element} {...handleCsProp(elemProps)}>
         {children}
       </ListItem>
     );

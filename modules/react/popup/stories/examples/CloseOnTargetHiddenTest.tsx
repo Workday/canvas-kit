@@ -4,6 +4,33 @@ import {
   useCloseOnTargetHidden,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const containerStyles = createStyles({
+  width: px2rem(400),
+  height: px2rem(400),
+  overflow: 'scroll',
+  padding: system.padding.xxs,
+  position: 'relative',
+  '& > div': {
+    width: px2rem(950),
+    height: px2rem(950),
+    '& > p:first-child': {
+      marginBlockEnd: px2rem(400),
+    },
+  },
+});
+
+const popupInnerStyles = createStyles({
+  position: 'absolute',
+  width: px2rem(950),
+  height: px2rem(950),
+  display: 'flex',
+  top: 0,
+  left: 0,
+  justifyContent: 'center',
+});
 
 export const CloseOnTargetHiddenTest = () => {
   const model = usePopupModel();
@@ -12,25 +39,12 @@ export const CloseOnTargetHiddenTest = () => {
   useCloseOnTargetHidden(model);
 
   return (
-    <div
-      style={{width: 400, height: 400, overflow: 'scroll', padding: 4, position: 'relative'}}
-      data-testid="scroll-area"
-    >
-      <div style={{width: 950, height: 950}}>
-        <p style={{marginBottom: 400}}>Scroll down</p>
+    <div className={containerStyles} data-testid="scroll-area">
+      <div>
+        <p>Scroll down</p>
         <p>Scroll right and click on the button</p>
         <Popup model={model}>
-          <div
-            style={{
-              position: 'absolute',
-              width: 950,
-              height: 950,
-              display: 'flex',
-              top: 0,
-              left: 0,
-              justifyContent: 'center',
-            }}
-          >
+          <div className={popupInnerStyles}>
             <Popup.Target data-testid="target" style={{alignSelf: 'center'}}>
               Open Popup
             </Popup.Target>

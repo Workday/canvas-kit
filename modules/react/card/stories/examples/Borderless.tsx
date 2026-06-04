@@ -1,11 +1,10 @@
-import React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
-  background: system.color.bg.alt.softer,
-  padding: system.space.x4,
+  background: system.color.surface.raised,
+  padding: system.padding.md,
 });
 
 export const Borderless = () => {

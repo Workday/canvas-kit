@@ -1,16 +1,17 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './SidePanel.mdx';
 
 import {SidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+import mdxDoc from './SidePanel.mdx';
+import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
-import {HiddenName as HiddenNameExample} from './examples/HiddenName';
-import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 import {ExternalControl as ExternalControlExample} from './examples/ExternalControl';
-import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
-import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
+import {HiddenName as HiddenNameExample} from './examples/HiddenName';
 import {OnExpandedChange as OnExpandedChangeExample} from './examples/OnExpandedChange';
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
+import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
+import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 
 export default {
   title: 'Preview/Side Panel (Deprecated)',

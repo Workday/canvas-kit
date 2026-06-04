@@ -1,6 +1,11 @@
 import React from 'react';
-import {Table} from '@workday/canvas-kit-react';
-import {StatusIndicator, StatusIndicatorVariant} from '@workday/canvas-kit-preview-react';
+
+import {
+  StatusIndicator,
+  StatusIndicatorVariant,
+} from '@workday/canvas-kit-preview-react/status-indicator';
+import {Table} from '@workday/canvas-kit-react/table';
+
 // @ts-ignore: Cannot find module error
 import {version} from '../../../lerna.json';
 
@@ -45,7 +50,7 @@ export const VersionTable = () => {
   const minVersion = 6;
   const currentMajorVersion = Number(version?.split('.')[0]);
   React.useEffect(() => {
-    let arr: VersionType[] = [];
+    const arr: VersionType[] = [];
     for (let i = minVersion; i <= currentMajorVersion; i++) {
       arr.push({
         versionNumber: i,
@@ -56,6 +61,7 @@ export const VersionTable = () => {
       });
     }
     setVersions(arr);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Table>

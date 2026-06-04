@@ -1,15 +1,32 @@
 /* eslint-disable no-param-reassign */
-import React from 'react';
 import {toId} from '@storybook/csf';
-import {Table} from '@workday/canvas-kit-react/table';
-import {Hyperlink} from '@workday/canvas-kit-react/button';
+import React from 'react';
 
-import {specifications, SpecDescribe, SpecIt} from './specs';
+import {Hyperlink} from '@workday/canvas-kit-react/button';
+import {Table} from '@workday/canvas-kit-react/table';
+
+import {type FileBlock} from '../utils/parseSpecFile';
 import {GithubBranch, GithubUrl, StorybookUrl} from './docs';
+import {SpecDescribe, SpecIt} from './specs';
+
+function useFetchSpecification({file, initialSpecs}: {file: string; initialSpecs?: FileBlock}) {
+  const [specs, setSpecs] = React.useState(initialSpecs);
+
+  React.useEffect(() => {
+    if (file && !initialSpecs) {
+      import(/* @vite-ignore */ file).then(({default: contents}: {default: FileBlock}) => {
+        setSpecs(contents);
+      });
+    }
+  }, [file, initialSpecs]);
+
+  return specs;
+}
 
 export interface SpecificationsProps {
   file: string;
   name?: string;
+  initialSpecs?: FileBlock;
 }
 
 interface Row {
@@ -56,18 +73,17 @@ function createTableRows(
   return rows;
 }
 
-export const Specifications = ({file, name}: SpecificationsProps) => {
+export const Specifications = ({file, name, initialSpecs}: SpecificationsProps) => {
   const storybookBaseUrl = React.useContext(StorybookUrl);
   const githubUrl = React.useContext(GithubUrl);
   const githubBranch = React.useContext(GithubBranch);
 
-  const specFile = specifications.find(f => f.name === file);
-
-  if (!specFile) {
+  const contents = useFetchSpecification({file, initialSpecs});
+  if (!contents) {
     return null;
   }
 
-  const block = name ? specFile.children.find(d => d.name === name) : specFile.children[0];
+  const block = name ? contents.children.find(d => d.name === name) : contents.children[0];
 
   if (!block) {
     return null;
@@ -86,23 +102,23 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
     const [, first, kind, name, last] = matches;
 
     return (
-      <>
+      <div>
         {first.replace(/given /i, '')}
         <Hyperlink
           href={`${storybookBaseUrl}?path=/story/${toId(
             kind,
-            name.replace('DefaultStory', 'Default Story')
+            name.replace('DefaultStory', 'Default Story').replace(/([A-Z])/g, '-$1')
           )}`}
         >
           {name.replace('DefaultStory', 'Default')}
         </Hyperlink>
         {last}
-      </>
+      </div>
     );
   };
 
   return block.type === 'describe' ? (
-    <>
+    <div className="sb-unstyled">
       <Table>
         <Table.Head>
           <Table.Row>
@@ -135,10 +151,7 @@ export const Specifications = ({file, name}: SpecificationsProps) => {
           ))}
         </Table.Body>
       </Table>
-      Source:{' '}
-      <Hyperlink href={`${githubUrl}blob/${githubBranch}/cypress/integration/${file}`}>
-        {file}
-      </Hyperlink>
-    </>
+      Source: <Hyperlink href={`${githubUrl}blob/${githubBranch}/${file}`}>{file}</Hyperlink>
+    </div>
   ) : null;
 };

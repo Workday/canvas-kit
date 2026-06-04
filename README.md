@@ -2,7 +2,7 @@
 
 This project provides a set of components for the Workday Canvas Design System that can be used to
 implement user experiences consistent with
-[Workday's design principles](https://design.workday.com/).
+[Workday's design principles](https://canvas.workdaydesign.com/).
 
 <a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
@@ -27,7 +27,7 @@ implement user experiences consistent with
 
 The following are supported versions of dependencies.
 
-- React: >=16.8 < 17
+- React: >=17.0
 - Typescript: >=5.0 (optional)
 - Emotion: ^11.7.0
 
@@ -62,7 +62,9 @@ import {cssVar} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
 
 import {App} from './App';
 
@@ -75,7 +77,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 
@@ -92,11 +94,9 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 export const App = () => {
   return (
     <CanvasProvider>
-      <>
-        <main>
-          <p>Get Started With Canvas Kit</p>
-        </main>
-      </>
+      <main>
+        <p>Get Started With Canvas Kit</p>
+      </main>
     </CanvasProvider>
   );
 };

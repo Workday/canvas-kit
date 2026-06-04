@@ -1,16 +1,16 @@
-import React from 'react';
-
 import {
+  ListBox,
+  ListItemProps,
+  getCursor,
   multiSelectionManager,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
   useListModel,
-  ListItemProps,
-  ListBox,
-  getCursor,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const useMultiSelectItem = composeHooks(
   useListItemSelect,
@@ -18,18 +18,30 @@ const useMultiSelectItem = composeHooks(
   useListItemRegister
 );
 
+const itemStencil = createStencil({
+  vars: {
+    background: '',
+  },
+  base: ({background}) => ({
+    background,
+    width: system.size.md,
+    border: `${px2rem(1)} solid ${system.color.border.strong}`,
+  }),
+});
+
 const Item = createSubcomponent('button')({
   displayName: 'MultiSelectableItem',
   modelHook: useListModel,
   elemPropsHook: useMultiSelectItem,
 })<ListItemProps>((elemProps, Element, model) => {
+  const backgroundColor = model.state.selectedIds.includes(elemProps['data-id'])
+    ? system.color.surface.alt.default
+    : system.color.surface.default;
+
   return (
     <Element
       role="listitem"
-      {...elemProps}
-      style={{
-        background: model.state.selectedIds.includes(elemProps['data-id']) ? 'gray' : 'white',
-      }}
+      {...handleCsProp(elemProps, itemStencil({background: backgroundColor}))}
     />
   );
 });

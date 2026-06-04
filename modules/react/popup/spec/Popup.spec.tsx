@@ -1,15 +1,16 @@
-import * as React from 'react';
 import {renderToString} from 'react-dom/server';
 
-import {
-  usePopupModel,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  useInitialFocus,
-  useReturnFocus,
-  Popup,
-} from '@workday/canvas-kit-react/popup';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {
+  Popup,
+  useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
+} from '@workday/canvas-kit-react/popup';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 describe('Popup', () => {
   it('should render on a server without crashing', () => {
@@ -25,7 +26,7 @@ describe('Popup', () => {
         <Popup model={model}>
           <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
           <Popup.Popper placement={'bottom'}>
-            <Popup.Card width={400} padding="s">
+            <Popup.Card cs={{width: px2rem(400), padding: system.padding.md}}>
               <Popup.CloseIcon aria-label="Close" />
               <Popup.Heading>Delete Item</Popup.Heading>
               <Popup.Body>

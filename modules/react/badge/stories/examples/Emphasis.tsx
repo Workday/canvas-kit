@@ -1,17 +1,17 @@
 import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Text} from '@workday/canvas-kit-react/text';
 
 const containerStyles = createStyles({
   display: 'flex',
-  gap: system.space.x2,
-  padding: system.space.x4,
+  gap: system.gap.sm,
+  padding: system.padding.md,
   flexDirection: 'column',
 });
 
 const textStyles = createStyles({
-  paddingInlineEnd: system.space.x2,
+  paddingInlineEnd: system.padding.xs,
 });
 
 export const Emphasis = () => {

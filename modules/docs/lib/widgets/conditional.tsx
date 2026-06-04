@@ -1,5 +1,5 @@
 import {ConditionalTypeValue} from '../../docgen/docTypes';
-import {registerWidget, Value} from '../Value';
+import {Value, registerWidget} from '../Value';
 
 registerWidget<ConditionalTypeValue>('conditional', ({value}) => {
   return (

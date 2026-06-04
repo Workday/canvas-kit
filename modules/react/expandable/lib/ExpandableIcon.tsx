@@ -1,17 +1,17 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {chevronUpIcon} from '@workday/canvas-system-icons-web';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {useExpandableIcon} from './hooks/useExpandableIcon';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {IconPositions} from '@workday/canvas-kit-react/button';
-import {useExpandableModel} from './hooks/useExpandableModel';
-import {createStencil} from '@workday/canvas-kit-styling';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {system} from '@workday/canvas-tokens-web';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon, chevronUpIcon} from '@workday/canvas-system-icons-web';
+import {component, system} from '@workday/canvas-tokens-web';
+
+import {useExpandableIcon} from './hooks/useExpandableIcon';
+import {useExpandableModel} from './hooks/useExpandableModel';
 
 export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon, never>, 'icon'> {
   /**
-   * Icon to display from `@workday/canvas-accent-icons-web`
+   * Icon to display from `@workday/canvas-system-icons-web`
    * @default chevronUpIcon
    */
   icon?: CanvasSystemIcon;
@@ -26,7 +26,9 @@ export interface ExpandableIconProps extends Omit<ExtractProps<typeof SystemIcon
 export const expandableIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    padding: system.space.x1,
+    padding: system.legacy.padding.xxs,
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
   },
   modifiers: {
     isExpanded: {
@@ -45,20 +47,20 @@ export const expandableIconStencil = createStencil({
       styles: {
         marginInlineStart: 'auto',
         transform: 'rotate(180deg)',
-        paddingInlineEnd: system.space.x3,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {position: 'end', isExpanded: true},
       styles: {
         marginInlineStart: 'auto',
-        paddingInlineStart: system.space.x3,
+        paddingInlineStart: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {position: 'start', isExpanded: false},
       styles: {
-        marginInlineEnd: system.space.x2,
+        marginInlineEnd: system.legacy.padding.xs,
         transform: 'rotate(90deg)',
         ':dir(rtl)': {
           transform: 'rotate(-90deg)',
@@ -68,7 +70,7 @@ export const expandableIconStencil = createStencil({
     {
       modifiers: {position: 'start', isExpanded: true},
       styles: {
-        marginInlineEnd: system.space.x2,
+        marginInlineEnd: system.legacy.padding.xs,
         transform: 'rotate(180deg)',
       },
     },

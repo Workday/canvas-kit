@@ -2,6 +2,7 @@
  * @jest-environment node
  */
 import {renderToString} from 'react-dom/server';
+
 import {AIIngressButton} from '../lib/AIIngressButton';
 
 describe('AIIngressButton', () => {

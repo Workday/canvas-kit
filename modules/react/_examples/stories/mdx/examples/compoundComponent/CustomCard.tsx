@@ -1,15 +1,17 @@
 import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
 import {
+  ExtractProps,
   createContainer,
   createElemPropsHook,
   createModelHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Card} from '@workday/canvas-kit-react/card';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export type Theme = 'dark' | 'light';
 interface CustomCardProps extends ExtractProps<typeof Card> {
@@ -22,8 +24,8 @@ interface CustomCardProps extends ExtractProps<typeof Card> {
 const useCustomCardModel = createModelHook({
   defaultConfig: {theme: 'dark' as Theme},
 })(config => {
-  const lightThemeColor = colors.frenchVanilla100;
-  const darkThemeColor = colors.blackPepper300;
+  const lightThemeColor = system.color.fg.inverse;
+  const darkThemeColor = system.color.fg.default;
   const inverseColor = color => (color === darkThemeColor ? lightThemeColor : darkThemeColor);
 
   const [theme, setTheme] = React.useState(config.theme);
@@ -94,11 +96,7 @@ const CustomCard = createContainer(Card)({
   modelHook: useCustomCardModel,
   elemPropsHook: useCustomCard,
 })<CustomCardProps>(({theme, children, ...elemProps}) => {
-  return (
-    <Card depth={2} {...elemProps}>
-      {children}
-    </Card>
-  );
+  return <Card {...handleCsProp(elemProps, [{boxShadow: system.depth[2]}])}>{children}</Card>;
 });
 
 /**
@@ -115,7 +113,7 @@ export const Template = () => {
   return (
     <CustomCard model={model}>
       <CustomCard.Heading>
-        <Box color={model.state.contrastColor}>Change your theme {icon}</Box>
+        <Box cs={{color: model.state.contrastColor}}>Change your theme {icon}</Box>
       </CustomCard.Heading>
       <CustomCard.Body>
         <CustomCard.Button ref={buttonRef}>Toggle</CustomCard.Button>

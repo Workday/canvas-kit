@@ -1,18 +1,24 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {space} from '@workday/canvas-kit-react/tokens';
 import {
   ExtractProps,
   createSubcomponent,
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {
+  calc,
+  createStencil,
+  createVars,
+  cssVar,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {getTransformFromPlacement} from './getTransformFromPlacement';
 import {usePopupCard, usePopupModel} from './hooks';
-import {createStencil, createVars, cssVar, keyframes} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 export type FlexAndBoxProps = ExtractProps<typeof Card, never> & FlexStyleProps;
 export interface PopupCardProps extends FlexAndBoxProps {
@@ -36,16 +42,30 @@ const fadeIn = keyframes({
 });
 
 function getSpace(value?: string | number) {
-  if (value && value in space) {
-    return space[value as keyof typeof space];
+  // TODO (deprecated tokens): Revisit tokens after removal of style props
+  const spaceMap = {
+    zero: system.legacy.gap.none,
+    xxxs: system.legacy.gap.xs,
+    xxs: system.legacy.gap.sm,
+    xs: px2rem(12),
+    s: system.legacy.gap.md,
+    m: system.legacy.gap.lg,
+    l: system.legacy.gap.xl,
+    xl: px2rem(40),
+    xxl: system.legacy.gap.xxl,
+    xxxl: px2rem(80),
+  };
+
+  if (value && value in spaceMap) {
+    return spaceMap[value as keyof typeof spaceMap];
   } else {
     return value;
   }
 }
 
 function getMaxHeight(margin?: string | number) {
-  // set the default margin offset to space.xl
-  let marginOffset: string | number = cssVar(system.space.x10);
+  // set the default margin offset to 40px
+  let marginOffset: string | number = base.legacy.size500;
 
   if (margin) {
     // parse the margin prop
@@ -71,13 +91,18 @@ export const popupCardStencil = createStencil({
     transformOriginVertical: '',
   },
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    color: system.color.fg.default,
     position: 'relative',
-    maxWidth: `calc(100vw - ${system.space.x8})`,
-    gap: system.space.x2,
-    boxShadow: system.depth[5],
-    minHeight: system.space.zero,
-    padding: system.space.x6,
+    maxWidth: calc.subtract('100vw', system.legacy.size.sm),
+    gap: system.legacy.gap.lg,
+    boxShadow: system.depth[3],
+    minHeight: 0,
+    padding: system.legacy.padding.xl,
+    borderRadius: system.legacy.shape.xxxl,
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,
@@ -102,7 +127,7 @@ export const PopupCard = createSubcomponent('div')({
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
-  const translate = getTransformOrigin(transformOrigin, cssVar(system.space.x2));
+  const translate = getTransformOrigin(transformOrigin, system.legacy.gap.sm);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
 
   return (

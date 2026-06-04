@@ -1,11 +1,10 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
 import {jsx} from '@emotion/react';
+import styled from '@emotion/styled';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {base} from '@workday/canvas-tokens-web';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, cssVar} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const backgroundColors = {
   cssProp: cssVar(base.orange500),
@@ -14,6 +13,7 @@ const backgroundColors = {
   createStyles: cssVar(base.purple500),
 };
 
+// Showcase of old Emotion approach
 const StyledPrimaryButton = styled(PrimaryButton)({
   backgroundColor: backgroundColors.styledComponent,
 });
@@ -82,14 +82,14 @@ const cssProp = {css: {backgroundColor: backgroundColors.cssProp}} as {};
 
 export const StylingOverrides = () => {
   return (
-    <Flex flexDirection="column" minHeight="100vh" gap="s">
-      <Flex flexDirection="column" gap="s">
+    <Flex cs={{flexDirection: 'column', minHeight: '100vh', gap: system.gap.md}}>
+      <Flex cs={{flexDirection: 'column', gap: system.gap.md}}>
         <h2>Buttons</h2>
-        <Flex flexDirection="row" gap="s">
+        <Flex cs={{flexDirection: 'row', gap: system.gap.md}}>
           <PrimaryButton cs={styles}>createStyles</PrimaryButton>
           {jsx(PrimaryButton, {...cssProp}, 'CSS Prop')}
           <StyledPrimaryButton>Styled Component</StyledPrimaryButton>
-          <PrimaryButton backgroundColor={backgroundColors.styleProps}>Style Props</PrimaryButton>
+          <PrimaryButton background={backgroundColors.styleProps}>Style Props</PrimaryButton>
         </Flex>
         <div>
           {jsx(
@@ -105,12 +105,12 @@ export const StylingOverrides = () => {
           <StyledPrimaryButton cs={styles}>createStyles + Styled Component</StyledPrimaryButton>
         </div>
         <div>
-          <PrimaryButton cs={styles} backgroundColor={backgroundColors.styleProps}>
+          <PrimaryButton cs={styles} background={backgroundColors.styleProps}>
             createStyles + Style Props
           </PrimaryButton>
         </div>
         <div>
-          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps} cs={styles}>
+          <StyledPrimaryButton background={backgroundColors.styleProps} cs={styles}>
             createStyles + Styled Component + Style Props
           </StyledPrimaryButton>
         </div>
@@ -119,7 +119,7 @@ export const StylingOverrides = () => {
             StyledPrimaryButton,
             {
               ...cssProp,
-              backgroundColor: backgroundColors.styleProps,
+              background: backgroundColors.styleProps,
               cs: styles,
             },
             'createStyles + CSS Prop + Styled Component + Style Props'
@@ -131,13 +131,13 @@ export const StylingOverrides = () => {
             PrimaryButton,
             {
               ...cssProp,
-              backgroundColor: backgroundColors.styleProps,
+              background: backgroundColors.styleProps,
             },
             'CSS Prop + Style Props'
           )}
         </div>
         <div>
-          <StyledPrimaryButton backgroundColor={backgroundColors.styleProps}>
+          <StyledPrimaryButton background={backgroundColors.styleProps}>
             Styled Component + Style Props
           </StyledPrimaryButton>
         </div>
