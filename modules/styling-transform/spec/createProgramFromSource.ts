@@ -29,6 +29,9 @@ export function createVars<T extends string>(...args: T[]): CsVars<T, never>;
 export function createVars<T extends string, ID extends string>(...args: T[]): CsVars<T, ID>;
 export function cssVar(input: string): string;
 export function createStyles(...args: any[]): string;
+export const CORNER_SHAPE = 'superellipse(1.1)';
+export function withCornerShape(borderRadius: string | number): {borderRadius: string | number; cornerShape: string};
+export function createStencil(...args: any[]): any;
 `;
 
 function getLocalFileName(sources: {filename: string}[], name: string): string | undefined {

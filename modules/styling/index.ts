@@ -1,5 +1,6 @@
 export * from './lib/calc';
 export * from './lib/cs';
+export * from './lib/cornerShape';
 export * from './lib/px2rem';
 export * from './lib/slugify';
 export * from './lib/uniqueId';

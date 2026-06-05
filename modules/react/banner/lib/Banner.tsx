@@ -3,7 +3,7 @@ import * as React from 'react';
 import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {BannerActionText} from './BannerActionText';
@@ -35,6 +35,7 @@ export const bannerStencil = createStencil({
     borderStartEndRadius: system.legacy.shape.sm,
     borderEndStartRadius: system.legacy.shape.sm,
     borderEndEndRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     gap: system.legacy.gap.sm,
     cursor: 'pointer',
     transition: 'background-color 120ms linear',

@@ -14,6 +14,7 @@ import {
   cssVar,
   keyframes,
   px2rem,
+  withCornerShape,
 } from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -102,7 +103,7 @@ export const popupCardStencil = createStencil({
     boxShadow: system.depth[3],
     minHeight: 0,
     padding: system.legacy.padding.xl,
-    borderRadius: system.legacy.shape.xxxl,
+    ...withCornerShape(system.legacy.shape.xxxl),
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,

@@ -3,7 +3,12 @@ import React from 'react';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {
+  ExtractStencilProps,
+  createStencil,
+  px2rem,
+  withCornerShape,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
@@ -63,7 +68,7 @@ const statusIndicatorStencil = createStencil({
     gap: system.legacy.gap.xs,
     maxWidth: px2rem(200),
     alignItems: 'center',
-    borderRadius: system.legacy.shape.sm,
+    ...withCornerShape(system.legacy.shape.sm),
     height: system.legacy.size.xxs,
     padding: `0 ${system.legacy.padding.xs}`,
     outline: `${px2rem(1)} solid transparent`,

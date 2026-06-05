@@ -6,7 +6,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {useFocusRedirect, useReturnFocus} from '@workday/canvas-kit-react/popup';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, withCornerShape} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -34,7 +34,7 @@ export const useMenuList = composeHooks(
 export const menuListStencil = createStencil({
   base: {
     background: system.legacy.color.surface.popover,
-    borderRadius: system.legacy.shape.xxl,
+    ...withCornerShape(system.legacy.shape.xxl),
     padding: 0,
     gap: system.legacy.gap.xs,
   },

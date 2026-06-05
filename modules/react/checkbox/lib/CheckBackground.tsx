@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
@@ -21,7 +21,7 @@ export const checkboxBackgroundStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.sm,
+    ...withCornerShape(system.legacy.shape.sm),
     boxSizing: 'border-box',
     display: 'flex',
     height: base.legacy.size225,

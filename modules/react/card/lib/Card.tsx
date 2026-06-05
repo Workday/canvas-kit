@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
@@ -28,7 +28,7 @@ export const cardStencil = createStencil({
     gap: system.legacy.gap.lg,
     padding: system.legacy.padding.xl,
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.xxl,
+    ...withCornerShape(system.legacy.shape.xxl),
     border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
   },
   modifiers: {

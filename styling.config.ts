@@ -1,6 +1,6 @@
 import crypto from 'node:crypto';
 
-import {createConfig} from '@workday/canvas-kit-styling-transform';
+import {createConfig, handleWithCornerShape} from '@workday/canvas-kit-styling-transform';
 
 import pkg from './lerna.json';
 import {handleFocusRing} from './utils/style-transform/handleFocusRing';
@@ -26,7 +26,7 @@ const config = createConfig({
   },
   seed: crypto.createHash('sha256').update(pkg.version).digest('hex').slice(0, 6),
   fallbackFiles: [],
-  objectTransforms: [handleFocusRing],
+  objectTransforms: [handleFocusRing, handleWithCornerShape],
 });
 
 export default config;

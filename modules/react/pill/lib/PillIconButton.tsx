@@ -2,7 +2,7 @@ import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
 import {xSmallIcon} from '@workday/canvas-system-icons-web';
 import {component, system} from '@workday/canvas-tokens-web';
 
@@ -20,7 +20,7 @@ export const pillIconButtonStencil = createStencil({
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
-    borderRadius: px2rem(2),
+    ...withCornerShape(px2rem(2)),
     height: system.legacy.size.xxs,
     width: system.legacy.size.xxs,
     padding: 0,

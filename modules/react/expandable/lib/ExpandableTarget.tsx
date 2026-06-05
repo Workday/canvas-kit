@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useExpandableModel} from './hooks/useExpandableModel';
@@ -28,7 +28,7 @@ export const expandableTargetStencil = createStencil({
   base: {
     background: system.legacy.color.surface.transparent,
     borderColor: system.color.border.transparent,
-    borderRadius: system.legacy.shape.xxl,
+    ...withCornerShape(system.legacy.shape.xxl),
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',

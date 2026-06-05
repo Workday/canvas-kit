@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {BaseButton, buttonStencil} from './BaseButton';
@@ -22,6 +22,7 @@ export const toolbarIconButtonStencil = createStencil({
     padding: 0,
     height: system.legacy.size.sm,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     [systemIconStencil.vars.color]: system.color.fg.default,
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 

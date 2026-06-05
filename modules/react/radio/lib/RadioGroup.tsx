@@ -8,6 +8,7 @@ import {
   styled,
 } from '@workday/canvas-kit-react/common';
 import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+import {CORNER_SHAPE} from '@workday/canvas-kit-styling';
 
 import {Radio, RadioProps} from './Radio';
 
@@ -44,6 +45,7 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
     display: 'inline-block',
     boxSizing: 'border-box',
     borderRadius: borderRadius.m,
+    cornerShape: CORNER_SHAPE,
     padding: `${space.xxxs} ${space.xs}`,
     margin: `0 -${space.xs}`,
     '& > div': {

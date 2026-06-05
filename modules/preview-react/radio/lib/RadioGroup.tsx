@@ -1,6 +1,6 @@
 import {ErrorType, Themeable, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, calc, createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {RadioButton} from './RadioButton';
@@ -21,7 +21,7 @@ const radioGroupStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.legacy.shape.md,
+    ...withCornerShape(system.legacy.shape.md),
     gap: system.legacy.gap.sm,
     padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,

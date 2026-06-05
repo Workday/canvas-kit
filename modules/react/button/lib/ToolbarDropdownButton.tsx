@@ -1,6 +1,7 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {
+  CORNER_SHAPE,
   calc,
   colorSpace,
   createStencil,
@@ -28,6 +29,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     minWidth: system.legacy.size.sm,
     gap: 0,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
       system.color.fg.default

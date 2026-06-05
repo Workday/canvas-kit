@@ -5,7 +5,7 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -63,6 +63,7 @@ export const segmentedControlItemStencil = createStencil({
     gap: system.legacy.gap.xs,
 
     [buttonStencil.vars.borderRadius]: system.legacy.shape.md,
+    cornerShape: CORNER_SHAPE,
     [buttonStencil.vars.label]: system.color.fg.muted.default,
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
