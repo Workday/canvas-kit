@@ -2,13 +2,7 @@ import * as React from 'react';
 
 import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {
-  calc,
-  createStencil,
-  handleCsProp,
-  px2rem,
-  withCornerShape,
-} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -26,7 +20,8 @@ export const colorPickerColorSwatchStencil = createStencil({
     [systemIconStencil.vars.color]: iconColor,
     width: system.legacy.size.xxs,
     height: system.legacy.size.xxs,
-    ...withCornerShape(system.legacy.shape.sm),
+    borderRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     backgroundColor: color,
     display: 'flex',
     alignItems: 'center',

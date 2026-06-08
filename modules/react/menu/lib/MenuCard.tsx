@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {calc, createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -38,7 +38,8 @@ export const menuCardStencil = createStencil({
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
     padding: system.legacy.padding.xxs,
-    ...withCornerShape(system.legacy.shape.xxl),
+    borderRadius: system.legacy.shape.xxl,
+    cornerShape: CORNER_SHAPE,
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,

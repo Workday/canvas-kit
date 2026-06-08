@@ -2,7 +2,6 @@ import styleTransformer from './lib/styleTransform';
 import type {Config} from './lib/utils/types';
 
 export type * from './lib/utils/types';
-export {handleWithCornerShape} from './lib/utils/handleWithCornerShape';
 export {parseNodeToStaticValue} from './lib/utils/parseNodeToStaticValue';
 export {parseObjectToStaticValue} from './lib/utils/parseObjectToStaticValue';
 export {createObjectTransform} from './lib/createObjectTransform';

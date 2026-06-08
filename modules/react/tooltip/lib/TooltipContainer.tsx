@@ -7,12 +7,12 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
+  CORNER_SHAPE,
   calc,
   createStencil,
   createVars,
   keyframes,
   px2rem,
-  withCornerShape,
 } from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -83,7 +83,8 @@ export const tooltipContainerStencil = createStencil({
     // use :before vs margin to increase the tooltip hit-box
     '&:before': {
       content: '""',
-      ...withCornerShape(system.legacy.shape.md),
+      borderRadius: system.legacy.shape.md,
+      cornerShape: CORNER_SHAPE,
       outline: `${px2rem(1)} solid transparent`,
       outlineOffset: `-${px2rem(1)}`,
       zIndex: -1,

@@ -4,7 +4,7 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {createStencil, handleCsProp, withCornerShape} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
@@ -24,7 +24,8 @@ export const useComboboxCard = createElemPropsHook(useComboboxModel)(model => {
 export const comboboxCardStencil = createStencil({
   base: {
     '& :where([data-part="list-box-container"])': {
-      ...withCornerShape(system.legacy.shape.xxl),
+      borderRadius: system.legacy.shape.xxl,
+      cornerShape: CORNER_SHAPE,
     },
   },
 });

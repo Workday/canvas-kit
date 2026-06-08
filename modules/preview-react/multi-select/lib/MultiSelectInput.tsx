@@ -11,11 +11,11 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {
+  CORNER_SHAPE,
   CSProps,
   createStencil,
   handleCsProp,
   px2rem,
-  withCornerShape,
 } from '@workday/canvas-kit-styling';
 import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -30,7 +30,8 @@ export const multiSelectInputStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: system.legacy.color.surface.default,
-    ...withCornerShape(system.legacy.shape.md),
+    borderRadius: system.legacy.shape.md,
+    cornerShape: CORNER_SHAPE,
     boxSizing: 'border-box',
     minHeight: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -53,7 +54,8 @@ export const multiSelectInputStencil = createStencil({
       fontWeight: system.fontWeight.normal,
       lineHeight: system.legacy.lineHeight.subtext.lg,
       backgroundColor: system.legacy.color.surface.transparent,
-      ...withCornerShape(system.legacy.shape.md),
+      borderRadius: system.legacy.shape.md,
+      cornerShape: CORNER_SHAPE,
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`

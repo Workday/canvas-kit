@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {ToastBody} from './ToastBody';
@@ -54,7 +54,8 @@ const toastStencil = createStencil({
     width: px2rem(360),
     padding: 0,
     gap: system.legacy.gap.xs,
-    ...withCornerShape(system.legacy.shape.xl),
+    borderRadius: system.legacy.shape.xl,
+    cornerShape: CORNER_SHAPE,
   },
 });
 

@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, px2rem, withCornerShape} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {BaseTableBody} from './parts/BaseTableBody';
@@ -23,7 +23,8 @@ export const baseTableStencil = createStencil({
     lineHeight: system.legacy.lineHeight.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
     border: `${px2rem(1)} solid ${system.legacy.color.border.strong}`,
-    ...withCornerShape(system.legacy.shape.md),
+    borderRadius: system.legacy.shape.md,
+    cornerShape: CORNER_SHAPE,
     overflow: 'auto',
     color: system.color.fg.default,
   },
