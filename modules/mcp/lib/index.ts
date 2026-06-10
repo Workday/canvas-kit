@@ -11,6 +11,11 @@ import {fileURLToPath} from 'node:url';
 import {z} from 'zod';
 
 import packageJson from '../package.json';
+import {
+  ACCESSIBILITY_COMPONENTS,
+  ACCESSIBILITY_SCENARIOS,
+  resolveAccessibilityScenarioSlugs,
+} from './accessibility-enums';
 import fileNames from './config.json';
 import storiesConfig from './stories-config.json';
 
@@ -33,6 +38,98 @@ export function getServer() {
       },
     }
   );
+
+  const accessibilityResourceMetadata: Record<
+    string,
+    {title: string; description: string; slug: string}
+  > = {
+    'accessibility/AccessibilityOverview.mdx': {
+      title: 'Canvas Kit Accessibility Overview',
+      description:
+        'Core Canvas Kit accessibility principles and component usage guidance. Guidance only; no automated validation or compliance certification.',
+      slug: 'overview',
+    },
+    'accessibility/PageStructure.mdx': {
+      title: 'Canvas Kit Page Structure Accessibility',
+      description:
+        'Guidance for landmarks, headings, navigation, and logical focus order in Canvas Kit applications.',
+      slug: 'page-structure',
+    },
+    'accessibility/TablesAdvanced.mdx': {
+      title: 'Canvas Kit Table Accessibility',
+      description:
+        'Guidance for semantic data tables, interactive tables, sorting, filtering, row selection, and table focus behavior.',
+      slug: 'tables',
+    },
+    'accessibility/Popups.mdx': {
+      title: 'Canvas Kit Popup and Overlay Accessibility',
+      description:
+        'Guidance for dialogs, modals, popups, menus, tooltips, focus management, dismissal, and reading order.',
+      slug: 'popups',
+    },
+    'accessibility/AriaLiveRegions.mdx': {
+      title: 'Canvas Kit ARIA Live Region Accessibility',
+      description:
+        'Guidance for announcing asynchronous status updates with polite and assertive live regions.',
+      slug: 'aria-live',
+    },
+    'accessibility/Headers.mdx': {
+      title: 'Canvas Kit Header Accessibility',
+      description:
+        'Guidance for accessible application headers, page headers, heading text, navigation, and header controls.',
+      slug: 'headers',
+    },
+    'accessibility/SidePanel.mdx': {
+      title: 'Canvas Kit Side Panel Accessibility',
+      description:
+        'Guidance for side panel semantics, focus behavior, naming, and overlay versus persistent panel patterns.',
+      slug: 'side-panel',
+    },
+    'accessibility/WindowsHighContrastThemes.mdx': {
+      title: 'Canvas Kit Windows High Contrast Accessibility',
+      description:
+        'Guidance for forced colors and Windows High Contrast themes, including focus, state, border, and icon visibility.',
+      slug: 'windows-high-contrast',
+    },
+    'accessibility/TestingTableWithFormFields.mdx': {
+      title: 'Canvas Kit Form Accessibility',
+      description:
+        'Guidance from existing Canvas Kit accessibility documentation for form fields in table contexts.',
+      slug: 'forms',
+    },
+    'accessibility/WindowsHighContrastThemes.mdx#color-contrast': {
+      title: 'Canvas Kit Color Contrast Accessibility',
+      description:
+        'Guidance from existing Canvas Kit accessibility documentation for contrast-sensitive UI behavior in high contrast themes.',
+      slug: 'color-contrast',
+    },
+  };
+
+  function getAccessibilityFileEntry(fileEntry: string | {source: string; slug: string}) {
+    return typeof fileEntry === 'string'
+      ? {
+          source: fileEntry,
+          slug: accessibilityResourceMetadata[fileEntry]?.slug,
+        }
+      : fileEntry;
+  }
+
+  function getAccessibilityResource(fileEntry: string | {source: string; slug: string}) {
+    const entry = getAccessibilityFileEntry(fileEntry);
+    const metadataKey =
+      entry.slug === 'color-contrast' ? `${entry.source}#color-contrast` : entry.source;
+    const metadata = accessibilityResourceMetadata[metadataKey];
+    if (!metadata) {
+      throw new Error(`${entry.source} is not a valid accessibility resource`);
+    }
+
+    return {
+      ...metadata,
+      mimeType: 'text/markdown',
+      uri: `docs://accessibility/${entry.slug}`,
+      contents: fs.readFileSync(path.resolve(__dirname, 'lib', entry.source), 'utf8'),
+    };
+  }
 
   /**
    * Metadata for agents about the resource files.
@@ -490,11 +587,36 @@ Returns links to token documentation resources including migration guides, color
     }
   );
 
+  fileNames.accessibilityFiles.forEach(fileName => {
+    const resource = getAccessibilityResource(fileName);
+    if (!resource || !resource.contents) {
+      throw new Error(`Resource ${fileName} not found`);
+    }
+    server.registerResource(
+      resource.title,
+      resource.uri,
+      {
+        title: resource.title,
+        description: resource.description,
+        mimeType: resource.mimeType,
+      },
+      async (uri: URL) => ({
+        contents: [
+          {
+            uri: uri.href,
+            text: resource.contents,
+          },
+        ],
+      })
+    );
+  });
+
   interface StoryConfig {
     title: string;
     storybookUrl: string;
     mdxPath: string;
     mdxProse: string;
+    accessibilityProse?: string;
   }
 
   const stories = storiesConfig.stories as Record<string, StoryConfig>;
@@ -551,7 +673,149 @@ Returns links to token documentation resources including migration guides, color
         })
       );
     }
+
+    if (story.accessibilityProse?.trim()) {
+      server.registerResource(
+        `${story.title} Accessibility Guidance`,
+        `docs://examples/${slug}/accessibility`,
+        {
+          title: `${story.title} Accessibility Guidance`,
+          description: `Accessibility section extracted from the ${story.title} component documentation. Guidance only; this is not automated accessibility validation.`,
+          mimeType: 'text/markdown',
+        },
+        async (uri: URL) => ({
+          contents: [
+            {
+              uri: uri.href,
+              text: story.accessibilityProse,
+            },
+          ],
+        })
+      );
+    }
   }
+
+  const getAccessibilityResourceBySlug = (slug: string) => {
+    const fileName = fileNames.accessibilityFiles.find(file => {
+      const resource = getAccessibilityResource(file);
+      return resource.slug === slug;
+    });
+
+    if (!fileName) {
+      throw new Error(`Accessibility resource not found for slug "${slug}"`);
+    }
+
+    return getAccessibilityResource(fileName);
+  };
+
+  server.registerTool(
+    'get-accessibility-guidelines',
+    {
+      title: 'Get Canvas Kit Accessibility Guidelines',
+      description:
+        'Retrieve Canvas Kit accessibility guidance resources for a scenario, component, or both. This tool returns documentation links only; it does not scan code, test pages, certify WCAG conformance, or guarantee accessibility compliance.',
+      inputSchema: {
+        component: z
+          .enum(ACCESSIBILITY_COMPONENTS)
+          .optional()
+          .describe('Canvas Kit component or story slug to retrieve accessibility guidance for'),
+        scenario: z
+          .enum(ACCESSIBILITY_SCENARIOS)
+          .optional()
+          .describe('Accessibility scenario slug to retrieve guidance for'),
+      },
+      annotations: {
+        readOnlyHint: true,
+      },
+    },
+    async ({component, scenario}: {component?: string; scenario?: string}) => {
+      if (!component && !scenario) {
+        throw new Error('At least one of "component" or "scenario" is required.');
+      }
+
+      const scenarioSlugs = resolveAccessibilityScenarioSlugs({component, scenario});
+      const accessibilityResources = scenarioSlugs.map(slug => {
+        const resource = getAccessibilityResourceBySlug(slug);
+        return {
+          uri: resource.uri,
+          title: resource.title,
+          description: resource.description,
+        };
+      });
+
+      const componentStory = component ? stories[component] : null;
+      const exampleDocumentation =
+        component && componentStory?.mdxProse
+          ? {
+              uri: `docs://examples/${component}`,
+              title: `${componentStory.title} Documentation & Sample Code`,
+              description: `Documentation and code examples for ${componentStory.title}.`,
+            }
+          : null;
+      const componentAccessibilityDocumentation =
+        component && componentStory?.accessibilityProse?.trim()
+          ? {
+              uri: `docs://examples/${component}/accessibility`,
+              title: `${componentStory.title} Accessibility Guidance`,
+              description: `Accessibility section extracted from the ${componentStory.title} component documentation. Guidance only; this is not automated accessibility validation.`,
+            }
+          : null;
+
+      const output = {
+        component: component || null,
+        scenario: scenario || null,
+        scenarioSlugs,
+        accessibilityResources,
+        componentAccessibilityDocumentation,
+        exampleDocumentation,
+      };
+
+      return {
+        content: [
+          {type: 'text' as const, text: JSON.stringify(output)},
+          ...accessibilityResources.map(resource => ({
+            type: 'resource_link' as const,
+            uri: resource.uri,
+            name: resource.title,
+            mimeType: 'text/markdown',
+            description: resource.description,
+            annotations: {
+              audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+            },
+          })),
+          ...(exampleDocumentation
+            ? [
+                {
+                  type: 'resource_link' as const,
+                  uri: exampleDocumentation.uri,
+                  name: exampleDocumentation.title,
+                  mimeType: 'text/markdown',
+                  description: exampleDocumentation.description,
+                  annotations: {
+                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+                  },
+                },
+              ]
+            : []),
+          ...(componentAccessibilityDocumentation
+            ? [
+                {
+                  type: 'resource_link' as const,
+                  uri: componentAccessibilityDocumentation.uri,
+                  name: componentAccessibilityDocumentation.title,
+                  mimeType: 'text/markdown',
+                  description: componentAccessibilityDocumentation.description,
+                  annotations: {
+                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+                  },
+                },
+              ]
+            : []),
+        ],
+        structuredContent: output,
+      };
+    }
+  );
 
   const storyViewerPath = path.resolve(__dirname, 'apps', 'story-viewer.html');
   if (storySlugs.length > 0 && fs.existsSync(storyViewerPath)) {
