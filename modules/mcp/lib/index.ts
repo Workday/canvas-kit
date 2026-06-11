@@ -714,25 +714,25 @@ Returns links to token documentation resources including migration guides, color
       title: 'Get Canvas Kit Accessibility Guidelines',
       description:
         'Retrieve Canvas Kit accessibility guidance resources for a scenario, component, or both. This tool returns documentation links only; it does not scan code, test pages, certify WCAG conformance, or guarantee accessibility compliance.',
-      inputSchema: {
-        component: z
-          .enum(ACCESSIBILITY_COMPONENTS)
-          .optional()
-          .describe('Canvas Kit component or story slug to retrieve accessibility guidance for'),
-        scenario: z
-          .enum(ACCESSIBILITY_SCENARIOS)
-          .optional()
-          .describe('Accessibility scenario slug to retrieve guidance for'),
-      },
+      inputSchema: z
+        .object({
+          component: z
+            .enum(ACCESSIBILITY_COMPONENTS)
+            .optional()
+            .describe('Canvas Kit component or story slug to retrieve accessibility guidance for'),
+          scenario: z
+            .enum(ACCESSIBILITY_SCENARIOS)
+            .optional()
+            .describe('Accessibility scenario slug to retrieve guidance for'),
+        })
+        .refine(data => !!data.component || !!data.scenario, {
+          message: 'At least one of "component" or "scenario" is required.',
+        }),
       annotations: {
         readOnlyHint: true,
       },
     },
     async ({component, scenario}: {component?: string; scenario?: string}) => {
-      if (!component && !scenario) {
-        throw new Error('At least one of "component" or "scenario" is required.');
-      }
-
       const scenarioSlugs = resolveAccessibilityScenarioSlugs({component, scenario});
       const accessibilityResources = scenarioSlugs.map(slug => {
         const resource = getAccessibilityResourceBySlug(slug);
