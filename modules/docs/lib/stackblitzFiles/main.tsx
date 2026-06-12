@@ -10,9 +10,8 @@ import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 import {App} from './App';
 
-//@ts-ignore
+fonts.forEach(font => injectGlobal(font));
 injectGlobal({
-  ...fonts,
   'html, body': {
     fontFamily: system.fontFamily.default,
     margin: 0,
