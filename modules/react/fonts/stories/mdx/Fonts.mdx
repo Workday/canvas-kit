@@ -19,14 +19,14 @@ The fonts package makes importing font files simple so you know you're using the
 You can inject our CSS `@font-face` styles into your application by using `injectGlobal`. We prefer this approach over `@emotion/react`'s [Global](https://emotion.sh/docs/globals) component that injects the styles at runtime.
 
 ```ts
-import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
+import {injectGlobal} from '@workday/canvas-kit-styling';
 import {fonts} from '@workday/canvas-kit-react/fonts';
 import {system} from '@workday/canvas-tokens-web';
 
+fonts.forEach(font => injectGlobal(font));
 injectGlobal({
-  ...fonts,
   'html, body': {
-    fontFamily: cssVar(system.fontFamily.default),
+    fontFamily: system.fontFamily.default,
     margin: 0,
     minHeight: '100vh',
   },
