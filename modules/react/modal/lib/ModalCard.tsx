@@ -1,7 +1,7 @@
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useModalCard, useModalModel} from './hooks';
@@ -16,6 +16,7 @@ export const modalCardStencil = createStencil({
     outline: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[5],
     borderRadius: system.legacy.shape.xxxl,
+    cornerShape: CORNER_SHAPE,
     '@media screen and (max-width: 768px)': {
       gap: 0,
       margin: system.legacy.gap.md, // 16px all around margin on smaller screen sizes

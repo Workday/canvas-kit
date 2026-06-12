@@ -22,7 +22,7 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
@@ -100,6 +100,7 @@ const tabItemStencil = createStencil({
     color: system.color.fg.muted.default,
     position: 'relative',
     borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
+    cornerShape: CORNER_SHAPE,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -148,6 +149,7 @@ const tabItemStencil = createStencil({
         // selected state for Windows high contrast theme
         borderBlockEnd: `${base.legacy.size50} solid transparent`,
         borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
+        cornerShape: CORNER_SHAPE,
         backgroundColor: system.legacy.color.brand.fg.primary.default,
         bottom: 0,
         content: `''`,

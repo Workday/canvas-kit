@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
 import {focusRing} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
@@ -35,6 +35,7 @@ const colorPickerSwatchBookStencil = createStencil({
       height: system.legacy.size.xxs,
       cursor: 'pointer',
       borderRadius: system.legacy.shape.sm,
+      cornerShape: CORNER_SHAPE,
       transition: 'box-shadow 120ms ease',
       margin: `0px ${system.legacy.gap.sm} ${system.legacy.gap.sm} 0px`,
 

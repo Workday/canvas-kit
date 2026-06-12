@@ -8,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {FlexStyleProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {
+  CORNER_SHAPE,
   calc,
   createStencil,
   createVars,
@@ -103,6 +104,7 @@ export const popupCardStencil = createStencil({
     minHeight: 0,
     padding: system.legacy.padding.xl,
     borderRadius: system.legacy.shape.xxxl,
+    cornerShape: CORNER_SHAPE,
     maxHeight: maxHeight,
     overflowY: 'auto',
     animationName: fadeIn,

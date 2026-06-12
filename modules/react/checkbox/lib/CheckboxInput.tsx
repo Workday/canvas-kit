@@ -1,7 +1,14 @@
 import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
-import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CORNER_SHAPE,
+  CSProps,
+  calc,
+  createStencil,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
@@ -54,6 +61,7 @@ export interface CheckboxProps extends CSProps {
 const checkboxInputStencil = createStencil({
   base: {
     borderRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     width: base.legacy.size300,
     height: base.legacy.size300,
     margin: 0,

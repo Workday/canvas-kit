@@ -1,6 +1,6 @@
 import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
@@ -28,6 +28,7 @@ export const textInputStencil = createStencil({
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     backgroundColor: system.legacy.color.surface.default,
     borderRadius: system.legacy.shape.md,
+    cornerShape: CORNER_SHAPE,
     height: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.legacy.padding.xs, // Compensate for border

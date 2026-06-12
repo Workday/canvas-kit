@@ -5,7 +5,7 @@ import {
   space as spaceTokens,
   type as typeTokens,
 } from '@workday/canvas-kit-react/tokens';
-import {wrapProperty} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, wrapProperty} from '@workday/canvas-kit-styling';
 
 import {CanvasSystemPropValues, SystemPropNames, SystemPropValues} from './systemProps';
 
@@ -102,10 +102,20 @@ export function buildStyleFns(styleFnConfigs: StyleFnConfig[]): StyleFns {
         }
 
         if (styleFnConfig.system === 'shape') {
-          return {
+          const radius = getShape(value as SystemPropValues['shape']);
+          const shapeStyles: Record<string, unknown> = {
             ...styles,
-            [property]: getShape(value as SystemPropValues['shape']),
+            [property]: radius,
           };
+
+          const isShapeToken = typeof value === 'string' && value in borderRadiusTokens;
+          const isCircleToken = value === 'circle' || radius === borderRadiusTokens.circle;
+
+          if (isShapeToken && !isCircleToken) {
+            shapeStyles.cornerShape = CORNER_SHAPE;
+          }
+
+          return shapeStyles;
         }
 
         if (styleFnConfig.system === 'space') {

@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface PillCountProps extends FlexProps {}
@@ -15,6 +15,7 @@ export const pillCountStencil = createStencil({
     borderStartEndRadius: system.legacy.shape.sm,
     borderEndStartRadius: 0,
     borderEndEndRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     borderWidth: 0,
     borderInlineStartWidth: 0,
     borderStyle: 'solid',

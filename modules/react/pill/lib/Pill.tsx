@@ -2,7 +2,7 @@ import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {colorSpace, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {CORNER_SHAPE, colorSpace, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
@@ -35,6 +35,7 @@ export const pillStencil = createStencil({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     fontFamily: system.fontFamily.default,
     fontSize: system.legacy.fontSize.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,

@@ -16,7 +16,13 @@ import {
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CORNER_SHAPE,
+  CSProps,
+  createStencil,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -74,6 +80,7 @@ export const menuItemStencil = createStencil({
     color: system.color.fg.default,
     borderWidth: 0,
     borderRadius: system.legacy.shape.xxl,
+    cornerShape: CORNER_SHAPE,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',

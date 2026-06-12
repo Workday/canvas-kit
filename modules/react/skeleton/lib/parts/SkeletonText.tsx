@@ -1,5 +1,11 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {
+  CORNER_SHAPE,
+  CSProps,
+  createStencil,
+  cssVar,
+  handleCsProp,
+} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface SkeletonTextProps extends CSProps {
@@ -27,6 +33,7 @@ export const skeletonTextStencil = createStencil({
       // We do not have a `gap` token for 0.75rem so `padding` is being used here
       marginBlockEnd: system.legacy.padding.sm,
       borderRadius: system.legacy.shape.md,
+      cornerShape: CORNER_SHAPE,
       width: '100%',
     },
     '& [data-part="skeleton-text-lines"]:last-child': {

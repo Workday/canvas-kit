@@ -4,6 +4,7 @@ import * as React from 'react';
 import {GenericStyle, PickRequired} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {CSSProperties, borderRadius, colors, space, type} from '@workday/canvas-kit-react/tokens';
+import {CORNER_SHAPE} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 
 /**
@@ -51,6 +52,7 @@ export const statusIndicatorStyles: StatusIndicatorGenericStyle = {
     height: space.s,
     padding: `1px ${space.xxxs}`,
     borderRadius: borderRadius.s,
+    cornerShape: CORNER_SHAPE,
     boxSizing: 'border-box',
   },
   variants: {

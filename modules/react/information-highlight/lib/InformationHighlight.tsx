@@ -1,6 +1,12 @@
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {
+  CORNER_SHAPE,
+  CSProps,
+  createStencil,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useInformationHighlightModel} from './hooks/useInformationHighlightModel';
@@ -18,6 +24,7 @@ export const informationHighlightStencil = createStencil({
     gap: `${system.legacy.gap.sm} ${system.legacy.gap.md}`,
     padding: system.legacy.padding.md,
     borderRadius: system.legacy.shape.sm,
+    cornerShape: CORNER_SHAPE,
     outline: `${px2rem(1)} solid transparent`,
     borderInlineStart: `${base.legacy.size50} solid transparent`,
   },

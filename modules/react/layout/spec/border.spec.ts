@@ -1,5 +1,6 @@
 import {ContentDirection} from '@workday/canvas-kit-react/common';
 import {border} from '@workday/canvas-kit-react/layout';
+import {CORNER_SHAPE} from '@workday/canvas-kit-styling';
 
 const context = describe;
 
@@ -94,10 +95,34 @@ describe('Border Style Props Function', () => {
         borderTopRightRadius: '4px',
         borderBottomLeftRadius: '8px',
         borderBottomRightRadius: '999px',
+        cornerShape: CORNER_SHAPE,
       };
       const borderStyles = border(props);
 
       expect(borderStyles).toEqual(expected);
+    });
+
+    it('should include cornerShape for non-circular shape tokens', () => {
+      const props = {
+        borderRadius: 'm',
+      };
+      const borderStyles = border(props);
+
+      expect(borderStyles).toEqual({
+        borderRadius: '4px',
+        cornerShape: CORNER_SHAPE,
+      });
+    });
+
+    it('should not include cornerShape for circle shape tokens', () => {
+      const props = {
+        borderRadius: 'circle',
+      };
+      const borderStyles = border(props);
+
+      expect(borderStyles).toEqual({
+        borderRadius: '999px',
+      });
     });
   });
 
