@@ -19,6 +19,10 @@
 }
 
 /* TODO: Remove this when type tokens are updated */
+[data-theme='canvas'] {
+  --cnvs-sys-font-family-default: var(--cnvs-base-font-family-50);
+}
+
 [data-theme='sana-canvas'] {
   --cnvs-sys-font-family-default: 'Sana Sans', sans-serif;
 }
