@@ -37,7 +37,7 @@ jobs:
 
       - name: Extract next branch name
         id: extract-next-branch
-        uses: Workday/canvas-kit-actions/get-next-branch@v1
+        uses: Workday/canvas-kit-actions/get-next-branch@v2
         with:
           branch: ${{github.ref_name}}
 
@@ -57,7 +57,7 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
           ref: ${{needs.get-branch-names.outputs.next-branch}} # checkout the next branch
@@ -87,14 +87,14 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v6
         with:
           persist-credentials: false
           fetch-depth: 0 # Needed to do merges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@v2
         with:
-          node_version: 22.x
+          node_version: 24.x
 
       ## A `yarn bump` will create a commit and a tag. We need to set up the git user to do this.
       ## We'll make that user be the github-actions user.
