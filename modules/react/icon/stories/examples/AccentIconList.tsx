@@ -1,13 +1,13 @@
 import React from 'react';
 
-import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
+import * as CanvasAccentIcons from '@workday/canvas-accent-icons-web';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const ImportedIcons = Object.keys(CanvasAccenttIcons);
+const ImportedIcons = Object.keys(CanvasAccentIcons);
 
 const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccentIcons');
 
