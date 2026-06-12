@@ -52,7 +52,7 @@ export const AccentIconList = () => {
             return (
               <Flex cs={styleOverrides.individualIconContainer} key={index}>
                 <Box>
-                  <AccentIcon icon={CanvasAccenttIcons[singleIcon]} />
+                  <AccentIcon icon={CanvasAccentIcons[singleIcon]} />
                 </Box>
                 <Box>{singleIcon}</Box>
               </Flex>
