@@ -39,7 +39,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@v2
         with:
           node_version: 24.x
 
@@ -52,7 +52,7 @@ jobs:
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@v2
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
           version: ${{ inputs.version }}
           toRef: ${{ inputs.to_ref }}
 
-      - uses: Workday/canvas-kit-actions/report-failure@v1
+      - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()
         with:
           slackWebhook: ${{ secrets.SLACK_WEBHOOK }}

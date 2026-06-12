@@ -34,12 +34,12 @@ By consolidating everything into `publish.yml`, you only need to configure **1 t
 
 **publish.yml** handles ALL release types:
 
-| Trigger | Release Type | What Happens |
-|---------|--------------|--------------|
-| Push to `prerelease/*` | Canary | Calls `canary.yml` reusable workflow |
-| Push to `master`/`support` | Patch | Calls `release.yml` reusable workflow |
-| Manual → select "minor" | Minor | Calls `release-minor.yml` reusable workflow |
-| Manual → select "major" | Major | Calls `release-major.yml` reusable workflow |
+| Trigger                    | Release Type | What Happens                                |
+| -------------------------- | ------------ | ------------------------------------------- |
+| Push to `prerelease/*`     | Canary       | Calls `canary.yml` reusable workflow        |
+| Push to `master`/`support` | Patch        | Calls `release.yml` reusable workflow       |
+| Manual → select "minor"    | Minor        | Calls `release-minor.yml` reusable workflow |
+| Manual → select "major"    | Major        | Calls `release-major.yml` reusable workflow |
 
 ## Branch Workflow Guide
 
@@ -118,7 +118,7 @@ determine-publish-type job:
   ↓
 release-publish job:
   - Calls release.yml (reusable workflow) with version="patch"
-  - Calls canvas-kit-actions/release@v1:
+  - Calls canvas-kit-actions/release@v2:
     - Bumps version: 14.1.18 → 14.1.19
     - Updates CHANGELOG.md
     - Creates commit: "chore: Release v14.1.19 [skip release]"
@@ -153,7 +153,7 @@ Developer pushes commit to support (no [skip release])
 publish.yml triggers
   ↓
 release-publish job:
-  - Calls canvas-kit-actions/release@v1:
+  - Calls canvas-kit-actions/release@v2:
     - Bumps version: 13.2.45 → 13.2.46
     - Publishes to npm with tag "support"
     - Creates GitHub release
@@ -180,7 +180,7 @@ minor-release job:
   - Calls release-minor.yml (reusable workflow)
   - Checks out master branch
   - Pulls changes from prerelease/minor
-  - Calls canvas-kit-actions/release@v1 with version="minor":
+  - Calls canvas-kit-actions/release@v2 with version="minor":
     - Bumps version: 14.1.19 → 14.2.0
     - Updates CHANGELOG.md
     - Creates commit: "chore: Release v14.2.0 [skip release]"
@@ -214,7 +214,7 @@ major-release job:
   - Pushes current master to support branch
   - Gets current version (e.g., v14.2.0) - saves for later
   - Pulls changes from prerelease/major into master
-  - Calls canvas-kit-actions/release@v1 with version="major":
+  - Calls canvas-kit-actions/release@v2 with version="major":
     - Bumps version: 14.2.0 → 15.0.0
     - Publishes to npm with tag "latest"
     - Creates GitHub release
@@ -231,14 +231,14 @@ Packages published: @workday/canvas-kit-*@15.0.0
 
 ### Summary Table
 
-| Branch/Action | Workflow | Version Bump | npm Tag | Example |
-|---------------|----------|--------------|---------|---------|
-| **prerelease/minor** push | publish.yml | preminor | next | 14.1.18 → 14.2.0-next.0 |
-| **prerelease/major** push | publish.yml | premajor | prerelease-next | 14.1.18 → 15.0.0-alpha.1337-next.0 |
-| **master** push | publish.yml | patch | latest | 14.1.18 → 14.1.19 |
-| **support** push | publish.yml | patch | support | 13.2.45 → 13.2.46 |
-| **Manual minor** | publish.yml | minor | latest | 14.1.19 → 14.2.0 |
-| **Manual major** | publish.yml | major | latest | 14.2.0 → 15.0.0 |
+| Branch/Action             | Workflow    | Version Bump | npm Tag         | Example                            |
+| ------------------------- | ----------- | ------------ | --------------- | ---------------------------------- |
+| **prerelease/minor** push | publish.yml | preminor     | next            | 14.1.18 → 14.2.0-next.0            |
+| **prerelease/major** push | publish.yml | premajor     | prerelease-next | 14.1.18 → 15.0.0-alpha.1337-next.0 |
+| **master** push           | publish.yml | patch        | latest          | 14.1.18 → 14.1.19                  |
+| **support** push          | publish.yml | patch        | support         | 13.2.45 → 13.2.46                  |
+| **Manual minor**          | publish.yml | minor        | latest          | 14.1.19 → 14.2.0                   |
+| **Manual major**          | publish.yml | major        | latest          | 14.2.0 → 15.0.0                    |
 
 ### Key Points
 

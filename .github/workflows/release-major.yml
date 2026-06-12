@@ -36,7 +36,7 @@ jobs:
       - name: Pull changes >> prerelease/major -> master
         run: git pull origin prerelease/major
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@v2
         with:
           node_version: 24.x
 
@@ -50,7 +50,7 @@ jobs:
         run: npm config set registry https://registry.npmjs.org/
 
       # Run the release job to publish the next major version to npm
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@v2
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
@@ -79,7 +79,7 @@ jobs:
           DIST_TAG: 'support'
           VERSION: ${{ steps.previous-tag.outputs.tag }}
 
-      - uses: Workday/canvas-kit-actions/report-failure@v1
+      - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()
         with:
           slackWebhook: ${{ secrets.SLACK_WEBHOOK }}

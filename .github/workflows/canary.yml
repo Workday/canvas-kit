@@ -25,7 +25,7 @@ jobs:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@v2
         with:
           node_version: 24.x
 

@@ -26,7 +26,7 @@ jobs:
           scopes: ${{steps.scope-vars.outputs.scopes}}
           subjectPattern: ^[A-Z].+$
 
-      - uses: Workday/canvas-kit-actions/verify-pull-request@v1
+      - uses: Workday/canvas-kit-actions/verify-pull-request@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
