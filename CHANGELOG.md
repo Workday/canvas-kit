@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.12](https://github.com/Workday/canvas-kit/releases/tag/v15.0.12) (2026-06-12)
+
+
+
+
+## [v15.0.11](https://github.com/Workday/canvas-kit/releases/tag/v15.0.11) (2026-06-12)
+
+
+
+
+## [v15.0.10](https://github.com/Workday/canvas-kit/releases/tag/v15.0.10) (2026-06-11)
+
+
+
+
+## [v15.0.9](https://github.com/Workday/canvas-kit/releases/tag/v15.0.9) (2026-06-11)
+
+
+
+
+## [v15.0.8](https://github.com/Workday/canvas-kit/releases/tag/v15.0.8) (2026-06-11)
+
+
+
+
+## [v15.0.7](https://github.com/Workday/canvas-kit/releases/tag/v15.0.7) (2026-06-04)
+
+### Infrastructure
+
+- chore: Add CODEOWNERS file ([#3965](https://github.com/Workday/canvas-kit/pull/3965)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v14.3.16](https://github.com/Workday/canvas-kit/releases/tag/v14.3.16) (2026-06-04)
+
+### Infrastructure
+
+- chore: Add CODEOWNERS file ([#3965](https://github.com/Workday/canvas-kit/pull/3965)) ([@alanbsmith](https://github.com/alanbsmith))
 ## [v15.0.6](https://github.com/Workday/canvas-kit/releases/tag/v15.0.6) (2026-05-21)
 
 ### Components
@@ -41,11 +78,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Update mcp docs ([#3921](https://github.com/Workday/canvas-kit/pull/3921)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
 
 
-## [v14.3.14](https://github.com/Workday/canvas-kit/releases/tag/v14.3.14) (2026-04-30)
-
-### Infrastructure
-
-- chore: Fix lerna dist tag ([#3913](https://github.com/Workday/canvas-kit/pull/3913)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
 ## [v15.0.3](https://github.com/Workday/canvas-kit/releases/tag/v15.0.3) (2026-05-04)
 
 ### Components
@@ -60,6 +92,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - fix: Make sure mixed keyboard and mouse use doesn't scroll away from currently selected item in menus ([#3917](https://github.com/Workday/canvas-kit/pull/3917)) ([@ahayes91](https://github.com/ahayes91))
 
 
+## [v14.3.14](https://github.com/Workday/canvas-kit/releases/tag/v14.3.14) (2026-04-30)
+
+### Infrastructure
+
+- chore: Fix lerna dist tag ([#3913](https://github.com/Workday/canvas-kit/pull/3913)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
 ## [v15.0.1](https://github.com/Workday/canvas-kit/releases/tag/v15.0.1) (2026-04-30)
 
 ### Components
