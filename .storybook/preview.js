@@ -14,6 +14,22 @@ import theme from './theme';
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
 
+export const globalTypes = {
+  theme: {
+    name: 'Theme',
+    description: 'Token theme',
+    defaultValue: 'canvas',
+    toolbar: {
+      icon: 'paintbrush',
+      items: [
+        {value: 'canvas', title: 'Canvas'},
+        {value: 'sana', title: 'Sana'},
+      ],
+      showName: true,
+    },
+  },
+};
+
 export const decorators = [CanvasProviderDecorator];
 
 export const parameters = {
