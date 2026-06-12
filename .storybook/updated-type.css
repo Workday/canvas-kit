@@ -20,7 +20,7 @@
 
 /* TODO: Remove this when type tokens are updated */
 [data-theme='canvas'] {
-  --cnvs-sys-font-family-default: var(--cnvs-base-font-family-50);
+  --cnvs-sys-font-family-default: 'Roboto', sans-serif;
 }
 
 [data-theme='sana-canvas'] {
