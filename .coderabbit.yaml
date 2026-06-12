@@ -11,6 +11,6 @@ reviews:
   auto_review:
     enabled: true
     drafts: false
-    base_branches: ["support", "prerelease/minor", :"prerelease/major"]
+    base_branches: ["support", "prerelease/minor", "prerelease/major"]
 chat:
   auto_reply: true
