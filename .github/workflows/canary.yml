@@ -27,7 +27,7 @@ jobs:
 
       - uses: Workday/canvas-kit-actions/install@v1
         with:
-          node_version: 22.x
+          node_version: 24.x
 
       - name: Clear auth token for OIDC
         run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
