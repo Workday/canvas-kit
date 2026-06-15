@@ -18,3 +18,8 @@
     url(/SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
+/* canvas theme: reset font-family since <html> always carries data-theme="sana-canvas",
+   which causes --cnvs-base-font-family-50 to be inherited as Sana Sans by all children */
+[data-theme='canvas'] {
+  --cnvs-sys-font-family-default: 'Roboto', sans-serif;
+}
