@@ -27,7 +27,7 @@ export const textInputStencil = createStencil({
     display: 'block',
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.md,
+    borderRadius: system.shape.lg,
     height: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.legacy.padding.xs, // Compensate for border
