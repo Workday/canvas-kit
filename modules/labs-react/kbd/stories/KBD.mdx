@@ -1,0 +1,42 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {KBD} from '@workday/canvas-kit-labs-react/kbd';
+
+import KBDStoriesMeta from './KBD.stories';
+import {Basic} from './examples/Basic';
+import {RTL} from './examples/RTL';
+
+<Meta of={KBDStoriesMeta} />
+
+# KBD
+
+`KBD` is a compound component used to visually represent keyboard input, such as keys or keyboard
+shortcuts.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+`KBD` is a container that wraps one or more `KBD.Item` components. Each `KBD.Item` represents a
+single keyboard key.
+
+<ExampleCodeBlock code={Basic} />
+
+### RTL Example
+
+You can also use the `KBD` component in right-to-left (RTL) layouts. This is helpful for languages
+that are read from right to left.
+
+<ExampleCodeBlock code={RTL} />
+
+## Component API
+
+<SymbolDoc name="KBD" hideDescription />
