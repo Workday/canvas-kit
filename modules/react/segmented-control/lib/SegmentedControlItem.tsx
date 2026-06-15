@@ -61,6 +61,7 @@ export const segmentedControlItemStencil = createStencil({
     textAlign: 'start',
     paddingInline: 0,
     gap: system.legacy.gap.xs,
+    minWidth: 'min-content',
 
     [buttonStencil.vars.borderRadius]: system.legacy.shape.md,
     [buttonStencil.vars.label]: system.color.fg.muted.default,
