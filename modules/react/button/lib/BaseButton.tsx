@@ -144,6 +144,7 @@ export const buttonStencil = createStencil({
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
+    minWidth: 'min-content',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
       cssVar(borderRadius, system.legacy.shape.full)

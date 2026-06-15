@@ -24,13 +24,13 @@ const secondaryButtonStencil = createStencil({
     // Base Styles
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
-    [buttonStencil.vars.border]: system.color.border.transparent,
+    [buttonStencil.vars.border]: system.legacy.color.border.default,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.color.border.input.hover,
+      [buttonStencil.vars.border]: system.legacy.color.border.default,
       [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
       [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
@@ -51,8 +51,7 @@ const secondaryButtonStencil = createStencil({
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-
-      [buttonStencil.vars.label]: system.color.fg.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },

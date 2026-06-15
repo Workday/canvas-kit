@@ -1,6 +1,6 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -22,86 +22,37 @@ const tertiaryButtonStencil = createStencil({
   extends: buttonStencil,
   // Base Styles
   base: {
-    paddingInline: system.legacy.padding.xs,
-    minWidth: 'auto',
-    borderWidth: px2rem(2),
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
+    [buttonStencil.vars.border]: system.color.border.transparent,
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      [buttonStencil.vars.border]: system.color.border.transparent,
       [buttonStencil.vars.label]: system.color.fg.contrast.default,
-      ...focusRing({
-        width: 2,
-        separation: 0,
-        innerColor: system.legacy.color.focus.inverse,
-
-        outerColor: system.legacy.color.brand.focus.primary,
-      }),
+      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
     },
     // Hover Styles
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
-      textDecoration: 'underline',
     },
     // Active Styles
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
-      textDecoration: 'underline',
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
-      textDecoration: 'none',
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
   modifiers: {
-    // IconPosition Styles
-    iconPosition: {
-      only: {
-        padding: 0,
-        [systemIconStencil.vars.color]: cssVar(
-          buttonColorPropVars.default.icon,
-          system.color.fg.default
-        ),
-        '&:focus-visible, &.focus': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.focus.icon,
-            system.color.fg.strong
-          ),
-        },
-        '&:hover, &.hover': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.hover.icon,
-            system.color.fg.strong
-          ),
-        },
-        '&:active, &.active': {
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.active.icon,
-            system.color.fg.strong
-          ),
-        },
-        '&:disabled, &.disabled': {
-          [buttonStencil.vars.opacity]: system.opacity.disabled,
-          [systemIconStencil.vars.color]: cssVar(
-            buttonColorPropVars.disabled.icon,
-            system.color.fg.default
-          ),
-        },
-      },
-      start: {},
-      end: {},
-    },
     variant: {
       // Inverse Styles
       inverse: {
@@ -244,14 +195,6 @@ export const TertiaryButton = createComponent('button')({
     ref,
     Element
   ) => {
-    const baseIconPosition = iconPosition
-      ? iconPosition
-      : icon
-        ? children
-          ? 'start'
-          : 'only'
-        : undefined;
-
     return (
       <Button
         as={Element}
@@ -265,7 +208,7 @@ export const TertiaryButton = createComponent('button')({
             size,
             variant,
             grow,
-            iconPosition: baseIconPosition,
+            iconPosition,
           }),
           cs,
         ]}
