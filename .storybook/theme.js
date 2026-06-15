@@ -1,4 +1,5 @@
 import {create} from '@storybook/theming';
+
 import {version} from '../lerna.json';
 
 export default create({
@@ -45,7 +46,7 @@ export default create({
   appBg: '#ffffff',
 
   // Typography
-  fontBase: '"Sana Sans", sans-serif',
+  fontBase: '"Sana Sans LCG 05 VF", sans-serif',
   fontCode: '"Roboto Mono", "Courier New", monospace',
 
   // Text colors
