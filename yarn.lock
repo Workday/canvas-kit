@@ -4840,10 +4840,10 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.4.tgz#8ddaa5a465059227d79b808c263f167f7d3b6915"
   integrity sha512-+CO8OTemP947vf/nQeVu3IxHrq9Q2sHra3/FAImkQ0w4/f3tlOgQn7YTWt7rKL2fvTYghjNN0HoHQSR0T64uWg==
 
-"@workday/canvas-tokens-web@4.3.0":
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.3.0.tgz#808a07153b574feb826226f02f0dcf412d0c3424"
-  integrity sha512-hyUwVdwSf3Vpqfh0YV+0ctZJVTFD3O8nDwKaiUJsVBsXTlze9vvLbrhFDHUh+b5PjpZSqlBKX4pmcklu9t6BAA==
+"@workday/canvas-tokens-web@4.4.0-beta.0":
+  version "4.4.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-tokens-web/-/canvas-tokens-web-4.4.0-beta.0.tgz#6d93f5329eb94c6d3843ccb630d9a1b7b1faf66c"
+  integrity sha512-9q2alt3aG+coip7G3oyAubChFH3TBgOsGHtRDHVuTY1qN1l2UzzgWE/YGjJlHe8QK7ukBd4gc8bYys/817jtjw==
 
 "@workday/design-assets-types@0.2.8":
   version "0.2.8"
