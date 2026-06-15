@@ -23,7 +23,7 @@ import {injectGlobal} from '@workday/canvas-kit-styling';
 import {fonts} from '@workday/canvas-kit-react/fonts';
 import {system} from '@workday/canvas-tokens-web';
 
-fonts.forEach(font => injectGlobal(font));
+injectGlobal(...fonts);
 injectGlobal({
   'html, body': {
     fontFamily: system.fontFamily.default,
