@@ -11,7 +11,12 @@ import {Button, ButtonProps} from './Button';
  * We omit `ref` since all of our buttons use `createComponent` and already give access to `ref`.
  * Use this type to extend and customize any one off buttons that you want full control over styling.
  */
-export interface DeleteButtonProps extends ButtonProps {}
+export interface DeleteButtonProps extends ButtonProps {
+  /**
+   * Variant has an option for `inverse` which will inverse the styling
+   */
+  variant?: 'inverse';
+}
 
 const deleteButtonStencil = createStencil({
   extends: buttonStencil,
@@ -72,6 +77,47 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.label]: system.color.fg.inverse,
     },
   },
+  modifiers: {
+    variant: {
+      inverse: {
+        // Default Styles
+        [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+        [buttonStencil.vars.border]: system.color.border.transparent,
+        [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+        [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
+        // Hover Styles
+        '&:hover, &.hover': {
+          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
+          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
+        },
+        // Focus Styles
+        '&:focus-visible, &.focus': {
+          [buttonStencil.vars.background]: system.legacy.color.surface.default,
+          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
+          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
+        },
+        // Active Styles
+        '&:active, &.active': {
+          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
+          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
+        },
+        // Disabled Styles
+        '&:disabled, &.disabled': {
+          [buttonStencil.vars.opacity]: system.opacity.disabled,
+          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
+        },
+      },
+    },
+  },
 });
 
 /**
@@ -82,7 +128,7 @@ const deleteButtonStencil = createStencil({
 export const DeleteButton = createComponent('button')({
   displayName: 'DeleteButton',
   Component: (
-    {children, size, iconPosition, grow, cs, ...elemProps}: DeleteButtonProps,
+    {children, size, iconPosition, grow, variant, cs, ...elemProps}: DeleteButtonProps,
     ref,
     Element
   ) => {
@@ -93,7 +139,7 @@ export const DeleteButton = createComponent('button')({
         size={size}
         grow={grow}
         iconPosition={iconPosition}
-        cs={[deleteButtonStencil({size, iconPosition}), cs]}
+        cs={[deleteButtonStencil({variant, size, iconPosition}), cs]}
         {...elemProps}
       >
         {children}

@@ -3,7 +3,7 @@ import * as React from 'react';
 import {GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, createVars, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
@@ -253,24 +253,22 @@ export const buttonStencil = createStencil({
         lineHeight: system.legacy.lineHeight.body.sm,
         letterSpacing: system.legacy.letterSpacing.body.sm,
         height: system.legacy.size.lg,
-        paddingInline: system.legacy.padding.xxl,
-        minWidth: base.legacy.size1400,
+        paddingInline: system.legacy.padding.lg,
       },
       medium: {
         fontSize: system.legacy.fontSize.subtext.lg,
         lineHeight: system.legacy.lineHeight.subtext.lg,
         letterSpacing: system.legacy.letterSpacing.subtext.lg,
-        minWidth: base.legacy.size1200,
-        paddingInline: system.legacy.padding.xl,
+        paddingInline: system.legacy.padding.md,
         height: system.legacy.size.md,
+        gap: base.size75,
       },
       small: {
         fontSize: system.legacy.fontSize.subtext.lg,
         lineHeight: system.legacy.lineHeight.subtext.lg,
         letterSpacing: system.legacy.letterSpacing.subtext.lg,
         height: system.legacy.size.sm,
-        minWidth: base.legacy.size1000,
-        paddingInline: system.legacy.padding.md,
+        paddingInline: system.legacy.padding.sm,
         gap: system.legacy.gap.xs,
       },
       extraSmall: {
@@ -278,8 +276,7 @@ export const buttonStencil = createStencil({
         lineHeight: system.legacy.lineHeight.subtext.md,
         letterSpacing: system.legacy.letterSpacing.subtext.md,
         height: system.legacy.size.xs,
-        minWidth: 'auto',
-        paddingInline: system.legacy.padding.sm,
+        paddingInline: system.legacy.padding.xs,
         gap: system.legacy.gap.xs,
       },
     },
@@ -307,15 +304,15 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xl,
-        paddingInlineEnd: system.legacy.padding.xxl,
+        paddingInlineStart: system.legacy.padding.md,
+        paddingInlineEnd: system.legacy.padding.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xxl,
-        paddingInlineEnd: system.legacy.padding.xl,
+        paddingInlineStart: system.legacy.padding.lg,
+        paddingInlineEnd: system.legacy.padding.md,
       },
     },
     {
@@ -327,15 +324,15 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.lg,
-        paddingInlineEnd: system.legacy.padding.xl,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xl,
-        paddingInlineEnd: system.legacy.padding.lg,
+        paddingInlineStart: system.legacy.padding.md,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
@@ -347,15 +344,15 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.sm,
-        paddingInlineEnd: system.legacy.padding.md,
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: system.legacy.padding.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.md,
-        paddingInlineEnd: system.legacy.padding.sm,
+        paddingInlineStart: system.legacy.padding.sm,
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
@@ -367,15 +364,15 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xs,
-        paddingInlineEnd: system.legacy.padding.sm,
+        paddingInlineStart: calc.add(system.legacy.padding.xxs, '0.125rem'),
+        paddingInlineEnd: system.legacy.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.sm,
-        paddingInlineEnd: system.legacy.padding.xs,
+        paddingInlineStart: system.legacy.padding.xs,
+        paddingInlineEnd: calc.add(system.legacy.padding.xxs, '0.125rem'),
       },
     },
   ],
