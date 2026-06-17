@@ -18,7 +18,7 @@ export interface CardHeadingProps extends BoxProps {
 export const cardHeadingStencil = createStencil({
   extends: textStencil,
   base: {
-    color: system.sana.color.fg.strong,
+    color: system.color.fg.strong,
     fontWeight: system.fontWeight.bold,
     marginBlockStart: system.legacy.padding.none,
     marginBlockEnd: system.legacy.padding.none,
