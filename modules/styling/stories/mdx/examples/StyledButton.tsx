@@ -1,26 +1,24 @@
-import React from 'react';
-
-import {system} from '@workday/canvas-tokens-web';
-import {caretDownIcon} from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {buttonStencil, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {caretDownIcon} from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 const varStyles = createStyles({
-  [buttonStencil.vars.background]: system.color.static.gray.soft,
-  [buttonStencil.vars.label]: system.color.static.blue.strong,
+  [buttonStencil.vars.background]: base.slate200,
+  [buttonStencil.vars.label]: base.blue700,
   // Because PrimaryButton uses SystemIcon under the hood,
   // we also can change system icon variable for color
-  [systemIconStencil.vars.color]: system.color.static.blue.strong,
+  [systemIconStencil.vars.color]: base.blue700,
   '&:hover': {
-    [buttonStencil.vars.background]: system.color.static.amber.default,
-    [buttonStencil.vars.label]: system.color.static.white,
-    [systemIconStencil.vars.color]: system.color.static.white,
+    [buttonStencil.vars.background]: base.amber400,
+    [buttonStencil.vars.label]: system.color.fg.inverse,
+    [systemIconStencil.vars.color]: system.color.fg.inverse,
   },
   '&:focus-visible': {
-    [buttonStencil.vars.background]: system.color.static.green.default,
-    [buttonStencil.vars.boxShadowOuter]: system.color.static.green.strong,
-    [buttonStencil.vars.boxShadowInner]: system.color.static.white,
+    [buttonStencil.vars.background]: base.green600,
+    [buttonStencil.vars.boxShadowOuter]: base.green700,
+    [buttonStencil.vars.boxShadowInner]: base.green100,
   },
 });
 

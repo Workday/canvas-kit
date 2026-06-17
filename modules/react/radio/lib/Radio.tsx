@@ -1,15 +1,16 @@
 import * as React from 'react';
+
 import {
-  createComponent,
   StyledType,
+  Themeable,
+  createComponent,
   focusRing,
   mouseFocusBehavior,
   styled,
-  Themeable,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {LabelText} from '@workday/canvas-kit-react/text';
+import {borderRadius, colors, inputColors, space} from '@workday/canvas-kit-react/tokens';
 import {maybeWrapCSSVariables, px2rem} from '@workday/canvas-kit-styling';
 
 /**
@@ -53,6 +54,7 @@ export interface RadioProps extends Themeable {
 
 const radioBorderRadius = 9;
 
+// Ignore all `styled` as component is deprecated in v15
 const RadioContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
@@ -139,17 +141,17 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
           ? colors.frenchVanilla100
           : maybeWrapCSSVariables(themePrimary.main)
         : disabled
-        ? inputColors.disabled.background
-        : 'white',
+          ? inputColors.disabled.background
+          : 'white',
       borderColor: checked
         ? variant === 'inverse'
           ? colors.soap300
           : maybeWrapCSSVariables(themePrimary.main)
         : disabled
-        ? inputColors.disabled.border
-        : variant === 'inverse'
-        ? colors.soap300
-        : inputColors.hoverBorder,
+          ? inputColors.disabled.border
+          : variant === 'inverse'
+            ? colors.soap300
+            : inputColors.hoverBorder,
       borderWidth: '1px',
     },
     '&:focus, &focus:hover': {
@@ -197,8 +199,8 @@ const RadioInput = styled('input')<RadioProps & StyledType>(
             ? colors.soap300
             : maybeWrapCSSVariables(themePrimary.main)
           : variant === 'inverse'
-          ? colors.soap300
-          : inputColors.hoverBorder,
+            ? colors.soap300
+            : inputColors.hoverBorder,
       },
     }),
   })
@@ -236,17 +238,17 @@ const RadioBackground = styled('div')<RadioProps>(
         ? colors.soap300
         : maybeWrapCSSVariables(themePrimary.main)
       : disabled
-      ? colors.licorice100
-      : variant === 'inverse'
-      ? colors.soap300
-      : inputColors.border,
+        ? colors.licorice100
+        : variant === 'inverse'
+          ? colors.soap300
+          : inputColors.border,
     backgroundColor: checked
       ? variant === 'inverse'
         ? colors.frenchVanilla100
         : maybeWrapCSSVariables(themePrimary.main)
       : disabled
-      ? inputColors.disabled.background
-      : 'white',
+        ? inputColors.disabled.background
+        : 'white',
     opacity: disabled && variant === 'inverse' ? '.4' : '1',
   })
 );

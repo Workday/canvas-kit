@@ -1,10 +1,12 @@
 import * as React from 'react';
-import {focusRing, createComponent} from '@workday/canvas-kit-react/common';
+
+import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {BaseButton, buttonStencil} from './BaseButton';
 import {TertiaryButtonProps} from './TertiaryButton';
-import {brand, system} from '@workday/canvas-tokens-web';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size' | 'variant'> {
   onToggleChange?: (toggled: boolean | undefined) => void;
@@ -16,53 +18,72 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.space.x8,
-    padding: system.space.zero,
-    height: system.space.x8,
-    [buttonStencil.vars.borderRadius]: system.shape.x1,
+    minWidth: system.legacy.size.sm,
+    padding: 0,
+    height: system.legacy.size.sm,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
     [systemIconStencil.vars.color]: system.color.fg.default,
+    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [systemIconStencil.vars.color]: system.color.fg.default,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
       ...focusRing({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        outerColor: brand.common.focusOutline,
+        outerColor: system.legacy.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.default,
-      [systemIconStencil.vars.color]: system.color.fg.muted.stronger,
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.hover,
+      }),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.color.bg.alt.stronger,
+      [buttonStencil.vars.background]: colorSpace.darken({
+        color: system.legacy.color.surface.transparent,
+        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinValue: system.legacy.opacity.surface.pressed,
+      }),
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.color.bg.transparent.default,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [systemIconStencil.vars.color]: system.color.fg.default,
     },
 
     "&[aria-pressed='true']": {
-      [systemIconStencil.vars.color]: brand.primary.base,
-      [buttonStencil.vars.background]: brand.primary.lightest,
+      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
+
+      [buttonStencil.vars.background]: system.legacy.color.brand.surface.primary.default,
+
+      '&:focus-visible, &.focus': {
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
+      },
 
       '&:hover, &.hover': {
-        [buttonStencil.vars.background]: system.color.bg.alt.default,
-        [systemIconStencil.vars.color]: brand.primary.dark,
+        [buttonStencil.vars.background]: colorSpace.darken({
+          color: system.legacy.color.brand.surface.primary.default,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.hover,
+        }),
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
 
       '&:active, &.active': {
-        [buttonStencil.vars.background]: system.color.bg.alt.stronger,
-        [systemIconStencil.vars.color]: brand.primary.dark,
-      },
-
-      '&:disabled, &.disabled': {
-        [buttonStencil.vars.background]: brand.primary.lightest,
-        [systemIconStencil.vars.color]: brand.primary.light,
+        [buttonStencil.vars.background]: colorSpace.darken({
+          color: system.legacy.color.brand.surface.primary.default,
+          mixinColor: system.legacy.color.surface.overlay.mixin,
+          mixinValue: system.legacy.opacity.surface.pressed,
+        }),
+        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
       },
     },
   },

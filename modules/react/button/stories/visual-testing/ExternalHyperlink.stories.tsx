@@ -1,17 +1,17 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import React from 'react';
+
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
-import {Container} from './utils';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
+
+import {Container} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/ExternalHyperlink',
@@ -59,7 +59,7 @@ export const ExternalHyperlinkStates = {
           )}
         </ComponentStatesTable>
       </StaticStates>
-      <Flex flexDirection="column" gap="xxs">
+      <Flex cs={{flexDirection: 'column', gap: system.gap.sm}}>
         <h3>Typography</h3>
         <Subtext size="large">
           The quick{' '}
@@ -83,7 +83,7 @@ export const ExternalHyperlinkStates = {
         </BodyText>
       </Flex>
       <CanvasProvider dir="rtl">
-        <Flex flexDirection="column" gap="xxs">
+        <Flex cs={{flexDirection: 'column', gap: system.gap.sm}}>
           <Subtext size="large">
             השועל החום{' '}
             <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ

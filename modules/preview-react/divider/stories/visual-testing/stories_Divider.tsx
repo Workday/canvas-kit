@@ -1,14 +1,19 @@
-import React from 'react';
-
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
-
 import {Divider} from '@workday/canvas-kit-preview-react/divider';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Preview/Divider',
   component: Divider,
+});
+
+const blockStyles = createStyles({
+  'h3, p': {
+    margin: 0,
+  },
 });
 
 export const DividerStates = () => {
@@ -23,18 +28,18 @@ export const DividerStates = () => {
           },
           {
             label: 'Custom Space',
-            props: {space: system.space.x8},
+            props: {space: system.gap.xl},
           },
         ]}
       >
         {props => {
           return (
-            <div>
-              <h3 style={{margin: 0}}>Quote of the Day</h3>
+            <div className={blockStyles}>
+              <h3>Quote of the Day</h3>
               <Divider {...props} />
-              <p style={{margin: 0}}>
+              <p>
                 "It is not our differences that divide us. It is our inability to recognize, accept,
-                and celebrate those differences." – Audre Lorde
+                and celebrate those differences." – Audre Lorde
               </p>
             </div>
           );

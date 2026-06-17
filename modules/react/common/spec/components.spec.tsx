@@ -1,22 +1,22 @@
-import React from 'react';
-import {screen, render} from '@testing-library/react';
-import {expectTypeOf} from 'expect-type';
+import {render, screen} from '@testing-library/react';
 import {renderHook} from '@testing-library/react-hooks';
+import {expectTypeOf} from 'expect-type';
+import React from 'react';
 
 import {
+  BehaviorHook,
+  ElementComponent,
   composeHooks,
   createComponent,
+  createContainer,
+  createElemPropsHook,
+  createHook,
+  createModelHook,
+  createSubcomponent,
+  mergeProps,
   useForkRef,
   useLocalRef,
-  ElementComponent,
-  mergeProps,
-  createHook,
-  BehaviorHook,
-  createContainer,
-  createSubcomponent,
-  createModelHook,
   useModelContext,
-  createElemPropsHook,
 } from '@workday/canvas-kit-react/common';
 
 describe('createComponent', () => {
@@ -348,7 +348,7 @@ describe('useForkRef', () => {
 
   it('should call the ref function of the second ref if the first ref is undefined', () => {
     const ref1 = undefined;
-    const ref2 = jest.fn();
+    const ref2 = vi.fn();
 
     const ref = useForkRef(ref1, ref2);
 
@@ -358,7 +358,7 @@ describe('useForkRef', () => {
   });
 
   it('should call the ref function of the first ref if the second ref is undefined', () => {
-    const ref1 = jest.fn();
+    const ref1 = vi.fn();
     const ref2 = undefined;
 
     const ref = useForkRef(ref1, ref2);
@@ -369,8 +369,8 @@ describe('useForkRef', () => {
   });
 
   it('should call the ref function of both refs if both refs are ref functions', () => {
-    const ref1 = jest.fn();
-    const ref2 = jest.fn();
+    const ref1 = vi.fn();
+    const ref2 = vi.fn();
 
     const ref = useForkRef(ref1, ref2);
 
@@ -423,8 +423,8 @@ describe('composeHooks', () => {
   });
 
   beforeEach(() => {
-    spy1 = jest.fn();
-    spy2 = jest.fn();
+    spy1 = vi.fn();
+    spy2 = vi.fn();
   });
 
   it('should merge properties from both hooks', () => {
@@ -459,7 +459,7 @@ describe('composeHooks', () => {
   });
 
   it('should call both hook callbacks and passed in callback', () => {
-    const spy3 = jest.fn();
+    const spy3 = vi.fn();
     const props = composeHooks(hook1, hook2)(myModel, {onClick: spy3}, null) as {onClick: Function};
     props.onClick({event: 'foo'});
     expect(spy1).toHaveBeenCalled();

@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {TextInput, TextInputProps} from '@workday/canvas-kit-react/text-input';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 
 import {GoToContext} from './useGoToForm';
 

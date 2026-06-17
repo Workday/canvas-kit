@@ -4,7 +4,7 @@ export const EndIcon = () => (
   <Expandable>
     <Expandable.Target headingLevel="h4">
       <Expandable.Title>
-        TitleTitleTitleTitleTitle TitleTitleTitleTitle TitleTitleTitle Title
+        This is a really long title that should wrap to multiple lines
       </Expandable.Title>
       <Expandable.Icon iconPosition="end" />
     </Expandable.Target>

@@ -1,5 +1,7 @@
-import React from 'react';
 import {renderToString} from 'react-dom/server';
+
+import {px2rem} from '@workday/canvas-kit-styling';
+
 import {Combobox} from '../';
 
 describe('Combobox', () => {
@@ -10,7 +12,7 @@ describe('Combobox', () => {
           <Combobox.Input />
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
-              <Combobox.Menu.List maxHeight={200}>
+              <Combobox.Menu.List cs={{maxHeight: px2rem(200)}}>
                 <Combobox.Menu.Item>Option 1</Combobox.Menu.Item>
               </Combobox.Menu.List>
             </Combobox.Menu.Card>

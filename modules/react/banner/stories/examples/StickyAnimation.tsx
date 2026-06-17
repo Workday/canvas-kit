@@ -1,17 +1,17 @@
 import React from 'react';
 
+import {Banner} from '@workday/canvas-kit-react/banner';
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
-import {loopIcon} from '@workday/canvas-system-icons-web';
-import {Banner} from '@workday/canvas-kit-react/banner';
 import {
   createStencil,
   createStyles,
   createVars,
-  keyframes,
-  handleCsProp,
   cssVar,
+  handleCsProp,
+  keyframes,
 } from '@workday/canvas-kit-styling';
+import {loopIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const containerStyles = createStyles({
@@ -31,8 +31,8 @@ const stickAnimationKeyframes = keyframes({
 
 const stickyAnimationStencil = createStencil({
   base: {
-    marginBlock: system.space.x1,
-    marginInlineStart: system.space.x1,
+    marginBlock: system.gap.xs,
+    marginInlineStart: system.gap.xs,
     marginInlineEnd: 0,
     animationName: stickAnimationKeyframes,
     animationDuration: '.3s',
@@ -54,7 +54,7 @@ export const StickyAnimation = () => {
   }, [theme.canvas.direction, rerun]);
 
   return (
-    <Box height={64}>
+    <Box cs={{height: system.size.xxl}}>
       <div className={containerStyles} ref={containerRef}>
         <div
           key={rerun}

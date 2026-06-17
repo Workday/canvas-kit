@@ -1,12 +1,20 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import GridStories from './Grid.stories';
 import {Basic} from './examples/Grid/Basic';
 import {GridLayout} from './examples/Grid/GridLayout';
 import {GridLayoutInteractive} from './examples/Grid/GridLayoutInteractive';
-import * as GridStories from './Grid.stories';
 
 <Meta of={GridStories} />
 
 # Canvas Kit Grid
+
+> **Note**: Some of the content on this page may be outdated and may not follow the latest CK style
+> guidance. Please use care when making updates and carefully review any changes. Prefer using the
+> `createStyles` or `createStencil` utilities along with the latest design tokens to set styles.
+> This page will be updated soon.
 
 `Grid` is a low-level layout component that provides a common, ergonomic API for building
 two-dimensional layouts (rows and columns) with

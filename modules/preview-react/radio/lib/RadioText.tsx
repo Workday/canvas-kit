@@ -1,11 +1,13 @@
 import React from 'react';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {useRadioModel} from './hooks/useRadioModel';
-import {RadioLabelContext} from './RadioLabel';
+
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Text, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {RadioLabelContext} from './RadioLabel';
+import {useRadioModel} from './hooks/useRadioModel';
 
 const radioTextStencil = createStencil({
   extends: textStencil,
@@ -15,25 +17,16 @@ const radioTextStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        color: system.color.text.inverse,
+        color: system.color.fg.inverse,
       },
     },
     disabled: {
       true: {
         cursor: 'default',
-        color: system.color.text.disabled,
-      },
-    },
-  },
-  compound: [
-    {
-      modifiers: {variant: 'inverse', disabled: true},
-      styles: {
-        color: system.color.text.inverse,
         opacity: system.opacity.disabled,
       },
     },
-  ],
+  },
   defaultModifiers: {
     typeLevel: 'subtext.large',
   },

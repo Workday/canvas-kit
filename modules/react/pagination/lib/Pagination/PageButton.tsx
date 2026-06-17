@@ -1,21 +1,23 @@
 import * as React from 'react';
 
-import {brand, system} from '@workday/canvas-tokens-web';
 import {BaseButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {PaginationContext} from './usePaginationModel';
 
 export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.space.x8,
-    padding: system.space.zero,
+    minWidth: system.legacy.size.sm,
+    height: system.legacy.size.sm,
+    padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.color.bg.alt.soft,
+      [buttonStencil.vars.background]: system.legacy.color.surface.alt.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
     },
 
@@ -31,11 +33,13 @@ export const paginationPageButtonStencil = createStencil({
     toggled: {
       true: {
         fontWeight: system.fontWeight.bold,
-        [buttonStencil.vars.background]: brand.primary.base,
+        [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: brand.primary.base,
+          [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+
           [buttonStencil.vars.label]: system.color.fg.inverse,
         },
 

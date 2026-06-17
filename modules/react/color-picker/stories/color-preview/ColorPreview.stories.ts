@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './ColorPreview.mdx';
 
 import {ColorPreview} from '@workday/canvas-kit-react/color-picker';
 
+import mdxDoc from './ColorPreview.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';

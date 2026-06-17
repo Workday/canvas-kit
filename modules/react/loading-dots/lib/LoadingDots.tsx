@@ -1,14 +1,14 @@
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
   handleCsProp,
   keyframes,
-  CSProps,
-  createStencil,
-  calc,
   px2rem,
-  cssVar,
 } from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Keyframe for the dots loading animation.
@@ -34,7 +34,7 @@ const keyframesLoading = keyframes({
 export interface LoadingDotsProps extends CSProps {
   /**
    * Applies backgroundColor to loading dots, intended for use with the circle variant design on grey/dark/image-based backgrounds.
-   * @default `system.color.bg.alt.strong`
+   * @default `system.color.accent.muted.default`
    */
   loadingDotColor?: string;
   /**
@@ -48,20 +48,20 @@ export interface LoadingDotsProps extends CSProps {
 export const loadingDotsStencil = createStencil({
   vars: {
     animationDurationMs: '40ms',
-    loadingDotColor: system.color.bg.muted.strong,
+    loadingDotColor: '',
   },
   parts: {
     loadingAnimationDot: 'loading-animation-dot',
   },
   base: ({loadingDotColor, animationDurationMs, loadingAnimationDotPart}) => ({
     display: 'inline-flex',
-    gap: system.space.x2,
+    gap: system.legacy.gap.sm,
     [loadingAnimationDotPart]: {
-      backgroundColor: loadingDotColor,
-      width: system.space.x4,
-      height: system.space.x4,
-      fontSize: system.space.zero,
-      borderRadius: system.shape.round,
+      backgroundColor: cssVar(loadingDotColor, system.legacy.color.accent.muted.default),
+      width: system.legacy.size.xxxs,
+      height: system.legacy.size.xxxs,
+      fontSize: 0,
+      borderRadius: system.legacy.shape.full,
       outline: `${px2rem(2)} solid transparent`,
       transform: 'scale(0)',
       display: 'inline-block',
@@ -85,7 +85,7 @@ export const loadingDotsStencil = createStencil({
     variant: {
       inverse: ({loadingDotColor, loadingAnimationDotPart}) => ({
         [loadingAnimationDotPart]: {
-          backgroundColor: cssVar(system.color.bg.default, loadingDotColor),
+          backgroundColor: cssVar(loadingDotColor, system.color.bg.default),
         },
       }),
     },

@@ -1,8 +1,8 @@
 import React from 'react';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
+
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {customColorTheme} from '../../../../utils/storybook';
-
 import {
   Pagination,
   getLastPage,

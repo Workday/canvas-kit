@@ -1,10 +1,12 @@
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled} from '../../../../utils/storybook';
-
-import {Expandable} from '@workday/canvas-kit-react/expandable';
-import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
 import {Meta} from '@storybook/react';
+
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {useDisclosureModel} from '@workday/canvas-kit-react/disclosure';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {system} from '@workday/canvas-tokens-web';
+
+import {withSnapshotsEnabled} from '../../../../utils/storybook';
 
 const meta: Meta = withSnapshotsEnabled({
   title: 'Testing/Expandable',
@@ -32,7 +34,7 @@ export const StartIcon = () => {
         rowProps={[
           {label: 'No Avatar', props: {}},
           {label: 'Avatar', props: {avatar: true}},
-          {label: 'Depth', props: {depth: 3}},
+          {label: 'Depth', props: {depth: system.depth[3]}},
           {label: 'RTL', props: {dir: 'rtl'}},
         ]}
         columnProps={[
@@ -51,7 +53,7 @@ export const StartIcon = () => {
 
           return (
             <CanvasProvider dir={props?.dir}>
-              <Expandable depth={props?.depth} model={{...model, state}}>
+              <Expandable model={{...model, state}} cs={{boxShadow: props.depth}}>
                 <Expandable.Target headingLevel="h2">
                   <Expandable.Icon iconPosition="start" />
                   {props.avatar && <Expandable.Avatar name="Logan McNeil" />}
@@ -76,7 +78,7 @@ export const EndIcon = () => {
         rowProps={[
           {label: 'No Avatar', props: {}},
           {label: 'Avatar', props: {avatar: true}},
-          {label: 'Depth', props: {depth: 3}},
+          {label: 'Depth', props: {depth: system.depth[3]}},
           {label: 'RTL', props: {dir: 'rtl'}},
         ]}
         columnProps={[
@@ -95,7 +97,7 @@ export const EndIcon = () => {
 
           return (
             <CanvasProvider dir={props?.dir}>
-              <Expandable depth={props?.depth} model={{...model, state}}>
+              <Expandable model={{...model, state}} cs={{boxShadow: props.depth}}>
                 <Expandable.Target headingLevel="h3">
                   {props?.avatar && <Expandable.Avatar name="Logan McNeil" />}
                   <Expandable.Title>Hello</Expandable.Title>

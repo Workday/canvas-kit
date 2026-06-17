@@ -1,4 +1,4 @@
-import {buildStyleFns, buildStylePropFn, StyleFnConfig} from './buildStyleFns';
+import {StyleFnConfig, buildStyleFns, buildStylePropFn} from './buildStyleFns';
 import {SystemPropValues} from './systemProps';
 
 /** style props to for CSS space properties

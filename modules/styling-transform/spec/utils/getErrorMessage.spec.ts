@@ -1,10 +1,9 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
-import {getErrorMessage} from '../../lib/utils/getErrorMessage';
 import {withDefaultContext} from '../../lib/styleTransform';
+import {getErrorMessage} from '../../lib/utils/getErrorMessage';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 describe('getErrorMessage', () => {
   it('should return a message with fileName, line, character, and underline the correct characters', () => {

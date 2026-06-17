@@ -1,0 +1,1101 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v15.0/Overview" />
+
+# Canvas Kit 15.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v15. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+## Why You Should Upgrade
+
+v15 and v4 Canvas Tokens Web introduce new shape, size, gap, and padding tokens to our components.
+While we still support our old shape and space tokens, the new tokens aim to add more semantic
+meaning to allow for better use and theming. Our old shape and space tokens are now deprecated and
+will be removed in a future version.
+
+> **Note:** While v15 and v4 tokens should be backwards compatible with previous versions that use
+> CSS tokens, **we strongly advise migrating both Canvas Kit and Canvas Tokens Web together**.
+
+## Table of Contents
+
+- [Codemod](#codemod)
+  - [Instructions](#instructions)
+  - [Codemod Transformations for Icons](#codemod-transformations-for-icons)
+- [Theming](#theming)
+  - [System Brand Tokens and Brand Tokens](#system-brand-tokens-and-brand-tokens)
+- [Icon Updates](#icon-updates)
+  - [Svg](#svg)
+  - [System Icon](#system-icon)
+  - [System Icon Circle](#system-icon-circle)
+  - [Icon Size Updates](#icon-size-updates)
+- [New Components](#new-components)
+  - [Expressive Icon](#expressive-icon)
+  - [Switch (Preview)](#switch-preview)
+- [Component Promotions](#component-promotions)
+  - [Avatar](#avatar)
+  - [Information Highlight](#information-highlight)
+  - [Pill](#pill)
+  - [Segmented Control](#segmented-control)
+  - [Side Panel](#side-panel)
+- [Component Updates](#component-updates)
+  - [Buttons](#buttons)
+  - [Containers](#containers)
+  - [Indicators](#indicators)
+  - [Inputs](#inputs)
+  - [Navigation](#navigation)
+  - [Popups](#popups)
+- [Deprecations](#deprecations)
+  - [Accent Icon](#accent-icon)
+  - [Applet Icon](#applet-icon)
+  - [Icon Utilities](#icon-utilities)
+  - [Switch (Main)](#switch-main)
+- [Removals](#removals)
+  - [Avatar (Deprecated)](#avatar-deprecated)
+  - [Combobox (Labs)](#combobox-labs)
+  - [Form Field Container (Deprecated)](#form-field-container-deprecated)
+  - [Search Form (Labs)](#search-form-labs)
+  - [Segmented Control (Deprecated)](#segmented-control-deprecated)
+  - [Select (Deprecated)](#select-deprecated)
+  - [Side Panel (Deprecated)](#side-panel-deprecated)
+  - [Status Indicator AI Variant](#status-indicator-ai-variant)
+- [New Utilities](#new-utilities)
+  - [colorSpace](#colorspace)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Codemod
+
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v15. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+AST, identifying patterns, and making prescribed changes. This greatly decreases opportunities for
+error and reduces the number of manual updates, which allows you to focus on changes that need your
+attention. **We highly recommend you use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v13 of Canvas Kit,
+  you'll need to run the v14 codemod before you run v15.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v15. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v15 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v15 [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.
+
+### Codemod Transformations for Icons
+
+#### Icon Codemod
+
+For v15, there is a **separate codemod** called `v15-icons` that updates Canvas Kit icons usage
+across your codebase. This codemod will:
+
+- For **system icons**:
+  - Replace all **deprecated system icons** from `@workday/canvas-system-icons-web` with the correct
+    new icon name.
+
+- For **accent and applet icons**:
+  - Replace all uses of accent and applet icon imports from `@workday/canvas-accent-icons-web` and
+    `@workday/canvas-applet-icons-web` with imports from the new
+    `@workday/canvas-expressive-icons-web` expressive icon package.
+  - Change all legacy `<AccentIcon icon={foo} />` and `<AppletIcon icon={foo} />` component usages
+    to the new `<ExpressiveIcon icon={foo} />` syntax.
+
+To run the codemod:
+
+```sh
+npx @workday/canvas-kit-codemod v15-icons [path]
+```
+
+> **Tip:** Provide the specific directory or directories you want to update as `[path]` to speed up
+> migration.
+>
+> The codemod will handle both expressive (Accent/Applet) and system icons, replacing old icons and
+> updating your code to the latest APIs automatically. For further information about the new icon
+> system and migration options, check the
+> [Expressive Icon documentation](https://canvas.workdaydesign.com/styles/assets/expressive-icons)
+> and the
+> [migration guide table](https://canvas.workdaydesign.com/styles/assets/expressive-icons#tab=migration-guide).
+
+> 🤖 The `v15-icons` codemod automates the majority of icon migration work, but _always_ review the
+> PR for any remaining icons or component usages that the codemod could not address, especially in
+> tricky cases or heavily customized usages.
+
+## Theming
+
+### System Brand Tokens and Brand Tokens
+
+The relationship between **system brand tokens** (e.g. `system.color.brand.accent.primary`) and
+**brand tokens** (e.g. `brand.primary600`) has changed. Teams can still set palette values such as
+`base`, `light`, `lighter`, `lightest`, `dark` and `darkest` via the `CanvasProvider` `theme` prop.
+The mapping inside `CanvasProvider` exists for **backwards compatibility**. When you pass a theme
+object, we forward those values to both the legacy brand tokens and the system brand tokens so
+current implementations will continue to work.
+
+For more information on theming, view our [Theming](/get-started/for-developers/theming/overview/)
+documentation.
+
+For more information on our tokens, view our
+[Tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs)
+documentation.
+
+```tsx
+// This will set the [brand.primary.**] tokens to shades of purple.
+<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
+  <App />
+</CanvasProvider>
+```
+
+## Icon Updates
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+### Svg
+
+The `Svg` component has been improved to align with our latest token system and usage patterns:
+
+- `SvgProps` no longer extends `BoxProps`, which means Icon components may not accept Box-related
+  style props. Switch to use the `cs` prop instead. Use the `v14.1 codemod` to migrate style props
+  automatically.
+- The stencil variables for `width` and `height` are now deprecated; use the `size` prop instead.
+- The `transformColorNameToToken` utility has been fully removed; replace it with direct usage of
+  the new token values.
+
+### System Icon
+
+The `SystemIcon` component has been improved to align with our latest token system and usage
+patterns:
+
+- The `size` prop now accepts updated size token values: `xxs` (14px), `xs` (16px), `sm` (18px),
+  `md` (20px), `lg` (24px), and `xl` (32px), for consistent sizing across your application.
+- The `color` prop now only supports direct color values (tokens such as `blueberry400` are no
+  longer accepted). Use the component icon or system color tokens directly instead.
+- Hover-related props (`colorHover`, `accentHover`, `backgroundHover`) have been removed for a
+  cleaner and more predictable API. Instead, use new styling approaches if you need hover state
+  modifications.
+- Deprecated functionality, like `systemIconStyles`, `SystemIconStyles`, `deprecatedSystemIconVars`,
+  has been fully removed to reduce complexity and encourage best practices.
+
+### System Icon Circle
+
+The `SystemIconCircle` component has received important updates for improved accessibility and
+clarity:
+
+- Added a new `inverse` prop, enabling an inverse color variant for better adaptability across
+  backgrounds.
+- The `background` prop and the `color` prop must be provided together to ensure optimal contrast
+  and compliance with accessibility standards between the icon and its circular background.
+- `SystemIconCircleSize` has been deprecated; replace with direct tokens as size prop.
+
+### Icon Size Updates
+
+**PR:** [#3866](https://github.com/Workday/canvas-kit/pull/3866)
+
+Canvas v15 is optimized to look best when using the latest version of v4 tokens
+(`@workday/canvas-tokens-web`) and the latest version of v4 system icons
+(`@workday/canvas-system-icons-web`). It is designed to be backwards-compatible with v3 tokens and
+v3 system icons — nothing should break. But you might see minor imperfections when using v3 system
+icons when upgrading to v15. In those cases, we recommend upgrading to the latest version of v4
+icons `@workday/canvas-system-icons-web` and the latest version of v4 tokens
+`@workday/canvas-tokens-web`.
+
+The size of icons in some components have been updated. This is reflected in the following
+components:
+
+- `MultiSelect` | `1.5rem` → `1.25rem`
+- `Switch (Preview)` | `1.25rem` → `1.125rem`
+- `Buttons with icons (Primary, Secondary, Tertiary, Delete, ToolbarButton and ToolbarDropdownButton)`
+  | `1.125rem` → `1rem`
+- `Pill.Icon` | `1.25rem` → `1.125rem`
+- `Pill.IconButton` | `1.5rem` → `1.125rem`
+
+> **Note:** If you upgrade to `v15` and are not using `v4` tokens and `v4` icons, the size of the
+> icon will still be updated as part of the upgrade.
+
+## New Components
+
+### Expressive Icon
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+The new `ExpressiveIcon` component brings expressive icons to Canvas Kit. This component replaces
+the previous usage of `Accent` and `Applet` icons.
+
+The `ExpressiveIcon` component requires an `icon` prop, which should be an icon object imported from
+the
+[`@workday/canvas-expressive-icons-web`](https://www.npmjs.com/package/@workday/canvas-expressive-icons-web)
+package.
+
+> **Note**: If you previously used `Accent` or `Applet` icons, update your usage to import icons
+> from `@workday/canvas-expressive-icons-web` and pass them to `ExpressiveIcon` as the `icon` prop.
+> This can be done through a `v15-icons codemod` for auto-replacement or by following
+> [a migration table](https://canvas.workdaydesign.com/styles/assets/expressive-icons#tab=migration-guide).
+
+```tsx
+import * as React from 'react';
+
+import {bookOpenIcon} from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
+
+<ExpressiveIcon icon={bookOpenIcon} />;
+```
+
+### Switch (Preview)
+
+**PR:** [#3842](https://github.com/Workday/canvas-kit/pull/3842)
+
+We've created a new version of the [Switch](/components/inputs/switch/) component in `Preview`.
+
+Accessibility improvements include:
+
+- An icon to show the `unchecked` and `checked` state.
+- Visible borders when "High Contrast Mode" is enabled.
+
+> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however,
+> the styles have changed.
+
+## Component Promotions
+
+### Avatar
+
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
+
+We've promoted `Avatar` from [Preview](#preview) to [Main](#main). This replaces the deprecated
+`Avatar` that was previously in Main.
+
+**Before in v14**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
+```
+
+**After in v15**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### New Features
+
+The promoted `Avatar` includes several new features:
+
+- **Initials display**: Automatically shows initials from the `name` prop when no image URL is
+  provided
+- **Color variants**: Four color variants (`blue`, `amber`, `teal`, `purple`) instead of light/dark
+- **Custom initials**: Use `preferredInitials` for full control over displayed initials
+- **Decorative mode**: Use `isDecorative` when Avatar is purely decorative (rendered next to a name)
+- **Compound components**: Build custom avatars using `BaseAvatar`, `BaseAvatar.Image`, and
+  `BaseAvatar.Name`
+- **Utility function**: Use `getInitialsFromName` to extract initials from a name string
+
+```tsx
+// With initials (no image)
+<Avatar name="John Doe" variant="blue" />
+
+// Custom initials
+<Avatar name="John Smith Doe" preferredInitials="JD" />
+
+// Decorative (next to text name)
+<Avatar name="John Doe" url="..." isDecorative />
+
+// Using compound components for custom layouts
+<BaseAvatar variant="teal" size="large">
+  <BaseAvatar.Image src="..." alt="John Doe" />
+  <BaseAvatar.Name name="John Doe" />
+</BaseAvatar>
+```
+
+#### API Differences
+
+The new `Avatar` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) with a
+different API than the deprecated version.
+
+##### Structure Changes
+
+| Deprecated (Old Main) | New (Promoted from Preview)        |
+| --------------------- | ---------------------------------- |
+| `Avatar`              | `Avatar`                           |
+| -                     | `BaseAvatar`                       |
+| -                     | `BaseAvatar.Image` / `AvatarImage` |
+| -                     | `BaseAvatar.Name` / `AvatarName`   |
+
+##### Prop Changes
+
+| Feature          | Deprecated (Old Main)                             | New (Promoted from Preview)                            |
+| ---------------- | ------------------------------------------------- | ------------------------------------------------------ |
+| Variant          | `variant` (`light`, `dark`)                       | `variant` (`blue`, `amber`, `teal`, `purple`)          |
+| Size             | `size` (extraSmall=16px to extraExtraLarge=120px) | `size` (extraExtraSmall=24px to extraExtraLarge=120px) |
+| User identifier  | `altText` prop                                    | `name` prop                                            |
+| Custom initials  | Not supported                                     | `preferredInitials` prop                               |
+| Decorative mode  | Not supported                                     | `isDecorative` prop                                    |
+| Image URL        | `url` prop                                        | `url` prop                                             |
+| Object fit       | `objectFit` prop                                  | `objectFit` prop                                       |
+| Initials display | Not supported (shows user icon)                   | Shows initials from `name` when no image               |
+
+##### Size Mapping
+
+| Size Name       | Deprecated (Old Main) | New (Promoted from Preview) |
+| --------------- | --------------------- | --------------------------- |
+| extraExtraSmall | -                     | 24px                        |
+| extraSmall      | 16px                  | 32px                        |
+| small           | 24px                  | 40px                        |
+| medium          | 32px                  | 48px                        |
+| large           | 40px                  | 72px                        |
+| extraLarge      | 64px                  | 96px                        |
+| extraExtraLarge | 120px                 | 120px                       |
+
+##### Code Migration
+
+**Deprecated API (Old Main)**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar size="medium" variant="light" url="https://example.com/photo.jpg" altText="John Doe" />;
+```
+
+**New API (v15)**
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar size="medium" variant="blue" url="https://example.com/photo.jpg" name="John Doe" />;
+```
+
+### Information Highlight
+
+**PR:** [#3633](https://github.com/Workday/canvas-kit/pull/3633)
+
+We've promoted `InformationHighlight` from [Preview](#preview) to [Main](#main). There are no
+changes to the functionality or styling of the component. The only change required is updating the
+import statement.
+
+**Before in v14**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+```
+
+**After in v15**
+
+```tsx
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+### Pill
+
+**PR:** [#3634](https://github.com/Workday/canvas-kit/pull/3634)
+
+We've promoted `Pill` from [Preview](#preview) to [Main](#main). There are no changes to the
+functionality of the component. The only change required is updating the import statement.
+
+**Before in v14**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-preview-react/pill';
+```
+
+**After in v15**
+
+```tsx
+import {Pill} from '@workday/canvas-kit-react/pill';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+### Segmented Control
+
+**PR:** [#3626](https://github.com/Workday/canvas-kit/pull/3626)
+
+We've promoted `SegmentedControl` from [Preview](#preview) to [Main](#main). This replaces the
+deprecated `SegmentedControl` that was previously in Main.
+
+**Before in v14**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-preview-react/segmented-control';
+```
+
+**After in v15**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### New Features
+
+The promoted `SegmentedControl` includes several new features:
+
+- **Text and icon support**: Items can display text, icons, or both
+- **Size variants**: `small`, `medium`, and `large` sizes
+- **Vertical orientation**: Use `orientation="vertical"` for vertical layouts
+- **Built-in tooltips**: Add tooltips via `tooltipProps` on items
+- **Disabled state**: Disable all items via the model or individual items
+- **Dynamic items**: Render items dynamically using the collection API
+
+```tsx
+// Text only
+<SegmentedControl.Item data-id="yearly">Yearly</SegmentedControl.Item>
+
+// Icon with text
+<SegmentedControl.Item data-id="list" icon={listViewIcon}>List View</SegmentedControl.Item>
+
+// With size and orientation
+<SegmentedControl size="large" orientation="vertical">
+  ...
+</SegmentedControl>
+```
+
+#### API Differences
+
+The new `SegmentedControl` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) with a
+different API than the deprecated version.
+
+##### Structure Changes
+
+| Deprecated (Old Main)     | New (Promoted from Preview)                       |
+| ------------------------- | ------------------------------------------------- |
+| `SegmentedControl`        | `SegmentedControl`                                |
+| `SegmentedControl.Button` | `SegmentedControl.List` + `SegmentedControl.Item` |
+
+##### Prop Changes
+
+| Feature         | Deprecated (Old Main)      | New (Promoted from Preview)                   |
+| --------------- | -------------------------- | --------------------------------------------- |
+| Selection       | `value` prop on container  | `initialValue` prop on container              |
+| Change handler  | `onChange={(value) => {}}` | `onSelect={(data) => setSelected(data.id)}`   |
+| Item identifier | `value` prop on Button     | `data-id` prop on Item                        |
+| Disabled (all)  | Not supported              | `disabled` prop on container model            |
+| Size            | Not supported              | `size` prop (`small`, `medium`, `large`)      |
+| Orientation     | Not supported              | `orientation` prop (`horizontal`, `vertical`) |
+| Text labels     | Not supported              | `children` on Item                            |
+| Tooltips        | Not supported              | `tooltipProps` on Item                        |
+| Accessibility   | Manual                     | Built-in `aria-label` on List                 |
+
+##### Code Migration
+
+**Deprecated API (Old Main)**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+const [value, setValue] = React.useState<string | number>('list-view');
+
+<SegmentedControl value={value} onChange={setValue}>
+  <SegmentedControl.Button icon={listViewIcon} value="list-view" />
+  <SegmentedControl.Button icon={worksheetsIcon} value="table-view" />
+  <SegmentedControl.Button icon={deviceTabletIcon} value="device-view" />
+</SegmentedControl>;
+```
+
+**New API (v15)**
+
+```tsx
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+
+const [value, setValue] = React.useState('list-view');
+
+<SegmentedControl initialValue={value} onSelect={data => setValue(data.id)}>
+  <SegmentedControl.List aria-label="View type">
+    <SegmentedControl.Item data-id="list-view" icon={listViewIcon} tooltipProps={{title: 'List'}} />
+    <SegmentedControl.Item
+      data-id="table-view"
+      icon={worksheetsIcon}
+      tooltipProps={{title: 'Table'}}
+    />
+    <SegmentedControl.Item
+      data-id="device-view"
+      icon={deviceTabletIcon}
+      tooltipProps={{title: 'Device'}}
+    />
+  </SegmentedControl.List>
+</SegmentedControl>;
+```
+
+### Side Panel
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+We've promoted `SidePanel` from [Labs](#labs) to [Main](#main). This replaces the deprecated
+`SidePanel` that was previously in Main and should replace the one in [Preview](#preview) as well.
+
+**Before in v14**
+
+```tsx
+import {SidePanel} from '@workday/canvas-kit-labs-react/side-panel';
+```
+
+**After in v15**
+
+```tsx
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+```
+
+> 🤖 The codemod will handle the change of imports as shown above.
+
+#### Migrating from Preview
+
+If you're migrating from `@workday/canvas-kit-preview-react/side-panel`, here are the key API
+changes:
+
+```tsx
+// Before (preview-react)
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+
+// After (react)
+import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+```
+
+#### Hook API Changes
+
+| Preview (`useSidePanel`)         | Main (`useSidePanelModel`)                              |
+| -------------------------------- | ------------------------------------------------------- |
+| `initialExpanded: boolean`       | `initialTransitionState: 'expanded' \| 'collapsed'`     |
+| `origin: 'left' \| 'right'`      | `origin: 'start' \| 'end'`                              |
+| Returns `expanded: boolean`      | Returns `model.state.transitionState`                   |
+| Returns `setExpanded(bool)`      | Use `model.events.expand()` / `model.events.collapse()` |
+| Returns `panelProps` to spread   | Props applied automatically via `elemPropsHook`         |
+| Returns `labelProps` to spread   | Use `id={model.state.labelId}` on label element         |
+| Returns `controlProps` to spread | Props applied automatically to `SidePanel.ToggleButton` |
+
+#### Component API Changes
+
+| Preview                                        | Main                                                 |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>`    |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                         |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>` |
+| `expanded` prop on SidePanel                   | Managed by model's `transitionState`                 |
+| `touched` prop on SidePanel                    | Managed internally                                   |
+| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state    |
+| `onStateTransition` on component               | `onStateTransition` in model config                  |
+
+#### Code Migration Example
+
+```tsx
+// Before (in Preview)
+const {expanded, panelProps, labelProps, controlProps} = useSidePanel({
+  initialExpanded: false,
+});
+
+<SidePanel {...panelProps} origin="right" onExpandedChange={exp => console.log(exp)}>
+  <SidePanel.ToggleButton {...controlProps} />
+  <Heading {...labelProps}>Panel Title</Heading>
+  {expanded && <Content />}
+</SidePanel>;
+
+// After (in Main)
+const model = useSidePanelModel({
+  initialTransitionState: 'collapsed',
+  origin: 'end',
+  onStateTransition: state => {
+    const isExpanded = state === 'expanded' || state === 'expanding';
+    console.log(isExpanded);
+  },
+});
+
+<SidePanel model={model}>
+  <SidePanel.ToggleButton aria-label="Collapse View" />
+  <SidePanel.Heading>Panel Title</SidePanel.Heading>
+  {model.state.transitionState === 'expanded' && <Content />}
+</SidePanel>;
+```
+
+#### Checking Expanded State
+
+```tsx
+// Before (@workday/canvas-kit-preview-react/side-panel)
+if (expanded) {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - for exact state
+if (model.state.transitionState === 'expanded') {
+  /* ... */
+}
+
+// After (@workday/canvas-kit-react/side-panel) - including animation states
+const isExpanded =
+  model.state.transitionState === 'expanded' || model.state.transitionState === 'expanding';
+```
+
+## Component Updates
+
+The following components have been updated to use our new `size`, `padding`, `gap` and `shape`
+tokens. These changes are **only visual**.
+
+If you'd like to see the visual differences between `v14` with `v3` tokens and `v15 alpha` with `v4`
+tokens, check out our [Visual Changes](/docs/guides-upgrade-guides-v15-0-visual-changes--docs) file.
+
+### Buttons
+
+**PR:** [#3604](https://github.com/Workday/canvas-kit/pull/3604)
+
+`PrimaryButton`, `SecondaryButton`, `DeleteButton`, `TertiaryButton`, `ToolbarButton`,
+`ToolbarDropdownButton`, `Hyperlink`, `ExternalHyperlink` and `ActionBar`.
+
+### Containers
+
+**PR:** [#3732](https://github.com/Workday/canvas-kit/pull/3732)
+
+`Card`, `Expandable` and `Tabs`
+
+### Indicators
+
+**PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738)
+
+`StatusIndicator (Preview)`, `Avatar`, `Badge`, `Banner`, `InformationHighlight`, `Pill` and
+`Skeleton`
+
+### Inputs
+
+**PR:** [#3719](https://github.com/Workday/canvas-kit/pull/3719)
+
+`ColorPicker`, `MultiSelect`, `Radio`, `Checkbox`, `FormField`, `Select`, `Switch`, `TextArea` and
+`TextInput`
+
+### Navigation
+
+**PR:** [#3753](https://github.com/Workday/canvas-kit/pull/3753)
+
+`Breadcrumbs`, `Pagination`, `Hyperlink` and `ExternalHyperlink`
+
+### Popups
+
+**PR:** [#3745](https://github.com/Workday/canvas-kit/pull/3745)
+
+`Menu`, `Modal`, `Popup`, `Toast` and `Tooltip`
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+### Accent Icon
+
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Accent Icon set has been **deprecated** and will be removed in a future major version. We
+recommend migrating to **Expressive Icons**, which are more flexible and aligned with our current
+design direction.
+
+### Applet Icon
+
+**PR:** [#3727](https://github.com/Workday/canvas-kit/pull/3727)
+
+The Applet Icon set has been **deprecated** and will be removed in a future major version. Please
+migrate to **Expressive Icons**, as Applet Icons will no longer receive updates or support.
+
+### Icon Utilities
+
+**PR:** [#3851](https://github.com/Workday/canvas-kit/pull/3851)
+
+`validateIconType` and `SpanProps` are deprecated.
+
+### Switch (Main)
+
+**PR:** [#3854](https://github.com/Workday/canvas-kit/pull/3854)
+
+We've deprecated the `Switch` component in `@workday/canvas-kit-react` Main package. Please use the
+`Switch` component in our Preview package `@workday/canvas-kit-preview-react`.
+
+> **NOTE:** The API has not changed between `Switch` in `main` and `Switch` in `preview` however,
+> the styles have changed.
+
+## Removals
+
+### Avatar (Deprecated)
+
+**PR:** [#3660](https://github.com/Workday/canvas-kit/pull/3660)
+
+The deprecated `Avatar` that was previously in `@workday/canvas-kit-react/avatar` has been removed.
+This was the older implementation that showed a user icon placeholder and supported `light`/`dark`
+variants.
+
+Please migrate to the new `Avatar` component (promoted from Preview) which uses initials display,
+color variants (`blue`, `amber`, `teal`, `purple`), and supports compound components. See the
+[API Differences](#api-differences) section above for migration guidance.
+
+### Combobox (Labs)
+
+**PR:** [#3661](https://github.com/Workday/canvas-kit/pull/3661)
+
+The deprecated `Combobox` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+
+- `Combobox`
+- `ComboboxProps`
+- `AutocompleteList`
+- `Status`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
+
+### Form Field Container (Deprecated)
+
+**PR:** [#3882](https://github.com/Workday/canvas-kit/pull/3882)
+
+The deprecated `FormField.Container` has been removed from `@workday/canvas-kit-react/form-field`.
+This component was deprecated in v12 and has now been fully removed in v15.
+
+Please use `FormField.Field` instead, which ensures proper label alignment, spacing of inputs and
+hint text regardless of the orientation.
+
+`formFieldContainerStencil` has been removed from `@workday/canvas-kit-react/form-field` as well.
+
+**Before in v14**
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Container>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>You must provide an email</FormField.Hint>
+  </FormField.Container>
+</FormField>;
+```
+
+> 🤖 The codemod will automatically handle replacing `FormField.Container` with `FormField.Field`
+> throughout your codebase.
+
+### Search Form (Labs)
+
+**PR:** [#3661](https://github.com/Workday/canvas-kit/pull/3661)
+
+The deprecated `SearchForm` component has been removed from `@workday/canvas-kit-labs-react`.
+
+The following exports are no longer available:
+
+- `SearchForm`
+- `SearchFormProps`
+- `SearchFormState`
+- `SearchTheme`
+- `SearchThemeAttributes`
+
+Please migrate to the [Combobox](/get-started/for-developers/guides/combobox/) in
+`@workday/canvas-kit-react`.
+
+### Segmented Control (Deprecated)
+
+**PR:** [#3626](https://github.com/Workday/canvas-kit/pull/3626)
+
+The deprecated `SegmentedControl` that was previously in
+`@workday/canvas-kit-react/segmented-control` has been removed. This was the older implementation
+that used `SegmentedControl.Button` subcomponents.
+
+Please migrate to the new `SegmentedControl` component (promoted from Preview) which uses a compound
+component pattern with `SegmentedControl.List` and `SegmentedControl.Item`. See the
+[API Differences](#api-differences) section above for migration guidance.
+
+### Select (Deprecated)
+
+**PR:** [#3658](https://github.com/Workday/canvas-kit/pull/3658)
+
+The `Select` component in `@workday/canvas-kit-preview-react/select` has been removed. Please use
+the `Select` component from `@workday/canvas-kit-react/select` instead.
+
+**Before in v14**
+
+```tsx
+import {Select} from '@workday/canvas-kit-preview-react/select';
+```
+
+**After in v15**
+
+```tsx
+import {Select} from '@workday/canvas-kit-react/select';
+```
+
+#### Main Select Features
+
+The Main `Select` includes features not available in the Preview version:
+
+- **Composition-based API**: Full control over structure with subcomponents
+- **FormField integration**: Built-in accessibility when wrapped with FormField
+- **Model-based state**: Use `useSelectModel` for advanced state management
+- **Icons in input**: Use `inputStartIcon` prop on `Select.Input`
+- **Icons in items**: Use `Select.Item.Icon` subcomponent
+
+```tsx
+// With icons
+<Select.Input inputStartIcon={myIcon} />
+
+// With item icons
+<Select.Item>
+  <Select.Item.Icon icon={starIcon} />
+  Favorite
+</Select.Item>
+
+// With model for controlled state
+const model = useSelectModel({
+  items: myItems,
+  onSelect: ({id}) => console.log('Selected:', id),
+});
+
+<Select model={model}>
+  ...
+</Select>
+```
+
+#### API Differences
+
+The Main `Select` is a
+[compound component](/getting-started/for-developers/resources/compound-components/) built on top of
+the Combobox component with a composition-based API, whereas the Preview Select was a monolithic
+class-based component.
+
+##### Structure Changes
+
+| Preview (Removed)           | Main                                                                                        |
+| --------------------------- | ------------------------------------------------------------------------------------------- |
+| `Select` (single component) | `Select` + `Select.Input` + `Select.Popper` + `Select.Card` + `Select.List` + `Select.Item` |
+
+##### Prop Changes
+
+| Feature          | Preview (Removed)                        | Main                                   |
+| ---------------- | ---------------------------------------- | -------------------------------------- |
+| Options          | `options` prop (array of Option objects) | `items` prop (array of any type)       |
+| Selected value   | `value` prop                             | Managed via model (`useSelectModel`)   |
+| Change handler   | `onChange={(e) => {}}`                   | `onChange` on `Select.Input`           |
+| Error state      | `error={Select.ErrorType.Error}`         | `error="error"` or `error="caution"`   |
+| Custom rendering | `renderOption` / `renderSelected` props  | Composition via `Select.Item` children |
+| Form integration | Manual                                   | Built-in with `FormField` wrapper      |
+| Accessibility    | Manual ARIA                              | Built-in via Combobox foundation       |
+
+##### Code Migration
+
+**Preview API (Removed)**
+
+```tsx
+import {Select} from '@workday/canvas-kit-preview-react/select';
+
+const options = [
+  {label: 'Small', value: 'small'},
+  {label: 'Medium', value: 'medium'},
+  {label: 'Large', value: 'large'},
+];
+
+const [value, setValue] = React.useState('medium');
+
+<Select options={options} value={value} onChange={e => setValue(e.target.value)} />;
+```
+
+**Main API (v15)**
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select} from '@workday/canvas-kit-react/select';
+
+const items = ['Small', 'Medium', 'Large'];
+
+<Select items={items}>
+  <FormField label="Size">
+    <FormField.Input as={Select.Input} onChange={e => console.log('Selected:', e.target.value)} />
+    <Select.Popper>
+      <Select.Card>
+        <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+      </Select.Card>
+    </Select.Popper>
+  </FormField>
+</Select>;
+```
+
+### Side Panel (Deprecated)
+
+**PR:** [#3670](https://github.com/Workday/canvas-kit/pull/3670)
+
+The deprecated `SidePanel` that was previously in `@workday/canvas-kit-react/side-panel` has been
+removed. This was the older implementation that used our old patterns.
+
+Please migrate to the new `SidePanel` component (promoted from Labs) which uses a compound component
+pattern and `useSidePanelModel`. See the [API Differences](#api-differences) section above for
+migration guidance.
+
+### Status Indicator AI Variant
+
+**PR:** [#3899](https://github.com/Workday/canvas-kit/pull/3899)
+
+We've removed the `ai` variant from the `StatusIndicator` component in `Preview`. This pattern is no
+longer supported. If you wish to create your own custom variant you can customize both the icon and
+color of the `StatusIndicator`.
+
+> 🤖 The codemod will automatically handle replacing `ai` variant with `variant="blue`. You can
+> manually change the color if you wish.
+
+## New Utilities
+
+### colorSpace
+
+**PR:** [#3738](https://github.com/Workday/canvas-kit/pull/3738),
+[#3818](https://github.com/Workday/canvas-kit/pull/3818)
+
+We've added a new utility called
+[colorSpace](/get-started/for-developers/styling/utilities/#colorspace) which has three functions:
+[darken](/get-started/for-developers/styling/utilities/#darken),
+[hover](/get-started/for-developers/styling/utilities/#hover) and
+[pressed](/get-started/for-developers/styling/utilities/#pressed).
+
+These utilities are meant to be used for interactive states (i.e. `:hover`, `:active` on buttons,
+links, etc.).
+
+These will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is a mix of the first color and the mixin color together in the srgb colorspace by a
+given amount.
+
+With the addition of our `surface` tokens, we wanted to create a utility that would allow us to use
+the `surface` tokens in interactive states. Alpha colors (`surface` tokens) are translucent versions
+of their solid counterparts. Solid colors are designed for white backgrounds and can lose contrast
+on other surfaces. Alpha colors adapt via transparency, so they match the appearance of solid colors
+on the default page background while remaining legible on any surface.
+
+#### Darken
+
+This is the core function that is used under the hood for the `hover` and `pressed` functions.
+
+It takes a single options object with four properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or
+   fallback color).
+
+```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.darken({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      mixinColor: system.color.accent.overlay.mixin,
+      mixinValue: system.opacity.accent.hover,
+    }),
+  },
+});
+```
+
+#### Hover and Pressed
+
+For the `hover` and `pressed` functions, they take a single options object with three properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage come
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+##### Hover
+
+This function is used specifically for hover states.
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.hover({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
+
+##### Pressed
+
+This function is used specifically for pressed/active states.
+
+```tsx
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:active': {
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      colorType: 'accent',
+    }),
+  },
+});
+```
+
+## Glossary
+
+For an overview of the different packages we provide, please view our docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
+
+### Main
+
+Components in the Main package are stable and ready for production use.
+
+### Preview
+
+Components in the Preview package are mostly stable but may still receive breaking changes before
+being promoted to Main.
+
+### Labs
+
+Components in the Labs package are experimental and may receive significant changes or be removed
+entirely.

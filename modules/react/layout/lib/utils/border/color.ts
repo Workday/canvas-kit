@@ -1,4 +1,4 @@
-import {buildStyleFns, StyleFnConfig} from '../buildStyleFns';
+import {StyleFnConfig, buildStyleFns} from '../buildStyleFns';
 import {SystemPropValues} from '../systemProps';
 
 /** style props to set CSS border color properties

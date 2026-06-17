@@ -1,18 +1,24 @@
-import styled, {CSSObject} from '@emotion/styled';
+import {CSProps, createStyles, handleCsProp} from '@workday/canvas-kit-styling';
 
 import {createComponent} from './utils';
 
-export const ellipsisStyles: CSSObject = {
+const ellipsisStyles = createStyles({
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
   overflow: 'hidden',
-};
+});
 
-const StyledEllipsisComponent = styled('span')(ellipsisStyles);
+export interface EllipsisTextProps extends CSProps {
+  children: React.ReactNode;
+}
 
 export const EllipsisText = createComponent('span')({
   displayName: 'EllipsisText',
-  Component(elemProps = {}, ref, Element) {
-    return <StyledEllipsisComponent as={Element} ref={ref} {...elemProps} />;
+  Component({children, ...elemProps}: EllipsisTextProps, ref, Element) {
+    return (
+      <Element ref={ref} {...handleCsProp(elemProps, ellipsisStyles)}>
+        {children}
+      </Element>
+    );
   },
 });

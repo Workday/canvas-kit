@@ -1,38 +1,39 @@
 // @ts-ignore: Cannot find module error
-import headerImage from './ck-banner.jpg';
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
+import {Card} from '@workday/canvas-kit-react/card';
+import {Graphic} from '@workday/canvas-kit-react/icon';
+import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+// @ts-ignore: Cannot find module error
+import {version} from '../../../lerna.json';
 // @ts-ignore: Cannot find module error
 import componentsImage from './Components.png';
 // @ts-ignore: Cannot find module error
-import tokensImage from './Tokens.png';
-// @ts-ignore: Cannot find module error
 import stylingImage from './Styling.png';
-import {Flex, Grid, Box} from '@workday/canvas-kit-react/layout';
-import {InstallBlock} from './installBlock';
-import {Text, Heading} from '@workday/canvas-kit-react/text';
-import {Card} from '@workday/canvas-kit-react/card';
-import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {Graphic} from '@workday/canvas-kit-react/icon';
 // @ts-ignore: Cannot find module error
-import {version} from '../../../lerna.json';
+import tokensImage from './Tokens.png';
+import headerImage from './ck-banner.jpg';
+import {InstallBlock} from './installBlock';
 
 const parentFlexStyles = createStyles({
   display: 'flex',
   flexDirection: 'column',
-  gap: system.space.x4,
-  marginBottom: system.space.x6,
+  gap: system.gap.md,
+  marginBlockEnd: system.gap.lg,
 });
 
 const bannerTextStyles = createStyles({
-  color: system.color.text.inverse,
+  color: system.color.fg.inverse,
   fontSize: '5vmin',
   lineHeight: '5vmin',
 });
 
 const versionStyles = createStyles({
-  ...system.type.body.medium,
-  marginInlineStart: system.space.x4,
+  ...system.type.body.md,
+  marginInlineStart: system.gap.md,
 });
 
 const imageStyles = createStyles({
@@ -41,14 +42,14 @@ const imageStyles = createStyles({
 });
 
 const gridStyles = createStyles({
-  maxHeight: 400,
+  maxHeight: px2rem(400),
   gridTemplateRows: '1fr 1fr 2fr 1fr',
   display: 'grid',
 });
 
 const linkStyles = createStyles({
   alignSelf: 'end',
-  marginTop: system.space.x3,
+  marginBlockStart: px2rem(12),
 });
 
 export const WelcomePage = () => {
@@ -73,16 +74,18 @@ export const WelcomePage = () => {
           <ExternalHyperlink
             href="https://canvas.workdaydesign.com/"
             iconLabel="Open docs in new window"
-            cs={{marginInlineStart: system.space.x1}}
+            cs={{marginInlineStart: system.gap.xs}}
           >
             Workday Design Principles.
           </ExternalHyperlink>
         </Text>
         <Heading size="medium">Quick Links</Heading>
         <Grid
-          gridAutoColumns="auto"
-          gridTemplateColumns="repeat(auto-fill, minmax(250px, 1fr))"
-          gridGap="s"
+          cs={{
+            gridAutoColumns: 'auto',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+            gridGap: system.gap.sm,
+          }}
         >
           <Grid as={Card} className={gridStyles}>
             <Graphic src={{url: componentsImage}} />

@@ -1,3 +1,5 @@
+import {Meta} from '@storybook/blocks';
+
 <Meta title="Styling/Guides/Customizing Styles" />
 
 # How To Customize Styles
@@ -24,7 +26,7 @@ import {Text} from '@Workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
-  margin: system.space.x4
+  margin: system.gap.md
 })
 //...
 <Text cs={uppercaseTextStyles}>My uppercased text</Text>;
@@ -41,7 +43,7 @@ import {Text} from '@Workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
-  margin: system.space.x4
+  margin: system.gap.md
 })
 //...
 <Text className={uppercaseTextStyles}>My uppercased text</Text>;
@@ -113,9 +115,9 @@ const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, ico
 
 ```tsx
 // v11
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const navIconStencil = createStencil({
   // We extend `systemIconStencil` to inherit it's base styles, modifiers and variables so that we can customize it
@@ -131,7 +133,7 @@ const navIconStencil = createStencil({
     display: 'inline-flex',
     pointerEvents: 'unset',
     // instead of using our old tokens it's better to use our new system tokens
-    margin: `${system.space.x1} ${system.space.x1} 0 0`,
+    margin: `${system.gap.xs} ${system.gap.xs} 0 0`,
     padding: '0',
     '&:hover, &.hover': {
       // systemIconStencil doesn't have hover specific variables

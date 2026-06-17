@@ -3,7 +3,9 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {Flex, Grid, Box} from '../';
+
+import {Box, Flex, Grid} from '../';
+
 const context = describe;
 describe('Layout Components', () => {
   context('Flex Component', () => {

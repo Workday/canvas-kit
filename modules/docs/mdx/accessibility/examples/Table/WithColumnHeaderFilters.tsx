@@ -1,26 +1,26 @@
 import React from 'react';
 
+import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {AriaLiveRegion, createComponent, useUniqueId} from '@workday/canvas-kit-react/common';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
-  useInitialFocus,
-  useReturnFocus,
+  useCloseOnOutsideClick,
   useFocusRedirect,
+  useInitialFocus,
+  usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Text} from '@workday/canvas-kit-react/text';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 import {filterIcon, searchIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 interface CountryData {
   country: string;
@@ -58,7 +58,7 @@ const countryData: CountryData[] = [
 ];
 
 const textStyles = createStyles({
-  paddingInlineStart: system.space.x3,
+  paddingInlineStart: system.padding.md,
 });
 
 interface FilterableColumnHeaderProps {
@@ -172,7 +172,7 @@ export const FilterableColumnHeaders = () => {
   }
 
   return (
-    <Table maxHeight="40rem">
+    <Table cs={{maxHeight: '40rem'}}>
       <Table.Caption>
         Population Listed by Country (2021)
         <AriaLiveRegion cs={textStyles}>

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
+import {CardHeading} from './CardHeading';
 
 export interface CardProps extends BoxProps {
   /**
@@ -14,10 +14,10 @@ export interface CardProps extends BoxProps {
    */
   children?: React.ReactNode;
   /**
-   * The variant of the Card. Can be `default`, `borderless` or `filled`.
+   * The variant of the Card. Can be `default`, `borderless` or `tonal`.
    * @default 'default'
    */
-  variant?: 'borderless' | 'filled';
+  variant?: 'borderless' | 'tonal';
 }
 
 // .cnvs-card
@@ -25,19 +25,19 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x6,
-    padding: system.space.x8,
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x2,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
+    gap: system.legacy.gap.lg,
+    padding: system.legacy.padding.xl,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.xxl,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
   },
   modifiers: {
     variant: {
       borderless: {
         borderColor: 'transparent',
       },
-      filled: {
-        backgroundColor: system.color.bg.alt.soft,
+      tonal: {
+        backgroundColor: system.legacy.color.surface.alt.default,
         borderColor: system.color.border.transparent,
       },
     },

@@ -1,6 +1,9 @@
-import { ExampleCodeBlock, SymbolDoc } from '@workday/canvas-kit-docs';
-import { CreateStyles } from './examples/CreateStyles';
-import { CreateVars } from './examples/CreateVars';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {CreateStyles} from './examples/CreateStyles';
+import {CreateVars} from './examples/CreateVars';
 
 <Meta title="Styling/Utilities" />
 
@@ -16,7 +19,6 @@ tricky mental division or write irrational numbers.
 
 ```ts
 import {px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
   // returns '0.0625rem'
@@ -38,8 +40,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) + 0.125rem)'
-  padding: calc.add(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) + 0.125rem)'
+  padding: calc.add(system.padding.xxs, '0.125rem'),
 };
 ```
 
@@ -52,8 +54,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) - 0.125rem)'
-  padding: calc.subtract(system.space.x1, '0.125rem'),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) - 0.125rem)'
+  padding: calc.subtract(system.padding.xxs, '0.125rem'),
 };
 ```
 
@@ -66,8 +68,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) * 3)'
-  padding: calc.multiply(system.space.x1, 3),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) * 3)'
+  padding: calc.multiply(system.padding.xxs, 3),
 };
 ```
 
@@ -80,8 +82,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x1) / 2)'
-  padding: calc.divide(system.space.x1, 2),
+  // returns 'calc(var(--cnvs-sys-padding-xxs) / 2)'
+  padding: calc.divide(system.padding.xxs, 2),
 };
 ```
 
@@ -95,8 +97,8 @@ import {calc} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  // returns 'calc(var(--cnvs-sys-space-x4) * -1)'
-  margin: calc.negate(system.space.x4),
+  // returns 'calc(var(--cnvs-sys-gap-md) * -1)'
+  margin: calc.negate(system.gap.md),
 };
 ```
 
@@ -106,31 +108,103 @@ const styles = {
 
 A utility that should be used for interactive states on buttons and links.
 
-It will return [color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix) and the result is mixing the first color and the mixin color together in a given colorspace by a given amount.
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in the srgb colorspace by a
+given amount.
 
-It takes a single options object with four fields:
-1. `color`: The color that will be darkened (this is typically the "base" color on the given element).
+It takes a single options object with four properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
 2. `fallback`: A fallback color if the first color is not valid or not defined.
 3. `mixinColor`: The color that will be mixed in with the first color (or fallback color).
-4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or fallback color).
+4. `mixinValue`: The percentage of the mixin color that will be added to the first color (or
+   fallback color).
 
 ```tsx
 import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 const styles = createStyles({
   backgroundColor: system.color.brand.accent.primary,
   '&:hover': {
-    backgroundColor: colorSpace.darken(
-      {
-        color: system.color.brand.accent.primary,
-        fallback: brand.primary.darkest,
-        mixinColor: system.color.accent.overlay.mixin,
-        mixinValue: system.opacity.accent.hover
-      }
-    )
-  }
-})
+    backgroundColor: colorSpace.darken({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary.darkest,
+      mixinColor: system.color.accent.overlay.mixin,
+      mixinValue: system.opacity.accent.hover,
+    }),
+  },
+});
+```
+
+### Hover
+
+A utility that should be used for `hover` interactive states on buttons and links.
+
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in the srgb colorspace by a
+given amount.
+
+It takes a single options object with three properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:hover': {
+    backgroundColor: colorSpace.hover({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary800,
+      colorType: 'accent',
+    }),
+  },
+});
+```
+
+### Pressed
+
+A utility that should be used for `active` or `pressed` interactive states on buttons and links.
+
+It will return
+[color-mix()](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/color-mix)
+and the result is mixing the first color and the mixin color together in the srgb colorspace by a
+given amount.
+
+It takes a single options object with three properties:
+
+1. `color`: The color that will be darkened (this is typically the "base" color on the given
+   element).
+2. `fallback`: A fallback color if the first color is not valid or not defined.
+3. `colorType`: A string that will determine where the mixin color and the mixin percentage comes
+   from in tokens (i.e. `system.color.accent....`, `system.color.surface....`,
+   `system.opacity.accent....` or `system.opacity.surface....`).
+
+```tsx
+import {colorSpace, createStyles} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
+const styles = createStyles({
+  backgroundColor: system.color.brand.accent.primary,
+  '&:active': {
+    backgroundColor: colorSpace.pressed({
+      color: system.color.brand.accent.primary,
+      fallback: brand.primary800,
+      colorType: 'accent',
+    }),
+  },
+});
 ```
 
 ## keyframes
@@ -142,16 +216,16 @@ transformer.
 ### Example
 
 ```tsx
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {
+  CSProps,
+  calc,
+  createStencil,
   handleCsProp,
   keyframes,
-  createStencil,
-  calc,
   px2rem,
-  CSProps,
 } from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 /**
  * Keyframe for the dots loading animation.
@@ -168,12 +242,12 @@ const keyframesLoading = keyframes({
 export const loadingStencil = createStencil({
   base: {
     display: 'inline-flex',
-    gap: system.space.x2,
-    width: system.space.x4,
-    height: system.space.x4,
-    fontSize: system.space.zero,
-    borderRadius: system.shape.round,
-    backgroundColor: system.color.bg.muted.softer,
+    gap: system.gap.sm,
+    width: system.size.xxxs,
+    height: system.size.xxxs,
+    fontSize: '0',
+    borderRadius: system.shape.full,
+    backgroundColor: system.color.accent.muted.soft,
     outline: `${px2rem(2)} solid transparent`,
     transform: 'scale(0)',
     animationName: keyframesLoading,
@@ -199,7 +273,8 @@ export const LoadingDot = createComponent('div')({
 
 The `injectGlobal` function re-exports the
 [Emotion CSS injectGlobal](https://emotion.sh/docs/@emotion/css#global-styles) function, but is
-compatible with a custom Emotion instance and is understood by the Static style transformer. It will also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
+compatible with a custom Emotion instance and is understood by the Static style transformer. It will
+also wrap our CSS tokens to ensure you can inject global styles using our CSS variables.
 
 ```tsx
 injectGlobal({
@@ -208,7 +283,7 @@ injectGlobal({
     fontFamily: system.fontFamily.default,
     margin: 0,
     minHeight: '100vh',
-    ...system.type.heading.large,
+    ...system.type.heading.lg,
   },
   '#root, #root < div': {
     minHeight: '100vh',
@@ -220,14 +295,16 @@ injectGlobal({
 
 ```tsx
 import {createRoot} from 'react-dom/client';
-import {fonts} from '@workday/canvas-kit-react-fonts';
-import {system} from '@workday/canvas-tokens-web';
-import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
-import {App} from './App';
 
+import {fonts} from '@workday/canvas-kit-react-fonts';
+import {cssVar, injectGlobal} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
+import {App} from './App';
 
 //@ts-ignore
 injectGlobal({
@@ -239,7 +316,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 

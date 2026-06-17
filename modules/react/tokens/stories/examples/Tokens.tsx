@@ -1,10 +1,10 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
-import {pickForegroundColor} from '@workday/canvas-kit-react/common';
+import * as React from 'react';
 
-import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
-import {Text} from '@workday/canvas-kit-react/text';
+import {pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Text} from '@workday/canvas-kit-react/text';
+import {borderRadius, colors, depth, space, type} from '@workday/canvas-kit-react/tokens';
 
 const DepthCard = ({depth, children}) => {
   return (
@@ -46,6 +46,7 @@ export const Depth = () => (
   </Flex>
 );
 
+// Ignore all `styled` as tokens are deprecated and will be removed in the future major version.
 const StyledLargeTitle = styled('h3')({
   ...type.levels.title.large,
 });
@@ -244,8 +245,8 @@ const Swatch = styled('li')<{bg: string; primary?: boolean}>(
       ...type.levels.body.large,
       fontWeight: type.properties.fontWeights.bold,
       height: space.xxxl,
-      paddingTop: space.s,
-      paddingBottom: space.s,
+      paddingBlockStart: space.s,
+      paddingBlockEnd: space.s,
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'space-around',

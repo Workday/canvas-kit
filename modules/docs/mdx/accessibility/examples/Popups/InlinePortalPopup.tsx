@@ -1,35 +1,36 @@
 import * as React from 'react';
+
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {changeFocus, useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  usePopupModel,
   useCloseOnEscape,
   useCloseOnOutsideClick,
+  usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {changeFocus, useUniqueId} from '@workday/canvas-kit-react/common';
 
 const cardStyles = createStyles({
   width: px2rem(320),
 });
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.xs,
 });
 
 const layoutStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
   alignItems: 'flex-start',
   flexDirection: 'column',
 });
 
 const bodyStyles = createStyles({
-  marginY: system.space.zero,
+  marginBlock: '0',
 });
 
 /**
@@ -52,9 +53,13 @@ export const InlinePortalPopup = () => {
   // Defer initial focus until Popper content is mounted. useInitialFocus runs when visible while
   // stackRef can still point at an empty sentinel (second open) and throws.
   React.useEffect(() => {
-    if (!visible || !portalReady) return;
+    if (!visible || !portalReady) {
+      return;
+    }
     const el = initialFocusRef.current;
-    if (!el) return;
+    if (!el) {
+      return;
+    }
     requestAnimationFrame(() => {
       changeFocus(el);
     });

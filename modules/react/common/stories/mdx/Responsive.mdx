@@ -1,11 +1,16 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {ResponsiveContainer} from './examples/ResponsiveStyles';
 import {ResponsiveViewport} from './examples/ResponsiveViewport';
 
-<Meta title="Features/Responsive Styling" />
+<Meta title="Features/Responsive Styling (outdated)" />
 
 # Responsive Styling
+
+> **Note**: Some content on this page is outdated and does not follow our latest style patterns. It
+> will be updated soon.
 
 ## What is Responsive Styling?
 
@@ -95,6 +100,7 @@ using a `min-width`. See example below.
 ```ts
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
+
 const theme = useTheme();
 const {up} = theme.canvas.breakpoints;
 const mediaQuery = up('l'); // Returns '@media (min-width: 1024px)'
@@ -135,6 +141,7 @@ This example uses the `xl` breakpoint and only adds a `min-width` of `0` to the 
 ```ts
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
+
 const theme = useTheme();
 const {down} = theme.canvas.breakpoints;
 const mediaQuery = down('xl'); // Returns '@media (min-width: 0)'
@@ -161,6 +168,7 @@ seen in the second example below.
 ```ts
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
+
 const theme = useTheme();
 const {between} = theme.canvas.breakpoints;
 // Returns '@media (min-width: 320px) and (max-width: 1023.5px)'
@@ -177,6 +185,7 @@ This example uses `xl` as the `end` breakpoint and only adds a min-width to the 
 ```ts
 import {useTheme} from '@workday/canvas-kit-react/common';
 import {space} from '@workday/canvas-kit-react/tokens';
+
 const theme = useTheme();
 const {between} = theme.canvas.breakpoints;
 const mediaQuery = between('m', 'xl'); // Returns '@media (min-width: 768px)'

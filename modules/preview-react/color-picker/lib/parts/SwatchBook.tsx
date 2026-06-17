@@ -1,8 +1,9 @@
 import * as React from 'react';
-import {focusRing} from '@workday/canvas-kit-react/common';
+
 import {ColorSwatch} from '@workday/canvas-kit-react/color-picker';
-import {calc, cssVar, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {focusRing} from '@workday/canvas-kit-react/common';
+import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface SwatchBookColorObject {
   value: string;
@@ -17,8 +18,7 @@ export interface SwatchBookProps {
 
 const colorPickerSwatchBookStencil = createStencil({
   vars: {
-    /* TODO: Update to `system.color.border.inverse.default` in v15. */
-    shadow: `${cssVar(system.color.border.inverse, base.neutral0)} 0 0 0 ${px2rem(2)}, ${
+    shadow: `${system.legacy.color.border.inverse.default} 0 0 0 ${px2rem(2)}, ${
       system.color.border.input.default
     } 0 0 0 ${px2rem(3)}`,
   },
@@ -28,15 +28,15 @@ const colorPickerSwatchBookStencil = createStencil({
   base: ({tilePart, shadow}) => ({
     display: 'flex',
     flexWrap: 'wrap',
-    margin: `0 ${calc.negate(system.space.x2)} ${calc.negate(system.space.x2)} 0`,
+    margin: `0 ${calc.negate(system.legacy.gap.sm)} ${calc.negate(system.legacy.gap.sm)} 0`,
     [tilePart]: {
       display: 'flex',
-      width: px2rem(20),
-      height: px2rem(20),
+      width: system.legacy.size.xxs,
+      height: system.legacy.size.xxs,
       cursor: 'pointer',
-      borderRadius: system.shape.half,
+      borderRadius: system.legacy.shape.sm,
       transition: 'box-shadow 120ms ease',
-      margin: `0px ${system.space.x2} ${system.space.x2} 0px`,
+      margin: `0px ${system.legacy.gap.sm} ${system.legacy.gap.sm} 0px`,
 
       '&:hover': {
         boxShadow: shadow,

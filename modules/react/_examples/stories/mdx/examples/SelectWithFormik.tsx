@@ -1,31 +1,28 @@
-import * as React from 'react';
 import {useFormik} from 'formik';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  activityStreamIcon,
-  avatarIcon,
-  uploadCloudIcon,
-  userIcon,
-} from '@workday/canvas-system-icons-web';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {cloudArrowUpIcon, cloudIcon, commentIcon, userIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const customOptionsMain = [
   {
     label: 'Dessert Person by Claire Saffitz',
     serverId: 1,
-    icon: activityStreamIcon,
+    icon: commentIcon,
   },
   {
     label: 'Elements of Pizza by Ken Forkish',
     serverId: 2,
-    icon: avatarIcon,
+    icon: cloudIcon,
   },
   {
     label: 'Flour Water Salt Yeast by Ken Forkish',
     serverId: 3,
-    icon: uploadCloudIcon,
+    icon: cloudArrowUpIcon,
   },
   {label: 'Mastering Pasta by Marc Verti', serverId: 4, icon: userIcon},
 ];
@@ -53,8 +50,8 @@ export const SelectWithFormik = () => {
 
   return (
     <form onSubmit={formik.handleSubmit} action=".">
-      <Flex gap="xs" flexDirection="column" alignItems="flex-start">
-        <FormField orientation="vertical" alignSelf="stretch" alignItems="normal">
+      <Flex cs={{gap: system.gap.sm, flexDirection: 'column', alignItems: 'flex-start'}}>
+        <FormField orientation="vertical" cs={{alignSelf: 'stretch', alignItems: 'normal'}}>
           <Select model={selectModel}>
             <FormField.Label>Choose a book</FormField.Label>
             <FormField.Input
@@ -66,7 +63,7 @@ export const SelectWithFormik = () => {
             />
             <Select.Popper>
               <Select.Card>
-                <Select.List maxHeight={200}>
+                <Select.List cs={{maxHeight: px2rem(200)}}>
                   {item => {
                     return (
                       <Select.Item data-id={item.serverId} data-text={item.label}>

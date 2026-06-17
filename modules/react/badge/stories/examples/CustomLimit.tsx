@@ -1,7 +1,7 @@
 import * as React from 'react';
+
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -9,27 +9,27 @@ const columnStyles = createStyles({
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 const controls = createStyles({
   boxSizing: 'border-box',
-  borderBottom: `solid 1px ${system.color.border.divider}`,
+  borderBlockEnd: `solid 1px ${system.color.border.strong}`,
   display: 'flex',
-  gap: system.space.x1,
-  padding: system.space.x1,
+  gap: system.gap.xs,
+  padding: system.padding.xxs,
 });
 
 const defaultBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: system.color.bg.alt.soft,
-  padding: system.space.x4,
+  backgroundColor: system.color.surface.alt.default,
+  padding: system.padding.md,
 });
 
 const inverseBackground = createStyles({
   boxSizing: 'border-box',
-  backgroundColor: system.color.bg.primary.default,
-  padding: system.space.x4,
+  backgroundColor: system.color.brand.accent.primary,
+  padding: system.padding.md,
 });
 
 const initialCount = 1;

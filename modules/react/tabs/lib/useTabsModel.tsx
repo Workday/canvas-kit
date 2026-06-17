@@ -1,11 +1,11 @@
 import React from 'react';
-import {createModelHook, useModalityType} from '@workday/canvas-kit-react/common';
+
 import {
   defaultGetId,
   useListModel,
   useOverflowListModel,
 } from '@workday/canvas-kit-react/collection';
-
+import {createModelHook, useModalityType} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 /**
@@ -67,8 +67,8 @@ export const useTabsModel = createModelHook({
       initialSelectedIds: config.initialTab
         ? [config.initialTab]
         : config.items?.length
-        ? [getId(config.items![0])]
-        : [],
+          ? [getId(config.items![0])]
+          : [],
       shouldVirtualize: false,
     })
   );

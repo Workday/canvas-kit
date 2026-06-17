@@ -1,18 +1,19 @@
 import React from 'react';
-import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {system} from '@workday/canvas-tokens-web';
-import {Flex} from '@workday/canvas-kit-react/layout';
+
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainer: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
   loadingStyles: createStyles({
-    backgroundColor: system.color.bg.muted.default,
-    padding: system.space.x3,
+    backgroundColor: system.color.accent.muted.default,
+    padding: system.padding.sm,
   }),
 };
 

@@ -1,7 +1,9 @@
-import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {component} from '@workday/canvas-tokens-web';
+
+import {ButtonSizes} from '../types';
 
 export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   /**
@@ -26,12 +28,27 @@ export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   shouldMirrorIconInRTL?: boolean;
 }
 
-const iconSizes: Record<ButtonSizes, number> = {
-  extraSmall: 18,
-  small: 20,
-  medium: 20,
-  large: 24,
-};
+const buttonIconStencil = createStencil({
+  base: {
+    display: 'inline-block',
+  },
+  modifiers: {
+    size: {
+      extraSmall: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+      },
+      small: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+      },
+      medium: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+      },
+      large: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.lg,
+      },
+    },
+  },
+});
 
 export const ButtonLabelIcon = createComponent('span')({
   Component: (
@@ -49,20 +66,14 @@ export const ButtonLabelIcon = createComponent('span')({
       return null;
     }
 
-    const iconSize = iconSizes[size];
-
     return (
       <SystemIcon
         ref={ref}
         as={Element}
-        size={iconSize}
         icon={icon}
-        width={px2rem(iconSize)}
-        height={px2rem(iconSize)}
-        display="inline-block"
         shouldMirror={shouldMirrorIcon}
         shouldMirrorInRTL={shouldMirrorIconInRTL}
-        {...elemProps}
+        {...handleCsProp(elemProps, buttonIconStencil({size}))}
       />
     );
   },

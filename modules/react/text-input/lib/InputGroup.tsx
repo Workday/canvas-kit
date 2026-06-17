@@ -1,21 +1,20 @@
 import React from 'react';
 
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {
+  ExtractProps,
   createContainer,
   createElemPropsHook,
   createModelHook,
   createSubcomponent,
   dispatchInputEvent,
-  ExtractProps,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {xSmallIcon} from '@workday/canvas-system-icons-web';
+import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
 import {TextInput} from './TextInput';
 
 export const useInputGroupModel = createModelHook({})(() => {
@@ -41,8 +40,8 @@ export const inputGroupInnerStencil = createStencil({
      * on your own.
      */
     insetInlineEnd: 'initial',
-    width: system.space.x10,
-    height: system.space.x10,
+    width: system.legacy.size.md,
+    height: system.legacy.size.md,
     /**
      * Some inner input group elements are decoration only and should not have pointer events
      */
@@ -279,11 +278,11 @@ export const InputGroup = createContainer('div')({
   // `offsetEnd` arrays
   React.Children.forEach(children, child => {
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerStart) {
-      const width = wrapProperty(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.legacy.size.md);
       offsetsStart.push(width);
     }
     if (React.isValidElement<any>(child) && child.type === InputGroupInnerEnd) {
-      const width = wrapProperty(child.props.width || system.space.x10);
+      const width = wrapProperty(child.props.width || system.legacy.size.md);
       offsetsEnd.push(width);
     }
   });

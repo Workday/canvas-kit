@@ -1,10 +1,13 @@
-import {ExampleCodeBlock, SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import BreadcrumbsStories from './Breadcrumbs.stories';
 import {Basic} from './examples/Basic';
-import {OverflowBreadcrumbs} from './examples/Overflow';
-import {RTLOverflowList} from './examples/RTL';
 import {CurrentItemTruncation} from './examples/CurrentItemTruncation';
 import {LinkTruncation} from './examples/LinkTruncation';
-import * as BreadcrumbsStories from './Breadcrumbs.stories';
+import {OverflowBreadcrumbs} from './examples/Overflow';
+import {RTLOverflowList} from './examples/RTL';
 
 <Meta of={BreadcrumbsStories} />
 
@@ -133,4 +136,4 @@ return (
 
 ## Specifications
 
-<Specifications file="Breadcrumbs.spec.ts" name="Breadcrumbs" />
+<Specifications file="./cypress/component/Breadcrumbs.spec.tsx" name="Breadcrumbs" />

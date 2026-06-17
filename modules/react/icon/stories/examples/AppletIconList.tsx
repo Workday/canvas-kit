@@ -1,7 +1,8 @@
 import React from 'react';
+
 import * as CanvasAppletIcons from '@workday/canvas-applet-icons-web';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {AppletIcon} from '@workday/canvas-kit-react/icon';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -14,7 +15,7 @@ const styleOverrides = {
   parentContainer: createStyles({
     flexDirection: 'column',
     alignItems: 'center',
-    gap: system.space.x6,
+    gap: system.gap.lg,
   }),
   iconGroupContainer: createStyles({
     flexWrap: 'wrap',
@@ -23,8 +24,8 @@ const styleOverrides = {
     alignItems: 'center',
     width: `max(${px2rem(320)},20%)`,
     flexDirection: 'row',
-    gap: system.space.x3,
-    padding: system.space.x3,
+    gap: px2rem(12),
+    padding: system.padding.sm,
   }),
 };
 

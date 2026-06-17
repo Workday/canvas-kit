@@ -1,15 +1,13 @@
+import {ColorInputPopup} from '../../modules/preview-react/color-picker/stories/examples/ColorInputPopup';
+import {IconButtonPopup} from '../../modules/preview-react/color-picker/stories/examples/IconButtonPopup';
+import {InputInteraction} from '../../modules/preview-react/color-picker/stories/examples/InputInteraction';
 import {Basic} from '../../modules/react/color-picker/stories/color-input/examples/Basic';
 import {Caution} from '../../modules/react/color-picker/stories/color-input/examples/Caution';
-import {Error} from '../../modules/react/color-picker/stories/color-input/examples/Error';
 import {Checked} from '../../modules/react/color-picker/stories/color-input/examples/Checked';
-import {Grow} from '../../modules/react/color-picker/stories/color-input/examples/Grow';
 import {Disabled} from '../../modules/react/color-picker/stories/color-input/examples/Disabled';
-
+import {Error} from '../../modules/react/color-picker/stories/color-input/examples/Error';
+import {Grow} from '../../modules/react/color-picker/stories/color-input/examples/Grow';
 import {Basic as BasicColorPreview} from '../../modules/react/color-picker/stories/color-preview/examples/Basic';
-
-import {IconButtonPopup} from '../../modules/preview-react/color-picker/stories/examples/IconButtonPopup';
-import {ColorInputPopup} from '../../modules/preview-react/color-picker/stories/examples/ColorInputPopup';
-import {InputInteraction} from '../../modules/preview-react/color-picker/stories/examples/InputInteraction';
 
 const getColorInput = () => cy.get('[type="text"]');
 const getColorPickerPopup = () => cy.findByRole('dialog');

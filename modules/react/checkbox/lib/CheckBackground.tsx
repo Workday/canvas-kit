@@ -1,11 +1,13 @@
 import * as React from 'react';
-import {createComponent, ErrorType} from '@workday/canvas-kit-react/common';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+
+import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;
   error?: ErrorType;
+  variant?: 'inverse';
 }
 
 export const checkboxBackgroundStencil = createStencil({
@@ -13,39 +15,72 @@ export const checkboxBackgroundStencil = createStencil({
     errorRingColorInner: '',
     errorRingColorOuter: '',
   },
+  parts: {
+    background: 'checkbox-background',
+  },
   base: {
     alignItems: 'center',
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.half,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.sm,
+    boxSizing: 'border-box',
     display: 'flex',
-    height: calc.add(system.space.x4, px2rem(2)),
+    height: base.legacy.size225,
     justifyContent: 'center',
-    padding: `${system.space.zero} ${calc.divide(system.space.x1, 2)}`,
+    padding: `0 ${px2rem(2)}`,
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: calc.add(system.space.x4, px2rem(2)),
+    width: base.legacy.size225,
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
+    variant: {
+      inverse: {
+        backgroundColor: system.legacy.color.surface.inverse,
+      },
+    },
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: brand.common.errorInner,
+        [errorRingColorInner]: system.legacy.color.brand.border.critical,
+
         [errorRingColorOuter]: 'transparent',
-        backgroundColor: brand.error.lightest,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
       }),
       caution: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: brand.common.alertInner,
-        [errorRingColorOuter]: brand.common.alertOuter,
-        backgroundColor: brand.alert.lightest,
+        [errorRingColorInner]: system.legacy.color.brand.focus.caution.inner,
+
+        [errorRingColorOuter]: system.legacy.color.brand.border.caution,
+
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
       }),
     },
   },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', error: 'error'},
+      styles: {
+        backgroundColor: system.legacy.color.surface.inverse,
+      },
+    },
+    {
+      modifiers: {variant: 'inverse', error: 'caution'},
+      styles: {
+        backgroundColor: system.legacy.color.surface.inverse,
+      },
+    },
+  ],
 });
 
 export const CheckBackground = createComponent('div')({
   displayName: 'CheckBackground',
-  Component: ({error, children}: CheckBackgroundProps) => {
-    return <div {...checkboxBackgroundStencil({error})}>{children}</div>;
+  Component: ({error, variant, children}: CheckBackgroundProps) => {
+    return (
+      <div
+        {...checkboxBackgroundStencil.parts.background}
+        {...checkboxBackgroundStencil({error, variant})}
+      >
+        {children}
+      </div>
+    );
   },
 });

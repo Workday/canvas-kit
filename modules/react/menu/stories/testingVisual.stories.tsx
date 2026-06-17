@@ -1,15 +1,13 @@
-import React from 'react';
-
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {StaticStates} from '@workday/canvas-kit-react/testing';
-import {saveAsIcon} from '@workday/canvas-system-icons-web';
-import {base} from '@workday/canvas-tokens-web';
-
-import {customColorTheme} from '../../../../utils/storybook';
-
+import {Flex} from '@workday/canvas-kit-react/layout';
 // unreleased path
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {saveAsIcon} from '@workday/canvas-system-icons-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
 
@@ -26,7 +24,7 @@ export default {
 
 const AllStatesMenuItem = () => (
   <Menu initialSelectedIds={['selected']} initialCursorId="non-existent">
-    <Menu.Card style={{animation: 'none', width: 300}}>
+    <Menu.Card cs={{animation: 'none', width: px2rem(300)}}>
       <Menu.List>
         <Menu.Group title="Group Heading One">
           <Menu.Item>Normal Item</Menu.Item>
@@ -74,7 +72,7 @@ export const MenuItemStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs">
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Normal</h3>
             <AllStatesMenuItem />
@@ -101,15 +99,15 @@ export const MenuItemStatesCustomTheme = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs">
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Custom Themed</h3>
             <CanvasProvider
               theme={{
                 canvas: {
                   palette: {
-                    primary: {main: base.blackberry600},
-                    common: {focusOutline: base.blackPepper600},
+                    primary: {main: base.indigo500},
+                    common: {focusOutline: base.magenta900},
                   },
                 },
               }}
@@ -125,7 +123,7 @@ export const MenuItemStatesCustomTheme = {
 
 const AllStatesMenuOption = () => (
   <Menu initialSelectedIds={['selected']} initialCursorId="non-existent">
-    <Menu.Card style={{animation: 'none', width: 300}}>
+    <Menu.Card cs={{animation: 'none', width: px2rem(300)}}>
       <Menu.List>
         <Menu.Option>Normal Item</Menu.Option>
         <Menu.Option className="focus">Focused Item</Menu.Option>
@@ -193,7 +191,7 @@ const AllStatesMenuOption = () => (
 const MenuWithGroups = () => {
   return (
     <Menu initialSelectedIds={['0']} initialCursorId="non-existent">
-      <Menu.Card style={{animation: 'none', width: 300}}>
+      <Menu.Card cs={{animation: 'none', width: px2rem(300)}}>
         <Menu.List>
           <Menu.Group title="Group Heading One">
             <Menu.Item className="focus">Group one, Item one (focused)</Menu.Item>
@@ -213,7 +211,7 @@ export const MenuOptionStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs">
+        <Flex cs={{gap: system.gap.md}}>
           <div>
             <h3>Normal</h3>
             <AllStatesMenuOption />
@@ -240,7 +238,7 @@ export const MenuGroups = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs">
+        <Flex cs={{gap: system.gap.lg}}>
           <div>
             <h3>LTR</h3>
             <MenuWithGroups />

@@ -1,16 +1,18 @@
 import * as React from 'react';
 
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnEscape,
   useCloseOnOutsideClick,
   useFocusTrap,
   useInitialFocus,
-  useReturnFocus,
   usePopupModel,
+  useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const FocusTrap = () => {
   const model = usePopupModel();
@@ -35,19 +37,19 @@ export const FocusTrap = () => {
 
   return (
     <Popup model={model}>
-      <Flex gap="s">
+      <Flex cs={{gap: system.gap.sm}}>
         <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
         <div aria-owns={popupId} style={{position: 'absolute'}} />
         <Popup.Popper>
-          <Popup.Card width={400}>
+          <Popup.Card cs={{width: px2rem(400)}}>
             <Popup.CloseIcon aria-label="Close" />
             <Popup.Heading>Delete Item</Popup.Heading>
             <Popup.Body>
-              <Box as="p" marginY="zero">
+              <Box as="p" cs={{marginBlock: '0'}}>
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
             </Popup.Body>
-            <Flex gap="s" padding="xxs">
+            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>
