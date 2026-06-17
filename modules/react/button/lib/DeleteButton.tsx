@@ -21,6 +21,10 @@ export interface DeleteButtonProps extends ButtonProps {
 const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
+    // This is here temporarily until tokens are updated
+    '[data-theme="sana-canvas"] &': {
+      '--cnvs-sys-color-accent-overlay-mixin': 'black',
+    },
     // Base Styles
     [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
@@ -42,10 +46,10 @@ const deleteButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
+      [buttonStencil.vars.background]: colorSpace.hover({
         color: system.legacy.color.brand.accent.critical,
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.hover,
+        fallback: system.legacy.color.brand.accent.critical,
+        colorType: 'accent',
       }),
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
@@ -55,10 +59,10 @@ const deleteButtonStencil = createStencil({
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
+      [buttonStencil.vars.background]: colorSpace.pressed({
         color: system.legacy.color.brand.accent.critical,
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.pressed,
+        fallback: system.legacy.color.brand.accent.critical,
+        colorType: 'accent',
       }),
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
@@ -82,7 +86,7 @@ const deleteButtonStencil = createStencil({
       inverse: {
         // Default Styles
         [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-        [buttonStencil.vars.border]: system.color.border.transparent,
+        [buttonStencil.vars.border]: system.color.border.default,
         [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles

@@ -21,6 +21,10 @@ export interface PrimaryButtonProps extends ButtonProps {
 const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
+    // These are here temporarily until tokens are updated
+    '[data-theme="sana-canvas"] &': {
+      '--cnvs-sys-color-accent-overlay-mixin': 'white',
+    },
     // Base Styles
     [buttonStencil.vars.background]: cssVar(
       brand.action.base,
@@ -43,20 +47,20 @@ const primaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
+      [buttonStencil.vars.background]: colorSpace.hover({
         color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.hover,
+        fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+        colorType: 'accent',
       }),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
+      [buttonStencil.vars.background]: colorSpace.pressed({
         color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.pressed,
+        fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+        colorType: 'accent',
       }),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
@@ -76,6 +80,10 @@ const primaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
+        // This is here temporarily until tokens are updated
+        '[data-theme="sana-canvas"] &': {
+          '--cnvs-sys-color-accent-overlay-mixin': 'black',
+        },
         [buttonStencil.vars.background]: cssVar(
           brand.action.lightest,
           system.legacy.color.surface.inverse

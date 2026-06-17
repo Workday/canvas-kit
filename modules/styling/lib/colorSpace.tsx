@@ -95,6 +95,12 @@ export interface InteractiveStateProps {
    * @default 'accent'
    */
   colorType?: 'accent' | 'surface';
+  /**
+   * A string that will determine which surface overlay variant to use.
+   *
+   * @default 'default'
+   */
+  surfaceType?: 'default' | 'inverse';
 }
 
 /**
@@ -110,11 +116,22 @@ export interface InteractiveStateProps {
  * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
  *
  */
-const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+const hover = ({
+  color,
+  fallback,
+  colorType = 'accent',
+  surfaceType = 'default',
+}: InteractiveStateProps) => {
+  const mixinColor =
+    colorType === 'accent'
+      ? system.color.accent.overlay.hover
+      : surfaceType === 'default'
+        ? system.color.surface.overlay.hover.default
+        : system.color.surface.overlay.hover.inverse;
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.color[colorType].overlay.mixin,
+    mixinColor: mixinColor,
     mixinValue: system.opacity[colorType].hover,
   });
 };
@@ -140,11 +157,22 @@ const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) =
  * @param colorType
  * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
  */
-const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+const pressed = ({
+  color,
+  fallback,
+  colorType = 'accent',
+  surfaceType = 'default',
+}: InteractiveStateProps) => {
+  const mixinColor =
+    colorType === 'accent'
+      ? system.color.accent.overlay.pressed
+      : surfaceType === 'default'
+        ? system.color.surface.overlay.pressed.default
+        : system.color.surface.overlay.pressed.inverse;
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.color[colorType].overlay.mixin,
+    mixinColor: mixinColor,
     mixinValue: system.opacity[colorType].pressed,
   });
 };

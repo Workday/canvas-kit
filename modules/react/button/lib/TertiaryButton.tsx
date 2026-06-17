@@ -24,21 +24,21 @@ const tertiaryButtonStencil = createStencil({
   base: {
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-    [buttonStencil.vars.label]: system.color.fg.strong,
+    [buttonStencil.vars.label]: system.color.fg.default,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     [buttonStencil.vars.border]: system.color.border.transparent,
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-      [buttonStencil.vars.label]: system.color.fg.contrast.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
       [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
-      [systemIconStencil.vars.color]: system.color.fg.strong,
+      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.inverse,
+      [systemIconStencil.vars.color]: system.color.fg.stronger,
     },
     // Active Styles
     '&:active, &.active': {
@@ -68,15 +68,10 @@ const tertiaryButtonStencil = createStencil({
         // Focus Styles
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: system.legacy.color.surface.inverse,
-
           [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
-          ...focusRing({
-            width: 2,
-            separation: 2,
-            innerColor: system.color.border.contrast.default,
-            outerColor: system.legacy.color.focus.inverse,
-          }),
+          [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
+          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.focus.inverse,
         },
         // Active Styles
         '&:active, &.active': {
