@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 interface CheckBackgroundProps {
   children: React.ReactNode;
@@ -21,16 +21,17 @@ export const checkboxBackgroundStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.sm,
+    borderRadius: system.sana.shape.xs,
+    cornerShape: 'superellipse(1.1)',
     boxSizing: 'border-box',
     display: 'flex',
-    height: base.legacy.size225,
     justifyContent: 'center',
     padding: `0 ${px2rem(2)}`,
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    width: base.legacy.size225,
+    height: system.legacy.size.xxxs,
+    width: system.legacy.size.xxxs,
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
@@ -42,16 +43,11 @@ export const checkboxBackgroundStencil = createStencil({
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
         [errorRingColorInner]: system.legacy.color.brand.border.critical,
-
-        [errorRingColorOuter]: 'transparent',
-        backgroundColor: system.legacy.color.brand.surface.critical.default,
+        [errorRingColorOuter]: system.legacy.color.brand.border.critical,
       }),
       caution: ({errorRingColorInner, errorRingColorOuter}) => ({
         [errorRingColorInner]: system.legacy.color.brand.focus.caution.inner,
-
         [errorRingColorOuter]: system.legacy.color.brand.border.caution,
-
-        backgroundColor: system.legacy.color.brand.surface.caution.default,
       }),
     },
   },

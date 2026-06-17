@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {checkboxBackgroundStencil} from './CheckBackground';
 import {checkboxRippleStencil} from './CheckboxRipple';
@@ -54,11 +54,11 @@ export interface CheckboxProps extends CSProps {
 const checkboxInputStencil = createStencil({
   base: {
     borderRadius: system.legacy.shape.sm,
-    width: base.legacy.size300,
-    height: base.legacy.size300,
+    width: system.legacy.size.xs,
+    height: system.legacy.size.xs,
     margin: 0,
-    marginBlockStart: calc.negate(px2rem(3)),
-    marginInlineStart: calc.negate(px2rem(3)),
+    marginBlockStart: calc.negate(px2rem(4)),
+    marginInlineStart: calc.negate(px2rem(4)),
     position: 'absolute',
     opacity: system.opacity.zero,
 
@@ -67,7 +67,7 @@ const checkboxInputStencil = createStencil({
     },
 
     [`&:where(:hover,.hover) ~ [data-part="${checkboxRippleStencil.parts.ripple['data-part']}"]`]: {
-      boxShadow: `0 0 0 ${px2rem(7)} ${system.legacy.color.surface.overlay.hover.default}`,
+      boxShadow: `0 0 0 ${px2rem(6)} ${system.legacy.color.surface.overlay.hover.default}`,
     },
 
     // Hover state and not disabled
@@ -78,8 +78,8 @@ const checkboxInputStencil = createStencil({
 
     [`&:where(:checked, :indeterminate) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
       {
-        borderColor: system.legacy.color.brand.accent.primary,
-        backgroundColor: system.legacy.color.brand.accent.primary,
+        borderColor: system.legacy.color.brand.accent.positive,
+        backgroundColor: system.legacy.color.brand.accent.positive,
       },
 
     [`&:where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
@@ -112,8 +112,8 @@ const checkboxInputStencil = createStencil({
             animate: false,
             outerColor: system.legacy.color.brand.border.primary,
           }),
-          borderColor: system.legacy.color.brand.accent.primary,
-          borderWidth: px2rem(2),
+          borderColor: system.legacy.color.brand.accent.positive,
+          borderWidth: px2rem(1),
         },
       },
   },
@@ -175,15 +175,15 @@ const checkboxInputStencil = createStencil({
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
           borderColor: checkboxBackgroundStencil.vars.errorRingColorInner,
           boxShadow: `
-            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
-            0 0 0 ${px2rem(2)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
+            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorOuter},
+            0 0 0 ${px2rem(1)} ${checkboxBackgroundStencil.vars.errorRingColorInner}`,
         },
         '&:where(:checked, :indeterminate) ~ div:first-of-type': {
           borderColor: 'transparent',
           boxShadow: `
             0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-            0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
-            0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
+            0 0 0 ${px2rem(3)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
+            0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,
         },
         '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {

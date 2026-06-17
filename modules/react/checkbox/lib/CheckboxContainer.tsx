@@ -1,9 +1,9 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {LabelText} from '@workday/canvas-kit-react/text';
-import {CSProps, createStencil} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {Subtext} from '@workday/canvas-kit-react/text';
+import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
@@ -14,10 +14,13 @@ interface CheckboxContainerProps extends CSProps {
 }
 
 const checkboxContainerStencil = createStencil({
-  base: {
+  parts: {
+    label: 'checkbox-container-label',
+  },
+  base: ({labelPart}) => ({
     display: 'flex',
     alignItems: 'center',
-    minHeight: base.legacy.size225,
+    minHeight: system.legacy.size.xxxs,
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -26,13 +29,23 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      height: base.legacy.size225,
-      minWidth: base.legacy.size225,
+      height: system.legacy.size.xxxs,
+      minWidth: system.legacy.size.xxxs,
       alignSelf: 'flex-start',
       position: 'relative',
     },
-    '& > label': {
-      paddingInlineStart: system.legacy.padding.sm,
+    [labelPart]: {
+      paddingInlineStart: system.legacy.padding.xs,
+      cursor: 'pointer',
+      marginBlockStart: calc.negate(px2rem(2)),
+    },
+  }),
+  modifiers: {
+    disabled: {
+      true: {
+        opacity: system.opacity.disabled,
+        cursor: 'default',
+      },
     },
   },
 });
@@ -41,17 +54,18 @@ export const CheckboxContainer = createComponent('div')({
   displayName: 'CheckboxContainer',
   Component: ({children, disabled, id, label, variant}: CheckboxContainerProps) => {
     return (
-      <div {...checkboxContainerStencil()}>
+      <div {...checkboxContainerStencil({disabled})}>
         <div>{children}</div>
         {label && (
-          <LabelText
+          <Subtext
+            size="large"
+            as="label"
             htmlFor={id}
-            disabled={disabled}
             variant={variant}
-            style={{cursor: disabled ? 'default' : 'pointer'}}
+            {...checkboxContainerStencil.parts.label}
           >
             {label}
-          </LabelText>
+          </Subtext>
         )}
       </div>
     );
