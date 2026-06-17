@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.13](https://github.com/Workday/canvas-kit/releases/tag/v15.0.13) (2026-06-17)
+
+### Components
+
+- fix: Bump enable-automerge action to v2 ([#4006](https://github.com/Workday/canvas-kit/pull/4006)) ([@alanbsmith](https://github.com/alanbsmith))
+
+### Infrastructure
+
+- chore: Update deprecated GH Actions ([#3973](https://github.com/Workday/canvas-kit/pull/3973)) ([@alanbsmith](https://github.com/alanbsmith))
+- chore: Update to latest GH Actions and Node 24 ([#4005](https://github.com/Workday/canvas-kit/pull/4005)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.12](https://github.com/Workday/canvas-kit/releases/tag/v15.0.12) (2026-06-12)
 
 
