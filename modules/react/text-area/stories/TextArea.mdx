@@ -108,35 +108,78 @@ Form Field provides error and caution states for Text Area. Set the `error` prop
 [Form Field's Error documentation](/components/inputs/form-field/#error-states) for
 examples and accessibility guidance.
 
-## Accessibility
+## **I. Accessibility Overview**
 
-`TextArea` should be used with [Form Field](/components/inputs/form-field/) to
-ensure proper labeling, error handling, and help text association. See
-[FormField's accessibility documentation](/components/inputs/form-field/#accessibility)
-for comprehensive guidance on form accessibility best practices.
+`TextArea` allows users to enter and edit multiple lines of text. It must be composed with
+[Form Field](/components/inputs/form-field/) so the control has a programmatically determinable name,
+relationships, and instructions. The primary accessibility goal is to ensure assistive technology
+users can identify the multi-line field, understand how to complete it, and hear hints, errors,
+required state, and character limit information when the text area receives focus.
 
-### Character Limits
+See [FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
+comprehensive guidance on form accessibility best practices.
 
-When limiting text area length:
+### **1\. Built-in Behaviors**
 
-- Use the `maxLength` attribute to enforce the limit programmatically.
-- For longer limits (100+ characters), consider adding character count information to
-  `FormField.Hint`.
-- Avoid announcing character counts after every keystroke, as this disrupts screen reader users.
-  Check out
-  [Debouncing an AriaLiveRegion: TextArea with character limit](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit)
-  for an example of how to wait for users to stop typing before announcing the character count to
-  screen readers.
+Canvas Kit handles the following automatically when you compose `TextArea` inside `FormField`:
 
-### Screen Reader Experience
+- **Native multi-line control**: `TextArea` renders a `<textarea>` element. Screen readers identify
+  it as a multi-line text input and announce the current value or "blank" when focused.
+- **Label and hint association**: Inherits `FormField` labeling (`htmlFor` / `id`, `aria-labelledby`)
+  and `FormField.Hint` association (`aria-describedby`). See
+  [Form Field accessibility](/components/inputs/form-field/#accessibility) for details.
+- **Required and invalid state**: When `FormField` sets `isRequired` or `error="error"`, those
+  states are exposed on the underlying `<textarea>` and announced by assistive technologies.
+- **`disabled`**: The `disabled` prop maps to the native `disabled` attribute on the `<textarea>`.
+- **User-resizable dimensions**: Defaults to `resize: both` so users can adjust the control for visual
+  comfort.
 
-When properly implemented with `FormField`, screen readers will announce:
+For a simple text area field, the DOM looks like:
 
-- The label text when the text area receives focus.
-- Required, disabled, or read-only status.
-- Help text and error messages (via `aria-describedby`).
-- The current value or "blank" if empty.
-- That it's a multi-line text input field.
+```html
+<div>
+  <label id="label-abc" for="input-abc">Comments</label>
+  <textarea id="input-abc" aria-labelledby="label-abc" aria-describedby="hint-abc"></textarea>
+  <p id="hint-abc">Share any additional feedback.</p>
+</div>
+```
+
+Do not manually add `aria-labelledby`, `aria-describedby`, or `id` on `TextArea`
+when `FormField` already wires those relationships.
+
+### **2\. Accessibility Requirements**
+
+Developers must provide the following for accessible text areas:
+
+- **`FormField` + `FormField.Label` + `FormField.Input`**: Wrap every `TextArea` (for example,
+  `<FormField.Input as={TextArea} />`) so labeling and description wiring is applied.
+- **`FormField.Hint`**: Use for instructions, guidance, error messages, and static character count
+  text.
+- **`isRequired`**: Set on `FormField` when the field is mandatory so the `required` attribute is
+  exposed.
+- **`disabled`**: Set on `TextArea` when the field is not interactive.
+- **`error` and `FormField.Hint`**: When `error="error"`, prepend the error text with the word
+  "Error" in `FormField.Hint` so users who cannot perceive color can distinguish error text from
+  field-level hint text.
+- **`maxLength`**: Enforce character limits programmatically on `TextArea`.
+- **Character count (100+ characters)**: Add character count information to `FormField.Hint`. Announce
+  updates via a debounced `AriaLiveRegion` but avoid announcing character counts after every keystroke. Refer to
+  [Debouncing an AriaLiveRegion: TextArea with character limit](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit).
+
+### **3\. Anti-Patterns**
+
+Do not generate the following:
+
+- **Unlabeled text areas**: Do not use `TextArea` without `FormField` and `FormField.Label`.
+- **Placeholder-only labels**: Do not rely on `placeholder` instead of `FormField.Label`; placeholders
+  disappear while typing and are poor substitutes for labels.
+- **Manual ARIA overrides**: Do not set `aria-labelledby`, `aria-describedby`, or `id` on `TextArea`
+  when `FormField` already manages those relationships.
+- **Color-only errors**: Do not set `error="error"` without descriptive text in `FormField.Hint`.
+- **Per-keystroke character announcements**: Do not announce character counts after every keystroke;
+  debounce live region updates so screen reader users are not interrupted while typing.
+- **Disabling resize unnecessarily**: Do not set `resize` to `none` unless there is a strong design or
+  layout requirement; users lose a visual comfort affordance.
 
 ## Component API
 
