@@ -25,7 +25,7 @@ export const cardStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.legacy.gap.lg,
+    gap: system.legacy.padding.sm,
     padding: system.legacy.padding.xl,
     backgroundColor: system.legacy.color.surface.default,
     borderRadius: system.legacy.shape.xxl,

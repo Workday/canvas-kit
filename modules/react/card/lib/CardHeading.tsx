@@ -21,7 +21,7 @@ export const cardHeadingStencil = createStencil({
     color: system.sana.color.fg.strong,
     fontWeight: system.fontWeight.bold,
     marginBlockStart: system.legacy.padding.none,
-    paddingBlockEnd: system.legacy.padding.sm,
+    marginBlockEnd: system.legacy.padding.none,
   },
   defaultModifiers: {typeLevel: 'body.small'},
 });
