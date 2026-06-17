@@ -10,9 +10,9 @@ import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 import {App} from './App';
 
-//@ts-ignore
+injectGlobal(...fonts);
+// @ts-expect-error - token CSS variable strings aren't assignable to csstype's strict property types
 injectGlobal({
-  ...fonts,
   'html, body': {
     fontFamily: system.fontFamily.default,
     margin: 0,

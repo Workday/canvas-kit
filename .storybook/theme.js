@@ -1,6 +1,6 @@
 import {create} from '@storybook/theming';
+
 import {version} from '../lerna.json';
-import {system} from '@workday/canvas-tokens-web';
 
 export default create({
   base: 'light',
@@ -46,7 +46,8 @@ export default create({
   appBg: '#ffffff',
 
   // Typography
-  mainTextFace: system.fontFamily.mono,
+  fontBase: '"Sana Sans LCG 05 VF", sans-serif',
+  fontCode: '"Roboto Mono", "Courier New", monospace',
 
   // Text colors
   textColor: '#2B2B2B',
