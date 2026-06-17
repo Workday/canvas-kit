@@ -9,7 +9,7 @@ jobs:
       cypress-version: ${{ steps.cypress-version.outputs.version }}
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: Workday/canvas-kit-actions/install@v2
         with:
@@ -20,7 +20,7 @@ jobs:
     needs: 'install'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: Workday/canvas-kit-actions/install@v2
         with:
@@ -44,7 +44,7 @@ jobs:
     needs: 'install'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - uses: Workday/canvas-kit-actions/install@v2
         with:
@@ -55,7 +55,7 @@ jobs:
 
       - name: Cache Build
         id: build-cache
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -65,7 +65,7 @@ jobs:
     needs: 'build'
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0 # Required to retrieve git history
 
@@ -74,7 +74,7 @@ jobs:
           node_version: 24.x
 
       - name: Restore Build
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
@@ -96,7 +96,7 @@ jobs:
         containers: [1, 2, 3, 4, 5]
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0 # Required to retrieve git history
 
@@ -105,7 +105,7 @@ jobs:
           node_version: 24.x
 
       - name: Restore Build
-        uses: actions/cache@v5
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
