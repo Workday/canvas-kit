@@ -6,5 +6,3 @@
 export const cornerShapeStyles = {
   cornerShape: 'superellipse(1.1)',
 } as const;
-
-export const cornerShape = cornerShapeStyles.cornerShape;
