@@ -11,7 +11,7 @@ jobs:
   lint-pull-request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v.6.0.3
 
       - name: Get Package Scopes
         id: scope-vars
@@ -26,7 +26,7 @@ jobs:
           scopes: ${{steps.scope-vars.outputs.scopes}}
           subjectPattern: ^[A-Z].+$
 
-      - uses: Workday/canvas-kit-actions/verify-pull-request@v1
+      - uses: Workday/canvas-kit-actions/verify-pull-request@v2
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
