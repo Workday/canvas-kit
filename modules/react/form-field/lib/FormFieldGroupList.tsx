@@ -11,9 +11,9 @@ const formFieldGroupListStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.legacy.shape.md,
+    borderRadius: system.legacy.shape.lg,
     gap: system.legacy.gap.sm,
-    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.xxs}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
@@ -21,11 +21,9 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        backgroundColor: system.legacy.color.brand.surface.critical.default,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
       },
       caution: {
-        backgroundColor: system.legacy.color.brand.surface.caution.default,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.border.caution}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.focus.caution.inner}`,
       },
     },
