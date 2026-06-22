@@ -10,7 +10,7 @@ export const switchInputStencil = createStencil({
     position: 'absolute',
     // This allows for the input to be the same size as the clickable area for the Switch
     margin: 0,
-    height: base.legacy.size225,
+    height: system.legacy.size.xs,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),
