@@ -94,18 +94,18 @@ yarn remove @workday/canvas-kit-codemod
 > accomplish this, Canvas Kit now uses Canvas Tokens version 4.4.0 or higher, which introduces a new
 > Sana theme token set.
 
-To apply the Sana Canvas theme in your application, you need to add the
-`data-attribute="sana-canvas"` attribute to your root level (such as `body`). This enables the new
-theme, which brings the biggest changes to typography and colors.
+To apply the Sana Canvas theme in your application, you need to add the `data-theme="sana-canvas"`
+attribute to your root level (such as `body`). This enables the new theme, which brings the biggest
+changes to typography and colors.
 
 You can add the theme at a high level (e.g., on your root provider) to apply the new visual style
-globally, or you can apply `data-attribute="sana-canvas"` locally to specific components to scope
-the theme to certain areas.
+globally, or you can apply `data-theme="sana-canvas"` locally to specific components to scope the
+theme to certain areas.
 
 For example, to apply the Sana Canvas theme globally:
 
 ```tsx
-<body data-attribute="sana-canvas">
+<body data-theme="sana-canvas">
   <App />
 </body>
 ```
@@ -113,7 +113,7 @@ For example, to apply the Sana Canvas theme globally:
 Or, to apply the theme to a single component or section:
 
 ```tsx
-<div data-attribute="sana-canvas">
+<div data-theme="sana-canvas">
   <MyComponent />
 </div>
 ```
@@ -142,7 +142,7 @@ earlier versions.
 - Error and alert states no longer display a status background color; only the standard background
   is shown.
 - The hover ring is smaller to better align with the smaller size. The hover ring background color
-  uses neutral instead of slate in `sana-canvas` team.
+  uses neutral instead of slate in `sana-canvas` theme.
 
 ### Radio
 
@@ -156,7 +156,7 @@ earlier versions.
 - Error and alert states no longer display a status background color; only the standard background
   is shown.
 - The hover ring is smaller to better align with the smaller size. The hover ring background color
-  uses a neutral color instead of slate in `sana-canvas` team.
+  uses a neutral color instead of slate in `sana-canvas` theme.
 
 ### Switch
 
@@ -169,7 +169,7 @@ earlier versions.
   `system.color.brand.accent.primary`.
 - The default (unchecked) background color now uses `system.color.surface.muted.default` instead of
   `system.color.surface.muted.soft`. Background color uses a neutral color instead of slate in
-  `sana-canvas` team.
+  `sana-canvas` theme.
 
 ## Deprecations
 
