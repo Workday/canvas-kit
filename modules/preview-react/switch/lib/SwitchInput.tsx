@@ -23,7 +23,7 @@ export const switchInputStencil = createStencil({
     },
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: system.legacy.color.brand.accent.primary,
+        backgroundColor: system.legacy.color.brand.accent.positive,
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {

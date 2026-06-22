@@ -22,7 +22,7 @@ export default {
 };
 
 export const CheckboxStates = () => (
-  <StaticStates>
+  <StaticStates data-theme="sana-canvas">
     <ComponentStatesTable
       rowProps={permutateProps(
         {
@@ -82,7 +82,7 @@ export const CheckboxStates = () => (
 );
 
 export const InverseCheckboxStates = () => (
-  <StaticStates>
+  <StaticStates data-theme="sana-canvas">
     <ComponentStatesTable
       rowProps={permutateProps(
         {
