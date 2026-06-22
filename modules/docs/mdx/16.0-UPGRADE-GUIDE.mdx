@@ -16,6 +16,8 @@ Soon to be...
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+- [Theming](#theming)
+  - [Sana Canvas Theme](#sana-canvas-theme)
 - [New Components](#new-components)
 - [Component Updates](#component-updates)
 - [Deprecations](#deprecations)
@@ -84,13 +86,90 @@ yarn remove @workday/canvas-kit-codemod
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
 
+## Theming
+
+### Sana Canvas Theme
+
+> **Note:** In v16, we've updated all of our components to visually align with the Sana. To
+> accomplish this, Canvas Kit now uses Canvas Tokens version 4.4.0 or higher, which introduces a new
+> Sana theme token set.
+
+To apply the Sana Canvas theme in your application, you need to add the
+`data-attribute="sana-canvas"` attribute to your root level (such as `body`). This enables the new
+theme, which brings the biggest changes to typography and colors.
+
+You can add the theme at a high level (e.g., on your root provider) to apply the new visual style
+globally, or you can apply `data-attribute="sana-canvas"` locally to specific components to scope
+the theme to certain areas.
+
+For example, to apply the Sana Canvas theme globally:
+
+```tsx
+<body data-attribute="sana-canvas">
+  <App />
+</body>
+```
+
+Or, to apply the theme to a single component or section:
+
+```tsx
+<div data-attribute="sana-canvas">
+  <MyComponent />
+</div>
+```
+
+Please ensure you are using Canvas Tokens v4.4.0 or later. The Sana theme will not be available with
+earlier versions.
+
+> **Tip:** The most significant visual changes in the Sana theme are to typography and colors. Be
+> sure to review your application thoroughly after upgrading and applying the Sana theme.
+
 ## New Components
 
 [Content will be added]
 
 ## Component Updates
 
-[Content will be added]
+### Checkbox
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+#### Visual Updates
+
+- The default Checkbox size is now **20px** (previously 24px).
+- Checked state uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary` for the background.
+- Error and alert states no longer display a status background color; only the standard background
+  is shown.
+- The hover ring is smaller to better align with the smaller size. The hover ring background color
+  uses neutral instead of slate in `sana-canvas` team.
+
+### Radio
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+#### Visual Updates
+
+- The default Radio size is now **20px** (previously 24px).
+- Checked state uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary` for the background.
+- Error and alert states no longer display a status background color; only the standard background
+  is shown.
+- The hover ring is smaller to better align with the smaller size. The hover ring background color
+  uses a neutral color instead of slate in `sana-canvas` team.
+
+### Switch
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+#### Visual Updates
+
+- The Switch thumb is now **20px** (was 18px). The icon-thumb container width remains unchanged.
+- The checked state background now uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary`.
+- The default (unchecked) background color now uses `system.color.surface.muted.default` instead of
+  `system.color.surface.muted.soft`. Background color uses a neutral color instead of slate in
+  `sana-canvas` team.
 
 ## Deprecations
 
