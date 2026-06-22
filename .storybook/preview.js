@@ -10,6 +10,8 @@ import '@workday/canvas-tokens-web/css/system/_variables.css';
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';
 import theme from './theme';
+// After tokens so Sana Sans overrides token font-family defaults in the preview iframe
+import './updated-type.css';
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
@@ -23,7 +25,7 @@ export const globalTypes = {
       icon: 'paintbrush',
       items: [
         {value: 'canvas', title: 'Canvas'},
-        {value: 'sana', title: 'Sana'},
+        {value: 'sana', title: 'Sana Canvas'},
       ],
       showName: true,
     },

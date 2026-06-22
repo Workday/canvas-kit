@@ -21,7 +21,7 @@ export default makeDecorator({
       canvas: parameters.theme || defaultCanvasTheme,
     };
     const tokenTheme = context.globals?.theme;
-    const dataTheme = tokenTheme === 'sana' ? 'sana-canvas' : undefined;
+    const dataTheme = tokenTheme === 'sana' ? 'sana-canvas' : 'canvas';
     return (
       <CanvasProvider theme={theme} className={storyStyles} data-theme={dataTheme}>
         {storyFn(context) as React.ReactNode}
