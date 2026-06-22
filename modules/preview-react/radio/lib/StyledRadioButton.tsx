@@ -110,7 +110,7 @@ export const radioInputStencil = createStencil({
         // The backgroundColor represents the dot in the middle of the radio.
         // The borderColor represents the border around the middle dot of the radio.
         [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
-          backgroundColor: system.legacy.color.brand.accent.positive, // inner circle background color
+          backgroundColor: system.legacy.color.brand.accent.primary, // inner circle background color
           borderColor: system.legacy.color.border.inverse.default, // inner circle border color
         },
         [`&:focus-visible + ${checkPart}, &:focus-visible:hover + ${checkPart}, &.focus + ${checkPart}, &.focus:hover + ${checkPart}`]:

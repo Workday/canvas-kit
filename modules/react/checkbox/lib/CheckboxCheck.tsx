@@ -48,7 +48,7 @@ const checkboxCheckStencil = createStencil({
         [systemIconStencil.vars.color]: system.legacy.color.brand.accent.primary,
 
         '& > div': {
-          backgroundColor: system.legacy.color.brand.accent.positive,
+          backgroundColor: system.legacy.color.brand.accent.primary,
         },
       },
     },
