@@ -135,7 +135,6 @@ export const buttonStencil = createStencil({
       buttonColorPropVars.default.background,
       cssVar(background, 'transparent')
     ),
-    minWidth: 'max-content',
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
@@ -260,6 +259,7 @@ export const buttonStencil = createStencil({
         letterSpacing: system.legacy.letterSpacing.body.sm,
         height: system.legacy.size.lg,
         paddingInline: system.legacy.padding.lg,
+        minWidth: base.legacy.size1300,
       },
       medium: {
         fontSize: system.legacy.fontSize.subtext.lg,
@@ -268,6 +268,7 @@ export const buttonStencil = createStencil({
         paddingInline: system.legacy.padding.md,
         height: system.legacy.size.md,
         gap: base.size75,
+        minWidth: base.legacy.size1100,
       },
       small: {
         fontSize: system.legacy.fontSize.subtext.lg,
@@ -276,6 +277,7 @@ export const buttonStencil = createStencil({
         height: system.legacy.size.sm,
         paddingInline: system.legacy.padding.sm,
         gap: system.legacy.gap.xs,
+        minWidth: base.legacy.size900,
       },
       extraSmall: {
         fontSize: system.legacy.fontSize.subtext.md,
@@ -284,6 +286,7 @@ export const buttonStencil = createStencil({
         height: system.legacy.size.xs,
         paddingInline: system.legacy.padding.xs,
         gap: system.legacy.gap.xs,
+        minWidth: 'auto',
       },
     },
     grow: {
