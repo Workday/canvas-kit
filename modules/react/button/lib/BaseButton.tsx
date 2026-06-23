@@ -135,6 +135,7 @@ export const buttonStencil = createStencil({
       buttonColorPropVars.default.background,
       cssVar(background, 'transparent')
     ),
+    minWidth: 'max-content',
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
@@ -149,7 +150,6 @@ export const buttonStencil = createStencil({
     whiteSpace: 'nowrap',
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
-    minWidth: 'auto',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
       cssVar(borderRadius, system.legacy.shape.full)

@@ -37,7 +37,7 @@ const tertiaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.inverse,
+      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: system.color.fg.stronger,
     },
     // Active Styles

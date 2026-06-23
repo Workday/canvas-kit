@@ -99,7 +99,7 @@ const deleteButtonStencil = createStencil({
         // Focus Styles
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: system.legacy.color.surface.default,
-          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
+          [buttonStencil.vars.border]: system.legacy.color.border.default,
           [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
           [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
           [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,

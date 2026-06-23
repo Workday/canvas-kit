@@ -96,7 +96,7 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: colorSpace.hover({
             color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
             fallback: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
-            colorType: 'accent',
+            colorType: 'surface',
           }),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
