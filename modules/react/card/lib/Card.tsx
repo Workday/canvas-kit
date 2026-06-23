@@ -23,15 +23,15 @@ export interface CardProps extends BoxProps {
 // .cnvs-card
 export const cardStencil = createStencil({
   extends: cornerShapeStencil,
-  base: ({shape}) => ({
-    [shape]: system.legacy.shape.xxl,
+  base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     display: 'flex',
     flexDirection: 'column',
     gap: system.legacy.padding.sm,
     padding: system.legacy.padding.xl,
     backgroundColor: system.legacy.color.surface.default,
     border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
-  }),
+  },
   modifiers: {
     variant: {
       borderless: {
