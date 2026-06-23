@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {cornerShapeStyles, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {CardBody} from './CardBody';
@@ -22,16 +22,16 @@ export interface CardProps extends BoxProps {
 
 // .cnvs-card
 export const cardStencil = createStencil({
-  base: {
+  extends: cornerShapeStencil,
+  base: ({shape}) => ({
+    [shape]: system.legacy.shape.xxl,
     display: 'flex',
     flexDirection: 'column',
     gap: system.legacy.padding.sm,
     padding: system.legacy.padding.xl,
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.xxl,
-    ...cornerShapeStyles,
     border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
-  },
+  }),
   modifiers: {
     variant: {
       borderless: {
