@@ -30,6 +30,13 @@ yarn add @workday/canvas-kit-labs-react
 `KBD` is a container that wraps one or more `KBD.Item` components. Each `KBD.Item` represents a
 single keyboard key.
 
+> **Important:** When displaying a group of keyboard keys (such as <kbd>Ctrl</kbd> + <kbd>C</kbd>),
+> **do not** combine them into a single `KBD.Item` (for example, `<KBD.Item>Ctrl + C</KBD.Item>`).
+> Doing so will cause issues with RTL (right-to-left) positioning and keyboard shortcut display.
+>
+> Instead, wrap each key in its own `KBD.Item` and group them inside a `KBD` container. This ensures
+> correct rendering and layout in both LTR and RTL environments.
+
 <ExampleCodeBlock code={Basic} />
 
 ### RTL Example

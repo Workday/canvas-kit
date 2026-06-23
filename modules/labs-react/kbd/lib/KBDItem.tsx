@@ -1,9 +1,8 @@
 import React from 'react';
 
+import {kbdStencil} from '@workday/canvas-kit-labs-react/kbd';
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-
-import {kbdStencil} from './KBD';
 
 export interface KBDItemProps extends CSProps {
   /**

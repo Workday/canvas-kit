@@ -24,7 +24,9 @@ export const Basic = () => {
         <KBD.Item>C</KBD.Item>
       </KBD>
       <KBD>
-        <KBD.Item>Shift + P</KBD.Item>
+        <KBD.Item>Shift</KBD.Item>
+        <span>+</span>
+        <KBD.Item>P</KBD.Item>
       </KBD>
     </div>
   );
