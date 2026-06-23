@@ -1,20 +1,31 @@
 import {KBD} from '@workday/canvas-kit-labs-react/kbd';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {BodyText} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+const containerStyles = createStyles({
+  gap: system.gap.md,
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 export const Basic = () => {
   return (
-    <Flex cs={{gap: system.gap.md, alignItems: 'center', flexDirection: 'column'}}>
-      <KBD variant="default">
+    <div className={containerStyles}>
+      <BodyText size="small" cs={{marginBlock: 0}}>
+        Press
+        <KBD cs={{marginInline: system.padding.xxs}}>
+          <KBD.Item>F</KBD.Item>
+        </KBD>
+        to pay respects.
+      </BodyText>
+      <KBD>
         <KBD.Item>⌘</KBD.Item>
-
         <KBD.Item>C</KBD.Item>
       </KBD>
-      <KBD variant="ghost">
-        <KBD.Item>Shift</KBD.Item>
-        <span>+</span>
-        <KBD.Item>A</KBD.Item>
+      <KBD>
+        <KBD.Item>Shift + P</KBD.Item>
       </KBD>
-    </Flex>
+    </div>
   );
 };

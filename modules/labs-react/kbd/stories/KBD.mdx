@@ -7,6 +7,8 @@ import {KBD} from '@workday/canvas-kit-labs-react/kbd';
 import KBDStoriesMeta from './KBD.stories';
 import {Basic} from './examples/Basic';
 import {RTL} from './examples/RTL';
+import {Size} from './examples/Size';
+import {Variant} from './examples/Variant';
 
 <Meta of={KBDStoriesMeta} />
 
@@ -36,6 +38,20 @@ You can also use the `KBD` component in right-to-left (RTL) layouts. This is hel
 that are read from right to left.
 
 <ExampleCodeBlock code={RTL} />
+
+### Size
+
+The `KBD` component supports different sizes. You can adjust the size using the `size` prop with
+options like `small`, `medium`, and `large` to suit various UI needs.
+
+<ExampleCodeBlock code={Size} />
+
+### Variant
+
+The `KBD` component supports different variants through the `variant` prop. Use `default` for the
+standard style or `plain` for a more minimal appearance.
+
+<ExampleCodeBlock code={Variant} />
 
 ## Component API
 

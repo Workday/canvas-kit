@@ -1,19 +1,28 @@
 import {KBD} from '@workday/canvas-kit-labs-react/kbd';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+const containerStyles = createStyles({
+  gap: system.gap.md,
+  display: 'flex',
+  flexDirection: 'column',
+});
 
 export const RTL = () => {
   return (
-    <Flex dir="rtl" cs={{gap: system.gap.md, alignItems: 'center', flexDirection: 'column'}}>
-      <KBD variant="default">
+    <div className={containerStyles} dir="rtl">
+      <KBD>
+        <KBD.Item>F</KBD.Item>
+      </KBD>
+      <KBD>
         <KBD.Item>⌘</KBD.Item>
         <KBD.Item>C</KBD.Item>
       </KBD>
-      <KBD variant="ghost">
+      <KBD>
         <KBD.Item>Shift</KBD.Item>
         <span>+</span>
-        <KBD.Item>A</KBD.Item>
+        <KBD.Item>P</KBD.Item>
       </KBD>
-    </Flex>
+    </div>
   );
 };

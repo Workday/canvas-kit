@@ -19,7 +19,7 @@ export default {
 
 const darkBackground = createStyles({
   background: system.color.surface.alt.default,
-  padding: system.padding.xxl,
+  padding: system.padding.xs,
 });
 
 export const KBDStates = () => (
@@ -27,14 +27,20 @@ export const KBDStates = () => (
     <ComponentStatesTable
       rowProps={permutateProps({
         variant: [
-          {value: undefined, label: 'Default'},
-          {value: 'ghost', label: 'Ghost'},
+          {value: 'default', label: 'Default'},
+          {value: 'plain', label: 'Plain'},
         ],
       })}
-      columnProps={[{label: 'Default', props: {}}]}
+      columnProps={permutateProps({
+        size: [
+          {value: 'small', label: 'Small'},
+          {value: 'medium', label: 'Medium'},
+          {value: 'large', label: 'Large'},
+        ],
+      })}
     >
       {props => (
-        <div className={props.variant === 'ghost' ? darkBackground : ''}>
+        <div className={props.variant === 'plain' ? darkBackground : ''}>
           <KBD {...props}>
             <KBD.Item>⌘</KBD.Item>
             <KBD.Item>C</KBD.Item>

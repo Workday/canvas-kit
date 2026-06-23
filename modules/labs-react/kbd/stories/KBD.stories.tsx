@@ -3,6 +3,8 @@ import {Meta} from '@storybook/react';
 import mdxDoc from './KBD.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {RTL as RTLExample} from './examples/RTL';
+import {Size as SizeExample} from './examples/Size';
+import {Variant as VariantExample} from './examples/Variant';
 
 export default {
   title: 'Labs/KBD',
@@ -20,4 +22,12 @@ export const Basic = {
 
 export const RTL = {
   render: RTLExample,
+};
+
+export const Size = {
+  render: SizeExample,
+};
+
+export const Variant = {
+  render: VariantExample,
 };
