@@ -21,10 +21,6 @@ export interface DeleteButtonProps extends ButtonProps {
 const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    // This is here temporarily until tokens are updated
-    '[data-theme="sana-canvas"] &': {
-      '--cnvs-sys-color-accent-overlay-mixin': 'black',
-    },
     // Base Styles
     [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,

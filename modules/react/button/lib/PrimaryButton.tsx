@@ -21,10 +21,6 @@ export interface PrimaryButtonProps extends ButtonProps {
 const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    // These are here temporarily until tokens are updated
-    '[data-theme="sana-canvas"] &': {
-      '--cnvs-sys-color-accent-overlay-mixin': 'white',
-    },
     // Base Styles
     [buttonStencil.vars.background]: cssVar(
       brand.action.base,
@@ -80,10 +76,6 @@ const primaryButtonStencil = createStencil({
     variant: {
       // Inverse Styles
       inverse: {
-        // This is here temporarily until tokens are updated
-        '[data-theme="sana-canvas"] &': {
-          '--cnvs-sys-color-accent-overlay-mixin': 'black',
-        },
         [buttonStencil.vars.background]: cssVar(
           brand.action.lightest,
           system.legacy.color.surface.inverse
