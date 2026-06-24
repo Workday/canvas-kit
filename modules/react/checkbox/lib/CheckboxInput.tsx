@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {ErrorType, createComponent, focusRing} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  cornerShapeStencil,
+  createComponent,
+  focusRing,
+} from '@workday/canvas-kit-react/common';
 import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -52,8 +57,9 @@ export interface CheckboxProps extends CSProps {
 }
 
 const checkboxInputStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
-    borderRadius: system.legacy.shape.sm,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
     width: system.legacy.size.xs,
     height: system.legacy.size.xs,
     margin: 0,
@@ -138,10 +144,6 @@ const checkboxInputStencil = createStencil({
             borderColor: system.legacy.color.focus.inverse,
             backgroundColor: system.legacy.color.surface.inverse,
           },
-        // Disabled State for inverse variant (applies to all disabled states: unchecked, checked, and indeterminate)
-        [`&:disabled ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]: {
-          opacity: system.opacity.disabled,
-        },
         // Disabled + checked/indeterminate state for inverse variant
         [`&:where(:checked, :indeterminate):where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
           {
@@ -194,7 +196,7 @@ const checkboxInputStencil = createStencil({
   },
   compound: [
     {
-      modifiers: {variant: 'inverse', error: true},
+      modifiers: {variant: 'inverse', error: 'true'},
       styles: {
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
           border: `${px2rem(1)} solid ${system.legacy.color.focus.inverse}`,
@@ -221,7 +223,14 @@ export const CheckboxInput = createComponent('input')({
         type="checkbox"
         ref={ref}
         aria-checked={indeterminate ? 'mixed' : checked}
-        {...handleCsProp(elemProps, checkboxInputStencil({variant, disabled, error: !!error}))}
+        {...handleCsProp(
+          elemProps,
+          checkboxInputStencil({
+            variant,
+            disabled: disabled ? 'true' : undefined,
+            error: error ? 'true' : undefined,
+          })
+        )}
       />
     );
   },
