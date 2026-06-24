@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {pickForegroundColor} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, pickForegroundColor} from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkSmallIcon} from '@workday/canvas-system-icons-web';
@@ -12,15 +12,16 @@ export interface ColorSwatchProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export const colorPickerColorSwatchStencil = createStencil({
+  extends: cornerShapeStencil,
   vars: {
     color: '',
     iconColor: '',
   },
   base: ({color, iconColor}) => ({
     [systemIconStencil.vars.color]: iconColor,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
     width: system.legacy.size.xxs,
     height: system.legacy.size.xxs,
-    borderRadius: system.legacy.shape.sm,
     backgroundColor: color,
     display: 'flex',
     alignItems: 'center',
@@ -50,7 +51,7 @@ export const ColorSwatch = ({color, showCheck = false, ...elemProps}: ColorSwatc
         colorPickerColorSwatchStencil({
           color,
           iconColor: pickForegroundColor(color),
-          withShadow: showCheck || lowerCasedColor === '#ffffff',
+          withShadow: showCheck || lowerCasedColor === '#ffffff' ? 'true' : undefined,
         })
       )}
     >

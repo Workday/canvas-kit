@@ -1,4 +1,9 @@
-import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  GrowthBehavior,
+  cornerShapeStencil,
+  createComponent,
+} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -15,10 +20,12 @@ export interface TextInputProps extends GrowthBehavior, CSProps {
 }
 
 export const textInputStencil = createStencil({
+  extends: cornerShapeStencil,
   vars: {
     width: '',
   },
   base: ({width}) => ({
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     fontFamily: system.fontFamily.default,
     fontSize: system.legacy.fontSize.subtext.lg,
     fontWeight: system.fontWeight.normal,
@@ -27,7 +34,6 @@ export const textInputStencil = createStencil({
     display: 'block',
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.lg,
     height: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     padding: system.legacy.padding.xs, // Compensate for border
@@ -115,7 +121,11 @@ export const TextInput = createComponent('input')({
         ref={ref}
         {...mergeStyles(
           elemProps,
-          textInputStencil({width: typeof width === 'number' ? px2rem(width) : width, grow, error})
+          textInputStencil({
+            width: typeof width === 'number' ? px2rem(width) : width,
+            grow: grow === true ? 'true' : grow === false ? 'false' : undefined,
+            error,
+          })
         )}
       />
     );

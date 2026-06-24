@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -8,10 +8,11 @@ import {useFormFieldModel} from './hooks';
 export interface FormFieldGroupListProps extends CSProps, FlexProps {}
 
 const formFieldGroupListStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.legacy.shape.lg,
     gap: system.legacy.gap.sm,
     padding: `${system.legacy.padding.xs} ${system.legacy.padding.xxs}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,
