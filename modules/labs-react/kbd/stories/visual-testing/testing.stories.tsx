@@ -4,7 +4,7 @@ import {
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export default {
@@ -16,11 +16,6 @@ export default {
     },
   },
 };
-
-const darkBackground = createStyles({
-  background: system.color.surface.alt.default,
-  padding: system.padding.xs,
-});
 
 export const KBDStates = () => (
   <StaticStates>
@@ -37,10 +32,14 @@ export const KBDStates = () => (
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
         ],
+        theme: [
+          {value: undefined, label: ''},
+          {value: 'sana-canvas', label: '(Sana Canvas)'},
+        ],
       })}
     >
-      {props => (
-        <div className={props.variant === 'plain' ? darkBackground : ''}>
+      {({dataTheme, ...props}) => (
+        <div data-theme={props.dataTheme}>
           <KBD {...props}>
             <KBD.Item>⌘</KBD.Item>
             <KBD.Item>C</KBD.Item>

@@ -2,6 +2,7 @@ import {Meta} from '@storybook/react';
 
 import mdxDoc from './KBD.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Items as ItemsExample} from './examples/Items';
 import {RTL as RTLExample} from './examples/RTL';
 import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
@@ -30,4 +31,8 @@ export const Size = {
 
 export const Variant = {
   render: VariantExample,
+};
+
+export const Items = {
+  render: ItemsExample,
 };

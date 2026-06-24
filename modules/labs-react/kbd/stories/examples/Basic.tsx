@@ -28,6 +28,15 @@ export const Basic = () => {
         <span>+</span>
         <KBD.Item>P</KBD.Item>
       </KBD>
+      <KBD>
+        <KBD.Item>
+          <KBD variant="plain">
+            <KBD.Item>Shift</KBD.Item>
+            <span>+</span>
+            <KBD.Item>P</KBD.Item>
+          </KBD>
+        </KBD.Item>
+      </KBD>
     </div>
   );
 };

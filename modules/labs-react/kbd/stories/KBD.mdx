@@ -6,6 +6,7 @@ import {KBD} from '@workday/canvas-kit-labs-react/kbd';
 
 import KBDStoriesMeta from './KBD.stories';
 import {Basic} from './examples/Basic';
+import {Items} from './examples/Items';
 import {RTL} from './examples/RTL';
 import {Size} from './examples/Size';
 import {Variant} from './examples/Variant';
@@ -31,13 +32,21 @@ yarn add @workday/canvas-kit-labs-react
 single keyboard key.
 
 > **Important:** When displaying a group of keyboard keys (such as <kbd>Ctrl</kbd> + <kbd>C</kbd>),
-> **do not** combine them into a single `KBD.Item` (for example, `<KBD.Item>Ctrl + C</KBD.Item>`).
-> Doing so will cause issues with RTL (right-to-left) positioning and keyboard shortcut display.
->
-> Instead, wrap each key in its own `KBD.Item` and group them inside a `KBD` container. This ensures
-> correct rendering and layout in both LTR and RTL environments.
+> **do not** place that combination as a text into a single `KBD.Item` (for example,
+> `<KBD.Item>Ctrl + C</KBD.Item>`). Doing so will cause issues with RTL (right-to-left) positioning
+> and keyboard shortcut display. Instead, wrap each key in its own `KBD.Item` and group them inside
+> a `KBD` container. This ensures correct rendering and layout in both LTR and RTL environments.
 
 <ExampleCodeBlock code={Basic} />
+
+### Dynamic Items
+
+`KBD` is built on the [Collection API](/get-started/for-developers/guides/collection-api/). Instead
+of rendering `KBD.Item` components statically, you can pass an array of strings to the `items` prop
+and provide a render prop as the children. Each string represents the label of a single keyboard
+key.
+
+<ExampleCodeBlock code={Items} />
 
 ### RTL Example
 
@@ -49,17 +58,37 @@ that are read from right to left.
 ### Size
 
 The `KBD` component supports different sizes. You can adjust the size using the `size` prop with
-options like `small`, `medium`, and `large` to suit various UI needs.
+options like `small`, `medium`, and `large` to suit various UI needs. The `size` is shared with each
+`KBD.Item` through the model.
 
 <ExampleCodeBlock code={Size} />
 
 ### Variant
 
 The `KBD` component supports different variants through the `variant` prop. Use `default` for the
-standard style or `plain` for a more minimal appearance.
+standard style or `plain` for a more minimal appearance. The `variant` is shared with each
+`KBD.Item` through the model.
 
 <ExampleCodeBlock code={Variant} />
 
 ## Component API
 
 <SymbolDoc name="KBD" hideDescription />
+
+## Model
+
+`KBD` uses a `useKBDModel` to track the keyboard keys (`items`) and to share the `size` and
+`variant` with each `KBD.Item`. If you need direct access to the model's state, you can create it
+yourself with `useKBDModel` and pass it to `KBD` via the `model` prop.
+
+```tsx
+const model = useKBDModel({
+  size: 'large',
+  variant: 'plain',
+  items: ['⌘', 'C'],
+});
+
+<KBD model={model}>{item => <KBD.Item>{item}</KBD.Item>}</KBD>;
+```
+
+<SymbolDoc name="useKBDModel" hideDescription />
