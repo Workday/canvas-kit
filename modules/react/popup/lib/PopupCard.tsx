@@ -101,7 +101,7 @@ export const popupCardStencil = createStencil({
     gap: system.legacy.gap.lg,
     boxShadow: system.depth[3],
     minHeight: 0,
-    padding: system.legacy.padding.xl,
+    padding: system.legacy.padding.xxl,
     borderRadius: system.legacy.shape.xxxl,
     maxHeight: maxHeight,
     overflowY: 'auto',

@@ -3,6 +3,7 @@ import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {PopupBody} from './PopupBody';
+import {PopupButtonGroup} from './PopupButtonGroup';
 import {PopupCard} from './PopupCard';
 import {PopupCloseButton} from './PopupCloseButton';
 import {PopupCloseIcon} from './PopupCloseIcon';
@@ -110,6 +111,7 @@ export const Popup = createContainer()({
      * {@link usePopupCloseButton}.
      */
     CloseButton: PopupCloseButton,
+    ButtonGroup: PopupButtonGroup,
   },
 })<PopupProps>(({children}: PopupProps) => {
   return <>{children}</>;

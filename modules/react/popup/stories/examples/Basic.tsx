@@ -1,4 +1,4 @@
-import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {DeleteButton, PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
@@ -50,12 +50,18 @@ export const Basic = () => {
               Are you sure you'd like to delete the item titled 'My Item'?
             </Box>
           </Popup.Body>
-          <Flex cs={flexStyles}>
+          {/* <Flex cs={flexStyles}>
             <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Popup.CloseButton>
             <Popup.CloseButton>Cancel</Popup.CloseButton>
-          </Flex>
+          </Flex> */}
+          <Popup.ButtonGroup>
+            <SecondaryButton>Cancel</SecondaryButton>
+            <PrimaryButton as={DeleteButton} onClick={handleDelete}>
+              Delete
+            </PrimaryButton>
+          </Popup.ButtonGroup>
         </Popup.Card>
       </Popup.Popper>
     </Popup>
