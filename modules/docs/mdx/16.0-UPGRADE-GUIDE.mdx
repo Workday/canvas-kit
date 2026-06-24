@@ -18,6 +18,7 @@ Soon to be...
   - [Instructions](#instructions)
 - [New Components](#new-components)
 - [Component Updates](#component-updates)
+  - [Card](#card)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -92,7 +93,18 @@ yarn remove @workday/canvas-kit-codemod
 
 ## Component Updates
 
-[Content will be added]
+### Card
+
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+
+#### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
 
 ## New Utilities
 
