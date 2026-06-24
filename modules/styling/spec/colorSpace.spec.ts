@@ -23,19 +23,18 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.hover({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-hover, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
       );
     });
     it('should return color-mix of hover state using surface tokens', () => {
       const color = '--cnvs-sys-color-brand-accent-primary';
       const fallback = '--cnvs-brand-primary-base';
       const colorType = 'surface';
-      const surfaceType = 'default';
 
-      const expected = colorSpace.hover({color, fallback, colorType, surfaceType});
+      const expected = colorSpace.hover({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-hover-${surfaceType}, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
       );
     });
   });
@@ -55,12 +54,11 @@ describe('CSS color-mix Functions', () => {
       const color = '--cnvs-sys-color-brand-accent-primary';
       const fallback = '--cnvs-brand-primary-base';
       const colorType = 'surface';
-      const surfaceType = 'default';
 
-      const expected = colorSpace.pressed({color, fallback, colorType, surfaceType});
+      const expected = colorSpace.pressed({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-pressed-${surfaceType}, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
       );
     });
   });
