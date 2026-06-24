@@ -24,33 +24,40 @@ export const ColorPickerStates = {
     },
   },
   render: () => (
-    <StaticStates>
-      <ComponentStatesTable
-        rowProps={[
-          {label: 'Default', props: {}},
-          {label: 'with Hex Input', props: {showCustomHexInput: true}},
-          {
-            label: 'With Reset',
-            props: {
-              resetColor: defaultColorSet.blueberry400,
-              resetLabel: 'Reset',
-              onColorReset: noop,
-            },
-          },
-          {
-            label: 'With Reset and Hex Input',
-            props: {
-              showCustomHexInput: true,
-              resetColor: defaultColorSet.blueberry400,
-              resetLabel: 'Reset',
-              onColorReset: noop,
-            },
-          },
-        ]}
-        columnProps={[{label: 'Default', props: {}}]}
-      >
-        {props => <ColorPicker {...props} onColorChange={noop} />}
-      </ComponentStatesTable>
-    </StaticStates>
+    <>
+      {[undefined, 'sana-canvas'].map(theme => (
+        <>
+          {theme && <h3>{theme}</h3>}
+          <StaticStates data-theme={theme}>
+            <ComponentStatesTable
+              rowProps={[
+                {label: 'Default', props: {}},
+                {label: 'with Hex Input', props: {showCustomHexInput: true}},
+                {
+                  label: 'With Reset',
+                  props: {
+                    resetColor: defaultColorSet.blueberry400,
+                    resetLabel: 'Reset',
+                    onColorReset: noop,
+                  },
+                },
+                {
+                  label: 'With Reset and Hex Input',
+                  props: {
+                    showCustomHexInput: true,
+                    resetColor: defaultColorSet.blueberry400,
+                    resetLabel: 'Reset',
+                    onColorReset: noop,
+                  },
+                },
+              ]}
+              columnProps={[{label: 'Default', props: {}}]}
+            >
+              {props => <ColorPicker {...props} onColorChange={noop} />}
+            </ComponentStatesTable>
+          </StaticStates>
+        </>
+      ))}
+    </>
   ),
 };
