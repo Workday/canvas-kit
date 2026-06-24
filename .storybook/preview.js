@@ -71,6 +71,7 @@ export const parameters = {
         prefix('getting-started', 'aaabc'),
         prefix('stencils', 'aabcd'),
         prefix('functions', 'abcde'),
+        prefix('basic-sana-canvas', '0'),
         prefix('basic', 'aa'),
         prefix('default', 'ab'),
         prefix('testing', 'zzzzz'),
