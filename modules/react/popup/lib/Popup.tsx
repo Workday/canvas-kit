@@ -93,10 +93,11 @@ export const Popup = createContainer()({
      */
     CloseIcon: PopupCloseIcon,
     /**
-     * A `Popup.Heading` is a wrapper around {@link CardHeading Card.Heading} that connect the
-     * heading to a {@link PopupModel}. It will add an `id` to the element that match the
-     * `aria-labelledby` that is applied to the `Popup.Card` element for accessibility. The behavior
-     * hook used is called {@link usePopupHeading}.
+     * A `Popup.Heading` renders a heading element styled with {@link cardHeadingStencil}
+     * (with popup-specific padding and type level values). It connects the heading to a
+     * {@link PopupModel}. It adds an `id` that matches the `aria-labelledby` applied to the
+     * `Popup.Card` element for accessibility. The behavior hook used is called
+     * {@link usePopupHeading}.
      */
     Heading: PopupHeading,
     /**
