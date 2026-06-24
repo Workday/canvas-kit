@@ -55,10 +55,6 @@
     url(/SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
-[data-theme='canvas'] {
-  --cnvs-sys-font-family-default: 'Roboto', sans-serif;
-}
-
 [data-theme='sana-canvas'] {
   --cnvs-sys-font-family-default: 'Sana Sans LCG 05 VF', sans-serif;
 }
