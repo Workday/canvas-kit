@@ -46,7 +46,7 @@ export default create({
   appBg: '#ffffff',
 
   // Typography
-  fontBase: '"Sana Sans LCG 05 VF", sans-serif',
+  fontBase: '"Roboto", sans-serif',
   fontCode: '"Roboto Mono", "Courier New", monospace',
 
   // Text colors
