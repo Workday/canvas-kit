@@ -10,7 +10,7 @@ export const InputInteraction = () => {
     textAreaRef.current?.focus();
   };
   return (
-    <div className="App">
+    <div className="App" data-theme="sana-canvas">
       <ColorPicker showCustomHexInput onColorChange={handleColorChange} />
       <label htmlFor="test">Text Area</label>
       <textarea id="test" style={{color: color}} ref={textAreaRef} />
