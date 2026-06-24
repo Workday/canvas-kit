@@ -17,7 +17,7 @@ export default {
 
 export const CardStates = {
   render: () => (
-    <StaticStates>
+    <StaticStates data-theme="sana-canvas">
       <ComponentStatesTable
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
