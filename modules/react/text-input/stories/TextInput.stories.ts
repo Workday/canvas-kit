@@ -11,6 +11,7 @@ import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
+import {SanaCanvas as SanaCanvasExample} from './examples/SanaCanvas';
 
 export default {
   title: 'Components/Inputs/Text Input',
@@ -48,4 +49,7 @@ export const Required: Story = {
 };
 export const Icons: Story = {
   render: IconsExample,
+};
+export const SanaCanvas: Story = {
+  render: SanaCanvasExample,
 };
