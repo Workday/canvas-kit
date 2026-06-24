@@ -113,8 +113,9 @@ export const Popup = createContainer()({
      */
     CloseButton: PopupCloseButton,
     /**
-     * A `Popup.ButtonGroup` is a wrapper around {@link ButtonGroup} that is styled with
-     * {@link popupButtonGroupStencil}. It is used to group buttons within a popup and can place buttons at the start, center, or end of the container.
+     * A `Popup.ButtonGroup` component styled with {@link popupButtonGroupStencil}. It is used to
+     * group buttons within a popup and can place buttons at the start, center, or end of the
+     * container.
      */
     ButtonGroup: PopupButtonGroup,
   },

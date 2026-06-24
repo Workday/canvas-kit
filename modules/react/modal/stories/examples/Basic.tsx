@@ -1,7 +1,6 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const handleAcknowledge = () => {

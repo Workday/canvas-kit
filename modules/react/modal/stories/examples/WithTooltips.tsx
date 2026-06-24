@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {system} from '@workday/canvas-tokens-web';
 
 export const WithTooltips = () => {
   const modal = useModalModel();

@@ -1,7 +1,5 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {system} from '@workday/canvas-tokens-web';
 
 export const IframeTest = () => {
   return (

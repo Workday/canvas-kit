@@ -12,11 +12,6 @@ import {system} from '@workday/canvas-tokens-web';
 
 const INITIAL_FILES = ['Resume.docx', 'Cover_Letter.docx', 'References.docx'];
 
-const actionStyles = createStyles({
-  gap: system.gap.md,
-  padding: system.padding.sm,
-});
-
 const headingStyles = createStyles({
   marginBlock: '0',
 });

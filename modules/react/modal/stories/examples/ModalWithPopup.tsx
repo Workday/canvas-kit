@@ -1,5 +1,4 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {
   Popup,
@@ -7,7 +6,6 @@ import {
   useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {system} from '@workday/canvas-tokens-web';
 
 export const ModalWithPopup = () => {
   const modal = useModalModel();

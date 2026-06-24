@@ -93,8 +93,9 @@ export const Modal = createContainer()({
      */
     OverflowOverlay: ModalOverflowOverlay,
     /**
-     * A `Modal.ButtonGroup` is a wrapper around {@link ButtonGroup} that is styled with
-     * {@link modalButtonGroupStencil}. It is used to group buttons within a modal and can place buttons at the start, center, or end of the container.
+     * A `Modal.ButtonGroup` component styled with {@link popupButtonGroupStencil}. It is used to
+     * group buttons within a modal and can place buttons at the start, center, or end of the
+     * container.
      */
     ButtonGroup: Popup.ButtonGroup,
   },

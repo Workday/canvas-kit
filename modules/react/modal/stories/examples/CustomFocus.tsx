@@ -3,7 +3,7 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {system} from '@workday/canvas-tokens-web';

@@ -1,5 +1,5 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex, Grid} from '@workday/canvas-kit-react/layout';
+import {Grid} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
   useCloseOnEscape,

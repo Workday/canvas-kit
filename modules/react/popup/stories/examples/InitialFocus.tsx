@@ -26,11 +26,6 @@ const bodyStyles = createStyles({
   marginBlock: '0',
 });
 
-const flexStyles = createStyles({
-  gap: system.gap.md,
-  padding: system.padding.xs,
-});
-
 const columnStyles = createStyles({
   gap: system.gap.md,
   alignItems: 'flex-start',
