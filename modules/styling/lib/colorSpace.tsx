@@ -95,12 +95,6 @@ export interface InteractiveStateProps {
    * @default 'accent'
    */
   colorType?: 'accent' | 'surface';
-  /**
-   * A string that will determine which surface overlay variant to use.
-   *
-   * @default 'default'
-   */
-  surfaceType?: 'default' | 'inverse';
 }
 
 /**
@@ -116,23 +110,12 @@ export interface InteractiveStateProps {
  * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
  *
  */
-const hover = ({
-  color,
-  fallback,
-  colorType = 'accent',
-  surfaceType = 'default',
-}: InteractiveStateProps) => {
-  const mixinColor =
-    colorType === 'accent'
-      ? system.color.accent.overlay.hover
-      : surfaceType === 'default'
-        ? system.color.surface.overlay.hover.default
-        : system.color.surface.overlay.hover.inverse;
+const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: mixinColor,
-    mixinValue: system.opacity[colorType].hover,
+    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinValue: system.legacy.opacity[colorType].hover,
   });
 };
 
@@ -157,23 +140,12 @@ const hover = ({
  * @param colorType
  * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
  */
-const pressed = ({
-  color,
-  fallback,
-  colorType = 'accent',
-  surfaceType = 'default',
-}: InteractiveStateProps) => {
-  const mixinColor =
-    colorType === 'accent'
-      ? system.color.accent.overlay.pressed
-      : surfaceType === 'default'
-        ? system.color.surface.overlay.pressed.default
-        : system.color.surface.overlay.pressed.inverse;
+const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: mixinColor,
-    mixinValue: system.opacity[colorType].pressed,
+    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinValue: system.legacy.opacity[colorType].pressed,
   });
 };
 
