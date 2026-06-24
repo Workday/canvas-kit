@@ -149,12 +149,12 @@ export const ReturnFocus = () => {
                 : 'Are you sure you want to delete this file?'}
             </Text>
           </Modal.Body>
-          <Flex cs={actionStyles}>
+          <Modal.ButtonGroup>
             <Modal.CloseButton ref={cancelButtonRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleConfirmDelete}>
               Delete
             </Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

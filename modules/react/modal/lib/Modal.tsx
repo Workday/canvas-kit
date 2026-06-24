@@ -92,6 +92,11 @@ export const Modal = createContainer()({
      * full body overflow is desired.
      */
     OverflowOverlay: ModalOverflowOverlay,
+    /**
+     * A `Modal.ButtonGroup` is a wrapper around {@link ButtonGroup} that is styled with
+     * {@link modalButtonGroupStencil}. It is used to group buttons within a modal and can place buttons at the start, center, or end of the container.
+     */
+    ButtonGroup: Popup.ButtonGroup,
   },
 })<ExtractProps<typeof Dialog, never>>(elemProps => {
   return <>{elemProps.children}</>;

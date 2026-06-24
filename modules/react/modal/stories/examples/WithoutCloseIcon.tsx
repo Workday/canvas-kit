@@ -42,12 +42,12 @@ export const WithoutCloseIcon = () => {
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+          <Modal.ButtonGroup>
             <Modal.CloseButton ref={cancelBtnRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

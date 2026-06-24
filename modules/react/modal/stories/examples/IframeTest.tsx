@@ -13,10 +13,10 @@ export const IframeTest = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <Flex cs={{gap: system.gap.md}}>
-              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
+            <Modal.ButtonGroup>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
-            </Flex>
+              <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
+            </Modal.ButtonGroup>
             <iframe
               role="iframe"
               srcDoc="<html><body>Hello, <b>world</b>.<button>iframe button 1</button><button data-testid='button2'>iframe button 2</button></body></html>"

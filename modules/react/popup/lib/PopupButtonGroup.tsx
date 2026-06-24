@@ -1,13 +1,20 @@
 import * as React from 'react';
 
 import {GrowthBehavior, createSubcomponent} from '@workday/canvas-kit-react/common';
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {usePopupModel} from './hooks';
 
-export interface PopupButtonGroupProps extends GrowthBehavior {
+export interface PopupButtonGroupProps extends GrowthBehavior, CSProps {
+  /**
+   * The contents of the PopupButtonGroup. Can be `Button` children or any valid elements.
+   */
   children?: React.ReactNode;
+  /**
+   * The position of elements within the PopupButtonGroup. Can be `start`, `center`, or `end`.
+   * @default 'end'
+   */
   position?: 'start' | 'center' | 'end';
 }
 

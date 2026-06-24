@@ -41,12 +41,12 @@ export const CustomFocus = () => {
               />
             </FormField>
           </Modal.Body>
-          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+          <Modal.ButtonGroup>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
