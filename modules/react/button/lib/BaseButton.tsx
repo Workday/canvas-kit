@@ -121,10 +121,10 @@ export const buttonStencil = createStencil({
   },
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // This is here temporarily until tokens are updated
-    '[data-theme="sana-canvas"] &': {
-      '--cnvs-sys-opacity-accent-hover': '0.045',
-      '--cnvs-sys-opacity-accent-pressed': '0.118',
-    },
+    // '[data-theme="sana-canvas"] &': {
+    //   '--cnvs-sys-opacity-accent-hover': '0.045',
+    //   '--cnvs-sys-opacity-accent-pressed': '0.118',
+    // },
     // Default Styles
     fontFamily: system.fontFamily.default,
     fontSize: system.legacy.fontSize.subtext.lg,
