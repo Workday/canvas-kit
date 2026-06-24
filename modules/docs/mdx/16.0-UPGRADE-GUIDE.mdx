@@ -19,6 +19,8 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+- [New Utilities](#new-utilities)
+  - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
 - [Glossary](#glossary)
   - [Main](#main)
@@ -120,6 +122,34 @@ For more details and advanced usage, refer to the storybook documentation and ou
 ## Component Updates
 
 [Content will be added]
+
+## New Utilities
+
+### cornerShapeStencil
+
+We've added a new stencil called `cornerShapeStencil` to `@workday/canvas-kit-react/common`. It
+applies the CSS [`corner-shape`](https://developer.mozilla.org/en-US/docs/Web/CSS/corner-shape)
+property as a progressive enhancement for components using border radius that aren't circular.
+Browsers that don't support `corner-shape` fall back to `border-radius` alone, as border-radius is
+declared first in the cascade.
+
+The stencil exposes a `shape` variable for setting the border radius. Extend it in your own stencils
+to get consistent rounded corners:
+
+```tsx
+import {cornerShapeStencil} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+export const myStencil = createStencil({
+  extends: cornerShapeStencil,
+  base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+  },
+});
+```
+
+`Card` extends this stencil for its rounded corners.
 
 ## Deprecations
 
