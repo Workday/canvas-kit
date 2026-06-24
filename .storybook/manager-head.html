@@ -11,4 +11,9 @@
   body {
     font-family: 'Roboto', sans-serif;
   }
+
+  /* Hide the theme toggle button in docs view as it cannot toggle individual stories' themes */
+  #root > div:not(:has([id^='storybook-panel'])) button[title*='Token theme'] {
+    display: none !important;
+  }
 </style>
