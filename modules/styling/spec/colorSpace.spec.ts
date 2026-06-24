@@ -23,7 +23,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.hover({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, oklch(0 0 0 / 1)) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0.18) * 100%))`
       );
     });
     it('should return color-mix of hover state using surface tokens', () => {
@@ -34,7 +34,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.hover({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, oklch(0.629 0.0281 255.62 / 1)) calc(var(--cnvs-sys-opacity-${colorType}-hover, 0.08) * 100%))`
       );
     });
   });
@@ -47,7 +47,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.pressed({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-pressed, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-pressed, oklch(0 0 0 / 1)) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0.36) * 100%))`
       );
     });
     it('should return color-mix of pressed state using surface tokens', () => {
@@ -58,7 +58,7 @@ describe('CSS color-mix Functions', () => {
       const expected = colorSpace.pressed({color, fallback, colorType});
 
       expect(expected).toBe(
-        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, black) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0) * 100%))`
+        `color-mix(in srgb, var(${color}, var(${fallback})) , var(--cnvs-sys-color-${colorType}-overlay-mixin, oklch(0.629 0.0281 255.62 / 1)) calc(var(--cnvs-sys-opacity-${colorType}-pressed, 0.18) * 100%))`
       );
     });
   });
