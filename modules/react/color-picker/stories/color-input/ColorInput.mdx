@@ -1,10 +1,6 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import ColorInputStoriesMeta from './ColorInput.stories';
 import {Basic} from './examples/Basic';
@@ -16,6 +12,7 @@ import {Grow} from './examples/Grow';
 import {LabelPosition} from './examples/LabelPosition';
 import {RefForwarding} from './examples/RefForwarding';
 import {Required} from './examples/Required';
+import {SanaCanvas} from './examples/SanaCanvas';
 import {ValidColorChange} from './examples/ValidColorChange';
 
 <Meta of={ColorInputStoriesMeta} />
@@ -33,6 +30,17 @@ yarn add @workday/canvas-kit-react
 ```
 
 ## Usage
+
+### Sana Canvas Theme
+
+To apply the Sana Canvas theme to Color Input, apply the `data-theme="sana-canvas"` attribute to
+your component or to any ancestor element (such as `body`) if you wish to scope the theme to a
+larger area.
+
+This example applies `data-theme="sana-canvas"` to the wrapping
+[Form Field](/components/inputs/form-field/).
+
+<ExampleCodeBlock code={SanaCanvas} />
 
 ### Basic Example
 
