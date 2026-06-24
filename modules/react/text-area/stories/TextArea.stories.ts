@@ -11,6 +11,7 @@ import {Placeholder as PlaceholderExample} from './examples/Placeholder';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
 import {ResizeConstraints as ResizeConstraintsExample} from './examples/ResizeConstraints';
+import {SanaCanvas as SanaCanvasExample} from './examples/SanaCanvas';
 
 export default {
   title: 'Components/Inputs/TextArea',
@@ -49,4 +50,7 @@ export const Required: Story = {
 };
 export const ResizeConstraints: Story = {
   render: ResizeConstraintsExample,
+};
+export const SanaCanvas: Story = {
+  render: SanaCanvasExample,
 };
