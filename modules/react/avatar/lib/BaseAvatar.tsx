@@ -16,7 +16,7 @@ export interface BaseAvatarProps extends CSProps {
    * The variant of the Avatar.
    * @default "blue"
    */
-  variant?: 'blue' | 'amber' | 'teal' | 'purple';
+  variant?: 'blue' | 'amber' | 'teal' | 'purple' | 'magenta' | 'green';
 
   /**
    * The size of the Avatar.
@@ -82,6 +82,14 @@ export const baseAvatarStencil = createStencil({
       }),
       purple: ({backgroundColor, color}) => ({
         backgroundColor: cssVar(backgroundColor, base.legacy.purple600),
+        color: cssVar(color, system.color.fg.inverse),
+      }),
+      magenta: ({backgroundColor, color}) => ({
+        backgroundColor: cssVar(backgroundColor, base.legacy.magenta600),
+        color: cssVar(color, system.color.fg.inverse),
+      }),
+      green: ({backgroundColor, color}) => ({
+        backgroundColor: cssVar(backgroundColor, base.legacy.green600),
         color: cssVar(color, system.color.fg.inverse),
       }),
     },
