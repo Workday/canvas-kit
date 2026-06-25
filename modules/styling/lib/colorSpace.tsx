@@ -115,7 +115,7 @@ const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) =
     color: color,
     fallback: fallback,
     mixinColor: system.legacy.color[colorType].overlay.mixin,
-    mixinValue: system.legacy.opacity[colorType].hover,
+    mixinValue: system.opacity[colorType].hover,
   });
 };
 
@@ -145,7 +145,7 @@ const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps)
     color: color,
     fallback: fallback,
     mixinColor: system.legacy.color[colorType].overlay.mixin,
-    mixinValue: system.legacy.opacity[colorType].pressed,
+    mixinValue: system.opacity[colorType].pressed,
   });
 };
 
