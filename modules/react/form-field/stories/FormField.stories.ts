@@ -19,7 +19,6 @@ import {LabelPositionHorizontalEnd as LabelPositionHorizontalEndExample} from '.
 import {LabelPositionHorizontalStart as LabelPositionHorizontalStartExample} from './examples/LabelPositionHorizontalStart';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
-import {SanaCanvas as SanaCanvasExample} from './examples/SanaCanvas';
 import {ThemedError as ThemedErrorExample} from './examples/ThemedErrors';
 
 export default {
@@ -77,12 +76,11 @@ export const Grow: Story = {
 export const ThemedError: Story = {
   render: ThemedErrorExample,
 };
+
 export const GroupedInputs: Story = {
   render: GroupedInputsExample,
 };
+
 export const HiddenLabel: Story = {
   render: HiddenLabelExample,
-};
-export const SanaCanvas: Story = {
-  render: SanaCanvasExample,
 };

@@ -6,7 +6,6 @@ import mdxDoc from './ColorPreview.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
-import {SanaCanvas as SanaCanvasExample} from './examples/SanaCanvas';
 
 export default {
   title: 'Components/Inputs/Color Picker/Color Preview',
@@ -29,7 +28,4 @@ export const LabelPosition: Story = {
 };
 export const RefForwarding: Story = {
   render: RefForwardingExample,
-};
-export const SanaCanvas: Story = {
-  render: SanaCanvasExample,
 };

@@ -12,7 +12,6 @@ import {Grow as GrowExample} from './examples/Grow';
 import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
-import {SanaCanvas as SanaCanvasExample} from './examples/SanaCanvas';
 import {ValidColorChange as ValidColorChangeExample} from './examples/ValidColorChange';
 
 export default {
@@ -54,9 +53,6 @@ export const RefForwarding: Story = {
 };
 export const Required: Story = {
   render: RequiredExample,
-};
-export const SanaCanvas: Story = {
-  render: SanaCanvasExample,
 };
 export const ValidColorChange: Story = {
   render: ValidColorChangeExample,
