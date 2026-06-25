@@ -27,7 +27,7 @@ describe('CSS color-mix Functions', () => {
       );
     });
     it('should return color-mix of hover state using surface tokens', () => {
-      const color = '--cnvs-sys-color-brand-accent-primary';
+      const color = '--cnvs-sys-color-brand-surface-primary-default';
       const fallback = '--cnvs-brand-primary-base';
       const colorType = 'surface';
 
@@ -51,7 +51,7 @@ describe('CSS color-mix Functions', () => {
       );
     });
     it('should return color-mix of pressed state using surface tokens', () => {
-      const color = '--cnvs-sys-color-brand-accent-primary';
+      const color = '--cnvs-sys-color-brand-surface-primary-default';
       const fallback = '--cnvs-brand-primary-base';
       const colorType = 'surface';
 

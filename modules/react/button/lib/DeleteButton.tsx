@@ -13,7 +13,7 @@ import {Button, ButtonProps} from './Button';
  */
 export interface DeleteButtonProps extends ButtonProps {
   /**
-   * Variant has an option for `inverse` which will inverse the styling
+   * Variant has an option for `inverse` which will invert the styling
    */
   variant?: 'inverse';
 }
