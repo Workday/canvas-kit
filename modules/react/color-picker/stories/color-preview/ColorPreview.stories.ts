@@ -31,5 +31,5 @@ export const RefForwarding: Story = {
   render: RefForwardingExample,
 };
 export const SanaCanvas: Story = {
-  render: RefForwardingExample,
+  render: SanaCanvasExample,
 };
