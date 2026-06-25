@@ -53,8 +53,8 @@ export const baseAvatarStencil = createStencil({
     height: cssVar(size, system.legacy.size.lg),
     minWidth: cssVar(size, system.legacy.size.lg),
     minHeight: cssVar(size, system.legacy.size.lg),
-    backgroundColor: cssVar(backgroundColor, base.legacy.blue300),
-    color: cssVar(color, base.legacy.blue800),
+    backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+    color: cssVar(color, system.color.fg.inverse),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -68,12 +68,12 @@ export const baseAvatarStencil = createStencil({
   modifiers: {
     variant: {
       blue: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.blue300),
-        color: cssVar(color, base.legacy.blue800),
+        backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+        color: cssVar(color, system.color.fg.inverse),
       }),
       amber: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.amber200),
-        color: cssVar(color, base.legacy.amber700),
+        backgroundColor: cssVar(backgroundColor, base.legacy.amber300),
+        color: cssVar(color, base.legacy.amber800),
       }),
 
       teal: ({backgroundColor, color}) => ({
@@ -81,8 +81,8 @@ export const baseAvatarStencil = createStencil({
         color: cssVar(color, base.legacy.teal800),
       }),
       purple: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.purple300),
-        color: cssVar(color, base.legacy.purple800),
+        backgroundColor: cssVar(backgroundColor, base.legacy.purple600),
+        color: cssVar(color, system.color.fg.inverse),
       }),
     },
     size: {
