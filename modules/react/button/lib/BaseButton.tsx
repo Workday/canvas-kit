@@ -125,7 +125,7 @@ export const buttonStencil = createStencil({
     fontSize: system.legacy.fontSize.subtext.lg,
     lineHeight: system.legacy.lineHeight.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    fontWeight: system.fontWeight.bold,
+    fontWeight: system.fontWeight.medium,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
       cssVar(background, 'transparent')

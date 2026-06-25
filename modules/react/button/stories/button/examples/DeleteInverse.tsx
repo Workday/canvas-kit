@@ -6,6 +6,7 @@ import {trashIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
+  backgroundColor: system.color.surface.contrast.default,
   gap: system.gap.md,
   padding: system.padding.md,
 });
