@@ -29,8 +29,11 @@ const primaryButtonStencil = createStencil({
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: cssVar(brand.action.base, brand.primary.base),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, brand.primary.accent),
-      /* TODO: Update to `system.color.border.inverse.default` in v15. */
-      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
+      /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(
+        system.color.border.inverse.default,
+        base.neutral0
+      ),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
@@ -67,8 +70,11 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: cssVar(brand.action.lightest, brand.primary.lightest),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          [buttonStencil.vars.boxShadowOuter]: cssVar(system.color.border.inverse, base.neutral0),
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          [buttonStencil.vars.boxShadowOuter]: cssVar(
+            system.color.border.inverse.default,
+            base.neutral0
+          ),
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Hover Styles

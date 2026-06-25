@@ -56,8 +56,8 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme) {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          cssVar(system.color.border.inverse, base.neutral0)
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          cssVar(system.color.border.inverse.default, base.neutral0)
         },
         0 0 0 4px ${
           theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)

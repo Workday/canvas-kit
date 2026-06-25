@@ -118,8 +118,11 @@ const tabItemStencil = createStencil({
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      /* TODO: Update to `system.color.border.inverse.default` in v15. */
-      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
+      /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(
+        system.color.border.inverse.default,
+        base.neutral0
+      ),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
       [systemIconStencil.vars.color]: system.color.icon.strong,
     },

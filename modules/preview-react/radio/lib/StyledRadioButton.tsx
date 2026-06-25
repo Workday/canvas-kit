@@ -84,8 +84,8 @@ export const radioInputStencil = createStencil({
         width: 1,
         separation: 0,
         animate: false,
-        /* TODO: Update to `system.color.border.inverse.default` in v15. */
-        innerColor: cssVar(system.color.border.inverse, base.neutral0),
+        /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+        innerColor: cssVar(system.color.border.inverse.default, base.neutral0),
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -108,8 +108,8 @@ export const radioInputStencil = createStencil({
           width: 2,
           separation: 2,
           animate: false,
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          innerColor: cssVar(system.color.border.inverse, base.neutral0),
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          innerColor: cssVar(system.color.border.inverse.default, base.neutral0),
           outerColor: brand.common.focusOutline,
         }),
       },
@@ -133,8 +133,8 @@ export const radioInputStencil = createStencil({
           // The borderColor represents the border around the middle dot of the radio.
           '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
             backgroundColor: brand.primary.base, // inner circle background color
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            borderColor: cssVar(system.color.border.inverse.default, base.neutral0), // inner circle border color
           },
         },
         '&:hover + .cnvs-radio-check, &.hover + .cnvs-radio-check': {
@@ -148,8 +148,8 @@ export const radioInputStencil = createStencil({
         // The borderColor represents the border around the middle dot of the radio.
         '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
           backgroundColor: brand.primary.base, // inner circle background color
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          borderColor: cssVar(system.color.border.inverse, base.neutral0), // inner circle border color
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          borderColor: cssVar(system.color.border.inverse.default, base.neutral0), // inner circle border color
         },
         '&:focus-visible + .cnvs-radio-check, &:focus-visible:hover + .cnvs-radio-check, &.focus + .cnvs-radio-check, &.focus:hover + .cnvs-radio-check':
           {
@@ -157,8 +157,8 @@ export const radioInputStencil = createStencil({
               width: 2,
               separation: 0,
               innerColor: system.color.border.contrast.default,
-              /* TODO: Update to `system.color.border.inverse.default` in v15. */
-              outerColor: cssVar(system.color.border.inverse, base.neutral0),
+              /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+              outerColor: cssVar(system.color.border.inverse.default, base.neutral0),
             }),
           },
         '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -167,8 +167,8 @@ export const radioInputStencil = createStencil({
               width: 2,
               separation: 2,
               innerColor: system.color.border.contrast.default,
-              /* TODO: Update to `system.color.border.inverse.default` in v15. */
-              outerColor: cssVar(system.color.border.inverse, base.neutral0),
+              /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+              outerColor: cssVar(system.color.border.inverse.default, base.neutral0),
             }),
           },
       },

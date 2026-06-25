@@ -161,8 +161,8 @@ const checkboxInputStencil = createStencil({
             separation: 0,
             animate: false,
             innerColor: system.color.border.contrast.default,
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            outerColor: cssVar(system.color.border.inverse, base.neutral0),
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            outerColor: cssVar(system.color.border.inverse.default, base.neutral0),
           }),
         },
         '&:checked:focus-visible, &:checked.focus, &:indeterminate:focus-visible, &:indeterminate.focus':
@@ -173,11 +173,11 @@ const checkboxInputStencil = createStencil({
                 separation: 2,
                 animate: false,
                 innerColor: system.color.border.contrast.default,
-                /* TODO: Update to `system.color.border.inverse.default` in v15. */
-                outerColor: cssVar(system.color.border.inverse, base.neutral0),
+                /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+                outerColor: cssVar(system.color.border.inverse.default, base.neutral0),
               }),
-              /* TODO: Update to `system.color.border.inverse.default` in v15. */
-              borderColor: cssVar(system.color.border.inverse, base.neutral0),
+              /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+              borderColor: cssVar(system.color.border.inverse.default, base.neutral0),
             },
           },
       },
@@ -201,8 +201,8 @@ const checkboxInputStencil = createStencil({
           borderColor: 'transparent',
           boxShadow: `
             0 0 0 ${px2rem(2)} ${
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            cssVar(system.color.border.inverse, base.neutral0)
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            cssVar(system.color.border.inverse.default, base.neutral0)
           },
             0 0 0 ${px2rem(4)} ${checkboxBackgroundStencil.vars.errorRingColorInner},
             0 0 0 ${px2rem(5)} ${checkboxBackgroundStencil.vars.errorRingColorOuter}`,

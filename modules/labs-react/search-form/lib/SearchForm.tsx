@@ -361,8 +361,8 @@ export const searchFormStencil = createStencil({
             background: system.color.bg.alt.soft,
 
             boxShadow: `0 0 0 0px ${
-              /* TODO: Update to `system.color.border.inverse.default` in v15. */
-              cssVar(system.color.border.inverse, base.neutral0)
+              /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+              cssVar(system.color.border.inverse.default, base.neutral0)
             }, 0 0 0 2px ${brand.common.focusOutline}`,
           },
         },

@@ -85,8 +85,8 @@ export const textInputStencil = createStencil({
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `0 0 0 2px ${
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            cssVar(system.color.border.inverse, base.neutral0)
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            cssVar(system.color.border.inverse.default, base.neutral0)
           }, 0 0 0 4px ${brand.common.focusOutline}`,
           outlineOffset: px2rem(2),
         },
@@ -102,8 +102,8 @@ export const textInputStencil = createStencil({
         '&:is(:focus-visible, .focus):not([disabled])': {
           boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.common.alertInner},
         0 0 0 2px ${
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          cssVar(system.color.border.inverse, base.neutral0)
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          cssVar(system.color.border.inverse.default, base.neutral0)
         },
         0 0 0 4px ${brand.common.focusOutline}`,
         },

@@ -36,8 +36,8 @@ const tertiaryButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        /* TODO: Update to `system.color.border.inverse.default` in v15. */
-        innerColor: cssVar(system.color.border.inverse, base.neutral0),
+        /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+        innerColor: cssVar(system.color.border.inverse.default, base.neutral0),
         outerColor: brand.common.focusOutline,
       }),
     },
@@ -116,8 +116,8 @@ const tertiaryButtonStencil = createStencil({
           ...focusRing({
             width: 2,
             separation: 0,
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            outerColor: cssVar(system.color.border.inverse, base.neutral0),
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            outerColor: cssVar(system.color.border.inverse.default, base.neutral0),
           }),
         },
         // Hover Styles

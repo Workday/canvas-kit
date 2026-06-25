@@ -25,8 +25,11 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.background]: brand.error.base,
       [buttonStencil.vars.label]: brand.error.accent,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, brand.error.accent),
-      /* TODO: Update to `system.color.border.inverse.default` in v15. */
-      [buttonStencil.vars.boxShadowInner]: cssVar(system.color.border.inverse, base.neutral0),
+      /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+      [buttonStencil.vars.boxShadowInner]: cssVar(
+        system.color.border.inverse.default,
+        base.neutral0
+      ),
       [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
     },
     // Hover Styles

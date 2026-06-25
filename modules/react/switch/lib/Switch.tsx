@@ -93,8 +93,8 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           boxShadow: `
               0 0 0 ${px2rem(2)} ${
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            cssVar(system.color.border.inverse, base.neutral0)
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            cssVar(system.color.border.inverse.default, base.neutral0)
           },
               0 0 0 ${system.space.x1} ${brand.common.errorInner},
               0 0 0 ${px2rem(5)} transparent`,
@@ -104,8 +104,8 @@ const switchInputStencil = createStencil({
         '& ~ div:first-of-type': {
           boxShadow: `
           0 0 0 ${px2rem(2)} ${
-            /* TODO: Update to `system.color.border.inverse.default` in v15. */
-            cssVar(system.color.border.inverse, base.neutral0)
+            /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+            cssVar(system.color.border.inverse.default, base.neutral0)
           },
           0 0 0 ${system.space.x1} ${brand.common.alertInner},
           0 0 0 ${px2rem(5)} ${brand.common.alertOuter}`,

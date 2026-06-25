@@ -182,8 +182,8 @@ export const buttonStencil = createStencil({
         separation: 2,
         innerColor: cssVar(
           buttonColorPropVars.focus.boxShadowInner,
-          /* TODO: Update to `system.color.border.inverse.default` in v15. */
-          cssVar(boxShadowInner, cssVar(system.color.border.inverse, base.neutral0))
+          /* TODO: Update to `system.color.border.inverse.default.default` in v15. */
+          cssVar(boxShadowInner, cssVar(system.color.border.inverse.default, base.neutral0))
         ),
         outerColor: cssVar(
           buttonColorPropVars.focus.boxShadowOuter,

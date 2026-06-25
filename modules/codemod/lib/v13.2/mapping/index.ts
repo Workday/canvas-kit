@@ -250,7 +250,7 @@ export const systemColors = {
       cantaloupe400: 'system.color.border.caution.default',
       cantaloupe600: 'system.color.border.caution.strong',
       cinnamon500: 'system.color.border.critical.default',
-      frenchVanilla100: 'system.color.border.inverse',
+      frenchVanilla100: 'system.color.border.inverse.default',
       licorice100: 'system.color.border.input.disabled',
       licorice200: 'system.color.border.input.default',
       licorice500: 'system.color.border.input.strong',
