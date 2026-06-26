@@ -17,6 +17,7 @@ Soon to be...
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [New Components](#new-components)
+  - [KBD](#kbd)
 - [Component Updates](#component-updates)
   - [Avatar](#avatar)
 - [New Utilities](#new-utilities)
@@ -89,7 +90,35 @@ yarn remove @workday/canvas-kit-codemod
 
 ## New Components
 
-[Content will be added]
+### KBD
+
+**PR:** [#4001](https://github.com/Workday/canvas-kit/pull/4001)
+
+The new `KBD` component allows you to display keyboard inputs in your UI using accessible, visually
+consistent keyboard key representations. This is useful for documenting keyboard shortcuts,
+instructional prompts, or any UI patterns that reference specific keys.
+
+**Highlights:**
+
+- Provides a semantic (`kbd` element) way to visually present keyboard keys and shortcuts to users.
+- Supports various variants (`default` for prominence, `plain` for use on colored surfaces), as well
+  as size options (`small`, `medium`, `large`).
+- Easy to use nested `KBD.Item` components for sequences or combinations.
+- RTL support.
+
+**Example:**
+
+```tsx
+import {KBD} from '@workday/canvas-kit-labs-react';
+
+<KBD>
+  <KBD.Item aria-label="Command">⌘</KBD.Item>
+  <KBD.Item>C</KBD.Item>
+</KBD>;
+```
+
+For more details and advanced usage, including accessibility guidance for symbolic keys and
+functional shortcuts, refer to the storybook documentation and our example stories.
 
 ## Component Updates
 
