@@ -262,7 +262,7 @@ export const buttonStencil = createStencil({
         letterSpacing: system.legacy.letterSpacing.subtext.lg,
         paddingInline: system.legacy.padding.md,
         height: system.legacy.size.md,
-        gap: base.size75,
+        gap: base.legacy.size75,
         minWidth: base.legacy.size1100,
       },
       small: {
@@ -368,7 +368,7 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: calc.add(system.legacy.padding.xxs, '0.125rem'),
+        paddingInlineStart: calc.add(system.legacy.padding.xxs, px2rem(2)),
         paddingInlineEnd: system.legacy.padding.xs,
       },
     },
@@ -376,7 +376,7 @@ export const buttonStencil = createStencil({
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
         paddingInlineStart: system.legacy.padding.xs,
-        paddingInlineEnd: calc.add(system.legacy.padding.xxs, '0.125rem'),
+        paddingInlineEnd: calc.add(system.legacy.padding.xxs, px2rem(2)),
       },
     },
   ],

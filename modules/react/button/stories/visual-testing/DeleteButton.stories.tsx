@@ -53,7 +53,7 @@ const DeleteButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container>
+        <Container blue={props.variant === 'inverse'}>
           <DeleteButton {...props}>Test</DeleteButton>
         </Container>
       )}
