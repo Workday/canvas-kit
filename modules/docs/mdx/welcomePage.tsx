@@ -3,7 +3,7 @@ import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Graphic} from '@workday/canvas-kit-react/icon';
 import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {Heading, Text, Title} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -63,9 +63,9 @@ export const WelcomePage = () => {
             className={imageStyles}
           />
           <Flex cs={{flexDirection: 'row', position: 'absolute', top: '45%', right: '5%'}}>
-            <Text typeLevel="title.medium" cs={[bannerTextStyles, versionStyles]}>
+            <Title size="medium" cs={[bannerTextStyles, versionStyles]}>
               v{version}
-            </Text>
+            </Title>
           </Flex>
         </Box>
         <Text typeLevel="body.medium">
