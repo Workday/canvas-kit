@@ -32,14 +32,10 @@ export const KBDStates = () => (
           {value: 'medium', label: 'Medium'},
           {value: 'large', label: 'Large'},
         ],
-        theme: [
-          {value: undefined, label: ''},
-          {value: 'sana-canvas', label: '(Sana Canvas)'},
-        ],
       })}
     >
-      {({dataTheme, ...props}) => (
-        <div data-theme={props.dataTheme}>
+      {props => (
+        <div>
           <KBD {...props}>
             <KBD.Item>⌘</KBD.Item>
             <KBD.Item>C</KBD.Item>
