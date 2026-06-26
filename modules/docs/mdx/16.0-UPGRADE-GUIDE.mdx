@@ -99,7 +99,7 @@ instructional prompts, or any UI patterns that reference specific keys.
 
 **Highlights:**
 
-- Provides a semantic and accessible way to present keyboard keys and shortcuts to users.
+- Provides a semantic (`kbd` element) way to visually present keyboard keys and shortcuts to users.
 - Supports various variants (`default` for prominence, `plain` for use on colored surfaces), as well
   as size options (`small`, `medium`, `large`).
 - Easy to use nested `KBD.Item` components for sequences or combinations.
@@ -111,13 +111,14 @@ instructional prompts, or any UI patterns that reference specific keys.
 import {KBD} from '@workday/canvas-kit-labs-react';
 
 <KBD>
-  <KBD.Item>⌘</KBD.Item>
+  <KBD.Item aria-label="Command">⌘</KBD.Item>
   <KBD.Item>C</KBD.Item>
 </KBD>;
 ```
 
-For more details and advanced usage, refer to the storybook documentation and our example stories
-(e.g. for RTL, variants, and testing).
+For more details and advanced usage, including accessibility guidance for symbolic keys and
+functional shortcuts, refer to the storybook documentation and our example stories (e.g. for RTL,
+variants, and testing).
 
 ## Component Updates
 

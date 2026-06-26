@@ -71,6 +71,47 @@ standard style or `plain` for a more minimal appearance. The `variant` is shared
 
 <ExampleCodeBlock code={Variant} />
 
+## Accessibility
+
+`KBD` is **presentational and semantic text**. It renders a `kbd` element so assistive technology
+can recognize the content as keyboard input, but it does **not** make a keyboard shortcut work or
+expose it to the browser. It is the visual/semantic representation of a key, not the accessibility
+contract for a functioning shortcut.
+
+### Provide spoken labels for symbolic or abbreviated keys
+
+Glyphs and abbreviations such as <kbd>⌘</kbd>, <kbd>⌥</kbd>, <kbd>⇧</kbd>, and arrow keys are **not
+announced reliably** across screen reader, browser, and OS combinations. When a `KBD.Item` contains
+a symbol or abbreviation, add an `aria-label` with the spoken name of the key so it is announced
+consistently:
+
+```tsx
+<KBD>
+  <KBD.Item aria-label="Command">⌘</KBD.Item>
+  <KBD.Item>C</KBD.Item>
+</KBD>
+```
+
+Plain alphanumeric keys (such as `C` above) read correctly on their own and don't need an
+`aria-label`.
+
+### Expose the actual shortcut on the control it triggers
+
+`KBD` only documents a shortcut visually. If the shortcut is functional, also expose it on the
+relevant interactive control using
+[`aria-keyshortcuts`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
+so assistive technology can communicate it to users:
+
+```tsx
+<button aria-keyshortcuts="Command+C">
+  Copy
+  <KBD>
+    <KBD.Item aria-label="Command">⌘</KBD.Item>
+    <KBD.Item>C</KBD.Item>
+  </KBD>
+</button>
+```
+
 ## Component API
 
 <SymbolDoc name="KBD" hideDescription />

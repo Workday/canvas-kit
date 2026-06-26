@@ -20,15 +20,15 @@ export const Basic = () => {
         to pay respects.
       </BodyText>
       <KBD>
-        <KBD.Item>⌘</KBD.Item>
+        <KBD.Item aria-label="Command">⌘</KBD.Item>
         <KBD.Item>C</KBD.Item>
       </KBD>
-      <KBD>
+      <KBD aria-keyshortcuts="Shift+P">
         <KBD.Item>Shift</KBD.Item>
         <span>+</span>
         <KBD.Item>P</KBD.Item>
       </KBD>
-      <KBD>
+      <KBD aria-keyshortcuts="Shift+P">
         <KBD.Item>
           <KBD variant="plain">
             <KBD.Item>Shift</KBD.Item>
