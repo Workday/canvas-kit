@@ -20,7 +20,7 @@ export const globalTypes = {
   theme: {
     name: 'Theme',
     description: 'Token theme',
-    defaultValue: 'canvas',
+    defaultValue: 'sana',
     toolbar: {
       icon: 'paintbrush',
       items: [
