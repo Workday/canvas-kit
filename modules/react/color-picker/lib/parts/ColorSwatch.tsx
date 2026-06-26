@@ -26,6 +26,7 @@ export const colorPickerColorSwatchStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    forcedColorAdjust: 'none',
     '& > *': {
       // Account for 24px icon
       margin: calc.negate(px2rem(2)),
@@ -35,6 +36,9 @@ export const colorPickerColorSwatchStencil = createStencil({
     withShadow: {
       true: {
         boxShadow: `inset 0px 0px 0px ${px2rem(1)} rgba(0, 0, 0, 0.25)`,
+        '@media (forced-colors: active)': {
+          outline: `solid ${px2rem(1)} SelectedItemText`,
+        },
       },
     },
   },
