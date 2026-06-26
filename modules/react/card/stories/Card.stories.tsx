@@ -1,5 +1,4 @@
 import {Meta, StoryObj} from '@storybook/react';
-import React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
 
@@ -20,14 +19,6 @@ export default {
 } as Meta<typeof Card>;
 
 type Story = StoryObj<typeof Card>;
-
-export const BasicSanaCanvas: Story = {
-  render: () => (
-    <div data-theme="sana-canvas">
-      <BasicExample />
-    </div>
-  ),
-};
 
 export const Basic: Story = {
   render: BasicExample,
