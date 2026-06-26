@@ -5,7 +5,7 @@
 <style type="text/css">
   body {
     padding: 0 !important;
-    font-family: sans-serif;
+    font-family: 'Sana Sans LCG 05 VF', sans-serif;
   }
 
   .story > * {
@@ -39,6 +39,7 @@
 <link rel="preload" href="Roboto-Medium.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="RobotoMono-Regular.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="SanaSans-Variable.woff2" as="font" type="font/woff2" crossorigin />
 
 <!-- Font faces -->
 <style>
@@ -77,5 +78,18 @@
     font-weight: 400;
     src: local('Roboto Mono'), local('RobotoMono-Regular'),
       url(RobotoMono-Regular.ttf) format('truetype');
+  }
+
+  /*
+   * Testing only: register SanaSans under the family name the Canvas default
+   * font-family token (--cnvs-base-font-family-50) already points at, so every
+   * component that resolves --cnvs-sys-font-family-default renders with it.
+   */
+  @font-face {
+    font-family: 'Sana Sans LCG 05 VF';
+    font-style: normal;
+    font-weight: 1 1000;
+    font-display: swap;
+    src: url(SanaSans-Variable.woff2) format('woff2-variations');
   }
 </style>
