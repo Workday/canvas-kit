@@ -195,12 +195,37 @@ functional shortcuts, refer to the storybook documentation and our example stori
 
 #### Visual Updates
 
-- The Switch thumb is now **20px** (was 18px). The icon-thumb container width remains unchanged.
+- The Switch thumb is now **16px** (was 14px). The icon-thumb container width remains unchanged.
 - The checked state background now uses `system.color.brand.accent.positive` instead of
   `system.color.brand.accent.primary`.
 - The default (unchecked) background color now uses `system.color.surface.muted.default` instead of
   `system.color.surface.muted.soft`. Background color uses a neutral color instead of slate in
   `sana-canvas` theme.
+
+### Accessibility: Checked-State Contrast
+
+> **Important:** The checked states of `Checkbox`, `Radio`, and `Switch` now derive their
+> background/fill color from `system.color.brand.accent.positive` (which maps to your theme's
+> `brand.success.main`), while the foreground (the check icon, radio dot, and switch thumb) remains
+> an inverse/white color. This pairing relies on `brand.success.main` being a sufficiently dark
+> color.
+
+This change is safe for the default Canvas themes, where `brand.success.main` is dark enough to
+maintain adequate contrast against the white foreground. However, **consumer themes that override
+`brand.success.main` with a light color may produce insufficient contrast** between the checked
+background and the white check icon, radio dot, or switch thumb. This can cause the checked state to
+fail
+[WCAG 1.4.11 Non-text Contrast (3:1)](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html).
+
+If you customize `brand.success.main` in your theme, please verify the following:
+
+- **Maintain a minimum 3:1 contrast ratio** between your `brand.success.main` value and the white
+  (`#ffffff`) foreground used for the check icon, radio dot, and switch thumb.
+- Prefer a `brand.success.main` value that is dark enough to pair with a light foreground. If your
+  brand requires a light success color, you may need to override the component styles so the
+  foreground uses a darker, paired contrast color instead of white.
+- Test the checked states of `Checkbox`, `Radio`, and `Switch` against your customized theme,
+  including any light-mode and dark-mode variants.
 
 ## New Utilities
 

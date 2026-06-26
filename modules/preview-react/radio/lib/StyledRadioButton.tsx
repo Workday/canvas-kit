@@ -17,17 +17,17 @@ export const radioInputStencil = createStencil({
   },
   base: {
     cursor: 'pointer',
-    height: system.legacy.size.xxxs,
-    width: system.legacy.size.xxxs,
+    height: system.legacy.size.xs,
+    width: system.legacy.size.xs,
     borderRadius: system.legacy.shape.full,
     position: 'absolute',
     margin: 0,
+    opacity: system.opacity.zero,
     '&:focus-visible, &.focus, &:active': {
-      outline: 'transparent',
+      outline: `${px2rem(1)} solid transparent`,
     },
     '&:disabled, &.disabled': {
       cursor: 'auto',
-      opacity: system.opacity.disabled,
       // This creates the inner circle when the Radio is checked.
       // The backgroundColor represents the dot in the middle of the radio.
       // The borderColor represents the border around the middle dot of the radio.
