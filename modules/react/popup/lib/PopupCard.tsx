@@ -115,6 +115,7 @@ export const popupCardStencil = createStencil({
     },
     '@media screen and (max-width: 768px)': {
       transformOrigin: 'bottom center',
+      padding: system.legacy.padding.lg,
     },
   }),
 });
