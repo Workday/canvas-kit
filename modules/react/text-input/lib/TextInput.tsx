@@ -90,6 +90,13 @@ export const textInputStencil = createStencil({
         0 0 0 4px ${system.legacy.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
+        // For Windows High Contrast mode: display error outline at double the
+        // width of the focus ring outline (to differentiate the error outline
+        // from the focus ring outline since both outlines will be the same
+        // color in WHC mode).
+        '@media (forced-colors: active)': {
+          outline: `solid ${px2rem(4)} ButtonBorder`,
+        },
       },
       caution: {
         borderColor: system.legacy.color.brand.border.caution,
@@ -104,6 +111,15 @@ export const textInputStencil = createStencil({
         0 0 0 4px ${system.legacy.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
+        // For Windows High Contrast mode: see comment above regarding the
+        // error outline. Unlike the error state, outlineOffset for the
+        // caution state is defined outside of the `(:focus-visible, .focus)`
+        // selector so we must override it here to prevent the caution outline
+        // from being separated too far from the input.
+        '@media (forced-colors: active)': {
+          outline: `solid ${px2rem(4)} ButtonBorder`,
+          outlineOffset: 0,
+        },
       },
     },
   },
