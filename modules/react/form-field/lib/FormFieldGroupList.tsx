@@ -24,13 +24,13 @@ const formFieldGroupListStencil = createStencil({
       error: {
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
         '@media (forced-colors: active)': {
-          outline: `solid ${px2rem(2)} ActiveText`,
+          outline: `solid ${px2rem(2)} ButtonBorder`,
         },
       },
       caution: {
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.border.caution}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.focus.caution.inner}`,
         '@media (forced-colors: active)': {
-          outline: `solid ${px2rem(2)} ActiveText`,
+          outline: `solid ${px2rem(2)} ButtonBorder`,
         },
       },
     },
