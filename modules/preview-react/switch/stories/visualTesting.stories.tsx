@@ -19,7 +19,7 @@ export default {
 };
 
 export const SwitchStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
         {
@@ -75,7 +75,7 @@ SwitchThemedStates.parameters = {
 };
 
 export const SwitchStatesRTL = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
         {

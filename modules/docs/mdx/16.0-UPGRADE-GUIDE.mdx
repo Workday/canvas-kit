@@ -16,8 +16,6 @@ Soon to be...
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
-- [Theming](#theming)
-  - [Sana Canvas Theme](#sana-canvas-theme)
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
@@ -88,44 +86,6 @@ yarn remove @workday/canvas-kit-codemod
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
-
-## Theming
-
-### Sana Canvas Theme
-
-> **Note:** In v16, we've updated all of our components to visually align with the Sana. To
-> accomplish this, Canvas Kit now uses Canvas Tokens version 4.4.0 or higher, which introduces a new
-> Sana theme token set.
-
-To apply the Sana Canvas theme in your application, you need to add the `data-theme="sana-canvas"`
-attribute to your root level (such as `body`). This enables the new theme, which brings the biggest
-changes to typography and colors.
-
-You can add the theme at a high level (e.g., on your root provider) to apply the new visual style
-globally, or you can apply `data-theme="sana-canvas"` locally to specific components to scope the
-theme to certain areas.
-
-For example, to apply the Sana Canvas theme globally:
-
-```tsx
-<body data-theme="sana-canvas">
-  <App />
-</body>
-```
-
-Or, to apply the theme to a single component or section:
-
-```tsx
-<div data-theme="sana-canvas">
-  <MyComponent />
-</div>
-```
-
-Please ensure you are using **Canvas Tokens v4.4.0** or later. The Sana theme will not be available
-with earlier versions.
-
-> **Tip:** The most significant visual changes in the Sana theme are to typography and colors. Be
-> sure to review your application thoroughly after upgrading and applying the Sana theme.
 
 ## New Components
 

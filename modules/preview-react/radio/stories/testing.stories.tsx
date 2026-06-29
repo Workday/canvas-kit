@@ -45,7 +45,7 @@ const testGroup = (
 export const RadioStates = {
   render: () => {
     return (
-      <div data-theme="sana-canvas">
+      <div>
         <StaticStates>
           <ComponentStatesTable
             rowProps={permutateProps({
@@ -184,7 +184,7 @@ export const RadioStates = {
 };
 export const InverseRadioStates = {
   render: () => (
-    <div data-theme="sana-canvas">
+    <div>
       <StaticStates>
         <ComponentStatesTable
           rowProps={permutateProps({
