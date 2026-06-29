@@ -60,6 +60,19 @@ export const baseAvatarStencil = createStencil({
     justifyContent: 'center',
     overflow: 'hidden',
     border: 'none',
+    // for Windows high contrast desktop themes — pending a11y review (see WHCM evaluation story)
+    // Static boundary: WHCM remaps transparent outlines to a system color so the circle stays visible.
+    // outline: `${px2rem(1)} solid transparent`,
+
+    // Suppress boundary when Avatar is or is inside a button/link — parent owns boundary and focus.
+    // 'button &, a &, &:is(button, a)': {
+    //   outline: 'none',
+    // },
+    // Focus-only ring when Avatar is the button/link — avoids clashing with a permanent boundary.
+    // '&:is(button, a):focus-visible, &:is(button, a).focus': {
+    //   outline: `${px2rem(2)} solid transparent`,
+    //   outlineOffset: px2rem(2),
+    // },
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
     lineHeight: system.legacy.lineHeight.body.md,

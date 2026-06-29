@@ -3,6 +3,12 @@ import React from 'react';
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
+import {
+  renderWhcmEvaluationCell,
+  whcmEvaluationRowProps,
+  whcmStrategyColumnProps,
+} from './examples/WindowsHighContrastEvaluation';
+
 export default {
   title: 'Testing/Indicators/Avatar',
   component: Avatar,
@@ -48,6 +54,16 @@ export const AvatarStates = () => {
         {({variant, ...props}) => {
           return <Avatar variant={variant} name="John Doe" />;
         }}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
+export const WindowsHighContrastEvaluationStates = () => {
+  return (
+    <StaticStates>
+      <ComponentStatesTable rowProps={whcmEvaluationRowProps} columnProps={whcmStrategyColumnProps}>
+        {props => renderWhcmEvaluationCell(props)}
       </ComponentStatesTable>
     </StaticStates>
   );
