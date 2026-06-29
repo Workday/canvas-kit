@@ -137,7 +137,7 @@ export const ExampleCodeBlock = ({code}: any) => {
       <Card data-part="example-block" className="sb-unstyled">
         {/* This allows for the div to scroll on smaller viewports while not allowing the components to overflow over the container */}
         <Card.Body data-part="example-block-container">
-          <CanvasProvider className={defaultBranding}>
+          <CanvasProvider className={defaultBranding} data-theme="sana-canvas">
             {React.createElement(code)}
             {code && (
               <div data-part="code-toggle-stackblitz-btn-container">
