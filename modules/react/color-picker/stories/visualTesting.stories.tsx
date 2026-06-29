@@ -21,7 +21,7 @@ export default {
 };
 
 export const ColorInputStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
         {

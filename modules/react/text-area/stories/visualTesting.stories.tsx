@@ -20,7 +20,7 @@ export default {
 };
 
 export const TextAreaStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
         {

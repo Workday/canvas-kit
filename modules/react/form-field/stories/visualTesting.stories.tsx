@@ -21,7 +21,7 @@ export default {
 };
 
 export const FormFieldStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={[
         {label: 'Required', props: {isRequired: true}},

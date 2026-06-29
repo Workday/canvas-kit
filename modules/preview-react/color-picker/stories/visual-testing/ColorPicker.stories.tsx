@@ -24,7 +24,7 @@ export const ColorPickerStates = {
     },
   },
   render: () => (
-    <StaticStates data-theme="sana-canvas">
+    <StaticStates>
       <ComponentStatesTable
         rowProps={[
           {label: 'Default', props: {}},

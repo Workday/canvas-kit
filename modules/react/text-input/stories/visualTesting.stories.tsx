@@ -24,7 +24,7 @@ export default {
 };
 
 export const TextInputStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps(
         {
@@ -88,7 +88,7 @@ TextInputThemedStates.parameters = {
 };
 
 export const InputGroupStates = () => (
-  <StaticStates data-theme="sana-canvas">
+  <StaticStates>
     <ComponentStatesTable
       rowProps={[
         {
