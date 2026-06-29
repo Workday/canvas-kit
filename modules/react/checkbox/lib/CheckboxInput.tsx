@@ -209,7 +209,7 @@ const checkboxInputStencil = createStencil({
         '&:not(:where(:focus-visible, .focus)) ~ div:first-of-type': {
           border: `${px2rem(1)} solid ${system.legacy.color.focus.inverse}`,
         },
-        '&:not(where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
+        '&:not(:where(:checked, :indeterminate, :disabled, :focus-visible, .focus)):where(:hover, .hover, :active, .active) ~ div:first-of-type':
           {
             borderColor: system.legacy.color.focus.inverse,
           },
