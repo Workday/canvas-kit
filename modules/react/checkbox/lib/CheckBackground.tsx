@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {ErrorType, createComponent} from '@workday/canvas-kit-react/common';
+import {ErrorType, cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -11,6 +11,7 @@ interface CheckBackgroundProps {
 }
 
 export const checkboxBackgroundStencil = createStencil({
+  extends: cornerShapeStencil,
   vars: {
     errorRingColorInner: '',
     errorRingColorOuter: '',
@@ -21,8 +22,7 @@ export const checkboxBackgroundStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.sana.shape.xs,
-    cornerShape: 'superellipse(1.1)',
+    [cornerShapeStencil.vars.shape]: system.sana.shape.xs,
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
