@@ -19,6 +19,7 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+  - [Card](#card)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -184,6 +185,68 @@ If you customize `brand.success.600` in your theme, please verify the following:
 - Prefer a `brand.success.600` value that is dark enough to pair with a light foreground. If your
   brand requires a light success color, you may need to override the component styles so the
   foreground uses a darker, paired contrast color instead of white.
+  > **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
+  > unless specified otherwise.
+
+### Color Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+
+### Color Picker
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- **Sana Canvas:** swatch shape is now **6px** (previously **4px**).
+
+### Form Field
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape for grouped inputs (Radio groups and Checkbox groups) is now **12px** (previously 8px). As
+  in v15, this shape is primarily visible for error and caution states.
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Area
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Card
+
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+
+#### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
 
 ## New Utilities
 
