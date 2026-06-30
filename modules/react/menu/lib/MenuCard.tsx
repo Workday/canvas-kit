@@ -32,7 +32,7 @@ export const menuCardStencil = createStencil({
     fontSize: system.legacy.fontSize.subtext.lg,
     lineHeight: system.legacy.lineHeight.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    color: system.color.fg.default,
+    color: system.color.fg.strong,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',

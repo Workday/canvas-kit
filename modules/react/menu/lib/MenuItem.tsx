@@ -71,7 +71,7 @@ export const menuItemStencil = createStencil({
     padding: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
-    color: system.color.fg.default,
+    color: system.color.fg.strong,
     borderWidth: 0,
     borderRadius: system.legacy.shape.xxl,
     textAlign: 'start',
