@@ -21,14 +21,6 @@ export const globalTypes = {
     name: 'Theme',
     description: 'Token theme',
     defaultValue: 'sana',
-    toolbar: {
-      icon: 'paintbrush',
-      items: [
-        {value: 'canvas', title: 'Canvas'},
-        {value: 'sana', title: 'Sana Canvas'},
-      ],
-      showName: true,
-    },
   },
 };
 
