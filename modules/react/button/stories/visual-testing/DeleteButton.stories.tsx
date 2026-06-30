@@ -29,7 +29,7 @@ const DeleteButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
         {
           variant: [
             {value: undefined, label: ''},
-            {value: 'inverse', label: 'Inverse'},
+            {value: 'outline', label: 'Outline'},
           ],
           size: [
             {value: 'extraSmall', label: 'Extra Small'},
@@ -53,7 +53,7 @@ const DeleteButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
       columnProps={stateTableColumnProps}
     >
       {props => (
-        <Container blue={props.variant === 'inverse'}>
+        <Container>
           <DeleteButton {...props}>Test</DeleteButton>
         </Container>
       )}

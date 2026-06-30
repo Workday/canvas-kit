@@ -13,9 +13,9 @@ import {Button, ButtonProps} from './Button';
  */
 export interface DeleteButtonProps extends ButtonProps {
   /**
-   * Variant has an option for `inverse` which will invert the styling
+   * Variant has an option for `outline` which will reverse the styling of the button
    */
-  variant?: 'inverse';
+  variant?: 'outline';
 }
 
 const deleteButtonStencil = createStencil({
@@ -79,7 +79,7 @@ const deleteButtonStencil = createStencil({
   },
   modifiers: {
     variant: {
-      inverse: {
+      outline: {
         // Default Styles
         [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
         [buttonStencil.vars.border]: system.color.border.default,
