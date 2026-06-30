@@ -19,6 +19,14 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+  - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
+  - [Checkbox](#checkbox)
+  - [Radio](#radio)
+  - [Color Input](#color-input)
+  - [Color Picker](#color-picker)
+  - [Form Field](#form-field)
+  - [Text Area](#text-area)
+  - [Text Input](#text-input)
   - [Card](#card)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
@@ -122,6 +130,31 @@ functional shortcuts, refer to the storybook documentation and our example stori
 
 ## Component Updates
 
+### Accessibility: Checked-State Contrast
+
+> **Important:** The checked states of `Checkbox`, `Radio`, and `Switch` now derive their
+> background/fill color from `system.color.brand.accent.positive` (which maps to your theme's
+> `brand.success.600`), while the foreground (the check icon, radio dot, and switch thumb) remains
+> an inverse/white color. This pairing relies on `brand.success.600` being a sufficiently dark
+> color.
+
+This change is safe for the default Canvas themes, where `brand.success.600` is dark enough to
+maintain adequate contrast against the white foreground. However, **consumer themes that override
+`brand.success.600` with a light color may produce insufficient contrast** between the checked
+background and the white check icon, radio dot, or switch thumb. This can cause the checked state to
+fail
+[WCAG 1.4.11 Non-text Contrast (3:1)](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html).
+
+If you customize `brand.success.600` in your theme, please verify the following:
+
+- **Maintain a minimum 3:1 contrast ratio** between your `brand.success.main` value and the white
+  (`#ffffff`) foreground used for the check icon, radio dot, and switch thumb.
+- Prefer a `brand.success.600` value that is dark enough to pair with a light foreground. If your
+  brand requires a light success color, you may need to override the component styles so the
+  foreground uses a darker, paired contrast color instead of white.
+  > **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
+  > unless specified otherwise.
+
 ### Checkbox
 
 **PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
@@ -162,31 +195,6 @@ functional shortcuts, refer to the storybook documentation and our example stori
 - The default (unchecked) background color now uses `system.color.surface.muted.default` instead of
   `system.color.surface.muted.soft`. Background color uses a neutral color instead of slate in
   `sana-canvas` theme.
-
-### Accessibility: Checked-State Contrast
-
-> **Important:** The checked states of `Checkbox`, `Radio`, and `Switch` now derive their
-> background/fill color from `system.color.brand.accent.positive` (which maps to your theme's
-> `brand.success.600`), while the foreground (the check icon, radio dot, and switch thumb) remains
-> an inverse/white color. This pairing relies on `brand.success.600` being a sufficiently dark
-> color.
-
-This change is safe for the default Canvas themes, where `brand.success.600` is dark enough to
-maintain adequate contrast against the white foreground. However, **consumer themes that override
-`brand.success.600` with a light color may produce insufficient contrast** between the checked
-background and the white check icon, radio dot, or switch thumb. This can cause the checked state to
-fail
-[WCAG 1.4.11 Non-text Contrast (3:1)](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html).
-
-If you customize `brand.success.600` in your theme, please verify the following:
-
-- **Maintain a minimum 3:1 contrast ratio** between your `brand.success.main` value and the white
-  (`#ffffff`) foreground used for the check icon, radio dot, and switch thumb.
-- Prefer a `brand.success.600` value that is dark enough to pair with a light foreground. If your
-  brand requires a light success color, you may need to override the component styles so the
-  foreground uses a darker, paired contrast color instead of white.
-  > **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
-  > unless specified otherwise.
 
 ### Color Input
 
