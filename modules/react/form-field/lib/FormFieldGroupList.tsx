@@ -1,4 +1,4 @@
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -8,10 +8,11 @@ import {useFormFieldModel} from './hooks';
 export interface FormFieldGroupListProps extends CSProps, FlexProps {}
 
 const formFieldGroupListStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.legacy.shape.md,
     gap: system.legacy.gap.sm,
     padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,
@@ -21,12 +22,16 @@ const formFieldGroupListStencil = createStencil({
   modifiers: {
     error: {
       error: {
-        backgroundColor: system.legacy.color.brand.surface.critical.default,
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        '@media (forced-colors: active)': {
+          outline: `solid ${px2rem(2)} ButtonBorder`,
+        },
       },
       caution: {
-        backgroundColor: system.legacy.color.brand.surface.caution.default,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.border.caution}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.focus.caution.inner}`,
+        '@media (forced-colors: active)': {
+          outline: `solid ${px2rem(2)} ButtonBorder`,
+        },
       },
     },
   },
