@@ -685,11 +685,11 @@ const myStyles = createStyles({
 
 ### Webpack
 
-The `@webpack/canvas-kit-styling-transform` package comes with a webpack loader that can be added to development and/or production.
+The `@workday/canvas-kit-styling-transform` package comes with a webpack loader that can be added to development and/or production. Import the plugin from the `/webpack` subpath:
 
 ```js
 // import the transform - CJS and ESM are supported
-import {StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform';
+import {StylingWebpackPlugin} from '@workday/canvas-kit-styling-transform/webpack';
 
 // somewhere only once. For static webpack config files, this can be near the top.
 // If inside Storybook, Gatsby, Next.js, etc configs, put inside the function that is called that
