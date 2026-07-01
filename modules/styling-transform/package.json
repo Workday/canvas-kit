@@ -7,6 +7,12 @@
   "sideEffects": false,
   "main": "index.ts",
   "module": "index.ts",
+  "exports": {
+    ".": "./index.ts",
+    "./vite": "./vite.ts",
+    "./webpack": "./webpack.ts",
+    "./testing": "./testing.ts"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Workday/canvas-kit.git",
@@ -17,6 +23,8 @@
     "lib/*",
     "dist/*",
     "index.ts",
+    "vite.ts",
+    "webpack.ts",
     "testing.ts"
   ],
   "scripts": {
