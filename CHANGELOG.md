@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.15](https://github.com/Workday/canvas-kit/releases/tag/v15.0.15) (2026-07-01)
+
+### Infrastructure
+
+- fix: Bump ts-patch version to resolve tspc build failures ([#4036](https://github.com/Workday/canvas-kit/pull/4036)) ([@alanbsmith](https://github.com/alanbsmith))
+- chore: Fix circular deps and broken ts-patch build ([#4039](https://github.com/Workday/canvas-kit/pull/4039)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.14](https://github.com/Workday/canvas-kit/releases/tag/v15.0.14) (2026-06-17)
 
 
