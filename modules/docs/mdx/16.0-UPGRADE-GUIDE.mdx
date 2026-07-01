@@ -21,6 +21,11 @@ Soon to be...
 - [Component Updates](#component-updates)
   - [Avatar](#avatar)
   - [Card](#card)
+  - [Color Input](#color-input)
+  - [Color Picker](#color-picker)
+  - [Form Field](#form-field)
+  - [Text Area](#text-area)
+  - [Text Input](#text-input)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -163,8 +168,61 @@ No migration is required unless you rely on the previous color values for custom
 
 **PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
 
-We've updated the `Card` component to use the new `cornerShapeStencil` for its rounded corners. This
-allows for a more consistent rounded corner style across all components.
+#### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
+
+### Color Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+
+### Color Picker
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- **Sana Canvas:** swatch shape is now **6px** (previously **4px**).
+
+### Form Field
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape for grouped inputs (Radio groups and Checkbox groups) is now **12px** (previously 8px). As
+  in v15, this shape is primarily visible for error and caution states.
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Area
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
 
 ## New Utilities
 
