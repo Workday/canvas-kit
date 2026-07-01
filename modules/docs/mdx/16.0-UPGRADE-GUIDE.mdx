@@ -189,9 +189,30 @@ functional shortcuts, refer to the storybook documentation and our example stori
 
 ### Buttons
 
-#### Delete Button Outline Variant
-
 **PR:** [#4000](https://github.com/Workday/canvas-kit/pull/4000)
+
+All buttons have had the following updates:
+
+- `fontWeight` has been updated from `system.fontWeight.bold` to `system.fontWeight.medium`.
+- `minWidth` has been updated to the following:
+
+| Default Size | minWidth v15 | minWidth v16 |
+| ------------ | ------------ | ------------ |
+| extraSmall   | unchanged    | unchanged    |
+| small        | `5rem`       | `4.5rem`     |
+| medium       | `6rem`       | `5.5rem`     |
+| large        | `7rem`       | `6.5rem`     |
+
+- `paddingInline` has been updated to the following:
+
+| Size       | paddingInline v15 | paddingInline v16 |
+| ---------- | ----------------- | ----------------- |
+| extraSmall | `0.75rem`         | `0.5rem`          |
+| small      | `1rem`            | `0.75rem`         |
+| medium     | `1.5rem`          | `1rem`            |
+| large      | `2rem`            | `1.25rem`         |
+
+#### Delete Button Outline Variant
 
 We've added an `outline` variant to the `DeleteButton` component. This variant will reverse the
 button's styling with a `border` and `transparent` background.
