@@ -28,31 +28,6 @@ export interface ComponentStatesTableProps {
   children(props: Props): React.ReactNode;
 }
 
-const columnDescriptionStyles = createStyles({
-  fontSize: px2rem(12),
-  lineHeight: px2rem(16),
-  marginBlockStart: px2rem(4),
-  marginBlockEnd: '0',
-});
-
-const columnDescriptionListStyles = createStyles({
-  paddingInlineStart: px2rem(8),
-});
-
-function ColumnDescription({description}: {description: string | string[]}) {
-  if (Array.isArray(description)) {
-    return (
-      <ul className={`${columnDescriptionStyles} ${columnDescriptionListStyles}`}>
-        {description.map(item => (
-          <li key={item}>{item}</li>
-        ))}
-      </ul>
-    );
-  }
-
-  return <p className={columnDescriptionStyles}>{description}</p>;
-}
-
 const tableStyles = createStyles({
   width: '100%',
   thead: {
@@ -64,7 +39,6 @@ const tableStyles = createStyles({
     paddingBlockEnd: system.padding.md,
     paddingInlineEnd: system.padding.md,
     textAlign: 'start',
-    verticalAlign: 'top',
   },
 });
 
@@ -81,7 +55,6 @@ export const ComponentStatesTable = ({
           {columnProps.map(col => (
             <th key={`component-table-heading-${col.label.toLowerCase().replace(' ', ',')}`}>
               {col.label}
-              {col.description && <ColumnDescription description={col.description} />}
             </th>
           ))}
         </tr>

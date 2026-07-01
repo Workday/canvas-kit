@@ -12,6 +12,4 @@ export type Props = {
 export type PropCombination = {
   label: string;
   props: Props;
-  /** Optional description rendered below the column heading in ComponentStatesTable. */
-  description?: string | string[];
 };
