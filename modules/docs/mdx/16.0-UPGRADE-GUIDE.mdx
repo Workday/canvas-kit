@@ -19,7 +19,13 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+  - [Avatar](#avatar)
   - [Card](#card)
+  - [Color Input](#color-input)
+  - [Color Picker](#color-picker)
+  - [Form Field](#form-field)
+  - [Text Area](#text-area)
+  - [Text Input](#text-input)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -122,6 +128,42 @@ functional shortcuts, refer to the storybook documentation and our example stori
 
 ## Component Updates
 
+### Avatar
+
+**PR:** [#3981](https://github.com/Workday/canvas-kit/pull/3981)
+
+We've updated `Avatar` color variants to align with Sana Canvas. These changes are **only visual** —
+the component API is unchanged except for two new `variant` options.
+
+#### Updated Variants
+
+Existing variants use darker background colors and updated foreground colors for improved contrast:
+
+| Variant  | Change                                                                                       |
+| -------- | -------------------------------------------------------------------------------------------- |
+| `blue`   | Background updated from `blue300` to `blue600`; text now uses `system.color.fg.inverse`      |
+| `amber`  | Background updated from `amber200` to `amber300`; text updated from `amber700` to `amber800` |
+| `purple` | Background updated from `purple300` to `purple600`; text now uses `system.color.fg.inverse`  |
+
+The `teal` variant is unchanged.
+
+#### New Variants
+
+Two new color variants are available:
+
+- `magenta` — `magenta600` background with `system.color.fg.inverse` text
+- `green` — `green600` background with `system.color.fg.inverse` text
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar name="Mary Jane" variant="magenta" />
+<Avatar name="Green Arrow" variant="green" />
+```
+
+No migration is required unless you rely on the previous color values for custom styling via the
+`cs` prop or `baseAvatarStencil` modifiers.
+
 ### Card
 
 **PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
@@ -134,6 +176,53 @@ functional shortcuts, refer to the storybook documentation and our example stori
   `padding.sm`).
 - Card's border radius is now managed via the new `cornerShapeStencil` (see
   [New Utilities](#new-utilities)).
+
+### Color Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+
+### Color Picker
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- **Sana Canvas:** swatch shape is now **6px** (previously **4px**).
+
+### Form Field
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape for grouped inputs (Radio groups and Checkbox groups) is now **12px** (previously 8px). As
+  in v15, this shape is primarily visible for error and caution states.
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Area
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Text Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+#### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
 
 ## New Utilities
 
