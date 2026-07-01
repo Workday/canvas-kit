@@ -4,8 +4,10 @@ import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
-import '@workday/canvas-tokens-web/css/sana/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+// Imported after system so its equal-specificity `[data-theme="sana-canvas"]` rules win
+// the cascade tie over system's unscoped `:root` rules when set on <html>.
+import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';
@@ -15,14 +17,6 @@ import './updated-type.css';
 
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
-
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Token theme',
-    defaultValue: 'sana',
-  },
-};
 
 export const decorators = [CanvasProviderDecorator];
 
