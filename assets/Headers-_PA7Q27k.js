@@ -1,0 +1,31 @@
+import{j as e}from"./jsx-runtime-Bu6AqWCO.js";import{useMDXComponents as r}from"./index-3YbjYt95.js";import{ae as n}from"./index-BuzUoXuP.js";import{E as s}from"./union-B_YdO4Rn.js";import"./index-IfJi-UCQ.js";import{B as d}from"./GlobalHeader-BBgT8Uji.js";import"./iframe-CqQaqg02.js";import"../sb-preview/runtime.js";import"./index-BDZ5T_cP.js";import"./index-CDT9hUPM.js";import"./index-BfFTulA3.js";import"./index-Rq9y6XjC.js";import"./sparkle-BveIfg6z.js";import"./types-wqmYQQWa.js";import"./SystemIcon-BHdFM4gJ.js";import"./Svg-BweBcPJP.js";import"./px2rem-C0KbprIx.js";import"./components-BmHbwbhb.js";import"./cs-rfTTo7Bg.js";import"./StatusIndicator-NDpFz6Y6.js";import"./Text-BmRVJVDA.js";import"./mergeStyles-QRcURb9q.js";import"./Box-mcEjmPIp.js";import"./index-N3xz2Kqy.js";import"./emotion-element-699e6908.browser.esm-B_iKzvpy.js";import"./useConstant-CUZppmaV.js";import"./flex-YMVbti20.js";import"./grid-WMWBj9Hm.js";import"./index-5dfzm_kn.js";import"./Card-Do4F3jna.js";import"./ExternalHyperlink-CK2LQ_ab.js";import"./Hyperlink-Dk9GtM2m.js";import"./external-link-BZdacz1K.js";import"./SecondaryButton-DgWyxuYl.js";import"./BaseButton-CnjstBv9.js";import"./Button-Bi-j31bu.js";import"./lerna-MRK8lqbN.js";import"./CanvasProvider-DrUGAeqB.js";import"./index-5mrAZJYD.js";import"./Tooltip-hfy8Ol31.js";import"./useTooltip-P-OrPrqM.js";import"./getTransformFromPlacement-BtpPb64q.js";import"./useDisclosureModel-a5nE6ygN.js";import"./models-CHTjB2ql.js";import"./useUniqueId-DC-hMIDg.js";import"./useCloseOnEscape-aGu2neH7.js";import"./Popper-CkRntUYs.js";import"./TertiaryButton-fEWojvdf.js";import"./upperFirst-BXmTrG0i.js";import"./TypeLevelComponents-BCUDE-Iz.js";import"./ColorPicker-ZJsE9F3r.js";import"./ColorInput-Bnr3B3QM.js";import"./check-small-C7Z-gSGs.js";import"./TextInput-VSHHKRMb.js";import"./types-DXdjelYI.js";import"./FormField-CJii8RnW.js";import"./check-Bvurkvei.js";import"./Expandable-DN7QfFSE.js";import"./Avatar-DdwObW3m.js";import"./chevron-up-BKywTRZX.js";import"./Dialog-Cje_mGxc.js";import"./Popup-1ipA4aUs.js";import"./x-D9WWWeCM.js";import"./usePopupTarget-CHZojcSk.js";import"./useInitialFocus-DYhXH2-D.js";import"./useReturnFocus-DND-TDO8.js";import"./useFocusRedirect-D10zBWnf.js";import"./Breadcrumbs-DFy0zo5O.js";import"./useOverflowListTarget-CN1RWLjZ.js";import"./useListItemSelect-E9NNzeRO.js";import"./useMount-CAK2BN3_.js";import"./bundle.esm-C4XAbbi1.js";import"./Menu-B017jkPL.js";import"./OverflowTooltip-CFPJJQRu.js";import"./chevron-right-small-DxmMaev8.js";import"./related-actions-TP4TzHu6.js";import"./Flex-C02s6o63.js";import"./Table-Dwt5GicB.js";import"./inbox-BZ9JNbvp.js";import"./useComboboxLoader-BwVUKkBI.js";import"./useListLoader-DR-o4XEV.js";import"./Combobox-Cx0RCrow.js";import"./InputGroup-CjuXeudd.js";import"./x-small-DK7gM0f7.js";import"./search-INhyn6-E.js";import"./notifications-BSXm4WVy.js";import"./CountBadge-DrPR-B_m.js";import"./AriaLiveRegion-n4NGECxl.js";import"./AccessibleHide-Cipeke9L.js";function o(t){const i={code:"code",h2:"h2",h3:"h3",li:"li",p:"p",ul:"ul",...r(),...t.components};return e.jsxs(e.Fragment,{children:[e.jsx(n,{title:"Guides/Accessibility/Examples/Page Header"}),`
+`,e.jsx(i.h2,{id:"global-header",children:"Global Header"}),`
+`,e.jsxs(i.p,{children:[`Developers building internal Workday applications will likely not need to create this component.
+However, if you're building components to be used outside of Workday, this is a helpful reference
+for building a global navigation header that looks like our internal `,e.jsx(i.code,{children:"GlobalHeader"}),"."]}),`
+`,e.jsx(i.h3,{id:"tooltip-usage",children:"Tooltip usage"}),`
+`,e.jsxs(i.ul,{children:[`
+`,e.jsxs(i.li,{children:["The ",e.jsx(i.code,{children:"default"})," variant ",e.jsx(i.code,{children:"<Tooltip>"}),` is used on all of the icon buttons, which will automatically set
+the `,e.jsx(i.code,{children:"aria-label"})," of the child component to the ",e.jsx(i.code,{children:"title"})," prop string."]}),`
+`,e.jsxs(i.li,{children:["The ",e.jsx(i.code,{children:"describe"})," variant ",e.jsx(i.code,{children:"<Tooltip>"}),` is used instead on the "MENU" button because this is a text
+button. This variant will instead set `,e.jsx(i.code,{children:"aria-describedby"}),` to the child component referencing the
+the tooltip's text "Global Navigation" to ensure that the visible button text "MENU" is not
+overriden by an `,e.jsx(i.code,{children:"aria-label"}),"."]}),`
+`]}),`
+`,e.jsx(i.h3,{id:"count-badge-usage",children:"Count badge usage"}),`
+`,e.jsxs(i.p,{children:["When ",e.jsx(i.code,{children:"<CountBadge>"})," is used as a sibling component for button, the ",e.jsx(i.code,{children:"aria-describedby"}),` property is
+set on the button referencing the `,e.jsx(i.code,{children:"id"})," value of the ",e.jsx(i.code,{children:"<CountBadge>"}),`. This practice helps support
+users depending on screen readers to describe both the name of the button and the value of the
+`,e.jsx(i.code,{children:"<CountBadge>"}),"."]}),`
+`,e.jsx(i.p,{children:`When a web app dynamically updates count badges in real-time, consider the following accessibility
+enhancements to support live, real-time announcements for screen readers:`}),`
+`,e.jsxs(i.ul,{children:[`
+`,e.jsxs(i.li,{children:["The ",e.jsx(i.code,{children:"<CountBadge>"})," component is rendered as a child of the ",e.jsx(i.code,{children:"<AriaLiveRegion>"})," container."]}),`
+`,e.jsxs(i.li,{children:["The ",e.jsx(i.code,{children:"<AriaLiveRegion>"})," container is assigned a name by using ",e.jsx(i.code,{children:"aria-labelledby"}),` to reference the
+name of the icon button `,e.jsx(i.code,{children:'"Notifications"'}),"."]}),`
+`,e.jsxs(i.li,{children:["The ",e.jsx(i.code,{children:"<AccessibleHide>"})," component is used following the ",e.jsx(i.code,{children:"<CountBadge>"}),` to render a hidden word
+"new" that only screen reader users can access.`]}),`
+`,e.jsxs(i.li,{children:["When the ",e.jsx(i.code,{children:"<CountBadge>"}),` is updated, then screen readers can automatically describe (in real-time)
+the name of the live region, "Notifications" and the text updated inside of it, "1 new".`]}),`
+`]}),`
+`,e.jsx(s,{code:d})]})}function ze(t={}){const{wrapper:i}={...r(),...t.components};return i?e.jsx(i,{...t,children:e.jsx(o,{...t})}):o(t)}export{ze as default};
