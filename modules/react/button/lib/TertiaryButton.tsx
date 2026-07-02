@@ -39,11 +39,13 @@ const tertiaryButtonStencil = createStencil({
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: system.color.fg.stronger,
+      [buttonStencil.vars.label]: system.color.fg.stronger,
     },
     // Active Styles
     '&:active, &.active': {
       [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
+      [buttonStencil.vars.label]: system.color.fg.stronger,
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
