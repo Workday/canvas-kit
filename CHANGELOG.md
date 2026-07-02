@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.18](https://github.com/Workday/canvas-kit/releases/tag/v15.0.18) (2026-07-02)
+
+
+
+
 ## [v15.0.17](https://github.com/Workday/canvas-kit/releases/tag/v15.0.17) (2026-07-02)
 
 ### Infrastructure
