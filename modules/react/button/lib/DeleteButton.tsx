@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
 import {Button, ButtonProps} from './Button';
@@ -42,11 +42,14 @@ const deleteButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.hover({
-        color: system.legacy.color.brand.accent.critical,
-        fallback: system.legacy.color.brand.accent.critical,
-        colorType: 'accent',
-      }),
+      [buttonStencil.vars.background]: cssVar(
+        brand.critical700,
+        colorSpace.hover({
+          color: system.legacy.color.brand.accent.critical,
+          fallback: system.legacy.color.brand.accent.critical,
+          colorType: 'accent',
+        })
+      ),
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
@@ -55,11 +58,14 @@ const deleteButtonStencil = createStencil({
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.pressed({
-        color: system.legacy.color.brand.accent.critical,
-        fallback: system.legacy.color.brand.accent.critical,
-        colorType: 'accent',
-      }),
+      [buttonStencil.vars.background]: cssVar(
+        brand.critical800,
+        colorSpace.pressed({
+          color: system.legacy.color.brand.accent.critical,
+          fallback: system.legacy.color.brand.accent.critical,
+          colorType: 'accent',
+        })
+      ),
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
