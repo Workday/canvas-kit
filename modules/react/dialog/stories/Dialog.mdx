@@ -49,7 +49,7 @@ Prefer **Dialog** for the standard non-modal dialog; use
 composed hooks when you need a custom popup stack or behavior (for example omitting
 **`useInitialFocus`**).
 
-### Minimum accessible structure
+### Minimum Accessible Structure
 
 The following matches the [Basic Example](#basic-example) layout: **`Dialog.CloseIcon`** before
 **`Dialog.Heading`** so open focus lands on the dismiss control first; primary actions use
@@ -108,8 +108,8 @@ duplicate them** in consuming code.
 
 **ARIA and DOM** (_applied by hooks/subcomponents_):
 
-- `Dialog.Card`: `role="dialog"`, `aria-labelledby` referencing the heading `id`, and `id` of the
-  form `dialog-{modelId}` (non-modal; page content is not hidden with `aria-hidden`)
+- `Dialog.Card`: `role="dialog"`, `aria-labelledby` referencing the heading `id`(non-modal; page
+  content is not hidden with `aria-hidden`)
 - `Dialog.Popper`: sibling wrapper rendered when open with `aria-owns` pointing at `Dialog.Card` to
   remap the accessibility tree for sequential reading order in supported browsers
 - `Dialog.Heading`: `id` wired to `Dialog.Card`'s `aria-labelledby`
@@ -119,6 +119,8 @@ duplicate them** in consuming code.
 - <kbd>Enter</kbd> / <kbd>Space</kbd> on the trigger opens the dialog (standard button behavior)
 - On open and close, focus is managed by **`useInitialFocus`** and **`useReturnFocus`** (application
   overrides: see **Focus management** in Accessibility Requirements)
+- <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> move focus forward and backward through
+  interactive elements inside the dialog (standard sequential focus behavior)
 - <kbd>Escape</kbd> closes the dialog and returns focus per `useReturnFocus`
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
@@ -198,13 +200,11 @@ interface MyTargetProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
 }
 
-const MyTarget = React.forwardRef<HTMLButtonElement, MyTargetProps>(
-  ({label, ...props}, ref) => (
-    <button ref={ref} type="button" {...props}>
-      {label}
-    </button>
-  )
-);
+const MyTarget = React.forwardRef<HTMLButtonElement, MyTargetProps>(({label, ...props}, ref) => (
+  <button ref={ref} type="button" {...props}>
+    {label}
+  </button>
+));
 
 <Dialog>
   <Dialog.Target as={MyTarget} label="Open" />
@@ -212,14 +212,14 @@ const MyTarget = React.forwardRef<HTMLButtonElement, MyTargetProps>(
 </Dialog>;
 ```
 
-| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                                                                                                                                                                                                      |
-| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                                                                                                                                         |
-| Keyboard-operable trigger                                     | See **Custom targets and programmatic open** above.                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Labeled inputs in the body                                    | When the body contains inputs, associate each with a visible label (for example **`FormField`** + **`FormField.Label`**).                                                                                                                                                                                                                                                                                                                                                              |
-| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus).                                                                                                                                                                               |
-| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                                                                     |
+| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                        |
+| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                           |
+| Keyboard-operable trigger                                     | See **Custom targets and programmatic open** above.                                                                                                                                                                                                                                                      |
+| Labeled inputs in the body                                    | When the body contains inputs, associate each with a visible label (for example **`FormField`** + **`FormField.Label`**).                                                                                                                                                                                |
+| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus). |
+| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                       |
 
 **Open focus below the heading** _(conditional; see supplementary copy row above)_:
 
@@ -256,8 +256,8 @@ const model = useDialogModel({initialFocusRef: inputRef});
 **Summary for code generation:**
 
 - **REQUIRED:** accessible name, dismiss control, keyboard-operable trigger, labeled inputs
-- **CONDITIONAL:** **`initialFocusRef`**, **`returnFocusRef`**, **`aria-describedby`**, **`aria-expanded`**
-  / **`aria-haspopup`**, **`forwardRef`** on custom **`Dialog.Target`**
+- **CONDITIONAL:** **`initialFocusRef`**, **`returnFocusRef`**, **`aria-describedby`**,
+  **`aria-expanded`** / **`aria-haspopup`**, **`forwardRef`** on custom **`Dialog.Target`**
 
 **Wiring aria-expanded** _(conditional)_:
 
