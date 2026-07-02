@@ -64,6 +64,12 @@ async function main() {
     resolve(__dirname, '../public/updated-type.css')
   );
 
+  // Serve the theme-setting script from public/ so Storybook head <script> tags work without bundler resolution
+  fs.copyFileSync(
+    resolve(__dirname, '../.storybook/set-data-theme.js'),
+    resolve(__dirname, '../public/set-data-theme.js')
+  );
+
   await Promise.all(
     fontsToDownload.map(fileName => {
       return download(fontBaseUrl + fileName, resolve(__dirname, '../public', fileName));

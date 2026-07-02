@@ -13,7 +13,7 @@ import stylingConfig from '../styling.config';
 import { vitePluginInlineSpecifications } from './vite-plugin-inline-specifications';
 import { vitePluginRedirectMDXToGithub } from './vite-plugin-redirect-mdx-to-github';
 import { vitePluginWholeSource } from './vite-plugin-whole-source';
-import { vitePluginTypescriptWithTransformers } from '@workday/canvas-kit-styling-transform';
+import { vitePluginTypescriptWithTransformers } from '@workday/canvas-kit-styling-transform/vite';
 import { getDocParser } from '@workday/canvas-kit-docs/docgen/createDocProgram';
 
 // const modulesPath = path.resolve(__dirname, '../modules');
