@@ -9,6 +9,15 @@ export function getTSConfigFile(tsconfigPath: string) {
   return ts.parseJsonConfigFileContent(configFile.config, ts.sys, basePath, {}, tsconfigPath);
 }
 
+/** Create a one-shot TypeScript program suitable for production builds. */
+export const createProgram = (
+  tsconfigPath: string,
+  compilerOptions: ts.CompilerOptions
+): ts.Program => {
+  const {fileNames} = getTSConfigFile(tsconfigPath);
+  return ts.createProgram(fileNames, compilerOptions);
+};
+
 export const getCompilerOptions = (tsconfigPath: string) => {
   let compilerOptions: ts.CompilerOptions = {
     jsx: ts.JsxEmit.React,
