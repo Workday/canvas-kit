@@ -3,6 +3,7 @@ import * as React from 'react';
 import {createContainer} from '@workday/canvas-kit-react/common';
 
 import {PopupBody} from './PopupBody';
+import {PopupButtonGroup} from './PopupButtonGroup';
 import {PopupCard} from './PopupCard';
 import {PopupCloseButton} from './PopupCloseButton';
 import {PopupCloseIcon} from './PopupCloseIcon';
@@ -111,6 +112,12 @@ export const Popup = createContainer()({
      * {@link usePopupCloseButton}.
      */
     CloseButton: PopupCloseButton,
+    /**
+     * A `Popup.ButtonGroup` component styled with {@link popupButtonGroupStencil}. It is used to
+     * group buttons within a popup and can place buttons at the start, center, or end of the
+     * container.
+     */
+    ButtonGroup: PopupButtonGroup,
   },
 })<PopupProps>(({children}: PopupProps) => {
   return <>{children}</>;

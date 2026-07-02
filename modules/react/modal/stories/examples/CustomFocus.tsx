@@ -3,7 +3,7 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {system} from '@workday/canvas-tokens-web';
@@ -41,12 +41,12 @@ export const CustomFocus = () => {
               />
             </FormField>
           </Modal.Body>
-          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+          <Modal.ButtonGroup>
+            <Modal.CloseButton>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton>Cancel</Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>
