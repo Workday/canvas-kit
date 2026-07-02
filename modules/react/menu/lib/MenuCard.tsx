@@ -37,7 +37,7 @@ export const menuCardStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.legacy.padding.xxs,
+    padding: system.legacy.padding.xs,
     borderRadius: system.legacy.shape.xxl,
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
