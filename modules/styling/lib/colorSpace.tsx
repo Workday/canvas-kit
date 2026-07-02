@@ -145,7 +145,7 @@ const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps)
     color: color,
     fallback: fallback,
     mixinColor: system.legacy.color[colorType].overlay.mixin,
-    mixinValue: system.opacity[colorType].pressed,
+    mixinValue: system.legacy.opacity[colorType].pressed,
   });
 };
 
