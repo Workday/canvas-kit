@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {colorSpace, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {buttonColorPropVars, buttonStencil} from './BaseButton';
@@ -24,45 +24,35 @@ const secondaryButtonStencil = createStencil({
     // Base Styles
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
     [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
-    [buttonStencil.vars.border]: system.color.border.input.default,
-    [buttonStencil.vars.label]: system.color.fg.default,
+    [buttonStencil.vars.border]: system.legacy.color.border.default,
+    [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.background]: system.legacy.color.surface.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
+      [buttonStencil.vars.border]: system.legacy.color.border.default,
       [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
       [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.transparent,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.hover,
-      }),
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.legacy.color.border.input.hover,
+      [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.transparent,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.pressed,
-      }),
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.legacy.color.border.input.hover,
+      [buttonStencil.vars.border]: system.color.border.input.hover,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
     },
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-
-      [buttonStencil.vars.label]: system.color.fg.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
   },
@@ -76,11 +66,6 @@ const secondaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.transparent,
-            mixinColor: system.legacy.color.surface.overlay.mixin,
-            mixinValue: system.legacy.opacity.surface.hover,
-          }),
           [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
@@ -88,7 +73,6 @@ const secondaryButtonStencil = createStencil({
         // Focus Styles
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: system.legacy.color.surface.inverse,
-
           [buttonStencil.vars.border]: system.color.border.transparent,
           [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
@@ -97,11 +81,6 @@ const secondaryButtonStencil = createStencil({
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.transparent,
-            mixinColor: system.legacy.color.surface.overlay.mixin,
-            mixinValue: system.legacy.opacity.surface.pressed,
-          }),
           [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
