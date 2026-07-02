@@ -1,9 +1,7 @@
-import * as React from 'react';
-
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {AccentIcon} from '@workday/canvas-kit-react/icon';
+import {rocketIcon} from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
-import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -22,7 +20,7 @@ export const Basic = () => {
       <SidePanel>
         <SidePanel.Heading size="small">
           <Flex cs={flexHeadingStyles}>
-            <AccentIcon icon={rocketIcon} />
+            <ExpressiveIcon icon={rocketIcon} />
             Tasks Panel
           </Flex>
         </SidePanel.Heading>
