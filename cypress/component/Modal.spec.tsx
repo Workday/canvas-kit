@@ -172,16 +172,16 @@ describe('Modal', () => {
   });
 });
 
-context('given the WithMobileOverlayCloseEnabled example is rendered', () => {
+context('given the WithMobileOverlayCloseEnabled example is rendered and modal is opened', () => {
   beforeEach(() => {
     cy.mount(<WithMobileOverlayCloseEnabled />);
+    cy.findByRole('button', {name: 'Open License'}).click();
   });
 
   context(
     'when clicking outside the modal on mobile view with enableMobileCloseOnOverlayClick === true',
     () => {
       beforeEach(() => {
-        cy.mount(<WithMobileOverlayCloseEnabled />);
         cy.viewport('iphone-x');
         cy.get('body').realTouch();
       });
