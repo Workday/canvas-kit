@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.17](https://github.com/Workday/canvas-kit/releases/tag/v15.0.17) (2026-07-02)
+
+### Infrastructure
+
+- chore: Fix stalled CI storybook builds ([#4044](https://github.com/Workday/canvas-kit/pull/4044)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.16](https://github.com/Workday/canvas-kit/releases/tag/v15.0.16) (2026-07-02)
 
 
