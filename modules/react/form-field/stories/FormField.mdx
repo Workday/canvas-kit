@@ -137,22 +137,19 @@ for required fields are suffixed by a red asterisk.
 
 ### Grouped Inputs
 
-Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like
-`RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `fieldset` element and
-`FormFieldGroup.Label` renders a `legend` element. These elements will allow screen readers to
-automatically announce the legend's context when focusing on the inputs in the group.
+Use `FormFieldGroup` when you have a group of inputs that need to be associated to one another, like `RadioGroup` or a group of `Checkbox`'s. `FormFieldGroup` renders a `div` with `role="group"` and an `aria-labelledby` reference. `FormFieldGroup.Label` renders a `div` with an `id` referenced by the `aria-labelledby` of the `FormFieldGroup`. Screen readers announce the group label when focusing controls in the group.
 
 `FormFieldGroup` supports the same props of `FormField`:
 
 - `error`: `"caution" | "error"` Defines the error around the whole group of inputs.
-- `orientation`: `"horizontal" | "vertical"` Defines the legend placement.
+- `orientation`: `"horizontal" | "vertical"` Defines the group label placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
 <ExampleCodeBlock code={GroupedInputs} />
 
 > **Accessibility Note**: In addition to radio button and checkbox groups, `FormFieldGroup` can be
 > useful in any situation where the form needs to have multiple sets of identical input fields. For
-> example, a form with identical fields for a Shipping address and a Billing address. The legend
+> example, a form with identical fields for a Shipping address and a Billing address. The legend (group label)
 > provides critical context for screen reader users in these situations.
 
 ### Custom
@@ -206,17 +203,61 @@ check our
 
 `FormField` provides essential accessibility features to ensure form inputs have a programmatically determinable name, relationships, and instructions. The primary accessibility goal is to ensure assistive technology users can identify every field, understand how to complete it, and hear hints, errors, and required state when the form input receives focus.
 
+### Minimum accessible structure
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>We'll never share your email.</FormField.Hint>
+  </FormField.Field>
+</FormField>;
+```
+
+Include **`FormField.Hint`** whenever there is hint or error text—the wiring slot for
+`aria-describedby` exists by default (see **Built-in Behaviors**).
+
 ### Built-in Behaviors
 
-Canvas Kit handles the following automatically when you compose `FormField` with its subcomponents:
+Canvas Kit applies these automatically when you compose `FormField` with its subcomponents. **Do not
+duplicate them** in consuming code.
 
-- **Label association**: `FormField.Label` renders a `<label>` with `htmlFor` matching the `id` on `FormField.Input` (`input-{id}`). Clicking the label moves focus to the input.
-  - **`aria-labelledby`**: `FormField.Input` receives `aria-labelledby="label-{id}"` so complex controls (for example, `MultiSelect` with a combobox and listbox) can forward the same accessible name to every related element.
-- **Hint association**: `FormField.Hint` receives `id="hint-{id}"` and `FormField.Input` receives `aria-describedby="hint-{id}"` so help text is announced when the field is focused.
-- **Required state**: When `isRequired` is set, the native `required` attribute is applied to the input and announced by assistive technologies.
-- **Invalid state**: When `error="error"`, `aria-invalid="true"` is set on the input. Caution (`error="caution"`) does **not** set `aria-invalid`.
-- **Generated IDs**: `label-{id}`, `input-{id}`, and `hint-{id}` are created from the `FormField` `id` (auto-generated or custom via the `id` prop).
-- **Grouped controls**: `FormFieldGroup` applies `role="group"` and `aria-labelledby` to associate related inputs (for example, `RadioGroup` or multiple `Checkbox` controls) with `FormFieldGroup.Label`.
+**ARIA and DOM** (_applied by subcomponents_):
+
+- `FormField.Label`: `<label>` with `htmlFor` matching the `id` on `FormField.Input` (`input-{id}`).
+  Clicking the label moves focus to the input.
+- `FormField.Input`: `id` (`input-{id}`), `aria-labelledby` (`label-{id}`), `aria-describedby`
+  (`hint-{id}` when an `id` exists), `required` when `isRequired`, and `aria-invalid="true"` when
+  `error="error"`. Caution (`error="caution"`) does **not** set `aria-invalid`.
+- `FormField.Hint`: `id="hint-{id}"` for description association.
+- Generated IDs: `label-{id}`, `input-{id}`, and `hint-{id}` from the `FormField` `id` (auto-generated
+  or custom via the `id` prop).
+- `FormFieldGroup`: `role="group"` with `aria-labelledby` referencing `FormFieldGroup.Label`.
+- Composite controls (for example, `MultiSelect`) forward `aria-labelledby` to related sub-elements
+  (combobox, listbox) so every part shares the same accessible name.
+
+**Implementation note on `aria-describedby`:** `FormField.Input` always sets
+`aria-describedby="hint-{id}"` when an `id` exists, even if `FormField.Hint` is not rendered. Always
+render `FormField.Hint` when there is hint or error text. Omitting `FormField.Hint` leaves a dangling
+`aria-describedby` reference.
+
+**Keyboard** (_standard form control behavior_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move focus to and from the input (native tab order)
+- Clicking `FormField.Label` moves focus to the associated input (native `<label>` behavior)
+- Checkbox, radio, and composite controls follow the wrapped input component's own keyboard patterns
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), and hint or error text via `aria-describedby`
+- The Caution state is visual only —`aria-invalid` is **not** set for `error="caution"`
+- In a `FormFieldGroup`, the group label is associated via `aria-labelledby`; focusing a control in the group includes the group name in context
+- Disabled inputs are skipped in the tab order and may be announced as unavailable
 
 For a simple field, the DOM looks like:
 
@@ -272,19 +313,35 @@ For grouped checkbox controls, compose a `FormFieldGroup` with `FormFieldGroup.L
 
 ### Accessibility Requirements
 
-Developers must provide the following for accessible forms:
+Required in application code for accessible form fields. Rows marked _(conditional)_ apply only when
+the situation matches—otherwise omit.
 
-- **`FormField.Label`**: Visible, concise text that describes the purpose of the control. Use `isHidden` only when an equally clear alternative exists (for example, a universally recognizable search icon).
-- **`FormField.Input`**: Wrap every Canvas Kit input (`TextInput`, `Select`, `TextArea`, etc.) so labeling and description wiring is applied.
-- **`isRequired`**: Set on `FormField` when the field is mandatory so the `required` attribute is exposed. Consider a form-level note that asterisk (\*) marks required fields.
-- **`error` and `FormField.Hint`**: When `error="error"`, prepend the error text with the word "Error" in `FormField.Hint` so users who cannot perceive color can distinguish error text from field-level hint text.
-- **`FormFieldGroup` + `FormFieldGroup.Label`**: Use for radio buttons, checkbox groups or a set of related input fields so the group purpose is programmatically associated. Alternatively, use '`FormField` with `as="fieldset"` and `FormField.Label` with `as="legend"`.
-- **`id` (optional but recommended)**: Pass a stable, unique `id` on `FormField` when multiple fields share a page or when you need predictable `label-`, `input-`, and `hint-` IDs for testing or custom composition.
+**If no design spec is provided:** use a visible `FormField.Label`, wrap the input with
+`FormField.Input`, omit `isHidden`, and omit a custom `id` unless testing or composition requires it.
+
+| Requirement | How to satisfy |
+| --- | --- |
+| Visible label | **`FormField.Label`** with concise, meaningful text |
+| Input wiring | **`FormField.Input as={...}`** wrapping every Canvas Kit input (`TextInput`, `Select`, `TextArea`, etc.) |
+| Hint or error text _(conditional)_ | **`FormField.Hint`** when there is help or validation copy—required because `aria-describedby` is wired by default (see **Built-in Behaviors**) |
+| Error state _(conditional)_ | `error="error"` on **`FormField`** and **`FormField.Hint`** prefixed with "Error:" so users who cannot perceive color can distinguish errors from hints |
+| Caution state _(conditional)_ | `error="caution"` on **`FormField`** with descriptive **`FormField.Hint`** (no `aria-invalid`) |
+| Required field _(conditional)_ | `isRequired` on **`FormField`**; consider a form-level note that asterisk (\*) marks required fields |
+| Group label _(conditional)_ | **`FormFieldGroup`** + **`FormFieldGroup.Label`** for radio buttons, checkbox groups, or related inputs. Alternatively, **`FormField as="fieldset"`** with **`FormField.Label as="legend"`** |
+| Hidden label _(conditional)_ | **`FormField.Label isHidden`** only when an equally clear alternative exists (for example, a universally recognizable search icon) |
+| Stable IDs _(conditional)_ | `id` prop on **`FormField`** when multiple fields share a page or predictable `label-`, `input-`, and `hint-` IDs are needed for testing or custom composition |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, input wiring
+- **CONDITIONAL:** hint/error text, required state, group label, hidden label, stable `id`
 
 ### Anti-Patterns
 
-Do not generate the following:
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
 
+- Manually set `id`, `htmlFor`, `aria-labelledby`, `aria-describedby`, `aria-invalid`, or `required` on **`FormField.Input`** or **`FormField.Label`** — Canvas Kit subcomponents wire these automatically
 - **Unlabeled inputs**: Do not use Canvas Kit inputs without `FormField` and `FormField.Label`.
 - **Placeholder-only labels**: Do not rely on `placeholder` instead of `FormField.Label`; placeholders disappear while typing and are poor substitutes for labels.
 - **Color-only errors**: Do not set `error="error"` without descriptive text in `FormField.Hint`.
