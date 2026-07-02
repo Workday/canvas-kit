@@ -19,9 +19,15 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+  - [Avatar](#avatar)
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
   - [Card](#card)
+  - [Color Input](#color-input)
+  - [Color Picker](#color-picker)
+  - [Form Field](#form-field)
+  - [Text Area](#text-area)
+  - [Text Input](#text-input)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -124,8 +130,90 @@ functional shortcuts, refer to the storybook documentation and our example stori
 
 ## Component Updates
 
-> **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
-> unless specified otherwise.
+### Avatar
+
+**PR:** [#3981](https://github.com/Workday/canvas-kit/pull/3981)
+
+We've updated `Avatar` color variants to align with Sana Canvas. These changes are **only visual** —
+the component API is unchanged except for two new `variant` options.
+
+#### Updated Variants
+
+Existing variants use darker background colors and updated foreground colors for improved contrast:
+
+| Variant  | Change                                                                                       |
+| -------- | -------------------------------------------------------------------------------------------- |
+| `blue`   | Background updated from `blue300` to `blue600`; text now uses `system.color.fg.inverse`      |
+| `amber`  | Background updated from `amber200` to `amber300`; text updated from `amber700` to `amber800` |
+| `purple` | Background updated from `purple300` to `purple600`; text now uses `system.color.fg.inverse`  |
+
+The `teal` variant is unchanged.
+
+#### New Variants
+
+Two new color variants are available:
+
+- `magenta` — `magenta600` background with `system.color.fg.inverse` text
+- `green` — `green600` background with `system.color.fg.inverse` text
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar name="Mary Jane" variant="magenta" />
+<Avatar name="Green Arrow" variant="green" />
+```
+
+No migration is required unless you rely on the previous color values for custom styling via the
+`cs` prop or `baseAvatarStencil` modifiers.
+
+### Buttons
+
+**PR:** [#4000](https://github.com/Workday/canvas-kit/pull/4000)
+
+All buttons have had the following updates:
+
+- `fontWeight` has been updated from `system.fontWeight.bold` to `system.fontWeight.medium`.
+- `minWidth` has been updated to the following:
+
+| Default Size | minWidth v15 | minWidth v16 |
+| ------------ | ------------ | ------------ |
+| extraSmall   | unchanged    | unchanged    |
+| small        | `5rem`       | `4.5rem`     |
+| medium       | `6rem`       | `5.5rem`     |
+| large        | `7rem`       | `6.5rem`     |
+
+- `paddingInline` has been updated to the following:
+
+| Size       | paddingInline v15 | paddingInline v16 |
+| ---------- | ----------------- | ----------------- |
+| extraSmall | `0.75rem`         | `0.5rem`          |
+| small      | `1rem`            | `0.75rem`         |
+| medium     | `1.5rem`          | `1rem`            |
+| large      | `2rem`            | `1.25rem`         |
+
+#### Delete Button Outline Variant
+
+We've added an `outline` variant to the `DeleteButton` component. This variant will reverse the
+button's styling with a `border` and `transparent` background.
+
+```tsx
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+
+<DeleteButton variant="outline">Delete</DeleteButton>;
+```
+
+### Card
+
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+
+#### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
 
 ### Color Input
 
@@ -173,55 +261,6 @@ functional shortcuts, refer to the storybook documentation and our example stori
 - Shape is now **12px** (previously 8px).
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
-
-### Card
-
-**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
-
-#### Visual Updates
-
-- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
-  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
-- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
-  `padding.sm`).
-- Card's border radius is now managed via the new `cornerShapeStencil` (see
-  [New Utilities](#new-utilities)).
-
-### Buttons
-
-**PR:** [#4000](https://github.com/Workday/canvas-kit/pull/4000)
-
-All buttons have had the following updates:
-
-- `fontWeight` has been updated from `system.fontWeight.bold` to `system.fontWeight.medium`.
-- `minWidth` has been updated to the following:
-
-| Default Size | minWidth v15 | minWidth v16 |
-| ------------ | ------------ | ------------ |
-| extraSmall   | unchanged    | unchanged    |
-| small        | `5rem`       | `4.5rem`     |
-| medium       | `6rem`       | `5.5rem`     |
-| large        | `7rem`       | `6.5rem`     |
-
-- `paddingInline` has been updated to the following:
-
-| Size       | paddingInline v15 | paddingInline v16 |
-| ---------- | ----------------- | ----------------- |
-| extraSmall | `0.75rem`         | `0.5rem`          |
-| small      | `1rem`            | `0.75rem`         |
-| medium     | `1.5rem`          | `1rem`            |
-| large      | `2rem`            | `1.25rem`         |
-
-#### Delete Button Outline Variant
-
-We've added an `outline` variant to the `DeleteButton` component. This variant will reverse the
-button's styling with a `border` and `transparent` background.
-
-```tsx
-import {DeleteButton} from '@workday/canvas-kit-react/button';
-
-<DeleteButton variant="outline">Delete</DeleteButton>;
-```
 
 ## New Utilities
 
