@@ -114,8 +114,8 @@ const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) =
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.color[colorType].overlay.mixin,
-    mixinValue: system.opacity[colorType].hover,
+    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinValue: system.legacy.opacity[colorType].hover,
   });
 };
 
@@ -144,8 +144,8 @@ const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps)
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.color[colorType].overlay.mixin,
-    mixinValue: system.opacity[colorType].pressed,
+    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinValue: system.legacy.opacity[colorType].pressed,
   });
 };
 
