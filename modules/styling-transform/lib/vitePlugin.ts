@@ -55,7 +55,7 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
       if (resolvedConfig.command === 'build') {
         // Watch mode keeps the Node process alive after Vite finishes.
         // Storybook's static build does not reliably call closeBundle before file writes.
-        tsProgram = createProgram(tsconfigPath);
+        tsProgram = createProgram(tsconfigPath, compilerOptions);
         return;
       }
       // Watch mode is now only used for development builds.

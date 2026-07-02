@@ -10,9 +10,12 @@ export function getTSConfigFile(tsconfigPath: string) {
 }
 
 /** Create a one-shot TypeScript program suitable for production builds. */
-export const createProgram = (tsconfigPath: string): ts.Program => {
-  const {options, fileNames} = getTSConfigFile(tsconfigPath);
-  return ts.createProgram(fileNames, options);
+export const createProgram = (
+  tsconfigPath: string,
+  compilerOptions: ts.CompilerOptions
+): ts.Program => {
+  const {fileNames} = getTSConfigFile(tsconfigPath);
+  return ts.createProgram(fileNames, compilerOptions);
 };
 
 export const getCompilerOptions = (tsconfigPath: string) => {
