@@ -1,0 +1,50 @@
+import {Meta} from '@storybook/blocks';
+
+<Meta title="React/Fonts" />
+
+# Sana Sans Font
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Usage
+
+The fonts package makes importing font files simple so you know you're using the correct font in your environment. We use Sana Sans for most languages we support at Workday.
+
+> Note: If your application environment already provides Sana Sans, you don't need to inject it as in the example below. But this package is useful for testing, documentation, and development where you don't have the font readily available. This package is likely not appropriate to use in production environments due to how the font is [hosted](#hosting-fonts).
+
+You can inject our CSS `@font-face` styles into your application by using `injectGlobal`. We prefer this approach over `@emotion/react`'s [Global](https://emotion.sh/docs/globals) component that injects the styles at runtime.
+
+```ts
+import {injectGlobal} from '@workday/canvas-kit-styling';
+import {fonts} from '@workday/canvas-kit-react/fonts';
+import {system} from '@workday/canvas-tokens-web';
+
+injectGlobal(...fonts);
+injectGlobal({
+  'html, body': {
+    fontFamily: system.fontFamily.default,
+    margin: 0,
+    minHeight: '100vh',
+  },
+});
+```
+
+## Hosting Fonts
+
+We currently host Sana Sans through durable storage, and this package connects `@font-faces` to those font files. This keeps the package size minimal, while ensuring you don't have to worry about the wiring. But because durable storage is regionally-bound, you might consider using a CDN if your environment experiences degraded performance.
+
+## Variable Fonts
+
+Sana Sans is a [variable font](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts). That means instead of importing multiple static files, you can import a single, dynamic file that supports multiple font weights and styles. It also provides more flexibility and customization than traditional, static fonts. But you should be able to use it identically to how you've been using other fonts.
+
+### Sana Sans
+
+- **Family**: Sana Sans
+- **Format**: TrueType variable font
+- **Weight range**: 100–700 (Regular through Bold)
+- **Styles**: normal, italic
+- **Source**: `https://design.workdaycdn.com/assets/fonts/Sana-Sans/SanaSansLCG05-Variable.ttf`
