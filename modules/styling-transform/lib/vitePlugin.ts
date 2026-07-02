@@ -1,7 +1,7 @@
 import ts, {type CompilerOptions, type Program} from 'typescript';
 import {type Plugin, createFilter} from 'vite';
 
-import {getCompilerOptions, startWatch} from './createTypeScriptWatchProgram';
+import {createProgram, getCompilerOptions, startWatch} from './createTypeScriptWatchProgram';
 
 type Filepath = string;
 type InvalidateModule = () => void;
@@ -28,17 +28,22 @@ export interface Options {
 }
 
 export function vitePluginTypescriptWithTransformers(config: Options = {}): Plugin {
-  let tsProgram: ts.BuilderProgram;
+  let tsProgram: ts.Program | ts.BuilderProgram;
   let compilerOptions: CompilerOptions;
   let filter: ReturnType<(typeof import('vite'))['createFilter']>;
   const moduleInvalidationQueue: Map<Filepath, InvalidateModule> = new Map();
-  let closeWatch: CloseWatch;
+  // When the production (static) build runs, closeWatch is a no-op because there's no watch to close.
+  let closeWatch: CloseWatch | undefined;
+  // When the program is running in development with watch mode, tsProgram is a BuilderProgram.
+  // When the program is running in production, tsProgram is a Program.
+  // We need to get the Program from the BuilderProgram to get the correct source files.
+  const getProgram = () => ('getProgram' in tsProgram ? tsProgram.getProgram() : tsProgram);
 
   return {
     name: 'vite-plugin-typescript',
     enforce: 'pre',
 
-    async configResolved() {
+    async configResolved(resolvedConfig) {
       const tsconfigPath = config.tsconfigPath ?? './tsconfig.json';
       compilerOptions = config.compilerOptions ?? (await getCompilerOptions(tsconfigPath));
 
@@ -46,6 +51,14 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
       const excludeArray = config.exclude ?? [];
 
       filter = createFilter(includeArray, excludeArray);
+      // If Vite is running a production (static) build, we need to create a new Program instead of running watch mode.
+      if (resolvedConfig.command === 'build') {
+        // Watch mode keeps the Node process alive after Vite finishes.
+        // Storybook's static build does not reliably call closeBundle before file writes.
+        tsProgram = createProgram(tsconfigPath);
+        return;
+      }
+      // Watch mode is now only used for development builds.
       [tsProgram, closeWatch] = await startWatch(compilerOptions, tsconfigPath, program => {
         tsProgram = program;
 
@@ -62,13 +75,13 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
       }
 
       const printer = ts.createPrinter(compilerOptions);
+      const program = getProgram();
 
       const transformers =
-        config.transformers?.filter(t => t !== undefined).map(t => t!(tsProgram.getProgram())) ||
-        [];
+        config.transformers?.filter(t => t !== undefined).map(t => t!(program)) || [];
 
       const sourceFile =
-        tsProgram.getSourceFile(id) || ts.createSourceFile(id, '', ts.ScriptTarget.ES2019);
+        program.getSourceFile(id) || ts.createSourceFile(id, '', ts.ScriptTarget.ES2019);
 
       const transformed = printer.printFile(
         ts
@@ -82,9 +95,14 @@ export function vitePluginTypescriptWithTransformers(config: Options = {}): Plug
 
       return postTransform || transformed;
     },
+    // Runs when the build finishes.
+    // This is an extra precaution in case Storybook / Vite don't call closeBundle before the process exits.
+    buildEnd() {
+      closeWatch?.();
+    },
 
     closeBundle() {
-      closeWatch();
+      closeWatch?.();
     },
   };
 }
