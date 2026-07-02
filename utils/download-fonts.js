@@ -14,6 +14,9 @@ const fontsToDownload = [
   'RobotoMono-Regular.ttf',
 ];
 
+const sanaFontBaseUrl = 'https://design.workdaycdn.com/assets/fonts/Sana-Sans/';
+const sanaFontsToDownload = ['SanaSansLCG05-Variable.ttf'];
+
 async function download(url, filePath) {
   return new Promise((resolve, reject) => {
     console.log(`Downloading ${url} to ${filePath}`);
@@ -54,9 +57,27 @@ async function main() {
   if (!fs.existsSync(resolve(__dirname, '../public'))) {
     fs.mkdirSync(resolve(__dirname, '../public'));
   }
+
+  // Serve type CSS from public/ so Storybook head <link> tags work without bundler resolution
+  fs.copyFileSync(
+    resolve(__dirname, '../.storybook/updated-type.css'),
+    resolve(__dirname, '../public/updated-type.css')
+  );
+
+  // Serve the theme-setting script from public/ so Storybook head <script> tags work without bundler resolution
+  fs.copyFileSync(
+    resolve(__dirname, '../.storybook/set-data-theme.js'),
+    resolve(__dirname, '../public/set-data-theme.js')
+  );
+
   await Promise.all(
     fontsToDownload.map(fileName => {
       return download(fontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
+    })
+  );
+  await Promise.all(
+    sanaFontsToDownload.map(fileName => {
+      return download(sanaFontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
     })
   );
 }
