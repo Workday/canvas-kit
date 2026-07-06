@@ -2,6 +2,7 @@ import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   composeHooks,
+  cornerShapeStencil,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
@@ -32,9 +33,10 @@ export const useMenuList = composeHooks(
 );
 
 export const menuListStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
     background: system.legacy.color.surface.popover,
-    borderRadius: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     padding: 0,
     gap: base.legacy.size25,
   },

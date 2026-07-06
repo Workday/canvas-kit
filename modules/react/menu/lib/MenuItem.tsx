@@ -8,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
+  cornerShapeStencil,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
@@ -53,6 +54,7 @@ export interface MenuItemProps extends CSProps {
 }
 
 export const menuItemStencil = createStencil({
+  extends: cornerShapeStencil,
   parts: {
     text: 'menu-item-text',
     icon: 'menu-item-icon',
@@ -73,7 +75,7 @@ export const menuItemStencil = createStencil({
     cursor: 'pointer',
     color: system.color.fg.strong,
     borderWidth: 0,
-    borderRadius: system.legacy.shape.lg,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
