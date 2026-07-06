@@ -117,11 +117,16 @@ export const menuItemStencil = createStencil({
       backgroundColor: system.legacy.color.surface.overlay.hover.default,
     },
 
+    // Active styles
+    '&:is(.active, :active)': {
+      color: system.color.fg.strong,
+      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+    },
+
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      color: system.color.fg.inverse,
-      backgroundColor: system.legacy.color.brand.accent.primary,
-      outline: `${px2rem(2)} solid transparent`,
+      color: system.color.fg.strong,
+      outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
       outlineOffset: `-${px2rem(2)}`,
     },
 
