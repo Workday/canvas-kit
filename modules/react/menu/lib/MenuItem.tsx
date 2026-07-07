@@ -150,15 +150,11 @@ export const menuItemStencil = createStencil({
       flexGrow: 1,
       alignSelf: 'center',
     },
-
-    [`& :where(${iconPart})`]: {
-      alignSelf: 'start',
-    },
   }),
 });
 
 const MenuItemIcon = (elemProps: SystemIconProps) => {
-  return <SystemIcon {...menuItemStencil.parts.icon} {...elemProps} />;
+  return <SystemIcon size="xs" {...menuItemStencil.parts.icon} {...elemProps} />;
 };
 
 const MenuItemText = createComponent('span')({
