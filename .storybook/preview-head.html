@@ -2,10 +2,14 @@
   document.title = 'Canvas Kit Storybook';
 </script>
 
+<link rel="stylesheet" href="/updated-type.css" />
+<script src="/set-data-theme.js"></script>
+
 <style type="text/css">
+  html,
   body {
     padding: 0 !important;
-    font-family: sans-serif;
+    font-family: var(--cnvs-sys-font-family-default);
   }
 
   .story > * {
@@ -34,6 +38,7 @@
   }
 </style>
 <!-- preload fonts for Chromatic -->
+<link rel="preload" href="SanaSansLCG05-Variable.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Light.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="Roboto-Medium.ttf" as="font" type="font/ttf" crossorigin />
