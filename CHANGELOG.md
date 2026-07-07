@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.19](https://github.com/Workday/canvas-kit/releases/tag/v15.0.19) (2026-07-07)
+
+### Infrastructure
+
+- chore: Update all external actions to use SHA1 for versioning ([#4045](https://github.com/Workday/canvas-kit/pull/4045)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.18](https://github.com/Workday/canvas-kit/releases/tag/v15.0.18) (2026-07-02)
 
 
