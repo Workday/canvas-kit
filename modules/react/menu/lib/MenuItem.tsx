@@ -97,17 +97,15 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: system.legacy.color.brand.fg.primary.strong,
-      backgroundColor: system.legacy.color.brand.surface.primary.strong,
+      color: system.sana.color.brand.fg.selected,
+      backgroundColor: system.sana.color.brand.surface.selected,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        [systemIconStencil.vars.color]: 'currentColor',
-        outline: 'none',
-        backgroundColor: system.legacy.color.brand.accent.primary,
-        color: system.color.fg.inverse,
+        outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
+        outlineOffset: `-${px2rem(2)}`,
       },
     },
 
