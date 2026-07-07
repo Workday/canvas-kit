@@ -79,7 +79,7 @@ jobs:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
 
-      - uses: chromaui/action@main
+      - uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # main branch
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: dlpro96xybh

@@ -71,7 +71,7 @@ jobs:
 
       ## If the previous step passed, push the verified commit directly to the next branch
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
@@ -139,7 +139,7 @@ jobs:
 
       # Not working for now...
       # - name: Visual Tests
-      #   uses: chromaui/action@main
+      #   uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # main branch
       #   with:
       #     token: ${{ secrets.GITHUB_TOKEN }}
       #     appCode: dlpro96xybh
@@ -160,7 +160,7 @@ jobs:
 
       ## Push both the commit and tag created by Lerna's version command using a PAT
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: refs/heads/${{ needs.get-branch-names.outputs.next-branch }}
@@ -176,7 +176,7 @@ jobs:
 
     steps:
       ## If we've failed any previous step, we'll need to create a PR instead
-      - uses: NicholasBoll/action-forward-merge-pr@main
+      - uses: NicholasBoll/action-forward-merge-pr@89b33d1968555fb5d6a5814b4ab78221e47c37ab # v1.1.1
         with:
           token: ${{secrets.GH_RW_TOKEN}} # use PAT to force GH Actions to run the PR verify. The regular token will not
           branches: support+master,master+prerelease/minor,prerelease/minor+prerelease/major
