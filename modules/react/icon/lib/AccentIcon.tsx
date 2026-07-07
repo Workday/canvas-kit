@@ -97,7 +97,7 @@ export const accentIconStencil = createStencil({
 
 /** @deprecated Deprecated in v11 */
 const transformColorNameToToken = (color?: string) => {
-  const {legacy, ...baseTokens} = base;
+  const {legacy, sana, ...baseTokens} = base;
   if (color && color in baseTokens) {
     return cssVar(baseTokens[color as keyof typeof baseTokens]);
   }
