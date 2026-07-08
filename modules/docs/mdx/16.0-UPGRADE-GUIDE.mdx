@@ -26,6 +26,7 @@ Soon to be...
   - [Color Input](#color-input)
   - [Color Picker](#color-picker)
   - [Form Field](#form-field)
+  - [Menu](#menu)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
 - [New Utilities](#new-utilities)
@@ -242,6 +243,47 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
 
+### Menu
+
+**PR:** [#3987](https://github.com/Workday/canvas-kit/pull/3987)
+
+#### Visual Updates
+
+**Menu.Card**
+
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Padding updated from `padding.xxs` (4px) to `padding.xs` (8px).
+- Border radius is now managed via `cornerShapeStencil` (still uses `shape.xxl`).
+
+**Menu.List**
+
+- Gap between items updated from `gap.xs` (4px) to `base.legacy.size25` (2px).
+
+**Menu.Item**
+
+- Icon-to-label gap updated from `gap.md` (16px) to `gap.sm` (8px).
+- Padding updated from symmetric `padding.sm`/`padding.md` (12px/16px) to asymmetric
+  `padding.xs`/`padding.xs`/`padding.xs`/`padding.sm` (8px top/right/bottom, 12px left).
+- Item border radius updated from `shape.xxl` (24px) to `shape.lg` (12px).
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Built-in icons (`Menu.Item.Icon`, `Menu.Option` checkmark, `Submenu.TargetItem` chevron) now use
+  `size="xs"` and updated icon assets (`checkIcon`, `chevronRightIcon`).
+
+**Menu.Group.Heading**
+
+- Padding updated to use `paddingBlock: padding.xs` with `paddingInline: padding.sm` / `padding.md`.
+
+#### State Style Updates (Menu.Item)
+
+| State                           | v15                                                                                   | v16                                                                                    |
+| ------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| Active/pressed                  | Not styled                                                                            | `surface.overlay.pressed` background                                                   |
+| Focus                           | Solid blue fill (`brand.accent.primary`)                                              | Inset outline using `brand.border.primary`                                             |
+| Selected                        | Solid blue fill and text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`)   |
+| Selected + Focus                | Solid blue fill                                                                       | Inset outline with selected background preserved                                       |
+| Disabled + Focus                | Solid blue fill (`brand.accent.primary`) with disabled opacity (dims focus style)     | Light blue background and blue text with disabled opacity (dims selected style)      |
+| Expanded submenu parent + Focus | Same blue fill focus style as other focused items                                     | Focus ring removed; selected styling shown instead to indicate the open ancestor trail |
+
 ### Text Area
 
 **PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
@@ -288,7 +330,8 @@ export const myStencil = createStencil({
 });
 ```
 
-`Card` extends this stencil for its rounded corners.
+`Card` and `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`) extend this stencil for their rounded
+corners.
 
 ## Deprecations
 
