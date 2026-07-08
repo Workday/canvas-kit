@@ -128,6 +128,16 @@ export const menuItemStencil = createStencil({
       outlineOffset: `-${px2rem(2)}`,
     },
 
+    // Focus + Expanded Submenu
+    // When a `Submenu.TargetItem`'s submenu is open, real focus has moved into the submenu, so we
+    // de-emphasize this item's focus ring and show selected styling instead to indicate it's part
+    // of the open ancestor trail rather than the actively focused item.
+    '&[aria-expanded="true"]:is(.focus, :focus-visible)': {
+      color: system.sana.color.brand.fg.selected,
+      backgroundColor: system.sana.color.brand.surface.selected,
+      outline: 'none',
+    },
+
     // Disabled styles
     '&:is(:disabled, [aria-disabled=true])': {
       cursor: 'default',
