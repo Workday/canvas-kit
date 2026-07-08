@@ -6,6 +6,7 @@ import {KBD} from '@workday/canvas-kit-labs-react/kbd';
 
 import KBDStoriesMeta from './KBD.stories';
 import {Basic} from './examples/Basic';
+import {InTooltip} from './examples/InTooltip';
 import {Items} from './examples/Items';
 import {RTL} from './examples/RTL';
 import {Size} from './examples/Size';
@@ -70,6 +71,13 @@ standard style or `plain` for a more minimal appearance. The `variant` is shared
 `KBD.Item` through the model.
 
 <ExampleCodeBlock code={Variant} />
+
+### In Tooltip
+
+`KBD` can be used inside a `Tooltip` to communicate the keyboard shortcut associated with an
+interactive control. Pair it with descriptive text so the shortcut is easy to understand.
+
+<ExampleCodeBlock code={InTooltip} />
 
 ## Accessibility
 
