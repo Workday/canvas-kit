@@ -20,8 +20,10 @@ export default makeDecorator({
     const theme: PartialEmotionCanvasTheme = {
       canvas: parameters.theme || defaultCanvasTheme,
     };
+    const tokenTheme = context.globals?.theme;
+    const dataTheme = tokenTheme === 'sana' ? 'sana-canvas' : undefined;
     return (
-      <CanvasProvider theme={theme} className={storyStyles}>
+      <CanvasProvider theme={theme} className={storyStyles} data-theme={dataTheme}>
         {storyFn(context) as React.ReactNode}
       </CanvasProvider>
     );
