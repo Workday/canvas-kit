@@ -43,21 +43,27 @@ const primaryButtonStencil = createStencil({
     },
     // Hover Styles
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.hover,
-      }),
+      [buttonStencil.vars.background]: cssVar(
+        brand.action.dark,
+        colorSpace.hover({
+          color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          colorType: 'accent',
+        })
+      ),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
     },
     // Active Styles
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-        mixinColor: system.legacy.color.accent.overlay.mixin,
-        mixinValue: system.legacy.opacity.accent.pressed,
-      }),
+      [buttonStencil.vars.background]: cssVar(
+        brand.action.darkest,
+        colorSpace.pressed({
+          color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          colorType: 'accent',
+        })
+      ),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
     },
@@ -85,11 +91,14 @@ const primaryButtonStencil = createStencil({
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: colorSpace.darken({
-            color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
-            mixinColor: system.legacy.color.accent.overlay.mixin,
-            mixinValue: system.legacy.opacity.accent.hover,
-          }),
+          [buttonStencil.vars.background]: cssVar(
+            brand.action.lighter,
+            colorSpace.hover({
+              color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              fallback: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              colorType: 'surface',
+            })
+          ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
@@ -107,11 +116,14 @@ const primaryButtonStencil = createStencil({
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: colorSpace.darken({
-            color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
-            mixinColor: system.legacy.color.accent.overlay.mixin,
-            mixinValue: system.legacy.opacity.accent.pressed,
-          }),
+          [buttonStencil.vars.background]: cssVar(
+            brand.action.light,
+            colorSpace.pressed({
+              color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              fallback: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              colorType: 'surface',
+            })
+          ),
           [buttonStencil.vars.label]: system.color.fg.stronger,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },

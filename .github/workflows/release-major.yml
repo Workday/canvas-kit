@@ -19,7 +19,7 @@ jobs:
 
       # Update support to point to the current major version
       - name: Push current master to support
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: support
@@ -60,14 +60,14 @@ jobs:
 
       # Update prerelease/minor to point to the next major release.
       - name: Push to prerelease/minor
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/minor
 
       # Update prerelease/major with the changes from prerelease/minor which include the major release version bump.
       - name: Push to prerelease/major
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0
         with:
           github_token: ${{ secrets.GH_RW_TOKEN }}
           branch: prerelease/major
