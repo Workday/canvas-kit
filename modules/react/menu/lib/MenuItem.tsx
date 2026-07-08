@@ -146,10 +146,8 @@ export const menuItemStencil = createStencil({
       '&:where(.hover, :hover, [aria-selected=true])': {
         background: 'none',
       },
+
       // Focus + Disabled
-      // TODO: Confirm that this is correct with design. The background color is pulled from the
-      // "Selected Disabled" entry in Figma, and the focus outline is inherited from the
-      // base `.focus` rule above (dimmed by this block's opacity).
       '&:where(.focus, :focus-visible)': {
         backgroundColor: system.sana.color.brand.surface.selected,
         opacity: system.opacity.disabled,
