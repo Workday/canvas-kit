@@ -28,6 +28,7 @@ Soon to be...
   - [Form Field](#form-field)
   - [Text Area](#text-area)
   - [Text Input](#text-input)
+  - [Toast](#toast)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -261,6 +262,19 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 - Shape is now **12px** (previously 8px).
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
+
+### Toast
+
+#### Visual Updates
+
+- Padding is now applied to the `Toast` container itself instead of being distributed across
+  `Toast.Body` and `Toast.Icon`.
+- Gap between the icon, body, and close icon is now `base.size150` (12px).
+- Shape uses `system.shape.xl`.
+- `Toast.Body` no longer has a gap between text and link.
+- `Toast.CloseIcon` is set to have absolute positioning and aligned with the top-right corner (in
+  LTR).
+- `Toast.CloseIcon` was changed to be `extra-small` tertiary button.
 
 ## New Utilities
 
