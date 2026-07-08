@@ -4,7 +4,7 @@ import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-re
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useActionBarModel} from './useActionBarModel';
 
