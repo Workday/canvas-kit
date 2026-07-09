@@ -63,7 +63,7 @@ jobs:
       ## used for future PRs. New PRs may show extra Chromatic changes until the "Update Branch"
       ## button is used in PRs which will pull this new baseline.
       - name: Update Chromatic Baseline
-        uses: chromaui/action@main
+        uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # main branch
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: ${{ secrets.CHROMATIC_APP_CODE }}
