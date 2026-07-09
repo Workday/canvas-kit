@@ -14,7 +14,7 @@ const formFieldGroupListStencil = createStencil({
     display: 'flex',
     flexDirection: 'column',
     gap: system.legacy.gap.sm,
-    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
