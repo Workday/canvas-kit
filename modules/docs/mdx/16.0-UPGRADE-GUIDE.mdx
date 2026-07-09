@@ -266,8 +266,21 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
   `padding.xs`/`padding.xs`/`padding.xs`/`padding.sm` (8px top/right/bottom, 12px left).
 - Item border radius updated from `shape.xxl` (24px) to `shape.lg` (12px).
 - Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
-- Built-in icons (`Menu.Item.Icon`, `Menu.Option` checkmark, `Submenu.TargetItem` chevron) now use
-  `size="xs"` and updated icon assets (`checkIcon`, `chevronRightIcon`).
+
+#### Menu icon sizing
+
+Menu icons are now smaller to align with Sana Canvas specs. In v15, `Menu.Item.Icon` did not set a
+`size` prop and fell back to the `SystemIcon` default of `lg` (24px / 1.5rem). In v16, all icons
+rendered through `Menu.Item.Icon` and `Menu.Option.Icon` use `size="xs"` (16px / 1rem).
+
+The selected checkmark in `Menu.Option` now uses `checkIcon` at `size="xs"` instead of
+`checkSmallIcon` at the previous 24px default. The nested submenu chevron in `Submenu.TargetItem`
+also changed from `chevronRightSmallIcon` to `chevronRightIcon` at `size="xs"`.
+
+Passing a custom `size` to `Menu.Item.Icon` or `Menu.Option.Icon` will still override the default.
+`Select` and `Combobox` menus inherit the `Menu.Option` checkmark change. If you are rendering
+custom chevron or checkmark icons inside of menu items, update them to `size="xs"` and swap
+`*SmallIcon` assets for their standard equivalents where appropriate.
 
 **Menu.Group.Heading**
 
@@ -281,7 +294,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 | Focus                           | Solid blue fill (`brand.accent.primary`)                                              | Inset outline using `brand.border.primary`                                             |
 | Selected                        | Solid blue fill and text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`)   |
 | Selected + Focus                | Solid blue fill                                                                       | Inset outline with selected background preserved                                       |
-| Disabled + Focus                | Solid blue fill (`brand.accent.primary`) with disabled opacity (dims focus style)     | Light blue background and blue text with disabled opacity (dims selected style)      |
+| Disabled + Focus                | Solid blue fill (`brand.accent.primary`) with disabled opacity (dims focus style)     | Light blue background and blue text with disabled opacity (dims selected style)        |
 | Expanded submenu parent + Focus | Same blue fill focus style as other focused items                                     | Focus ring removed; selected styling shown instead to indicate the open ancestor trail |
 
 ### Text Area
