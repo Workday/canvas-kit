@@ -67,23 +67,13 @@ export const segmentedControlItemStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.default,
-        fallback: system.color.bg.alt.default,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.hover,
-      }),
+      [buttonStencil.vars.background]: system.color.surface.overlay.hover.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.strong,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.pressed,
-      }),
+      [buttonStencil.vars.background]: system.color.surface.overlay.pressed.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
@@ -102,7 +92,6 @@ export const segmentedControlItemStencil = createStencil({
 
     "&[aria-pressed='true']": {
       [buttonStencil.vars.background]: system.legacy.color.surface.default,
-      // [buttonStencil.vars.border]: system.color.border.inverse.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
       boxShadow: system.depth[2],
