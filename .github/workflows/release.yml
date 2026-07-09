@@ -34,14 +34,14 @@ jobs:
       ## First, we'll checkout the repository. We don't persist credentials because we need a
       ## Personal Access Token to push on a branch that is protected. See
       ## https://github.com/cycjimmy/semantic-release-action#basic-usage
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
           fetch-depth: 0 # Used for conventional commit ranges
 
-      - uses: Workday/canvas-kit-actions/install@v1
+      - uses: Workday/canvas-kit-actions/install@v2
         with:
-          node_version: 22.x
+          node_version: 24.x
 
       - name: Clear auth token for OIDC
         run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
@@ -52,7 +52,7 @@ jobs:
       - name: Configure npm registry
         run: npm config set registry https://registry.npmjs.org/
 
-      - uses: Workday/canvas-kit-actions/release@v1
+      - uses: Workday/canvas-kit-actions/release@v2
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
@@ -60,7 +60,7 @@ jobs:
           version: ${{ inputs.version }}
           toRef: ${{ inputs.to_ref }}
 
-      - uses: Workday/canvas-kit-actions/report-failure@v1
+      - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()
         with:
           slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
