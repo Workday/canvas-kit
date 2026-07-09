@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.0.20](https://github.com/Workday/canvas-kit/releases/tag/v15.0.20) (2026-07-08)
+
+
+
+
+## [v15.0.19](https://github.com/Workday/canvas-kit/releases/tag/v15.0.19) (2026-07-07)
+
+### Infrastructure
+
+- chore: Update all external actions to use SHA1 for versioning ([#4045](https://github.com/Workday/canvas-kit/pull/4045)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.0.18](https://github.com/Workday/canvas-kit/releases/tag/v15.0.18) (2026-07-02)
+
+
+
+
+## [v15.0.17](https://github.com/Workday/canvas-kit/releases/tag/v15.0.17) (2026-07-02)
+
+### Infrastructure
+
+- chore: Fix stalled CI storybook builds ([#4044](https://github.com/Workday/canvas-kit/pull/4044)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.0.16](https://github.com/Workday/canvas-kit/releases/tag/v15.0.16) (2026-07-02)
+
+
+
+
+## [v15.0.15](https://github.com/Workday/canvas-kit/releases/tag/v15.0.15) (2026-07-01)
+
+### Infrastructure
+
+- fix: Bump ts-patch version to resolve tspc build failures ([#4036](https://github.com/Workday/canvas-kit/pull/4036)) ([@alanbsmith](https://github.com/alanbsmith))
+- chore: Fix circular deps and broken ts-patch build ([#4039](https://github.com/Workday/canvas-kit/pull/4039)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.14](https://github.com/Workday/canvas-kit/releases/tag/v15.0.14) (2026-06-17)
 
 
