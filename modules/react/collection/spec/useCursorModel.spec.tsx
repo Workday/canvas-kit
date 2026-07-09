@@ -4,6 +4,7 @@ import {
   getLastOfRow,
   getPreviousPage,
   getNextPage,
+  isCursor,
   useCursorListModel,
   navigationManager,
   wrappingNavigationManager,
@@ -527,5 +528,37 @@ describe('getOffsetItem', () => {
         expect(getOffsetItem(-3)(1, {state})).toEqual(1);
       });
     });
+  });
+});
+
+describe('isCursor', () => {
+  const items = ['a', 'b'].map(createItem);
+
+  it('returns false when cursorId is empty string, including when item id is still empty (registration)', () => {
+    const state = createState({items, cursorId: ''});
+    expect(isCursor(state, '')).toBe(false);
+    expect(isCursor(state, 'a')).toBe(false);
+  });
+
+  it('returns false when cursorId is null or undefined', () => {
+    expect(isCursor(createState({items, cursorId: null as any}), 'a')).toBe(false);
+    expect(isCursor(createState({items, cursorId: undefined as any}), 'a')).toBe(false);
+  });
+
+  it('uses strict equality for string cursorId', () => {
+    const state = createState({items, cursorId: 'b'});
+    expect(isCursor(state, 'b')).toBe(true);
+    expect(isCursor(state, 'a')).toBe(false);
+  });
+
+  it('uses includes for array cursorId', () => {
+    const state = createState({items, cursorId: ['a', 'b']});
+    expect(isCursor(state, 'a')).toBe(true);
+    expect(isCursor(state, 'c')).toBe(false);
+  });
+
+  it('returns false for empty array cursorId without throwing', () => {
+    const state = createState({items, cursorId: []});
+    expect(isCursor(state, 'a')).toBe(false);
   });
 });
