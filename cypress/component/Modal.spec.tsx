@@ -3,6 +3,7 @@ import {Basic} from '../../modules/react/modal/stories/examples/Basic';
 import {WithoutCloseIcon} from '../../modules/react/modal/stories/examples/WithoutCloseIcon';
 import {CustomFocus} from '../../modules/react/modal/stories/examples/CustomFocus';
 import {CustomTarget} from '../../modules/react/modal/stories/examples/CustomTarget';
+import {WithMobileOverlayCloseEnabled} from '../../modules/react/modal/stories/examples/WithMobileOverlayCloseEnabled';
 
 import {WithRadioButtons} from '../../modules/react/modal/stories/examples/WithRadioButtons';
 import {StackedModals} from '../../modules/react/modal/stories/examples/StackedModals';
@@ -169,6 +170,27 @@ describe('Modal', () => {
       });
     });
   });
+});
+
+context('given the WithMobileOverlayCloseEnabled example is rendered and modal is opened', () => {
+  beforeEach(() => {
+    cy.mount(<WithMobileOverlayCloseEnabled />);
+    cy.findByRole('button', {name: 'Open License'}).click();
+  });
+
+  context(
+    'when clicking outside the modal on mobile view with enableMobileCloseOnOverlayClick === true',
+    () => {
+      beforeEach(() => {
+        cy.viewport('iphone-x');
+        cy.get('body').realTouch();
+      });
+
+      it(`should close the modal`, () => {
+        cy.findByRole('dialog', {name: 'MIT License'}).should('not.exist');
+      });
+    }
+  );
 });
 
 context('given the FormModal example is rendered', () => {

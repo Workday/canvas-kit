@@ -22,6 +22,11 @@ export const usePopupModel = createModelHook({
      * focus will be moved to the first focusable element inside the popup.
      */
     initialFocusRef: undefined as undefined | React.RefObject<any>,
+    /**
+     * Optional flag to enable close on background overlay click for mobile devices.
+     * By default, this behaviour is disabled.
+     */
+    enableMobileCloseOnOverlayClick: false,
   },
   requiredConfig: useDisclosureModel.requiredConfig,
 })(config => {
@@ -58,6 +63,11 @@ export const usePopupModel = createModelHook({
      * @default 'bottom'
      */
     placement,
+    /**
+     * Optional flag to enable close on background overlay click for mobile devices.
+     * By default, this behaviour is disabled.
+     */
+    enableMobileCloseOnOverlayClick: config.enableMobileCloseOnOverlayClick,
   };
 
   const events = {

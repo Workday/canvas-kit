@@ -31,7 +31,7 @@ export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model =
 
       if (
         dialog &&
-        modality !== 'touch' &&
+        (modality !== 'touch' || model.state.enableMobileCloseOnOverlayClick) &&
         elements.length &&
         elements[elements.length - 1] === model.state.stackRef.current &&
         elementsBetweenDialogAnBody.some(element => element === event.target)
@@ -39,7 +39,7 @@ export const useCloseOnOverlayClick = createElemPropsHook(usePopupModel)(model =
         model.events.hide(event);
       }
     },
-    [model.state.stackRef, model.events, modality]
+    [model.state.stackRef, model.events, modality, model.state.enableMobileCloseOnOverlayClick]
   );
 
   const visible = model.state.visibility !== 'hidden';
