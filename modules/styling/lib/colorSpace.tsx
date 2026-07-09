@@ -113,7 +113,7 @@ export interface InteractiveStateProps {
  * ```
  * - `color`: Base color value.
  * - `fallback`: Fallback color value if the base color is not defined or invalid.
- * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.legacy.color.accent....` or `system.legacy.color.surface....`).
  *
  */
 const hover = ({
