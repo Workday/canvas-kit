@@ -140,7 +140,7 @@ export const menuItemStencil = createStencil({
       cursor: 'default',
       opacity: system.opacity.disabled,
 
-      '&:where(.hover, :hover, [aria-selected=true])': {
+      '&:where(.hover, :hover)': {
         background: 'none',
       },
 
