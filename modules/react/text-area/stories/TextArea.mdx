@@ -108,33 +108,97 @@ Form Field provides error and caution states for Text Area. Set the `error` prop
 [Form Field's Error documentation](/components/inputs/form-field/#error-states) for
 examples and accessibility guidance.
 
-## **I. Accessibility Overview**
+## Accessibility
 
-`TextArea` allows users to enter and edit multiple lines of text. It must be composed with
-[Form Field](/components/inputs/form-field/) so the control has a programmatically determinable name,
-relationships, and instructions. The primary accessibility goal is to ensure assistive technology
-users can identify the multi-line field, understand how to complete it, and hear hints, errors,
-required state, and character limit information when the text area receives focus.
+The primary accessibility goal for `TextArea` is to give every user a visible, persistent label and
+clear instructions, and to ensure assistive technology users can identify the multi-line field and
+hear hints, errors, required state, and character-limit information when the control receives focus.
 
-See [FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
-comprehensive guidance on form accessibility best practices.
+### Minimum accessible structure
 
-### **1\. Built-in Behaviors**
+Match the Basic example: label first, then the input inside `FormField.Field`. This order matches the
+DOM reading sequence and ensures the label's `htmlFor` targets the `<textarea>` before hint text
+follows the control.
 
-Canvas Kit handles the following automatically when you compose `TextArea` inside `FormField`:
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
 
-- **Native multi-line control**: `TextArea` renders a `<textarea>` element. Screen readers identify
-  it as a multi-line text input and announce the current value or "blank" when focused.
-- **Label and hint association**: Inherits `FormField` labeling (`htmlFor` / `id`, `aria-labelledby`)
-  and `FormField.Hint` association (`aria-describedby`). See
-  [Form Field accessibility](/components/inputs/form-field/#accessibility) for details.
-- **Required and invalid state**: When `FormField` sets `isRequired` or `error="error"`, those
-  states are exposed on the underlying `<textarea>` and announced by assistive technologies.
-- **`disabled`**: The `disabled` prop maps to the native `disabled` attribute on the `<textarea>`.
+<FormField>
+  <FormField.Label>Leave a Review</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextArea} onChange={handleChange} value={value} />
+  </FormField.Field>
+</FormField>;
+```
+
+Every `TextArea` requires **`FormField`**, a visible **`FormField.Label`**, and
+**`FormField.Input as={TextArea}`** so the control has a programmatically determinable name,
+relationships, and instructions. See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for shared
+form-field guidance. Include **`FormField.Hint`** for instructions, validation messages, or character
+counts—`FormField` associates that text with the text area through `aria-describedby` (see
+**Built-in Behaviors**).
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically when you compose `TextArea` with `FormField` subcomponents.
+**Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by subcomponents_):
+
+- **`TextArea`**: Renders a native `<textarea>` element. Screen readers identify it as a multi-line
+  text input.
+- **`FormField.Label`**: `<label>` with `htmlFor` matching the `id` on `FormField.Input`
+  (`input-{id}`). Clicking the label moves focus to the text area.
+- **`FormField.Input`**: Applies `useFormFieldInput` to wire `id` (`input-{id}`), `aria-labelledby`
+  (`label-{id}`), `aria-describedby` (`hint-{id}` when an `id` exists), `required` when `isRequired`,
+  `aria-invalid="true"` when `error="error"`, and passes `error` for visual styling. Caution
+  (`error="caution"`) does **not** set `aria-invalid`.
+- **`FormField.Hint`**: `id="hint-{id}"` for description association.
+- Generated IDs: `label-{id}`, `input-{id}`, and `hint-{id}` from the `FormField` `id` (auto-generated
+  or custom via the `id` prop).
+- **`TextArea` `disabled`**: Maps to the native `disabled` attribute; disabled fields are removed from
+  the tab order.
 - **User-resizable dimensions**: Defaults to `resize: both` so users can adjust the control for visual
   comfort.
 
+**Implementation notes**:
+
+- **`FormField.Input` always sets `aria-describedby="hint-{id}"`** when an `id` exists, even if
+  `FormField.Hint` is not rendered. Always render `FormField.Hint` when there is hint or error text.
+  Omitting `FormField.Hint` leaves a dangling `aria-describedby` reference.
+- **`placeholder`** is visual hint text only. It is not a substitute for `FormField.Label` and
+  disappears while typing, which can disorient users with cognitive disabilities.
+- Set **`error`** on **`FormField`**, not on `TextArea` directly, so `aria-invalid` and error styling
+  stay in sync.
+
+**Keyboard** (_standard multi-line text control behavior_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd>: Move focus to and from the text area (native tab
+  order).
+- Clicking **`FormField.Label`**: Moves focus to the associated `<textarea>` (native `<label>` behavior).
+- Inside the text area: arrow keys, <kbd>Home</kbd>, <kbd>End</kbd>, and standard text-editing shortcuts
+  behave as the browser and operating system provide for `<textarea>` elements.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), and hint or error text via `aria-describedby`.
+- The current value or "blank" is announced when the text area receives focus.
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
+- Disabled text areas may be announced as unavailable and are skipped in the tab order.
+
 For a simple text area field, the DOM looks like:
+
+```html
+<div>
+  <label id="label-abc" for="input-abc">Leave a Review</label>
+  <textarea id="input-abc" aria-labelledby="label-abc"></textarea>
+</div>
+```
+
+When hint text is present:
 
 ```html
 <div>
@@ -144,42 +208,109 @@ For a simple text area field, the DOM looks like:
 </div>
 ```
 
-Do not manually add `aria-labelledby`, `aria-describedby`, or `id` on `TextArea`
-when `FormField` already wires those relationships.
+For a field in an error state:
 
-### **2\. Accessibility Requirements**
+```html
+<div>
+  <label id="label-abc" for="input-abc">Comments</label>
+  <textarea
+    id="input-abc"
+    aria-labelledby="label-abc"
+    aria-describedby="hint-abc"
+    aria-invalid="true"
+  ></textarea>
+  <p id="hint-abc">Error: Please enter at least 10 characters.</p>
+</div>
+```
 
-Developers must provide the following for accessible text areas:
+### Accessibility Requirements
 
-- **`FormField` + `FormField.Label` + `FormField.Input`**: Wrap every `TextArea` (for example,
-  `<FormField.Input as={TextArea} />`) so labeling and description wiring is applied. /* REVIEW: Is this valid code? */
-- **`FormField.Hint`**: Use for instructions, guidance, error messages, and static character count
-  text.
-- **`isRequired`**: Set on `FormField` when the field is mandatory so the `required` attribute is
-  exposed.
-- **`disabled`**: Set on `TextArea` when the field is not interactive.
-- **`error` and `FormField.Hint`**: When `error="error"`, prepend the error text with the word
-  "Error" in `FormField.Hint` so users who cannot perceive color can distinguish error text from
-  field-level hint text.
-- **`maxLength`**: Enforce character limits programmatically on `TextArea`.
-- **Character count (100+ characters)**: Add character count information to `FormField.Hint`. Announce
-  updates via a debounced `AriaLiveRegion` but avoid announcing character counts after every keystroke. Refer to
-  [Debouncing an AriaLiveRegion: TextArea with character limit](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit).
+Required in application code for an accessible `TextArea`. Rows marked _(conditional)_ apply only when
+the situation matches—otherwise omit.
 
-### **3\. Anti-Patterns**
+**If no design spec is provided:** use a visible `FormField.Label`, wrap the control with
+`FormField.Input as={TextArea}`, omit `isHidden`, keep default `resize: both`, and omit a custom `id`
+unless testing or composition requires it.
 
-Do not generate the following:
+**Character limit with debounced live region** _(conditional — when `maxLength` is set)_:
 
-- **Unlabeled text areas**: Do not use `TextArea` without `FormField` and `FormField.Label`.
+```tsx
+import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+const MAX_CHARACTERS = 200;
+
+<FormField>
+  <FormField.Label>Comments</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextArea} maxLength={MAX_CHARACTERS} onChange={handleChange} value={value} />
+    <FormField.Hint>{`${value.length} of ${MAX_CHARACTERS} characters`}</FormField.Hint>
+    <AriaLiveRegion as={AccessibleHide}>{liveUpdateStr}</AriaLiveRegion>
+  </FormField.Field>
+</FormField>;
+```
+
+Debounce live-region updates (for example, 2 seconds after typing stops). Announce immediately when
+the limit is reached. Clear the live region on blur. Do not announce character counts after every
+keystroke. See
+[Debouncing an AriaLiveRegion: TextArea with character limit](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit)
+for a full example.
+
+**Ref forwarding** _(conditional — when programmatic focus is needed)_:
+
+```tsx
+const ref = React.useRef<HTMLTextAreaElement>(null);
+
+<FormField.Input as={TextArea} ref={ref} onChange={handleChange} value={value} />;
+```
+
+| Requirement | How to satisfy |
+| --- | --- |
+| Visible label | **`FormField.Label`** with concise, meaningful text |
+| Input wiring | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance |
+| Hint or error text _(conditional)_ | **`FormField.Hint`** when there is help or validation copy—required because `aria-describedby` is wired by default (see **Built-in Behaviors**) |
+| Error state _(conditional)_ | `error="error"` on **`FormField`** and **`FormField.Hint`** prefixed with "Error:" so users who cannot perceive color can distinguish errors from hints |
+| Caution state _(conditional)_ | `error="caution"` on **`FormField`** with descriptive **`FormField.Hint`** (no `aria-invalid`) |
+| Required field _(conditional)_ | `isRequired` on **`FormField`**; consider a form-level note that asterisk (\*) marks required fields |
+| Disabled field _(conditional)_ | `disabled` on **`FormField.Input`** (passed through to `<textarea>`) |
+| Character limit _(conditional)_ | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`** for screen reader updates |
+| Placeholder _(conditional)_ | Short format example on **`FormField.Input`** only—never as the sole label |
+| Stable IDs _(conditional)_ | `id` prop on **`FormField`** when predictable `label-`, `input-`, and `hint-` IDs are needed for testing |
+| Resize constraints _(conditional)_ | `resize` prop on **`TextArea`**; default to `Both` unless layout requires otherwise |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, `FormField.Input as={TextArea}` wiring
+- **CONDITIONAL:** hint/error text, required state, disabled state, character limit with live region, placeholder, stable `id`, resize constraints
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Manually set `id`, `htmlFor`, `aria-labelledby`, `aria-describedby`, `aria-invalid`, or `required` on
+  **`FormField.Input`** or **`TextArea`** — `FormField` subcomponents wire these automatically via
+  `useFormFieldInput` and related hooks.
+- **Unlabeled text areas**: Do not use `TextArea` without `FormField` and `FormField.Label` (see
+  **Minimum accessible structure**).
 - **Placeholder-only labels**: Do not rely on `placeholder` instead of `FormField.Label`; placeholders
   disappear while typing and are poor substitutes for labels.
-- **Manual ARIA overrides**: Do not set `aria-labelledby`, `aria-describedby`, or `id` on `TextArea`
-  when `FormField` already manages those relationships.
-- **Color-only errors**: Do not set `error="error"` without descriptive text in `FormField.Hint`.
+- **Single-line input for multi-line content**: Do not use `TextInput` when the user needs to enter
+  paragraphs or multi-line text; use `TextArea` instead.
+- **Color-only errors**: Do not set `error="error"` without descriptive text in `FormField.Hint`
+  prefixed with `"Error:"` so users who cannot perceive color can distinguish errors from hints (see
+  **Error state** in Accessibility Requirements).
+- **Caution for invalid values**: Do not use `error="caution"` when a value is invalid; use
+  `error="error"` so `aria-invalid` is exposed.
+- **Broken ID references**: Do not point `aria-describedby` at missing elements; always render
+  `FormField.Hint` when hint or error text exists.
 - **Per-keystroke character announcements**: Do not announce character counts after every keystroke;
-  debounce live region updates so screen reader users are not interrupted while typing.
+  debounce `AriaLiveRegion` updates so screen reader users are not interrupted while typing.
 - **Disabling resize unnecessarily**: Do not set `resize` to `none` unless there is a strong design or
-  layout requirement; users lose a visual comfort affordance.
+  layout requirement; users lose a visual comfort affordance that supports low-vision and motor needs.
+- **Standalone `TextArea` without `FormField`**: Do not render `<TextArea />` outside `FormField.Input`;
+  the control will lack a programmatically determinable name and description relationships.
 
 ## Component API
 
