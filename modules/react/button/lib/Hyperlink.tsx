@@ -32,7 +32,7 @@ export const hyperlinkStencil = createStencil({
     wordBreak: 'break-word',
     '&:hover, &.hover': {
       color: system.legacy.color.fg.info.strong,
-      background: system.legacy.color.surface.alt.default,
+      background: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus, &.focus, &:focus-visible': {
       boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
@@ -40,7 +40,7 @@ export const hyperlinkStencil = createStencil({
     },
     '&:active, &.active': {
       color: system.legacy.color.fg.info.strong,
-      background: system.legacy.color.surface.alt.default,
+      background: system.legacy.color.surface.overlay.pressed.default,
     },
   },
   modifiers: {
