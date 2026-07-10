@@ -286,16 +286,35 @@ custom chevron or checkmark icons inside of menu items, update them to `size="xs
 
 - Padding updated to use `paddingBlock: padding.xs` with `paddingInline: padding.sm` / `padding.md`.
 
-#### State Style Updates (Menu.Item)
+#### State Style Updates
 
-| State                           | v15                                                                                   | v16                                                                                    |
-| ------------------------------- | ------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Active/pressed                  | Not styled                                                                            | `surface.overlay.pressed` background                                                   |
-| Focus                           | Solid blue fill (`brand.accent.primary`)                                              | Inset outline using `brand.border.primary`                                             |
-| Selected                        | Solid blue fill and text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`)   |
-| Selected + Focus                | Solid blue fill                                                                       | Inset outline with selected background preserved                                       |
-| Disabled + Focus                | Solid blue fill (`brand.accent.primary`) with disabled opacity (dims focus style)     | Light blue background and blue text with disabled opacity (dims selected style)        |
-| Expanded submenu parent + Focus | Same blue fill focus style as other focused items                                     | Focus ring removed; selected styling shown instead to indicate the open ancestor trail |
+`Menu.Item` and `Menu.Option` share the same underlying item styles via `menuItemStencil`. For
+guidance on when to use `Menu.Item` vs `Menu.Option`, including accessibility requirements for
+selectable menus, see the
+[Menu accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs#accessibility).
+
+##### Menu.Item
+
+| State                           | v15                                                      | v16                                                                              |
+| ------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Active/pressed                  | Not styled                                               | `surface.overlay.pressed` background                                             |
+| Focus                           | Solid blue fill (`brand.accent.primary`) and white text  | Inset outline using `brand.border.primary`                                       |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Expanded submenu parent + Focus | Same blue fill and white text focus style as other focused items | Focus ring removed; ancestor-trail styling shown instead (`Submenu.TargetItem`)  |
+
+##### Menu.Option
+
+Used in `Select`, `Combobox`, and other listbox menus. Selected states apply when
+`aria-selected="true"`.
+
+| State                             | v15                                                                          | v16                                                                                  |
+| --------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Active/pressed                    | Not styled                                                                   | `surface.overlay.pressed` background                                                 |
+| Focus                             | Solid blue fill (`brand.accent.primary`) and white text                      | Inset outline using `brand.border.primary`                                           |
+| Selected (`aria-selected="true"`) | Solid blue fill and white text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) |
+| Selected + Focus                  | Solid blue fill and white text                                               | Inset outline with selected background preserved                                     |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Disabled + Selected               | Solid blue fill and white text with disabled opacity                         | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity                            |
 
 ### Text Area
 
