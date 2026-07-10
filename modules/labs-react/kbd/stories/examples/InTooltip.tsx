@@ -21,10 +21,10 @@ export const InTooltip = () => {
       title={
         <div className={flexContainer}>
           <Subtext size="large">Copy to clipboard</Subtext>
-          <KBD aria-keyshortcuts="Command+P">
+          <KBD>
             <KBD.Item>
               <KBD variant="plain">
-                <KBD.Item>⌘</KBD.Item>
+                <KBD.Item aria-label="Command">⌘</KBD.Item>
                 <KBD.Item>C</KBD.Item>
               </KBD>
             </KBD.Item>
@@ -32,7 +32,7 @@ export const InTooltip = () => {
         </div>
       }
     >
-      <SecondaryButton icon={copyIcon} />
+      <SecondaryButton icon={copyIcon} aria-keyshortcuts="Command+C" />
     </Tooltip>
   );
 };
