@@ -146,6 +146,7 @@ export const menuItemStencil = createStencil({
 
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
+        color: system.legacy.color.brand.fg.selected,
         backgroundColor: system.legacy.color.brand.surface.selected,
         opacity: system.opacity.disabled,
       },
