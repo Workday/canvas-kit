@@ -95,6 +95,12 @@ export interface InteractiveStateProps {
    * @default 'accent'
    */
   colorType?: 'accent' | 'surface';
+  /**
+   * A string that will determine which surface overlay variant to use.
+   *
+   * @default 'default'
+   */
+  surfaceType?: 'default' | 'inverse';
 }
 
 /**
@@ -107,14 +113,25 @@ export interface InteractiveStateProps {
  * ```
  * - `color`: Base color value.
  * - `fallback`: Fallback color value if the base color is not defined or invalid.
- * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.color.accent....` or `system.color.surface....`).
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from (i.e. `system.legacy.color.accent....` or `system.legacy.color.surface....`).
  *
  */
-const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+const hover = ({
+  color,
+  fallback,
+  colorType = 'accent',
+  surfaceType = 'default',
+}: InteractiveStateProps) => {
+  const mixinColor =
+    colorType === 'accent'
+      ? system.legacy.color.accent.overlay.hover
+      : surfaceType === 'default'
+        ? system.legacy.color.surface.overlay.hover.default
+        : system.legacy.color.surface.overlay.hover.inverse;
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinColor: mixinColor,
     mixinValue: system.legacy.opacity[colorType].hover,
   });
 };
@@ -129,7 +146,7 @@ const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) =
  * ```
  * - `color`: Base color value.
  * - `fallback`: Fallback color value if the base color is not defined or invalid.
- * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.color.accent....`, `system.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
+ * - `colorType`: A string that will determine where the mixin color and the mixin percentage comes from in tokens (i.e. `system.legacy.color.accent....`, `system.legacy.color.surface....`, `system.opacity.accent....` or `system.opacity.surface....`).
  *
  * @param color
  * The value being darkened.
@@ -140,11 +157,22 @@ const hover = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) =
  * @param colorType
  * A string that will determine where the mixin color and the mixin percentage comes from within tokens.
  */
-const pressed = ({color, fallback, colorType = 'accent'}: InteractiveStateProps) => {
+const pressed = ({
+  color,
+  fallback,
+  colorType = 'accent',
+  surfaceType = 'default',
+}: InteractiveStateProps) => {
+  const mixinColor =
+    colorType === 'accent'
+      ? system.legacy.color.accent.overlay.pressed
+      : surfaceType === 'default'
+        ? system.legacy.color.surface.overlay.pressed.default
+        : system.legacy.color.surface.overlay.pressed.inverse;
   return darken({
     color: color,
     fallback: fallback,
-    mixinColor: system.legacy.color[colorType].overlay.mixin,
+    mixinColor: mixinColor,
     mixinValue: system.legacy.opacity[colorType].pressed,
   });
 };
