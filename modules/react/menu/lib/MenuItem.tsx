@@ -97,8 +97,8 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: system.sana.color.brand.fg.selected,
-      backgroundColor: system.sana.color.brand.surface.selected,
+      color: system.legacy.color.brand.fg.selected,
+      backgroundColor: system.legacy.color.brand.surface.selected,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
@@ -133,8 +133,8 @@ export const menuItemStencil = createStencil({
     // de-emphasize this item's focus ring and show selected styling instead to indicate it's part
     // of the open ancestor trail rather than the actively focused item.
     '&[aria-expanded="true"]:is(.focus, :focus-visible)': {
-      color: system.sana.color.brand.fg.selected,
-      backgroundColor: system.sana.color.brand.surface.selected,
+      color: system.legacy.color.brand.fg.selected,
+      backgroundColor: system.legacy.color.brand.surface.selected,
       outline: 'none',
     },
 
@@ -149,7 +149,7 @@ export const menuItemStencil = createStencil({
 
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: system.sana.color.brand.surface.selected,
+        backgroundColor: system.legacy.color.brand.surface.selected,
         opacity: system.opacity.disabled,
       },
     },
