@@ -359,6 +359,8 @@ If you customize `brand.success.base` in your theme, please verify the following
 - The default tooltip has been restyled from a dark surface to a light surface.
 - A visible border (`system.color.border.default`) is now applied to the container, replacing the
   previous transparent outline.
+- Tooltip boundaries remain visible in Windows High Contrast mode: when High Contrast is detected,
+  Tooltip uses a solid outline (`outline: solid 1px CanvasText`) to ensure clear visibility.
 - Shape is now fully rounded using `system.shape.full`.
 - Type level is now `subtext.lg` (previously `subtext.md`).
 - Padding and spacing have been adjusted to accommodate the new styling.

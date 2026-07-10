@@ -59,6 +59,10 @@ const toastStencil = createStencil({
     border: `${px2rem(1)} solid ${system.color.border.default}`,
     backgroundColor: system.legacy.color.surface.default,
     boxShadow: system.depth[3],
+
+    '@media (forced-colors: active)': {
+      outline: `${px2rem(1)} solid CanvasText`,
+    },
   },
 });
 

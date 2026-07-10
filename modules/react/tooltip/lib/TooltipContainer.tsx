@@ -102,6 +102,10 @@ export const tooltipContainerStencil = createStencil({
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
       bottom: calc.negate(base.legacy.size50),
     },
+
+    '@media (forced-colors: active)': {
+      outline: `${px2rem(1)} solid CanvasText`,
+    },
   }),
   modifiers: {
     elementHasFocus: {
