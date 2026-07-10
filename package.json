@@ -139,7 +139,7 @@
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-expressive-icons-web": "1.0.2",
   "@workday/canvas-system-icons-web": "4.0.4",
-  "@workday/canvas-tokens-web": "4.4.0-beta.3",
+  "@workday/canvas-tokens-web": "4.4.0-beta.4",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
