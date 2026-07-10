@@ -120,12 +120,10 @@ export const segmentedControlItemStencil = createStencil({
       large: {
         height: system.legacy.size.sm,
         fontSize: system.legacy.fontSize.subtext.lg,
-        [systemIconStencil.vars.size]: 14,
       },
       medium: {
         height: base.legacy.size350,
         fontWeight: system.sana.fontWeight.semibold,
-        [systemIconStencil.vars.size]: 14,
       },
       small: {
         fontFamily: system.fontFamily.default,
@@ -189,7 +187,7 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'small', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${base.size75} ${system.legacy.padding.xs}`,
+        paddingInline: `${base.legacy.size75} ${system.legacy.padding.xs}`,
       },
     },
     {
