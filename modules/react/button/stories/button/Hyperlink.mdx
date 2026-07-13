@@ -8,6 +8,7 @@ import {ExternalLinkRTL} from './examples/ExternalHyperlinkRTL';
 import {Link} from './examples/Hyperlink';
 import {InBodyText} from './examples/HyperlinkInBodyText';
 import {LinkInverse} from './examples/HyperlinkInverse';
+import {NeutralLink} from './examples/NeutralHyperlink';
 import {StandaloneLink} from './examples/StandaloneHyperlink';
 
 import HyperlinkStoriesMeta from './Hyperlink.stories';
@@ -50,6 +51,16 @@ outside of a paragraph or body text. This will remove the underline.
 This variant can also be used with the `ExternalHyperlink` component.
 
 <ExampleCodeBlock code={StandaloneLink} />
+
+#### Neutral
+
+`Hyperlink`s also have a `neutral` variant. This is an underlined dark gray alternate to the default
+blue hyperlink. Unlike `standalone`, it keeps the underline. This variant is meant for use on
+colored backgrounds.
+
+This variant can also be used with the `ExternalHyperlink` component.
+
+<ExampleCodeBlock code={NeutralLink} />
 
 #### In Body Text
 

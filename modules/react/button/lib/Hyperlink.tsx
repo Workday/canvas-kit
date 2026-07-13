@@ -10,8 +10,9 @@ export interface HyperlinkProps extends CSProps {
    * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
    * - `standalone`: removes the underline of the Hyperlink. This is useful when a hyperlink is used outside the context of a paragraph or body text.
    * - `standaloneInverse`: removes the underline of the Hyperlink and sets the color to white. This is useful when a hyperlink is used outside the context of a paragraph or body text on a dark background.
+   * - `neutral`: sets the color to a dark gray (keeps the underline). Use this variant when you want to use a hyperlink in a neutral color scheme (for example, on colored backgrounds).
    */
-  variant?: 'inverse' | 'standalone' | 'standaloneInverse';
+  variant?: 'inverse' | 'standalone' | 'standaloneInverse' | 'neutral';
   /**
    * attribute for the hyperlink URL
    */
@@ -75,6 +76,17 @@ export const hyperlinkStencil = createStencil({
         '&:active, &.active': {
           color: system.legacy.color.fg.info.strong,
           background: system.legacy.color.surface.navigation,
+        },
+      },
+      neutral: {
+        color: system.color.fg.default,
+        '&:hover, &.hover': {
+          color: system.color.fg.strong,
+          background: system.legacy.color.surface.overlay.hover.default,
+        },
+        '&:active, &.active': {
+          color: system.color.fg.strong,
+          background: system.legacy.color.surface.overlay.pressed.default,
         },
       },
     },
