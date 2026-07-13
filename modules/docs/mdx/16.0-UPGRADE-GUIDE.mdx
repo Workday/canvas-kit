@@ -32,6 +32,8 @@ Soon to be...
     - [Switch](#switch)
     - [Text Area](#text-area)
     - [Text Input](#text-input)
+  - [Navigation Components](#navigation-components)
+    - [Hyperlink](#hyperlink)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -333,6 +335,41 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Shape is now **12px** (previously 8px).
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
+
+### Navigation Components
+
+#### Hyperlink
+
+##### Visual Updates
+
+- Default link color uses Sana brand link tokens (`system.sana.color.brand.fg.link.default` /
+  `.hover`). Hover and active text is now the darker link-hover blue.
+- Hover and active backgrounds use surface overlay tokens instead of `surface.alt`.
+
+##### New Neutral Variant
+
+We've added a `neutral` variant: underlined dark-gray link text (`fg.default` → `fg.strong` on
+hover/active). Use it as an alternate to the default blue link — for example on colored backgrounds.
+Unlike `standalone`, it keeps the underline.
+
+```tsx
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
+
+<Hyperlink variant="neutral" href="#neutral-hyperlink">
+  Neutral Hyperlink
+</Hyperlink>
+<ExternalHyperlink
+  variant="neutral"
+  href="#neutral-external-hyperlink"
+  iconLabel="Opens new window"
+>
+  Neutral External Hyperlink
+</ExternalHyperlink>
+```
+
+> **Note:** Prefer `standalone` / `standaloneInverse` when the link sits outside body text and
+> should not be underlined (e.g. breadcrumbs). Prefer `neutral` when you want an underlined
+> neutral-colored link.
 
 ## New Utilities
 
