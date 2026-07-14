@@ -2,7 +2,7 @@
   "packages": [
     "modules/**"
   ],
-  "version": "15.0.21",
+  "version": "15.1.0",
   "npmClient": "yarn",
   "command": {
     "version": {
