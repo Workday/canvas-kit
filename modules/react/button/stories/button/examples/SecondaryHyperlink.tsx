@@ -7,17 +7,20 @@ const containerStyles = createStyles({
   gap: system.gap.md,
 });
 
-export const NeutralLink = () => (
+export const SecondaryLink = () => (
   <div className={containerStyles}>
-    <Hyperlink variant="neutral" href="#neutral-hyperlink">
-      Neutral Hyperlink
+    <Hyperlink variant="secondary" href="#secondary-hyperlink">
+      Secondary Hyperlink
     </Hyperlink>
     <ExternalHyperlink
-      variant="neutral"
-      href="#neutral-external-hyperlink"
+      variant="secondary"
+      href="#secondary-external-hyperlink"
       iconLabel="Opens new window"
     >
-      Neutral External Hyperlink
+      Secondary External Hyperlink
     </ExternalHyperlink>
+    <Hyperlink variant="secondary" type="standalone" href="#secondary-standalone-hyperlink">
+      Secondary Standalone Hyperlink
+    </Hyperlink>
   </div>
 );

@@ -346,30 +346,55 @@ If you customize `brand.success.base` in your theme, please verify the following
   `.hover`). Hover and active text is now the darker link-hover blue.
 - Hover and active backgrounds use surface overlay tokens instead of `surface.alt`.
 
-##### New Neutral Variant
+##### New Secondary Variant and `type` Prop
 
-We've added a `neutral` variant: underlined dark-gray link text (`fg.default` → `fg.strong` on
-hover/active). Use it as an alternate to the default blue link — for example on colored backgrounds.
-Unlike `standalone`, it keeps the underline.
+A new "secondary" variant and `type` prop have been added to `Hyperlink` and `ExternalHyperlink`.
+Color and underline are now controlled by separate props:
+
+| Need                       | API                                       |
+| -------------------------- | ----------------------------------------- |
+| Blue, underlined (default) | _(no props)_                              |
+| Blue, no underline         | `type="standalone"`                       |
+| Inverse, underlined        | `variant="inverse"`                       |
+| Inverse, no underline      | `variant="inverse"` `type="standalone"`   |
+| Dark gray, underlined      | `variant="secondary"`                     |
+| Dark gray, no underline    | `variant="secondary"` `type="standalone"` |
+
+`variant` is now either 'inverse' or 'secondary'. Underline is controlled by `type` which is either
+'inline' or 'standalone', defaulting to 'inline'. The compound variants `standalone`, and
+`standaloneInverse` are **removed**.
 
 ```tsx
 import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
 
-<Hyperlink variant="neutral" href="#neutral-hyperlink">
-  Neutral Hyperlink
+<Hyperlink variant="secondary" href="#secondary-hyperlink">
+  Secondary Hyperlink
+</Hyperlink>
+<Hyperlink type="standalone" href="#standalone-hyperlink">
+  Standalone Hyperlink
 </Hyperlink>
 <ExternalHyperlink
-  variant="neutral"
-  href="#neutral-external-hyperlink"
+  variant="secondary"
+  type="standalone"
+  href="#secondary-standalone-external-hyperlink"
   iconLabel="Opens new window"
 >
-  Neutral External Hyperlink
+  Secondary Standalone External Hyperlink
 </ExternalHyperlink>
 ```
 
-> **Note:** Prefer `standalone` / `standaloneInverse` when the link sits outside body text and
-> should not be underlined (e.g. breadcrumbs). Prefer `neutral` when you want an underlined
-> neutral-colored link.
+###### Breaking Change Migration
+
+Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically:
+
+| Before                        | After                                   |
+| ----------------------------- | --------------------------------------- |
+| `variant="standalone"`        | `type="standalone"`                     |
+| `variant="standaloneInverse"` | `variant="inverse"` `type="standalone"` |
+
+> **Note:** The composed `variant="inverse"` `type="standalone"` focus ring uses the inverse focus
+> style from the `inverse` variant. The former `standaloneInverse` variant used
+> `system.legacy.color.focus.inverse` — expect a small focus-ring difference after migration.
 
 ## New Utilities
 

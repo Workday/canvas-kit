@@ -23,7 +23,8 @@ export const ExternalLinkInverse = () => (
     </ExternalHyperlink>
     <ExternalHyperlink
       href="https://workday.com"
-      variant="standaloneInverse"
+      variant="inverse"
+      type="standalone"
       iconLabel="Opens new window"
     >
       Hyperlink

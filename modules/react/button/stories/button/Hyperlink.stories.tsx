@@ -7,7 +7,7 @@ import {ExternalLinkRTL as ExternalLinkRTLExample} from './examples/ExternalHype
 import {Link as LinkExample} from './examples/Hyperlink';
 import {InBodyText as InBodyTextExample} from './examples/HyperlinkInBodyText';
 import {LinkInverse as LinkInverseExample} from './examples/HyperlinkInverse';
-import {NeutralLink as NeutralLinkExample} from './examples/NeutralHyperlink';
+import {SecondaryLink as SecondaryLinkExample} from './examples/SecondaryHyperlink';
 import {StandaloneLink as StandaloneLinkExample} from './examples/StandaloneHyperlink';
 
 export default {
@@ -38,8 +38,8 @@ export const ExternalLinkRTL: StoryObj = {
 export const StandaloneLink: StoryObj = {
   render: StandaloneLinkExample,
 };
-export const NeutralLink: StoryObj = {
-  render: NeutralLinkExample,
+export const SecondaryLink: StoryObj = {
+  render: SecondaryLinkExample,
 };
 export const InBodyText: StoryObj = {
   render: InBodyTextExample,

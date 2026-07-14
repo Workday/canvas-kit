@@ -8,7 +8,7 @@ import {ExternalLinkRTL} from './examples/ExternalHyperlinkRTL';
 import {Link} from './examples/Hyperlink';
 import {InBodyText} from './examples/HyperlinkInBodyText';
 import {LinkInverse} from './examples/HyperlinkInverse';
-import {NeutralLink} from './examples/NeutralHyperlink';
+import {SecondaryLink} from './examples/SecondaryHyperlink';
 import {StandaloneLink} from './examples/StandaloneHyperlink';
 
 import HyperlinkStoriesMeta from './Hyperlink.stories';
@@ -45,22 +45,23 @@ on a dark or colorful background.
 
 #### Standalone
 
-`Hyperlink`s also have a `standalone` variant. Use this variant when you need to place a `Hyperlink`
-outside of a paragraph or body text. This will remove the underline.
+Use `type="standalone"` when you need to place a `Hyperlink` outside of a paragraph or body text.
+This removes the underline. By default, `type` is `"inline"` and links are underlined.
 
-This variant can also be used with the `ExternalHyperlink` component.
+This prop can also be used with the `ExternalHyperlink` component, and can be combined with
+`variant` (for example, `variant="secondary"` `type="standalone"`).
 
 <ExampleCodeBlock code={StandaloneLink} />
 
-#### Neutral
+#### Secondary
 
-`Hyperlink`s also have a `neutral` variant. This is an underlined dark gray alternate to the default
-blue hyperlink. Unlike `standalone`, it keeps the underline. This variant is meant for use on
-colored backgrounds.
+`Hyperlink`s also have a `secondary` variant. This is a dark gray alternate to the default blue
+hyperlink. Combine this with `type="standalone"` to remove its underline. This variant is meant for
+use on colored backgrounds.
 
 This variant can also be used with the `ExternalHyperlink` component.
 
-<ExampleCodeBlock code={NeutralLink} />
+<ExampleCodeBlock code={SecondaryLink} />
 
 #### In Body Text
 
