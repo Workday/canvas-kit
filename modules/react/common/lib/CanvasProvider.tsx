@@ -214,10 +214,19 @@ export const useCanvasThemeToCssVars = (
   const style = elemProps.style || {};
   const {palette} = filledTheme.canvas;
 
+  // A consumer who passes any `palette` (partial or the full `defaultCanvasTheme`) is
+  // intentionally scoping/resetting branding for this subtree, opting out of global CSS
+  // theming (e.g. a `data-theme` attribute). In that case we write every branded token from
+  // the filled theme, even ones that resolve to the same value as `defaultCanvasTheme`, so the
+  // override actually wins over the global cascade. If no `palette` was passed, we write
+  // nothing and let global theming (and `defaultBranding` as a last resort) take over.
+  const hasExplicitPalette =
+    !!theme?.canvas?.palette && Object.keys(theme.canvas.palette).length > 0;
+
   (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
     if (color === 'common') {
       (['focusOutline', 'alertInner', 'alertOuter', 'errorInner'] as const).forEach(key => {
-        if (palette.common[key] !== defaultCanvasTheme.palette.common[key]) {
+        if (hasExplicitPalette) {
           const value = maybeWrapCSSVariables(palette.common[key]);
 
           // Set deprecated token for backwards compatibility
@@ -274,9 +283,10 @@ export const useCanvasThemeToCssVars = (
     } else {
       (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
         key => {
-          // We only want to set custom colors if they do not match the default. The `defaultBranding` class will take care of the rest.
-          //@ts-ignore
-          if (palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
+          // Only force an override when the consumer explicitly passed a `palette` (see
+          // `hasExplicitPalette` above). Otherwise leave these tokens alone so global CSS
+          // theming (e.g. a `data-theme` attribute) and `defaultBranding` continue to cascade.
+          if (hasExplicitPalette) {
             const value = maybeWrapCSSVariables(palette[color][key]);
 
             // Set deprecated token (e.g., brand.primary.base) for backwards compatibility
