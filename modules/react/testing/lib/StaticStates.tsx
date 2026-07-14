@@ -43,7 +43,12 @@ export const StaticStates: React.FC<
   localTheme._styleRewriteFn = convertToStaticStates;
 
   return (
-    <CanvasProvider theme={localTheme} className={className} {...elemProps}>
+    <CanvasProvider
+      theme={localTheme}
+      className={className}
+      {...elemProps}
+      data-theme="sana-canvas"
+    >
       {children}
     </CanvasProvider>
   );
