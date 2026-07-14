@@ -53,10 +53,7 @@ export interface ItemProps extends ButtonContainerProps {
 export const segmentedControlItemStencil = createStencil({
   extends: buttonStencil,
   base: {
-    fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    ...system.legacy.type.subtext.lg,
     fontWeight: system.fontWeight.medium,
     textAlign: 'start',
     paddingInline: 0,
@@ -102,7 +99,7 @@ export const segmentedControlItemStencil = createStencil({
       },
 
       '&:focus-visible, &.focus': {
-        boxShadow: `0 0 0 ${px2rem(2)} ${system.color.border.inverse.default},0 0 0 ${px2rem(4)} ${system.color.brand.border.primary}`,
+        boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.border.inverse.default},0 0 0 ${px2rem(4)} ${system.color.brand.border.primary}`,
       },
 
       '&:disabled, &.disabled': {
