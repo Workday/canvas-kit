@@ -1,0 +1,191 @@
+import React from 'react';
+
+import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
+import {Box} from '@workday/canvas-kit-react/layout';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {configureIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {customColorTheme} from '../../../../utils/storybook';
+import {Basic} from './examples/Basic';
+import {RightToLeft} from './examples/RightToLeft';
+
+const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
+
+export default {
+  title: 'Testing/Preview/Tabs',
+  component: Tabs,
+  parameters: {
+    chromatic: {
+      disable: false,
+      delay: fontDelay,
+    },
+  },
+};
+
+type MyTabItem = {
+  id: string;
+  text: React.ReactNode;
+  contents: string;
+};
+
+const TabsExample = (props: React.ComponentProps<typeof StaticStates> = {}) => {
+  return (
+    <StaticStates {...props}>
+      <ComponentStatesTable
+        rowProps={[
+          {label: 'Filled No Icon', props: {variant: 'filled', hasIcon: false}},
+          {label: 'Outline No Icon', props: {variant: 'outline', hasIcon: false}},
+          {label: 'Filled Icon', props: {variant: 'filled', hasIcon: true}},
+          {label: 'Outline Icon', props: {variant: 'outline', hasIcon: true}},
+        ]}
+        columnProps={[
+          {label: 'Default', props: {'aria-selected': false}},
+          {label: 'Selected', props: {'aria-selected': true}},
+          {label: 'Focus', props: {className: 'focus'}},
+          {label: 'Hover', props: {className: 'hover'}},
+
+          {label: 'Disabled', props: {'aria-disabled': true}},
+        ]}
+      >
+        {({hasIcon, variant, ...props}) => (
+          <Tabs variant={variant}>
+            {hasIcon ? (
+              <Tabs.Item {...props}>
+                <Tabs.Item.Icon icon={configureIcon} />
+                <Tabs.Item.Text>Icon</Tabs.Item.Text>
+              </Tabs.Item>
+            ) : (
+              <Tabs.Item {...props}>Tab</Tabs.Item>
+            )}
+          </Tabs>
+        )}
+      </ComponentStatesTable>
+    </StaticStates>
+  );
+};
+
+export const TabStates = {
+  render: () => (
+    <>
+      <h3>Default</h3>
+      <TabsExample />
+      <h3>Themed</h3>
+      <TabsExample theme={{canvas: customColorTheme}} />
+      <h3>RTL</h3>
+      <TabsExample dir="rtl" />
+    </>
+  ),
+};
+
+export const Bidirectionality = {
+  render: () => {
+    return (
+      <>
+        <h3>Left-to-right</h3>
+        <div>
+          <Basic />
+        </div>
+        <br />
+        <h3>Right-to-left</h3>
+        <div>
+          <RightToLeft />
+        </div>
+      </>
+    );
+  },
+};
+
+const OverflowTabs = () => {
+  const [items] = React.useState<MyTabItem[]>([
+    {id: 'first', text: 'First Tab', contents: 'Contents of First Tab'},
+    {id: 'second', text: 'Second Tab', contents: 'Contents of Second Tab'},
+    {id: 'third', text: 'Third Tab', contents: 'Contents of Third Tab'},
+    {id: 'fourth', text: 'Fourth Tab', contents: 'Contents of Fourth Tab'},
+    {id: 'fifth', text: 'Fifth Tab', contents: 'Contents of Fifth Tab'},
+    {id: 'sixth', text: 'Sixth Tab', contents: 'Contents of Sixth Tab'},
+    {id: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
+  ]);
+
+  return (
+    <>
+      <Tabs items={items}>
+        <Tabs.List overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}>
+          {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+        </Tabs.List>
+        <Tabs.Menu.Popper>
+          <Tabs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
+            <Tabs.Menu.List>
+              {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+            </Tabs.Menu.List>
+          </Tabs.Menu.Card>
+        </Tabs.Menu.Popper>
+        <Tabs.Panels>
+          {(item: MyTabItem) => (
+            <Tabs.Panel cs={{marginBlockStart: system.gap.lg}}>{item.contents}</Tabs.Panel>
+          )}
+        </Tabs.Panels>
+      </Tabs>
+      <Tabs variant="outline" items={items}>
+        <Tabs.List
+          overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}
+          cs={{marginBlockStart: system.gap.lg}}
+        >
+          {(item: MyTabItem) => <Tabs.Item>{item.text}</Tabs.Item>}
+        </Tabs.List>
+        <Tabs.Menu.Popper>
+          <Tabs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
+            <Tabs.Menu.List>
+              {(item: MyTabItem) => <Tabs.Menu.Item>{item.text}</Tabs.Menu.Item>}
+            </Tabs.Menu.List>
+          </Tabs.Menu.Card>
+        </Tabs.Menu.Popper>
+        <Tabs.Panels>
+          {(item: MyTabItem) => (
+            <Tabs.Panel cs={{marginBlockStart: system.gap.lg}}>{item.contents}</Tabs.Panel>
+          )}
+        </Tabs.Panels>
+      </Tabs>
+    </>
+  );
+};
+
+export const Overflow = {
+  parameters: {
+    chromatic: {
+      viewports: [480, 1200],
+    },
+  },
+  render: () => {
+    return (
+      <Box cs={{width: px2rem(360)}}>
+        <OverflowTabs />
+      </Box>
+    );
+  },
+};
+
+export const ContainerWidth = {
+  render: () => {
+    return (
+      <StaticStates>
+        <ComponentStatesTable
+          rowProps={[
+            {label: '100%', props: {width: '100%'}},
+            {label: '500px', props: {width: '500px'}},
+            {label: '360px', props: {width: '360px'}},
+            {label: '150px', props: {width: '150px'}},
+          ]}
+          columnProps={[{label: 'Overflow Tabs', props: {}}]}
+        >
+          {({width}) => (
+            <Box cs={{width}}>
+              <OverflowTabs />
+            </Box>
+          )}
+        </ComponentStatesTable>
+      </StaticStates>
+    );
+  },
+};
