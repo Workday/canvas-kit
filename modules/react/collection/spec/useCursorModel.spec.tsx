@@ -1,12 +1,12 @@
 import {
-  getOffsetItem,
   getFirstOfRow,
   getLastOfRow,
-  getPreviousPage,
   getNextPage,
+  getOffsetItem,
+  getPreviousPage,
   isCursor,
-  useCursorListModel,
   navigationManager,
+  useCursorListModel,
   wrappingNavigationManager,
 } from '../lib/useCursorListModel';
 

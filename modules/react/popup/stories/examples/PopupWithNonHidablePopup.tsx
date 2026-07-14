@@ -1,10 +1,11 @@
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   Popup,
-  useCloseOnOutsideClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
+import {system} from '@workday/canvas-tokens-web';
 
 export const PopupWithNonHidablePopup = () => {
   const popup1 = usePopupModel();
@@ -14,7 +15,7 @@ export const PopupWithNonHidablePopup = () => {
   useCloseOnEscape(popup1);
 
   return (
-    <Flex gap="s">
+    <Flex cs={{gap: system.gap.md}}>
       <Popup model={popup1}>
         <Popup.Target>Open Popup 1</Popup.Target>
         <Popup.Popper>

@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {
   createElemPropsHook,
+  useLocalRef,
   useMountLayout,
   useResizeObserver,
-  useLocalRef,
 } from '@workday/canvas-kit-react/common';
 
 import {useOverflowListModel} from './useOverflowListModel';

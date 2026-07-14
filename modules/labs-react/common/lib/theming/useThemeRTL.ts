@@ -1,7 +1,8 @@
-import {CanvasTheme, useIsRTL, useTheme, StyleRewriteFn} from '@workday/canvas-kit-react/common';
-import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 import {useMemo} from 'react';
 import rtlCSSJS from 'rtl-css-js';
+
+import {CanvasTheme, StyleRewriteFn, useIsRTL, useTheme} from '@workday/canvas-kit-react/common';
+import {CSSProperties} from '@workday/canvas-kit-react/tokens';
 
 export type ComponentStyles = Record<string, CSSProperties>;
 type ThemeWithStaticStates = CanvasTheme & {_styleRewriteFn?: StyleRewriteFn};

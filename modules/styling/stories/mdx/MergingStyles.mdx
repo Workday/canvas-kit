@@ -1,6 +1,9 @@
-import {ExampleCodeBlock, SymbolDoc, StorybookStatusIndicator} from '@workday/canvas-kit-docs';
-import {InformationHighlight} from '@workday/canvas-kit-preview-react/information-highlight';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, StorybookStatusIndicator, SymbolDoc} from '@workday/canvas-kit-docs';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 import {system} from '@workday/canvas-tokens-web';
+
 import {StylingOverrides} from './examples/StylingOverrides';
 
 <Meta title="Styling/Guides/Merging Styles" />
@@ -61,8 +64,9 @@ cause style class merging. For example:
 
 ```tsx
 import styled from '@emotion/styled';
-import {createStyles} from '@workday/canvas-kit-styling';
+
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
 
 const styles1 = createStyles({
   padding: 4,
@@ -80,6 +84,7 @@ const Component2 = props => {
   return <Component1 cs={styles2} />;
 };
 
+// Not recommended approach
 const Component3 = styled(Component1)({
   padding: 8,
 });
@@ -150,7 +155,7 @@ by making all styles have the same specificity of `0-1-0` and inserting `base` s
 in `base`, a `modifier`, and a `compound` modifier, the `compound` modifier would win because it is
 the last defined. This should be the expected order.
 
-<InformationHighlight className="sb-unstyled" variant="caution" cs={{marginBlock: system.space.x4}}>
+<InformationHighlight className="sb-unstyled" variant="caution" cs={{marginBlock: system.gap.md}}>
   <InformationHighlight.Icon />
   <InformationHighlight.Heading>Caution</InformationHighlight.Heading>
   <InformationHighlight.Body>
@@ -163,4 +168,3 @@ the last defined. This should be the expected order.
 ### mergeStyles API
 
 <SymbolDoc hideHeading name="mergeStyles" />
-

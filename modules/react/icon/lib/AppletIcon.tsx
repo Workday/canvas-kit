@@ -1,10 +1,12 @@
-import {colors, BrandingColor, CanvasColor} from '@workday/canvas-kit-react/tokens';
-import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {CSSObject} from '@emotion/styled';
-import {Svg, SvgProps, svgStencil} from './Svg';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, createStencil, px2rem, cssVar} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {BrandingColor, CanvasColor, colors} from '@workday/canvas-kit-react/tokens';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base as baseTokens, system} from '@workday/canvas-tokens-web';
+import {CanvasAppletIcon, CanvasIconTypes} from '@workday/design-assets-types';
+
+import {Svg, SvgProps, svgStencil} from './Svg';
 
 /**
  * @deprecated Interface `AppletIconStyles` will be removed in a future version. All props will be moved inside `AppletIconProps`.
@@ -62,6 +64,9 @@ export const appletIconStyles = ({
   };
 };
 
+/**
+ *  @deprecated ⚠️ `AppletIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export interface AppletIconProps
   extends AppletIconStyles,
     Pick<SvgProps, 'shouldMirror' | 'shouldMirrorInRTL' | 'cs'> {
@@ -76,6 +81,9 @@ export interface AppletIconProps
   size?: number;
 }
 
+/**
+ *  @deprecated ⚠️ `appletIconStencil` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const appletIconStencil = createStencil({
   extends: svgStencil,
   vars: {
@@ -90,31 +98,34 @@ export const appletIconStencil = createStencil({
       fill: system.color.fg.inverse,
     },
     '& .color-200': {
-      fill: cssVar(color200, base.blue200),
+      fill: cssVar(color200, baseTokens.legacy.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, base.blue400),
+      fill: cssVar(color300, baseTokens.legacy.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, base.blue600),
+      fill: cssVar(color400, baseTokens.legacy.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, base.blue700),
+      fill: cssVar(color500, baseTokens.legacy.blue700),
     },
   }),
 });
 
+/**
+ *  @deprecated ⚠️ `AppletIcon` is deprecated and will be removed in a future major version. Deprecated in v15.0.0.
+ */
 export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
-      color200: base[`${color}200` as keyof typeof base],
-      color300: base[`${color}300` as keyof typeof base],
-      color400: base[`${color}400` as keyof typeof base],
-      color500: base[`${color}500` as keyof typeof base],
+      color200: baseTokens.legacy[`${color}200` as keyof typeof baseTokens.legacy],
+      color300: baseTokens.legacy[`${color}300` as keyof typeof baseTokens.legacy],
+      color400: baseTokens.legacy[`${color}400` as keyof typeof baseTokens.legacy],
+      color500: baseTokens.legacy[`${color}500` as keyof typeof baseTokens.legacy],
     };
 
     return (
@@ -124,7 +135,10 @@ export const AppletIcon = createComponent('span')({
         as={Element}
         ref={ref}
         {...handleCsProp(elemProps, [
-          appletIconStencil({...colors, size: size ? px2rem(size) : undefined}),
+          appletIconStencil({
+            ...colors,
+            size: size ? px2rem(size) : undefined,
+          }),
         ])}
       />
     );

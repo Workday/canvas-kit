@@ -1,19 +1,17 @@
-import * as React from 'react';
-import styled from '@emotion/styled';
-
-import {colors, type, depth, space, borderRadius} from '@workday/canvas-kit-react/tokens';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-const StyledCard = styled('div')({
-  ...depth[3],
-  padding: space.m,
-  borderRadius: borderRadius.m,
-  backgroundColor: colors.cinnamon300,
-  ...type.levels.body.medium,
+const cardStyles = createStyles({
+  ...system.type.body.md,
+  boxShadow: system.depth[3],
+  padding: system.padding.lg,
+  borderRadius: system.shape.md,
+  backgroundColor: system.color.accent.danger,
 });
 
 export const Overview = () => (
   <Flex>
-    <StyledCard>Using Tokens To Style</StyledCard>
+    <div className={cardStyles}>Using Tokens To Style</div>
   </Flex>
 );

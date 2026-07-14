@@ -1,10 +1,12 @@
 import React from 'react';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {system} from '@workday/canvas-tokens-web';
 
 export const CustomFocus = () => {
   const longDescID = useUniqueId();
@@ -26,10 +28,10 @@ export const CustomFocus = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>Acknowledge License</Modal.Heading>
           <Modal.Body>
-            <Box as="p" id={longDescID} marginTop={0} marginBottom="m">
+            <Box as="p" id={longDescID} cs={{marginBlockStart: 0, marginBlockEnd: system.gap.md}}>
               Enter your initials to acknowledge the license.
             </Box>
-            <FormField cs={{marginBottom: 0}}>
+            <FormField cs={{marginBlockEnd: 0}}>
               <FormField.Label>Initials</FormField.Label>
               <FormField.Input
                 as={TextInput}
@@ -39,7 +41,7 @@ export const CustomFocus = () => {
               />
             </FormField>
           </Modal.Body>
-          <Flex gap="s" padding="xxs">
+          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>

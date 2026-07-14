@@ -1,9 +1,10 @@
 import React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
-import {Flex} from '@workday/canvas-kit-react/layout';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 const parentContainerStyles = createStyles({

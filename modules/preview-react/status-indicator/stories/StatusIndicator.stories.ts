@@ -1,8 +1,10 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './StatusIndicator.mdx';
 
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+
+import mdxDoc from './StatusIndicator.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Custom as CustomExample} from './examples/Custom';
 import {Emphasis as EmphasisExample} from './examples/Emphasis';
 import {Icon as IconExample} from './examples/Icon';
 import {Overflow as OverflowExample} from './examples/Overflow';
@@ -35,4 +37,7 @@ export const Overflow: Story = {
 };
 export const Variants: Story = {
   render: VariantsExample,
+};
+export const Custom: Story = {
+  render: CustomExample,
 };

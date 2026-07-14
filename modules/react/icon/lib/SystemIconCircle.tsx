@@ -1,12 +1,20 @@
-import {colors} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon, systemIconStencil} from './SystemIcon';
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {createComponent, pickForegroundColor} from '@workday/canvas-kit-react/common';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, cssVar, px2rem, CSProps} from '@workday/canvas-kit-styling';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
-import {transformColorNameToToken} from './Svg';
+import {CanvasSystemIcon as LegacyCanvasSystemIcon} from '@workday/design-assets-types';
 
+import {resolveSize} from './Svg';
+import {SystemIcon, systemIconStencil} from './SystemIcon';
+
+/* @deprecated Use tokens instead. Deprecated in v15.0.0. */
 export enum SystemIconCircleSize {
   xs = 16,
   s = 24,
@@ -16,27 +24,28 @@ export enum SystemIconCircleSize {
   xxl = 120,
 }
 
-export interface SystemIconCircleProps extends CSProps {
+/** Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens.
+ * @deprecated Use tokens instead. Deprecated in v15.0.0.
+ * */
+const sizes = {
+  xs: system.legacy.size.xxxs,
+  s: system.legacy.size.xs,
+  m: system.legacy.size.sm,
+  l: system.legacy.size.md,
+  xl: system.legacy.size.xxl,
+  xxl: px2rem(120),
+};
+
+type SystemIconCircleCommonProps = {
   /**
-   * The background color of the SystemIconCircle
-   * @default base.soap300
+   * The icon to display from `@workday/canvas-system-icons-web`.
    */
-  background?: string;
+  icon: CanvasSystemIcon | LegacyCanvasSystemIcon;
   /**
-   * The icon color for the SystemIconCircle. Required if background specified as a CSS variable.
-   * If not specified, it will be calculated based on the background color.
-   * @default rgba(0,0,0,0.65)
-   */
-  color?: string;
-  /**
-   * The icon to display from `@workday/canvas-accent-icons-web`.
-   */
-  icon: CanvasSystemIcon;
-  /**
-   * The size of the SystemIconCircle.
+   * The size token of the SystemIconCircle.
    * @default SystemIconCircleSize.l
    */
-  size?: SystemIconCircleSize | number;
+  size?: SystemIconCircleSize | string | number;
   /**
    * If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to
    * always mirror the icon regardless of the content direction. If the SVG should mirror only when
@@ -51,32 +60,54 @@ export interface SystemIconCircleProps extends CSProps {
    * @default false
    */
   shouldMirrorInRTL?: boolean;
-}
+  /**
+   * If set to `true`, the icon will be displayed in inverse mode.
+   * @default false
+   */
+  inverse?: boolean;
+} & CSProps;
+
+/**
+ * Circle fill and icon color. When `background` is set, `color` is required so foreground/background
+ * stay paired for contrast.
+ */
+export type SystemIconCircleProps =
+  | (SystemIconCircleCommonProps & {background?: never; color?: never})
+  | (SystemIconCircleCommonProps & {background: string; color: string});
 
 export const systemIconCircleStencil = createStencil({
   vars: {
-    containerSize: '',
     background: '',
     color: '',
+    size: '',
   },
-  base: ({background, containerSize, color}) => ({
-    background: cssVar(background, system.color.bg.alt.soft),
+  base: ({background, color, size}) => ({
+    background: cssVar(background, system.legacy.color.surface.alt.default),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: system.space.zero,
+    padding: 0,
     border: 'none',
-    borderRadius: system.shape.round,
+    borderRadius: system.legacy.shape.full,
     overflow: 'hidden',
-    width: cssVar(containerSize, system.space.x10),
-    height: cssVar(containerSize, system.space.x10),
-    [systemIconStencil.vars.size]: calc.multiply(cssVar(containerSize, system.space.x10), 0.625),
+    width: cssVar(size, system.legacy.size.md),
+    height: cssVar(size, system.legacy.size.md),
+    // There is no `component.systemIcon.size.*` token for `40px` so leaving `size` here.
+    [systemIconStencil.vars.size]: calc.multiply(cssVar(size, system.legacy.size.md), 0.625),
     [systemIconStencil.vars.color]: color,
     '& img': {
       width: '100%',
       height: '100%',
     },
   }),
+  modifiers: {
+    inverse: {
+      true: ({background, color}) => ({
+        background: cssVar(background, system.legacy.color.accent.info),
+        [systemIconStencil.vars.color]: cssVar(color, system.color.fg.inverse),
+      }),
+    },
+  },
 });
 
 export const SystemIconCircle = createComponent('span')({
@@ -89,29 +120,21 @@ export const SystemIconCircle = createComponent('span')({
       icon,
       shouldMirror,
       shouldMirrorInRTL,
+      inverse,
       ...elemProps
     }: SystemIconCircleProps,
     ref,
     Element
   ) => {
-    // `pickForegroundColor` hasn't support to use css variables to generate foregroundColor
-    const backgroundFallback =
-      background && !background.startsWith('--') ? background : colors.soap200;
-
-    const iconColor = pickForegroundColor(
-      backgroundFallback,
-      'rgba(0,0,0,0.65)',
-      colors.frenchVanilla100
-    );
-
     return (
       <div
-        {...mergeStyles(
+        {...handleCsProp(
           elemProps,
           systemIconCircleStencil({
-            containerSize: typeof size === 'number' ? px2rem(size) : size,
-            background: transformColorNameToToken(background),
-            color: color || iconColor,
+            size: resolveSize(size, sizes),
+            background,
+            color,
+            inverse,
           })
         )}
       >

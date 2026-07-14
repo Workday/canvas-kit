@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 import {Card} from '@workday/canvas-kit-react/card';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -7,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 const customCardStyles = createStyles({
   boxShadow: system.depth[2],
   maxWidth: px2rem(320),
-  padding: system.space.x3,
+  padding: system.padding.sm,
 });
 
 export const WithCustomStyles = () => (

@@ -1,5 +1,5 @@
-import {Expandable} from '@workday/canvas-kit-react/expandable';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 
 export const RTL = () => {
   return (

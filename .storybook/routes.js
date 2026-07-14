@@ -1,5 +1,5 @@
 // List of routes The key is the Canvas Site URL The value is the first Storybook example ID. This
-// prevents odd scrolling. This file is used by the `webpack-loader-redirect-mdx-to-github` loader
+// prevents odd scrolling. This file is used by the `vite-plugin-redirect-mdx-to-github` loader
 // and will rewrite the URL to point to the correct URL for the story. The Storybook key will be
 // rewritten to something like `?path=/docs/${id}`
 const routes = {
@@ -24,7 +24,7 @@ const routes = {
   '/components/inputs/form-field/': 'components-inputs-form-field--docs',
   '/components/inputs/radio/': 'preview-inputs-radio--docs',
   '/components/inputs/select/': 'components-inputs-select--docs',
-  '/components/inputs/switch/': 'components-inputs-switch--docs',
+  '/components/inputs/switch/': 'preview-inputs-switch-new--docs',
   '/components/inputs/text-area/': 'components-inputs-textarea--docs',
   '/components/inputs/text-input/': 'components-inputs-text-input--docs',
   '/components/layout/box/': 'components-layout-box--docs',
@@ -62,6 +62,7 @@ const routes = {
   '/get-started/for-developers/documentation/testing#visual-tests':
     'hooks-and-utilities-testing--docs',
   '/get-started/introduction/': 'guides-getting-started--docs',
+  '/get-started/for-developers/styling/utilities/': 'styling-utilities--docs',
   // Tokens
   '/tokens/color/': 'tokens-tokens--docs#colors',
   '/tokens/depth/': 'tokens-tokens--docs#depth',
@@ -80,6 +81,9 @@ const routes = {
   '/help/upgrade-guides/canvas-v14-upgrade-guide/': 'guides-upgrade-guides-v14-0-overview--docs',
   '/help/upgrade-guides/canvas-v14-upgrade-guide/#tab=visual-changes':
     'guides-upgrade-guides-v14-0-visual-changes--docs',
+  '/help/upgrade-guides/canvas-v15-upgrade-guide/': 'guides-upgrade-guides-v15-0-overview--docs',
+  '/help/upgrade-guides/canvas-v15-upgrade-guide/#tab=visual-changes':
+    'guides-upgrade-guides-v15-0-visual-changes--docs',
 };
 
-module.exports = routes;
+export default routes;

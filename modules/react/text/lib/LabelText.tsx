@@ -1,7 +1,8 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
-import {createStencil} from '@workday/canvas-kit-styling';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {textStencil} from './Text';
 
 /**
@@ -30,20 +31,26 @@ export interface TypeLabelProps extends BoxProps {
 const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
-    ...system.type.subtext.large,
-    color: system.color.text.default,
+    // ...system.legacy.type.subtext.lg,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    color: system.color.fg.default,
   },
   modifiers: {
     disabled: {
       true: {
         cursor: 'default',
-        color: system.color.text.disabled,
+        color: system.color.fg.disabled,
       },
     },
     variant: {
-      inverse: {color: system.color.text.inverse},
-      error: {color: system.color.text.critical.default},
-      hint: {color: system.color.text.hint},
+      inverse: {color: system.color.fg.inverse},
+      error: {color: system.legacy.color.brand.fg.critical.default},
+      hint: {color: system.color.fg.muted.default},
     },
   },
   compound: [
@@ -51,7 +58,7 @@ const labelTextStencil = createStencil({
       modifiers: {variant: 'inverse', disabled: true},
       styles: {
         opacity: system.opacity.disabled,
-        color: system.color.text.inverse,
+        color: system.color.fg.inverse,
       },
     },
   ],

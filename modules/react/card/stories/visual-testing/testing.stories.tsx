@@ -1,9 +1,9 @@
 import React from 'react';
-import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {system} from '@workday/canvas-tokens-web';
+import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
 import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Card',
@@ -22,19 +22,19 @@ export const CardStates = {
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
           {label: 'Borderless', props: {variant: 'borderless'}},
-          {label: 'Filled', props: {variant: 'filled'}},
+          {label: 'Tonal', props: {variant: 'tonal'}},
           {label: 'With Heading', props: {}},
           {
             label: 'With custom padding (0px)',
-            props: {cs: {padding: system.space.zero}},
+            props: {cs: {padding: '0'}},
           },
           {
             label: 'With custom padding (16px)',
-            props: {cs: {padding: system.space.x4}},
+            props: {cs: {padding: system.padding.md}},
           },
           {
             label: 'With custom gap (0px)',
-            props: {cs: {gap: system.space.zero}},
+            props: {cs: {gap: '0'}},
           },
           {
             label: 'With custom box shadow (system.depth[1])',
@@ -55,8 +55,8 @@ export const CardStates = {
           <div
             style={{
               background:
-                props.variant !== 'filled' ? cssVar(system.color.bg.alt.softer) : undefined,
-              padding: cssVar(system.space.x4),
+                props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
+              padding: cssVar(system.padding.md),
             }}
           >
             <Card {...props}>

@@ -1,4 +1,4 @@
-import {gridItem, GridItemStyleProps} from '../lib/utils/gridItem';
+import {GridItemStyleProps, gridItem} from '../lib/utils/gridItem';
 
 describe('gridItem Style Props Function', () => {
   it('should ignore non-grid-item props', () => {

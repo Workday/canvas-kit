@@ -22,12 +22,12 @@ building components, styling, and implementing accessibility features.
 ### Token Import Pattern
 
 ```tsx
-import {system, brand, base} from '@workday/canvas-tokens-web';
-
+import {base, brand, system} from '@workday/canvas-tokens-web';
 // Import CSS variables once at app root level
 import '@workday/canvas-tokens-web/css/base/_variables.css';
-import '@workday/canvas-tokens-web/css/system/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
+import '@workday/canvas-tokens-web/css/system/_variables.css';
 ```
 
 ### Token Usage Examples
@@ -35,9 +35,9 @@ import '@workday/canvas-tokens-web/css/brand/_variables.css';
 ```tsx
 // ✅ Good - Use system tokens
 const styles = createStyles({
-  color: system.color.text.default,
-  margin: system.space.x4,
-  backgroundColor: system.color.bg.primary.default,
+  color: system.color.fg.default,
+  margin: system.gap.md,
+  backgroundColor: system.color.brand.accent.primary,
 });
 
 // ❌ Avoid - Hardcoded values
@@ -66,8 +66,8 @@ causes performance issues.
 ```tsx
 // ✅ Good - Module level
 const buttonStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  color: system.color.text.inverse,
+  backgroundColor: system.color.brand.accent.primary,
+  color: system.color.fg.inverse,
 });
 
 export const MyButton = () => <button className={buttonStyles}>Click me</button>;
@@ -89,13 +89,13 @@ props:
 - Styling tokens-based components
 
 ```tsx
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {Text} from '@workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
-  margin: system.space.x4,
+  margin: system.gap.md,
 });
 
 <Text cs={uppercaseTextStyles}>My uppercased text</Text>;
@@ -113,13 +113,13 @@ Use `createStencil` when styles depend on **props**, **variants**, or **componen
 const buttonStencil = createStencil({
   vars: {color: '', backgroundColor: ''},
   base: ({color, backgroundColor}) => ({
-    color: cssVar(color, system.color.text.default),
+    color: cssVar(color, system.color.fg.default),
     backgroundColor: cssVar(backgroundColor, system.color.bg.default),
   }),
   modifiers: {
     variant: {
-      primary: {backgroundColor: system.color.bg.primary.default},
-      secondary: {backgroundColor: system.color.bg.muted.default},
+      primary: {backgroundColor: system.color.brand.accent.primary},
+      secondary: {backgroundColor: system.color.accent.muted.default},
     },
   },
 });
@@ -158,16 +158,16 @@ Use CSS logical properties instead of physical properties for RTL compatibility:
 ```tsx
 // ✅ Good - Logical properties (adapt to RTL automatically)
 const styles = createStyles({
-  marginInlineStart: system.space.x4,
-  paddingInlineEnd: system.space.x2,
-  borderInlineStart: `1px solid ${system.color.border.default}`,
+  marginInlineStart: system.gap.md,
+  paddingInlineEnd: system.gap.sm,
+  borderInlineStart: `${px2rem(1)} solid ${system.color.border.default}`,
 });
 
 // ❌ Avoid - Physical properties (don't adapt to RTL)
 const styles = createStyles({
-  marginLeft: system.space.x4,
-  paddingRight: system.space.x2,
-  borderLeft: `1px solid ${system.color.border.default}`,
+  marginLeft: system.gap.md,
+  paddingRight: system.gap.sm,
+  borderLeft: `${px2rem(1)} solid ${system.color.border.default}`,
 });
 ```
 
@@ -178,12 +178,12 @@ const styles = createStyles({
 - **`calc`** - Math operations with CSS calc() and variables
 
 ```tsx
-import {px2rem, cssVar, calc} from '@workday/canvas-kit-styling';
+import {calc, cssVar, px2rem} from '@workday/canvas-kit-styling';
 
 const styles = createStyles({
   margin: px2rem(8), // Converts 8px to rem
-  padding: calc.add(system.space.x1, '0.125rem'),
-  color: cssVar(system.color.text.default, '#000'), // With fallback
+  padding: calc.add(system.padding.xxs, '0.125rem'),
+  color: cssVar(system.color.fg.default, '#000'), // With fallback
 });
 ```
 
@@ -326,14 +326,14 @@ const MyComponent = elemProps => {
 ```tsx
 // ✅ Good
 const cardStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 export const Card = () => <div className={cardStyles}>Content</div>;
 
 // ❌ Bad
 export const Card = () => {
-  const cardStyles = createStyles({padding: system.space.x4});
+  const cardStyles = createStyles({padding: system.padding.md});
   return <div className={cardStyles}>Content</div>;
 };
 ```
@@ -347,8 +347,8 @@ Use modifiers for variants/states instead of conditional logic:
 const badgeStencil = createStencil({
   modifiers: {
     status: {
-      success: {background: system.color.bg.success.default},
-      error: {background: system.color.bg.negative.default},
+      success: {background: system.color.accent.success},
+      error: {background: system.color.brand.accent.critical},
     },
   },
 });
@@ -386,7 +386,7 @@ Extend existing stencils rather than creating from scratch:
 const customIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    margin: system.space.x2,
+    margin: system.gap.sm,
   },
 });
 
@@ -518,8 +518,9 @@ Apply theming at the global level using CSS variables:
 ```css
 /* index.css */
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
 
 :root {
   --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);

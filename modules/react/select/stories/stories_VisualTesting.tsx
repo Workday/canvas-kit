@@ -1,14 +1,15 @@
 import * as React from 'react';
 
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {withSnapshotsEnabled, customColorTheme} from '../../../../utils/storybook';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {px2rem} from '@workday/canvas-kit-styling';
 
-import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
+import {customColorTheme, withSnapshotsEnabled} from '../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Inputs/Select',
@@ -68,7 +69,7 @@ export const SelectStates = () => {
             <Select items={options} nonInteractiveIds={disabledItems}>
               <FormField.Input as={Select.Input} {...props} id="contact-select" />
               <Select.Popper>
-                <Select.Card maxHeight="200px">
+                <Select.Card cs={{maxHeight: px2rem(200)}}>
                   <Select.List>
                     {item => {
                       return <Select.Item aria-disabled={item.disabled}>{item.id}</Select.Item>;
@@ -96,12 +97,12 @@ export const SelectOpenMenuStates = () => {
         columnProps={[{label: 'Default', props: {}}]}
       >
         {props => (
-          <FormField cs={{marginBottom: '250px'}}>
+          <FormField cs={{marginBlockEnd: px2rem(250)}}>
             <FormField.Label>Contact</FormField.Label>
             <Select items={options} nonInteractiveIds={disabledItems} initialVisibility="visible">
               <FormField.Input as={Select.Input} {...props} id="contact-select" />
               <Select.Popper>
-                <Select.Card maxHeight="200px">
+                <Select.Card cs={{maxHeight: px2rem(200)}}>
                   <Select.List>
                     {item => {
                       return <Select.Item aria-disabled={item.disabled}>{item.id}</Select.Item>;

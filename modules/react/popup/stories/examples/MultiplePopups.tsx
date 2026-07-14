@@ -1,12 +1,12 @@
-import {Popup} from '@workday/canvas-kit-react/popup';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {useDialogModel} from '@workday/canvas-kit-react/dialog';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {useModalModel} from '@workday/canvas-kit-react/modal';
+import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const flexStyles = createStyles({
-  gap: system.space.x4,
+  gap: system.gap.md,
 });
 
 const popupStyles = createStyles({

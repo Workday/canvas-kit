@@ -1,39 +1,39 @@
 import * as React from 'react';
+
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
+import {LoadReturn} from '@workday/canvas-kit-react/collection';
+import {
+  Combobox,
+  useComboboxInput,
+  useComboboxLoader,
+  useComboboxModel,
+} from '@workday/canvas-kit-react/combobox';
 import {
   AccessibleHide,
   AriaLiveRegion,
+  ExtractProps,
   composeHooks,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {
-  notificationsIcon,
-  inboxIcon,
-  justifyIcon,
   assistantIcon,
+  hamburgerIcon,
+  inboxIcon,
+  notificationsIcon,
   searchIcon,
 } from '@workday/canvas-system-icons-web';
-
-import {SecondaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {Avatar} from '@workday/canvas-kit-preview-react/avatar';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {LoadReturn} from '@workday/canvas-kit-react/collection';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {
-  Combobox,
-  useComboboxModel,
-  useComboboxInput,
-  useComboboxLoader,
-} from '@workday/canvas-kit-react/combobox';
-import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {CountBadge} from '@workday/canvas-kit-react/badge';
+import {system} from '@workday/canvas-tokens-web';
 
 interface GlobalHeaderProps extends FlexProps {
   notifications: number;
@@ -50,26 +50,26 @@ const styleOverrides = {
     alignItems: 'center',
     justifyContent: 'space-between',
     boxSizing: 'border-box',
-    ...system.type.subtext.large,
+    ...system.type.subtext.lg,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     backgroundColor: system.color.bg.default,
-    padding: system.space.x1,
+    padding: system.padding.xxs,
   }),
   flexItems: createStyles({
-    gap: system.space.x4,
+    gap: system.gap.md,
     alignItems: 'center',
-    marginX: system.space.x3,
+    marginInline: px2rem(12),
   }),
   inputGroupInner: createStyles({
-    marginLeft: '1rem',
+    marginInline: system.gap.md,
     width: px2rem(20),
     transition: 'opacity 100ms ease',
   }),
   comboboxContainer: createStyles({
     margin: 'auto',
     width: '100%',
-    maxWidth: calc.multiply(system.space.x20, 6),
+    maxWidth: calc.multiply(px2rem(80), 6),
   }),
   comboboxInput: createStyles({
     borderRadius: px2rem(1000),
@@ -89,12 +89,12 @@ const styleOverrides = {
   countBadgeStyles: createStyles({
     boxSizing: 'border-box',
     position: 'absolute',
-    top: calc.negate(system.space.x1),
-    insetInlineEnd: calc.negate(system.space.x1),
+    top: calc.negate(system.gap.xs),
+    insetInlineEnd: calc.negate(system.gap.xs),
   }),
   actionButtonStyles: createStyles({
-    gap: system.space.x4,
-    margin: system.space.x4,
+    gap: system.gap.md,
+    margin: system.gap.md,
   }),
 };
 
@@ -140,11 +140,11 @@ export const Basic = () => {
 
 export const GlobalHeader = createComponent('div')({
   displayName: 'GlobalHeader',
-  Component: ({notifications, ...props}: GlobalHeaderProps) => (
+  Component: ({notifications}: GlobalHeaderProps) => (
     <div className={styleOverrides.headerWrapper}>
       <Flex cs={styleOverrides.flexItems}>
         <Tooltip title="Global Navigation" type="describe">
-          <TertiaryButton icon={justifyIcon} cs={styleOverrides.menuButtonStyles}>
+          <TertiaryButton icon={hamburgerIcon} cs={styleOverrides.menuButtonStyles}>
             MENU
           </TertiaryButton>
         </Tooltip>
@@ -247,7 +247,7 @@ const Autocomplete = createComponent('div')({
               <StyledMenuItem as="span">No Results Found</StyledMenuItem>
             ) : (
               model.state.items.length > 0 && (
-                <Combobox.Menu.List maxHeight={px2rem(200)}>
+                <Combobox.Menu.List cs={{maxHeight: px2rem(200)}}>
                   {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
                 </Combobox.Menu.List>
               )

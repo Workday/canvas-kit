@@ -1,15 +1,13 @@
 import React from 'react';
 
+import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
-
 const mainContentStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 const items = [

@@ -1,23 +1,24 @@
 import React from 'react';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {trashIcon} from '@workday/canvas-system-icons-web';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {trashIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 const INITIAL_FILES = ['Resume.docx', 'Cover_Letter.docx', 'References.docx'];
 
 const actionStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x2,
+  gap: system.gap.md,
+  padding: system.padding.sm,
 });
 
 const headingStyles = createStyles({
-  marginY: system.space.zero,
+  marginBlock: '0',
 });
 
 const emptyStateStyles = createStyles({
@@ -27,9 +28,9 @@ const emptyStateStyles = createStyles({
 
 const listStyles = createStyles({
   flexDirection: 'column',
-  gap: system.space.x4,
-  marginY: system.space.zero,
-  padding: system.space.zero,
+  gap: system.gap.md,
+  marginBlock: '0',
+  padding: '0',
   listStyle: 'none',
   maxWidth: '28rem',
 });
@@ -37,7 +38,7 @@ const listStyles = createStyles({
 const rowStyles = createStyles({
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: system.space.x4,
+  gap: system.gap.md,
   width: '100%',
 });
 

@@ -1,17 +1,17 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-
-import {useModalHeading, useModalModel} from './hooks';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
+
+import {useModalHeading, useModalModel} from './hooks';
 
 export interface ModalHeadingProps extends ExtractProps<typeof Popup.Heading, never> {}
 
 export const modalHeadingStencil = createStencil({
   base: {
     '@media screen and (max-width: 768px)': {
-      padding: `${system.space.x2} ${system.space.x2} ${system.space.x1}`,
+      padding: `${system.legacy.padding.xs} ${system.legacy.padding.xs} ${system.legacy.padding.xxs}`,
     },
   },
 });

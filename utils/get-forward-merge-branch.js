@@ -1,4 +1,4 @@
-const {assert} = require('console');
+import {strict as assert} from 'node:assert';
 
 const {GITHUB_REF = ''} = process.env;
 
@@ -23,7 +23,7 @@ function getForwardMergeBranch(/** @type string */ branch) {
   return nextBranch;
 }
 
-module.exports = getForwardMergeBranch;
+export default getForwardMergeBranch;
 
 // This console log for forward-merge.yml workflow and for workflows that need access to the next branch
 console.log(getForwardMergeBranch(branch));

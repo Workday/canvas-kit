@@ -1,14 +1,14 @@
-import * as React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {rocketIcon} from '@workday/canvas-accent-icons-web';
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {Heading, Text} from '@workday/canvas-kit-react/text';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {useDirection} from './useDirection';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system, base} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {useDirection} from './useDirection';
 
 const stylesOverride = {
   viewPortContainer: createStyles({
@@ -16,11 +16,10 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   accentIcon: createStyles({
-    marginInlineEnd: system.space.x4,
+    marginInlineEnd: system.gap.md,
   }),
   mainContent: createStyles({
     alignItems: 'center',

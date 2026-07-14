@@ -1,4 +1,4 @@
-import {Collection, API} from 'jscodeshift';
+import {API, Collection} from 'jscodeshift';
 
 /**
  * Search for import statements for a package and specific import specifiers. This
@@ -38,10 +38,7 @@ export function hasImportSpecifiers(
 
     // Extract the main package(s) from the import, and test specifiers against that package
     const mainPackage = (typeof packageName === 'string' ? [packageName] : packageName).map(s =>
-      s
-        .split('/')
-        .slice(0, -1)
-        .join('/')
+      s.split('/').slice(0, -1).join('/')
     );
     if (mainPackage.includes(value as string)) {
       return !!(nodePath.specifiers || []).find(specifier => {

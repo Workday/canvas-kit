@@ -1,9 +1,10 @@
 import * as React from 'react';
 
 import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Popper} from '@workday/canvas-kit-react/popup';
 import {Card} from '@workday/canvas-kit-react/card';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Popper} from '@workday/canvas-kit-react/popup';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Components/Popups/Popper',
@@ -42,7 +43,7 @@ export const PopperStory = {
             <Card.Body>
               <p>A card positioned by Popper!</p>
               <div style={big ? {width: 500} : {}}></div>
-              <Flex gap="s">
+              <Flex cs={{gap: system.gap.md}}>
                 <SecondaryButton
                   onClick={() => {
                     setBig(!big);

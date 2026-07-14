@@ -1,5 +1,6 @@
 // @ts-ignore: Cannot find module error
 import {version} from '../../../../lerna.json';
+
 export const packageJSONFile = `{
   "name": "vite-react-typescript-starter",
   "private": true,
@@ -23,8 +24,9 @@ export const packageJSONFile = `{
     "@workday/canvas-kit-react": "${version}",
     "@workday/canvas-kit-react-fonts": "^${version}",
     "@workday/canvas-kit-styling": "${version}",
-    "@workday/canvas-system-icons-web": "3.0.36",
-    "@workday/canvas-tokens-web": "3.1.2"
+    "@workday/canvas-system-icons-web": "4.0.2",
+    "@workday/canvas-expressive-icons-web": "1.0.1",
+    "@workday/canvas-tokens-web": "4.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.59",

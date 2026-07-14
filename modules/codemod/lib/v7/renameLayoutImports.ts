@@ -1,4 +1,4 @@
-import {Transform, ImportDeclaration, ASTPath} from 'jscodeshift';
+import {ASTPath, ImportDeclaration, Transform} from 'jscodeshift';
 
 // used to filter our imports we want to keep in @workday/canvas-kit-labs-react/common
 const commonSpecifiers = [
@@ -88,7 +88,7 @@ const transform: Transform = (file, api) => {
     source: {value: '@workday/canvas-kit-react/layout'},
   });
 
-  const mapToSpecifiers = (specifier: typeof reactLayoutSpecifiers[0]) => {
+  const mapToSpecifiers = (specifier: (typeof reactLayoutSpecifiers)[0]) => {
     return j.importSpecifier(
       j.identifier(specifier.name),
       specifier.importedName ? j.identifier(specifier.importedName) : undefined

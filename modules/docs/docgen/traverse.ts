@@ -1,5 +1,6 @@
 import ts from 'typescript';
-import {guards, kindsMap, getKindNameFromNode} from './traversals';
+
+import {getKindNameFromNode, guards, kindsMap} from './traversals';
 
 type KindMap = typeof kindsMap;
 type Guards = typeof guards;

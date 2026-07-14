@@ -1,8 +1,8 @@
 import {Default} from '../../modules/react/tooltip/stories/examples/Default';
 import {DescribeType} from '../../modules/react/tooltip/stories/examples/DescribeType';
 import {DescriptionType} from '../../modules/react/tooltip/stories/examples/DescriptionType';
-import {Muted} from '../../modules/react/tooltip/stories/examples/Muted';
 import {Ellipsis} from '../../modules/react/tooltip/stories/examples/Ellipsis';
+import {Muted} from '../../modules/react/tooltip/stories/examples/Muted';
 import {NonInteractive, Overflow} from '../../modules/react/tooltip/stories/testing.stories';
 import {TooltipWithFallbackPlacements} from '../../modules/react/tooltip/stories/testingFallback.stories';
 

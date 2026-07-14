@@ -1,47 +1,37 @@
-import * as React from 'react';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
-const baseStyles = {
-  color: 'blackPepper500',
-  minHeight: 'xl',
-  minWidth: '2rem',
-  padding: 'xs',
-};
+const baseStyles = createStencil({
+  vars: {
+    backgroundColor: '',
+  },
+  base: ({backgroundColor}) => ({
+    color: system.color.fg.default,
+    minHeight: system.size.xl,
+    minWidth: system.size.sm,
+    padding: system.padding.sm,
+    textAlign: 'center',
+    backgroundColor,
+  }),
+});
 
 export const Basic = () => (
-  <Flex columnGap="xs">
-    <Flex flexDirection="column" rowGap="xs" flex={1}>
-      <Flex.Item backgroundColor="cinnamon300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
-      <Flex.Item backgroundColor="sourLemon300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
-      <Flex.Item backgroundColor="blueberry300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
+  <Flex cs={{columnGap: system.gap.sm}}>
+    <Flex cs={{flexDirection: 'column', rowGap: system.gap.md, flex: 1}}>
+      <Flex.Item cs={baseStyles({backgroundColor: base.amber400})}>1</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.green400})}>1</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.indigo400})}>1</Flex.Item>
     </Flex>
-    <Flex flexDirection="column" rowGap="xs" flex={2}>
-      <Flex.Item backgroundColor="cinnamon300" textAlign="center" {...baseStyles}>
-        2
-      </Flex.Item>
-      <Flex.Item backgroundColor="sourLemon300" textAlign="center" {...baseStyles}>
-        2
-      </Flex.Item>
-      <Flex.Item backgroundColor="blueberry300" textAlign="center" {...baseStyles}>
-        2
-      </Flex.Item>
+    <Flex cs={{flexDirection: 'column', rowGap: system.gap.md, flex: 2}}>
+      <Flex.Item cs={baseStyles({backgroundColor: base.amber400})}>2</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.green400})}>2</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.indigo400})}>2</Flex.Item>
     </Flex>
-    <Flex flexDirection="column" rowGap="xs" flex={1}>
-      <Flex.Item backgroundColor="cinnamon300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
-      <Flex.Item backgroundColor="sourLemon300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
-      <Flex.Item backgroundColor="blueberry300" textAlign="center" {...baseStyles}>
-        1
-      </Flex.Item>
+    <Flex cs={{flexDirection: 'column', rowGap: system.gap.md, flex: 1}}>
+      <Flex.Item cs={baseStyles({backgroundColor: base.amber400})}>1</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.green400})}>1</Flex.Item>
+      <Flex.Item cs={baseStyles({backgroundColor: base.indigo400})}>1</Flex.Item>
     </Flex>
   </Flex>
 );

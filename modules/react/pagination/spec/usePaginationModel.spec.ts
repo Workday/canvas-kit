@@ -1,5 +1,7 @@
-import {renderHook, act} from '@testing-library/react-hooks';
-import {usePaginationModel, UsePaginationModelConfig} from '../lib/Pagination/usePaginationModel';
+import {act, renderHook} from '@testing-library/react-hooks';
+
+import {UsePaginationModelConfig, usePaginationModel} from '../lib/Pagination/usePaginationModel';
+
 const context = describe;
 
 describe('usePaginationModel hook', () => {
@@ -86,7 +88,7 @@ describe('usePaginationModel hook', () => {
     });
 
     it('should call onPageChange with the currentPage when on updates', () => {
-      const onPageChange = jest.fn();
+      const onPageChange = vi.fn();
       const {result} = renderHook(() => buildModel({onPageChange}));
       act(() => {
         result.current.events.previous();
