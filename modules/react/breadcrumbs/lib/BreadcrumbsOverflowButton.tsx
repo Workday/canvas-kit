@@ -36,8 +36,8 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
     [systemIconStencil.vars.color]: system.color.fg.default,
     [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
     [chevronRightIconPart]: {
-      height: system.legacy.size.sm,
-      width: system.legacy.size.sm,
+      height: system.legacy.size.xxs,
+      width: system.legacy.size.xxs,
       justifyContent: 'center',
       alignItems: 'center',
       display: 'inline-flex',
@@ -67,6 +67,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}
+        size="extraSmall"
         {...breadcrumbsOverflowButtonStencil.parts.overflowButton}
         {...handleCsProp(elemProps)}
       />
