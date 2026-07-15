@@ -88,11 +88,6 @@ const checkboxInputStencil = createStencil({
         backgroundColor: system.legacy.color.brand.accent.positive,
       },
 
-    [`&:where(:disabled, .disabled) ~ [data-part="${checkboxBackgroundStencil.parts.background['data-part']}"]`]:
-      {
-        opacity: system.opacity.disabled,
-      },
-
     // Focus State
     '&:where(:focus-visible, :active, .focus, .active)': {
       outline: 'none',
