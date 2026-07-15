@@ -52,7 +52,6 @@ export const BreadcrumbsLink = createComponent('a')({
     ref,
     Element
   ) => {
-    // TODO: Swap in secondary variant with type=standalone once available
     return (
       <OverflowTooltip {...tooltipProps}>
         <Hyperlink
@@ -60,7 +59,8 @@ export const BreadcrumbsLink = createComponent('a')({
           ref={ref}
           as={Element}
           role="link"
-          variant="standalone"
+          variant="secondary"
+          type="standalone"
           {...handleCsProp(
             elemProps,
             breadcrumbsLinkStencil({
