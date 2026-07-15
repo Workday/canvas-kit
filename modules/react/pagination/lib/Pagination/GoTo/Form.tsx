@@ -17,6 +17,7 @@ export const paginationGoToFormStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     gap: system.legacy.gap.sm,
+    marginInlineStart: system.legacy.gap.xs,
     ':dir(rtl)': {
       paddingInline: system.legacy.padding.xs,
     },
