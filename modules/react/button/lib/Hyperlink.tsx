@@ -6,14 +6,15 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
-   * sets color modifier styles for Hyperlink
-   * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
+   * Sets color styles for Hyperlink
+   * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes. Use this
+   *   variant on dark backgrounds.
    * - `secondary`: sets the color to a dark gray (keeps the underline by default). Use this
-   *   variant when you want a secondary-colored hyperlink (for example, on colored backgrounds).
+   *   variant on colored backgrounds.
    */
   variant?: 'inverse' | 'secondary';
   /**
-   * sets underline behavior for Hyperlink
+   * Sets underline behavior for Hyperlink
    * - `inline` (default): keeps the underline. Use when the hyperlink appears in body text.
    * - `standalone`: removes the underline. Use when a hyperlink is outside paragraph or body text.
    *
@@ -21,7 +22,7 @@ export interface HyperlinkProps extends CSProps {
    */
   type?: 'inline' | 'standalone';
   /**
-   * attribute for the hyperlink URL
+   * Attribute for the hyperlink URL
    */
   href?: string;
   children?: React.ReactNode;

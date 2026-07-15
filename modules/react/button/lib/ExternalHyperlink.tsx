@@ -41,7 +41,7 @@ export const externalHyperlinkStencil = createStencil({
 
 /**
  * `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
- * link on a dark or colorful background such as `system.color.accent.info`.
+ * link on a dark background such as `system.color.accent.info`.
  */
 export const ExternalHyperlink = createComponent('a')({
   displayName: 'ExternalHyperlink',

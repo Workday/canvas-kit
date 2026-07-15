@@ -39,29 +39,23 @@ the current page. By default, `Hyperlink`s have an underline for accessibility.
 #### Inverse
 
 `Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
-on a dark or colorful background.
+on a dark background.
 
 <ExampleCodeBlock code={LinkInverse} />
+
+#### Secondary
+
+`Hyperlink`s also have a `secondary` variant. This is a dark gray alternate to the default blue
+hyperlink. Use this variant when you need to place a `Hyperlink` on a colored background.
+
+<ExampleCodeBlock code={SecondaryLink} />
 
 #### Standalone
 
 Use `type="standalone"` when you need to place a `Hyperlink` outside of a paragraph or body text.
 This removes the underline. By default, `type` is `"inline"` and links are underlined.
 
-This prop can also be used with the `ExternalHyperlink` component, and can be combined with
-`variant` (for example, `variant="secondary"` `type="standalone"`).
-
 <ExampleCodeBlock code={StandaloneLink} />
-
-#### Secondary
-
-`Hyperlink`s also have a `secondary` variant. This is a dark gray alternate to the default blue
-hyperlink. Combine this with `type="standalone"` to remove its underline. This variant is meant for
-use on colored backgrounds.
-
-This variant can also be used with the `ExternalHyperlink` component.
-
-<ExampleCodeBlock code={SecondaryLink} />
 
 #### In Body Text
 
@@ -115,7 +109,7 @@ users know about the behavior by adding an icon, `externalLinkIcon`.
 <ExampleCodeBlock code={ExternalLink} />
 
 `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
-link on a dark or colorful background.
+link on a dark background.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 
