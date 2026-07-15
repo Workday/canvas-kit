@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.1](https://github.com/Workday/canvas-kit/releases/tag/v15.1.1) (2026-07-15)
+
+### Infrastructure
+
+- chore: Update Chromatic tests to only run when ready for review ([#4061](https://github.com/Workday/canvas-kit/pull/4061)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.1.0](https://github.com/Workday/canvas-kit/releases/tag/v15.1.0) (2026-07-14)
+
+
+
+
+## [v15.0.21](https://github.com/Workday/canvas-kit/releases/tag/v15.0.21) (2026-07-14)
+
+### Components
+
+- fix: Update flashing of menu item on first render ([#3930](https://github.com/Workday/canvas-kit/pull/3930)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.3.17](https://github.com/Workday/canvas-kit/releases/tag/v14.3.17) (2026-07-09)
+
+### Components
+
+- fix: Update flashing of menu item on first render ([#3930](https://github.com/Workday/canvas-kit/pull/3930)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- chore: Update to latest GH Actions and Node 24 ([#4005](https://github.com/Workday/canvas-kit/pull/4005)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.20](https://github.com/Workday/canvas-kit/releases/tag/v15.0.20) (2026-07-08)
 
 

@@ -4,7 +4,7 @@ import { Meta } from '@storybook/blocks';
 
 # Canvas Kit MCP
 
-This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, **design token** documentation, and **per-component docs with sample code** (plus optional interactive previews) to AI assistants.
+This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, **design token** documentation, **accessibility guidance**, and **per-component docs with sample code** (plus optional interactive previews) to AI assistants.
 
 ## Table of Contents
 
@@ -16,11 +16,14 @@ This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, 
 - [Tools](#tools)
   - [`get-canvas-kit-upgrade-guides`](#get-canvas-kit-upgrade-guides)
   - [`get-canvas-kit-tokens`](#get-canvas-kit-tokens)
+  - [`get-accessibility-guidelines`](#get-accessibility-guidelines)
   - [`fetch-component-documentation-example`](#fetch-component-documentation-example)
 - [Resources](#resources)
   - [Upgrade Guides](#upgrade-guides)
   - [Token Documentation](#token-documentation)
+  - [Accessibility Guidance (`docs://accessibility/*`)](#accessibility-guidance-docsaccessibility)
   - [Component examples (`docs://examples/{slug}`)](#component-examples-docsexamplesslug)
+  - [Component accessibility sections (`docs://examples/{slug}/accessibility`)](#component-accessibility-sections-docsexamplesslugaccessibility)
   - [Interactive story previews (`ui://story/{slug}`)](#interactive-story-previews-uistoryslug)
 - [How assistants should use tools vs resources](#how-assistants-should-use-tools-vs-resources)
 - [Source Documentation](#source-documentation)
@@ -160,6 +163,33 @@ Retrieves Canvas Kit design token migration documentation for transitioning to t
 
 **Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
 
+### `get-accessibility-guidelines`
+
+Retrieves Canvas Kit accessibility guidance for a scenario, component, or both. This tool is **documentation guidance only**. It does not scan code or pages, run automated accessibility tests, certify WCAG conformance, or guarantee compliance.
+
+**Parameters:**
+
+- `component` (optional) — Canvas Kit component/story slug, such as `checkbox`, `table`, or `modal`.
+- `scenario` (optional) — Accessibility scenario slug, such as `forms`, `tables`, `popups`, `aria-live`, or `page-structure`.
+
+At least one of `component` or `scenario` is required.
+
+**Examples:**
+
+```json
+{"scenario": "forms"}
+```
+
+```json
+{"component": "table"}
+```
+
+```json
+{"component": "checkbox", "scenario": "forms"}
+```
+
+**Returns:** A JSON summary plus `resource_link` entries for matching `docs://accessibility/{slug}` resources. When available, the response also includes `docs://examples/{component}` and `docs://examples/{component}/accessibility`.
+
 ### `fetch-component-documentation-example`
 
 Opens a **Canvas Kit component** in Storybook (URL returned to the user) and returns metadata for assistants, including a link to the full markdown doc for that component.
@@ -208,9 +238,25 @@ Design token migration and usage guides covering:
 - Spacing, shape, size, opacity, and depth tokens
 - OKLCH color space implementation
 
+### Accessibility Guidance (`docs://accessibility/*`)
+
+URI prefix: `docs://accessibility/*`
+
+Guidance-only accessibility documentation covering:
+
+- Overview and general Canvas Kit accessibility principles
+- Forms, page structure, tables, popups, ARIA live regions, headers, and side panels
+- Windows High Contrast themes and color contrast
+
+These resources do not perform automated validation or provide compliance guarantees.
+
 ### Component examples (`docs://examples/{slug}`)
 
 Markdown documentation and **inline code** for each discovered component story. Content is produced at build time from MDX story files (with `ExampleCodeBlock` replaced by real example source). Use these when implementing or explaining APIs.
+
+### Component accessibility sections (`docs://examples/{slug}/accessibility`)
+
+Markdown extracted from a component's exact `## Accessibility` section when that section exists in the component MDX docs. Use these with the broader `docs://accessibility/*` resources for component-specific guidance.
 
 ### Interactive story previews (`ui://story/{slug}`)
 
@@ -226,6 +272,7 @@ All resources are available to AI assistants through MCP resource URIs.
 ## Source Documentation
 
 - **Upgrade guides and token LLM docs** live under [`modules/docs/llm`](../../docs/llm) (upgrade guides, token guides, and other LLM-oriented files). Update those files and rebuild the MCP package to refresh bundled resources.
+- **Accessibility docs** live under [`modules/docs/mdx/accessibility`](../../docs/mdx/accessibility) and are copied into the MCP package through the `accessibilityFiles` manifest.
 - **Component example markdown** is generated from Canvas Kit story MDX and example files under `modules/react` and `modules/preview-react` via the MCP build (`build:discover`, `build:apps`). See [`modules/mcp/README.md`](../../README.md) for the pipeline.
 
 ## Contributing
