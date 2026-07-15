@@ -32,6 +32,7 @@ Soon to be...
     - [Switch](#switch)
     - [Text Area](#text-area)
     - [Text Input](#text-input)
+  - [Menu](#menu)
   - [Navigation Components](#navigation-components)
     - [Hyperlink](#hyperlink)
 - [New Utilities](#new-utilities)
@@ -336,6 +337,79 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
 
+### Menu
+
+**PR:** [#3987](https://github.com/Workday/canvas-kit/pull/3987)
+
+#### Visual Updates
+
+**Menu.Card**
+
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Padding updated from `padding.xxs` (4px) to `padding.xs` (8px).
+- Border radius is now managed via `cornerShapeStencil` (still uses `shape.xxl`).
+
+**Menu.List**
+
+- Gap between items updated from `gap.xs` (4px) to `base.legacy.size25` (2px).
+
+**Menu.Item**
+
+- Icon-to-label gap updated from `gap.md` (16px) to `gap.sm` (8px).
+- Padding updated from symmetric `padding.sm`/`padding.md` (12px/16px) to asymmetric
+  `padding.xs`/`padding.xs`/`padding.xs`/`padding.sm` (8px top/right/bottom, 12px left).
+- Item border radius updated from `shape.xxl` (24px) to `shape.lg` (12px).
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+
+#### Menu icon sizing
+
+Menu icons are now smaller to align with Sana Canvas specs. In v15, `Menu.Item.Icon` did not set a
+`size` prop and fell back to the `SystemIcon` default of `lg` (24px / 1.5rem). In v16, all icons
+rendered through `Menu.Item.Icon` and `Menu.Option.Icon` use `size="xs"` (16px / 1rem).
+
+The selected checkmark in `Menu.Option` now uses `checkIcon` at `size="xs"` instead of
+`checkSmallIcon` at the previous 24px default. The nested submenu chevron in `Submenu.TargetItem`
+also changed from `chevronRightSmallIcon` to `chevronRightIcon` at `size="xs"`.
+
+Passing a custom `size` to `Menu.Item.Icon` or `Menu.Option.Icon` will still override the default.
+`Select` and `Combobox` menus inherit the `Menu.Option` checkmark change. If you are rendering
+custom chevron or checkmark icons inside of menu items, update them to `size="xs"` and swap
+`*SmallIcon` assets for their standard equivalents where appropriate.
+
+**Menu.Group.Heading**
+
+- Padding updated to use `paddingBlock: padding.xs` with `paddingInline: padding.sm` / `padding.md`.
+
+#### State Style Updates
+
+`Menu.Item` and `Menu.Option` share the same underlying item styles via `menuItemStencil`. For
+guidance on when to use `Menu.Item` vs `Menu.Option`, including accessibility requirements for
+selectable menus, see the
+[Menu accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs#accessibility).
+
+##### Menu.Item
+
+| State                           | v15                                                      | v16                                                                              |
+| ------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Active/pressed                  | Not styled                                               | `surface.overlay.pressed` background                                             |
+| Focus                           | Solid blue fill (`brand.accent.primary`) and white text  | Inset outline using `brand.border.primary`                                       |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Expanded submenu parent + Focus | Same blue fill and white text focus style as other focused items | Focus ring removed; ancestor-trail styling shown instead (`Submenu.TargetItem`)  |
+
+##### Menu.Option
+
+Used in `Select`, `Combobox`, and other listbox menus. Selected states apply when
+`aria-selected="true"`.
+
+| State                             | v15                                                                          | v16                                                                                  |
+| --------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Active/pressed                    | Not styled                                                                   | `surface.overlay.pressed` background                                                 |
+| Focus                             | Solid blue fill (`brand.accent.primary`) and white text                      | Inset outline using `brand.border.primary`                                           |
+| Selected (`aria-selected="true"`) | Solid blue fill and white text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) |
+| Selected + Focus                  | Solid blue fill and white text                                               | Inset outline with selected background preserved                                     |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Disabled + Selected               | Solid blue fill and white text with disabled opacity                         | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity                            |
+
 ### Navigation Components
 
 #### Hyperlink
@@ -418,7 +492,8 @@ export const myStencil = createStencil({
 });
 ```
 
-`Card` extends this stencil for its rounded corners.
+`Card` and `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`) extend this stencil for their rounded
+corners.
 
 ## Deprecations
 
