@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {extendIcon} from '@workday/canvas-system-icons-web';
+import {sidebarLeftIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
@@ -41,39 +41,23 @@ export const sidePanelToggleButtonStencil = createStencil({
     state: {
       collapsing: {
         margin: 0,
-        transform: `scaleX(1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(-1)`,
-        },
       },
       collapsed: {
         margin: 'auto',
-        transform: `scaleX(1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(-1)`,
-        },
       },
       expanded: {
         margin: 0,
-        transform: `scaleX(-1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(1)`,
-        },
       },
       expanding: {
         margin: 0,
-        transform: `scaleX(-1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(1)`,
-        },
       },
     },
     origin: {
       start: {},
       end: {
-        transform: `scaleX(1)`,
+        transform: `scaleX(-1)`,
         ':dir(rtl)': {
-          transform: `scaleX(-1)`,
+          transform: `scaleX(1)`,
         },
       },
     },
@@ -81,21 +65,10 @@ export const sidePanelToggleButtonStencil = createStencil({
 
   compound: [
     {
-      modifiers: {state: 'collapsed', origin: 'end'},
-      styles: {
-        transform: `scaleX(-1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(1)`,
-        },
-      },
-    },
-    {
       modifiers: {state: 'collapsing', origin: 'end'},
       styles: {
-        transform: `scaleX(-1)`,
         insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
-          transform: `scaleX(1)`,
           insetInlineEnd: base.legacy.size150,
         },
       },
@@ -103,10 +76,8 @@ export const sidePanelToggleButtonStencil = createStencil({
     {
       modifiers: {state: 'expanded', origin: 'end'},
       styles: {
-        transform: `scaleX(1)`,
         insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
-          transform: `scaleX(-1)`,
           insetInlineEnd: base.legacy.size150,
         },
       },
@@ -114,10 +85,8 @@ export const sidePanelToggleButtonStencil = createStencil({
     {
       modifiers: {state: 'expanding', origin: 'end'},
       styles: {
-        transform: `scaleX(1)`,
         insetInlineStart: base.legacy.size150,
         ':dir(rtl)': {
-          transform: `scaleX(-1)`,
           insetInlineEnd: base.legacy.size150,
         },
       },
@@ -141,7 +110,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
   (
     {
       variant = undefined,
-      icon = extendIcon,
+      icon = sidebarLeftIcon,
       tooltipTextExpand = 'Expand View',
       tooltipTextCollapse = 'Collapse View',
       tooltipProps,
