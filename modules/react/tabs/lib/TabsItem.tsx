@@ -70,9 +70,8 @@ export interface TabsItemProps
    */
   'aria-controls'?: string;
   /**
-   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
-   * should either be `true` or `undefined` and never `false`. This is automatically set by the
-   * component and should only be used in advanced cases.
+   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active.  This
+   * is automatically set by the component and should only be used in advanced cases.
    */
   'aria-selected'?: boolean;
   /**
