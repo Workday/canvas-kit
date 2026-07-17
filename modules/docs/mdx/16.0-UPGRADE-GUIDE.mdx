@@ -19,9 +19,11 @@ Soon to be...
 - [New Components](#new-components)
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
+  - [Action Bar](#action-bar)
   - [Avatar](#avatar)
   - [Buttons](#buttons) - [Delete Button Outline Variant](#delete-button-outline-variant)
   - [Card](#card)
+  - [Form Field](#form-field)
   - [Inputs](#inputs)
     - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
     - [Checkbox](#checkbox)
@@ -37,6 +39,7 @@ Soon to be...
     - [Hyperlink](#hyperlink)
     - [Breadcrumbs](#breadcrumbs)
     - [Pagination](#pagination)
+  - [Segmented Control](#segmented-control)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -138,6 +141,14 @@ For more details and advanced usage, including accessibility guidance for symbol
 functional shortcuts, refer to the storybook documentation and our example stories.
 
 ## Component Updates
+
+### Action Bar
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+#### Visual Updates
+
+- `ActionBar` padding has been updated to `padding.md` (16px).
 
 ### Avatar
 
@@ -491,6 +502,25 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
 - GoTo label uses `size="large"` (14px). GoTo input text is centered; border radius inherits from
   TextInput `shape.lg` (12px).
 - GoToForm spacing uses `marginInlineStart: gap.xs` alongside Controls `gap.xs`.
+
+### Segmented Control
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+
+#### Visual Updates
+
+- Container background changed from `surface.alt.strong` to `surface.alt.default` (a lighter background color).
+- Border radius changed to `shape.full` (full rounded corners) on the container.
+- Grid gap reduced from `gap.sm` (8px) to `gap.xs` (4px).
+- Selected/pressed item now uses boxShadow: system.depth[2] instead of a visible border.
+- Font weight changed from bold to medium (base and small sizes);
+- Medium size now uses semi-bold font weight.
+- Size adjustments: large height shrunk to size.sm (32px) (was size.md (40px));
+- Medium size is now 28px in height (was 32px).
+- Hover and pressed states now use `surface.overlay.hover.default` and `surface.overlay.pressed.default` respectively for the item.
+- Container padding changed to `padding.md` (16px) including for mobile devices.
+- On mobile devices, the container padding remains `padding.md` (16px).
 
 ## New Utilities
 
