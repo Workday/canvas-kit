@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Card} from '@workday/canvas-kit-react/card';
 import {
   ExtractProps,
+  cornerShapeStencil,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
@@ -18,6 +19,7 @@ export interface MenuCardProps extends ExtractProps<typeof Card, never> {
 }
 
 export const menuCardStencil = createStencil({
+  extends: cornerShapeStencil,
   vars: {
     minWidth: px2rem(1),
     transformOriginVertical: 'top',
@@ -32,13 +34,13 @@ export const menuCardStencil = createStencil({
     fontSize: system.legacy.fontSize.subtext.lg,
     lineHeight: system.legacy.lineHeight.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    color: system.color.fg.default,
+    color: system.color.fg.strong,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.legacy.padding.xxs,
-    borderRadius: system.legacy.shape.xxl,
+    padding: system.legacy.padding.xs,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,
