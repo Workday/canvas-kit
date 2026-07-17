@@ -248,6 +248,26 @@ In this release, we:
           uri: 'docs://upgrade-guides/15.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'upgrade-guides/16.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 16.0 Upgrade Guide',
+          description: `# Canvas Kit 16.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v16.
+
+In this release, we:
+- added the new KBD component in @workday/canvas-kit-labs-react for keyboard shortcut UI
+- updated visual styling across Action Bar, Avatar, Buttons, Card, Inputs, Menu, and Segmented Control to align with Sana Canvas
+- changed Checkbox, Radio, and Switch checked states to use brand.accent.positive (verify contrast if you customize brand.success.base)
+- updated Menu focus/selected states, icon sizing (xs), and item spacing
+- added cornerShapeStencil utility for progressive corner-shape enhancement (used by Card and Menu)
+- added DeleteButton outline variant
+- added new Avatar variants (magenta, green) and updated existing color variants
+
+Canvas Kit v16 is optimized for the latest v5 system icons (@workday/canvas-system-icons-web) and the Sana Canvas theme from @workday/canvas-tokens-web. Import @workday/canvas-tokens-web/css/sana/_variables.css and set data-theme="sana-canvas" on your root element to enable the Sana theme.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/16.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       case 'theming.md':
         return {
           title: 'Canvas Kit Theming Guide',
