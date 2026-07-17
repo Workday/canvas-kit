@@ -14,6 +14,8 @@ export {default as styled, type StyleRewriteFn, filterOutProps} from './styled';
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export * from './theme';
+export * from './sanaTheme';
+export * from './brandScope';
 /**
  * @deprecated ⚠️ `useTheme` and `getTheme` are deprecated. Use CSS variables from `@workday/canvas-tokens-web` instead.
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).

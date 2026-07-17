@@ -2,7 +2,12 @@ import {Theme, ThemeContext} from '@emotion/react';
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {isElementRTL, useCanvasThemeToCssVars, useLocalRef} from '@workday/canvas-kit-react/common';
+import {
+  CanvasProviderTheme,
+  canvasThemeToCssVars,
+  isElementRTL,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -53,7 +58,7 @@ export const usePopupStack = <E extends HTMLElement>(
   const {elementRef, localRef} = useLocalRef(ref);
 
   const theme = React.useContext(ThemeContext as React.Context<Theme>);
-  const {style} = useCanvasThemeToCssVars(theme, {});
+  const {style} = canvasThemeToCssVars(theme as CanvasProviderTheme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.

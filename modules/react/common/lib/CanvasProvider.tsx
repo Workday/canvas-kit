@@ -1,10 +1,26 @@
 import {CacheProvider, Theme, ThemeProvider} from '@emotion/react';
 import * as React from 'react';
 
-import {createStyles, getCache, maybeWrapCSSVariables} from '@workday/canvas-kit-styling';
+import {createStyles, getCache} from '@workday/canvas-kit-styling';
 import {base, brand, system} from '@workday/canvas-tokens-web';
 
-import {PartialEmotionCanvasTheme, defaultCanvasTheme, useTheme} from './theming';
+import {
+  CanvasProviderTheme,
+  CanvasThemingScope,
+  EmotionCanvasTheme,
+  PartialEmotionCanvasTheme,
+  defaultCanvasTheme,
+  getTheme,
+  isNumericalTheme,
+  resolveThemingScope,
+  useTheme,
+} from './theming';
+import {
+  hasExplicitSemanticPalette,
+  writeBrandScopeSemantic,
+  writeNumericalTheme,
+  writeSemanticTheme,
+} from './theming/brandScope';
 
 export interface CanvasProviderProps {
   /**
@@ -13,104 +29,21 @@ export interface CanvasProviderProps {
    *
    * While we support theme overrides, we advise to use global theming via CSS Variables.
    */
-  theme?: PartialEmotionCanvasTheme;
+  theme?: CanvasProviderTheme;
+  /**
+   * How partial theme input expands. Default `'brand'`.
+   *
+   * **Numerical `brand` shape:** `'brand'` applies the `primary['600']` shortcut
+   * (PrimaryButton + selected states). `'full'` writes each ramp key literally with
+   * no shortcuts. Other `brand.*` keys always map 1:1 to CSS variables.
+   *
+   * **Legacy `canvas.palette` shape:** `'brand'` = primary.main shortcut only.
+   * `'full'` = auto-generated ramps + broad `system.color.brand.*` forwarding.
+   *
+   * @default 'brand'
+   */
+  themeScope?: CanvasThemingScope;
 }
-
-const mappedKeys = {
-  lightest: 'lightest',
-  lighter: 'lighter',
-  light: 'light',
-  main: 'base',
-  dark: 'dark',
-  darkest: 'darkest',
-  contrast: 'accent',
-};
-
-/**
- * Mapping from deprecated theme palette keys to new numerical brand tokens.
- * This ensures backwards compatibility when consumers use the old theme format.
- * For example: palette.primary.main -> brand.primary600
- */
-const numericalTokenMapping = {
-  lightest: '25',
-  lighter: '50',
-  light: '200',
-  main: '600',
-  dark: '700',
-  darkest: '800',
-} as const;
-
-/**
- * Mapping from deprecated theme palette colors to new brand token names.
- * For example:
- * `primary` -> `primary`
- * `error` -> `critical`
- * `success` -> `positive`
- * `alert` -> `caution`
- * `neutral` -> `neutral`
- */
-const brandColorMapping = {
-  primary: 'primary',
-  error: 'critical',
-  success: 'positive',
-  alert: 'caution',
-  neutral: 'neutral',
-} as const;
-
-/**
- * Mapping from deprecated common palette keys to new brand.common tokens.
- *
- * ## Brandable System Tokens
- *
- * These are all the `system.color.brand.*` tokens that can be customized via theming.
- * Each token references a brand token that can be overridden through the CanvasProvider theme prop.
- *
- * ### Focus Tokens
- * - `system.color.brand.focus.primary` → `brand.primary.500` → Controlled by `focusOutline` (separately from `palette.primary.main`, which controls `brand.primary.600`)
- * - `system.color.brand.focus.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
- * - `system.color.brand.focus.caution.inner` → `brand.caution.400` → Controlled by `palette.alert.main` or `alertInner`
- * - `system.color.brand.focus.caution.outer` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
- *
- * ### Border Tokens
- * - `system.color.brand.border.primary` → `brand.primary.500` → Controlled by `focusOutline` (separately from `palette.primary.main`, which controls `brand.primary.600`)
- * - `system.color.brand.border.critical` → `brand.critical.500` → Controlled by `palette.error.dark` or `errorInner`
- * - `system.color.brand.border.caution` → `brand.caution.500` → Controlled by `palette.alert.dark` or `alertOuter`
- *
- * ### Surface Tokens
- * - `system.color.brand.surface.primary.default` → `brand.primary.A25` → Controlled by `palette.primary.lightest`
- * - `system.color.brand.surface.primary.strong` → `brand.primary.A50` → Controlled by `palette.primary.lighter`
- * - `system.color.brand.surface.critical.default` → `brand.critical.A25` → Controlled by `palette.error.lightest`
- * - `system.color.brand.surface.critical.strong` → `brand.critical.A50` → Controlled by `palette.error.lighter`
- * - `system.color.brand.surface.caution.default` → `brand.caution.A25` → Controlled by `palette.alert.lightest`
- * - `system.color.brand.surface.caution.strong` → `brand.caution.A50` → Controlled by `palette.alert.lighter`
- * - `system.color.brand.surface.positive.default` → `brand.positive.A25` → Controlled by `palette.success.lightest`
- * - `system.color.brand.surface.positive.strong` → `brand.positive.A50` → Controlled by `palette.success.lighter`
- * - `system.color.brand.surface.selected` → `brand.primary.A50` → Controlled by `palette.primary.lighter`
- *
- * ### Accent Tokens
- * - `system.color.brand.accent.primary` → `brand.primary.600` → Controlled by `palette.primary.main`
- * - `system.color.brand.accent.critical` → `brand.critical.600` → Controlled by `palette.error.main`
- * - `system.color.brand.accent.caution` → `brand.caution.400` → Controlled by `palette.alert.main`
- * - `system.color.brand.accent.positive` → `brand.positive.600` → Controlled by `palette.success.main`
- * - `system.color.brand.accent.action` → `brand.primary.600` → Controlled by `palette.primary.main`
- *
- * ### Foreground (Text/Icon) Tokens
- * - `system.color.brand.fg.primary.default` → `brand.primary.600` → Controlled by `palette.primary.main`
- * - `system.color.brand.fg.primary.strong` → `brand.primary.700` → Controlled by `palette.primary.dark`
- * - `system.color.brand.fg.critical.default` → `brand.critical.600` → Controlled by `palette.error.main`
- * - `system.color.brand.fg.critical.strong` → `brand.critical.700` → Controlled by `palette.error.dark`
- * - `system.color.brand.fg.caution.default` → `brand.caution.600` → Controlled by `palette.alert.darkest`
- * - `system.color.brand.fg.caution.strong` → `brand.caution.700` → Controlled by `palette.alert.dark` (Note: no direct mapping, inherits default)
- * - `system.color.brand.fg.positive.default` → `brand.positive.600` → Controlled by `palette.success.main`
- * - `system.color.brand.fg.positive.strong` → `brand.positive.700` → Controlled by `palette.success.dark`
- * - `system.color.brand.fg.selected` → `brand.primary.700` → Controlled by `palette.primary.dark`
- */
-const commonTokenMapping = {
-  focusOutline: brand.common.focus, // maps to brand.primary500
-  alertInner: brand.common.caution.inner, // maps to brand.caution400
-  alertOuter: brand.common.caution.outer, // maps to brand.caution500
-  errorInner: brand.common.critical, // maps to brand.critical500
-} as const;
 
 /**
  * If you wish to reset the theme to the default, apply this class on the CanvasProvider.
@@ -158,12 +91,6 @@ export const defaultBranding = createStyles({
   [brand.gradient.primary]:
     `linear-gradient(90deg, ${brand.primary.base} 0%, ${brand.primary.dark} 100%)`,
 
-  /**
-   * Default `system.color.brand.*` values on the provider scope so components that read
-   * system tokens first (e.g. `cssVar(system.color.brand.accent.primary, brand.primary.base)`)
-   * still resolve to the same branding as legacy `brand.*` vars when globals define system
-   * tokens differently, or when consumers override `brand.*` via `className`.
-   */
   [system.color.brand.focus.primary]: brand.common.focusOutline,
   [system.color.brand.border.primary]: brand.common.focusOutline,
   [system.color.brand.accent.primary]: brand.primary.base,
@@ -202,245 +129,80 @@ export const defaultBranding = createStyles({
   [system.color.brand.surface.selected]: brand.primary.lighter,
 });
 
+/** Pure function — safe to call outside React hooks (e.g. usePopupStack). */
+export function canvasThemeToCssVars(
+  theme: CanvasProviderTheme | undefined,
+  elemProps: React.HTMLAttributes<HTMLElement>,
+  options?: {
+    themeScope?: CanvasThemingScope;
+    filledSemanticTheme?: EmotionCanvasTheme;
+  }
+) {
+  const className = elemProps.className || '';
+  const style: React.CSSProperties = {...(elemProps.style || {})};
+  const scope = options?.themeScope ?? resolveThemingScope(theme);
+
+  if (!theme) {
+    return {...elemProps, className, style};
+  }
+
+  if (isNumericalTheme(theme)) {
+    writeNumericalTheme(theme, style, scope);
+  } else if (!hasExplicitSemanticPalette(theme)) {
+    // `{canvas: {}}` — no inline overrides; global CSS (e.g. Sana) cascades through.
+  } else if (scope === 'brand') {
+    writeBrandScopeSemantic(theme, style);
+  } else {
+    const filledTheme =
+      options?.filledSemanticTheme ?? getTheme(theme as PartialEmotionCanvasTheme);
+    writeSemanticTheme(filledTheme.canvas.palette, style, {writeAll: true});
+  }
+
+  return {...elemProps, className, style};
+}
+
 export const useCanvasThemeToCssVars = (
   /**
    * @deprecated ⚠️ `theme` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
    */
-  theme: PartialEmotionCanvasTheme | undefined,
-  elemProps: React.HTMLAttributes<HTMLElement>
+  theme: CanvasProviderTheme | undefined,
+  elemProps: React.HTMLAttributes<HTMLElement>,
+  themeScope?: CanvasThemingScope
 ) => {
-  const filledTheme = useTheme(theme);
-  const className = (elemProps.className || '').split(' ').concat(defaultBranding).join(' ');
-  const style = elemProps.style || {};
-  const {palette} = filledTheme.canvas;
+  const filledTheme = useTheme(
+    isNumericalTheme(theme) ? undefined : (theme as PartialEmotionCanvasTheme)
+  );
+  const resolvedScope = themeScope ?? resolveThemingScope(theme);
 
-  // A consumer who passes any `palette` (partial or the full `defaultCanvasTheme`) is
-  // intentionally scoping/resetting branding for this subtree, opting out of global CSS
-  // theming (e.g. a `data-theme` attribute). In that case we write every branded token from
-  // the filled theme, even ones that resolve to the same value as `defaultCanvasTheme`, so the
-  // override actually wins over the global cascade. If no `palette` was passed, we write
-  // nothing and let global theming (and `defaultBranding` as a last resort) take over.
-  const hasExplicitPalette =
-    !!theme?.canvas?.palette && Object.keys(theme.canvas.palette).length > 0;
-
-  (['common', 'primary', 'error', 'alert', 'success', 'neutral'] as const).forEach(color => {
-    if (color === 'common') {
-      (['focusOutline', 'alertInner', 'alertOuter', 'errorInner'] as const).forEach(key => {
-        if (hasExplicitPalette) {
-          const value = maybeWrapCSSVariables(palette.common[key]);
-
-          // Set deprecated token for backwards compatibility
-          //@ts-ignore
-          style[brand.common[key]] = value;
-
-          // Forward to new brand.common tokens
-          //@ts-ignore
-          style[commonTokenMapping[key]] = value;
-
-          // Additional system token forwarding for focusOutline
-          if (key === 'focusOutline') {
-            // system.color.brand.focus.primary -> brand.primary.500 (via brand.common.focus)
-            // @ts-ignore
-            style[system.color.brand.focus.primary] = value;
-            // system.color.brand.border.primary -> brand.primary.500
-            // @ts-ignore
-            style[system.color.brand.border.primary] = value;
-          }
-
-          // Additional system token forwarding for alertInner
-          if (key === 'alertInner') {
-            // Forward alertInner to system.color.brand.focus.caution.inner
-            // This token is used by components (e.g., TextInput with error="caution")
-            // for inner focus ring styling. Maps to brand.caution400 via brand.common.caution.inner.
-            // This ensures backwards compatibility when users customize alertInner in their theme.
-            // @ts-ignore
-            style[system.color.brand.focus.caution.inner] = value;
-          }
-
-          // Additional system token forwarding for alertOuter
-          if (key === 'alertOuter') {
-            // Forward alertOuter to system.color.brand.border.caution
-            // This token is used by components (e.g., TextInput with error="caution")
-            // for border and outer focus ring styling. Maps to brand.caution500 via brand.common.caution.outer.
-            // This ensures backwards compatibility when users customize alertOuter in their theme.
-            // @ts-ignore
-            style[system.color.brand.border.caution] = value;
-          }
-
-          // Additional system token forwarding for errorInner
-          if (key === 'errorInner') {
-            // Forward errorInner to system.color.brand.focus.critical and system.color.brand.border.critical
-            // These tokens are used by components (e.g., TextInput with error="error", Switch) for critical
-            // focus ring and border styling. Maps to brand.critical500 via brand.common.errorInner.
-            // This ensures backwards compatibility when users customize errorInner in their theme.
-            // @ts-ignore
-            style[system.color.brand.focus.critical] = value;
-            // @ts-ignore
-            style[system.color.brand.border.critical] = value;
-          }
-        }
-      });
-    } else {
-      (['lightest', 'lighter', 'light', 'main', 'dark', 'darkest', 'contrast'] as const).forEach(
-        key => {
-          // Only force an override when the consumer explicitly passed a `palette` (see
-          // `hasExplicitPalette` above). Otherwise leave these tokens alone so global CSS
-          // theming (e.g. a `data-theme` attribute) and `defaultBranding` continue to cascade.
-          if (hasExplicitPalette) {
-            const value = maybeWrapCSSVariables(palette[color][key]);
-
-            // Set deprecated token (e.g., brand.primary.base) for backwards compatibility
-            // @ts-ignore
-            style[brand[color][mappedKeys[key]]] = value;
-
-            // Forward to new numerical brand tokens (e.g., brand.primary600)
-            // Skip 'contrast' as it doesn't map to numerical tokens
-            if (key !== 'contrast' && key in numericalTokenMapping) {
-              const newBrandColor = brandColorMapping[color as keyof typeof brandColorMapping];
-              const numericalSuffix =
-                numericalTokenMapping[key as keyof typeof numericalTokenMapping];
-
-              // @ts-ignore - Dynamically access brand tokens like brand.primary600
-              const numericalToken = brand[newBrandColor + numericalSuffix];
-              if (numericalToken) {
-                // @ts-ignore
-                style[numericalToken] = value;
-              }
-
-              // Forward to all relevant system.color.brand.* tokens
-              // These system tokens reference the numerical brand tokens, so updating them ensures full compatibility
-              if (key === 'main') {
-                // system.color.brand.accent.{color} -> brand.{color}.600 (except caution -> 400)
-                // @ts-ignore
-                const systemAccentToken = system.color.brand.accent[newBrandColor];
-                if (systemAccentToken) {
-                  // @ts-ignore
-                  style[systemAccentToken] = value;
-                }
-
-                // system.color.brand.fg.{color}.default -> brand.{color}.600
-                // @ts-ignore
-                const systemFgToken = system.color.brand.fg[newBrandColor]?.default;
-                if (systemFgToken) {
-                  // @ts-ignore
-                  style[systemFgToken] = value;
-                }
-
-                // system.color.brand.focus.primary (maps to brand.primary.500 per docs)
-                // For primary only, update focus when 'main' changes — unless focusOutline was customized (it takes precedence)
-                if (newBrandColor === 'primary') {
-                  const focusOutlineCustomized =
-                    palette.common.focusOutline !== defaultCanvasTheme.palette.common.focusOutline;
-                  if (!focusOutlineCustomized) {
-                    // @ts-ignore
-                    const focusToken = system.color.brand.focus.primary;
-                    if (focusToken) {
-                      // @ts-ignore
-                      style[focusToken] = value;
-                    }
-                  }
-                }
-              } else if (key === 'dark') {
-                // system.color.brand.fg.{color}.strong -> brand.{color}.700
-                // @ts-ignore
-                const systemFgStrongToken = system.color.brand.fg[newBrandColor]?.strong;
-                if (systemFgStrongToken) {
-                  // @ts-ignore
-                  style[systemFgStrongToken] = value;
-                }
-
-                // system.color.brand.fg.selected -> brand.primary.700 (for primary only)
-                if (newBrandColor === 'primary') {
-                  // @ts-ignore
-                  const selectedToken = system.color.brand.fg.selected;
-                  if (selectedToken) {
-                    // @ts-ignore
-                    style[selectedToken] = value;
-                  }
-                }
-
-                // system.color.brand.focus.critical & system.color.brand.border.critical -> brand.critical.500 (palette.error.dark)
-                if (newBrandColor === 'critical') {
-                  // @ts-ignore
-                  const focusCriticalToken = system.color.brand.focus.critical;
-                  if (focusCriticalToken) {
-                    // @ts-ignore
-                    style[focusCriticalToken] = value;
-                  }
-                  // @ts-ignore
-                  const borderCriticalToken = system.color.brand.border.critical;
-                  if (borderCriticalToken) {
-                    // @ts-ignore
-                    style[borderCriticalToken] = value;
-                  }
-                }
-
-                // system.color.brand.focus.caution.outer & system.color.brand.border.caution -> brand.caution.500 (palette.alert.dark)
-                if (newBrandColor === 'caution') {
-                  // @ts-ignore
-                  const focusCautionOuterToken = system.color.brand.focus.caution?.outer;
-                  if (focusCautionOuterToken) {
-                    // @ts-ignore
-                    style[focusCautionOuterToken] = value;
-                  }
-                  // @ts-ignore
-                  const borderCautionToken = system.color.brand.border.caution;
-                  if (borderCautionToken) {
-                    // @ts-ignore
-                    style[borderCautionToken] = value;
-                  }
-                }
-              } else if (key === 'lighter') {
-                // system.color.brand.surface.{color}.strong -> brand.{color}.A50
-                // Note: A50 tokens are different from regular 50 tokens but we'll forward the lighter value
-                // @ts-ignore
-                const surfaceStrongToken = system.color.brand.surface[newBrandColor]?.strong;
-                if (surfaceStrongToken) {
-                  // @ts-ignore
-                  style[surfaceStrongToken] = value;
-                }
-
-                // system.color.brand.surface.selected -> brand.primary.A50 (for primary only)
-                if (newBrandColor === 'primary') {
-                  // @ts-ignore
-                  const selectedSurfaceToken = system.color.brand.surface.selected;
-                  if (selectedSurfaceToken) {
-                    // @ts-ignore
-                    style[selectedSurfaceToken] = value;
-                  }
-                }
-              } else if (key === 'lightest') {
-                // system.color.brand.surface.{color}.default -> brand.{color}.A25
-                // @ts-ignore
-                const surfaceDefaultToken = system.color.brand.surface[newBrandColor]?.default;
-                if (surfaceDefaultToken) {
-                  // @ts-ignore
-                  style[surfaceDefaultToken] = value;
-                }
-              }
-            }
-          }
-        }
-      );
-    }
+  return canvasThemeToCssVars(theme, elemProps, {
+    themeScope: resolvedScope,
+    filledSemanticTheme:
+      !isNumericalTheme(theme) && resolvedScope === 'full' ? filledTheme : undefined,
   });
-
-  return {...elemProps, className, style};
 };
 
 export const CanvasProvider = ({
   children,
-  theme = {canvas: {}}, // default to empty theme to avoid breaking changes
+  theme = {canvas: {}},
+  themeScope,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
-  const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props);
+  const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
   const cache = getCache();
   const rest = {...elemProps, ...props};
+  const emotionTheme = isNumericalTheme(theme)
+    ? ({canvas: defaultCanvasTheme} as Theme)
+    : (theme as Theme);
+
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={theme as Theme}>
+      <ThemeProvider theme={emotionTheme}>
         <div
-          dir={theme?.canvas?.direction || defaultCanvasTheme.direction}
+          dir={
+            isNumericalTheme(theme)
+              ? theme.direction || defaultCanvasTheme.direction
+              : theme?.canvas?.direction || defaultCanvasTheme.direction
+          }
           {...(rest as React.HTMLAttributes<HTMLDivElement>)}
         >
           {children}
