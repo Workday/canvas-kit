@@ -24,5 +24,47 @@
     "tokens/v4/shape.md",
     "tokens/v4/size.md",
     "tokens/v4/space.md"
+  ],
+  "accessibilityFiles": [
+    {
+      "source": "accessibility/AccessibilityOverview.mdx",
+      "slug": "overview"
+    },
+    {
+      "source": "accessibility/PageStructure.mdx",
+      "slug": "page-structure"
+    },
+    {
+      "source": "accessibility/TablesAdvanced.mdx",
+      "slug": "tables"
+    },
+    {
+      "source": "accessibility/Popups.mdx",
+      "slug": "popups"
+    },
+    {
+      "source": "accessibility/AriaLiveRegions.mdx",
+      "slug": "aria-live"
+    },
+    {
+      "source": "accessibility/Headers.mdx",
+      "slug": "headers"
+    },
+    {
+      "source": "accessibility/SidePanel.mdx",
+      "slug": "side-panel"
+    },
+    {
+      "source": "accessibility/WindowsHighContrastThemes.mdx",
+      "slug": "windows-high-contrast"
+    },
+    {
+      "source": "accessibility/TestingTableWithFormFields.mdx",
+      "slug": "forms"
+    },
+    {
+      "source": "accessibility/WindowsHighContrastThemes.mdx",
+      "slug": "color-contrast"
+    }
   ]
 }
