@@ -44,7 +44,7 @@ export const hyperlinkStencil = createStencil({
       background: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.primary}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
