@@ -247,7 +247,6 @@ export const TabsItem = createSubcomponent('button')({
   },
 })<TabsItemProps>(({children, ...elemProps}, Element, model) => {
   const modality = useModalityType();
-  console.log(model.state.variant);
 
   return (
     <OverflowTooltip>
