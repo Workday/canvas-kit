@@ -25,15 +25,12 @@ function getVariantValue(attr: JSXAttribute): string | null {
   return null;
 }
 
-function hasTypeStandalone(attributes: JSXElement['openingElement']['attributes']): boolean {
-  return Boolean(
-    attributes?.some(attr => {
-      if (attr.type !== 'JSXAttribute' || attr.name.name !== 'type') {
-        return false;
-      }
-      return getVariantValue(attr) === 'standalone';
-    })
-  );
+function findTypeAttribute(
+  attributes: JSXElement['openingElement']['attributes']
+): JSXAttribute | undefined {
+  return attributes?.find(attr => attr.type === 'JSXAttribute' && attr.name.name === 'type') as
+    | JSXAttribute
+    | undefined;
 }
 
 export default function transformer(file: FileInfo, api: API, _options: Options) {
@@ -83,7 +80,10 @@ export default function transformer(file: FileInfo, api: API, _options: Options)
     }
 
     const ensureTypeStandalone = () => {
-      if (!hasTypeStandalone(attributes)) {
+      const existingTypeAttr = findTypeAttribute(attributes);
+      if (existingTypeAttr) {
+        existingTypeAttr.value = j.stringLiteral('standalone');
+      } else {
         attributes.push(j.jsxAttribute(j.jsxIdentifier('type'), j.stringLiteral('standalone')));
       }
     };

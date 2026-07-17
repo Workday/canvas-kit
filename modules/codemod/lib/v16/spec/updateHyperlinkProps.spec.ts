@@ -136,4 +136,17 @@ describe('updateHyperlinkProps', () => {
     `;
     expectTransform(input, expected);
   });
+
+  it('should overwrite type="inline" when converting variant="standalone"', () => {
+    const input = stripIndent`
+      import {Hyperlink} from '@workday/canvas-kit-react/button'
+      <Hyperlink variant="standalone" type="inline" href="#link">Link</Hyperlink>
+    `;
+
+    const expected = stripIndent`
+      import {Hyperlink} from '@workday/canvas-kit-react/button'
+      <Hyperlink type="standalone" href="#link">Link</Hyperlink>
+    `;
+    expectTransform(input, expected);
+  });
 });
