@@ -35,7 +35,7 @@ export const hyperlinkStencil = createStencil({
     color: system.sana.color.brand.fg.link.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
-    padding: `0 ${px2rem(2)} `,
+    padding: `0 ${px2rem(2)}`,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
