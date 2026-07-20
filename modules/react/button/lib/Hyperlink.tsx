@@ -32,7 +32,7 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: system.legacy.color.fg.info.default,
+    color: system.color.fg.link.default,
     cursor: 'pointer',
     borderRadius: px2rem(2),
     padding: `0 ${px2rem(2)}`,
@@ -40,7 +40,7 @@ export const hyperlinkStencil = createStencil({
     transition: 'color 0.15s,background-color 0.15s',
     wordBreak: 'break-word',
     '&:hover, &.hover': {
-      color: system.legacy.color.fg.info.strong,
+      color: system.color.fg.link.hover,
       background: system.legacy.color.surface.overlay.hover.default,
     },
     '&:focus, &.focus, &:focus-visible': {
@@ -48,7 +48,7 @@ export const hyperlinkStencil = createStencil({
       outline: 'none',
     },
     '&:active, &.active': {
-      color: system.legacy.color.fg.info.strong,
+      color: system.color.fg.link.hover,
       background: system.legacy.color.surface.overlay.pressed.default,
     },
   },
@@ -64,7 +64,7 @@ export const hyperlinkStencil = createStencil({
           boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.fg.inverse}`,
         },
         '&:active, &.active': {
-          color: system.legacy.color.fg.info.strong,
+          color: system.color.fg.link.hover,
           background: system.legacy.color.surface.navigation,
         },
       },
