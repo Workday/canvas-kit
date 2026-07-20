@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const ToastDialog = () => (
   <Toast mode="dialog" aria-label="notification">
-    <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
+    <Toast.Icon icon={checkIcon} color={system.color.brand.fg.positive.default} />
     <Toast.Body>
       <Toast.Message>Your workbook was successfully processed.</Toast.Message>
       <Toast.Link href="#hreflink">Custom Link</Toast.Link>

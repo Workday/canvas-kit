@@ -2,6 +2,7 @@ import {Meta} from '@storybook/react';
 
 import mdxDoc from './KBD.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {InTooltip as InTooltipExample} from './examples/InTooltip';
 import {Items as ItemsExample} from './examples/Items';
 import {RTL as RTLExample} from './examples/RTL';
 import {Size as SizeExample} from './examples/Size';
@@ -35,4 +36,8 @@ export const Variant = {
 
 export const Items = {
   render: ItemsExample,
+};
+
+export const InTooltip = {
+  render: InTooltipExample,
 };
