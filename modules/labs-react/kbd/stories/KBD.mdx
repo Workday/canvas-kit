@@ -86,6 +86,11 @@ can recognize the content as keyboard input, but it does **not** make a keyboard
 expose it to the browser. It is the visual/semantic representation of a key, not the accessibility
 contract for a functioning shortcut.
 
+- `aria-keyshortcuts` isn't supposed to go on the presentational KBD wrapper, it should be on the interactive control with the key listener.
+- The `<KBD.Item>` components that use glyphs need translated aria-label strings. (E.g. "Command", "Control", etc.)
+
+
+
 ### Provide spoken labels for symbolic or abbreviated keys
 
 Glyphs and abbreviations such as <kbd>⌘</kbd>, <kbd>⌥</kbd>, <kbd>⇧</kbd>, and arrow keys are **not

@@ -8,6 +8,7 @@ import {
 } from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
+  cornerShapeStencil,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
@@ -53,6 +54,7 @@ export interface MenuItemProps extends CSProps {
 }
 
 export const menuItemStencil = createStencil({
+  extends: cornerShapeStencil,
   parts: {
     text: 'menu-item-text',
     icon: 'menu-item-icon',
@@ -67,13 +69,13 @@ export const menuItemStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.legacy.gap.md,
-    padding: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
+    gap: system.legacy.gap.sm,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.xs} ${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
-    color: system.color.fg.default,
+    color: system.color.fg.strong,
     borderWidth: 0,
-    borderRadius: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
@@ -95,32 +97,42 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: system.legacy.color.brand.fg.primary.strong,
-      backgroundColor: system.legacy.color.brand.surface.primary.strong,
+      color: system.legacy.color.brand.fg.selected,
+      backgroundColor: system.legacy.color.brand.surface.selected,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        [systemIconStencil.vars.color]: 'currentColor',
-        outline: 'none',
-        backgroundColor: system.legacy.color.brand.accent.primary,
-        color: system.color.fg.inverse,
+        outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
+        outlineOffset: `-${px2rem(2)}`,
       },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
-      color: system.color.fg.strong,
       backgroundColor: system.legacy.color.surface.overlay.hover.default,
+    },
+
+    // Active styles
+    '&:is(.active, :active)': {
+      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      color: system.color.fg.inverse,
-      backgroundColor: system.legacy.color.brand.accent.primary,
-      outline: `${px2rem(2)} solid transparent`,
+      outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
       outlineOffset: `-${px2rem(2)}`,
+    },
+
+    // Focus + Expanded Submenu
+    // When a `Submenu.TargetItem`'s submenu is open, real focus has moved into the submenu, so we
+    // de-emphasize this item's focus ring and show selected styling instead to indicate it's part
+    // of the open ancestor trail rather than the actively focused item.
+    '&[aria-expanded="true"]:is(.focus, :focus-visible)': {
+      color: system.legacy.color.brand.fg.selected,
+      backgroundColor: system.legacy.color.brand.surface.selected,
+      outline: 'none',
     },
 
     // Disabled styles
@@ -128,12 +140,14 @@ export const menuItemStencil = createStencil({
       cursor: 'default',
       opacity: system.opacity.disabled,
 
-      '&:where(.hover, :hover, [aria-selected=true])': {
+      '&:where(.hover, :hover)': {
         background: 'none',
       },
+
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        backgroundColor: system.legacy.color.brand.accent.primary,
+        color: system.legacy.color.brand.fg.selected,
+        backgroundColor: system.legacy.color.brand.surface.selected,
         opacity: system.opacity.disabled,
       },
     },
@@ -142,15 +156,11 @@ export const menuItemStencil = createStencil({
       flexGrow: 1,
       alignSelf: 'center',
     },
-
-    [`& :where(${iconPart})`]: {
-      alignSelf: 'start',
-    },
   }),
 });
 
 const MenuItemIcon = (elemProps: SystemIconProps) => {
-  return <SystemIcon {...menuItemStencil.parts.icon} {...elemProps} />;
+  return <SystemIcon size="xs" {...menuItemStencil.parts.icon} {...elemProps} />;
 };
 
 const MenuItemText = createComponent('span')({

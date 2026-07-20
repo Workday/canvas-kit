@@ -76,7 +76,8 @@ export const menuGroupHeadingStencil = createStencil({
     alignItems: 'center',
     width: '100%',
     gap: system.legacy.gap.md,
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
+    paddingBlock: system.legacy.padding.xs,
+    paddingInline: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
   },
 });
 
