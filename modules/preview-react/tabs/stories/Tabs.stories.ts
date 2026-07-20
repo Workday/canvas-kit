@@ -1,6 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
 
 import mdxDoc from './Tabs.mdx';
 import {AlternativeTabStop as AlternativeTabStopExample} from './examples/AlternativeTabStop';
