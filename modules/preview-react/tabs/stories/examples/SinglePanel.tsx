@@ -1,4 +1,5 @@
 import {Tabs, useTabsModel} from '@workday/canvas-kit-preview-react/tabs';
+import {slugify} from '@workday/canvas-kit-react/common';
 import {system} from '@workday/canvas-tokens-web';
 
 export const SinglePanel = () => {
@@ -31,7 +32,12 @@ export const SinglePanel = () => {
           Third Tab
         </Tabs.Item>
       </Tabs.List>
-      <Tabs.Panel cs={{marginBlockStart: system.gap.lg}} hidden={undefined} id="mytab-panel">
+      <Tabs.Panel
+        cs={{marginBlockStart: system.gap.lg}}
+        hidden={undefined}
+        id="mytab-panel"
+        aria-labelledby={slugify(`${model.state.id}-${model.state.selectedIds[0]}`)}
+      >
         {contents[model.state.selectedIds[0]]}
       </Tabs.Panel>
     </Tabs>
