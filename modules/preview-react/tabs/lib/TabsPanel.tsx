@@ -28,7 +28,7 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
    * Part of the ARIA specification for tabs. By default, all `tabpanel` elements have a `tabIndex`
    * of `0` which makes the whole content area receive focus. If you have a focusable item near the
    * top of the tab panel content area, you may set `tabIndex` to `undefined` to prevent the tab
-   * panel element from receiving focus. Only do this is a child of the tab panel can receive focus.
+   * panel element from receiving focus. Only do this if a child of the tab panel can receive focus.
    */
   tabIndex?: number;
 }
