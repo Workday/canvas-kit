@@ -35,6 +35,7 @@ export const bannerStencil = createStencil({
     borderStartEndRadius: system.legacy.shape.sm,
     borderEndStartRadius: system.legacy.shape.sm,
     borderEndEndRadius: system.legacy.shape.sm,
+    boxShadow: system.depth[5],
     gap: system.legacy.gap.sm,
     cursor: 'pointer',
     transition: 'background-color 120ms linear',
