@@ -21,7 +21,8 @@ Soon to be...
 - [Component Updates](#component-updates)
   - [Action Bar](#action-bar)
   - [Avatar](#avatar)
-  - [Buttons](#buttons) - [Delete Button Outline Variant](#delete-button-outline-variant)
+  - [Buttons](#buttons)
+    - [Delete Button Outline Variant](#delete-button-outline-variant)
   - [Card](#card)
   - [Form Field](#form-field)
   - [Inputs](#inputs)
@@ -40,6 +41,8 @@ Soon to be...
     - [Breadcrumbs](#breadcrumbs)
     - [Pagination](#pagination)
   - [Segmented Control](#segmented-control)
+	- [Toast](#toast)
+	- [Tooltip](#tooltip)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -349,6 +352,36 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Shape is now **12px** (previously 8px).
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
+
+### Toast
+
+**PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
+
+#### Visual Updates
+
+- Padding is now applied to the `Toast` container itself instead of being distributed across
+  `Toast.Body` and `Toast.Icon`.
+- Gap between the icon, body, and close icon is now `base.size150` (12px).
+- Shape uses `system.shape.xl`.
+- `Toast.Body` no longer has a gap between text and link.
+- `Toast.CloseIcon` is set to have absolute positioning and aligned with the top-right corner (in
+  LTR).
+- `Toast.CloseIcon` was changed to be `extraSmall` tertiary button.
+
+### Tooltip
+
+**PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
+
+#### Visual Updates
+
+- The default tooltip has been restyled from a dark surface to a light surface.
+- A visible border (`system.color.border.default`) is now applied to the container, replacing the
+  previous transparent outline.
+- Tooltip boundaries remain visible in Windows High Contrast mode: when High Contrast is detected,
+  Tooltip uses a solid outline (`outline: solid 1px CanvasText`) to ensure clear visibility.
+- Shape is now fully rounded using `system.shape.full`.
+- Type level is now `subtext.lg` (previously `subtext.md`).
+- Padding and spacing have been adjusted to accommodate the new styling.
 
 ### Menu
 
