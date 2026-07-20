@@ -9,8 +9,8 @@ import {brandScopePrimaryOnly, primaryWithFocus} from '../../../../../utils/stor
 import {BrandingFixture} from './examples/BrandingFixture';
 
 const rowStyles = createStyles({
-  gap: system.gap.xl,
-  flexWrap: 'wrap',
+  // gap: system.gap.xl,
+  // flexWrap: 'wrap',
 });
 
 export default {
@@ -20,12 +20,12 @@ export default {
 const comparisonRender = () => (
   <Flex cs={rowStyles}>
     <BrandingFixture label="Global (no scoped override)" />
-    <BrandingFixture
+    {/* <BrandingFixture
       label="Scoped: sanaCanvasProviderTheme"
       scopedTheme={sanaCanvasProviderTheme}
     />
     <BrandingFixture label="Scoped: primary only" scopedTheme={brandScopePrimaryOnly} />
-    <BrandingFixture label="Scoped: primary + focusOutline" scopedTheme={primaryWithFocus} />
+    <BrandingFixture label="Scoped: primary + focusOutline" scopedTheme={primaryWithFocus} /> */}
   </Flex>
 );
 
@@ -39,18 +39,6 @@ export const SanaCanvas = {
       },
     },
     chromatic: {disable: false},
-  },
-  render: comparisonRender,
-};
-
-export const Canvas = {
-  name: 'Canvas',
-  parameters: {
-    docs: {
-      description: {
-        story: 'Open with `?theme=canvas` to set `data-theme="canvas"` on `<html>`.',
-      },
-    },
   },
   render: comparisonRender,
 };

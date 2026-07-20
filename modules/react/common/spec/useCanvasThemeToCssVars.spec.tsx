@@ -2,7 +2,14 @@ import {renderHook} from '@testing-library/react';
 
 import {brand, system} from '@workday/canvas-tokens-web';
 
-import {useCanvasThemeToCssVars} from '../lib/CanvasProvider';
+import {canvasThemeToCssVars, useCanvasThemeToCssVars} from '../lib/CanvasProvider';
+
+describe('canvasThemeToCssVars', () => {
+  it('does not write CSS variables when theme is undefined', () => {
+    const {style} = canvasThemeToCssVars(undefined, {});
+    expect(Object.keys(style)).toHaveLength(0);
+  });
+});
 
 describe('useCanvasThemeToCssVars — brand scope', () => {
   it('writes brand numerical CSS variables directly', () => {

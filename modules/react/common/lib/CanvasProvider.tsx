@@ -183,31 +183,34 @@ export const useCanvasThemeToCssVars = (
 
 export const CanvasProvider = ({
   children,
-  theme = {canvas: {}},
+  theme,
   themeScope,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
   const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
   const cache = getCache();
   const rest = {...elemProps, ...props};
-  const emotionTheme = isNumericalTheme(theme)
-    ? ({canvas: defaultCanvasTheme} as Theme)
-    : (theme as Theme);
+  const emotionTheme = theme
+    ? isNumericalTheme(theme)
+      ? ({canvas: defaultCanvasTheme} as Theme)
+      : (theme as Theme)
+    : undefined;
+  const content = (
+    <div
+      dir={
+        isNumericalTheme(theme)
+          ? theme.direction || defaultCanvasTheme.direction
+          : theme?.canvas?.direction || defaultCanvasTheme.direction
+      }
+      {...(rest as React.HTMLAttributes<HTMLDivElement>)}
+    >
+      {children}
+    </div>
+  );
 
   return (
     <CacheProvider value={cache}>
-      <ThemeProvider theme={emotionTheme}>
-        <div
-          dir={
-            isNumericalTheme(theme)
-              ? theme.direction || defaultCanvasTheme.direction
-              : theme?.canvas?.direction || defaultCanvasTheme.direction
-          }
-          {...(rest as React.HTMLAttributes<HTMLDivElement>)}
-        >
-          {children}
-        </div>
-      </ThemeProvider>
+      {emotionTheme ? <ThemeProvider theme={emotionTheme}>{content}</ThemeProvider> : content}
     </CacheProvider>
   );
 };

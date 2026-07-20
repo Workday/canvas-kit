@@ -1,3 +1,4 @@
+import {ThemeProvider} from '@emotion/react';
 import * as React from 'react';
 
 import {
@@ -43,13 +44,10 @@ export const StaticStates: React.FC<
   localTheme._styleRewriteFn = convertToStaticStates;
 
   return (
-    <CanvasProvider
-      theme={localTheme}
-      className={className}
-      {...elemProps}
-      data-theme="sana-canvas"
-    >
-      {children}
-    </CanvasProvider>
+    <ThemeProvider theme={localTheme}>
+      <CanvasProvider className={className} {...elemProps} data-theme="sana-canvas" theme={theme}>
+        {children}
+      </CanvasProvider>
+    </ThemeProvider>
   );
 };

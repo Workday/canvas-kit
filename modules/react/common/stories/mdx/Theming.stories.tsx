@@ -18,11 +18,6 @@ export const Theming = {
   render: ThemingExample,
 };
 
-export const BrandScope = {
-  name: 'Brand Scope',
-  render: ThemingBrandScope,
-};
-
 export const RTL = {
   render: RTLExample,
 };
