@@ -29,7 +29,7 @@ export const useTabsModel = createModelHook({
     ...useOverflowListModel.defaultConfig,
     /**
      * Optional id for the whole `Tabs` group. The `aria-controls` of the `Tab.Item` and `id` of the
-     * `Tab.Panel` will automatically derived from this id. If not provided, a unique id will be
+     * `Tab.Panel` will automatically be derived from this id. If not provided, a unique id will be
      * created.
      * @default useUniqueId()
      */

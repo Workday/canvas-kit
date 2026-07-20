@@ -20,7 +20,7 @@ export interface TabPanelProps extends ExtractProps<typeof Box, never> {
   /**
    * The identifier of the tab. This identifier will be used in change events and for `initialTab`.
    * Must match the `data-id` of the associated tab item. If this property is not provided, it will
-   * default to a string representation of the the zero-based index of the Tab when it was
+   * default to a string representation of the zero-based index of the Tab when it was
    * initialized.
    */
   'data-id'?: string;
