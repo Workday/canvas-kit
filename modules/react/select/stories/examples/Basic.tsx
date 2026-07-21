@@ -33,7 +33,7 @@ export const Basic = () => {
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
           <Select items={options}>
-            <FormField.Input grow as={Select.Input} onChange={handleChange} />
+            <FormField.Input as={Select.Input} onChange={handleChange} />
             <Select.Popper>
               <Select.Card>
                 <Select.List>
