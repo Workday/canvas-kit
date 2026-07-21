@@ -29,7 +29,7 @@ export const HyperlinkStates = {
             {label: 'Inverse', value: 'inverse'},
             {label: 'Secondary', value: 'secondary'},
           ],
-          type: [
+          linkType: [
             {label: 'Inline', value: undefined},
             {label: 'Standalone', value: 'standalone'},
           ],

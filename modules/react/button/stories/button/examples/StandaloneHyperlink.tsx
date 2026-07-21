@@ -9,7 +9,7 @@ const containerStyles = createStyles({
 
 export const StandaloneLink = () => (
   <div className={containerStyles}>
-    <Hyperlink type="standalone" href="#standalone-hyperlink">
+    <Hyperlink linkType="standalone" href="#standalone-hyperlink">
       Hyperlink
     </Hyperlink>
   </div>

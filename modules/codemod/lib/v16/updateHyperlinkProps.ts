@@ -25,10 +25,10 @@ function getVariantValue(attr: JSXAttribute): string | null {
   return null;
 }
 
-function findTypeAttribute(
+function findLinkTypeAttribute(
   attributes: JSXElement['openingElement']['attributes']
 ): JSXAttribute | undefined {
-  return attributes?.find(attr => attr.type === 'JSXAttribute' && attr.name.name === 'type') as
+  return attributes?.find(attr => attr.type === 'JSXAttribute' && attr.name.name === 'linkType') as
     | JSXAttribute
     | undefined;
 }
@@ -80,11 +80,11 @@ export default function transformer(file: FileInfo, api: API, _options: Options)
     }
 
     const ensureTypeStandalone = () => {
-      const existingTypeAttr = findTypeAttribute(attributes);
-      if (existingTypeAttr) {
-        existingTypeAttr.value = j.stringLiteral('standalone');
+      const existingLinkTypeAttr = findLinkTypeAttribute(attributes);
+      if (existingLinkTypeAttr) {
+        existingLinkTypeAttr.value = j.stringLiteral('standalone');
       } else {
-        attributes.push(j.jsxAttribute(j.jsxIdentifier('type'), j.stringLiteral('standalone')));
+        attributes.push(j.jsxAttribute(j.jsxIdentifier('linkType'), j.stringLiteral('standalone')));
       }
     };
 

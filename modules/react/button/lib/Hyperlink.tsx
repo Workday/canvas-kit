@@ -20,7 +20,7 @@ export interface HyperlinkProps extends CSProps {
    *
    * @default 'inline'
    */
-  type?: 'inline' | 'standalone';
+  linkType?: 'inline' | 'standalone';
   /**
    * Attribute for the hyperlink URL
    */
@@ -80,7 +80,7 @@ export const hyperlinkStencil = createStencil({
         },
       },
     },
-    type: {
+    linkType: {
       inline: {},
       standalone: {
         textDecoration: 'none',
@@ -95,8 +95,12 @@ export const hyperlinkStencil = createStencil({
  */
 export const Hyperlink = createComponent('a')({
   displayName: 'Hyperlink',
-  Component: ({children, variant, type = 'inline', ...elemProps}: HyperlinkProps, ref, Element) => (
-    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStencil({variant, type}))}>
+  Component: (
+    {children, variant, linkType = 'inline', ...elemProps}: HyperlinkProps,
+    ref,
+    Element
+  ) => (
+    <Element ref={ref} {...handleCsProp(elemProps, hyperlinkStencil({variant, linkType}))}>
       {children}
     </Element>
   ),

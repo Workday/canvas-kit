@@ -17,7 +17,7 @@ export const LinkInverse = () => (
     <Hyperlink href="#hyperlink" variant="inverse">
       Hyperlink
     </Hyperlink>
-    <Hyperlink href="#hyperlink" variant="inverse" type="standalone">
+    <Hyperlink href="#hyperlink" variant="inverse" linkType="standalone">
       Hyperlink
     </Hyperlink>
   </Box>

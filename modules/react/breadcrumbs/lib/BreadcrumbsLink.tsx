@@ -60,7 +60,7 @@ export const BreadcrumbsLink = createComponent('a')({
           as={Element}
           role="link"
           variant="secondary"
-          type="standalone"
+          linkType="standalone"
           {...handleCsProp(
             elemProps,
             breadcrumbsLinkStencil({

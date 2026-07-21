@@ -6,7 +6,7 @@ import {expectTransformFactory} from './expectTransformFactory';
 const expectTransform = expectTransformFactory(transform);
 
 describe('updateHyperlinkProps', () => {
-  it('should convert variant="standalone" to type="standalone"', () => {
+  it('should convert variant="standalone" to linkType="standalone"', () => {
     const input = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
       <Hyperlink variant="standalone" href="#link">Link</Hyperlink>
@@ -14,12 +14,12 @@ describe('updateHyperlinkProps', () => {
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink href="#link" type="standalone">Link</Hyperlink>
+      <Hyperlink href="#link" linkType="standalone">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
 
-  it('should convert variant="standaloneInverse" to variant="inverse" type="standalone"', () => {
+  it('should convert variant="standaloneInverse" to variant="inverse" linkType="standalone"', () => {
     const input = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
       <Hyperlink variant="standaloneInverse" href="#link">Link</Hyperlink>
@@ -27,7 +27,7 @@ describe('updateHyperlinkProps', () => {
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink variant="inverse" href="#link" type="standalone">Link</Hyperlink>
+      <Hyperlink variant="inverse" href="#link" linkType="standalone">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
@@ -44,12 +44,12 @@ describe('updateHyperlinkProps', () => {
     const expected = stripIndent`
       import {ExternalHyperlink} from '@workday/canvas-kit-react/button'
       <>
-        <ExternalHyperlink href="#a" iconLabel="Opens new window" type="standalone">A</ExternalHyperlink>
+        <ExternalHyperlink href="#a" iconLabel="Opens new window" linkType="standalone">A</ExternalHyperlink>
         <ExternalHyperlink
           variant="inverse"
           href="#b"
           iconLabel="Opens new window"
-          type="standalone">B</ExternalHyperlink>
+          linkType="standalone">B</ExternalHyperlink>
       </>
     `;
     expectTransform(input, expected);
@@ -63,7 +63,7 @@ describe('updateHyperlinkProps', () => {
 
     const expected = stripIndent`
       import {Hyperlink as Link} from '@workday/canvas-kit-react/button'
-      <Link href="#link" type="standalone">Link</Link>
+      <Link href="#link" linkType="standalone">Link</Link>
     `;
     expectTransform(input, expected);
   });
@@ -76,7 +76,7 @@ describe('updateHyperlinkProps', () => {
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react'
-      <Hyperlink href="#link" type="standalone">Link</Hyperlink>
+      <Hyperlink href="#link" linkType="standalone">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
@@ -102,7 +102,7 @@ describe('updateHyperlinkProps', () => {
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink variant="inverse" href="#link" type="standalone">Link</Hyperlink>
+      <Hyperlink variant="inverse" href="#link" linkType="standalone">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
@@ -119,33 +119,33 @@ describe('updateHyperlinkProps', () => {
       import {styled} from '@emotion/styled';
       import {Hyperlink} from '@workday/canvas-kit-react/button'
       const StyledLink = styled(Hyperlink)({color: '#000'});
-      <StyledLink href="#link" type="standalone">Link</StyledLink>
+      <StyledLink href="#link" linkType="standalone">Link</StyledLink>
     `;
     expectTransform(input, expected);
   });
 
-  it('should not duplicate type="standalone" if already present', () => {
+  it('should not duplicate linkType="standalone" if already present', () => {
     const input = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink variant="standalone" type="standalone" href="#link">Link</Hyperlink>
+      <Hyperlink variant="standalone" linkType="standalone" href="#link">Link</Hyperlink>
     `;
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink type="standalone" href="#link">Link</Hyperlink>
+      <Hyperlink linkType="standalone" href="#link">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
 
-  it('should overwrite type="inline" when converting variant="standalone"', () => {
+  it('should overwrite linkType="inline" when converting variant="standalone"', () => {
     const input = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink variant="standalone" type="inline" href="#link">Link</Hyperlink>
+      <Hyperlink variant="standalone" linkType="inline" href="#link">Link</Hyperlink>
     `;
 
     const expected = stripIndent`
       import {Hyperlink} from '@workday/canvas-kit-react/button'
-      <Hyperlink type="standalone" href="#link">Link</Hyperlink>
+      <Hyperlink linkType="standalone" href="#link">Link</Hyperlink>
     `;
     expectTransform(input, expected);
   });
