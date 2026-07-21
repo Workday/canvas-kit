@@ -14,8 +14,5 @@ export const SecondaryLink = () => (
     <Hyperlink variant="secondary" href="#secondary-hyperlink">
       Hyperlink
     </Hyperlink>
-    <Hyperlink variant="secondary" linkType="standalone" href="#secondary-standalone-hyperlink">
-      Hyperlink
-    </Hyperlink>
   </div>
 );
