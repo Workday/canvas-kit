@@ -46,6 +46,11 @@ export const hyperlinkStencil = createStencil({
     '&:focus, &.focus, &:focus-visible': {
       boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
       outline: 'none',
+      // Windows High Contrast Mode ignores `boxShadow`, so provide an explicit
+      // outline to keep the focus indicator visible.
+      '@media (forced-colors: active)': {
+        outline: `solid ${px2rem(2)} ButtonBorder`,
+      },
     },
     '&:active, &.active': {
       color: system.color.fg.link.hover,
