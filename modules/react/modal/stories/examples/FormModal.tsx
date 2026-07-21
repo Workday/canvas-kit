@@ -36,15 +36,15 @@ export const FormModal = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>New User</Modal.Heading>
           <Modal.Body>
-            <FormField>
+            <FormField grow>
               <FormField.Label>First Name</FormField.Label>
               <FormField.Input as={TextInput} name="first" />
             </FormField>
-            <FormField>
+            <FormField grow>
               <FormField.Label>Last Name</FormField.Label>
               <FormField.Input as={TextInput} name="last" />
             </FormField>
-            <FormField>
+            <FormField grow>
               <FormField.Label>Favorite Color</FormField.Label>
               <FormField.Field>
                 <Select items={FAVORITE_COLOR_OPTIONS}>

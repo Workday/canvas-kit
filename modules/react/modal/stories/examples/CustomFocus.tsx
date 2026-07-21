@@ -31,12 +31,13 @@ export const CustomFocus = () => {
             <Box as="p" id={longDescID} cs={{marginBlockStart: 0, marginBlockEnd: system.gap.md}}>
               Enter your initials to acknowledge the license.
             </Box>
-            <FormField cs={{marginBlockEnd: 0}}>
+            <FormField>
               <FormField.Label>Initials</FormField.Label>
               <FormField.Input
                 as={TextInput}
                 ref={ref}
                 value={value}
+                grow
                 onChange={e => setValue(e.currentTarget.value)}
               />
             </FormField>

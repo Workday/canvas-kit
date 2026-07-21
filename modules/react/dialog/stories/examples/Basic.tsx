@@ -30,7 +30,7 @@ export const Basic = () => {
           <Dialog.Body>
             <FormField>
               <FormField.Label>Email</FormField.Label>
-              <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+              <FormField.Input as={TextInput} grow onChange={handleChange} value={value} />
             </FormField>
           </Dialog.Body>
           <Dialog.ButtonGroup>

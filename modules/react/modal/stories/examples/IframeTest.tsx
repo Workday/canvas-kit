@@ -11,7 +11,7 @@ export const IframeTest = () => {
           <Modal.Heading>Delete Item</Modal.Heading>
           <Modal.Body>
             <p>Are you sure you want to delete the item?</p>
-            <Modal.ButtonGroup>
+            <Modal.ButtonGroup position="start">
               <Modal.CloseButton>Cancel</Modal.CloseButton>
               <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
             </Modal.ButtonGroup>
