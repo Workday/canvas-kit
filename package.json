@@ -3,7 +3,6 @@
   "name": "canvas-kit",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",
-  "type": "module",
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.26.3",
     "@babel/plugin-transform-runtime": "^7.26.3",
@@ -85,7 +84,7 @@
     "storybook": "8.4.7",
     "string-replace-loader": "^3.1.0",
     "ts-loader": "^9.5.1",
-    "ts-patch": "^3.2.1",
+    "ts-patch": "^3.3.0",
     "tsx": "^4.19.2",
     "typescript": "5.0",
     "vite": "^7.1.11",
@@ -140,7 +139,7 @@
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-expressive-icons-web": "1.0.2",
   "@workday/canvas-system-icons-web": "4.0.4",
-  "@workday/canvas-tokens-web": "4.4.0-beta.0",
+  "@workday/canvas-tokens-web": "4.4.0-beta.6",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",

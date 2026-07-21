@@ -1,9 +1,21 @@
 name: Pull Request
 
-on: pull_request
+on:
+  pull_request:
+    # labeled: so Chromatic can run when "ready for review" is applied
+    types: [opened, synchronize, reopened, labeled]
+
+# Cancel in-progress runs for the same PR when a new commit is pushed.
+# Avoids burning Chromatic snapshots (and CI minutes) on superseded commits.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
+  # On labeled events, only continue when the Chromatic gate label was added —
+  # other labels should not re-run the suite.
   install:
+    if: github.event.action != 'labeled' || github.event.label.name == 'ready for review'
     runs-on: ubuntu-latest
     outputs:
       cypress-version: ${{ steps.cypress-version.outputs.version }}
@@ -16,6 +28,7 @@ jobs:
           node_version: 24.x
 
   check:
+    if: github.event.action != 'labeled'
     runs-on: ubuntu-latest
     needs: 'install'
 
@@ -40,6 +53,7 @@ jobs:
         run: yarn test
 
   build:
+    if: github.event.action != 'labeled' || github.event.label.name == 'ready for review'
     runs-on: ubuntu-latest
     needs: 'install'
 
@@ -60,7 +74,10 @@ jobs:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
 
+  # Chromatic only when the PR is marked ready for review (and on later pushes
+  # while that label remains). Skipped for draft/in-progress commits.
   visual-test:
+    if: contains(github.event.pull_request.labels.*.name, 'ready for review')
     runs-on: ubuntu-latest
     needs: 'build'
 
@@ -79,7 +96,7 @@ jobs:
           path: docs
           key: ${{ runner.os }}-build-${{ github.sha }}
 
-      - uses: chromaui/action@main
+      - uses: chromaui/action@94713c544284a14195de3b50ef24301579f1877e # main branch
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           projectToken: dlpro96xybh
@@ -88,6 +105,7 @@ jobs:
           exitZeroOnChanges: true
 
   integration-test:
+    if: github.event.action != 'labeled'
     runs-on: ubuntu-latest
     needs: ['install', 'build']
     strategy:

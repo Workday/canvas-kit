@@ -4,7 +4,7 @@ import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {ToastBody} from './ToastBody';
 import {ToastCloseIcon} from './ToastCloseIcon';
@@ -52,9 +52,17 @@ const toastStencil = createStencil({
     display: 'flex',
     flexDirection: 'row',
     width: px2rem(360),
-    padding: 0,
-    gap: system.legacy.gap.xs,
+    paddingBlock: system.legacy.padding.sm,
+    paddingInline: `${system.legacy.padding.md} ${system.legacy.padding.xl}`,
+    gap: base.legacy.size150,
     borderRadius: system.legacy.shape.xl,
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
+    backgroundColor: system.legacy.color.surface.default,
+    boxShadow: system.depth[3],
+
+    '@media (forced-colors: active)': {
+      outline: `${px2rem(1)} solid CanvasText`,
+    },
   },
 });
 
