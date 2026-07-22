@@ -148,7 +148,6 @@ import {Menu} from '@workday/canvas-kit-react/menu';
       <Menu.List>
         <Menu.Item>First Item</Menu.Item>
         <Menu.Item>Second Item</Menu.Item>
-        <Menu.Item aria-disabled>Unavailable Item</Menu.Item>
       </Menu.List>
     </Menu.Card>
   </Menu.Popper>
@@ -194,16 +193,24 @@ Canvas Kit applies these automatically via `useMenuModel` (list + popup) and Men
 `mode="single"`, **`useMenuItemFocus`** moves focus to the first menu item when the menu opens. Do
 not generate **`initialFocusRef`** — it is not wired on Menu.
 
+**Implementation note on `mode="multiple"`:** `useMenuModel` supports `mode="multiple"`, which keeps
+the menu open and toggles selection in model state. **`Menu.Item`** uses `role="menuitem"`, which
+does not support **`aria-selected`**, so selected state is not exposed to assistive technology. Do
+not generate **`mode="multiple"`** with **`Menu.Item`** for an accessible multi-select UI—use
+[**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs),
+**MultiSelect**, or
+[**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs) instead.
+
 **Keyboard** (_trigger is `Menu.Target`, default `SecondaryButton`; list uses vertical orientation by
 default_):
 
 - <kbd>Enter</kbd> / <kbd>Space</kbd> on the trigger opens the menu (button activation)
 - <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> on the trigger also opens the menu
-- On open, focus moves to the first menu item by default (`mode="single"`)
+- On open, focus moves to the first menu item by default
 - <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> moves the roving tabindex between items
 - <kbd>Home</kbd> / <kbd>End</kbd> moves to the first or last item
-- <kbd>Enter</kbd> / <kbd>Space</kbd> on an item activates it; in `mode="single"` (default) the menu
-  closes; in `mode="multiple"` selection toggles and the menu stays open
+- <kbd>Enter</kbd> / <kbd>Space</kbd> on an item activates it and closes the menu (default
+  `mode="single"`)
 - <kbd>Escape</kbd> closes the menu and returns focus per `useReturnFocus`
 - <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> closes the menu via `useFocusRedirect`
 - <kbd>ArrowRight</kbd> / <kbd>Enter</kbd> / <kbd>Space</kbd> on **`Menu.Submenu.TargetItem`** opens
@@ -223,8 +230,8 @@ default_):
 ### Accessibility Requirements
 
 Required in application code for an accessible Menu. Hoist **`useMenuModel`** when you need return
-focus overrides, programmatic open, dynamic `items`, or non-default `mode`. Rows marked
-_(conditional)_ apply only when the situation matches—otherwise omit.
+focus overrides or dynamic `items`. Rows marked _(conditional)_ apply only when the situation
+matches—otherwise omit.
 
 **If no design spec is provided:** use **`Menu.Target`** + **`Menu.Item`** (not **`Menu.Option`**),
 default `mode="single"`, default open focus on the first menu item, and omit **`returnFocusRef`**,
@@ -238,61 +245,32 @@ target. **Do not generate `returnFocusRef` or `initialFocusRef` by default.**
 | When           | Default behavior                                                                                                                                     | Ask the developer before overriding                                                                                                                                                                      |
 | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Menu **opens** | Focus moves to the **first menu item** by default via item focus hooks—not `useInitialFocus`. Omit **`initialFocusRef`**.                            | _Which item should receive focus when the menu opens?_ Prefer item order / `data-id` registration; do not assume **`initialFocusRef`** works on Menu.                                                     |
-| Menu **closes** | **`useReturnFocus`** moves focus to **`Menu.Target`**. Omit **`returnFocusRef`**.                                                                  | _Which element should receive focus when the menu closes?_ (When there is no **`Menu.Target`**, set **`returnFocusRef`** on **`useMenuModel({returnFocusRef})`**, or when return focus should land elsewhere.) |
+| Menu **closes** | **`useReturnFocus`** moves focus to **`Menu.Target`**. Omit **`returnFocusRef`**.                                                                  | _Which element should receive focus when the menu closes?_ (Only when return focus should land somewhere other than **`Menu.Target`**.) |
 
-**Custom targets and programmatic open** _(conditional)_: Apply when using a custom **`as`**
-component on **`Menu.Target`**, opening via **`model.events.show()`**, or opening without
+**Custom targets** _(conditional)_: Apply when using a custom **`as`** component on
 **`Menu.Target`**. **`Menu.Target`** adds **`onClick`**, keyboard openers, and **`ref`**. Custom
-targets must forward both to a **keyboard-focusable** element (prefer a native **`<button>`** or
-**`as={SecondaryButton}`**). Use **`React.forwardRef`** when the menu may open programmatically
-before the user activates the target.
-
-**Programmatic open without `Menu.Target`:**
-
-```tsx
-import React from 'react';
-
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Menu, useMenuModel} from '@workday/canvas-kit-react/menu';
-
-const openButtonRef = React.useRef<HTMLButtonElement>(null);
-const model = useMenuModel({returnFocusRef: openButtonRef});
-
-<PrimaryButton ref={openButtonRef} onClick={() => model.events.show()}>
-  Open
-</PrimaryButton>
-<Menu model={model}>
-  <Menu.Popper>
-    <Menu.Card>
-      <Menu.List>
-        <Menu.Item>First Item</Menu.Item>
-        <Menu.Item>Second Item</Menu.Item>
-      </Menu.List>
-    </Menu.Card>
-  </Menu.Popper>
-</Menu>;
-```
+targets must forward **`ref`** and props to a **keyboard-focusable** element (prefer a native
+**`<button>`** or **`as={SecondaryButton}`**). Wrap the component in **`React.forwardRef`** when it
+does not forward refs by default.
 
 | Requirement                                              | How to satisfy                                                                                                                                                                                                                                                                 |
 | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Keyboard-operable, named trigger                         | **`Menu.Target`** with visible text, or icon-only with **`Tooltip`** (default `type="label"` sets `aria-label`) or a translated **`aria-label`** without **`Tooltip`**. See **Custom targets and programmatic open** above.                                                |
+| Keyboard-operable, named trigger                         | **`Menu.Target`** with visible text, or icon-only with **`Tooltip`** (default `type="label"` sets `aria-label`) or a translated **`aria-label`** without **`Tooltip`**. See **Custom targets** above.                                                |
 | Menu list composition                                    | **`Menu.Popper` → `Menu.Card` → `Menu.List`** with **`Menu.Item`** children (or dynamic `items` + render prop on **`Menu.List`**).                                                                                                                                            |
 | Disabled items _(conditional)_                           | **`aria-disabled`** on **`Menu.Item`** so the item stays in the roving tabindex / screen reader sequence.                                                                                                                                                                      |
 | Stable item ids _(conditional)_                          | **`data-id`** on items when using **`onSelect`**, dynamic lists, or nested menus that need stable selection ids.                                                                                                                                                               |
 | Complex item content / icons _(conditional)_             | For static API when children are not plain text, set **`data-text`** on **`Menu.Item`** so typeahead/filtering can resolve the item text. Decorative icons alongside **`Menu.Item.Text`** usually need no extra accessible name.                                             |
 | Groups _(conditional)_                                   | **`Menu.Group`** with **`title`** or **`Menu.Group.Heading`** so `role="group"` is labeled. Group headers are not keyboard-selectable.                                                                                                                                          |
 | Nested menus _(conditional)_                             | **`Menu.Submenu`** with **`Menu.Submenu.TargetItem`** plus **`Popper` / `Card` / `List` / `Item`**. Do not manually set submenu `aria-haspopup` / `aria-expanded`.                                                                                                             |
-| Multi-select menu _(conditional)_                        | `mode="multiple"` on the model when items should toggle selection without closing. Ask before changing from default `single`.                                                                                                                                                  |
 | Context menu trigger _(conditional)_                     | **`Menu.TargetContext`** instead of **`Menu.Target`**. OS/browser support for `contextmenu` / Shift+F10 varies—provide an alternate open path for critical actions when required.                                                                                              |
-| Listbox / selectable options _(conditional)_             | Do **not** use **`Menu.Option`** + `role="listbox"` for a menu button. Compose via [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) / [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs). |
+| Selectable or multi-select options _(conditional)_       | Do **not** use **`Menu.Option`**, `role="listbox"`, or **`mode="multiple"`** with **`Menu.Item`** for a menu button. Compose via [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs), **MultiSelect**, or [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs). |
 
 **Summary for code generation:**
 
 - **REQUIRED:** keyboard-operable named **`Menu.Target`**, **`Menu.Popper` → `Menu.Card` →
   `Menu.List`**, **`Menu.Item`** (or dynamic list items)
 - **CONDITIONAL:** **`aria-disabled`**, **`data-id`**, **`data-text`**, groups, submenus,
-  `mode="multiple"`, **`Menu.TargetContext`**, **`returnFocusRef`**, **`forwardRef`** on custom
-  targets
+  **`Menu.TargetContext`**, **`returnFocusRef`**, **`forwardRef`** on custom targets
 
 ### Anti-Patterns
 
@@ -303,8 +281,9 @@ to supply instead):
   `aria-haspopup`, `aria-expanded`, shared `id`, or roving `tabIndex` on **`Menu.Target`**,
   **`Menu.List`**, **`Menu.Item`**, or **`Menu.Submenu.TargetItem`** — Canvas Kit hooks wire these
 - Omit **`Menu.Popper`**, or render **`Menu.Card` / `Menu.List`** outside the Menu composition
-- Use **`Menu.Option`** / override **`Menu.List`** to `role="listbox"` for a standard menu button —
-  use **Select** or **Combobox** instead
+- Use **`Menu.Option`**, `role="listbox"`, or **`mode="multiple"`** with **`Menu.Item`** for
+  selectable or multi-select UIs — use **Select**, **MultiSelect**, or **Combobox** instead (see
+  **Implementation note on `mode="multiple"`** in Built-in Behaviors)
 - Set **`initialFocusRef`** — Menu does not compose **`useInitialFocus`**, so this prop has no
   effect on open focus (see **Built-in Behaviors**)
 - Set **`returnFocusRef`** by default — state the default return-to-target behavior first and ask
@@ -312,9 +291,8 @@ to supply instead):
 - Use native **`disabled`** (or deprecated **`isDisabled`**) instead of **`aria-disabled`** when
   the item should remain discoverable
 - Skip **`data-text`** on static items whose accessible/filter text is not plain string children
-- Use a custom **`Menu.Target`** **`as`** component **without** **`forwardRef`** when the menu can
-  open programmatically
-- Call **`model.events.show()`** without **`returnFocusRef`** when there is no **`Menu.Target`**
+- Use a custom **`Menu.Target`** **`as`** component that does not forward **`ref`** to a focusable
+  element — use **`React.forwardRef`** or a Canvas Kit button component instead
 - Treat Menu like a **Modal** / **Dialog** (focus trap, `role="dialog"`, inert page) — Menu is a
   menu button popup with roving tabindex inside **`role="menu"`**
 
