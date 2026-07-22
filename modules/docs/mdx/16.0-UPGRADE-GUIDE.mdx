@@ -18,6 +18,7 @@ Soon to be...
   - [Instructions](#instructions)
 - [New Components](#new-components)
   - [KBD](#kbd)
+  - [Tabs](#tabs)
 - [Component Updates](#component-updates)
   - [Action Bar](#action-bar)
   - [Avatar](#avatar)
@@ -138,6 +139,28 @@ import {KBD} from '@workday/canvas-kit-labs-react';
 
 For more details and advanced usage, including accessibility guidance for symbolic keys and
 functional shortcuts, refer to the storybook documentation and our example stories.
+
+### Tabs
+
+**PR:** [#4062](https://github.com/Workday/canvas-kit/pull/4062)
+
+A new `Tabs` component has been added to `@workday/canvas-kit-preview-react`, aligned with the Sana
+Canvas visual language. It supports `filled` and `outline` variants.
+
+```tsx
+import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
+
+<Tabs>
+  <Tabs.List>
+    <Tabs.Item>First Tab</Tabs.Item>
+    <Tabs.Item>Second Tab</Tabs.Item>
+  </Tabs.List>
+  <Tabs.Panels>
+    <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+    <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+  </Tabs.Panels>
+</Tabs>;
+```
 
 ## Component Updates
 
