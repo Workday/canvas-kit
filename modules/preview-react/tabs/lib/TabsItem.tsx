@@ -170,6 +170,11 @@ const tabItemStencil = createStencil({
           '&:hover, &.hover, &:focus-visible, &.focus': {
             backgroundColor: system.legacy.color.surface.overlay.pressed.default,
           },
+
+          // Non-color outline indicator for Windows high contrast theme
+          '@media (forced-colors: active)': {
+            outline: `${px2rem(2)} solid ButtonBorder`,
+          },
         },
       },
       outline: {
