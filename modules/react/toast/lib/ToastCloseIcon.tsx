@@ -1,15 +1,16 @@
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {base} from '@workday/canvas-tokens-web';
 
 export interface ToastCloseIconProps extends ExtractProps<typeof Popup.CloseIcon, never> {}
 
 export const toastCloseIconStencil = createStencil({
   base: {
     position: 'absolute',
-    insetBlockStart: px2rem(2),
-    insetInlineEnd: px2rem(2),
+    insetBlockStart: base.legacy.size50,
+    insetInlineEnd: base.legacy.size50,
   },
 });
 
