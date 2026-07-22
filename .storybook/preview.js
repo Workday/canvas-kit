@@ -5,8 +5,13 @@ import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
-// Imported after system so its equal-specificity `[data-theme="sana-canvas"]` rules win
-// the cascade tie over system's unscoped `:root` rules when set on <html>.
+// Sana's `[data-theme="sana-canvas"]` selector and system/brand/base's `:root`
+// selector have equal specificity (0,1,0). When both match the same element
+// (i.e. `data-theme="sana-canvas"` is set on <html>), the cascade falls back
+// to source order. Importing sana last is therefore required and sufficient —
+// this is deterministic as long as each file is imported exactly once, in
+// this order, by a single root entry point (true for both Storybook and any
+// real consuming app). See the Theming docs for the guidance we give consumers.
 import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';

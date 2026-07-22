@@ -4,6 +4,7 @@ import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {RTL} from './examples/RTL';
 import {Theming} from './examples/Theming';
+import {ThemingBrandScope} from './examples/ThemingBrandScope';
 
 <Meta title="Features/Theming/Overview" />
 
@@ -137,6 +138,113 @@ application, such as:
 
 For all other cases, use global theming at `:root` to ensure consistent theming throughout your
 application.
+
+## Global Theme Import Order (Sana Canvas)
+
+When using Sana Canvas, import `@workday/canvas-tokens-web/css/sana/_variables.css` **after**
+base, brand, and system in a single root entry point. Sana's `[data-theme="sana-canvas"]` selector
+and `:root` rules have equal specificity — source order determines the winner. Importing sana last
+is required and sufficient.
+
+```css
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+/* Sana last — wins the cascade tie when data-theme="sana-canvas" is on <html> */
+@import '@workday/canvas-tokens-web/css/sana/_variables.css';
+```
+
+Scoped `CanvasProvider` theming is unrelated to this import order.
+
+## Brand Theme API (`CanvasProvider`)
+
+The preferred `theme` shape uses a numerical `brand` object. Each key maps 1:1 to a
+`--cnvs-brand-*` CSS variable unless noted as a shortcut below.
+
+### What is themable?
+
+| You set | Components affected |
+| ------- | ------------------- |
+| `brand.primary['600']` alone | `PrimaryButton`, selected `Menu.Item` (text + background) |
+| `brand.primary['500']` | Focus rings, border primary (independent of `600`) |
+| `brand.action.*` | `PrimaryButton` (read before `brand.primary`) |
+| `brand.critical.*` | `TextInput` error, critical accents |
+| `brand.caution.*` | `TextInput` caution, caution focus |
+| `brand.positive.*` | `Checkbox`, `Radio` checked states |
+| `brand.neutral.*` | Neutral brand text/surfaces |
+| `selected.fg` / `selected.surface` | Selected list/menu states directly |
+
+**Focus does not follow primary.** Setting only `brand.primary['600']` leaves focus rings at the
+default blue unless you also set `brand.primary['500']` or `canvas.palette.common.focusOutline`.
+
+### Minimal example (brand scope — default)
+
+```tsx
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {base} from '@workday/canvas-tokens-web';
+
+<CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
+  <App />
+</CanvasProvider>
+```
+
+<ExampleCodeBlock code={ThemingBrandScope} />
+
+### Explicit overrides
+
+```tsx
+<CanvasProvider
+  theme={{
+    brand: {
+      primary: {'600': base.red600, '500': base.blue500},
+    },
+    selected: {fg: base.red700, surface: base.redA50},
+  }}
+>
+  <App />
+</CanvasProvider>
+```
+
+### `themeScope`
+
+| Value | Numerical `brand` shape | Legacy `canvas.palette` shape |
+| ----- | ----------------------- | ------------------------------ |
+| `'brand'` (default) | `primary['600']` shortcut → buttons + selected; other keys literal 1:1 | `primary.main` shortcut only |
+| `'full'` | All keys literal 1:1, no shortcut | Auto-generated ramps + broad system token forwarding |
+
+Use `themeScope="full"` on the legacy shape only when you need the old auto-ramp behavior.
+
+### Sana Canvas preset
+
+Sana's full visual treatment (fonts, shapes, system surfaces) comes from **global CSS**
+(`data-theme="sana-canvas"` + `sana/_variables.css`). For **popup parity** (menus, selects), also
+pass the JS preset at your root `CanvasProvider`:
+
+```tsx
+import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider theme={sanaCanvasProviderTheme}>
+  <App />
+</CanvasProvider>
+```
+
+### Visual testing
+
+Use the **Features/Theming → Sana Canvas** and **Canvas** stories to compare global vs scoped
+branding side-by-side. Open **Canvas** with `?theme=canvas` in the URL.
+
+### Migration: semantic → numerical
+
+| Old (`canvas.palette`) | New (`brand`) |
+| ---------------------- | ------------- |
+| `palette.primary.main` | `brand.primary['600']` |
+| `palette.primary.dark` (selected text) | `selected.fg` or `brand.primary['700']` |
+| `palette.primary.lighter` (selected bg) | `selected.surface` or `brand.primary.A50` |
+| `palette.common.focusOutline` | `brand.primary['500']` (independent of `600`) |
+| `palette.error.*` | `brand.critical.*` |
+| `palette.alert.*` | `brand.caution.*` |
+| `palette.success.*` | `brand.positive.*` |
+| Full auto-generated ramp | `themeScope="full"` on legacy shape |
 
 ## ✅ Preferred Approach (v14+)
 
