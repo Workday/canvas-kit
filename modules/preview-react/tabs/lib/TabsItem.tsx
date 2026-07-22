@@ -150,7 +150,7 @@ const tabItemStencil = createStencil({
   modifiers: {
     variant: {
       filled: {
-        border: 'none',
+        border: `${px2rem(1)} solid transparent`,
 
         '&:hover, &.hover': {
           backgroundColor: system.legacy.color.surface.overlay.hover.default,
@@ -167,8 +167,14 @@ const tabItemStencil = createStencil({
 
         '&[aria-selected=true]': {
           backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+          borderColor: system.color.border.input.default,
           '&:hover, &.hover, &:focus-visible, &.focus': {
             backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+          },
+
+          '&:focus-visible, &.focus': {
+            borderWidth: px2rem(2),
+            marginInline: px2rem(-1),
           },
 
           // Non-color outline indicator for Windows high contrast theme
