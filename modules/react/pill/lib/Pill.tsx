@@ -59,13 +59,12 @@ export const pillStencil = createStencil({
       display: 'flex',
       lineHeight: system.legacy.lineHeight.subtext.md, // ensure correct line height
     },
-    // TODO: Revisit hover and active state color mix approach to get closer to v16 Figma
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.strong,
+        color: system.legacy.color.surface.alt.default,
+        fallback: system.legacy.color.surface.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.hover,
+        mixinValue: '0.0392',
       }),
       [buttonStencil.vars.border]: system.color.border.transparent,
       [buttonStencil.vars.label]: system.color.fg.stronger,
@@ -74,10 +73,10 @@ export const pillStencil = createStencil({
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.stronger,
+        color: system.legacy.color.surface.alt.default,
+        fallback: system.legacy.color.surface.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.pressed,
+        mixinValue: '0.0745',
       }),
       [buttonStencil.vars.label]: system.color.fg.stronger,
       [systemIconStencil.vars.color]: 'currentColor',
@@ -135,19 +134,19 @@ export const pillStencil = createStencil({
         },
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.strong,
-            fallback: system.color.bg.alt.strong,
+            color: system.legacy.color.surface.alt.default,
+            fallback: system.legacy.color.surface.alt.default,
             mixinColor: system.legacy.color.surface.overlay.mixin,
-            mixinValue: system.legacy.opacity.surface.hover,
+            mixinValue: '0.0392',
           }),
           [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.transparent,
         },
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.strong,
-            fallback: system.color.bg.alt.stronger,
+            color: system.legacy.color.surface.alt.default,
+            fallback: system.legacy.color.surface.alt.default,
             mixinColor: system.legacy.color.surface.overlay.mixin,
-            mixinValue: system.legacy.opacity.surface.pressed,
+            mixinValue: '0.0745',
           }),
           [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.transparent,
         },

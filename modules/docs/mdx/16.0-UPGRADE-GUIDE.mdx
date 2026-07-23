@@ -284,8 +284,10 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
   `fontFamily`/`fontSize`/`lineHeight`/`letterSpacing`/`fontWeight`).
 - Background color tier changed from `surface.alt.strong` to `surface.alt.default` (a lighter
   background) for the base, disabled state, and the disabled `Pill.Count` background. Hover/active
-  states are unchanged from v15 and still mix from `surface.alt.strong`, since `color-mix()` doesn't
-  produce a visible change when mixed against the new translucent `alt.default` base.
+  states now mix `surface.overlay.mixin` into `surface.alt.default` at 3.92% (hover) and 7.45%
+  (active) via `colorSpace.darken()`. In Sana, `surface.overlay.mixin` resolves to neutral black;
+  mix percentages were recalibrated from the v15 defaults (8%/18%) for the lighter
+  `surface.alt.default` base.
 - Active state label color changed from `fg.strong` to `fg.stronger`, now matching the hover state.
 - The `readOnly` variant now explicitly sets its label color to `fg.default` (previously inherited
   `fg.strong`).
