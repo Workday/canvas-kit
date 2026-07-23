@@ -14,7 +14,7 @@ import {
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {checkSmallIcon} from '@workday/canvas-system-icons-web';
+import {checkIcon} from '@workday/canvas-system-icons-web';
 
 import {MenuItem, MenuItemProps, menuItemStencil} from './MenuItem';
 import {useMenuModel} from './useMenuModel';
@@ -24,7 +24,7 @@ const MenuOptionText = createComponent('span')({
     return (
       <>
         <MenuItem.Text ref={ref} as={Element} {...elemProps} />
-        <SystemIcon {...menuItemStencil.parts.selected} icon={checkSmallIcon} />
+        <SystemIcon size="xs" {...menuItemStencil.parts.selected} icon={checkIcon} />
       </>
     );
   },
