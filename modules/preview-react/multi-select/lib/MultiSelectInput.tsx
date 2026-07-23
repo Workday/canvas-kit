@@ -5,13 +5,18 @@ import {useComboboxInput, useComboboxInputConstrained} from '@workday/canvas-kit
 import {
   ErrorType,
   composeHooks,
+  cornerShapeStencil,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput, textInputStencil} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {caretDownSmallIcon, searchIcon} from '@workday/canvas-system-icons-web';
+import {
+  chevronDownSmallIcon,
+  chevronUpSmallIcon,
+  searchIcon,
+} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {MultiSelectedItemProps} from './MultiSelectedItem';
@@ -19,12 +24,13 @@ import {MultiSelectedList} from './MultiSelectedList';
 import {useMultiSelectModel} from './useMultiSelectModel';
 
 export const multiSelectInputStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
-    border: `1px solid ${system.color.border.input.default}`,
+    border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: system.legacy.color.surface.default,
-    borderRadius: system.legacy.shape.md,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     boxSizing: 'border-box',
     minHeight: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
@@ -209,7 +215,8 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
       formInputProps,
       ...elemProps
     },
-    Element
+    Element,
+    model
   ) => {
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({error}))}>
@@ -225,7 +232,12 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             {...elemProps}
           />
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} size="md" />
+            <SystemIcon
+              size="md"
+              icon={
+                model.state.visibility === 'visible' ? chevronUpSmallIcon : chevronDownSmallIcon
+              }
+            />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList disabled={disabled} removeLabel={removeLabel} />
@@ -251,7 +263,8 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       error,
       ...elemProps
     },
-    Element
+    Element,
+    model
   ) => {
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
@@ -276,7 +289,12 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">
-            <SystemIcon icon={caretDownSmallIcon} size="md" />
+            <SystemIcon
+              size="md"
+              icon={
+                model.state.visibility === 'visible' ? chevronUpSmallIcon : chevronDownSmallIcon
+              }
+            />
           </InputGroup.InnerEnd>
         </InputGroup>
         <MultiSelectedList removeLabel={removeLabel} disabled={disabled} />

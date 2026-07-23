@@ -4,7 +4,8 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useComboboxModel} from './hooks/useComboboxModel';
 
