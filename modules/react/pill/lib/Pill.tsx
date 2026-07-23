@@ -35,13 +35,9 @@ export const pillStencil = createStencil({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: system.legacy.shape.sm,
-    fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.sm, // ensure correct line height when there's no elements and just text
+    ...system.legacy.type.subtext.md,
     boxShadow: 'none',
     outline: 'none',
-    fontWeight: system.fontWeight.medium,
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
     width: 'fit-content',
@@ -53,7 +49,7 @@ export const pillStencil = createStencil({
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [buttonStencil.vars.background]: system.legacy.color.surface.alt.strong,
+    [buttonStencil.vars.background]: system.legacy.color.surface.alt.default,
     [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: 'currentColor',
@@ -61,12 +57,13 @@ export const pillStencil = createStencil({
 
     '&:has(span)': {
       display: 'flex',
-      lineHeight: system.legacy.lineHeight.subtext.lg, // ensure correct line height
+      lineHeight: system.legacy.lineHeight.subtext.md, // ensure correct line height
     },
+    // TODO: Confirm this is close enough to Figma's layered gradient hover/active (real compositing)
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.strong,
+        color: system.legacy.color.surface.alt.default,
+        fallback: system.legacy.color.surface.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.hover,
       }),
@@ -77,12 +74,12 @@ export const pillStencil = createStencil({
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.stronger,
+        color: system.legacy.color.surface.alt.default,
+        fallback: system.legacy.color.surface.alt.default,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.pressed,
       }),
-      [buttonStencil.vars.label]: system.color.fg.strong,
+      [buttonStencil.vars.label]: system.color.fg.stronger,
       [systemIconStencil.vars.color]: 'currentColor',
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
@@ -100,10 +97,11 @@ export const pillStencil = createStencil({
       }),
     },
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.alt.strong,
-      [buttonStencil.vars.label]: system.color.fg.disabled,
+      [buttonStencil.vars.opacity]: system.opacity.disabled,
+      [buttonStencil.vars.background]: system.legacy.color.surface.alt.default,
+      [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: 'currentColor',
-      [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.alt.strong,
+      [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.alt.default,
       [pillCountStencil.vars.borderColor]: 'transparent',
     },
   }),
@@ -113,6 +111,7 @@ export const pillStencil = createStencil({
         border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
         cursor: 'default',
         [buttonStencil.vars.background]: system.color.bg.default,
+        [buttonStencil.vars.label]: system.color.fg.default,
         '&:hover, &.hover': {
           borderColor: system.legacy.color.border.default,
           [buttonStencil.vars.background]: system.color.bg.default,
@@ -136,8 +135,8 @@ export const pillStencil = createStencil({
         },
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.strong,
-            fallback: system.color.bg.alt.strong,
+            color: system.legacy.color.surface.alt.default,
+            fallback: system.legacy.color.surface.alt.default,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.hover,
           }),
@@ -145,8 +144,8 @@ export const pillStencil = createStencil({
         },
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.strong,
-            fallback: system.color.bg.alt.stronger,
+            color: system.legacy.color.surface.alt.default,
+            fallback: system.legacy.color.surface.alt.default,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.pressed,
           }),
