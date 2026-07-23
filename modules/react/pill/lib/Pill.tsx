@@ -59,11 +59,11 @@ export const pillStencil = createStencil({
       display: 'flex',
       lineHeight: system.legacy.lineHeight.subtext.md, // ensure correct line height
     },
-    // TODO: Confirm this is close enough to Figma's layered gradient hover/active (real compositing)
+    // TODO: Revisit hover and active state color mix approach to get closer to v16 Figma
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.default,
-        fallback: system.legacy.color.surface.alt.default,
+        color: system.legacy.color.surface.alt.strong,
+        fallback: system.color.bg.alt.strong,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.hover,
       }),
@@ -74,8 +74,8 @@ export const pillStencil = createStencil({
     },
     '&:active, &.active': {
       [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.default,
-        fallback: system.legacy.color.surface.alt.default,
+        color: system.legacy.color.surface.alt.strong,
+        fallback: system.color.bg.alt.stronger,
         mixinColor: system.legacy.color.surface.overlay.mixin,
         mixinValue: system.legacy.opacity.surface.pressed,
       }),
@@ -135,8 +135,8 @@ export const pillStencil = createStencil({
         },
         '&:hover, &.hover': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.default,
-            fallback: system.legacy.color.surface.alt.default,
+            color: system.legacy.color.surface.alt.strong,
+            fallback: system.color.bg.alt.strong,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.hover,
           }),
@@ -144,8 +144,8 @@ export const pillStencil = createStencil({
         },
         '&:active, &.active': {
           [buttonStencil.vars.background]: colorSpace.darken({
-            color: system.legacy.color.surface.alt.default,
-            fallback: system.legacy.color.surface.alt.default,
+            color: system.legacy.color.surface.alt.strong,
+            fallback: system.color.bg.alt.stronger,
             mixinColor: system.legacy.color.surface.overlay.mixin,
             mixinValue: system.legacy.opacity.surface.pressed,
           }),
