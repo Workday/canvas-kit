@@ -1,0 +1,526 @@
+import {Meta} from '@storybook/addon-docs';
+
+<Meta title="Guides/Upgrade Guides/v16.0/Overview" />
+
+# Canvas Kit 16.0 Upgrade Guide
+
+This guide contains an overview of the changes in Canvas Kit v16. Please
+[reach out](https://github.com/Workday/canvas-kit/issues/new?labels=bug&template=bug.md) if you have
+any questions.
+
+## Why You Should Upgrade
+
+Soon to be...
+
+## Table of Contents
+
+- [Codemod](#codemod)
+  - [Instructions](#instructions)
+- [New Components](#new-components)
+  - [KBD](#kbd)
+- [Component Updates](#component-updates)
+  - [Action Bar](#action-bar)
+  - [Avatar](#avatar)
+  - [Buttons](#buttons)
+    - [Delete Button Outline Variant](#delete-button-outline-variant)
+  - [Card](#card)
+  - [Form Field](#form-field)
+  - [Inputs](#inputs)
+    - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
+    - [Checkbox](#checkbox)
+    - [Color Input](#color-input)
+    - [Color Picker](#color-picker)
+    - [Form Field](#form-field)
+    - [Radio](#radio)
+    - [Switch](#switch)
+    - [Text Area](#text-area)
+    - [Text Input](#text-input)
+  - [Menu](#menu)
+  - [Segmented Control](#segmented-control)
+	- [Toast](#toast)
+	- [Tooltip](#tooltip)
+- [New Utilities](#new-utilities)
+  - [cornerShapeStencil](#cornershapestencil)
+- [Deprecations](#deprecations)
+- [Glossary](#glossary)
+  - [Main](#main)
+  - [Preview](#preview)
+  - [Labs](#labs)
+
+## Codemod
+
+We've provided a [codemod](https://github.com/Workday/canvas-kit/tree/master/modules/codemod) to
+automatically update your code to work with most of the breaking changes in v16. **Breaking changes
+handled by the codemod are marked with 🤖 in the Upgrade Guide.**
+
+A codemod is a script that makes programmatic transformations on your codebase by traversing the
+AST, identifying patterns, and making prescribed changes. This greatly decreases opportunities for
+error and reduces the number of manual updates, which allows you to focus on changes that need your
+attention. **We highly recommend you use the codemod for these reasons.**
+
+If you're new to running codemods or if it's been a minute since you've used one, there are a few
+things you'll want to keep in mind.
+
+- Our codemods are meant to be run sequentially. For example, if you're using v14 of Canvas Kit,
+  you'll need to run the v15 codemod before you run v16.
+- The codemod will update your code to be compatible with the specified version, but it will **not**
+  remove outdated dependencies or upgrade dependencies to the latest version. You'll need to upgrade
+  dependencies on your own.
+  - We recommend upgrading dependencies before running the codemod.
+  - Always review your `package.json` files to make sure your dependency versions look correct.
+- The codemod will not handle every breaking change in v16. You will likely need to make some manual
+  changes to be compatible. Use our Upgrade Guide as a checklist.
+- Codemods are not bulletproof.
+  - Conduct a thorough PR and QA review of all changes to ensure no regressions were introduced.
+  - As a safety precaution, we recommend committing the changes from the codemod as a single
+    isolated commit (separate from other changes) so you can roll back more easily if necessary.
+
+We're here to help! Automatic changes to your codebase can feel scary. You can always reach out to
+our team. We'd be very happy to walk you through the process to set you up for success.
+
+### Instructions
+
+The easiest way to run our codemod is to use `npx` in your terminal.
+
+```sh
+npx @workday/canvas-kit-codemod v16 [path]
+```
+
+Be sure to provide specific directories that need to be updated via the `[path]` argument. This
+decreases the amount of AST the codemod needs to traverse and reduces the chances of the script
+having an error. For example, if your source code lives in `src/`, use `src/` as your `[path]`. Or,
+if you have a monorepo with three packages using Canvas Kit, provide those specific packages as your
+`[path]`.
+
+Alternatively, if you're unable to run the codemod successfully using `npx`, you can install the
+codemod package as a dev dependency, run it with `yarn`, and then remove the package after you're
+finished.
+
+```sh
+yarn add @workday/canvas-kit-codemod --dev
+yarn canvas-kit-codemod v16 [path]
+yarn remove @workday/canvas-kit-codemod
+```
+
+> **Note:** The codemod only works on `.js`, `.jsx`, `.ts`, and `.tsx` files. You'll need to
+> manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
+> after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
+> your project conventions.
+
+## New Components
+
+### KBD
+
+**PR:** [#4001](https://github.com/Workday/canvas-kit/pull/4001)
+
+The new `KBD` component allows you to display keyboard inputs in your UI using accessible, visually
+consistent keyboard key representations. This is useful for documenting keyboard shortcuts,
+instructional prompts, or any UI patterns that reference specific keys.
+
+**Highlights:**
+
+- Provides a semantic (`kbd` element) way to visually present keyboard keys and shortcuts to users.
+- Supports various variants (`default` for prominence, `plain` for use on colored surfaces), as well
+  as size options (`small`, `medium`, `large`).
+- Easy to use nested `KBD.Item` components for sequences or combinations.
+- RTL support.
+
+**Example:**
+
+```tsx
+import {KBD} from '@workday/canvas-kit-labs-react';
+
+<KBD>
+  <KBD.Item aria-label="Command">⌘</KBD.Item>
+  <KBD.Item>C</KBD.Item>
+</KBD>;
+```
+
+For more details and advanced usage, including accessibility guidance for symbolic keys and
+functional shortcuts, refer to the storybook documentation and our example stories.
+
+## Component Updates
+
+### Action Bar
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+#### Visual Updates
+
+- `ActionBar` padding has been updated to `padding.md` (16px).
+
+### Avatar
+
+**PR:** [#3981](https://github.com/Workday/canvas-kit/pull/3981)
+
+We've updated `Avatar` color variants to align with Sana Canvas. These changes are **only visual** —
+the component API is unchanged except for two new `variant` options.
+
+#### Updated Variants
+
+Existing variants use darker background colors and updated foreground colors for improved contrast:
+
+| Variant  | Change                                                                                       |
+| -------- | -------------------------------------------------------------------------------------------- |
+| `blue`   | Background updated from `blue300` to `blue600`; text now uses `system.color.fg.inverse`      |
+| `amber`  | Background updated from `amber200` to `amber300`; text updated from `amber700` to `amber800` |
+| `purple` | Background updated from `purple300` to `purple600`; text now uses `system.color.fg.inverse`  |
+
+The `teal` variant is unchanged.
+
+#### New Variants
+
+Two new color variants are available:
+
+- `magenta` — `magenta600` background with `system.color.fg.inverse` text
+- `green` — `green600` background with `system.color.fg.inverse` text
+
+```tsx
+import {Avatar} from '@workday/canvas-kit-react/avatar';
+
+<Avatar name="Mary Jane" variant="magenta" />
+<Avatar name="Green Arrow" variant="green" />
+```
+
+No migration is required unless you rely on the previous color values for custom styling via the
+`cs` prop or `baseAvatarStencil` modifiers.
+
+### Buttons
+
+**PR:** [#4000](https://github.com/Workday/canvas-kit/pull/4000)
+
+All buttons have had the following updates:
+
+- `fontWeight` has been updated from `system.fontWeight.bold` to `system.fontWeight.medium`.
+- `minWidth` has been updated to the following:
+
+| Default Size | minWidth v15 | minWidth v16 |
+| ------------ | ------------ | ------------ |
+| extraSmall   | unchanged    | unchanged    |
+| small        | `5rem`       | `4.5rem`     |
+| medium       | `6rem`       | `5.5rem`     |
+| large        | `7rem`       | `6.5rem`     |
+
+- `paddingInline` has been updated to the following:
+
+| Size       | paddingInline v15 | paddingInline v16 |
+| ---------- | ----------------- | ----------------- |
+| extraSmall | `0.75rem`         | `0.5rem`          |
+| small      | `1rem`            | `0.75rem`         |
+| medium     | `1.5rem`          | `1rem`            |
+| large      | `2rem`            | `1.25rem`         |
+
+#### Delete Button Outline Variant
+
+We've added an `outline` variant to the `DeleteButton` component. This variant will reverse the
+button's styling with a `border` and `transparent` background.
+
+```tsx
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+
+<DeleteButton variant="outline">Delete</DeleteButton>;
+```
+
+### Card
+
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+
+#### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
+
+### Inputs
+
+#### Accessibility: Checked-State Contrast
+
+> **Important:** The checked states of `Checkbox`, `Radio`, and `Switch` now derive their
+> background/fill color from `system.color.brand.accent.positive` (which maps to your theme's
+> `brand.success.base`), while the foreground (the check icon, radio dot, and switch thumb) remains
+> an inverse/white color. This pairing relies on `brand.success.base` being a sufficiently dark
+> color.
+
+This change is safe for the default Canvas themes, where `brand.success.base` is dark enough to
+maintain adequate contrast against the white foreground. However, **consumer themes that override
+`brand.success.base` with a light color may produce insufficient contrast** between the checked
+background and the white check icon, radio dot, or switch thumb. This can cause the checked state to
+fail
+[WCAG 1.4.11 Non-text Contrast (3:1)](https://www.w3.org/WAI/WCAG21/Understanding/non-text-contrast.html).
+
+If you customize `brand.success.base` in your theme, please verify the following:
+
+- **Maintain a minimum 3:1 contrast ratio** between your `brand.success.main` value and the white
+  (`#ffffff`) foreground used for the check icon, radio dot, and switch thumb.
+- Prefer a `brand.success.base` value that is dark enough to pair with a light foreground. If your
+  brand requires a light success color, you may need to override the component styles so the
+  foreground uses a darker, paired contrast color instead of white.
+  > **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
+  > unless specified otherwise.
+
+#### Checkbox
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+##### Visual Updates
+
+- The default Checkbox size is now **20px** (previously 24px).
+- Checked state uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary` for the background.
+- Error and alert states no longer display a status background color; only the standard background
+  is shown.
+- The hover ring is smaller to better align with the smaller size. The hover ring background color
+  uses neutral instead of slate in `sana-canvas` theme.
+
+#### Color Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+##### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+
+#### Color Picker
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+##### Visual Updates
+
+- **Sana Canvas:** swatch shape is now **6px** (previously **4px**).
+
+#### Form Field
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+##### Visual Updates
+
+- Shape for grouped inputs (Radio groups and Checkbox groups) is now **12px** (previously 8px). As
+  in v15, this shape is primarily visible for error and caution states.
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+#### Radio
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+##### Visual Updates
+
+- The default Radio size is now **20px** (previously 24px).
+- Checked state uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary` for the background.
+- Error and alert states no longer display a status background color; only the standard background
+  is shown.
+- The hover ring is smaller to better align with the smaller size. The hover ring background color
+  uses a neutral color instead of slate in `sana-canvas` theme.
+
+#### Switch
+
+**PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
+
+##### Visual Updates
+
+- The Switch thumb is now **16px** (was 14px). The icon-thumb container width remains unchanged.
+- The checked state background now uses `system.color.brand.accent.positive` instead of
+  `system.color.brand.accent.primary`.
+- The default (unchecked) background color now uses `system.color.surface.muted.default` instead of
+  `system.color.surface.muted.soft`. Background color uses a neutral color instead of slate in
+  `sana-canvas` theme.
+
+#### Text Area
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+##### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+#### Text Input
+
+**PR:** [#3992](https://github.com/Workday/canvas-kit/pull/3992)
+
+##### Visual Updates
+
+- Shape is now **12px** (previously 8px).
+- Error and caution states no longer display a status background color; only the standard background
+  is shown.
+
+### Toast
+
+**PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
+
+#### Visual Updates
+
+- Padding is now applied to the `Toast` container itself instead of being distributed across
+  `Toast.Body` and `Toast.Icon`.
+- Gap between the icon, body, and close icon is now `base.size150` (12px).
+- Shape uses `system.shape.xl`.
+- `Toast.Body` no longer has a gap between text and link.
+- `Toast.CloseIcon` is set to have absolute positioning and aligned with the top-right corner (in
+  LTR).
+- `Toast.CloseIcon` was changed to be `extraSmall` tertiary button.
+
+### Tooltip
+
+**PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
+
+#### Visual Updates
+
+- The default tooltip has been restyled from a dark surface to a light surface.
+- A visible border (`system.color.border.default`) is now applied to the container, replacing the
+  previous transparent outline.
+- Tooltip boundaries remain visible in Windows High Contrast mode: when High Contrast is detected,
+  Tooltip uses a solid outline (`outline: solid 1px CanvasText`) to ensure clear visibility.
+- Shape is now fully rounded using `system.shape.full`.
+- Type level is now `subtext.lg` (previously `subtext.md`).
+- Padding and spacing have been adjusted to accommodate the new styling.
+
+### Menu
+
+**PR:** [#3987](https://github.com/Workday/canvas-kit/pull/3987)
+
+#### Visual Updates
+
+**Menu.Card**
+
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Padding updated from `padding.xxs` (4px) to `padding.xs` (8px).
+- Border radius is now managed via `cornerShapeStencil` (still uses `shape.xxl`).
+
+**Menu.List**
+
+- Gap between items updated from `gap.xs` (4px) to `base.legacy.size25` (2px).
+
+**Menu.Item**
+
+- Icon-to-label gap updated from `gap.md` (16px) to `gap.sm` (8px).
+- Padding updated from symmetric `padding.sm`/`padding.md` (12px/16px) to asymmetric
+  `padding.xs`/`padding.xs`/`padding.xs`/`padding.sm` (8px top/right/bottom, 12px left).
+- Item border radius updated from `shape.xxl` (24px) to `shape.lg` (12px).
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+
+#### Menu icon sizing
+
+Menu icons are now smaller to align with Sana Canvas specs. In v15, `Menu.Item.Icon` did not set a
+`size` prop and fell back to the `SystemIcon` default of `lg` (24px / 1.5rem). In v16, all icons
+rendered through `Menu.Item.Icon` and `Menu.Option.Icon` use `size="xs"` (16px / 1rem).
+
+The selected checkmark in `Menu.Option` now uses `checkIcon` at `size="xs"` instead of
+`checkSmallIcon` at the previous 24px default. The nested submenu chevron in `Submenu.TargetItem`
+also changed from `chevronRightSmallIcon` to `chevronRightIcon` at `size="xs"`.
+
+Passing a custom `size` to `Menu.Item.Icon` or `Menu.Option.Icon` will still override the default.
+`Select` and `Combobox` menus inherit the `Menu.Option` checkmark change. If you are rendering
+custom chevron or checkmark icons inside of menu items, update them to `size="xs"` and swap
+`*SmallIcon` assets for their standard equivalents where appropriate.
+
+**Menu.Group.Heading**
+
+- Padding updated to use `paddingBlock: padding.xs` with `paddingInline: padding.sm` / `padding.md`.
+
+#### State Style Updates
+
+`Menu.Item` and `Menu.Option` share the same underlying item styles via `menuItemStencil`. For
+guidance on when to use `Menu.Item` vs `Menu.Option`, including accessibility requirements for
+selectable menus, see the
+[Menu accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs#accessibility).
+
+##### Menu.Item
+
+| State                           | v15                                                      | v16                                                                              |
+| ------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Active/pressed                  | Not styled                                               | `surface.overlay.pressed` background                                             |
+| Focus                           | Solid blue fill (`brand.accent.primary`) and white text  | Inset outline using `brand.border.primary`                                       |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Expanded submenu parent + Focus | Same blue fill and white text focus style as other focused items | Focus ring removed; ancestor-trail styling shown instead (`Submenu.TargetItem`)  |
+
+##### Menu.Option
+
+Used in `Select`, `Combobox`, and other listbox menus. Selected states apply when
+`aria-selected="true"`.
+
+| State                             | v15                                                                          | v16                                                                                  |
+| --------------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| Active/pressed                    | Not styled                                                                   | `surface.overlay.pressed` background                                                 |
+| Focus                             | Solid blue fill (`brand.accent.primary`) and white text                      | Inset outline using `brand.border.primary`                                           |
+| Selected (`aria-selected="true"`) | Solid blue fill and white text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) |
+| Selected + Focus                  | Solid blue fill and white text                                               | Inset outline with selected background preserved                                     |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Disabled + Selected               | Solid blue fill and white text with disabled opacity                         | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity                            |
+
+### Segmented Control
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+
+#### Visual Updates
+
+- Container background changed from `surface.alt.strong` to `surface.alt.default` (a lighter background color).
+- Border radius changed to `shape.full` (full rounded corners) on the container.
+- Grid gap reduced from `gap.sm` (8px) to `gap.xs` (4px).
+- Selected/pressed item now uses boxShadow: system.depth[2] instead of a visible border.
+- Font weight changed from bold to medium (base and small sizes);
+- Medium size now uses semi-bold font weight.
+- Size adjustments: large height shrunk to size.sm (32px) (was size.md (40px));
+- Medium size is now 28px in height (was 32px).
+- Hover and pressed states now use `surface.overlay.hover.default` and `surface.overlay.pressed.default` respectively for the item.
+- Container padding changed to `padding.md` (16px) including for mobile devices.
+- On mobile devices, the container padding remains `padding.md` (16px).
+
+## New Utilities
+
+### cornerShapeStencil
+
+We've added a new stencil called `cornerShapeStencil` to `@workday/canvas-kit-react/common`. It
+applies the CSS [`corner-shape`](https://developer.mozilla.org/en-US/docs/Web/CSS/corner-shape)
+property as a progressive enhancement for components using border radius that aren't circular.
+Browsers that don't support `corner-shape` fall back to `border-radius` alone, as border-radius is
+declared first in the cascade.
+
+The stencil exposes a `shape` variable for setting the border radius. Extend it in your own stencils
+to get consistent rounded corners:
+
+```tsx
+import {cornerShapeStencil} from '@workday/canvas-kit-react/common';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+export const myStencil = createStencil({
+  extends: cornerShapeStencil,
+  base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+  },
+});
+```
+
+`Card` and `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`) extend this stencil for their rounded
+corners.
+
+## Deprecations
+
+We add the [@deprecated](https://jsdoc.app/tags-deprecated.html) JSDoc tag to code we plan to remove
+in a future major release. This signals consumers to migrate to a more stable alternative before the
+deprecated code is removed.
+
+## Glossary
+
+For an overview of the different packages we provide, please view our docs
+[here](https://workday.github.io/canvas-kit/?path=/docs/guides-packages--docs).
+
+### Main
+
+Components in the Main package are stable and ready for production use.
+
+### Preview
+
+Components in the Preview package are mostly stable but may still receive breaking changes before
+being promoted to Main.
+
+### Labs
+
+Components in the Labs package are experimental and may receive significant changes or be removed
+entirely.
