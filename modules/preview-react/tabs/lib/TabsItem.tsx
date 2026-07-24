@@ -84,7 +84,7 @@ export interface TabsItemProps
    * The variant of the TabsItem.
    * @default 'filled'
    */
-  variant?: 'filled' | 'outline';
+  variant?: 'filled' | 'outlined';
 }
 
 const tabItemStencil = createStencil({
@@ -183,7 +183,7 @@ const tabItemStencil = createStencil({
           },
         },
       },
-      outline: {
+      outlined: {
         border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
         // adding extra margin to the left and right of the tab item to avoid visual glitch when the tab is selected
         marginInline: px2rem(1),

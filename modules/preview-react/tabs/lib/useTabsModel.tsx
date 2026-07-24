@@ -49,7 +49,7 @@ export const useTabsModel = createModelHook({
      * The variant of the Tabs.
      * @default 'filled'
      */
-    variant: 'filled' as 'filled' | 'outline',
+    variant: 'filled' as 'filled' | 'outlined',
     menuConfig: {} as typeof useMenuModel.TConfig,
   },
   requiredConfig: useOverflowListModel.requiredConfig,

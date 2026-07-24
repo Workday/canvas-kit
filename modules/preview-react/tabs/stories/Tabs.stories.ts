@@ -10,7 +10,7 @@ import {DynamicTabs as DynamicTabsExample} from './examples/DynamicTabs';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 import {Icons as IconsExample} from './examples/Icons';
 import {NamedTabs as NamedTabsExample} from './examples/NamedTabs';
-import {OutlineTabs as OutlineTabsExample} from './examples/OutlineTabs';
+import {OutlinedTabs as OutlinedTabsExample} from './examples/OutlinedTabs';
 import {OverflowTabs as OverflowTabsExample} from './examples/OverflowTabs';
 import {RightToLeft as RightToLeftExample} from './examples/RightToLeft';
 import {SinglePanel as SinglePanelExample} from './examples/SinglePanel';
@@ -31,8 +31,8 @@ type Story = StoryObj<typeof Tabs>;
 export const Basic: Story = {
   render: BasicExample,
 };
-export const OutlineTabs: Story = {
-  render: OutlineTabsExample,
+export const OutlinedTabs: Story = {
+  render: OutlinedTabsExample,
 };
 export const NamedTabs: Story = {
   render: NamedTabsExample,

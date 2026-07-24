@@ -36,9 +36,9 @@ const TabsExample = (props: React.ComponentProps<typeof StaticStates> = {}) => {
       <ComponentStatesTable
         rowProps={[
           {label: 'Filled No Icon', props: {variant: 'filled', hasIcon: false}},
-          {label: 'Outline No Icon', props: {variant: 'outline', hasIcon: false}},
+          {label: 'Outline No Icon', props: {variant: 'outlined', hasIcon: false}},
           {label: 'Filled Icon', props: {variant: 'filled', hasIcon: true}},
-          {label: 'Outline Icon', props: {variant: 'outline', hasIcon: true}},
+          {label: 'Outline Icon', props: {variant: 'outlined', hasIcon: true}},
         ]}
         columnProps={[
           {label: 'Default', props: {'aria-selected': false}},
@@ -127,7 +127,7 @@ const OverflowTabs = () => {
           )}
         </Tabs.Panels>
       </Tabs>
-      <Tabs variant="outline" items={items}>
+      <Tabs variant="outlined" items={items}>
         <Tabs.List
           overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}
           cs={{marginBlockStart: system.gap.lg}}
