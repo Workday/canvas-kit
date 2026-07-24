@@ -7,7 +7,7 @@ import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-st
 import {system} from '@workday/canvas-tokens-web';
 
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
-import {StatusIndicatorLabel} from './StatusIndicatorLabel';
+import {StatusIndicatorLabel, statusIndicatorLabelStencil} from './StatusIndicatorLabel';
 
 /**
  * @deprecated This is being deprecated and will be removed in a future release. Use
@@ -63,9 +63,9 @@ const statusIndicatorStencil = createStencil({
     gap: system.legacy.gap.xs,
     maxWidth: px2rem(200),
     alignItems: 'center',
-    borderRadius: system.legacy.shape.sm,
-    height: system.legacy.size.xxs,
-    padding: `0 ${system.legacy.padding.xs}`,
+    borderRadius: system.legacy.shape.md,
+    height: system.legacy.size.xs,
+    padding: `${system.legacy.padding.xxs} ${system.legacy.padding.xs}`,
     outline: `${px2rem(1)} solid transparent`,
     [systemIconStencil.vars.color]: 'currentColor',
   },
@@ -106,6 +106,10 @@ const statusIndicatorStencil = createStencil({
       transparent: {
         color: system.color.fg.inverse,
         backgroundColor: system.legacy.color.surface.contrast.default,
+        // TODO: replace hardcoded directional shadow color with a token once available
+        // (see shadow/directional in Figma)
+        [statusIndicatorLabelStencil.vars.textShadow]:
+          `0px 1px 4px ${system.legacy.color.shadow.ambient}, 0px 0.5px 2px rgba(28, 33, 39, 0.12)`,
       },
     },
     /**

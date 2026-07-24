@@ -29,6 +29,7 @@ Soon to be...
     - [Count Badge](#count-badge)
     - [Information Highlight](#information-highlight)
     - [Pill](#pill)
+    - [Status Indicator](#status-indicator)
   - [Form Field](#form-field)
   - [Inputs](#inputs)
     - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
@@ -245,7 +246,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 #### Banner
 
-**PR:** TBD
+**PR:** [#4087](https://github.com/Workday/canvas-kit/pull/4087)
 
 ##### Visual Updates
 
@@ -263,7 +264,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 #### Count Badge
 
-**PR:** TBD
+**PR:** [#4087](https://github.com/Workday/canvas-kit/pull/4087)
 
 ##### Visual Updates
 
@@ -279,7 +280,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 #### Information Highlight
 
-**PR:** TBD
+**PR:** [#4087](https://github.com/Workday/canvas-kit/pull/4087)
 
 ##### Breaking Changes
 
@@ -313,7 +314,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 #### Pill
 
-**PR:** TBD
+**PR:** [#4087](https://github.com/Workday/canvas-kit/pull/4087)
 
 ##### Visual Updates
 
@@ -343,6 +344,23 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
   flush with the ~24px click target instead of hugging the smaller 16px icon box. It uses
   `system.legacy.color.brand.border.primary`, matching the Pill container's own focus color.
 - `Pill.Icon`'s glyph size shrunk from `systemIcon.size.sm` (18px) to `systemIcon.size.xs` (16px).
+
+#### Status Indicator
+
+**PR:** [#4087](https://github.com/Workday/canvas-kit/pull/4087)
+
+##### Visual Updates
+
+- Container height increased from `size.xxs` (20px) to `size.xs` (24px).
+- Border radius changed from `shape.sm` (4px) to `shape.md` (8px).
+- Padding changed from asymmetric `0`/`padding.xs` (0px/8px) to `padding.xxs`/`padding.xs`
+  (4px/8px).
+- The default icon size has been reduced from `20px` to `16px`.
+- Label typography now uses the `subtext.medium` type level (12px, previously `subtext.large`, 14px)
+  with `fontWeight.medium` (previously `fontWeight.bold`), and no longer applies
+  `text-transform: capitalize`.
+- The `transparent` variant's label now has a text-shadow applied for legibility over imagery or
+  video backgrounds.
 
 ### Inputs
 
