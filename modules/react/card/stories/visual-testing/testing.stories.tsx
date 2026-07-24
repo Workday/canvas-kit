@@ -22,7 +22,7 @@ export const CardStates = {
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
           {label: 'Borderless', props: {variant: 'borderless'}},
-          {label: 'Tonal', props: {variant: 'tonal'}},
+          {label: 'Alt', props: {variant: 'alt'}},
           {label: 'With Heading', props: {}},
           {
             label: 'With custom padding (0px)',
@@ -54,8 +54,7 @@ export const CardStates = {
         {({heading = true, ...props}) => (
           <div
             style={{
-              background:
-                props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
+              background: props.variant !== 'alt' ? cssVar(system.color.surface.raised) : undefined,
               padding: cssVar(system.padding.md),
             }}
           >

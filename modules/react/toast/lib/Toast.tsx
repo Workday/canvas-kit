@@ -1,9 +1,10 @@
 import React from 'react';
 
+import {cardStencil} from '@workday/canvas-kit-react/card';
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {ToastBody} from './ToastBody';
@@ -57,7 +58,6 @@ const toastStencil = createStencil({
     gap: base.legacy.size150,
     borderRadius: system.legacy.shape.xl,
     border: `${px2rem(1)} solid ${system.color.border.default}`,
-    backgroundColor: system.legacy.color.surface.default,
     boxShadow: system.depth[5],
 
     '@media (forced-colors: active)': {
@@ -117,9 +117,10 @@ export const Toast = createContainer('div')({
      */
     Link: ToastLink,
   },
-})<ToastProps>(({children, ...elemProps}, _, model) => {
+})<ToastProps>(({children, variant, ...elemProps}, _, model) => {
   return (
     <Popup.Card
+      variant={variant}
       {...getAriaAttributes(model.state.mode, model.state.id)}
       {...mergeStyles(elemProps, toastStencil())}
     >

@@ -89,7 +89,6 @@ export const popupCardStencil = createStencil({
     maxHeight: '',
     transformOriginHorizontal: '',
     transformOriginVertical: '',
-    background: '',
   },
   base: ({maxHeight, transformOriginHorizontal, transformOriginVertical}) => ({
     fontFamily: system.fontFamily.default,
@@ -119,14 +118,6 @@ export const popupCardStencil = createStencil({
       padding: system.legacy.padding.lg,
     },
   }),
-  modifiers: {
-    variant: {
-      alt: ({background}) => ({
-        background: cssVar(background, system.sana.color.surface.elevated),
-      }),
-    },
-    borderless: {},
-  },
 });
 
 export const PopupCard = createSubcomponent('div')({
@@ -139,17 +130,17 @@ export const PopupCard = createSubcomponent('div')({
   }, [model.state.placement]);
   const translate = getTransformOrigin(transformOrigin, system.legacy.gap.sm);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
-
+  console.log(elemProps);
   return (
     <Card
       as={Element}
       ref={ref}
+      variant={variant}
       {...mergeStyles(elemProps, [
         popupCardStencil({
           transformOriginHorizontal: transformOrigin.horizontal,
           transformOriginVertical: transformOrigin.vertical,
           maxHeight: cardMaxHeight,
-          variant: variant,
         }),
         translateVars({positionX: translate.x, positionY: translate.y}),
       ])}

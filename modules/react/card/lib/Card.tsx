@@ -17,7 +17,7 @@ export interface CardProps extends BoxProps {
    * The variant of the Card. Can be `default`, `borderless` or `tonal`.
    * @default 'default'
    */
-  variant?: 'borderless' | 'alt';
+  variant?: 'alt' | 'tonal';
 }
 
 // .cnvs-card
@@ -37,13 +37,13 @@ export const cardStencil = createStencil({
   }),
   modifiers: {
     variant: {
-      borderless: {
-        borderColor: 'transparent',
-      },
-
+      tonal: ({background}) => ({
+        background: cssVar(background, system.legacy.color.surface.alt.strong),
+        borderColor: system.color.border.transparent,
+      }),
       alt: ({background}) => ({
         background: cssVar(background, system.sana.color.surface.elevated),
-        borderColor: system.color.border.transparent,
+        borderColor: system.color.border.inverse.default,
       }),
     },
   },
