@@ -24,7 +24,7 @@ const MenuOptionText = createComponent('span')({
     return (
       <>
         <MenuItem.Text ref={ref} as={Element} {...elemProps} />
-        <SystemIcon size="xs" {...menuItemStencil.parts.selected} icon={checkIcon} />
+        <SystemIcon size="md" {...menuItemStencil.parts.selected} icon={checkIcon} />
       </>
     );
   },
