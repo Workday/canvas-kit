@@ -27,6 +27,7 @@ Soon to be...
   - [Indicators](#indicators)
     - [Banner](#banner)
     - [Count Badge](#count-badge)
+    - [Information Highlight](#information-highlight)
     - [Pill](#pill)
   - [Form Field](#form-field)
   - [Inputs](#inputs)
@@ -273,6 +274,41 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
   no longer red/danger-colored and now uses the brand primary accent color.
 - The `inverse` variant's text color changed from `system.legacy.color.fg.info.strong` to
   `system.color.fg.strong`.
+
+#### Information Highlight
+
+**PR:** TBD
+
+##### Breaking Changes
+
+- The default `variant` changed from `informational` to `default`. If you rely on the implicit
+  default, add `variant="informational"` explicitly to preserve the previous appearance.
+
+##### New API
+
+- `variant="default"` — general-purpose variant with gray background (`surface.alt.default`), flat
+  `layersIcon` (no colored circle), and icon color `system.color.fg.default`.
+- `ctaPlacement="bottom" | "end"` — `bottom` (default) stacks the link below heading/body; `end`
+  places the link in a right column, vertically centered beside the content.
+
+##### Visual Updates
+
+- The left accent border (`borderInlineStart`) has been removed.
+- Border radius changed from `shape.sm` (4px) to `shape.xxl` (20px) via `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
+- Icon-to-content horizontal gap changed from `gap.md` (16px) to **12px**.
+- Vertical spacing between text blocks: **4px** between heading and body (`gap.xs`), **16px** between
+  body and link (`gap.md`).
+- The default `InformationHighlight.Icon` size has been reduced from `24px` to `20px` (`systemIcon`
+  size `md`).
+- `Heading` typography now uses `system.legacy.type.subtext.lg` with `fontWeight.medium`
+  (previously `body.sm` scale with `fontWeight.bold`). Color changed from `fg.default` to
+  `fg.strong`.
+- `Body` typography consolidated to `system.legacy.type.subtext.lg` spread. Color changed from
+  `fg.default` to `fg.muted.default`.
+- `Link` typography consolidated to `system.legacy.type.subtext.lg` spread; `fontWeight.bold`
+  override removed (weight is now regular).
+- Background surface tokens per variant/emphasis are unchanged.
 
 #### Pill
 
