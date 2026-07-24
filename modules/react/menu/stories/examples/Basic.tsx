@@ -10,7 +10,7 @@ export const Basic = () => {
     <Menu onSelect={data => setSelected(data.id)}>
       <Menu.Target>Open Menu</Menu.Target>
       <Menu.Popper>
-        <Menu.Card>
+        <Menu.Card variant="alt">
           <Menu.List>
             <Menu.Item>First Item</Menu.Item>
             <Menu.Item>Second Item</Menu.Item>

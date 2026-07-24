@@ -76,6 +76,7 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * Amount of time (in ms) to delay before hiding the tooltip
    */
   hideDelay?: number;
+  variant?: 'alt';
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -106,6 +107,7 @@ export const Tooltip = createComponent('div')({
     showDelay = 300,
     hideDelay = 100,
     fallbackPlacements = defaultFallbackPlacements,
+    variant,
     ...elemProps
   }: TooltipProps) {
     const titleText = innerText(title);
@@ -157,6 +159,7 @@ export const Tooltip = createComponent('div')({
                 {...handleCsProp(elemProps)}
                 {...tooltipProps}
                 elementHasFocus={elementHasFocus}
+                variant={variant}
               >
                 {title}
               </TooltipContainer>
