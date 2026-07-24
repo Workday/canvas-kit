@@ -78,7 +78,6 @@ export const textInputStencil = createStencil({
     error: {
       error: {
         borderColor: system.legacy.color.brand.border.critical,
-        // borderWidth: px2rem(2),
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
