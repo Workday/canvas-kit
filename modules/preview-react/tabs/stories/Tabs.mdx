@@ -10,6 +10,7 @@ import {DynamicTabs} from './examples/DynamicTabs';
 import {HoistedModel} from './examples/HoistedModel';
 import {Icons} from './examples/Icons';
 import {NamedTabs} from './examples/NamedTabs';
+import {OutlinedTabs} from './examples/OutlinedTabs';
 import {OverflowTabs} from './examples/OverflowTabs';
 import {RightToLeft} from './examples/RightToLeft';
 import {SinglePanel} from './examples/SinglePanel';
@@ -43,6 +44,12 @@ that does not support overflow.
 
 <ExampleCodeBlock code={Basic} />
 
+### Outlined Tabs
+
+Set the `variant` prop of `Tabs` to `outlined` to render an outlined style of tabs.
+
+<ExampleCodeBlock code={OutlinedTabs} />
+
 ### Overflow Tabs
 
 Tabs is a responsive component based on the width of its container. If the rendered tabs exceed the
@@ -74,7 +81,7 @@ trigger an event to change the active tab.
 ### Named Tabs
 
 `Tabs.Item` and `Tabs.Panel` both take an optional `data-id` attribute that is used for the
-`onSelect` callback. This example is identical to the Basic Example, but with tabs named using
+`onActivate` callback. This example is identical to the Basic Example, but with tabs named using
 `data-id` for the `Tabs.Item` and `Tabs.Panel` subcomponents.
 
 <ExampleCodeBlock code={NamedTabs} />
