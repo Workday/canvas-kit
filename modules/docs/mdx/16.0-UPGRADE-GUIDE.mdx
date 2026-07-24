@@ -20,6 +20,7 @@ Soon to be...
   - [KBD](#kbd)
 - [Component Updates](#component-updates)
   - [Action Bar](#action-bar)
+  - [Banner](#banner)
   - [Avatar](#avatar)
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
@@ -38,6 +39,8 @@ Soon to be...
     - [Select](#select)
     - [MultiSelect](#multiselect)
   - [Menu](#menu)
+  - [Modal](#modal)
+  - [Popup](#popup)
   - [Segmented Control](#segmented-control)
 	- [Toast](#toast)
 	- [Tooltip](#tooltip)
@@ -150,6 +153,12 @@ functional shortcuts, refer to the storybook documentation and our example stori
 #### Visual Updates
 
 - `ActionBar` padding has been updated to `padding.md` (16px).
+
+### Banner
+
+#### Visual Updates
+
+- `Banner` now uses `system.depth[5]` for box-shadow (previously had no box-shadow).
 
 ### Avatar
 
@@ -389,6 +398,7 @@ No API changes. No migration is required unless you render a custom dropdown ind
   `Toast.Body` and `Toast.Icon`.
 - Gap between the icon, body, and close icon is now `base.size150` (12px).
 - Shape uses `system.shape.xl`.
+- Box-shadow updated from `system.depth[3]` to `system.depth[5]`.
 - `Toast.Body` no longer has a gap between text and link.
 - `Toast.CloseIcon` is set to have absolute positioning and aligned with the top-right corner (in
   LTR).
@@ -406,8 +416,21 @@ No API changes. No migration is required unless you render a custom dropdown ind
 - Tooltip boundaries remain visible in Windows High Contrast mode: when High Contrast is detected,
   Tooltip uses a solid outline (`outline: solid 1px CanvasText`) to ensure clear visibility.
 - Shape is now fully rounded using `system.shape.full`.
+- Box-shadow updated from `system.depth[2]` to `system.depth[3]`.
 - Type level is now `subtext.lg` (previously `subtext.md`).
 - Padding and spacing have been adjusted to accommodate the new styling.
+
+### Modal
+
+#### Visual Updates
+
+- `Modal.Card` box-shadow updated from `system.depth[5]` to `system.depth[6]`.
+
+### Popup
+
+#### Visual Updates
+
+- `Popup.Card` box-shadow updated from `system.depth[3]` to `system.depth[4]`.
 
 ### Menu
 
