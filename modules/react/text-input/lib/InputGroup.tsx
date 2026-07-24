@@ -57,6 +57,7 @@ export const inputGroupInnerStencil = createStencil({
     height,
     insetInlineStart,
     insetInlineEnd,
+    [systemIconStencil.vars.size]: component.systemIcon.size.xs,
   }),
   modifiers: {
     pointerEvents: {
