@@ -41,6 +41,8 @@ Soon to be...
     - [Text Area](#text-area)
     - [Text Input](#text-input)
   - [Menu](#menu)
+  - [Modal](#modal)
+  - [Popup](#popup)
   - [Segmented Control](#segmented-control)
   - [Toast](#toast)
   - [Tooltip](#tooltip)
@@ -297,13 +299,12 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 - Border radius changed from `shape.sm` (4px) to `shape.xxl` (20px) via `cornerShapeStencil` (see
   [New Utilities](#new-utilities)).
 - Icon-to-content horizontal gap changed from `gap.md` (16px) to **12px**.
-- Vertical spacing between text blocks: **4px** between heading and body (`gap.xs`), **16px** between
-  body and link (`gap.md`).
+- Vertical spacing between text blocks: **4px** between heading and body (`gap.xs`), **16px**
+  between body and link (`gap.md`).
 - The default `InformationHighlight.Icon` size has been reduced from `24px` to `20px` (`systemIcon`
   size `md`).
-- `Heading` typography now uses `system.legacy.type.subtext.lg` with `fontWeight.medium`
-  (previously `body.sm` scale with `fontWeight.bold`). Color changed from `fg.default` to
-  `fg.strong`.
+- `Heading` typography now uses `system.legacy.type.subtext.lg` with `fontWeight.medium` (previously
+  `body.sm` scale with `fontWeight.bold`). Color changed from `fg.default` to `fg.strong`.
 - `Body` typography consolidated to `system.legacy.type.subtext.lg` spread. Color changed from
   `fg.default` to `fg.muted.default`.
 - `Link` typography consolidated to `system.legacy.type.subtext.lg` spread; `fontWeight.bold`
@@ -468,6 +469,7 @@ If you customize `brand.success.base` in your theme, please verify the following
   `Toast.Body` and `Toast.Icon`.
 - Gap between the icon, body, and close icon is now `base.size150` (12px).
 - Shape uses `system.shape.xl`.
+- Box-shadow updated from `system.depth[3]` to `system.depth[5]`.
 - `Toast.Body` no longer has a gap between text and link.
 - `Toast.CloseIcon` is set to have absolute positioning and aligned with the top-right corner (in
   LTR).
@@ -485,8 +487,21 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Tooltip boundaries remain visible in Windows High Contrast mode: when High Contrast is detected,
   Tooltip uses a solid outline (`outline: solid 1px CanvasText`) to ensure clear visibility.
 - Shape is now fully rounded using `system.shape.full`.
+- Box-shadow updated from `system.depth[2]` to `system.depth[3]`.
 - Type level is now `subtext.lg` (previously `subtext.md`).
 - Padding and spacing have been adjusted to accommodate the new styling.
+
+### Modal
+
+#### Visual Updates
+
+- `Modal.Card` box-shadow updated from `system.depth[5]` to `system.depth[6]`.
+
+### Popup
+
+#### Visual Updates
+
+- `Popup.Card` box-shadow updated from `system.depth[3]` to `system.depth[4]`.
 
 ### Menu
 
