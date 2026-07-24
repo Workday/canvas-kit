@@ -6,14 +6,10 @@ import {system} from '@workday/canvas-tokens-web';
 const informationHighlightBodyStencil = createStencil({
   base: () => {
     return {
-      fontFamily: system.fontFamily.default,
-      fontWeight: system.fontWeight.normal,
-      lineHeight: system.legacy.lineHeight.subtext.lg,
-      fontSize: system.legacy.fontSize.subtext.lg,
-      letterSpacing: system.legacy.letterSpacing.subtext.lg,
-      color: system.color.fg.default,
+      ...system.legacy.type.subtext.lg,
+      color: system.color.fg.muted.default,
       gridColumn: '2',
-      marginBlockEnd: system.legacy.gap.sm,
+      marginBlockEnd: system.legacy.gap.md,
     };
   },
 });
@@ -25,6 +21,7 @@ export const Body = createComponent('div')({
       <Text
         as={Element}
         ref={ref}
+        data-part="information-highlight-body"
         {...handleCsProp(elemProps, informationHighlightBodyStencil())}
       />
     );
