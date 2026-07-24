@@ -10,10 +10,11 @@ import {
   dispatchInputEvent,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp, wrapProperty} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {TextInput} from './TextInput';
 
@@ -175,6 +176,14 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
   } as const;
 });
 
+const clearButtonStencil = createStencil({
+  base: {
+    svg: {
+      [systemIconStencil.vars.size]: component.systemIcon.size.xs,
+    },
+  },
+});
+
 /**
  * A clear input button. This can be a component later.
  */
@@ -182,7 +191,12 @@ const ClearButton = createSubcomponent(TertiaryButton)({
   modelHook: useInputGroupModel,
   elemPropsHook: useClearButton,
 })<ExtractProps<typeof TertiaryButton, never>>((elemProps, Element) => {
-  return <Element data-part="input-group-clear-button" {...handleCsProp(elemProps)} />;
+  return (
+    <Element
+      data-part="input-group-clear-button"
+      {...handleCsProp(elemProps, clearButtonStencil())}
+    />
+  );
 });
 
 // make sure we always use pixels if the input is a number - this is required for `calc`

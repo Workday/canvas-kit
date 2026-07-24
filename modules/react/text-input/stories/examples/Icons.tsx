@@ -24,7 +24,7 @@ export const Icons = () => {
       <FormField.Label>Email</FormField.Label>
       <FormField.Field as={InputGroup}>
         <InputGroup.InnerStart>
-          <SystemIcon icon={mailIcon} size="small" />
+          <SystemIcon icon={mailIcon} size="xs" />
         </InputGroup.InnerStart>
         <InputGroup.Input id={formFieldInputId} autoComplete="email" />
         <InputGroup.InnerEnd>
