@@ -7,7 +7,7 @@ import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-st
 import {system} from '@workday/canvas-tokens-web';
 
 import {StatusIndicatorIcon} from './StatusIndicatorIcon';
-import {StatusIndicatorLabel, statusIndicatorLabelStencil} from './StatusIndicatorLabel';
+import {StatusIndicatorLabel} from './StatusIndicatorLabel';
 
 /**
  * @deprecated This is being deprecated and will be removed in a future release. Use
@@ -107,10 +107,6 @@ const statusIndicatorStencil = createStencil({
       transparent: {
         color: system.color.fg.inverse,
         backgroundColor: system.legacy.color.surface.contrast.default,
-        // TODO: replace hardcoded directional shadow color with a token once available
-        // (see shadow/directional in Figma)
-        [statusIndicatorLabelStencil.vars.textShadow]:
-          `0px 1px 4px ${system.legacy.color.shadow.ambient}, 0px 0.5px 2px rgba(28, 33, 39, 0.12)`,
       },
     },
     /**
