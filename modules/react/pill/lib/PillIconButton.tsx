@@ -1,5 +1,5 @@
 import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -19,34 +19,40 @@ export const pillIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
-    marginInlineStart: calc.negate(px2rem(2)), // visually create space between label and the button by -2px
-    borderRadius: px2rem(2),
-    height: system.legacy.size.xxs,
-    width: system.legacy.size.xxs,
+    marginInlineStart: 0, // leave room for the 24x24 focus ring
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    height: system.legacy.size.xxxs,
+    width: system.legacy.size.xxxs,
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
     [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
 
-    [systemIconStencil.vars.color]: system.color.fg.strong,
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
     '::after': {
       content: '""',
-      height: system.legacy.size.sm,
-      width: system.legacy.size.sm,
+      boxSizing: 'border-box',
       position: 'absolute',
-      left: calc.negate(px2rem(7)),
-      bottom: calc.negate(px2rem(7)),
+      top: calc.negate(px2rem(5)),
+      right: calc.negate(px2rem(5)),
+      bottom: calc.negate(px2rem(5)),
+      left: calc.negate(px2rem(5)),
       margin: 0,
       pointerEvents: 'all',
+      borderRadius: system.legacy.shape.sm,
+      borderStyle: 'solid',
+      borderWidth: px2rem(2),
+      borderColor: 'transparent',
     },
 
     '&:focus-visible, &.focus': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      ...focusRing({
-        innerColor: system.color.border.transparent,
-      }),
+      boxShadow: 'none',
+      '::after': {
+        borderColor: system.legacy.color.brand.border.primary,
+      },
     },
     '&:hover, &.hover': {
       [buttonStencil.vars.border]: system.color.border.transparent,
@@ -56,7 +62,7 @@ export const pillIconButtonStencil = createStencil({
     },
     '&:disabled, &.disabled': {
       [buttonStencil.vars.border]: system.color.border.transparent,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
   },
 });

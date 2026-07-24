@@ -6,11 +6,7 @@ import {system} from '@workday/canvas-tokens-web';
 const informationHighlightLinkStencil = createStencil({
   base: () => {
     return {
-      fontFamily: system.fontFamily.default,
-      fontWeight: system.fontWeight.bold,
-      lineHeight: system.legacy.lineHeight.subtext.lg,
-      fontSize: system.legacy.fontSize.subtext.lg,
-      letterSpacing: system.legacy.letterSpacing.subtext.lg,
+      ...system.legacy.type.subtext.lg,
       gridColumn: '2',
       justifySelf: 'start',
       color: system.color.fg.default,
@@ -25,6 +21,7 @@ export const Link = createComponent('a')({
       <Hyperlink
         as={Element}
         ref={ref}
+        data-part="information-highlight-link"
         {...handleCsProp(elemProps, informationHighlightLinkStencil())}
       />
     );

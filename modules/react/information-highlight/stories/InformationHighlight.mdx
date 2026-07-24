@@ -8,6 +8,7 @@ import { Heading } from './examples/Heading';
 import { Informational } from './examples/Informational';
 import { Caution } from './examples/Caution';
 import { Critical } from './examples/Critical';
+import { CtaPlacementEnd } from './examples/CtaPlacementEnd';
 import { IconCritical } from './examples/CustomIconCritical';
 import { RTL } from './examples/RTL';
 
@@ -32,20 +33,26 @@ yarn add @workday/canvas-kit-react
 
 ### Variants
 
-`InformationHighlight` has three variants and each `variant` has two types of `emphasis`.
+`InformationHighlight` has four variants and each `variant` has two types of `emphasis`.
 
-Variants: `informational`, `caution`, `critical`
+Variants: `default`, `informational`, `caution`, `critical`
 
 Emphasis: `low`, `high`
 
 The variants have different icons and colors to convey severity and the emphasis changes the
 background color to have a lower or higher contrast. If no `variant` or `emphasis` is selected the
-layout will default to `Variant: informational, Emphasis: low`.
+layout will default to `Variant: default, Emphasis: low`.
 
-The following examples will show the `low` and `high` emphasis of the three variants. `low` Emphasis
-will be shown first and should be used when there is other more important information on the page.
-`high` Emphasis will be shown second, and should be used when the highlight is not competing with
-other, more important information.
+The following examples will show the `low` and `high` emphasis of the severity variants. `low`
+Emphasis will be shown first and should be used when there is other more important information on
+the page. `high` Emphasis will be shown second, and should be used when the highlight is not
+competing with other, more important information.
+
+#### Default
+
+The default variant is for general callouts that do not convey a specific severity level. See the
+[Basic Example](#basic-example) above — it uses the default `variant` and `emphasis` with all parts
+filled in.
 
 #### Informational
 
@@ -67,6 +74,15 @@ The critical variant is for _must know_ information that could otherwise cause f
 is unaware.
 
 <ExampleCodeBlock code={Critical} />
+
+### CTA Placement
+
+Use `ctaPlacement` to control where the link renders relative to the heading and body.
+
+- `bottom` (default): the link stacks below the heading and body in document order.
+- `end`: the link renders beside the content, vertically centered and right-aligned.
+
+<ExampleCodeBlock code={CtaPlacementEnd} />
 
 ### RTL Example
 
