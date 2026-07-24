@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {ExtractStencilProps, createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -58,12 +58,13 @@ const deprecatedVariantsMap = {
 } as const;
 
 const statusIndicatorStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
     display: 'inline-flex',
     gap: system.legacy.gap.xs,
     maxWidth: px2rem(200),
     alignItems: 'center',
-    borderRadius: system.legacy.shape.md,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.md,
     height: system.legacy.size.xs,
     padding: `${system.legacy.padding.xxs} ${system.legacy.padding.xs}`,
     outline: `${px2rem(1)} solid transparent`,
