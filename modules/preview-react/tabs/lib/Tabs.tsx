@@ -5,7 +5,6 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {TabsItem} from './TabsItem';
 import {TabsList} from './TabsList';
-import {TabsMenuPopper} from './TabsMenuPopper';
 import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsPanel} from './TabsPanel';
 import {TabsPanels} from './TabsPanels';
@@ -111,10 +110,6 @@ export const Tabs = createContainer()({
      * ```
      */
     OverflowButton: TabsOverflowButton,
-    /**
-     * @deprecated ⚠️ `MenuPopper` has been deprecated and will be removed in a future major version. Please use `Tabs.Menu.Popper` instead.
-     */
-    MenuPopper: TabsMenuPopper,
     /**
      * The overflow menu of the Tabs component. If there isn't enough room to render all the tab
      * items, the extra tabs that don't fit will be overflowed into this menu.
