@@ -160,7 +160,7 @@ export const menuItemStencil = createStencil({
 });
 
 const MenuItemIcon = (elemProps: SystemIconProps) => {
-  return <SystemIcon size="xs" {...menuItemStencil.parts.icon} {...elemProps} />;
+  return <SystemIcon size="md" {...menuItemStencil.parts.icon} {...elemProps} />;
 };
 
 const MenuItemText = createComponent('span')({
