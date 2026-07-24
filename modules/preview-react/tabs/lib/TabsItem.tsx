@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {
   isSelected,
   useListItemRegister,
@@ -12,6 +11,7 @@ import {
   EllipsisText,
   ExtractProps,
   composeHooks,
+  cornerShapeStencil,
   createComponent,
   createElemPropsHook,
   createSubcomponent,
@@ -22,7 +22,7 @@ import {
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
@@ -70,8 +70,9 @@ export interface TabsItemProps
    */
   'aria-controls'?: string;
   /**
-   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active.  This
-   * is automatically set by the component and should only be used in advanced cases.
+   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
+   * should either be `true` or `undefined` and never `false`. This is automatically set by the
+   * component and should only be used in advanced cases.
    */
   'aria-selected'?: boolean;
   /**
@@ -79,26 +80,28 @@ export interface TabsItemProps
    * set while all inactive tabs should have a `tabIndex={-1}`
    */
   tabIndex?: number;
+  /**
+   * The variant of the TabsItem.
+   * @default 'filled'
+   */
+  variant?: 'filled' | 'outlined';
 }
 
 const tabItemStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
-    fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    ...system.legacy.type.subtext.lg,
     fontWeight: system.fontWeight.medium,
-    border: 'none',
     backgroundColor: system.legacy.color.surface.transparent,
     flex: '0 0 auto',
     minWidth: 0,
     alignItems: 'center',
     padding: `0 ${system.legacy.padding.md}`,
-    height: system.legacy.size.lg,
+    height: system.legacy.size.md,
     cursor: 'pointer',
-    color: system.color.fg.muted.default,
+    color: system.color.fg.default,
     position: 'relative',
-    borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -108,21 +111,18 @@ const tabItemStencil = createStencil({
 
     '&:has(span)': {
       display: 'flex',
-      gap: system.legacy.gap.sm,
+      gap: base.legacy.size75,
     },
 
-    '&:hover, &.hover, &:focus-visible, &.focus': {
-      backgroundColor: system.legacy.color.surface.overlay.hover.default,
-      color: system.color.fg.muted.strong,
-      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
+    '&:hover, &.hover': {
+      color: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:focus-visible, &.focus': {
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
-      ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      backgroundColor: system.legacy.color.surface.transparent,
       color: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
@@ -134,29 +134,85 @@ const tabItemStencil = createStencil({
       '&:hover': {
         cursor: 'auto',
         backgroundColor: system.legacy.color.surface.transparent,
-        [systemIconStencil.vars.color]: system.color.fg.muted.default,
+        [systemIconStencil.vars.color]: system.color.fg.default,
       },
     },
 
     '&[aria-selected=true]': {
-      color: system.legacy.color.brand.fg.primary.default,
-      cursor: 'default',
-      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
-      '&:after': {
-        position: 'absolute',
-        // selected state for Windows high contrast theme
-        borderBlockEnd: `${base.legacy.size50} solid transparent`,
-        borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
-        backgroundColor: system.legacy.color.brand.fg.primary.default,
-        bottom: 0,
-        content: `''`,
-        left: 0,
-        marginBlockStart: `${calc.negate(calc.divide(system.legacy.padding.xs, system.legacy.padding.xxs))}`,
-        width: '100%',
-      },
+      color: system.color.fg.default,
+      [systemIconStencil.vars.color]: system.color.fg.default,
       '&:hover, &.hover, &:focus-visible, &.focus': {
-        backgroundColor: system.legacy.color.surface.transparent,
-        color: system.legacy.color.brand.fg.primary.default,
+        color: system.color.fg.default,
+        [systemIconStencil.vars.color]: system.color.fg.default,
+      },
+    },
+  },
+  modifiers: {
+    variant: {
+      filled: {
+        border: `${px2rem(1)} solid transparent`,
+
+        '&:hover, &.hover': {
+          backgroundColor: system.legacy.color.surface.overlay.hover.default,
+        },
+
+        '&:focus-visible, &.focus': {
+          ...focusRing({
+            width: 2,
+            separation: 2,
+            innerColor: system.legacy.color.focus.inverse,
+            outerColor: system.legacy.color.brand.focus.primary,
+          }),
+        },
+
+        '&[aria-selected=true]': {
+          backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+          borderColor: system.color.border.input.default,
+          '&:hover, &.hover, &:focus-visible, &.focus': {
+            backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+          },
+
+          '&:focus-visible, &.focus': {
+            borderWidth: px2rem(2),
+            marginInline: px2rem(-1),
+          },
+
+          // Non-color outline indicator for Windows high contrast theme
+          '@media (forced-colors: active)': {
+            outline: `${px2rem(2)} solid ButtonBorder`,
+          },
+        },
+      },
+      outlined: {
+        border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+        // adding extra margin to the left and right of the tab item to avoid visual glitch when the tab is selected
+        marginInline: px2rem(1),
+
+        '&:hover, &.hover': {
+          borderColor: system.legacy.color.border.strong,
+        },
+
+        '&:focus-visible, &.focus': {
+          marginInline: px2rem(0),
+          border: `${px2rem(2)} solid ${system.legacy.color.brand.focus.primary}`,
+        },
+
+        '&[aria-selected=true]': {
+          marginInline: px2rem(0),
+          border: `${px2rem(2)} solid ${system.color.border.contrast.default}`,
+          '&:hover, &.hover, &:focus-visible, &.focus': {
+            border: `${px2rem(2)} solid ${system.color.border.contrast.default}`,
+          },
+
+          '&:focus-visible, &.focus': {
+            ...focusRing({
+              width: 2,
+              separation: 2,
+              innerColor: system.legacy.color.focus.inverse,
+              outerColor: system.legacy.color.brand.focus.primary,
+            }),
+          },
+        },
       },
     },
   },
@@ -164,9 +220,9 @@ const tabItemStencil = createStencil({
 
 export const StyledTabItem = createComponent('button')<TabsItemProps>({
   displayName: 'StyledTabItem',
-  Component: ({children, ...elemProps}, ref, Element) => {
+  Component: ({children, variant, ...elemProps}, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, tabItemStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, tabItemStencil({variant}))}>
         {children}
       </Element>
     );
@@ -200,11 +256,17 @@ export const TabsItem = createSubcomponent('button')({
     Icon: SystemIcon,
     Text: EllipsisText,
   },
-})<TabsItemProps>(({children, ...elemProps}, Element) => {
+})<TabsItemProps>(({children, ...elemProps}, Element, model) => {
   const modality = useModalityType();
+
   return (
     <OverflowTooltip>
-      <StyledTabItem as={Element} maxWidth={modality === 'touch' ? undefined : 280} {...elemProps}>
+      <StyledTabItem
+        as={Element}
+        maxWidth={modality === 'touch' ? undefined : 280}
+        {...elemProps}
+        variant={model.state.variant}
+      >
         {children}
       </StyledTabItem>
     </OverflowTooltip>
