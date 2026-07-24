@@ -2,6 +2,19 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+/** Default Surface/Shimmer fill for skeleton placeholders (Shape, Header, Text lines). */
+export const skeletonSurfaceFillStencil = createStencil({
+  vars: {
+    backgroundColor: '',
+  },
+  base: ({backgroundColor}) => ({
+    background: cssVar(
+      backgroundColor,
+      `linear-gradient(to left, ${system.legacy.color.surface.alt.strong}, ${system.legacy.color.surface.loading})`
+    ),
+  }),
+});
+
 export interface SkeletonShapeProps extends CSProps {
   /**
    *  The width of the shape in `px` or `%`.
@@ -20,20 +33,20 @@ export interface SkeletonShapeProps extends CSProps {
   borderRadius?: number | string;
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default Surface shimmer gradient (`surface.alt.strong` → `surface.loading`); override with a solid color
    */
   backgroundColor?: string;
 }
 
 export const skeletonShapeStencil = createStencil({
+  extends: skeletonSurfaceFillStencil,
   vars: {
     width: '',
     height: '',
     borderRadius: '',
     backgroundColor: '',
   },
-  base: ({width, height, borderRadius, backgroundColor}) => ({
-    backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
+  base: ({width, height, borderRadius}) => ({
     borderRadius: cssVar(borderRadius, '0'),
     height: cssVar(height, '100%'),
     width: width,
