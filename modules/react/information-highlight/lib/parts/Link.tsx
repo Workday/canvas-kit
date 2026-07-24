@@ -21,6 +21,7 @@ export const Link = createComponent('a')({
       <Hyperlink
         as={Element}
         ref={ref}
+        variant="secondary"
         data-part="information-highlight-link"
         {...handleCsProp(elemProps, informationHighlightLinkStencil())}
       />
