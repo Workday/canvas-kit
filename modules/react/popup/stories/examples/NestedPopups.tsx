@@ -46,12 +46,12 @@ export const NestedPopups = () => {
                     <Popup.Body>
                       <p style={{marginBlockStart: 0, marginBlockEnd: 0}}>Contents of Popup 2</p>
                     </Popup.Body>
-                    <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
+                    <Popup.ButtonGroup>
                       <Popup.CloseButton as={Popup.CloseButton} model={popup1}>
                         Close Both (as)
                       </Popup.CloseButton>
                       <SecondaryButton {...closeBothProps}>Close Both (props)</SecondaryButton>
-                    </Flex>
+                    </Popup.ButtonGroup>
                   </Popup.Card>
                 </Popup.Popper>
               </Popup>

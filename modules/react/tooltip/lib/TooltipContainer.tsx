@@ -81,7 +81,7 @@ export const tooltipContainerStencil = createStencil({
       left: 0,
       right: 0,
       bottom: 0,
-      boxShadow: system.depth[2],
+      boxShadow: system.depth[3],
     },
     // Hide tooltip when the reference element is either clipped or fully hidden
     '[data-popper-reference-hidden] &': {

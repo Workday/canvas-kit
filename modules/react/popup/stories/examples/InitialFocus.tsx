@@ -26,11 +26,6 @@ const bodyStyles = createStyles({
   marginBlock: '0',
 });
 
-const flexStyles = createStyles({
-  gap: system.gap.md,
-  padding: system.padding.xs,
-});
-
 const columnStyles = createStyles({
   gap: system.gap.md,
   alignItems: 'flex-start',
@@ -60,11 +55,11 @@ const InitialFocusOnButton = () => {
               Your message has been sent!
             </Text>
           </Popup.Body>
-          <Flex cs={flexStyles}>
+          <Popup.ButtonGroup>
             <Popup.CloseButton as={PrimaryButton} ref={initialFocusRef}>
               OK
             </Popup.CloseButton>
-          </Flex>
+          </Popup.ButtonGroup>
         </Popup.Card>
       </Popup.Popper>
     </Popup>
@@ -96,10 +91,10 @@ const InitialFocusOnTextInput = () => {
               <FormField.Input as={TextInput} ref={initialFocusRef} />
             </FormField>
           </Popup.Body>
-          <Flex cs={flexStyles}>
-            <Popup.CloseButton as={PrimaryButton}>Send</Popup.CloseButton>
+          <Popup.ButtonGroup>
             <Popup.CloseButton>Cancel</Popup.CloseButton>
-          </Flex>
+            <Popup.CloseButton as={PrimaryButton}>Send</Popup.CloseButton>
+          </Popup.ButtonGroup>
         </Popup.Card>
       </Popup.Popper>
     </Popup>
@@ -129,9 +124,9 @@ const InitialFocusOnHeading = () => {
           <Popup.Body>
             <Text cs={bodyStyles}>Review the summary below before continuing.</Text>
           </Popup.Body>
-          <Flex cs={flexStyles}>
+          <Popup.ButtonGroup>
             <Popup.CloseButton as={PrimaryButton}>Continue</Popup.CloseButton>
-          </Flex>
+          </Popup.ButtonGroup>
         </Popup.Card>
       </Popup.Popper>
     </Popup>

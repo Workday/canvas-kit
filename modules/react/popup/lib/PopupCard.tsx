@@ -99,7 +99,7 @@ export const popupCardStencil = createStencil({
     position: 'relative',
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     gap: system.legacy.gap.lg,
-    boxShadow: system.depth[3],
+    boxShadow: system.depth[4],
     minHeight: 0,
     padding: system.legacy.padding.xl,
     borderRadius: system.legacy.shape.xxxl,
@@ -115,6 +115,7 @@ export const popupCardStencil = createStencil({
     },
     '@media screen and (max-width: 768px)': {
       transformOrigin: 'bottom center',
+      padding: system.legacy.padding.lg,
     },
   }),
 });
