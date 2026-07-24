@@ -32,6 +32,7 @@ export const ExternalHyperlinkStates = {
             variant: [
               {label: 'Default', value: undefined},
               {label: 'Inverse', value: 'inverse'},
+              {label: 'Secondary', value: 'secondary'},
             ],
           })}
           columnProps={permutateProps({

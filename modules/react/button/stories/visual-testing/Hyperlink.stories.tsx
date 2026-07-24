@@ -27,6 +27,11 @@ export const HyperlinkStates = {
           variant: [
             {label: 'Default', value: undefined},
             {label: 'Inverse', value: 'inverse'},
+            {label: 'Secondary', value: 'secondary'},
+          ],
+          linkType: [
+            {label: 'Inline', value: undefined},
+            {label: 'Standalone', value: 'standalone'},
           ],
         })}
         columnProps={permutateProps({
