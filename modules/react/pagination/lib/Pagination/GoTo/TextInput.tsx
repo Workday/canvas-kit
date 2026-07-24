@@ -15,6 +15,7 @@ export const paginationGoToTextInputStencil = createStencil({
   base: {
     minWidth: px2rem(55),
     width: px2rem(55),
+    textAlign: 'center',
   },
 });
 
