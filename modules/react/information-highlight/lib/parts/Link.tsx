@@ -33,12 +33,12 @@ export const Link = createSubcomponent('a')({
   return (
     <Hyperlink
       as={Element}
-      variant="secondary"
       data-part="information-highlight-link"
       {...handleCsProp(
         elemProps,
         informationHighlightLinkStencil({ctaPlacement: model.state.ctaPlacement})
       )}
+      variant="secondary"
     />
   );
 });
