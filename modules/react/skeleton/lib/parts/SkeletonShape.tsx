@@ -12,6 +12,10 @@ export const skeletonSurfaceFillStencil = createStencil({
       backgroundColor,
       `linear-gradient(to left, ${system.legacy.color.surface.alt.strong}, ${system.legacy.color.surface.loading})`
     ),
+    border: `${px2rem(1)} solid transparent`,
+    '@media (forced-colors: active)': {
+      borderColor: 'CanvasText',
+    },
   }),
 });
 
