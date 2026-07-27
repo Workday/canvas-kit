@@ -322,7 +322,9 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 - `variant="default"` — general-purpose variant with gray background (`surface.alt.default`), flat
   `layersIcon` (no colored circle), and icon color `system.color.fg.default`.
 - `ctaPlacement="bottom" | "end"` — `bottom` (default) stacks the link below heading/body; `end`
-  places the link in a right column, vertically centered beside the content.
+  visually places the link at the inline end beside content when the container is wide enough, and
+  stacks it below the body when narrower. Grid placement does not reorder DOM children—keyboard tab
+  order and screen reader order stay heading, body, then link.
 
 ##### Visual Updates
 

@@ -91,11 +91,18 @@ Use `ctaPlacement` to control where the link renders relative to the heading and
 - `bottom` (default): the link stacks below the heading and body in document order.
 - `end`: the link renders beside the content (when the component is wide enough), vertically
   centered at the inline end; in narrower widths it moves below the body, still aligned to the
-  inline end. DOM and keyboard tab order remain heading, body, then link.
+  inline end.
+
+> **Note**: `ctaPlacement` only changes placement in the component's CSS grid. Keyboard tab order
+> and screen reader order stay unchanged (**Heading → Body → Link**). With `ctaPlacement="end"`, the
+> link appears at the inline end when the highlight container is wide enough. At narrower widths, it
+> stacks under the body while remaining last in the DOM. Use the width controls in
+> [Cta Placement End](#cta-placement) to preview reflow.
 
 With `ctaPlacement="end"`, long link text wraps within the available width rather than truncating,
-and the layout reflows when the highlight is narrow. Use the container width controls in the example
-to preview behavior at different widths. See [Link text](#link-text) for copy guidance.
+and the layout reflows when the highlight is narrow. `end` uses the logical inline end, so placement
+follows reading direction in RTL layouts (see [RTL Example](#rtl-example)). See
+[Link Text Guidance](#link-text-guidance) for copy guidance.
 
 <ExampleCodeBlock code={CtaPlacementEnd} />
 
