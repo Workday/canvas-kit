@@ -1,5 +1,7 @@
 import {Basic} from '../../modules/react/menu/stories/examples/Basic';
 import {MenuWithFallbackPlacements} from '../../modules/react/menu/stories/examples/MenuWithFallbackPlacements';
+import {NestedDynamic} from '../../modules/react/menu/stories/examples/NestedDynamic';
+import {NestedSiblings} from '../../modules/react/menu/stories/examples/NestedSiblings';
 
 describe('Menu', () => {
   context(`given the [Components/Popups/Menu, Basic] story is rendered`, () => {
@@ -204,6 +206,141 @@ describe('Menu', () => {
 
         it('should not select the fourth item', () => {
           cy.findByTestId('output').should('not.contain', '4');
+        });
+      });
+    });
+  });
+
+  context(`given the [Components/Popups/Menu, NestedSiblings] story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<NestedSiblings />);
+      cy.findByRole('button', {name: 'Open Menu'}).click();
+      cy.findByRole('menu').should('be.visible');
+    });
+
+    context('when the "Second Item" submenu is opened by hovering', () => {
+      beforeEach(() => {
+        cy.findByRole('menuitem', {name: 'Second Item'}).realHover();
+        cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('be.visible');
+      });
+
+      it('should set aria-expanded to true on "Second Item"', () => {
+        cy.findByRole('menuitem', {name: 'Second Item'}).should(
+          'have.attr',
+          'aria-expanded',
+          'true'
+        );
+      });
+
+      context('when the sibling "Third Item" is then hovered', () => {
+        beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'Third Item'}).realHover();
+          cy.findByRole('menuitem', {name: 'Third: First Sub Item'}).should('be.visible');
+        });
+
+        it('should close the "Second Item" submenu', () => {
+          cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('not.exist');
+        });
+
+        it('should set aria-expanded to false on "Second Item"', () => {
+          cy.findByRole('menuitem', {name: 'Second Item'}).should(
+            'have.attr',
+            'aria-expanded',
+            'false'
+          );
+        });
+
+        it('should leave only the root menu and one submenu open', () => {
+          cy.findAllByRole('menu').should('have.length', 2);
+        });
+
+        context('when the original "Second Item" is hovered again', () => {
+          beforeEach(() => {
+            cy.findByRole('menuitem', {name: 'Second Item'}).realHover();
+            cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('be.visible');
+          });
+
+          it('should close the "Third Item" submenu', () => {
+            cy.findByRole('menuitem', {name: 'Third: First Sub Item'}).should('not.exist');
+          });
+
+          it('should leave only the root menu and one submenu open', () => {
+            cy.findAllByRole('menu').should('have.length', 2);
+          });
+        });
+      });
+    });
+
+    context('when a submenu is opened with the right arrow key', () => {
+      beforeEach(() => {
+        cy.findByRole('menuitem', {name: 'First Item'}).should('be.focused');
+        cy.focused().realType('{downarrow}');
+        cy.findByRole('menuitem', {name: 'Second Item'}).should('be.focused');
+        cy.focused().realType('{rightarrow}');
+      });
+
+      it('should open the submenu', () => {
+        cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('be.visible');
+      });
+
+      it('should keep the submenu open and move focus into it', () => {
+        cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('be.focused');
+      });
+
+      context('when the left arrow key is pressed', () => {
+        beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('be.focused');
+          cy.focused().realType('{leftarrow}');
+        });
+
+        it('should close the submenu', () => {
+          cy.findByRole('menuitem', {name: 'Second: First Sub Item'}).should('not.exist');
+        });
+
+        it('should return focus to the "Second Item" target', () => {
+          cy.findByRole('menuitem', {name: 'Second Item'}).should('be.focused');
+        });
+      });
+    });
+  });
+
+  context(`given the [Components/Popups/Menu, NestedDynamic] story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<NestedDynamic />);
+      cy.findByRole('button', {name: 'Open Menu'}).click();
+      cy.findByRole('menu').should('be.visible');
+    });
+
+    context('when hovering deeper into a chain of nested submenus', () => {
+      beforeEach(() => {
+        cy.findByRole('menuitem', {name: 'Second Item'}).realHover();
+        cy.findByRole('menuitem', {name: 'Second Sub Item'}).should('be.visible');
+        cy.findByRole('menuitem', {name: 'Second Sub Item'}).realHover();
+        cy.findByRole('menuitem', {name: 'Second Sub Sub Item'}).should('be.visible');
+      });
+
+      it('should keep the ancestor submenu open', () => {
+        cy.findByRole('menuitem', {name: 'Second Item'}).should(
+          'have.attr',
+          'aria-expanded',
+          'true'
+        );
+      });
+
+      it('should keep every menu in the open chain visible', () => {
+        cy.findAllByRole('menu').should('have.length', 3);
+      });
+
+      // Re-entering an item that is already part of the open trail should not collapse the trail,
+      // matching the platform menu convention of only closing when a sibling is hovered.
+      context('when hovering back onto the ancestor item in the open trail', () => {
+        beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'Second Item'}).realHover();
+        });
+
+        it('should keep the open trail intact', () => {
+          cy.findByRole('menuitem', {name: 'Second Sub Sub Item'}).should('be.visible');
+          cy.findAllByRole('menu').should('have.length', 3);
         });
       });
     });
