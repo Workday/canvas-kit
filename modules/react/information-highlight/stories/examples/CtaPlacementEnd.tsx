@@ -15,8 +15,8 @@ export const CtaPlacementEnd = () => {
         <InformationHighlight.Heading>Informational Highlight</InformationHighlight.Heading>
         <InformationHighlight.Body>
           <p className={contentTextStyles}>
-            With `ctaPlacement="end"`, the link renders beside the content and is vertically
-            centered on the right.
+            With `ctaPlacement="end"`, the link renders beside the content, vertically centered at
+            the inline end.
           </p>
         </InformationHighlight.Body>
         <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
