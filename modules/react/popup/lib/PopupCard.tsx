@@ -130,7 +130,7 @@ export const PopupCard = createSubcomponent('div')({
   }, [model.state.placement]);
   const translate = getTransformOrigin(transformOrigin, system.legacy.gap.sm);
   const cardMaxHeight = getMaxHeight(elemProps.margin);
-  console.log(elemProps);
+
   return (
     <Card
       as={Element}

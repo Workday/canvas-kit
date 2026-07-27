@@ -36,7 +36,7 @@ export const Basic = () => {
     <Popup model={model}>
       <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
       <Popup.Popper placement="top">
-        <Popup.Card cs={cardStyles} variant="alt">
+        <Popup.Card cs={cardStyles}>
           <Popup.CloseIcon aria-label="Close" />
           <Popup.Heading>Delete Item</Popup.Heading>
           <Popup.Body>

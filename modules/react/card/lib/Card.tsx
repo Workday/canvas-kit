@@ -14,7 +14,7 @@ export interface CardProps extends BoxProps {
    */
   children?: React.ReactNode;
   /**
-   * The variant of the Card. Can be `default`, `borderless` or `tonal`.
+   * The variant of the Card. Can be `alt`, `tonal` or default.
    * @default 'default'
    */
   variant?: 'alt' | 'tonal';

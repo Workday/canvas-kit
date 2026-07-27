@@ -21,7 +21,7 @@ export const CardStates = {
       <ComponentStatesTable
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
-          {label: 'Borderless', props: {variant: 'borderless'}},
+          {label: 'Default', props: {variant: ''}},
           {label: 'Alt', props: {variant: 'alt'}},
           {label: 'With Heading', props: {}},
           {
