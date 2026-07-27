@@ -233,7 +233,7 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 ### Card
 
-**PR:** [#3960](https://github.com/Workday/canvas-kit/pull/3960), [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014), [#4088](https://github.com/Workday/canvas-kit/pull/4088)
 
 #### 🤖 Variant Changes
 
@@ -243,7 +243,7 @@ The `Card` component's variants have been updated:
 - **Updated:** The default variant now has a visible border
 - **Unchanged:** The `tonal` variant remains the same
 
-The codemod will automatically update `variant="borderless"` to `variant="alt"`.
+🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
 
 ```tsx
 // v15
@@ -429,7 +429,7 @@ If you customize `brand.success.base` in your theme, please verify the following
 
 ### Container Components
 
-**PR:** [#3960](https://github.com/Workday/canvas-kit/pull/3960)
+**PR:** [#4088](https://github.com/Workday/canvas-kit/pull/4088)
 
 #### Alt Variant Support
 
@@ -441,7 +441,7 @@ Several container components now support an `alt` variant that provides an eleva
 - `Toast` - Can use `variant="alt"` for elevated toast styling
 - `Tooltip` - Can use `variant="alt"` for elevated tooltip styling
 
-The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders, providing visual hierarchy and depth to these components.
+The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders, providing visual hierarchy and depth to these components when placed on an alt background.
 
 ```tsx
 // Examples of using the alt variant
@@ -450,7 +450,6 @@ The `alt` variant uses `system.sana.color.surface.elevated` background with inve
 </Menu.Card>
 
 <Dialog.Card variant="alt">
-  <Dialog.CloseIcon />
   <Dialog.Heading>Dialog Title</Dialog.Heading>
   <Dialog.Body>Content</Dialog.Body>
 </Dialog.Card>
