@@ -18,6 +18,7 @@ Soon to be...
   - [Instructions](#instructions)
 - [New Components](#new-components)
   - [KBD](#kbd)
+  - [Tabs](#tabs)
 - [Component Updates](#component-updates)
   - [Action Bar](#action-bar)
   - [Banner](#banner)
@@ -37,12 +38,18 @@ Soon to be...
     - [Switch](#switch)
     - [Text Area](#text-area)
     - [Text Input](#text-input)
+    - [Select](#select)
+    - [MultiSelect](#multiselect)
   - [Menu](#menu)
   - [Modal](#modal)
+  - [Navigation Components](#navigation-components)
+    - [Hyperlink](#hyperlink)
+    - [Breadcrumbs](#breadcrumbs)
+    - [Pagination](#pagination)
   - [Popup](#popup)
   - [Segmented Control](#segmented-control)
-	- [Toast](#toast)
-	- [Tooltip](#tooltip)
+  - [Toast](#toast)
+  - [Tooltip](#tooltip)
 - [New Utilities](#new-utilities)
   - [cornerShapeStencil](#cornershapestencil)
 - [Deprecations](#deprecations)
@@ -142,6 +149,28 @@ import {KBD} from '@workday/canvas-kit-labs-react';
 
 For more details and advanced usage, including accessibility guidance for symbolic keys and
 functional shortcuts, refer to the storybook documentation and our example stories.
+
+### Tabs
+
+**PR:** [#4062](https://github.com/Workday/canvas-kit/pull/4062)
+
+A new `Tabs` component has been added to `@workday/canvas-kit-preview-react`, aligned with the Sana
+Canvas visual language. It supports `filled` and `outlined` variants.
+
+```tsx
+import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
+
+<Tabs>
+  <Tabs.List>
+    <Tabs.Item>First Tab</Tabs.Item>
+    <Tabs.Item>Second Tab</Tabs.Item>
+  </Tabs.List>
+  <Tabs.Panels>
+    <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+    <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+  </Tabs.Panels>
+</Tabs>;
+```
 
 ## Component Updates
 
@@ -383,6 +412,227 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
 
+#### Select
+
+**PR:** [#4085](https://github.com/Workday/canvas-kit/pull/4085)
+
+##### Visual Updates
+
+- The dropdown indicator icon now uses `chevronDownSmallIcon` and `chevronUpSmallIcon` instead of
+  `caretDownSmallIcon`. The icon toggles direction when the menu is open.
+- `Select.Input` inherits the `TextInput` shape update (**12px**, previously 8px) and menu styling
+  updates from [Menu](#menu).
+- Gap between the input and dropdown menu updated from `4px` to `8px` via `Menu.Popper` offset.
+
+No API changes. No migration is required unless you render a custom dropdown indicator or override
+`selectInputStencil` caret styles.
+
+#### MultiSelect
+
+**PR:** [#4085](https://github.com/Workday/canvas-kit/pull/4085)
+
+##### Visual Updates
+
+- Shape is now **12px** (`shape.lg`, previously `shape.md` / 8px) via `cornerShapeStencil`.
+- The dropdown indicator icon now uses `chevronDownSmallIcon` and `chevronUpSmallIcon` instead of
+  `caretDownSmallIcon`. The icon toggles direction when the menu is open.
+- `MultiSelect` menus inherit the [Menu](#menu) styling updates.
+- Gap between the input and dropdown menu updated from `4px` to `8px` via `Menu.Popper` offset.
+
+No API changes. No migration is required unless you render a custom dropdown indicator or override
+`multiSelectInputStencil` styles.
+
+### Menu
+
+**PR:** [#3987](https://github.com/Workday/canvas-kit/pull/3987)
+
+#### Visual Updates
+
+**Menu.Card**
+
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Padding updated from `padding.xxs` (4px) to `padding.xs` (8px).
+- Border radius is now managed via `cornerShapeStencil` (still uses `shape.xxl`).
+
+**Menu.Popper**
+
+- Offset between the trigger and dropdown menu updated from `4px` to `8px`. This affects `Select`,
+  `MultiSelect`, `Combobox`, and other components that use `Menu.Popper`.
+
+**Menu.List**
+
+- Gap between items updated from `gap.xs` (4px) to `base.legacy.size25` (2px).
+
+**Menu.Item**
+
+- Icon-to-label gap updated from `gap.md` (16px) to `gap.sm` (8px).
+- Padding updated from symmetric `padding.sm`/`padding.md` (12px/16px) to asymmetric
+  `padding.xs`/`padding.xs`/`padding.xs`/`padding.sm` (8px top/right/bottom, 12px left).
+- Item border radius updated from `shape.xxl` (24px) to `shape.lg` (12px).
+- Text color updated from `system.color.fg.default` to `system.color.fg.strong`.
+- Icon size updated to `md` (20px / 1.25rem).
+
+#### Menu icon sizing
+
+Menu icons are now smaller to align with Sana Canvas specs. In v15, `Menu.Item.Icon` did not set a
+`size` prop and fell back to the `SystemIcon` default of `lg` (24px / 1.5rem). In v16, all icons
+rendered through `Menu.Item.Icon` and `Menu.Option.Icon` use `size="md"` (20px / 1.25rem).
+
+The selected checkmark in `Menu.Option` now uses `checkIcon` at `size="xs"` instead of
+`checkSmallIcon` at the previous 24px default. The nested submenu chevron in `Submenu.TargetItem`
+also changed from `chevronRightSmallIcon` to `chevronRightIcon` at `size="md"`.
+
+Passing a custom `size` to `Menu.Item.Icon` or `Menu.Option.Icon` will still override the default.
+`Select` and `Combobox` menus inherit the `Menu.Option` checkmark change. If you are rendering
+custom chevron or checkmark icons inside of menu items, update them to `size="md"` and swap
+`*SmallIcon` assets for their standard equivalents where appropriate.
+
+**Menu.Group.Heading**
+
+- Padding updated to use `paddingBlock: padding.xs` with `paddingInline: padding.sm` / `padding.md`.
+
+#### State Style Updates
+
+`Menu.Item` and `Menu.Option` share the same underlying item styles via `menuItemStencil`. For
+guidance on when to use `Menu.Item` vs `Menu.Option`, including accessibility requirements for
+selectable menus, see the
+[Menu accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-popups-menu--docs#accessibility).
+
+##### Menu.Item
+
+| State                                     | v15                                                                     | v16                                                                                                                               |
+| ----------------------------------------- | ----------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Active/pressed                            | Not styled                                                              | `surface.overlay.pressed` background                                                                                              |
+| Focus                                     | Solid blue fill (`brand.accent.primary`) and white text                 | Inset outline using `brand.border.primary`                                                                                        |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Expanded submenu parent + Focus           | Same blue fill and white text focus style as other focused items        | Focus ring removed; ancestor-trail styling shown instead (`Submenu.TargetItem`)                                                   |
+
+##### Menu.Option
+
+Used in `Select`, `Combobox`, and other listbox menus. Selected states apply when
+`aria-selected="true"`.
+
+| State                                     | v15                                                                                         | v16                                                                                                                               |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Active/pressed                            | Not styled                                                                                  | `surface.overlay.pressed` background                                                                                              |
+| Focus                                     | Solid blue fill (`brand.accent.primary`) and white text                                     | Inset outline using `brand.border.primary`                                                                                        |
+| Selected (`aria-selected="true"`)         | Solid blue fill and white text (`brand.surface.primary.strong` / `brand.fg.primary.strong`) | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`)                                              |
+| Selected + Focus                          | Solid blue fill and white text                                                              | Inset outline with selected background preserved                                                                                  |
+| Disabled + Focus (`aria-disabled="true"`) | Solid blue fill and white text with disabled opacity (dims focus style)                     | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity (dims focus indicator) |
+| Disabled + Selected                       | Solid blue fill and white text with disabled opacity                                        | Light blue background and blue text (`brand.surface.selected` / `brand.fg.selected`) with disabled opacity                        |
+
+### Modal
+
+#### Visual Updates
+
+- `Modal.Card` box-shadow updated from `system.depth[5]` to `system.depth[6]`.
+
+### Navigation Components
+
+#### Hyperlink
+
+##### Visual Updates
+
+- Default link color uses new link tokens (`system.color.fg.link.default` / `.hover`). Hover and
+  active text is now the darker link-hover blue.
+- Hover and active backgrounds use surface overlay tokens instead of `surface.alt`.
+
+##### New Secondary Variant and `linkType` Prop
+
+A new "secondary" variant and `linkType` prop have been added to `Hyperlink` and
+`ExternalHyperlink`. Color and underline are now controlled by separate props:
+
+| Need                       | API                                           |
+| -------------------------- | --------------------------------------------- |
+| Blue, underlined (default) | _(no props)_                                  |
+| Blue, no underline         | `linkType="standalone"`                       |
+| Inverse, underlined        | `variant="inverse"`                           |
+| Inverse, no underline      | `variant="inverse"` `linkType="standalone"`   |
+| Dark gray, underlined      | `variant="secondary"`                         |
+| Dark gray, no underline    | `variant="secondary"` `linkType="standalone"` |
+
+`variant` is now either 'inverse' or 'secondary'. Underline is controlled by `linkType` which is
+either 'inline' or 'standalone', defaulting to 'inline'. The compound variants `standalone` and
+`standaloneInverse` are **removed**.
+
+```tsx
+import {ExternalHyperlink, Hyperlink} from '@workday/canvas-kit-react/button';
+
+<Hyperlink variant="secondary" href="#secondary-hyperlink">
+  Secondary Hyperlink
+</Hyperlink>
+<Hyperlink linkType="standalone" href="#standalone-hyperlink">
+  Standalone Hyperlink
+</Hyperlink>
+<ExternalHyperlink
+  variant="secondary"
+  linkType="standalone"
+  href="#secondary-standalone-external-hyperlink"
+  iconLabel="Opens new window"
+>
+  Secondary Standalone External Hyperlink
+</ExternalHyperlink>
+```
+
+###### Breaking Change Migration
+
+Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically:
+
+| Before                        | After                                       |
+| ----------------------------- | ------------------------------------------- |
+| `variant="standalone"`        | `linkType="standalone"`                     |
+| `variant="standaloneInverse"` | `variant="inverse"` `linkType="standalone"` |
+
+#### Breadcrumbs
+
+##### Visual Updates
+
+- Trail links (`Breadcrumbs.Link`) use Hyperlink `variant="secondary"` and `linkType="standalone"`.
+  Trail text uses `system.color.fg.default`; hover and active states use surface overlay tokens with
+  underline on hover.
+- The current item (`Breadcrumbs.CurrentItem`) uses `system.color.fg.muted.default`.
+- Overflow and separator chevrons use muted/strong foreground colors with
+  `component.legacy.systemIcon.size.md`.
+
+#### Pagination
+
+##### Visual Updates
+
+- Page buttons use overlay hover/pressed backgrounds and a focus ring (aligned with the
+  TertiaryButton pattern). The current page uses `system.color.brand.accent.primary` with inverse
+  label text.
+- Control chevrons (previous/next and jump controls) are sized to 16px via
+  `component.legacy.systemIcon.size.xs`.
+- GoTo label uses `size="large"` (14px). GoTo input text is centered; border radius inherits from
+  TextInput `shape.lg` (12px).
+- GoToForm spacing uses `marginInlineStart: gap.xs` alongside Controls `gap.xs`.
+
+### Popup
+
+#### Visual Updates
+
+- `Popup.Card` box-shadow updated from `system.depth[3]` to `system.depth[4]`.
+
+### Segmented Control
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+#### Visual Updates
+
+- Container background changed from `surface.alt.strong` to `surface.alt.default` (a lighter
+  background color).
+- Border radius changed to `shape.full` (full rounded corners) on the container.
+- Grid gap reduced from `gap.sm` (8px) to `gap.xs` (4px).
+- Selected/pressed item now uses boxShadow: system.depth[2] instead of a visible border.
+- Font weight changed from bold to medium (base and small sizes);
+- Medium size now uses semi-bold font weight.
+- Size adjustments: large height shrunk to size.sm (32px) (was size.md (40px));
+- Medium size is now 28px in height (was 32px).
+- Hover and pressed states now use `surface.overlay.hover.default` and
+  `surface.overlay.pressed.default` respectively for the item.
+- Container padding changed to `padding.md` (16px) including for mobile devices.
+- On mobile devices, the container padding remains `padding.md` (16px).
+
 ### Toast
 
 **PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
@@ -579,8 +829,8 @@ export const myStencil = createStencil({
 });
 ```
 
-`Card` and `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`) extend this stencil for their rounded
-corners.
+`Card`, `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`), and `MultiSelect` extend this stencil for
+their rounded corners.
 
 ## Deprecations
 
