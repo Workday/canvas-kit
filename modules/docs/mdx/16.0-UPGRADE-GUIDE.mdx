@@ -25,6 +25,7 @@ Soon to be...
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
   - [Card](#card)
+  - [Container Components](#container-components)
   - [Form Field](#form-field)
   - [Inputs](#inputs)
     - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
@@ -232,7 +233,29 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 ### Card
 
-**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+**PR:** [#3960](https://github.com/Workday/canvas-kit/pull/3960), [#4014](https://github.com/Workday/canvas-kit/pull/4014)
+
+#### 🤖 Variant Changes
+
+The `Card` component's variants have been updated:
+- **Removed:** The `borderless` variant has been removed and replaced with `alt`
+- **New:** The `alt` variant provides an elevated surface with inverse borders
+- **Updated:** The default variant now has a visible border
+- **Unchanged:** The `tonal` variant remains the same
+
+The codemod will automatically update `variant="borderless"` to `variant="alt"`.
+
+```tsx
+// v15
+<Card variant="borderless">
+  <Card.Body>Content</Card.Body>
+</Card>
+
+// v16
+<Card variant="alt">
+  <Card.Body>Content</Card.Body>
+</Card>
+```
 
 #### Visual Updates
 
@@ -242,6 +265,8 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
   `padding.sm`).
 - Card's border radius is now managed via the new `cornerShapeStencil` (see
   [New Utilities](#new-utilities)).
+- The default variant now includes a visible border (`system.color.border.default`).
+- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with inverse borders.
 
 ### Inputs
 
@@ -401,6 +426,41 @@ If you customize `brand.success.base` in your theme, please verify the following
 #### Visual Updates
 
 - `Popup.Card` box-shadow updated from `system.depth[3]` to `system.depth[4]`.
+
+### Container Components
+
+**PR:** [#3960](https://github.com/Workday/canvas-kit/pull/3960)
+
+#### Alt Variant Support
+
+Several container components now support an `alt` variant that provides an elevated surface appearance:
+
+- `Menu.Card` - Can use `variant="alt"` for elevated menu styling
+- `Dialog.Card` - Can use `variant="alt"` for elevated dialog styling
+- `Popup.Card` - Can use `variant="alt"` for elevated popup styling
+- `Toast` - Can use `variant="alt"` for elevated toast styling
+- `Tooltip` - Can use `variant="alt"` for elevated tooltip styling
+
+The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders, providing visual hierarchy and depth to these components.
+
+```tsx
+// Examples of using the alt variant
+<Menu.Card variant="alt">
+  <Menu.List>...</Menu.List>
+</Menu.Card>
+
+<Dialog.Card variant="alt">
+  <Dialog.CloseIcon />
+  <Dialog.Heading>Dialog Title</Dialog.Heading>
+  <Dialog.Body>Content</Dialog.Body>
+</Dialog.Card>
+
+<Toast variant="alt">
+  <Toast.Body>
+    <Toast.Message>Notification message</Toast.Message>
+  </Toast.Body>
+</Toast>
+```
 
 ### Menu
 
