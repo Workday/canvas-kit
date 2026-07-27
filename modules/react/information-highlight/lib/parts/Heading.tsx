@@ -6,6 +6,9 @@ import {system} from '@workday/canvas-tokens-web';
 import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
 
 const informationHighlightHeadingStencil = createStencil({
+  parts: {
+    heading: 'information-highlight-heading',
+  },
   base: () => {
     return {
       ...system.legacy.type.subtext.lg,
@@ -36,7 +39,7 @@ export const InformationHighlightHeading = createSubcomponent('h3')({
     <Heading
       as={Element}
       size={size}
-      data-part="information-highlight-heading"
+      {...informationHighlightHeadingStencil.parts.heading}
       {...handleCsProp(
         elemProps,
         informationHighlightHeadingStencil({ctaPlacement: model.state.ctaPlacement})

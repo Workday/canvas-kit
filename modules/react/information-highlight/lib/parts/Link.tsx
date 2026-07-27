@@ -6,6 +6,9 @@ import {system} from '@workday/canvas-tokens-web';
 import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
 
 const informationHighlightLinkStencil = createStencil({
+  parts: {
+    link: 'information-highlight-link',
+  },
   base: () => {
     return {
       ...system.legacy.type.subtext.lg,
@@ -33,7 +36,7 @@ export const Link = createSubcomponent('a')({
   return (
     <Hyperlink
       as={Element}
-      data-part="information-highlight-link"
+      {...informationHighlightLinkStencil.parts.link}
       {...handleCsProp(
         elemProps,
         informationHighlightLinkStencil({ctaPlacement: model.state.ctaPlacement})
