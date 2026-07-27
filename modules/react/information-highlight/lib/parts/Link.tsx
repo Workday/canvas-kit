@@ -1,30 +1,44 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
+
+import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
 
 const informationHighlightLinkStencil = createStencil({
   base: () => {
     return {
       ...system.legacy.type.subtext.lg,
-      gridColumn: '2',
-      justifySelf: 'start',
       color: system.color.fg.default,
     };
   },
+  modifiers: {
+    ctaPlacement: {
+      bottom: {
+        gridColumn: '2',
+        justifySelf: 'start',
+      },
+      end: {
+        margin: 0,
+        maxWidth: '100%',
+      },
+    },
+  },
 });
 
-export const Link = createComponent('a')({
+export const Link = createSubcomponent('a')({
   displayName: 'Link',
-  Component: ({...elemProps}: ExtractProps<typeof Hyperlink, never>, ref, Element) => {
-    return (
-      <Hyperlink
-        as={Element}
-        ref={ref}
-        variant="secondary"
-        data-part="information-highlight-link"
-        {...handleCsProp(elemProps, informationHighlightLinkStencil())}
-      />
-    );
-  },
+  modelHook: useInformationHighlightModel,
+})(({...elemProps}: ExtractProps<typeof Hyperlink, never>, Element, model) => {
+  return (
+    <Hyperlink
+      as={Element}
+      variant="secondary"
+      data-part="information-highlight-link"
+      {...handleCsProp(
+        elemProps,
+        informationHighlightLinkStencil({ctaPlacement: model.state.ctaPlacement})
+      )}
+    />
+  );
 });

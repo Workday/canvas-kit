@@ -1,16 +1,17 @@
-import { Meta } from '@storybook/blocks';
-import { ExampleCodeBlock, SymbolDoc, Specifications } from '@workday/canvas-kit-docs';
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import InformationHighlightStoriesMeta from './InformationHighlight.stories';
-import { Basic } from './examples/Basic';
-import { Body } from './examples/Body';
-import { Heading } from './examples/Heading';
-import { Informational } from './examples/Informational';
-import { Caution } from './examples/Caution';
-import { Critical } from './examples/Critical';
-import { CtaPlacementEnd } from './examples/CtaPlacementEnd';
-import { IconCritical } from './examples/CustomIconCritical';
-import { RTL } from './examples/RTL';
+import {Basic} from './examples/Basic';
+import {Body} from './examples/Body';
+import {Caution} from './examples/Caution';
+import {Critical} from './examples/Critical';
+import {CtaPlacementEnd} from './examples/CtaPlacementEnd';
+import {IconCritical} from './examples/CustomIconCritical';
+import {Heading} from './examples/Heading';
+import {Informational} from './examples/Informational';
+import {RTL} from './examples/RTL';
 
 <Meta of={InformationHighlightStoriesMeta} />
 
@@ -75,12 +76,26 @@ is unaware.
 
 <ExampleCodeBlock code={Critical} />
 
+### Link Text Guidance
+
+When you include `InformationHighlight.Link`, write labels for quick scanning in the highlight
+layout.
+
+- **Keep link text concise and scannable** — Use the shortest meaningful phrase.
+- **Prevent wrapping** — Avoid sentence-length links in tight layouts.
+
 ### CTA Placement
 
 Use `ctaPlacement` to control where the link renders relative to the heading and body.
 
 - `bottom` (default): the link stacks below the heading and body in document order.
-- `end`: the link renders beside the content, vertically centered at the inline end.
+- `end`: the link renders beside the content (when the component is wide enough), vertically
+  centered at the inline end; in narrower widths it moves below the body, still aligned to the
+  inline end. DOM and keyboard tab order remain heading, body, then link.
+
+With `ctaPlacement="end"`, long link text wraps within the available width rather than truncating,
+and the layout reflows when the highlight is narrow. Use the container width controls in the example
+to preview behavior at different widths. See [Link text](#link-text) for copy guidance.
 
 <ExampleCodeBlock code={CtaPlacementEnd} />
 
@@ -113,4 +128,7 @@ parent dom element that renders your application.
 
 ## Specifications
 
-<Specifications file="./cypress/component/InformationHighlight.spec.tsx" name="InformationHighlight" />
+<Specifications
+  file="./cypress/component/InformationHighlight.spec.tsx"
+  name="InformationHighlight"
+/>

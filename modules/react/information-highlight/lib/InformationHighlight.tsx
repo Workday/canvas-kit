@@ -9,7 +9,9 @@ import {InformationHighlightHeading} from './parts/Heading';
 import {Icon} from './parts/Icon';
 import {Link} from './parts/Link';
 
-interface InformationHighlightProps extends CSProps {}
+interface InformationHighlightProps extends CSProps {
+  children?: React.ReactNode;
+}
 
 const defaultVariantStyles = {
   backgroundColor: system.legacy.color.surface.alt.default,
@@ -92,10 +94,14 @@ export const informationHighlightStencil = createStencil({
     ctaPlacement: {
       bottom: {},
       end: {
-        gridTemplateColumns: 'min-content minmax(0, 1fr) max-content',
+        width: '100%',
+        minWidth: 0,
+        containerType: 'inline-size',
+        gridTemplateColumns: 'min-content minmax(0, 1fr)',
         gridTemplateAreas: `
-          "icon heading link"
-          "icon body link"
+          "icon heading"
+          "icon body"
+          "icon link"
         `,
         '& [data-part="information-highlight-icon"]': {
           gridArea: 'icon',
@@ -109,9 +115,19 @@ export const informationHighlightStencil = createStencil({
         },
         '& [data-part="information-highlight-link"]': {
           gridArea: 'link',
-          placeSelf: 'center end',
-          whiteSpace: 'nowrap',
-          wordBreak: 'normal',
+          justifySelf: 'end',
+          marginBlockStart: system.legacy.gap.md,
+        },
+        '@container (min-width: 28rem)': {
+          gridTemplateColumns: 'min-content minmax(0, 1fr) minmax(0, max-content)',
+          gridTemplateAreas: `
+            "icon heading link"
+            "icon body link"
+          `,
+          '& [data-part="information-highlight-link"]': {
+            alignSelf: 'center',
+            marginBlockStart: 0,
+          },
         },
       },
     },
@@ -127,7 +143,7 @@ export const InformationHighlight = createContainer('section')({
     Body: Body,
     Link: Link,
   },
-})(({...elemProps}: InformationHighlightProps, Element, model) => {
+})(({children, ...elemProps}: InformationHighlightProps, Element, model) => {
   return (
     <Element
       {...handleCsProp(
@@ -137,6 +153,8 @@ export const InformationHighlight = createContainer('section')({
           ctaPlacement: model.state.ctaPlacement,
         })
       )}
-    />
+    >
+      {children}
+    </Element>
   );
 });
