@@ -91,7 +91,7 @@ export const informationHighlightStencil = createStencil({
         },
       },
     },
-    ctaPlacement: {
+    actionPlacement: {
       bottom: {},
       end: {
         width: '100%',
@@ -150,7 +150,7 @@ export const InformationHighlight = createContainer('section')({
         elemProps,
         informationHighlightStencil({
           [model.state.variant]: model.state.emphasis,
-          ctaPlacement: model.state.ctaPlacement,
+          actionPlacement: model.state.actionPlacement,
         })
       )}
     >

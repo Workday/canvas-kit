@@ -57,12 +57,18 @@ export const InformationHighlightStates = () => {
           {label: 'Only Body High Emphasis', props: {body: true, emphasis: 'high'}},
 
           {
-            label: 'CTA Placement End Low Emphasis',
-            props: {heading: true, body: true, link: true, emphasis: 'low', ctaPlacement: 'end'},
+            label: 'Action Placement End Low Emphasis',
+            props: {heading: true, body: true, link: true, emphasis: 'low', actionPlacement: 'end'},
           },
           {
-            label: 'CTA Placement End High Emphasis',
-            props: {heading: true, body: true, link: true, emphasis: 'high', ctaPlacement: 'end'},
+            label: 'Action Placement End High Emphasis',
+            props: {
+              heading: true,
+              body: true,
+              link: true,
+              emphasis: 'high',
+              actionPlacement: 'end',
+            },
           },
         ]}
         columnProps={[
@@ -73,9 +79,13 @@ export const InformationHighlightStates = () => {
         ]}
       >
         {props => {
-          const {variant, heading, body, link, emphasis, ctaPlacement} = props;
+          const {variant, heading, body, link, emphasis, actionPlacement} = props;
           return (
-            <InformationHighlight variant={variant} emphasis={emphasis} ctaPlacement={ctaPlacement}>
+            <InformationHighlight
+              variant={variant}
+              emphasis={emphasis}
+              actionPlacement={actionPlacement}
+            >
               <InformationHighlight.Icon />
               {heading && <InformationHighlight.Heading>Lorem ipsum</InformationHighlight.Heading>}
               {body && (

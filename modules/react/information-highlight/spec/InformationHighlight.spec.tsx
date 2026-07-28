@@ -33,10 +33,10 @@ describe('InformationHighlight', () => {
     expect(ssrRender).not.toThrow();
   });
 
-  it('should render ctaPlacement end on a server without crashing', () => {
+  it('should render actionPlacement end on a server without crashing', () => {
     const ssrRender = () =>
       renderToString(
-        <InformationHighlight variant="informational" ctaPlacement="end">
+        <InformationHighlight variant="informational" actionPlacement="end">
           <InformationHighlight.Icon />
           <InformationHighlight.Heading>Content</InformationHighlight.Heading>
           <InformationHighlight.Body>Content</InformationHighlight.Body>

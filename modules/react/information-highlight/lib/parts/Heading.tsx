@@ -19,7 +19,7 @@ const informationHighlightHeadingStencil = createStencil({
     };
   },
   modifiers: {
-    ctaPlacement: {
+    actionPlacement: {
       bottom: {
         gridColumn: '2',
       },
@@ -42,7 +42,7 @@ export const InformationHighlightHeading = createSubcomponent('h3')({
       {...informationHighlightHeadingStencil.parts.heading}
       {...handleCsProp(
         elemProps,
-        informationHighlightHeadingStencil({ctaPlacement: model.state.ctaPlacement})
+        informationHighlightHeadingStencil({actionPlacement: model.state.actionPlacement})
       )}
     />
   );

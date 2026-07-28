@@ -7,33 +7,36 @@ import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const CtaPlacementEnd = () => {
+export const ActionPlacementEnd = () => {
   const [containerWidth, setContainerWidth] = React.useState('100%');
 
   return (
     <div>
       <Box cs={{width: containerWidth, marginBlockEnd: system.gap.lg}}>
         <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
-          <InformationHighlight variant="informational" ctaPlacement="end">
+          <InformationHighlight variant="informational" actionPlacement="end">
             <InformationHighlight.Icon />
             <InformationHighlight.Heading>Informational Highlight</InformationHighlight.Heading>
             <InformationHighlight.Body>
               <Text cs={{margin: 0}}>
-                With `ctaPlacement="end"`, the link renders beside the content, vertically centered
-                at the inline end. DOM and keyboard tab order stay heading, body, then link.
+                With `actionPlacement="end"`, the link renders beside the content, vertically
+                centered at the inline end. DOM and keyboard tab order stay heading, body, then
+                link.
               </Text>
             </InformationHighlight.Body>
             <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
           </InformationHighlight>
-          <InformationHighlight variant="caution" emphasis="high" ctaPlacement="end">
+          <InformationHighlight variant="caution" emphasis="high" actionPlacement="end">
             <InformationHighlight.Icon />
             <InformationHighlight.Heading>Caution Highlight</InformationHighlight.Heading>
             <InformationHighlight.Body>
-              <Text cs={{margin: 0}}>CTA placement works across variants and emphasis levels.</Text>
+              <Text cs={{margin: 0}}>
+                Action placement works across variants and emphasis levels.
+              </Text>
             </InformationHighlight.Body>
             <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
           </InformationHighlight>
-          <InformationHighlight variant="informational" ctaPlacement="end">
+          <InformationHighlight variant="informational" actionPlacement="end">
             <InformationHighlight.Icon />
             <InformationHighlight.Heading>Long link label</InformationHighlight.Heading>
             <InformationHighlight.Body>

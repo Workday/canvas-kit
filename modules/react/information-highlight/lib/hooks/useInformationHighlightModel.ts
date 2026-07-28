@@ -12,14 +12,14 @@ export const useInformationHighlightModel = createModelHook({
      *   only—DOM, keyboard tab order, and screen reader order remain heading, body, then link.
      * @default 'bottom'
      */
-    ctaPlacement: 'bottom' as 'bottom' | 'end',
+    actionPlacement: 'bottom' as 'bottom' | 'end',
   },
 })(config => {
   return {
     state: {
       variant: config.variant,
       emphasis: config.emphasis,
-      ctaPlacement: config.ctaPlacement,
+      actionPlacement: config.actionPlacement,
     },
     events: {},
   };

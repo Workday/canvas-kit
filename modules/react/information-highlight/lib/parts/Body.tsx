@@ -17,7 +17,7 @@ const informationHighlightBodyStencil = createStencil({
     };
   },
   modifiers: {
-    ctaPlacement: {
+    actionPlacement: {
       bottom: {
         gridColumn: '2',
       },
@@ -38,7 +38,7 @@ export const Body = createSubcomponent('div')({
       {...informationHighlightBodyStencil.parts.body}
       {...handleCsProp(
         elemProps,
-        informationHighlightBodyStencil({ctaPlacement: model.state.ctaPlacement})
+        informationHighlightBodyStencil({actionPlacement: model.state.actionPlacement})
       )}
     />
   );

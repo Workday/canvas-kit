@@ -16,7 +16,7 @@ const informationHighlightLinkStencil = createStencil({
     };
   },
   modifiers: {
-    ctaPlacement: {
+    actionPlacement: {
       bottom: {
         gridColumn: '2',
         justifySelf: 'start',
@@ -39,7 +39,7 @@ export const Link = createSubcomponent('a')({
       {...informationHighlightLinkStencil.parts.link}
       {...handleCsProp(
         elemProps,
-        informationHighlightLinkStencil({ctaPlacement: model.state.ctaPlacement})
+        informationHighlightLinkStencil({actionPlacement: model.state.actionPlacement})
       )}
       variant="secondary"
     />
