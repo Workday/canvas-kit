@@ -1,5 +1,4 @@
 import {DeleteButton} from '@workday/canvas-kit-react/button';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {
   Popup,
@@ -7,7 +6,6 @@ import {
   useCloseOnOutsideClick,
   usePopupModel,
 } from '@workday/canvas-kit-react/popup';
-import {system} from '@workday/canvas-tokens-web';
 
 export const ModalWithPopup = () => {
   const modal = useModalModel();
@@ -31,17 +29,18 @@ export const ModalWithPopup = () => {
             <Modal.Body>
               <p>Are you sure you want to delete the item?</p>
               <Popup model={popup}>
-                <Flex cs={{gap: system.gap.md}}>
-                  <Popup.Target as={DeleteButton}>Yes, Delete</Popup.Target>
+                <Popup.ButtonGroup>
                   <Popup.CloseButton>Cancel</Popup.CloseButton>
-                </Flex>
+                  <Popup.Target as={DeleteButton}>Yes, Delete</Popup.Target>
+                </Popup.ButtonGroup>
                 <Popup.Popper>
                   <Popup.Card>
                     <Popup.CloseIcon aria-label="Close" />
                     <Popup.Heading>Really Delete Item</Popup.Heading>
                     <Popup.Body>
                       <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-                      <Flex cs={{gap: system.gap.md}}>
+                      <Popup.ButtonGroup>
+                        <Popup.CloseButton>Cancel</Popup.CloseButton>
                         <Popup.CloseButton
                           as={DeleteButton}
                           onClick={event => {
@@ -51,8 +50,7 @@ export const ModalWithPopup = () => {
                         >
                           Yes, Really Delete
                         </Popup.CloseButton>
-                        <Popup.CloseButton>Cancel</Popup.CloseButton>
-                      </Flex>
+                      </Popup.ButtonGroup>
                     </Popup.Body>
                   </Popup.Card>
                 </Popup.Popper>

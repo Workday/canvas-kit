@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.4](https://github.com/Workday/canvas-kit/releases/tag/v15.1.4) (2026-07-28)
+
+### Infrastructure
+
+- chore: Revert Update Chromatic tests to only run when ready for review ([#4092](https://github.com/Workday/canvas-kit/pull/4092)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
+## [v15.1.3](https://github.com/Workday/canvas-kit/releases/tag/v15.1.3) (2026-07-23)
+
+
+
+
+## [v15.1.2](https://github.com/Workday/canvas-kit/releases/tag/v15.1.2) (2026-07-23)
+
+
+
+
 ## [v15.1.1](https://github.com/Workday/canvas-kit/releases/tag/v15.1.1) (2026-07-15)
 
 ### Infrastructure
