@@ -55,7 +55,10 @@ export const CardStates = {
         {({heading = true, ...props}) => (
           <div
             style={{
-              background: props.variant !== 'alt' ? cssVar(system.color.surface.raised) : undefined,
+              background:
+                props.variant !== 'alt'
+                  ? cssVar(system.color.surface.raised)
+                  : cssVar(system.color.bg.alt.default),
               padding: cssVar(system.padding.md),
             }}
           >

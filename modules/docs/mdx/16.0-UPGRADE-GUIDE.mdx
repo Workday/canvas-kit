@@ -25,8 +25,8 @@ Soon to be...
   - [Avatar](#avatar)
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
-  - [Card](#card)
   - [Container Components](#container-components)
+	  - [Card](#card)
   - [Inputs](#inputs)
     - [Accessibility: Checked-State Contrast](#accessibility-checked-state-contrast)
     - [Checkbox](#checkbox)
@@ -269,9 +269,9 @@ The `Card` component's variants have been updated:
 - **Removed:** The `borderless` variant has been removed and replaced with `alt`
 - **New:** The `alt` variant provides an elevated surface with inverse borders
 - **Updated:** The default variant now has a visible border
-- **Unchanged:** The `tonal` variant remains the same
+- The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
 
-**Note:** If you were previously using `variant="borderless"`, should use `variant="alt"` instead. While the styles are different, both where intended to be used on an `alt` background.
+**Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"` instead. While the styles are different, both where intended to be used on an `alt` background.
 
 🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
 
@@ -311,7 +311,6 @@ Several container components now support an `alt` variant that provides an eleva
 - `Popup.Card` - Can use `variant="alt"` for elevated popup styling
 - `Toast` - Can use `variant="alt"` for elevated toast styling
 - `Tooltip` - Can use `variant="alt"` for elevated tooltip styling
-- `ColorPicker` - Can use `variant="alt"` for elevated color picker styling
 
 The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders, providing visual hierarchy and depth to these components when placed on an alt background.
 
