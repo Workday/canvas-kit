@@ -6,6 +6,13 @@
 > guide, see our
 > [Theming Documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
+## Sana Canvas Theme
+
+For application-level theming in v16, import the Sana CSS variables and set `data-theme="sana-canvas"`
+on `<html>`. See the
+[v16 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v-16-0-overview--docs#sana-canvas-theme)
+for the canonical setup. The `CanvasProvider` `theme` prop is for **scoped** theming only.
+
 ## Installation
 
 ```sh
@@ -14,7 +21,7 @@ yarn add @workday/canvas-kit-react/common
 
 ## Recommended Approach: CSS Variables
 
-Canvas Kit v14+ promotes using CSS variables for theming. Import CSS variable files and override
+Canvas Kit v16 promotes using CSS variables for theming. Import CSS variable files and override
 values in your root CSS:
 
 ```css
@@ -23,12 +30,13 @@ values in your root CSS:
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 @import '@workday/canvas-tokens-web/css/brand/_variables.css';
 @import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 :root {
   /* Override brand primary colors */
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
-  --cnvs-brand-primary-light: var(--cnvs-base-palette-magenta-200);
-  --cnvs-brand-primary-dark: var(--cnvs-base-palette-magenta-700);
+  --cnvs-brand-primary-600: var(--cnvs-base-palette-magenta-600);
+  --cnvs-brand-primary-500: var(--cnvs-base-palette-magenta-500);
+  --cnvs-brand-primary-A50: var(--cnvs-base-palette-magenta-A50);
 }
 ```
 
@@ -40,14 +48,30 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
 const themedBrand = createStyles({
-  [brand.primary.base]: base.legacy.magenta600,
-  [brand.primary.dark]: base.legacy.magenta700,
+  [brand.primary600]: base.magenta600,
+  [brand.primary700]: base.magenta700,
 });
 
 <CanvasProvider className={themedBrand}>
   <App />
 </CanvasProvider>;
 ```
+
+## Scoped Theming (CanvasProvider)
+
+For embedded or multi-brand sections, use the numerical `brand` shape:
+
+```tsx
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {base} from '@workday/canvas-tokens-web';
+
+<CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
+  <ScopedSection />
+</CanvasProvider>
+```
+
+For popup parity when using global Sana CSS, pass `sanaCanvasProviderTheme` at your root
+`CanvasProvider`. See the [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) for details.
 
 ## Bidirectionality (RTL Support)
 

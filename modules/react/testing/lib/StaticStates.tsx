@@ -45,7 +45,7 @@ export const StaticStates: React.FC<
 
   return (
     <ThemeProvider theme={localTheme}>
-      <CanvasProvider className={className} {...elemProps} data-theme="sana-canvas" theme={theme}>
+      <CanvasProvider className={className} data-theme="sana-canvas" {...elemProps} theme={theme}>
         {children}
       </CanvasProvider>
     </ThemeProvider>

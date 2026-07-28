@@ -10,10 +10,83 @@ any questions.
 
 ## Why You Should Upgrade
 
-Soon to be...
+Canvas Kit v16 is a 1:1 component update that aligns every Canvas component to Sana's visual
+styling. Components ship that styling regardless of theme — you do not need to opt into the Sana
+Canvas theme for components to look correct.
+
+The Sana Canvas **theme** (CSS variables + `data-theme="sana-canvas"`) is a separate, opt-in step
+that updates brand colors, neutrals, surfaces, and shapes at the application level. See
+[Sana Canvas Theme](#sana-canvas-theme) below.
+
+
+## Sana Canvas Theme
+
+v16 components are Sana-aligned out of the box. To opt your **application** into the full Sana Canvas
+theme — brand neutrals, surfaces, and shapes — import the Sana CSS variables and set
+`data-theme="sana-canvas"` on `<html>`.
+
+> **Note:** All visual updates in this guide apply to both the Default Canvas theme and the Sana
+> Canvas theme unless specified otherwise.
+
+### Opting In
+
+Import the Sana variables **last** in your root CSS entry point. Sana's `[data-theme="sana-canvas"]`
+selector and `:root` have equal specificity — source order determines the winner.
+
+```css
+/* index.css — order matters */
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+/* Sana last: [data-theme="sana-canvas"] and :root have equal specificity (0,1,0),
+   so when both match <html> the cascade falls back to source order. */
+@import '@workday/canvas-tokens-web/css/sana/_variables.css';
+```
+
+Set the theme attribute on `<html>` (not a nested element):
+
+```html
+<html lang="en" data-theme="sana-canvas"></html>
+```
+
+> **Gotcha:** There is no `[data-theme="canvas"]` rule. The sana file only defines
+> `[data-theme="sana-canvas"]` overrides, so removing the attribute is how you get classic Canvas —
+> there's nothing to undo it with.
+
+
+### What Changes When You Opt In
+
+Things that change are things that use the primary brand token and the Sana neutral ramp. Verified
+against `@workday/canvas-tokens-web/css/sana/_variables.css`:
+
+- **Brand primary consumers flip.** `--cnvs-sys-color-brand-accent-primary` and `-accent-action`
+  re-point from blue to `--cnvs-brand-neutral-975`, and `-brand-fg-primary-default/-strong` to
+  `--cnvs-brand-neutral-a900/-a950`. `PrimaryButton`, brand links, and selected states are what
+  visibly change.
+- **Focus does not.** `--cnvs-sys-color-brand-focus-primary` and `-border-primary` stay `blue-500`.
+- **`--cnvs-brand-primary-600` is intentionally _not_ redefined** — it stays the consumer's brand
+  hook.
+- **The full neutral ramp is replaced** (`--cnvs-brand-neutral-*`, all steps plus alphas), plus
+  selected `critical`, `caution`, `positive`, shapes (`sm`, `xs`, `xxl`, `xxxl`), surfaces/overlays,
+  and chart ramps.
+
+### Scoped Theming
+
+The `CanvasProvider` theming updates in
+[#4060](https://github.com/Workday/canvas-kit/pull/4060) are for **scoped** use cases — embedding
+Canvas in another brand, multi-tenant sections, and popup parity. Application teams should not need
+them if they import the Sana variables and set `data-theme="sana-canvas"` globally.
+
+For the scoped theming API, see our
+[Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 ## Table of Contents
 
+- [Sana Canvas Theme](#sana-canvas-theme)
+  - [Opting In](#opting-in)
+  - [What Changes When You Opt In](#what-changes-when-you-opt-in)
+  - [Scoped Theming](#scoped-theming)
 - [Codemod](#codemod)
   - [Instructions](#instructions)
 - [New Components](#new-components)
@@ -296,8 +369,6 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Prefer a `brand.success.base` value that is dark enough to pair with a light foreground. If your
   brand requires a light success color, you may need to override the component styles so the
   foreground uses a darker, paired contrast color instead of white.
-  > **Note:** All visual updates apply to both the Default Canvas theme and new Sana Canvas theme
-  > unless specified otherwise.
 
 #### Checkbox
 

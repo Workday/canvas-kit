@@ -1,4 +1,4 @@
-import {isNumericalTheme, isPrimaryOnlyInput, resolveThemingScope} from '../lib/theming/types';
+import {isNumericalTheme, resolveThemingScope} from '../lib/theming/types';
 
 describe('isNumericalTheme', () => {
   it('is false for the deprecated shape', () => {
@@ -36,19 +36,5 @@ describe('resolveThemingScope', () => {
     expect(resolveThemingScope({brand: {critical: {'600': 'red', '700': 'darkred'}}})).toBe(
       'brand'
     );
-  });
-});
-
-describe('isPrimaryOnlyInput', () => {
-  it('is true for semantic primary.main only', () => {
-    expect(isPrimaryOnlyInput({canvas: {palette: {primary: {main: 'red'}}}})).toBe(true);
-  });
-
-  it('is false when common tokens are set', () => {
-    expect(
-      isPrimaryOnlyInput({
-        canvas: {palette: {primary: {main: 'red'}, common: {focusOutline: 'teal'}}},
-      })
-    ).toBe(false);
   });
 });

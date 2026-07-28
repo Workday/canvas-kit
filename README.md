@@ -45,48 +45,33 @@ or
 npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
-> **Note:** If your application does not already provide `Roboto` as a font, you can install
-> `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
-> omit this if you're already loading fonts.
-
 **Usage**
 
-To ensure fonts are loaded correctly, update your root `index.js` file.
+Update your root `index.js` file to import CSS variables and render your app.
 
 ```jsx
 import {createRoot} from 'react-dom/client';
-import {injectGlobal} from '@emotion/css';
-import {fonts} from '@workday/canvas-kit-react-fonts';
-import {system} from '@workday/canvas-tokens-web';
-import {cssVar} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
-
+import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {App} from './App';
-
-injectGlobal({
-  ...fonts,
-  'html, body': {
-    fontFamily: cssVar(system.fontFamily.default),
-    margin: 0,
-    minHeight: '100vh',
-  },
-  '#root, #root < div': {
-    minHeight: '100vh',
-    ...system.type.body.sm,
-  },
-});
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 root.render(<App />);
 ```
 
-The in your `App.js` you can set a global theme.
+Set `data-theme="sana-canvas"` on `<html>` in your `index.html`:
+
+```html
+<html lang="en" data-theme="sana-canvas"></html>
+```
+
+Then in your `App.js` you can wrap your application with `CanvasProvider`.
 
 ```jsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';

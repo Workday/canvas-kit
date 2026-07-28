@@ -25,7 +25,7 @@ import {
 export interface CanvasProviderProps {
   /**
    * ⚠️ Only use this prop if you intent to to theme a part of your application that is different from global theming.
-   * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#global-vs-scoped-theming).
+   * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#scoped-theming).
    *
    * While we support theme overrides, we advise to use global theming via CSS Variables.
    */

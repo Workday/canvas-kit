@@ -47,18 +47,14 @@ const columnStyles = createStyles({
 });
 
 export const BrandingFixture = ({label, scopedTheme}: BrandingFixtureProps) => {
-  return (
+  const content = (
     <Flex cs={columnStyles}>
       <SidePanel cs={{height: '100vh', backgroundColor: system.color.surface.raised}}>
         <SidePanel.Heading>{label}</SidePanel.Heading>
         <Menu>
-          {/* <Menu.Card> */}
-          {/* <Menu.List> */}
           <Menu.Item aria-selected={true}>Item 1</Menu.Item>
           <Menu.Item>Item 2</Menu.Item>
           <Menu.Item>Item 3</Menu.Item>
-          {/* </Menu.List> */}
-          {/* </Menu.Card> */}
         </Menu>
       </SidePanel>
       <Flex cs={{gap: system.gap.md, flexDirection: 'column'}}>
@@ -209,4 +205,10 @@ export const BrandingFixture = ({label, scopedTheme}: BrandingFixtureProps) => {
       </Flex>
     </Flex>
   );
+
+  if (scopedTheme) {
+    return <CanvasProvider theme={scopedTheme}>{content}</CanvasProvider>;
+  }
+
+  return content;
 };

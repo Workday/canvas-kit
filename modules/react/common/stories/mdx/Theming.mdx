@@ -2,166 +2,80 @@ import {Meta} from '@storybook/blocks';
 
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
-import {RTL} from './examples/RTL';
-import {Theming} from './examples/Theming';
 import {ThemingBrandScope} from './examples/ThemingBrandScope';
 
 <Meta title="Features/Theming/Overview" />
 
 # Canvas Kit Theming Guide
 
-## Overview
+Canvas Kit v16 components are Sana-aligned out of the box. The Sana Canvas **theme** is a separate,
+opt-in step that updates brand colors, neutrals, surfaces, and shapes at the application
+level.
 
-Canvas Kit v14 and v15 introduce a significant shift in our approach to theming: we've moved away
-from JavaScript-based theme objects to CSS variables. This change provides better performance,
-improved developer experience, and greater flexibility for theming applications.
+For a full list of what changes when you opt in, see the
+[v16 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v-16-0-overview--docs#sana-canvas-theme).
 
-> **📌 Quick Start:**
->
-> 1. **Import CSS variables once** at the root level of your application (e.g., in `index.css`)
-> 2. **Override tokens at `:root`** for global theming — this is the recommended approach
-> 3. **Use `CanvasProvider` scoped theming only** for specific scenarios like multi-brand sections
->    or embedded components
->
-> If your application renders within an environment that already imports these CSS variables, **do
-> not re-import them**.
+## Sana Canvas Theme
 
-View our latest tokens documentation
-[here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
-
-## Migration from v10 Theme Prop to v14 CSS Variables
-
-### The Evolution
-
-**Canvas Kit v10** introduced CSS tokens through the `@workday/canvas-tokens-web` package, providing
-a foundation for consistent design system values.
-
-**Canvas Kit v14** Removes the cascade barrier created by the `CanvasProvider`, allowing CSS
-variables to work as intended.
-
-## Old Approach (v10-v13)
-
-The old theming approach used JavaScript objects passed to the `CanvasProvider` theme prop:
-
-```tsx
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {base} from '@workday/canvas-tokens-web';
-
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-  <App />
-</CanvasProvider>;
-```
-
-This would use `chroma.js` to generate a palette based on the `main` color provided.
-
-**Why we're moving away from this approach:**
-
-- Performance overhead from JavaScript theme object processing
-- Limited flexibility for complex theming scenarios
-- Inconsistent cascade behavior
-
-Any time `theme` is passed, the `CanvasProvider` would generate a palette and attach brand variables
-via a `className` scoping those brand variables to a wrapping div. In order for us to provide a
-better solution to theming that is scalable and is more aligned with our CSS variables, we changed
-this approach.
-
-**Note:** While we support theme overrides, we advise to use global theming via CSS Variables.
-
-## What is a Cascade Barrier?
-
-When we say "cascade barrier", we're talking about how
-[CSS cascades](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_cascade/Cascade) and takes
-precedence. Take the following example:
+Import the Sana variables **last** in your root CSS and set `data-theme="sana-canvas"` on `<html>`.
 
 ```css
-:root {
-  --cnbvs-brand-primary-base: blue;
-}
-
-// the element with the class .my-app will have a higher specificity than root, creating a barrier where the CSS variables gets redefined and takes precedence over what is defined at root.
-.my-app {
-  --cnvs-brand-primary-base: red;
-}
-```
-
-In the case of the `CanvasProvider` prior to v14, all our brand tokens where defined within a class
-and scoped to the `div` that the `CanvasProvider` created. This meant that anything set on `:root`
-or outside of the `CanvasProvider` would not be able to cascade down to the components within the
-`CanvasProvider`.
-
-If you provide a `theme` to the `CanvasProvider`, it will create a scoped theme. Note that in v14
-and v15, global CSS variables are the recommended way to theme Popups and Modals consistently.
-
-## Global vs Scoped Theming
-
-Canvas Kit v14 and v15 support two theming strategies: **global theming** and **scoped theming**.
-Understanding the difference is important to avoid unexpected behavior.
-
-### Global Theming
-
-Global theming applies CSS variables at the `:root` level, making them available throughout your
-entire application. This is the **recommended approach** for most use cases.
-
-```css
+/* index.css — order matters */
 @import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/sana/_variables.css';
+
 :root {
-	// This is showing how you can change the value of a token at the root level of your application.
+  /* Optional — override only if you have a custom brand color */
   --cnvs-brand-primary-600: var(--cnvs-base-palette-magenta-600);
 }
 ```
 
-### Scoped Theming
+```html
+<html lang="en" data-theme="sana-canvas"></html>
+```
 
-Scoped theming applies CSS variables to a specific section of your application using the
-`CanvasProvider` via the `theme` prop. The theme only affects components within that provider.
+## Classic Canvas (without Sana theme)
+
+If you are not opting into the Sana Canvas theme, omit `data-theme` from `<html>`. The `:root`
+tokens apply as-is — no `theme` prop on `CanvasProvider` is required.
+
+```html
+<html lang="en"></html>
+```
 
 ```tsx
-// Using the theme prop for scoped theming. This will set the [brand.primary.**] tokens to shades of purple. This will also ensure that the Popup and Modal components are themed consistently.
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-  <ScopedSection />
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider>
+  <App />
 </CanvasProvider>
 ```
 
-> **⚠️ Warning:** Scoped theming creates a cascade barrier that **will break global theming**. Any
-> CSS variables defined at `:root` will be overridden by the scoped theme. Only the tokens
-> explicitly defined in the `theme` prop will be changed - other tokens will use their default
-> values, not your global overrides.
+The sana stylesheet only defines `[data-theme="sana-canvas"]` overrides. Without that attribute,
+those rules do not apply.
 
-### When to Use Scoped Theming
+If your application **has** opted into Sana globally but one subsection needs classic Canvas branding,
+use `defaultBranding` on a scoped `CanvasProvider`:
 
-Only use scoped theming when you intentionally need a different theme for a specific section of your
-application, such as:
+```tsx
+import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 
-- Embedding a Canvas Kit component in a third-party application with a different brand
-- Creating a preview panel that shows components with different themes
-- Supporting multi-tenant applications where sections have different branding
-
-For all other cases, use global theming at `:root` to ensure consistent theming throughout your
-application.
-
-## Global Theme Import Order (Sana Canvas)
-
-When using Sana Canvas, import `@workday/canvas-tokens-web/css/sana/_variables.css` **after**
-base, brand, and system in a single root entry point. Sana's `[data-theme="sana-canvas"]` selector
-and `:root` rules have equal specificity — source order determines the winner. Importing sana last
-is required and sufficient.
-
-```css
-@import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/brand/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
-/* Sana last — wins the cascade tie when data-theme="sana-canvas" is on <html> */
-@import '@workday/canvas-tokens-web/css/sana/_variables.css';
+<CanvasProvider className={defaultBranding}>
+  <ClassicCanvasSection />
+</CanvasProvider>
 ```
 
-Scoped `CanvasProvider` theming is unrelated to this import order.
+## Scoped Theming
 
-## Brand Theme API (`CanvasProvider`)
+Most application teams should use the Sana Canvas theme globally and not pass a `theme` prop to
+`CanvasProvider`. Use scoped theming only when a section of your app needs a different brand — for
+example, embedding Canvas in a third-party application, multi-tenant branding, or popup parity.
 
-The preferred `theme` shape uses a numerical `brand` object. Each key maps 1:1 to a
-`--cnvs-brand-*` CSS variable unless noted as a shortcut below.
-
-### What is themable?
+The `theme` prop accepts a numerical `brand` object. Each key maps 1:1 to a `--cnvs-brand-*` CSS
+variable.
 
 | You set | Components affected |
 | ------- | ------------------- |
@@ -175,50 +89,22 @@ The preferred `theme` shape uses a numerical `brand` object. Each key maps 1:1 t
 | `selected.fg` / `selected.surface` | Selected list/menu states directly |
 
 **Focus does not follow primary.** Setting only `brand.primary['600']` leaves focus rings at the
-default blue unless you also set `brand.primary['500']` or `canvas.palette.common.focusOutline`.
-
-### Minimal example (brand scope — default)
+default blue unless you also set `brand.primary['500']`.
 
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {base} from '@workday/canvas-tokens-web';
 
 <CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
-  <App />
+  <ScopedSection />
 </CanvasProvider>
 ```
 
 <ExampleCodeBlock code={ThemingBrandScope} />
 
-### Explicit overrides
-
-```tsx
-<CanvasProvider
-  theme={{
-    brand: {
-      primary: {'600': base.red600, '500': base.blue500},
-    },
-    selected: {fg: base.red700, surface: base.redA50},
-  }}
->
-  <App />
-</CanvasProvider>
-```
-
-### `themeScope`
-
-| Value | Numerical `brand` shape | Legacy `canvas.palette` shape |
-| ----- | ----------------------- | ------------------------------ |
-| `'brand'` (default) | `primary['600']` shortcut → buttons + selected; other keys literal 1:1 | `primary.main` shortcut only |
-| `'full'` | All keys literal 1:1, no shortcut | Auto-generated ramps + broad system token forwarding |
-
-Use `themeScope="full"` on the legacy shape only when you need the old auto-ramp behavior.
-
-### Sana Canvas preset
-
-Sana's full visual treatment (fonts, shapes, system surfaces) comes from **global CSS**
-(`data-theme="sana-canvas"` + `sana/_variables.css`). For **popup parity** (menus, selects), also
-pass the JS preset at your root `CanvasProvider`:
+Popups (menus, selects, modals) portal to `document.body`. When `data-theme="sana-canvas"` is on
+`<html>`, they inherit the global theme automatically. For scoped theming, pass
+`sanaCanvasProviderTheme` at your root `CanvasProvider` so popups match:
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
@@ -228,381 +114,8 @@ import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react
 </CanvasProvider>
 ```
 
-### Visual testing
-
-Use the **Features/Theming → Sana Canvas** and **Canvas** stories to compare global vs scoped
-branding side-by-side. Open **Canvas** with `?theme=canvas` in the URL.
-
-### Migration: semantic → numerical
-
-| Old (`canvas.palette`) | New (`brand`) |
-| ---------------------- | ------------- |
-| `palette.primary.main` | `brand.primary['600']` |
-| `palette.primary.dark` (selected text) | `selected.fg` or `brand.primary['700']` |
-| `palette.primary.lighter` (selected bg) | `selected.surface` or `brand.primary.A50` |
-| `palette.common.focusOutline` | `brand.primary['500']` (independent of `600`) |
-| `palette.error.*` | `brand.critical.*` |
-| `palette.alert.*` | `brand.caution.*` |
-| `palette.success.*` | `brand.positive.*` |
-| Full auto-generated ramp | `themeScope="full"` on legacy shape |
-
-## ✅ Preferred Approach (v14+)
-
-Canvas Kit v14 and v15 promote using CSS variables for theming, which can be applied in two ways:
-
-### Method 1: Global CSS Variables (Recommended)
-
-Apply theming at the global level by importing CSS variable files and overriding values in your root
-CSS:
-
-```css
-/* index.css */
-@import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
-@import '@workday/canvas-tokens-web/css/brand/_variables.css';
-@import '@workday/canvas-tokens-web/css/component/_variables.css';
-
-:root {
-  /* Override brand primary colors */
-  --cnvs-brand-primary-600: var(--cnvs-base-palette-magenta-600);
-  --cnvs-brand-primary-200: var(--cnvs-base-palette-magenta-200);
-  --cnvs-brand-primary-50: var(--cnvs-base-palette-magenta-50);
-  --cnvs-brand-primary-25: var(--cnvs-base-palette-magenta-25);
-  --cnvs-brand-primary-700: var(--cnvs-base-palette-magenta-700);
-  --cnvs-brand-primary-800: var(--cnvs-base-palette-magenta-800);
-}
-```
-
-> **Note:** You should only import the CSS variables _once_ at the root level of your application.
-> If your application renders within another environment that imports these and sets them, **do
-> not** re import them.
-
-### Method 2: Provider-Level CSS Variables
-
-Use Canvas Kit's `CanvasProvider` and `theme` prop to generate themed class names that can be
-applied to specific components or sections:
-
-```tsx
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-
-// This will set the [brand.primary.**] tokens to shades of purple. This will also ensure that the Popup and Modal components are themed consistently.
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'purple'}}}}}>
-  <App />
-</CanvasProvider>;
-```
-
-## CSS Token Structure
-
-Canvas Kit provides three layers of CSS variables.
-
-### Base Tokens (`base/_variables.css`)
-
-Base tokens define foundation palette and design values.
-
-```css
---cnvs-base-palette-blue-600: oklch(0.5198 0.1782 256.11 / 1);
---cnvs-base-palette-magenta-600: oklch(0.534 0.183 344.19 / 1);
---cnvs-base-font-size-100: 1rem;
---cnvs-base-space-x4: calc(var(--cnvs-base-unit) * 4);
-```
-
-### Brand Tokens (`brand/_variables.css`)
-
-Brand tokens define semantic color assignments.
-
-```css
---cnvs-brand-primary-600: var(--cnvs-base-palette-blue-600);
---cnvs-brand-primary-200: var(--cnvs-base-palette-blue-200);
---cnvs-brand-primary-50: var(--cnvs-base-palette-blue-50);
---cnvs-brand-primary-25: var(--cnvs-base-palette-blue-25);
---cnvs-brand-primary-700: var(--cnvs-base-palette-blue-700);
---cnvs-brand-primary-800: var(--cnvs-base-palette-blue-800);
-```
-
-### System Tokens (`system/_variables.css`)
-
-System tokens define component-specific values.
-
-```css
---cnvs-sys-color-bg-default: var(--cnvs-base-palette-blue-600);
---cnvs-sys-shape-sm: var(--cnvs-base-size-50);
-```
-
-## Practical Examples
-
-### Complete Brand Theming
-
-```css
-/* themes/magenta-theme.css */
-@import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
-@import '@workday/canvas-tokens-web/css/brand/_variables.css';
-
-:root {
-  /* Primary brand colors */
-  --cnvs-brand-primary-600: var(--cnvs-base-palette-magenta-600);
-  --cnvs-brand-primary-200: var(--cnvs-base-palette-magenta-200);
-  --cnvs-brand-primary-50: var(--cnvs-base-palette-magenta-50);
-  --cnvs-brand-primary-25: var(--cnvs-base-palette-magenta-25);
-  --cnvs-brand-primary-700: var(--cnvs-base-palette-magenta-700);
-  --cnvs-brand-primary-800: var(--cnvs-base-palette-magenta-800);
-}
-```
-
-### Scoped Theming
-
-<ExampleCodeBlock code={Theming} />
-
-### RTL Support
-
-Canvas Kit supports RTL out of the box. Our components are styled to use
-[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_logical_properties_and_values).
-If you want to add additional styles based on RTL, you can also use the `:dir`
-[pseudo selector](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir).
-
-#### Setting RTL Direction
-
-Use the native HTML `dir` attribute to set the text direction. The `CanvasProvider` accepts a `dir`
-prop which sets this attribute on its wrapper element:
-
-```tsx
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-
-// Set RTL direction
-<CanvasProvider dir="rtl">
-  <App />
-</CanvasProvider>;
-```
-
-You can also set it on any HTML element:
-
-```tsx
-<div dir="rtl">
-  <MyComponent />
-</div>
-```
-
-> **Note:** The `dir` attribute is the standard HTML way to set text direction. It's preferred over
-> the deprecated `theme.canvas.direction` approach because it works natively with CSS logical
-> properties and the `:dir()` pseudo-class.
-
-#### Using CSS Logical Properties
-
-CSS logical properties automatically adapt to the text direction. Use these instead of physical
-properties:
-
-```css
-/* Physical properties (don't adapt to RTL) */
-.my-component {
-  margin-left: 1rem;
-  padding-right: 1rem;
-  border-left: 1px solid;
-}
-
-/* Logical properties (adapt to RTL automatically) */
-.my-component {
-  margin-inline-start: 1rem;
-  padding-inline-end: 1rem;
-  border-inline-start: 1px solid;
-}
-```
-
-#### Conditional RTL Styles with `:dir()`
-
-For styles that need to change based on direction (like rotating icons), use the `:dir()`
-pseudo-class:
-
-```tsx
-import {createStyles} from '@workday/canvas-kit-styling';
-
-const rtlButtonStyles = createStyles({
-  ':dir(rtl)': {
-    svg: {
-      transform: 'rotate(180deg)',
-    },
-  },
-});
-```
-
-<ExampleCodeBlock code={RTL} />
-
-### Resetting to Default Brand Theme
-
-If you need to reset the theme in parts of your application, there's a few ways to do this. We
-export a `defaultBranding` class that can be applied to the `CanvasProvider` which can wrap parts of
-your application.
-
-```tsx
-import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
-
-<CanvasProvider className={defaultBranding}>
-  <SomeSubComponent />
-</CanvasProvider>;
-```
-
-> **Note:** Doing the following **will create a cascade barrier**. Only use this method if you
-> intentionally want to override the default theme.
-
-## Migration Guide
-
-### Step 1: Identify Current Theme Usage
-
-Find all instances of `CanvasProvider` with theme props in your application.
-
-```tsx
-// Find these patterns:
-<CanvasProvider theme={{canvas: {palette: {...}}}}>
-```
-
-### Step 2: Extract Theme Values
-
-Convert JavaScript theme objects to CSS variable overrides.
-
-```tsx
-// Old approach:
-const theme = {
-  canvas: {
-    palette: {
-      primary: {
-        main: colors.greenApple400,
-        dark: colors.greenApple500,
-      }
-    }
-  }
-};
-
-// New approach - CSS variables:
-:root {
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-green-400);
-  --cnvs-brand-primary-dark: var(--cnvs-base-palette-green-500);
-}
-```
-
-### Step 3: App Level Theming Usage
-
-Replace theme-based `CanvasProvider` usage with CSS class-based theming.
-
-```tsx
-<CanvasProvider theme={{canvas: {palette: {primary: {main: 'green'}}}}}>
-  <App />
-</CanvasProvider>
-```
-
-## Best Practices
-
-### 1. Use Semantic Token Names
-
-Use brand tokens instead of base tokens for better maintainability.
-
-```css
-/* ✅ Good - semantic meaning */
---cnvs-brand-primary-600: var(--cnvs-base-palette-blue-600);
-
-/* ❌ Avoid - direct base token usage */
---cnvs-base-palette-blue-600: blue;
-```
-
-### 2. Test Accessibility
-
-Ensure color combinations meet accessibility standards.
-
-For a full list of color contrast pairs, view our
-[Color Contrast](https://canvas.workday.com/guidelines/color/color-contrast) documentation.
-
-### 3. Avoid Component Level Theming
-
-Theming is meant to be done at the app level or root level of the application. Avoid theming at the
-component level.
-
-```tsx
-/* ✅ Good - App level theming */
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-
-import {base, brand} from '@workday/canvas-tokens-web';
-
-
-<CanvasProvider theme={{canvas: {palette: {primary: {main: base.magenta600}}}}}>
-  <App/>
-</CanvasProvider>
-
-/* ❌ Avoid - wrapping components to theme */
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
-import {PrimaryButton} from '@workday/canvas-kit-react/button';
-
-const myCustomTheme = createStyles({
-  [brand.primary.base]: base.magenta600
-})
-
-<CanvasProvider className={myCustomTheme}>
-  <PrimaryButton>Click Me</PrimaryButton>
-</CanvasProvider>
-
-```
-
-## Performance Benefits
-
-The CSS variable approach provides several performance improvements:
-
-- **Reduced Bundle Size**: No JavaScript theme object processing
-- **Better Caching**: CSS variables can be cached by the browser
-- **Faster Rendering**: Native CSS cascade instead of JavaScript calculations
-- **Runtime Efficiency**: No theme context propagation overhead
-
-## Troubleshooting
-
-### Theme Not Applied
-
-Ensure CSS variable files are imported in the correct order.
-
-> **Note:** You should only import the CSS variables _once_ at the root level of your application.
-> If your application renders within another environment that imports these and sets them, **do
-> not** re import them.
-
-```css
-/* Correct order */
-@import '@workday/canvas-tokens-web/css/base/_variables.css';
-@import '@workday/canvas-tokens-web/css/system/_variables.css';
-@import '@workday/canvas-tokens-web/css/brand/_variables.css';
-@import '@workday/canvas-tokens-web/css/component/_variables.css';
-
-/* Your overrides after imports */
-:root {
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-magenta-600);
-}
-```
-
-### Inconsistent Theming
-
-Check for CSS specificity issues.
-
-```css
-/* Ensure your overrides have sufficient specificity */
-:root {
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600) !important;
-}
-
-/* Or use more specific selectors */
-.my-app {
-  --cnvs-brand-primary-base: var(--cnvs-base-palette-blue-600);
-}
-```
-
-### Missing Token Values
-
-Verify all required CSS token files are imported and token names are correct.
-
-```tsx
-import {base, brand, system} from '@workday/canvas-tokens-web';
-
-// Check token availability in development
-console.log(brand.primary.base); // Should output CSS variable name
-```
-
-## Conclusion
-
-The migration to CSS variables in Canvas Kit v14 provides a more performant, flexible, and
-maintainable theming solution. By following this guide and best practices, you can successfully
-migrate your applications and take advantage of the improved theming capabilities.
-
-For additional support and examples, refer to the Canvas Kit Storybook documentation and the
-`@workday/canvas-tokens` [repository](https://github.com/Workday/canvas-tokens).
+See **Features/Theming → Sana Canvas** in Storybook for a side-by-side comparison of global and
+scoped branding.
+
+View token documentation
+[here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
