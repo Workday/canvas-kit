@@ -1,7 +1,7 @@
 import {stripIndent} from 'common-tags';
 
-import {expectTransformFactory} from '../../v6/utils/expectTransformFactory';
 import transform from '../updateCardVariant';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import {cardStencil} from '@workday/canvas-kit-react/card';
 import {ExtractProps, createContainer} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
-import {createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {ToastBody} from './ToastBody';
