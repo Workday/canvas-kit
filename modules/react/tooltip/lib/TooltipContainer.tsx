@@ -126,6 +126,7 @@ export const tooltipContainerStencil = createStencil({
       alt: {
         '&:before': {
           background: system.sana.color.surface.elevated,
+          border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
         },
       },
     },

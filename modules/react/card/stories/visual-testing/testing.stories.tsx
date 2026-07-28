@@ -23,6 +23,7 @@ export const CardStates = {
           {label: 'Without Heading', props: {heading: false}},
           {label: 'Default', props: {variant: ''}},
           {label: 'Alt', props: {variant: 'alt'}},
+          {label: 'Tonal', props: {variant: 'tonal'}},
           {label: 'With Heading', props: {}},
           {
             label: 'With custom padding (0px)',

@@ -43,7 +43,7 @@ export const cardStencil = createStencil({
       }),
       alt: ({background}) => ({
         background: cssVar(background, system.sana.color.surface.elevated),
-        borderColor: system.color.border.inverse.default,
+        borderColor: system.sana.color.border.elevated,
       }),
     },
   },
