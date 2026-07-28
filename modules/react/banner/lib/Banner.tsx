@@ -1,6 +1,11 @@
 import * as React from 'react';
 
-import {ExtractProps, createContainer, focusRing} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  cornerShapeStencil,
+  createContainer,
+  focusRing,
+} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
@@ -19,30 +24,29 @@ export interface BannerProps extends ExtractProps<typeof Flex, never> {
 }
 
 export const bannerStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
     // TODO: Need to update fontFamily token [#3221](https://github.com/Workday/canvas-kit/issues/3221).
     fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
-    fontWeight: system.fontWeight.medium,
+    fontWeight: system.fontWeight.bold,
     lineHeight: system.legacy.lineHeight.subtext.lg,
     fontSize: system.legacy.fontSize.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
+    paddingInline: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
+    paddingBlock: px2rem(10),
     border: '0',
     display: 'flex',
     alignItems: 'center',
     textAlign: 'left',
-    borderStartStartRadius: system.legacy.shape.sm,
-    borderStartEndRadius: system.legacy.shape.sm,
-    borderEndStartRadius: system.legacy.shape.sm,
-    borderEndEndRadius: system.legacy.shape.sm,
-    boxShadow: system.depth[5],
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     gap: system.legacy.gap.sm,
     cursor: 'pointer',
     transition: 'background-color 120ms linear',
     outline: `${system.legacy.gap.xs} solid transparent`,
+    boxShadow: system.depth[5],
     '&:focus-visible, &.focus': {
       outline: `${system.legacy.gap.xs} double transparent`,
-      ...focusRing({separation: 2}),
+      ...focusRing({separation: 2, outerColor: system.legacy.color.brand.border.primary}),
     },
   },
   modifiers: {
@@ -51,10 +55,10 @@ export const bannerStencil = createStencil({
         backgroundColor: system.legacy.color.brand.accent.critical,
         color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          background: colorSpace.darken({
+          background: colorSpace.hover({
             color: system.legacy.color.brand.accent.critical,
-            mixinColor: system.legacy.color.accent.overlay.mixin,
-            mixinValue: system.legacy.opacity.accent.hover,
+            fallback: system.legacy.color.brand.accent.critical,
+            colorType: 'accent',
           }),
         },
         '& [data-part="exclamation-circle-icon"]': {
@@ -67,10 +71,10 @@ export const bannerStencil = createStencil({
         backgroundColor: system.legacy.color.brand.accent.caution,
         color: system.color.fg.contrast.default,
         '&:hover, &.hover': {
-          background: colorSpace.darken({
+          background: colorSpace.hover({
             color: system.legacy.color.brand.accent.caution,
-            mixinColor: system.legacy.color.accent.overlay.mixin,
-            mixinValue: system.legacy.opacity.accent.hover,
+            fallback: system.legacy.color.brand.accent.caution,
+            colorType: 'accent',
           }),
         },
         '& [data-part="exclamation-triangle-icon"]': {
@@ -162,7 +166,10 @@ export const Banner = createContainer('button')({
     <Element
       {...mergeStyles(
         elemProps,
-        bannerStencil({hasErrors: model.state.hasError, isSticky: model.state.isSticky})
+        bannerStencil({
+          hasErrors: model.state.hasError ? 'true' : 'false',
+          isSticky: model.state.isSticky ? 'true' : 'false',
+        })
       )}
     >
       {children}
