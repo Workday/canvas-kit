@@ -23,11 +23,7 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       export default function App() {
-        return (
-          <Card variant="alt">
-            Body Content
-          </Card>
-        );
+        return (<Card variant="alt">Body Content</Card>);
       }
     `;
 
@@ -51,11 +47,7 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card} from '@workday/canvas-kit-react';
 
       export default function App() {
-        return (
-          <Card variant="alt">
-            Body Content
-          </Card>
-        );
+        return (<Card variant="alt">Body Content</Card>);
       }
     `;
 
@@ -79,11 +71,7 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       export default function App() {
-        return (
-          <Card variant="alt">
-            Body Content
-          </Card>
-        );
+        return (<Card variant="alt">Body Content</Card>);
       }
     `;
 
@@ -107,11 +95,7 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       export default function App() {
-        return (
-          <Card variant="tonal">
-            Body Content
-          </Card>
-        );
+        return (<Card variant="tonal">Body Content</Card>);
       }
     `;
 
@@ -171,19 +155,17 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card} from '@workday/canvas-kit-react/card';
 
       export default function App() {
-        return (
-          <>
-            <Card variant="alt">
-              First Card
-            </Card>
-            <Card variant="tonal">
-              Second Card
-            </Card>
-            <Card variant="alt">
-              Third Card
-            </Card>
-          </>
-        );
+        return (<>
+          <Card variant="alt">
+            First Card
+          </Card>
+          <Card variant="tonal">
+            Second Card
+          </Card>
+          <Card variant="alt">
+            Third Card
+          </Card>
+        </>);
       }
     `;
 
@@ -207,11 +189,7 @@ describe('Canvas Kit v16 Card Variant Update', () => {
       import {Card as MyCard} from '@workday/canvas-kit-react/card';
 
       export default function App() {
-        return (
-          <MyCard variant="alt">
-            Body Content
-          </MyCard>
-        );
+        return (<MyCard variant="alt">Body Content</MyCard>);
       }
     `;
 
