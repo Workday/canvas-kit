@@ -11,7 +11,7 @@ import {
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {Popper} from '@workday/canvas-kit-react/popup';
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+import {chevronRightIcon} from '@workday/canvas-system-icons-web';
 
 import {MenuCard} from './MenuCard';
 import {MenuDivider} from './MenuDivider';
@@ -139,7 +139,7 @@ export const SubmenuTargetItem = createSubcomponent('button')({
   return (
     <StyledMenuItem as={Element} {...elemProps}>
       {typeof children === 'string' ? <MenuItem.Text>{children}</MenuItem.Text> : children}
-      <MenuItem.Icon icon={chevronRightSmallIcon} />
+      <MenuItem.Icon icon={chevronRightIcon} />
     </StyledMenuItem>
   );
 });

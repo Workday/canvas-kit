@@ -32,6 +32,9 @@ const AllStatesMenuItem = () => (
           <Menu.Item className="hover">Hovered Item</Menu.Item>
           <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
           <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
+          <Menu.Item className="focus" aria-disabled={true}>
+            Focused & Disabled Item
+          </Menu.Item>
           <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
           <Menu.Item>
             Superlonglinethatshouldbreakonitsownwithouthavingtodoanythingspecial
@@ -130,6 +133,9 @@ const AllStatesMenuOption = () => (
         <Menu.Option className="hover">Hovered Item</Menu.Option>
         <Menu.Option className="focus hover">Focused & Hovered Item</Menu.Option>
         <Menu.Option aria-disabled={true}>Disabled Item</Menu.Option>
+        <Menu.Option className="focus" aria-disabled={true}>
+          Focused & Disabled Item
+        </Menu.Option>
         <Menu.Option aria-selected={true}>Selected Item</Menu.Option>
         <Menu.Option className="focus" aria-selected={true}>
           Focused & Selected Item

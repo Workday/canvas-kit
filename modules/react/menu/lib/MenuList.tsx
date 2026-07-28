@@ -2,12 +2,13 @@ import {ListBox, ListProps} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   composeHooks,
+  cornerShapeStencil,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {useFocusRedirect, useReturnFocus} from '@workday/canvas-kit-react/popup';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
 
@@ -32,11 +33,12 @@ export const useMenuList = composeHooks(
 );
 
 export const menuListStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
     background: system.legacy.color.surface.popover,
-    borderRadius: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     padding: 0,
-    gap: system.legacy.gap.xs,
+    gap: base.legacy.size25,
   },
   modifiers: {
     orientation: {

@@ -70,8 +70,7 @@ When users interact with a `SegmentedControl` using screen readers:
   `aria-label="View options"`)
 - Each button announces its text/label, "toggle button" role, and pressed/unpressed state (e.g.,
   "List view, toggle button, pressed" or "Grid view, toggle button, not pressed")
-- For icon-only buttons with tooltips, the tooltip text is announced along with the button role and
-  state
+- icon-only items must have an accessible name, supplied by visible text, aria-label, or a Tooltip in label mode.
 - When a button is activated, screen readers should announce the new state
 
 Refer to [Button](?path=/docs/components-buttons--docs#accessibility) for more information about

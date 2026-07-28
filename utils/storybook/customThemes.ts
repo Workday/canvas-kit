@@ -13,7 +13,7 @@ export const customColorTheme: PartialCanvasTheme = {
       main: 'crimson',
     },
     success: {
-      main: 'aquamarine',
+      main: 'darkolivegreen',
     },
     neutral: {
       main: 'gray',

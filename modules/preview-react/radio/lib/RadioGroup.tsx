@@ -1,4 +1,9 @@
-import {ErrorType, Themeable, createContainer} from '@workday/canvas-kit-react/common';
+import {
+  ErrorType,
+  Themeable,
+  cornerShapeStencil,
+  createContainer,
+} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -18,12 +23,13 @@ export interface RadioGroupProps extends Themeable, CSProps, FlexProps {
  * Styles for RadioGroup
  */
 const radioGroupStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.legacy.shape.md,
     gap: system.legacy.gap.sm,
-    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
     margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
@@ -32,10 +38,8 @@ const radioGroupStencil = createStencil({
     error: {
       error: {
         boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
-        backgroundColor: system.legacy.color.brand.surface.critical.default,
       },
       caution: {
-        backgroundColor: system.legacy.color.brand.surface.caution.default,
         boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.border.caution}`,
       },
     },
