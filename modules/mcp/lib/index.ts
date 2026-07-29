@@ -484,9 +484,9 @@ Complete migration guide from @workday/canvas-tokens-web v3 to v4. Includes:
         };
       case 'tokens/v4/v4.4-token-reference.md':
         return {
-          title: 'Canvas Kit v4.4 Token Reference',
-          description: `# Canvas Kit v4.4 Token Reference
-Current-state reference for @workday/canvas-tokens-web@4.4.0-beta.11 and Canvas Kit v16. Start here for current token usage. Includes:
+          title: 'Canvas Tokens v4.4 Reference',
+          description: `# Canvas Tokens v4.4 Reference
+Current-state reference for @workday/canvas-tokens-web@4.4.0-beta.11. Start here for current token usage with Canvas Kit v16. Includes:
 - CSS import setup and Sana Canvas theme enablement (data-theme="sana-canvas")
 - Namespace rules: use system.*, not system.legacy.* or system.sana.*
 - 107 live system.color.* tokens (surface, fg, border, accent, brand families)

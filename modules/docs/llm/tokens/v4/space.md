@@ -5,9 +5,9 @@
 Spacing refers to the area between and within visual elements. Canvas provides spacing tokens to
 create a consistent foundation for responsive design and UI density.
 
-> **Deprecated:** `system.space.x1`–`x20` (and `space.zero`, `space.half`) are all deprecated.
+> **Deprecated:** `system.space.x1`–`x20` (and `space.zero`, `space.half`) are deprecated spacing tokens.
 > Use `system.gap.*` for exterior spacing and `system.padding.*` for interior spacing instead.
-> There is no `system.space` in new code.
+> `system.size.*` (`xxxs`–`xxl`) is a separate, valid family for component dimensions — not a replacement for `space`.
 
 ## Anatomy
 
@@ -200,14 +200,14 @@ Space tokens can be used inside of components as well as between components, for
 ### Javascript / Typescript
 
 ```tsx
-// styles.ts
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const styles = {
+const gridStyles = createStyles({
   display: 'grid',
-  gap: `var(${system.gap.xs})`,
-  padding: `var(${system.padding.xs})`,
-};
+  gap: system.gap.xs,
+  padding: system.padding.xs,
+});
 ```
 
 ### CSS

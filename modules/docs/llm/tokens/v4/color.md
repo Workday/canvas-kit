@@ -27,6 +27,14 @@ connected to [Brand tokens](#brand-color-tokens), which are tenant-specific them
 
 [View our system color tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-overview--docs)
 
+### Background
+
+Colors with the prefix `bg` are page-level background colors. Use `bg/default` for most pages. Use `bg/alt` to emphasize primary content containers, such as cards.
+
+**Component References:** Background tokens are used in page layouts, [Card](/components/containers/card) components, and container elements throughout Canvas Kit.
+
+[View our background color tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-color-background--docs)
+
 ### Surface
 
 Surfaces are visual containers that hold content that sit on top of the page or other surfaces. Use surface colors on cards, modals, panels, dropdowns, sheets, etc.
@@ -119,7 +127,8 @@ Status colors include `danger`, `success`, and `warning`. These colors are not b
 
 ## Using our Colors
 
-- Use `surface` for page backgrounds and containers like cards, modals, and panels. (`bg.*` is deprecated — use `surface.default` / `surface.alt.default`.)
+- Use `bg` for page backgrounds. Use one `bg` color per view, unless designing a split view.
+- Use `surface` for containers like cards, modals, and panels.
 - Use `accent` for high-emphasis actions like primary buttons and status indicators.
 - Use `fg` for text and icons. Match `fg` colors to their background or surface modifier.
 - Use `border` for edges, dividers, and input field boundaries.
@@ -137,13 +146,15 @@ need to import the CSS variables in your application.
 ### Javascript / Typescript
 
 ```tsx
-// styles.ts
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const styles = {
-  backgroundColor: system.color.surface.default,
-};
+const cardStyles = createStyles({
+  backgroundColor: system.color.bg.default,
+});
 ```
+
+`createStyles` resolves token names to `var(--cnvs-…)` automatically. Outside `createStyles`, wrap tokens with `cssVar()` or a `` `var(${token})` `` template literal.
 
 ### CSS
 
@@ -151,7 +162,7 @@ const styles = {
 // styles.css
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 .card {
-  background-color: var(--cnvs-sys-color-surface-default);
+  background-color: var(--cnvs-sys-color-bg-default);
 }
 ```
 
@@ -163,7 +174,7 @@ const styles = {
 
 | Don't write | Write |
 |---|---|
-| `system.color.bg.*` | `system.color.surface.*` |
+| `system.color.bg.*` (except `bg.default`, `bg.alt.default`) | `system.color.surface.*` |
 | `system.color.text.*` | `system.color.fg.*` |
 | `system.color.icon.*` | `system.color.fg.*` |
 | `system.color.border.divider` | `system.color.border.default` |

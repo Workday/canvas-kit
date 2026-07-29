@@ -43,12 +43,15 @@ Under `data-theme="sana-canvas"`, shape values change automatically. Write `syst
 ### Javascript / Typescript
 
 ```tsx
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const styles = {
+const cardStyles = createStyles({
   borderRadius: system.shape.xxl,
-};
+});
 ```
+
+`createStyles` resolves token names to `var(--cnvs-…)` automatically. Outside `createStyles`, wrap tokens with `cssVar()` or a `` `var(${token})` `` template literal.
 
 ### CSS
 
