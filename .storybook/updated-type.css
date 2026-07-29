@@ -18,6 +18,59 @@
     url(/SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Roboto Light'), local('Roboto-Light'), url(/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(/Roboto-Medium.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(/Roboto-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'IBM Plex Mono';
+  font-style: normal;
+  font-weight: 400;
+  src:
+    local('IBM Plex Mono'),
+    local('IBMPlexMono-Regular'),
+    url(/IBMPlexMono-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto Mono';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Roboto Mono'), local('RobotoMono-Regular'), url(/RobotoMono-Regular.ttf) format('truetype');
+}
+
+[data-theme='sana-canvas'] {
+  --cnvs-sys-font-family-fallback: Roboto, -apple-system, BlinkMacSystemFont, 'Sana Serif', Inter,
+    system-ui, sans-serif, Avenir, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol';
+  --cnvs-sys-font-family-default: 'Sana Sans LCG 05 VF', var(--cnvs-sys-font-family-fallback);
+  --cnvs-sys-font-family-mono: 'IBM Plex Mono', 'Roboto Mono', 'Courier New', Courier, monospace;
+}
+
 /* canvas theme: reset font-family since <html> always carries data-theme="sana-canvas",
    which causes --cnvs-base-font-family-50 to be inherited as Sana Sans by all children */
 [data-theme='canvas'] {
