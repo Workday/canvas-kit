@@ -18,4 +18,17 @@
   body {
     font-family: var(--cnvs-sys-font-family-default);
   }
+
+  /* Sidebar selected item only — do not change colorSecondary in theme.js (breaks docs links) */
+  div.sidebar-item[data-nodetype][data-selected='true'],
+  div.sidebar-item[data-nodetype][data-selected='true']:hover,
+  div.sidebar-item[data-nodetype][data-selected='true']:focus,
+  div.sidebar-item[data-nodetype][data-selected='true']:focus-visible {
+    background: rgba(0, 127, 255, 0.1098) !important;
+    color: rgba(0, 87, 174, 1) !important;
+  }
+
+  div.sidebar-item[data-nodetype][data-selected='true'] svg {
+    color: inherit !important;
+  }
 </style>
