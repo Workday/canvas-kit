@@ -37,13 +37,13 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: '#5D6775',
-  barSelectedColor: 'rgba(0, 87, 174, 1)',
+  barSelectedColor: '',
   barBg: '#ffffff',
 
   // Custom colors (used in UI extension if needed)
   brandColors: {
     primary: '#0F2E66', // base.blue900
-    pink: 'rgba(0, 127, 255, 0.1098)', // base.magenta600
+    surfaceSelected: 'rgba(0, 127, 255, 0.1098)', // fg color
     coral: '#FF8778', // base.red300
     teal: '#019EAC', // base.teal500
     slate: '#5D6775', // base.slate600
