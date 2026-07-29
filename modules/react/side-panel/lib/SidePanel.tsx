@@ -20,7 +20,7 @@ export const useSidePanelContainer = createElemPropsHook(useSidePanelModel)(({st
   };
 });
 
-export type SidePanelVariant = 'standard' | 'alternate';
+export type SidePanelVariant = 'standard' | 'alternative' | 'modal';
 
 export interface SidePanelProps extends CSProps {
   /**
@@ -36,7 +36,10 @@ export interface SidePanelProps extends CSProps {
    */
   expandedWidth?: number | string;
   /**
-   * The style variant of the side panel. 'standard' uses a lighter gray background (`system.color.bg.alt.softer`), no depth. 'alternate' uses a white background with depth (`system.color.bg.default` and level 3 depth).
+   * The style variant of the side panel.
+   * - `'standard'`: navigation surface background (`system.legacy.color.surface.navigation`), no depth.
+   * - `'alternative'`: raised surface background (`system.legacy.color.surface.raised`), no depth.
+   * - `'modal'`: default surface background (`system.legacy.color.surface.default`) with level 6 depth, for panels that overlay page content.
    *
    * @default 'standard'
    */
@@ -58,9 +61,12 @@ export const panelStencil = createStencil({
   }),
   modifiers: {
     variant: {
-      alternate: {
+      modal: {
         backgroundColor: system.legacy.color.surface.default,
-        boxShadow: system.depth[3],
+        boxShadow: system.depth[6],
+      },
+      alternative: {
+        backgroundColor: system.legacy.color.surface.raised,
       },
       standard: {
         backgroundColor: system.legacy.color.surface.navigation,

@@ -1,24 +1,25 @@
-
 import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
-  SymbolDoc,
   Specifications,
   StorybookStatusIndicator,
+  SymbolDoc,
 } from '@workday/canvas-kit-docs';
+
 import SidePanelStoriesMeta from './SidePanel.stories';
 
-import {Basic} from './examples/Basic';
-import {Heading} from './examples/Heading';
-import {AlternatePanel} from './examples/Variant';
-import {ExternalControl} from './examples/ExternalControl';
-import {RightOrigin} from './examples/RightOrigin';
 import {AlwaysOpen} from './examples/AlwaysOpen';
+import {Basic} from './examples/Basic';
+import {ExternalControl} from './examples/ExternalControl';
+import {Heading} from './examples/Heading';
 import {OnStateTransition} from './examples/OnStateTransition';
+import {RightOrigin} from './examples/RightOrigin';
+import {AlternativePanel, ModalPanel} from './examples/Variant';
 
 <Meta of={SidePanelStoriesMeta} />
 
-# Canvas Kit Side Panel <StorybookStatusIndicator type="new" />
+# Canvas Kit Side Panel
 
 `SidePanel` is a collapsible container that anchors to the left or right side of the screen. It uses
 the model pattern for state management and is fully accessible.
@@ -60,15 +61,16 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel
 
 ### Component API Changes
 
-| Preview                                        | Main                                              |
-| ---------------------------------------------- | ------------------------------------------------- |
-| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>` |
-| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                      |
-| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>`              |
-| `expanded` prop on SidePanel                   | Managed by model's `transitionState`              |
-| `touched` prop on SidePanel                    | Managed internally                                |
-| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state |
-| `onStateTransition` on component               | `onStateTransition` on model config               |
+| Preview                                        | Main                                                 |
+| ---------------------------------------------- | ---------------------------------------------------- |
+| `<SidePanel {...panelProps}>`                  | `<SidePanel model={model}>` or just `<SidePanel>`    |
+| `<SidePanel.ToggleButton {...controlProps} />` | `<SidePanel.ToggleButton />`                         |
+| `<Heading {...labelProps}>`                    | `<SidePanel.Heading>Panel Title</SidePanel.Heading>` |
+| `expanded` prop on SidePanel                   | Managed by model's `transitionState`                 |
+| `touched` prop on SidePanel                    | Managed internally                                   |
+| `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state    |
+| `onStateTransition` on component               | `onStateTransition` on model config                  |
+| `variant="alternate"`                          | `variant="modal"`                                    |
 
 ### Code Migration Example
 
@@ -146,13 +148,33 @@ heading while keeping it accessible to screen readers.
 
 <ExampleCodeBlock code={Heading} />
 
-### Alternate Variant
+### Variants
 
-`SidePanel` has one variant, `alternate`, which you can supply as a top-level prop. Default depth of
-`alternate` variant is 5, if `alternate` SidePanel has an overlay behavior the depth 6 should be
-used (this case is covered in the Examples section).
+`SidePanel` supports three variants, which you supply as a top-level `variant` prop. They differ
+only in surface color and depth — the layout, animation, and accessibility behavior is identical.
 
-<ExampleCodeBlock code={AlternatePanel} />
+| Variant       | Surface                                  | Depth | Use for                                                                       |
+| ------------- | ---------------------------------------- | ----- | ----------------------------------------------------------------------------- |
+| `standard`    | `system.legacy.color.surface.navigation` | None  | The default. Panels that are part of the page layout, such as navigation.     |
+| `alternative` | `system.legacy.color.surface.raised`     | None  | Panels that need to stand out from the page background while staying in-flow. |
+| `modal`       | `system.legacy.color.surface.default`    | 6     | Panels that float above page content, such as a panel with overlay behavior.  |
+
+#### Alternative
+
+The `alternative` variant uses a raised surface color with no depth. Because it doesn't cast a
+shadow, it remains part of the page layout and is a good fit when the panel sits next to content on
+a tinted or gray background.
+
+<ExampleCodeBlock code={AlternativePanel} />
+
+#### Modal
+
+The `modal` variant uses the default surface color with depth 6, matching `Modal.Card`. Use it when
+the panel overlays page content instead of sitting alongside it. Note that the depth is the only
+overlay affordance `SidePanel` provides — you're responsible for the positioning, backdrop, and
+focus management that overlay behavior requires.
+
+<ExampleCodeBlock code={ModalPanel} />
 
 ### External Control
 
@@ -282,8 +304,8 @@ element, including `id`, `aria-labelledby`, and `onTransitionEnd`.
 
 ### useSidePanelToggleButton
 
-The `useSidePanelToggleButton` elemProps hook provides ARIA attributes for the toggle
-button, including `aria-controls`, `aria-pressed`, and `aria-describedby`.
+The `useSidePanelToggleButton` elemProps hook provides ARIA attributes for the toggle button,
+including `aria-controls`, `aria-pressed`, and `aria-describedby`.
 
 <SymbolDoc name="useSidePanelToggleButton" fileName="/react/" />
 

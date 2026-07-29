@@ -53,6 +53,7 @@ Soon to be...
     - [Pagination](#pagination)
   - [Popup](#popup)
   - [Segmented Control](#segmented-control)
+  - [Side Panel](#side-panel)
   - [Toast](#toast)
   - [Tooltip](#tooltip)
 - [New Utilities](#new-utilities)
@@ -747,6 +748,62 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
   `surface.overlay.pressed.default` respectively for the item.
 - Container padding changed to `padding.md` (16px) including for mobile devices.
 - On mobile devices, the container padding remains `padding.md` (16px).
+
+### Side Panel
+
+**PR:** [#4048](https://github.com/Workday/canvas-kit/pull/4048)
+
+#### Breaking Changes
+
+The `variant` prop on `SidePanel` no longer accepts `alternate`. It has been renamed to `modal` to
+describe what the variant is for — a panel that floats above page content — because a second
+non-overlay variant now occupies the "alternative surface" role.
+
+```tsx
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+
+// Before
+<SidePanel variant="alternate">{/* ... */}</SidePanel>
+
+// After
+<SidePanel variant="modal">{/* ... */}</SidePanel>
+```
+
+> 🤖 The `v16` codemod will rename `variant="alternate"` to `variant="modal"` as shown above. It
+> only transforms `SidePanel` imported from `@workday/canvas-kit-react`; the deprecated `SidePanel`
+> in `@workday/canvas-kit-preview-react` is left alone.
+
+If you were using `alternate` for a panel that sits inline with page content rather than over it,
+switch to the new `alternative` variant instead of `modal` to avoid picking up the overlay shadow.
+
+#### New API
+
+- `variant="alternative"` — uses a raised surface (`system.legacy.color.surface.raised`) with no
+  depth. Use it for panels that need to stand out from the page background while remaining part of
+  the page layout.
+
+The full set of variants is now:
+
+| Variant       | Surface                                  | Depth |
+| ------------- | ---------------------------------------- | ----- |
+| `standard`    | `system.legacy.color.surface.navigation` | None  |
+| `alternative` | `system.legacy.color.surface.raised`     | None  |
+| `modal`       | `system.legacy.color.surface.default`    | 6     |
+
+#### Visual Updates
+
+- The `modal` variant's box-shadow updated from `system.depth[3]` to `system.depth[6]`, matching
+  `Modal.Card` (see [Modal](#modal)).
+- `SidePanel.ToggleButton`'s default icon changed from `extendIcon` to `sidebarLeftIcon`. The icon
+  no longer rotates as the panel expands and collapses: it keeps a single orientation in LTR and is
+  mirrored horizontally in RTL.
+- `SidePanel.ToggleButton`'s width changed from `gap.lg` (24px) to `size.md` (40px), and its top
+  offset changed from `gap.lg` (24px) to `12px`.
+- `SidePanel.Heading` padding changed from a symmetric `padding.xs` (8px) to `padding.sm` (12px)
+  with a `paddingInlineStart` of `padding.md` (16px), and it now has a `minHeight` of `size.xxl`
+  (64px) so the heading lines up with the toggle button and the collapsed panel width.
+- `SidePanel.Heading` now lays out its children with flexbox and centers them vertically, so an icon
+  passed alongside the heading text aligns without extra styling.
 
 ### Toast
 
