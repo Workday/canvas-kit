@@ -16,7 +16,7 @@ export type AccessibilityScenario = (typeof ACCESSIBILITY_SCENARIOS)[number];
 export const ACCESSIBILITY_COMPONENTS = [
   'action-bar',
   'ai-ingress-button-(ai)',
-  'avatar-(promoted)',
+  'avatar',
   'banner',
   'body-text',
   'box',
@@ -51,7 +51,7 @@ export const ACCESSIBILITY_COMPONENTS = [
   'segmented-control',
   'select',
   'side-panel-(deprecated)',
-  'side-panel-(new)',
+  'side-panel',
   'skeleton',
   'status-indicator',
   'status-indicator-(deprecated)',
