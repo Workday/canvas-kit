@@ -5,7 +5,7 @@ import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {formattingIcon, rocketIcon, tokensIcon} from '@workday/canvas-system-icons-web';
+import {fontEditIcon, rocketIcon, tokensIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 // @ts-ignore: Cannot find module error
@@ -94,7 +94,7 @@ export const WelcomePage = () => {
         >
           <Card className={cardStyles}>
             <Flex className={cardHeaderStyles}>
-              <SystemIcon icon={rocketIcon} />
+              <SystemIcon icon={rocketIcon} aria-hidden="true" />
               <Card.Heading>Getting Started</Card.Heading>
             </Flex>
             <Card.Body className={cardBodyStyles}>
@@ -109,7 +109,7 @@ export const WelcomePage = () => {
           </Card>
           <Card className={cardStyles}>
             <Flex className={cardHeaderStyles}>
-              <SystemIcon icon={tokensIcon} />
+              <SystemIcon icon={tokensIcon} aria-hidden="true" />
               <Card.Heading>Tokens</Card.Heading>
             </Flex>
             <Card.Body className={cardBodyStyles}>
@@ -127,7 +127,7 @@ export const WelcomePage = () => {
           </Card>
           <Card className={cardStyles}>
             <Flex className={cardHeaderStyles}>
-              <SystemIcon icon={formattingIcon} />
+              <SystemIcon icon={fontEditIcon} aria-hidden="true" />
               <Card.Heading>Styling</Card.Heading>
             </Flex>
             <Card.Body className={cardBodyStyles}>
