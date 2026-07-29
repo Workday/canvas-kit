@@ -4677,10 +4677,10 @@
   resolved "https://registry.yarnpkg.com/@workday/canvas-expressive-icons-web/-/canvas-expressive-icons-web-1.0.2.tgz#8cd2a75a5a59aed528d5b9c7a004c6478f0d9084"
   integrity sha512-57ao8gTvwy71wyMzuVks95aeRb0HsOx49HweuNM7RnQo9b8LJ/ToV2j7KJJYbekTsAqZxJBkFyFwX9tokja/kA==
 
-"@workday/canvas-system-icons-web@4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-4.0.4.tgz#8ddaa5a465059227d79b808c263f167f7d3b6915"
-  integrity sha512-+CO8OTemP947vf/nQeVu3IxHrq9Q2sHra3/FAImkQ0w4/f3tlOgQn7YTWt7rKL2fvTYghjNN0HoHQSR0T64uWg==
+"@workday/canvas-system-icons-web@5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@workday/canvas-system-icons-web/-/canvas-system-icons-web-5.0.1.tgz#683368affaf5031bb1400efbbcfc1a6c2062dd0a"
+  integrity sha512-MnZjqG7RE3kDfD40c+VJSxoH1972Yd1bngdun7eBGSdk7aOGqaAPwvOpttx/mfvf+ovs79jyh/ep1X8u8LPlSw==
 
 "@workday/canvas-tokens-web@4.4.0-beta.11":
   version "4.4.0-beta.11"
