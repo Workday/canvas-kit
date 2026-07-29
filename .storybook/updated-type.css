@@ -1,5 +1,5 @@
 @font-face {
-  font-family: 'Sana Sans LCG 05 VF';
+  font-family: 'Sana Sans VF';
   font-style: normal;
   font-weight: 100 700;
   src:
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-  font-family: 'Sana Sans LCG 05 VF';
+  font-family: 'Sana Sans VF';
   font-style: italic;
   font-weight: 100 700;
   src:
@@ -67,7 +67,7 @@
   --cnvs-sys-font-family-fallback: Roboto, -apple-system, BlinkMacSystemFont, 'Sana Serif', Inter,
     system-ui, sans-serif, Avenir, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol';
-  --cnvs-sys-font-family-default: 'Sana Sans LCG 05 VF', var(--cnvs-sys-font-family-fallback);
+  --cnvs-sys-font-family-default: 'Sana Sans VF', var(--cnvs-sys-font-family-fallback);
   --cnvs-sys-font-family-mono: 'IBM Plex Mono', 'Roboto Mono', 'Courier New', Courier, monospace;
 }
 

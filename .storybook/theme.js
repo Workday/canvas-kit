@@ -47,7 +47,7 @@ export default create({
 
   // Typography
   fontBase:
-    '"Sana Sans LCG 05 VF", Roboto, -apple-system, BlinkMacSystemFont, "Sana Serif", Inter, system-ui, sans-serif',
+    '"Sana Sans VF", Roboto, -apple-system, BlinkMacSystemFont, "Sana Serif", Inter, system-ui, sans-serif',
   fontCode: '"IBM Plex Mono", "Roboto Mono", "Courier New", monospace',
 
   // Text colors
