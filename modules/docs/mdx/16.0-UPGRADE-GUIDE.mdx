@@ -764,6 +764,8 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
 
 - `BaseTable` / `Table` outer border color updated from `system.legacy.color.border.strong` to
   `system.legacy.color.border.default`.
+- `Table.Caption` divider (`borderBlockEnd`) updated from `system.legacy.color.border.strong` to
+  `system.legacy.color.border.default`.
 - Container corner radius is now **12px** (`shape.lg`, previously `shape.md` / 8px), managed via
   `cornerShapeStencil` (see [New Utilities](#new-utilities)).
 - `Table.Header` (and `BaseTable.Header`) cell padding is now uniform `padding.md` (16px) on all
@@ -829,8 +831,8 @@ export const myStencil = createStencil({
 });
 ```
 
-`Card`, `Expandable` (`Expandable.Target`), `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`), and
-`MultiSelect` extend this stencil for their rounded corners.
+`Card`, `Expandable` (`Expandable.Target`), `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`), `MultiSelect`, and
+`Table` (`BaseTable`, `Table`) extend this stencil for their rounded corners.
 
 ## Deprecations
 
