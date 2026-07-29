@@ -91,6 +91,9 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     Element,
     model
   ) => {
+    const sidePanelIcon =
+      icon || (model.state.origin === 'start' ? sidebarLeftIcon : sidebarRightIcon);
+
     return (
       <Tooltip
         type="muted"
@@ -101,7 +104,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
         }
       >
         <TertiaryButton
-          icon={model.state.origin === 'start' ? sidebarLeftIcon : sidebarRightIcon}
+          icon={sidePanelIcon}
           as={Element}
           variant={variant}
           aria-label={tooltipText}
