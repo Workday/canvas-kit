@@ -45,6 +45,30 @@ this approach.
 
 **Note:** While we support theme overrides, we advise to use global theming via CSS Variables.
 
+## Sana Canvas Theme (v16+)
+
+Canvas Kit v16 targets the Sana Canvas visual language. Enable it by importing the Sana token
+stylesheet **after** the system variables, then setting the theme attribute on your root element:
+
+```css
+@import '@workday/canvas-tokens-web/css/base/_variables.css';
+@import '@workday/canvas-tokens-web/css/brand/_variables.css';
+@import '@workday/canvas-tokens-web/css/component/_variables.css';
+@import '@workday/canvas-tokens-web/css/system/_variables.css';
+@import '@workday/canvas-tokens-web/css/sana/_variables.css';
+```
+
+```html
+<html data-theme="sana-canvas">
+```
+
+The Sana stylesheet reassigns palette values, shape sizes, depth shadows, typography, and semantic
+color tokens under `[data-theme="sana-canvas"]`. Consumers write plain `system.*` paths — values
+change automatically. Do not use `system.sana.*` or `system.legacy.*` in application code.
+
+Load Sana Sans via `@workday/canvas-kit-react/fonts`. For the full current token inventory and
+Sana-specific value overrides, see [v4.4 Token Reference](./tokens/v4/v4.4-token-reference.md).
+
 ## What is a Cascade Barrier?
 
 When we say "cascade barrier", we're talking about how

@@ -1,5 +1,7 @@
 # Color
 
+> For the complete current token inventory and deprecation map, see [v4.4 Token Reference](./v4.4-token-reference.md).
+
 ## Usage Guidance
 
 Our color choices promote visual clarity, making it easy for users to find what they need. We use a
@@ -24,14 +26,6 @@ System tokens are themed variables intended to provide application-wide theming.
 connected to [Brand tokens](#brand-color-tokens), which are tenant-specific theming.
 
 [View our system color tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-overview--docs)
-
-### Background
-
-Colors with the prefix `bg` are page-level background colors. Use `bg/default` for most pages. Use `bg/alt` to emphasize primary content containers, such as cards.
-
-**Component References:** Background tokens are used in page layouts, [Card](/components/containers/card) components, and container elements throughout Canvas Kit.
-
-[View our background color tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-color-background--docs)
 
 ### Surface
 
@@ -78,7 +72,7 @@ State layers are overlays placed between or in front of background and foregroun
 
 ### Foreground
 
-Use foreground colors (or `fg`) to set the color of text and icons.
+Use foreground colors (`system.color.fg.*`) to set the color of text and icons. The deprecated `text.*` and `icon.*` families map to `fg.*`.
 
 All `fg` colors except `fg/inverse` can be used on `surface/default`, `bg/default`, `surface/alt`, and `bg/alt`.
 
@@ -125,8 +119,7 @@ Status colors include `danger`, `success`, and `warning`. These colors are not b
 
 ## Using our Colors
 
-- Use `bg` for page backgrounds. Use one `bg` color per view, unless designing a split view.
-- Use `surface` for containers like cards, modals, and panels.
+- Use `surface` for page backgrounds and containers like cards, modals, and panels. (`bg.*` is deprecated — use `surface.default` / `surface.alt.default`.)
 - Use `accent` for high-emphasis actions like primary buttons and status indicators.
 - Use `fg` for text and icons. Match `fg` colors to their background or surface modifier.
 - Use `border` for edges, dividers, and input field boundaries.
@@ -148,7 +141,7 @@ need to import the CSS variables in your application.
 import {system} from '@workday/canvas-tokens-web';
 
 const styles = {
-  backgroundColor: `var(${system.color.bg.default})`,
+  backgroundColor: system.color.surface.default,
 };
 ```
 
@@ -158,10 +151,23 @@ const styles = {
 // styles.css
 @import '@workday/canvas-tokens-web/css/system/_variables.css';
 .card {
-  background-color: var(--cnvs-sys-color-bg-default);
+  background-color: var(--cnvs-sys-color-surface-default);
 }
 ```
 
 ## All Colors
 
+107 non-deprecated `system.color.*` tokens are listed in [v4.4 Token Reference](./v4.4-token-reference.md#current-systemcolor-inventory-107-tokens).
+
 ## Deprecated Colors
+
+| Don't write | Write |
+|---|---|
+| `system.color.bg.*` | `system.color.surface.*` |
+| `system.color.text.*` | `system.color.fg.*` |
+| `system.color.icon.*` | `system.color.fg.*` |
+| `system.color.border.divider` | `system.color.border.default` |
+| `system.color.border.container` | `system.color.border.strong` |
+| `system.color.static.*` | A `base` palette ramp |
+
+See [v4.4 Token Reference](./v4.4-token-reference.md#deprecated-color-families) for the full deprecation map.

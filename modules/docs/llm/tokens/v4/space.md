@@ -1,7 +1,13 @@
 # Space
 
+> For the complete current token reference, see [v4.4 Token Reference](./v4.4-token-reference.md).
+
 Spacing refers to the area between and within visual elements. Canvas provides spacing tokens to
 create a consistent foundation for responsive design and UI density.
+
+> **Deprecated:** `system.space.x1`–`x20` (and `space.zero`, `space.half`) are all deprecated.
+> Use `system.gap.*` for exterior spacing and `system.padding.*` for interior spacing instead.
+> There is no `system.space` in new code.
 
 ## Anatomy
 

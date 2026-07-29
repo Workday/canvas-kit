@@ -482,6 +482,34 @@ Complete migration guide from @workday/canvas-tokens-web v3 to v4. Includes:
           uri: 'docs://tokens/v4/v4-token-migration',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'tokens/v4/v4.4-token-reference.md':
+        return {
+          title: 'Canvas Kit v4.4 Token Reference',
+          description: `# Canvas Kit v4.4 Token Reference
+Current-state reference for @workday/canvas-tokens-web@4.4.0-beta.11 and Canvas Kit v16. Start here for current token usage. Includes:
+- CSS import setup and Sana Canvas theme enablement (data-theme="sana-canvas")
+- Namespace rules: use system.*, not system.legacy.* or system.sana.*
+- 107 live system.color.* tokens (surface, fg, border, accent, brand families)
+- T-shirt scales for shape, size, padding, and gap with default and Sana value columns
+- Deprecated color families (bg.*, text.*, icon.*) and replacement map
+- Sana theme overrides (shape, color, depth, typography)
+- v16 utilities: cornerShapeStencil and colorSpace`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/v4.4-token-reference',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/color.md':
+        return {
+          title: 'Canvas Kit v4 Color Tokens',
+          description: `# Canvas Kit v4 Color Tokens
+Semantic color token usage guide for @workday/canvas-tokens-web v4. Includes:
+- Color families: surface, fg, border, accent, brand (bg/text/icon are deprecated)
+- Usage guidance for backgrounds, surfaces, accents, foreground, borders, shadows, and focus
+- Link to v4.4 Token Reference for the full current inventory and deprecation map`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/color',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       case 'tokens/v4/opacity.md':
         return {
           title: 'Canvas Kit v4 Opacity Token Migration Guide',
@@ -551,19 +579,18 @@ Space tokens control the spacing of UI elements. Use them to create consistent s
     'get-canvas-kit-tokens',
     {
       title: 'Get Canvas Kit Tokens',
-      description: `Retrieve Canvas Kit design token documentation for migrating from old tokens to the new @workday/canvas-tokens-web system.
+      description: `Retrieve Canvas Kit design token documentation for @workday/canvas-tokens-web.
+
+Start with docs://tokens/v4/v4.4-token-reference for the current v4.4 token surface (Sana Canvas theme, t-shirt scales, deprecations).
 
 Use this tool when:
-- Migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web
-- Converting old fruit-named colors (cinnamon, blueberry, cantaloupe) to new token system
-- Understanding the token hierarchy: base tokens, system tokens, and brand tokens
-- Finding the correct system token replacement (sys.color.bg.*, sys.color.fg.*, sys.color.border.*)
-- Learning the token naming pattern: [property].[role].[modifier]
-- Understanding color roles (primary, positive, caution, critical, muted, etc.)
-- Migrating spacing (space.s → system.space.x4), shape, typography, or depth tokens
-- Ensuring WCAG accessibility compliance with color contrast requirements
+- Choosing current system tokens (surface.*, fg.*, border.*, accent.*, brand.*)
+- Enabling the Sana Canvas theme (css/sana/_variables.css + data-theme="sana-canvas")
+- Migrating deprecated tokens (bg.* → surface.*, text.* → fg.*, icon.* → fg.*, space.x* → padding/gap)
+- Understanding t-shirt size scales for shape, size, padding, and gap
+- Finding historical migration guides (v2→v3, v3→v4, v13→v14)
 
-Returns links to token documentation resources including migration guides, color palettes, color roles, contrast guidelines, and complete v14 migration examples.`,
+Returns links to token documentation including the v4.4 current-state reference, migration guides, color palettes, contrast guidelines, and per-family token guides.`,
       annotations: {
         readOnlyHint: true,
       },

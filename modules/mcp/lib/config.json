@@ -20,6 +20,8 @@
     "tokens/color-scale.md",
     "llm-token-migration-14.txt",
     "tokens/v4/v4-token-migration.md",
+    "tokens/v4/v4.4-token-reference.md",
+    "tokens/v4/color.md",
     "tokens/v4/opacity.md",
     "tokens/v4/shape.md",
     "tokens/v4/size.md",
