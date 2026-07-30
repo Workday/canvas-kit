@@ -132,6 +132,28 @@ export default function transformer(file: FileInfo, api: API, _options: Options)
   // rename usages of icons imported by name
   root
     .find(j.Identifier, {name: (name: string) => name in usageRenameMap})
+    .filter(nodePath => {
+      const parent = nodePath.parent.value;
+
+      // an identifier in a name position, i.e. `config.undoIcon` or `{undoIcon: true}`, only
+      // happens to match the icon's name and isn't a reference to the import
+      if (
+        (parent.type === 'MemberExpression' || parent.type === 'OptionalMemberExpression') &&
+        !parent.computed
+      ) {
+        return parent.property !== nodePath.value;
+      }
+
+      if (
+        (parent.type === 'Property' || parent.type === 'ObjectProperty') &&
+        !parent.computed &&
+        !parent.shorthand
+      ) {
+        return parent.key !== nodePath.value;
+      }
+
+      return true;
+    })
     .replaceWith(nodePath => j.identifier(usageRenameMap[nodePath.value.name]));
 
   // rename usages of icons accessed off a namespace import, i.e. `systemIcons.academicAppointmentTitleIcon`

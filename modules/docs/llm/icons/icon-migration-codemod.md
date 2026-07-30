@@ -106,13 +106,13 @@ updates those usages in the same pass as the v5 changes. You do not need to run 
 
 The v5 release adds Sana-aligned artwork and the renames, deprecations, and layer simplifications
 documented in
-[What changed in v5](/docs/guides-icon-migration-sana-canvas-assets-overview--docs#what-changed-in-v5).
+[What Changed in v5](/docs/guides-icon-migration-sana-canvas-assets-overview--docs#what-changed-in-v5).
 The codemod picks up those mappings from the same metadata file when you install
 `@workday/canvas-system-icons-web` v5.
 
-## Example transformations
+## Example Transformations
 
-### Named import
+### Named Import
 
 **Before**
 
@@ -132,7 +132,7 @@ import {arrowUpToLineIcon} from '@workday/canvas-system-icons-web';
 <SystemIcon icon={arrowUpToLineIcon} />;
 ```
 
-### Import alias preserved
+### Import Alias Preserved
 
 **Before**
 
@@ -150,7 +150,7 @@ import {arrowUpToLineIcon as myIcon} from '@workday/canvas-system-icons-web';
 <SystemIcon icon={myIcon} />;
 ```
 
-### Fallback already imported
+### Fallback Already Imported
 
 **Before**
 
@@ -174,7 +174,7 @@ import {arrowUpToLineIcon} from '@workday/canvas-system-icons-web';
 </>;
 ```
 
-## What the codemod does not do
+## What the Codemod Does Not Do
 
 - **Other packages.** The codemod does not change icons imported from libraries other than
   `@workday/canvas-system-icons-web`, even if the symbol name matches a deprecated Canvas icon.
@@ -185,7 +185,7 @@ import {arrowUpToLineIcon} from '@workday/canvas-system-icons-web';
 - **Component API changes.** The codemod does not migrate `<AccentIcon>`, `<AppletIcon>`, or related
   v15 expressive icon APIs. Use the `v15-icons` codemod for that work.
 
-## After migration
+## After Migration
 
 1. Run your test suite and spot-check high-traffic screens.
 2. Search the repo for remaining deprecated export names or old SVG filenames if you maintain custom

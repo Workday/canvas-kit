@@ -52,7 +52,11 @@ export function getImportRenameMap(
       ) {
         const styledName = nodePath.parent.parent.value.id.name;
 
-        if (nodePath.value.arguments[0].type === 'Identifier') {
+        if (
+          nodePath.value.arguments &&
+          nodePath.value.arguments.length &&
+          nodePath.value.arguments[0].type === 'Identifier'
+        ) {
           styledMap[nodePath.value.arguments[0].name] = styledName;
         }
       }

@@ -17,6 +17,32 @@ describe('migrateIcons', () => {
     expectTransform(input, input);
   });
 
+  it('should not change the icon matching property', () => {
+    const input = stripIndent`
+      import {undoIcon} from '@workday/canvas-system-icons-web';
+      import {SystemIcon} from '@workday/canvas-kit-react/icon';
+
+      <>
+        <SystemIcon icon={undoIcon} />
+        <SystemIcon icon={{name: 'undoIcon'}} />
+        <SystemIcon icon={config.undoIcon} />
+      </>
+    `;
+
+    const expected = stripIndent`
+      import {arrowUTurnLeftIcon} from '@workday/canvas-system-icons-web';
+      import {SystemIcon} from '@workday/canvas-kit-react/icon';
+
+      <>
+        <SystemIcon icon={arrowUTurnLeftIcon} />
+        <SystemIcon icon={{name: 'undoIcon'}} />
+        <SystemIcon icon={config.undoIcon} />
+      </>
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should replace a deprecated Canvas system icon with its fallback icon', () => {
     const input = stripIndent`
       import {academicAppointmentTitleIcon} from '@workday/canvas-system-icons-web';
@@ -72,7 +98,6 @@ describe('migrateIcons', () => {
   });
 
   it('should replace the icon with a supported icon when the fallback is also deprecated', () => {
-    // `transformation-import` falls back to `extend`, which falls back to `arrow-right-to-line`
     const input = stripIndent`
       import {transformationImportIcon} from '@workday/canvas-system-icons-web';
       import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -114,6 +139,32 @@ describe('migrateIcons', () => {
     expectTransform(input, expected);
   });
 
+  it('should not add a duplicate import when the fallback is already imported', () => {
+    const input = stripIndent`
+      import {passwordIcon, lockKeyholeIcon, lockIcon} from '@workday/canvas-system-icons-web';
+      import {SystemIcon} from '@workday/canvas-kit-react/icon';
+
+      <>
+        <SystemIcon icon={passwordIcon} />
+        <SystemIcon icon={lockKeyholeIcon} />
+        <SystemIcon icon={lockIcon} />
+      </>
+    `;
+
+    const expected = stripIndent`
+      import {lockIcon} from '@workday/canvas-system-icons-web';
+      import {SystemIcon} from '@workday/canvas-kit-react/icon';
+
+      <>
+        <SystemIcon icon={lockIcon} />
+        <SystemIcon icon={lockIcon} />
+        <SystemIcon icon={lockIcon} />
+      </>
+    `;
+
+    expectTransform(input, expected);
+  });
+
   it('should not add a duplicate import when the fallback is already imported if renamed', () => {
     const input = stripIndent`
       import {academicAppointmentTitleIcon as academicIcon, clipboardUserIcon as clipboardIcon} from '@workday/canvas-system-icons-web';
@@ -140,10 +191,10 @@ describe('migrateIcons', () => {
 
   it('should not change an icon that is its own fallback', () => {
     const input = stripIndent`
-      import {chevronHierarchyOpenIcon} from '@workday/canvas-system-icons-web';
+      import {hierarchyChevronOpenIcon} from '@workday/canvas-system-icons-web';
       import {SystemIcon} from '@workday/canvas-kit-react/icon';
 
-      <SystemIcon icon={chevronHierarchyOpenIcon} />
+      <SystemIcon icon={hierarchyChevronOpenIcon} />
     `;
 
     expectTransform(input, input);
