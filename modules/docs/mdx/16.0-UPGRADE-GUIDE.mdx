@@ -755,7 +755,7 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
 
 #### Breaking Changes
 
-The `variant` prop on `SidePanel` no longer accepts `alternate`. It has been renamed to `modal` to
+The `variant` prop on `SidePanel` no longer accepts `alternate`. It has been renamed to `overlay` to
 describe what the variant is for — a panel that floats above page content — because a second
 non-overlay variant now occupies the "alternative surface" role.
 
@@ -766,15 +766,16 @@ import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 <SidePanel variant="alternate">{/* ... */}</SidePanel>
 
 // After
-<SidePanel variant="modal">{/* ... */}</SidePanel>
+<SidePanel variant="overlay">{/* ... */}</SidePanel>
 ```
 
-> 🤖 The `v16` codemod will rename `variant="alternate"` to `variant="modal"` as shown above. It
+> 🤖 The `v16` codemod will rename `variant="alternate"` to `variant="overlay"` as shown above. It
 > only transforms `SidePanel` imported from `@workday/canvas-kit-react`; the deprecated `SidePanel`
 > in `@workday/canvas-kit-preview-react` is left alone.
 
 If you were using `alternate` for a panel that sits inline with page content rather than over it,
-switch to the new `alternative` variant instead of `modal` to avoid picking up the overlay shadow.
+switch to the new `alternative` variant instead of `overlay` to avoid picking up the elevation
+shadow.
 
 #### New API
 
@@ -788,12 +789,11 @@ The full set of variants is now:
 | ------------- | ---------------------------------------- | ----- |
 | `standard`    | `system.legacy.color.surface.navigation` | None  |
 | `alternative` | `system.legacy.color.surface.raised`     | None  |
-| `modal`       | `system.legacy.color.surface.default`    | 6     |
+| `overlay`     | `system.legacy.color.surface.default`    | 6     |
 
 #### Visual Updates
 
-- The `modal` variant's box-shadow updated from `system.depth[3]` to `system.depth[6]`, matching
-  `Modal.Card` (see [Modal](#modal)).
+- The `overlay` variant's box-shadow updated from `system.depth[3]` to `system.depth[6]`.
 - `SidePanel.ToggleButton`'s default icon changed from `extendIcon` to `sidebarLeftIcon`. The icon
   no longer rotates as the panel expands and collapses: it keeps a single orientation in LTR and is
   mirrored horizontally in RTL.

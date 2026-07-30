@@ -65,6 +65,11 @@ export const sidePanelToggleButtonStencil = createStencil({
   },
 });
 
+/**
+ * Adds the necessary ARIA attributes to the SidePanel's toggle button.
+ * This includes `aria-controls` pointing at the panel, `aria-pressed` to convey the collapsed
+ * state, and `aria-describedby` pointing at the panel's heading.
+ */
 export const useSidePanelToggleButton = createElemPropsHook(useSidePanelModel)(({state}) => {
   return {
     'aria-controls': state.panelId,

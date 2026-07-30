@@ -6,7 +6,7 @@ import {expectTransformFactory} from './expectTransformFactory';
 const expectTransform = expectTransformFactory(transform);
 
 describe('updateSidePanelVariant', () => {
-  it('should convert variant="alternate" to variant="modal" on package root imports', () => {
+  it('should convert variant="alternate" to variant="overlay" on package root imports', () => {
     const input = stripIndent`
       import {SidePanel} from '@workday/canvas-kit-react'
       <SidePanel variant="alternate">Content</SidePanel>
@@ -14,12 +14,12 @@ describe('updateSidePanelVariant', () => {
 
     const expected = stripIndent`
       import {SidePanel} from '@workday/canvas-kit-react'
-      <SidePanel variant="modal">Content</SidePanel>
+      <SidePanel variant="overlay">Content</SidePanel>
     `;
     expectTransform(input, expected);
   });
 
-  it('should convert variant="alternate" to variant="modal" on slash imports', () => {
+  it('should convert variant="alternate" to variant="overlay" on slash imports', () => {
     const input = stripIndent`
       import {SidePanel} from '@workday/canvas-kit-react/side-panel'
       <SidePanel variant="alternate">Content</SidePanel>
@@ -27,7 +27,7 @@ describe('updateSidePanelVariant', () => {
 
     const expected = stripIndent`
       import {SidePanel} from '@workday/canvas-kit-react/side-panel'
-      <SidePanel variant="modal">Content</SidePanel>
+      <SidePanel variant="overlay">Content</SidePanel>
     `;
     expectTransform(input, expected);
   });
@@ -40,7 +40,7 @@ describe('updateSidePanelVariant', () => {
 
     const expected = stripIndent`
       import {SidePanel as Panel} from '@workday/canvas-kit-react/side-panel'
-      <Panel variant="modal">Content</Panel>
+      <Panel variant="overlay">Content</Panel>
     `;
     expectTransform(input, expected);
   });
@@ -53,7 +53,7 @@ describe('updateSidePanelVariant', () => {
 
     const expected = stripIndent`
       import {SidePanel} from '@workday/canvas-kit-react/side-panel'
-      <SidePanel variant="modal">Content</SidePanel>
+      <SidePanel variant="overlay">Content</SidePanel>
     `;
     expectTransform(input, expected);
   });
@@ -70,7 +70,7 @@ describe('updateSidePanelVariant', () => {
       import styled from '@emotion/styled';
       import {SidePanel} from '@workday/canvas-kit-react/side-panel'
       const StyledPanel = styled(SidePanel)({color: '#000'});
-      <StyledPanel variant="modal">Content</StyledPanel>
+      <StyledPanel variant="overlay">Content</StyledPanel>
     `;
     expectTransform(input, expected);
   });
@@ -87,7 +87,7 @@ describe('updateSidePanelVariant', () => {
       import styled from '@emotion/styled';
       import {SidePanel} from '@workday/canvas-kit-react'
       const StyledPanel = styled(SidePanel)({color: '#000'});
-      <StyledPanel variant="modal">Content</StyledPanel>
+      <StyledPanel variant="overlay">Content</StyledPanel>
     `;
     expectTransform(input, expected);
   });

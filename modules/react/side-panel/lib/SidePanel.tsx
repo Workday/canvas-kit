@@ -20,7 +20,7 @@ export const useSidePanelContainer = createElemPropsHook(useSidePanelModel)(({st
   };
 });
 
-export type SidePanelVariant = 'standard' | 'alternative' | 'modal';
+export type SidePanelVariant = 'standard' | 'alternative' | 'overlay';
 
 export interface SidePanelProps extends CSProps {
   /**
@@ -39,7 +39,7 @@ export interface SidePanelProps extends CSProps {
    * The style variant of the side panel.
    * - `'standard'`: navigation surface background (`system.legacy.color.surface.navigation`), no depth.
    * - `'alternative'`: raised surface background (`system.legacy.color.surface.raised`), no depth.
-   * - `'modal'`: default surface background (`system.legacy.color.surface.default`) with level 6 depth, for panels that overlay page content.
+   * - `'overlay'`: default surface background (`system.legacy.color.surface.default`) with level 6 depth, for panels that need to look lifted off the page. This is a visual treatment only — it adds no dialog semantics, focus trapping, or backdrop.
    *
    * @default 'standard'
    */
@@ -61,7 +61,7 @@ export const panelStencil = createStencil({
   }),
   modifiers: {
     variant: {
-      modal: {
+      overlay: {
         backgroundColor: system.legacy.color.surface.default,
         boxShadow: system.depth[6],
       },
@@ -103,8 +103,10 @@ export const SidePanel = createContainer('section')({
      * It must be used within the `SidePanel` component as a child. For accessibility purposes,
      * it should be the first focusable element in the panel.
      *
-     * The button automatically receives `aria-controls`, `aria-expanded`, and `aria-labelledby`
-     * attributes from the model.
+     * The button automatically receives `aria-controls` (the panel's `id`), `aria-pressed` (`true`
+     * when the panel is collapsed), and `aria-describedby` (the heading's `id`) from the model.
+     * Provide a static `aria-label` for the button's accessible name — `aria-pressed` already
+     * conveys the state, so the label should not change between states.
      */
     ToggleButton: SidePanelToggleButton,
     /**

@@ -15,7 +15,7 @@ import {ExternalControl} from './examples/ExternalControl';
 import {Heading} from './examples/Heading';
 import {OnStateTransition} from './examples/OnStateTransition';
 import {RightOrigin} from './examples/RightOrigin';
-import {AlternativePanel, ModalPanel} from './examples/Variant';
+import {AlternativePanel, OverlayPanel} from './examples/Variant';
 
 <Meta of={SidePanelStoriesMeta} />
 
@@ -70,7 +70,7 @@ import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel
 | `touched` prop on SidePanel                    | Managed internally                                   |
 | `onExpandedChange` callback                    | Use `onStateTransition` and derive expanded state    |
 | `onStateTransition` on component               | `onStateTransition` on model config                  |
-| `variant="alternate"`                          | `variant="modal"`                                    |
+| `variant="alternate"`                          | `variant="overlay"` (rename only, same styling)      |
 
 ### Code Migration Example
 
@@ -157,7 +157,7 @@ only in surface color and depth — the layout, animation, and accessibility beh
 | ------------- | ---------------------------------------- | ----- | ----------------------------------------------------------------------------- |
 | `standard`    | `system.legacy.color.surface.navigation` | None  | The default. Panels that are part of the page layout, such as navigation.     |
 | `alternative` | `system.legacy.color.surface.raised`     | None  | Panels that need to stand out from the page background while staying in-flow. |
-| `modal`       | `system.legacy.color.surface.default`    | 6     | Panels that float above page content, such as a panel with overlay behavior.  |
+| `overlay`     | `system.legacy.color.surface.default`    | 6     | Panels that need to look lifted off the page. Styling only — see below.       |
 
 #### Alternative
 
@@ -167,13 +167,55 @@ a tinted or gray background.
 
 <ExampleCodeBlock code={AlternativePanel} />
 
-#### Modal
+#### Overlay
 
-The `modal` variant is for panels that overlay other page content, like an overlay menu. It gives
-the panel a default surface color and a shadow (depth 6) to stand out. Use this variant when you
-want the side panel to float above your main content, not as part of the page layout.
+The `overlay` variant is a **visual treatment only**. It gives the panel the default surface color
+and depth 6 so it reads as floating above the page, which is the same elevation `Modal.Card` uses.
+The name describes how the panel looks; it does not turn `SidePanel` into a dialog. This variant is
+the `alternate` variant from `@workday/canvas-kit-preview-react`, renamed — it has never carried any
+behavior beyond the surface and shadow.
 
-<ExampleCodeBlock code={ModalPanel} />
+Reach for it when a panel needs to look lifted off the page — for example an overlay menu or a
+filter panel you position over content with your own CSS. `SidePanel` still renders a `<section>`
+that participates in the page and the tab order exactly like `standard` and `alternative` do.
+
+Setting `variant="overlay"` does **not** add any of the following, and `SidePanel` has no props to
+opt into them:
+
+- `role="dialog"` or `aria-modal` — the element stays a plain `<section>` named by its heading
+- A focus trap, initial focus, or return focus
+- A backdrop / overlay element
+- Close on **Escape** or close on outside click
+- `aria-hidden` on sibling content, or body scroll locking
+- Positioning — the panel is in normal flow until you position it yourself
+
+> **Accessibility Note**: If you need a panel that genuinely blocks the rest of the page, use
+> [`Modal`](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs) instead
+> of assembling that behavior around `SidePanel`. `Modal` composes `useInitialFocus`,
+> `useReturnFocus`, `useFocusTrap`, `useCloseOnEscape`, `useCloseOnOverlayClick`,
+> `useAssistiveHideSiblings`, and `useDisableBodyScroll` and is tested as a unit. Those hooks are
+> built on `usePopupModel` and cannot be added to `useSidePanelModel`, so a hand-rolled version on
+> top of `SidePanel` will not get you the same guarantees.
+
+**Keyboard and focus behavior:** because the variant adds no dialog semantics, keyboard behavior is
+identical to the other two variants and no focus management is expected of you:
+
+- **Tab** / **Shift + Tab** move through the panel's focusable elements in DOM order and then
+  continue into the rest of the page. Focus is **not** trapped.
+- Focus does not move when the panel expands or collapses. It stays on `SidePanel.ToggleButton`,
+  which reports the new state through `aria-pressed`.
+- **Escape** does nothing. Collapsing happens only through the toggle button or
+  `model.events.collapse()`.
+- Collapsing hides the panel's content visually but does not remove it from the DOM. Keep the toggle
+  button as the first focusable element in the panel — see [Accessibility](#accessibility) — so
+  keyboard users reach the control before the content it hides.
+
+If you do position this variant over other content, treat it as a non-modal region: the content
+behind it stays reachable by keyboard and by screen reader, and users can tab out of the panel while
+it visually covers the page. That mismatch between what the panel looks like and how it behaves is
+the reason to prefer `Modal` for anything the user must dismiss before continuing.
+
+<ExampleCodeBlock code={OverlayPanel} />
 
 ### External Control
 

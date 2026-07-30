@@ -27,15 +27,15 @@ const stylesOverride = {
   }),
 };
 
-export const ModalPanel = () => {
+export const OverlayPanel = () => {
   const {direction, toggleDirection} = useDirection();
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel variant="modal">
+        <SidePanel variant="overlay">
           <SidePanel.ToggleButton aria-label="Collapse View" />
-          <SidePanel.Heading size="small">Modal Panel</SidePanel.Heading>
+          <SidePanel.Heading size="small">Overlay Panel</SidePanel.Heading>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">

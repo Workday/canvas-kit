@@ -12,7 +12,7 @@ import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateT
 import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
 import {
   AlternativePanel as AlternativePanelExample,
-  ModalPanel as ModalPanelExample,
+  OverlayPanel as OverlayPanelExample,
 } from './examples/Variant';
 
 export default {
@@ -34,8 +34,8 @@ export const Basic: Story = {
 export const Heading: Story = {
   render: HeadingExample,
 };
-export const ModalPanel: Story = {
-  render: ModalPanelExample,
+export const OverlayPanel: Story = {
+  render: OverlayPanelExample,
 };
 export const ExternalControl: Story = {
   render: ExternalControlExample,

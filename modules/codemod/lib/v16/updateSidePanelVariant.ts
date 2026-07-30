@@ -63,7 +63,7 @@ export default function transformer(file: FileInfo, api: API, _options: Options)
       return;
     }
 
-    variantProp.value = j.stringLiteral('modal');
+    variantProp.value = j.stringLiteral('overlay');
   });
 
   return root.toSource();
