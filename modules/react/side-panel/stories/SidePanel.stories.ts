@@ -13,7 +13,7 @@ import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
 import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
 
 export default {
-  title: 'Components/Containers/Side Panel (New)',
+  title: 'Components/Containers/Side Panel',
   component: SidePanel,
   tags: ['autodocs'],
   parameters: {

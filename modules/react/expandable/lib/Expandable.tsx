@@ -24,6 +24,7 @@ export const expandableContainerStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
+    gap: system.legacy.gap.sm,
     padding: system.legacy.padding.xs,
   },
 });

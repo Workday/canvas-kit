@@ -28,8 +28,9 @@ export default create({
   appBg: '#ffffff',
 
   // Typography
-  fontBase: '"Sana Sans LCG 05 VF", sans-serif',
-  fontCode: '"Roboto Mono", "Courier New", monospace',
+  fontBase:
+    '"Sana Sans VF", Roboto, -apple-system, BlinkMacSystemFont, "Sana Serif", Inter, system-ui, sans-serif',
+  fontCode: '"IBM Plex Mono", "Roboto Mono", "Courier New", monospace',
 
   // Text colors
   textColor: '#2B2B2B',
