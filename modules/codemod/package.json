@@ -29,13 +29,17 @@
     "url": "https://github.com/Workday/canvas-kit/issues"
   },
   "homepage": "https://github.com/Workday/canvas-kit#readme",
+  "peerDependencies": {
+    "@workday/canvas-system-icons-web": "^5.0.2"
+  },
   "dependencies": {
     "chalk": "4.1.2",
     "jscodeshift": "^17.1.0",
     "yargs": "^16.2.0"
   },
   "devDependencies": {
-    "@types/jscodeshift": "^0.11.3"
+    "@types/jscodeshift": "^0.11.3",
+    "@workday/canvas-system-icons-web": "^5.0.2"
   },
   "scripts": {
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist",
