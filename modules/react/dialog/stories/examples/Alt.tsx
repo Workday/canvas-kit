@@ -8,7 +8,7 @@ import {system} from '@workday/canvas-tokens-web';
 const altBackgroundStyles = createStyles({
   background: system.color.bg.alt.default,
   padding: system.padding.xl,
-  borderRadius: system.shape.x2,
+  borderRadius: system.shape.md,
   minHeight: px2rem(400),
   display: 'flex',
   alignItems: 'center',
