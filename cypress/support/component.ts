@@ -11,7 +11,6 @@ import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
-import '../../.storybook/updated-type.css';
 import './commands';
 
 declare global {

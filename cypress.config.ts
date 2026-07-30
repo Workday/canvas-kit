@@ -16,10 +16,6 @@ export default defineConfig({
     devServer: {
       framework: 'react',
       bundler: 'vite',
-      viteConfig: {
-        // Font files in updated-type.css use root-relative URLs (e.g. /Roboto-Regular.ttf)
-        publicDir: 'public',
-      },
     },
     viewportWidth: 1024,
     viewportHeight: 768,
