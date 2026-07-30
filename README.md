@@ -66,6 +66,9 @@ import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+// The Sana variables import is needed if you're using the Sana Canvas theme, imported after
+// system so its rules win the cascade tie over system's unscoped `:root` rules when set on <html>.
+import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {App} from './App';
 
