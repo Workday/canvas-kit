@@ -47,7 +47,9 @@ npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 
 > **Note:** If your application does not already provide `Roboto` as a font, you can install
 > `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
-> omit this if you're already loading fonts.
+> omit this if you're already loading fonts. For full setup details, including instructions for the
+> Sana Canvas theme, see our
+> [Fonts guide](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs).
 
 **Usage**
 
@@ -183,6 +185,7 @@ recommend against using it in production until the first stable version has been
   - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)
   - [Creating Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--docs)
   - [Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--docs)
+  - [Fonts](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs)
 
 ## License
 
