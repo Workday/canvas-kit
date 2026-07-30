@@ -18,7 +18,9 @@ const migrations = deprecatedIcons.reduce(
   (acc, icon) => {
     const oldIcon = toCamelCase(icon.name) + 'Icon';
     // `wd-icon-clipboard-user.svg` -> `clipboardUserIcon`
-    const newIcon = toCamelCase(icon.fallback.replace(/^wd-icon-|\.svg$/g, '')) + 'Icon';
+    const newIcon = icon.fallback
+      ? toCamelCase(icon.fallback.replace(/^wd-icon-|\.svg$/g, '')) + 'Icon'
+      : oldIcon;
 
     if (oldIcon !== newIcon) {
       acc[oldIcon] = newIcon;

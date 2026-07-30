@@ -837,6 +837,126 @@ Returns links to token documentation resources including migration guides, color
     }
   );
 
+  /**
+   * Metadata for agents about the icon migration documentation files.
+   */
+  function getIconMigrationResource(fileName: string) {
+    switch (fileName) {
+      case 'icons/icon-migration.md':
+        return {
+          title: 'Canvas Kit Sana Canvas Assets Icon Migration Guide',
+          description: `# Sana Canvas Assets v5
+Overview of the @workday/canvas-system-icons-web v5 release and how to upgrade. Includes:
+- What changed in v5: renames, deprecations, and layer simplifications
+- Rename table mapping old JS names to new JS names (uploadIcon → arrowUpToLineIcon, downloadIcon → arrowDownToLineIcon, etc.)
+- Deprecation table for icons redesigned to match Sana's visual language
+- Package installation instructions for @workday/canvas-system-icons-web v5
+- Complete list of every deprecated export with the fallback icon it maps to`,
+          mimeType: 'text/markdown',
+          uri: 'docs://icons/icon-migration',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'icons/icon-migration-codemod.md':
+        return {
+          title: 'Canvas Kit Icon Migration Codemod Guide',
+          description: `# Icon Migration Codemod
+Guide for running the icon-migration codemod that updates @workday/canvas-system-icons-web imports and usages. Includes:
+- Running the codemod with npx or as a dev dependency
+- What the codemod handles: named imports, aliases, namespace imports, chained fallbacks, duplicate imports
+- Coverage of both v4 naming convention migrations and v5 Sana Canvas Assets changes in a single pass
+- Before and after example transformations
+- Manual lookup through system.deprecated.metadata.json
+- Limitations: other packages, dynamic icon selection, non-code assets, and v15 expressive icon APIs`,
+          mimeType: 'text/markdown',
+          uri: 'docs://icons/icon-migration-codemod',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      default:
+        throw new Error(`${fileName} is not a valid icon migration resource`);
+    }
+  }
+
+  fileNames.iconMigrationFiles.forEach(fileName => {
+    const resource = getIconMigrationResource(fileName);
+    if (!resource || !resource.contents) {
+      throw new Error(`Resource ${fileName} not found`);
+    }
+    server.registerResource(
+      resource.title,
+      resource.uri,
+      {
+        title: resource.title,
+        description: resource.description,
+        mimeType: resource.mimeType,
+      },
+      async (uri: URL) => ({
+        contents: [
+          {
+            uri: uri.href,
+            text: resource.contents,
+          },
+        ],
+      })
+    );
+  });
+
+  server.registerTool(
+    'get-canvas-kit-icon-migration',
+    {
+      title: 'Get Canvas Kit Icon Migration Guides',
+      description: `Retrieve Canvas Kit documentation for migrating to @workday/canvas-system-icons-web v5 (Sana Canvas Assets).
+
+Use this tool when:
+- Upgrading @workday/canvas-system-icons-web to v5
+- Finding the replacement for a deprecated system icon (uploadIcon, downloadIcon, undoIcon, redoIcon, lockKeyholeIcon, etc.)
+- Resolving deprecation warnings from @workday/canvas-system-icons-web
+- Running or troubleshooting the icon-migration codemod
+- Understanding what the codemod rewrites and what you must migrate by hand
+
+Returns links to the Sana Canvas Assets overview, which includes the full deprecated icon mapping table, and the icon-migration codemod guide.`,
+      annotations: {
+        readOnlyHint: true,
+      },
+    },
+    async () => {
+      const output = {
+        count: fileNames.iconMigrationFiles.length,
+        files: fileNames.iconMigrationFiles.map(fileName => {
+          const resource = getIconMigrationResource(fileName);
+          if (!resource) {
+            throw new Error(`Resource ${fileName} not found`);
+          }
+          return {
+            name: resource.title,
+            uri: resource.uri,
+          };
+        }),
+      };
+      return {
+        content: [
+          {type: 'text', text: JSON.stringify(output)},
+          ...fileNames.iconMigrationFiles.map(fileName => {
+            const resource = getIconMigrationResource(fileName);
+            if (!resource) {
+              throw new Error(`Resource ${fileName} not found`);
+            }
+            return {
+              type: 'resource_link' as const,
+              uri: resource.uri,
+              name: resource.title,
+              mimeType: resource.mimeType,
+              description: resource.description,
+              annotations: {
+                audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+              },
+            };
+          }),
+        ],
+        structuredContent: output,
+      };
+    }
+  );
+
   const storyViewerPath = path.resolve(__dirname, 'apps', 'story-viewer.html');
   if (storySlugs.length > 0 && fs.existsSync(storyViewerPath)) {
     const slugEnum = storySlugs as [string, ...string[]];

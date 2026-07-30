@@ -11,6 +11,7 @@
     "llm-style-props-migration.txt",
     "theming.md"
   ],
+  "iconMigrationFiles": ["icons/icon-migration.md", "icons/icon-migration-codemod.md"],
   "tokenFiles": [
     "tokens/token-migration.md",
     "tokens/color-palette.md",

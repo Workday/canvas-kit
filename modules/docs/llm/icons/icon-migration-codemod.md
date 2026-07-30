@@ -1,7 +1,3 @@
-import {Meta} from '@storybook/blocks';
-
-<Meta title="Guides/Icon Migration/Codemod" />
-
 # Migration codemod
 
 The **`icon-migration`** codemod reads deprecation metadata shipped with
