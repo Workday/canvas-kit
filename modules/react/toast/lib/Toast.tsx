@@ -57,11 +57,16 @@ const toastStencil = createStencil({
     gap: base.legacy.size150,
     borderRadius: system.legacy.shape.xl,
     border: `${px2rem(1)} solid ${system.color.border.default}`,
-    backgroundColor: system.legacy.color.surface.default,
     boxShadow: system.depth[5],
 
     '@media (forced-colors: active)': {
       outline: `${px2rem(1)} solid CanvasText`,
+    },
+    variant: {
+      alt: {
+        border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
+      },
+      tonal: {},
     },
   },
 });
@@ -117,11 +122,12 @@ export const Toast = createContainer('div')({
      */
     Link: ToastLink,
   },
-})<ToastProps>(({children, ...elemProps}, _, model) => {
+})<ToastProps>(({children, variant, ...elemProps}, _, model) => {
   return (
     <Popup.Card
+      variant={variant}
       {...getAriaAttributes(model.state.mode, model.state.id)}
-      {...mergeStyles(elemProps, toastStencil())}
+      {...mergeStyles(elemProps, toastStencil({variant}))}
     >
       {children}
     </Popup.Card>
