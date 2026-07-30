@@ -45,20 +45,20 @@ or
 npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
-> **Note:** If your application does not already provide `Roboto` as a font, you can install
-> `@workday/canvas-kit-react-fonts`. The example below shows how to inject the fonts, but you can
-> omit this if you're already loading fonts. For full setup details, including instructions for the
-> Sana Canvas theme, see our
-> [Fonts guide](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs).
+**Fonts**
+
+Canvas Kit doesn't include fonts by default. See our
+[Fonts guide](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs) for setup
+instructions, including which font package to use depending on whether your application has the Sana
+Canvas theme enabled.
 
 **Usage**
 
-To ensure fonts are loaded correctly, update your root `index.js` file.
+Update your root `index.js` file to import Canvas Kit's design tokens.
 
 ```jsx
 import {createRoot} from 'react-dom/client';
 import {injectGlobal} from '@emotion/css';
-import {fonts} from '@workday/canvas-kit-react-fonts';
 import {system} from '@workday/canvas-tokens-web';
 import {cssVar} from '@workday/canvas-kit-styling';
 
@@ -67,11 +67,9 @@ import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
 
-
 import {App} from './App';
 
 injectGlobal({
-  ...fonts,
   'html, body': {
     fontFamily: cssVar(system.fontFamily.default),
     margin: 0,

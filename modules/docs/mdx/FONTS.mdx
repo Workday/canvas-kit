@@ -2,19 +2,27 @@ import {Meta} from '@storybook/blocks';
 
 <Meta title="Guides/Fonts" />
 
-# Sana Sans Font
+# Fonts
+
+Canvas Kit doesn't include fonts by default. Which font package you need depends on whether your
+application has the [Sana Canvas theme](#sana-sans) (`data-theme="sana-canvas"`) enabled.
+
+- If the Sana Canvas theme **is** enabled, use [Sana Sans](#sana-sans).
+- If the Sana Canvas theme **is not** enabled (the default/legacy Canvas theme), configure your app
+  to use [Roboto](#roboto) instead.
+
+## Sana Sans
 
 Sana Sans should be applied whenever the
-[Sana Canvas theme](#using-sana-sans-with-the-sana-canvas-theme) (`data-theme="sana-canvas"`) is
-enabled in your application.
+[Sana Canvas theme](#using-sana-sans-with-the-sana-canvas-theme) is enabled in your application.
 
-## Installation
+### Installation
 
 ```sh
 yarn add @workday/canvas-kit-react
 ```
 
-## Usage
+### Usage
 
 The fonts package makes importing font files simple so you know you're using the correct font in
 your environment. We use Sana Sans for most languages we support at Workday.
@@ -41,14 +49,14 @@ injectGlobal({
 });
 ```
 
-## Hosting Fonts
+### Hosting Fonts
 
 We currently host Sana Sans through durable storage, and this package connects `@font-faces` to
 those font files. This keeps the package size minimal, while ensuring you don't have to worry about
 the wiring. But because durable storage is regionally-bound, you might consider using a CDN if your
 environment experiences degraded performance.
 
-## Variable Fonts
+### Variable Fonts
 
 Sana Sans is a
 [variable font](https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Fonts/Variable_fonts). That
@@ -57,15 +65,13 @@ supports multiple font weights and styles. It also provides more flexibility and
 traditional, static fonts. But you should be able to use it identically to how you've been using
 other fonts.
 
-### Sana Sans
-
 - **Family**: Sana Sans
 - **Format**: TrueType variable font
 - **Weight range**: 100–700 (Regular through Bold)
 - **Styles**: normal, italic
 - **Source**: `https://design.workdaycdn.com/assets/fonts/Sana-Sans/SanaSansLCG05-Variable.ttf`
 
-## Using Sana Sans with the Sana Canvas Theme
+### Using Sana Sans with the Sana Canvas Theme
 
 The Sana Canvas theme is enabled by setting `data-theme="sana-canvas"` on `<html>` (or a scoped
 ancestor element). This switches the `--cnvs-sys-font-family-default` token
@@ -80,3 +86,31 @@ Once the theme's font-family token and the loaded `@font-face` share the same fa
 additional CSS override is required — install and use the `fonts` package exactly as described in
 [Usage](#usage) above, and Sana Sans will render automatically wherever `data-theme="sana-canvas"`
 is set.
+
+## Roboto
+
+If your application doesn't have the Sana Canvas theme enabled, install
+`@workday/canvas-kit-react-fonts` to load Roboto instead.
+
+### Installation
+
+```sh
+yarn add @workday/canvas-kit-react-fonts
+```
+
+### Usage
+
+```ts
+import {fonts} from '@workday/canvas-kit-react-fonts';
+import {injectGlobal} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+injectGlobal(...fonts);
+injectGlobal({
+  'html, body': {
+    fontFamily: system.fontFamily.default,
+    margin: 0,
+    minHeight: '100vh',
+  },
+});
+```
