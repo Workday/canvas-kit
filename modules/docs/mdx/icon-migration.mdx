@@ -19,15 +19,15 @@ upgrade the package.
 
 ## Table of Contents
 
-- [What changed in v5](#what-changed-in-v5)
+- [What Changed in v5](#what-changed-in-v5)
   - [Renames](#renames)
   - [Deprecations](#deprecations)
-  - [Layer simplification](#layer-simplification)
+  - [Layer Simplification](#layer-simplification)
 - [Install `@workday/canvas-system-icons-web` v5](#install-workdaycanvas-system-icons-web-v5)
-- [Migrating with the codemod](#migrating-with-the-codemod)
-- [All deprecated icons list](#all-deprecated-icons-list)
+- [Migrating with the Codemod](#migrating-with-the-codemod)
+- [All Deprecated Icons List](#all-deprecated-icons-list)
 
-## What changed in v5
+## What Changed in v5
 
 ### Renames
 
@@ -80,7 +80,7 @@ transition period.
 | Redo              | `redoIcon`             | Arrow U Turn Right      | `arrowUTurnRightIcon`        |
 | Undo              | `undoIcon`             | Arrow U Turn Left       | `arrowUTurnLeftIcon`         |
 
-### Layer simplification
+### Layer Simplification
 
 As part of the shift to Sana styles, several icons were simplified to match Sana's visual language.
 Some elements were streamlined or removed for stylistic purposes. The result is cleaner icons with
@@ -104,7 +104,7 @@ yarn add @workday/canvas-system-icons-web@^5
 If you use Canvas Kit packages that depend on system icons, align those versions with your Canvas
 Kit upgrade path and confirm `package.json` resolves to v5 of `@workday/canvas-system-icons-web`.
 
-## Migrating with the codemod
+## Migrating with the Codemod
 
 The **`icon-migration`** codemod is the recommended way to update `@workday/canvas-system-icons-web`
 imports in application code. It reads `dist/metadata/system.deprecated.metadata.json` from the

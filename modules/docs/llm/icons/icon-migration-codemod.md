@@ -1,4 +1,4 @@
-# Migration codemod
+# Migration Codemod
 
 The **`icon-migration`** codemod reads deprecation metadata shipped with
 `@workday/canvas-system-icons-web` and updates imports and usages in your source files
@@ -10,20 +10,20 @@ For general advice on running Canvas Kit codemods (review process, formatting, f
 
 ## Table of Contents
 
-- [Running the codemod](#running-the-codemod)
-- [What the codemod does](#what-the-codemod-does)
-- [All icon transforms](#all-icon-transforms)
-  - [v4 naming convention migrations](#v4-naming-convention-migrations)
-  - [v5 Sana Canvas Assets changes](#v5-sana-canvas-assets-changes)
-- [Example transformations](#example-transformations)
-  - [Named import](#named-import)
-  - [Import alias preserved](#import-alias-preserved)
-  - [Fallback already imported](#fallback-already-imported)
-- [Manual migration and lookup](#manual-migration-and-lookup)
-- [What the codemod does not do](#what-the-codemod-does-not-do)
-- [After migration](#after-migration)
+- [Running the Codemod](#running-the-codemod)
+- [What the Codemod Does](#what-the-codemod-does)
+- [All Icon Transforms](#all-icon-transforms)
+  - [v4 Naming Convention Migrations](#v4-naming-convention-migrations)
+  - [v5 Sana Canvas Assets Changes](#v5-sana-canvas-assets-changes)
+- [Example Transformations](#example-transformations)
+  - [Named Import](#named-import)
+  - [Import Alias Preserved](#import-alias-preserved)
+  - [Fallback Already Imported](#fallback-already-imported)
+- [Manual Migration and Lookup](#manual-migration-and-lookup)
+- [What the Codemod Does Not Do](#what-the-codemod-does-not-do)
+- [After Migration](#after-migration)
 
-## Running the codemod
+## Running the Codemod
 
 Upgrade `@workday/canvas-system-icons-web` to v5 before you run the codemod so deprecation and
 fallback mappings match what the transform expects.
@@ -60,7 +60,7 @@ packages in a monorepo). Limiting scope speeds up the run and reduces unrelated 
   expressive icons, covered in the
   [v15 upgrade guide](/docs/guides-upgrade-guides-v15-0-overview--docs#codemod-transformations-for-icons).
 
-## What the codemod does
+## What the Codemod Does
 
 The transform runs only on files that import from `@workday/canvas-system-icons-web`. For each
 deprecated icon export listed in `system.deprecated.metadata.json`, it replaces usages with the
@@ -82,12 +82,12 @@ package, not only the v5 Sana Canvas Assets changes summarized in the overview g
 Icons that are not deprecated are left unchanged. The codemod also leaves deprecated entries whose
 fallback is the same export name unchanged.
 
-## All icon transforms
+## All Icon Transforms
 
 The codemod covers two sets of changes in a single pass. Both are driven by
 `system.deprecated.metadata.json`, so you do not need separate runs for them.
 
-### v4 naming convention migrations
+### v4 Naming Convention Migrations
 
 `@workday/canvas-system-icons-web` **v4** aligned the library with a systematic naming convention.
 Many legacy export names were deprecated and mapped to clearer replacements (for example,
@@ -102,7 +102,7 @@ If your codebase still imports icons from before that alignment, the **`icon-mig
 updates those usages in the same pass as the v5 changes. You do not need to run the older
 `v15-icons` codemod for system icons if you migrate with `icon-migration` on a current v5 package.
 
-### v5 Sana Canvas Assets changes
+### v5 Sana Canvas Assets Changes
 
 The v5 release adds Sana-aligned artwork and the renames, deprecations, and layer simplifications
 documented in
