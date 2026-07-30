@@ -16,6 +16,7 @@ Soon to be...
 
 - [Codemod](#codemod)
   - [Instructions](#instructions)
+  - [Codemod Transformations for Icons](#codemod-transformations-for-icons)
 - [New Components](#new-components)
   - [KBD](#kbd)
   - [Tabs](#tabs)
@@ -122,6 +123,60 @@ yarn remove @workday/canvas-kit-codemod
 > manually edit other file types (`.json`, `.mdx`, `.md`, etc.). You may need to run your linter
 > after executing the codemod, as its resulting formatting (spacing, quotes, etc.) may not match
 > your project conventions.
+
+## Codemod Transformations for v16
+
+The following automated transformations are available for upgrading to v16:
+
+- **Update Hyperlink Props**: updateHyperlinkProps
+
+Run the codemod with: `npx @workday/canvas-kit-codemod v16 [path]`
+
+### Codemod Transformations for Icons
+
+#### Icon Migration Codemod
+
+For v16, there is a **separate codemod** called `icon-migration` that updates
+`@workday/canvas-system-icons-web` usage across your codebase. Upgrade the icon package to v5 before
+you run it so deprecation and fallback mappings match what the transform expects.
+
+```sh
+yarn add @workday/canvas-system-icons-web@^5
+```
+
+The codemod reads `system.deprecated.metadata.json` from the installed icon package and rewrites
+each deprecated export to its fallback icon. This codemod will:
+
+- Update **named imports** and their references (for example, `uploadIcon` to `arrowUpToLineIcon`).
+- Preserve **import aliases** and point them at the fallback export.
+- Update **namespace imports** member access (for example, `systemIcons.uploadIcon` to
+  `systemIcons.arrowUpToLineIcon`).
+- Resolve **chained fallbacks** when a fallback icon is itself deprecated.
+- Remove **duplicate imports** when the fallback is already imported in the same declaration.
+
+Because it applies every mapping in the metadata file, a single run covers both the v4 naming
+convention migrations and the v5 Sana Canvas Assets renames and deprecations. Icons that are not
+deprecated are left unchanged.
+
+To run the codemod:
+
+```sh
+npx @workday/canvas-kit-codemod icon-migration [path]
+```
+
+> **Tip:** Provide the specific directory or directories you want to update as `[path]` to speed up
+> migration.
+>
+> This codemod only touches `@workday/canvas-system-icons-web`. For accent, applet, and expressive
+> icons, use the `v15-icons` transform covered in the
+> [v15 upgrade guide](/docs/guides-upgrade-guides-v15-0-overview--docs#codemod-transformations-for-icons).
+> For details on what changed in v5 and the full list of deprecated icons, see the
+> [Sana Canvas Assets overview](/docs/guides-icon-migration-sana-canvas-assets-overview--docs) and
+> the [Icon Migration codemod guide](/docs/guides-icon-migration-codemod--docs).
+
+> 🤖 The `icon-migration` codemod automates the majority of system icon migration work, but _always_
+> review the PR for any remaining icons the codemod could not address, especially dynamic icon
+> selection, non-code assets, and heavily customized usages.
 
 ## New Components
 
