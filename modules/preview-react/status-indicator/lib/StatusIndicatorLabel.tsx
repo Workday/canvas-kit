@@ -6,17 +6,17 @@ import {system} from '@workday/canvas-tokens-web';
 
 export interface StatusIndicatorLabelProps extends TextProps {}
 
-const statusIndicatorLabelStencil = createStencil({
+export const statusIndicatorLabelStencil = createStencil({
   extends: textStencil,
   base: {
-    fontWeight: system.fontWeight.bold,
+    fontWeight: system.fontWeight.medium,
     whiteSpace: 'nowrap',
     overflow: 'hidden',
     textOverflow: 'ellipsis',
     textTransform: 'capitalize',
     color: 'inherit',
   },
-  defaultModifiers: {typeLevel: 'subtext.large'},
+  defaultModifiers: {typeLevel: 'subtext.medium'},
 });
 
 export const StatusIndicatorLabel = createComponent('span')({

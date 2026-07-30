@@ -1,3 +1,4 @@
+// sort-imports-ignore
 import {DocsContainer, DocsPage} from '@storybook/addon-docs';
 
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
@@ -17,6 +18,7 @@ import '@workday/canvas-tokens-web/css/sana/_variables.css';
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';
 import theme from './theme';
+
 // After tokens so Sana Sans overrides token font-family defaults in the preview iframe
 import './updated-type.css';
 
