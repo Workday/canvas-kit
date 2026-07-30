@@ -169,10 +169,9 @@ a tinted or gray background.
 
 #### Modal
 
-The `modal` variant uses the default surface color with depth 6, matching `Modal.Card`. Use it when
-the panel overlays page content instead of sitting alongside it. Note that the depth is the only
-overlay affordance `SidePanel` provides — you're responsible for the positioning, backdrop, and
-focus management that overlay behavior requires.
+The `modal` variant is for panels that overlay other page content, like an overlay menu. It gives
+the panel a default surface color and a shadow (depth 6) to stand out. Use this variant when you
+want the side panel to float above your main content, not as part of the page layout.
 
 <ExampleCodeBlock code={ModalPanel} />
 
