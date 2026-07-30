@@ -17,6 +17,9 @@ const fontsToDownload = [
 const sanaFontBaseUrl = 'https://design.workdaycdn.com/assets/fonts/Sana-Sans/';
 const sanaFontsToDownload = ['SanaSansLCG05-Variable.ttf'];
 
+const ibmPlexMonoBaseUrl = 'https://design.workdaycdn.com/assets/fonts/IBM-Plex-Mono/';
+const ibmPlexMonoFontsToDownload = ['IBMPlexMono-Regular.woff2'];
+
 async function download(url, filePath) {
   return new Promise((resolve, reject) => {
     console.log(`Downloading ${url} to ${filePath}`);
@@ -78,6 +81,11 @@ async function main() {
   await Promise.all(
     sanaFontsToDownload.map(fileName => {
       return download(sanaFontBaseUrl + fileName, resolve(__dirname, '../public', fileName));
+    })
+  );
+  await Promise.all(
+    ibmPlexMonoFontsToDownload.map(fileName => {
+      return download(ibmPlexMonoBaseUrl + fileName, resolve(__dirname, '../public', fileName));
     })
   );
 }

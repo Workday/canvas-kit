@@ -123,12 +123,12 @@ export const tooltipContainerStencil = createStencil({
       },
     },
     variant: {
-      alt: {
+      alt: ({background}) => ({
         '&:before': {
-          background: system.sana.color.surface.elevated,
+          background: cssVar(background, system.sana.color.surface.elevated),
           border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
         },
-      },
+      }),
     },
   },
 });

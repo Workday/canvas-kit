@@ -26,6 +26,7 @@ Soon to be...
     - [Delete Button Outline Variant](#delete-button-outline-variant)
 	- [Container Components](#container-components)
 	  - [Card](#card)
+    - [Expandable](#expandable)
   - [Indicators](#indicators)
     - [Banner](#banner)
     - [Count Badge](#count-badge)
@@ -53,6 +54,7 @@ Soon to be...
     - [Pagination](#pagination)
   - [Popup](#popup)
   - [Segmented Control](#segmented-control)
+  - [Table](#table)
   - [Toast](#toast)
   - [Tooltip](#tooltip)
 - [New Utilities](#new-utilities)
@@ -220,9 +222,6 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 <Avatar name="Green Arrow" variant="green" />
 ```
 
-No migration is required unless you rely on the previous color values for custom styling via the
-`cs` prop or `baseAvatarStencil` modifiers.
-
 ### Buttons
 
 **PR:** [#4000](https://github.com/Workday/canvas-kit/pull/4000)
@@ -259,45 +258,6 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 <DeleteButton variant="outline">Delete</DeleteButton>;
 ```
 
-### Card
-
-**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014), [#4088](https://github.com/Workday/canvas-kit/pull/4088)
-
-#### Variant Changes
-
-The `Card` component's variants have been updated:
-- **Removed:** The `borderless` variant has been removed and replaced with `alt`
-- **New:** The `alt` variant provides an elevated surface with inverse borders
-- **Updated:** The default variant now has a visible border
-- The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
-
-**Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"` instead. While the styles are different, both where intended to be used on an `alt` background.
-
-🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
-
-```tsx
-// v15
-<Card variant="borderless">
-  <Card.Body>Content</Card.Body>
-</Card>
-
-// v16
-<Card variant="alt">
-  <Card.Body>Content</Card.Body>
-</Card>
-```
-
-#### Visual Updates
-
-- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
-  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
-- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
-  `padding.sm`).
-- Card's border radius is now managed via the new `cornerShapeStencil` (see
-  [New Utilities](#new-utilities)).
-- The default variant now includes a visible border (`system.color.border.default`).
-- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with inverse borders.
-
 ### Container Components
 
 **PR:** [#4088](https://github.com/Workday/canvas-kit/pull/4088)
@@ -331,6 +291,56 @@ The `alt` variant uses `system.sana.color.surface.elevated` background with inve
   </Toast.Body>
 </Toast>
 ```
+
+#### Card
+
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014), [#4088](https://github.com/Workday/canvas-kit/pull/4088)
+
+##### Variant Changes
+
+The `Card` component's variants have been updated:
+- **Removed:** The `borderless` variant has been removed and replaced with `alt`
+- **New:** The `alt` variant provides an elevated surface with inverse borders
+- **Updated:** The default variant now has a visible border
+- The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
+
+**Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"` instead. While the styles are different, both where intended to be used on an `alt` background.
+
+🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
+
+```tsx
+// v15
+<Card variant="borderless">
+  <Card.Body>Content</Card.Body>
+</Card>
+
+// v16
+<Card variant="alt">
+  <Card.Body>Content</Card.Body>
+</Card>
+```
+
+##### Visual Updates
+
+- `Card.Heading` now defaults to `body.small` type level (previously `body.large`). If your design
+  requires a larger heading, you can override the `typeLevel` prop on `Card.Heading`.
+- The gap between `Card.Heading` and `Card.Body` has been reduced (previously `gap.lg`, now
+  `padding.sm`).
+- Card's border radius is now managed via the new `cornerShapeStencil` (see
+  [New Utilities](#new-utilities)).
+- The default variant now includes a visible border (`system.color.border.default`).
+- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with inverse borders.
+
+#### Expandable
+
+##### Visual Updates
+
+- `Expandable.Target` border radius changed from `shape.xxl` (24px, pill) to `shape.lg` (12px), now
+  managed via `cornerShapeStencil` (see [New Utilities](#new-utilities)).
+- Gap between `Expandable.Target` and `Expandable.Content` is now `gap.sm` (8px), set on the
+  `Expandable` container (previously handled entirely via `Expandable.Content`'s top padding).
+- `Expandable.Content` padding is now uniform `padding.xs` (8px) on all sides (previously
+  `padding.md` top / `padding.xs` sides and bottom).
 
 ### Indicators
 
@@ -808,6 +818,21 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
 - Container padding changed to `padding.md` (16px) including for mobile devices.
 - On mobile devices, the container padding remains `padding.md` (16px).
 
+### Table
+
+#### Visual Updates
+
+- `BaseTable` / `Table` outer border color updated from `system.legacy.color.border.strong` to
+  `system.legacy.color.border.default`.
+- `Table.Caption` divider (`borderBlockEnd`) updated from `system.legacy.color.border.strong` to
+  `system.legacy.color.border.default`.
+- Container corner radius is now **12px** (`shape.lg`, previously `shape.md` / 8px), managed via
+  `cornerShapeStencil` (see [New Utilities](#new-utilities)).
+- `Table.Header` (and `BaseTable.Header`) cell padding is now uniform `padding.md` (16px) on all
+  sides (previously asymmetric `padding.xs` vertically and `padding.md` horizontally).
+- Column header label text color is now `system.color.fg.strong` (previously inherited `fg.default`
+  from the table container).
+
 ### Toast
 
 **PR:** [#4053](https://github.com/Workday/canvas-kit/pull/4053)
@@ -866,8 +891,8 @@ export const myStencil = createStencil({
 });
 ```
 
-`Card`, `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`), and `MultiSelect` extend this stencil for
-their rounded corners.
+`Card`, `Expandable` (`Expandable.Target`), `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`), `MultiSelect`, and
+`Table` (`BaseTable`, `Table`) extend this stencil for their rounded corners.
 
 ## Deprecations
 
