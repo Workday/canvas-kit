@@ -6,41 +6,23 @@ export default create({
   base: 'light',
 
   // Branding
-  brandTitle: ` <div style="display: flex; align-items: center;">
-    <svg
-      width="36"
-      height="45"
-      viewBox="0 0 36 45"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style="margin-right: 12px;"
-    >
-      <path
-        d="M0 1.5C0 0.671574 0.671573 0 1.5 0H34.5C35.3284 0 36 0.671573 36 1.5V43.5C36 44.3284 35.3284 45 34.5 45H10.5C9.67157 45 9 44.3284 9 43.5V37.5C9 36.6716 8.32843 36 7.5 36H1.5C0.671573 36 0 35.3284 0 34.5V1.5Z"
-        fill="url(#paint0_linear_63_362)"
-      />
-      <path
-        d="M25.5 9C26.3284 9.00002 27 9.67159 27 10.5V16.5C27 17.3284 26.3284 18 25.5 18H19.5C18.6717 18 18.0002 18.6714 18 19.4996V25.5C18 26.3284 18.6715 27 19.5 27H25.5C26.3284 27 27 27.6716 27 28.5V34.5C27 35.3284 26.3259 36.0066 25.5003 35.9385C16.7553 35.2172 9.78275 28.2446 9.06148 19.4996C8.99339 18.674 9.67153 18 10.5 18H16.5L16.5769 17.9978C17.3694 17.9577 17.9999 17.3025 18 16.5V10.5C18 9.67157 18.6715 9 19.5 9H25.5Z"
-        fill="white"
-      />
-      <defs>
-        <linearGradient id="paint0_linear_63_362" x1="0" y1="0" x2="36" y2="45" gradientUnits="userSpaceOnUse">
-          <stop offset="0.0817308" stop-color="#0F2E66"/>
-          <stop offset="0.600962" stop-color="#B03286"/>
-          <stop offset="1" stop-color="#FF916E"/>
-        </linearGradient>
-      </defs>
+  brandImage: null,
+  brandTitle: `<div style="display: flex; align-items: center; gap: 12px; min-width: 0;">
+    <svg width="40" height="40" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: block; flex-shrink: 0;">
+      <rect width="120" height="120" rx="25" fill="#F3F5F7"/>
+      <path d="M96.7827 30.0557C98.6295 30.0557 100.141 31.5507 99.9895 33.382C99.1125 43.962 94.0889 53.3716 86.5405 60.0004C94.0889 66.6291 99.1125 76.0388 99.9895 86.6187C100.141 88.45 98.6295 89.9451 96.7827 89.9451H83.4072C81.5604 89.9451 80.0633 88.4555 80.0633 86.6179V73.3092C80.0633 71.4716 78.5662 69.982 76.7194 69.982H63.3439C61.4971 69.982 60 68.4923 60 66.6548V53.346C60 53.0365 60.0436 52.7367 60.1233 52.4525C60.5157 51.049 61.8083 50.0188 63.3439 50.0188H76.7194C78.5662 50.0188 80.0633 48.5291 80.0633 46.6916V33.3829C80.0633 31.5453 81.5604 30.0557 83.4072 30.0557H96.7827Z" fill="#2B2B2B"/>
+      <path d="M56.6561 30.0557C58.5028 30.0558 60 31.5454 60 33.3829V46.6916C60 48.5291 58.5028 50.0187 56.6561 50.0188H43.2806C41.4342 50.0189 39.9372 51.5081 39.9367 53.3452V66.6548C39.9367 68.4923 41.4338 69.982 43.2806 69.982H56.6561C58.5028 69.9821 60 71.4717 60 73.3092V86.6179C60 88.4554 58.4974 89.9596 56.6569 89.8086C37.1621 88.2088 21.6184 72.7427 20.0105 53.3452C19.8587 51.5139 21.3705 50.0188 23.2173 50.0188H36.5928L36.7642 50.0139C38.531 49.9249 39.9365 48.4716 39.9367 46.6916V33.3829C39.9367 31.5453 41.4338 30.0557 43.2806 30.0557H56.6561Z" fill="#2B2B2B"/>
     </svg>
-    <div style="display: flex; flex-direction: column; color: #0F2E66;">
-      <span style="font-size: 20px; font-weight: 600;">Canvas Kit</span>
-      <span style="font-size: 18px; font-weight: 500;">v${version}</span>
+    <div style="display: flex; flex-direction: column; color: rgba(3, 3, 3, 0.8392); min-width: 0;">
+      <span style="font-size: 20px; font-weight: 600; line-height: 1.2;">Canvas Kit</span>
+      <span style="font-size: 18px; font-weight: 500; line-height: 1.2;">v${version}</span>
     </div>
   </div>`,
   brandUrl: 'https://github.com/Workday/canvas-kit',
 
   // Primary UI
   colorPrimary: '#0F2E66',
-  colorSecondary: '#B03286',
+  colorSecondary: 'rgba(0, 87, 174, 1)',
 
   // UI
   appBg: '#ffffff',
@@ -55,13 +37,13 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: '#5D6775',
-  barSelectedColor: '#0F2E66',
+  barSelectedColor: '',
   barBg: '#ffffff',
 
   // Custom colors (used in UI extension if needed)
   brandColors: {
     primary: '#0F2E66', // base.blue900
-    pink: '#B03286', // base.magenta600
+    surfaceSelected: 'rgba(0, 127, 255, 0.1098)', // fg color
     coral: '#FF8778', // base.red300
     teal: '#019EAC', // base.teal500
     slate: '#5D6775', // base.slate600
