@@ -1,5 +1,4 @@
 import {stripIndent} from 'common-tags';
-import {describe, it} from 'vitest';
 
 import transform from '../migrateIcons';
 import {expectTransformFactory} from './expectTransformFactory';
@@ -7,7 +6,7 @@ import {expectTransformFactory} from './expectTransformFactory';
 const expectTransform = expectTransformFactory(transform);
 
 describe('migrateIcons', () => {
-  it('should not change the icon if it is not a Canvsa system icon', () => {
+  it('should not change the icon if it is not a Canvas system icon', () => {
     const input = stripIndent`
       import {undoIcon} from 'any-icon-library';
       import {SystemIcon} from '@workday/canvas-kit-react/icon';
@@ -18,7 +17,7 @@ describe('migrateIcons', () => {
     expectTransform(input, input);
   });
 
-  it('should replace the icon with the deprecated icon if it is a Canvas system icon', () => {
+  it('should replace a deprecated Canvas system icon with its fallback icon', () => {
     const input = stripIndent`
       import {academicAppointmentTitleIcon} from '@workday/canvas-system-icons-web';
       import {SystemIcon} from '@workday/canvas-kit-react/icon';
