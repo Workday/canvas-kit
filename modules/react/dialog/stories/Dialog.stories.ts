@@ -3,6 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 
 import mdxDoc from './Dialog.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {Basic as BasicExample} from './examples/Basic';
 import {Focus as FocusExample} from './examples/Focus';
 
@@ -24,4 +25,7 @@ export const Basic: Story = {
 };
 export const Focus: Story = {
   render: FocusExample,
+};
+export const Alt: Story = {
+  render: AltExample,
 };

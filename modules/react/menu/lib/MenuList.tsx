@@ -35,7 +35,6 @@ export const useMenuList = composeHooks(
 export const menuListStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    background: system.legacy.color.surface.popover,
     [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     padding: 0,
     gap: base.legacy.size25,
