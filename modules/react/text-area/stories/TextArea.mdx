@@ -274,25 +274,10 @@ const ref = React.useRef<HTMLTextAreaElement>(null);
 <FormField.Input as={TextArea} ref={ref} onChange={handleChange} value={value} />;
 ```
 
-| Requirement                        | How to satisfy                                                                                                                                          |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Visible label                      | **`FormField.Label`** with concise, meaningful text                                                                                                     |
-| Input wiring                       | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance                                                                                  |
-| Hint or error text _(conditional)_ | **`FormField.Hint`** when there is help or validation copy—required because `aria-describedby` is wired by default (see **Built-in Behaviors**)         |
-| Error state _(conditional)_        | `error="error"` on **`FormField`** and **`FormField.Hint`** prefixed with "Error:" so users who cannot perceive color can distinguish errors from hints |
-| Caution state _(conditional)_      | `error="caution"` on **`FormField`** with descriptive **`FormField.Hint`** (no `aria-invalid`)                                                          |
-| Required field _(conditional)_     | `isRequired` on **`FormField`**; consider a form-level note that asterisk (\*) marks required fields                                                    |
-| Disabled field _(conditional)_     | `disabled` on **`FormField.Input`** (passed through to `<textarea>`)                                                                                    |
-| Character limit _(conditional)_    | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`** for screen reader updates               |
-| Placeholder _(conditional)_        | Short format example on **`FormField.Input`** only—never as the sole label                                                                              |
-| Stable IDs _(conditional)_         | `id` prop on **`FormField`** when predictable `label-`, `input-`, and `hint-` IDs are needed for testing                                                |
-| Resize constraints _(conditional)_ | `resize` prop on **`TextArea`**; default to `Both` unless layout requires otherwise                                                                     |
-
-**Summary for code generation:**
-
-- **REQUIRED:** visible label, `FormField.Input as={TextArea}` wiring
-- **CONDITIONAL:** hint/error text, required state, disabled state, character limit with live
-  region, placeholder, stable `id`, resize constraints
+| Requirement                     | How to satisfy                                                                                                                                                                                    |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                      | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
+| Character limit _(conditional)_   | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`**. See [Aria Live Regions guide](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit) |
 
 ### Anti-Patterns
 
