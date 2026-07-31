@@ -92,7 +92,7 @@ export function writeNumericalBrandRamp(
     return;
   }
   (Object.keys(ramp) as Array<keyof (CanvasBrandRamp | CanvasActionBrandRamp)>).forEach(rampKey => {
-    if (options?.skipKeys?.has(rampKey)) {
+    if (options?.skipKeys?.has(String(rampKey))) {
       return;
     }
     const value = ramp[rampKey as keyof typeof ramp];
@@ -490,23 +490,20 @@ export function writeNumericalTheme(
     if (brandPalette.primary?.['600'] && Object.keys(brandPalette.primary).length === 1) {
       applyPrimaryBrandBundle(brandPalette.primary['600'], style);
       skipRamp.primary = new Set(['600']);
-      skipRamp.action = new Set(['base', 'dark', 'darkest']);
+      // Do not skip action keys — explicit `brand.action.*` must win over derived shades
+      // written by applyPrimaryBrandBundle (writeNumericalBrandRamp runs after).
     }
+    // Only the main ramp key triggers the family shortcut. Lone `'500'` (focus/border) must
+    // write 1:1 and must not overwrite critical600 / caution400 via the bundle.
     const critical = brandPalette.critical;
-    if (critical && Object.keys(critical).length === 1) {
-      const criticalColor = critical['600'] ?? critical['500'];
-      if (criticalColor) {
-        applyCriticalBrandBundle(criticalColor, style);
-        skipRamp.critical = new Set(Object.keys(critical));
-      }
+    if (critical?.['600'] && Object.keys(critical).length === 1) {
+      applyCriticalBrandBundle(critical['600'], style);
+      skipRamp.critical = new Set(['600']);
     }
     const caution = brandPalette.caution;
-    if (caution && Object.keys(caution).length === 1) {
-      const cautionColor = caution['400'] ?? caution['500'];
-      if (cautionColor) {
-        applyCautionBrandBundle(cautionColor, style);
-        skipRamp.caution = new Set(Object.keys(caution));
-      }
+    if (caution?.['400'] && Object.keys(caution).length === 1) {
+      applyCautionBrandBundle(caution['400'], style);
+      skipRamp.caution = new Set(['400']);
     }
     if (brandPalette.positive?.['600'] && Object.keys(brandPalette.positive).length === 1) {
       applyPositiveBrandBundle(brandPalette.positive['600'], style);

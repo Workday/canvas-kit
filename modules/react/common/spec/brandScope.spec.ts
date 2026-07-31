@@ -106,4 +106,41 @@ describe('writeNumericalTheme', () => {
     expect(style[system.color.brand.accent.positive as string]).toBe('darkolivegreen');
     expect(style[system.color.brand.focus.primary as string]).toBe('turquoise');
   });
+
+  it('lets explicit action keys win over primary[600] shortcut', () => {
+    const style: Record<string, string> = {};
+    writeNumericalTheme(
+      {
+        brand: {
+          primary: {'600': 'purple'},
+          action: {base: 'navy', dark: 'midnight', accent: 'turquoise'},
+        },
+      },
+      style,
+      'brand'
+    );
+
+    expect(style[brand.action.base as string]).toBe('navy');
+    expect(style[brand.action.dark as string]).toBe('midnight');
+    expect(style[brand.action.accent as string]).toBe('turquoise');
+    expect(style[brand.primary600 as string]).toBe('purple');
+  });
+
+  it('writes lone critical[500] without overwriting critical600', () => {
+    const style: Record<string, string> = {};
+    writeNumericalTheme({brand: {critical: {'500': 'orange'}}}, style, 'brand');
+
+    expect(style[brand.critical500 as string]).toBe('orange');
+    expect(style[brand.critical600 as string]).toBeUndefined();
+    expect(style[brand.error.base as string]).toBeUndefined();
+  });
+
+  it('writes lone caution[500] without overwriting caution400', () => {
+    const style: Record<string, string> = {};
+    writeNumericalTheme({brand: {caution: {'500': 'gold'}}}, style, 'brand');
+
+    expect(style[brand.caution500 as string]).toBe('gold');
+    expect(style[brand.caution400 as string]).toBeUndefined();
+    expect(style[brand.alert.base as string]).toBeUndefined();
+  });
 });

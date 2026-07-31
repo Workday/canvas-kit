@@ -66,22 +66,25 @@ export const usePopupStack = <E extends HTMLElement>(
     return localRef.current;
   });
 
-  // Forward only theme overrides (style) to the popup container when a theme was provided via
-  // CanvasProvider theme prop. We do NOT apply defaultBranding (className) so we don't create a
-  // cascade barrier—only the CSS variables the consumer overrode are set. This effect runs
-  // before PopupStack.add below so the container has the theme before it's shown (avoids blue→magenta flash).
+  // Forward only CSS custom properties to the popup container when a theme was provided via
+  // CanvasProvider. We do NOT apply defaultBranding (className) so we don't create a cascade
+  // barrier. Filter to `--*` keys and string values so consumer layout styles from the provider
+  // are not copied onto the popup stack. Runs before PopupStack.add to avoid a theme flash.
   React.useLayoutEffect(() => {
     const element = localRef.current;
     if (!element) {
       return undefined;
     }
-    const styleKeys = Object.keys(style);
+    const styleKeys = Object.keys(style).filter(key => key.startsWith('--'));
     if (styleKeys.length === 0) {
       return undefined;
     }
     for (const key of styleKeys) {
-      // @ts-ignore - token keys are CSS custom property names
-      element.style.setProperty(key, style[key]);
+      const value = style[key as keyof typeof style];
+      if (value == null || value === false) {
+        continue;
+      }
+      element.style.setProperty(key, String(value));
     }
     // No cleanup: leave theme on container so reopening doesn't flash
     return undefined;

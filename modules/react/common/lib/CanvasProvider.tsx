@@ -216,18 +216,24 @@ export const CanvasProvider = ({
     }
   }, [theme]);
 
+  // Computed className/style win over consumer props — do not re-spread `props` over them.
   const {className, style, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
   const cache = getCache();
-  const rest = {...elemProps, ...props};
 
   // Read parent context to support nested scoped providers
   const parentBrandStyle = React.useContext(CanvasBrandStyleContext);
 
-  // Merge parent style with current style, with current taking precedence
-  const mergedBrandStyle = React.useMemo(
-    () => ({...parentBrandStyle, ...style}),
-    [parentBrandStyle, style]
-  );
+  // Popup forwarding only needs CSS custom properties (not consumer layout styles).
+  const mergedBrandStyle = React.useMemo(() => {
+    const merged: React.CSSProperties = {};
+    for (const [key, value] of Object.entries({...parentBrandStyle, ...style})) {
+      if (key.startsWith('--') && value != null && value !== false) {
+        // @ts-ignore - CSS custom property key
+        merged[key] = String(value);
+      }
+    }
+    return merged;
+  }, [parentBrandStyle, style]);
 
   const emotionTheme = theme
     ? isNumericalTheme(theme)
@@ -241,8 +247,9 @@ export const CanvasProvider = ({
           ? theme.direction || defaultCanvasTheme.direction
           : theme?.canvas?.direction || defaultCanvasTheme.direction
       }
+      className={className}
+      {...(elemProps as React.HTMLAttributes<HTMLDivElement>)}
       style={style}
-      {...(rest as React.HTMLAttributes<HTMLDivElement>)}
     >
       {children}
     </div>

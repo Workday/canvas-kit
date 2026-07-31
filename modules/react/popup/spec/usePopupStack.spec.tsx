@@ -121,6 +121,23 @@ describe('usePopupStack', () => {
       }
     });
 
+    it('should not forward non-CSS-variable styles from CanvasProvider to the popup', async () => {
+      const wrapper = ({children}: {children: React.ReactNode}) => (
+        <CanvasProvider theme={{brand: {primary: {'600': '#123456'}}}} style={{padding: '16px'}}>
+          {children}
+        </CanvasProvider>
+      );
+
+      const {result} = renderHook(() => usePopupStack(), {wrapper});
+      const container = result.current.current;
+
+      await waitFor(() => {
+        expect(container?.style.getPropertyValue('--cnvs-brand-primary-600')).toBe('#123456');
+      });
+
+      expect(container?.style.padding).toBe('');
+    });
+
     it('should merge styles from nested CanvasProviders', async () => {
       const parentTheme = {
         brand: {
