@@ -15,7 +15,9 @@ Currently, teams using the Sana Canvas theme must pass `sanaCanvasProviderTheme`
 
 ### Simplified Default Setup
 
-Teams using Sana Canvas globally will use a simpler setup:
+"Using Sana Canvas globally" means setting `data-theme="sana-canvas"` on the `<html>` element
+(alongside importing the Sana CSS variables). Teams doing that can use a simpler setup — no
+`theme` prop on `CanvasProvider`:
 
 ```tsx
 // New recommended setup - no theme prop needed

@@ -81,10 +81,10 @@ export const usePopupStack = <E extends HTMLElement>(
     }
     for (const key of styleKeys) {
       const value = style[key as keyof typeof style];
-      if (value == null || value === false) {
+      if (typeof value !== 'string') {
         continue;
       }
-      element.style.setProperty(key, String(value));
+      element.style.setProperty(key, value);
     }
     // No cleanup: leave theme on container so reopening doesn't flash
     return undefined;

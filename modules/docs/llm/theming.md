@@ -97,7 +97,8 @@ import {base} from '@workday/canvas-tokens-web';
 </CanvasProvider>
 ```
 
-Popups (menus, selects, modals) portal to `document.body`. How theming reaches them:
+Popups (including menus, selects, modals, and toasts) portal to `document.body` — outside the
+parent component's DOM hierarchy. How theming reaches them:
 
 **Preferred — you control `<html>`:** set `data-theme="sana-canvas"` on `<html>`. Popups inherit
 Sana CSS variables automatically; no `theme` prop needed:
@@ -127,8 +128,9 @@ import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react
 `sanaCanvasProviderTheme` is also useful in tests without global Sana CSS or with custom popup
 hosts outside the normal document flow.
 
-See **Features/Theming → Sana Canvas** in Storybook for a side-by-side comparison of global and
-scoped branding.
+See the
+[Sana Canvas](https://workday.github.io/canvas-kit/?path=/story/features-theming--sana-canvas)
+Storybook story for a side-by-side comparison of global and scoped branding.
 
 View token documentation
 [here](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).

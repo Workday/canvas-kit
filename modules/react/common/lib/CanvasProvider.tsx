@@ -227,9 +227,9 @@ export const CanvasProvider = ({
   const mergedBrandStyle = React.useMemo(() => {
     const merged: React.CSSProperties = {};
     for (const [key, value] of Object.entries({...parentBrandStyle, ...style})) {
-      if (key.startsWith('--') && value != null && value !== false) {
+      if (key.startsWith('--') && typeof value === 'string') {
         // @ts-ignore - CSS custom property key
-        merged[key] = String(value);
+        merged[key] = value;
       }
     }
     return merged;
