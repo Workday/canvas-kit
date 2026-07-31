@@ -108,9 +108,20 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * Pass to `CanvasProvider` at app root when using global Sana CSS — forwards Sana brand
  * variables to popup containers.
  *
+ * **Note:** This is optional when `data-theme="sana-canvas"` is set on `<html>`.
+ * Popups naturally inherit CSS variables from the global theme. Only needed for:
+ * - Testing environments without global CSS
+ * - Custom popup containers outside normal document flow
+ * - Legacy applications transitioning to Sana
+ *
  * @example
  * ```tsx
- * // index.css: import sana/_variables.css last; <html data-theme="sana-canvas">
+ * // Typical setup - no theme prop needed
+ * import '@workday/canvas-tokens-web/css/sana/_variables.css';
+ * // <html data-theme="sana-canvas">
+ * <CanvasProvider><App /></CanvasProvider>
+ *
+ * // Edge case - testing without global CSS
  * <CanvasProvider theme={sanaCanvasProviderTheme}><App /></CanvasProvider>
  * ```
  */

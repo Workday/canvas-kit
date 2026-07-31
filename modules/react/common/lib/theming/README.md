@@ -73,6 +73,10 @@ import {base} from '@workday/canvas-tokens-web';
 For popup parity when using global Sana CSS, pass `sanaCanvasProviderTheme` at your root
 `CanvasProvider`. See the [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) for details.
 
+**Note:** In most cases with `data-theme="sana-canvas"` set globally, the theme prop is not needed
+as popups inherit CSS variables naturally. The `sanaCanvasProviderTheme` is primarily for edge cases
+like testing environments or custom popup containers.
+
 ## Bidirectionality (RTL Support)
 
 ### Setting RTL Direction
