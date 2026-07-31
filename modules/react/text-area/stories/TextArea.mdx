@@ -189,12 +189,16 @@ Canvas Kit applies these automatically when you compose `TextArea` with `FormFie
 - The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
 - Disabled text areas may be announced as unavailable and are skipped in the tab order.
 
-For a simple text area field, the DOM looks like:
+For a simple text area field without hint text, the DOM looks like:
 
 ```html
 <div>
   <label id="label-abc" for="input-abc">Leave a Review</label>
-  <textarea id="input-abc" aria-labelledby="label-abc"></textarea>
+  <textarea
+    id="input-abc"
+    aria-labelledby="label-abc"
+    aria-describedby="hint-abc"
+  ></textarea>
 </div>
 ```
 
