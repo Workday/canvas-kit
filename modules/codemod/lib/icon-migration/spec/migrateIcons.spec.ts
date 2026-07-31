@@ -26,6 +26,7 @@ describe('migrateIcons', () => {
         <SystemIcon icon={undoIcon} />
         <SystemIcon icon={{name: 'undoIcon'}} />
         <SystemIcon icon={config.undoIcon} />
+        <SystemIcon icon={{undoIcon: true}} />
       </>
     `;
 
@@ -37,6 +38,7 @@ describe('migrateIcons', () => {
         <SystemIcon icon={arrowUTurnLeftIcon} />
         <SystemIcon icon={{name: 'undoIcon'}} />
         <SystemIcon icon={config.undoIcon} />
+        <SystemIcon icon={{undoIcon: true}} />
       </>
     `;
 
