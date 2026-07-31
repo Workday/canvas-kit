@@ -109,10 +109,29 @@ describe('writeNumericalTheme', () => {
 
     expect(style[brand.action.base as string]).toBe('purple');
     expect(style[brand.action.accent as string]).toBe('turquoise');
+    expect(style[brand.primary500 as string]).toBe('turquoise');
     expect(style[system.color.brand.border.critical as string]).toBe('crimson');
     expect(style[system.color.brand.border.caution as string]).toBe('coral');
     expect(style[system.color.brand.accent.positive as string]).toBe('darkolivegreen');
+    // primary.500 is ramp-only — does not set focus
+    expect(style[system.color.brand.focus.primary as string]).toBeUndefined();
+  });
+
+  it('writes focus from focus.primary independently of primary ramp', () => {
+    const style: Record<string, string> = {};
+    writeNumericalTheme(
+      {
+        brand: {primary: {'600': 'purple'}},
+        focus: {primary: 'turquoise'},
+      },
+      style,
+      'brand'
+    );
+
+    expect(style[brand.primary600 as string]).toBe('purple');
     expect(style[system.color.brand.focus.primary as string]).toBe('turquoise');
+    expect(style[system.color.brand.border.primary as string]).toBe('turquoise');
+    expect(style[brand.primary500 as string]).toBeUndefined();
   });
 
   it('lets explicit action keys win over primary[600] shortcut', () => {

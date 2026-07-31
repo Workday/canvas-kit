@@ -38,17 +38,15 @@ export const BRAND_SCOPE_PRIMARY_BUNDLE = {
 
 /**
  * Independently brandable tokens — writable when explicitly provided,
- * but NEVER derived from primary.main / brand.primary.600.
+ * but NEVER derived from primary.main / brand.primary.600 / brand.primary.500.
  */
 export const BRAND_SCOPE_INDEPENDENT = {
   focus: {
     primary: system.color.brand.focus.primary,
-    brandToken: brand.primary500,
     semanticKey: 'focusOutline' as const,
   },
   border: {
     primary: system.color.brand.border.primary,
-    brandToken: brand.primary500,
     semanticKey: 'focusOutline' as const,
   },
 } as const;
@@ -253,9 +251,20 @@ export function writeSelectedShortcuts(
   }
 }
 
+/** Writes first-class focus shortcuts — never derived from brand.primary. */
+export function writeFocusShortcuts(
+  focus: CanvasNumericalBrandTheme['focus'] | undefined,
+  style: React.CSSProperties
+) {
+  if (!focus?.primary) {
+    return;
+  }
+  writeFocusBorderBundle(focus.primary, style);
+}
+
+/** Writes focus/border system tokens without touching brand.primary500. */
 function writeFocusBorderBundle(value: string, style: React.CSSProperties) {
   setStyleVar(style, brand.common.focusOutline, value);
-  setStyleVar(style, brand.primary500, value);
   if (BRAND_SCOPE_INDEPENDENT.focus.primary) {
     setStyleVar(style, BRAND_SCOPE_INDEPENDENT.focus.primary, value);
   }
@@ -264,7 +273,10 @@ function writeFocusBorderBundle(value: string, style: React.CSSProperties) {
   }
 }
 
-/** Writes focus/border from explicit common or brand.primary.500 input — never from primary.main. */
+/**
+ * Writes focus/border from explicit input — never from primary.main or primary.500.
+ * Numerical themes use {@link writeFocusShortcuts}; legacy uses `common.focusOutline`.
+ */
 export function writeIndependentBrandTokens(
   theme: CanvasProviderTheme | undefined,
   style: React.CSSProperties
@@ -274,10 +286,6 @@ export function writeIndependentBrandTokens(
   }
 
   if (isNumericalTheme(theme)) {
-    const focusValue = theme.brand?.primary?.['500'];
-    if (focusValue) {
-      writeFocusBorderBundle(focusValue, style);
-    }
     if (theme.system) {
       writeSystemBrandOverrides(theme.system, style);
     }
@@ -506,7 +514,7 @@ export function writeNumericalTheme(
       // Do not skip action keys — explicit `brand.action.*` must win over derived shades
       // written by applyPrimaryBrandBundle (writeNumericalBrandRamp runs after).
     }
-    // Only the main ramp key triggers the family shortcut. Lone `'500'` (focus/border) must
+    // Only the main ramp key triggers the family shortcut. Lone `'500'` must
     // write 1:1 and must not overwrite critical600 / caution400 via the bundle.
     const critical = brandPalette.critical;
     if (critical?.['600'] && Object.keys(critical).length === 1) {
@@ -537,6 +545,7 @@ export function writeNumericalTheme(
   }
 
   writeSelectedShortcuts(theme.selected, style);
+  writeFocusShortcuts(theme.focus, style);
   writeIndependentBrandTokens(theme, style);
 }
 

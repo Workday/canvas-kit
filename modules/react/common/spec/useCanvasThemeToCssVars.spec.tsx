@@ -42,6 +42,15 @@ describe('useCanvasThemeToCssVars — brand scope', () => {
     expect(result.current.style[system.color.brand.focus.primary as any]).toBe('teal');
   });
 
+  it('writes numerical focus.primary without touching primary500', () => {
+    const {result} = renderHook(() =>
+      useCanvasThemeToCssVars({brand: {primary: {'600': 'red'}}, focus: {primary: 'teal'}}, {})
+    );
+    expect(result.current.style[brand.primary600 as any]).toBe('red');
+    expect(result.current.style[system.color.brand.focus.primary as any]).toBe('teal');
+    expect(result.current.style[brand.primary500 as any]).toBeUndefined();
+  });
+
   it('writes error and alert tokens for brand-scope error/alert main', () => {
     const {result} = renderHook(() =>
       useCanvasThemeToCssVars(

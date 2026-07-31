@@ -77,7 +77,7 @@ variable.
 | You set | Components affected |
 | ------- | ------------------- |
 | `brand.primary['600']` alone | `PrimaryButton`, selected `Menu.Item` (text + background) |
-| `brand.primary['500']` | Focus rings, border primary (independent of `600`) |
+| `focus.primary` | Focus rings, border primary (independent of primary brand) |
 | `brand.action.*` | `PrimaryButton` (read before `brand.primary`) |
 | `brand.critical.*` | `TextInput` error, critical accents |
 | `brand.caution.*` | `TextInput` caution, caution focus |
@@ -86,7 +86,7 @@ variable.
 | `selected.fg` / `selected.surface` | Selected list/menu states directly |
 
 **Focus does not follow primary.** Setting only `brand.primary['600']` leaves focus rings at the
-default blue unless you also set `brand.primary['500']`.
+default blue unless you also set `focus.primary`.
 
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
