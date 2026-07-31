@@ -3,7 +3,7 @@ import {createContainer, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Box, BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {colorSpace, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {PillAvatar} from './PillAvatar';
 import {PillCount, pillCountStencil} from './PillCount';
@@ -63,7 +63,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.alt.default,
         fallback: system.legacy.color.surface.alt.default,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinColor: base.legacy.neutral1000,
         mixinValue: '0.0392',
       }),
       [buttonStencil.vars.border]: system.color.border.transparent,
@@ -75,7 +75,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.legacy.color.surface.alt.default,
         fallback: system.legacy.color.surface.alt.default,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
+        mixinColor: base.legacy.neutral1000,
         mixinValue: '0.0745',
       }),
       [buttonStencil.vars.label]: system.color.fg.stronger,
@@ -136,7 +136,7 @@ export const pillStencil = createStencil({
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.legacy.color.surface.alt.default,
             fallback: system.legacy.color.surface.alt.default,
-            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinColor: base.legacy.neutral1000,
             mixinValue: '0.0392',
           }),
           [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.transparent,
@@ -145,7 +145,7 @@ export const pillStencil = createStencil({
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.legacy.color.surface.alt.default,
             fallback: system.legacy.color.surface.alt.default,
-            mixinColor: system.legacy.color.surface.overlay.mixin,
+            mixinColor: base.legacy.neutral1000,
             mixinValue: '0.0745',
           }),
           [pillCountStencil.vars.backgroundColor]: system.legacy.color.surface.transparent,
