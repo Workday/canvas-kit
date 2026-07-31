@@ -21,6 +21,7 @@ import {
   writeNumericalTheme,
   writeSemanticTheme,
 } from './theming/brandScope';
+import {sanaCanvasProviderTheme} from './theming/sanaTheme';
 
 /**
  * Context for providing brand CSS variables to popup containers.
@@ -195,6 +196,24 @@ export const CanvasProvider = ({
   themeScope,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
+  // Add console warning for unnecessary sanaCanvasProviderTheme usage
+  React.useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      if (
+        theme === sanaCanvasProviderTheme &&
+        typeof document !== 'undefined' &&
+        document.documentElement.getAttribute('data-theme') === 'sana-canvas'
+      ) {
+        console.warn(
+          'Canvas Kit: You are passing sanaCanvasProviderTheme to CanvasProvider but ' +
+            'data-theme="sana-canvas" is already set globally. The theme prop is not needed ' +
+            'in this case and can be removed for simpler setup. See: ' +
+            'https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs'
+        );
+      }
+    }
+  }, [theme]);
+
   const {className, style, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
   const cache = getCache();
   const rest = {...elemProps, ...props};
