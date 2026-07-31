@@ -27,15 +27,15 @@ const stylesOverride = {
   }),
 };
 
-export const AlternatePanel = () => {
+export const OverlayPanel = () => {
   const {direction, toggleDirection} = useDirection();
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel variant="alternate">
+        <SidePanel variant="overlay">
           <SidePanel.ToggleButton aria-label="Collapse View" />
-          <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
+          <SidePanel.Heading size="small">Overlay Panel</SidePanel.Heading>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">
@@ -47,5 +47,20 @@ export const AlternatePanel = () => {
         </Flex>
       </Flex>
     </CanvasProvider>
+  );
+};
+
+const viewportStyles = createStyles({
+  height: px2rem(320),
+});
+
+export const AlternativePanel = () => {
+  return (
+    <Flex cs={viewportStyles}>
+      <SidePanel variant="alternative">
+        <SidePanel.ToggleButton aria-label="Collapse View" />
+        <SidePanel.Heading size="small">Alternative Panel</SidePanel.Heading>
+      </SidePanel>
+    </Flex>
   );
 };

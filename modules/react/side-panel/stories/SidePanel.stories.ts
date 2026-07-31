@@ -10,7 +10,10 @@ import {ExternalControl as ExternalControlExample} from './examples/ExternalCont
 import {Heading as HeadingExample} from './examples/Heading';
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
 import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
-import {AlternatePanel as AlternatePanelExample} from './examples/Variant';
+import {
+  AlternativePanel as AlternativePanelExample,
+  OverlayPanel as OverlayPanelExample,
+} from './examples/Variant';
 
 export default {
   title: 'Components/Containers/Side Panel',
@@ -31,8 +34,8 @@ export const Basic: Story = {
 export const Heading: Story = {
   render: HeadingExample,
 };
-export const AlternatePanel: Story = {
-  render: AlternatePanelExample,
+export const OverlayPanel: Story = {
+  render: OverlayPanelExample,
 };
 export const ExternalControl: Story = {
   render: ExternalControlExample,
@@ -45,4 +48,7 @@ export const AlwaysOpen: Story = {
 };
 export const OnStateTransition: Story = {
   render: OnStateTransitionExample,
+};
+export const AlternativePanel: Story = {
+  render: AlternativePanelExample,
 };
