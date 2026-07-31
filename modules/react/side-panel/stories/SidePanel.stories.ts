@@ -3,17 +3,15 @@ import {Meta, StoryObj} from '@storybook/react';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 
 import mdxDoc from './SidePanel.mdx';
+import {AlternativePanel as AlternativePanelExample} from './examples/AlternativePanel';
 import {AlwaysOpen as AlwaysOpenExample} from './examples/AlwaysOpen';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
 import {ExternalControl as ExternalControlExample} from './examples/ExternalControl';
 import {Heading as HeadingExample} from './examples/Heading';
 import {OnStateTransition as OnStateTransitionExample} from './examples/OnStateTransition';
+import {OverlayPanel as OverlayPanelExample} from './examples/OverlayPanel';
 import {RightOrigin as RightOriginExample} from './examples/RightOrigin';
-import {
-  AlternativePanel as AlternativePanelExample,
-  OverlayPanel as OverlayPanelExample,
-} from './examples/Variant';
 
 export default {
   title: 'Components/Containers/Side Panel',
@@ -34,6 +32,9 @@ export const Basic: Story = {
 export const Heading: Story = {
   render: HeadingExample,
 };
+export const AlternativePanel: Story = {
+  render: AlternativePanelExample,
+};
 export const OverlayPanel: Story = {
   render: OverlayPanelExample,
 };
@@ -48,7 +49,4 @@ export const AlwaysOpen: Story = {
 };
 export const OnStateTransition: Story = {
   render: OnStateTransitionExample,
-};
-export const AlternativePanel: Story = {
-  render: AlternativePanelExample,
 };
