@@ -1,7 +1,7 @@
 # Migration Codemod
 
 The **`icon-migration`** codemod reads deprecation metadata shipped with
-`@workday/canvas-system-icons-web` and updates imports and usages in your source files
+`@workday/canvas-system-icons-web` and updates imports and usage instances in your source files
 automatically. For what changed in v5 and package installation, see the
 [Sana Canvas Assets overview](/docs/guides-icon-migration-sana-canvas-assets-overview--docs).
 
