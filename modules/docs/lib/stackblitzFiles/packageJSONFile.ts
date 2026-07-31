@@ -24,7 +24,7 @@ export const packageJSONFile = `{
     "@workday/canvas-kit-react": "${version}",
     "@workday/canvas-kit-react-fonts": "^${version}",
     "@workday/canvas-kit-styling": "${version}",
-    "@workday/canvas-system-icons-web": "5.0.1",
+    "@workday/canvas-system-icons-web": "^5.0.3",
     "@workday/canvas-expressive-icons-web": "1.0.1",
     "@workday/canvas-tokens-web": "4.4.0-beta.11"
   },
