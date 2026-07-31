@@ -25,6 +25,7 @@ Soon to be...
   - [Avatar](#avatar)
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
+    - [Secondary Button](#secondary-button)
   - [Container Components](#container-components)
     - [Card](#card)
     - [Expandable](#expandable)
@@ -315,6 +316,11 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 <DeleteButton variant="outline">Delete</DeleteButton>;
 ```
 
+#### Secondary Button
+
+`SecondaryButton` now has a `transparent` `backgroundColor` and will not show on interactive states.
+The interactive states will now show on the `border`.
+
 ### Container Components
 
 **PR:** [#4088](https://github.com/Workday/canvas-kit/pull/4088)
@@ -366,7 +372,7 @@ The `Card` component's variants have been updated:
 - The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
 
 **Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"`
-instead. While the styles are different, both were intended to be used on an `alt` background.
+instead. While the styles are different, both where intended to be used on an `alt` background.
 
 🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
 
@@ -1012,13 +1018,6 @@ export const myStencil = createStencil({
 
 `Card`, `Expandable` (`Expandable.Target`), `Menu` (`Menu.Card`, `Menu.List`, `Menu.Item`),
 `MultiSelect`, and `Table` (`BaseTable`, `Table`) extend this stencil for their rounded corners.
-
-## Fonts
-
-Sana Canvas is a new theme available in v16, enabled by setting `data-theme="sana-canvas"` on
-`<html>` (or a scoped ancestor element). See our
-[Fonts guide](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs) for instructions
-on setting up the Sana Sans font required by this theme.
 
 ## Deprecations
 
