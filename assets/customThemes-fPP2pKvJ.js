@@ -1,1 +1,0 @@
-const r={palette:{primary:{main:"purple",contrast:"turquoise"},alert:{main:"coral"},error:{main:"crimson"},success:{main:"aquamarine"},neutral:{main:"gray"},common:{focusOutline:"turquoise"}}};export{r as c};
