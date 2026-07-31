@@ -5,6 +5,7 @@ import {brand, system} from '@workday/canvas-tokens-web';
 
 import {defaultCanvasTheme} from './theme';
 import {
+  CanvasActionBrandRamp,
   CanvasBrandRamp,
   CanvasNumericalBrandTheme,
   CanvasProviderTheme,
@@ -68,6 +69,13 @@ const brandColorMapping: Record<string, BrandColor> = {
   neutral: 'neutral',
 };
 
+/** Brand ramp keys defined in Sana CSS but not yet exported from canvas-tokens-web. */
+const EXTENDED_BRAND_TOKEN_MAP: Record<string, string> = {
+  neutral150: '--cnvs-brand-neutral-150',
+  neutral850: '--cnvs-brand-neutral-850',
+  neutralA150: '--cnvs-brand-neutral-a150',
+};
+
 const setStyleVar = (style: React.CSSProperties, token: string, value: string) => {
   // @ts-ignore - CSS custom property key
   style[token] = maybeWrapCSSVariables(value);
@@ -76,18 +84,18 @@ const setStyleVar = (style: React.CSSProperties, token: string, value: string) =
 /** Maps a numerical brand ramp onto `brand.<color><rampKey>` CSS variables. */
 export function writeNumericalBrandRamp(
   color: BrandColor | 'action',
-  ramp: CanvasBrandRamp | undefined,
+  ramp: CanvasBrandRamp | CanvasActionBrandRamp | undefined,
   style: React.CSSProperties,
   options?: {skipKeys?: Set<string>}
 ) {
   if (!ramp) {
     return;
   }
-  (Object.keys(ramp) as Array<keyof CanvasBrandRamp>).forEach(rampKey => {
+  (Object.keys(ramp) as Array<keyof (CanvasBrandRamp | CanvasActionBrandRamp)>).forEach(rampKey => {
     if (options?.skipKeys?.has(rampKey)) {
       return;
     }
-    const value = ramp[rampKey];
+    const value = ramp[rampKey as keyof typeof ramp];
     if (value == null) {
       return;
     }
@@ -95,7 +103,7 @@ export function writeNumericalBrandRamp(
       color === 'action'
         ? brand.action[rampKey as keyof typeof brand.action]
         : // @ts-ignore - dynamic token lookup
-          brand[`${color}${rampKey}`];
+          (brand[`${color}${rampKey}`] ?? EXTENDED_BRAND_TOKEN_MAP[`${color}${rampKey}`]);
     if (token) {
       setStyleVar(style, token, value);
     }
@@ -117,11 +125,27 @@ export function applyPrimaryBrandBundle(primaryColor: string, style: React.CSSPr
     setStyleVar(style, system.color.brand.accent.action, value);
   }
 
+  const selectedFg = colorSpace.pressed({
+    color: `var(${brand.primary600})`,
+    fallback: value,
+    colorType: 'accent',
+  });
+  const selectedSurface = colorSpace.darken({
+    color: system.color.bg.default,
+    fallback: 'white',
+    mixinColor: `var(${brand.primary600})`,
+    mixinValue: '0.11',
+  });
+
+  setStyleVar(style, brand.primary700, selectedFg);
+  setStyleVar(style, brand.primary.dark, selectedFg);
+  setStyleVar(style, brand.primaryA50, selectedSurface);
+
   if (BRAND_SCOPE_PRIMARY_BUNDLE.selected.fg) {
-    setStyleVar(style, BRAND_SCOPE_PRIMARY_BUNDLE.selected.fg, `var(${brand.primary700})`);
+    setStyleVar(style, BRAND_SCOPE_PRIMARY_BUNDLE.selected.fg, selectedFg);
   }
   if (BRAND_SCOPE_PRIMARY_BUNDLE.selected.surface) {
-    setStyleVar(style, BRAND_SCOPE_PRIMARY_BUNDLE.selected.surface, `var(${brand.primaryA50})`);
+    setStyleVar(style, BRAND_SCOPE_PRIMARY_BUNDLE.selected.surface, selectedSurface);
   }
 
   const hoverColor = colorSpace.hover({
@@ -136,6 +160,68 @@ export function applyPrimaryBrandBundle(primaryColor: string, style: React.CSSPr
   });
   setStyleVar(style, brand.action.dark, hoverColor);
   setStyleVar(style, brand.action.darkest, pressedColor);
+}
+
+/** Called when consumer sets only `error.main` or `brand.critical['600']`. */
+export function applyCriticalBrandBundle(criticalColor: string, style: React.CSSProperties) {
+  const value = maybeWrapCSSVariables(criticalColor);
+
+  setStyleVar(style, brand.error.base, value);
+  setStyleVar(style, brand.critical600, value);
+  setStyleVar(style, brand.critical500, value);
+
+  if (system.color.brand.accent.critical) {
+    setStyleVar(style, system.color.brand.accent.critical, value);
+  }
+  if (system.color.brand.fg.critical?.default) {
+    setStyleVar(style, system.color.brand.fg.critical.default, value);
+  }
+  if (system.color.brand.border.critical) {
+    setStyleVar(style, system.color.brand.border.critical, value);
+  }
+  if (system.color.brand.focus.critical) {
+    setStyleVar(style, system.color.brand.focus.critical, value);
+  }
+}
+
+/** Called when consumer sets only `alert.main` or `brand.caution['400']`. */
+export function applyCautionBrandBundle(cautionColor: string, style: React.CSSProperties) {
+  const value = maybeWrapCSSVariables(cautionColor);
+
+  setStyleVar(style, brand.alert.base, value);
+  setStyleVar(style, brand.caution400, value);
+  setStyleVar(style, brand.caution500, value);
+
+  if (system.color.brand.accent.caution) {
+    setStyleVar(style, system.color.brand.accent.caution, value);
+  }
+  if (system.color.brand.fg.caution?.default) {
+    setStyleVar(style, system.color.brand.fg.caution.default, value);
+  }
+  if (system.color.brand.border.caution) {
+    setStyleVar(style, system.color.brand.border.caution, value);
+  }
+  if (system.color.brand.focus.caution?.inner) {
+    setStyleVar(style, system.color.brand.focus.caution.inner, value);
+  }
+  if (system.color.brand.focus.caution?.outer) {
+    setStyleVar(style, system.color.brand.focus.caution.outer, value);
+  }
+}
+
+/** Called when consumer sets only `success.main` or `brand.positive['600']`. */
+export function applyPositiveBrandBundle(positiveColor: string, style: React.CSSProperties) {
+  const value = maybeWrapCSSVariables(positiveColor);
+
+  setStyleVar(style, brand.success.base, value);
+  setStyleVar(style, brand.positive600, value);
+
+  if (system.color.brand.accent.positive) {
+    setStyleVar(style, system.color.brand.accent.positive, value);
+  }
+  if (system.color.brand.fg.positive?.default) {
+    setStyleVar(style, system.color.brand.fg.positive.default, value);
+  }
 }
 
 /** Writes first-class selected shortcuts from numerical theme input. */
@@ -391,22 +477,47 @@ export function writeSemanticTheme(
   });
 }
 
-/** Writes numerical theme — brand scope applies primary shortcut; full scope is literal 1:1 only. */
+/** Writes numerical theme — brand scope applies per-family shortcuts; remaining keys write 1:1. */
 export function writeNumericalTheme(
   theme: CanvasNumericalBrandTheme,
   style: React.CSSProperties,
   scope: 'brand' | 'full'
 ) {
-  const primaryRamp = theme.brand?.primary;
-  const primaryOnly =
-    scope === 'brand' && primaryRamp?.['600'] && Object.keys(primaryRamp).length === 1;
+  const brandPalette = theme.brand;
+  const skipRamp: Partial<Record<BrandColor | 'action', Set<string>>> = {};
 
-  if (primaryOnly && primaryRamp?.['600']) {
-    applyPrimaryBrandBundle(primaryRamp['600'], style);
-  } else if (theme.brand) {
+  if (scope === 'brand' && brandPalette) {
+    if (brandPalette.primary?.['600'] && Object.keys(brandPalette.primary).length === 1) {
+      applyPrimaryBrandBundle(brandPalette.primary['600'], style);
+      skipRamp.primary = new Set(['600']);
+      skipRamp.action = new Set(['base', 'dark', 'darkest']);
+    }
+    const critical = brandPalette.critical;
+    if (critical && Object.keys(critical).length === 1) {
+      const criticalColor = critical['600'] ?? critical['500'];
+      if (criticalColor) {
+        applyCriticalBrandBundle(criticalColor, style);
+        skipRamp.critical = new Set(Object.keys(critical));
+      }
+    }
+    const caution = brandPalette.caution;
+    if (caution && Object.keys(caution).length === 1) {
+      const cautionColor = caution['400'] ?? caution['500'];
+      if (cautionColor) {
+        applyCautionBrandBundle(cautionColor, style);
+        skipRamp.caution = new Set(Object.keys(caution));
+      }
+    }
+    if (brandPalette.positive?.['600'] && Object.keys(brandPalette.positive).length === 1) {
+      applyPositiveBrandBundle(brandPalette.positive['600'], style);
+      skipRamp.positive = new Set(['600']);
+    }
+  }
+
+  if (brandPalette) {
     (['primary', 'critical', 'caution', 'positive', 'neutral', 'action'] as const).forEach(
       color => {
-        writeNumericalBrandRamp(color, theme.brand?.[color], style);
+        writeNumericalBrandRamp(color, brandPalette[color], style, {skipKeys: skipRamp[color]});
       }
     );
   }
@@ -420,9 +531,19 @@ export function writeBrandScopeSemantic(
   theme: PartialEmotionCanvasTheme,
   style: React.CSSProperties
 ) {
-  const rawMain = theme.canvas?.palette?.primary?.main;
-  if (rawMain) {
-    applyPrimaryBrandBundle(rawMain, style);
+  const palette = theme.canvas?.palette;
+
+  if (palette?.primary?.main) {
+    applyPrimaryBrandBundle(palette.primary.main, style);
+  }
+  if (palette?.error?.main) {
+    applyCriticalBrandBundle(palette.error.main, style);
+  }
+  if (palette?.alert?.main) {
+    applyCautionBrandBundle(palette.alert.main, style);
+  }
+  if (palette?.success?.main) {
+    applyPositiveBrandBundle(palette.success.main, style);
   }
   writeIndependentBrandTokens(theme, style);
 }

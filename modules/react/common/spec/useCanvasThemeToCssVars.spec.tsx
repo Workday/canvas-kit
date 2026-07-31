@@ -41,4 +41,23 @@ describe('useCanvasThemeToCssVars — brand scope', () => {
     expect(result.current.style[brand.action.base as any]).toBe('red');
     expect(result.current.style[system.color.brand.focus.primary as any]).toBe('teal');
   });
+
+  it('writes error and alert tokens for brand-scope error/alert main', () => {
+    const {result} = renderHook(() =>
+      useCanvasThemeToCssVars(
+        {
+          canvas: {
+            palette: {
+              error: {main: 'crimson'},
+              alert: {main: 'coral'},
+            },
+          },
+        },
+        {}
+      )
+    );
+    expect(result.current.style[system.color.brand.border.critical as any]).toBe('crimson');
+    expect(result.current.style[system.color.brand.border.caution as any]).toBe('coral');
+    expect(result.current.style[system.color.brand.focus.caution?.inner as any]).toBe('coral');
+  });
 });

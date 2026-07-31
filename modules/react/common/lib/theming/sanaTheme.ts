@@ -15,12 +15,22 @@
  * | `sanaCanvasNumericalTheme` | Numerical `brand` shape for popup forwarding |
  * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` with global Sana CSS |
  */
-import {brand} from '@workday/canvas-tokens-web';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 import type {CanvasNumericalBrandTheme} from './types';
 
 /** Reference a canvas-tokens CSS variable (resolves under `[data-theme="sana-canvas"]`). */
 const varRef = (token: string) => `var(${token})`;
+
+/**
+ * Sana extends the neutral ramp with steps not yet exported from canvas-tokens-web JS.
+ * Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ */
+const sanaBrandNeutral = {
+  '150': '--cnvs-brand-neutral-150',
+  '850': '--cnvs-brand-neutral-850',
+  A150: '--cnvs-brand-neutral-a150',
+} as const;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
@@ -33,7 +43,7 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       base: varRef(brand.neutral975),
       dark: varRef(brand.neutral950),
       darkest: varRef(brand.neutral900),
-      accent: varRef(brand.neutral0),
+      accent: varRef(base.neutral0),
       lightest: varRef(brand.neutral25),
       lighter: varRef(brand.neutral50),
       light: varRef(brand.neutral200),
@@ -42,7 +52,7 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       '25': varRef(brand.neutral25),
       '50': varRef(brand.neutral50),
       '100': varRef(brand.neutral100),
-      '150': varRef(brand.neutral150),
+      '150': varRef(sanaBrandNeutral['150']),
       '200': varRef(brand.neutral200),
       '300': varRef(brand.neutral300),
       '400': varRef(brand.neutral400),
@@ -50,14 +60,14 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       '600': varRef(brand.neutral600),
       '700': varRef(brand.neutral700),
       '800': varRef(brand.neutral800),
-      '850': varRef(brand.neutral850),
+      '850': varRef(sanaBrandNeutral['850']),
       '900': varRef(brand.neutral900),
       '950': varRef(brand.neutral950),
       '975': varRef(brand.neutral975),
       A25: varRef(brand.neutralA25),
       A50: varRef(brand.neutralA50),
       A100: varRef(brand.neutralA100),
-      A150: varRef(brand.neutralA150),
+      A150: varRef(sanaBrandNeutral.A150),
       A200: varRef(brand.neutralA200),
     },
     primary: {

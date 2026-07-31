@@ -297,6 +297,7 @@ export type CanvasBrandRamp = Partial<
     | '25'
     | '50'
     | '100'
+    | '150'
     | '200'
     | '300'
     | '400'
@@ -304,13 +305,23 @@ export type CanvasBrandRamp = Partial<
     | '600'
     | '700'
     | '800'
+    | '850'
     | '900'
     | '950'
     | '975'
     | 'A25'
     | 'A50'
     | 'A100'
+    | 'A150'
     | 'A200',
+    string
+  >
+>;
+
+/** Semantic keys for `brand.action.*` CSS variables (PrimaryButton, etc.). */
+export type CanvasActionBrandRamp = Partial<
+  Record<
+    'base' | 'lightest' | 'lighter' | 'light' | 'dark' | 'darkest' | 'darker' | 'accent',
     string
   >
 >;
@@ -378,7 +389,7 @@ export interface CanvasNumericalBrandTheme {
      * | `dark` / `darkest` | PrimaryButton hover / pressed |
      * | `accent` | PrimaryButton label color |
      */
-    action?: CanvasBrandRamp;
+    action?: CanvasActionBrandRamp;
 
     /**
      * Critical/error ramp (`--cnvs-brand-critical-*`).
@@ -537,7 +548,8 @@ export function resolveThemingScope(theme: CanvasProviderTheme | undefined): Can
       continue;
     }
     for (const key of Object.keys(colorPalette)) {
-      if (color === 'primary' && key === 'main') {
+      // `main` alone uses brand-scope bundles for every semantic palette color.
+      if (key === 'main') {
         continue;
       }
       if (EXTENDED_RAMP_KEYS.has(key)) {

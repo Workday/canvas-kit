@@ -37,4 +37,12 @@ describe('resolveThemingScope', () => {
       'brand'
     );
   });
+
+  it('error and alert main-only input stays on brand scope', () => {
+    expect(
+      resolveThemingScope({
+        canvas: {palette: {error: {main: 'crimson'}, alert: {main: 'coral'}}},
+      })
+    ).toBe('brand');
+  });
 });

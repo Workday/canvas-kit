@@ -22,6 +22,14 @@ import {
   writeSemanticTheme,
 } from './theming/brandScope';
 
+/**
+ * Context for providing brand CSS variables to popup containers.
+ * This carries the resolved CSS variable style map from CanvasProvider
+ * to usePopupStack for proper popup theming, regardless of whether
+ * a numerical or legacy theme is used.
+ */
+export const CanvasBrandStyleContext = React.createContext<React.CSSProperties>({});
+
 export interface CanvasProviderProps {
   /**
    * ⚠️ Only use this prop if you intent to to theme a part of your application that is different from global theming.
@@ -187,9 +195,19 @@ export const CanvasProvider = ({
   themeScope,
   ...props
 }: CanvasProviderProps & React.HTMLAttributes<HTMLElement>) => {
-  const {className, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
+  const {className, style, ...elemProps} = useCanvasThemeToCssVars(theme, props, themeScope);
   const cache = getCache();
   const rest = {...elemProps, ...props};
+
+  // Read parent context to support nested scoped providers
+  const parentBrandStyle = React.useContext(CanvasBrandStyleContext);
+
+  // Merge parent style with current style, with current taking precedence
+  const mergedBrandStyle = React.useMemo(
+    () => ({...parentBrandStyle, ...style}),
+    [parentBrandStyle, style]
+  );
+
   const emotionTheme = theme
     ? isNumericalTheme(theme)
       ? ({canvas: defaultCanvasTheme} as Theme)
@@ -202,15 +220,26 @@ export const CanvasProvider = ({
           ? theme.direction || defaultCanvasTheme.direction
           : theme?.canvas?.direction || defaultCanvasTheme.direction
       }
+      style={style}
       {...(rest as React.HTMLAttributes<HTMLDivElement>)}
     >
       {children}
     </div>
   );
 
+  const wrappedContent = (
+    <CanvasBrandStyleContext.Provider value={mergedBrandStyle}>
+      {content}
+    </CanvasBrandStyleContext.Provider>
+  );
+
   return (
     <CacheProvider value={cache}>
-      {emotionTheme ? <ThemeProvider theme={emotionTheme}>{content}</ThemeProvider> : content}
+      {emotionTheme ? (
+        <ThemeProvider theme={emotionTheme}>{wrappedContent}</ThemeProvider>
+      ) : (
+        wrappedContent
+      )}
     </CacheProvider>
   );
 };
