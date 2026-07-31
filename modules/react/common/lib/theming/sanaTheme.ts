@@ -13,7 +13,7 @@
  * | Preset | Use case |
  * |--------|----------|
  * | `sanaCanvasNumericalTheme` | Numerical `brand` shape for popup forwarding |
- * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` with global Sana CSS |
+ * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` when `<html>` is unavailable |
  */
 import {base, brand} from '@workday/canvas-tokens-web';
 
@@ -105,23 +105,27 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
 };
 
 /**
- * Pass to `CanvasProvider` at app root when using global Sana CSS — forwards Sana brand
- * variables to popup containers.
+ * Pass to root `CanvasProvider` to forward Sana brand CSS variables onto popup containers
+ * (menus, selects, modals, tooltips).
  *
- * **Note:** This is optional when `data-theme="sana-canvas"` is set on `<html>`.
- * Popups naturally inherit CSS variables from the global theme. Only needed for:
- * - Testing environments without global CSS
- * - Custom popup containers outside normal document flow
- * - Legacy applications transitioning to Sana
+ * **When to use it**
+ * - **Required** when you cannot set `data-theme="sana-canvas"` on `<html>` (embedded apps,
+ *   microfrontends, third-party shells). Popups portal to `document.body` and will not inherit
+ *   a nested `data-theme` — this preset copies Sana brand vars onto the popup stack container.
+ * - Also useful in tests without global Sana CSS, or custom popup hosts outside normal cascade.
+ *
+ * **When you can skip it**
+ * - Prefer setting `data-theme="sana-canvas"` on `<html>` with Sana CSS imported. Popups then
+ *   inherit brand variables from the document and no `theme` prop is needed.
  *
  * @example
  * ```tsx
- * // Typical setup - no theme prop needed
+ * // Preferred — control <html>
  * import '@workday/canvas-tokens-web/css/sana/_variables.css';
  * // <html data-theme="sana-canvas">
  * <CanvasProvider><App /></CanvasProvider>
  *
- * // Edge case - testing without global CSS
+ * // No access to <html> — required for popup parity
  * <CanvasProvider theme={sanaCanvasProviderTheme}><App /></CanvasProvider>
  * ```
  */

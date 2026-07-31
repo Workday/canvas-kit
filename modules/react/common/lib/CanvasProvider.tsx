@@ -206,8 +206,10 @@ export const CanvasProvider = ({
       ) {
         console.warn(
           'Canvas Kit: You are passing sanaCanvasProviderTheme to CanvasProvider but ' +
-            'data-theme="sana-canvas" is already set globally. The theme prop is not needed ' +
-            'in this case and can be removed for simpler setup. See: ' +
+            'data-theme="sana-canvas" is already set on <html>. The theme prop is not needed ' +
+            'in this case and can be removed. Keep sanaCanvasProviderTheme when you cannot ' +
+            'control <html> (embedded apps / microfrontends) so popups still get Sana brand ' +
+            'variables. See: ' +
             'https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs'
         );
       }

@@ -38,18 +38,24 @@ The CSS setup remains unchanged:
 
 ### When Theme Prop Is Still Needed
 
-The `sanaCanvasProviderTheme` remains available for specific scenarios:
+The `sanaCanvasProviderTheme` remains available — and is **required for popup parity** — in these scenarios:
 
-1. **Scoped Theming**: When a section needs different branding
+1. **No access to `<html>`**: Embedded apps, microfrontends, and third-party shells that cannot set
+   `data-theme="sana-canvas"` on `<html>`. Nested `data-theme` does not reach portaled popups.
+   ```tsx
+   <CanvasProvider theme={sanaCanvasProviderTheme}>
+     <App />
+   </CanvasProvider>
+   ```
+
+2. **Scoped Theming**: When a section needs different branding
    ```tsx
    <CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
      <ScopedSection />
    </CanvasProvider>
    ```
 
-2. **Testing**: When global CSS isn't loaded in test environments
-
-3. **Legacy Migration**: Applications transitioning to Sana incrementally
+3. **Testing**: When global CSS isn't loaded in test environments
 
 4. **Edge Cases**: Custom popup containers rendered outside normal document flow
 

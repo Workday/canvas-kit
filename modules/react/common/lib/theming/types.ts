@@ -356,7 +356,7 @@ export type CanvasThemingScope = 'brand' | 'full';
  * }} />
  * ```
  *
- * @see sanaCanvasProviderTheme for Sana global theme + popup parity
+ * @see sanaCanvasProviderTheme when `<html>` is unavailable and popups need Sana brand forwarding
  */
 export interface CanvasNumericalBrandTheme {
   brand?: {

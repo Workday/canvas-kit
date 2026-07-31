@@ -70,12 +70,27 @@ import {base} from '@workday/canvas-tokens-web';
 </CanvasProvider>
 ```
 
-For popup parity when using global Sana CSS, pass `sanaCanvasProviderTheme` at your root
-`CanvasProvider`. See the [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) for details.
+### Popups and `sanaCanvasProviderTheme`
 
-**Note:** In most cases with `data-theme="sana-canvas"` set globally, the theme prop is not needed
-as popups inherit CSS variables naturally. The `sanaCanvasProviderTheme` is primarily for edge cases
-like testing environments or custom popup containers.
+Popups (menus, selects, modals) portal to `document.body`. Theme inheritance depends on where
+`data-theme="sana-canvas"` lives:
+
+- **You control `<html>`:** set `data-theme="sana-canvas"` there. Popups inherit Sana variables —
+  no `theme` prop needed.
+- **You cannot control `<html>`** (embedded apps, microfrontends, third-party shells): pass
+  `sanaCanvasProviderTheme` to your root `CanvasProvider`. Nested `data-theme` on a wrapper does
+  not reach portaled popups; this preset forwards Sana brand variables onto the popup stack.
+
+```tsx
+import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+
+// Required when <html> is unavailable
+<CanvasProvider theme={sanaCanvasProviderTheme}>
+  <App />
+</CanvasProvider>
+```
+
+See the [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) for details.
 
 ## Bidirectionality (RTL Support)
 

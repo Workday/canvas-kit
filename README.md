@@ -87,6 +87,17 @@ export const App = () => {
 };
 ```
 
+If you cannot control `<html>` (embedded apps, microfrontends), pass `sanaCanvasProviderTheme`
+instead so menus, selects, and other popups still get Sana brand variables:
+
+```jsx
+import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider theme={sanaCanvasProviderTheme}>
+  <App />
+</CanvasProvider>
+```
+
 > **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from
 > `@workday/canvas-tokens-web`. For more information, view our
 > [Token docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).

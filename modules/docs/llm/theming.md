@@ -97,20 +97,35 @@ import {base} from '@workday/canvas-tokens-web';
 </CanvasProvider>
 ```
 
-Popups (menus, selects, modals) portal to `document.body` and inherit CSS variables from
-`[data-theme="sana-canvas"]` automatically. In most cases, no theme prop is needed:
+Popups (menus, selects, modals) portal to `document.body`. How theming reaches them:
+
+**Preferred — you control `<html>`:** set `data-theme="sana-canvas"` on `<html>`. Popups inherit
+Sana CSS variables automatically; no `theme` prop needed:
 
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
-// Simple setup - popups inherit global Sana theme
+// <html data-theme="sana-canvas">
 <CanvasProvider>
   <App />
 </CanvasProvider>
 ```
 
-**Note:** The `sanaCanvasProviderTheme` export remains available for edge cases like testing
-environments without global CSS or custom popup containers outside the normal document flow.
+**Required — no access to `<html>`:** embedded apps, microfrontends, and third-party shells often
+cannot set attributes on `<html>`. A nested `data-theme` on a wrapper does **not** apply to
+portaled popups. Pass `sanaCanvasProviderTheme` so Canvas Kit forwards Sana brand variables onto
+the popup stack container:
+
+```tsx
+import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider theme={sanaCanvasProviderTheme}>
+  <App />
+</CanvasProvider>
+```
+
+`sanaCanvasProviderTheme` is also useful in tests without global Sana CSS or with custom popup
+hosts outside the normal document flow.
 
 See **Features/Theming → Sana Canvas** in Storybook for a side-by-side comparison of global and
 scoped branding.
