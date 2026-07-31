@@ -24,8 +24,8 @@ Soon to be...
   - [Avatar](#avatar)
   - [Buttons](#buttons)
     - [Delete Button Outline Variant](#delete-button-outline-variant)
-	- [Container Components](#container-components)
-	  - [Card](#card)
+  - [Container Components](#container-components)
+    - [Card](#card)
     - [Expandable](#expandable)
   - [Indicators](#indicators)
     - [Banner](#banner)
@@ -54,6 +54,7 @@ Soon to be...
     - [Pagination](#pagination)
   - [Popup](#popup)
   - [Segmented Control](#segmented-control)
+  - [Side Panel](#side-panel)
   - [Table](#table)
   - [Toast](#toast)
   - [Tooltip](#tooltip)
@@ -265,7 +266,8 @@ import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 #### Alt Variant Support
 
-Several container components now support an `alt` variant that provides an elevated surface appearance:
+Several container components now support an `alt` variant that provides an elevated surface
+appearance:
 
 - `Menu.Card` - Can use `variant="alt"` for elevated menu styling
 - `Dialog.Card` - Can use `variant="alt"` for elevated dialog styling
@@ -273,7 +275,8 @@ Several container components now support an `alt` variant that provides an eleva
 - `Toast` - Can use `variant="alt"` for elevated toast styling
 - `Tooltip` - Can use `variant="alt"` for elevated tooltip styling
 
-The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders, providing visual hierarchy and depth to these components when placed on an alt background.
+The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders,
+providing visual hierarchy and depth to these components when placed on an alt background.
 
 ```tsx
 // Examples of using the alt variant
@@ -295,17 +298,20 @@ The `alt` variant uses `system.sana.color.surface.elevated` background with inve
 
 #### Card
 
-**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014), [#4088](https://github.com/Workday/canvas-kit/pull/4088)
+**PR:** [#4014](https://github.com/Workday/canvas-kit/pull/4014),
+[#4088](https://github.com/Workday/canvas-kit/pull/4088)
 
 ##### Variant Changes
 
 The `Card` component's variants have been updated:
+
 - **Removed:** The `borderless` variant has been removed and replaced with `alt`
 - **New:** The `alt` variant provides an elevated surface with inverse borders
 - **Updated:** The default variant now has a visible border
 - The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
 
-**Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"` instead. While the styles are different, both where intended to be used on an `alt` background.
+**Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"`
+instead. While the styles are different, both where intended to be used on an `alt` background.
 
 🤖 The codemod will automatically update `variant="borderless"` to `variant="alt"`.
 
@@ -330,7 +336,8 @@ The `Card` component's variants have been updated:
 - Card's border radius is now managed via the new `cornerShapeStencil` (see
   [New Utilities](#new-utilities)).
 - The default variant now includes a visible border (`system.color.border.default`).
-- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with inverse borders.
+- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with
+  inverse borders.
 
 #### Expandable
 
@@ -818,6 +825,62 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
   `surface.overlay.pressed.default` respectively for the item.
 - Container padding changed to `padding.md` (16px) including for mobile devices.
 - On mobile devices, the container padding remains `padding.md` (16px).
+
+### Side Panel
+
+**PR:** [#4107](https://github.com/Workday/canvas-kit/pull/4107)
+
+#### Breaking Changes
+
+The `variant` prop on `SidePanel` no longer accepts `alternate`. It has been renamed to `overlay` to
+describe what the variant is for — a panel that floats above page content — because a second
+non-overlay variant now occupies the "alternative surface" role.
+
+```tsx
+import {SidePanel} from '@workday/canvas-kit-react/side-panel';
+
+// Before
+<SidePanel variant="alternate">{/* ... */}</SidePanel>
+
+// After
+<SidePanel variant="overlay">{/* ... */}</SidePanel>
+```
+
+> 🤖 The `v16` codemod will rename `variant="alternate"` to `variant="overlay"` as shown above. It
+> only transforms `SidePanel` imported from `@workday/canvas-kit-react`; the deprecated `SidePanel`
+> in `@workday/canvas-kit-preview-react` is left alone.
+
+If you were using `alternate` for a panel that sits inline with page content rather than over it,
+switch to the new `alternative` variant instead of `overlay` to avoid picking up the elevation
+shadow.
+
+#### New API
+
+- `variant="alternative"` — uses a raised surface (`system.legacy.color.surface.raised`) with no
+  depth. Use it for panels that need to stand out from the page background while remaining part of
+  the page layout.
+
+The full set of variants is now:
+
+| Variant       | Surface                                  | Depth |
+| ------------- | ---------------------------------------- | ----- |
+| `standard`    | `system.legacy.color.surface.navigation` | None  |
+| `alternative` | `system.legacy.color.surface.raised`     | None  |
+| `overlay`     | `system.legacy.color.surface.default`    | 6     |
+
+#### Visual Updates
+
+- The `overlay` variant's box-shadow updated from `system.depth[3]` to `system.depth[6]`.
+- `SidePanel.ToggleButton`'s default icon changed from `extendIcon` to `sidebarLeftIcon`. The icon
+  no longer rotates as the panel expands and collapses: it keeps a single orientation in LTR and is
+  mirrored horizontally in RTL.
+- `SidePanel.ToggleButton`'s width changed from `gap.lg` (24px) to `size.md` (40px), and its top
+  offset changed from `gap.lg` (24px) to `12px`.
+- `SidePanel.Heading` padding changed from a symmetric `padding.xs` (8px) to `padding.sm` (12px)
+  with a `paddingInlineStart` of `padding.md` (16px), and it now has a `minHeight` of `size.xxl`
+  (64px) so the heading lines up with the toggle button and the collapsed panel width.
+- `SidePanel.Heading` now lays out its children with flexbox and centers them vertically, so an icon
+  passed alongside the heading text aligns without extra styling.
 
 ### Table
 
