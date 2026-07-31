@@ -7,6 +7,7 @@ import {defaultCanvasTheme} from './theme';
 import {
   CanvasActionBrandRamp,
   CanvasBrandRamp,
+  CanvasNeutralBrandRamp,
   CanvasNumericalBrandTheme,
   CanvasProviderTheme,
   CanvasTheme,
@@ -84,14 +85,18 @@ const setStyleVar = (style: React.CSSProperties, token: string, value: string) =
 /** Maps a numerical brand ramp onto `brand.<color><rampKey>` CSS variables. */
 export function writeNumericalBrandRamp(
   color: BrandColor | 'action',
-  ramp: CanvasBrandRamp | CanvasActionBrandRamp | undefined,
+  ramp: CanvasBrandRamp | CanvasNeutralBrandRamp | CanvasActionBrandRamp | undefined,
   style: React.CSSProperties,
   options?: {skipKeys?: Set<string>}
 ) {
   if (!ramp) {
     return;
   }
-  (Object.keys(ramp) as Array<keyof (CanvasBrandRamp | CanvasActionBrandRamp)>).forEach(rampKey => {
+  (
+    Object.keys(ramp) as Array<
+      keyof (CanvasBrandRamp | CanvasNeutralBrandRamp | CanvasActionBrandRamp)
+    >
+  ).forEach(rampKey => {
     if (options?.skipKeys?.has(String(rampKey))) {
       return;
     }
@@ -222,6 +227,14 @@ export function applyPositiveBrandBundle(positiveColor: string, style: React.CSS
   if (system.color.brand.fg.positive?.default) {
     setStyleVar(style, system.color.brand.fg.positive.default, value);
   }
+}
+
+/** Called when consumer sets only `neutral.main` or `brand.neutral['600']`. */
+export function applyNeutralBrandBundle(neutralColor: string, style: React.CSSProperties) {
+  const value = maybeWrapCSSVariables(neutralColor);
+
+  setStyleVar(style, brand.neutral.base, value);
+  setStyleVar(style, brand.neutral600, value);
 }
 
 /** Writes first-class selected shortcuts from numerical theme input. */
@@ -509,6 +522,10 @@ export function writeNumericalTheme(
       applyPositiveBrandBundle(brandPalette.positive['600'], style);
       skipRamp.positive = new Set(['600']);
     }
+    if (brandPalette.neutral?.['600'] && Object.keys(brandPalette.neutral).length === 1) {
+      applyNeutralBrandBundle(brandPalette.neutral['600'], style);
+      skipRamp.neutral = new Set(['600']);
+    }
   }
 
   if (brandPalette) {
@@ -541,6 +558,9 @@ export function writeBrandScopeSemantic(
   }
   if (palette?.success?.main) {
     applyPositiveBrandBundle(palette.success.main, style);
+  }
+  if (palette?.neutral?.main) {
+    applyNeutralBrandBundle(palette.neutral.main, style);
   }
   writeIndependentBrandTokens(theme, style);
 }

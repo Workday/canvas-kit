@@ -50,7 +50,7 @@ export const StaticStates: React.FC<
   // Nest ThemeProvider *inside* CanvasProvider so CanvasProvider's own ThemeProvider
   // (used for legacy Emotion theme consumers) does not wipe `_styleRewriteFn`.
   return (
-    <CanvasProvider className={className} data-theme="sana-canvas" {...elemProps} theme={theme}>
+    <CanvasProvider className={className} {...elemProps} theme={theme}>
       <ThemeProvider theme={localTheme}>{children}</ThemeProvider>
     </CanvasProvider>
   );

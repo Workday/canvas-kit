@@ -5,12 +5,7 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 import {base} from '@workday/canvas-tokens-web';
 
 export const ThemingBrandScope = () => (
-  <CanvasProvider
-    theme={{
-      brand: {primary: {'600': base.magenta600}},
-      selected: {surface: base.magentaA50, fg: base.magenta700},
-    }}
-  >
+  <CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
     <Card>
       <Card.Heading>Brand scope</Card.Heading>
       <Card.Body>

@@ -1,4 +1,4 @@
-import {isNumericalTheme, resolveThemingScope} from '../lib/theming/types';
+import {ContentDirection, isNumericalTheme, resolveThemingScope} from '../lib/theming/types';
 
 describe('isNumericalTheme', () => {
   it('is false for the deprecated shape', () => {
@@ -7,6 +7,11 @@ describe('isNumericalTheme', () => {
 
   it('is true for the numerical shape', () => {
     expect(isNumericalTheme({brand: {primary: {'600': 'red'}}})).toBe(true);
+  });
+
+  it('is true for direction-only and themeScope-only numerical themes', () => {
+    expect(isNumericalTheme({direction: ContentDirection.RTL})).toBe(true);
+    expect(isNumericalTheme({themeScope: 'brand'})).toBe(true);
   });
 
   it('is false for undefined and empty', () => {

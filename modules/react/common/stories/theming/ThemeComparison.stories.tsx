@@ -35,7 +35,7 @@ export const SanaCanvas = {
     docs: {
       description: {
         story:
-          'Default global Sana theme (`data-theme="sana-canvas"`). Compare with Canvas using `?theme=canvas` in the URL.',
+          'Side-by-side branding fixtures. The second column intentionally uses scoped `sanaCanvasProviderTheme` (may log the global-theme console warning in Storybook). Compare with Canvas using `?theme=canvas` in the URL.',
       },
     },
     chromatic: {disable: false},

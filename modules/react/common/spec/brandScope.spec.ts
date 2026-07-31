@@ -80,6 +80,14 @@ describe('writeBrandScopeSemantic', () => {
     expect(style[system.color.brand.border.critical as string]).toBe('crimson');
     expect(style[system.color.brand.border.caution as string]).toBe('coral');
   });
+
+  it('applies neutral.main via the neutral brand bundle', () => {
+    const style: Record<string, string> = {};
+    writeBrandScopeSemantic({canvas: {palette: {neutral: {main: 'gray'}}}}, style);
+
+    expect(style[brand.neutral.base as string]).toBe('gray');
+    expect(style[brand.neutral600 as string]).toBe('gray');
+  });
 });
 
 describe('writeNumericalTheme', () => {

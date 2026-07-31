@@ -43,7 +43,9 @@ export type BrandingFixtureProps = {
 
 const columnStyles = createStyles({
   backgroundColor: system.color.bg.alt.default,
-  width: '100vw',
+  flex: '1 1 280px',
+  minWidth: '280px',
+  maxWidth: '100%',
 });
 
 export const BrandingFixture = ({label, scopedTheme}: BrandingFixtureProps) => {

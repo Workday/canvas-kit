@@ -5,6 +5,11 @@ import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 
+/**
+ * Scoped Sana setup for popup parity: `data-theme` themes the in-tree UI, and
+ * `sanaCanvasProviderTheme` forwards brand CSS variables onto portaled popups
+ * (menus, selects, modals) that render under `document.body`.
+ */
 export const SimplifiedSetup = () => {
   const myModel = usePopupModel();
   useCloseOnOutsideClick(myModel);

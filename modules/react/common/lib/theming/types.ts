@@ -291,13 +291,14 @@ export type EmotionCanvasTheme = {canvas: CanvasTheme};
  * - `'500'` — focus rings and border primary (independent of `'600'`)
  * - `'A50'` — selected surface tint (when not using `selected.surface`)
  * - `'25'` / `'A25'` — subtle brand surfaces
+ *
+ * Neutral-only Sana steps (`'150'`, `'850'`, `'A150'`) live on {@link CanvasNeutralBrandRamp}.
  */
 export type CanvasBrandRamp = Partial<
   Record<
     | '25'
     | '50'
     | '100'
-    | '150'
     | '200'
     | '300'
     | '400'
@@ -305,18 +306,23 @@ export type CanvasBrandRamp = Partial<
     | '600'
     | '700'
     | '800'
-    | '850'
     | '900'
     | '950'
     | '975'
     | 'A25'
     | 'A50'
     | 'A100'
-    | 'A150'
     | 'A200',
     string
   >
 >;
+
+/**
+ * Neutral brand ramp — includes Sana-only steps (`150` / `850` / `A150`) that are not
+ * exported for primary/critical/caution/positive families.
+ */
+export type CanvasNeutralBrandRamp = CanvasBrandRamp &
+  Partial<Record<'150' | '850' | 'A150', string>>;
 
 /** Semantic keys for `brand.action.*` CSS variables (PrimaryButton, etc.). */
 export type CanvasActionBrandRamp = Partial<
@@ -430,7 +436,7 @@ export interface CanvasNumericalBrandTheme {
      * Affects brand-neutral text, borders, and surfaces where components reference
      * `brand.neutral.*` or `system.color.brand` tokens tied to neutral.
      */
-    neutral?: CanvasBrandRamp;
+    neutral?: CanvasNeutralBrandRamp;
   };
 
   /**
@@ -487,7 +493,14 @@ export function isNumericalTheme(
   if ('canvas' in theme) {
     return false;
   }
-  return 'brand' in theme || 'system' in theme || 'selected' in theme;
+  // `direction` / `themeScope` alone are valid numerical themes (e.g. RTL-only).
+  return (
+    'brand' in theme ||
+    'system' in theme ||
+    'selected' in theme ||
+    'direction' in theme ||
+    'themeScope' in theme
+  );
 }
 
 const EXTENDED_RAMP_KEYS = new Set([

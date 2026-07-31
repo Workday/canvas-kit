@@ -37,7 +37,8 @@ const sanaBrandNeutral = {
  * Values are `var()` references to Sana brand variables — not merged from `defaultCanvasTheme`.
  */
 export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
-  themeScope: 'full',
+  // Explicit brand vars only — multi-key ramps write 1:1; no system shortcut bundles run.
+  themeScope: 'brand',
   brand: {
     action: {
       base: varRef(brand.neutral975),

@@ -100,8 +100,8 @@ import {base} from '@workday/canvas-tokens-web';
 Popups (including menus, selects, modals, and toasts) portal to `document.body` — outside the
 parent component's DOM hierarchy. How theming reaches them:
 
-**Preferred — you control `<html>`:** set `data-theme="sana-canvas"` on `<html>`. Popups inherit
-Sana CSS variables automatically; no `theme` prop needed:
+**Preferred — you control the document root:** set `data-theme="sana-canvas"` on the `<html>`
+element. Popups inherit Sana CSS variables automatically; no `theme` prop needed:
 
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
@@ -112,15 +112,15 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 </CanvasProvider>
 ```
 
-**Required — no access to `<html>`:** embedded apps, microfrontends, and third-party shells often
-cannot set attributes on `<html>`. A nested `data-theme` on a wrapper does **not** apply to
-portaled popups. Pass `sanaCanvasProviderTheme` so Canvas Kit forwards Sana brand variables onto
-the popup stack container:
+**Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,
+microfrontends, third-party shells), a nested `data-theme` alone does **not** reach portaled
+popups. Pass both `data-theme="sana-canvas"` (for in-tree UI) and `sanaCanvasProviderTheme` (so
+Canvas Kit forwards Sana brand variables onto the popup stack container):
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
 
-<CanvasProvider theme={sanaCanvasProviderTheme}>
+<CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
   <App />
 </CanvasProvider>
 ```
