@@ -1,21 +1,22 @@
 import {Meta} from '@storybook/blocks';
+
 import {
   ExampleCodeBlock,
+  Specifications,
   StorybookStatusIndicator,
   SymbolDoc,
-  Specifications,
 } from '@workday/canvas-kit-docs';
 
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
+import {Dynamic} from './examples/Dynamic';
+import {RTL} from './examples/RTL';
+import {Sizes} from './examples/Sizes';
 import {TextAndIcon} from './examples/TextAndIcon';
 import {TextOnly} from './examples/TextOnly';
-import {Sizes} from './examples/Sizes';
 import {Vertical} from './examples/Vertical';
-import {RTL} from './examples/RTL';
-import {Dynamic} from './examples/Dynamic';
 
 import SegmentedControlStoriesMeta from './SegmentedControl.stories';
 
@@ -59,8 +60,8 @@ buttons.
 
 - Each button is a 2-state toggle button with `aria-pressed={true | false}` to indicate the current
   state to screen readers.
-- Providing your own `aria-label` string to `SegmentedControl.List` is recommended for describing the
-  purpose of the component.
+- Providing your own `aria-label` string to `SegmentedControl.List` is recommended for describing
+  the purpose of the component.
 
 #### Screen Reader Experience
 
@@ -70,7 +71,8 @@ When users interact with a `SegmentedControl` using screen readers:
   `aria-label="View options"`)
 - Each button announces its text/label, "toggle button" role, and pressed/unpressed state (e.g.,
   "List view, toggle button, pressed" or "Grid view, toggle button, not pressed")
-- icon-only items must have an accessible name, supplied by visible text, aria-label, or a Tooltip in label mode.
+- icon-only items must have an accessible name, supplied by visible text, aria-label, or a Tooltip
+  in label mode.
 - When a button is activated, screen readers should announce the new state
 
 Refer to [Button](?path=/docs/components-buttons--docs#accessibility) for more information about
@@ -147,4 +149,4 @@ the `model` state and provide a render function to display the items.
 
 ## Specifications
 
-<Specifications file="SegmentedControl.spec.ts" name="SegmentedControl" />
+<Specifications file="./cypress/component/SegmentedControl.spec.tsx" name="SegmentedControl" />
