@@ -41,7 +41,9 @@ function copyFile(sourceDir: string, relativePath: string): void {
   fs.copyFileSync(srcPath, destPath);
 }
 
-const allFiles = [...new Set([...index.upgradeGuideFiles, ...index.tokenFiles])];
+const allFiles = [
+  ...new Set([...index.upgradeGuideFiles, ...index.tokenFiles, ...index.iconMigrationFiles]),
+];
 const accessibilityFiles = [
   ...new Map(
     (index.accessibilityFiles as AccessibilityFileEntry[]).map(file => {

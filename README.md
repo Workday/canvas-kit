@@ -45,20 +45,44 @@ or
 npm install @workday/canvas-kit-react @workday/canvas-tokens-web
 ```
 
+**Fonts**
+
+Canvas Kit doesn't include fonts by default. See our
+[Fonts guide](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs) for setup
+instructions, including which font package to use depending on whether your application has the Sana
+Canvas theme enabled.
+
 **Usage**
 
-Update your root `index.js` file to import CSS variables and render your app.
+Update your root `index.js` file to import Canvas Kit's design tokens.
 
 ```jsx
 import {createRoot} from 'react-dom/client';
+import {injectGlobal} from '@emotion/css';
+import {system} from '@workday/canvas-tokens-web';
+import {cssVar} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+// The Sana variables import is needed if you're using the Sana Canvas theme, imported after
+// system so its rules win the cascade tie over system's unscoped `:root` rules when set on <html>.
 import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {App} from './App';
+
+injectGlobal({
+  'html, body': {
+    fontFamily: cssVar(system.fontFamily.default),
+    margin: 0,
+    minHeight: '100vh',
+  },
+  '#root, #root < div': {
+    minHeight: '100vh',
+    ...system.type.body.sm,
+  },
+});
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
@@ -179,6 +203,7 @@ recommend against using it in production until the first stable version has been
   - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)
   - [Creating Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-creating-compound-components--docs)
   - [Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--docs)
+  - [Fonts](https://workday.github.io/canvas-kit/?path=/docs/guides-fonts--docs)
 
 ## License
 
