@@ -4,7 +4,6 @@ import {Flex} from '@workday/canvas-kit-react/layout';
 import {SidePanel, useSidePanelModel} from '@workday/canvas-kit-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 
 // local helper hook for setting content direction;
 import {useDirection} from './useDirection';
