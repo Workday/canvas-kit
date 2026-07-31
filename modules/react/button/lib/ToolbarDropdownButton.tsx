@@ -1,13 +1,6 @@
 import {createComponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {
-  calc,
-  colorSpace,
-  createStencil,
-  cssVar,
-  handleCsProp,
-  px2rem,
-} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
