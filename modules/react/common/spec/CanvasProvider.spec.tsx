@@ -7,7 +7,7 @@ import {sanaCanvasProviderTheme} from '../lib/theming/sanaTheme';
 describe('CanvasProvider', () => {
   describe('console warnings', () => {
     it('should warn when sanaCanvasProviderTheme is used with global Sana theme', () => {
-      const consoleSpy = vi.spyOn(global.console, 'warn');
+      const consoleSpy = vi.spyOn(global.console, 'warn').mockImplementation(() => {});
 
       // Set data-theme on document
       document.documentElement.setAttribute('data-theme', 'sana-canvas');
@@ -28,7 +28,7 @@ describe('CanvasProvider', () => {
     });
 
     it('should not warn when sanaCanvasProviderTheme is used without global Sana theme', () => {
-      const consoleSpy = vi.spyOn(global.console, 'warn');
+      const consoleSpy = vi.spyOn(global.console, 'warn').mockImplementation(() => {});
 
       render(
         <CanvasProvider theme={sanaCanvasProviderTheme}>
@@ -42,7 +42,7 @@ describe('CanvasProvider', () => {
     });
 
     it('should not warn when using a different theme', () => {
-      const consoleSpy = vi.spyOn(global.console, 'warn');
+      const consoleSpy = vi.spyOn(global.console, 'warn').mockImplementation(() => {});
 
       document.documentElement.setAttribute('data-theme', 'sana-canvas');
 
