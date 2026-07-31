@@ -3,7 +3,6 @@
   "compilerOptions": {
     "declaration": true,
     "outDir": "dist/es6",
-    "tsBuildInfoFile": "./.build-info/tsconfig.es6.tsbuildinfo",
-    "resolveJsonModule": true
+    "tsBuildInfoFile": "./.build-info/tsconfig.es6.tsbuildinfo"
   }
 }

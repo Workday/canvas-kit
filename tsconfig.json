@@ -9,7 +9,6 @@
     "jsx": "react-jsx",
     "lib": ["es2015", "es2017", "es2018", "es2019", "dom"],
     "moduleResolution": "node",
-    "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": false,
     "noImplicitReturns": true,
