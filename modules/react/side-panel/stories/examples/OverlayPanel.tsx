@@ -14,10 +14,6 @@ const stylesOverride = {
     height: px2rem(320),
     backgroundColor: system.color.bg.alt.default,
   }),
-  panel: createStyles({
-    alignItems: 'center',
-    padding: system.padding.md,
-  }),
   main: createStyles({
     alignItems: 'center',
     justifyContent: 'center',
@@ -47,20 +43,5 @@ export const OverlayPanel = () => {
         </Flex>
       </Flex>
     </CanvasProvider>
-  );
-};
-
-const viewportStyles = createStyles({
-  height: px2rem(320),
-});
-
-export const AlternativePanel = () => {
-  return (
-    <Flex cs={viewportStyles}>
-      <SidePanel variant="alternative">
-        <SidePanel.ToggleButton aria-label="Collapse View" />
-        <SidePanel.Heading size="small">Alternative Panel</SidePanel.Heading>
-      </SidePanel>
-    </Flex>
   );
 };
