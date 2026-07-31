@@ -89,7 +89,13 @@ const root = createRoot(container);
 root.render(<App />);
 ```
 
-The in your `App.js` you can set a global theme.
+Set `data-theme="sana-canvas"` on `<html>` in your `index.html`:
+
+```html
+<html lang="en" data-theme="sana-canvas"></html>
+```
+
+Then in your `App.js` you can wrap your application with `CanvasProvider`.
 
 ```jsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
@@ -103,6 +109,17 @@ export const App = () => {
     </CanvasProvider>
   );
 };
+```
+
+If you cannot control `<html>` (embedded apps, microfrontends), pass `sanaCanvasProviderTheme`
+instead so menus, selects, and other popups still get Sana brand variables:
+
+```jsx
+import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+
+<CanvasProvider theme={sanaCanvasProviderTheme}>
+  <App />
+</CanvasProvider>
 ```
 
 > **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from
