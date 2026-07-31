@@ -97,17 +97,20 @@ import {base} from '@workday/canvas-tokens-web';
 </CanvasProvider>
 ```
 
-Popups (menus, selects, modals) portal to `document.body`. When `data-theme="sana-canvas"` is on
-`<html>`, they inherit the global theme automatically. For scoped theming, pass
-`sanaCanvasProviderTheme` at your root `CanvasProvider` so popups match:
+Popups (menus, selects, modals) portal to `document.body` and inherit CSS variables from
+`[data-theme="sana-canvas"]` automatically. In most cases, no theme prop is needed:
 
 ```tsx
-import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
-<CanvasProvider theme={sanaCanvasProviderTheme}>
+// Simple setup - popups inherit global Sana theme
+<CanvasProvider>
   <App />
 </CanvasProvider>
 ```
+
+**Note:** The `sanaCanvasProviderTheme` export remains available for edge cases like testing
+environments without global CSS or custom popup containers outside the normal document flow.
 
 See **Features/Theming → Sana Canvas** in Storybook for a side-by-side comparison of global and
 scoped branding.
