@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.2](https://github.com/Workday/canvas-kit/releases/tag/v16.0.2) (2026-08-03)
+
+### Documentation
+
+- fix: Update theme docs and upgrade guide and add AGENTS.md ([#4114](https://github.com/Workday/canvas-kit/pull/4114)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v16.0.1](https://github.com/Workday/canvas-kit/releases/tag/v16.0.1) (2026-08-03)
 
 ### Documentation
