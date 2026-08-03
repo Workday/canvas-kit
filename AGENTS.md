@@ -23,6 +23,34 @@ This changes how you should behave compared to an application repo:
 
 When in doubt about impact, say so explicitly and ask rather than guessing.
 
+## Branching strategy
+
+Canvas Kit maintains three major versions at once, across four long-lived branches (full detail:
+[MAINTAINING.mdx § Branches](modules/docs/mdx/MAINTAINING.mdx)):
+
+| Branch | Version | What's allowed there |
+|---|---|---|
+| `support` | previous major | Patches only — no new features, no breaking changes |
+| `master` | current major | Patches and small updates. Visual/styling changes that align components to a new design direction (e.g. the v16 Sana visual update) can land here **without** an API break. Breaking API changes do not. |
+| `prerelease/minor` | current major | New features (non-breaking) for the current major |
+| `prerelease/major` | next major | New features, patches, **and** breaking API changes |
+
+Changes forward-merge one direction only: `support` → `master` → `prerelease/minor` →
+`prerelease/major`. A fix made in `support` eventually reaches every later branch; a feature or
+breaking change made in `prerelease/major` never automatically flows backward.
+
+What this means when you're deciding where a change belongs:
+
+- **Visual-only changes** (colors, spacing, shape that follow updated tokens, with no prop/API
+  change) can target `master`.
+- **New, additive, non-breaking features** target `prerelease/minor`, not `master`.
+- **Breaking changes** — removed/renamed exports, changed prop defaults, altered behavior — belong
+  on `prerelease/major` only. If you're not on that branch and a change looks breaking, say so and
+  ask before proceeding; don't assume `master` can absorb it because "it's just this once."
+- If you're unsure which branch a PR should target, ask — don't guess based on branch name alone,
+  and don't assume `master` is the conservative, breaking-change-free branch in every dimension
+  (it isn't, for visual changes) or that it's safe for API changes (it isn't).
+
 ## Before you touch config
 
 Do **not** modify `tsconfig.json`, `tsconfig.*.json`, `styling.config.ts`, `vite.config.ts`,
@@ -98,6 +126,60 @@ Rules that come up often:
 
 Full reference: [CREATING_COMPOUND_COMPONENTS.mdx](modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx),
 [API_PATTERN_GUIDELINES.mdx](modules/docs/mdx/API_PATTERN_GUIDELINES.mdx).
+
+## Accessibility
+
+Accessibility is not a follow-up pass — consider it while you implement, not just when you write
+the Cypress spec at the end. Canvas Kit's guiding principle is
+**["No ARIA is better than Bad ARIA"](https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/)**:
+prefer semantic HTML and native behavior over hand-added ARIA, and only add ARIA attributes that
+are actually required for the pattern.
+
+When implementing or changing a component:
+
+- **Accessible names** — every interactive element needs one. Priority order (highest first):
+  1. `aria-labelledby` (reference to an existing, visible element's id)
+  2. `aria-label`
+  3. Visible text content / native `<label>`
+
+  Avoid the `title` attribute or `placeholder` as a substitute for a label — screen readers treat
+  them inconsistently.
+- **Roles and states** — reach for the correct native element (`<button>`, not a styled `<div>`
+  with `onClick`) before adding a `role`. If you must use ARIA, follow the
+  [WAI-ARIA 1.2 spec](https://www.w3.org/TR/wai-aria-1.2/) and the matching
+  [APG pattern](https://www.w3.org/WAI/ARIA/apg/patterns/) exactly — don't invent a role/state
+  combination.
+- **Keyboard navigation** — every interactive element must be reachable and operable by keyboard.
+  Check whether Tab/Shift+Tab is sufficient or whether the APG pattern calls for additional keys
+  (arrow keys for a listbox/menu/tablist, Escape to dismiss, Enter/Space to activate). Don't ship
+  mouse-only interaction.
+- **Focus management** — visible focus indicators are required by default. Only suppress the
+  focus ring for mouse/touch/pointer input specifically, using the existing `data-whatinput`
+  pattern, never by removing `outline` unconditionally:
+
+  ```tsx
+  [`[data-whatinput='mouse'] &:focus,
+    [data-whatinput='touch'] &:focus,
+    [data-whatinput='pointer'] &:focus`]: {
+    outline: 'none',
+    border: 'none',
+  },
+  ```
+- **Popups, portals, and live regions** have their own established patterns — check
+  [Popups.mdx](modules/docs/mdx/accessibility/Popups.mdx),
+  [InlinePortals.mdx](modules/docs/mdx/accessibility/InlinePortals.mdx), and
+  [AriaLiveRegions.mdx](modules/docs/mdx/accessibility/AriaLiveRegions.mdx) before building your
+  own dismissal/announcement logic.
+- **When in doubt, say so and ask** rather than guessing at an ARIA attribute or pattern — bad
+  ARIA is worse than none.
+
+Verify manually and with tooling: every new Cypress example should include
+`cy.checkA11y()` (see [Testing](#testing)), but automated checks (axe) only catch a fraction of
+real accessibility issues — they don't verify labels make sense, keyboard flow is logical, or
+focus lands somewhere sensible after an action. Reason about that yourself.
+
+Full reference: [AccessibilityOverview.mdx](modules/docs/mdx/accessibility/AccessibilityOverview.mdx)
+and the rest of [modules/docs/mdx/accessibility](modules/docs/mdx/accessibility).
 
 ## Styling — the short version
 
@@ -230,6 +312,8 @@ skills are added, this section will point to them.
 - Import from `@workday/canvas-kit-react/<component>`.
 - Document every prop with JSDoc; add `@deprecated` + upgrade-guide entry for breaking changes.
 - Write Storybook examples as standalone files; follow the fixed MDX structure.
+- Reach for semantic HTML and native keyboard behavior before adding ARIA; add accessible names,
+  full keyboard support, and visible focus indicators as part of implementing, not after.
 - Add unit + Cypress (with `cy.checkA11y()`) tests for new/changed components.
 - Explain the blast radius before touching shared config.
 
@@ -237,6 +321,8 @@ skills are added, this section will point to them.
 - Use `Box`, `Flex`, `Grid`, `Stack`, `HStack`, `VStack`, style props, or `styled()` in new code.
 - Hardcode colors, spacing, or other values that a token already covers.
 - Import the package barrel or anything under `/lib/`.
+- Add ARIA attributes speculatively, or suppress focus outlines unconditionally instead of
+  scoping to `[data-whatinput='mouse'|'touch'|'pointer']`.
 - Modify `tsconfig*.json`, build config, or CI workflows without explaining why first.
 - Add DOM snapshot tests.
 - Ship a breaking change without an upgrade-guide entry.
