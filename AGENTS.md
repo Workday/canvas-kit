@@ -12,9 +12,10 @@ applications across the company. It ships as versioned npm packages
 
 This changes how you should behave compared to an application repo:
 
-- **Every public API change is a breaking change for someone.** Prop renames, removed exports,
+- **Every public API change affects downstream consumers.** Prop renames, removed exports,
   changed defaults, and behavior changes ripple into consumer apps that may be several major
-  versions behind.
+  versions behind. Breaking API changes belong on `prerelease/major`; additive, non-breaking
+  features belong on `prerelease/minor`.
 - **Nothing is "just internal cleanup."** Build config, `tsconfig*.json`, lint rules, and package
   entry points affect what downstream bundlers and type-checkers see. Treat these as public
   surface area, not implementation detail.
@@ -72,9 +73,8 @@ Never make a speculative or "might as well" config change alongside an unrelated
 ## Tooling & environment
 
 - **Package manager:** Yarn (classic), workspaces under `modules/**`. Do not use `npm install`.
-- **Node:** CI installs Node `24.x` (`.github/workflows/pull-request.yml`). The repo's
-  [.nvmrc](./.nvmrc) currently pins `22.15.0` — these are out of sync; if you need a definitive
-  answer for a task, ask rather than assuming which one governs.
+- **Node:** Use Node 24 — [.nvmrc](./.nvmrc) pins `24.16.0`, and CI installs Node `24.x`
+  (`.github/workflows/pull-request.yml`).
 - **Monorepo tool:** Lerna, driving `build`, `clean`, `depcheck`, `watch` across `modules/**`.
 - **TypeScript:** 5.0, `strict: true`. Don't relax strictness to make an error disappear.
 
@@ -91,9 +91,10 @@ Key scripts (see [package.json](./package.json)):
 | `yarn create-component` | Scaffold a new component from `utils/create-component/templates` |
 | `yarn depcheck` | Verify package dependency declarations |
 
-Run the relevant checks (`lint`, `typecheck`, `test`) before considering a change done. CI runs
-all of them (`.github/workflows/pull-request.yml`); don't rely on CI to catch what you could
-catch locally.
+Run the relevant checks before considering a change done — typically `yarn lint`,
+`yarn typecheck`, and `yarn test` for the packages you touched. Add `yarn cypress:run` when
+you changed interactive/component behavior. CI runs the full set
+(`.github/workflows/pull-request.yml`); don't rely on CI to catch what you could catch locally.
 
 ## Component architecture
 
@@ -120,9 +121,10 @@ Rules that come up often:
   `mergeProps`, not manual spreading, when you define props by hand).
 - Don't declare `children`, `model`, `ref`, or `as` on your Props interface — the factories add
   them automatically.
-- No default exports; no TS `enum` (use disjoint string unions); prop names never repeat the
-  component name (`type`, not `buttonType`) and avoid direction/color-coupled names (`leftIcon`
-  breaks under RTL).
+- No default exports in library or component modules (Storybook CSF files use their required
+  `export default` metadata). No TS `enum` (use disjoint string unions); prop names never repeat
+  the component name (`type`, not `buttonType`) and avoid direction/color-coupled names
+  (`leftIcon` breaks under RTL).
 
 Full reference: [CREATING_COMPOUND_COMPONENTS.mdx](modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx),
 [API_PATTERN_GUIDELINES.mdx](modules/docs/mdx/API_PATTERN_GUIDELINES.mdx).
@@ -290,11 +292,10 @@ testing complete.
   applicable. Don't leave a placeholder or empty summary.
 - PR titles are linted (`lint-pull-request.yml`, conventional-commit style: `type(scope): Subject`
   with `feat|fix|docs|style|refactor|perf|test|build|ci|chore|revert`).
-- Add the `ready for review` label once the PR is actually ready — this is what should trigger
-  CodeRabbit review. **Note:** as of this writing, `.coderabbit.yaml` auto-reviews on push to
-  certain base branches but is not gated on the `ready for review` label; wiring CodeRabbit to
-  trigger specifically off that label is an open task, not yet configured. Don't assume it already
-  works — verify before relying on it.
+- Add the `ready for review` label once the PR is actually ready for human review. CodeRabbit
+  auto-review is currently configured in [`.coderabbit.yaml`](./.coderabbit.yaml) for pushes to
+  `support` and `prerelease/*` base branches; it is **not** wired to the `ready for review` label
+  or to `pull_request_target` labeling events. Don't assume labeling alone triggers a bot review.
 - Call out the areas you want reviewer focus on ("Where Should the Reviewer Start?", "Areas for
   Feedback?" in the template) instead of leaving them blank.
 

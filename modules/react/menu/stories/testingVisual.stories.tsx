@@ -118,7 +118,7 @@ export const MenuItemStatesCustomTheme = {
                   primary: {'600': base.indigo500},
                 },
                 selected: {fg: base.indigo600, surface: base.indigoA50},
-                focus: {},
+                focus: {primary: base.magenta900},
               }}
             >
               <AllStatesMenuItem />
@@ -134,12 +134,7 @@ const AllStatesMenuOption = () => (
   <Menu initialSelectedIds={['selected']} initialCursorId="non-existent">
     <Menu.Card cs={{animation: 'none', width: px2rem(300)}}>
       <Menu.List>
-        <Menu.Option aria-selected={true} className="selected">
-          Normal Item
-        </Menu.Option>
-        <Menu.Item aria-selected={true} className="selected">
-          TEst Menu Item
-        </Menu.Item>
+        <Menu.Option>Normal Item</Menu.Option>
         <Menu.Option className="focus">Focused Item</Menu.Option>
         <Menu.Option className="hover">Hovered Item</Menu.Option>
         <Menu.Option className="focus hover">Focused & Hovered Item</Menu.Option>

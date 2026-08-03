@@ -23,10 +23,15 @@ that updates brand colors, neutrals, surfaces, and shapes at the application lev
 - Canvas System Icons v5.0.0: Introduces the new Sana Canvas icons.
 - Canvas Kit v16: The new version of Canvas Kit that includes the new Sana Canvas components and utilities.
 
-> **Note:** Canvas Tokens and Canvas System Icons are not included in the Canvas Kit package. You will need to install them separately.
+> **Note:** Canvas Tokens and Canvas System Icons are not included in the Canvas Kit package. Install
+> them separately, then upgrade Canvas Kit itself:
 
 ```sh
+# Separate packages required by Canvas Kit v16
 yarn add @workday/canvas-tokens-web@4.4.0 @workday/canvas-system-icons-web@5.0.0
+
+# Upgrade Canvas Kit packages (adjust package names to what your app uses)
+yarn add @workday/canvas-kit-react@^16
 ```
 
 
@@ -176,6 +181,8 @@ remove the theme prop.
   - [Instructions](#instructions)
   - [Codemod Transformations for Icons](#codemod-transformations-for-icons)
 - [MCP](#mcp)
+  - [Icon migration — `get-canvas-kit-icon-migration`](#icon-migration--get-canvas-kit-icon-migration)
+  - [Token references — `get-canvas-kit-tokens`](#token-references--get-canvas-kit-tokens)
 - [New Components](#new-components)
   - [KBD](#kbd)
   - [Tabs](#tabs)
@@ -401,7 +408,31 @@ import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
 
 ## MCP
 
-We've added a new tool to our MCP to help with icon migrations. This tool will help you find and replace icon usage in your codebase. We've also updated token references for the 4.4.0 release of our tokens package.
+Canvas Kit's MCP server (`@workday/canvas-kit-mcp`) helps agents migrate icons and look up tokens for
+v16 / tokens `4.4.0`.
+
+### Icon migration — `get-canvas-kit-icon-migration`
+
+Use this tool when upgrading `@workday/canvas-system-icons-web` to v5 (Sana Canvas Assets), finding
+replacements for deprecated icons, or running the `icon-migration` codemod.
+
+1. Install / enable the Canvas Kit MCP server (see the
+   [MCP docs](/docs/ai-for-llms-mcp-docs--docs)).
+2. Ask your agent to call `get-canvas-kit-icon-migration`.
+3. Follow the returned guides:
+   - [Sana Canvas Assets overview](/docs/guides-icon-migration-sana-canvas-assets-overview--docs)
+     (full deprecated → replacement table)
+   - [Icon Migration codemod](/docs/guides-icon-migration-codemod--docs)
+
+```sh
+npx @workday/canvas-kit-codemod icon-migration [path]
+```
+
+### Token references — `get-canvas-kit-tokens`
+
+Token docs were updated for `@workday/canvas-tokens-web` `4.4.0`. Call `get-canvas-kit-tokens` and
+start with the v4.4 token reference served by the MCP (`docs://tokens/v4/v4.4-token-reference`) for
+the current token surface (Sana Canvas, t-shirt scales, deprecations).
 
 ## Component Updates
 

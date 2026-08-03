@@ -32,13 +32,13 @@ All exported from `@workday/canvas-kit-styling` (source: [modules/styling](modul
 - Define at **module scope**, not inside a render function:
 
   ```tsx
-  // Good — outside the component
-  const styles = createStyles({color: base.red600});
+  // Good — outside the component (prefer system tokens; reach for base only when none fit)
+  const styles = createStyles({color: system.color.fg.strong});
   const MyComponent = () => <PrimaryButton cs={styles}>Text</PrimaryButton>;
 
   // Bad — recreated every render, loses static-compilation benefits
   function MyComponent() {
-    const styles = createStyles({color: base.red600});
+    const styles = createStyles({color: system.color.fg.strong});
     return <PrimaryButton cs={styles}>Text</PrimaryButton>;
   }
   ```
@@ -101,8 +101,9 @@ export const buttonStencil = createStencil({
     // ...
   }),
   modifiers: {
-    size: {large: {...}, medium: {...}, small: {...}, extraSmall: {...}},
-    grow: {true: {...}},
+    // Placeholder bodies — real styles omitted for brevity
+    size: {large: {}, medium: {}, small: {}, extraSmall: {}},
+    grow: {true: {}},
     iconPosition: {only: {padding: 0}, start: {}, end: {}},
   },
   compound: [
@@ -243,7 +244,12 @@ Migration example (old → new), from the docs:
 <Flex depth={1} marginX={10} background="frenchVanilla100" />
 
 // After
-<Flex cs={{boxShadow: system.depth[1], marginInline: px2rem(10), background: system.color.bg.default}} />
+const flexStyles = createStyles({
+  boxShadow: system.depth[1],
+  marginInline: px2rem(10),
+  background: system.color.bg.default,
+});
+<Flex cs={flexStyles} />
 ```
 
 For **new** components, don't reach for `Box`/`Flex` as your styling primitive at all — render a
