@@ -57,7 +57,7 @@ export const brandScopePrimaryOnly: CanvasNumericalBrandTheme = {
  * | Key | Maps to | Consumers |
  * |-----|---------|-----------|
  * | `primary['600']` + `action` | purple / turquoise label | PrimaryButton, accents |
- * | `primary['500']` | turquoise | Focus rings |
+ * | `focus.primary` | turquoise | Focus rings |
  * | `critical['600']` | crimson | TextInput error, DeleteButton |
  * | `caution['400']` | coral | TextInput caution |
  * | `positive['600']` | darkolivegreen | Checkbox, Radio checked |
@@ -67,7 +67,6 @@ export const customNumericalTheme: CanvasNumericalBrandTheme = {
   brand: {
     primary: {
       '600': 'purple',
-      '500': 'turquoise',
     },
     critical: {
       '600': 'crimson',
@@ -86,6 +85,7 @@ export const customNumericalTheme: CanvasNumericalBrandTheme = {
       accent: 'turquoise',
     },
   },
+  focus: {primary: 'turquoise'},
 };
 
 /** Primary + independent focus color */

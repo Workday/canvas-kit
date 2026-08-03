@@ -288,7 +288,7 @@ export type EmotionCanvasTheme = {canvas: CanvasTheme};
  * Common keys:
  * - `'600'` — main accent / button fill / default brand fg
  * - `'700'` — strong fg / selected text (when not using `selected.fg`)
- * - `'500'` — focus rings and border primary (independent of `'600'`)
+ * - `'500'` — mid primary ramp (does **not** set focus — use {@link CanvasNumericalBrandTheme.focus})
  * - `'A50'` — selected surface tint (when not using `selected.surface`)
  * - `'25'` / `'A25'` — subtle brand surfaces
  *
@@ -357,8 +357,9 @@ export type CanvasThemingScope = 'brand' | 'full';
  * @example Explicit — focus independent of primary
  * ```tsx
  * <CanvasProvider theme={{
- *   brand: {primary: {'600': base.red600, '500': base.blue500}},
+ *   brand: {primary: {'600': base.red600}},
  *   selected: {fg: base.red700, surface: base.redA50},
+ *   focus: {primary: base.blue500},
  * }} />
  * ```
  *
@@ -374,13 +375,14 @@ export interface CanvasNumericalBrandTheme {
      * - `PrimaryButton` — `brand.action.base`, `accent.primary`, `accent.action`
      * - Selected `Menu.Item` — `system.color.brand.fg.selected`, `surface.selected`
      *
-     * Does **not** set focus rings — use `'500'` or `canvas.palette.common.focusOutline`.
+     * Does **not** set focus rings — use {@link CanvasNumericalBrandTheme.focus}
+     * or legacy `canvas.palette.common.focusOutline`.
      *
      * | Key | CSS variable | Typical consumers |
      * |-----|--------------|-------------------|
      * | `'600'` | `--cnvs-brand-primary-600` | PrimaryButton, brand links, accent.primary |
      * | `'700'` | `--cnvs-brand-primary-700` | Strong primary fg, selected text |
-     * | `'500'` | `--cnvs-brand-primary-500` | Focus rings, border primary |
+     * | `'500'` | `--cnvs-brand-primary-500` | Mid primary ramp only (not focus) |
      * | `'A50'` | `--cnvs-brand-primary-A50` | Selected/hover surfaces |
      */
     primary?: CanvasBrandRamp;
@@ -456,6 +458,19 @@ export interface CanvasNumericalBrandTheme {
   };
 
   /**
+   * Focus-ring shortcuts. Independent of `brand.primary` — matches tokens where
+   * `--cnvs-sys-color-brand-focus-primary` is not derived from primary brand.
+   *
+   * | Key | CSS variable | Typical consumers |
+   * |-----|--------------|-------------------|
+   * | `primary` | `--cnvs-sys-color-brand-focus-primary` (+ border primary) | Menu, Button, input focus rings |
+   */
+  focus?: {
+    /** Focus ring and primary border color */
+    primary?: string;
+  };
+
+  /**
    * Escape hatch for `system.color.brand.*` tokens not covered by `brand` ramps.
    * Keys mirror the token path, e.g. `{color: {brand: {focus: {primary: '#00f'}}}}`.
    */
@@ -498,6 +513,7 @@ export function isNumericalTheme(
     'brand' in theme ||
     'system' in theme ||
     'selected' in theme ||
+    'focus' in theme ||
     'direction' in theme ||
     'themeScope' in theme
   );
