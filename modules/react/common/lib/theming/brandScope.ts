@@ -256,10 +256,9 @@ export function writeFocusShortcuts(
   focus: CanvasNumericalBrandTheme['focus'] | undefined,
   style: React.CSSProperties
 ) {
-  if (!focus?.primary) {
-    return;
+  if (focus?.primary) {
+    writeFocusBorderBundle(focus.primary, style);
   }
-  writeFocusBorderBundle(focus.primary, style);
 }
 
 /** Writes focus/border system tokens without touching brand.primary500. */

@@ -216,11 +216,23 @@ Every prop gets a JSDoc comment. Follow the established pattern:
 
 Deprecating an export:
 
+Always include **which version the deprecation landed in**. Read the package's `package.json`
+`version` field for the current release (e.g. [`modules/react/package.json`](modules/react/package.json)
+for `@workday/canvas-kit-react`) — do not guess or hardcode a stale major.
+
 ```tsx
 /**
  * ...existing JSDoc, if present...
  *
- * @deprecated ⚠️ ${Name} has been deprecated and will be removed in a future major release. ${Migration strategy}
+ * @deprecated ⚠️ ${Name} has been deprecated in v${major} and will be removed in a future major version. ${Migration strategy}
+ */
+```
+
+Example (current `@workday/canvas-kit-react` is `16.x` → deprecate as `v16`):
+
+```tsx
+/**
+ * @deprecated ⚠️ `Foo` has been deprecated in v16 and will be removed in a future major version. Please use `Bar` instead.
  */
 ```
 
@@ -257,7 +269,8 @@ Any breaking change, removal, or deprecation must be documented in the current v
 guide under [modules/docs/mdx](modules/docs/mdx) (e.g. `16.0-UPGRADE-GUIDE.mdx`), not just in the
 PR description or changelog. This includes:
 
-- New `@deprecated` exports (add a `## Deprecations` entry with the migration path).
+- New `@deprecated` exports (include the version in the JSDoc message, and add a
+  `## Deprecations` entry with the migration path).
 - Removed exports/props.
 - Changed default values or behavior.
 - Anything that requires a consumer to update their code to avoid breakage.
@@ -311,7 +324,8 @@ skills are added, this section will point to them.
 - Use `createComponent`/`createContainer`/`createSubcomponent`/`createModelHook`.
 - Use `createStyles`/`createStencil` + tokens from `@workday/canvas-tokens-web`.
 - Import from `@workday/canvas-kit-react/<component>`.
-- Document every prop with JSDoc; add `@deprecated` + upgrade-guide entry for breaking changes.
+- Document every prop with JSDoc; add `@deprecated` (with the version it landed in, from that
+  package's `package.json`) + upgrade-guide entry for breaking changes.
 - Write Storybook examples as standalone files; follow the fixed MDX structure.
 - Reach for semantic HTML and native keyboard behavior before adding ARIA; add accessible names,
   full keyboard support, and visible focus indicators as part of implementing, not after.
