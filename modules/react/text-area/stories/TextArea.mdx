@@ -152,16 +152,6 @@ Canvas Kit applies these automatically when you compose `TextArea` with `FormFie
 - **User-resizable dimensions**: Defaults to `resize: both` so users can adjust the control for
   visual comfort.
 
-**Implementation notes**:
-
-- **`FormField.Input` always sets `aria-describedby="hint-{id}"`** when an `id` exists, even if
-  `FormField.Hint` is not rendered. Always render `FormField.Hint` when there is hint or error text.
-  Omitting `FormField.Hint` leaves a dangling `aria-describedby` reference.
-- **`placeholder`** is visual hint text only. It is not a substitute for `FormField.Label` and
-  disappears while typing, which can disorient users with cognitive disabilities.
-- Set **`error`** on **`FormField`**, not on `TextArea` directly, so `aria-invalid` and error
-  styling stay in sync.
-
 **Keyboard** (_standard `TextArea` behavior_):
 
 <kbd>Enter</kbd>: Inserts a new line (native `<textarea>` behavior). Do not add custom key handlers that prevent standard text editing.
