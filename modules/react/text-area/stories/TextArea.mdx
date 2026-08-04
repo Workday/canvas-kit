@@ -162,14 +162,12 @@ Canvas Kit applies these automatically when you compose `TextArea` with `FormFie
 - Set **`error`** on **`FormField`**, not on `TextArea` directly, so `aria-invalid` and error
   styling stay in sync.
 
-**Keyboard** (_standard multi-line text control behavior_):
+**Keyboard** (_standard `TextArea` behavior_):
 
-- <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd>: Move focus to and from the text area (native
-  tab order).
-- Clicking **`FormField.Label`**: Moves focus to the associated `<textarea>` (native `<label>`
-  behavior).
-- <kbd>Enter</kbd>: Inserts a new line (native `<textarea>` behavior). Do not add custom key
-  handlers that prevent standard text editing.
+<kbd>Enter</kbd>: Inserts a new line (native `<textarea>` behavior). Do not add custom key handlers that prevent standard text editing.
+
+`TextArea` uses native `<textarea>` keyboard behavior (tab order, label activation, and text-editing
+shortcuts). 
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
