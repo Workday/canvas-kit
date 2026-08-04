@@ -193,6 +193,36 @@ when the situation matches—otherwise omit.
 `FormField.Input as={TextArea}`, omit `isHidden`, keep default `resize: both`, omit a custom `id`
 unless testing or composition requires it, and omit a `ref` unless programmatic focus is required.
 
+**Character limit with debounced live region** _(conditional — when `maxLength` is set)_:
+
+```tsx
+import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+const MAX_CHARACTERS = 200;
+
+<FormField>
+  <FormField.Label>Comments</FormField.Label>
+  <FormField.Field>
+    <FormField.Input
+      as={TextArea}
+      maxLength={MAX_CHARACTERS}
+      onChange={handleChange}
+      value={value}
+    />
+    <FormField.Hint>{`${value.length} of ${MAX_CHARACTERS} characters`}</FormField.Hint>
+    <AriaLiveRegion as={AccessibleHide}>{liveUpdateStr}</AriaLiveRegion>
+  </FormField.Field>
+</FormField>;
+```
+
+Debounce live-region updates (for example, 2 seconds after typing stops). Announce immediately when
+the limit is reached. Clear the live region on blur. Do not announce character counts after every
+keystroke. See
+[Debouncing an AriaLiveRegion: TextArea with character limit](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit)
+for a full example.
+
 **Programmatic focus** _(conditional — omit by default)_:
 
 Use a ref when the product needs to move focus to the text area after an action (for example,
@@ -216,20 +246,12 @@ const handleClick = () => {
 <PrimaryButton onClick={handleClick}>Focus Text Area</PrimaryButton>;
 ```
 
-| Requirement                        | How to satisfy                                                                                                                                          |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Visible label                      | **`FormField.Label`** with concise, meaningful text                                                                                                     |
-| Input wiring                       | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance                                                                                  |
-| Hint or error text _(conditional)_ | **`FormField.Hint`** when there is help or validation copy—required because `aria-describedby` is wired by default (see **Built-in Behaviors**)         |
-| Error state _(conditional)_        | `error="error"` on **`FormField`** and **`FormField.Hint`** prefixed with "Error:" so users who cannot perceive color can distinguish errors from hints |
-| Caution state _(conditional)_      | `error="caution"` on **`FormField`** with descriptive **`FormField.Hint`** (no `aria-invalid`)                                                          |
-| Required field _(conditional)_     | `isRequired` on **`FormField`**; consider a form-level note that asterisk (\*) marks required fields                                                    |
-| Disabled field _(conditional)_     | `disabled` on **`FormField.Input`** (passed through to `<textarea>`)                                                                                    |
-| Character limit _(conditional)_    | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`** for screen reader updates               |
-| Placeholder _(conditional)_        | Short format example on **`FormField.Input`** only—never as the sole label                                                                              |
-| Stable IDs _(conditional)_         | `id` prop on **`FormField`** when predictable `label-`, `input-`, and `hint-` IDs are needed for testing                                                |
-| Resize constraints _(conditional)_ | `resize` prop on **`TextArea`**; default to `Both` unless layout requires otherwise                                                                     |
-| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)     |
+| Requirement                        | How to satisfy                                                                                                                                                                                                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                       | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                                                         |
+| Character limit _(conditional)_    | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`**. See [Aria Live Regions guide](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit) |
+| Resize constraints _(conditional)_ | `resize` prop on **`TextArea`**; default to `Both` unless layout requires otherwise                                                                                                                                                                                     |
+| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                                     |
 
 **Summary for code generation:**
 
