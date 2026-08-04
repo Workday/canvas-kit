@@ -207,13 +207,12 @@ const handleClick = () => {
 | ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Input wiring                       | **`FormField.Input as={TextArea}`** wrapping every `TextArea` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                                                     |
 | Character limit _(conditional)_    | `maxLength` on **`FormField.Input`**, visible count in **`FormField.Hint`**, and debounced **`AriaLiveRegion`**. See [Aria Live Regions guide](?path=/docs/guides-accessibility-aria-live-regions--docs#debouncing-an-arialiveregion-textarea-with-character-limit) |
-| Resize constraints _(conditional)_ | `resize` prop on **`TextArea`**; default to `Both` unless layout requires otherwise                                                                                                                                                                                 |
 | Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                                 |
 
 **Summary for code generation:**
 
 - **REQUIRED:** visible label, `FormField.Input as={TextArea}` wiring
-- **CONDITIONAL:** character limit with live region, resize constraints, programmatic focus via
+- **CONDITIONAL:** character limit with live region, programmatic focus via
   `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared
   FormField conditionals (hint/error, required, disabled, placeholder, stable `id`).
 
