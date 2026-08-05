@@ -5,7 +5,7 @@
   src:
     local('Sana Sans LCG 05 VF'),
     local('SanaSansLCG05VF-Regular'),
-    url(/SanaSansLCG05-Variable.ttf) format('truetype');
+    url(./SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
 @font-face {
@@ -15,35 +15,35 @@
   src:
     local('Sana Sans LCG 05 VF'),
     local('SanaSansLCG05VF-Regular'),
-    url(/SanaSansLCG05-Variable.ttf) format('truetype');
+    url(./SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 300;
-  src: local('Roboto Light'), local('Roboto-Light'), url(/Roboto-Light.ttf) format('truetype');
+  src: local('Roboto Light'), local('Roboto-Light'), url(./Roboto-Light.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto Regular'), local('Roboto-Regular'), url(/Roboto-Regular.ttf) format('truetype');
+  src: local('Roboto Regular'), local('Roboto-Regular'), url(./Roboto-Regular.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
-  src: local('Roboto Medium'), local('Roboto-Medium'), url(/Roboto-Medium.ttf) format('truetype');
+  src: local('Roboto Medium'), local('Roboto-Medium'), url(./Roboto-Medium.ttf) format('truetype');
 }
 
 @font-face {
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 700;
-  src: local('Roboto Bold'), local('Roboto-Bold'), url(/Roboto-Bold.ttf) format('truetype');
+  src: local('Roboto Bold'), local('Roboto-Bold'), url(./Roboto-Bold.ttf) format('truetype');
 }
 
 @font-face {
@@ -53,14 +53,14 @@
   src:
     local('IBM Plex Mono'),
     local('IBMPlexMono-Regular'),
-    url(/IBMPlexMono-Regular.woff2) format('woff2');
+    url(./IBMPlexMono-Regular.woff2) format('woff2');
 }
 
 @font-face {
   font-family: 'Roboto Mono';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto Mono'), local('RobotoMono-Regular'), url(/RobotoMono-Regular.ttf) format('truetype');
+  src: local('Roboto Mono'), local('RobotoMono-Regular'), url(./RobotoMono-Regular.ttf) format('truetype');
 }
 
 [data-theme='sana-canvas'] {
