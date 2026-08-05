@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.5](https://github.com/Workday/canvas-kit/releases/tag/v15.1.5) (2026-08-05)
+
+### Components
+
+- fix: Update SidePanel to use sidebarLeft icon ([#4071](https://github.com/Workday/canvas-kit/pull/4071)) ([@alanbsmith](https://github.com/alanbsmith))
+  This update will break any visual snapshots as the icon has changed from `extendIcon` to `sidebarLeftIcon`. It is safe to accept these visual changes. The icon also no longer flips on expand / collapse, but it will still respect end (right) origin and RTL.
+
+
 ## [v15.1.4](https://github.com/Workday/canvas-kit/releases/tag/v15.1.4) (2026-07-28)
 
 ### Infrastructure
