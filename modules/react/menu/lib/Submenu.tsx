@@ -152,6 +152,7 @@ export const useSubmenuTargetItem = composeHooks(
         } else {
           model.events.show(event);
         }
+        return undefined;
       },
       'data-has-children': true,
       onKeyDown(event: React.KeyboardEvent) {

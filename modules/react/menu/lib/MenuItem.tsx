@@ -247,7 +247,7 @@ export const useMenuItem = composeHooks(
               }
               model.events.hide(event);
               hideParent(model);
-              return;
+              return undefined;
             }
           : undefined,
     };

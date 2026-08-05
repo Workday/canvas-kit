@@ -42,6 +42,7 @@ export const useListItemSelect = createElemPropsHook(useListModel)((
       return null;
     }
     events.select({id: name});
+    return undefined;
   };
 
   return {onClick};
