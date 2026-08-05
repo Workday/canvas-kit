@@ -220,9 +220,19 @@ Rules:
   ```
 - Use `px2rem` for literal pixel values (borders, etc.): `` border: `solid ${px2rem(1)}` ``.
 - Use CSS **logical properties**: `marginInline`, `paddingInlineStart`, not `marginX`/`paddingLeft`.
-- `system.legacy.*` is a v15/16-era escape hatch and appears widely in existing code. Prefer the
-  non-legacy `system.*` token in new code; don't spread `system.legacy.*` usage to new components
-  just because it's common in old ones.
+- **`system.legacy.*` — maintainer vs consumer rule.** The `legacy` namespace carries `var()`
+  fallbacks to deprecated CSS variables so components keep working when consumers are on older
+  `@workday/canvas-tokens-web` versions. That backward-compat behavior is why it exists — not as a
+  shortcut for app authors.
+  - **In Canvas Kit library source (`modules/**/lib/**`)** — use `system.legacy.*` (and
+    `base.legacy`, `brand.legacy` when applicable) for any token that has a legacy equivalent.
+    Published components must not assume consumers have migrated to the latest token names.
+  - **Outside `lib/`** (stories, examples, docs, consumer apps) — prefer non-legacy `system.*`
+    tokens. Don't spread `system.legacy.*` into new example or app code just because it's common
+    in existing component implementations.
+  - When adding or updating styles in a `lib/` file, check whether the non-legacy token you're
+    tempted to use has a `system.legacy.*` counterpart — if it does, use the legacy path in
+    `lib/` code.
 
 Full reference: [TokenMigrationOverview.mdx](modules/docs/mdx/tokens/TokenMigrationOverview.mdx),
 [stylePropsMigrationOverview.mdx](modules/docs/mdx/style-props/stylePropsMigrationOverview.mdx).
