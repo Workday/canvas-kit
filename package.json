@@ -138,8 +138,13 @@
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-expressive-icons-web": "1.0.2",
+<<<<<<< HEAD
   "@workday/canvas-system-icons-web": "4.2.0",
   "@workday/canvas-tokens-web": "4.4.0",
+=======
+  "@workday/canvas-tokens-web": "^4.4.0",
+  "@workday/canvas-system-icons-web": "^5.0.3",
+>>>>>>> upstream/master
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",

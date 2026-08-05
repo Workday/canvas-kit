@@ -14,10 +14,6 @@ const stylesOverride = {
     height: px2rem(320),
     backgroundColor: system.color.bg.alt.default,
   }),
-  panel: createStyles({
-    alignItems: 'center',
-    padding: system.padding.md,
-  }),
   main: createStyles({
     alignItems: 'center',
     justifyContent: 'center',
@@ -27,15 +23,15 @@ const stylesOverride = {
   }),
 };
 
-export const AlternatePanel = () => {
+export const OverlayPanel = () => {
   const {direction, toggleDirection} = useDirection();
 
   return (
     <CanvasProvider dir={direction}>
       <Flex cs={stylesOverride.viewport}>
-        <SidePanel variant="alternate">
+        <SidePanel variant="overlay">
           <SidePanel.ToggleButton aria-label="Collapse View" />
-          <SidePanel.Heading size="small">Alternate Panel</SidePanel.Heading>
+          <SidePanel.Heading size="small">Overlay Panel</SidePanel.Heading>
         </SidePanel>
         <Flex as="main" cs={stylesOverride.main}>
           <Text as="p" typeLevel="body.large">

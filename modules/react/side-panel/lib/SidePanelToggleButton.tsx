@@ -7,8 +7,13 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
+<<<<<<< HEAD
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {sidebarLeftIcon} from '@workday/canvas-system-icons-web';
+=======
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {sidebarLeftIcon, sidebarRightIcon} from '@workday/canvas-system-icons-web';
+>>>>>>> upstream/master
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
@@ -33,9 +38,11 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.legacy.gap.lg,
-    width: system.legacy.gap.lg,
-    insetInlineEnd: base.legacy.size150,
+    top: px2rem(12),
+    width: system.legacy.size.md,
+    ':dir(rtl)': {
+      transform: `scaleX(-1)`,
+    },
   },
   modifiers: {
     state: {
@@ -53,8 +60,11 @@ export const sidePanelToggleButtonStencil = createStencil({
       },
     },
     origin: {
-      start: {},
+      start: {
+        insetInlineEnd: base.legacy.size150,
+      },
       end: {
+<<<<<<< HEAD
         transform: `scaleX(-1)`,
         ':dir(rtl)': {
           transform: `scaleX(1)`,
@@ -92,8 +102,19 @@ export const sidePanelToggleButtonStencil = createStencil({
       },
     },
   ],
+=======
+        insetInlineStart: base.legacy.size150,
+      },
+    },
+  },
+>>>>>>> upstream/master
 });
 
+/**
+ * Adds the necessary ARIA attributes to the SidePanel's toggle button.
+ * This includes `aria-controls` pointing at the panel, `aria-pressed` to convey the collapsed
+ * state, and `aria-describedby` pointing at the panel's heading.
+ */
 export const useSidePanelToggleButton = createElemPropsHook(useSidePanelModel)(({state}) => {
   return {
     'aria-controls': state.panelId,
@@ -110,7 +131,11 @@ export const SidePanelToggleButton = createSubcomponent('button')({
   (
     {
       variant = undefined,
+<<<<<<< HEAD
       icon = sidebarLeftIcon,
+=======
+      icon,
+>>>>>>> upstream/master
       tooltipTextExpand = 'Expand View',
       tooltipTextCollapse = 'Collapse View',
       tooltipProps,
@@ -120,6 +145,9 @@ export const SidePanelToggleButton = createSubcomponent('button')({
     Element,
     model
   ) => {
+    const sidePanelIcon =
+      icon || (model.state.origin === 'start' ? sidebarLeftIcon : sidebarRightIcon);
+
     return (
       <Tooltip
         type="muted"
@@ -130,7 +158,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
         }
       >
         <TertiaryButton
-          icon={icon}
+          icon={sidePanelIcon}
           as={Element}
           variant={variant}
           aria-label={tooltipText}

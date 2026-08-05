@@ -7,9 +7,11 @@
     "upgrade-guides/13.0-UPGRADE-GUIDE.md",
     "upgrade-guides/14.0-UPGRADE-GUIDE.md",
     "upgrade-guides/15.0-UPGRADE-GUIDE.md",
+    "upgrade-guides/16.0-UPGRADE-GUIDE.md",
     "llm-style-props-migration.txt",
     "theming.md"
   ],
+  "iconMigrationFiles": ["icons/icon-migration.md", "icons/icon-migration-codemod.md"],
   "tokenFiles": [
     "tokens/token-migration.md",
     "tokens/color-palette.md",
@@ -19,6 +21,8 @@
     "tokens/color-scale.md",
     "llm-token-migration-14.txt",
     "tokens/v4/v4-token-migration.md",
+    "tokens/v4/v4.4-token-reference.md",
+    "tokens/v4/color.md",
     "tokens/v4/opacity.md",
     "tokens/v4/shape.md",
     "tokens/v4/size.md",

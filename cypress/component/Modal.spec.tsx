@@ -103,9 +103,9 @@ describe('Modal', () => {
 
         it('should trap focus inside the modal element', () => {
           cy.realPress('Tab');
-          cy.focused().should('contain', 'Acknowledge');
-          cy.realPress('Tab');
           cy.focused().should('contain', 'Cancel');
+          cy.realPress('Tab');
+          cy.focused().should('contain', 'Acknowledge');
           cy.realPress('Tab');
           cy.findByRole('dialog', {name: 'MIT License'})
             .findByRole('button', {name: 'Close'})
@@ -618,9 +618,9 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
 
       it('should trap focus inside the modal element', () => {
         cy.realPress('Tab');
-        cy.focused().should('contain', 'Acknowledge');
-        cy.realPress('Tab');
         cy.focused().should('contain', 'Cancel');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Acknowledge');
         cy.realPress('Tab');
         cy.focused().should('have.attr', 'aria-label', 'Close');
         cy.realPress('Tab');

@@ -14,7 +14,7 @@ export const modalCardStencil = createStencil({
     width: px2rem(440),
     border: '0',
     outline: `${px2rem(1)} solid transparent`,
-    boxShadow: system.depth[5],
+    boxShadow: system.depth[6],
     borderRadius: system.legacy.shape.xxxl,
     '@media screen and (max-width: 768px)': {
       gap: 0,
