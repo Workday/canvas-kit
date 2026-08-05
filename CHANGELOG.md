@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.3](https://github.com/Workday/canvas-kit/releases/tag/v16.0.3) (2026-08-05)
+
+### Documentation
+
+- docs: Use relative asset paths in Storybook head files ([#4121](https://github.com/Workday/canvas-kit/pull/4121)) ([@sheelah](https://github.com/sheelah))
+
+
 ## [v16.0.2](https://github.com/Workday/canvas-kit/releases/tag/v16.0.2) (2026-08-03)
 
 ### Documentation
