@@ -54,12 +54,27 @@ export const MenuList = createSubcomponent('div')({
   displayName: 'Menu.List',
   modelHook: useMenuModel,
   elemPropsHook: useMenuList,
-})<MenuListProps>(({children, ...elemProps}, Element, model) => {
+})<MenuListProps>(({children, maxHeight = '60vh', ...elemProps}, Element, model) => {
+  // #region agent log
+  fetch('http://127.0.0.1:7685/ingest/d4b27670-faf7-4b29-bdd1-5bd77f857154', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json', 'X-Debug-Session-Id': 'dea6ae'},
+    body: JSON.stringify({
+      sessionId: 'dea6ae',
+      location: 'MenuList.tsx:render',
+      message: 'Menu list maxHeight',
+      data: {maxHeight},
+      timestamp: Date.now(),
+      hypothesisId: 'B4',
+    }),
+  }).catch(() => undefined);
+  // #endregion
   return (
     <ListBox
       as={Element}
       model={model}
       marginY={system.legacy.gap.none}
+      maxHeight={maxHeight}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}

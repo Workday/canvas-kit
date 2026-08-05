@@ -112,6 +112,9 @@ export const useSubmenuTargetItem = composeHooks(
         model.UNSTABLE_parentModel.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
       onMouseEnter(event: React.MouseEvent) {
+        if (event.currentTarget.getAttribute('aria-disabled') === 'true') {
+          return;
+        }
         currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
         mouseEnterTimer.start();
       },
@@ -119,6 +122,24 @@ export const useSubmenuTargetItem = composeHooks(
         mouseEnterTimer.clear();
       },
       onClick(event: React.MouseEvent) {
+        const isDisabled = event.currentTarget.getAttribute('aria-disabled') === 'true';
+        // #region agent log
+        fetch('http://127.0.0.1:7685/ingest/d4b27670-faf7-4b29-bdd1-5bd77f857154', {
+          method: 'POST',
+          headers: {'Content-Type': 'application/json', 'X-Debug-Session-Id': 'dea6ae'},
+          body: JSON.stringify({
+            sessionId: 'dea6ae',
+            location: 'Submenu.tsx:onClick',
+            message: 'Submenu target click',
+            data: {isDisabled, visibility: model.state.visibility},
+            timestamp: Date.now(),
+            hypothesisId: 'B1',
+          }),
+        }).catch(() => undefined);
+        // #endregion
+        if (isDisabled) {
+          return null;
+        }
         // If we're wrapping a target component that doesn't handle ref forwarding, update the
         // `state.targetRef` manually. This ensures that custom target components don't need to handle
         // ref forwarding since ref forwarding is only really needed to programmatically open popups
@@ -134,6 +155,9 @@ export const useSubmenuTargetItem = composeHooks(
       },
       'data-has-children': true,
       onKeyDown(event: React.KeyboardEvent) {
+        if (event.currentTarget.getAttribute('aria-disabled') === 'true') {
+          return;
+        }
         if (model.state.orientation === 'vertical') {
           // eslint-disable-next-line default-case
           switch (event.key) {
