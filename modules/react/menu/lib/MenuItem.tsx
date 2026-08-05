@@ -228,20 +228,6 @@ export const useMenuItem = composeHooks(
         model.state.mode === 'single'
           ? (event: React.SyntheticEvent) => {
               const isDisabled = event.currentTarget.getAttribute('aria-disabled') === 'true';
-              // #region agent log
-              fetch('http://127.0.0.1:7685/ingest/d4b27670-faf7-4b29-bdd1-5bd77f857154', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json', 'X-Debug-Session-Id': 'dea6ae'},
-                body: JSON.stringify({
-                  sessionId: 'dea6ae',
-                  location: 'MenuItem.tsx:onClick',
-                  message: 'Menu item hide handler',
-                  data: {isDisabled},
-                  timestamp: Date.now(),
-                  hypothesisId: 'B2',
-                }),
-              }).catch(() => undefined);
-              // #endregion
               if (isDisabled) {
                 return null;
               }
