@@ -102,7 +102,8 @@
     "create-module": "./utils/create-component/createComponent.js",
     "create-component": "./utils/create-component/createComponent.js",
     "promote-component": "./utils/promote-component.js",
-    "precommit": "lint-staged",
+    "prepare": "node utils/install-git-hooks.js",
+    "precommit": "node utils/check-node-version.js && lint-staged",
     "chromatic": "chromatic",
     "build-storybook": "node utils/download-fonts.js && storybook build .storybook -o docs",
     "lint": "node utils/check-lockfile.js && node utils/check-mismatched-dependencies.js && eslint .",
@@ -138,13 +139,8 @@
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-expressive-icons-web": "1.0.2",
-<<<<<<< HEAD
-  "@workday/canvas-system-icons-web": "4.2.0",
-  "@workday/canvas-tokens-web": "4.4.0",
-=======
   "@workday/canvas-tokens-web": "^4.4.0",
   "@workday/canvas-system-icons-web": "^5.0.3",
->>>>>>> upstream/master
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",

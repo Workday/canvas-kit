@@ -1,10 +1,6 @@
 {
   "name": "@workday/canvas-kit-react-fonts",
-<<<<<<< HEAD
-  "version": "15.1.5",
-=======
   "version": "16.0.3",
->>>>>>> upstream/master
   "description": "Fonts for canvas-kit-react",
   "author": "Workday, Inc. (https://www.workday.com)",
   "license": "Apache-2.0",

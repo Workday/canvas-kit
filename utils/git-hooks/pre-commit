@@ -1,0 +1,44 @@
+#!/bin/sh
+
+command_exists() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+has_hook_script() {
+  [ -f package.json ] && grep -q '"precommit"[[:space:]]*:' package.json
+}
+
+cd "$(git rev-parse --show-toplevel)" || exit 1
+
+has_hook_script precommit || exit 0
+
+load_nvm() {
+  command_exists nvm || {
+    export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+    [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+  }
+
+  command_exists nvm && [ -f .nvmrc ] && nvm use
+}
+
+export PATH="$PATH:/usr/local/bin:/usr/local"
+load_nvm
+
+if [ -s "/usr/local/opt/nvm/nvm.sh" ]; then
+  . "/usr/local/opt/nvm/nvm.sh"
+  [ -f .nvmrc ] && nvm use
+fi
+
+command_exists yarn || {
+  echo >&2 "pre-commit: can't find yarn in PATH"
+  exit 1
+}
+
+echo "pre-commit > yarn precommit (node $(node -v))"
+echo
+
+yarn precommit || {
+  echo
+  echo "pre-commit hook failed (add --no-verify to bypass)"
+  exit 1
+}

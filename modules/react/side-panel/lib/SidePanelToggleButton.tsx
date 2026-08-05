@@ -7,13 +7,8 @@ import {
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-<<<<<<< HEAD
-import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {sidebarLeftIcon} from '@workday/canvas-system-icons-web';
-=======
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {sidebarLeftIcon, sidebarRightIcon} from '@workday/canvas-system-icons-web';
->>>>>>> upstream/master
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSidePanelModel} from './useSidePanelModel';
@@ -64,50 +59,10 @@ export const sidePanelToggleButtonStencil = createStencil({
         insetInlineEnd: base.legacy.size150,
       },
       end: {
-<<<<<<< HEAD
-        transform: `scaleX(-1)`,
-        ':dir(rtl)': {
-          transform: `scaleX(1)`,
-        },
-      },
-    },
-  },
-
-  compound: [
-    {
-      modifiers: {state: 'collapsing', origin: 'end'},
-      styles: {
-        insetInlineStart: base.legacy.size150,
-        ':dir(rtl)': {
-          insetInlineEnd: base.legacy.size150,
-        },
-      },
-    },
-    {
-      modifiers: {state: 'expanded', origin: 'end'},
-      styles: {
-        insetInlineStart: base.legacy.size150,
-        ':dir(rtl)': {
-          insetInlineEnd: base.legacy.size150,
-        },
-      },
-    },
-    {
-      modifiers: {state: 'expanding', origin: 'end'},
-      styles: {
-        insetInlineStart: base.legacy.size150,
-        ':dir(rtl)': {
-          insetInlineEnd: base.legacy.size150,
-        },
-      },
-    },
-  ],
-=======
         insetInlineStart: base.legacy.size150,
       },
     },
   },
->>>>>>> upstream/master
 });
 
 /**
@@ -131,11 +86,7 @@ export const SidePanelToggleButton = createSubcomponent('button')({
   (
     {
       variant = undefined,
-<<<<<<< HEAD
-      icon = sidebarLeftIcon,
-=======
       icon,
->>>>>>> upstream/master
       tooltipTextExpand = 'Expand View',
       tooltipTextCollapse = 'Collapse View',
       tooltipProps,
