@@ -70,6 +70,20 @@ If a task seems to require a config change:
 
 Never make a speculative or "might as well" config change alongside an unrelated fix.
 
+## AI tooling artifacts — do not commit
+
+Cursor and Claude (and similar agents) write local working files that are **not** part of this
+repo's source. Never add, stage, or commit them:
+
+- **Cursor** — plan files (e.g. `.cursor/plans/`), debug sessions, and other session state under
+  `.cursor/`
+- **Claude** — plan files, debug sessions, and other local session artifacts (e.g. under
+  `.claude/`)
+
+These are personal/editor-local scratch work. If you create them while working on a task, leave
+them out of the PR entirely — don't check them in "for reference" or tuck them into an unrelated
+commit. If one appears in `git status`, do not stage it.
+
 ## Tooling & environment
 
 - **Package manager:** Yarn (classic), workspaces under `modules/**`. Do not use `npm install`.
@@ -197,7 +211,8 @@ See [STYLE.md](./STYLE.md) for the full reference. The headline rules:
   stencil, applied via `handleCsProp` — not the deprecated `mergeStyles`.
 - **Tokens dictate styling, not hardcoded values.** No literal hex colors, no raw pixel/`rem`
   spacing. Pull from `@workday/canvas-tokens-web` (`system` tokens first, `base` sparingly,
-  `brand` for theme-able keys only).
+  `brand` for theme-able keys only). In `modules/**/lib/**` implementation code, prefer
+  `system.legacy.*` when a legacy counterpart exists — see [STYLE.md](./STYLE.md).
 - **Import from public subpaths only:** `@workday/canvas-kit-react/<component>`. Never the bare
   package barrel or anything under `/lib/` — both are ESLint errors
   (`workday-custom-rules/use-ck-slash-imports`, `workday-custom-rules/restricted-imports`).
@@ -335,7 +350,11 @@ skills are added, this section will point to them.
 **Don't:**
 - Use `Box`, `Flex`, `Grid`, `Stack`, `HStack`, `VStack`, style props, or `styled()` in new code.
 - Hardcode colors, spacing, or other values that a token already covers.
+- Use non-legacy `system.*` tokens in `modules/**/lib/**` when a `system.legacy.*` equivalent
+  exists — library code must stay compatible across token package versions.
 - Import the package barrel or anything under `/lib/`.
+- Commit Cursor or Claude plan files, debug sessions, or other local AI session artifacts
+  (`.cursor/`, `.claude/`, etc.).
 - Add ARIA attributes speculatively, or suppress focus outlines unconditionally instead of
   scoping to `[data-whatinput='mouse'|'touch'|'pointer']`.
 - Modify `tsconfig*.json`, build config, or CI workflows without explaining why first.
