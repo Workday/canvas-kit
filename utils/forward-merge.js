@@ -80,6 +80,7 @@ function getBranches(/** @type string */ branch) {
     console.error(`The branch name is not valid: ${branch}`);
     process.exit(1);
   }
+
   return [branch, getNextBranch(branch)];
 }
 

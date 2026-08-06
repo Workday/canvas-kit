@@ -3,6 +3,173 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.4](https://github.com/Workday/canvas-kit/releases/tag/v16.0.4) (2026-08-05)
+
+### Documentation
+
+- docs: Update agents and style md to reference legacy tokens ([#4124](https://github.com/Workday/canvas-kit/pull/4124)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v16.0.3](https://github.com/Workday/canvas-kit/releases/tag/v16.0.3) (2026-08-05)
+
+### Documentation
+
+- docs: Use relative asset paths in Storybook head files ([#4121](https://github.com/Workday/canvas-kit/pull/4121)) ([@sheelah](https://github.com/sheelah))
+
+
+## [v16.0.2](https://github.com/Workday/canvas-kit/releases/tag/v16.0.2) (2026-08-03)
+
+### Documentation
+
+- fix: Update theme docs and upgrade guide and add AGENTS.md ([#4114](https://github.com/Workday/canvas-kit/pull/4114)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v16.0.1](https://github.com/Workday/canvas-kit/releases/tag/v16.0.1) (2026-08-03)
+
+### Documentation
+
+- docs: Update Sana Sans font name ([#4115](https://github.com/Workday/canvas-kit/pull/4115)) ([@sheelah](https://github.com/sheelah))
+
+
+## [v16.0.0](https://github.com/Workday/canvas-kit/releases/tag/v16.0.0) (2026-07-31)
+
+### BREAKING CHANGES
+
+- [#4001](https://github.com/Workday/canvas-kit/pull/4001) A new `KBD` component has been added to the Canvas Labs (`@workday/canvas-kit-labs-react`) package for rendering keyboard shortcuts.
+- [#4000](https://github.com/Workday/canvas-kit/pull/4000) Visual Changes
+- [#4088](https://github.com/Workday/canvas-kit/pull/4088) - Card `variant="borderless"` has been removed, use `alt` instead
+- [#4107](https://github.com/Workday/canvas-kit/pull/4107) Side Panel (main) `alternate` variant has been renamed to `overlay` to match Figma library. New variant `alternative` has been added to  Side Panel (main).
+- [#4060](https://github.com/Workday/canvas-kit/pull/4060) Legacy themes that only set `canvas.palette.<color>.main` now default to `themeScope: 'brand'` (PrimaryButton + selected states) instead of the previous implicit full ramp / broad `system.color.brand.*` forwarding. To restore v15 behavior, pass `themeScope: 'full'`:
+  ```jsx
+  <CanvasProvider
+    theme={{canvas: {palette: {primary: {main: '#FF00FF'}}}, themeScope: 'full'}}
+  >
+    <App />
+  </CanvasProvider>
+  ```
+
+### Components
+
+- feat: Add Sana Sans as default typeface ([#3960](https://github.com/Workday/canvas-kit/pull/3960)) ([@sheelah](https://github.com/sheelah))
+- feat: Update Sana Canvas Card component ([#4014](https://github.com/Workday/canvas-kit/pull/4014)) ([@sheelah](https://github.com/sheelah))
+- test: Set sana-canvas theme on Card visual tests ([@sheelah](https://github.com/sheelah))
+- feat: Add KBD component to labs ([#4001](https://github.com/Workday/canvas-kit/pull/4001)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  A new `KBD` component has been added to the Canvas Labs (`@workday/canvas-kit-labs-react`) package for rendering keyboard shortcuts.
+- chore: Remove Sana Canvas-specific Card story ([@sheelah](https://github.com/sheelah))
+- chore: Remove unnneeded data-theme ([@sheelah](https://github.com/sheelah))
+- feat: Implement Sana Canvas Text Input, Text Area, Form Field, and Color Picker ([#3992](https://github.com/Workday/canvas-kit/pull/3992)) ([@jamesfan](https://github.com/jamesfan))
+- feat: Add Sana Canvas Avatar ([#4023](https://github.com/Workday/canvas-kit/pull/4023)) ([@sheelah](https://github.com/sheelah))
+- feat: Update Sana Canvas Buttons ([#4000](https://github.com/Workday/canvas-kit/pull/4000)) ([@josh-bagwell](https://github.com/josh-bagwell))
+  This updates our Button styling to introduce Sana Canvas.
+- chore: Updated colorSpace util ([#4051](https://github.com/Workday/canvas-kit/pull/4051)) ([@josh-bagwell](https://github.com/josh-bagwell))
+- feat: Add Sana styles to Canvas Switch, Radio & Checkbox ([#4017](https://github.com/Workday/canvas-kit/pull/4017)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- feat: Add Sana Canvas Menu Updates ([#4052](https://github.com/Workday/canvas-kit/pull/4052)) ([@sheelah](https://github.com/sheelah))
+- fix: Remove duplicate opacity setting for disabled checkboxes ([#4067](https://github.com/Workday/canvas-kit/pull/4067)) ([@sheelah](https://github.com/sheelah))
+- feat: Update Segmented Control and Action per Sana Canvas updates ([#4048](https://github.com/Workday/canvas-kit/pull/4048)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Update Toast and Tooltip styles to match Sana ([#4053](https://github.com/Workday/canvas-kit/pull/4053)) ([@RayRedGoose](https://github.com/RayRedGoose), manuel.carrera)
+- feat: Update Sana Canvas Popup, Modal and Dialog ([#4018](https://github.com/Workday/canvas-kit/pull/4018)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera, [@mannycarrera4](https://github.com/mannycarrera4))
+  Updates Popup, Modal and Dialog to new Sana Canvas styling.
+- chore: Update components per new depth spec ([#4075](https://github.com/Workday/canvas-kit/pull/4075)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Updates Canvas Kit components to use the revised system.depth token scale from the Sana Canvas depth spec. Several overlay and surface components were using depth values that no longer match the intended elevation hierarchy.
+  
+  Banner — adds boxShadow: system.depth[5] (previously had no box-shadow)
+  Modal.Card — system.depth[5] → system.depth[6]
+  Popup.Card — system.depth[3] → system.depth[4]
+  Toast — system.depth[3] → system.depth[5]
+  Tooltip — system.depth[2] → system.depth[3]
+- feat: Add new Tabs component ([#4062](https://github.com/Workday/canvas-kit/pull/4062)) ([@RayRedGoose](https://github.com/RayRedGoose), Sheelah Brennan)
+- fix: Update icon size in menu ([#4086](https://github.com/Workday/canvas-kit/pull/4086)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Update Menu Icon size to 20x20
+- chore: Update Select and MultiSelect per Sana Canvas Visual updates ([#4085](https://github.com/Workday/canvas-kit/pull/4085)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Updates Select and MultiSelect to match Sana Canvas visuals: chevron open/closed indicators, MultiSelect shape.lg (12px) via cornerShapeStencil
+  Increases Menu.Popper offset from 4px to 8px (affects Select, MultiSelect, Combobox, and other menu-based dropdowns)
+- fix: Pass initial values to useRef for React 19 types ([#4091](https://github.com/Workday/canvas-kit/pull/4091)) ([@jamesfan](https://github.com/jamesfan), [@cursoragent](https://github.com/cursoragent))
+- feat: Add Sana Canvas indicator component updates ([#4087](https://github.com/Workday/canvas-kit/pull/4087)) ([@sheelah](https://github.com/sheelah))
+- feat: Add Sana Canvas Expandable and Table updates ([#4097](https://github.com/Workday/canvas-kit/pull/4097)) ([@sheelah](https://github.com/sheelah), Manuel Carrera)
+- chore: Set IBM Plex Mono as monospace font in Storybook ([#4103](https://github.com/Workday/canvas-kit/pull/4103)) ([@sheelah](https://github.com/sheelah))
+- feat: Add alt variant to containers ([#4088](https://github.com/Workday/canvas-kit/pull/4088)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@Copilot](https://github.com/Copilot))
+  A new `alt` variant has been added to our container components to be used when rendering on alt backgrounds.
+- feat: Add Sana styles to Side Panel ([#4107](https://github.com/Workday/canvas-kit/pull/4107)) ([@RayRedGoose](https://github.com/RayRedGoose))
+  Side Panel (main) `alternate` variant has been renamed to `overlay` to match Figma library. New variant `alternative` has been added to  Side Panel (main).
+- feat: Add icons migration ([#4108](https://github.com/Workday/canvas-kit/pull/4108)) ([@RayRedGoose](https://github.com/RayRedGoose), [@alanbsmith](https://github.com/alanbsmith))
+- fix: Fix examples for Side Panel ([#4111](https://github.com/Workday/canvas-kit/pull/4111)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- chore: Updates to colorSpace and Pill ([#4106](https://github.com/Workday/canvas-kit/pull/4106)) ([@josh-bagwell](https://github.com/josh-bagwell), manuel.carrera, [@sheelah](https://github.com/sheelah))
+- fix: Fix canary ([#4112](https://github.com/Workday/canvas-kit/pull/4112)) ([@RayRedGoose](https://github.com/RayRedGoose))
+- fix: Update Canvas Provider theming ([#4060](https://github.com/Workday/canvas-kit/pull/4060)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  `CanvasProvider` now prefers a numerical `brand` theme shape (e.g. `{brand: {primary: {'600': '...'}}}`) for scoped theming. Use `sanaCanvasProviderTheme` at the root provider when global Sana CSS is loaded so menus, selects, modals, and other popups get the same brand variables. Popup forwarding no longer relies on Emotion’s legacy theme context, so numerical themes no longer incorrectly force classic Canvas defaults onto popup containers.
+
+### Dependencies
+
+- chore: Update tokens to latest beta ([#4065](https://github.com/Workday/canvas-kit/pull/4065)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- feat: Add Sana Canvas Navigation component updates ([#4068](https://github.com/Workday/canvas-kit/pull/4068)) ([@sheelah](https://github.com/sheelah), manuel.carrera, Manuel Carrera, manuel.carrera)
+- chore: Update to latest icons package ([#4094](https://github.com/Workday/canvas-kit/pull/4094)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Documentation
+
+- docs: Add upgrade guide notes for Card ([@sheelah](https://github.com/sheelah))
+- docs: Add Basic Sana Canvas story ([@sheelah](https://github.com/sheelah))
+- docs: Set Sana theme in Storybook docs view & canvas view ([#4033](https://github.com/Workday/canvas-kit/pull/4033)) ([@sheelah](https://github.com/sheelah))
+- fix: Update mcp to add info on v16 upgrade guide ([#4073](https://github.com/Workday/canvas-kit/pull/4073)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore: Update storybook theme ([#4098](https://github.com/Workday/canvas-kit/pull/4098)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- chore: Clean up storybook ([#4099](https://github.com/Workday/canvas-kit/pull/4099)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- docs: Add updated fonts documentation to Storybook ([#4109](https://github.com/Workday/canvas-kit/pull/4109)) ([@sheelah](https://github.com/sheelah))
+- docs: Reorganize component categories in v16 upgrade guide ([#4113](https://github.com/Workday/canvas-kit/pull/4113)) ([@sheelah](https://github.com/sheelah))
+
+### Infrastructure
+
+- chore: Add initial v16 setup ([#3999](https://github.com/Workday/canvas-kit/pull/3999)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+- ci: Test GH actions ([@sheelah](https://github.com/sheelah))
+- ci: Retrigger GH actions ([@sheelah](https://github.com/sheelah))
+- fix: Update reference files for mcp ([#4102](https://github.com/Workday/canvas-kit/pull/4102)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.4](https://github.com/Workday/canvas-kit/releases/tag/v15.1.4) (2026-07-28)
+
+### Infrastructure
+
+- chore: Revert Update Chromatic tests to only run when ready for review ([#4092](https://github.com/Workday/canvas-kit/pull/4092)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
+## [v15.1.3](https://github.com/Workday/canvas-kit/releases/tag/v15.1.3) (2026-07-23)
+
+
+
+
+## [v15.1.2](https://github.com/Workday/canvas-kit/releases/tag/v15.1.2) (2026-07-23)
+
+
+
+
+## [v15.1.1](https://github.com/Workday/canvas-kit/releases/tag/v15.1.1) (2026-07-15)
+
+### Infrastructure
+
+- chore: Update Chromatic tests to only run when ready for review ([#4061](https://github.com/Workday/canvas-kit/pull/4061)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.1.0](https://github.com/Workday/canvas-kit/releases/tag/v15.1.0) (2026-07-14)
+
+
+
+
+## [v15.0.21](https://github.com/Workday/canvas-kit/releases/tag/v15.0.21) (2026-07-14)
+
+### Components
+
+- fix: Update flashing of menu item on first render ([#3930](https://github.com/Workday/canvas-kit/pull/3930)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v14.3.17](https://github.com/Workday/canvas-kit/releases/tag/v14.3.17) (2026-07-09)
+
+### Components
+
+- fix: Update flashing of menu item on first render ([#3930](https://github.com/Workday/canvas-kit/pull/3930)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+### Infrastructure
+
+- chore: Update to latest GH Actions and Node 24 ([#4005](https://github.com/Workday/canvas-kit/pull/4005)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.0.20](https://github.com/Workday/canvas-kit/releases/tag/v15.0.20) (2026-07-08)
 
 

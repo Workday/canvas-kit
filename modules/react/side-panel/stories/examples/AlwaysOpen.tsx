@@ -1,5 +1,5 @@
-import {rocketIcon} from '@workday/canvas-accent-icons-web';
-import {AccentIcon} from '@workday/canvas-kit-react/icon';
+import {rocketIcon} from '@workday/canvas-expressive-icons-web';
+import {ExpressiveIcon} from '@workday/canvas-kit-react/icon';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {SidePanel} from '@workday/canvas-kit-react/side-panel';
 import {Text} from '@workday/canvas-kit-react/text';
@@ -34,7 +34,7 @@ export const AlwaysOpen = () => {
     <Flex cs={stylesOverride.pageContainer}>
       <SidePanel initialTransitionState="expanded">
         <Flex cs={stylesOverride.panelContainer}>
-          <AccentIcon icon={rocketIcon} cs={stylesOverride.accentIcon} />
+          <ExpressiveIcon icon={rocketIcon} cs={stylesOverride.accentIcon} />
           <SidePanel.Heading size="small" cs={stylesOverride.panelHeading}>
             Tasks Panel
           </SidePanel.Heading>

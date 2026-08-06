@@ -1,36 +1,49 @@
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
+
 const informationHighlightHeadingStencil = createStencil({
+  parts: {
+    heading: 'information-highlight-heading',
+  },
   base: () => {
     return {
-      fontFamily: system.fontFamily.default,
-      fontWeight: system.fontWeight.bold,
-      lineHeight: system.legacy.lineHeight.body.sm,
-      fontSize: system.legacy.fontSize.body.sm,
-      letterSpacing: system.legacy.letterSpacing.body.sm,
-      color: system.color.fg.default,
-      gridColumn: '2',
+      ...system.legacy.type.subtext.lg,
+      fontWeight: system.fontWeight.medium,
+      color: system.color.fg.strong,
       margin: 0,
+      marginBlockEnd: system.legacy.gap.xs,
     };
+  },
+  modifiers: {
+    actionPlacement: {
+      bottom: {
+        gridColumn: '2',
+      },
+      end: {},
+    },
   },
 });
 
 export interface InformationHighlightHeadingProps
   extends Partial<ExtractProps<typeof Heading, never>> {}
 
-export const InformationHighlightHeading = createComponent('h3')({
+export const InformationHighlightHeading = createSubcomponent('h3')({
   displayName: 'Heading',
-  Component: ({size = 'small', ...elemProps}: InformationHighlightHeadingProps, ref, Element) => {
-    return (
-      <Heading
-        as={Element}
-        ref={ref}
-        size={size}
-        {...handleCsProp(elemProps, informationHighlightHeadingStencil())}
-      />
-    );
-  },
+  modelHook: useInformationHighlightModel,
+})(({size = 'small', ...elemProps}: InformationHighlightHeadingProps, Element, model) => {
+  return (
+    <Heading
+      as={Element}
+      size={size}
+      {...informationHighlightHeadingStencil.parts.heading}
+      {...handleCsProp(
+        elemProps,
+        informationHighlightHeadingStencil({actionPlacement: model.state.actionPlacement})
+      )}
+    />
+  );
 });

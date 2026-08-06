@@ -16,10 +16,10 @@ export const RTL = () => {
             האם ברצונך למחוק פריט זה
           </Box>
         </Popup.Body>
-        <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
-          <DeleteButton>לִמְחוֹק</DeleteButton>
+        <Popup.ButtonGroup>
           <SecondaryButton>לְבַטֵל</SecondaryButton>
-        </Flex>
+          <DeleteButton>לִמְחוֹק</DeleteButton>
+        </Popup.ButtonGroup>
       </Popup.Card>
     </CanvasProvider>
   );

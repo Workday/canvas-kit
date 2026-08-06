@@ -45,6 +45,35 @@ Returns Canvas Kit upgrade guide documentation (v9 through v14) as resource link
 
 Returns Canvas Kit design token documentation for migrating to `@workday/canvas-tokens-web`.
 
+### `get-accessibility-guidelines`
+
+Returns Canvas Kit accessibility guidance resource links for a component, scenario, or both. This is
+documentation guidance only; it does not scan code or pages, run automated accessibility tests,
+certify WCAG conformance, or guarantee compliance.
+
+Parameters:
+
+- `component` (optional) -- Canvas Kit component/story slug, such as `checkbox`, `table`, or
+  `modal`.
+- `scenario` (optional) -- Accessibility scenario slug, such as `forms`, `tables`, `popups`, or
+  `page-structure`.
+
+At least one of `component` or `scenario` is required.
+
+Examples:
+
+```json
+{"scenario": "forms"}
+```
+
+```json
+{"component": "table"}
+```
+
+```json
+{"component": "checkbox", "scenario": "forms"}
+```
+
 ### `fetch-component-documentation-example`
 
 Renders an interactive Canvas Kit component story inline for the user. Accepts a `story` parameter
@@ -70,11 +99,22 @@ Markdown upgrade guides for Canvas Kit major versions (v9-v14).
 
 Design token migration guides, color palette, roles, contrast, and scale documentation.
 
+### `docs://accessibility/*`
+
+Accessibility guidance documentation for Canvas Kit scenarios, including overview, forms, page
+structure, tables, popups, ARIA live regions, headers, side panels, Windows High Contrast themes, and
+color contrast.
+
 ### `docs://examples/{slug}`
 
 Markdown documentation and inline code examples for each component. These are extracted from the MDX
 story files at build time, with `ExampleCodeBlock` references replaced by the actual source code of
 each example.
+
+### `docs://examples/{slug}/accessibility`
+
+Accessibility section extracted from a component's MDX documentation when that component has a
+non-empty `## Accessibility` section.
 
 ### `ui://story/{slug}`
 
@@ -98,7 +138,8 @@ The build runs in stages via `npm run build`:
    writes `lib/stories-config.json`
 2. **`build:apps`** -- compiles each MDX story into a self-contained single-file HTML app using
    Vite, bundling React, Emotion, Canvas Tokens CSS, and lightweight Storybook stubs
-3. **`build:copy`** -- copies static resources (upgrade guides, token docs) into `dist/lib`
+3. **`build:copy`** -- copies static resources (upgrade guides, token docs, accessibility docs) into
+   `dist/lib`
 4. **`build:types`** -- generates TypeScript declarations
 5. **`build:mcp`** -- bundles `lib/index.ts` and `lib/cli.ts` with esbuild
 

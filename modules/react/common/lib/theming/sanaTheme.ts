@@ -1,0 +1,133 @@
+/**
+ * Sana Canvas theme presets.
+ *
+ * Sana is a distinct theme from classic Canvas — not a delta on `defaultCanvasTheme`.
+ * Full visual treatment (fonts, shapes, system surfaces) comes from global CSS:
+ * import `@workday/canvas-tokens-web/css/sana/_variables.css` and set
+ * `data-theme="sana-canvas"` on `<html>`.
+ *
+ * These JS presets reference Sana brand CSS variables so `CanvasProvider` can forward
+ * them to popup containers (menus, selects, modals). Keep in sync with
+ * `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ *
+ * | Preset | Use case |
+ * |--------|----------|
+ * | `sanaCanvasNumericalTheme` | Numerical `brand` shape for popup forwarding |
+ * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` when `<html>` is unavailable |
+ */
+import {base, brand} from '@workday/canvas-tokens-web';
+
+import type {CanvasNumericalBrandTheme} from './types';
+
+/** Reference a canvas-tokens CSS variable (resolves under `[data-theme="sana-canvas"]`). */
+const varRef = (token: string) => `var(${token})`;
+
+/**
+ * Sana extends the neutral ramp with steps not yet exported from canvas-tokens-web JS.
+ * Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ */
+const sanaBrandNeutral = {
+  '150': '--cnvs-brand-neutral-150',
+  '850': '--cnvs-brand-neutral-850',
+  A150: '--cnvs-brand-neutral-a150',
+} as const;
+
+/**
+ * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
+ * Values are `var()` references to Sana brand variables — not merged from `defaultCanvasTheme`.
+ */
+export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
+  // Explicit brand vars only — multi-key ramps write 1:1; no system shortcut bundles run.
+  themeScope: 'brand',
+  brand: {
+    action: {
+      base: varRef(brand.neutral975),
+      dark: varRef(brand.neutral950),
+      darkest: varRef(brand.neutral900),
+      accent: varRef(base.neutral0),
+      lightest: varRef(brand.neutral25),
+      lighter: varRef(brand.neutral50),
+      light: varRef(brand.neutral200),
+    },
+    neutral: {
+      '25': varRef(brand.neutral25),
+      '50': varRef(brand.neutral50),
+      '100': varRef(brand.neutral100),
+      '150': varRef(sanaBrandNeutral['150']),
+      '200': varRef(brand.neutral200),
+      '300': varRef(brand.neutral300),
+      '400': varRef(brand.neutral400),
+      '500': varRef(brand.neutral500),
+      '600': varRef(brand.neutral600),
+      '700': varRef(brand.neutral700),
+      '800': varRef(brand.neutral800),
+      '850': varRef(sanaBrandNeutral['850']),
+      '900': varRef(brand.neutral900),
+      '950': varRef(brand.neutral950),
+      '975': varRef(brand.neutral975),
+      A25: varRef(brand.neutralA25),
+      A50: varRef(brand.neutralA50),
+      A100: varRef(brand.neutralA100),
+      A150: varRef(sanaBrandNeutral.A150),
+      A200: varRef(brand.neutralA200),
+    },
+    primary: {
+      '500': varRef(brand.primary500),
+      '600': varRef(brand.primary600),
+      '700': varRef(brand.primary700),
+      A25: varRef(brand.primaryA25),
+      A50: varRef(brand.primaryA50),
+      A100: varRef(brand.primaryA100),
+    },
+    critical: {
+      '500': varRef(brand.critical500),
+      '600': varRef(brand.critical600),
+      '700': varRef(brand.critical700),
+      A25: varRef(brand.criticalA25),
+      A50: varRef(brand.criticalA50),
+    },
+    caution: {
+      '400': varRef(brand.caution400),
+      '500': varRef(brand.caution500),
+      A25: varRef(brand.cautionA25),
+      A50: varRef(brand.cautionA50),
+    },
+    positive: {
+      '600': varRef(brand.positive600),
+      '800': varRef(brand.positive800),
+      A25: varRef(brand.positiveA25),
+      A50: varRef(brand.positiveA50),
+    },
+  },
+  selected: {
+    fg: varRef(brand.neutralA900),
+    surface: varRef(brand.neutralA100),
+  },
+};
+
+/**
+ * Pass to root `CanvasProvider` to forward Sana brand CSS variables onto popup containers
+ * (menus, selects, modals, tooltips).
+ *
+ * **When to use it**
+ * - **Required** when you cannot set `data-theme="sana-canvas"` on `<html>` (embedded apps,
+ *   microfrontends, third-party shells). Popups portal to `document.body` and will not inherit
+ *   a nested `data-theme` — this preset copies Sana brand vars onto the popup stack container.
+ * - Also useful in tests without global Sana CSS, or custom popup hosts outside normal cascade.
+ *
+ * **When you can skip it**
+ * - Prefer setting `data-theme="sana-canvas"` on `<html>` with Sana CSS imported. Popups then
+ *   inherit brand variables from the document and no `theme` prop is needed.
+ *
+ * @example
+ * ```tsx
+ * // Preferred — control <html>
+ * import '@workday/canvas-tokens-web/css/sana/_variables.css';
+ * // <html data-theme="sana-canvas">
+ * <CanvasProvider><App /></CanvasProvider>
+ *
+ * // No access to <html> — required for popup parity
+ * <CanvasProvider theme={sanaCanvasProviderTheme}><App /></CanvasProvider>
+ * ```
+ */
+export const sanaCanvasProviderTheme = sanaCanvasNumericalTheme;
