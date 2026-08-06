@@ -5,6 +5,8 @@ import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import DialogStoriesMeta from './Dialog.stories';
 import {Basic} from './examples/Basic';
 import {Focus} from './examples/Focus';
+import {Alt} from './examples/Alt';
+import DialogStoriesMeta from './Dialog.stories';
 
 <Meta of={DialogStoriesMeta} />
 
@@ -34,6 +36,19 @@ move freely in and out of the dialog, supporting more flexible navigation. The f
 shows how Dialog manages focus in and out of the component.
 
 <ExampleCodeBlock code={Focus} />
+
+> **Accessibility Note**: Focus redirect **will not** have any effect on the reading order of a
+> screen reader.
+
+### Alt Example
+
+The `alt` variant is designed for use on alternative page backgrounds
+(`system.color.bg.alt.default`). Use this variant to maintain proper visual hierarchy when placing
+components on colored backgrounds. While the default variant should be used on
+`system.color.bg.default` backgrounds, the `alt` variant ensures the component remains visually
+elevated on `system.color.bg.alt.default` backgrounds.
+
+<ExampleCodeBlock code={Alt} />
 
 ## Accessibility
 

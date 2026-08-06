@@ -11,6 +11,11 @@ import {fileURLToPath} from 'node:url';
 import {z} from 'zod';
 
 import packageJson from '../package.json';
+import {
+  ACCESSIBILITY_COMPONENTS,
+  ACCESSIBILITY_SCENARIOS,
+  resolveAccessibilityScenarioSlugs,
+} from './accessibility-enums';
 import fileNames from './config.json';
 import storiesConfig from './stories-config.json';
 
@@ -33,6 +38,98 @@ export function getServer() {
       },
     }
   );
+
+  const accessibilityResourceMetadata: Record<
+    string,
+    {title: string; description: string; slug: string}
+  > = {
+    'accessibility/AccessibilityOverview.mdx': {
+      title: 'Canvas Kit Accessibility Overview',
+      description:
+        'Core Canvas Kit accessibility principles and component usage guidance. Guidance only; no automated validation or compliance certification.',
+      slug: 'overview',
+    },
+    'accessibility/PageStructure.mdx': {
+      title: 'Canvas Kit Page Structure Accessibility',
+      description:
+        'Guidance for landmarks, headings, navigation, and logical focus order in Canvas Kit applications.',
+      slug: 'page-structure',
+    },
+    'accessibility/TablesAdvanced.mdx': {
+      title: 'Canvas Kit Table Accessibility',
+      description:
+        'Guidance for semantic data tables, interactive tables, sorting, filtering, row selection, and table focus behavior.',
+      slug: 'tables',
+    },
+    'accessibility/Popups.mdx': {
+      title: 'Canvas Kit Popup and Overlay Accessibility',
+      description:
+        'Guidance for dialogs, modals, popups, menus, tooltips, focus management, dismissal, and reading order.',
+      slug: 'popups',
+    },
+    'accessibility/AriaLiveRegions.mdx': {
+      title: 'Canvas Kit ARIA Live Region Accessibility',
+      description:
+        'Guidance for announcing asynchronous status updates with polite and assertive live regions.',
+      slug: 'aria-live',
+    },
+    'accessibility/Headers.mdx': {
+      title: 'Canvas Kit Header Accessibility',
+      description:
+        'Guidance for accessible application headers, page headers, heading text, navigation, and header controls.',
+      slug: 'headers',
+    },
+    'accessibility/SidePanel.mdx': {
+      title: 'Canvas Kit Side Panel Accessibility',
+      description:
+        'Guidance for side panel semantics, focus behavior, naming, and overlay versus persistent panel patterns.',
+      slug: 'side-panel',
+    },
+    'accessibility/WindowsHighContrastThemes.mdx': {
+      title: 'Canvas Kit Windows High Contrast Accessibility',
+      description:
+        'Guidance for forced colors and Windows High Contrast themes, including focus, state, border, and icon visibility.',
+      slug: 'windows-high-contrast',
+    },
+    'accessibility/TestingTableWithFormFields.mdx': {
+      title: 'Canvas Kit Form Accessibility',
+      description:
+        'Guidance from existing Canvas Kit accessibility documentation for form fields in table contexts.',
+      slug: 'forms',
+    },
+    'accessibility/WindowsHighContrastThemes.mdx#color-contrast': {
+      title: 'Canvas Kit Color Contrast Accessibility',
+      description:
+        'Guidance from existing Canvas Kit accessibility documentation for contrast-sensitive UI behavior in high contrast themes.',
+      slug: 'color-contrast',
+    },
+  };
+
+  function getAccessibilityFileEntry(fileEntry: string | {source: string; slug: string}) {
+    return typeof fileEntry === 'string'
+      ? {
+          source: fileEntry,
+          slug: accessibilityResourceMetadata[fileEntry]?.slug,
+        }
+      : fileEntry;
+  }
+
+  function getAccessibilityResource(fileEntry: string | {source: string; slug: string}) {
+    const entry = getAccessibilityFileEntry(fileEntry);
+    const metadataKey =
+      entry.slug === 'color-contrast' ? `${entry.source}#color-contrast` : entry.source;
+    const metadata = accessibilityResourceMetadata[metadataKey];
+    if (!metadata) {
+      throw new Error(`${entry.source} is not a valid accessibility resource`);
+    }
+
+    return {
+      ...metadata,
+      mimeType: 'text/markdown',
+      uri: `docs://accessibility/${entry.slug}`,
+      contents: fs.readFileSync(path.resolve(__dirname, 'lib', entry.source), 'utf8'),
+    };
+  }
 
   /**
    * Metadata for agents about the resource files.
@@ -149,6 +246,26 @@ In this release, we:
 - introduced new tokens to our components`,
           mimeType: 'text/markdown',
           uri: 'docs://upgrade-guides/15.0-UPGRADE-GUIDE',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'upgrade-guides/16.0-UPGRADE-GUIDE.md':
+        return {
+          title: 'Canvas Kit 16.0 Upgrade Guide',
+          description: `# Canvas Kit 16.0 Upgrade Guide
+This guide contains an overview of the changes in Canvas Kit v16.
+
+In this release, we:
+- added the new KBD component in @workday/canvas-kit-labs-react for keyboard shortcut UI
+- updated visual styling across Action Bar, Avatar, Buttons, Card, Inputs, Menu, and Segmented Control to align with Sana Canvas
+- changed Checkbox, Radio, and Switch checked states to use brand.accent.positive (verify contrast if you customize brand.success.base)
+- updated Menu focus/selected states, icon sizing (xs), and item spacing
+- added cornerShapeStencil utility for progressive corner-shape enhancement (used by Card and Menu)
+- added DeleteButton outline variant
+- added new Avatar variants (magenta, green) and updated existing color variants
+
+Canvas Kit v16 is optimized for the latest v5 system icons (@workday/canvas-system-icons-web) and the Sana Canvas theme from @workday/canvas-tokens-web. Import @workday/canvas-tokens-web/css/sana/_variables.css and set data-theme="sana-canvas" on your root element to enable the Sana theme.`,
+          mimeType: 'text/markdown',
+          uri: 'docs://upgrade-guides/16.0-UPGRADE-GUIDE',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
       case 'theming.md':
@@ -365,6 +482,34 @@ Complete migration guide from @workday/canvas-tokens-web v3 to v4. Includes:
           uri: 'docs://tokens/v4/v4-token-migration',
           contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
         };
+      case 'tokens/v4/v4.4-token-reference.md':
+        return {
+          title: 'Canvas Tokens v4.4 Reference',
+          description: `# Canvas Tokens v4.4 Reference
+Current-state reference for @workday/canvas-tokens-web@4.4.0-beta.11. Start here for current token usage with Canvas Kit v16. Includes:
+- CSS import setup and Sana Canvas theme enablement (data-theme="sana-canvas")
+- Namespace rules: use system.*, not system.legacy.* or system.sana.*
+- 107 live system.color.* tokens (surface, fg, border, accent, brand families)
+- T-shirt scales for shape, size, padding, and gap with default and Sana value columns
+- Deprecated color families (bg.*, text.*, icon.*) and replacement map
+- Sana theme overrides (shape, color, depth, typography)
+- v16 utilities: cornerShapeStencil and colorSpace`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/v4.4-token-reference',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'tokens/v4/color.md':
+        return {
+          title: 'Canvas Kit v4 Color Tokens',
+          description: `# Canvas Kit v4 Color Tokens
+Semantic color token usage guide for @workday/canvas-tokens-web v4. Includes:
+- Color families: surface, fg, border, accent, brand (bg/text/icon are deprecated)
+- Usage guidance for backgrounds, surfaces, accents, foreground, borders, shadows, and focus
+- Link to v4.4 Token Reference for the full current inventory and deprecation map`,
+          mimeType: 'text/markdown',
+          uri: 'docs://tokens/v4/color',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
       case 'tokens/v4/opacity.md':
         return {
           title: 'Canvas Kit v4 Opacity Token Migration Guide',
@@ -434,19 +579,18 @@ Space tokens control the spacing of UI elements. Use them to create consistent s
     'get-canvas-kit-tokens',
     {
       title: 'Get Canvas Kit Tokens',
-      description: `Retrieve Canvas Kit design token documentation for migrating from old tokens to the new @workday/canvas-tokens-web system.
+      description: `Retrieve Canvas Kit design token documentation for @workday/canvas-tokens-web.
+
+Start with docs://tokens/v4/v4.4-token-reference for the current v4.4 token surface (Sana Canvas theme, t-shirt scales, deprecations).
 
 Use this tool when:
-- Migrating from @workday/canvas-kit-react/tokens to @workday/canvas-tokens-web
-- Converting old fruit-named colors (cinnamon, blueberry, cantaloupe) to new token system
-- Understanding the token hierarchy: base tokens, system tokens, and brand tokens
-- Finding the correct system token replacement (sys.color.bg.*, sys.color.fg.*, sys.color.border.*)
-- Learning the token naming pattern: [property].[role].[modifier]
-- Understanding color roles (primary, positive, caution, critical, muted, etc.)
-- Migrating spacing (space.s → system.space.x4), shape, typography, or depth tokens
-- Ensuring WCAG accessibility compliance with color contrast requirements
+- Choosing current system tokens (surface.*, fg.*, border.*, accent.*, brand.*)
+- Enabling the Sana Canvas theme (css/sana/_variables.css + data-theme="sana-canvas")
+- Migrating deprecated tokens (bg.* → surface.*, text.* → fg.*, icon.* → fg.*, space.x* → padding/gap)
+- Understanding t-shirt size scales for shape, size, padding, and gap
+- Finding historical migration guides (v2→v3, v3→v4, v13→v14)
 
-Returns links to token documentation resources including migration guides, color palettes, color roles, contrast guidelines, and complete v14 migration examples.`,
+Returns links to token documentation including the v4.4 current-state reference, migration guides, color palettes, contrast guidelines, and per-family token guides.`,
       annotations: {
         readOnlyHint: true,
       },
@@ -490,11 +634,36 @@ Returns links to token documentation resources including migration guides, color
     }
   );
 
+  fileNames.accessibilityFiles.forEach(fileName => {
+    const resource = getAccessibilityResource(fileName);
+    if (!resource || !resource.contents) {
+      throw new Error(`Resource ${fileName} not found`);
+    }
+    server.registerResource(
+      resource.title,
+      resource.uri,
+      {
+        title: resource.title,
+        description: resource.description,
+        mimeType: resource.mimeType,
+      },
+      async (uri: URL) => ({
+        contents: [
+          {
+            uri: uri.href,
+            text: resource.contents,
+          },
+        ],
+      })
+    );
+  });
+
   interface StoryConfig {
     title: string;
     storybookUrl: string;
     mdxPath: string;
     mdxProse: string;
+    accessibilityProse?: string;
   }
 
   const stories = storiesConfig.stories as Record<string, StoryConfig>;
@@ -551,7 +720,269 @@ Returns links to token documentation resources including migration guides, color
         })
       );
     }
+
+    if (story.accessibilityProse?.trim()) {
+      server.registerResource(
+        `${story.title} Accessibility Guidance`,
+        `docs://examples/${slug}/accessibility`,
+        {
+          title: `${story.title} Accessibility Guidance`,
+          description: `Accessibility section extracted from the ${story.title} component documentation. Guidance only; this is not automated accessibility validation.`,
+          mimeType: 'text/markdown',
+        },
+        async (uri: URL) => ({
+          contents: [
+            {
+              uri: uri.href,
+              text: story.accessibilityProse,
+            },
+          ],
+        })
+      );
+    }
   }
+
+  const getAccessibilityResourceBySlug = (slug: string) => {
+    const fileName = fileNames.accessibilityFiles.find(file => {
+      const resource = getAccessibilityResource(file);
+      return resource.slug === slug;
+    });
+
+    if (!fileName) {
+      throw new Error(`Accessibility resource not found for slug "${slug}"`);
+    }
+
+    return getAccessibilityResource(fileName);
+  };
+
+  server.registerTool(
+    'get-accessibility-guidelines',
+    {
+      title: 'Get Canvas Kit Accessibility Guidelines',
+      description:
+        'Retrieve Canvas Kit accessibility guidance resources for a scenario, component, or both. This tool returns documentation links only; it does not scan code, test pages, certify WCAG conformance, or guarantee accessibility compliance.',
+      inputSchema: z
+        .object({
+          component: z
+            .enum(ACCESSIBILITY_COMPONENTS)
+            .optional()
+            .describe('Canvas Kit component or story slug to retrieve accessibility guidance for'),
+          scenario: z
+            .enum(ACCESSIBILITY_SCENARIOS)
+            .optional()
+            .describe('Accessibility scenario slug to retrieve guidance for'),
+        })
+        .refine(data => !!data.component || !!data.scenario, {
+          message: 'At least one of "component" or "scenario" is required.',
+        }),
+      annotations: {
+        readOnlyHint: true,
+      },
+    },
+    async ({component, scenario}: {component?: string; scenario?: string}) => {
+      const scenarioSlugs = resolveAccessibilityScenarioSlugs({component, scenario});
+      const accessibilityResources = scenarioSlugs.map(slug => {
+        const resource = getAccessibilityResourceBySlug(slug);
+        return {
+          uri: resource.uri,
+          title: resource.title,
+          description: resource.description,
+        };
+      });
+
+      const componentStory = component ? stories[component] : null;
+      const exampleDocumentation =
+        component && componentStory?.mdxProse
+          ? {
+              uri: `docs://examples/${component}`,
+              title: `${componentStory.title} Documentation & Sample Code`,
+              description: `Documentation and code examples for ${componentStory.title}.`,
+            }
+          : null;
+      const componentAccessibilityDocumentation =
+        component && componentStory?.accessibilityProse?.trim()
+          ? {
+              uri: `docs://examples/${component}/accessibility`,
+              title: `${componentStory.title} Accessibility Guidance`,
+              description: `Accessibility section extracted from the ${componentStory.title} component documentation. Guidance only; this is not automated accessibility validation.`,
+            }
+          : null;
+
+      const output = {
+        component: component || null,
+        scenario: scenario || null,
+        scenarioSlugs,
+        accessibilityResources,
+        componentAccessibilityDocumentation,
+        exampleDocumentation,
+      };
+
+      return {
+        content: [
+          {type: 'text' as const, text: JSON.stringify(output)},
+          ...accessibilityResources.map(resource => ({
+            type: 'resource_link' as const,
+            uri: resource.uri,
+            name: resource.title,
+            mimeType: 'text/markdown',
+            description: resource.description,
+            annotations: {
+              audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+            },
+          })),
+          ...(exampleDocumentation
+            ? [
+                {
+                  type: 'resource_link' as const,
+                  uri: exampleDocumentation.uri,
+                  name: exampleDocumentation.title,
+                  mimeType: 'text/markdown',
+                  description: exampleDocumentation.description,
+                  annotations: {
+                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+                  },
+                },
+              ]
+            : []),
+          ...(componentAccessibilityDocumentation
+            ? [
+                {
+                  type: 'resource_link' as const,
+                  uri: componentAccessibilityDocumentation.uri,
+                  name: componentAccessibilityDocumentation.title,
+                  mimeType: 'text/markdown',
+                  description: componentAccessibilityDocumentation.description,
+                  annotations: {
+                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+                  },
+                },
+              ]
+            : []),
+        ],
+        structuredContent: output,
+      };
+    }
+  );
+
+  /**
+   * Metadata for agents about the icon migration documentation files.
+   */
+  function getIconMigrationResource(fileName: string) {
+    switch (fileName) {
+      case 'icons/icon-migration.md':
+        return {
+          title: 'Canvas Kit Sana Canvas Assets Icon Migration Guide',
+          description: `# Sana Canvas Assets v5
+Overview of the @workday/canvas-system-icons-web v5 release and how to upgrade. Includes:
+- What changed in v5: renames, deprecations, and layer simplifications
+- Rename table mapping old JS names to new JS names (uploadIcon → arrowUpToLineIcon, downloadIcon → arrowDownToLineIcon, etc.)
+- Deprecation table for icons redesigned to match Sana's visual language
+- Package installation instructions for @workday/canvas-system-icons-web v5
+- Complete list of every deprecated export with the fallback icon it maps to`,
+          mimeType: 'text/markdown',
+          uri: 'docs://icons/icon-migration',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      case 'icons/icon-migration-codemod.md':
+        return {
+          title: 'Canvas Kit Icon Migration Codemod Guide',
+          description: `# Icon Migration Codemod
+Guide for running the icon-migration codemod that updates @workday/canvas-system-icons-web imports and usages. Includes:
+- Running the codemod with npx or as a dev dependency
+- What the codemod handles: named imports, aliases, namespace imports, chained fallbacks, duplicate imports
+- Coverage of both v4 naming convention migrations and v5 Sana Canvas Assets changes in a single pass
+- Before and after example transformations
+- Manual lookup through system.deprecated.metadata.json
+- Limitations: other packages, dynamic icon selection, non-code assets, and v15 expressive icon APIs`,
+          mimeType: 'text/markdown',
+          uri: 'docs://icons/icon-migration-codemod',
+          contents: fs.readFileSync(path.resolve(__dirname, 'lib', fileName), 'utf8'),
+        };
+      default:
+        throw new Error(`${fileName} is not a valid icon migration resource`);
+    }
+  }
+
+  fileNames.iconMigrationFiles.forEach(fileName => {
+    const resource = getIconMigrationResource(fileName);
+    if (!resource || !resource.contents) {
+      throw new Error(`Resource ${fileName} not found`);
+    }
+    server.registerResource(
+      resource.title,
+      resource.uri,
+      {
+        title: resource.title,
+        description: resource.description,
+        mimeType: resource.mimeType,
+      },
+      async (uri: URL) => ({
+        contents: [
+          {
+            uri: uri.href,
+            text: resource.contents,
+          },
+        ],
+      })
+    );
+  });
+
+  server.registerTool(
+    'get-canvas-kit-icon-migration',
+    {
+      title: 'Get Canvas Kit Icon Migration Guides',
+      description: `Retrieve Canvas Kit documentation for migrating to @workday/canvas-system-icons-web v5 (Sana Canvas Assets).
+
+Use this tool when:
+- Upgrading @workday/canvas-system-icons-web to v5
+- Finding the replacement for a deprecated system icon (uploadIcon, downloadIcon, undoIcon, redoIcon, lockKeyholeIcon, etc.)
+- Resolving deprecation warnings from @workday/canvas-system-icons-web
+- Running or troubleshooting the icon-migration codemod
+- Understanding what the codemod rewrites and what you must migrate by hand
+
+Returns links to the Sana Canvas Assets overview, which includes the full deprecated icon mapping table, and the icon-migration codemod guide.`,
+      annotations: {
+        readOnlyHint: true,
+      },
+    },
+    async () => {
+      const output = {
+        count: fileNames.iconMigrationFiles.length,
+        files: fileNames.iconMigrationFiles.map(fileName => {
+          const resource = getIconMigrationResource(fileName);
+          if (!resource) {
+            throw new Error(`Resource ${fileName} not found`);
+          }
+          return {
+            name: resource.title,
+            uri: resource.uri,
+          };
+        }),
+      };
+      return {
+        content: [
+          {type: 'text', text: JSON.stringify(output)},
+          ...fileNames.iconMigrationFiles.map(fileName => {
+            const resource = getIconMigrationResource(fileName);
+            if (!resource) {
+              throw new Error(`Resource ${fileName} not found`);
+            }
+            return {
+              type: 'resource_link' as const,
+              uri: resource.uri,
+              name: resource.title,
+              mimeType: resource.mimeType,
+              description: resource.description,
+              annotations: {
+                audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+              },
+            };
+          }),
+        ],
+        structuredContent: output,
+      };
+    }
+  );
 
   const storyViewerPath = path.resolve(__dirname, 'apps', 'story-viewer.html');
   if (storySlugs.length > 0 && fs.existsSync(storyViewerPath)) {

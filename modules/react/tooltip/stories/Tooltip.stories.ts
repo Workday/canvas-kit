@@ -3,6 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 
 import mdxDoc from './Tooltip.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {CustomContent as CustomContentExample} from './examples/CustomContent';
 import {Default as DefaultExample} from './examples/Default';
 import {DelayedTooltip as DelayedTooltipExample} from './examples/DelayedTooltip';
@@ -44,6 +45,9 @@ export const DescribeType: Story = {
 };
 export const Muted: Story = {
   render: MutedExample,
+};
+export const Alt: Story = {
+  render: AltExample,
 };
 export const Placements: Story = {
   render: PlacementsExample,

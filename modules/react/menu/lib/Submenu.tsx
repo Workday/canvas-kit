@@ -11,7 +11,7 @@ import {
   useForkRef,
 } from '@workday/canvas-kit-react/common';
 import {Popper} from '@workday/canvas-kit-react/popup';
-import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
+import {chevronRightIcon} from '@workday/canvas-system-icons-web';
 
 import {MenuCard} from './MenuCard';
 import {MenuDivider} from './MenuDivider';
@@ -45,7 +45,7 @@ export const SubmenuPopper = createSubcomponent('div')({
 });
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
-  const timer = React.useRef() as React.MutableRefObject<number | undefined>;
+  const timer = React.useRef<number | undefined>(undefined);
 
   const start = () => {
     timer.current = window.setTimeout(fn, waitMs);
@@ -81,7 +81,7 @@ export const useSubmenuTargetItem = composeHooks(
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
-    const currentTargetIdRef = React.useRef<string>();
+    const currentTargetIdRef = React.useRef<string | undefined>(undefined);
     const mouseEnterTimer = useIntentTimer(() => {
       model.UNSTABLE_parentModel.events.goTo({id: currentTargetIdRef.current || ''});
       model.events.show(event);
@@ -139,7 +139,7 @@ export const SubmenuTargetItem = createSubcomponent('button')({
   return (
     <StyledMenuItem as={Element} {...elemProps}>
       {typeof children === 'string' ? <MenuItem.Text>{children}</MenuItem.Text> : children}
-      <MenuItem.Icon icon={chevronRightSmallIcon} />
+      <MenuItem.Icon icon={chevronRightIcon} />
     </StyledMenuItem>
   );
 });

@@ -13,6 +13,7 @@ interface StoryEntry {
   storybookUrl: string;
   mdxPath: string;
   mdxProse: string;
+  accessibilityProse: string;
 }
 
 function titleToStorybookPath(title: string): string {
@@ -68,6 +69,25 @@ function extractMdxProse(mdxFilePath: string, exampleSources: Record<string, str
   return prose.replace(/^\n+/, '').replace(/\n{3,}/g, '\n\n');
 }
 
+function extractAccessibilitySection(markdown: string): string {
+  const lines = markdown.split('\n');
+  const start = lines.findIndex(line => /^#{1,6}\s+Accessibility\b/i.test(line.trim()));
+
+  if (start === -1) {
+    return '';
+  }
+
+  const headingLevel = lines[start].trim().match(/^(#{1,6})\s+Accessibility\b/i)?.[1].length || 2;
+  const nextSameOrHigherHeading = new RegExp(`^#{1,${headingLevel}}\\s+`);
+  const end = lines.findIndex(
+    (line, index) => index > start && nextSameOrHigherHeading.test(line.trim())
+  );
+  return lines
+    .slice(start, end === -1 ? undefined : end)
+    .join('\n')
+    .trim();
+}
+
 function findExampleSources(mdxFilePath: string): Record<string, string> {
   const mdxDir = path.dirname(mdxFilePath);
   const examplesDir = path.join(mdxDir, 'examples');
@@ -76,7 +96,9 @@ function findExampleSources(mdxFilePath: string): Record<string, string> {
   }
 
   const sources: Record<string, string> = {};
-  const entries = fs.readdirSync(examplesDir).filter(f => f.endsWith('.tsx') || f.endsWith('.ts'));
+  const entries = fs
+    .readdirSync(examplesDir)
+    .filter((f: string) => f.endsWith('.tsx') || f.endsWith('.ts'));
 
   for (const entry of entries) {
     const name = entry.replace(/\.(tsx?|ts)$/, '');
@@ -89,14 +111,14 @@ function findExampleSources(mdxFilePath: string): Record<string, string> {
 function findMdxFile(storyFilePath: string): string | null {
   const dir = path.dirname(storyFilePath);
   const entries = fs.readdirSync(dir);
-  const mdxFiles = entries.filter(e => e.endsWith('.mdx'));
+  const mdxFiles = entries.filter((e: string) => e.endsWith('.mdx'));
 
   if (mdxFiles.length === 0) {
     return null;
   }
 
   const storyBaseName = path.basename(storyFilePath).replace(/\.stories\.(ts|tsx)$/, '');
-  const exactMatch = mdxFiles.find(f => f.replace('.mdx', '') === storyBaseName);
+  const exactMatch = mdxFiles.find((f: string) => f.replace('.mdx', '') === storyBaseName);
   if (exactMatch) {
     return path.join(dir, exactMatch);
   }
@@ -165,11 +187,13 @@ async function main() {
     const repoRoot = path.resolve(__dirname, '../../..');
     const absoluteMdxPath = path.resolve(repoRoot, candidate.mdxPath);
     const exampleSources = findExampleSources(absoluteMdxPath);
+    const mdxProse = extractMdxProse(absoluteMdxPath, exampleSources);
     stories[slug] = {
       title: candidate.title,
       storybookUrl: `${STORYBOOK_BASE_URL}?path=/docs/${storybookPath}--docs`,
       mdxPath: candidate.mdxPath,
-      mdxProse: extractMdxProse(absoluteMdxPath, exampleSources),
+      mdxProse,
+      accessibilityProse: extractAccessibilitySection(mdxProse),
     };
   }
 

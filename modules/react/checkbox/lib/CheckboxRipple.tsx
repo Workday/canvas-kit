@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export const checkboxRippleStencil = createStencil({
   parts: {
@@ -9,8 +9,8 @@ export const checkboxRippleStencil = createStencil({
   base: {
     borderRadius: system.legacy.shape.full,
     boxShadow: 'none',
-    height: base.legacy.size225,
-    width: base.legacy.size225,
+    height: system.legacy.size.xxxs,
+    width: system.legacy.size.xxxs,
     transition: 'box-shadow 150ms ease-out',
     position: 'absolute',
     pointerEvents: 'none',

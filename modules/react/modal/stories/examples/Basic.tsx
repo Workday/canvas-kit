@@ -1,7 +1,6 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
-import {system} from '@workday/canvas-tokens-web';
 
 export const Basic = () => {
   const handleAcknowledge = () => {
@@ -25,12 +24,12 @@ export const Basic = () => {
               software and associated documentation files (the "Software").
             </Box>
           </Modal.Body>
-          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+          <Modal.ButtonGroup>
+            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={PrimaryButton} onClick={handleAcknowledge}>
               Acknowledge
             </Modal.CloseButton>
-            <Modal.CloseButton onClick={handleCancel}>Cancel</Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

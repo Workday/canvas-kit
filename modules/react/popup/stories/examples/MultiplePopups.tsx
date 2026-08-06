@@ -46,9 +46,9 @@ export const MultiplePopups = () => {
                 Shift + Tab.
               </p>
             </Popup.Body>
-            <Flex>
+            <Popup.ButtonGroup>
               <Popup.CloseButton>OK</Popup.CloseButton>
-            </Flex>
+            </Popup.ButtonGroup>
           </Popup.Card>
         </Popup.Popper>
       </Popup>
