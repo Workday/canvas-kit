@@ -73,6 +73,49 @@ describe('Menu disabled and submenu bugs', () => {
     expect(target).toHaveAttribute('aria-expanded', 'false');
   });
 
+  it('should move focus to the first item when reopened while a disabled item holds the cursor', async () => {
+    render(
+      <Menu>
+        <Menu.Target>Open Menu</Menu.Target>
+        <Menu.Popper>
+          <Menu.Card>
+            <Menu.List>
+              <Menu.Item data-id="first">First</Menu.Item>
+              <Menu.Item data-id="second">Second</Menu.Item>
+              <Menu.Item aria-disabled data-id="last">
+                Last
+              </Menu.Item>
+            </Menu.List>
+          </Menu.Card>
+        </Menu.Popper>
+      </Menu>
+    );
+
+    const target = screen.getByRole('button', {name: 'Open Menu'});
+
+    fireEvent.click(target);
+    await screen.findByRole('menu');
+
+    // Arrow up from the first item wraps the cursor onto the disabled last item.
+    fireEvent.keyDown(screen.getByRole('menuitem', {name: 'First'}), {key: 'ArrowUp'});
+    await waitFor(() => {
+      expect(screen.getByRole('menuitem', {name: 'Last'})).toHaveFocus();
+    });
+
+    fireEvent.keyDown(screen.getByRole('menuitem', {name: 'Last'}), {key: 'Escape'});
+    await waitFor(() => {
+      expect(screen.queryByRole('menu')).not.toBeInTheDocument();
+    });
+
+    fireEvent.click(target);
+    await screen.findByRole('menu');
+
+    await waitFor(() => {
+      expect(screen.getByRole('menuitem', {name: 'First'})).toHaveFocus();
+    });
+    expect(screen.getByRole('menuitem', {name: 'Last'})).not.toHaveFocus();
+  });
+
   it('should apply default maxHeight to Menu.List for scrolling', async () => {
     render(
       <Menu>

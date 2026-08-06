@@ -185,6 +185,27 @@ describe('Menu', () => {
         });
       });
 
+      context('when a disabled item has focus and the menu is closed and reopened', () => {
+        beforeEach(() => {
+          cy.findByRole('menuitem', {name: 'First Item'})
+            .should('be.focused')
+            .realType('{uparrow}');
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).should('be.focused');
+          cy.focused().realType('{esc}');
+          cy.findByRole('menu').should('not.exist');
+          cy.findByRole('button', {name: 'Open Menu'}).click();
+          cy.findByRole('menu').should('be.visible');
+        });
+
+        it('should move focus to the first item instead of the disabled item', () => {
+          cy.findByRole('menuitem', {name: 'First Item'}).should('be.focused');
+        });
+
+        it('should not leave focus on the disabled item', () => {
+          cy.findByRole('menuitem', {name: 'Fourth Item'}).should('not.be.focused');
+        });
+      });
+
       context('when the enter key is pressed', () => {
         beforeEach(() => {
           cy.findByRole('menu').should('exist');

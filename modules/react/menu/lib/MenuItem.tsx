@@ -192,6 +192,30 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)((
 ) => {
   const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
   const id = elemProps['data-id'];
+
+  // A menu keeps its cursor between openings, so reopening would restore focus to a disabled item.
+  // Items remount whenever the menu opens, which distinguishes reopening from navigating onto a
+  // disabled item while the menu is already open. Clearing the cursor lets the roving focus
+  // fallback in `useListItemRovingFocus` move focus to the first item. The check waits for the
+  // first render where `id` is known, since items without an explicit `data-id` register it later.
+  const hasCheckedDisabledCursor = React.useRef(false);
+  React.useLayoutEffect(() => {
+    if (hasCheckedDisabledCursor.current || !id) {
+      return;
+    }
+    hasCheckedDisabledCursor.current = true;
+
+    const element = localRef.current;
+    const isItemDisabled =
+      element?.getAttribute('aria-disabled') === 'true' ||
+      (element as HTMLButtonElement | null)?.disabled === true;
+
+    if (model.state.mode === 'single' && isCursor(model.state, id) && isItemDisabled) {
+      model.events.goToFirst();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   // focus on the item with the cursor
   React.useLayoutEffect(() => {
     if (model.state.mode === 'single') {
