@@ -150,6 +150,42 @@ export const segmentedControlItemStencil = createStencil({
 
 (Full source: [SegmentedControlItem.tsx](modules/react/segmented-control/lib/SegmentedControlItem.tsx))
 
+### Corner radius — `buttonStencil.vars.borderRadius` vs `cornerShapeStencil`
+
+A stencil can only have one `extends` target, so which mechanism sets the corner radius depends on
+what the stencil already extends. Don't set a raw `borderRadius: px2rem(n)` prop in either case.
+
+- **Extends `buttonStencil`:** write the radius into `buttonStencil.vars.borderRadius` (shown
+  above) — `buttonStencil` already wires that var into the real `border-radius` with its own
+  fallback chain. See `toolbarIconButtonStencil` in
+  [ToolbarIconButton.tsx](modules/react/toolbar/lib/ToolbarIconButton.tsx).
+- **Doesn't extend `buttonStencil`:** use `cornerShapeStencil`
+  ([cornerShape.ts](modules/react/common/lib/styles/cornerShape.ts)) instead of a plain
+  `borderRadius` prop. It's a progressive-enhancement squircle (`corner-shape:
+  superellipse(1.1)` + `borderRadius`, falling back to a plain radius in browsers without
+  `corner-shape` support):
+  ```tsx
+  const myStencil = createStencil({
+    extends: cornerShapeStencil,
+    base: {
+      [cornerShapeStencil.vars.shape]: system.legacy.shape.md,
+    },
+  });
+  ```
+
+  This applies **only to Canvas Kit library source** (`modules/**/lib/**`) — not consumer code,
+  Storybook examples, or docs. Use it when the stencil's border radius is one of:
+  - `system.legacy.shape.md`
+  - `system.legacy.shape.lg`
+  - `system.legacy.shape.xl`
+  - `system.legacy.shape.xxl`
+  - `system.legacy.shape.xxxl`
+
+  Don't apply it when the radius is:
+  - `system.legacy.shape.sm`
+  - `system.legacy.shape.full`
+  - `system.legacy.shape.none`
+
 ### Stencil rules
 
 - A stencil applies to a **single element**. Nested elements → use `parts`. Compound components →
