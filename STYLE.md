@@ -200,6 +200,15 @@ what the stencil already extends. Don't set a raw `borderRadius: px2rem(n)` prop
 - `parts` increase CSS specificity — use sparingly, and never put a part on a nested component
   that already has its own stencil. Part values must be prefixed/unique across components
   (`card-separator`, not `separator`) to avoid cross-component selector collisions.
+- Part keys are camelCase (`avatarImage`); the string value is the kebab-case `data-part` id
+  (`avatar-image`). A stencil's `parts` object commonly holds multiple entries for a single
+  compound component (e.g. `avatarStencil` → `avatarImage`, `avatarName`; `MenuItem`'s stencil →
+  `text`, `icon`, `selected`). When a compound component splits its subcomponents into separate
+  files instead, each file's stencil owns just its own single part — see
+  [Heading.tsx](modules/react/information-highlight/lib/parts/Heading.tsx).
+- Spread `{...stencil.parts.x}` **before** `handleCsProp(elemProps, ...)` so a consumer-supplied
+  prop doesn't accidentally override `data-part` unless you intend that. A fixed prop that must win
+  (e.g. `variant="secondary"`) goes *after* `handleCsProp` instead.
 - Pair every pseudo-selector with a class twin so visual/static-state testing can capture it:
   `'&:hover, &.hover'`, `'&:focus-visible, &.focus'`, `'&:disabled, &.disabled'`.
 - Apply with `handleCsProp(elemProps, [stencil({...})])`. **Don't use `mergeStyles`** — it's
