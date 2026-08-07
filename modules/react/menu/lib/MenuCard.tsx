@@ -8,7 +8,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -42,7 +42,7 @@ export const menuCardStencil = createStencil({
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,
-    maxHeight,
+    maxHeight: cssVar(maxHeight, '60vh'),
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {

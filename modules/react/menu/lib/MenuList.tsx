@@ -54,13 +54,12 @@ export const MenuList = createSubcomponent('div')({
   displayName: 'Menu.List',
   modelHook: useMenuModel,
   elemPropsHook: useMenuList,
-})<MenuListProps>(({children, maxHeight = '60vh', ...elemProps}, Element, model) => {
+})<MenuListProps>(({children, ...elemProps}, Element, model) => {
   return (
     <ListBox
       as={Element}
       model={model}
       marginY={system.legacy.gap.none}
-      maxHeight={maxHeight}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >
       {children}
