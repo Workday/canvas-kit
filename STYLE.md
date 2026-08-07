@@ -150,20 +150,28 @@ export const segmentedControlItemStencil = createStencil({
 
 (Full source: [SegmentedControlItem.tsx](modules/react/segmented-control/lib/SegmentedControlItem.tsx))
 
-### Corner radius — `buttonStencil.vars.borderRadius` vs `cornerShapeStencil`
+### Corner radius and `cornerShapeStencil`
 
-A stencil can only have one `extends` target, so which mechanism sets the corner radius depends on
-what the stencil already extends. Don't set a raw `borderRadius: px2rem(n)` prop in either case.
+We apply a subtle
+[corner-shape](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape)
+to components that use border-radius under certain conditions (see below), using a
+`cornerShapeStencil`. This applies to any stencil with a border radius
+(inputs, cards, menu items, buttons, etc). The one exception is a stencil that already extends
+`buttonStencil` for button-like behavior: since a stencil can only have one `extends` target, that
+stencil writes the radius into `buttonStencil.vars.borderRadius` instead. Don't set a raw
+`borderRadius: px2rem(n)` prop in either case.
 
-- **Extends `buttonStencil`:** write the radius into `buttonStencil.vars.borderRadius` (shown
-  above) — `buttonStencil` already wires that var into the real `border-radius` with its own
-  fallback chain. See `toolbarIconButtonStencil` in
+- **Extends `buttonStencil`:** write the radius into `buttonStencil.vars.borderRadius` (shown above)
+  — `buttonStencil` already wires that var into the real `border-radius` with its own fallback
+  chain. See `toolbarIconButtonStencil` in
   [ToolbarIconButton.tsx](modules/react/toolbar/lib/ToolbarIconButton.tsx).
-- **Doesn't extend `buttonStencil`:** use `cornerShapeStencil`
-  ([cornerShape.ts](modules/react/common/lib/styles/cornerShape.ts)) instead of a plain
-  `borderRadius` prop. It's a progressive-enhancement squircle (`corner-shape:
-  superellipse(1.1)` + `borderRadius`, falling back to a plain radius in browsers without
-  `corner-shape` support):
+- **Doesn't extend `buttonStencil`** (the common case — most stencils don't): use
+  `cornerShapeStencil` ([cornerShape.ts](modules/react/common/lib/styles/cornerShape.ts)) instead of
+  a plain `borderRadius` prop.
+
+  This is a progressive-enhancement (`corner-shape: superellipse(1.1)` + `borderRadius`), falling
+  back to a plain radius in browsers without `corner-shape` support:
+
   ```tsx
   const myStencil = createStencil({
     extends: cornerShapeStencil,
@@ -172,6 +180,10 @@ what the stencil already extends. Don't set a raw `borderRadius: px2rem(n)` prop
     },
   });
   ```
+
+  See `checkboxInputStencil` ([CheckboxInput.tsx](modules/react/checkbox/lib/CheckboxInput.tsx)),
+  `cardStencil` ([Card.tsx](modules/react/card/lib/Card.tsx)), and `menuItemStencil`
+  ([MenuItem.tsx](modules/react/menu/lib/MenuItem.tsx)) for non-button examples.
 
   This applies **only to Canvas Kit library source** (`modules/**/lib/**`) — not consumer code,
   Storybook examples, or docs. Use it when the stencil's border radius is one of:
