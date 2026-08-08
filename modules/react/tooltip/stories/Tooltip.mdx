@@ -5,6 +5,7 @@ import {InformationHighlight} from '@workday/canvas-kit-react/information-highli
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import TooltipStoriesMeta from './Tooltip.stories';
+import {AIDisclosure} from './examples/AIDisclosure';
 import {CustomContent} from './examples/CustomContent';
 import {Default} from './examples/Default';
 import {DelayedTooltip} from './examples/DelayedTooltip';
@@ -136,6 +137,14 @@ tooltip yourself, you can set the `type` to `muted`. This will not add any speci
 to the target element.
 
 <ExampleCodeBlock code={Muted} />
+
+### AI Functionality Disclosure
+
+When a control triggers AI-powered functionality, disclose that to assistive technology users with
+a `description` type tooltip. This adds an `aria-description` to the target element so screen
+reader users are informed of the AI involvement without changing the element's visible label.
+
+<ExampleCodeBlock code={AIDisclosure} />
 
 ### Custom Content
 
