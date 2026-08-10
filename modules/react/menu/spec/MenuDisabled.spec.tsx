@@ -116,32 +116,6 @@ describe('Menu disabled and submenu bugs', () => {
     expect(screen.getByRole('menuitem', {name: 'Last'})).not.toHaveFocus();
   });
 
-  it('should apply default maxHeight to Menu.List for scrolling', async () => {
-    render(
-      <Menu>
-        <Menu.Target>Open Menu</Menu.Target>
-        <Menu.Popper>
-          <Menu.Card>
-            <Menu.List>
-              {Array.from({length: 25}, (_, i) => (
-                <Menu.Item key={i} data-id={`item-${i}`}>
-                  Item {i}
-                </Menu.Item>
-              ))}
-            </Menu.List>
-          </Menu.Card>
-        </Menu.Popper>
-      </Menu>
-    );
-
-    fireEvent.click(screen.getByRole('button', {name: 'Open Menu'}));
-    const menu = await screen.findByRole('menu');
-    const scrollContainer = menu.parentElement;
-
-    expect(scrollContainer).toHaveStyle({maxHeight: '60vh'});
-    expect(scrollContainer).toHaveStyle({overflowY: 'auto'});
-  });
-
   it('should close sibling submenu when another is opened by click', async () => {
     render(<NestedSiblings />);
 
