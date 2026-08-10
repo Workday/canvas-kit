@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.6](https://github.com/Workday/canvas-kit/releases/tag/v16.0.6) (2026-08-10)
+
+### Documentation
+
+- docs: Add corner shape and parts conventions to STYLE.md ([#4130](https://github.com/Workday/canvas-kit/pull/4130)) ([@sheelah](https://github.com/sheelah))
+
+
 ## [v16.0.5](https://github.com/Workday/canvas-kit/releases/tag/v16.0.5) (2026-08-07)
 
 ### Documentation
