@@ -150,6 +150,54 @@ export const segmentedControlItemStencil = createStencil({
 
 (Full source: [SegmentedControlItem.tsx](modules/react/segmented-control/lib/SegmentedControlItem.tsx))
 
+### Corner radius and `cornerShapeStencil`
+
+We apply a subtle
+[corner-shape](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/corner-shape)
+to components that use border-radius under certain conditions (see below), using a
+`cornerShapeStencil`. This applies to any stencil with a border radius
+(inputs, cards, menu items, buttons, etc). The one exception is a stencil that already extends
+`buttonStencil` for button-like behavior: since a stencil can only have one `extends` target, that
+stencil writes the radius into `buttonStencil.vars.borderRadius` instead. Don't set a raw
+`borderRadius: px2rem(n)` prop in either case.
+
+- **Extends `buttonStencil`:** write the radius into `buttonStencil.vars.borderRadius` (shown above)
+  — `buttonStencil` already wires that var into the real `border-radius` with its own fallback
+  chain. See `toolbarIconButtonStencil` in
+  [ToolbarIconButton.tsx](modules/react/toolbar/lib/ToolbarIconButton.tsx).
+- **Doesn't extend `buttonStencil`** (the common case — most stencils don't): use
+  `cornerShapeStencil` ([cornerShape.ts](modules/react/common/lib/styles/cornerShape.ts)) instead of
+  a plain `borderRadius` prop.
+
+  This is a progressive-enhancement (`corner-shape: superellipse(1.1)` + `borderRadius`), falling
+  back to a plain radius in browsers without `corner-shape` support:
+
+  ```tsx
+  const myStencil = createStencil({
+    extends: cornerShapeStencil,
+    base: {
+      [cornerShapeStencil.vars.shape]: system.legacy.shape.md,
+    },
+  });
+  ```
+
+  See `checkboxInputStencil` ([CheckboxInput.tsx](modules/react/checkbox/lib/CheckboxInput.tsx)),
+  `cardStencil` ([Card.tsx](modules/react/card/lib/Card.tsx)), and `menuItemStencil`
+  ([MenuItem.tsx](modules/react/menu/lib/MenuItem.tsx)) for non-button examples.
+
+  This applies **only to Canvas Kit library source** (`modules/**/lib/**`) — not consumer code,
+  Storybook examples, or docs. Use it when the stencil's border radius is one of:
+  - `system.legacy.shape.md`
+  - `system.legacy.shape.lg`
+  - `system.legacy.shape.xl`
+  - `system.legacy.shape.xxl`
+  - `system.legacy.shape.xxxl`
+
+  Don't apply it when the radius is:
+  - `system.legacy.shape.sm`
+  - `system.legacy.shape.full`
+  - `system.legacy.shape.none`
+
 ### Stencil rules
 
 - A stencil applies to a **single element**. Nested elements → use `parts`. Compound components →
@@ -164,6 +212,15 @@ export const segmentedControlItemStencil = createStencil({
 - `parts` increase CSS specificity — use sparingly, and never put a part on a nested component
   that already has its own stencil. Part values must be prefixed/unique across components
   (`card-separator`, not `separator`) to avoid cross-component selector collisions.
+- Part keys are camelCase (`avatarImage`); the string value is the kebab-case `data-part` id
+  (`avatar-image`). A stencil's `parts` object commonly holds multiple entries for a single
+  compound component (e.g. `avatarStencil` → `avatarImage`, `avatarName`; `MenuItem`'s stencil →
+  `text`, `icon`, `selected`). When a compound component splits its subcomponents into separate
+  files instead, each file's stencil owns just its own single part — see
+  [Heading.tsx](modules/react/information-highlight/lib/parts/Heading.tsx).
+- Spread `{...stencil.parts.x}` **before** `handleCsProp(elemProps, ...)` so a consumer-supplied
+  prop doesn't accidentally override `data-part` unless you intend that. A fixed prop that must win
+  (e.g. `variant="secondary"`) goes *after* `handleCsProp` instead.
 - Pair every pseudo-selector with a class twin so visual/static-state testing can capture it:
   `'&:hover, &.hover'`, `'&:focus-visible, &.focus'`, `'&:disabled, &.disabled'`.
 - Apply with `handleCsProp(elemProps, [stencil({...})])`. **Don't use `mergeStyles`** — it's
