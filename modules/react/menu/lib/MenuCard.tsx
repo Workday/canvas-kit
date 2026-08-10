@@ -48,7 +48,9 @@ export const menuCardStencil = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-
+    '&:where(:has([data-part="list-box-container"]))': {
+      overflow: 'hidden',
+    },
     '& :where([data-part="list-box-container"])': {
       borderRadius: system.legacy.shape.xxl,
       overflow: 'hidden',
