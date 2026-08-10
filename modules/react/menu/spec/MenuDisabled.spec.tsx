@@ -73,6 +73,68 @@ describe('Menu disabled and submenu bugs', () => {
     expect(target).toHaveAttribute('aria-expanded', 'false');
   });
 
+  it('should not open submenu when TargetItem is disabled via nonInteractiveIds', async () => {
+    render(
+      <Menu nonInteractiveIds={['sub']}>
+        <Menu.Target>Open Menu</Menu.Target>
+        <Menu.Popper>
+          <Menu.Card>
+            <Menu.List>
+              <Menu.Submenu>
+                <Menu.Submenu.TargetItem data-id="sub">Submenu</Menu.Submenu.TargetItem>
+                <Menu.Submenu.Popper>
+                  <Menu.Submenu.Card>
+                    <Menu.Submenu.List>
+                      <Menu.Submenu.Item data-id="sub-item">Sub Item</Menu.Submenu.Item>
+                    </Menu.Submenu.List>
+                  </Menu.Submenu.Card>
+                </Menu.Submenu.Popper>
+              </Menu.Submenu>
+            </Menu.List>
+          </Menu.Card>
+        </Menu.Popper>
+      </Menu>
+    );
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Menu'}));
+    const target = await screen.findByRole('menuitem', {name: 'Submenu'});
+
+    expect(target).toHaveAttribute('disabled');
+
+    fireEvent.click(target);
+
+    expect(screen.queryByRole('menuitem', {name: 'Sub Item'})).not.toBeInTheDocument();
+    expect(target).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  it('should not fire onSelect when Menu.Item is disabled via nonInteractiveIds', async () => {
+    const onSelect = vi.fn();
+
+    render(
+      <Menu nonInteractiveIds={['disabled']} onSelect={onSelect}>
+        <Menu.Target>Open Menu</Menu.Target>
+        <Menu.Popper>
+          <Menu.Card>
+            <Menu.List>
+              <Menu.Item data-id="enabled">Enabled</Menu.Item>
+              <Menu.Item data-id="disabled">Disabled</Menu.Item>
+            </Menu.List>
+          </Menu.Card>
+        </Menu.Popper>
+      </Menu>
+    );
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Menu'}));
+    const disabledItem = await screen.findByRole('menuitem', {name: 'Disabled'});
+
+    expect(disabledItem).toHaveAttribute('disabled');
+
+    fireEvent.click(disabledItem);
+
+    expect(onSelect).not.toHaveBeenCalled();
+    expect(screen.getByRole('menu')).toBeInTheDocument();
+  });
+
   it('should move focus to the first item when reopened while a disabled item holds the cursor', async () => {
     render(
       <Menu>
@@ -114,6 +176,32 @@ describe('Menu disabled and submenu bugs', () => {
       expect(screen.getByRole('menuitem', {name: 'First'})).toHaveFocus();
     });
     expect(screen.getByRole('menuitem', {name: 'Last'})).not.toHaveFocus();
+  });
+
+  it('should apply default maxHeight to Menu.List for scrolling', async () => {
+    render(
+      <Menu>
+        <Menu.Target>Open Menu</Menu.Target>
+        <Menu.Popper>
+          <Menu.Card>
+            <Menu.List>
+              {Array.from({length: 25}, (_, i) => (
+                <Menu.Item key={i} data-id={`item-${i}`}>
+                  Item {i}
+                </Menu.Item>
+              ))}
+            </Menu.List>
+          </Menu.Card>
+        </Menu.Popper>
+      </Menu>
+    );
+
+    fireEvent.click(screen.getByRole('button', {name: 'Open Menu'}));
+    const menu = await screen.findByRole('menu');
+    const scrollContainer = menu.parentElement;
+
+    expect(scrollContainer).toHaveStyle({maxHeight: '100%'});
+    expect(scrollContainer).toHaveStyle({overflowY: 'auto'});
   });
 
   it('should close sibling submenu when another is opened by click', async () => {

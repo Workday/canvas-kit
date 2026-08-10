@@ -2,6 +2,7 @@ import React from 'react';
 
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
 
+import {isElementDisabled} from './isElementDisabled';
 import {useListModel} from './useListModel';
 
 /**
@@ -23,8 +24,7 @@ export const useListItemSelect = createElemPropsHook(useListModel)((
 ) => {
   const name = elemProps['data-id'] || '';
   const onClick = (event: React.MouseEvent<HTMLElement>) => {
-    const isDisabled = event.currentTarget.getAttribute('aria-disabled') === 'true';
-    if (isDisabled || state.nonInteractiveIds.includes(name)) {
+    if (isElementDisabled(event.currentTarget) || state.nonInteractiveIds.includes(name)) {
       return null;
     }
     events.select({id: name});

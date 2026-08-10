@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {
   isCursor,
+  isElementDisabled,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
@@ -205,10 +206,7 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)((
     }
     hasCheckedDisabledCursor.current = true;
 
-    const element = localRef.current;
-    const isItemDisabled =
-      element?.getAttribute('aria-disabled') === 'true' ||
-      (element as HTMLButtonElement | null)?.disabled === true;
+    const isItemDisabled = isElementDisabled(localRef.current);
 
     if (model.state.mode === 'single' && isCursor(model.state, id) && isItemDisabled) {
       model.events.goToFirst();
@@ -251,8 +249,7 @@ export const useMenuItem = composeHooks(
       onClick:
         model.state.mode === 'single'
           ? (event: React.SyntheticEvent) => {
-              const isDisabled = event.currentTarget.getAttribute('aria-disabled') === 'true';
-              if (isDisabled) {
+              if (isElementDisabled(event.currentTarget as Element)) {
                 return null;
               }
               model.events.hide(event);

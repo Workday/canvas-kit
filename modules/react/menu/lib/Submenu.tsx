@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
+import {
+  isElementDisabled,
+  useListItemRegister,
+  useListItemRovingFocus,
+} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   PropsWithModel,
@@ -112,7 +116,7 @@ export const useSubmenuTargetItem = composeHooks(
         model.UNSTABLE_parentModel.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
       onMouseEnter(event: React.MouseEvent) {
-        if (event.currentTarget.getAttribute('aria-disabled') === 'true') {
+        if (isElementDisabled(event.currentTarget)) {
           return;
         }
         currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
@@ -122,8 +126,7 @@ export const useSubmenuTargetItem = composeHooks(
         mouseEnterTimer.clear();
       },
       onClick(event: React.MouseEvent) {
-        const isDisabled = event.currentTarget.getAttribute('aria-disabled') === 'true';
-        if (isDisabled) {
+        if (isElementDisabled(event.currentTarget)) {
           return null;
         }
         // If we're wrapping a target component that doesn't handle ref forwarding, update the
@@ -142,7 +145,7 @@ export const useSubmenuTargetItem = composeHooks(
       },
       'data-has-children': true,
       onKeyDown(event: React.KeyboardEvent) {
-        if (event.currentTarget.getAttribute('aria-disabled') === 'true') {
+        if (isElementDisabled(event.currentTarget)) {
           return;
         }
         if (model.state.orientation === 'vertical') {
