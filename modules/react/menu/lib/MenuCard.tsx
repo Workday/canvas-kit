@@ -48,11 +48,10 @@ export const menuCardStencil = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    '&:where(:has([data-part="list-box-container"]))': {
-      overflow: 'hidden',
-    },
+
     '& :where([data-part="list-box-container"])': {
       borderRadius: system.legacy.shape.xxl,
+      overflow: 'hidden',
       // Card is a flex column container. Without this, a flex child won't shrink below its
       // content size, so `maxHeight` on the Card would be ignored and content would overflow
       // instead of scrolling inside the list-box-container.
