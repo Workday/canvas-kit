@@ -52,6 +52,11 @@ export const Ellipsis = () => {
       <OverflowTooltip>
         <CustomContent />
       </OverflowTooltip>
+      <OverflowTooltip showDelay={2000}>
+        <SecondaryButton cs={{maxWidth: px2rem(200)}}>
+          2 second delay on show and hide content
+        </SecondaryButton>
+      </OverflowTooltip>
     </React.Fragment>
   );
 };
