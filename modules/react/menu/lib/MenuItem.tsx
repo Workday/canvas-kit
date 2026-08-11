@@ -8,6 +8,7 @@ import {
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
 import {
+  changeFocus,
   composeHooks,
   createComponent,
   createElemPropsHook,
@@ -180,7 +181,12 @@ export const useMenuItemArrowReturn = createElemPropsHook(useMenuModel)(model =>
     onKeyDown(event: React.KeyboardEvent) {
       const styles = getComputedStyle(event.currentTarget);
       if (event.key === 'ArrowLeft' && styles.direction === 'ltr' && model.UNSTABLE_parentModel) {
+        event.preventDefault();
+        const target = model.state.targetRef.current as HTMLElement | null;
         model.events.hide(event);
+        requestAnimationFrame(() => {
+          changeFocus(target);
+        });
       }
     },
   };
