@@ -34,8 +34,9 @@ and component slug tables: [references.md](references.md).
 2. **Every interactive element needs an accessible name** — see [Naming](#accessible-names).
 3. **Keyboard before mouse-only** — Tab/Shift+Tab at minimum; APG patterns often need arrow keys,
    Escape, Enter/Space.
-4. **Visible focus by default** — suppress the ring only for mouse/touch/pointer via
-   `data-whatinput`, never unconditional `outline: none` (see [Focus](#focus-indicators)).
+4. **Visible focus by default** — use `:focus-visible` so keyboard users get a focus ring while
+   pointer clicks rely on browser heuristics. Never remove focus outlines unconditionally (see
+   [Focus](#focus-indicators)).
 5. **Follow APG exactly** — if you add ARIA, match the
    [WAI-ARIA APG pattern](https://www.w3.org/WAI/ARIA/apg/patterns/) for that widget. Don't invent
    role/state combinations.
@@ -105,18 +106,31 @@ Deprecated: `disabled` on `MenuItem` — use `aria-disabled` (`/sana-canvas-comp
 
 ## Focus indicators
 
-Required by default. Scope suppression to pointer input only:
+Required by default. Canvas Kit uses **`:focus-visible`** — browser heuristics decide when focus
+styles apply (keyboard navigation shows the ring; most pointer clicks do not). Do **not** use
+`data-whatinput` or `InputProvider`; those were removed in v14.
+
+When extending stencils or adding custom focus styles:
 
 ```tsx
-[`[data-whatinput='mouse'] &:focus,
- [data-whatinput='touch'] &:focus,
- [data-whatinput='pointer'] &:focus`]: {
-  outline: 'none',
-},
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const customButtonStyles = createStyles({
+  '&:focus-visible, &.focus': {
+    outline: `2px solid ${system.legacy.color.brand.focus.primary}`,
+    outlineOffset: '2px',
+  },
+});
 ```
 
-Do not remove focus outlines globally. Canvas Kit components already follow this pattern — preserve
-it when extending stencils.
+- **`:focus-visible`** — real keyboard/focus navigation
+- **`&.focus`** — static state twin for visual testing (Chromatic `StaticStates`); pair with
+  `:focus-visible` the way Canvas Kit components do
+
+Do not remove focus outlines globally (`outline: none` on `:focus` without a `:focus-visible`
+replacement). Canvas Kit components already follow this pattern — preserve it when extending
+stencils. `hideMouseFocus` / `mouseFocusBehavior` are deprecated — use `:focus-visible` instead.
 
 ## Popups, portals, and focus
 
@@ -215,7 +229,7 @@ See `WindowsHighContrastThemes.mdx`.
 - [ ] Can this be native HTML or an existing Canvas Kit component?
 - [ ] Every interactive control has an accessible name (not placeholder/title alone)
 - [ ] Keyboard: Tab + pattern-specific keys (arrows, Escape, Enter/Space)
-- [ ] Focus visible; pointer-only outline suppression via data-whatinput only
+- [ ] Focus visible via `:focus-visible` (not `data-whatinput` or unconditional `outline: none`)
 - [ ] Popup: right primitive (Modal vs Menu vs Popup); initial + return focus
 - [ ] Dynamic status: AriaLiveRegion (plain text, debounced) — not alert() or title
 - [ ] No speculative ARIA — matches APG or remove it
@@ -250,7 +264,8 @@ Full slug lists: [references.md](references.md).
 - ❌ `placeholder` as the only input label
 - ❌ `title` as accessible name
 - ❌ `tabIndex={0}` on non-interactive elements to "make it focusable"
-- ❌ `outline: none` without `data-whatinput` guard
+- ❌ `outline: none` on `:focus` without a `:focus-visible` replacement
+- ❌ `data-whatinput` / `hideMouseFocus` for focus suppression (deprecated — use `:focus-visible`)
 - ❌ Nested interactive controls (`<button>` wrapping `TertiaryButton`)
 - ❌ `alert()` or unbounded `assertive` live regions for routine updates
 - ❌ Hand-rolled menu/dialog when `Menu`/`Modal`/`Dialog` fits
@@ -265,7 +280,7 @@ Building a popup?                → Modal (trap) vs Dialog vs Popup vs Menu —
 Selectable menu items?           → Menu.Option + aria-selected (not Menu.Item alone)
 Status after filter/search?      → AriaLiveRegion (polite, debounced)
 Custom expand/collapse?          → Expandable / Disclosure patterns (/sana-canvas-builder)
-Extending focus styles?          → data-whatinput scoped suppression only
+Extending focus styles?          → `:focus-visible` (+ `&.focus` for static states)
 Which component a11y rules?      → MCP get-accessibility-guidelines + docs://examples/{slug}/accessibility
 Deprecated a11y props?           → /sana-canvas-component-selection
 ```
