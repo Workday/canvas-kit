@@ -12,8 +12,5 @@ export const isElementDisabled = (element: Element | null | undefined): boolean 
   if (!element) {
     return false;
   }
-  return (
-    element.getAttribute('aria-disabled') === 'true' ||
-    (element as HTMLButtonElement | HTMLInputElement).disabled === true
-  );
+  return element.getAttribute('aria-disabled') === 'true' || element.hasAttribute('disabled');
 };

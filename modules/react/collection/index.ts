@@ -19,7 +19,7 @@ export * from './lib/useListItemRemoveOnDeleteKey';
 export * from './lib/focusOnCurrentCursor';
 export * from './lib/listItemRemove';
 export * from './lib/isElementDisabled';
-export {ListBox, type ListBoxProps} from './lib/ListBox';
+export {ListBox, type ListBoxProps, listBoxContainerStencil} from './lib/ListBox';
 export {keyboardEventToCursorEvents} from './lib/keyUtils';
 export {
   singleSelectionManager,

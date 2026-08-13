@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
+import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   createElemPropsHook,
@@ -48,12 +49,11 @@ export const menuCardStencil = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    '&:where(:has([data-part="list-box-container"]))': {
+    [`&:where(:has(${listBoxContainerStencil.parts.listBoxContainer.selector}))`]: {
       overflow: 'hidden',
     },
-    '& :where([data-part="list-box-container"])': {
+    [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
       borderRadius: system.legacy.shape.xxl,
-      overflow: 'hidden',
       // Card is a flex column container. Without this, a flex child won't shrink below its
       // content size, so `maxHeight` on the Card would be ignored and content would overflow
       // instead of scrolling inside the list-box-container.
