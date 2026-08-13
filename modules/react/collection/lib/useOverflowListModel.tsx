@@ -25,9 +25,13 @@ export function getHiddenIds(
   let shouldAddGap = false;
 
   if (selectedIds !== 'all' && selectedIds.length) {
-    if (items.length) {
+    const candidate = selectedIds[0];
+    // Size cache keys are resolved ids (including custom `getId`), unlike raw `config.items`.
+    if (itemSizeCache[candidate] !== undefined) {
+      selectedKey = candidate;
+    } else if (items?.length) {
       // If selectedIds[0] is not in items, use the first id from items
-      selectedKey = items.find(item => item.id === selectedIds[0]) ? selectedIds[0] : items[0].id;
+      selectedKey = items.find(item => item.id === candidate) ? candidate : items[0].id;
     }
   }
 

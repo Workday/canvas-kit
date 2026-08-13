@@ -90,5 +90,16 @@ describe('useOverflowModel', () => {
         ).toEqual(hiddenIds);
       });
     });
+
+    it('should keep the selected item visible when items use a custom id field instead of `id`', () => {
+      expect(
+        getHiddenIds(250, 0, overflowTargeSize, itemSizeCache, ['second'], [
+          {index: 0, value: {contextId: 'first'}, textValue: 'First'},
+          {index: 1, value: {contextId: 'second'}, textValue: 'Second'},
+          {index: 2, value: {contextId: 'third'}, textValue: 'Third'},
+          {index: 3, value: {contextId: 'fourth'}, textValue: 'Fourth'},
+        ] as any)
+      ).toEqual(['first', 'third', 'fourth']);
+    });
   });
 });
