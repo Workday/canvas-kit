@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.7](https://github.com/Workday/canvas-kit/releases/tag/v15.1.7) (2026-08-13)
+
+### Components
+
+- fix: Forward getId to useTabsModel to ensure custom ids work when registering items ([#4141](https://github.com/Workday/canvas-kit/pull/4141)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v15.1.6](https://github.com/Workday/canvas-kit/releases/tag/v15.1.6) (2026-08-13)
 
 ### Components
