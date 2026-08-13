@@ -58,14 +58,24 @@ describe('usePopupStack', () => {
 
       // Wait for the effect to apply styles
       await waitFor(() => {
-        // Check that the container has the correct CSS variables
         const styles = container?.style;
         if (styles) {
-          // The Sana theme should set brand variables
-          // Sana theme uses CSS variable references (var(--cnvs-brand-primary-600))
-          const primary600 = styles.getPropertyValue('--cnvs-brand-primary-600');
-          // Check that the value is a CSS variable reference
-          expect(primary600).toContain('var(--cnvs-brand-primary-600)');
+          // Sana only redefines primary A300 (not 600) — writing primary-600 would be a
+          // var() self-reference cycle. Neutral/action ramps and system.color.brand.*
+          // overrides are forwarded as var() references to the underlying palette.
+          expect(styles.getPropertyValue('--cnvs-brand-primary-600')).toBe('');
+          expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(
+            'var(--cnvs-base-palette-blue-a300)'
+          );
+          expect(styles.getPropertyValue('--cnvs-brand-neutral-600')).toBe(
+            'var(--cnvs-base-palette-neutral-600)'
+          );
+          expect(styles.getPropertyValue('--cnvs-brand-action-base')).toBe(
+            'var(--cnvs-brand-neutral-975)'
+          );
+          expect(styles.getPropertyValue('--cnvs-sys-color-brand-accent-primary')).toBe(
+            'var(--cnvs-brand-neutral-975)'
+          );
         }
       });
     });
