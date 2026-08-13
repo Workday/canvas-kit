@@ -82,8 +82,8 @@ input component. By default, the orientation will be set to `vertical`.
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `isRequired` prop of the wrapping Form Field to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
@@ -102,11 +102,16 @@ something else, be sure to set the `width` property of `InputGroup.InnerStart` o
 `InputGroup.InnerEnd` to match the intended width of the element. Do not use the `cs` prop or any
 method to change width. The `width` prop is used to correctly position other inner elements.
 
+Do **not** use `FormField.Input as={InputGroup}` — that breaks label association. Render
+`FormField.Field as={InputGroup}`, hoist the input `id` from the Form Field model, and set it on
+`InputGroup.Input` (see the Icons example).
+
 <ExampleCodeBlock code={Icons} />
 
-> **Accessibility Note**: In this example, the mail icon is decorative and hidden from screen
-> readers. If icons are used for conveying meaning in addition to the label text, a text alternative
-> must be provided for screen readers.
+> **Accessibility Note**: Canvas Kit icons are already hidden from assistive technology — their SVG
+> markup sets `role="presentation"` and `focusable="false"` — so decorative icons like the mail icon
+> in this example need no extra attributes. If an icon conveys meaning beyond the label text, provide
+> that meaning as text for screen readers.
 
 ### Error States
 
@@ -117,33 +122,186 @@ accessibility guidance.
 
 ## Accessibility
 
-`TextInput` should be used with [Form Field](/components/inputs/form-field/) to ensure proper
-labeling, error handling, and help text association. See
-[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
-comprehensive guidance on form accessibility best practices.
+The primary accessibility goal for `TextInput` is to give every user a visible, persistent label and
+clear instructions, and to ensure assistive technology users can identify the single-line field and
+hear hints, errors, required state, and input purpose when the control receives focus. Use
+`TextInput` for single-line values (names, emails, short answers). For multiple lines or paragraphs
+of text, use [TextArea](/components/inputs/text-area/) instead.
 
-### Autocomplete Attribute
+### Minimum Accessible Structure
 
-- Add appropriate `autoComplete` values to indicate the input's purpose (e.g., `"email"`, `"name"`,
-  `"street-address"`, `"tel"`). Read more about
-  [Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html).
-- Autocomplete enables browser autofill and helps assistive technologies understand the field's
-  purpose, benefiting users with cognitive disabilities and motor impairments.
-- Autocomplete also helps password managers identify the correct fields.
+Build on the Basic example: label first, then the input inside `FormField.Field`. This order
+matches the DOM reading sequence and ensures the label's `htmlFor` targets the `<input>` before
+hint text follows the control.
 
-### Input Type for Mobile Keyboards
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-`TextInput` defaults to `<input type="text">`, but for better mobile keyboard support, use more
-specific `type` attributes (like `"email"`, `"tel"`, `"url"`, or `"search"`) as needed.
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} />
+    <FormField.Hint>We'll never share your email.</FormField.Hint>
+  </FormField.Field>
+</FormField>;
+```
 
-### Screen Reader Experience
+Every `TextInput` requires **`FormField`**, a visible **`FormField.Label`**, and
+**`FormField.Input as={TextInput}`** so the control has a programmatically determinable name,
+relationships, and instructions. See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for shared
+form-field guidance. Include **`FormField.Hint`** for instructions or validation
+messages—`FormField` associates that text with the input through `aria-describedby`.
 
-When properly implemented with `FormField`, screen readers will announce:
+### Built-in Behaviors
 
-- The label text when the input receives focus.
-- Required, disabled, or read-only status.
-- Help text and error messages (via `aria-describedby`).
-- The current value or "blank" if empty.
+Canvas Kit applies these automatically when you compose `TextInput` with `FormField` subcomponents
+(and `InputGroup`, when used). **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by subcomponents_):
+
+- **`TextInput`**: Renders a native `<input type="text">` by default. Screen readers identify it as
+  a single-line text input.
+- **`TextInput` `disabled`**: Maps to the native `disabled` attribute; disabled fields are removed
+  from the tab order.
+- **`InputGroup.ClearButton`**: Sets `role="presentation"` and `tabIndex={-1}` so the control is not
+  in the tab order and is not exposed as an operable button to screen readers. Clearing is available
+  via native keyboard editing in the input.
+- **`InputGroup.Input`**: Always ensures a `placeholder` attribute exists (empty string when unset)
+  so `:placeholder-shown` styling for the clear button works correctly.
+- **Canvas Kit icons** (for example `SystemIcon` inside `InputGroup`): SVG markup includes
+  `role="presentation"` and `focusable="false"`, which removes the implied `img` role. Decorative
+  icons need no `aria-hidden`.
+
+**Keyboard** (_standard `TextInput` behavior_):
+
+`TextInput` uses native `<input>` keyboard behavior (tab order, label activation, and text-editing
+shortcuts). Do not add custom key handlers that prevent standard text editing.
+
+**`InputGroup.ClearButton`** is intentionally not keyboard-focusable; users clear the value with
+standard input editing keys.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), and hint or error text via `aria-describedby`.
+- The current value or "blank" is announced when the input receives focus.
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
+- Disabled inputs may be announced as unavailable and are skipped in the tab order.
+- **`InputGroup.ClearButton`** is not announced as a separate operable control.
+- Icons rendered inside **`InputGroup.InnerStart`** or **`InputGroup.InnerEnd`** are not announced,
+  because their SVG markup uses `role="presentation"`.
+
+For rendered label, input, and hint association markup, see the DOM examples in
+[FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors). `TextInput`
+renders a native `<input>` (see FormField examples).
+
+### Accessibility Requirements
+
+Required in application code for an accessible `TextInput`. Rows marked _(conditional)_ apply only
+when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible `FormField.Label`, wrap the control with
+`FormField.Input as={TextInput}`, omit `isHidden`, omit a custom `id` unless testing or composition
+requires it, omit a `ref` unless programmatic focus is required, and omit `InputGroup` unless icons
+or a clear control are part of the design.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Use a ref when the product needs to move focus to the input after an action (for example, focusing
+the field after a validation error, or a control that focuses the input). Do not attach a `ref` or
+call `focus()` unless the design or developer asks for it. See [Ref Forwarding](#ref-forwarding)
+under Usage for a complete Storybook example.
+
+```tsx
+const ref = React.useRef<HTMLInputElement>(null);
+
+const handleClick = () => {
+  ref.current?.focus();
+};
+
+<FormField>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field>
+    <FormField.Input as={TextInput} ref={ref} />
+  </FormField.Field>
+</FormField>
+<PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>;
+```
+
+**`InputGroup` with icons** _(conditional)_:
+
+When the design includes start/end icons or a clear control, compose `InputGroup` as
+`FormField.Field` (not as `FormField.Input`) and wire the input `id` from the Form Field model:
+
+```tsx
+import {
+  FormField,
+  useFormFieldInput,
+  useFormFieldModel,
+} from '@workday/canvas-kit-react/form-field';
+import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {InputGroup} from '@workday/canvas-kit-react/text-input';
+import {mailIcon} from '@workday/canvas-system-icons-web';
+
+const model = useFormFieldModel();
+const {id: formFieldInputId} = useFormFieldInput(model);
+
+<FormField model={model}>
+  <FormField.Label>Email</FormField.Label>
+  <FormField.Field as={InputGroup}>
+    <InputGroup.InnerStart>
+      <SystemIcon icon={mailIcon} />
+    </InputGroup.InnerStart>
+    <InputGroup.Input id={formFieldInputId} autoComplete="email" />
+    <InputGroup.InnerEnd>
+      <InputGroup.ClearButton />
+    </InputGroup.InnerEnd>
+  </FormField.Field>
+</FormField>;
+```
+
+| Requirement                           | How to satisfy                                                                                                                                                                                                                                              |
+| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                          | **`FormField.Input as={TextInput}`** wrapping every `TextInput` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                                           |
+| Autocomplete _(conditional)_          | `autoComplete` on **`FormField.Input`** (or **`InputGroup.Input`**) with an appropriate token (e.g. `"email"`, `"name"`, `"street-address"`, `"tel"`). See [Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html) |
+| Input `type` _(conditional)_          | More specific `type` than `"text"` (e.g. `"email"`, `"tel"`, `"url"`, `"search"`) when a specialized mobile keyboard improves entry                                                                                                                          |
+| Icons / clear control _(conditional)_ | **`FormField.Field as={InputGroup}`** + **`InputGroup.Input`** with hoisted `id` (see **`InputGroup` with icons** above). Decorative icons need no extra attributes; when an icon conveys meaning beyond the label, convey that meaning as text              |
+| Programmatic focus _(conditional)_    | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                         |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, `FormField.Input as={TextInput}` wiring
+- **CONDITIONAL:** `autoComplete`, specialized `type`, `InputGroup` icon/clear composition with
+  hoisted `id`, programmatic focus via `ref`. See
+  [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
+  conditionals (hint/error, required, disabled, placeholder, stable `id`).
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- **Unlabeled text inputs**: Do not use `TextInput` without `FormField` and `FormField.Label` (see
+  **Minimum accessible structure**). For shared FormField anti-patterns (manual ARIA wiring,
+  placeholder-only labels, color-only errors, broken ID references), see
+  [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
+- **Multi-line content in `TextInput`**: Do not use `TextInput` when the user needs to enter
+  paragraphs or multi-line text; use [TextArea](/components/inputs/text-area/) instead.
+- **`FormField.Input as={InputGroup}`**: Do not put `InputGroup` on `FormField.Input` — that breaks
+  label association. Use **`FormField.Field as={InputGroup}`**, hoist `id` from
+  `useFormFieldInput(model)`, and pass it to **`InputGroup.Input`** (see **`InputGroup` with icons**
+  in Accessibility Requirements and [Icons](#icons) under Usage).
+- **Re-wiring `ClearButton` a11y**: Do not override `InputGroup.ClearButton`'s `role` or `tabIndex`
+  to make it a focusable, announced button — Canvas Kit intentionally keeps clearing on the input.
+- **Redundant `aria-hidden` on icons**: Do not add `aria-hidden` to Canvas Kit icons — their SVG
+  markup already sets `role="presentation"` and `focusable="false"`.
+- **Meaningful icons without a text alternative**: Do not rely on an icon inside `InputGroup` to
+  convey information beyond the label; because icons are presentational, that meaning must come from
+  text such as **`FormField.Label`** or **`FormField.Hint`**.
+- **Programmatic focus by default**: Do not attach a `ref` or call `focus()` on the input unless the
+  design or developer asks for it (see **Programmatic focus** in Accessibility Requirements).
 
 ## Component API
 
