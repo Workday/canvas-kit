@@ -15,12 +15,10 @@
  * | `sanaCanvasNumericalTheme` | Numerical `brand` shape for popup forwarding |
  * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` when `<html>` is unavailable |
  */
+import {cssVar} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
 import type {CanvasNumericalBrandTheme} from './types';
-
-/** Reference a canvas-tokens CSS variable (resolves under `[data-theme="sana-canvas"]`). */
-const varRef = (token: string) => `var(${token})`;
 
 /**
  * Sana extends the neutral ramp with base-palette steps not yet exported from
@@ -79,58 +77,58 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   themeScope: 'brand',
   brand: {
     primary: {
-      A300: varRef(sanaBaseAccentA300.primary),
+      A300: cssVar(sanaBaseAccentA300.primary),
     },
     critical: {
-      A300: varRef(sanaBaseAccentA300.critical),
+      A300: cssVar(sanaBaseAccentA300.critical),
     },
     caution: {
-      A300: varRef(sanaBaseAccentA300.caution),
+      A300: cssVar(sanaBaseAccentA300.caution),
     },
     positive: {
-      A300: varRef(sanaBaseAccentA300.positive),
+      A300: cssVar(sanaBaseAccentA300.positive),
     },
     action: {
-      base: varRef(brand.neutral975),
-      dark: varRef(brand.neutral950),
-      darkest: varRef(brand.neutral900),
-      darker: varRef(brand.neutral975),
-      accent: varRef(base.neutral0),
-      lightest: varRef(brand.neutral25),
-      lighter: varRef(brand.neutral50),
-      light: varRef(brand.neutral200),
+      base: cssVar(brand.neutral975),
+      dark: cssVar(brand.neutral950),
+      darkest: cssVar(brand.neutral900),
+      darker: cssVar(brand.neutral975),
+      accent: cssVar(base.neutral0),
+      lightest: cssVar(brand.neutral25),
+      lighter: cssVar(brand.neutral50),
+      light: cssVar(brand.neutral200),
     },
     neutral: {
-      '25': varRef(base.neutral25),
-      '50': varRef(base.neutral50),
-      '100': varRef(base.neutral100),
-      '150': varRef(sanaBaseNeutral['150']),
-      '200': varRef(base.neutral200),
-      '300': varRef(base.neutral300),
-      '400': varRef(base.neutral400),
-      '500': varRef(base.neutral500),
-      '600': varRef(base.neutral600),
-      '700': varRef(base.neutral700),
-      '800': varRef(base.neutral800),
-      '850': varRef(sanaBaseNeutral['850']),
-      '900': varRef(base.neutral900),
-      '950': varRef(base.neutral950),
-      '975': varRef(base.neutral975),
-      A25: varRef(base.neutralA25),
-      A50: varRef(base.neutralA50),
-      A100: varRef(base.neutralA100),
-      A150: varRef(sanaBaseNeutral.A150),
-      A200: varRef(base.neutralA200),
-      A300: varRef(base.neutralA300),
-      A400: varRef(base.neutralA400),
-      A500: varRef(base.neutralA500),
-      A600: varRef(base.neutralA600),
-      A700: varRef(base.neutralA700),
-      A800: varRef(base.neutralA800),
-      A850: varRef(sanaBaseNeutral.A850),
-      A900: varRef(base.neutralA900),
-      A950: varRef(base.neutralA950),
-      A975: varRef(base.neutralA975),
+      '25': cssVar(base.neutral25),
+      '50': cssVar(base.neutral50),
+      '100': cssVar(base.neutral100),
+      '150': cssVar(sanaBaseNeutral['150']),
+      '200': cssVar(base.neutral200),
+      '300': cssVar(base.neutral300),
+      '400': cssVar(base.neutral400),
+      '500': cssVar(base.neutral500),
+      '600': cssVar(base.neutral600),
+      '700': cssVar(base.neutral700),
+      '800': cssVar(base.neutral800),
+      '850': cssVar(sanaBaseNeutral['850']),
+      '900': cssVar(base.neutral900),
+      '950': cssVar(base.neutral950),
+      '975': cssVar(base.neutral975),
+      A25: cssVar(base.neutralA25),
+      A50: cssVar(base.neutralA50),
+      A100: cssVar(base.neutralA100),
+      A150: cssVar(sanaBaseNeutral.A150),
+      A200: cssVar(base.neutralA200),
+      A300: cssVar(base.neutralA300),
+      A400: cssVar(base.neutralA400),
+      A500: cssVar(base.neutralA500),
+      A600: cssVar(base.neutralA600),
+      A700: cssVar(base.neutralA700),
+      A800: cssVar(base.neutralA800),
+      A850: cssVar(sanaBaseNeutral.A850),
+      A900: cssVar(base.neutralA900),
+      A950: cssVar(base.neutralA950),
+      A975: cssVar(base.neutralA975),
     },
   },
   // `selected` is intentionally omitted — see the `primary`/`critical`/`caution`/`positive` note
@@ -143,13 +141,13 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
     color: {
       brand: {
         accent: {
-          primary: varRef(brand.neutral975),
-          action: varRef(brand.neutral975),
+          primary: cssVar(brand.neutral975),
+          action: cssVar(brand.neutral975),
         },
         fg: {
           primary: {
-            default: varRef(brand.neutralA900),
-            strong: varRef(brand.neutralA950),
+            default: cssVar(brand.neutralA900),
+            strong: cssVar(brand.neutralA950),
           },
         },
       },

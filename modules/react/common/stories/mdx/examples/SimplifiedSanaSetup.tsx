@@ -16,7 +16,7 @@ export const SimplifiedSetup = () => {
   return (
     <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
       <Popup model={myModel}>
-        <Popup.Target as={SecondaryButton}>Open Menu</Popup.Target>
+        <Popup.Target as={PrimaryButton}>Open Menu</Popup.Target>
         <Popup.Popper>
           <Popup.Card>
             <Popup.Body>
