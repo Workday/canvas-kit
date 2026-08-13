@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.6](https://github.com/Workday/canvas-kit/releases/tag/v15.1.6) (2026-08-13)
+
+### Components
+
+- fix(OverflowTooltip): Add missing showDelay and hideDelay prop support for OverflowTooltip ([#4138](https://github.com/Workday/canvas-kit/pull/4138)) ([@BillGeoghegan](https://github.com/BillGeoghegan), Bill Geoghegan)
+  - Adds ability to pass showDelay and hideDelay values for OverflowTooltip
+
+
 ## [v15.1.5](https://github.com/Workday/canvas-kit/releases/tag/v15.1.5) (2026-08-05)
 
 ### Components
