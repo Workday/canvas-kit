@@ -20,8 +20,10 @@ export const SimplifiedSetup = () => {
         <Popup.Popper>
           <Popup.Card>
             <Popup.Body>
-              <Menu>
-                <Menu.Item>Option 1</Menu.Item>
+              <Menu initialSelectedIds={['selected']}>
+                <Menu.Option id="selected" aria-selected={true}>
+                  Option 1
+                </Menu.Option>
                 <Menu.Item>Option 2</Menu.Item>
                 <Menu.Item>Option 3</Menu.Item>
               </Menu>

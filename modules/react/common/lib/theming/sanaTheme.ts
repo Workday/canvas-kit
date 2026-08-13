@@ -23,85 +23,137 @@ import type {CanvasNumericalBrandTheme} from './types';
 const varRef = (token: string) => `var(${token})`;
 
 /**
- * Sana extends the neutral ramp with steps not yet exported from canvas-tokens-web JS.
- * Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ * Sana extends the neutral ramp with base-palette steps not yet exported from
+ * canvas-tokens-web JS. Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
  */
-const sanaBrandNeutral = {
-  '150': '--cnvs-brand-neutral-150',
-  '850': '--cnvs-brand-neutral-850',
-  A150: '--cnvs-brand-neutral-a150',
+const sanaBaseNeutral = {
+  '150': '--cnvs-base-palette-neutral-150',
+  '850': '--cnvs-base-palette-neutral-850',
+  A150: '--cnvs-base-palette-neutral-a150',
+  A850: '--cnvs-base-palette-neutral-a850',
+} as const;
+
+/**
+ * Sana's only distinct step for `primary`/`critical`/`caution`/`positive` — a stronger alpha
+ * wash (`A300`) on top of the matching base-palette hue. Not yet exported from canvas-tokens-web
+ * JS; defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ */
+const sanaBaseAccentA300 = {
+  primary: '--cnvs-base-palette-blue-a300',
+  critical: '--cnvs-base-palette-red-a300',
+  caution: '--cnvs-base-palette-amber-a300',
+  positive: '--cnvs-base-palette-green-a300',
 } as const;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
  * Values are `var()` references to Sana brand variables — not merged from `defaultCanvasTheme`.
+ *
+ * `action` and `neutral` are fully populated: Sana's palette is neutral/monochrome-driven, so
+ * `action.*` reads directly from the `neutral` ramp (see
+ * `@workday/canvas-tokens-web/css/sana/_variables.css`). `primary`/`critical`/`caution`/`positive`
+ * only set `A300` — the one step Sana actually redefines for those families (a stronger alpha
+ * wash on the matching hue) — every other key is intentionally omitted: Sana does not define a
+ * distinct value for it, so writing it here would only reference the very variable being written
+ * (a `var()` cycle that resolves to invalid, leaking the classic-theme fallback color instead of
+ * Sana's).
+ *
+ * The `selected.fg`/`selected.surface` shortcuts (`system.color.brand.fg`/`surface.selected`,
+ * aliases for `primary.700`/`primary.A50`) are likewise omitted — Sana doesn't redefine those
+ * ramp steps either, so selected `Menu.Item`/`Menu.Option` state stays on the classic values.
+ *
+ * `system.color.brand.accent.primary`/`.action` and `.fg.primary.default`/`.strong` **are**
+ * forwarded (via the `system.color.brand.*` escape hatch — see
+ * {@link CanvasNumericalBrandTheme.system}) — unlike `selected`, Sana's stylesheet does
+ * redefine these four, to `brand.neutral.975` / `.A900` / `.A950`, so portaled popups need the
+ * override too for parity with in-document Sana styling.
+ *
+ * Ramp values must reference `base.*` (the underlying palette), never `brand.*` of the same
+ * name — CanvasProvider writes each entry onto the identically-named `--cnvs-brand-*` CSS
+ * variable, so referencing `brand.*` here would create that same self-reference cycle. The
+ * `system.color.brand.*` overrides above are the exception: they target *different* CSS
+ * variables (`--cnvs-sys-color-brand-*`) than the `brand.*` values they reference, so no cycle.
  */
 export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   // Explicit brand vars only — multi-key ramps write 1:1; no system shortcut bundles run.
   themeScope: 'brand',
   brand: {
+    primary: {
+      A300: varRef(sanaBaseAccentA300.primary),
+    },
+    critical: {
+      A300: varRef(sanaBaseAccentA300.critical),
+    },
+    caution: {
+      A300: varRef(sanaBaseAccentA300.caution),
+    },
+    positive: {
+      A300: varRef(sanaBaseAccentA300.positive),
+    },
     action: {
       base: varRef(brand.neutral975),
       dark: varRef(brand.neutral950),
       darkest: varRef(brand.neutral900),
+      darker: varRef(brand.neutral975),
       accent: varRef(base.neutral0),
       lightest: varRef(brand.neutral25),
       lighter: varRef(brand.neutral50),
       light: varRef(brand.neutral200),
     },
     neutral: {
-      '25': varRef(brand.neutral25),
-      '50': varRef(brand.neutral50),
-      '100': varRef(brand.neutral100),
-      '150': varRef(sanaBrandNeutral['150']),
-      '200': varRef(brand.neutral200),
-      '300': varRef(brand.neutral300),
-      '400': varRef(brand.neutral400),
-      '500': varRef(brand.neutral500),
-      '600': varRef(brand.neutral600),
-      '700': varRef(brand.neutral700),
-      '800': varRef(brand.neutral800),
-      '850': varRef(sanaBrandNeutral['850']),
-      '900': varRef(brand.neutral900),
-      '950': varRef(brand.neutral950),
-      '975': varRef(brand.neutral975),
-      A25: varRef(brand.neutralA25),
-      A50: varRef(brand.neutralA50),
-      A100: varRef(brand.neutralA100),
-      A150: varRef(sanaBrandNeutral.A150),
-      A200: varRef(brand.neutralA200),
-    },
-    primary: {
-      '500': varRef(brand.primary500),
-      '600': varRef(brand.primary600),
-      '700': varRef(brand.primary700),
-      A25: varRef(brand.primaryA25),
-      A50: varRef(brand.primaryA50),
-      A100: varRef(brand.primaryA100),
-    },
-    critical: {
-      '500': varRef(brand.critical500),
-      '600': varRef(brand.critical600),
-      '700': varRef(brand.critical700),
-      A25: varRef(brand.criticalA25),
-      A50: varRef(brand.criticalA50),
-    },
-    caution: {
-      '400': varRef(brand.caution400),
-      '500': varRef(brand.caution500),
-      A25: varRef(brand.cautionA25),
-      A50: varRef(brand.cautionA50),
-    },
-    positive: {
-      '600': varRef(brand.positive600),
-      '800': varRef(brand.positive800),
-      A25: varRef(brand.positiveA25),
-      A50: varRef(brand.positiveA50),
+      '25': varRef(base.neutral25),
+      '50': varRef(base.neutral50),
+      '100': varRef(base.neutral100),
+      '150': varRef(sanaBaseNeutral['150']),
+      '200': varRef(base.neutral200),
+      '300': varRef(base.neutral300),
+      '400': varRef(base.neutral400),
+      '500': varRef(base.neutral500),
+      '600': varRef(base.neutral600),
+      '700': varRef(base.neutral700),
+      '800': varRef(base.neutral800),
+      '850': varRef(sanaBaseNeutral['850']),
+      '900': varRef(base.neutral900),
+      '950': varRef(base.neutral950),
+      '975': varRef(base.neutral975),
+      A25: varRef(base.neutralA25),
+      A50: varRef(base.neutralA50),
+      A100: varRef(base.neutralA100),
+      A150: varRef(sanaBaseNeutral.A150),
+      A200: varRef(base.neutralA200),
+      A300: varRef(base.neutralA300),
+      A400: varRef(base.neutralA400),
+      A500: varRef(base.neutralA500),
+      A600: varRef(base.neutralA600),
+      A700: varRef(base.neutralA700),
+      A800: varRef(base.neutralA800),
+      A850: varRef(sanaBaseNeutral.A850),
+      A900: varRef(base.neutralA900),
+      A950: varRef(base.neutralA950),
+      A975: varRef(base.neutralA975),
     },
   },
-  selected: {
-    fg: varRef(brand.neutralA900),
-    surface: varRef(brand.neutralA100),
+  // `selected` is intentionally omitted — see the `primary`/`critical`/`caution`/`positive` note
+  // above. Selected Menu.Item/Menu.Option state falls through to the classic
+  // `brand.primary.700` / `brand.primary.A50` values, unchanged by Sana.
+  //
+  // Unlike `selected`, Sana's stylesheet *does* redefine these four `system.color.brand.*`
+  // tokens, so forward them for portal parity (see the doc comment above).
+  system: {
+    color: {
+      brand: {
+        accent: {
+          primary: varRef(brand.neutral975),
+          action: varRef(brand.neutral975),
+        },
+        fg: {
+          primary: {
+            default: varRef(brand.neutralA900),
+            strong: varRef(brand.neutralA950),
+          },
+        },
+      },
+    },
   },
 };
 
@@ -118,6 +170,15 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * **When you can skip it**
  * - Prefer setting `data-theme="sana-canvas"` on `<html>` with Sana CSS imported. Popups then
  *   inherit brand variables from the document and no `theme` prop is needed.
+ *
+ * Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
+ * `-surface-selected`) is unaffected either way — Sana doesn't redefine `brand.primary`, so
+ * those resolve to the classic `brand.primary.700` / `.A50` values with or without this preset.
+ *
+ * `--cnvs-sys-color-brand-accent-primary`/`-accent-action`/`-fg-primary-default`/
+ * `-fg-primary-strong` are different: Sana's stylesheet *does* redefine them (to Sana neutral
+ * tones), so without this preset a popup outside `data-theme="sana-canvas"`'s reach falls back
+ * to classic primary-derived colors for those four, out of step with the rest of a Sana UI.
  *
  * @example
  * ```tsx

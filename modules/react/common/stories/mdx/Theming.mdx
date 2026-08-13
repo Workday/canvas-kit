@@ -118,6 +118,11 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 </CanvasProvider>
 ```
 
+Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
+`-surface-selected`) is unaffected by Sana either way: Sana doesn't redefine `brand.primary`, so
+those variables keep resolving to the classic `brand.primary.700` / `.A50` values whether or not
+`data-theme="sana-canvas"` is set.
+
 **Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,
 microfrontends, third-party shells), a nested `data-theme` alone does **not** reach portaled
 popups. Pass both `data-theme="sana-canvas"` (for in-tree UI) and `sanaCanvasProviderTheme` (so

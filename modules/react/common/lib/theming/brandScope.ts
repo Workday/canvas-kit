@@ -73,6 +73,11 @@ const EXTENDED_BRAND_TOKEN_MAP: Record<string, string> = {
   neutral150: '--cnvs-brand-neutral-150',
   neutral850: '--cnvs-brand-neutral-850',
   neutralA150: '--cnvs-brand-neutral-a150',
+  neutralA850: '--cnvs-brand-neutral-a850',
+  primaryA300: '--cnvs-brand-primary-a300',
+  criticalA300: '--cnvs-brand-critical-a300',
+  cautionA300: '--cnvs-brand-caution-a300',
+  positiveA300: '--cnvs-brand-positive-a300',
 };
 
 const setStyleVar = (style: React.CSSProperties, token: string, value: string) => {
