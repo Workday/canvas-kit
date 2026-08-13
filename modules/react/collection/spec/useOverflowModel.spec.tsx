@@ -101,5 +101,39 @@ describe('useOverflowModel', () => {
         ] as any)
       ).toEqual(['first', 'third', 'fourth']);
     });
+
+    const items = [
+      {id: 'first', value: 'first', index: 0, textValue: 'first'},
+      {id: 'second', value: 'second', index: 1, textValue: 'second'},
+      {id: 'third', value: 'third', index: 2, textValue: 'third'},
+      {id: 'fourth', value: 'fourth', index: 3, textValue: 'fourth'},
+    ];
+
+    it('should not pin an unmeasured selected id when the first item is cached', () => {
+      expect(
+        getHiddenIds(
+          250,
+          0,
+          overflowTargeSize,
+          {first: 100, second: 150, third: 200},
+          ['fourth'],
+          items
+        )
+      ).toEqual(['second', 'third']);
+    });
+
+    it('should leave the selected item unpinned when neither the selected id nor the first item is cached', () => {
+      expect(
+        getHiddenIds(250, 0, overflowTargeSize, {second: 150, third: 200}, ['fourth'], items)
+      ).toEqual(['third']);
+    });
+
+    it('should ignore inherited prototype identifiers such as toString', () => {
+      expect(getHiddenIds(250, 0, overflowTargeSize, itemSizeCache, ['toString'], items)).toEqual([
+        'second',
+        'third',
+        'fourth',
+      ]);
+    });
   });
 });

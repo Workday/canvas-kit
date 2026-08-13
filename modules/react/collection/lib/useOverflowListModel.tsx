@@ -26,12 +26,15 @@ export function getHiddenIds(
 
   if (selectedIds !== 'all' && selectedIds.length) {
     const candidate = selectedIds[0];
-    // Size cache keys are resolved ids (including custom `getId`), unlike raw `config.items`.
-    if (itemSizeCache[candidate] !== undefined) {
+    const fallbackId = items?.[0]?.id;
+    // Only pin own cached sizes so unmeasured ids and inherited names cannot yield NaN.
+    if (Object.prototype.hasOwnProperty.call(itemSizeCache, candidate)) {
       selectedKey = candidate;
-    } else if (items?.length) {
-      // If selectedIds[0] is not in items, use the first id from items
-      selectedKey = items.find(item => item.id === candidate) ? candidate : items[0].id;
+    } else if (
+      fallbackId !== undefined &&
+      Object.prototype.hasOwnProperty.call(itemSizeCache, fallbackId)
+    ) {
+      selectedKey = fallbackId;
     }
   }
 
