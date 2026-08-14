@@ -208,8 +208,10 @@ Prefer a semantic component before composing **Popup** directly:
 [**Dialog**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs) for a
 standard non-modal dialog (behaviors and `aria-owns` built in), or
 [**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs) for
-blocking tasks with focus trapping and assistive sibling hiding. Use **Popup** with composed hooks
-when you need a custom popup stack or behavior set that those components do not provide.
+blocking tasks with focus trapping and assistive sibling hiding (see also the W3C
+[Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/)). Use **Popup** with
+composed hooks when you need a custom popup stack or behavior set that those components do not
+provide.
 
 ### Minimum Accessible Structure
 
@@ -288,6 +290,8 @@ Example). Once applied, **do not duplicate them** in consuming code.
 - `Popup.Popper`: positions and registers the popup with the stack; unlike
   [**Dialog.Popper**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs),
   it does **not** set `aria-owns`
+- `Popup.CloseIcon` / `Popup.CloseButton`: `onClick` that calls `model.events.hide()`
+- `Popup.Target`: `ref` and `onClick` to open and to receive return focus
 
 **Implementation note on `aria-owns`:** `useFocusRedirect` does not provide `aria-owns`. When you
 need remapped reading order for portaled content, add it yourself (see **Reading order** in
@@ -299,7 +303,7 @@ varies by browser and screen reader.
 - <kbd>Enter</kbd> / <kbd>Space</kbd> on the trigger opens the popup (standard button behavior)
 - On open and close, focus is managed by **`useInitialFocus`** and **`useReturnFocus`** when those
   hooks are composed (application overrides: see **Focus management** in Accessibility Requirements)
-- <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> move focus forward and backward through
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move focus forward and backward through
   interactive elements inside the popup (standard sequential focus behavior)
 - With **`useFocusRedirect`**, tabbing past the last or before the first focusable element closes
   the popup
@@ -313,8 +317,8 @@ intended_):
   the popup name (`Popup.Heading`), and `dialog` role
 - Background page content remains available to assistive technology unless you compose
   **`useAssistiveHideSiblings`** (prefer
-  [**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs) for that
-  pattern)
+  [**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs) for
+  that pattern)
 - Reading order may still follow document order at the end of `body` unless `aria-owns` remapping is
   added and honored; support varies by browser and screen reader
 
@@ -336,8 +340,8 @@ the default to the developer first.** Only set **`initialFocusRef`** or **`retur
 the developer (or an explicit design spec) chooses a non-default target. **Do not generate focus
 refs by default.**
 
-| When             | Default behavior                                                                                                                                                                         | Ask the developer before overriding                                                                                                                                                                       |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| When             | Default behavior                                                                                                                                                                         | Ask the developer before overriding                                                                                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Popup **opens**  | **`useInitialFocus`** moves focus to the **first focusable element** in DOM order inside the popup (often **`Popup.CloseIcon`** or **`Popup.CloseButton`**). Omit **`initialFocusRef`**. | _Which element should receive focus when the popup opens?_ (Only when the default first focusable element is wrong for the design.) Attach **`initialFocusRef`** to that element on **`usePopupModel`**. |
 | Popup **closes** | **`useReturnFocus`** moves focus to **`Popup.Target`**. Omit **`returnFocusRef`**.                                                                                                       | _Which element should receive focus when the popup closes?_ (Only when return focus should land somewhere other than **`Popup.Target`**.)                                                                |
 
@@ -346,11 +350,11 @@ after the UI updates (for example with **`useLayoutEffect`**). See
 [Modal > Return Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs#return-focus).
 
 **Custom targets** _(conditional)_: Apply when using a custom **`as`** component on
-**`Popup.Target`**. **`Popup.Target`** adds **`onClick`** and **`ref`**. Custom targets must
-forward both to a **keyboard-focusable** element (prefer a native **`<button>`** or
-**`as={SecondaryButton}`**). Wrap the component in **`React.forwardRef`** when it does not forward
-refs by default (required if the popup can open programmatically before the user clicks the
-target).
+**`Popup.Target`**. **`Popup.Target`** adds **`onClick`** and **`ref`**. Custom targets must forward
+both to a **keyboard-focusable** element (prefer a native **`<button>`** or
+**`as={SecondaryButton}`** / another Canvas Kit button). Wrap the component in
+**`React.forwardRef`** when it does not forward refs by default (required if the popup can open
+programmatically before the user clicks the target).
 
 **Reading order (`aria-owns`)** _(conditional)_:
 
@@ -362,13 +366,20 @@ default—Dialog wires **`aria-owns`** for you.
 
 **Modal-like focus trapping** _(conditional)_:
 
-Prefer
-[**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs) for
-blocking tasks. If you must compose trapping on **Popup**, use **`useFocusTrap`** with
+Prefer [**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs)
+for blocking tasks. If you must compose trapping on **Popup**, use **`useFocusTrap`** with
 **`useAssistiveHideSiblings`** (and typically **omit** **`useFocusRedirect`**). Focus trapping does
 not stop mouse or virtual-cursor escape by itself.
 
 **Open focus below the heading** _(conditional; see supplementary copy row below)_:
+
+Button-focus variant (matches [Initial Focus](#initial-focus)): when open focus lands on a primary
+action below the heading, wire **`aria-describedby`** to the supplementary copy. For the form-field
+variant (focus an input), see
+[Dialog](https://workday.github.io/canvas-kit/?path=/docs/components-popups-dialog--docs#accessibility-requirements)
+or
+[Modal](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs#accessibility-requirements)
+**Open focus below the heading**.
 
 ```tsx
 import React from 'react';
@@ -416,16 +427,16 @@ useFocusRedirect(model);
 When open focus lands on **`Popup.Heading`** itself, add **`tabIndex={-1}`** so the heading can
 receive programmatic focus.
 
-| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                     |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Shared model + behavior hooks                                 | Hoist **`usePopupModel`**, pass **`model={model}`** to **`Popup`**, and compose at least the Basic Example hooks for non-modal dialogs (`useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`, `useReturnFocus`, `useFocusRedirect`) unless a design deliberately omits one.              |
-| Accessible popup name                                         | Use **`Popup.Heading`** so `aria-labelledby` on `Popup.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Popup.Card`** with a translated string (not both).                                                                                                     |
-| Dismiss control                                               | Provide a way to close the popup: **`Popup.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Popup.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                      |
-| Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                      |
-| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Popup.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Popup.Card`**. See [Initial Focus](#initial-focus).                                                                                   |
-| Reading order remapping _(conditional)_                       | See **Reading order (`aria-owns`)** above, or use **Dialog**.                                                                                                                                                                                                                                      |
-| Focus trapping / hide siblings _(conditional)_                | Prefer **Modal**. If composing on **Popup**, see **Modal-like focus trapping** above.                                                                                                                                                                                                              |
-| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                 |
+| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                         |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Shared model + behavior hooks                                 | Hoist **`usePopupModel`**, pass **`model={model}`** to **`Popup`**, and compose at least the Basic Example hooks for non-modal dialogs (`useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`, `useReturnFocus`, `useFocusRedirect`) unless a design deliberately omits one. |
+| Accessible popup name                                         | Use **`Popup.Heading`** so `aria-labelledby` on `Popup.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Popup.Card`** with a translated string (not both).                                                                                         |
+| Dismiss control                                               | Provide a way to close the popup: **`Popup.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Popup.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                            |
+| Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                          |
+| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Popup.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Popup.Card`**. See **Open focus below the heading** above and [Initial Focus](#initial-focus).                          |
+| Reading order remapping _(conditional)_                       | See **Reading order (`aria-owns`)** above, or use **Dialog**.                                                                                                                                                                                                                          |
+| Focus trapping / hide siblings _(conditional)_                | Prefer **Modal**. If composing on **Popup**, see **Modal-like focus trapping** above.                                                                                                                                                                                                  |
+| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                     |
 
 **Summary for code generation:**
 

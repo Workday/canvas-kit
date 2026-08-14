@@ -62,7 +62,10 @@ For blocking tasks, use
 Prefer **Dialog** for the standard non-modal dialog; use
 [**Popup**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs) with
 composed hooks when you need a custom popup stack or behavior (for example omitting
-**`useInitialFocus`**).
+**`useInitialFocus`**). The W3C
+[Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) applies to
+[**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs); Dialog is
+intentionally non-modal.
 
 ### Minimum Accessible Structure
 
@@ -74,7 +77,6 @@ The following matches the [Basic Example](#basic-example) layout: **`Dialog.Clos
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Dialog} from '@workday/canvas-kit-react/dialog';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 <Dialog>
@@ -89,10 +91,10 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
           <FormField.Input as={TextInput} />
         </FormField>
       </Dialog.Body>
-      <Flex>
-        <Dialog.CloseButton as={PrimaryButton}>Submit</Dialog.CloseButton>
+      <Dialog.ButtonGroup>
         <Dialog.CloseButton>Cancel</Dialog.CloseButton>
-      </Flex>
+        <Dialog.CloseButton as={PrimaryButton}>Submit</Dialog.CloseButton>
+      </Dialog.ButtonGroup>
     </Dialog.Card>
   </Dialog.Popper>
 </Dialog>;
@@ -100,9 +102,8 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 
 Include a dismiss control: **`Dialog.CloseButton`** with visible text (for example "Cancel" or
 "Close"), and/or **`Dialog.CloseIcon`** when the design uses an icon-only dismiss (requires
-**`aria-label`** or **`Tooltip`**). Use **`Dialog.CloseButton`** for primary actions that should
-also close the dialog (for example "Submit"). Add other actions with **`Dialog.CloseButton`** or
-buttons as needed.
+**`aria-label`** or **`Tooltip`**). Use **`Dialog.CloseButton`** for actions that should also close
+the dialog (for example "Submit").
 
 ### Built-in Behaviors
 
@@ -123,18 +124,20 @@ duplicate them** in consuming code.
 
 **ARIA and DOM** (_applied by hooks/subcomponents_):
 
-- `Dialog.Card`: `role="dialog"`, `aria-labelledby` referencing the heading `id`(non-modal; page
+- `Dialog.Card`: `role="dialog"`, `aria-labelledby` referencing the heading `id` (non-modal; page
   content is not hidden with `aria-hidden`)
 - `Dialog.Popper`: sibling wrapper rendered when open with `aria-owns` pointing at `Dialog.Card` to
   remap the accessibility tree for sequential reading order in supported browsers
 - `Dialog.Heading`: `id` wired to `Dialog.Card`'s `aria-labelledby`
+- `Dialog.CloseIcon` / `Dialog.CloseButton`: `onClick` that calls `model.events.hide()`
+- `Dialog.Target`: `ref` and `onClick` to open and to receive return focus
 
 **Keyboard** (_trigger is `Dialog.Target`, default `SecondaryButton`_):
 
 - <kbd>Enter</kbd> / <kbd>Space</kbd> on the trigger opens the dialog (standard button behavior)
 - On open and close, focus is managed by **`useInitialFocus`** and **`useReturnFocus`** (application
   overrides: see **Focus management** in Accessibility Requirements)
-- <kbd>Tab</kbd> / <kbd>Shift</kbd> + <kbd>Tab</kbd> move focus forward and backward through
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move focus forward and backward through
   interactive elements inside the dialog (standard sequential focus behavior)
 - <kbd>Escape</kbd> closes the dialog and returns focus per `useReturnFocus`
 
@@ -174,19 +177,24 @@ after the UI updates (for example with **`useLayoutEffect`**). See
 **Custom targets** _(conditional)_: Apply when using a custom **`as`** component on
 **`Dialog.Target`**. **`Dialog.Target`** adds **`onClick`** and **`ref`**. Custom targets must
 forward both to a **keyboard-focusable** element (prefer a native **`<button>`** or
-**`as={SecondaryButton}`**). Wrap the component in **`React.forwardRef`** when it does not forward
-refs by default.
+**`as={SecondaryButton}`** / another Canvas Kit button). Wrap the component in
+**`React.forwardRef`** when it does not forward refs by default (required if the dialog can open
+programmatically before the user clicks the target).
 
 | Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                        |
 | Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                           |
 | Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                            |
-| Labeled inputs in the body                                    | When the body contains inputs, associate each with a visible label (for example **`FormField`** + **`FormField.Label`**).                                                                                                                                                                                |
-| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus). |
+| Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See **Open focus below the heading** below and [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus) (button-focus variant). |
 | Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                       |
 
 **Open focus below the heading** _(conditional; see supplementary copy row above)_:
+
+When open focus moves past the heading (for example into a form field), wire **`aria-describedby`**
+so assistive technology still announces the supplementary copy. For focusing a primary action
+instead of an input, see
+[Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus).
 
 ```tsx
 import React from 'react';
@@ -204,6 +212,7 @@ const model = useDialogModel({initialFocusRef: inputRef});
   <Dialog.Target>Open</Dialog.Target>
   <Dialog.Popper>
     <Dialog.Card aria-describedby={descriptionId}>
+      <Dialog.CloseIcon aria-label="Close" />
       <Dialog.Heading>Title</Dialog.Heading>
       <Dialog.Body>
         <p id={descriptionId}>Enter your email to continue.</p>
@@ -220,7 +229,7 @@ const model = useDialogModel({initialFocusRef: inputRef});
 
 **Summary for code generation:**
 
-- **REQUIRED:** accessible name, dismiss control, keyboard-operable trigger, labeled inputs
+- **REQUIRED:** accessible name, dismiss control, keyboard-operable trigger
 - **CONDITIONAL:** **`initialFocusRef`**, **`returnFocusRef`**, **`aria-describedby`**,
   **`aria-expanded`** / **`aria-haspopup`**, **`forwardRef`** on custom **`Dialog.Target`**
 
