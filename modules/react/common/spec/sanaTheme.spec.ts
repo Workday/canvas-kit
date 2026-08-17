@@ -30,10 +30,10 @@ describe('sanaCanvasNumericalTheme', () => {
     expect(Object.keys(sanaCanvasNumericalTheme.brand?.positive ?? {})).toEqual(['A300']);
 
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-brand-primary-a300' as any]).toBe('var(--cnvs-base-palette-blue-a300)');
-    expect(style['--cnvs-brand-critical-a300' as any]).toBe('var(--cnvs-base-palette-red-a300)');
-    expect(style['--cnvs-brand-caution-a300' as any]).toBe('var(--cnvs-base-palette-amber-a300)');
-    expect(style['--cnvs-brand-positive-a300' as any]).toBe('var(--cnvs-base-palette-green-a300)');
+    expect(style['--cnvs-brand-primary-a300' as any]).toBe(base.sana.blueA300);
+    expect(style['--cnvs-brand-critical-a300' as any]).toBe(base.sana.redA300);
+    expect(style['--cnvs-brand-caution-a300' as any]).toBe(base.sana.amberA300);
+    expect(style['--cnvs-brand-positive-a300' as any]).toBe(base.sana.greenA300);
   });
 
   it('writes brand tokens when passed to canvasThemeToCssVars', () => {
@@ -45,10 +45,10 @@ describe('sanaCanvasNumericalTheme', () => {
 
   it('writes Sana extended neutral ramp keys from the base palette', () => {
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-brand-neutral-150' as any]).toBe('var(--cnvs-base-palette-neutral-150)');
-    expect(style['--cnvs-brand-neutral-850' as any]).toBe('var(--cnvs-base-palette-neutral-850)');
-    expect(style['--cnvs-brand-neutral-a150' as any]).toBe('var(--cnvs-base-palette-neutral-a150)');
-    expect(style['--cnvs-brand-neutral-a850' as any]).toBe('var(--cnvs-base-palette-neutral-a850)');
+    expect(style['--cnvs-brand-neutral-150' as any]).toBe(base.sana.neutral150);
+    expect(style['--cnvs-brand-neutral-850' as any]).toBe(base.sana.neutral850);
+    expect(style['--cnvs-brand-neutral-a150' as any]).toBe(base.sana.neutralA150);
+    expect(style['--cnvs-brand-neutral-a850' as any]).toBe(base.sana.neutralA850);
   });
 
   it('writes the full neutral alpha ramp through A975 (not just up to A200)', () => {
@@ -63,11 +63,12 @@ describe('sanaCanvasNumericalTheme', () => {
     expect(style[brand.action.darker as any]).toBe(`var(${brand.neutral975})`);
   });
 
-  it('does not write selected.fg/selected.surface shortcuts (no distinct Sana primary values)', () => {
-    expect(sanaCanvasNumericalTheme.selected).toBeUndefined();
+  it('forwards selected.fg/selected.surface using Sana neutral values (no color change from classic)', () => {
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-sys-color-brand-fg-selected' as any]).toBeUndefined();
-    expect(style['--cnvs-sys-color-brand-surface-selected' as any]).toBeUndefined();
+    expect(style['--cnvs-sys-color-brand-fg-selected' as any]).toBe(`var(${brand.neutralA900})`);
+    expect(style['--cnvs-sys-color-brand-surface-selected' as any]).toBe(
+      `var(${brand.neutralA100})`
+    );
   });
 
   it('forwards accent.primary/action and fg.primary.default/strong for portal parity', () => {

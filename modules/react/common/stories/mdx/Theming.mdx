@@ -119,8 +119,8 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 ```
 
 Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
-`-surface-selected`) is unaffected by Sana either way: Sana doesn't redefine `brand.primary`, so
-those variables keep resolving to the classic `brand.primary.700` / `.A50` values whether or not
+`-surface-selected`) uses Sana's neutral ramp (`neutralA900`/`neutralA100`), the same values as
+classic Canvas — selection styling doesn't change under Sana, whether or not
 `data-theme="sana-canvas"` is set.
 
 **Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,

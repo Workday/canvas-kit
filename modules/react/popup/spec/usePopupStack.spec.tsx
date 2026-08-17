@@ -2,6 +2,7 @@ import {renderHook, waitFor} from '@testing-library/react';
 import React from 'react';
 
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+import {base, brand} from '@workday/canvas-tokens-web';
 
 import {usePopupStack} from '../lib/hooks/usePopupStack';
 
@@ -64,17 +65,23 @@ describe('usePopupStack', () => {
           // var() self-reference cycle. Neutral/action ramps and system.color.brand.*
           // overrides are forwarded as var() references to the underlying palette.
           expect(styles.getPropertyValue('--cnvs-brand-primary-600')).toBe('');
-          expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(
-            'var(--cnvs-base-palette-blue-a300)'
-          );
+          expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(base.sana.blueA300);
           expect(styles.getPropertyValue('--cnvs-brand-neutral-600')).toBe(
-            'var(--cnvs-base-palette-neutral-600)'
+            `var(${base.neutral600})`
           );
           expect(styles.getPropertyValue('--cnvs-brand-action-base')).toBe(
             'var(--cnvs-brand-neutral-975)'
           );
           expect(styles.getPropertyValue('--cnvs-sys-color-brand-accent-primary')).toBe(
             'var(--cnvs-brand-neutral-975)'
+          );
+          // Selected Menu.Item/Menu.Option state doesn't change under Sana — same neutral
+          // values as classic, forwarded for portal parity.
+          expect(styles.getPropertyValue('--cnvs-sys-color-brand-fg-selected')).toBe(
+            `var(${brand.neutralA900})`
+          );
+          expect(styles.getPropertyValue('--cnvs-sys-color-brand-surface-selected')).toBe(
+            `var(${brand.neutralA100})`
           );
         }
       });

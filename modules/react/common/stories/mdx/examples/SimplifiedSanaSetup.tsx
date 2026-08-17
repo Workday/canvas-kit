@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
@@ -21,9 +21,7 @@ export const SimplifiedSetup = () => {
           <Popup.Card>
             <Popup.Body>
               <Menu initialSelectedIds={['selected']}>
-                <Menu.Option id="selected" aria-selected={true}>
-                  Option 1
-                </Menu.Option>
+                <Menu.Option data-id="selected">Option 1</Menu.Option>
                 <Menu.Item>Option 2</Menu.Item>
                 <Menu.Item>Option 3</Menu.Item>
               </Menu>

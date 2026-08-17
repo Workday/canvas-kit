@@ -21,27 +21,15 @@ import {base, brand} from '@workday/canvas-tokens-web';
 import type {CanvasNumericalBrandTheme} from './types';
 
 /**
- * Sana extends the neutral ramp with base-palette steps not yet exported from
- * canvas-tokens-web JS. Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ * `base.sana` is a pre-built map of `var(--token, fallback)` strings exported by
+ * canvas-tokens-web specifically for these Sana-only base-palette steps — use them directly,
+ * not `cssVar()` (which expects a bare variable name, not an already-wrapped `var()` string).
+ * Referencing `base.*` (not `brand.*` of the same name) avoids a `var()` self-reference cycle:
+ * CanvasProvider writes each ramp entry onto the identically-named `--cnvs-brand-*` variable, so
+ * `brand.sana.neutral150` (itself `var(--cnvs-brand-neutral-150, ...)`) would point right back at
+ * the variable being written.
  */
-const sanaBaseNeutral = {
-  '150': '--cnvs-base-palette-neutral-150',
-  '850': '--cnvs-base-palette-neutral-850',
-  A150: '--cnvs-base-palette-neutral-a150',
-  A850: '--cnvs-base-palette-neutral-a850',
-} as const;
-
-/**
- * Sana's only distinct step for `primary`/`critical`/`caution`/`positive` — a stronger alpha
- * wash (`A300`) on top of the matching base-palette hue. Not yet exported from canvas-tokens-web
- * JS; defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
- */
-const sanaBaseAccentA300 = {
-  primary: '--cnvs-base-palette-blue-a300',
-  critical: '--cnvs-base-palette-red-a300',
-  caution: '--cnvs-base-palette-amber-a300',
-  positive: '--cnvs-base-palette-green-a300',
-} as const;
+const sanaBaseNeutral = base.sana;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
@@ -56,9 +44,11 @@ const sanaBaseAccentA300 = {
  * (a `var()` cycle that resolves to invalid, leaking the classic-theme fallback color instead of
  * Sana's).
  *
- * The `selected.fg`/`selected.surface` shortcuts (`system.color.brand.fg`/`surface.selected`,
- * aliases for `primary.700`/`primary.A50`) are likewise omitted — Sana doesn't redefine those
- * ramp steps either, so selected `Menu.Item`/`Menu.Option` state stays on the classic values.
+ * `selected.fg`/`selected.surface` are forwarded too — they write directly onto
+ * `--cnvs-sys-color-brand-fg-selected`/`-surface-selected` (independent of the `primary` ramp),
+ * and Sana keeps selected `Menu.Item`/`Menu.Option` state on its neutral ramp
+ * (`neutralA900`/`neutralA100`), same as classic. Forwarding them keeps portaled popups in sync
+ * with in-document Sana styling and matches classic's own behavior — no color change intended.
  *
  * `system.color.brand.accent.primary`/`.action` and `.fg.primary.default`/`.strong` **are**
  * forwarded (via the `system.color.brand.*` escape hatch — see
@@ -77,16 +67,16 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   themeScope: 'brand',
   brand: {
     primary: {
-      A300: cssVar(sanaBaseAccentA300.primary),
+      A300: sanaBaseNeutral.blueA300,
     },
     critical: {
-      A300: cssVar(sanaBaseAccentA300.critical),
+      A300: sanaBaseNeutral.redA300,
     },
     caution: {
-      A300: cssVar(sanaBaseAccentA300.caution),
+      A300: sanaBaseNeutral.amberA300,
     },
     positive: {
-      A300: cssVar(sanaBaseAccentA300.positive),
+      A300: sanaBaseNeutral.greenA300,
     },
     action: {
       base: cssVar(brand.neutral975),
@@ -102,7 +92,7 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       '25': cssVar(base.neutral25),
       '50': cssVar(base.neutral50),
       '100': cssVar(base.neutral100),
-      '150': cssVar(sanaBaseNeutral['150']),
+      '150': sanaBaseNeutral.neutral150,
       '200': cssVar(base.neutral200),
       '300': cssVar(base.neutral300),
       '400': cssVar(base.neutral400),
@@ -110,14 +100,14 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       '600': cssVar(base.neutral600),
       '700': cssVar(base.neutral700),
       '800': cssVar(base.neutral800),
-      '850': cssVar(sanaBaseNeutral['850']),
+      '850': sanaBaseNeutral.neutral850,
       '900': cssVar(base.neutral900),
       '950': cssVar(base.neutral950),
       '975': cssVar(base.neutral975),
       A25: cssVar(base.neutralA25),
       A50: cssVar(base.neutralA50),
       A100: cssVar(base.neutralA100),
-      A150: cssVar(sanaBaseNeutral.A150),
+      A150: sanaBaseNeutral.neutralA150,
       A200: cssVar(base.neutralA200),
       A300: cssVar(base.neutralA300),
       A400: cssVar(base.neutralA400),
@@ -125,18 +115,20 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       A600: cssVar(base.neutralA600),
       A700: cssVar(base.neutralA700),
       A800: cssVar(base.neutralA800),
-      A850: cssVar(sanaBaseNeutral.A850),
+      A850: sanaBaseNeutral.neutralA850,
       A900: cssVar(base.neutralA900),
       A950: cssVar(base.neutralA950),
       A975: cssVar(base.neutralA975),
     },
   },
-  // `selected` is intentionally omitted — see the `primary`/`critical`/`caution`/`positive` note
-  // above. Selected Menu.Item/Menu.Option state falls through to the classic
-  // `brand.primary.700` / `brand.primary.A50` values, unchanged by Sana.
-  //
-  // Unlike `selected`, Sana's stylesheet *does* redefine these four `system.color.brand.*`
-  // tokens, so forward them for portal parity (see the doc comment above).
+  // Selected Menu.Item/Menu.Option state — writes directly onto
+  // `--cnvs-sys-color-brand-fg-selected` / `-surface-selected` (not derived from
+  // `primary.700`/`primary.A50`, so no var() cycle risk referencing `brand.*` here).
+  // Sana keeps this on its neutral ramp rather than primary; forwarded for portal parity.
+  selected: {
+    fg: cssVar(brand.neutralA900),
+    surface: cssVar(brand.neutralA100),
+  },
   system: {
     color: {
       brand: {
@@ -170,8 +162,8 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  *   inherit brand variables from the document and no `theme` prop is needed.
  *
  * Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
- * `-surface-selected`) is unaffected either way — Sana doesn't redefine `brand.primary`, so
- * those resolve to the classic `brand.primary.700` / `.A50` values with or without this preset.
+ * `-surface-selected`) is forwarded to Sana's neutral values (`neutralA900`/`neutralA100`,
+ * same as classic) so portaled popups match in-document Sana styling — no color change either way.
  *
  * `--cnvs-sys-color-brand-accent-primary`/`-accent-action`/`-fg-primary-default`/
  * `-fg-primary-strong` are different: Sana's stylesheet *does* redefine them (to Sana neutral
