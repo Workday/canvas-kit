@@ -35,32 +35,28 @@ const sanaBaseNeutral = base.sana;
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
  * Values are `var()` references to Sana brand variables — not merged from `defaultCanvasTheme`.
  *
- * `action` and `neutral` are fully populated: Sana's palette is neutral/monochrome-driven, so
- * `action.*` reads directly from the `neutral` ramp (see
- * `@workday/canvas-tokens-web/css/sana/_variables.css`). `primary`/`critical`/`caution`/`positive`
- * only set `A300` — the one step Sana actually redefines for those families (a stronger alpha
- * wash on the matching hue) — every other key is intentionally omitted: Sana does not define a
- * distinct value for it, so writing it here would only reference the very variable being written
- * (a `var()` cycle that resolves to invalid, leaking the classic-theme fallback color instead of
- * Sana's).
+ * Mirrors only what Sana's stylesheet itself defines: the `neutral` ramp, the `A300` step of
+ * `primary`/`critical`/`caution`/`positive` (the one step Sana redefines for those families — a
+ * stronger alpha wash on the matching hue), and the four `system.color.brand.*` tokens Sana
+ * overrides. Every other key is intentionally omitted — Sana does not define a distinct value
+ * for it, so writing it here would only reference the very variable being written (a `var()`
+ * cycle that resolves to invalid, leaking the classic-theme fallback color instead of Sana's).
  *
- * `selected.fg`/`selected.surface` are forwarded too — they write directly onto
- * `--cnvs-sys-color-brand-fg-selected`/`-surface-selected` (independent of the `primary` ramp),
- * and Sana keeps selected `Menu.Item`/`Menu.Option` state on its neutral ramp
- * (`neutralA900`/`neutralA100`), same as classic. Forwarding them keeps portaled popups in sync
- * with in-document Sana styling and matches classic's own behavior — no color change intended.
- *
- * `system.color.brand.accent.primary`/`.action` and `.fg.primary.default`/`.strong` **are**
- * forwarded (via the `system.color.brand.*` escape hatch — see
- * {@link CanvasNumericalBrandTheme.system}) — unlike `selected`, Sana's stylesheet does
- * redefine these four, to `brand.neutral.975` / `.A900` / `.A950`, so portaled popups need the
- * override too for parity with in-document Sana styling.
+ * `action.*` and `selected.*` are deliberately **not** set. Sana's stylesheet does not define
+ * `--cnvs-brand-action-*` or `--cnvs-sys-color-brand-fg-selected`/`-surface-selected`; those are
+ * derived downstream from the root theme. Forcing them here would pin values the root is meant
+ * to own.
  *
  * Ramp values must reference `base.*` (the underlying palette), never `brand.*` of the same
  * name — CanvasProvider writes each entry onto the identically-named `--cnvs-brand-*` CSS
  * variable, so referencing `brand.*` here would create that same self-reference cycle. The
- * `system.color.brand.*` overrides above are the exception: they target *different* CSS
- * variables (`--cnvs-sys-color-brand-*`) than the `brand.*` values they reference, so no cycle.
+ * `system.color.brand.*` overrides are the exception: they target *different* CSS variables
+ * (`--cnvs-sys-color-brand-*`) than the `brand.*` values they reference, so no cycle.
+ *
+ * Note this preset only covers brand tokens. The rest of Sana (shape, depth, type, non-brand
+ * system colors) comes from the stylesheet's `[data-theme="sana-canvas"]` block — pass
+ * `data-theme` to `CanvasProvider` alongside this preset and it is forwarded to portaled popups
+ * so the full theme applies there too.
  */
 export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   // Explicit brand vars only — multi-key ramps write 1:1; no system shortcut bundles run.
@@ -77,16 +73,6 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
     },
     positive: {
       A300: sanaBaseNeutral.greenA300,
-    },
-    action: {
-      base: cssVar(brand.neutral975),
-      dark: cssVar(brand.neutral950),
-      darkest: cssVar(brand.neutral900),
-      darker: cssVar(brand.neutral975),
-      accent: cssVar(base.neutral0),
-      lightest: cssVar(brand.neutral25),
-      lighter: cssVar(brand.neutral50),
-      light: cssVar(brand.neutral200),
     },
     neutral: {
       '25': cssVar(base.neutral25),
@@ -121,14 +107,6 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       A975: cssVar(base.neutralA975),
     },
   },
-  // Selected Menu.Item/Menu.Option state — writes directly onto
-  // `--cnvs-sys-color-brand-fg-selected` / `-surface-selected` (not derived from
-  // `primary.700`/`primary.A50`, so no var() cycle risk referencing `brand.*` here).
-  // Sana keeps this on its neutral ramp rather than primary; forwarded for portal parity.
-  selected: {
-    fg: cssVar(brand.neutralA900),
-    surface: cssVar(brand.neutralA100),
-  },
   system: {
     color: {
       brand: {
@@ -161,14 +139,13 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * - Prefer setting `data-theme="sana-canvas"` on `<html>` with Sana CSS imported. Popups then
  *   inherit brand variables from the document and no `theme` prop is needed.
  *
- * Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
- * `-surface-selected`) is forwarded to Sana's neutral values (`neutralA900`/`neutralA100`,
- * same as classic) so portaled popups match in-document Sana styling — no color change either way.
+ * Pass `data-theme="sana-canvas"` alongside it. That attribute is forwarded to popup stack
+ * containers, so the rest of Sana (shape, depth, type, non-brand system colors) applies to
+ * portaled content through the stylesheet's own `[data-theme="sana-canvas"]` block — this preset
+ * covers brand tokens, the attribute covers everything else.
  *
- * `--cnvs-sys-color-brand-accent-primary`/`-accent-action`/`-fg-primary-default`/
- * `-fg-primary-strong` are different: Sana's stylesheet *does* redefine them (to Sana neutral
- * tones), so without this preset a popup outside `data-theme="sana-canvas"`'s reach falls back
- * to classic primary-derived colors for those four, out of step with the rest of a Sana UI.
+ * `action.*` and selected-state tokens are not set by this preset — Sana does not define them,
+ * and they resolve from the root theme.
  *
  * @example
  * ```tsx
@@ -177,8 +154,10 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * // <html data-theme="sana-canvas">
  * <CanvasProvider><App /></CanvasProvider>
  *
- * // No access to <html> — required for popup parity
- * <CanvasProvider theme={sanaCanvasProviderTheme}><App /></CanvasProvider>
+ * // No access to <html> — pass both for full parity, including portaled popups
+ * <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
+ *   <App />
+ * </CanvasProvider>
  * ```
  */
 export const sanaCanvasProviderTheme = sanaCanvasNumericalTheme;

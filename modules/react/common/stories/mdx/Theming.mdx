@@ -118,15 +118,12 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 </CanvasProvider>
 ```
 
-Selected `Menu.Item`/`Menu.Option` state (`--cnvs-sys-color-brand-fg-selected` /
-`-surface-selected`) uses Sana's neutral ramp (`neutralA900`/`neutralA100`), the same values as
-classic Canvas — selection styling doesn't change under Sana, whether or not
-`data-theme="sana-canvas"` is set.
-
 **Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,
-microfrontends, third-party shells), a nested `data-theme` alone does **not** reach portaled
-popups. Pass both `data-theme="sana-canvas"` (for in-tree UI) and `sanaCanvasProviderTheme` (so
-Canvas Kit forwards Sana brand variables onto the popup stack container):
+microfrontends, third-party shells), pass both `data-theme="sana-canvas"` and
+`sanaCanvasProviderTheme` to `CanvasProvider`. The preset supplies Sana's brand variables, and
+Canvas Kit forwards the `data-theme` attribute onto the popup stack container — so portaled
+menus, modals, and dialogs match the same `[data-theme="sana-canvas"]` selector and pick up the
+rest of the theme (shape, depth, type, non-brand system colors) through normal cascade:
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';

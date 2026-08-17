@@ -2,7 +2,7 @@ import {renderHook, waitFor} from '@testing-library/react';
 import React from 'react';
 
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
-import {base, brand} from '@workday/canvas-tokens-web';
+import {base} from '@workday/canvas-tokens-web';
 
 import {usePopupStack} from '../lib/hooks/usePopupStack';
 
@@ -62,28 +62,65 @@ describe('usePopupStack', () => {
         const styles = container?.style;
         if (styles) {
           // Sana only redefines primary A300 (not 600) — writing primary-600 would be a
-          // var() self-reference cycle. Neutral/action ramps and system.color.brand.*
-          // overrides are forwarded as var() references to the underlying palette.
+          // var() self-reference cycle. The neutral ramp and system.color.brand.* overrides
+          // are forwarded as var() references to the underlying palette.
           expect(styles.getPropertyValue('--cnvs-brand-primary-600')).toBe('');
           expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(base.sana.blueA300);
           expect(styles.getPropertyValue('--cnvs-brand-neutral-600')).toBe(
             `var(${base.neutral600})`
           );
-          expect(styles.getPropertyValue('--cnvs-brand-action-base')).toBe(
-            'var(--cnvs-brand-neutral-975)'
-          );
           expect(styles.getPropertyValue('--cnvs-sys-color-brand-accent-primary')).toBe(
             'var(--cnvs-brand-neutral-975)'
           );
-          // Selected Menu.Item/Menu.Option state doesn't change under Sana — same neutral
-          // values as classic, forwarded for portal parity.
-          expect(styles.getPropertyValue('--cnvs-sys-color-brand-fg-selected')).toBe(
-            `var(${brand.neutralA900})`
-          );
-          expect(styles.getPropertyValue('--cnvs-sys-color-brand-surface-selected')).toBe(
-            `var(${brand.neutralA100})`
-          );
+          // `action` and selected-state tokens are not set by the preset — Sana doesn't define
+          // them, so they resolve from the root theme rather than being pinned here.
+          expect(styles.getPropertyValue('--cnvs-brand-action-base')).toBe('');
+          expect(styles.getPropertyValue('--cnvs-sys-color-brand-fg-selected')).toBe('');
+          expect(styles.getPropertyValue('--cnvs-sys-color-brand-surface-selected')).toBe('');
         }
+      });
+    });
+
+    it('should forward data-theme to the popup container so scoped token CSS applies', async () => {
+      // Token stylesheets scope variables to `[data-theme="..."]`. Portals render outside the
+      // CanvasProvider wrapper, so the attribute must be copied for the whole theme (palette,
+      // shape, depth, type) to resolve — inline brand vars alone don't cover it.
+      const wrapper = ({children}: {children: React.ReactNode}) => (
+        <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
+          {children}
+        </CanvasProvider>
+      );
+
+      const {result} = renderHook(() => usePopupStack(), {wrapper});
+
+      await waitFor(() => {
+        expect(result.current.current?.getAttribute('data-theme')).toBe('sana-canvas');
+      });
+    });
+
+    it('should not set data-theme on the popup container when the provider has none', async () => {
+      const wrapper = ({children}: {children: React.ReactNode}) => (
+        <CanvasProvider theme={sanaCanvasProviderTheme}>{children}</CanvasProvider>
+      );
+
+      const {result} = renderHook(() => usePopupStack(), {wrapper});
+
+      await waitFor(() => {
+        expect(result.current.current?.hasAttribute('data-theme')).toBe(false);
+      });
+    });
+
+    it('should inherit data-theme from an outer provider through nested providers', async () => {
+      const wrapper = ({children}: {children: React.ReactNode}) => (
+        <CanvasProvider data-theme="sana-canvas">
+          <CanvasProvider theme={sanaCanvasProviderTheme}>{children}</CanvasProvider>
+        </CanvasProvider>
+      );
+
+      const {result} = renderHook(() => usePopupStack(), {wrapper});
+
+      await waitFor(() => {
+        expect(result.current.current?.getAttribute('data-theme')).toBe('sana-canvas');
       });
     });
 

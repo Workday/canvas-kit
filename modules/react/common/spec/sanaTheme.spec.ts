@@ -7,8 +7,6 @@ import {sanaCanvasNumericalTheme, sanaCanvasProviderTheme} from '../lib/theming/
 describe('sanaCanvasNumericalTheme', () => {
   it('references Sana base-palette CSS variables instead of defaultCanvasTheme literals', () => {
     expect(sanaCanvasNumericalTheme.brand?.neutral?.['600']).toBe(`var(${base.neutral600})`);
-    expect(sanaCanvasNumericalTheme.brand?.action?.base).toBe(`var(${brand.neutral975})`);
-    expect(sanaCanvasNumericalTheme.brand?.action?.accent).toBe(`var(${base.neutral0})`);
     expect(sanaCanvasNumericalTheme.brand?.neutral?.['600']).not.toBe(
       defaultCanvasTheme.palette.neutral.main
     );
@@ -40,7 +38,6 @@ describe('sanaCanvasNumericalTheme', () => {
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
     expect(Object.keys(style).length).toBeGreaterThan(0);
     expect(style[brand.neutral600 as any]).toBe(`var(${base.neutral600})`);
-    expect(style[brand.action.base as any]).toBe(`var(${brand.neutral975})`);
   });
 
   it('writes Sana extended neutral ramp keys from the base palette', () => {
@@ -58,22 +55,24 @@ describe('sanaCanvasNumericalTheme', () => {
     expect(style[brand.neutralA975 as any]).toBe(`var(${base.neutralA975})`);
   });
 
-  it('writes action.darker alongside the rest of the action bundle', () => {
+  it('does not write brand.action.* — Sana does not define it; it derives from the root theme', () => {
+    expect(sanaCanvasNumericalTheme.brand?.action).toBeUndefined();
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style[brand.action.darker as any]).toBe(`var(${brand.neutral975})`);
+    expect(style[brand.action.base as any]).toBeUndefined();
+    expect(style[brand.action.darker as any]).toBeUndefined();
+    expect(style[brand.action.accent as any]).toBeUndefined();
   });
 
-  it('forwards selected.fg/selected.surface using Sana neutral values (no color change from classic)', () => {
+  it('does not write selected.* — Sana does not define it; it derives from the root theme', () => {
+    expect(sanaCanvasNumericalTheme.selected).toBeUndefined();
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-sys-color-brand-fg-selected' as any]).toBe(`var(${brand.neutralA900})`);
-    expect(style['--cnvs-sys-color-brand-surface-selected' as any]).toBe(
-      `var(${brand.neutralA100})`
-    );
+    expect(style['--cnvs-sys-color-brand-fg-selected' as any]).toBeUndefined();
+    expect(style['--cnvs-sys-color-brand-surface-selected' as any]).toBeUndefined();
   });
 
   it('forwards accent.primary/action and fg.primary.default/strong for portal parity', () => {
-    // Unlike `selected`, Sana's stylesheet redefines these four `system.color.brand.*`
-    // tokens, so popups outside `[data-theme="sana-canvas"]`'s reach need the override too.
+    // Sana's stylesheet redefines these four `system.color.brand.*` tokens, so popups outside
+    // `[data-theme="sana-canvas"]`'s reach need the override too.
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
     expect(style['--cnvs-sys-color-brand-accent-primary' as any]).toBe(`var(${brand.neutral975})`);
     expect(style['--cnvs-sys-color-brand-accent-action' as any]).toBe(`var(${brand.neutral975})`);
