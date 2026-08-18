@@ -3,10 +3,9 @@ import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import DialogStoriesMeta from './Dialog.stories';
+import {Alt} from './examples/Alt';
 import {Basic} from './examples/Basic';
 import {Focus} from './examples/Focus';
-import {Alt} from './examples/Alt';
-import DialogStoriesMeta from './Dialog.stories';
 
 <Meta of={DialogStoriesMeta} />
 
@@ -64,8 +63,8 @@ Prefer **Dialog** for the standard non-modal dialog; use
 composed hooks when you need a custom popup stack or behavior (for example omitting
 **`useInitialFocus`**). The W3C
 [Dialog (Modal) Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/) applies to
-[**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs); Dialog is
-intentionally non-modal.
+[**Modal**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-modal--docs); Dialog
+is intentionally non-modal.
 
 ### Minimum Accessible Structure
 
@@ -181,13 +180,13 @@ forward both to a **keyboard-focusable** element (prefer a native **`<button>`**
 **`React.forwardRef`** when it does not forward refs by default (required if the dialog can open
 programmatically before the user clicks the target).
 
-| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                           |
-| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                        |
-| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                           |
-| Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                            |
+| Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                             |
+| ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                                                                                          |
+| Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                             |
+| Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                                                                                              |
 | Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See **Open focus below the heading** below and [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus) (button-focus variant). |
-| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                       |
+| Open/closed state on the trigger _(conditional)_              | See **Wiring aria-expanded** below. **Default:** omit **`aria-expanded`** and **`aria-haspopup`**.                                                                                                                                                                                                                                                                         |
 
 **Open focus below the heading** _(conditional; see supplementary copy row above)_:
 
