@@ -1,10 +1,7 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
 import {Basic} from './examples/Basic';
 import {Disabled} from './examples/Disabled';
 import {Grow} from './examples/Grow';
@@ -71,8 +68,6 @@ the width of its container.
 
 <ExampleCodeBlock code={Grow} />
 
-The `grow` prop may also be applied directly to the Text Input if Form Field is not being used.
-
 ### Label Position Horizontal
 
 Set the `orientation` prop of the Form Field to designate the position of the label relative to the
@@ -110,8 +105,8 @@ Do **not** use `FormField.Input as={InputGroup}` — that breaks label associati
 
 > **Accessibility Note**: Canvas Kit icons are already hidden from assistive technology — their SVG
 > markup sets `role="presentation"` and `focusable="false"` — so decorative icons like the mail icon
-> in this example need no extra attributes. If an icon conveys meaning beyond the label text, provide
-> that meaning as text for screen readers.
+> in this example need no extra attributes. If an icon conveys meaning beyond the label text,
+> provide that meaning as text for screen readers.
 
 ### Error States
 
@@ -130,9 +125,9 @@ of text, use [TextArea](/components/inputs/text-area/) instead.
 
 ### Minimum Accessible Structure
 
-Build on the Basic example: label first, then the input inside `FormField.Field`. This order
-matches the DOM reading sequence and ensures the label's `htmlFor` targets the `<input>` before
-hint text follows the control.
+Build on the Basic example: label first, then the input inside `FormField.Field`. This order matches
+the DOM reading sequence and ensures the label's `htmlFor` targets the `<input>` before hint text
+follows the control.
 
 ```tsx
 import {FormField} from '@workday/canvas-kit-react/form-field';
@@ -262,13 +257,13 @@ const {id: formFieldInputId} = useFormFieldInput(model);
 </FormField>;
 ```
 
-| Requirement                           | How to satisfy                                                                                                                                                                                                                                              |
-| ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Input wiring                          | **`FormField.Input as={TextInput}`** wrapping every `TextInput` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                                           |
+| Requirement                           | How to satisfy                                                                                                                                                                                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Input wiring                          | **`FormField.Input as={TextInput}`** wrapping every `TextInput` instance. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                                            |
 | Autocomplete _(conditional)_          | `autoComplete` on **`FormField.Input`** (or **`InputGroup.Input`**) with an appropriate token (e.g. `"email"`, `"name"`, `"street-address"`, `"tel"`). See [Identify Input Purpose](https://www.w3.org/WAI/WCAG22/Understanding/identify-input-purpose.html) |
 | Input `type` _(conditional)_          | More specific `type` than `"text"` (e.g. `"email"`, `"tel"`, `"url"`, `"search"`) when a specialized mobile keyboard improves entry                                                                                                                          |
 | Icons / clear control _(conditional)_ | **`FormField.Field as={InputGroup}`** + **`InputGroup.Input`** with hoisted `id` (see **`InputGroup` with icons** above). Decorative icons need no extra attributes; when an icon conveys meaning beyond the label, convey that meaning as text              |
-| Programmatic focus _(conditional)_    | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                         |
+| Programmatic focus _(conditional)_    | `ref` on **`FormField.Input`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                          |
 
 **Summary for code generation:**
 
