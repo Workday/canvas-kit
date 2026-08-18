@@ -408,7 +408,9 @@ To style elements in the render function, we'll need to choose what elements to 
 the example below, we're able to spread the parts directly to elements. The Stencil will generate
 the type and value most appropriate for the context the part is used. In the Stencil, the part is
 represented by a string that looks like `[data-part="{partValue}"]` and in the render function, it
-is an object that looks like `{'data-part': partValue}`.
+is an object that looks like `{'data-part': partValue}`. That object also has a non-enumerable
+`selector` property (`[data-part="{partValue}"]`) for targeting the part from another stencil's
+style object without writing the attribute selector by hand.
 
 ```jsx
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
@@ -445,6 +447,22 @@ const MyButton = ({children, ...elemProps}) => {
     </button>
   );
 };
+```
+
+To target a part from another stencil, use `.selector`. Spreading the part onto an element still
+only applies `data-part`.
+
+```jsx
+const cardStencil = createStencil({
+  base: {
+    [`&:where(:has(${myButtonStencil.parts.icon.selector}))`]: {
+      paddingInlineStart: 0,
+    },
+    [`& ${myButtonStencil.parts.label.selector}`]: {
+      fontWeight: 700,
+    },
+  },
+});
 ```
 
 As a reusable component, you can use component parts to style elements that are not exposed in the

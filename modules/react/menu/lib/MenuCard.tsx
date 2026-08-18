@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
+import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   createElemPropsHook,
@@ -8,7 +9,7 @@ import {
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
-import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
@@ -42,11 +43,21 @@ export const menuCardStencil = createStencil({
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,
-    maxHeight,
+    maxHeight: cssVar(maxHeight, '60vh'),
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
+    },
+    [`&:where(:has(${listBoxContainerStencil.parts.listBoxContainer.selector}))`]: {
+      overflow: 'hidden',
+    },
+    [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
+      borderRadius: system.legacy.shape.xxl,
+      // Card is a flex column container. Without this, a flex child won't shrink below its
+      // content size, so `maxHeight` on the Card would be ignored and content would overflow
+      // instead of scrolling inside the list-box-container.
+      minHeight: 0,
     },
   }),
 });

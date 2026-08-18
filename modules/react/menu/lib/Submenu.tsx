@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {useListItemRegister, useListItemRovingFocus} from '@workday/canvas-kit-react/collection';
+import {
+  isElementDisabled,
+  useListItemRegister,
+  useListItemRovingFocus,
+} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   PropsWithModel,
@@ -82,6 +86,23 @@ export const useSubmenuTargetItem = composeHooks(
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
     const currentTargetIdRef = React.useRef<string>();
+    // A submenu owns its own `visibility`, so opening a sibling submenu would otherwise leave this
+    // one open. The parent's cursor always moves to the item being hovered or focused, so treat the
+    // cursor moving away from our target item as a signal to close.
+    const parentCursorId = model.UNSTABLE_parentModel.state.cursorId;
+    const isVisible = model.state.visibility === 'visible';
+    React.useEffect(() => {
+      if (!isVisible) {
+        return;
+      }
+      const targetId = (model.state.targetRef.current as HTMLElement | null)?.getAttribute(
+        'data-id'
+      );
+      if (targetId && parentCursorId && parentCursorId !== targetId) {
+        model.events.hide();
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [parentCursorId, isVisible]);
     const mouseEnterTimer = useIntentTimer(() => {
       model.UNSTABLE_parentModel.events.goTo({id: currentTargetIdRef.current || ''});
       model.events.show(event);
@@ -95,6 +116,9 @@ export const useSubmenuTargetItem = composeHooks(
         model.UNSTABLE_parentModel.events.goTo({id: event.currentTarget.getAttribute('data-id')!});
       },
       onMouseEnter(event: React.MouseEvent) {
+        if (isElementDisabled(event.currentTarget)) {
+          return;
+        }
         currentTargetIdRef.current = event.currentTarget.getAttribute('data-id')!;
         mouseEnterTimer.start();
       },
@@ -102,6 +126,9 @@ export const useSubmenuTargetItem = composeHooks(
         mouseEnterTimer.clear();
       },
       onClick(event: React.MouseEvent) {
+        if (isElementDisabled(event.currentTarget)) {
+          return null;
+        }
         // If we're wrapping a target component that doesn't handle ref forwarding, update the
         // `state.targetRef` manually. This ensures that custom target components don't need to handle
         // ref forwarding since ref forwarding is only really needed to programmatically open popups
@@ -114,9 +141,13 @@ export const useSubmenuTargetItem = composeHooks(
         } else {
           model.events.show(event);
         }
+        return undefined;
       },
       'data-has-children': true,
       onKeyDown(event: React.KeyboardEvent) {
+        if (isElementDisabled(event.currentTarget)) {
+          return;
+        }
         if (model.state.orientation === 'vertical') {
           // eslint-disable-next-line default-case
           switch (event.key) {

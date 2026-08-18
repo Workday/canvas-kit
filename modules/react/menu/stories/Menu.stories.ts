@@ -9,6 +9,7 @@ import {Grouping as GroupingExample} from './examples/Grouping';
 import {Icons as IconsExample} from './examples/Icons';
 import {Nested as NestedExample} from './examples/Nested';
 import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
+import {NestedSiblings as NestedSiblingsExample} from './examples/NestedSiblings';
 import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 
 export default {
@@ -44,4 +45,7 @@ export const Nested: Story = {
 };
 export const NestedDynamic: Story = {
   render: NestedDynamicExample,
+};
+export const NestedSiblings: Story = {
+  render: NestedSiblingsExample,
 };
