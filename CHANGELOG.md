@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.8](https://github.com/Workday/canvas-kit/releases/tag/v15.1.8) (2026-08-18)
+
+### Components
+
+- fix: Close nested Menus when hovering over other items ([#4090](https://github.com/Workday/canvas-kit/pull/4090)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
 ## [v15.1.7](https://github.com/Workday/canvas-kit/releases/tag/v15.1.7) (2026-08-13)
 
 ### Components
