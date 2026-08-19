@@ -55,7 +55,8 @@ export const menuCardStencil = createStencil({
       overflow: 'hidden',
     },
     [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
-      borderRadius: system.legacy.shape.xxl,
+      // slightly smaller border radius
+      borderRadius: system.legacy.shape.lg,
       // Card is a flex column container. Without this, a flex child won't shrink below its
       // content size, so `maxHeight` on the Card would be ignored and content would overflow
       // instead of scrolling inside the list-box-container.
