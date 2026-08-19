@@ -3,6 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
 import mdxDoc from './Menu.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {Basic as BasicExample} from './examples/Basic';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
 import {Grouping as GroupingExample} from './examples/Grouping';
@@ -48,4 +49,7 @@ export const NestedDynamic: Story = {
 };
 export const NestedSiblings: Story = {
   render: NestedSiblingsExample,
+};
+export const Alt: Story = {
+  render: AltExample,
 };

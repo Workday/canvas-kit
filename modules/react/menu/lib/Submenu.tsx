@@ -49,7 +49,7 @@ export const SubmenuPopper = createSubcomponent('div')({
 });
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
-  const timer = React.useRef() as React.MutableRefObject<number | undefined>;
+  const timer = React.useRef<number | undefined>(undefined);
 
   const start = () => {
     timer.current = window.setTimeout(fn, waitMs);
@@ -85,24 +85,7 @@ export const useSubmenuTargetItem = composeHooks(
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
-    const currentTargetIdRef = React.useRef<string>();
-    // A submenu owns its own `visibility`, so opening a sibling submenu would otherwise leave this
-    // one open. The parent's cursor always moves to the item being hovered or focused, so treat the
-    // cursor moving away from our target item as a signal to close.
-    const parentCursorId = model.UNSTABLE_parentModel.state.cursorId;
-    const isVisible = model.state.visibility === 'visible';
-    React.useEffect(() => {
-      if (!isVisible) {
-        return;
-      }
-      const targetId = (model.state.targetRef.current as HTMLElement | null)?.getAttribute(
-        'data-id'
-      );
-      if (targetId && parentCursorId && parentCursorId !== targetId) {
-        model.events.hide();
-      }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [parentCursorId, isVisible]);
+    const currentTargetIdRef = React.useRef<string | undefined>(undefined);
     const mouseEnterTimer = useIntentTimer(() => {
       model.UNSTABLE_parentModel.events.goTo({id: currentTargetIdRef.current || ''});
       model.events.show(event);
