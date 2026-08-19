@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.9](https://github.com/Workday/canvas-kit/releases/tag/v15.1.9) (2026-08-19)
+
+### Documentation
+
+- docs: Update docs on Menu ([#4145](https://github.com/Workday/canvas-kit/pull/4145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v15.1.8](https://github.com/Workday/canvas-kit/releases/tag/v15.1.8) (2026-08-18)
 
 ### Components
