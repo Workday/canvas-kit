@@ -740,12 +740,54 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('parts');
       expectTypeOf(myStencil.parts).toHaveProperty('separator');
-      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{'data-part': 'my-separator'}>();
+      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{
+        'data-part': 'my-separator';
+        readonly selector: '[data-part="my-separator"]';
+      }>();
 
       expect(myStencil).toHaveProperty(
         'parts.separator.data-part',
         expect.stringMatching('my-separator')
       );
+    });
+
+    it('should return a CSS selector on stencil parts', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      expectTypeOf(
+        myStencil.parts.separator.selector
+      ).toEqualTypeOf<'[data-part="my-separator"]'>();
+      expect(myStencil.parts.separator.selector).toEqual('[data-part="my-separator"]');
+    });
+
+    it('should not include selector when spreading part props onto an element', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      expect({...myStencil.parts.separator}).toEqual({'data-part': 'my-separator'});
+    });
+
+    it('should not apply selector as a DOM attribute when spreading part props', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      render(<div {...myStencil.parts.separator} data-testid="part" />);
+
+      expect(screen.getByTestId('part')).toHaveAttribute('data-part', 'my-separator');
+      expect(screen.getByTestId('part')).not.toHaveAttribute('selector');
     });
 
     it('should coerce a variable input to a type of string', () => {
@@ -1330,6 +1372,7 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.parts).toHaveProperty('separator');
         expectTypeOf(extendedStencil.parts.separator).toEqualTypeOf<{
           'data-part': 'base-separator';
+          readonly selector: '[data-part="base-separator"]';
         }>();
         expect(extendedStencil).toHaveProperty(
           'parts.separator.data-part',
@@ -1341,6 +1384,7 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.parts).toHaveProperty('border');
         expectTypeOf(extendedStencil.parts.border).toEqualTypeOf<{
           'data-part': 'extended-border';
+          readonly selector: '[data-part="extended-border"]';
         }>();
         expect(extendedStencil).toHaveProperty(
           'parts.border.data-part',
