@@ -2,9 +2,13 @@
 // @ts-check
 'use strict';
 
-import fetch from 'node-fetch';
-import {promisify} from 'util';
 import * as childProcess from 'child_process';
+import fetch from 'node-fetch';
+import fs from 'node:fs';
+import {promisify} from 'util';
+
+import {isRetryablePublishFailure, publishFromPackage} from './publish-packages.mjs';
+
 const exec = promisify(childProcess.exec);
 
 const {
@@ -113,17 +117,31 @@ exec('git diff --name-only HEAD HEAD^')
       `--force-publish="*"`,
       `--preid ${preid}`,
       `--dist-tag ${distTag}`,
+      `--concurrency 1`,
       bump,
     ];
 
-    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`);
+    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`).catch(async err => {
+      const output = `${err.stdout || ''}\n${err.stderr || ''}\n${err.message || ''}`;
+      if (!isRetryablePublishFailure(output)) {
+        throw err;
+      }
+      console.warn(
+        'Canary publish hit a retryable registry/provenance error. Completing unpublished packages...'
+      );
+      await publishFromPackage({distTag});
+      return {stdout: output};
+    });
   })
   .then(({stdout}) => {
     console.log(stdout);
 
     const regex = new RegExp(`@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*)`, 'g');
     data.packages = stdout.match(regex);
-    data.version = regex.exec(data.packages[0])[1];
+    const versionMatch = data.packages ? regex.exec(data.packages[0]) : null;
+    data.version = versionMatch
+      ? versionMatch[1]
+      : JSON.parse(fs.readFileSync('lerna.json', 'utf8')).version;
 
     slackAnnouncement({
       fallback: `New canary build published (v${data.version})`,

@@ -42,6 +42,11 @@ jobs:
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: 'minor'
 
+      ## See release.yml: finish any packages a failed lerna publish left unpublished.
+      - name: Publish remaining packages
+        if: failure()
+        run: node utils/publish-packages.mjs --dist-tag latest
+
       - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()
         with:

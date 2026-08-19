@@ -58,6 +58,11 @@ jobs:
           version: 'major'
           toRef: 'prerelease/major'
 
+      ## See release.yml: finish any packages a failed lerna publish left unpublished.
+      - name: Publish remaining packages
+        if: failure()
+        run: node utils/publish-packages.mjs --dist-tag latest
+
       # Update prerelease/minor to point to the next major release.
       - name: Push to prerelease/minor
         uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # v1.3.0

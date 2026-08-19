@@ -5,6 +5,7 @@ name: Publish to npm
 # - Patch releases (automatic on master/support branches) → release.yml
 # - Minor releases (manual workflow_dispatch) → release-minor.yml
 # - Major releases (manual workflow_dispatch) → release-major.yml
+# - Complete unpublished (manual workflow_dispatch) → complete-unpublished.yml
 #
 # Commits containing [skip release] will skip publishing but still trigger forward-merge.
 #
@@ -20,12 +21,15 @@ on:
   workflow_dispatch:
     inputs:
       release_type:
-        description: 'Release type (minor or major)'
+        description:
+          'Release type. Use complete-unpublished to finish a partial publish without bumping
+          versions.'
         required: true
         type: choice
         options:
           - minor
           - major
+          - complete-unpublished
 
 permissions:
   id-token: write # Required for OIDC
@@ -128,4 +132,13 @@ jobs:
     needs: determine-publish-type
     if: needs.determine-publish-type.outputs.publish_type == 'major'
     uses: ./.github/workflows/release-major.yml
+    secrets: inherit
+
+  # Finish packages missing from npm after a partial publish. Does not bump versions.
+  complete-unpublished:
+    needs: determine-publish-type
+    if: needs.determine-publish-type.outputs.publish_type == 'complete-unpublished'
+    uses: ./.github/workflows/complete-unpublished.yml
+    with:
+      dist_tag: ${{ github.ref_name == 'support' && 'support' || 'latest' }}
     secrets: inherit

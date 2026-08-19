@@ -60,6 +60,15 @@ jobs:
           version: ${{ inputs.version }}
           toRef: ${{ inputs.to_ref }}
 
+      ## Safety net: `lerna publish from-package` is idempotent (skips versions already on
+      ## npm). If the release action aborts mid-set — typically a Sigstore transparency-log
+      ## 409 during trusted publishing — this finishes the remainder without bumping again.
+      - name: Publish remaining packages
+        if: failure()
+        run:
+          node utils/publish-packages.mjs --dist-tag ${{ inputs.branch == 'master' && 'latest' ||
+          'support' }}
+
       - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()
         with:
