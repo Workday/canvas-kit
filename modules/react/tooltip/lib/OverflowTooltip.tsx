@@ -89,6 +89,14 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
    * disable the fallback placements.
    */
   fallbackPlacements?: Placement[];
+  /**
+   * Amount of time (in ms) to delay before showing the Tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the Tooltip
+   */
+  hideDelay?: number;
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -113,10 +121,16 @@ export const OverflowTooltip = ({
   placement = 'top',
   fallbackPlacements = defaultFallbackPlacements,
   children,
+  showDelay,
+  hideDelay,
   ...elemProps
 }: OverflowTooltipProps) => {
   const [titleText, setTitleText] = React.useState('');
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'muted'});
+  const {targetProps, popperProps, tooltipProps} = useTooltip({
+    type: 'muted',
+    showDelay,
+    hideDelay,
+  });
 
   const onMouseEnter = (event: React.MouseEvent) => {
     const target = event.currentTarget;

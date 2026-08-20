@@ -1061,6 +1061,22 @@ export interface StencilConfig<
    *   )
    * }
    * ```
+   *
+   * To target a part from another stencil's style object, use `.selector`. It is non-enumerable, so
+   * spreading the part onto an element still only applies `data-part`.
+   *
+   * ```ts
+   * const cardStencil = createStencil({
+   *   base: {
+   *     [`&:where(:has(${myButtonStencil.parts.icon.selector}))`]: {
+   *       paddingInlineStart: 0,
+   *     },
+   *     [`& ${myButtonStencil.parts.label.selector}`]: {
+   *       fontWeight: 700,
+   *     },
+   *   },
+   * })
+   * ```
    */
   parts?: P;
   /**
@@ -1301,9 +1317,28 @@ function makeParts<const T extends Record<string, string>>(parts: T): StencilVar
   }, {} as StencilVarsParts<T>);
 }
 
-export type StencilPartProps<T> = {
-  [K in keyof T]: {'data-part': T[K]};
+export type StencilPart<V extends string = string> = {
+  'data-part': V;
+  /**
+   * CSS selector matching this part (`[data-part="..."]`). Non-enumerable so it is not applied to
+   * the DOM when the part is spread onto an element.
+   */
+  readonly selector: `[data-part="${V}"]`;
 };
+
+export type StencilPartProps<T> = {
+  [K in keyof T]: StencilPart<T[K] & string>;
+};
+
+function makePartProp<V extends string>(value: V): StencilPart<V> {
+  const part = {'data-part': value} as StencilPart<V>;
+  // Non-enumerable so `{...stencil.parts.foo}` only spreads `data-part` onto the DOM.
+  Object.defineProperty(part, 'selector', {
+    value: `[data-part="${value}"]`,
+    enumerable: false,
+  });
+  return part;
+}
 
 function makePartProps<const T extends Record<string, string>>(parts?: T): StencilPartProps<T> {
   if (!parts) {
@@ -1311,7 +1346,7 @@ function makePartProps<const T extends Record<string, string>>(parts?: T): Stenc
   }
 
   return Object.keys(parts).reduce((result, key: any) => {
-    (result as any)[key] = {'data-part': parts[key]};
+    (result as any)[key] = makePartProp(parts[key]);
     return result;
   }, {} as StencilPartProps<T>);
 }

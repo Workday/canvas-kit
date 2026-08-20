@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.7](https://github.com/Workday/canvas-kit/releases/tag/v16.0.7) (2026-08-19)
+
+### Components
+
+- fix: Update SidePanel to use sidebarLeft icon ([#4071](https://github.com/Workday/canvas-kit/pull/4071)) ([@alanbsmith](https://github.com/alanbsmith))
+  This update will break any visual snapshots as the icon has changed from `extendIcon` to `sidebarLeftIcon`. It is safe to accept these visual changes. The icon also no longer flips on expand / collapse, but it will still respect end (right) origin and RTL.
+- fix(OverflowTooltip): Add missing showDelay and hideDelay prop support for OverflowTooltip ([#4138](https://github.com/Workday/canvas-kit/pull/4138)) ([@BillGeoghegan](https://github.com/BillGeoghegan), Bill Geoghegan)
+  - Adds ability to pass showDelay and hideDelay values for OverflowTooltip
+- fix: Forward getId to useTabsModel to ensure custom ids work when registering items ([#4141](https://github.com/Workday/canvas-kit/pull/4141)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Close nested Menus when hovering over other items ([#4090](https://github.com/Workday/canvas-kit/pull/4090)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+### Documentation
+
+- docs: Update docs on Menu ([#4145](https://github.com/Workday/canvas-kit/pull/4145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.9](https://github.com/Workday/canvas-kit/releases/tag/v15.1.9) (2026-08-19)
+
+### Documentation
+
+- docs: Update docs on Menu ([#4145](https://github.com/Workday/canvas-kit/pull/4145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.8](https://github.com/Workday/canvas-kit/releases/tag/v15.1.8) (2026-08-18)
+
+### Components
+
+- fix: Close nested Menus when hovering over other items ([#4090](https://github.com/Workday/canvas-kit/pull/4090)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
+## [v15.1.7](https://github.com/Workday/canvas-kit/releases/tag/v15.1.7) (2026-08-13)
+
+### Components
+
+- fix: Forward getId to useTabsModel to ensure custom ids work when registering items ([#4141](https://github.com/Workday/canvas-kit/pull/4141)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.6](https://github.com/Workday/canvas-kit/releases/tag/v15.1.6) (2026-08-13)
+
+### Components
+
+- fix(OverflowTooltip): Add missing showDelay and hideDelay prop support for OverflowTooltip ([#4138](https://github.com/Workday/canvas-kit/pull/4138)) ([@BillGeoghegan](https://github.com/BillGeoghegan), Bill Geoghegan)
+  - Adds ability to pass showDelay and hideDelay values for OverflowTooltip
+
+
 ## [v16.0.6](https://github.com/Workday/canvas-kit/releases/tag/v16.0.6) (2026-08-10)
 
 ### Documentation
@@ -17,6 +62,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Update readme for v16 ([#4127](https://github.com/Workday/canvas-kit/pull/4127)) ([@sheelah](https://github.com/sheelah))
 
 
+## [v15.1.5](https://github.com/Workday/canvas-kit/releases/tag/v15.1.5) (2026-08-05)
+
+### Components
+
+- fix: Update SidePanel to use sidebarLeft icon ([#4071](https://github.com/Workday/canvas-kit/pull/4071)) ([@alanbsmith](https://github.com/alanbsmith))
+  This update will break any visual snapshots as the icon has changed from `extendIcon` to `sidebarLeftIcon`. It is safe to accept these visual changes. The icon also no longer flips on expand / collapse, but it will still respect end (right) origin and RTL.
 ## [v16.0.4](https://github.com/Workday/canvas-kit/releases/tag/v16.0.4) (2026-08-05)
 
 ### Documentation
