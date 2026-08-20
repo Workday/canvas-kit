@@ -1,6 +1,8 @@
 {
-  "packages": ["modules/**"],
-  "version": "16.0.7",
+  "packages": [
+    "modules/**"
+  ],
+  "version": "16.0.8",
   "npmClient": "yarn",
   "command": {
     "version": {
