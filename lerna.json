@@ -1,7 +1,5 @@
 {
-  "packages": [
-    "modules/**"
-  ],
+  "packages": ["modules/**"],
   "version": "16.0.7",
   "npmClient": "yarn",
   "command": {
@@ -12,7 +10,7 @@
       "forcePublish": "*"
     },
     "publish": {
-      "forcePublish": "*"
+      "concurrency": 1
     }
   }
 }
