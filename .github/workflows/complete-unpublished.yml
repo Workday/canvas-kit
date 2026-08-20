@@ -17,6 +17,7 @@ permissions:
 jobs:
   complete-unpublished:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
 
     steps:
       - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
@@ -28,7 +29,7 @@ jobs:
           node_version: 24.x
 
       - name: Clear auth token for OIDC
-        run: echo "NODE_AUTH_TOKEN=" >> $GITHUB_ENV
+        run: echo "NODE_AUTH_TOKEN=" >> "$GITHUB_ENV"
 
       - name: Upgrade npm for OIDC
         run: npm install -g npm@11.11.0
@@ -42,4 +43,11 @@ jobs:
           TSP_SKIP_CACHE: true
 
       - name: Publish unpublished packages
-        run: node utils/publish-packages.mjs --dist-tag ${{ inputs.dist_tag }}
+        env:
+          DIST_TAG: ${{ inputs.dist_tag }}
+        run: |
+          case "$DIST_TAG" in
+            latest|support|next|prerelease-next) ;;
+            *) echo "::error::Unsupported dist_tag: $DIST_TAG"; exit 1 ;;
+          esac
+          yarn publish:from-package -- --dist-tag "$DIST_TAG"

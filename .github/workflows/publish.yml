@@ -58,14 +58,14 @@ jobs:
           # For workflow_dispatch, use the selected release type
           if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
             echo "publish_type=${{ inputs.release_type }}" >> $GITHUB_OUTPUT
-            echo "branch=master" >> $GITHUB_OUTPUT
+            echo "branch=$GITHUB_REF_NAME" >> "$GITHUB_OUTPUT"
             echo "::notice::Workflow dispatch detected - release type: ${{ inputs.release_type }}"
             exit 0
           fi
 
           # For push events, determine type based on branch
-          BRANCH="${{ github.ref_name }}"
-          echo "branch=${BRANCH}" >> $GITHUB_OUTPUT
+          BRANCH="$GITHUB_REF_NAME"
+          echo "branch=${BRANCH}" >> "$GITHUB_OUTPUT"
 
           if [[ "$BRANCH" == prerelease/* ]]; then
             echo "publish_type=canary" >> $GITHUB_OUTPUT
@@ -140,5 +140,4 @@ jobs:
     if: needs.determine-publish-type.outputs.publish_type == 'complete-unpublished'
     uses: ./.github/workflows/complete-unpublished.yml
     with:
-      dist_tag: ${{ github.ref_name == 'support' && 'support' || 'latest' }}
-    secrets: inherit
+      dist_tag: ${{ needs.determine-publish-type.outputs.branch == 'support' && 'support' || 'latest' }}

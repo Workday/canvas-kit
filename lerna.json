@@ -10,7 +10,6 @@
       "forcePublish": "*"
     },
     "publish": {
-      "forcePublish": "*",
       "concurrency": 1
     }
   }

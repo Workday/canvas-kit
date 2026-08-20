@@ -7,7 +7,11 @@ import fetch from 'node-fetch';
 import fs from 'node:fs';
 import {promisify} from 'util';
 
-import {isRetryablePublishFailure, publishFromPackage} from './publish-packages.mjs';
+import {
+  getUnpublishedPackages,
+  isRetryablePublishFailure,
+  parsePublishedPackageLines,
+} from './publish-packages.mjs';
 
 const exec = promisify(childProcess.exec);
 
@@ -18,16 +22,26 @@ const {
   BUILD_URL = 'https://github.com/Workday/canvas-kit/actions',
 } = process.env;
 
+if (!GITHUB_REF) {
+  console.error('GITHUB_REF is required');
+  process.exit(1);
+}
+
 console.log('GITHUB_REF', GITHUB_REF);
 const branch = GITHUB_REF.replace('refs/heads/', '');
 const prefixedBuildNumber = GITHUB_RUN_NUMBER.padStart(4, '0');
 
 const isPreMajor = branch.match(/^prerelease\/major$/g);
 const isPreMinor = branch.match(/^prerelease\/minor$/g);
+
+/** @type {{sha?: string, version?: string, packages?: string[] | null}} */
 const data = {};
 
+/** @type {string} */
 let distTag;
+/** @type {string} */
 let preid;
+/** @type {string} */
 let bump;
 
 if (isPreMajor) {
@@ -39,7 +53,12 @@ if (isPreMajor) {
   process.exit(1);
 }
 
+/** @param {Record<string, string>} attachment */
 const slackAnnouncement = attachment => {
+  if (!SLACK_WEBHOOK) {
+    return;
+  }
+
   fetch(SLACK_WEBHOOK, {
     method: 'post',
     headers: {'Content-Type': 'application/json'},
@@ -121,23 +140,66 @@ exec('git diff --name-only HEAD HEAD^')
       bump,
     ];
 
-    return exec(`yarn lerna publish ${lernaFlags.join(' ')}`).catch(async err => {
-      const output = `${err.stdout || ''}\n${err.stderr || ''}\n${err.message || ''}`;
+    const lernaCommand = `yarn lerna publish ${lernaFlags.join(' ')}`;
+
+    return exec(lernaCommand)
+      .then(({stdout}) => ({stdout, packages: undefined}))
+      .catch(async err => {
+      const execErr = /** @type {Error & {stdout?: string, stderr?: string}} */ (err);
+      const output = `${execErr.stdout ?? ''}\n${execErr.stderr ?? ''}\n${execErr.message}`;
       if (!isRetryablePublishFailure(output)) {
         throw err;
       }
-      console.warn(
-        'Canary publish hit a retryable registry/provenance error. Completing unpublished packages...'
+
+      const attempted = parsePublishedPackageLines(output).filter(pkg =>
+        pkg.version.includes(`-${preid}.`)
       );
-      await publishFromPackage({distTag});
-      return {stdout: output};
+      if (attempted.length === 0) {
+        throw err;
+      }
+
+      let missing = await getUnpublishedPackages(attempted);
+      if (missing.length === 0) {
+        console.warn('All attempted canary versions are already on npm.');
+        return {
+          stdout: output,
+          packages: attempted.map(pkg => `${pkg.name}@${pkg.version}`),
+        };
+      }
+
+      console.warn(
+        `Canary publish hit a retryable registry/provenance error. Retrying missing versions:\n${missing
+          .map(pkg => `${pkg.name}@${pkg.version}`)
+          .join('\n')}`
+      );
+
+      const retryResult = await exec(lernaCommand);
+      const retryOutput = `${output}\n${retryResult.stdout ?? ''}\n${retryResult.stderr ?? ''}`;
+      const published = parsePublishedPackageLines(retryOutput).filter(pkg =>
+        pkg.version.includes(`-${preid}.`)
+      );
+      missing = await getUnpublishedPackages(published.length > 0 ? published : attempted);
+      if (missing.length > 0) {
+        throw new Error(
+          `Canary recovery failed. Still missing:\n${missing
+            .map(pkg => `${pkg.name}@${pkg.version}`)
+            .join('\n')}`
+        );
+      }
+
+      return {
+        stdout: retryOutput,
+        packages: (published.length > 0 ? published : attempted).map(
+          pkg => `${pkg.name}@${pkg.version}`
+        ),
+      };
     });
   })
-  .then(({stdout}) => {
+  .then(({stdout, packages}) => {
     console.log(stdout);
 
     const regex = new RegExp(`@workday\\/[a-z-]*@(\\d*.\\d*.\\d*-${preid}.\\d*)`, 'g');
-    data.packages = stdout.match(regex);
+    data.packages = packages ?? stdout.match(regex);
     const versionMatch = data.packages ? regex.exec(data.packages[0]) : null;
     data.version = versionMatch
       ? versionMatch[1]
