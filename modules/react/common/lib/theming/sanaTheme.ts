@@ -15,93 +15,113 @@
  * | `sanaCanvasNumericalTheme` | Numerical `brand` shape for popup forwarding |
  * | `sanaCanvasProviderTheme` | Same — pass to root `CanvasProvider` when `<html>` is unavailable |
  */
+import {cssVar} from '@workday/canvas-kit-styling';
 import {base, brand} from '@workday/canvas-tokens-web';
 
 import type {CanvasNumericalBrandTheme} from './types';
 
-/** Reference a canvas-tokens CSS variable (resolves under `[data-theme="sana-canvas"]`). */
-const varRef = (token: string) => `var(${token})`;
-
 /**
- * Sana extends the neutral ramp with steps not yet exported from canvas-tokens-web JS.
- * Defined in `@workday/canvas-tokens-web/css/sana/_variables.css`.
+ * `base.sana` is a pre-built map of `var(--token, fallback)` strings exported by
+ * canvas-tokens-web specifically for these Sana-only base-palette steps — use them directly,
+ * not `cssVar()` (which expects a bare variable name, not an already-wrapped `var()` string).
+ * Referencing `base.*` (not `brand.*` of the same name) avoids a `var()` self-reference cycle:
+ * CanvasProvider writes each ramp entry onto the identically-named `--cnvs-brand-*` variable, so
+ * `brand.sana.neutral150` (itself `var(--cnvs-brand-neutral-150, ...)`) would point right back at
+ * the variable being written.
  */
-const sanaBrandNeutral = {
-  '150': '--cnvs-brand-neutral-150',
-  '850': '--cnvs-brand-neutral-850',
-  A150: '--cnvs-brand-neutral-a150',
-} as const;
+const sanaBaseNeutral = base.sana;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
  * Values are `var()` references to Sana brand variables — not merged from `defaultCanvasTheme`.
+ *
+ * Mirrors only what Sana's stylesheet itself defines: the `neutral` ramp, the `A300` step of
+ * `primary`/`critical`/`caution`/`positive` (the one step Sana redefines for those families — a
+ * stronger alpha wash on the matching hue), and the four `system.color.brand.*` tokens Sana
+ * overrides. Every other key is intentionally omitted — Sana does not define a distinct value
+ * for it, so writing it here would only reference the very variable being written (a `var()`
+ * cycle that resolves to invalid, leaking the classic-theme fallback color instead of Sana's).
+ *
+ * `action.*` and `selected.*` are deliberately **not** set. Sana's stylesheet does not define
+ * `--cnvs-brand-action-*` or `--cnvs-sys-color-brand-fg-selected`/`-surface-selected`; those are
+ * derived downstream from the root theme. Forcing them here would pin values the root is meant
+ * to own.
+ *
+ * Ramp values must reference `base.*` (the underlying palette), never `brand.*` of the same
+ * name — CanvasProvider writes each entry onto the identically-named `--cnvs-brand-*` CSS
+ * variable, so referencing `brand.*` here would create that same self-reference cycle. The
+ * `system.color.brand.*` overrides are the exception: they target *different* CSS variables
+ * (`--cnvs-sys-color-brand-*`) than the `brand.*` values they reference, so no cycle.
+ *
+ * Note this preset only covers brand tokens. The rest of Sana (shape, depth, type, non-brand
+ * system colors) comes from the stylesheet's `[data-theme="sana-canvas"]` block — pass
+ * `data-theme` to `CanvasProvider` alongside this preset and it is forwarded to portaled popups
+ * so the full theme applies there too.
  */
 export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   // Explicit brand vars only — multi-key ramps write 1:1; no system shortcut bundles run.
   themeScope: 'brand',
   brand: {
-    action: {
-      base: varRef(brand.neutral975),
-      dark: varRef(brand.neutral950),
-      darkest: varRef(brand.neutral900),
-      accent: varRef(base.neutral0),
-      lightest: varRef(brand.neutral25),
-      lighter: varRef(brand.neutral50),
-      light: varRef(brand.neutral200),
-    },
-    neutral: {
-      '25': varRef(brand.neutral25),
-      '50': varRef(brand.neutral50),
-      '100': varRef(brand.neutral100),
-      '150': varRef(sanaBrandNeutral['150']),
-      '200': varRef(brand.neutral200),
-      '300': varRef(brand.neutral300),
-      '400': varRef(brand.neutral400),
-      '500': varRef(brand.neutral500),
-      '600': varRef(brand.neutral600),
-      '700': varRef(brand.neutral700),
-      '800': varRef(brand.neutral800),
-      '850': varRef(sanaBrandNeutral['850']),
-      '900': varRef(brand.neutral900),
-      '950': varRef(brand.neutral950),
-      '975': varRef(brand.neutral975),
-      A25: varRef(brand.neutralA25),
-      A50: varRef(brand.neutralA50),
-      A100: varRef(brand.neutralA100),
-      A150: varRef(sanaBrandNeutral.A150),
-      A200: varRef(brand.neutralA200),
-    },
     primary: {
-      '500': varRef(brand.primary500),
-      '600': varRef(brand.primary600),
-      '700': varRef(brand.primary700),
-      A25: varRef(brand.primaryA25),
-      A50: varRef(brand.primaryA50),
-      A100: varRef(brand.primaryA100),
+      A300: sanaBaseNeutral.blueA300,
     },
     critical: {
-      '500': varRef(brand.critical500),
-      '600': varRef(brand.critical600),
-      '700': varRef(brand.critical700),
-      A25: varRef(brand.criticalA25),
-      A50: varRef(brand.criticalA50),
+      A300: sanaBaseNeutral.redA300,
     },
     caution: {
-      '400': varRef(brand.caution400),
-      '500': varRef(brand.caution500),
-      A25: varRef(brand.cautionA25),
-      A50: varRef(brand.cautionA50),
+      A300: sanaBaseNeutral.amberA300,
     },
     positive: {
-      '600': varRef(brand.positive600),
-      '800': varRef(brand.positive800),
-      A25: varRef(brand.positiveA25),
-      A50: varRef(brand.positiveA50),
+      A300: sanaBaseNeutral.greenA300,
+    },
+    neutral: {
+      '25': cssVar(base.neutral25),
+      '50': cssVar(base.neutral50),
+      '100': cssVar(base.neutral100),
+      '150': sanaBaseNeutral.neutral150,
+      '200': cssVar(base.neutral200),
+      '300': cssVar(base.neutral300),
+      '400': cssVar(base.neutral400),
+      '500': cssVar(base.neutral500),
+      '600': cssVar(base.neutral600),
+      '700': cssVar(base.neutral700),
+      '800': cssVar(base.neutral800),
+      '850': sanaBaseNeutral.neutral850,
+      '900': cssVar(base.neutral900),
+      '950': cssVar(base.neutral950),
+      '975': cssVar(base.neutral975),
+      A25: cssVar(base.neutralA25),
+      A50: cssVar(base.neutralA50),
+      A100: cssVar(base.neutralA100),
+      A150: sanaBaseNeutral.neutralA150,
+      A200: cssVar(base.neutralA200),
+      A300: cssVar(base.neutralA300),
+      A400: cssVar(base.neutralA400),
+      A500: cssVar(base.neutralA500),
+      A600: cssVar(base.neutralA600),
+      A700: cssVar(base.neutralA700),
+      A800: cssVar(base.neutralA800),
+      A850: sanaBaseNeutral.neutralA850,
+      A900: cssVar(base.neutralA900),
+      A950: cssVar(base.neutralA950),
+      A975: cssVar(base.neutralA975),
     },
   },
-  selected: {
-    fg: varRef(brand.neutralA900),
-    surface: varRef(brand.neutralA100),
+  system: {
+    color: {
+      brand: {
+        accent: {
+          primary: cssVar(brand.neutral975),
+          action: cssVar(brand.neutral975),
+        },
+        fg: {
+          primary: {
+            default: cssVar(brand.neutralA900),
+            strong: cssVar(brand.neutralA950),
+          },
+        },
+      },
+    },
   },
 };
 
@@ -119,6 +139,14 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * - Prefer setting `data-theme="sana-canvas"` on `<html>` with Sana CSS imported. Popups then
  *   inherit brand variables from the document and no `theme` prop is needed.
  *
+ * Pass `data-theme="sana-canvas"` alongside it. That attribute is forwarded to popup stack
+ * containers, so the rest of Sana (shape, depth, type, non-brand system colors) applies to
+ * portaled content through the stylesheet's own `[data-theme="sana-canvas"]` block — this preset
+ * covers brand tokens, the attribute covers everything else.
+ *
+ * `action.*` and selected-state tokens are not set by this preset — Sana does not define them,
+ * and they resolve from the root theme.
+ *
  * @example
  * ```tsx
  * // Preferred — control <html>
@@ -126,8 +154,10 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
  * // <html data-theme="sana-canvas">
  * <CanvasProvider><App /></CanvasProvider>
  *
- * // No access to <html> — required for popup parity
- * <CanvasProvider theme={sanaCanvasProviderTheme}><App /></CanvasProvider>
+ * // No access to <html> — pass both for full parity, including portaled popups
+ * <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
+ *   <App />
+ * </CanvasProvider>
  * ```
  */
 export const sanaCanvasProviderTheme = sanaCanvasNumericalTheme;

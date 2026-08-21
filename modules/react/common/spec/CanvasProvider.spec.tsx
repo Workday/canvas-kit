@@ -5,6 +5,16 @@ import {CanvasProvider} from '../lib/CanvasProvider';
 import {sanaCanvasProviderTheme} from '../lib/theming/sanaTheme';
 
 describe('CanvasProvider', () => {
+  it('forwards data-theme onto the wrapper div', () => {
+    const {container} = render(
+      <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
+        <div>Test</div>
+      </CanvasProvider>
+    );
+
+    expect(container.firstElementChild?.getAttribute('data-theme')).toBe('sana-canvas');
+  });
+
   describe('console warnings', () => {
     it('should warn when sanaCanvasProviderTheme is used with global Sana theme', () => {
       const consoleSpy = vi.spyOn(global.console, 'warn').mockImplementation(() => {});
