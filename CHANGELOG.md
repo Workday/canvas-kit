@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.8](https://github.com/Workday/canvas-kit/releases/tag/v16.0.8) (2026-08-20)
+
+### Infrastructure
+
+- chore: Fix npm publish failures ([#4150](https://github.com/Workday/canvas-kit/pull/4150)) ([@alanbsmith](https://github.com/alanbsmith))
+  Release and canary CI now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
 ## [v16.0.7](https://github.com/Workday/canvas-kit/releases/tag/v16.0.7) (2026-08-19)
 
 ### Components
