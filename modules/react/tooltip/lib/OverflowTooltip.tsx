@@ -55,6 +55,11 @@ export const findEllipsisElement = (element: Element): Element | null => {
   }
 };
 
+const getInnerText = (element: Element): string => {
+  const ownerWindow = element.ownerDocument?.defaultView;
+  return ownerWindow && element instanceof ownerWindow.HTMLElement ? element.innerText : '';
+};
+
 const isOverflowed = (element: Element) => {
   const overflowElement = findEllipsisElement(element) || findOverflowElement(element);
 
@@ -134,14 +139,14 @@ export const OverflowTooltip = ({
 
   const onMouseEnter = (event: React.MouseEvent) => {
     const target = event.currentTarget;
-    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    setTitleText(getInnerText(target));
     if (isOverflowed(target)) {
       targetProps.onMouseEnter(event as React.MouseEvent);
     }
   };
   const onFocus = (event: React.FocusEvent) => {
     const target = event.currentTarget;
-    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    setTitleText(getInnerText(target));
     if (isOverflowed(target)) {
       targetProps.onFocus(event as React.FocusEvent);
     }
