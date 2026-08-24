@@ -189,6 +189,17 @@ export const useMultiSelectInput = composeHooks(
   useComboboxInput
 );
 
+const useMultiSelectSearchInput = composeHooks(
+  createElemPropsHook(useMultiSelectModel)(model => ({
+    onKeyPress(event: React.KeyboardEvent) {
+      if (model.state.visibility === 'hidden') {
+        model.events.show(event);
+      }
+    },
+  })),
+  useMultiSelectInput
+);
+
 export interface MultiSelectInputProps
   extends CSProps,
     Pick<
@@ -248,7 +259,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
 
 export const MultiSelectSearchInput = createSubcomponent(TextInput)({
   modelHook: useMultiSelectModel,
-  elemPropsHook: useMultiSelectInput,
+  elemPropsHook: useMultiSelectSearchInput,
 })<MultiSelectInputProps>(
   (
     {
