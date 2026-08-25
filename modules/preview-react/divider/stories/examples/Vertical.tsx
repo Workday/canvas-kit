@@ -5,18 +5,18 @@ import {system} from '@workday/canvas-tokens-web';
 const rowStyles = createStyles({
   display: 'flex',
   alignItems: 'center',
-  height: system.space.x16,
+  height: system.size.xxl,
 });
 
 const statStyles = createStyles({
   display: 'flex',
   flexDirection: 'column',
-  gap: system.gap.zero,
+  gap: system.gap.none,
 });
 
 const labelStyles = createStyles({
   ...system.type.subtext.medium,
-  color: system.color.text.hint,
+  color: system.color.fg.default,
   margin: 0,
 });
 
