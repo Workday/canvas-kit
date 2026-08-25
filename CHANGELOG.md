@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.10](https://github.com/Workday/canvas-kit/releases/tag/v16.0.10) (2026-08-25)
+
+### Components
+
+- fix: Handle cross-window elements for OverflowTooltip ([#4152](https://github.com/Workday/canvas-kit/pull/4152)) ([@jjbubudi](https://github.com/jjbubudi))
+  OverflowTooltip now correctly displays text for targets rendered in a different window/iframe context, such as pages opened via `window.open()`.
+
+
 ## [v16.0.9](https://github.com/Workday/canvas-kit/releases/tag/v16.0.9) (2026-08-25)
 
 ### Components
