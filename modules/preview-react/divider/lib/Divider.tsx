@@ -83,8 +83,8 @@ export const Divider = createComponent('hr')({
   Component: ({space, orientation = 'horizontal', ...elemProps}: DividerProps, ref, Element) => (
     <Element
       ref={ref}
-      aria-orientation={orientation}
       {...handleCsProp(elemProps, dividerStencil({space, orientation}))}
+      aria-orientation={orientation}
     />
   ),
 });
