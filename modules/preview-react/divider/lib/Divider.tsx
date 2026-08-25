@@ -1,6 +1,13 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {
+  CSProps,
+  calc,
+  createStencil,
+  cssVar,
+  handleCsProp,
+  px2rem,
+} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export const dividerStencil = createStencil({
   vars: {
@@ -24,7 +31,7 @@ export const dividerStencil = createStencil({
         display: 'block',
         height: px2rem(1),
         borderBlockStart: `1px solid ${system.legacy.color.border.default}`,
-        margin: `${cssVar(space, base.legacy.size25)} 0`,
+        margin: `${calc.divide(cssVar(space, system.legacy.gap.xs), 2)} 0`,
       }),
       vertical: ({space}) => ({
         display: 'inline-block',
@@ -32,7 +39,7 @@ export const dividerStencil = createStencil({
         width: px2rem(1),
         height: 'auto',
         borderInlineStart: `1px solid ${system.legacy.color.border.default}`,
-        margin: `0 ${cssVar(space, base.legacy.size25)}`,
+        margin: `0 ${calc.divide(cssVar(space, system.legacy.gap.xs), 2)}`,
       }),
     },
   },
