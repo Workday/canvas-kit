@@ -2,11 +2,13 @@ import * as React from 'react';
 
 import {
   isCursor,
+  isElementDisabled,
   useListItemRegister,
   useListItemRovingFocus,
   useListItemSelect,
 } from '@workday/canvas-kit-react/collection';
 import {
+  changeFocus,
   composeHooks,
   cornerShapeStencil,
   createComponent,
@@ -160,7 +162,7 @@ export const menuItemStencil = createStencil({
 });
 
 const MenuItemIcon = (elemProps: SystemIconProps) => {
-  return <SystemIcon size="xs" {...menuItemStencil.parts.icon} {...elemProps} />;
+  return <SystemIcon size="md" {...menuItemStencil.parts.icon} {...elemProps} />;
 };
 
 const MenuItemText = createComponent('span')({
@@ -189,7 +191,12 @@ export const useMenuItemArrowReturn = createElemPropsHook(useMenuModel)(model =>
     onKeyDown(event: React.KeyboardEvent) {
       const styles = getComputedStyle(event.currentTarget);
       if (event.key === 'ArrowLeft' && styles.direction === 'ltr' && model.UNSTABLE_parentModel) {
+        event.preventDefault();
+        const target = model.state.targetRef.current as HTMLElement | null;
         model.events.hide(event);
+        requestAnimationFrame(() => {
+          changeFocus(target);
+        });
       }
     },
   };
@@ -202,6 +209,27 @@ export const useMenuItemFocus = createElemPropsHook(useMenuModel)((
 ) => {
   const {localRef, elementRef} = useLocalRef(ref as React.Ref<HTMLElement>);
   const id = elemProps['data-id'];
+
+  // A menu keeps its cursor between openings, so reopening would restore focus to a disabled item.
+  // Items remount whenever the menu opens, which distinguishes reopening from navigating onto a
+  // disabled item while the menu is already open. Clearing the cursor lets the roving focus
+  // fallback in `useListItemRovingFocus` move focus to the first item. The check waits for the
+  // first render where `id` is known, since items without an explicit `data-id` register it later.
+  const hasCheckedDisabledCursor = React.useRef(false);
+  React.useLayoutEffect(() => {
+    if (hasCheckedDisabledCursor.current || !id) {
+      return;
+    }
+    hasCheckedDisabledCursor.current = true;
+
+    const isItemDisabled = isElementDisabled(localRef.current);
+
+    if (model.state.mode === 'single' && isCursor(model.state, id) && isItemDisabled) {
+      model.events.goToFirst();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+
   // focus on the item with the cursor
   React.useLayoutEffect(() => {
     if (model.state.mode === 'single') {
@@ -237,11 +265,12 @@ export const useMenuItem = composeHooks(
       onClick:
         model.state.mode === 'single'
           ? (event: React.SyntheticEvent) => {
-              // only hide if the item isn't disabled
-              if (event.currentTarget.getAttribute('aria-disabled') !== 'true') {
-                model.events.hide(event);
-                hideParent(model);
+              if (isElementDisabled(event.currentTarget as Element)) {
+                return null;
               }
+              model.events.hide(event);
+              hideParent(model);
+              return undefined;
             }
           : undefined,
     };

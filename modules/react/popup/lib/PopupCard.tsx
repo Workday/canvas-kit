@@ -99,7 +99,7 @@ export const popupCardStencil = createStencil({
     position: 'relative',
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     gap: system.legacy.gap.lg,
-    boxShadow: system.depth[3],
+    boxShadow: system.depth[4],
     minHeight: 0,
     padding: system.legacy.padding.xl,
     borderRadius: system.legacy.shape.xxxl,
@@ -124,7 +124,7 @@ export const PopupCard = createSubcomponent('div')({
   displayName: 'Popup.Card',
   modelHook: usePopupModel,
   elemPropsHook: usePopupCard,
-})<PopupCardProps>(({children, ref, ...elemProps}, Element, model) => {
+})<PopupCardProps>(({children, ref, variant, ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
@@ -135,6 +135,7 @@ export const PopupCard = createSubcomponent('div')({
     <Card
       as={Element}
       ref={ref}
+      variant={variant}
       {...mergeStyles(elemProps, [
         popupCardStencil({
           transformOriginHorizontal: transformOrigin.horizontal,

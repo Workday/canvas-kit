@@ -3,12 +3,14 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
 import mdxDoc from './Menu.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {Basic as BasicExample} from './examples/Basic';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
 import {Grouping as GroupingExample} from './examples/Grouping';
 import {Icons as IconsExample} from './examples/Icons';
 import {Nested as NestedExample} from './examples/Nested';
 import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
+import {NestedSiblings as NestedSiblingsExample} from './examples/NestedSiblings';
 import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 
 export default {
@@ -44,4 +46,10 @@ export const Nested: Story = {
 };
 export const NestedDynamic: Story = {
   render: NestedDynamicExample,
+};
+export const NestedSiblings: Story = {
+  render: NestedSiblingsExample,
+};
+export const Alt: Story = {
+  render: AltExample,
 };

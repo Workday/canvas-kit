@@ -18,7 +18,7 @@ const TableBody = createComponent('tbody')({
 
 const tableRowStencil = createStencil({
   base: {
-    borderBlockEnd: `${px2rem(1)} solid ${system.color.border.strong}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
   },
 });
 
