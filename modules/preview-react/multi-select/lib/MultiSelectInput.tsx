@@ -191,8 +191,14 @@ export const useMultiSelectInput = composeHooks(
 
 const useMultiSelectSearchInput = composeHooks(
   createElemPropsHook(useMultiSelectModel)(model => ({
-    onKeyPress(event: React.KeyboardEvent) {
-      if (model.state.visibility === 'hidden') {
+    onKeyDown(event: React.KeyboardEvent) {
+      if (
+        model.state.visibility === 'hidden' &&
+        event.key.length === 1 &&
+        !event.altKey &&
+        !event.ctrlKey &&
+        !event.metaKey
+      ) {
         model.events.show(event);
       }
     },

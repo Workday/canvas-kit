@@ -6,6 +6,14 @@ describe('MultiSelect', () => {
       cy.mount(<Searching />);
     });
 
+    context('when Enter is pressed before typing', () => {
+      it('should keep the listbox hidden', () => {
+        cy.findByRole('combobox', {name: 'Fruits'}).focus().realPress('Enter');
+        cy.findByRole('combobox', {name: 'Fruits'}).should('have.attr', 'aria-expanded', 'false');
+        cy.findByRole('listbox').should('not.exist');
+      });
+    });
+
     context('when search text is entered using the keyboard', () => {
       beforeEach(() => {
         cy.findByRole('combobox', {name: 'Fruits'}).focus().realType('apple{enter}');

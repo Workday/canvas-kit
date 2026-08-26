@@ -30,7 +30,18 @@ describe('MultiSelect.SearchInput', () => {
     expect(input).toHaveAttribute('aria-expanded', 'false');
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
 
-    fireEvent.keyPress(input, {key: 'a', code: 'KeyA', charCode: 97});
+    fireEvent.keyDown(input, {key: 'Enter', code: 'Enter'});
+    fireEvent.keyDown(input, {key: 'Tab', code: 'Tab'});
+    fireEvent.keyDown(input, {key: 'Escape', code: 'Escape'});
+    fireEvent.keyDown(input, {key: 'a', code: 'KeyA', altKey: true});
+    fireEvent.keyDown(input, {key: 'a', code: 'KeyA', ctrlKey: true});
+    fireEvent.keyDown(input, {key: 'a', code: 'KeyA', metaKey: true});
+
+    expect(input).toHaveAttribute('aria-expanded', 'false');
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument();
+    expect(onShow).not.toHaveBeenCalled();
+
+    fireEvent.keyDown(input, {key: 'a', code: 'KeyA'});
     fireEvent.change(input, {target: {value: 'a'}});
 
     expect(await screen.findByRole('listbox')).toBeInTheDocument();
@@ -39,7 +50,7 @@ describe('MultiSelect.SearchInput', () => {
     expect(onFilterChange).toHaveBeenCalledTimes(1);
     expect(onShow).toHaveBeenCalledTimes(1);
 
-    fireEvent.keyPress(input, {key: 'p', code: 'KeyP', charCode: 112});
+    fireEvent.keyDown(input, {key: 'p', code: 'KeyP'});
     fireEvent.change(input, {target: {value: 'ap'}});
 
     expect(onFilterChange).toHaveBeenCalledTimes(2);
