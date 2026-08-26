@@ -38,7 +38,7 @@
       "slug": "page-structure"
     },
     {
-      "source": "accessibility/TablesAdvanced.mdx",
+      "source": "accessibility/tables/Overview.mdx",
       "slug": "tables"
     },
     {
@@ -62,7 +62,7 @@
       "slug": "windows-high-contrast"
     },
     {
-      "source": "accessibility/TestingTableWithFormFields.mdx",
+      "source": "accessibility/tables/WithFormFields.mdx",
       "slug": "forms"
     },
     {

@@ -55,7 +55,7 @@ export function getServer() {
         'Guidance for landmarks, headings, navigation, and logical focus order in Canvas Kit applications.',
       slug: 'page-structure',
     },
-    'accessibility/TablesAdvanced.mdx': {
+    'accessibility/tables/Overview.mdx': {
       title: 'Canvas Kit Table Accessibility',
       description:
         'Guidance for semantic data tables, interactive tables, sorting, filtering, row selection, and table focus behavior.',
@@ -91,7 +91,7 @@ export function getServer() {
         'Guidance for forced colors and Windows High Contrast themes, including focus, state, border, and icon visibility.',
       slug: 'windows-high-contrast',
     },
-    'accessibility/TestingTableWithFormFields.mdx': {
+    'accessibility/tables/WithFormFields.mdx': {
       title: 'Canvas Kit Form Accessibility',
       description:
         'Guidance from existing Canvas Kit accessibility documentation for form fields in table contexts.',

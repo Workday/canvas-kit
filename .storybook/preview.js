@@ -68,6 +68,8 @@ export const parameters = {
         prefix('default', 'ab'),
         prefix('testing', 'zzzzz'),
         prefix('examples', 'zzzz'),
+        // Guides > Accessibility > Table Patterns sits after Examples and before Testing
+        prefix('table-patterns', 'zzzzy'),
         // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
         value => value.replace(/v([1-9]\-0)/, '0$1'),
         // Make sure docs stories goes first
