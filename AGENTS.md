@@ -182,8 +182,7 @@ When implementing or changing a component:
   },
   ```
 - **Popups, portals, and live regions** have their own established patterns — check
-  [Popups.mdx](modules/docs/mdx/accessibility/Popups.mdx),
-  [InlinePortals.mdx](modules/docs/mdx/accessibility/InlinePortals.mdx), and
+  [Popups.mdx](modules/docs/mdx/accessibility/Popups.mdx) and
   [AriaLiveRegions.mdx](modules/docs/mdx/accessibility/AriaLiveRegions.mdx) before building your
   own dismissal/announcement logic.
 - **When in doubt, say so and ask** rather than guessing at an ARIA attribute or pattern — bad
