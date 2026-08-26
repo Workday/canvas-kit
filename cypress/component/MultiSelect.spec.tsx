@@ -11,6 +11,7 @@ describe('MultiSelect', () => {
         cy.findByRole('combobox', {name: 'Fruits'}).focus().realPress('Enter');
         cy.findByRole('combobox', {name: 'Fruits'}).should('have.attr', 'aria-expanded', 'false');
         cy.findByRole('listbox').should('not.exist');
+        cy.checkA11y({include: ['[role="combobox"]']});
       });
     });
 
