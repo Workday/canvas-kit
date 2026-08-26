@@ -2,6 +2,7 @@ import React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Menu} from '@workday/canvas-kit-react/menu';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
@@ -22,13 +23,20 @@ export const SimplifiedSetup = () => {
           <Popup.Card>
             <Popup.Body>
               <Menu initialSelectedIds={['selected']}>
-                <Menu.Option data-id="selected">Option 1</Menu.Option>
-                <Menu.Item>Option 2</Menu.Item>
-                <Menu.Item>Option 3</Menu.Item>
+                <Menu.List role="listbox">
+                  <Menu.Option data-id="selected">Option 1</Menu.Option>
+                  <Menu.Option>Option 2</Menu.Option>
+                  <Menu.Option>Option 3</Menu.Option>
+                </Menu.List>
               </Menu>
               <PrimaryButton>Hello World</PrimaryButton>
             </Popup.Body>
-            <TextInput />
+            <FormField>
+              <FormField.Label>Example text input</FormField.Label>
+              <FormField.Field>
+                <FormField.Input as={TextInput} />
+              </FormField.Field>
+            </FormField>
           </Popup.Card>
         </Popup.Popper>
       </Popup>

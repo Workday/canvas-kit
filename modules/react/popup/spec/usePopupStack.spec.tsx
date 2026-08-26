@@ -110,6 +110,31 @@ describe('usePopupStack', () => {
       });
     });
 
+    it('should remove data-theme from the popup container when the provider value is cleared', async () => {
+      let dataTheme: string | undefined = 'sana-canvas';
+      const wrapper = ({children}: {children: React.ReactNode}) => (
+        <CanvasProvider
+          theme={sanaCanvasProviderTheme}
+          {...(dataTheme ? {'data-theme': dataTheme} : {})}
+        >
+          {children}
+        </CanvasProvider>
+      );
+
+      const {result, rerender} = renderHook(() => usePopupStack(), {wrapper});
+
+      await waitFor(() => {
+        expect(result.current.current?.getAttribute('data-theme')).toBe('sana-canvas');
+      });
+
+      dataTheme = undefined;
+      rerender();
+
+      await waitFor(() => {
+        expect(result.current.current?.hasAttribute('data-theme')).toBe(false);
+      });
+    });
+
     it('should inherit data-theme from an outer provider through nested providers', async () => {
       const wrapper = ({children}: {children: React.ReactNode}) => (
         <CanvasProvider data-theme="sana-canvas">

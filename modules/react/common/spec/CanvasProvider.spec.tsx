@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import * as React from 'react';
 
 import {CanvasProvider} from '../lib/CanvasProvider';
@@ -6,13 +6,16 @@ import {sanaCanvasProviderTheme} from '../lib/theming/sanaTheme';
 
 describe('CanvasProvider', () => {
   it('forwards data-theme onto the wrapper div', () => {
-    const {container} = render(
+    render(
       <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
         <div>Test</div>
       </CanvasProvider>
     );
 
-    expect(container.firstElementChild?.getAttribute('data-theme')).toBe('sana-canvas');
+    expect(screen.getByText('Test').closest('[data-theme]')).toHaveAttribute(
+      'data-theme',
+      'sana-canvas'
+    );
   });
 
   describe('console warnings', () => {

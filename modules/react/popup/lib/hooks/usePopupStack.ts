@@ -104,11 +104,15 @@ export const usePopupStack = <E extends HTMLElement>(
   // to avoid a theme flash.
   React.useLayoutEffect(() => {
     const element = localRef.current;
-    if (!element || !themeAttribute) {
+    if (!element) {
       return undefined;
     }
-    element.setAttribute('data-theme', themeAttribute);
-    // No cleanup: leave theme on container so reopening doesn't flash
+    if (themeAttribute) {
+      element.setAttribute('data-theme', themeAttribute);
+    } else {
+      element.removeAttribute('data-theme');
+    }
+    // No unmount cleanup: leave theme on container so reopening doesn't flash
     return undefined;
   }, [localRef, themeAttribute]);
 
