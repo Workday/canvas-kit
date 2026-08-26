@@ -7,23 +7,24 @@ import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 type MyTabItem = {
-  id: string;
+  contextId: string;
   text: React.ReactNode;
   contents: string;
 };
 
 export const OverflowTabs = () => {
   const [items] = React.useState<MyTabItem[]>([
-    {id: 'first', text: 'First Tab', contents: 'Contents of First Tab'},
-    {id: 'second', text: 'Second Tab', contents: 'Contents of Second Tab'},
-    {id: 'third', text: 'Third Tab', contents: 'Contents of Third Tab'},
-    {id: 'fourth', text: 'Fourth Tab', contents: 'Contents of Fourth Tab'},
-    {id: 'fifth', text: 'Fifth Tab', contents: 'Contents of Fifth Tab'},
-    {id: 'sixth', text: 'Sixth Tab', contents: 'Contents of Sixth Tab'},
-    {id: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
+    {contextId: 'first', text: 'First Tab', contents: 'Contents of First Tab'},
+    {contextId: 'second', text: 'Second Tab', contents: 'Contents of Second Tab'},
+    {contextId: 'third', text: 'Third Tab', contents: 'Contents of Third Tab'},
+    {contextId: 'fourth', text: 'Fourth Tab', contents: 'Contents of Fourth Tab'},
+    {contextId: 'fifth', text: 'Fifth Tab', contents: 'Contents of Fifth Tab'},
+    {contextId: 'sixth', text: 'Sixth Tab', contents: 'Contents of Sixth Tab'},
+    {contextId: 'seventh', text: 'Seventh Tab', contents: 'Contents of Seventh Tab'},
   ]);
   const model = useTabsModel({
     items,
+    getId: (item: MyTabItem) => item.contextId,
   });
   const [containerWidth, setContainerWidth] = React.useState('100%');
   return (

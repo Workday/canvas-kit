@@ -5,6 +5,7 @@ import {InformationHighlight} from '@workday/canvas-kit-react/information-highli
 import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
 
 import TooltipStoriesMeta from './Tooltip.stories';
+import {AIDisclosure} from './examples/AIDisclosure';
 import {CustomContent} from './examples/CustomContent';
 import {Default} from './examples/Default';
 import {DelayedTooltip} from './examples/DelayedTooltip';
@@ -145,6 +146,15 @@ content or a focusable element is needed by your UI, a tooltip is not a good cho
 a dialog instead.
 
 <ExampleCodeBlock code={CustomContent} />
+
+### AI Disclosure
+
+Use a tooltip to disclose when content or functionality is powered by AI. Pair an icon button with a
+tooltip near the content it describes so users understand how it was produced before they act on it.
+The tooltip labels the button, making the disclosure available to both sighted and screen reader
+users.
+
+<ExampleCodeBlock code={AIDisclosure} />
 
 ### Delayed Tooltip
 
