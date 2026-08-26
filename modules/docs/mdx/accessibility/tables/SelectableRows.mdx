@@ -1,4 +1,5 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
 import {SelectableRows} from '../examples/Table/WithSelectableRows';
@@ -17,12 +18,13 @@ header each time users are reading any of the Check boxes in the first column. F
 - Our research found that VoiceOver (MacOS v12.7, Safari v17.1) persistently announce "Select All"
   despite using the `<td>` element because of the optional `<thead>` element in the table. We
   omitted the optional `<thead>` and `<tbody>` elements from this example for that reason.
-- We used Canvas' accessible `Tooltip` component to assign names to each Checkbox based on the most
-  useful value in the row, the topping name. This allows everyone to view the name of the checkboxes
-  by hovering the mouse or focusing with the keyboard.
+- We used Canvas Kit's `Tooltip` component to assign concise names to each Checkbox, describing
+  their purpose of selecting rows. This allows everyone to view the name of the checkboxes by
+  hovering the mouse or focusing with the keyboard.
+- Since each checkbox is not uniquely labeled, we added `aria-describedby` to the checkbox,
+  referencing the unique `id` of the row header cell. This practice gives screen readers more
+  context about which value each checkbox is refering to.
 - We rendered the cells in column 2 as the row headers for the table, enabling screen readers to
-  automatically announce the topping name even while reading down the Amounts in column 3. When we
-  rendered column 1 as row headers, then reading down column 2 (Topping Name) sounded redundant
-  because the `Checkbox` names in column 1 are identical to the Topping Name in column 2.
+  automatically announce the topping name even while reading down the Amounts in column 3.
 
 <ExampleCodeBlock code={SelectableRows} />
