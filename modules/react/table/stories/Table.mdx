@@ -1,11 +1,13 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import TableStoriesMeta from './Table.stories';
+import {BaseHtmlTable} from './examples/BaseHtmlTable';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
 import {FixedColumn} from './examples/FixedColumn';
 import {RightToLeft} from './examples/RightToLeft';
-import {BaseHtmlTable} from './examples/BaseHtmlTable';
-import TableStoriesMeta from './Table.stories';
 
 <Meta of={TableStoriesMeta} />
 
@@ -97,6 +99,192 @@ section.
 Table and its subcomponents support custom styling via the `cs` prop. For more information, check
 our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+`Table` is a styled compound wrapper around native HTML table elements (`<table>`, `<caption>`,
+`<thead>`, `<tbody>`, `<tfoot>`, `<tr>`, `<th>`, `<td>`). Assistive technology can announce column
+and row headers as users move through cells **only when** the markup is a real data table with
+correct headers and an accessible name. `Table` does **not** include a model, roving tabindex, or
+built-in sort, filter, selection, or expand behavior.
+
+Use `Table` for tabular data with a relationship between rows and columns—not for page layout.
+Prefer **`Table`** (CSS Grid) unless the design needs a standard HTML table layout without Grid;
+then use **`BaseTable`**. The same accessibility requirements apply to both. For interactive table
+patterns, follow
+[Guides > Accessibility > Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs)
+instead of inventing ARIA. See also
+[Table Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/table/).
+
+### Minimum accessible structure
+
+The following matches the [Example with Caption](#example-with-caption) (`Basic` story): native
+table markup with **`Table.Caption`** as the accessible name and **`scope="col"`** on column
+headers. The [Basic Example](#basic-example) uses a visible **`Heading`** and **`aria-labelledby`**
+instead of a caption; that is an equally valid naming pattern (see **Accessibility Requirements**).
+
+```tsx
+import {Table} from '@workday/canvas-kit-react/table';
+
+<Table>
+  <Table.Caption>Coffee Drinks and Sizes</Table.Caption>
+  <Table.Head>
+    <Table.Row>
+      <Table.Header scope="col">Drink</Table.Header>
+      <Table.Header scope="col">Size</Table.Header>
+    </Table.Row>
+  </Table.Head>
+  <Table.Body>
+    <Table.Row>
+      <Table.Cell>Espresso</Table.Cell>
+      <Table.Cell>1 oz</Table.Cell>
+    </Table.Row>
+    <Table.Row>
+      <Table.Cell>Macchiato</Table.Cell>
+      <Table.Cell>2 oz Espresso</Table.Cell>
+    </Table.Row>
+  </Table.Body>
+</Table>;
+```
+
+Put **`Table.Caption`** first when you use it (HTML requires `<caption>` as the first child of
+`<table>`). Pair every column header with **`scope="col"`**. Do not render empty **`Table.Row`**
+elements.
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically when you compose `Table` (or `BaseTable`) with its
+subcomponents. **Do not duplicate them** in consuming code.
+
+**Native table semantics** (_applied by `createComponent` element mapping_):
+
+- `Table`: `<table>`
+- `Table.Caption`: `<caption>`
+- `Table.Head`: `<thead>`
+- `Table.Body`: `<tbody>`
+- `Table.Footer`: `<tfoot>`
+- `Table.Row`: `<tr>` (`Table.Row` also sets CSS Grid column tracks from the count of valid child
+  cells; this is layout only)
+- `Table.Header`: `<th>`
+- `Table.Cell`: `<td>`
+
+**Keyboard** (_standard `Table` behavior_):
+
+`Table` uses native `<table>` keyboard behavior. Do not add custom key handlers or grid-widget keys
+on a data table.
+
+When **`Table`** overflows (the root stencil uses `overflow: auto`), add **`tabIndex={0}`** so
+keyboard users can focus and scroll it, as in the [Fixed Column](#fixed-column) example. Omit
+**`tabIndex`** when the table does not scroll.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- The table is announced as a table, with its accessible name from **`Table.Caption`** or
+  **`aria-labelledby`** / **`aria-label`** on **`Table`**
+- Moving across a row announces the **column** header (`scope="col"`)
+- Moving down a column announces the **row** header when body cells use **`Table.Header`** with
+  **`scope="row"`**
+- Interactive controls inside cells are announced with their own name and role when focused
+
+### Accessibility Requirements
+
+Required in application code for an accessible `Table`. There is **no** `useTableModel`. Canvas Kit
+does **not** set `scope`, an accessible name, `tabIndex`, or `id` / `headers` cell associations —
+supply those in application code when the table below requires them. Rows marked _(conditional)_
+apply only when the situation matches—otherwise omit.
+
+**If no design spec is provided:** generate a simple data table with **`Table.Caption`**,
+**`Table.Head`** / **`Table.Body`**, **`scope="col"`** on column headers, and **`Table.Cell`** for
+body data. Omit **`Table.Footer`**, row headers, **`tabIndex`**, `id` / `headers` associations,
+**`aria-sort`**, **`aria-expanded`**, **`aria-level`**, selection checkboxes, and filter/sort popups
+unless the spec calls for those patterns.
+
+**Heading instead of caption** _(conditional)_:
+
+When the design uses a visible heading (or other text) instead of **`Table.Caption`**, give that
+heading a unique `id` and set **`aria-labelledby`** on **`Table`**. Do not also render
+**`Table.Caption`** unless the design needs both a caption and extra labelling. See
+[Basic Example](#basic-example).
+
+```tsx
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Table} from '@workday/canvas-kit-react/table';
+import {Heading} from '@workday/canvas-kit-react/text';
+
+const headingId = useUniqueId();
+
+<>
+  <Heading as="h3" id={headingId} size="small">
+    Pizza Toppings
+  </Heading>
+  <Table aria-labelledby={headingId}>
+    <Table.Head>
+      <Table.Row>
+        <Table.Header scope="col">Toppings</Table.Header>
+        <Table.Header scope="col">Amount</Table.Header>
+      </Table.Row>
+    </Table.Head>
+    <Table.Body>{/* rows */}</Table.Body>
+  </Table>
+</>;
+```
+
+**Interactive and advanced patterns** _(conditional)_:
+
+Do not invent table ARIA. Copy the matching Canvas Kit guide when the spec includes that behavior:
+
+- [Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
+- [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
+- [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- [Filterable Column Headers](?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
+- [Sortable Column Headers](?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
+- [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
+
+| Requirement                                           | How to satisfy                                                                                                                                                                                                                                                             |
+| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Data table, not layout                                | Compose **`Table`** (or **`BaseTable`**) with **`Head`**, **`Body`**, **`Row`**, **`Header`**, and **`Cell`**. Do not use a table to position non-tabular UI.                                                                                                              |
+| Accessible name                                       | **`Table.Caption`** with a descriptive title, **or** **`aria-labelledby`** on **`Table`** pointing at a visible heading `id` (see **Heading instead of caption**). Canvas Kit does not set **`aria-labelledby`**.                                                          |
+| Column headers                                        | Set **`scope="col"`** on every **`Table.Header`** in **`Table.Head`**. **`Table.Header`** renders `<th>` but does not set `scope`. Do not use **`Table.Cell`** (`<td>`) for column headers.                                                                                |
+| Row headers _(conditional)_                           | When the first (or identifying) column names each row, set **`scope="row"`** on **`Table.Header`** in the body, as in [Fixed Column](#fixed-column). Do not rely on `<th>` alone.                                                                                          |
+| Keyboard access to overflow _(conditional)_           | If the table scrolls, set **`tabIndex={0}`** on **`Table`**. Omit it when content does not overflow.                                                                                                                                                                       |
+| Footer _(conditional)_                                | **`Table.Footer`** only when the design includes summary or footer rows.                                                                                                                                                                                                   |
+| Form controls in cells _(conditional)_                | Label every control (prefer **`FormField`**). See [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs) and [Form Field](?path=/docs/components-inputs-form-field--docs).                                                             |
+| Sort, filter, select, expand, or nest _(conditional)_ | Follow the matching [Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs) guide. **Ask the developer** which pattern the spec requires before generating `aria-sort`, `aria-expanded`, `aria-level`, `aria-owns`, live regions, or selection checkboxes. |
+
+**Summary for code generation:**
+
+- **REQUIRED:** semantic `Table` composition, accessible name (caption or `aria-labelledby`),
+  `scope="col"` on column headers
+- **CONDITIONAL:** heading + `aria-labelledby`, `scope="row"`, `tabIndex={0}` for overflow,
+  `Table.Footer`, form-field labelling in cells, advanced table patterns from the guides
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Manually set `role="table"`, `role="row"`, `role="columnheader"`, `role="rowheader"`, or
+  `role="cell"` on **`Table`** subcomponents — they already render native table elements
+- Omit **`scope`** on **`Table.Header`**, or use **`Table.Cell`** for column or row headers
+- Generate `id` / `headers` associations on cells for a simple data table — use **`scope`** instead
+  (see **Accessibility Requirements**)
+- Leave the table unnamed (no **`Table.Caption`**, **`aria-labelledby`**, or **`aria-label`**), or
+  set **`aria-labelledby`** when **`Table.Caption`** already names the table
+- Use a table for page layout
+- Add **`tabIndex={0}`** on a table that does not scroll, or omit it on a horizontally/vertically
+  scrollable table
+- Set **`aria-sort`**, **`aria-expanded`**, **`aria-level`**, **`aria-owns`**, or selection
+  checkboxes by default — those belong to specific
+  [Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs) and need a matching design
+  spec
+- Nest a `<table>` inside a cell to fake hierarchy, or add extra **`Table.Body`** elements to fake a
+  tree — see [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
+- Put a "Select All" checkbox in a column header **`Table.Header`** without following
+  [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- Place unlabeled inputs in cells, or rely on the column header alone without checking
+  [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
+- Generate **`role="grid"`** / grid-widget keyboard behavior on **`Table`** — CSS Grid on
+  **`Table.Row`** is visual layout, not an ARIA grid
 
 ## Component API
 
