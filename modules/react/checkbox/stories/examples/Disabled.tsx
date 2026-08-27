@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 
 export const Disabled = () => {
   const [checked, setChecked] = React.useState(false);
@@ -11,17 +11,17 @@ export const Disabled = () => {
   };
 
   return (
-    <FormField>
-      <FormField.Label>Confirm</FormField.Label>
-      <FormField.Field>
-        <FormField.Input
+    <FormFieldGroup>
+      <FormFieldGroup.Label>Confirm</FormFieldGroup.Label>
+      <FormFieldGroup.Field>
+        <FormFieldGroup.Input
           as={Checkbox}
           checked={checked}
           disabled={true}
           label="I agree to the terms"
           onChange={handleChange}
         />
-      </FormField.Field>
-    </FormField>
+      </FormFieldGroup.Field>
+    </FormFieldGroup>
   );
 };

@@ -75,27 +75,27 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 
 ### Label Position Horizontal
 
-Set the `orientation` prop of the Form Field to designate the position of the label relative to the
-input component. By default, the orientation will be set to `vertical`.
+Set the `orientation` prop of the wrapping FormFieldGroup to designate the position of the group
+label relative to the checkboxes. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 
 ### Required
 
-Set the `required` prop of a wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `isRequired` prop of a wrapping FormFieldGroup to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Checkbox to
-the Alert or Error state, respectively. You will also need to set the `hintId` and `hintText` props
-on the Form Field to meet accessibility standards. You may wish to omit the `label` prop on the Form
-Field given that Checkbox already includes a label.
+Set the `error` prop of the wrapping FormFieldGroup to `"caution"` or `"error"` to set the Checkbox
+to the Alert or Error state, respectively. Render `FormFieldGroup.Hint` with the message text so
+assistive technology can associate the hint with the group. Keep the Checkbox `label` so each
+control retains its own accessible name; `FormFieldGroup.Label` only provides the group name.
 
 The `error` prop may be applied directly to the Checkbox with a value of `"caution"` or `"error"` if
-Form Field is not being used.
+FormFieldGroup is not being used.
 
 #### Caution
 
