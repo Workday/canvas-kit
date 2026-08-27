@@ -42,11 +42,48 @@ export interface ProjectContext {
 }
 
 interface CacheEntry {
-  mtimeMs: number;
+  fingerprint: string;
   context: ProjectContext;
 }
 
 const contextCache = new Map<string, CacheEntry>();
+
+function getProjectCacheFingerprint(projectRoot: string): string | null {
+  const packageJsonPath = path.join(projectRoot, 'package.json');
+  if (!fs.existsSync(packageJsonPath)) {
+    return null;
+  }
+
+  const parts: string[] = [];
+
+  try {
+    parts.push(`root:${fs.statSync(packageJsonPath).mtimeMs}`);
+  } catch {
+    return null;
+  }
+
+  for (const packageName of TRACKED_CANVAS_PACKAGES) {
+    const installedPackageJson = path.join(
+      projectRoot,
+      'node_modules',
+      packageName,
+      'package.json'
+    );
+
+    if (!fs.existsSync(installedPackageJson)) {
+      parts.push(`${packageName}:absent`);
+      continue;
+    }
+
+    try {
+      parts.push(`${packageName}:${fs.statSync(installedPackageJson).mtimeMs}`);
+    } catch {
+      parts.push(`${packageName}:unreadable`);
+    }
+  }
+
+  return parts.join('|');
+}
 
 function parseSemver(version: string): [number, number, number] | null {
   const match = version.trim().match(/^(\d+)\.(\d+)\.(\d+)/);
@@ -228,35 +265,29 @@ export function buildProjectContext(
   };
 }
 
-function getCachedContext(cacheKey: string, packageJsonPath: string): ProjectContext | null {
+function getCachedContext(cacheKey: string, projectRoot: string): ProjectContext | null {
   const entry = contextCache.get(cacheKey);
-  if (!entry || !fs.existsSync(packageJsonPath)) {
+  const fingerprint = getProjectCacheFingerprint(projectRoot);
+
+  if (!entry || !fingerprint) {
     return null;
   }
 
-  try {
-    const mtimeMs = fs.statSync(packageJsonPath).mtimeMs;
-    if (entry.mtimeMs === mtimeMs) {
-      return entry.context;
-    }
-  } catch {
-    return null;
+  if (entry.fingerprint === fingerprint) {
+    return entry.context;
   }
 
+  contextCache.delete(cacheKey);
   return null;
 }
 
-function setCachedContext(
-  cacheKey: string,
-  packageJsonPath: string,
-  context: ProjectContext
-): void {
-  try {
-    const mtimeMs = fs.statSync(packageJsonPath).mtimeMs;
-    contextCache.set(cacheKey, {mtimeMs, context});
-  } catch {
-    // Skip caching if package.json is unreadable.
+function setCachedContext(cacheKey: string, projectRoot: string, context: ProjectContext): void {
+  const fingerprint = getProjectCacheFingerprint(projectRoot);
+  if (!fingerprint) {
+    return;
   }
+
+  contextCache.set(cacheKey, {fingerprint, context});
 }
 
 async function resolveRoots(server: McpServer): Promise<string[]> {
@@ -315,8 +346,7 @@ export async function resolveProjectContext(
     }
 
     const cacheKey = `${candidate.source}:${projectRoot}`;
-    const packageJsonPath = path.join(projectRoot, 'package.json');
-    const cached = getCachedContext(cacheKey, packageJsonPath);
+    const cached = getCachedContext(cacheKey, projectRoot);
 
     if (cached) {
       return {
@@ -333,7 +363,7 @@ export async function resolveProjectContext(
     }
 
     const context = buildProjectContext(projectRoot, candidate.source, options.indexVersion);
-    setCachedContext(cacheKey, packageJsonPath, context);
+    setCachedContext(cacheKey, projectRoot, context);
     return context;
   }
 

@@ -134,3 +134,26 @@ test('getRecommendedPackageVersion uses independent lines for tokens and icons',
     '5.0.3'
   );
 });
+
+test('resolveProjectContext invalidates cache when installed package versions change', async () => {
+  const tempDir = createTempCanvasProject({reactVersion: '16.0.2'});
+
+  const first = await resolveProjectContext({
+    projectPath: tempDir,
+    indexVersion: '16.0.8',
+  });
+  assert.equal(first.packages['@workday/canvas-kit-react'].installedVersion, '16.0.2');
+
+  fs.writeFileSync(
+    path.join(tempDir, 'node_modules/@workday/canvas-kit-react/package.json'),
+    JSON.stringify({name: '@workday/canvas-kit-react', version: '16.0.5'})
+  );
+
+  const second = await resolveProjectContext({
+    projectPath: tempDir,
+    indexVersion: '16.0.8',
+  });
+  assert.equal(second.packages['@workday/canvas-kit-react'].installedVersion, '16.0.5');
+
+  fs.rmSync(tempDir, {recursive: true, force: true});
+});
