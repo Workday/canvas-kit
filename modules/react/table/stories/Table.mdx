@@ -207,26 +207,10 @@ heading a unique `id` and set **`aria-labelledby`** on **`Table`**. Do not also 
 [Basic Example](#basic-example).
 
 ```tsx
-import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {Table} from '@workday/canvas-kit-react/table';
-import {Heading} from '@workday/canvas-kit-react/text';
-
-const headingId = useUniqueId();
-
-<>
-  <Heading as="h3" id={headingId} size="small">
-    Pizza Toppings
-  </Heading>
-  <Table aria-labelledby={headingId}>
-    <Table.Head>
-      <Table.Row>
-        <Table.Header scope="col">Toppings</Table.Header>
-        <Table.Header scope="col">Amount</Table.Header>
-      </Table.Row>
-    </Table.Head>
-    <Table.Body>{/* rows */}</Table.Body>
-  </Table>
-</>;
+<Heading as="h3" id={headingId}>
+  Pizza Toppings
+</Heading>
+<Table aria-labelledby={headingId}>{/* … */}</Table>
 ```
 
 **Interactive and advanced patterns** _(conditional)_:
