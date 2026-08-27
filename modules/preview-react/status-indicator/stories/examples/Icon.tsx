@@ -12,7 +12,7 @@ export const Icon = () => {
   return (
     <Flex cs={parentContainerStyles}>
       <StatusIndicator>
-        <StatusIndicator.Icon aria-label="unpublished" icon={cloudArrowUpIcon} />
+        <StatusIndicator.Icon icon={cloudArrowUpIcon} />
         <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
       </StatusIndicator>
       <StatusIndicator variant="positive">
