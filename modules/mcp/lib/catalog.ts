@@ -190,12 +190,13 @@ export function searchComponents(
   limit = 10
 ): ComponentSearchResult {
   const boundedLimit = Math.max(1, Math.min(limit, 25));
+  const results = rankComponents(query, catalog.components, boundedLimit);
 
   return {
     meta: catalog.meta,
     query,
-    count: rankComponents(query, catalog.components, boundedLimit).length,
-    results: rankComponents(query, catalog.components, boundedLimit),
+    count: results.length,
+    results,
   };
 }
 
@@ -268,11 +269,12 @@ export function validateTokens(
 
 export function searchIcons(catalog: IconCatalog, query: string, limit = 10): IconSearchResult {
   const boundedLimit = Math.max(1, Math.min(limit, 25));
+  const results = rankIcons(query, catalog.icons, boundedLimit);
 
   return {
     meta: catalog.meta,
     query,
-    count: rankIcons(query, catalog.icons, boundedLimit).length,
-    results: rankIcons(query, catalog.icons, boundedLimit),
+    count: results.length,
+    results,
   };
 }

@@ -3,7 +3,9 @@ import * as fs from 'node:fs';
 import * as path from 'node:path';
 
 interface RootsCapableServer {
-  listRoots?: () => Promise<{roots?: Array<{uri: string}>}>;
+  server?: {
+    listRoots?: () => Promise<{roots?: Array<{uri: string}>}>;
+  };
 }
 
 export const TRACKED_CANVAS_PACKAGES = [
@@ -260,11 +262,12 @@ function setCachedContext(
 async function resolveRoots(server: McpServer): Promise<string[]> {
   try {
     const rootsServer = server as McpServer & RootsCapableServer;
-    if (!rootsServer.listRoots) {
+    const listRoots = rootsServer.server?.listRoots;
+    if (!listRoots) {
       return [];
     }
 
-    const result = await rootsServer.listRoots();
+    const result = await listRoots.call(rootsServer.server);
     return (result.roots ?? [])
       .map((root: {uri: string}) => root.uri)
       .filter((uri: string) => uri.startsWith('file://'))
@@ -340,4 +343,34 @@ export async function resolveProjectContext(
 export function getInstallCommand(packageName: string, version?: string | null): string {
   const range = version ? `@^${version}` : '';
   return `npm install ${packageName}${range}`;
+}
+
+const CANVAS_KIT_PACKAGES = new Set<TrackedCanvasPackage>([
+  '@workday/canvas-kit-react',
+  '@workday/canvas-kit-preview-react',
+  '@workday/canvas-kit-labs-react',
+  '@workday/canvas-kit-styling',
+]);
+
+export function getRecommendedPackageVersion(
+  packageName: TrackedCanvasPackage,
+  indexVersion: string,
+  catalogVersions: {
+    tokens?: string;
+    icons?: string;
+  } = {}
+): string {
+  if (CANVAS_KIT_PACKAGES.has(packageName)) {
+    return indexVersion;
+  }
+
+  if (packageName === '@workday/canvas-tokens-web') {
+    return catalogVersions.tokens ?? indexVersion;
+  }
+
+  if (packageName === '@workday/canvas-system-icons-web') {
+    return catalogVersions.icons ?? indexVersion;
+  }
+
+  return indexVersion;
 }

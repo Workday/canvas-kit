@@ -72,8 +72,7 @@ const catalogSourceDir = path.resolve(__dirname, '../lib');
 catalogFiles.forEach(fileName => {
   const sourcePath = path.resolve(catalogSourceDir, fileName);
   if (!fs.existsSync(sourcePath)) {
-    console.warn(`Skipping missing catalog file: ${fileName}`);
-    return;
+    throw new Error(`Missing required catalog file: ${sourcePath}`);
   }
 
   const destPath = path.resolve(targetDir, fileName);

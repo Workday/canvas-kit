@@ -1,6 +1,6 @@
 import type {McpServer} from '@modelcontextprotocol/sdk/server/mcp.js';
 
-import {resolveProjectContext} from './project-context';
+import {type ProjectContext, resolveProjectContext} from './project-context';
 import {wrapStructuredOutput} from './version-context';
 
 type ToolContent = {
@@ -24,14 +24,17 @@ export async function finalizeToolResponse(
   indexVersion: string,
   output: Record<string, unknown>,
   extraContent: Array<ResourceLinkContent | ToolContent> = [],
-  projectPath?: string
+  projectPath?: string,
+  projectContext?: ProjectContext
 ) {
-  const projectContext = await resolveProjectContext({
-    server,
-    indexVersion,
-    projectPath,
-  });
-  const structuredContent = wrapStructuredOutput(output, projectContext);
+  const context =
+    projectContext ??
+    (await resolveProjectContext({
+      server,
+      indexVersion,
+      projectPath,
+    }));
+  const structuredContent = wrapStructuredOutput(output, context);
 
   return {
     content: [{type: 'text' as const, text: JSON.stringify(structuredContent)}, ...extraContent],

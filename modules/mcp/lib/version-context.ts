@@ -15,12 +15,17 @@ export interface VersionContextEnvelope {
 export function createVersionContextEnvelope(
   projectContext: ProjectContext
 ): VersionContextEnvelope {
-  const warning =
-    projectContext.drift.severity === 'major'
-      ? `MCP index is v${projectContext.drift.indexVersion} but the consumer project installs @workday/canvas-kit-react@${projectContext.drift.installedVersion ?? 'unknown'}. Treat catalog answers as unverified until confirmed against node_modules.`
-      : projectContext.source === 'none'
-        ? 'No Canvas consumer project was detected. Catalog answers reflect the MCP index only and are not verified against an installed project.'
-        : undefined;
+  const {severity, indexVersion, installedVersion} = projectContext.drift;
+  let warning: string | undefined;
+
+  if (severity === 'major') {
+    warning = `MCP index is v${indexVersion} but the consumer project installs @workday/canvas-kit-react@${installedVersion ?? 'unknown'}. Treat catalog answers as unverified until confirmed against node_modules.`;
+  } else if (severity === 'minor' || severity === 'patch') {
+    warning = `MCP index is v${indexVersion} while the consumer project installs @workday/canvas-kit-react@${installedVersion ?? 'unknown'} (${severity} drift). Verify availability against node_modules before recommending imports.`;
+  } else if (projectContext.source === 'none') {
+    warning =
+      'No Canvas consumer project was detected. Catalog answers reflect the MCP index only and are not verified against an installed project.';
+  }
 
   return {
     versionContext: {

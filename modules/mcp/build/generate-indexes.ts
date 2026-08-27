@@ -151,7 +151,10 @@ function parseNamedExports(filePath: string, visited = new Set<string>()): strin
       .map(part => part.trim())
       .filter(Boolean)
       .forEach(part => {
-        const exportName = part.split(/\s+as\s+/)[0].trim();
+        const exportName = part
+          .replace(/^type\s+/, '')
+          .split(/\s+as\s+/)[0]
+          .trim();
         if (exportName && exportName !== 'type') {
           exports.add(exportName);
         }
@@ -489,7 +492,7 @@ function generateComponentCatalog(canvasKitVersion: string): ComponentCatalog {
       {
         package: '@workday/canvas-kit-labs-react',
         version: canvasKitVersion,
-        channel: 'vision',
+        channel: 'production',
         path: 'modules/labs-react',
       },
     ]),

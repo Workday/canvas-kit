@@ -4,7 +4,12 @@ import {z} from 'zod';
 import {getComponent, searchComponents, searchIcons, validateTokens} from './catalog';
 import type {ComponentCatalog, IconCatalog, TokenCatalog} from './catalog-types';
 import {enrichComponentEntry, enrichIconEntry, enrichTokenValidation} from './catalog-verify';
-import {TRACKED_CANVAS_PACKAGES, resolveProjectContext} from './project-context';
+import {
+  TRACKED_CANVAS_PACKAGES,
+  getInstallCommand,
+  getRecommendedPackageVersion,
+  resolveProjectContext,
+} from './project-context';
 import {finalizeToolResponse} from './tool-response';
 import {getCanvasUpgradePath} from './upgrade-path';
 import {validateCanvasCode} from './validate-code';
@@ -15,12 +20,26 @@ export interface CatalogBundle {
   iconCatalog: IconCatalog;
 }
 
+function getCatalogPackageVersions(catalogs: CatalogBundle) {
+  return {
+    tokens:
+      catalogs.tokenCatalog.meta.sources.find(source => source.channel === 'production')?.version ??
+      undefined,
+    icons:
+      catalogs.iconCatalog.meta.sources.find(
+        source =>
+          source.package === '@workday/canvas-system-icons-web' && source.channel === 'vision'
+      )?.version ?? undefined,
+  };
+}
+
 export function registerCatalogTools(
   server: McpServer,
   indexVersion: string,
   catalogs: CatalogBundle
 ): void {
   const {componentCatalog, tokenCatalog, iconCatalog} = catalogs;
+  const catalogPackageVersions = getCatalogPackageVersions(catalogs);
 
   server.registerTool(
     'search-canvas-components',
@@ -50,7 +69,7 @@ export function registerCatalogTools(
         results: result.results.map(entry => enrichComponentEntry(entry, projectContext)),
       };
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -79,7 +98,7 @@ export function registerCatalogTools(
         suggestions: result.suggestions.map(entry => enrichComponentEntry(entry, projectContext)),
       };
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -115,7 +134,7 @@ export function registerCatalogTools(
         invalid: result.invalid,
       };
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -144,7 +163,7 @@ export function registerCatalogTools(
         results: result.results.map(entry => enrichIconEntry(entry, projectContext)),
       };
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -169,17 +188,24 @@ export function registerCatalogTools(
       const missingRecommended = TRACKED_CANVAS_PACKAGES.filter(packageName => {
         const info = projectContext.packages[packageName];
         return !info.installed && packageName !== '@workday/canvas-kit-styling';
-      }).map(packageName => ({
-        packageName,
-        installCommand: `npm install ${packageName}@^${indexVersion}`,
-      }));
+      }).map(packageName => {
+        const version = getRecommendedPackageVersion(
+          packageName,
+          indexVersion,
+          catalogPackageVersions
+        );
+        return {
+          packageName,
+          installCommand: getInstallCommand(packageName, version),
+        };
+      });
 
       const output = {
         projectContext,
         missingRecommended,
       };
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -215,7 +241,7 @@ export function registerCatalogTools(
       });
       const output = {validation};
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 
@@ -246,7 +272,7 @@ export function registerCatalogTools(
       });
       const output = {upgradePath};
 
-      return finalizeToolResponse(server, indexVersion, output, [], projectPath);
+      return finalizeToolResponse(server, indexVersion, output, [], projectPath, projectContext);
     }
   );
 }

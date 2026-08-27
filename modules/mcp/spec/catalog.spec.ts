@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import * as fs from 'node:fs';
+import * as os from 'node:os';
+import * as path from 'node:path';
 import test from 'node:test';
 
 import {getComponent, searchComponents, searchIcons, validateTokens} from '../lib/catalog';
@@ -212,19 +214,48 @@ test('enrichTokenValidation reports deprecated system.space.x4 with replacement'
 });
 
 test('verifyComponentAvailability flags missing preview package with fallback', () => {
-  const previewSwitch = componentCatalog.components.find(
-    component => component.subpath === 'switch'
+  const previewStatusIndicator = {
+    name: 'StatusIndicator',
+    slug: 'status-indicator',
+    packageName: '@workday/canvas-kit-preview-react',
+    subpath: 'status-indicator',
+    canonicalImport: '@workday/canvas-kit-preview-react/status-indicator',
+    status: 'preview' as const,
+    exports: ['StatusIndicator'],
+    deprecated: false,
+    recommended: true,
+    deprecatedExports: [],
+    deprecatedProps: [],
+    aliases: ['status-indicator'],
+  };
+
+  const tempDir = fs.mkdtempSync(path.join(os.tmpdir(), 'canvas-mcp-catalog-'));
+  const nodeModules = path.join(tempDir, 'node_modules', '@workday');
+  const mainStatusDir = path.join(nodeModules, 'canvas-kit-react', 'status-indicator');
+  fs.mkdirSync(mainStatusDir, {recursive: true});
+  fs.writeFileSync(
+    path.join(tempDir, 'package.json'),
+    JSON.stringify({
+      dependencies: {
+        '@workday/canvas-kit-react': '^16.0.2',
+      },
+    })
   );
-  assert.ok(previewSwitch);
+  fs.writeFileSync(
+    path.join(nodeModules, 'canvas-kit-react', 'package.json'),
+    JSON.stringify({name: '@workday/canvas-kit-react', version: '16.0.2'})
+  );
+  fs.writeFileSync(
+    path.join(mainStatusDir, 'index.ts'),
+    'export const StatusIndicator = () => null;'
+  );
 
-  const evalRoot = '/Users/michael.onikosi/Documents/development/canvas-mcp-evals/upgraded-mcp';
-  if (!fs.existsSync(evalRoot)) {
-    return;
-  }
-
-  const projectContext = buildProjectContext(evalRoot, 'parameter', '16.0.8');
-  const availability = verifyComponentAvailability(previewSwitch, projectContext);
+  const projectContext = buildProjectContext(tempDir, 'parameter', '16.0.8');
+  const availability = verifyComponentAvailability(previewStatusIndicator, projectContext);
 
   assert.equal(availability.installed, false);
   assert.ok(availability.installCommand?.includes('@workday/canvas-kit-preview-react'));
+  assert.equal(availability.fallback?.import, '@workday/canvas-kit-react/status-indicator');
+
+  fs.rmSync(tempDir, {recursive: true, force: true});
 });

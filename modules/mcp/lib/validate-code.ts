@@ -16,6 +16,7 @@ export interface CodeValidationIssue {
     | 'deprecated-export'
     | 'deprecated-prop'
     | 'deprecated-token'
+    | 'unverified-token'
     | 'raw-hex'
     | 'invented-identifier';
   message: string;
@@ -35,25 +36,24 @@ export interface CodeValidationResult {
 }
 
 function resolveImportTarget(projectRoot: string, importPath: string): boolean {
-  const [packageName, ...subpathParts] = importPath.split('/');
-  if (!packageName.startsWith('@workday/canvas-')) {
+  if (!importPath.startsWith('@workday/canvas-')) {
     return true;
   }
 
-  const packageOnly = importPath.startsWith('@workday/')
-    ? importPath.split('/').slice(0, 2).join('/')
-    : packageName;
+  const segments = importPath.split('/');
+  const packageOnly = segments.slice(0, 2).join('/');
+  const subpathParts = segments.slice(2);
 
   const base = path.join(projectRoot, 'node_modules', packageOnly);
   if (!fs.existsSync(base)) {
     return false;
   }
 
-  if (subpathParts.length <= 1) {
+  if (subpathParts.length === 0) {
     return true;
   }
 
-  const subpath = subpathParts.slice(1).join('/');
+  const subpath = subpathParts.join('/');
   const candidates = [
     path.join(base, subpath),
     `${path.join(base, subpath)}.js`,
@@ -186,7 +186,7 @@ export function validateCanvasCode(options: {
         });
       } else if (projectRoot && !verifyTokenInProject(entry, projectContext)) {
         issues.push({
-          type: 'deprecated-token',
+          type: 'unverified-token',
           message: `Token "${token}" is indexed but could not be verified in the installed @workday/canvas-tokens-web package.`,
           line: lineNumber,
           value: token,
