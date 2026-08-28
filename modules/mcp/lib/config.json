@@ -42,6 +42,26 @@
       "slug": "tables"
     },
     {
+      "source": "accessibility/tables/ExpandableRows.mdx",
+      "slug": "expandable-rows"
+    },
+    {
+      "source": "accessibility/tables/NestedRows.mdx",
+      "slug": "nested-rows"
+    },
+    {
+      "source": "accessibility/tables/SelectableRows.mdx",
+      "slug": "selectable-rows"
+    },
+    {
+      "source": "accessibility/tables/FilterableColumnHeaders.mdx",
+      "slug": "filterable-column-headers"
+    },
+    {
+      "source": "accessibility/tables/SortableColumnHeaders.mdx",
+      "slug": "sortable-column-headers"
+    },
+    {
       "source": "accessibility/Popups.mdx",
       "slug": "popups"
     },
