@@ -70,14 +70,16 @@ of `StatusIndicator` via [style props](/get-started/for-developers/documentation
 Set the `variant` prop of `StatusIndicator` to adjust its background color. `variant` accepts the
 following values:
 
-- `gray`
-- `orange`
-- `blue`
-- `green`
-- `red`
+- `neutral` (default; `gray` is a deprecated alias)
+- `caution` (`orange` is a deprecated alias)
+- `info` (`blue` is a deprecated alias)
+- `positive` (`green` is a deprecated alias)
+- `critical` (`red` is a deprecated alias)
 - `transparent`
 
 The background color dictated by the `variant` will be dark or light based on the `emphasis`.
+`variant` and `emphasis` change color only—they do not change the accessible name. Put the status
+meaning in **`StatusIndicator.Label`**.
 
 <ExampleCodeBlock code={Variants} />
 
@@ -92,6 +94,113 @@ You can customize both the icon and color of the `StatusIndicator` to create a c
 Status Indicator and its subcomponents support custom styling via the `cs` prop. For more
 information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+`StatusIndicator` is a compact, **non-interactive** status label. The accessibility goal is that
+assistive technology users get the same status meaning as sighted users from
+**`StatusIndicator.Label`** text—not from color, emphasis, or a decorative icon.
+
+### Minimum Accessible Structure
+
+The following matches the [Basic Example](#basic-example): a container and a visible label. Icon is
+optional.
+
+```tsx
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+
+<StatusIndicator>
+  <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
+</StatusIndicator>;
+```
+
+Always include **`StatusIndicator.Label`** with concise text that names the status. Do not rely on
+**`variant`**, **`emphasis`**, or **`StatusIndicator.Icon`** as the only indicator of meaning.
+
+### Built-in Behaviors
+
+Canvas Kit applies visual layout and color through `statusIndicatorStencil` when you compose
+**`StatusIndicator`**, **`StatusIndicator.Label`**, and optionally **`StatusIndicator.Icon`**. It
+does **not** apply `role="img"` or an accessible name on the icon. **Do not duplicate them** in
+consuming code. Only add icon ARIA when the informative-icon requirement below applies.
+
+**ARIA and DOM** (_applied by subcomponents_):
+
+- **`StatusIndicator`**: renders a `div` (override with `as` if needed). Default `maxWidth` is
+  `200px`. Default `variant` is `neutral`; default `emphasis` is `low`. No ARIA role is set.
+- **`StatusIndicator.Label`**: renders a `span` with bold subtext, `white-space: nowrap`,
+  `overflow: hidden`, and `text-overflow: ellipsis`. Truncation is visual; the full text remains in
+  the accessibility tree.
+- **`StatusIndicator.Icon`**: renders `SystemIcon` at size `20`. It does **not** set `role="img"` or
+  `aria-label`. If `icon.type` is missing, the icon renders nothing.
+
+**Keyboard** (_not a control by default_):
+
+- **`StatusIndicator`** is not in the tab order. There is no built-in keyboard behavior.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- Assistive technology should announce the **`StatusIndicator.Label`** text as the content of the
+  indicator
+- `variant` and `emphasis` are **not** announced
+- A decorative **`StatusIndicator.Icon`** (no `role="img"`) should not add a separate accessible
+  name
+- [**OverflowTooltip**](https://workday.github.io/canvas-kit/?path=/docs/components-popups-tooltip--docs#tooltips-on-overflowing-content)
+  uses `type="muted"` and does not set `aria-label` on the target—the accessible name stays the
+  element's text content
+
+### Accessibility Requirements
+
+Required in application code for an accessible Status Indicator. Rows marked _(conditional)_ apply
+only when the situation matches—otherwise omit.
+
+**If no design spec is provided:** include a visible **`StatusIndicator.Label`**; keep the icon
+decorative (omit `role="img"` and `aria-label`); omit `tabIndex` and **`OverflowTooltip`**. Prefer
+short label text so truncation is unnecessary.
+
+| Requirement                      | How to satisfy                                                                                                                                                                                                                                         |
+| -------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Visible status text              | **`StatusIndicator.Label`** with translated text that names the status (for example, "Unpublished", not color alone)                                                                                                                                   |
+| Color is not the only indicator  | Use **`variant`** / **`emphasis`** only as visual reinforcement of the label. See [Failure of Success Criterion 1.4.1 due to identifying required or error fields using color differences only](https://www.w3.org/WAI/WCAG22/Techniques/failures/F81) |
+| Decorative icon _(conditional)_  | **`StatusIndicator.Icon`** with `icon={...}` and **no** `role="img"` when the icon only supports the label visually                                                                                                                                    |
+| Informative icon _(conditional)_ | On **`StatusIndicator.Icon`**, set `role="img"` and a translated `aria-label` that adds meaning **beyond** the label text                                                                                                                              |
+| Overflowed label _(conditional)_ | Avoid exceeding the `200px` max width. If truncation cannot be avoided, wrap **`StatusIndicator`** in **`OverflowTooltip`** and set `tabIndex={0}` so keyboard and mouse users can reveal the full text. See the [Overflow example](#overflow)         |
+
+**Informative icon** _(conditional)_:
+
+```tsx
+import {StatusIndicator} from '@workday/canvas-kit-preview-react/status-indicator';
+import {cloudArrowUpIcon} from '@workday/canvas-system-icons-web';
+
+<StatusIndicator>
+  <StatusIndicator.Icon role="img" aria-label="Waiting to sync" icon={cloudArrowUpIcon} />
+  <StatusIndicator.Label>Unpublished</StatusIndicator.Label>
+</StatusIndicator>;
+```
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible **`StatusIndicator.Label`** whose text conveys the status
+- **CONDITIONAL:** `role="img"` + translated `aria-label` on **`StatusIndicator.Icon`**,
+  **`OverflowTooltip`** + `tabIndex={0}`
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Omit **`StatusIndicator.Label`** or use an empty label, relying on `variant`, `emphasis`, or an
+  icon for meaning
+- Set `role="img"` on a decorative **`StatusIndicator.Icon`**, or set `role="img"` without a
+  translated `aria-label`—that can expose an unnamed image to assistive technology. See **Decorative
+  icon** and **Informative icon** in **Accessibility Requirements**
+- Duplicate the label text as `aria-label` on the icon when the icon adds no extra meaning
+- Add `role="status"`, `aria-live`, or `aria-label` on **`StatusIndicator`** by default—Canvas Kit
+  does not wire these, and they change how assistive technology treats a static label. If a design
+  requires announcing asynchronous updates, see
+  [ARIA Live Regions](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-aria-live-regions--docs)
+- Truncate label text without **`OverflowTooltip`** and `tabIndex={0}` when keyboard users must read
+  the overflow
 
 ## Component API
 

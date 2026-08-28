@@ -17,7 +17,7 @@ export const Icon = () => {
       </StatusIndicator>
       <StatusIndicator variant="positive">
         <StatusIndicator.Label>published</StatusIndicator.Label>
-        <StatusIndicator.Icon aria-label="published" icon={cloudArrowUpIcon} />
+        <StatusIndicator.Icon icon={cloudArrowUpIcon} />
       </StatusIndicator>
     </Flex>
   );
