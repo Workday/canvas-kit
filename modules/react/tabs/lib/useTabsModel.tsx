@@ -110,21 +110,26 @@ export const useTabsModel = createModelHook({
     unregisterPanel: panels.events.unregisterItem,
   };
 
-  const menu = useMenuModel(
-    useMenuModel.mergeConfig(config.menuConfig, {
-      id: `menu-${model.state.id}`,
-      items: overflowItems,
-      nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
-      onSelect(data) {
-        menu.events.hide();
-        events.select(data);
-      },
-      onShow() {
-        // Always select the first item when the menu is opened
-        menu.events.goToFirst();
-      },
-    })
-  );
+  const mergedMenuConfig = useMenuModel.mergeConfig(config.menuConfig, {
+    id: `menu-${model.state.id}`,
+    items: overflowItems,
+    // `getId`/`getTextValue` aren't callbacks or guards, so `mergeConfig` would let these
+    // unconditionally clobber a `menuConfig.getId`/`getTextValue` override. Fall back to the
+    // top-level Tabs config only when the caller hasn't set one on `menuConfig` directly.
+    getId: config.menuConfig?.getId || getId,
+    getTextValue: config.menuConfig?.getTextValue || config.getTextValue,
+    nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
+    onSelect(data) {
+      menu.events.hide();
+      events.select(data);
+    },
+    onShow() {
+      // Always select the first item when the menu is opened
+      menu.events.goToFirst();
+    },
+  });
+
+  const menu = useMenuModel(mergedMenuConfig);
 
   return {
     ...model,

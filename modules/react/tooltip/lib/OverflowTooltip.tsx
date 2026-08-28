@@ -55,6 +55,11 @@ export const findEllipsisElement = (element: Element): Element | null => {
   }
 };
 
+const getInnerText = (element: Element): string => {
+  const ownerWindow = element.ownerDocument?.defaultView;
+  return ownerWindow && element instanceof ownerWindow.HTMLElement ? element.innerText : '';
+};
+
 const isOverflowed = (element: Element) => {
   const overflowElement = findEllipsisElement(element) || findOverflowElement(element);
 
@@ -89,6 +94,14 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
    * disable the fallback placements.
    */
   fallbackPlacements?: Placement[];
+  /**
+   * Amount of time (in ms) to delay before showing the Tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the Tooltip
+   */
+  hideDelay?: number;
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -113,21 +126,27 @@ export const OverflowTooltip = ({
   placement = 'top',
   fallbackPlacements = defaultFallbackPlacements,
   children,
+  showDelay,
+  hideDelay,
   ...elemProps
 }: OverflowTooltipProps) => {
   const [titleText, setTitleText] = React.useState('');
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'muted'});
+  const {targetProps, popperProps, tooltipProps} = useTooltip({
+    type: 'muted',
+    showDelay,
+    hideDelay,
+  });
 
   const onMouseEnter = (event: React.MouseEvent) => {
     const target = event.currentTarget;
-    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    setTitleText(getInnerText(target));
     if (isOverflowed(target)) {
       targetProps.onMouseEnter(event as React.MouseEvent);
     }
   };
   const onFocus = (event: React.FocusEvent) => {
     const target = event.currentTarget;
-    setTitleText(target instanceof HTMLElement ? target.innerText : '');
+    setTitleText(getInnerText(target));
     if (isOverflowed(target)) {
       targetProps.onFocus(event as React.FocusEvent);
     }
