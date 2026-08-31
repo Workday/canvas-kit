@@ -10,6 +10,6 @@ export const StatusIndicatorIcon = createComponent('span')({
       return null;
     }
 
-    return <SystemIcon as={Element} ref={ref} size="xs" role="img" {...elemProps} />;
+    return <SystemIcon as={Element} ref={ref} size="xs" {...elemProps} />;
   },
 });
