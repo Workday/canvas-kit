@@ -148,7 +148,8 @@ controls in the group.
 `FormFieldGroup` supports the same props of `FormField`:
 
 - `error`: `"caution" | "error"` Defines the error around the whole group of inputs.
-- `orientation`: `"horizontal" | "vertical"` Defines the group label placement.
+- `orientation`: `"vertical" | "horizontalStart" | "horizontalEnd"` Defines the group label
+  placement.
 - `isRequired`: `true` Defines if a group like RadioGroup is required.
 
 <ExampleCodeBlock code={GroupedInputs} />
@@ -303,7 +304,7 @@ the label for both is the "States you've lived in".
 </div>
 ```
 
-For field in an error state, the error text is referenced using `aria-describedby`. The rendered
+For a field in an error state, the error text is referenced using `aria-describedby`. The rendered
 markup looks like:
 
 ```html

@@ -210,19 +210,25 @@ call `focus()` unless the design or developer asks for it. See [Ref Forwarding](
 under Usage for a complete Storybook example.
 
 ```tsx
-const ref = React.useRef<HTMLInputElement>(null);
+const Example = () => {
+  const ref = React.useRef<HTMLInputElement>(null);
 
-const handleClick = () => {
-  ref.current?.focus();
+  const handleClick = () => {
+    ref.current?.focus();
+  };
+
+  return (
+    <>
+      <FormField>
+        <FormField.Label>Email</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextInput} ref={ref} />
+        </FormField.Field>
+      </FormField>
+      <PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>
+    </>
+  );
 };
-
-<FormField>
-  <FormField.Label>Email</FormField.Label>
-  <FormField.Field>
-    <FormField.Input as={TextInput} ref={ref} />
-  </FormField.Field>
-</FormField>
-<PrimaryButton onClick={handleClick}>Focus Text Input</PrimaryButton>;
 ```
 
 **`InputGroup` with icons** _(conditional)_:

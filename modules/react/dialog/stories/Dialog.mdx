@@ -30,9 +30,11 @@ The following example shows a typical Dialog with heading, close control, and fo
 
 ### Focus Redirect
 
-Dialog **does not** trap keyboard focus like the Modal component does. Instead, it allows focus to
-move freely in and out of the dialog, supporting more flexible navigation. The following example
-shows how Dialog manages focus in and out of the component.
+Dialog **does not** trap keyboard focus like the Modal component does. The default `useDialogModel`
+composes `useFocusRedirect`: <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> at the last or first
+focusable element inside the dialog closes it and moves focus to the next or previous focusable
+element on the page. Dialog is non-modal and is **not** a focus trap; it does **not** change screen
+reader reading order. The following example shows how Dialog manages focus at those edges.
 
 <ExampleCodeBlock code={Focus} />
 
@@ -182,7 +184,7 @@ programmatically before the user clicks the target).
 
 | Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                             |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Dialog.Card`** with a translated string (not both).                                                                                                                                                                          |
+| Accessible dialog name                                        | Use **`Dialog.Heading`** so `aria-labelledby` on `Dialog.Card` references a visible title. Do not omit the heading: **`Dialog.Card` always sets `aria-labelledby`**, and an `aria-label` fallback is unreliable when that ID does not exist.                                                                                                                                |
 | Dismiss control                                               | Provide a way to close the dialog: **`Dialog.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Dialog.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                             |
 | Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                                                                                              |
 | Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Dialog.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Dialog.Card`**. See **Open focus below the heading** below and [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus) (button-focus variant). |
@@ -203,27 +205,31 @@ import {Dialog, useDialogModel} from '@workday/canvas-kit-react/dialog';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-const descriptionId = useUniqueId();
-const inputRef = React.useRef<HTMLInputElement>(null);
-const model = useDialogModel({initialFocusRef: inputRef});
+const Example = () => {
+  const descriptionId = useUniqueId();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const model = useDialogModel({initialFocusRef: inputRef});
 
-<Dialog model={model}>
-  <Dialog.Target>Open</Dialog.Target>
-  <Dialog.Popper>
-    <Dialog.Card aria-describedby={descriptionId}>
-      <Dialog.CloseIcon aria-label="Close" />
-      <Dialog.Heading>Title</Dialog.Heading>
-      <Dialog.Body>
-        <p id={descriptionId}>Enter your email to continue.</p>
-        <FormField>
-          <FormField.Label>Email</FormField.Label>
-          <FormField.Input as={TextInput} ref={inputRef} />
-        </FormField>
-      </Dialog.Body>
-      <Dialog.CloseButton>Cancel</Dialog.CloseButton>
-    </Dialog.Card>
-  </Dialog.Popper>
-</Dialog>;
+  return (
+    <Dialog model={model}>
+      <Dialog.Target>Open</Dialog.Target>
+      <Dialog.Popper>
+        <Dialog.Card aria-describedby={descriptionId}>
+          <Dialog.CloseIcon aria-label="Close" />
+          <Dialog.Heading>Title</Dialog.Heading>
+          <Dialog.Body>
+            <p id={descriptionId}>Enter your email to continue.</p>
+            <FormField>
+              <FormField.Label>Email</FormField.Label>
+              <FormField.Input as={TextInput} ref={inputRef} />
+            </FormField>
+          </Dialog.Body>
+          <Dialog.CloseButton>Cancel</Dialog.CloseButton>
+        </Dialog.Card>
+      </Dialog.Popper>
+    </Dialog>
+  );
+};
 ```
 
 **Summary for code generation:**

@@ -267,7 +267,7 @@ programmatically before the user clicks the target).
 
 | Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                           |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible dialog name                                        | Use **`Modal.Heading`** so `aria-labelledby` on `Modal.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Modal.Card`** with a translated string (not both).                                                                                                                                                                                                           |
+| Accessible dialog name                                        | Use **`Modal.Heading`** so `aria-labelledby` on `Modal.Card` references a visible title. Do not omit the heading: **`Modal.Card` always sets `aria-labelledby`**, and an `aria-label` fallback is unreliable when that ID does not exist.                                                                                                                                     |
 | Dismiss control                                               | Provide a way to close the modal: **`Modal.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Modal.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                                                                                                                                              |
 | Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                                                                                                                                            |
 | Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Modal.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Modal.Card`**. See **Open focus below the heading** below, [Custom Focus](#custom-focus), and [Popup > Initial Focus](https://workday.github.io/canvas-kit/?path=/docs/components-popups-popup--docs#initial-focus) (button-focus variant). |
@@ -289,27 +289,31 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 
-const descriptionId = useUniqueId();
-const inputRef = React.useRef<HTMLInputElement>(null);
-const model = useModalModel({initialFocusRef: inputRef});
+const Example = () => {
+  const descriptionId = useUniqueId();
+  const inputRef = React.useRef<HTMLInputElement>(null);
+  const model = useModalModel({initialFocusRef: inputRef});
 
-<Modal model={model}>
-  <Modal.Target>Open</Modal.Target>
-  <Modal.Overlay>
-    <Modal.Card aria-describedby={descriptionId}>
-      <Modal.CloseIcon aria-label="Close" />
-      <Modal.Heading>Title</Modal.Heading>
-      <Modal.Body>
-        <p id={descriptionId}>Enter your email to continue.</p>
-        <FormField>
-          <FormField.Label>Email</FormField.Label>
-          <FormField.Input as={TextInput} ref={inputRef} />
-        </FormField>
-      </Modal.Body>
-      <Modal.CloseButton>Cancel</Modal.CloseButton>
-    </Modal.Card>
-  </Modal.Overlay>
-</Modal>;
+  return (
+    <Modal model={model}>
+      <Modal.Target>Open</Modal.Target>
+      <Modal.Overlay>
+        <Modal.Card aria-describedby={descriptionId}>
+          <Modal.CloseIcon aria-label="Close" />
+          <Modal.Heading>Title</Modal.Heading>
+          <Modal.Body>
+            <p id={descriptionId}>Enter your email to continue.</p>
+            <FormField>
+              <FormField.Label>Email</FormField.Label>
+              <FormField.Input as={TextInput} ref={inputRef} />
+            </FormField>
+          </Modal.Body>
+          <Modal.CloseButton>Cancel</Modal.CloseButton>
+        </Modal.Card>
+      </Modal.Overlay>
+    </Modal>
+  );
+};
 ```
 
 **Summary for code generation:**

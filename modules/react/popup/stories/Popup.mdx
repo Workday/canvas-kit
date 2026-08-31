@@ -232,30 +232,34 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 
-const model = usePopupModel();
+const Example = () => {
+  const model = usePopupModel();
 
-useCloseOnOutsideClick(model);
-useCloseOnEscape(model);
-useInitialFocus(model);
-useReturnFocus(model);
-useFocusRedirect(model);
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusRedirect(model);
 
-<Popup model={model}>
-  <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
-  <Popup.Popper>
-    <Popup.Card>
-      <Popup.CloseIcon aria-label="Close" />
-      <Popup.Heading>Delete Item</Popup.Heading>
-      <Popup.Body>
-        <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
-      </Popup.Body>
-      <Popup.ButtonGroup>
-        <Popup.CloseButton>Cancel</Popup.CloseButton>
-        <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
-      </Popup.ButtonGroup>
-    </Popup.Card>
-  </Popup.Popper>
-</Popup>;
+  return (
+    <Popup model={model}>
+      <Popup.Target as={DeleteButton}>Delete Item</Popup.Target>
+      <Popup.Popper>
+        <Popup.Card>
+          <Popup.CloseIcon aria-label="Close" />
+          <Popup.Heading>Delete Item</Popup.Heading>
+          <Popup.Body>
+            <p>Are you sure you'd like to delete the item titled 'My Item'?</p>
+          </Popup.Body>
+          <Popup.ButtonGroup>
+            <Popup.CloseButton>Cancel</Popup.CloseButton>
+            <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
+          </Popup.ButtonGroup>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
 ```
 
 Include a dismiss control: **`Popup.CloseButton`** with visible text (for example "Cancel" or
@@ -396,32 +400,36 @@ import {
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
 
-const messageId = useUniqueId();
-const initialFocusRef = React.useRef(null);
-const model = usePopupModel({initialFocusRef});
+const Example = () => {
+  const messageId = useUniqueId();
+  const initialFocusRef = React.useRef(null);
+  const model = usePopupModel({initialFocusRef});
 
-useCloseOnOutsideClick(model);
-useCloseOnEscape(model);
-useInitialFocus(model);
-useReturnFocus(model);
-useFocusRedirect(model);
+  useCloseOnOutsideClick(model);
+  useCloseOnEscape(model);
+  useInitialFocus(model);
+  useReturnFocus(model);
+  useFocusRedirect(model);
 
-<Popup model={model}>
-  <Popup.Target>Open</Popup.Target>
-  <Popup.Popper>
-    <Popup.Card aria-describedby={messageId}>
-      <Popup.Heading>Confirmation</Popup.Heading>
-      <Popup.Body>
-        <p id={messageId}>Your message has been sent!</p>
-      </Popup.Body>
-      <Popup.ButtonGroup>
-        <Popup.CloseButton as={PrimaryButton} ref={initialFocusRef}>
-          OK
-        </Popup.CloseButton>
-      </Popup.ButtonGroup>
-    </Popup.Card>
-  </Popup.Popper>
-</Popup>;
+  return (
+    <Popup model={model}>
+      <Popup.Target>Open</Popup.Target>
+      <Popup.Popper>
+        <Popup.Card aria-describedby={messageId}>
+          <Popup.Heading>Confirmation</Popup.Heading>
+          <Popup.Body>
+            <p id={messageId}>Your message has been sent!</p>
+          </Popup.Body>
+          <Popup.ButtonGroup>
+            <Popup.CloseButton as={PrimaryButton} ref={initialFocusRef}>
+              OK
+            </Popup.CloseButton>
+          </Popup.ButtonGroup>
+        </Popup.Card>
+      </Popup.Popper>
+    </Popup>
+  );
+};
 ```
 
 When open focus lands on **`Popup.Heading`** itself, add **`tabIndex={-1}`** so the heading can
@@ -430,7 +438,7 @@ receive programmatic focus.
 | Requirement                                                   | How to satisfy                                                                                                                                                                                                                                                                         |
 | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Shared model + behavior hooks                                 | Hoist **`usePopupModel`**, pass **`model={model}`** to **`Popup`**, and compose at least the Basic Example hooks for non-modal dialogs (`useCloseOnOutsideClick`, `useCloseOnEscape`, `useInitialFocus`, `useReturnFocus`, `useFocusRedirect`) unless a design deliberately omits one. |
-| Accessible popup name                                         | Use **`Popup.Heading`** so `aria-labelledby` on `Popup.Card` references a visible title. If there is no heading, set **`aria-label`** on **`Popup.Card`** with a translated string (not both).                                                                                         |
+| Accessible popup name                                         | Use **`Popup.Heading`** so `aria-labelledby` on `Popup.Card` references a visible title. Do not omit the heading: **`Popup.Card` always sets `aria-labelledby`**, and an `aria-label` fallback is unreliable when that ID does not exist.                                               |
 | Dismiss control                                               | Provide a way to close the popup: **`Popup.CloseButton`** with visible text (no extra **`aria-label`** needed), and/or **`Popup.CloseIcon`** for icon-only dismiss (requires **`Tooltip`** or translated **`aria-label`**).                                                            |
 | Keyboard-operable trigger                                     | See **Custom targets** above.                                                                                                                                                                                                                                                          |
 | Supplementary copy when overriding open focus _(conditional)_ | When **`initialFocusRef`** places open focus **below** **`Popup.Heading`**, assign a unique `id` to supplementary text and pass **`aria-describedby`** on **`Popup.Card`**. See **Open focus below the heading** above and [Initial Focus](#initial-focus).                          |

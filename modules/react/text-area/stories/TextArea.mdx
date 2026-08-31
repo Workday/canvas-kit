@@ -188,19 +188,25 @@ a `ref` or call `focus()` unless the design or developer asks for it. See
 [Ref Forwarding](#ref-forwarding) under Usage for a complete Storybook example.
 
 ```tsx
-const ref = React.useRef<HTMLTextAreaElement>(null);
+const Example = () => {
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
-const handleClick = () => {
-  ref.current?.focus();
+  const handleClick = () => {
+    ref.current?.focus();
+  };
+
+  return (
+    <>
+      <FormField>
+        <FormField.Label>Leave a Review</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextArea} ref={ref} />
+        </FormField.Field>
+      </FormField>
+      <PrimaryButton onClick={handleClick}>Focus Text Area</PrimaryButton>
+    </>
+  );
 };
-
-<FormField>
-  <FormField.Label>Leave a Review</FormField.Label>
-  <FormField.Field>
-    <FormField.Input as={TextArea} ref={ref} />
-  </FormField.Field>
-</FormField>
-<PrimaryButton onClick={handleClick}>Focus Text Area</PrimaryButton>;
 ```
 
 | Requirement                        | How to satisfy                                                                                                                                                                                                                                                      |
