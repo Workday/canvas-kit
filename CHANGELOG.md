@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.12](https://github.com/Workday/canvas-kit/releases/tag/v16.0.12) (2026-08-31)
+
+### Components, Documentation
+
+- fix(StatusIndicator): Stop forcing `role="img"` on StatusIndicator.Icon ([#4158](https://github.com/Workday/canvas-kit/pull/4158)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+  `StatusIndicator.Icon` no longer applies `role="img"` automatically. Decorative icons next to a label need no extra ARIA. If an icon conveys meaning beyond the label, set `role="img"` and a translated `aria-label` on `StatusIndicator.Icon`.
+
+
 ## [v16.0.11](https://github.com/Workday/canvas-kit/releases/tag/v16.0.11) (2026-08-31)
 
 ### Documentation
