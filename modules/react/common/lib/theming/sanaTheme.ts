@@ -29,7 +29,7 @@ import type {CanvasNumericalBrandTheme} from './types';
  * `brand.sana.neutral150` (itself `var(--cnvs-brand-neutral-150, ...)`) would point right back at
  * the variable being written.
  */
-const sanaBaseNeutral = base.sana;
+const sanaBasePalette = base.sana;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.
@@ -63,22 +63,22 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
   themeScope: 'brand',
   brand: {
     primary: {
-      A300: sanaBaseNeutral.blueA300,
+      A300: sanaBasePalette.blueA300,
     },
     critical: {
-      A300: sanaBaseNeutral.redA300,
+      A300: sanaBasePalette.redA300,
     },
     caution: {
-      A300: sanaBaseNeutral.amberA300,
+      A300: sanaBasePalette.amberA300,
     },
     positive: {
-      A300: sanaBaseNeutral.greenA300,
+      A300: sanaBasePalette.greenA300,
     },
     neutral: {
       '25': cssVar(base.neutral25),
       '50': cssVar(base.neutral50),
       '100': cssVar(base.neutral100),
-      '150': sanaBaseNeutral.neutral150,
+      '150': sanaBasePalette.neutral150,
       '200': cssVar(base.neutral200),
       '300': cssVar(base.neutral300),
       '400': cssVar(base.neutral400),
@@ -86,14 +86,14 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       '600': cssVar(base.neutral600),
       '700': cssVar(base.neutral700),
       '800': cssVar(base.neutral800),
-      '850': sanaBaseNeutral.neutral850,
+      '850': sanaBasePalette.neutral850,
       '900': cssVar(base.neutral900),
       '950': cssVar(base.neutral950),
       '975': cssVar(base.neutral975),
       A25: cssVar(base.neutralA25),
       A50: cssVar(base.neutralA50),
       A100: cssVar(base.neutralA100),
-      A150: sanaBaseNeutral.neutralA150,
+      A150: sanaBasePalette.neutralA150,
       A200: cssVar(base.neutralA200),
       A300: cssVar(base.neutralA300),
       A400: cssVar(base.neutralA400),
@@ -101,7 +101,7 @@ export const sanaCanvasNumericalTheme: CanvasNumericalBrandTheme = {
       A600: cssVar(base.neutralA600),
       A700: cssVar(base.neutralA700),
       A800: cssVar(base.neutralA800),
-      A850: sanaBaseNeutral.neutralA850,
+      A850: sanaBasePalette.neutralA850,
       A900: cssVar(base.neutralA900),
       A950: cssVar(base.neutralA950),
       A975: cssVar(base.neutralA975),
