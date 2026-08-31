@@ -1,21 +1,21 @@
 import React from 'react';
 
-import {
-  createElemPropsHook,
-  createSubcomponent,
-  composeHooks,
-} from '@workday/canvas-kit-react/common';
 import {LoadReturn} from '@workday/canvas-kit-react/collection';
 import {
   Combobox,
-  useComboboxModel,
-  useComboboxLoader,
   useComboboxInput,
   useComboboxInputArbitrary,
+  useComboboxLoader,
+  useComboboxModel,
 } from '@workday/canvas-kit-react/combobox';
+import {
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
+import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -27,6 +27,8 @@ const options = Array(1000)
   .map((_, index) => {
     return `${colors[index % colors.length]} ${fruits[index % fruits.length]} ${index + 1}`;
   });
+
+const simulatedDelay = (window as any).Cypress ? 5 : 300;
 
 const useAutocompleteInput = composeHooks(
   createElemPropsHook(useComboboxModel)(model => {
@@ -113,7 +115,7 @@ export const Autocomplete = () => {
               items,
               total,
             });
-          }, 300);
+          }, simulatedDelay);
         });
       },
       onShow() {
@@ -133,11 +135,10 @@ export const Autocomplete = () => {
           <FormField.Input as={AutoCompleteInput} isLoading={loader.isLoading} />
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
-              {model.state.items.length === 0 && (
+              {model.state.items.length < 1 ? (
                 <StyledMenuItem as="span">No Results Found</StyledMenuItem>
-              )}
-              {model.state.items.length > 0 && (
-                <Combobox.Menu.List maxHeight={px2rem(200)}>
+              ) : (
+                <Combobox.Menu.List cs={{maxHeight: px2rem(200)}}>
                   {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
                 </Combobox.Menu.List>
               )}

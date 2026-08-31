@@ -1,3 +1,5 @@
+// https://github.com/vitest-dev/vitest/issues/4043
+// @vitest-environment node
 import {focusRing} from '@workday/canvas-kit-react/common';
 import {
   createProgramFromSource,

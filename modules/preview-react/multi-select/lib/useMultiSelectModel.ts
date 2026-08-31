@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {createModelHook} from '@workday/canvas-kit-react/common';
+import {Item, useListModel} from '@workday/canvas-kit-react/collection';
 import {useComboboxModel} from '@workday/canvas-kit-react/combobox';
-import {useListModel, Item} from '@workday/canvas-kit-react/collection';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 
 /**
  * `MultiSelectModel` extends the {@link ComboboxModel}. Selecting items from

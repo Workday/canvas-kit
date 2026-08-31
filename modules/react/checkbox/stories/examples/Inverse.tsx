@@ -1,12 +1,13 @@
 import React from 'react';
+
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  padding: system.space.x4,
+  backgroundColor: system.color.surface.contrast.default,
+  padding: system.padding.md,
 });
 
 export const Inverse = () => {

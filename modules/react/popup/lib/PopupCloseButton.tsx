@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
 import {usePopupCloseButton, usePopupModel} from './hooks';
 

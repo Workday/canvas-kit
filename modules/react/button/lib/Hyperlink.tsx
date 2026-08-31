@@ -1,14 +1,17 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, CSProps, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface HyperlinkProps extends CSProps {
   /**
    * sets modifier styles for Hyperlink
-   * - `inverse`: sets the color to frenchVanilla100 and updates hover, focus, and active pseudo-classes
+   * - `inverse`: sets the color to white and updates hover, focus, and active pseudo-classes
+   * - `standalone`: removes the underline of the Hyperlink. This is useful when a hyperlink is used outside the context of a paragraph or body text.
+   * - `standaloneInverse`: removes the underline of the Hyperlink and sets the color to white. This is useful when a hyperlink is used outside the context of a paragraph or body text on a dark background.
    */
-  variant?: 'inverse';
+  variant?: 'inverse' | 'standalone' | 'standaloneInverse';
   /**
    * attribute for the hyperlink URL
    */
@@ -20,40 +23,58 @@ export const hyperlinkStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
     textDecoration: 'underline',
-    color: system.color.text.primary.default,
+    color: system.legacy.color.fg.info.default,
     cursor: 'pointer',
-    borderRadius: system.shape.half,
-    display: 'inline-block',
-    padding: '0 2px',
+    borderRadius: px2rem(2),
+    padding: `0 ${px2rem(2)} `,
     margin: '0 -2px',
     transition: 'color 0.15s,background-color 0.15s',
+    wordBreak: 'break-word',
     '&:hover, &.hover': {
-      color: system.color.text.primary.strong,
-      background: system.color.bg.alt.soft,
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 2px ${cssVar(system.color.bg.primary.default)}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
       outline: 'none',
     },
     '&:active, &.active': {
-      color: system.color.text.primary.stronger,
-      background: system.color.bg.alt.default,
+      color: system.legacy.color.fg.info.strong,
+      background: system.legacy.color.surface.alt.default,
     },
   },
   modifiers: {
     variant: {
       inverse: {
-        color: system.color.text.inverse,
+        color: system.color.fg.inverse,
         '&:hover, &.hover': {
-          color: system.color.text.inverse,
+          color: system.color.fg.inverse,
           background: 'rgba(255, 255, 255, 0.1)',
         },
         '&:focus, &.focus, &:focus-visible': {
-          boxShadow: `0 0 0 2px ${cssVar(system.color.text.inverse)}`,
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.color.fg.inverse}`,
         },
         '&:active, &.active': {
-          color: system.color.text.primary.stronger,
-          background: system.color.bg.alt.soft,
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
+        },
+      },
+      standalone: {
+        textDecoration: 'none',
+      },
+      standaloneInverse: {
+        textDecoration: 'none',
+        color: system.color.fg.inverse,
+        '&:hover, &.hover': {
+          color: system.color.fg.inverse,
+          background: 'rgba(255, 255, 255, 0.1)',
+        },
+        '&:focus, &.focus, &:focus-visible': {
+          boxShadow: `0 0 0 ${px2rem(2)}  ${system.legacy.color.focus.inverse}`,
+        },
+        '&:active, &.active': {
+          color: system.legacy.color.fg.info.strong,
+          background: system.legacy.color.surface.navigation,
         },
       },
     },

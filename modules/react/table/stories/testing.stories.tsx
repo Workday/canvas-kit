@@ -1,13 +1,10 @@
-import React from 'react';
-
-import {StaticStates} from '@workday/canvas-kit-react/testing';
-
+import {Flex} from '@workday/canvas-kit-react/layout';
 // unreleased path
 import {Table} from '@workday/canvas-kit-react/table';
-import {Flex} from '@workday/canvas-kit-react/layout';
+import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {Heading} from '@workday/canvas-kit-react/text';
-import {system} from '@workday/canvas-tokens-web';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Containers/Table',
@@ -72,14 +69,14 @@ const exampleData = [
 
 const tableHeaderStencil = createStencil({
   base: {
-    backgroundColor: system.color.bg.alt.softer,
-    borderRight: `${px2rem(1)} solid ${system.color.border.divider}`,
+    backgroundColor: system.color.surface.raised,
+    borderInlineEnd: `${px2rem(1)} solid ${system.color.border.default}`,
   },
   modifiers: {
     variant: {
       sticky: {
         position: 'sticky',
-        left: system.space.zero,
+        left: 0,
         zIndex: 2,
       },
     },
@@ -124,7 +121,7 @@ export const TableStates = {
   render: () => {
     return (
       <StaticStates>
-        <Flex gap="xs" flexDirection="column">
+        <Flex cs={{gap: system.gap.xs, flexDirection: 'column'}}>
           <div>
             <h3>Standard</h3>
             <Standard />

@@ -1,8 +1,9 @@
 import React from 'react';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
-import {Text} from '@workday/canvas-kit-react/text';
+
 import {LoadingSparkles} from '@workday/canvas-kit-preview-react/loading-sparkles';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common';
+import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 
 const containerStyles = createStyles({

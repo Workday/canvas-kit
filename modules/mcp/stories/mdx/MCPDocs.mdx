@@ -1,0 +1,320 @@
+import { Meta } from '@storybook/blocks';
+
+<Meta title="AI For LLMs/MCP Docs" />
+
+# Canvas Kit MCP
+
+This Model Context Protocol (MCP) server exposes Canvas Kit **upgrade guides**, **design token** documentation, **accessibility guidance**, and **per-component docs with sample code** (plus optional interactive previews) to AI assistants.
+
+## Table of Contents
+
+- [Installation](#installation)
+  - [Cursor Quick Install](#cursor-quick-install)
+  - [Other IDEs (Windsurf, VS Code, etc.)](#other-ides-windsurf-vs-code-etc)
+  - [Explicit Node path (nvm / GUI editors)](#explicit-node-path-nvm--gui-editors)
+  - [Troubleshooting: stale npx installs](#troubleshooting-stale-npx-installs)
+- [Tools](#tools)
+  - [`get-canvas-kit-upgrade-guides`](#get-canvas-kit-upgrade-guides)
+  - [`get-canvas-kit-tokens`](#get-canvas-kit-tokens)
+  - [`get-accessibility-guidelines`](#get-accessibility-guidelines)
+  - [`fetch-component-documentation-example`](#fetch-component-documentation-example)
+- [Resources](#resources)
+  - [Upgrade Guides](#upgrade-guides)
+  - [Token Documentation](#token-documentation)
+  - [Accessibility Guidance (`docs://accessibility/*`)](#accessibility-guidance-docsaccessibility)
+  - [Component examples (`docs://examples/{slug}`)](#component-examples-docsexamplesslug)
+  - [Component accessibility sections (`docs://examples/{slug}/accessibility`)](#component-accessibility-sections-docsexamplesslugaccessibility)
+  - [Interactive story previews (`ui://story/{slug}`)](#interactive-story-previews-uistoryslug)
+- [How assistants should use tools vs resources](#how-assistants-should-use-tools-vs-resources)
+- [Source Documentation](#source-documentation)
+- [Contributing](#contributing)
+  - [Testing Locally](#testing-locally)
+    - [MCP Inspector](#mcp-inspector)
+
+## Installation
+
+You can add this MCP server to Cursor, or other IDEs by following the instructions below.
+
+### Cursor Quick Install
+
+<a href="https://cursor.com/en-US/install-mcp?name=canvas-kit-mcp&config=eyJjb21tYW5kIjoibnB4IC15IEB3b3JrZGF5L2NhbnZhcy1raXQtbWNwIn0%3D">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://cursor.com/deeplink/mcp-install-light.svg"></source>
+    <source media="(prefers-color-scheme: light)" srcset="https://cursor.com/deeplink/mcp-install-dark.svg"></source>
+    <img src="https://cursor.com/deeplink/mcp-install-dark.svg" alt="Install MCP server in Cursor"></img>
+  </picture>
+</a>
+
+### Other IDEs (Windsurf, VS Code, etc.)
+
+Add to your MCP servers configuration file:
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ]
+    }
+  }
+}
+```
+
+Configuration file locations:
+- **Cursor**: `~/.cursor/mcp.json` (all projects) or `.cursor/mcp.json` at a repository root (project only); restart Cursor or reload MCP after changes
+- **Windsurf**: Settings → MCP Servers
+- **VS Code**: Cline/Continue extension settings
+
+The examples above use `"command": "npx"` on purpose: they are short, copy-pasteable, and work when your editor inherits the same `PATH` as your terminal (system Node, Homebrew, etc.).
+
+### Explicit Node path (nvm / GUI editors)
+
+Cursor and other desktop apps are often **not** started from a login shell, so they do not load `~/.zshrc` / `~/.bashrc`. Tools installed with **nvm**, **fnm**, or similar then disappear from `PATH`, and `"command": "npx"` fails even though `npx` works in Terminal.
+
+When Cursor’s MCP installer (or support) expands the config, you may see a resolved form like this — same package, but **absolute** paths to Node, npm’s `npx-cli.js`, and a minimal `PATH`:
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp": {
+      "command": "/Users/you/.nvm/versions/node/v22.12.0/bin/node",
+      "args": [
+        "/Users/you/.nvm/versions/node/v22.12.0/lib/node_modules/npm/bin/npx-cli.js",
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ],
+      "env": {
+        "PATH": "/Users/you/.nvm/versions/node/v22.12.0/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+      }
+    }
+  }
+}
+```
+
+Replace `/Users/you/.nvm/versions/node/v22.12.0` with the **version root** for the Node you want MCP to use, for example `dirname "$(dirname "$(command -v node)")"`. If you use `nvm which current`, it returns the full path to the `node` binary, so use its parent’s parent directory as the replacement value. JSON configs typically need **real absolute paths**, not `~`.
+
+The npm package scope is **`@workday`** (all lowercase on npm).
+
+### Troubleshooting: stale npx installs
+
+If MCP starts but behaves oddly, fails after an upgrade, or errors in ways that suggest an old cached copy of the package, clear **npx’s install cache** and restart the editor:
+
+```bash
+rm -rf ~/.npm/_npx
+```
+
+Then reload MCP or restart Cursor. As a broader step (optional), you can also run `npm cache clean --force`; that clears more of npm’s cache, not only npx.
+
+### Claude Code CLI
+
+```sh
+claude mcp add --scope project --transport stdio canvas-kit -- npx -y @workday/canvas-kit-mcp
+```
+
+### Claude Desktop
+
+Add to `~/Library/Application Support/Claude/claude_desktop_config.json` (macOS):
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@workday/canvas-kit-mcp"
+      ]
+    }
+  }
+}
+```
+
+## Tools
+
+This MCP server provides the following tools:
+
+### `get-canvas-kit-upgrade-guides`
+
+Retrieves Canvas Kit version upgrade documentation covering major version migrations. This tool can help you upgrade to Canvas Kit v9 and up.
+
+**Use cases:**
+- Upgrading Canvas Kit to a new major version
+- Understanding breaking changes between versions
+- Finding migration paths for deprecated components
+- Learning about new features and components
+
+**Returns:** Links to upgrade guide resources including version-specific migration steps, deprecation notices, theming guides, and styling migration documentation.
+
+### `get-canvas-kit-tokens`
+
+Retrieves Canvas Kit design token migration documentation for transitioning to the modern `@workday/canvas-tokens-web` package.
+
+**Use cases:**
+- Migrating from old token systems to `@workday/canvas-tokens-web`
+- Converting deprecated color tokens to the new token system
+- Understanding token hierarchy: base tokens, system tokens, and brand tokens
+- Finding correct system token replacements
+- Learning token naming patterns and semantic color roles
+- Migrating spacing, shape, typography, opacity, and depth tokens
+- Ensuring WCAG accessibility compliance with color contrast requirements
+
+**Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
+
+### `get-accessibility-guidelines`
+
+Retrieves Canvas Kit accessibility guidance for a scenario, component, or both. This tool is **documentation guidance only**. It does not scan code or pages, run automated accessibility tests, certify WCAG conformance, or guarantee compliance.
+
+**Parameters:**
+
+- `component` (optional) — Canvas Kit component/story slug, such as `checkbox`, `table`, or `modal`.
+- `scenario` (optional) — Accessibility scenario slug, such as `forms`, `tables`, `popups`, `aria-live`, or `page-structure`.
+
+At least one of `component` or `scenario` is required.
+
+**Examples:**
+
+```json
+{"scenario": "forms"}
+```
+
+```json
+{"component": "table"}
+```
+
+```json
+{"component": "checkbox", "scenario": "forms"}
+```
+
+**Returns:** A JSON summary plus `resource_link` entries for matching `docs://accessibility/{slug}` resources. When available, the response also includes `docs://examples/{component}` and `docs://examples/{component}/accessibility`.
+
+### `fetch-component-documentation-example`
+
+Opens a **Canvas Kit component** in Storybook (URL returned to the user) and returns metadata for assistants, including a link to the full markdown doc for that component.
+
+**Parameters:**
+
+- `story` (required) — Component slug from the tool’s enum (e.g. `buttons`, `menu`, `pill`, `modal`, `tabs`).
+
+**Returns:**
+
+- **Storybook URL** for the component’s docs page (shareable with humans)
+- A **`resource_link`** to `docs://examples/{story}` — prose plus code examples (built from MDX + example sources)
+- Inline preview metadata for clients that support MCP App rendering (`text/html;profile=mcp-app`)
+
+**Use cases:**
+
+- “Show me the Menu / Button / Modal docs” with a live doc link
+- Driving the assistant toward the correct **`docs://examples/{slug}`** resource for copy-pasteable samples
+
+## Resources
+
+The server exposes documentation resources in these categories:
+
+### Upgrade Guides
+
+URI prefix: `docs://upgrade-guides/*`
+
+Version-specific migration documentation covering:
+
+- Breaking changes and deprecations
+- New components and features
+- Styling system migrations (Emotion, CSS variables, `@workday/canvas-kit-styling`)
+- Theming and component refactoring
+- Accessibility improvements
+
+### Token Documentation
+
+URI prefix: `docs://tokens/*`
+
+Design token migration and usage guides covering:
+
+- Token system migrations (v2 → v3 → v4)
+- Color palette and semantic color roles
+- Token naming conventions and hierarchy
+- Accessibility and contrast guidelines
+- Spacing, shape, size, opacity, and depth tokens
+- OKLCH color space implementation
+
+### Accessibility Guidance (`docs://accessibility/*`)
+
+URI prefix: `docs://accessibility/*`
+
+Guidance-only accessibility documentation covering:
+
+- Overview and general Canvas Kit accessibility principles
+- Forms, page structure, tables, popups, ARIA live regions, headers, and side panels
+- Windows High Contrast themes and color contrast
+
+These resources do not perform automated validation or provide compliance guarantees.
+
+### Component examples (`docs://examples/{slug}`)
+
+Markdown documentation and **inline code** for each discovered component story. Content is produced at build time from MDX story files (with `ExampleCodeBlock` replaced by real example source). Use these when implementing or explaining APIs.
+
+### Component accessibility sections (`docs://examples/{slug}/accessibility`)
+
+Markdown extracted from a component's exact `## Accessibility` section when that section exists in the component MDX docs. Use these with the broader `docs://accessibility/*` resources for component-specific guidance.
+
+### Interactive story previews (`ui://story/{slug}`)
+
+Self-contained HTML apps for inline preview where the client supports MCP App resources (`text/html;profile=mcp-app`).
+
+All resources are available to AI assistants through MCP resource URIs.
+
+## How assistants should use tools vs resources
+
+1. **Prefer reading `docs://examples/{slug}`** for prose and sample code when answering implementation questions.
+2. **Call `fetch-component-documentation-example`** when the user should see the Storybook page and/or an interactive preview — not as a substitute for reading the markdown resource when only code is needed.
+
+## Source Documentation
+
+- **Upgrade guides and token LLM docs** live under [`modules/docs/llm`](../../docs/llm) (upgrade guides, token guides, and other LLM-oriented files). Update those files and rebuild the MCP package to refresh bundled resources.
+- **Accessibility docs** live under [`modules/docs/mdx/accessibility`](../../docs/mdx/accessibility) and are copied into the MCP package through the `accessibilityFiles` manifest.
+- **Component example markdown** is generated from Canvas Kit story MDX and example files under `modules/react` and `modules/preview-react` via the MCP build (`build:discover`, `build:apps`). See [`modules/mcp/README.md`](../../README.md) for the pipeline.
+
+## Contributing
+
+Canvas Kit MCP has two exports:
+
+- `dist/cli.js` — Node server invoked via `npx` for local stdio
+- `dist/index.js` — Module exports for extending the server or hosting with other transports
+
+### Testing Locally
+
+#### MCP Inspector
+
+The inspector requires Node.js v22+:
+
+```bash
+nvm use 22
+yarn build
+npx @modelcontextprotocol/inspector node dist/cli.js
+```
+
+Run these commands from the `modules/mcp` package after `yarn build`.
+
+#### Local IDE Testing
+
+Add an entry to your MCP servers configuration pointing to your local build:
+
+```json
+{
+  "mcpServers": {
+    "canvas-kit-mcp-local": {
+      "command": "node",
+      "args": [
+        "/absolute/path/to/canvas-kit/modules/mcp/dist/cli.js"
+      ]
+    }
+  }
+}
+```
+
+Rebuild the server after changes:
+
+```bash
+npm run build
+```

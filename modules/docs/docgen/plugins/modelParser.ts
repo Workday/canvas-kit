@@ -1,11 +1,11 @@
-import {ObjectProperty, FunctionValue, SymbolValue, FunctionParameter} from '../docTypes';
 import {
   createParserPlugin,
-  getValueDeclaration,
   defaultJSDoc,
-  getSymbolFromNode,
   getFullJsDocComment,
+  getSymbolFromNode,
+  getValueDeclaration,
 } from '../docParser';
+import {FunctionParameter, FunctionValue, ObjectProperty, SymbolValue} from '../docTypes';
 import t from '../traverse';
 import {ModelHookValue, ModelValue} from './customTypes';
 
@@ -205,26 +205,29 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     const options = node.initializer.expression.arguments[0];
 
     const optionsType = parser.checker.getTypeAtLocation(options);
-    const configProps = optionsType.getProperties().reduce((result, symbol) => {
-      if (['defaultConfig', 'requiredConfig'].includes(symbol.getName())) {
-        // The declaration of the config
-        const declaration = getValueDeclaration(symbol);
-        if (declaration) {
-          result[symbol.getName()] = parser.checker
-            .getTypeAtLocation(declaration)
-            .getProperties()
-            .map(p => {
-              // Each property of the config
-              const prop = getValueDeclaration(p);
-              return {
-                ...parser.getValueFromNode(prop!),
-                required: symbol.getName() === 'requiredConfig',
-              } as ObjectProperty;
-            });
+    const configProps = optionsType.getProperties().reduce(
+      (result, symbol) => {
+        if (['defaultConfig', 'requiredConfig'].includes(symbol.getName())) {
+          // The declaration of the config
+          const declaration = getValueDeclaration(symbol);
+          if (declaration) {
+            result[symbol.getName()] = parser.checker
+              .getTypeAtLocation(declaration)
+              .getProperties()
+              .map(p => {
+                // Each property of the config
+                const prop = getValueDeclaration(p);
+                return {
+                  ...parser.getValueFromNode(prop!),
+                  required: symbol.getName() === 'requiredConfig',
+                } as ObjectProperty;
+              });
+          }
         }
-      }
-      return result;
-    }, {} as Record<string, ObjectProperty[]>);
+        return result;
+      },
+      {} as Record<string, ObjectProperty[]>
+    );
 
     const modelProps: Record<string, ObjectProperty[]> = {};
     const returnProps: Record<string, ObjectProperty> = {};
@@ -342,8 +345,8 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
       ...jsDoc,
       type: {
         kind: 'object',
-        properties: (configProps['defaultConfig'] || []).concat(
-          configProps['requiredConfig'],
+        properties: (configProps.defaultConfig || []).concat(
+          configProps.requiredConfig,
           eventConfig
         ),
       },
@@ -375,8 +378,8 @@ export const modelParser = createParserPlugin<ModelHookValue | ModelValue>((node
     return {
       kind: 'modelHook',
       name: `use${modelName}`,
-      defaultConfig: configProps['defaultConfig'] || [],
-      requiredConfig: configProps['requiredConfig'] || [],
+      defaultConfig: configProps.defaultConfig || [],
+      requiredConfig: configProps.requiredConfig || [],
     } as ModelHookValue;
   }
   return;

@@ -1,4 +1,5 @@
 import {slugify} from '@workday/canvas-kit-styling';
+
 import {useCursorListModel} from './useCursorListModel';
 
 // retry a function each frame so we don't rely on the timing mechanism of React's render cycle.

@@ -1,9 +1,11 @@
 import React from 'react';
+
 import {
   createElemPropsHook,
-  useLocalRef,
   dispatchInputEvent,
+  useLocalRef,
 } from '@workday/canvas-kit-react/common';
+
 import {useComboboxModel} from './useComboboxModel';
 
 /**

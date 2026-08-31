@@ -1,15 +1,17 @@
 import * as React from 'react';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {
-  chevronLeftSmallIcon,
-  chevron2xLeftSmallIcon,
-  chevronRightSmallIcon,
-  chevron2xRightSmallIcon,
-} from '@workday/canvas-system-icons-web';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {useRTL} from './common/utils/useRTL';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {
+  chevron2xLeftSmallIcon,
+  chevron2xRightSmallIcon,
+  chevronLeftSmallIcon,
+  chevronRightSmallIcon,
+} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
 import {PaginationContext} from './usePaginationModel';
 
 export interface ControlButtonProps extends ExtractProps<typeof TertiaryButton, never> {
@@ -18,10 +20,28 @@ export interface ControlButtonProps extends ExtractProps<typeof TertiaryButton, 
 
 export interface PaginationControlsProps {}
 
+export const paginationControlsStencil = createStencil({
+  base: {
+    display: 'flex',
+    gap: system.legacy.gap.xs,
+    alignItems: 'center',
+  },
+});
+
+const controlButtonStencil = createStencil({
+  base: {
+    '&:dir(rtl)': {
+      '& .wd-icon': {
+        transform: 'scaleX(-1)',
+      },
+    },
+  },
+});
+
 export const PaginationControls = createComponent('div')({
   displayName: 'Pagination.Controls',
   Component(elemProps: PaginationControlsProps, ref, Element) {
-    return <Flex ref={ref} as={Element} gap="xxxs" alignItems="center" {...elemProps} />;
+    return <Element ref={ref} {...mergeStyles(elemProps, paginationControlsStencil())} />;
   },
 });
 
@@ -37,17 +57,16 @@ export const JumpToFirstButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.firstPage);
     };
-    const {shouldUseRTL} = useRTL();
-    const icon = shouldUseRTL ? chevron2xRightSmallIcon : chevron2xLeftSmallIcon;
+
     return (
       <TertiaryButton
         ref={ref}
         as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
-        icon={icon}
+        icon={chevron2xLeftSmallIcon}
         onClick={handleClick}
-        {...restProps}
+        {...mergeStyles(restProps, controlButtonStencil())}
       />
     );
   },
@@ -65,17 +84,16 @@ export const StepToPreviousButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.currentPage - 1);
     };
-    const {shouldUseRTL} = useRTL();
-    const icon = shouldUseRTL ? chevronRightSmallIcon : chevronLeftSmallIcon;
+
     return (
       <TertiaryButton
         ref={ref}
         as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
-        icon={icon}
+        icon={chevronLeftSmallIcon}
         onClick={handleClick}
-        {...restProps}
+        {...mergeStyles(restProps, controlButtonStencil())}
       />
     );
   },
@@ -93,17 +111,16 @@ export const StepToNextButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.currentPage + 1);
     };
-    const {shouldUseRTL} = useRTL();
-    const icon = shouldUseRTL ? chevronLeftSmallIcon : chevronRightSmallIcon;
+
     return (
       <TertiaryButton
         ref={ref}
         as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
-        icon={icon}
+        icon={chevronRightSmallIcon}
         onClick={handleClick}
-        {...restProps}
+        {...mergeStyles(restProps, controlButtonStencil())}
       />
     );
   },
@@ -121,17 +138,16 @@ export const JumpToLastButton = createComponent('button')({
       onClick?.(e);
       model.events.setCurrentPage(model.state.lastPage);
     };
-    const {shouldUseRTL} = useRTL();
-    const icon = shouldUseRTL ? chevron2xLeftSmallIcon : chevron2xRightSmallIcon;
+
     return (
       <TertiaryButton
         ref={ref}
         as={Element}
         aria-disabled={isDisabled || undefined}
         size="small"
-        icon={icon}
+        icon={chevron2xRightSmallIcon}
         onClick={handleClick}
-        {...restProps}
+        {...mergeStyles(restProps, controlButtonStencil())}
       />
     );
   },

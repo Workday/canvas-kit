@@ -1,14 +1,15 @@
 import * as React from 'react';
+
 import {
   SidePanel,
-  useSidePanel,
   SidePanelTransitionStates,
+  useSidePanel,
 } from '@workday/canvas-kit-preview-react/side-panel';
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading, Text} from '@workday/canvas-kit-react/text';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const stylesOverride = {
   viewport: createStyles({
@@ -16,11 +17,10 @@ const stylesOverride = {
   }),
   panel: createStyles({
     alignItems: 'center',
-    paddingY: system.space.x4,
-    paddingX: system.space.x4,
+    padding: system.padding.md,
   }),
   panelHeading: createStyles({
-    color: base.licorice500,
+    color: system.color.fg.muted.strong,
   }),
   main: createStyles({
     alignItems: 'center',

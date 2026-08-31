@@ -1,6 +1,6 @@
-import {JumpControls} from '../../modules/react/pagination/stories/examples/JumpControls';
 import {CustomRange} from '../../modules/react/pagination/stories/examples/CustomRange';
 import {GoToForm} from '../../modules/react/pagination/stories/examples/GoToForm';
+import {JumpControls} from '../../modules/react/pagination/stories/examples/JumpControls';
 
 describe('Pagination', () => {
   context('given the Jump Controls story is rendered', () => {

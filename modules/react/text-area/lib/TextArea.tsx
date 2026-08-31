@@ -1,7 +1,8 @@
-import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
-import {createStencil, calc, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {textInputStencil} from '@workday/canvas-kit-react/text-input';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 export type ValueOf<T> = T[keyof T];
 
 export interface TextAreaProps extends GrowthBehavior {
@@ -26,8 +27,8 @@ export const TextAreaResizeDirection = {
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
   base: {
-    minHeight: system.space.x16,
-    minWidth: calc.add(calc.multiply(system.space.x20, 3), system.space.x10),
+    minHeight: system.legacy.size.xxl,
+    minWidth: px2rem(280),
     '&::webkit-resizer': {
       display: 'none',
     },

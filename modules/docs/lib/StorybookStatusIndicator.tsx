@@ -1,0 +1,61 @@
+import {
+  StatusIndicator,
+  type StatusIndicatorVariant,
+} from '@workday/canvas-kit-preview-react/status-indicator';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {sparkleIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+const storybookStatusIndicatorStencil = createStencil({
+  base: {
+    borderRadius: system.shape.full,
+    padding: `0 ${system.padding.xs}`,
+    [systemIconStencil.vars.color]: 'currentColor',
+  },
+});
+
+const content = {
+  ai: {
+    icon: sparkleIcon,
+    label: 'AI Content',
+  },
+  deprecated: {
+    icon: undefined,
+    label: 'Deprecated',
+  },
+  new: {
+    icon: undefined,
+    label: 'New',
+  },
+  promoted: {
+    icon: undefined,
+    label: 'Promoted',
+  },
+};
+
+export const StorybookStatusIndicator = ({
+  type,
+}: {
+  type: 'ai' | 'deprecated' | 'new' | 'promoted';
+}) => {
+  const {icon, label} = content[type];
+  const variantMapping = {
+    ai: 'info',
+    deprecated: 'caution',
+    new: 'positive',
+    promoted: 'info',
+  };
+
+  return (
+    <StatusIndicator
+      className="sb-unstyled cnvs-title-status-indicator"
+      cs={storybookStatusIndicatorStencil({type})}
+      variant={variantMapping[type] as StatusIndicatorVariant}
+      emphasis="low"
+    >
+      {icon && <StatusIndicator.Icon icon={icon} />}
+      <StatusIndicator.Label>{label}</StatusIndicator.Label>
+    </StatusIndicator>
+  );
+};

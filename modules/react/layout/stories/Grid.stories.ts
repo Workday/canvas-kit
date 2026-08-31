@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Grid.mdx';
-
 import {Grid} from '@workday/canvas-kit-react/layout';
+
+import mdxDoc from './Grid.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Grid/Basic';
 import {GridLayout as GridLayoutExample} from './examples/Grid/GridLayout';

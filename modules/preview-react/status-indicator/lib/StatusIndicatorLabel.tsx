@@ -1,7 +1,7 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {TextProps, textStencil} from '@workday/canvas-kit-react/text';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {system} from '@workday/canvas-tokens-web';
 
 export interface StatusIndicatorLabelProps extends TextProps {}

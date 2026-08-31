@@ -1,6 +1,7 @@
 import React from 'react';
-import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
+
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
@@ -19,7 +20,7 @@ export const Basic = () => {
   };
 
   return (
-    <Flex flexDirection="column">
+    <Flex cs={{flexDirection: 'column'}}>
       <FormFieldGroup>
         <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
         <FormFieldGroup.Field>

@@ -1,14 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
+
 import {Expandable} from '@workday/canvas-kit-react/expandable';
+
 import mdxDoc from './Expandable.mdx';
-// examples
-import {StartIcon as StartIconExample} from './examples/StartIcon';
-import {EndIcon as EndIconExample} from './examples/EndIcon';
 import {Avatar as AvatarExample} from './examples/Avatar';
 import {Depth as DepthExample} from './examples/Depth';
-import {RTL as RTLExample} from './examples/RTL';
-import {LongTitle as LongTitleExample} from './examples/LongTitle';
+import {EndIcon as EndIconExample} from './examples/EndIcon';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
+import {LongTitle as LongTitleExample} from './examples/LongTitle';
+import {RTL as RTLExample} from './examples/RTL';
+// examples
+import {StartIcon as StartIconExample} from './examples/StartIcon';
 
 export default {
   title: 'Components/Containers/Expandable',

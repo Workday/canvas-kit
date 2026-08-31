@@ -26,4 +26,4 @@ function fixPackageJsonVersions(packageContents, monoDependencies) {
   return lines.join('\n');
 }
 
-module.exports = fixPackageJsonVersions;
+export default fixPackageJsonVersions;

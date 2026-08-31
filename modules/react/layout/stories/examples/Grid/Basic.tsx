@@ -1,69 +1,56 @@
-import * as React from 'react';
-import {Grid, GridProps, Box} from '@workday/canvas-kit-react/layout';
-import {type} from '@workday/canvas-kit-react/tokens';
-import styled from '@emotion/styled';
+import {Grid} from '@workday/canvas-kit-react/layout';
+import {Heading} from '@workday/canvas-kit-react/text';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-// temporary placeholder until type components are added to canvas-kit
-
-const StyledHeading = styled(Box.as('h3'))({
-  ...type.levels.body.large,
-  ...type.variants.inverse,
-  margin: 0,
-  fontWeight: type.properties.fontWeights.bold,
+const containerStyles = createStyles({
+  gridTemplateAreas:
+    "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
+  gridGap: system.gap.md,
+  gridTemplateColumns: '3fr 9fr',
+  gridTemplateRows: `auto ${px2rem(300)} auto`,
 });
 
-const borderPadProps = {
-  borderRadius: 'm',
-  padding: 's',
-};
+const gridStyles = createStencil({
+  vars: {
+    gridArea: '',
+  },
+  base: ({gridArea}) => ({
+    backgroundColor: system.color.brand.accent.primary,
+    borderRadius: system.shape.sm,
+    boxShadow: system.depth[1],
+    padding: system.padding.md,
+    gridArea,
+  }),
+});
 
-const Header = ({children, ...props}: GridProps) => (
-  <Grid as="header" gridArea="Header" depth={1} {...props} {...borderPadProps}>
-    {children}
-  </Grid>
-);
-
-const BodyContent = ({children, ...props}: GridProps) => (
-  <Grid as="main" gridArea="BodyContent" depth={1} {...props} {...borderPadProps}>
-    {children}
-  </Grid>
-);
-
-const SideBar = ({children, ...props}: GridProps) => (
-  <Grid as="aside" gridArea="SideBar" depth={1} {...props} {...borderPadProps}>
-    {children}
-  </Grid>
-);
-
-const Footer = ({children, ...props}: GridProps) => (
-  <Grid as="footer" gridArea="Footer" depth={1} {...props} {...borderPadProps}>
-    {children}
-  </Grid>
-);
+const headingStyles = createStyles({
+  ...system.type.heading.sm,
+  margin: '0',
+});
 
 export const Basic = () => {
-  const parentCont = {
-    gridTemplateAreas:
-      "'Header Header Header Header' 'SideBar BodyContent BodyContent BodyContent' 'Footer Footer Footer Footer'",
-    gridGap: 's',
-    gridTemplateColumns: '3fr 9fr',
-    gridTemplateRows: 'auto 300px auto',
-  };
   return (
-    <Grid as="section" padding="s">
-      <Grid {...parentCont}>
-        <Header backgroundColor="blueberry400">
-          <StyledHeading>Header</StyledHeading>
-        </Header>
-        <SideBar backgroundColor="blueberry300">
-          <StyledHeading>SideBar</StyledHeading>
-        </SideBar>
-        <BodyContent backgroundColor="plum300">
-          <StyledHeading>Body Content</StyledHeading>
-        </BodyContent>
-        <Footer backgroundColor="berrySmoothie300">
-          <StyledHeading>Footer</StyledHeading>
-        </Footer>
+    <Grid cs={containerStyles}>
+      <Grid as="header" cs={gridStyles({gridArea: 'Header'})}>
+        <Heading variant="inverse" size="small" cs={headingStyles}>
+          Page Header
+        </Heading>
+      </Grid>
+      <Grid as="nav" cs={gridStyles({gridArea: 'SideBar'})}>
+        <Heading variant="inverse" size="small" cs={headingStyles}>
+          Navigation
+        </Heading>
+      </Grid>
+      <Grid as="main" cs={gridStyles({gridArea: 'BodyContent'})}>
+        <Heading variant="inverse" size="small" cs={headingStyles}>
+          Main Content
+        </Heading>
+      </Grid>
+      <Grid as="footer" cs={gridStyles({gridArea: 'Footer'})}>
+        <Heading variant="inverse" size="small" cs={headingStyles}>
+          Page Footer
+        </Heading>
       </Grid>
     </Grid>
   );

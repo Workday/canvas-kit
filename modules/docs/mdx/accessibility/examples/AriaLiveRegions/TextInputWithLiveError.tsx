@@ -1,0 +1,34 @@
+import React from 'react';
+
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {AriaLiveRegion, changeFocus} from '@workday/canvas-kit-react/common';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const hintStyles = createStyles({
+  height: system.size.xs,
+});
+
+export const TextInputWithLiveError = () => {
+  const errMsg = 'Error: First name is required.';
+  const [hasError, setHasError] = React.useState('no');
+  const inputRef = React.useRef(null);
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) =>
+    setHasError(e.target.value.trim().length === 0 ? 'error' : 'no');
+  const handleSubmit = () => hasError && changeFocus(inputRef.current);
+
+  return (
+    <>
+      <FormField error={hasError === 'error' ? 'error' : undefined} isRequired={true}>
+        <FormField.Label>First Name:</FormField.Label>
+        <FormField.Input as={TextInput} onBlur={handleBlur} ref={inputRef} />
+        <FormField.Hint cs={hintStyles}>
+          <AriaLiveRegion>{hasError === 'error' && errMsg}</AriaLiveRegion>
+        </FormField.Hint>
+      </FormField>
+      <PrimaryButton onClick={handleSubmit}>Continue</PrimaryButton>
+    </>
+  );
+};

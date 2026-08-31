@@ -1,13 +1,12 @@
 import ts from 'typescript';
 
-import {findNodes} from '../findNodes';
-import {createProgramFromSource} from '../createProgramFromSource';
-
+import {withDefaultContext} from '../../lib/styleTransform';
 import {
   maybeWrapCSSVariables,
   parseObjectToStaticValue,
 } from '../../lib/utils/parseObjectToStaticValue';
-import {withDefaultContext} from '../../lib/styleTransform';
+import {createProgramFromSource} from '../createProgramFromSource';
+import {findNodes} from '../findNodes';
 
 describe('maybeWrapCSSVariables', () => {
   it('should wrap a variable with var(variable)', () => {

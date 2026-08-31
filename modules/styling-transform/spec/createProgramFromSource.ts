@@ -1,7 +1,6 @@
-import * as ts from 'typescript';
-import path from 'path';
-
 import {stripIndent} from 'common-tags';
+import path from 'path';
+import * as ts from 'typescript';
 
 function getConfig() {
   const tsconfigPath = ts.findConfigFile('.', ts.sys.fileExists) || '';

@@ -1,8 +1,8 @@
+import {Theme, ThemeContext} from '@emotion/react';
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {useLocalRef, useIsRTL, useCanvasThemeToCssVars} from '@workday/canvas-kit-react/common';
-import {ThemeContext, Theme} from '@emotion/react';
+import {isElementRTL, useCanvasThemeToCssVars, useLocalRef} from '@workday/canvas-kit-react/common';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -51,9 +51,9 @@ export const usePopupStack = <E extends HTMLElement>(
   target?: HTMLElement | React.RefObject<HTMLElement>
 ): React.RefObject<HTMLElement> => {
   const {elementRef, localRef} = useLocalRef(ref);
-  const isRTL = useIsRTL();
+
   const theme = React.useContext(ThemeContext as React.Context<Theme>);
-  const {className, style} = useCanvasThemeToCssVars(theme, {});
+  const {style} = useCanvasThemeToCssVars(theme, {});
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
@@ -66,6 +66,28 @@ export const usePopupStack = <E extends HTMLElement>(
     }
     return localRef.current;
   });
+
+  // Forward only theme overrides (style) to the popup container when a theme was provided via
+  // CanvasProvider theme prop. We do NOT apply defaultBranding (className) so we don't create a
+  // cascade barrier—only the CSS variables the consumer overrode are set. This effect runs
+  // before PopupStack.add below so the container has the theme before it's shown (avoids blue→magenta flash).
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    if (!element) {
+      return undefined;
+    }
+    const styleKeys = Object.keys(style);
+    if (styleKeys.length === 0) {
+      return undefined;
+    }
+    for (const key of styleKeys) {
+      // @ts-ignore - token keys are CSS custom property names
+      element.style.setProperty(key, style[key]);
+    }
+    // No cleanup: leave theme on container so reopening doesn't flash
+    return undefined;
+  }, [localRef, style]);
+
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
   // should also register as soon as the element is available
@@ -89,43 +111,30 @@ export const usePopupStack = <E extends HTMLElement>(
   }, [localRef, target, popupRef]);
 
   // The direction will properly follow the theme via React context, but portals lose the `dir`
-  // hierarchy, so we'll add it back here.
+  // hierarchy, so we'll add it back here. When there's no target (e.g. consumer doesn't use
+  // Popup.Target), find the nearest element with a `dir` attribute: start from the focused element
+  // (the trigger) or body, then use closest('[dir]'). Prefer reading getAttribute('dir') when
+  // present to avoid getComputedStyle.
   React.useLayoutEffect(() => {
-    if (isRTL) {
-      localRef.current?.setAttribute('dir', 'rtl');
-    } else {
-      localRef.current?.removeAttribute('dir');
+    const targetEl = target ? ('current' in target ? target.current : target) : undefined;
+    let elementToCheck: Element | undefined = targetEl ?? undefined;
+    if (elementToCheck == null && typeof document !== 'undefined') {
+      const active = document.activeElement;
+      const container = localRef.current;
+      const start = active && container && !container.contains(active) ? active : document.body;
+      elementToCheck = start.closest('[dir]') ?? document.documentElement;
     }
-  }, [localRef, isRTL]);
-
-  // theming className
-  React.useLayoutEffect(() => {
-    const element = localRef.current;
-    element?.classList.add(className.trim());
-    return () => {
-      element?.classList.remove(className.trim());
-    };
-  }, [localRef, className]);
-
-  React.useLayoutEffect(() => {
-    const element = localRef.current;
-    if (element) {
-      // eslint-disable-next-line guard-for-in
-      for (const key in style) {
-        // @ts-ignore
-        element.style.setProperty(key, style[key]);
+    if (elementToCheck) {
+      const explicitDir = elementToCheck.getAttribute('dir');
+      const isRTL =
+        explicitDir != null ? explicitDir.toLowerCase() === 'rtl' : isElementRTL(elementToCheck);
+      if (isRTL) {
+        localRef.current?.setAttribute('dir', 'rtl');
+      } else {
+        localRef.current?.setAttribute('dir', 'ltr');
       }
     }
-    return () => {
-      if (element) {
-        // eslint-disable-next-line guard-for-in
-        for (const key in style) {
-          // @ts-ignore
-          element.style.removeProperty(key, style[key]);
-        }
-      }
-    };
-  }, [localRef, style]);
+  }, [localRef, target]);
 
   return localRef;
 };

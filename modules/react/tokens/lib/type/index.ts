@@ -1,15 +1,16 @@
-import {fontFamilies, CanvasFontFamilies} from './fontFamilies';
-import {fontSizes, CanvasFontSizes} from './fontSizes';
-import {fontWeights, CanvasFontWeights} from './fontWeights';
-import {levels, CanvasTypeHierarchy} from './levels';
-import {variants, CanvasTypeVariants} from './variants';
+import {CanvasFontFamilies, fontFamilies} from './fontFamilies';
+import {CanvasFontSizes, fontSizes} from './fontSizes';
+import {CanvasFontWeights, fontWeights} from './fontWeights';
+import {CanvasTypeHierarchy, levels} from './levels';
+import {CanvasTypeVariants, variants} from './variants';
 
 export {fontFamily, monoFontFamily} from './fontFamilies';
 
+/** @deprecated ⚠️ `CanvasTypeProperties`, `CanvasTypeVariants`, `CanvasTypeHierarchy` have been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type {CanvasTypeProperties, CanvasTypeVariants, CanvasTypeHierarchy};
 
 /** ### Canvas Type Properties
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens--type)
+ * [View Storybook Docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs)
  *
  * ---
  * The type properties provide precise control and are only intended to be used when the type hierarchy tokens are not well-suited for the task.
@@ -21,6 +22,7 @@ export type {CanvasTypeProperties, CanvasTypeVariants, CanvasTypeHierarchy};
  * - `fontWeights`
  *
  * You can find more detailed information by inspecting individual properties.
+ * @deprecated ⚠️ `properties` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 const properties: CanvasTypeProperties = {
   fontFamilies,
@@ -30,7 +32,7 @@ const properties: CanvasTypeProperties = {
 
 /**
  * ### Canvas Type Tokens
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens--type)
+ * [View Storybook Docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs)
  *
  * ---
  * Type tokens are separated into three sections:
@@ -38,6 +40,8 @@ const properties: CanvasTypeProperties = {
  * - `levels` - provide higher-level styles for the Canvas type hierarchy: title, heading, body, and subtext
  * - `properties` - provide low-level type properties (font families, sizes, and weights)
  * - `variants` - provide modifiers for text styles (error, hint, and inverse)
+ *
+ * @deprecated ⚠️ `type` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  * */
 export const type: CanvasType = {
   levels,
@@ -45,6 +49,7 @@ export const type: CanvasType = {
   variants,
 };
 
+/** @deprecated ⚠️ `CanvasTypeProperties` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 type CanvasTypeProperties = {
   /** ### Font Family Tokens
    * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens--type)
@@ -124,6 +129,7 @@ type CanvasTypeProperties = {
   fontWeights: CanvasFontWeights;
 };
 
+/** @deprecated ⚠️ `CanvasType` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasType = {
   /** ### Canvas Type Hierarchy
    * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens--type)

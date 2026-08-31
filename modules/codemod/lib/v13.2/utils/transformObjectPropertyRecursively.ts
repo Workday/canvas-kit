@@ -283,23 +283,6 @@ export const transformObjectPropertyRecursively = (
     }
   }
 
-  if (property.type === 'ObjectProperty' && property.value.type === 'ObjectExpression') {
-    return createObjectProperty(
-      property.key,
-      j.objectExpression(
-        property.value.properties.map((prop: any) =>
-          transformObjectPropertyRecursively(
-            {j, root},
-            prop,
-            importDeclaration,
-            isCanvasKitStyling,
-            tokenTypes
-          )
-        )
-      )
-    );
-  }
-
   if (
     property.type === 'ObjectProperty' &&
     property.key.type === 'Identifier' &&
@@ -336,6 +319,23 @@ export const transformObjectPropertyRecursively = (
         );
       }
     }
+  }
+
+  if (property.type === 'ObjectProperty' && property.value.type === 'ObjectExpression') {
+    return createObjectProperty(
+      property.key,
+      j.objectExpression(
+        property.value.properties.map((prop: any) =>
+          transformObjectPropertyRecursively(
+            {j, root},
+            prop,
+            importDeclaration,
+            isCanvasKitStyling,
+            tokenTypes
+          )
+        )
+      )
+    );
   }
 
   return property;

@@ -1,25 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import {system} from '@workday/canvas-tokens-web';
-import {createStyles} from '@workday/canvas-kit-styling';
-import {infoIcon} from '@workday/canvas-system-icons-web';
-
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {
   CanvasProvider,
   ContentDirection,
-  createSubcomponent,
   PartialEmotionCanvasTheme,
+  createSubcomponent,
   useMount,
   useTheme,
 } from '@workday/canvas-kit-react/common';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {infoIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const mainContentStyles = createStyles({
-  padding: system.space.x4,
+  padding: system.padding.md,
 });
 
 export interface ExternalWindowPortalProps {
@@ -151,26 +150,24 @@ export const ExternalWindow = () => {
 
   return (
     <CanvasProvider theme={canvasTheme}>
-      <>
-        <main className={mainContentStyles}>
-          <p>Popup that opens a new Operating System Window</p>
-          <Popup model={model}>
-            <Tooltip title="Open External Window Tooltip">
-              <Popup.Target>Open External Window</Popup.Target>
-            </Tooltip>
-            <PopupExternalWindow>
-              <p>External Window Contents! Mouse over the info icon to get a tooltip</p>
-              <Flex gap="s">
-                <Tooltip title="More information">
-                  <SecondaryButton icon={infoIcon} />
-                </Tooltip>
-                <Popup.CloseButton>Close Window</Popup.CloseButton>
-              </Flex>
-            </PopupExternalWindow>
-          </Popup>
-          <p>Popup visibility: {model.state.visibility}</p>
-        </main>
-      </>
+      <main className={mainContentStyles}>
+        <p>Popup that opens a new Operating System Window</p>
+        <Popup model={model}>
+          <Tooltip title="Open External Window Tooltip">
+            <Popup.Target>Open External Window</Popup.Target>
+          </Tooltip>
+          <PopupExternalWindow>
+            <p>External Window Contents! Mouse over the info icon to get a tooltip</p>
+            <Flex cs={{gap: system.gap.sm}}>
+              <Tooltip title="More information">
+                <SecondaryButton icon={infoIcon} />
+              </Tooltip>
+              <Popup.CloseButton>Close Window</Popup.CloseButton>
+            </Flex>
+          </PopupExternalWindow>
+        </Popup>
+        <p>Popup visibility: {model.state.visibility}</p>
+      </main>
     </CanvasProvider>
   );
 };

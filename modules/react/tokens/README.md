@@ -162,9 +162,9 @@ import {space} from '@workday/canvas-kit-react/tokens';
 const iconSize = '1.25rem';
 
 const buttonSyles = {
-  paddingTop: `calc(${space.xs} + 2px)`,
+  paddingBlockStart: `calc(${space.xs} + 2px)`,
   paddingInlineStart: space.s,
-  paddingBottom: space.xs,
+  paddingBlockEnd: space.xs,
   paddingInlineEnd: `calc(${space.s} + ${iconSize})`,
 };
 ```

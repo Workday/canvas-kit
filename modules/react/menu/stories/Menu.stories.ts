@@ -1,15 +1,16 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Menu.mdx';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
+import mdxDoc from './Menu.mdx';
 import {Basic as BasicExample} from './examples/Basic';
-import {Grouping as GroupingExample} from './examples/Grouping';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
+import {Grouping as GroupingExample} from './examples/Grouping';
 import {Icons as IconsExample} from './examples/Icons';
-import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 import {Nested as NestedExample} from './examples/Nested';
 import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
+import {NestedSiblings as NestedSiblingsExample} from './examples/NestedSiblings';
+import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 
 export default {
   title: 'Components/Popups/Menu',
@@ -44,4 +45,7 @@ export const Nested: Story = {
 };
 export const NestedDynamic: Story = {
   render: NestedDynamicExample,
+};
+export const NestedSiblings: Story = {
+  render: NestedSiblingsExample,
 };

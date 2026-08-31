@@ -1,12 +1,14 @@
 import * as React from 'react';
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {transformationImportIcon} from '@workday/canvas-system-icons-web';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {SidePanelContext} from './hooks';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {extendIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
+
 import {SidePanelTransitionStates} from './SidePanel';
+import {SidePanelContext} from './hooks';
 
 export interface SidePanelToggleButtonProps extends ExtractProps<typeof TertiaryButton, never> {
   /**
@@ -22,9 +24,9 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.space.x6,
-    width: system.space.x8,
-    insetInlineEnd: system.space.x4,
+    top: system.legacy.gap.lg,
+    width: system.legacy.size.sm,
+    insetInlineEnd: system.legacy.gap.md,
   },
   modifiers: {
     state: {
@@ -76,21 +78,21 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'right'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.legacy.gap.md,
       },
     },
     {
       modifiers: {state: 'expanded', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.legacy.gap.md,
       },
     },
     {
       modifiers: {state: 'expanding', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.space.x4,
+        insetInlineStart: system.legacy.gap.md,
       },
     },
   ],
@@ -103,7 +105,7 @@ export const SidePanelToggleButton = createComponent('button')({
   displayName: 'SidePanel.ToggleButton',
   Component({
     variant = undefined,
-    icon = transformationImportIcon,
+    icon = extendIcon,
     tooltipTextExpand = 'Expand',
     tooltipTextCollapse = 'Collapse',
     ...elemProps

@@ -1,4 +1,4 @@
-module.exports = (pascalCaseName, titleCaseName) => `
+const component = (pascalCaseName, titleCaseName) => `
 import React from 'react';
 
 import {createContainer, ExtractProps} from '@workday/canvas-kit-react/common';
@@ -40,3 +40,5 @@ export const ${pascalCaseName} = createContainer('div')({
   );
 });
 `;
+
+export default component;

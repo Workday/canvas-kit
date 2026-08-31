@@ -1,14 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './toast.mdx';
-
 import {Toast} from '@workday/canvas-kit-react/toast';
+
 import {Basic as BasicExample} from './examples/Basic';
+import {RTL as RTLExample} from './examples/RTL';
 import {ToastAlert as ToastAlertExample} from './examples/ToastAlert';
 import {ToastDialog as ToastDialogExample} from './examples/ToastDialog';
 import {WithActionLinkAndCloseIcon as WithActionLinkAndCloseIconExample} from './examples/WithActionLinkAndCloseIcon';
 import {WithPopper as WithPopperExample} from './examples/WithPopper';
-import {RTL as RTLExample} from './examples/RTL';
+import mdxDoc from './toast.mdx';
 
 export default {
   title: 'Components/Popups/Toast',

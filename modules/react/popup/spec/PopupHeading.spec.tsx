@@ -1,5 +1,6 @@
+import {render, screen} from '@testing-library/react';
 import React from 'react';
-import {screen, render} from '@testing-library/react';
+
 import {Popup, usePopupModel} from '@workday/canvas-kit-react/popup';
 
 describe('Popup.Heading', () => {

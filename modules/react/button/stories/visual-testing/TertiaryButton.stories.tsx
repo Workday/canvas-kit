@@ -1,13 +1,13 @@
-import React from 'react';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../../utils/storybook';
 import {playCircleIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+
+import {customColorTheme} from '../../../../../utils/storybook';
 import {Container, stateTableColumnProps} from './utils';
 
 export default {
@@ -60,14 +60,10 @@ const TertiaryButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   </StaticStates>
 );
 
-const TertiaryIconButtonTest = (props: {
-  theme?: PartialEmotionCanvasTheme;
-  isThemeable?: boolean;
-}) => (
+const TertiaryIconButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
   <StaticStates theme={props.theme}>
     <ComponentStatesTable
       rowProps={permutateProps({
-        isThemeable: [{value: props.isThemeable, label: ''}],
         variant: [
           {value: undefined, label: ''},
           {value: 'inverse', label: 'Inverse'},
@@ -103,5 +99,5 @@ export const TertiaryButtonThemedStates = {
 };
 
 export const TertiaryIconButtonThemedStates = {
-  render: () => <TertiaryIconButtonTest theme={{canvas: customColorTheme}} isThemeable />,
+  render: () => <TertiaryIconButtonTest theme={{canvas: customColorTheme}} />,
 };

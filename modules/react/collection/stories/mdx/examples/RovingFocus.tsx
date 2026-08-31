@@ -1,11 +1,11 @@
 import React from 'react';
 
 import {
+  ListBox,
+  ListItemProps,
   useListItemRegister,
   useListItemRovingFocus,
   useListModel,
-  ListBox,
-  ListItemProps,
 } from '@workday/canvas-kit-react/collection';
 import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
 

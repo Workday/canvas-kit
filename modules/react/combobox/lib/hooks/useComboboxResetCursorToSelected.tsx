@@ -1,5 +1,7 @@
 import React from 'react';
+
 import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {useComboboxModel} from './useComboboxModel';
 
 /**
@@ -12,7 +14,6 @@ export const useComboboxResetCursorToSelected = createElemPropsHook(useComboboxM
     if (!visible && model.state.selectedIds.length) {
       model.events.goTo({id: model.state.selectedIds[0]});
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [visible, model.events, model.state.selectedIds]);
   return {};
 });

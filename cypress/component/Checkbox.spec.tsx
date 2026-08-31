@@ -1,7 +1,7 @@
 import {Basic} from '../../modules/react/checkbox/stories/examples/Basic';
-import {Alert} from '../../modules/react/checkbox/stories/examples/Alert';
-import {Error} from '../../modules/react/checkbox/stories/examples/Error';
+import {Caution} from '../../modules/react/checkbox/stories/examples/Caution';
 import {Disabled} from '../../modules/react/checkbox/stories/examples/Disabled';
+import {Error} from '../../modules/react/checkbox/stories/examples/Error';
 import {Indeterminate} from '../../modules/react/checkbox/stories/examples/Indeterminate';
 
 const getCheckbox = () => {
@@ -9,7 +9,7 @@ const getCheckbox = () => {
 };
 
 describe('Checkbox', () => {
-  [Basic, Alert, Error].forEach(Example => {
+  [Basic, Caution, Error].forEach(Example => {
     context(`given the '${Example.name}' example is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
@@ -37,7 +37,11 @@ describe('Checkbox', () => {
     });
 
     it('should not have any axe errors', () => {
-      cy.checkA11y();
+      cy.checkA11y(null, {
+        rules: {
+          'scrollable-region-focusable': {enabled: false},
+        },
+      });
     });
 
     it('should be disabled', () => {

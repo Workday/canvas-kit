@@ -1,16 +1,15 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './pagination.mdx';
-
 import {Pagination} from '@workday/canvas-kit-react/pagination';
 
 import {Basic as BasicExample} from './examples/Basic';
 import {CustomRange as CustomRangeExample} from './examples/CustomRange';
-import {JumpControls as JumpControlsExample} from './examples/JumpControls';
 import {GoToForm as GoToFormExample} from './examples/GoToForm';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
-import {ResponsiveRange as ResponsiveRangeExample} from './examples/ResponsiveRange';
+import {JumpControls as JumpControlsExample} from './examples/JumpControls';
 import {RTL as RTLExample} from './examples/RTL';
+import {ResponsiveRange as ResponsiveRangeExample} from './examples/ResponsiveRange';
+import mdxDoc from './pagination.mdx';
 
 export default {
   title: 'Components/Navigation/Pagination',

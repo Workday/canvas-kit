@@ -1,9 +1,7 @@
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
-
 import {FlexProps} from '@workday/canvas-kit-react/layout';
-
-import {createStencil, CSProps, calc, px2rem, handleCsProp} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {CSProps, calc, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useFormFieldModel} from './hooks';
 
@@ -13,22 +11,22 @@ const formFieldGroupListStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    borderRadius: system.shape.x1,
-    gap: system.space.x2,
-    padding: `${px2rem(10)} ${system.space.x3} ${system.space.x2}`,
-    margin: `0 ${calc.negate(system.space.x3)}`,
+    borderRadius: system.legacy.shape.md,
+    gap: system.legacy.gap.sm,
+    padding: `${px2rem(10)} ${base.legacy.size150} ${system.legacy.padding.xs}`,
+    margin: `0 ${calc.negate(base.legacy.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.error.base}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
       },
-      alert: {
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.alert.darkest}, inset 0 0 0 ${px2rem(3)} ${
-          brand.alert.base
-        }`,
+      caution: {
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.border.caution}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.focus.caution.inner}`,
       },
     },
   },

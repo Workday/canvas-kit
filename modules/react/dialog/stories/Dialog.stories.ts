@@ -1,8 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Dialog.mdx';
-
 import {Dialog} from '@workday/canvas-kit-react/dialog';
+
+import mdxDoc from './Dialog.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Focus as FocusExample} from './examples/Focus';
 

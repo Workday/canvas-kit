@@ -1,11 +1,12 @@
 import {Identifier, Transform} from 'jscodeshift';
+
+import {mapping} from './mapping';
 import {
   addMissingImports,
   filterOutImports,
   getImports,
   transformObjectPropertyRecursively,
 } from './utils';
-import {mapping} from './mapping';
 
 type DeclarationType = {[key: string]: any};
 

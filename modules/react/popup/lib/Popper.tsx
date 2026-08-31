@@ -1,20 +1,21 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
 import {
-  Placement as PopperJSPlacement,
-  Options,
   Instance,
   Modifier,
+  Options,
+  Placement as PopperJSPlacement,
   createPopper,
 } from '@popperjs/core';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+
+import {useLocalRef} from '@workday/canvas-kit-react/common';
+
+import {fallbackPlacementsModifier} from './fallbackPlacements';
+import {usePopupStack} from './hooks';
 
 export type Placement = `${PopperJSPlacement}`; // Use template literals to make documentation list them out
 export type PopperOptions = Options;
 export const defaultFallbackPlacements: Placement[] = ['top', 'right', 'bottom', 'left'];
-
-import {usePopupStack} from './hooks';
-import {useLocalRef} from '@workday/canvas-kit-react/common';
-import {fallbackPlacementsModifier} from './fallbackPlacements';
 
 export interface PopperProps {
   /**

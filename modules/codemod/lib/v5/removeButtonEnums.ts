@@ -1,12 +1,13 @@
 import {
   API,
   FileInfo,
-  Options,
+  ImportDeclaration,
   ImportSpecifier,
   MemberExpression,
+  Options,
   TSTypeReference,
-  ImportDeclaration,
 } from 'jscodeshift';
+
 import {getImportRenameMap} from './getImportRenameMap';
 
 // List of imports that will be removed from an import statement
@@ -142,10 +143,13 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
     })
     .remove();
 
-  const reverseImportMap = Object.keys(importMap).reduce((result, key) => {
-    result[importMap[key]] = key;
-    return result;
-  }, {} as Record<string, string>);
+  const reverseImportMap = Object.keys(importMap).reduce(
+    (result, key) => {
+      result[importMap[key]] = key;
+      return result;
+    },
+    {} as Record<string, string>
+  );
 
   // The following will replace JSX attributes that match something in `enumsToMap`
   // Example: variant={Button.Variant.Primary} => variant="primary"

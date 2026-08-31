@@ -1,6 +1,7 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transform from '../compoundBanner';
 import {stripIndent} from 'common-tags';
+
+import transform from '../compoundBanner';
+import {expectTransformFactory} from './expectTransformFactory';
 
 const expectTransform = expectTransformFactory(transform);
 
@@ -25,7 +26,7 @@ describe('banner', () => {
     const input = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner label="1 Warning" variant={Banner.Variant.Full} error={Banner.ErrorType.Alert} />
+      <Banner label="1 Warning" variant={Banner.Variant.Full} error={Banner.ErrorType.Caution} />
     `;
 
     const expected = stripIndent`
@@ -57,7 +58,7 @@ describe('banner', () => {
     const input = stripIndent`
       import {Banner} from '@workday/canvas-kit-react/banner'
 
-      <Banner error={numErrors ? Banner.ErrorType.Error : Banner.ErrorType.Alert} variant={shouldStick ? Banner.Variant.Sticky : Banner.Variant.Full} label='3 Warnings' />
+      <Banner error={numErrors ? Banner.ErrorType.Error : Banner.ErrorType.Caution} variant={shouldStick ? Banner.Variant.Sticky : Banner.Variant.Full} label='3 Warnings' />
     `;
 
     const expected = stripIndent`

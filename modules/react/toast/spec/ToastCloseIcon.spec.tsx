@@ -1,6 +1,8 @@
-import React from 'react';
 import {render, screen} from '@testing-library/react';
+import React from 'react';
+
 import {usePopupModel} from '@workday/canvas-kit-react/popup';
+
 import {Toast} from '../lib/Toast';
 
 describe('Toast.Close', () => {

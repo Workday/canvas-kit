@@ -7,6 +7,5 @@
 Status Indicators help the user quickly identify the status of a task, action, or page element.
 
 View the
-[documentation for Status Indicator](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator-react--basic)
+[documentation for Status Indicator](https://workday.github.io/canvas-kit/?path=/docs/preview-status-indicator--docs)
 on Storybook.
-

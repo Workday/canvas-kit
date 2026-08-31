@@ -1,9 +1,9 @@
 import React from 'react';
 
+import {PopupStack} from '@workday/canvas-kit-popup-stack';
 import {changeFocus, createElemPropsHook, isMouseFocusable} from '@workday/canvas-kit-react/common';
 
 import {usePopupModel} from './usePopupModel';
-import {PopupStack} from '@workday/canvas-kit-popup-stack';
 
 function getScrollParent(element: HTMLElement): HTMLElement {
   if (element === document.body || !element.parentElement) {

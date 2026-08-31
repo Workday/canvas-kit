@@ -1,7 +1,6 @@
 import {Meta, StoryObj} from '@storybook/react';
 
 import mdxDoc from './Testing.mdx';
-
 import {Basic} from './examples/Basic';
 
 export default {

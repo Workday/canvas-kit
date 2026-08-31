@@ -1,13 +1,14 @@
 import {Meta, StoryObj} from '@storybook/react';
-import mdxDoc from './LoadingSparkles.mdx';
+
 import {LoadingSparkles} from '@workday/canvas-kit-preview-react/loading-sparkles';
 
+import mdxDoc from './LoadingSparkles.mdx';
 // examples
 import {Basic as BasicExample} from './examples/Basic';
 import {RTL as RTLExample} from './examples/RTL';
 
 export default {
-  title: 'Preview/Loading Sparkles',
+  title: 'Preview/Loading Sparkles (AI)',
   component: LoadingSparkles,
   tags: ['autodocs'],
   parameters: {

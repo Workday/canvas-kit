@@ -1,22 +1,19 @@
-import * as React from 'react';
 import ReactDOM from 'react-dom';
-import {customColorTheme} from '../../../../utils/storybook';
-import {ContentDirection, CanvasProvider, useTheme} from '@workday/canvas-kit-react/common';
-import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
-import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {
-  Popup,
-  useCloseOnOutsideClick,
-  useCloseOnEscape,
-  usePopupModel,
-} from '@workday/canvas-kit-react/popup';
-import {Flex, Box} from '@workday/canvas-kit-react/layout';
 
-import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
-import {StackedModals as StackedModalsExample} from './examples/StackedModals';
-import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
-import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
+import {DeleteButton, PrimaryButton} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
+
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
+import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
+import {ModalWithPopupRTL as ModalWithPopupRTLExample} from './examples/ModalWithPopupRTL';
+import {NoTargetRTL as NoTargetRTLExample} from './examples/NoTargetRTL';
+import {StackedModals as StackedModalsExample} from './examples/StackedModals';
+import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
+import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
 
 export default {
   title: 'Testing/Popups/Modal',
@@ -40,7 +37,7 @@ export const AccessibilityTest = {
               <Modal.Heading>Delete Item</Modal.Heading>
               <Modal.Body>
                 <p>Are you sure you want to delete the item?</p>
-                <Flex gap="s">
+                <Flex cs={{gap: system.gap.md}}>
                   <Modal.CloseButton as={DeleteButton}>Delete</Modal.CloseButton>
                   <Modal.CloseButton>Cancel</Modal.CloseButton>
                 </Flex>
@@ -108,6 +105,14 @@ export const ModalWithPopup = {
   render: ModalWithPopupExample,
 };
 
+export const ModalWithPopupRTL = {
+  render: ModalWithPopupRTLExample,
+};
+
+export const NoTargetRTL = {
+  render: NoTargetRTLExample,
+};
+
 export const WithTooltips = {
   render: WithTooltipsExample,
 };
@@ -142,17 +147,17 @@ const TestModal = () => {
     <>
       <TestContent />
       <Modal model={model}>
-        <Modal.Overlay style={{animation: 'none'}}>
-          <Modal.Card style={{animation: 'none'}}>
+        <Modal.Overlay cs={{animation: 'none'}}>
+          <Modal.Card cs={{animation: 'none'}}>
             <Modal.CloseIcon aria-label="Close" />
             <Modal.Heading>Small Width Modal</Modal.Heading>
             <Modal.Body>
-              <Box as="p" marginY="zero">
+              <Box as="p" cs={{marginBlock: '0'}}>
                 This modal should appear on the bottom of the screen for mobile devices. Chromatic
                 uses a version of Chrome that makes it appear on the top and is a known issue.
               </Box>
             </Modal.Body>
-            <Flex gap="s" padding="xxs" marginTop="xxs">
+            <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
               <Modal.CloseButton as={PrimaryButton}>Delete</Modal.CloseButton>
               <Modal.CloseButton>Cancel</Modal.CloseButton>
             </Flex>
@@ -180,15 +185,15 @@ export const ModalRTL = {
     },
   },
   render: () => {
-    const theme = useTheme({canvas: {direction: ContentDirection.RTL}});
     const model = useModalModel({
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={theme}>
+      <CanvasProvider dir="rtl">
         <Modal model={model}>
-          <Modal.Overlay style={{animation: 'none'}}>
-            <Modal.Card style={{animation: 'none'}} width={300}>
+          <Modal.Target cs={{display: 'none'}}></Modal.Target>
+          <Modal.Overlay cs={{animation: 'none'}}>
+            <Modal.Card cs={{animation: 'none', width: px2rem(300)}}>
               <Modal.CloseIcon aria-label="" />
               <Modal.Heading>למחוק פריט</Modal.Heading>
               <Modal.Body>האם ברצונך למחוק פריט זה</Modal.Body>
@@ -199,6 +204,16 @@ export const ModalRTL = {
     );
   },
 };
+
+const customTheme = createStyles({
+  [brand.primary.base]: 'purple',
+  [brand.primary.accent]: 'turquoise',
+  [brand.common.focusOutline]: 'turquoise',
+  [brand.common.alertInner]: 'coral',
+  [brand.common.errorInner]: 'crimson',
+  [brand.success.base]: 'aquamarine',
+  [brand.neutral.base]: 'gray',
+});
 
 export const CustomThemeModal = {
   parameters: {
@@ -211,19 +226,20 @@ export const CustomThemeModal = {
       initialVisibility: 'visible',
     });
     return (
-      <CanvasProvider theme={{canvas: customColorTheme}}>
+      <CanvasProvider>
         <Modal model={model}>
-          <Modal.Overlay style={{animation: 'none'}}>
-            <Modal.Card style={{animation: 'none'}}>
+          {/* We are only adding the custom theme via class name for testing purposes. Custom themes should be set on the :root element in CSS using CSS variables */}
+          <Modal.Overlay cs={{animation: 'none'}} className={customTheme}>
+            <Modal.Card cs={{animation: 'none'}}>
               <Modal.CloseIcon aria-label="Close" />
               <Modal.Heading>MIT License</Modal.Heading>
               <Modal.Body>
-                <Box as="p" marginY="zero">
+                <Box as="p" cs={{marginBlock: '0'}}>
                   Permission is hereby granted, free of charge, to any person obtaining a copy of
                   this software and associated documentation files (the "Software").
                 </Box>
               </Modal.Body>
-              <Flex gap="s" padding="xxs" marginTop="xxs">
+              <Flex cs={{gap: system.gap.md, padding: system.padding.xs}}>
                 <Modal.CloseButton as={PrimaryButton}>Acknowledge</Modal.CloseButton>
                 <Modal.CloseButton>Cancel</Modal.CloseButton>
               </Flex>

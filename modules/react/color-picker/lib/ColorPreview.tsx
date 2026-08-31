@@ -1,8 +1,9 @@
-import {ColorInput} from './ColorInput';
-import {createComponent, StyledType} from '@workday/canvas-kit-react/common';
+import {createComponent} from '@workday/canvas-kit-react/common';
 import {TextInputProps} from '@workday/canvas-kit-react/text-input';
-import styled from '@emotion/styled';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {ColorInput} from './ColorInput';
 
 export interface ColorPreviewProps extends TextInputProps {
   /**
@@ -15,23 +16,25 @@ export interface ColorPreviewProps extends TextInputProps {
   id?: string;
 }
 
-const StyledColorPreview = styled(ColorInput)<StyledType>({
-  backgroundColor: colors.frenchVanilla100,
-  borderColor: colors.frenchVanilla100,
-  pointerEvents: 'none',
+export const colorPreviewStencil = createStencil({
+  base: {
+    backgroundColor: system.legacy.color.surface.default,
+    borderColor: system.legacy.color.border.inverse.default,
+    pointerEvents: 'none',
+  },
 });
 
 export const ColorPreview = createComponent('input')({
   displayName: 'ColorPreview',
   Component: ({id, value, ...elemProps}: ColorPreviewProps, ref, Element) => (
-    <StyledColorPreview
+    <ColorInput
       ref={ref}
       as={Element}
       id={id}
       value={value}
       readOnly={true}
       placeholder=""
-      {...elemProps}
+      {...handleCsProp(elemProps, colorPreviewStencil())}
     />
   ),
 });

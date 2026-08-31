@@ -1,4 +1,5 @@
 import {CSToPropsInput, handleCsProp} from '@workday/canvas-kit-styling';
+
 import {boxStyleFn} from '../Box';
 import {backgroundStyleFnConfigs} from './background';
 import {borderStyleFnConfigs} from './border';
@@ -30,11 +31,14 @@ const stylePropHash = [
   ...positionStyleFnConfigs,
   ...spaceStyleFnConfigs,
   ...textStyleFnConfigs,
-].reduce((result, prop) => {
-  //@ts-ignore
-  result[prop.name] = true;
-  return result;
-}, {} as Record<string, boolean>);
+].reduce(
+  (result, prop) => {
+    //@ts-ignore
+    result[prop.name] = true;
+    return result;
+  },
+  {} as Record<string, boolean>
+);
 
 function isStyleProps(prop: string): boolean {
   return stylePropHash[prop] || false;
@@ -43,6 +47,7 @@ function isStyleProps(prop: string): boolean {
 /**
  * This function has the same signature as {@link handleCsProp} and also calls `handleCsProps`, but
  * adds support for style props. It can be used as a drop-in replacement for `handleCsProps`.
+ * @deprecated ⚠️ `mergeStyles` is deprecated since it supports style props. Use `handleCsProps` to ensure correct style merging order. For more information view our [docs](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-merging-styles--docs#handlecsprop).
  */
 export function mergeStyles<T extends {}>(
   /**

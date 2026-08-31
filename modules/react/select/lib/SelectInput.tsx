@@ -1,13 +1,12 @@
-import {CanvasSystemIcon} from '@workday/design-assets-types';
-import {caretDownSmallIcon} from '@workday/canvas-system-icons-web';
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {CanvasSystemIcon, caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {useSelectInput} from './hooks/useSelectInput';
 import {useSelectModel} from './hooks/useSelectModel';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {system} from '@workday/canvas-tokens-web';
 
 export interface SelectInputProps extends ExtractProps<typeof TextInput, never>, CSProps {
   /**
@@ -35,13 +34,14 @@ export const selectInputStencil = createStencil({
     visualInputPart,
     caretContainerPart,
     startIconContainerPart,
+    caretPart,
   }) => ({
     [hiddenInputPart]: {
       position: 'absolute',
-      top: system.space.zero,
-      bottom: system.space.zero,
-      left: system.space.zero,
-      right: system.space.zero,
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
       opacity: system.opacity.zero,
       cursor: 'default',
       pointerEvents: 'none',
@@ -55,20 +55,47 @@ export const selectInputStencil = createStencil({
     },
     [visualInputPart]: {
       caretColor: 'transparent',
+      backgroundColor: system.legacy.color.surface.default,
+      color: system.color.fg.default,
       cursor: 'default',
+      '&::placeholder': {
+        color: system.color.fg.default,
+      },
       '&::selection': {
         backgroundColor: 'transparent',
       },
     },
+    [caretPart]: {
+      [systemIconStencil.vars.color]: system.color.fg.default,
+    },
+    '&:has(:disabled, .disabled)': {
+      [caretPart]: {
+        [systemIconStencil.vars.color]: system.color.fg.disabled,
+      },
+    },
   }),
+  modifiers: {
+    error: {
+      error: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: system.legacy.color.brand.surface.critical.default,
+        },
+      }),
+      caution: ({visualInputPart}) => ({
+        [visualInputPart]: {
+          backgroundColor: system.legacy.color.brand.surface.caution.default,
+        },
+      }),
+    },
+  },
 });
 
 export const SelectInput = createSubcomponent(TextInput)({
   modelHook: useSelectModel,
   elemPropsHook: useSelectInput,
-})<SelectInputProps>(({inputStartIcon, formInputProps, ...elemProps}, Element, model) => {
+})<SelectInputProps>(({inputStartIcon, formInputProps, error, ...elemProps}, Element, model) => {
   return (
-    <InputGroup data-width="ck-formfield-width" {...selectInputStencil()}>
+    <InputGroup data-width="ck-formfield-width" {...selectInputStencil({error: error})}>
       {inputStartIcon && model.state.selectedIds.length > 0 && (
         <InputGroup.InnerStart {...selectInputStencil.parts.startIconContainer}>
           <SystemIcon {...selectInputStencil.parts.startIcon} icon={inputStartIcon} />
@@ -80,6 +107,7 @@ export const SelectInput = createSubcomponent(TextInput)({
       <InputGroup.Input
         as={Element}
         placeholder="Choose an option"
+        error={error}
         {...selectInputStencil.parts.visualInput}
         {...elemProps}
       />

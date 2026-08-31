@@ -1,28 +1,26 @@
-import React from 'react';
-
-/* eslint-disable @emotion/no-vanilla */
-import {expectTypeOf} from 'expect-type';
-import {Properties} from 'csstype';
-import {SerializedStyles, ComponentSelector} from '@emotion/serialize';
 import {css} from '@emotion/css';
-import {jsx, CacheProvider} from '@emotion/react';
+import {CacheProvider, jsx} from '@emotion/react';
+import {ComponentSelector, SerializedStyles} from '@emotion/serialize';
 import styled from '@emotion/styled';
 import {render as rtlRender, screen} from '@testing-library/react';
+import {Properties} from 'csstype';
+import {expectTypeOf} from 'expect-type';
 
+import {compileCSS} from '../../styling-transform/lib/utils/createStyleObjectNode';
 import {
-  createStyles,
-  cssVar,
-  createVars,
-  createModifiers,
-  csToProps,
   CS,
-  createCompoundModifiers,
+  CSProps,
   CompoundModifier,
+  createCompoundModifiers,
+  createModifiers,
   createStencil,
+  createStyles,
+  createVars,
+  csToProps,
+  cssVar,
+  getCache,
   handleCsProp,
   keyframes,
-  CSProps,
-  getCache,
 } from '../lib/cs';
 
 const cache = getCache();
@@ -58,7 +56,9 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles)) {
-            expect(rule.cssText).toContain(`.${styles} {color: var(--my-var);}`);
+            expect(compileCSS(rule.cssText)).toContain(
+              compileCSS(`.${styles} {color: var(--my-var);}`)
+            );
           }
         }
       }
@@ -78,7 +78,7 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles3)) {
-            expect(rule.cssText).toContain(`.${styles3} {color: red;}`);
+            expect(compileCSS(rule.cssText)).toContain(compileCSS(`.${styles3} {color: red;}`));
           }
         }
       }
@@ -86,9 +86,11 @@ describe('cs', () => {
       const div = document.createElement('div');
       div.className = `${styles2} ${styles3}`;
       document.body.append(div);
+      const divColor = document.createElement('div');
+      divColor.style.color = 'red';
 
       // Test jsdom resolution of style properties
-      expect(getComputedStyle(div).color).toEqual('red');
+      expect(getComputedStyle(div).color).toEqual(getComputedStyle(divColor).color);
     });
 
     it('should use the name if name is passed', () => {
@@ -99,7 +101,7 @@ describe('cs', () => {
       for (const sheet of document.styleSheets as StyleSheetList & Iterable<CSSStyleSheet>) {
         for (const rule of sheet.cssRules as CSSRuleList & Iterable<CSSRule>) {
           if (rule.cssText.includes(styles)) {
-            expect(rule.cssText).toContain(`.${styles} {color: red;}`);
+            expect(compileCSS(rule.cssText)).toContain(compileCSS(`.${styles} {color: red;}`));
           }
         }
       }
@@ -738,12 +740,54 @@ describe('cs', () => {
 
       expectTypeOf(myStencil).toHaveProperty('parts');
       expectTypeOf(myStencil.parts).toHaveProperty('separator');
-      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{'data-part': 'my-separator'}>();
+      expectTypeOf(myStencil.parts.separator).toEqualTypeOf<{
+        'data-part': 'my-separator';
+        readonly selector: '[data-part="my-separator"]';
+      }>();
 
       expect(myStencil).toHaveProperty(
-        'parts.separator[data-part]',
+        'parts.separator.data-part',
         expect.stringMatching('my-separator')
       );
+    });
+
+    it('should return a CSS selector on stencil parts', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      expectTypeOf(
+        myStencil.parts.separator.selector
+      ).toEqualTypeOf<'[data-part="my-separator"]'>();
+      expect(myStencil.parts.separator.selector).toEqual('[data-part="my-separator"]');
+    });
+
+    it('should not include selector when spreading part props onto an element', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      expect({...myStencil.parts.separator}).toEqual({'data-part': 'my-separator'});
+    });
+
+    it('should not apply selector as a DOM attribute when spreading part props', () => {
+      const myStencil = createStencil({
+        parts: {
+          separator: 'my-separator',
+        },
+        base: {},
+      });
+
+      render(<div {...myStencil.parts.separator} data-testid="part" />);
+
+      expect(screen.getByTestId('part')).toHaveAttribute('data-part', 'my-separator');
+      expect(screen.getByTestId('part')).not.toHaveAttribute('selector');
     });
 
     it('should coerce a variable input to a type of string', () => {
@@ -1328,9 +1372,10 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.parts).toHaveProperty('separator');
         expectTypeOf(extendedStencil.parts.separator).toEqualTypeOf<{
           'data-part': 'base-separator';
+          readonly selector: '[data-part="base-separator"]';
         }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.separator[data-part]',
+          'parts.separator.data-part',
           expect.stringMatching('base-separator')
         );
 
@@ -1339,9 +1384,10 @@ describe('cs', () => {
         expectTypeOf(extendedStencil.parts).toHaveProperty('border');
         expectTypeOf(extendedStencil.parts.border).toEqualTypeOf<{
           'data-part': 'extended-border';
+          readonly selector: '[data-part="extended-border"]';
         }>();
         expect(extendedStencil).toHaveProperty(
-          'parts.border[data-part]',
+          'parts.border.data-part',
           expect.stringMatching('extended-border')
         );
       });

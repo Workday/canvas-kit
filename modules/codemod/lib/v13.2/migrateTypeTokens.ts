@@ -1,7 +1,8 @@
 import {Identifier, MemberExpression, Transform} from 'jscodeshift';
-import {addMissingImports, filterOutImports, getImports, varToMemberExpression} from './utils';
-import {typeProps} from './mapping/typeProps';
+
 import {mapping} from './mapping';
+import {typeProps} from './mapping/typeProps';
+import {addMissingImports, filterOutImports, getImports, varToMemberExpression} from './utils';
 
 type DeclarationType = {[key: string]: any};
 

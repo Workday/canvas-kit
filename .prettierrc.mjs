@@ -1,0 +1,16 @@
+export default {
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
+  arrowParens: 'avoid',
+  bracketSpacing: false,
+  jsxBracketSameLine: false,
+  printWidth: 100,
+  proseWrap: 'always',
+  semi: true,
+  singleQuote: true,
+  tabWidth: 2,
+  trailingComma: 'es5',
+  useTabs: false,
+  importOrder: ['^@workday/(.*)$', '^[./]'],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
+};

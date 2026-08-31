@@ -1,27 +1,26 @@
 import * as React from 'react';
 
-import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
 import {
-  createElemPropsHook,
+  useListItemRegister,
+  useListItemRovingFocus,
+  useOverflowListModel,
+} from '@workday/canvas-kit-react/collection';
+import {
   composeHooks,
+  createElemPropsHook,
   createSubModelElemPropsHook,
   createSubcomponent,
   useLocalRef,
   useResizeObserver,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {
-  useOverflowListModel,
-  useListItemRovingFocus,
-  useListItemRegister,
-} from '@workday/canvas-kit-react/collection';
-
-import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {useTabsModel, TABS_OVERFLOW_BUTTON_ID} from './useTabsModel';
-import {StyledTabItem} from './TabsItem';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {useMenuTarget} from '@workday/canvas-kit-react/menu';
+import {createStencil} from '@workday/canvas-kit-styling';
+import {chevronDownSmallIcon} from '@workday/canvas-system-icons-web';
+
+import {StyledTabItem} from './TabsItem';
+import {TABS_OVERFLOW_BUTTON_ID, useTabsModel} from './useTabsModel';
 
 // Re-export for consumers who may need to reference the overflow button ID
 export {TABS_OVERFLOW_BUTTON_ID} from './useTabsModel';
@@ -37,7 +36,7 @@ const tabsOverflowButtonStencil = createStencil({
   base: {
     '&:has([data-part="tabs-overflow-button-icon"])': {
       display: 'flex',
-      gap: system.space.zero,
+      gap: 0,
     },
   },
 });

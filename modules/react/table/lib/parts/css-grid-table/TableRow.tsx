@@ -1,6 +1,7 @@
 import React from 'react';
-import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {GridProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, createVars} from '@workday/canvas-kit-styling';
 
 const tableRowChildrenVars = createVars('cellNumber');

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
+import {mergeCallback} from '@workday/canvas-kit-react/common';
 import {
-  getTransformFromPlacement,
   Placement,
   Popper,
   defaultFallbackPlacements,
+  getTransformFromPlacement,
 } from '@workday/canvas-kit-react/popup';
-import {mergeCallback} from '@workday/canvas-kit-react/common';
 
 import {TooltipContainer} from './TooltipContainer';
 import {useTooltip} from './useTooltip';
@@ -89,6 +89,14 @@ export interface OverflowTooltipProps extends Omit<React.HTMLAttributes<HTMLDivE
    * disable the fallback placements.
    */
   fallbackPlacements?: Placement[];
+  /**
+   * Amount of time (in ms) to delay before showing the Tooltip
+   */
+  showDelay?: number;
+  /**
+   * Amount of time (in ms) to delay before hiding the Tooltip
+   */
+  hideDelay?: number;
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -96,24 +104,33 @@ function mergeCallbacks<T extends {[key: string]: any}>(
   componentProps: T,
   keys: (keyof T)[] = Object.keys(componentProps)
 ) {
-  return (keys as string[]).reduce((mergedProps, key) => {
-    if (typeof elemProps[key] === 'function') {
-      mergedProps[key] = mergeCallback(componentProps[key], elemProps[key]);
-    } else {
-      mergedProps[key] = componentProps[key];
-    }
-    return mergedProps;
-  }, {} as {[key: string]: any});
+  return (keys as string[]).reduce(
+    (mergedProps, key) => {
+      if (typeof elemProps[key] === 'function') {
+        mergedProps[key] = mergeCallback(componentProps[key], elemProps[key]);
+      } else {
+        mergedProps[key] = componentProps[key];
+      }
+      return mergedProps;
+    },
+    {} as {[key: string]: any}
+  );
 }
 
 export const OverflowTooltip = ({
   placement = 'top',
   fallbackPlacements = defaultFallbackPlacements,
   children,
+  showDelay,
+  hideDelay,
   ...elemProps
 }: OverflowTooltipProps) => {
   const [titleText, setTitleText] = React.useState('');
-  const {targetProps, popperProps, tooltipProps} = useTooltip({type: 'muted'});
+  const {targetProps, popperProps, tooltipProps} = useTooltip({
+    type: 'muted',
+    showDelay,
+    hideDelay,
+  });
 
   const onMouseEnter = (event: React.MouseEvent) => {
     const target = event.currentTarget;

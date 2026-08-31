@@ -1,6 +1,6 @@
-import React from 'react';
-import {render, getByTestId, act} from '@testing-library/react';
 import {Instance} from '@popperjs/core';
+import {act, getByTestId, render} from '@testing-library/react';
+import React from 'react';
 
 import {Popper} from '../';
 
@@ -55,7 +55,7 @@ describe('Popper', () => {
   });
 
   it('should call the children render prop with the placement', () => {
-    const renderProp = jest.fn();
+    const renderProp = vi.fn();
     render(
       <Popper anchorElement={document.body} placement="bottom">
         {renderProp}
@@ -66,7 +66,7 @@ describe('Popper', () => {
   });
 
   it('should call the children render prop with the placement on rerender', async () => {
-    const renderProp = jest.fn();
+    const renderProp = vi.fn();
     const PopperComponent = ({placement}) => {
       const anchor = React.useRef(null);
       return (
@@ -83,7 +83,7 @@ describe('Popper', () => {
     const screen = render(<PopperComponent placement="bottom" />);
 
     // force PopperJS to run
-    // eslint-disable-next-line compat/compat
+
     await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(renderProp).toBeCalledWith({placement: 'bottom'});
@@ -91,14 +91,14 @@ describe('Popper', () => {
     screen.rerender(<PopperComponent placement="top" />);
 
     // force PopperJS to run
-    // eslint-disable-next-line compat/compat
+
     await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(renderProp).toBeCalledWith({placement: 'top'});
   });
 
   it('should only create a Popper instance once and only call onFirstUpdate once on rerenders', async () => {
-    const onFirstUpdate = jest.fn();
+    const onFirstUpdate = vi.fn();
     const screen = render(
       <Popper anchorElement={document.body} popperOptions={{onFirstUpdate}} placement="top">
         Contents
@@ -106,7 +106,7 @@ describe('Popper', () => {
     );
 
     // force PopperJS to run
-    // eslint-disable-next-line compat/compat
+
     await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(onFirstUpdate).toHaveBeenCalledTimes(1);
@@ -118,7 +118,7 @@ describe('Popper', () => {
     );
 
     // force PopperJS to run
-    // eslint-disable-next-line compat/compat
+
     await act(() => new Promise<any>(requestAnimationFrame));
 
     expect(onFirstUpdate).toHaveBeenCalledTimes(1);

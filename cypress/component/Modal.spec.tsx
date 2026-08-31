@@ -1,14 +1,15 @@
-import * as h from '../helpers';
 import {Basic} from '../../modules/react/modal/stories/examples/Basic';
-import {WithoutCloseIcon} from '../../modules/react/modal/stories/examples/WithoutCloseIcon';
 import {CustomFocus} from '../../modules/react/modal/stories/examples/CustomFocus';
 import {CustomTarget} from '../../modules/react/modal/stories/examples/CustomTarget';
-
-import {WithRadioButtons} from '../../modules/react/modal/stories/examples/WithRadioButtons';
-import {StackedModals} from '../../modules/react/modal/stories/examples/StackedModals';
-import {WithTooltips} from '../../modules/react/modal/stories/examples/WithTooltips';
-import {ModalWithPopup} from '../../modules/react/modal/stories/examples/ModalWithPopup';
+import {FormModal} from '../../modules/react/modal/stories/examples/FormModal';
 import {IframeTest} from '../../modules/react/modal/stories/examples/IframeTest';
+import {ModalWithPopup} from '../../modules/react/modal/stories/examples/ModalWithPopup';
+import {ReturnFocus} from '../../modules/react/modal/stories/examples/ReturnFocus';
+import {StackedModals} from '../../modules/react/modal/stories/examples/StackedModals';
+import {WithRadioButtons} from '../../modules/react/modal/stories/examples/WithRadioButtons';
+import {WithTooltips} from '../../modules/react/modal/stories/examples/WithTooltips';
+import {WithoutCloseIcon} from '../../modules/react/modal/stories/examples/WithoutCloseIcon';
+import * as h from '../helpers';
 
 describe('Modal', () => {
   context(`given the Basic example is rendered`, () => {
@@ -101,7 +102,11 @@ describe('Modal', () => {
         });
 
         it('should trap focus inside the modal element', () => {
-          cy.tab().should('contain', 'Acknowledge').tab().should('contain', 'Cancel').tab();
+          cy.realPress('Tab');
+          cy.focused().should('contain', 'Acknowledge');
+          cy.realPress('Tab');
+          cy.focused().should('contain', 'Cancel');
+          cy.realPress('Tab');
           cy.findByRole('dialog', {name: 'MIT License'})
             .findByRole('button', {name: 'Close'})
             .should('have.focus');
@@ -169,6 +174,75 @@ describe('Modal', () => {
   });
 });
 
+context('given the FormModal example is rendered', () => {
+  beforeEach(() => {
+    cy.mount(<FormModal />);
+    cy.wait(150);
+  });
+
+  context('when Create New User is clicked', () => {
+    beforeEach(() => {
+      cy.findByRole('button', {name: 'Create New User'}).click();
+    });
+
+    it('should open the New User dialog', () => {
+      cy.findByRole('dialog', {name: 'New User'}).should('be.visible');
+    });
+
+    context('when the form is filled out and submitted', () => {
+      beforeEach(() => {
+        cy.findByRole('textbox', {name: 'First Name'}).type('Ada');
+        cy.findByRole('textbox', {name: 'Last Name'}).type('Lovelace');
+        cy.findByRole('button', {name: 'Submit'}).click();
+      });
+
+      it('should close the modal', () => {
+        cy.findByRole('dialog', {name: 'New User'}).should('not.exist');
+      });
+    });
+  });
+});
+
+context('given the ReturnFocus example is rendered', () => {
+  beforeEach(() => {
+    cy.mount(<ReturnFocus />);
+    cy.wait(150);
+  });
+
+  it('should open the delete confirmation dialog', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('be.visible');
+  });
+
+  it('should close the dialog when Cancel is clicked', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('button', {name: 'Cancel'}).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+  });
+
+  it('should remove one file when delete is confirmed', () => {
+    cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+    cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+      cy.findByRole('button', {name: 'Delete'}).click();
+    });
+    cy.findByRole('dialog', {name: 'Delete file?'}).should('not.exist');
+    cy.findAllByRole('button', {name: 'Delete'}).should('have.length', 2);
+  });
+
+  it('should show the empty state after all files are deleted', () => {
+    const confirmDelete = () => {
+      cy.findAllByRole('button', {name: 'Delete'}).eq(0).click();
+      cy.findByRole('dialog', {name: 'Delete file?'}).within(() => {
+        cy.findByRole('button', {name: 'Delete'}).click();
+      });
+    };
+    confirmDelete();
+    confirmDelete();
+    confirmDelete();
+    cy.findByText('No files remaining.').should('be.visible');
+  });
+});
+
 context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () => {
   beforeEach(() => {
     cy.mount(<WithTooltips />);
@@ -219,10 +293,26 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
 
       context(`when the 'OK' button is focused`, () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'OK'}).focus();
+          // Scope to this popup so we don't hit the other Popup's OK; use Tab from Close so focus
+          // matches :focus-visible (programmatic .focus() on OK alone may not show the tooltip in Electron).
+          cy.findByRole('dialog', {name: 'Hidable Popup'}).within(() => {
+            cy.findByRole('button', {name: 'Close'}).focus();
+          });
+          cy.realPress('Tab');
+          cy.findByRole('dialog', {name: 'Hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
         it(`should open the 'OK' tooltip`, () => {
-          cy.get('[role="tooltip"]').should('be.visible');
+          cy.findByRole('dialog', {name: 'Hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
+          // useTooltip default showDelay is 300ms
+          cy.wait(350);
+          cy.findByRole('tooltip', {
+            name: 'Really, Really, Really, Really, Really sure',
+            timeout: 10000,
+          }).should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
@@ -258,17 +348,30 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
 
       context(`when the 'OK' button is focused`, () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'OK'}).focus();
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'}).within(() => {
+            cy.findByRole('button', {name: 'Close'}).focus();
+          });
+          cy.realPress('Tab');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
 
         it(`should be focused`, () => {
-          cy.findByRole('button', {name: 'OK'}).should('have.focus');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
         });
 
         it(`should open the 'OK' tooltip`, () => {
-          cy.findByRole('tooltip', {name: 'Really, Really, Really, Really, Really sure'})
-            .wait(50)
-            .should('be.visible');
+          cy.findByRole('dialog', {name: 'Non-hidable Popup'})
+            .findByRole('button', {name: 'OK'})
+            .should('have.focus');
+          cy.wait(350);
+          cy.findByRole('tooltip', {
+            name: 'Really, Really, Really, Really, Really sure',
+            timeout: 10000,
+          }).should('be.visible');
         });
 
         context(`when clicking outside the modal`, () => {
@@ -281,7 +384,7 @@ context(`given the [Testing/Popups/Modal, With Tooltips] story is rendered`, () 
           });
 
           it(`should close the modal`, () => {
-            cy.findByRole('dialog', {name: 'Non-hidable'}).should('not.exist');
+            cy.findByRole('dialog', {name: 'Open Modal'}).should('not.exist');
           });
 
           it(`should close the 'OK' tooltip`, () => {
@@ -314,12 +417,10 @@ context(`given the [Testing/Popups/Modal, With Radio buttons] story is rendered`
     it('should trap focus inside the modal element', () => {
       cy.findByLabelText('Select Item').should('be.visible');
 
-      cy.focused()
-        .tab()
-        .should('have.attr', 'value', 'email')
-        .tab()
-        .should('have.attr', 'aria-label', 'Close')
-        .tab();
+      cy.realPress('Tab');
+      cy.focused().should('have.attr', 'value', 'email');
+      cy.realPress('Tab');
+      cy.focused().should('have.attr', 'aria-label', 'Close');
     });
   });
 });
@@ -417,13 +518,12 @@ context(`given the [Components/Popups/Modal, Without close icon] story is render
 
       it('should trap focus inside the modal element', () => {
         cy.findByRole('button', {name: 'Cancel'}).should('have.focus');
-        cy.tab()
-          .should('contain', 'Delete')
-          .tab()
-          .should('contain', 'Delete Item')
-          .tab()
-          .should('contain', 'Cancel');
-        cy.focused().should('have.text', 'Cancel');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Delete');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Delete Item');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Cancel');
       });
     });
 
@@ -517,14 +617,13 @@ context(`given the [Components/Popups/Modal, Custom focus] story is rendered`, (
       });
 
       it('should trap focus inside the modal element', () => {
-        cy.focused()
-          .tab()
-          .should('contain', 'Acknowledge')
-          .tab()
-          .should('contain', 'Cancel')
-          .tab()
-          .should('have.attr', 'aria-label', 'Close')
-          .tab();
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Acknowledge');
+        cy.realPress('Tab');
+        cy.focused().should('contain', 'Cancel');
+        cy.realPress('Tab');
+        cy.focused().should('have.attr', 'aria-label', 'Close');
+        cy.realPress('Tab');
         cy.findByLabelText('Initials').should('have.focus');
       });
     });
@@ -678,7 +777,7 @@ context(`given the 'Iframe Test' story is rendered`, () => {
 
     context('when Shift + Tab key is pressed', () => {
       beforeEach(() => {
-        cy.focused().tab({shift: true});
+        cy.focused().realPress(['Shift', 'Tab']);
       });
 
       it('should focus in the iframe', () => {
@@ -694,10 +793,10 @@ context(`given the 'Iframe Test' story is rendered`, () => {
           .should('have.focus');
       });
 
-      // skipping because the cy.tab plugin isn't capable of starting inside an iframe. We have to test this manually
+      // skipping because cypress may not be capable of starting inside an iframe. We have to test this manually
       context.skip('when the Tab key is pressed', () => {
         beforeEach(() => {
-          cy.get('iframe').its('0.contentDocument.body').then(cy.wrap).focused().tab();
+          cy.get('iframe').its('0.contentDocument.body').then(cy.wrap).focused().realPress('Tab');
         });
 
         it('should focus on the close button', () => {

@@ -6,17 +6,18 @@ const inheritFont: boolean = typeof canvasObject !== 'undefined' && canvasObject
 const inheritMonoFont: boolean | string =
   typeof canvasObject !== 'undefined' && canvasObject.inheritMonoFontFamily;
 
+/** @deprecated ⚠️ `fontFamily` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export const fontFamily = inheritFont
   ? 'inherit'
   : '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif';
+
+/** @deprecated ⚠️ `monoFontFamily` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export const monoFontFamily =
   inheritMonoFont === true
     ? 'inherit'
     : inheritMonoFont || '"Roboto Mono", "Courier New", Courier, monospace';
 
 /** ### Font Family Tokens
- * [View Storybook Docs](https://workday.github.io/canvas-kit/?path=/story/tokens-tokens-react--type)
- *
  * ---
  * There are two font family tokens:
  *
@@ -34,12 +35,16 @@ export const monoFontFamily =
  *   </p>
  * );
  * ```
+ * @deprecated ⚠️ `fontFamilies` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 export const fontFamilies: CanvasFontFamilies = {
   default: fontFamily,
   monospace: monoFontFamily,
 };
 
+/**
+ * @deprecated ⚠️ `CanvasFontFamilies` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
+ */
 export type CanvasFontFamilies = {
   /**
    * '"Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif'

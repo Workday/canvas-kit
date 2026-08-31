@@ -1,20 +1,21 @@
-import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
   subModelHook,
-  useIsRTL,
 } from '@workday/canvas-kit-react/common';
-import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
-import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
-export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
+
+export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
    * style prop applies styles to the whole Flex component,
@@ -23,6 +24,29 @@ export interface BreadcrumbsOverflowButtonProps extends TertiaryButtonProps {
    */
   style?: FlexProps;
 }
+
+export const breadcrumbsOverflowButtonStencil = createStencil({
+  parts: {
+    overflowButton: 'breadcrumbs-overflow-button',
+    chevronRightIcon: 'breadcrumbs-overflow-button-chevron-right-icon',
+  },
+  base: ({chevronRightIconPart}) => ({
+    alignItems: 'center',
+    display: 'flex',
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [chevronRightIconPart]: {
+      height: system.legacy.size.sm,
+      width: system.legacy.size.sm,
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'inline-flex',
+      ':dir(rtl)': {
+        transform: 'scaleX(-1)',
+      },
+    },
+  }),
+});
 
 export const useBreadcrumbsOverflowButton = composeHooks(
   createElemPropsHook(useBreadcrumbsModel)(() => ({
@@ -39,19 +63,18 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <Flex as="li" alignItems="center" {...style}>
-      <TertiaryButton as={Element} icon={relatedActionsIcon} {...elemProps} />
+    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+      <TertiaryButton
+        as={Element}
+        icon={relatedActionsIcon}
+        {...breadcrumbsOverflowButtonStencil.parts.overflowButton}
+        {...handleCsProp(elemProps)}
+      />
       <SystemIcon
         icon={chevronRightSmallIcon}
-        color={colors.licorice200}
-        colorHover={colors.licorice200}
-        size={20}
-        height={space.l}
-        width={space.l}
-        shouldMirror={useIsRTL()}
-        cs={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
+        {...breadcrumbsOverflowButtonStencil.parts.chevronRightIcon}
         aria-hidden
       />
-    </Flex>
+    </li>
   );
 });

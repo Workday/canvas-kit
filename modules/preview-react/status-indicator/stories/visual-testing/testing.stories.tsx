@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
+import {cloudArrowUpIcon} from '@workday/canvas-system-icons-web';
 
 import {StatusIndicator} from '../../index';
-import {uploadCloudIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Preview/Status Indicator',
@@ -29,25 +29,26 @@ export const StatusIndicatorStates = () => (
         ],
         icon: [
           {value: undefined, label: ''},
-          {value: uploadCloudIcon, label: 'With Icon'},
+          {value: cloudArrowUpIcon, label: 'With Icon'},
         ],
       })}
       columnProps={permutateProps({
         variant: [
-          {value: 'gray', label: 'Gray'},
-          {value: 'blue', label: 'Blue'},
-          {value: 'green', label: 'Green'},
-          {value: 'orange', label: 'Orange'},
-          {value: 'red', label: 'Red'},
+          {value: 'info', label: 'Info'},
+          {value: 'neutral', label: 'Neutral'},
+          {value: 'caution', label: 'Caution'},
+          {value: 'positive', label: 'Positive'},
+          {value: 'critical', label: 'Critical'},
           {value: 'transparent', label: 'Transparent'},
         ],
       })}
     >
       {props => {
         const {emphasis, icon, variant} = props;
+
         return (
           <StatusIndicator emphasis={emphasis} variant={variant}>
-            <StatusIndicator.Icon icon={icon} />
+            {icon && <StatusIndicator.Icon icon={icon} />}
             <StatusIndicator.Label>Lorem impsum dolor</StatusIndicator.Label>
           </StatusIndicator>
         );

@@ -11,6 +11,7 @@ export type RecursivePartial<T> = {
  * This function will also handle nested properties.
  * @param target A partial object with up to the same shape as the `fallback` object
  * @param fallback A fallback object. If a property to be accessed from the proxy is not available on the target object, the fallback object will be used
+ * @deprecated ⚠️ `getObjectProxy` is deprecated. This utility was used for theme object fallbacks. Now that we're shifting to a global theming approach based on CSS variables, this is no longer needed. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export function getObjectProxy<T extends {}>(
   target: RecursivePartial<T> | undefined,
@@ -23,13 +24,19 @@ export function getObjectProxy<T extends {}>(
           // @ts-ignore
           return getObjectProxy(target[prop], (fallback as any)[prop]);
         }
-        const targetProp = target[prop as keyof T];
+        const targetProp = Reflect.get(target as {}, prop, receiver); //?
         if (targetProp !== undefined) {
           return targetProp;
         }
         return Reflect.get(fallback, prop, receiver);
       },
+      getOwnPropertyDescriptor(_target, prop) {
+        // the fallback has all the correct properties, so use the fallback for all property
+        // descriptors
+        return Reflect.getOwnPropertyDescriptor(fallback, prop); //Reflect.getOwnPropertyDescriptor(fallback, prop);
+      },
       ownKeys() {
+        // the fallback has all the correct properties, so use the fallback for all keys
         return Reflect.ownKeys(fallback);
       },
     }) as T;

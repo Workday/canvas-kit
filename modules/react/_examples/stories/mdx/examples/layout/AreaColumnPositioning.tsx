@@ -1,26 +1,45 @@
 import * as React from 'react';
 
-import {Grid, Box} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+const boxStencil = createStencil({
+  vars: {
+    gridArea: '',
+    backgroundColor: '',
+  },
+  base: ({backgroundColor, gridArea}) => ({
+    height: px2rem(120),
+    backgroundColor,
+    gridArea,
+    p: {
+      color: system.color.fg.inverse,
+      fontWeight: system.fontWeight.bold,
+      textAlign: 'center',
+    },
+  }),
+});
+
+const headingStyles = createStyles({
+  gridTemplateColumns: '4fr 8fr',
+  gridTemplateAreas: "'header header' 'side main'",
+  gridGap: system.gap.md,
+});
 
 export const AreaColumnPositioning = () => (
   <>
     <Heading size="medium">Area Column Positioning</Heading>
-    <Grid gridTemplateColumns="4fr 8fr" gridTemplateAreas="'header header' 'side main'" gridGap="m">
-      <Box height="120px" backgroundColor="blueberry400" gridArea="header">
-        <BodyText size="small" textAlign="center" color="frenchVanilla100">
-          "header" area
-        </BodyText>
+    <Grid cs={headingStyles}>
+      <Box cs={boxStencil({backgroundColor: base.blue500, gridArea: 'header'})}>
+        <BodyText size="small">"header" area</BodyText>
       </Box>
-      <Box height="120px" backgroundColor="blueberry500" gridArea="side">
-        <BodyText size="small" textAlign="center" color="frenchVanilla100">
-          "side" area
-        </BodyText>
+      <Box cs={boxStencil({backgroundColor: base.blue600, gridArea: 'side'})}>
+        <BodyText size="small">"side" area</BodyText>
       </Box>
-      <Box height="120px" backgroundColor="blueberry600" gridArea="main">
-        <BodyText size="small" textAlign="center" color="frenchVanilla100">
-          "main" area
-        </BodyText>
+      <Box cs={boxStencil({backgroundColor: base.blue700, gridArea: 'main'})}>
+        <BodyText size="small">"main" area</BodyText>
       </Box>
     </Grid>
   </>

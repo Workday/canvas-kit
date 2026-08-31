@@ -1,9 +1,9 @@
+import {VirtualItem} from '@tanstack/react-virtual';
 import React from 'react';
 
 import {Generic} from '@workday/canvas-kit-react/common';
 
 import {Item, useBaseListModel} from './useBaseListModel';
-import {VirtualItem} from '@tanstack/react-virtual';
 
 export const ListRenderItemContext = React.createContext<{
   item?: Item<Generic>;

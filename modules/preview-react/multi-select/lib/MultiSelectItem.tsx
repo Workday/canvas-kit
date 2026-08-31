@@ -1,13 +1,12 @@
-import {handleCsProp} from '@workday/canvas-kit-styling';
-
+import {Combobox, useComboboxMenuItem} from '@workday/canvas-kit-react/combobox';
 import {
+  ExtractProps,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
-  ExtractProps,
 } from '@workday/canvas-kit-react/common';
-import {Combobox, useComboboxMenuItem} from '@workday/canvas-kit-react/combobox';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
+import {handleCsProp} from '@workday/canvas-kit-styling';
 
 import {useMultiSelectModel} from './useMultiSelectModel';
 

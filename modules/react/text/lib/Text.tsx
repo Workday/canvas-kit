@@ -1,10 +1,10 @@
-import {system} from '@workday/canvas-tokens-web';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
 
 type TypeSize = 'large' | 'medium' | 'small';
-type TokenName = `${keyof typeof system.type}.${TypeSize}`;
+type TokenName = `${keyof typeof system.legacy.type}.${TypeSize}`;
 
 export interface TextProps extends BoxProps {
   /**
@@ -32,61 +32,103 @@ export const textStencil = createStencil({
     typeLevel: {
       // Title level styles
       'title.large': {
-        ...system.type.title.large,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        fontSize: system.legacy.fontSize.title.lg,
+        lineHeight: system.legacy.lineHeight.title.lg,
+        color: system.color.fg.strong,
       },
       'title.medium': {
-        ...system.type.title.medium,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        fontSize: system.legacy.fontSize.title.md,
+        lineHeight: system.legacy.lineHeight.title.md,
+        color: system.color.fg.strong,
       },
       'title.small': {
-        ...system.type.title.small,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        lineHeight: system.legacy.lineHeight.title.sm,
+        fontSize: system.legacy.fontSize.title.sm,
+        color: system.color.fg.strong,
       },
       // Heading level styles
       'heading.large': {
-        ...system.type.heading.large,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        fontSize: system.legacy.fontSize.heading.lg,
+        lineHeight: system.legacy.lineHeight.heading.lg,
+        color: system.color.fg.strong,
       },
       'heading.medium': {
-        ...system.type.heading.medium,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        fontSize: system.legacy.fontSize.heading.md,
+        lineHeight: system.legacy.lineHeight.heading.md,
+        color: system.color.fg.strong,
       },
       'heading.small': {
-        ...system.type.heading.small,
-        color: system.color.text.strong,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.bold,
+        fontSize: system.legacy.fontSize.heading.sm,
+        lineHeight: system.legacy.lineHeight.heading.sm,
+        color: system.color.fg.strong,
       },
       // Body level styles
       'body.large': {
-        ...system.type.body.large,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.body.lg,
+        lineHeight: system.legacy.lineHeight.body.lg,
+        color: system.color.fg.default,
       },
       'body.medium': {
-        ...system.type.body.medium,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.body.md,
+        lineHeight: system.legacy.lineHeight.body.md,
+        color: system.color.fg.default,
       },
       'body.small': {
-        ...system.type.body.small,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.body.sm,
+        lineHeight: system.legacy.lineHeight.body.sm,
+        letterSpacing: system.legacy.letterSpacing.body.sm,
+        color: system.color.fg.default,
       },
       // Subtext level styles
       'subtext.large': {
-        ...system.type.subtext.large,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.subtext.lg,
+        lineHeight: system.legacy.lineHeight.subtext.lg,
+        letterSpacing: system.legacy.letterSpacing.subtext.lg,
+        color: system.color.fg.default,
       },
       'subtext.medium': {
-        ...system.type.subtext.medium,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.subtext.md,
+        lineHeight: system.legacy.lineHeight.subtext.md,
+        letterSpacing: system.legacy.letterSpacing.subtext.md,
+        color: system.color.fg.default,
       },
       'subtext.small': {
-        ...system.type.subtext.small,
-        color: system.color.text.default,
+        fontFamily: system.fontFamily.default,
+        fontWeight: system.fontWeight.normal,
+        fontSize: system.legacy.fontSize.subtext.sm,
+        lineHeight: system.legacy.lineHeight.subtext.sm,
+        letterSpacing: system.legacy.letterSpacing.subtext.sm,
+        color: system.color.fg.default,
       },
     },
     variant: {
-      error: {color: system.color.text.critical.default},
-      hint: {color: system.color.text.hint},
-      inverse: {color: system.color.text.inverse},
+      error: {
+        color: system.legacy.color.brand.fg.critical.default,
+      },
+      hint: {color: system.color.fg.muted.default},
+      inverse: {color: system.color.fg.inverse},
     },
   },
 });

@@ -1,4 +1,7 @@
 import React from 'react';
+
+import {isElementRTL} from '@workday/canvas-kit-react/common';
+
 import {useCursorListModel} from './useCursorListModel';
 
 export const orientationKeyMap = {
@@ -56,8 +59,7 @@ const hasOwnKey = <T extends object>(obj: T, key: any): key is keyof T => obj.ha
 
 export function keyboardEventToCursorEvents(
   event: React.KeyboardEvent,
-  model: ReturnType<typeof useCursorListModel>,
-  isRTL: boolean
+  model: ReturnType<typeof useCursorListModel>
 ): boolean {
   // Test ctrl key first
   if (event.ctrlKey) {
@@ -72,6 +74,7 @@ export function keyboardEventToCursorEvents(
   }
   // Try regular keys
   const map = model.state.columnCount > 0 ? gridKeyMap : orientationKeyMap[model.state.orientation];
+  const isRTL = isElementRTL(event.currentTarget);
   for (const key in map) {
     if (hasOwnKey(map, key)) {
       if (isRTL ? event.key === rightToLeftMap[key] : event.key === key) {

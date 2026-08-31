@@ -1,8 +1,8 @@
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {calc, createStyles} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Tooltip',
@@ -11,8 +11,8 @@ export default {
 
 const grid = createStyles({
   gridTemplateAreas: "'topButton topButton''leftButton rightButton''bottomButton bottomButton'",
-  height: calc.subtract('100vh', system.space.x16),
-  width: calc.subtract('100vw', system.space.x20),
+  height: calc.subtract('100vh', system.size.xxl),
+  width: calc.subtract('100vw', base.size1000),
 });
 
 const topButton = createStyles({
@@ -28,7 +28,7 @@ const bottomButton = createStyles({
   gridArea: 'bottomButton',
   justifySelf: 'center',
   alignSelf: 'end',
-  bottom: calc.subtract(system.space.x4, system.space.x10),
+  bottom: calc.subtract(system.gap.md, base.size500),
 });
 const leftButton = createStyles({
   gridArea: 'leftButton',

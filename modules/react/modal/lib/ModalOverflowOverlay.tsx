@@ -1,9 +1,9 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 
 import {ModalOverlay} from './ModalOverlay';
 import {useModalModel} from './hooks';
-import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export const modalOverflowOverlayStencil = createStencil({
   base: {

@@ -1,18 +1,18 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-
+import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
 import {
-  createSubcomponent,
   ExtractProps,
   createElemPropsHook,
+  createSubcomponent,
 } from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {getTransformFromPlacement} from '@workday/canvas-kit-react/popup';
+import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
-import {createStencil, calc, px2rem} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;
@@ -26,21 +26,38 @@ export const menuCardStencil = createStencil({
     maxHeight: '',
   },
   base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
-    ...system.type.subtext.large,
-    color: system.color.text.default,
+    // ...system.legacy.type.subtext.lg,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    color: system.color.fg.default,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.space.zero,
-    maxWidth: calc.subtract('100vw', system.space.x8),
+    padding: system.legacy.padding.xxs,
+    borderRadius: system.legacy.shape.xxl,
+    maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,
-    maxHeight,
+    maxHeight: cssVar(maxHeight, '60vh'),
     transformOrigin: `${transformOriginVertical} ${transformOriginHorizontal}`,
     // Allow overriding of animation in special cases
     '.wd-no-animation &': {
       animation: 'none',
+    },
+    [`&:where(:has(${listBoxContainerStencil.parts.listBoxContainer.selector}))`]: {
+      overflow: 'hidden',
+    },
+    [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
+      borderRadius: system.legacy.shape.xxl,
+      // Card is a flex column container. Without this, a flex child won't shrink below its
+      // content size, so `maxHeight` on the Card would be ignored and content would overflow
+      // instead of scrolling inside the list-box-container.
+      minHeight: 0,
     },
   }),
 });

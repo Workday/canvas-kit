@@ -1,6 +1,6 @@
-import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
-import {colors} from '@workday/canvas-kit-react/tokens';
 import chroma from 'chroma-js';
+
+import {CanvasThemePalette, EmotionCanvasTheme, useTheme} from '@workday/canvas-kit-react/common';
 
 type paletteSelection = Exclude<keyof EmotionCanvasTheme['canvas']['palette'], 'common'>;
 
@@ -27,6 +27,9 @@ const getPaletteColorsFromTheme = (
   };
 };
 
+/**
+ * @deprecated ⚠️ `getPaletteColors` is deprecated. Use CSS variables from `@workday/canvas-tokens-web` instead. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+ */
 export const getPaletteColors = (
   type: paletteSelection,
   theme: EmotionCanvasTheme
@@ -35,10 +38,10 @@ export const getPaletteColors = (
 
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(palette, {contrast: colors.frenchVanilla100});
+      return getPaletteColorsFromTheme(palette, {contrast: '#FFFFFF'});
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(palette, {contrast: colors.blackPepper400});
+      return getPaletteColorsFromTheme(palette, {contrast: '#333333'});
     }
     default: {
       return getPaletteColorsFromTheme(palette);
@@ -46,6 +49,9 @@ export const getPaletteColors = (
   }
 };
 
+/**
+ * @deprecated ⚠️ `useThemedPalette` is deprecated. In previous versions of Canvas Kit, we allowed teams to pass a theme object, this supported [Emotion's theming](https://emotion.sh/docs/theming). Now that we're shifting to a global theming approach based on CSS variables, we advise to no longer using the theme prop. For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
+ */
 export const useThemedPalette = (type: paletteSelection) => {
   const theme = useTheme();
 

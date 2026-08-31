@@ -1,4 +1,4 @@
-module.exports = pascalCaseName => `
+const componentTarget = pascalCaseName => `
 import React from 'react';
 
 import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
@@ -18,3 +18,5 @@ export const ${pascalCaseName}Target = createSubcomponent(PrimaryButton)({
   );
 });
 `;
+
+export default componentTarget;

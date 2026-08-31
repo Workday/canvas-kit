@@ -1,11 +1,11 @@
 import React from 'react';
-import {createModelHook, slugify, useModalityType} from '@workday/canvas-kit-react/common';
+
 import {
   defaultGetId,
   useListModel,
   useOverflowListModel,
 } from '@workday/canvas-kit-react/collection';
-
+import {createModelHook, slugify, useModalityType} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 /**
@@ -99,6 +99,15 @@ export const useTabsModel = createModelHook({
   // This is used when selecting a tab from the overflow menu - we want focus
   // to go to the newly selected tab, not back to the overflow button.
   const pendingFocusTabIdRef = React.useRef<string | null>(null);
+  const pendingFocusRafOuterRef = React.useRef(0);
+  const pendingFocusRafInnerRef = React.useRef(0);
+
+  React.useLayoutEffect(() => {
+    return () => {
+      cancelAnimationFrame(pendingFocusRafOuterRef.current);
+      cancelAnimationFrame(pendingFocusRafInnerRef.current);
+    };
+  }, []);
 
   const model = useOverflowListModel(
     useOverflowListModel.mergeConfig(config, {
@@ -116,8 +125,8 @@ export const useTabsModel = createModelHook({
       initialSelectedIds: config.initialTab
         ? [config.initialTab]
         : config.items?.length
-        ? [getId(config.items![0])]
-        : [],
+          ? [getId(config.items![0])]
+          : [],
       shouldVirtualize: false,
     })
   );
@@ -143,7 +152,7 @@ export const useTabsModel = createModelHook({
     if (!cursorId) {
       return;
     }
-    const currentCursorId = typeof cursorId === 'string' ? cursorId : cursorId.slice(-1)[0] ?? '';
+    const currentCursorId = typeof cursorId === 'string' ? cursorId : (cursorId.slice(-1)[0] ?? '');
     const cursorOnHidden = currentCursorId ? hiddenIds.includes(currentCursorId) : false;
     const cursorOnOverflowWhenNoOverflow =
       currentCursorId === TABS_OVERFLOW_BUTTON_ID && hiddenIds.length === 0;
@@ -169,7 +178,15 @@ export const useTabsModel = createModelHook({
         model.events.goTo({id: targetId});
       }
     }
-  }, [model.state, model.events]);
+    // Use field-level deps instead of `model.state` so this does not re-run on every model update.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    model.state.cursorId,
+    model.state.hiddenIds,
+    model.state.items,
+    model.state.selectedIds,
+    model.events,
+  ]);
 
   const panels = useListModel();
 
@@ -208,46 +225,49 @@ export const useTabsModel = createModelHook({
     unregisterPanel: panels.events.unregisterItem,
   };
 
-  const menu = useMenuModel(
-    useMenuModel.mergeConfig(config.menuConfig, {
-      id: `menu-${model.state.id}`,
-      items: overflowItems,
-      nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
-      onSelect(data) {
-        // Store the tab ID to focus after the menu closes and React re-renders
-        pendingFocusTabIdRef.current = data.id;
+  const mergedMenuConfig = useMenuModel.mergeConfig(config.menuConfig, {
+    id: `menu-${model.state.id}`,
+    items: overflowItems,
+    // `getId`/`getTextValue` aren't callbacks or guards, so `mergeConfig` would let these
+    // unconditionally clobber a `menuConfig.getId`/`getTextValue` override. Fall back to the
+    // top-level Tabs config only when the caller hasn't set one on `menuConfig` directly.
+    getId: config.menuConfig?.getId || getId,
+    getTextValue: config.menuConfig?.getTextValue || config.getTextValue,
+    nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
+    onSelect(data) {
+      // Store the tab ID to focus after the menu closes and React re-renders
+      pendingFocusTabIdRef.current = data.id;
 
-        // Update state: select the tab, move cursor, then close menu
-        events.select(data);
-        model.events.goTo({id: data.id});
-        menu.events.hide();
+      // Update state: select the tab, move cursor, then close menu
+      events.select(data);
+      model.events.goTo({id: data.id});
+      menu.events.hide();
 
-        // Focus the selected tab AFTER React has re-rendered.
-        // We use double requestAnimationFrame to ensure:
-        // 1. First rAF: React commits DOM changes from state updates
-        // 2. Second rAF: We focus after the popup's useReturnFocus has run
-        // This overrides the default behavior of returning focus to the overflow button.
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            const tabId = pendingFocusTabIdRef.current;
-            if (tabId) {
-              const tabElement = document.querySelector<HTMLElement>(
-                `[data-focus-id="${slugify(`${model.state.id}-${tabId}`)}"]`
-              );
-              if (tabElement) {
-                tabElement.focus();
-              }
-              pendingFocusTabIdRef.current = null;
+      // Focus the selected tab AFTER React has re-rendered.
+      // Double rAF is required because useReturnFocus restores focus to the overflow
+      // button on a single rAF after hide; the second frame runs after that restore.
+      pendingFocusRafOuterRef.current = requestAnimationFrame(() => {
+        pendingFocusRafInnerRef.current = requestAnimationFrame(() => {
+          const tabId = pendingFocusTabIdRef.current;
+          if (tabId) {
+            const tabElement = document.querySelector<HTMLElement>(
+              `[data-focus-id="${slugify(`${model.state.id}-${tabId}`)}"]`
+            );
+            if (tabElement) {
+              tabElement.focus();
             }
-          });
+            pendingFocusTabIdRef.current = null;
+          }
         });
-      },
-      onShow() {
-        // Always select the first item when the menu is opened
-        menu.events.goToFirst();
-      },
-    })
-  );
+      });
+    },
+    onShow() {
+      // Always select the first item when the menu is opened
+      menu.events.goToFirst();
+    },
+  });
+
+  const menu = useMenuModel(mergedMenuConfig);
 
   return {
     ...model,

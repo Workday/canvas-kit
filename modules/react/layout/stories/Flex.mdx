@@ -1,10 +1,18 @@
+import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import FlexStories from './Flex.stories';
 import {Basic} from './examples/Flex/Basic';
-import * as FlexStories from './Flex.stories';
 
 <Meta of={FlexStories} />
 
 # Canvas Kit Flex
+
+> **Note**: Some of the content on this page may be outdated and may not follow the latest CK style
+> guidance. Please use care when making updates and carefully review any changes. Prefer using the
+> `createStyles` or `createStencil` utilities along with the latest design tokens to set styles.
+> This page will be updated soon.
 
 `Flex` is a low-level layout component that provides a common, ergonomic API for building
 one-dimensional layouts with
@@ -55,13 +63,13 @@ building layouts.
 #### Props
 
 `Flex` exposes
-[flex container style props](/getting-started/for-developers/resources/style-props/#flex) and `Box`
+[flex container style props](/get-started/for-developers/documentation/style-props/#flex) and `Box`
 style props.
 
 ### Flex.Item
 
 `Flex.Item` is a subcomponent of `Flex`. It is a `Box` component under the hood and exposes
-[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) that map
+[flex item style props](/get-started/for-developers/documentation/style-props/#flex-item) that map
 to CSS Flexbox Item properties. This provides greater control over how child components render in
 your layout.
 
@@ -76,5 +84,5 @@ your layout.
 #### Props
 
 `Flex.Item` exposes
-[flex item style props](/getting-started/for-developers/resources/style-props/#flex-item) and `Box`
+[flex item style props](/get-started/for-developers/documentation/style-props/#flex-item) and `Box`
 style props.

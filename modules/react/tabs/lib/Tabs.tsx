@@ -5,11 +5,11 @@ import {Menu} from '@workday/canvas-kit-react/menu';
 
 import {TabsItem} from './TabsItem';
 import {TabsList} from './TabsList';
-import {TabsPanel} from './TabsPanel';
-import {useTabsModel} from './useTabsModel';
-import {TabsOverflowButton} from './TabsOverflowButton';
 import {TabsMenuPopper} from './TabsMenuPopper';
+import {TabsOverflowButton} from './TabsOverflowButton';
+import {TabsPanel} from './TabsPanel';
 import {TabsPanels} from './TabsPanels';
+import {useTabsModel} from './useTabsModel';
 
 // use `T = any` here because there's no way to pass generics to a compound component...
 export interface TabsProps {
@@ -42,7 +42,7 @@ export interface TabsProps {
  * ```
  *
  * See [Configuring a
- * Model](/getting-started/for-developers/resources/compound-components/#configuring-a-model) for
+ * Model](/get-started/for-developers/documentation/compound-components/#configuring-a-model) for
  * more information on model configuration.
  */
 export const Tabs = createContainer()({

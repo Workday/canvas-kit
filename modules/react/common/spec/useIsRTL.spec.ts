@@ -1,4 +1,5 @@
 import {renderHook} from '@testing-library/react-hooks';
+
 import {ContentDirection, useIsRTL} from '../lib/theming';
 
 describe('useIsRTL hook', () => {

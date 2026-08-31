@@ -1,4 +1,4 @@
-module.exports = (modulePath, storyPath, pascalCaseName, rootPath) => `
+const storiesVisualTesting = (modulePath, storyPath, pascalCaseName, rootPath) => `
 import React from 'react';
 
 import {StaticStates, ComponentStatesTable} from '@workday/canvas-kit-react/testing';
@@ -8,7 +8,6 @@ import {${pascalCaseName}} from '${modulePath}';
 
 export default withSnapshotsEnabled({
   title: '${storyPath}',
-  component: ${pascalCaseName},
 });
 
 export const ${pascalCaseName}States = () => {
@@ -40,3 +39,5 @@ export const ${pascalCaseName}States = () => {
   );
 };
 `;
+
+export default storiesVisualTesting;

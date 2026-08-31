@@ -21,12 +21,11 @@ accessibility concerns you'll want to keep in mind:
 ### Notification Example
 
 ```tsx
-import styled from '@emotion/styled';
+import { createStyles } from '@workday/canvas-kit-styling';
 import { accessibleHide } from "@workday/canvas-kit-react";
 
 ...
-
-const AccessibleHide = styled('div')({
+const accessibleHideStyles = createStyles({
   ...accessibleHide,
 });
 
@@ -40,9 +39,9 @@ const AccessibleHide = styled('div')({
   <SystemIcon icon={notificationsIcon} aria-hidden="true" />
   <Badge count={count} aria-hidden="true" />
 </TertiaryButton>
-<AccessibleHide role="status" aria-live="polite" aria-atomic="true">
+<span className={accessibleHideStyles} role="status" aria-live="polite" aria-atomic="true">
   New notifications
-</AccessibleHide>
+</span>
 ```
 
 ## Usage
@@ -55,6 +54,7 @@ const AccessibleHide = styled('div')({
 
 ```tsx
 import * as React from 'react';
+
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const CustomCountBadge = () => {
@@ -66,6 +66,7 @@ const CustomCountBadge = () => {
 
 ```tsx
 import * as React from 'react';
+
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const InverseCountBadge = () => {
@@ -77,6 +78,7 @@ const InverseCountBadge = () => {
 
 ```tsx
 import * as React from 'react';
+
 import {CountBadge} from '@workday/canvas-kit-react/badge';
 
 const InverseCountBadge = () => {

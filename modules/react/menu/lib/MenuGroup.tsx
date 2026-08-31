@@ -1,17 +1,16 @@
 import * as React from 'react';
 
-import {createStencil, CSProps} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
 import {
-  createSubcomponent,
+  createContainer,
   createElemPropsHook,
   createModelHook,
-  createContainer,
+  createSubcomponent,
   useUniqueId,
 } from '@workday/canvas-kit-react/common';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface MenuGroupHeaderProps extends CSProps, FlexProps {
   /**
@@ -68,14 +67,16 @@ const useMenuGroupModel = createModelHook({
 
 export const menuGroupHeadingStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontWeight: system.fontWeight.bold,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.space.x4,
-    padding: `${system.space.x2} ${system.space.x4}`,
-    boxSizing: 'border-box',
-    fontWeight: system.fontWeight.bold,
+    gap: system.legacy.gap.md,
+    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
   },
 });
 

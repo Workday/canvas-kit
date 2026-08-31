@@ -1,5 +1,6 @@
 import {useResponsiveContainerStyles} from '../lib/responsive/useResponsiveContainerStyles';
 import {breakpoints} from '../lib/theming';
+
 const context = describe;
 
 describe('useResponsiveContainerStyles', () => {

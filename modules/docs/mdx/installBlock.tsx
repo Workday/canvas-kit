@@ -1,12 +1,32 @@
 import React from 'react';
-import {Flex} from '@workday/canvas-kit-react/layout';
-import {colors} from '@workday/canvas-kit-react/tokens';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface InstallBlockProps {
   command?: string;
   packageName?: string;
 }
+
+const blockStyles = createStyles({
+  padding: system.padding.xs,
+  backgroundColor: system.color.surface.contrast.default,
+  borderRadius: system.shape.md,
+  justifyContent: 'space-between',
+  alignItems: 'center',
+  flexWrap: 'wrap',
+});
+
+const codeCommandStyles = createStyles({
+  color: system.color.fg.info.default,
+  marginInlineEnd: system.gap.sm,
+});
+
+const codePackageStyles = createStyles({
+  color: system.color.fg.inverse,
+});
 
 export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
   const commandRef = React.useRef<HTMLPreElement>(null);
@@ -21,17 +41,10 @@ export const InstallBlock = ({command, packageName}: InstallBlockProps) => {
     }
   };
   return (
-    <Flex
-      padding="xs"
-      backgroundColor={colors.licorice500}
-      borderRadius="m"
-      justifyContent="space-between"
-      alignItems="center"
-      flexWrap='wrap'
-    >
+    <Flex cs={blockStyles}>
       <pre ref={commandRef}>
-        <span style={{color: colors.blueberry200}}>{command}</span>{' '}
-        <span style={{color: colors.frenchVanilla100}}>{packageName}</span>
+        <span className={codeCommandStyles}>{command}</span>
+        <span className={codePackageStyles}>{packageName}</span>
       </pre>
       <PrimaryButton variant="inverse" onClick={handleCopy} size="small">
         {copied ? 'Copied' : 'Copy'}

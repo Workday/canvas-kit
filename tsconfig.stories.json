@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "include": ["**/*stories*.tsx", "**/*stories*.ts", "**/examples/*.tsx"],
-  "exclude": ["cypress"],
+  "exclude": ["cypress", "modules/mcp/build"],
   "compilerOptions": {
     "declaration": false,
     "declarationMap": false,

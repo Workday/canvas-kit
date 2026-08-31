@@ -1,5 +1,5 @@
 import {ModelHookValue, ModelValue} from '../../docgen/plugins/customTypes';
-import {PropertiesTable, registerWidget, Value} from '../Value';
+import {PropertiesTable, Value, registerWidget} from '../Value';
 import {Heading} from '../widgetUtils';
 
 registerWidget<ModelValue>('model', ({value}) => {

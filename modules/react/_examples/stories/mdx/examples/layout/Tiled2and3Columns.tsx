@@ -1,40 +1,75 @@
 import * as React from 'react';
 
-import {Grid, Box} from '@workday/canvas-kit-react/layout';
+import {Box, Grid} from '@workday/canvas-kit-react/layout';
 import {BodyText, Heading} from '@workday/canvas-kit-react/text';
-import {colors} from '@workday/canvas-kit-react/tokens';
+import {createStencil, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const gridStyles = createStyles({
+  gridTemplateAreas: `
+    'Heading Heading Heading Heading Heading Heading' 
+    'FormThirdLeft FormThirdLeft FormThirdCenter FormThirdCenter FormThirdRight FormThirdRight'
+    'FormHalfRight FormHalfRight FormHalfRight FormHalfLeft FormHalfLeft FormHalfLeft'
+  `,
+  gridAutoRows: 'min-content',
+  gridRowGap: system.gap.sm,
+  gridColumnGap: system.gap.xxl,
+  '> *:first-child': {
+    paddingInline: system.padding.sm,
+    border: `${px2rem(1)} solid ${system.color.brand.border.primary}`,
+    gridArea: 'Heading',
+  },
+});
 
 export const Tiled2and3Columns = () => (
-  <Grid
-    gridTemplateAreas={`
-        'Heading Heading Heading Heading Heading Heading' 
-        'FormThirdLeft FormThirdLeft FormThirdCenter FormThirdCenter FormThirdRight FormThirdRight'
-        'FormHalfRight FormHalfRight FormHalfRight FormHalfLeft FormHalfLeft FormHalfLeft'
-    `}
-    gridAutoRows="min-content"
-    gridRowGap="s"
-    gridColumnGap="xxxl"
-  >
-    <Box gridArea="Heading" paddingX="s" border={`1px solid ${colors.blueberry400}`}>
+  <Grid cs={gridStyles}>
+    <Box>
       <Heading size="medium">3 and 2 Column Tiled View</Heading>
     </Box>
-    <FormSkeleton gridArea="FormThirdLeft" text="Form - Left Third" />
-    <FormSkeleton gridArea="FormThirdCenter" text="Form - Center Third" />
-    <FormSkeleton gridArea="FormThirdRight" text="Form - Right Third" />
-    <FormSkeleton gridArea="FormHalfRight" text="Form - Left Half" />
-    <FormSkeleton gridArea="FormHalfLeft" text="Form - Right Half" />
+    <FormSkeleton area="FormThirdLeft" text="Form - Left Third" />
+    <FormSkeleton area="FormThirdCenter" text="Form - Center Third" />
+    <FormSkeleton area="FormThirdRight" text="Form - Right Third" />
+    <FormSkeleton area="FormHalfRight" text="Form - Left Half" />
+    <FormSkeleton area="FormHalfLeft" text="Form - Right Half" />
   </Grid>
 );
 
-const FormSkeleton = ({gridArea, text}) => (
-  <Box border={`1px dashed ${colors.blueberry400}`} paddingX="m" gridArea={gridArea}>
-    <BodyText size="small" fontWeight="bold">
-      {text}
-    </BodyText>
+const boxStencil = createStencil({
+  vars: {
+    area: '',
+  },
+  base: ({area}) => ({
+    paddingInline: system.padding.md,
+    border: `${px2rem(1)} dashed ${system.color.brand.border.primary}`,
+    gridArea: area,
+    p: {
+      fontWeight: system.fontWeight.bold,
+    },
+  }),
+});
+
+const innerGridStyles = createStyles({
+  gridGap: system.gap.sm,
+  marginBlockEnd: system.gap.xl,
+  '> *:first-child': {
+    width: px2rem(120),
+    height: system.size.xxs,
+    backgroundColor: system.color.surface.alt.default,
+  },
+  '> *:last-child': {
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
+    width: '100%',
+    height: system.size.xxs,
+  },
+});
+
+const FormSkeleton = ({area, text}) => (
+  <Box cs={boxStencil({area})}>
+    <BodyText size="small">{text}</BodyText>
     {Array.from({length: 3}).map(() => (
-      <Grid gridGap="s" marginBottom="xl">
-        <Box backgroundColor="soap500" width="120px" height="s" />
-        <Box borderWidth="1px" borderStyle="solid" borderColor="soap500" width="100%" height="xl" />
+      <Grid cs={innerGridStyles}>
+        <Box />
+        <Box />
       </Grid>
     ))}
   </Box>

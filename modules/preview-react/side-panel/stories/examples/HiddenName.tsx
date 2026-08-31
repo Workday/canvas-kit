@@ -1,7 +1,8 @@
 import * as React from 'react';
+
 import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {AccessibleHide} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {Text} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 

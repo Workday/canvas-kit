@@ -1,18 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+
 import {DeleteButton, SecondaryButton} from '@workday/canvas-kit-react/button';
 import {useMount} from '@workday/canvas-kit-react/common';
 import {
   Popup,
-  useCloseOnOutsideClick,
+  useBringToTopOnClick,
   useCloseOnEscape,
+  useCloseOnOutsideClick,
+  useInitialFocus,
   usePopupModel,
   usePopupStack,
-  useBringToTopOnClick,
-  useInitialFocus,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 interface WindowProps {
   top: number;
@@ -41,7 +44,7 @@ const Window = ({children, heading, relativeNode, top, left}: WindowProps) => {
 
   return ReactDOM.createPortal(
     <Popup model={model}>
-      <Popup.Card width={500}>
+      <Popup.Card cs={{width: px2rem(500)}}>
         <Popup.Heading>{heading}</Popup.Heading>
         <Popup.Body>{children}</Popup.Body>
       </Popup.Card>
@@ -68,11 +71,11 @@ const TempPopup = ({
 
   return (
     <Popup model={model}>
-      <Popup.Target as={DeleteButton} style={{marginRight: '16px'}}>
+      <Popup.Target as={DeleteButton} cs={{marginInlineEnd: system.gap.md}}>
         {deleteText}
       </Popup.Target>
       <Popup.Popper>
-        <Popup.Card width={400} padding="s">
+        <Popup.Card cs={{width: px2rem(400), padding: system.padding.md}}>
           <Popup.Heading>{heading}</Popup.Heading>
           <Popup.Body>{children({onClose: model.events.hide})}</Popup.Body>
         </Popup.Card>
@@ -114,17 +117,17 @@ export const MixedPopupTypes = () => {
             <TempPopup heading="Delete Item" deleteText="Delete Item">
               {({onClose}) => (
                 <>
-                  <div style={{marginBottom: '24px'}}>
+                  <div style={{marginBlockEnd: cssVar(system.gap.xl)}}>
                     Are you sure you'd like to delete the item titled 'My Item'?
                   </div>
                   <TempPopup heading="Really Delete Item" deleteText="Delete">
                     {({onClose}) => (
                       <>
-                        <div style={{marginBottom: '24px'}}>
+                        <div style={{marginBlockEnd: cssVar(system.gap.xl)}}>
                           Are you REALLY sure you'd like to delete the item titled 'My Item'?
                         </div>
 
-                        <DeleteButton style={{marginRight: '16px'}} onClick={onClose}>
+                        <DeleteButton cs={{marginInlineEnd: system.gap.md}} onClick={onClose}>
                           Really Delete
                         </DeleteButton>
                         <SecondaryButton onClick={onClose}>Cancel</SecondaryButton>

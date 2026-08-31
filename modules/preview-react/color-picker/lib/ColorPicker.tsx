@@ -1,11 +1,13 @@
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {checkIcon} from '@workday/canvas-system-icons-web';
-import {ColorInput} from '@workday/canvas-kit-react/color-picker';
-import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import * as React from 'react';
-import {FormField} from '@workday/canvas-kit-react/form-field';
-import styled from '@emotion/styled';
 
+import {SecondaryButton} from '@workday/canvas-kit-react/button';
+import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {checkIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+import {defaultColorSet} from './defaultColorSet';
 import {ResetButton} from './parts/ColorReset';
 import {SwatchBook, SwatchBookColorObject} from './parts/SwatchBook';
 
@@ -58,95 +60,34 @@ export interface ColorPickerProps extends React.HTMLAttributes<HTMLDivElement> {
   resetLabel?: string;
 }
 
-const defaultColorSet = [
-  colors.blueberry600,
-  colors.grapeSoda600,
-  colors.pomegranate600,
-  colors.cinnamon600,
-  colors.cantaloupe600,
-  colors.sourLemon600,
-  colors.greenApple600,
-  colors.jewel600,
-
-  colors.blueberry500,
-  colors.grapeSoda500,
-  colors.pomegranate500,
-  colors.cinnamon500,
-  colors.cantaloupe500,
-  colors.sourLemon500,
-  colors.greenApple500,
-  colors.jewel500,
-
-  colors.blueberry400,
-  colors.grapeSoda400,
-  colors.pomegranate400,
-  colors.cinnamon400,
-  colors.cantaloupe400,
-  colors.sourLemon400,
-  colors.greenApple400,
-  colors.jewel400,
-
-  colors.blueberry300,
-  colors.grapeSoda300,
-  colors.pomegranate300,
-  colors.cinnamon300,
-  colors.cantaloupe300,
-  colors.sourLemon300,
-  colors.greenApple300,
-  colors.jewel300,
-
-  colors.blueberry200,
-  colors.grapeSoda200,
-  colors.pomegranate200,
-  colors.cinnamon200,
-  colors.cantaloupe200,
-  colors.sourLemon200,
-  colors.greenApple200,
-  colors.jewel200,
-
-  colors.blueberry100,
-  colors.grapeSoda100,
-  colors.pomegranate100,
-  colors.cinnamon100,
-  colors.cantaloupe100,
-  colors.sourLemon100,
-  colors.greenApple100,
-  colors.jewel100,
-
-  colors.blackPepper600,
-  colors.blackPepper400,
-  colors.blackPepper300,
-  colors.blackPepper100,
-  colors.frenchVanilla500,
-  colors.frenchVanilla400,
-  colors.frenchVanilla200,
-  colors.frenchVanilla100,
-];
-
-const ColorPickerContainer = styled('div')({
-  width: 216,
-});
-
-const ColorInputWrapper = styled('form')({
-  width: '100%',
-  marginTop: space.s,
-  display: 'flex',
-  flexDirection: 'row',
-  justifyContent: 'space-between',
-});
-
-const ColorInputAndLabel = styled(FormField)({
-  display: 'flex',
-  flexDirection: 'column',
-  margin: 0,
-});
-
-const CheckButton = styled(SecondaryButton)({
-  alignSelf: 'flex-end',
-});
-
-const HexColorInput = styled(ColorInput)({
-  width: '168px',
+export const colorPickerStencil = createStencil({
+  parts: {
+    button: 'color-picker-button',
+    form: 'color-picker-form',
+    hexInput: 'color-picker-hex-input',
+    inputWrapper: 'color-picker-input-wrapper',
+  },
+  base: ({buttonPart, formPart, hexInputPart, inputWrapperPart}) => ({
+    width: px2rem(216),
+    [formPart]: {
+      width: '100%',
+      display: 'flex',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBlockStart: system.legacy.gap.md,
+    },
+    [inputWrapperPart]: {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 0,
+    },
+    [buttonPart]: {
+      alignSelf: 'flex-end',
+    },
+    [hexInputPart]: {
+      width: px2rem(168),
+    },
+  }),
 });
 
 const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: string) => {
@@ -165,7 +106,7 @@ const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: str
 };
 
 export const ColorPicker = ({
-  colorSet = defaultColorSet,
+  colorSet = Object.values(defaultColorSet),
   customHexInputLabel = 'Custom Hex Color',
   submitLabel = 'Submit',
   onColorChange,
@@ -203,32 +144,34 @@ export const ColorPicker = ({
   };
 
   return (
-    <ColorPickerContainer {...elemProps}>
+    <div {...handleCsProp(elemProps, colorPickerStencil())}>
       {onColorReset && resetColor && (
         <ResetButton onClick={onColorReset} resetColor={resetColor} label={resetLabel} />
       )}
       <SwatchBook colors={colorSet} onSelect={onColorChange} value={value} />
       {showCustomHexInput && (
-        <ColorInputWrapper onSubmit={onSubmit}>
-          <ColorInputAndLabel>
+        <form onSubmit={onSubmit} {...colorPickerStencil.parts.form}>
+          <FormField {...colorPickerStencil.parts.inputWrapper}>
             <FormField.Label>{customHexInputLabel}</FormField.Label>
             <FormField.Input
-              as={HexColorInput}
+              as={ColorInput}
               onChange={onCustomHexChange}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
               showCheck={value === validHexValue || value === customHexValue}
+              {...colorPickerStencil.parts.hexInput}
             />
-          </ColorInputAndLabel>
-          <CheckButton
+          </FormField>
+          <SecondaryButton
             aria-label={submitLabel}
             icon={checkIcon}
             type="submit"
             disabled={disabled}
+            {...colorPickerStencil.parts.button}
           />
-        </ColorInputWrapper>
+        </form>
       )}
-    </ColorPickerContainer>
+    </div>
   );
 };
 

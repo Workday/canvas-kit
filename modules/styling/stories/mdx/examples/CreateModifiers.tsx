@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {createStyles, createModifiers} from '@workday/canvas-kit-styling';
+import {createModifiers, createStyles} from '@workday/canvas-kit-styling';
 
 const myModifiers = createModifiers({
   size: {

@@ -1,7 +1,9 @@
-import {ButtonSizes} from '../types';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {px2rem} from '@workday/canvas-kit-styling';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {component} from '@workday/canvas-tokens-web';
+
+import {ButtonSizes} from '../types';
 
 export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
   /**
@@ -11,22 +13,52 @@ export interface ButtonLabelIconProps extends Partial<SystemIconProps> {
    */
   size?: ButtonSizes;
   /**
-   * If set to `true`, transform the icon's x-axis to mirror the graphic
+   * If set to `true`, transform the icon's x-axis to mirror the graphic. Use this if you want to
+   * always mirror the icon regardless of the content direction. If the icon should mirror only when
+   * in an right-to-left language, use `shouldMirrorIconInRTL` instead.
    * @default false
    */
   shouldMirrorIcon?: boolean;
+  /**
+   * If set to `true`, transform the icon's x-axis to mirror the graphic when the content direction
+   * is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases.
+   * Setting this to `true` indicates the icon should be mirrored in right-to-left languages.
+   * @default false
+   */
+  shouldMirrorIconInRTL?: boolean;
 }
 
-const iconSizes: Record<ButtonSizes, number> = {
-  extraSmall: 18,
-  small: 20,
-  medium: 20,
-  large: 24,
-};
+const buttonIconStencil = createStencil({
+  base: {
+    display: 'inline-block',
+  },
+  modifiers: {
+    size: {
+      extraSmall: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+      },
+      small: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+      },
+      medium: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+      },
+      large: {
+        [systemIconStencil.vars.size]: component.legacy.systemIcon.size.lg,
+      },
+    },
+  },
+});
 
 export const ButtonLabelIcon = createComponent('span')({
   Component: (
-    {icon, size = 'medium', shouldMirrorIcon = false, ...elemProps}: ButtonLabelIconProps,
+    {
+      icon,
+      size = 'medium',
+      shouldMirrorIcon = false,
+      shouldMirrorIconInRTL = false,
+      ...elemProps
+    }: ButtonLabelIconProps,
     ref,
     Element
   ) => {
@@ -34,17 +66,14 @@ export const ButtonLabelIcon = createComponent('span')({
       return null;
     }
 
-    const iconSize = iconSizes[size];
-
     return (
       <SystemIcon
-        size={iconSize}
+        ref={ref}
+        as={Element}
         icon={icon}
         shouldMirror={shouldMirrorIcon}
-        width={px2rem(iconSize)}
-        height={px2rem(iconSize)}
-        display="inline-block"
-        {...elemProps}
+        shouldMirrorInRTL={shouldMirrorIconInRTL}
+        {...handleCsProp(elemProps, buttonIconStencil({size}))}
       />
     );
   },

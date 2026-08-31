@@ -1,13 +1,13 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
+
 import {
+  SecondaryButtonProps as ButtonProps,
+  DeleteButton,
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,
-  DeleteButton,
-  deprecated_Button as DeprecatedButton,
-  SecondaryButtonProps as ButtonProps,
 } from '@workday/canvas-kit-react/button';
-import {render, fireEvent} from '@testing-library/react';
 import {ElementComponent} from '@workday/canvas-kit-react/common';
 
 (
@@ -16,12 +16,11 @@ import {ElementComponent} from '@workday/canvas-kit-react/common';
     SecondaryButton,
     TertiaryButton,
     DeleteButton,
-    DeprecatedButton,
     // We need to cast as `any` and cast as a specific button because TS will complain about no call signatures...
   ] as any[]
 ).forEach((ButtonComponent: ElementComponent<'button', ButtonProps>) => {
   describe(ButtonComponent.displayName!, () => {
-    const cb = jest.fn();
+    const cb = vi.fn();
     afterEach(() => {
       cb.mockReset();
     });

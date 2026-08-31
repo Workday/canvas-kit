@@ -1,24 +1,47 @@
 import {
-  createElemPropsHook,
-  useLocalRef,
-  composeHooks,
-  createSubcomponent,
-  useForkRef,
-} from '@workday/canvas-kit-react/common';
-import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
+import {
+  composeHooks,
+  createElemPropsHook,
+  createSubcomponent,
+  useForkRef,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 import {Text, TextProps} from '@workday/canvas-kit-react/text';
+import {OverflowTooltip, OverflowTooltipProps} from '@workday/canvas-kit-react/tooltip';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsCurrentItemProps extends TextProps {
+  maxWidth?: string | number;
   tooltipProps?: OverflowTooltipProps;
 }
 
+export const breadcrumbsCurrentItemStencil = createStencil({
+  vars: {
+    maxWidth: '',
+  },
+  base: ({maxWidth}) => ({
+    fontFamily: system.fontFamily.default,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    fontWeight: system.fontWeight.medium,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    color: system.color.fg.default,
+    display: 'inline-block',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
+    maxWidth,
+  }),
+});
+
 export const useBreadcrumbsItem = composeHooks(
-  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any, elemProps) => {
+  createElemPropsHook(useBreadcrumbsModel)((_model: any, ref: any) => {
     const {localRef} = useLocalRef(useForkRef(ref));
     let shouldShowTooltip = false;
     const refCurrent = localRef.current;
@@ -47,14 +70,12 @@ export const BreadcrumbsCurrentItem = createSubcomponent('li')({
       <OverflowTooltip {...tooltipProps}>
         <Text
           as={Element}
-          typeLevel="subtext.large"
-          fontWeight="medium"
-          display="inline-block"
-          maxWidth={maxWidth}
-          whiteSpace="nowrap"
-          textOverflow="ellipsis"
-          overflow="hidden"
-          {...elemProps}
+          {...handleCsProp(
+            elemProps,
+            breadcrumbsCurrentItemStencil({
+              maxWidth: typeof maxWidth === 'number' ? px2rem(maxWidth) : maxWidth,
+            })
+          )}
         >
           {children}
         </Text>

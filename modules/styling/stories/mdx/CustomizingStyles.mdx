@@ -1,3 +1,5 @@
+import {Meta} from '@storybook/blocks';
+
 <Meta title="Styling/Guides/Customizing Styles" />
 
 # How To Customize Styles
@@ -13,9 +15,9 @@ here are the following options:
 
 ### Using `createStyles` with `cs` prop
 
-Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small modifications to an
-existing Canvas Kit component like padding, color and flex properties. Take our `Text` component as
-an example.
+Use `createStyles` in tandem with `cs` prop when you're overriding static styles and making small
+modifications to an existing Canvas Kit component like padding, color and flex properties. Take our
+`Text` component as an example.
 
 ```tsx
 import {createStyles} from '@Workday/canvas-kit-styling';
@@ -24,7 +26,7 @@ import {Text} from '@Workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
-  margin: system.space.x4
+  margin: system.gap.md
 })
 //...
 <Text cs={uppercaseTextStyles}>My uppercased text</Text>;
@@ -41,14 +43,14 @@ import {Text} from '@Workday/canvas-kit-react/text';
 
 const uppercaseTextStyles = createStyles({
   textTransform: 'uppercase',
-  margin: system.space.x4
+  margin: system.gap.md
 })
 //...
 <Text className={uppercaseTextStyles}>My uppercased text</Text>;
 ```
 
-If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils) instead.
-
+If you need to dynamically apply styles based on some state or prop, use [Stencils](#stencils)
+instead.
 
 ## Stencils
 
@@ -56,8 +58,8 @@ Stencils can be useful when applying dynamic styles or building your own reusabl
 
 ### Extending Stencils
 
-[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-basics--create-stencil) help you
-organize the styling of reusable components into base styles, modifiers, and variables. The
+[Stencils](https://workday.github.io/canvas-kit/?path=/docs/styling-getting-started-create-stencil--docs)
+help you organize the styling of reusable components into base styles, modifiers, and variables. The
 organization makes it more natural to produce static and clean CSS with optional extraction into CSS
 files.
 
@@ -113,9 +115,9 @@ const NavIcon = ({iconColor, iconHover, iconBackground, iconBackgroundHover, ico
 
 ```tsx
 // v11
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
-import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 
 const navIconStencil = createStencil({
   // We extend `systemIconStencil` to inherit it's base styles, modifiers and variables so that we can customize it
@@ -131,7 +133,7 @@ const navIconStencil = createStencil({
     display: 'inline-flex',
     pointerEvents: 'unset',
     // instead of using our old tokens it's better to use our new system tokens
-    margin: `${system.space.x1} ${system.space.x1} 0 0`,
+    margin: `${system.gap.xs} ${system.gap.xs} 0 0`,
     padding: '0',
     '&:hover, &.hover': {
       // systemIconStencil doesn't have hover specific variables
@@ -177,5 +179,5 @@ const NavIcon = ({
 ```
 
 Another example of Stencil extension and customization is our
-[CustomButton](https://workday.github.io/canvas-kit/?path=/story/components-buttons--custom-styles)
+[CustomButton](https://workday.github.io/canvas-kit/?path=/story/components-buttons--docs#custom-styles)
 example. This example highlights the power of inheritance that you get from extending stencils.

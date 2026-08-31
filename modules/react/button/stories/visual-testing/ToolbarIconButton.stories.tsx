@@ -1,10 +1,12 @@
 import * as React from 'react';
-import {customColorTheme} from '../../../../../utils/storybook';
-import {playCircleIcon} from '@workday/canvas-system-icons-web';
+
 import {ToolbarIconButton} from '@workday/canvas-kit-react/button';
-import {Container, stateTableColumnProps} from './utils';
 import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {ComponentStatesTable, StaticStates} from '@workday/canvas-kit-react/testing';
+import {playCircleIcon} from '@workday/canvas-system-icons-web';
+
+import {customColorTheme} from '../../../../../utils/storybook';
+import {Container, stateTableColumnProps} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/Toolbar Icon Button',

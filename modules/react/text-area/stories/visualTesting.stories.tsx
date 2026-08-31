@@ -2,12 +2,12 @@ import * as React from 'react';
 
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
-
 import {TextArea} from '@workday/canvas-kit-react/text-area';
+
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Text Area',
@@ -31,7 +31,7 @@ export const TextAreaStates = () => (
           placeholder: [{value: 'Placeholder', label: 'Placeholder'}],
           error: [
             {value: undefined, label: ''},
-            {value: TextArea.ErrorType.Alert, label: 'Alert'},
+            {value: TextArea.ErrorType.Caution, label: 'Caution'},
             {value: TextArea.ErrorType.Error, label: 'Error'},
           ],
         },

@@ -1,12 +1,21 @@
 import * as React from 'react';
 
-import {SecondaryButton, PrimaryButton} from '@workday/canvas-kit-react/button';
-import {Popup, Popper, Placement} from '@workday/canvas-kit-react/popup';
+import {PrimaryButton, SecondaryButton} from '@workday/canvas-kit-react/button';
+import {Placement, Popper, Popup} from '@workday/canvas-kit-react/popup';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 
 export default {
   title: 'Testing/Popups/Popper',
   component: Popper,
 };
+
+const styles = createStyles({
+  display: 'flex',
+  justifyContent: 'center',
+  height: px2rem(400),
+  width: px2rem(400),
+  alignItems: 'center',
+});
 
 export const UpdateOptions = {
   render: () => {
@@ -30,15 +39,7 @@ export const UpdateOptions = {
           <SecondaryButton onClick={() => setPlacement('left')}>Left</SecondaryButton>
           <div>Placement: {placement}</div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            height: 400,
-            width: 400,
-            alignItems: 'center',
-          }}
-        >
+        <div className={styles}>
           <PrimaryButton ref={buttonRef}>Target element</PrimaryButton>
           <Popper
             placement={placement}
@@ -48,7 +49,7 @@ export const UpdateOptions = {
           >
             {({placement}) => {
               return (
-                <Popup.Card width={400}>
+                <Popup.Card cs={{width: px2rem(400)}}>
                   <Popup.Heading>{'Positioned Popper element'}</Popup.Heading>
                   <Popup.Body>Placement:{placement}</Popup.Body>
                 </Popup.Card>

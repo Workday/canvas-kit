@@ -1,5 +1,6 @@
-import {expectTransformFactory} from './expectTransformFactory';
 import transform from '../renameInputRefs';
+import {expectTransformFactory} from './expectTransformFactory';
+
 const context = describe;
 
 const expectTransform = expectTransformFactory(transform);

@@ -1,10 +1,10 @@
 import ts from 'typescript';
 
-import {isImportedFromStyling} from './isImportedFromStyling';
-import {parseObjectToStaticValue} from './parseObjectToStaticValue';
 import {createStyleObjectNode, serializeStyles} from './createStyleObjectNode';
-import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
+import {isImportedFromStyling} from './isImportedFromStyling';
 import {parseNodeToStaticValue} from './parseNodeToStaticValue';
+import {parseObjectToStaticValue} from './parseObjectToStaticValue';
+import {NestedStyleObject, NodeTransformer, TransformerContext} from './types';
 
 export const handleInjectGlobal: NodeTransformer = (node, context) => {
   const {checker} = context;

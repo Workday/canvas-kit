@@ -1,17 +1,17 @@
-/** @jsxRuntime classic */
-/** @jsx jsx */
-import {jsx} from '@emotion/react';
 import React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+
+import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {Flex} from '@workday/canvas-kit-react/layout';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {ExternalHyperlink} from '@workday/canvas-kit-react/button';
-import {Container} from './utils';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {BodyText, Subtext} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
+
+import {Container} from './utils';
 
 export default {
   title: 'Testing/Buttons/Button/ExternalHyperlink',
@@ -59,7 +59,7 @@ export const ExternalHyperlinkStates = {
           )}
         </ComponentStatesTable>
       </StaticStates>
-      <Flex flexDirection="column" gap="xxs">
+      <Flex cs={{flexDirection: 'column', gap: system.gap.sm}}>
         <h3>Typography</h3>
         <Subtext size="large">
           The quick{' '}
@@ -82,27 +82,27 @@ export const ExternalHyperlinkStates = {
           jumps over the lazy dog
         </BodyText>
       </Flex>
-      <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
-        <Flex flexDirection="column" gap="xxs">
+      <CanvasProvider dir="rtl">
+        <Flex cs={{flexDirection: 'column', gap: system.gap.sm}}>
           <Subtext size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </Subtext>
           <BodyText size="small">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="medium">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
           <BodyText size="large">
-            The quick{' '}
-            <ExternalHyperlink iconLabel="Opens link in new window">brown fox</ExternalHyperlink>{' '}
-            jumps over the lazy dog
+            השועל החום{' '}
+            <ExternalHyperlink iconLabel="Opens link in new window">המהיר</ExternalHyperlink> קופץ
+            מעל הכלב העצל
           </BodyText>
         </Flex>
       </CanvasProvider>

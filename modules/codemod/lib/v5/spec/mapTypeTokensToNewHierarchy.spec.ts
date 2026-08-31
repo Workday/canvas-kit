@@ -1,6 +1,8 @@
-import {expectTransformFactory} from './expectTransformFactory';
-import transformer from '../mapTypeTokensToNewHierarchy';
 import {stripIndent} from 'common-tags';
+
+import transformer from '../mapTypeTokensToNewHierarchy';
+import {expectTransformFactory} from './expectTransformFactory';
+
 const context = describe;
 
 const expectTransform = expectTransformFactory(transformer);

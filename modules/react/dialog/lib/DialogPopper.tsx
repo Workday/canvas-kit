@@ -1,7 +1,7 @@
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
-import {Popup, usePopupPopper, Popper} from '@workday/canvas-kit-react/popup';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {Popper, Popup, usePopupPopper} from '@workday/canvas-kit-react/popup';
 
-import {useDialogPopper, useDialogModel} from './hooks';
+import {useDialogModel, useDialogPopper} from './hooks';
 
 export interface DialogPopperProps extends ExtractProps<typeof Popup.Popper, never> {}
 

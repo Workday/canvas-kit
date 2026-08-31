@@ -1,15 +1,14 @@
 import React from 'react';
 
-import {createContainer, GrowthBehavior} from '@workday/canvas-kit-react/common';
+import {GrowthBehavior, createContainer} from '@workday/canvas-kit-react/common';
 import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 
-import {useFormFieldModel} from './hooks';
+import {FormFieldField} from './FormFieldField';
+import {FormFieldHint} from './FormFieldHint';
 import {FormFieldInput} from './FormFieldInput';
 import {FormFieldLabel} from './FormFieldLabel';
-import {FormFieldHint} from './FormFieldHint';
-import {FormFieldContainer} from './FormFieldContainer';
 import {formFieldStencil} from './formFieldStencil';
-import {FormFieldField} from './FormFieldField';
+import {useFormFieldModel} from './hooks';
 
 export interface FormFieldProps extends FlexProps, GrowthBehavior {
   /**
@@ -79,23 +78,6 @@ export const FormField = createContainer('div')({
      * @stencil formFieldHintStencil
      */
     Hint: FormFieldHint,
-    /**
-     * `FormField.Field` allows you to properly center `FormField.Label` when the `orientation` is set to `horizontal` and there is hint text..
-     *
-     * ```tsx
-     * <FormField orientation="horizontalStart">
-     *    <FormField.Label>First Name</FormField.Label>
-     *    <FormField.Container>
-     *      <FormField.Input as={TextInput} value={value} onChange={(e) => console.log(e)} />
-     *      <FormField.Hint>This is your hint text</FormField.Hint>
-     *    </FormField.Container>
-     *  </FormField>
-     * ```
-     *
-     * @stencil formFieldContainerStencil
-     * @deprecated `FormField.Container` is deprecated and will be removed in a future major version. Please use `FormField.Field` to always wrap `FormField.Input` and `FormField.Hint` to always ensure correct label and input alignment.
-     */
-    Container: FormFieldContainer,
     /**
      * `FormField.Field` allows you to customize container alignment and styles when wrapping your input and hint text.
      * ```tsx

@@ -1,17 +1,15 @@
-import React from 'react';
-
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Table} from '@workday/canvas-kit-react/table';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 import {createStyles} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const tableHeaderStyles = createStyles({
-  backgroundColor: system.color.bg.alt.softer,
+  backgroundColor: system.color.surface.raised,
 });
 
 export const RightToLeft = () => {
   return (
-    <CanvasProvider theme={{canvas: {direction: ContentDirection.RTL}}}>
+    <CanvasProvider dir="rtl">
       <Table>
         <Table.Caption>משקאות קפה וגדלים</Table.Caption>
         <Table.Head>

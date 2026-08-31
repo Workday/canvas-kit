@@ -1,8 +1,9 @@
 import * as React from 'react';
+
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {CSProps, calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
 import {LabelText} from '@workday/canvas-kit-react/text';
+import {CSProps, createStencil} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 interface CheckboxContainerProps extends CSProps {
   children: React.ReactNode;
@@ -16,7 +17,7 @@ const checkboxContainerStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    minHeight: system.space.x6,
+    minHeight: base.legacy.size225,
     position: 'relative',
     /**
      * Using a wrapper prevents the browser default behavior of trigging
@@ -25,13 +26,13 @@ const checkboxContainerStencil = createStencil({
      */
     '&>div': {
       display: 'flex',
-      height: calc.add(system.space.x4, px2rem(2)),
-      minWidth: calc.add(system.space.x4, px2rem(2)),
-      marginTop: px2rem(3),
+      height: base.legacy.size225,
+      minWidth: base.legacy.size225,
       alignSelf: 'flex-start',
+      position: 'relative',
     },
     '& > label': {
-      paddingInlineStart: system.space.x3,
+      paddingInlineStart: system.legacy.padding.sm,
     },
   },
 });

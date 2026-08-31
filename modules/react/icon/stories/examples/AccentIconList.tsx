@@ -1,12 +1,13 @@
 import React from 'react';
-import * as CanvasAccenttIcons from '@workday/canvas-accent-icons-web';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+
+import * as CanvasAccentIcons from '@workday/canvas-accent-icons-web';
 import {AccentIcon} from '@workday/canvas-kit-react/icon';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const ImportedIcons = Object.keys(CanvasAccenttIcons);
+const ImportedIcons = Object.keys(CanvasAccentIcons);
 
 const allIcons = ImportedIcons.filter(icon => icon !== 'CanvasAccentIcons');
 
@@ -14,7 +15,7 @@ const styleOverrides = {
   parentContainer: createStyles({
     flexDirection: 'column',
     alignItems: 'center',
-    gap: system.space.x6,
+    gap: system.gap.lg,
   }),
   iconGroupContainer: createStyles({
     flexWrap: 'wrap',
@@ -23,8 +24,8 @@ const styleOverrides = {
     alignItems: 'center',
     width: `max(${px2rem(320)},20%)`,
     flexDirection: 'row',
-    gap: system.space.x3,
-    padding: system.space.x3,
+    gap: px2rem(12),
+    padding: system.padding.sm,
   }),
 };
 
@@ -51,7 +52,7 @@ export const AccentIconList = () => {
             return (
               <Flex cs={styleOverrides.individualIconContainer} key={index}>
                 <Box>
-                  <AccentIcon icon={CanvasAccenttIcons[singleIcon]} />
+                  <AccentIcon icon={CanvasAccentIcons[singleIcon]} />
                 </Box>
                 <Box>{singleIcon}</Box>
               </Flex>

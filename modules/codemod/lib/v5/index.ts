@@ -1,25 +1,25 @@
-import slashImports from './slashImports';
-import removeDefaultImports from './removeDefaultImports';
-// button codemods
-import removeButtonEnums from './removeButtonEnums';
-import renameButtonRefs from './renameButtonRefs';
-import recategorizeButtons from './recategorizeButtons';
-// spacing codemods
-import renameSpacing from './renameSpacing';
-// core and labs/core codemods
-import renameCoreImports from './renameCoreImports';
+import {API, FileInfo, Options} from 'jscodeshift';
+
 // card codemods
 import compoundCard from './compoundCard';
-// input provider
-import moveInputProvider from './moveInputProvider';
-// input codemods
-import renameInputRefs from './renameInputRefs';
 // type hierarchy codemods
 import mapTypeTokensToNewHierarchy from './mapTypeTokensToNewHierarchy';
+// input provider
+import moveInputProvider from './moveInputProvider';
+import recategorizeButtons from './recategorizeButtons';
+// button codemods
+import removeButtonEnums from './removeButtonEnums';
+import removeDefaultImports from './removeDefaultImports';
+import renameButtonRefs from './renameButtonRefs';
+// core and labs/core codemods
+import renameCoreImports from './renameCoreImports';
+// input codemods
+import renameInputRefs from './renameInputRefs';
 // preview/tokens codemods
 import renamePreviewTokenImports from './renamePreviewTokenImports';
-
-import {API, FileInfo, Options} from 'jscodeshift';
+// spacing codemods
+import renameSpacing from './renameSpacing';
+import slashImports from './slashImports';
 
 export default function transformer(file: FileInfo, api: API, options: Options) {
   // These will run in order. If your transform depends on others, place yours after dependent

@@ -1,8 +1,8 @@
 import {Transform} from 'jscodeshift';
 
+import compoundToast from './compoundToast';
 import deprecateStack from './deprecateStack';
 import promoteToast from './promoteToast';
-import compoundToast from './compoundToast';
 import promoteUseThemedRing from './promoteUseThemedRing';
 
 const transform: Transform = (file, api, options) => {

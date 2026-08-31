@@ -1,7 +1,7 @@
 /**
  * Note: you need to run `yarn add -WD file:./utils/custom-lint-rules` after changes for them to be reflected locally
  */
-module.exports = {
+const restrictedImports = {
   meta: {
     type: 'problem',
     docs: {
@@ -11,7 +11,7 @@ module.exports = {
     },
     fixable: 'code',
   },
-  create: function(context) {
+  create: function (context) {
     return {
       ImportDeclaration(node) {
         const {value} = node.source;
@@ -29,3 +29,5 @@ module.exports = {
     };
   },
 };
+
+export default restrictedImports;

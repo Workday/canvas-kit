@@ -1,9 +1,13 @@
 import React from 'react';
-import {PopperController} from '../../../../../utils/storybook';
-import {Placement} from '@workday/canvas-kit-react/popup';
-import {Menu} from '@workday/canvas-kit-react/menu';
-import {BodyText} from '@workday/canvas-kit-react/text';
+
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Menu} from '@workday/canvas-kit-react/menu';
+import {Placement} from '@workday/canvas-kit-react/popup';
+import {BodyText} from '@workday/canvas-kit-react/text';
+import {px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {PopperController} from '../../../../../utils/storybook';
 
 export const MenuWithFallbackPlacements = () => {
   const [placement, setPlacement] = React.useState<Placement>('top');
@@ -34,14 +38,16 @@ export const MenuWithFallbackPlacements = () => {
         onSetMarginRightBtn={handleMarginRightBtn}
       >
         <Flex
-          width="100%"
-          marginTop={240}
-          justifyContent="center"
-          alignItems="center"
-          flexDirection="column"
+          cs={{
+            width: '100%',
+            marginBlockStart: px2rem(240),
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column',
+          }}
         >
           <Menu onSelect={data => setSelected(data.id)}>
-            <Menu.Target style={{marginLeft: marginLeftBtn, marginRight: marginRightBtn}}>
+            <Menu.Target cs={{marginInlineStart: marginLeftBtn, marginInlineEnd: marginRightBtn}}>
               Open Menu
             </Menu.Target>
             <Menu.Popper placement={placement}>
@@ -55,7 +61,10 @@ export const MenuWithFallbackPlacements = () => {
                 </Menu.List>
               </Menu.Card>
             </Menu.Popper>
-            <BodyText size="small" marginTop="s" marginLeft={20}>
+            <BodyText
+              size="small"
+              cs={{marginBlockStart: system.gap.md, marginInlineStart: px2rem(20)}}
+            >
               Selected: <span data-testid="output">{selected}</span>
             </BodyText>
           </Menu>

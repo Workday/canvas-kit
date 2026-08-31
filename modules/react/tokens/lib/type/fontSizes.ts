@@ -20,6 +20,7 @@ type ValueOf<T> = T[keyof T];
  *   </p>
  * );
  * ```
+ * @deprecated ⚠️ `fontSizes` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens.
  */
 export const fontSizes: CanvasFontSizes = {
   10: '0.625rem',
@@ -36,6 +37,7 @@ export const fontSizes: CanvasFontSizes = {
   56: '3.5rem',
 };
 
+/** @deprecated ⚠️ `CanvasFontSizes` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasFontSizes = {
   /** 10px converted to base-16 rem */
   10: '0.625rem';
@@ -63,4 +65,5 @@ export type CanvasFontSizes = {
   56: '3.5rem';
 };
 
+/** @deprecated ⚠️ `CanvasFontSizeValues` has been deprecated in a future major version. Please use our css var based [`fontFamily`](https://workday.github.io/canvas-tokens/?path=/docs/docs-system-tokens-type--docs) tokens. */
 export type CanvasFontSizeValues = ValueOf<CanvasFontSizes>;

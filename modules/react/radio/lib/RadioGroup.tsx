@@ -1,14 +1,19 @@
 import * as React from 'react';
-import {Radio, RadioProps} from './Radio';
-import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
+
 import {
   ErrorType,
   GrowthBehavior,
+  Themeable,
   getErrorColors,
   styled,
-  Themeable,
 } from '@workday/canvas-kit-react/common';
+import {borderRadius, space} from '@workday/canvas-kit-react/tokens';
 
+import {Radio, RadioProps} from './Radio';
+
+/**
+ * @deprecated ⚠️ `RadioGroupProps` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
+ */
 export interface RadioGroupProps extends Themeable, GrowthBehavior {
   /**
    * The Radio button children of the RadioGroup (must be at least two).
@@ -33,6 +38,7 @@ export interface RadioGroupProps extends Themeable, GrowthBehavior {
   onChange?: (value: string | number) => void;
 }
 
+// Ignore all `styled` as component is deprecated in v15
 const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'>>(
   {
     display: 'inline-block',
@@ -67,6 +73,9 @@ const Container = styled('div')<Pick<RadioGroupProps, 'error' | 'grow' | 'theme'
   }
 );
 
+/**
+ * @deprecated ⚠️ `RadioGroup` in Main has been deprecated and will be removed in a future major version. Please use [`Radio` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
+ */
 export class RadioGroup extends React.Component<RadioGroupProps> {
   static ErrorType = ErrorType;
 

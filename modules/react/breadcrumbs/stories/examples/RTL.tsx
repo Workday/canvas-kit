@@ -1,7 +1,9 @@
 import * as React from 'react';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
+
 import {Breadcrumbs} from '@workday/canvas-kit-react/breadcrumbs';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
 
 export interface Breadcrumb {
   id: string;
@@ -10,12 +12,6 @@ export interface Breadcrumb {
 }
 
 export const RTLOverflowList = () => {
-  const theme = {
-    canvas: {
-      direction: ContentDirection.RTL,
-    },
-  };
-
   const [items] = React.useState<Breadcrumb[]>([
     {id: '1', text: 'תנ״ך', link: '/tanakh'},
     {id: '2', text: 'כתובים', link: '/ketuvim'},
@@ -26,8 +22,8 @@ export const RTLOverflowList = () => {
   ]);
 
   return (
-    <CanvasProvider theme={theme}>
-      <Box maxWidth="300px">
+    <CanvasProvider dir="rtl">
+      <Box cs={{maxWidth: px2rem(300)}}>
         <Breadcrumbs items={items} aria-label="Breadcrumbs">
           <Breadcrumbs.List overflowButton={<Breadcrumbs.OverflowButton aria-label="More links" />}>
             {item =>
@@ -43,7 +39,7 @@ export const RTLOverflowList = () => {
             }
           </Breadcrumbs.List>
           <Breadcrumbs.Menu.Popper>
-            <Breadcrumbs.Menu.Card maxWidth={300} maxHeight={200}>
+            <Breadcrumbs.Menu.Card cs={{maxWidth: px2rem(300), maxHeight: px2rem(200)}}>
               <Breadcrumbs.Menu.List>
                 {(item: Breadcrumb) => (
                   <Breadcrumbs.Menu.Item href={item.link}>{item.text}</Breadcrumbs.Menu.Item>

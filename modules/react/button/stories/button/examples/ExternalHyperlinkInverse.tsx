@@ -6,8 +6,10 @@ import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  backgroundColor: system.color.bg.primary.default,
-  padding: system.space.x4,
+  backgroundColor: system.color.brand.accent.primary,
+  padding: system.padding.md,
+  display: 'inline-flex',
+  gap: system.gap.md,
 });
 
 export const ExternalLinkInverse = () => (
@@ -16,6 +18,13 @@ export const ExternalLinkInverse = () => (
       href="https://workday.com"
       variant="inverse"
       iconLabel="Opens link in new window"
+    >
+      Hyperlink
+    </ExternalHyperlink>
+    <ExternalHyperlink
+      href="https://workday.com"
+      variant="standaloneInverse"
+      iconLabel="Opens new window"
     >
       Hyperlink
     </ExternalHyperlink>

@@ -1,28 +1,46 @@
 import * as React from 'react';
 
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {mergeStyles, BoxProps} from '@workday/canvas-kit-react/layout';
+import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {CardHeading} from './CardHeading';
 import {CardBody} from './CardBody';
+import {CardHeading} from './CardHeading';
 
 export interface CardProps extends BoxProps {
   /**
    * Children of the Card. Should contain a `<Card.Body>` and an optional `<Card.Heading>`
    */
   children?: React.ReactNode;
+  /**
+   * The variant of the Card. Can be `default`, `borderless` or `tonal`.
+   * @default 'default'
+   */
+  variant?: 'borderless' | 'tonal';
 }
 
 // .cnvs-card
 export const cardStencil = createStencil({
   base: {
-    boxShadow: system.depth[1],
-    padding: system.space.x8,
-    backgroundColor: system.color.bg.default,
-    border: `${px2rem(1)} solid ${system.color.border.container}`,
-    borderRadius: system.shape.x2,
+    display: 'flex',
+    flexDirection: 'column',
+    gap: system.legacy.gap.lg,
+    padding: system.legacy.padding.xl,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.xxl,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+  },
+  modifiers: {
+    variant: {
+      borderless: {
+        borderColor: 'transparent',
+      },
+      tonal: {
+        backgroundColor: system.legacy.color.surface.alt.default,
+        borderColor: system.color.border.transparent,
+      },
+    },
   },
 });
 
@@ -40,9 +58,9 @@ export const cardStencil = createStencil({
  */
 export const Card = createComponent('div')({
   displayName: 'Card',
-  Component: ({children, ...elemProps}: CardProps, ref, Element) => {
+  Component: ({children, variant, ...elemProps}: CardProps, ref, Element) => {
     return (
-      <Element ref={ref} {...mergeStyles(elemProps, cardStencil())}>
+      <Element ref={ref} {...mergeStyles(elemProps, cardStencil({variant}))}>
         {children}
       </Element>
     );

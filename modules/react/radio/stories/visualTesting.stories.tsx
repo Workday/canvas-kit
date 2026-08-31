@@ -1,14 +1,14 @@
 import * as React from 'react';
 
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
 import {
   ComponentStatesTable,
-  permutateProps,
   StaticStates,
+  permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {customColorTheme} from '../../../../utils/storybook';
 
-import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {customColorTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Radio',
@@ -83,7 +83,7 @@ export const RadioStates = () => (
         rowProps={permutateProps({
           error: [
             {value: undefined, label: 'No Error'},
-            {value: 'alert', label: 'Alert'},
+            {value: 'caution', label: 'Caution'},
             {value: 'error', label: 'Error'},
           ],
         })}
@@ -124,7 +124,7 @@ export const RadioStates = () => (
         rowProps={permutateProps({
           error: [
             {value: undefined, label: 'No Error'},
-            {value: 'alert', label: 'Alert'},
+            {value: 'caution', label: 'Caution'},
             {value: 'error', label: 'Error'},
           ],
         })}
@@ -140,9 +140,9 @@ export const RadioStates = () => (
             <FormField.Label>{props.label}</FormField.Label>
             {testGroup}
             {props.orientation === 'horizontal' && (
-              <FormField.Container>
+              <FormField.Field>
                 {testGroup} {props.error && <FormField.Hint>hintText</FormField.Hint>}
-              </FormField.Container>
+              </FormField.Field>
             )}
             {props.error && <FormField.Hint>hintText</FormField.Hint>}
           </FormField>

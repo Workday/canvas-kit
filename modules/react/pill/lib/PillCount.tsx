@@ -1,0 +1,45 @@
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {calc, createStencil, cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+export interface PillCountProps extends FlexProps {}
+
+export const pillCountStencil = createStencil({
+  vars: {
+    backgroundColor: '',
+    borderColor: '',
+  },
+  base: ({backgroundColor, borderColor}) => ({
+    borderStartStartRadius: 0,
+    borderStartEndRadius: system.legacy.shape.sm,
+    borderEndStartRadius: 0,
+    borderEndEndRadius: system.legacy.shape.sm,
+    borderWidth: 0,
+    borderInlineStartWidth: 0,
+    borderStyle: 'solid',
+    borderColor: cssVar(borderColor, system.color.border.transparent),
+    display: 'inline-flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: system.legacy.size.xs,
+    width: system.legacy.size.xs,
+    padding: `0 ${system.legacy.padding.xxs}`,
+    // Using the `padding` token here as we don't have a `margin` token
+    marginInlineEnd: calc.negate(system.legacy.gap.sm),
+    marginInlineStart: system.legacy.gap.xs,
+    backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.alt.strong),
+    flex: '0 0 auto',
+  }),
+});
+
+export const PillCount = createComponent('span')({
+  displayName: 'Pill.Count',
+  Component: ({children, ...elemProps}: PillCountProps, ref, Element) => {
+    return (
+      <Element ref={ref} {...mergeStyles(elemProps, pillCountStencil())}>
+        {children}
+      </Element>
+    );
+  },
+});

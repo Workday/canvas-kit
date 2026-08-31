@@ -1,11 +1,11 @@
 import React from 'react';
 
-import {createContainer} from '@workday/canvas-kit-react/common';
 import {Combobox} from '@workday/canvas-kit-react/combobox';
+import {createContainer} from '@workday/canvas-kit-react/common';
 
-import {useMultiSelectModel} from './useMultiSelectModel';
-import {MultiSelectInput, MultiSelectSearchInput} from './MultiSelectInput';
 import {MultiSelectCard} from './MultiSelectCard';
+import {MultiSelectInput, MultiSelectSearchInput} from './MultiSelectInput';
+import {useMultiSelectModel} from './useMultiSelectModel';
 
 export interface MultiSelectProps extends React.PropsWithChildren {}
 

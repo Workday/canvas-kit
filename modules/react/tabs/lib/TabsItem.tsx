@@ -1,32 +1,33 @@
 import * as React from 'react';
 
+import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {
-  focusRing,
-  slugify,
-  createElemPropsHook,
-  composeHooks,
-  ExtractProps,
-  EllipsisText,
-  createSubcomponent,
-  useModalityType,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
-import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
-import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {
+  ListRenderItemContext,
+  isSelected,
   useListItemRegister,
   useListItemRovingFocus,
-  isSelected,
   useListItemSelect,
   useOverflowListItemMeasure,
-  ListRenderItemContext,
 } from '@workday/canvas-kit-react/collection';
+import {
+  EllipsisText,
+  ExtractProps,
+  composeHooks,
+  createComponent,
+  createElemPropsHook,
+  createSubcomponent,
+  focusRing,
+  slugify,
+  useModalityType,
+} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {Box, FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {OverflowTooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, component, system} from '@workday/canvas-tokens-web';
 
 import {useTabsModel} from './useTabsModel';
-import {buttonStencil} from '@workday/canvas-kit-react/button';
-import {system, brand, base} from '@workday/canvas-tokens-web';
+
 export interface TabsItemProps
   extends ExtractProps<typeof Box, never>,
     Partial<Pick<FlexProps, 'gap'>> {
@@ -84,76 +85,80 @@ export interface TabsItemProps
 
 const tabItemStencil = createStencil({
   base: {
-    ...system.type.subtext.large,
-    fontFamily: `${system.fontFamily.default}, Helvetica Neue, Helvetica, Arial, sans-serif`,
+    fontFamily: system.fontFamily.default,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.medium,
     border: 'none',
-    backgroundColor: 'transparent',
+    backgroundColor: system.legacy.color.surface.transparent,
     flex: '0 0 auto',
-    minWidth: system.space.zero,
+    minWidth: 0,
     alignItems: 'center',
-    padding: `${system.space.x3} ${system.space.x4}`,
-    height: px2rem(52),
+    padding: `0 ${system.legacy.padding.md}`,
+    height: system.legacy.size.lg,
     cursor: 'pointer',
     color: system.color.fg.muted.default,
     position: 'relative',
-    borderRadius: `${system.space.x1} ${system.space.x1} ${system.space.zero} ${system.space.zero}`,
+    borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
     transition: 'background 150ms ease, color 150ms ease',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
     overflow: 'hidden',
-    [systemIconStencil.vars.color]: system.color.fg.muted.soft,
+    [systemIconStencil.vars.color]: 'currentColor',
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
 
     '&:has(span)': {
       display: 'flex',
-      gap: system.space.x2,
+      gap: system.legacy.gap.sm,
     },
 
     '&:hover, &.hover, &:focus-visible, &.focus': {
-      backgroundColor: base.soap200,
-      color: base.blackPepper400,
-
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
+      color: system.color.fg.muted.strong,
+      [systemIconStencil.vars.color]: system.color.fg.muted.strong,
     },
 
     '&:focus-visible, &.focus': {
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
       ...focusRing({inset: 'outer', width: 0, separation: 2}),
-      [buttonStencil.vars.boxShadowInner]: system.color.border.inverse,
-      [buttonStencil.vars.boxShadowOuter]: brand.common.focusOutline,
-      [systemIconStencil.vars.color]: system.color.icon.strong,
+      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      color: system.color.fg.strong,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
+    // Using opacity token applied to container to achieve disabled state instead of 'disabled" color tokens for
+    // icon and text colors
     '&:disabled, &.disabled, &[aria-disabled]': {
-      color: system.color.text.disabled,
-      [systemIconStencil.vars.color]: system.color.fg.disabled,
+      opacity: system.opacity.disabled,
       '&:hover': {
         cursor: 'auto',
-        backgroundColor: system.color.bg.transparent,
-        [systemIconStencil.vars.color]: system.color.fg.disabled,
+        backgroundColor: system.legacy.color.surface.transparent,
+        [systemIconStencil.vars.color]: system.color.fg.muted.default,
       },
     },
 
     '&[aria-selected=true]': {
-      color: brand.primary.base,
+      color: system.legacy.color.brand.fg.primary.default,
       cursor: 'default',
-      [systemIconStencil.vars.color]: brand.primary.base,
+      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
-        borderBottom: `${system.space.x1} solid transparent`,
-        borderRadius: `${system.shape.x1} ${system.shape.x1} ${system.shape.zero} ${system.shape.zero}`,
-        backgroundColor: brand.primary.base,
-        bottom: system.space.zero,
+        borderBlockEnd: `${base.legacy.size50} solid transparent`,
+        borderRadius: `${system.legacy.shape.md} ${system.legacy.shape.md} ${system.legacy.shape.none} ${system.legacy.shape.none}`,
+        backgroundColor: system.legacy.color.brand.fg.primary.default,
+        bottom: 0,
         content: `''`,
-        left: system.space.zero,
-        marginBlockStart: `${calc.negate(calc.divide(system.space.x2, system.space.x1))}`,
+        left: 0,
+        marginBlockStart: `${calc.negate(calc.divide(system.legacy.padding.xs, system.legacy.padding.xxs))}`,
         width: '100%',
       },
       '&:hover, &.hover, &:focus-visible, &.focus': {
-        backgroundColor: system.color.bg.transparent,
-        color: brand.primary.base,
+        backgroundColor: system.legacy.color.surface.transparent,
+        color: system.legacy.color.brand.fg.primary.default,
       },
     },
   },
@@ -172,33 +177,37 @@ export const StyledTabItem = createComponent('button')<TabsItemProps>({
 
 /**
  * When the selected tab receives ArrowDown, move focus to its tab panel.
- * Only applies to the selected tab; returning null from onKeyDown prevents the roving
- * focus handler from also handling the key. Tabs.OverflowButton does not use this hook.
- * Uses ListRenderItemContext for the item id since this hook runs before useListItemRegister
- * merges in data-id.
+ * Returning `null` is the mergeCallback sentinel that stops later-merged
+ * `onKeyDown` handlers (including roving focus) from also handling this key.
+ * This hook must be composed before `useListItemRovingFocus` so it runs after
+ * that hook and its return value can skip the roving handler.
+ * Tabs.OverflowButton does not use this hook.
  */
-const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)(
-  ({state}, _, elemProps: {'data-id'?: string} = {}) => {
-    const {item} = React.useContext(ListRenderItemContext);
-    const name = elemProps['data-id'] || item?.id || '';
-    const selected = !!name && isSelected(name, state);
+const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)((
+  {state},
+  _,
+  elemProps: {'data-id'?: string} = {}
+) => {
+  const {item} = React.useContext(ListRenderItemContext);
+  const name = elemProps['data-id'] || item?.id || '';
+  const selected = !!name && isSelected(name, state);
 
-    return {
-      onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-        if (!selected || event.key !== 'ArrowDown') {
-          return;
-        }
-        event.preventDefault();
-        const panelId = slugify(`tabpanel-${state.id}-${name}`);
-        const panel = document.getElementById(panelId);
-        if (panel) {
-          (panel as HTMLElement).focus();
-        }
-        return null as unknown as void; // prevent roving focus from handling this key
-      },
-    };
-  }
-);
+  return {
+    onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+      if (!selected || event.key !== 'ArrowDown') {
+        return;
+      }
+      event.preventDefault();
+      const panelId = slugify(`tabpanel-${state.id}-${name}`);
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        (panel as HTMLElement).focus();
+      }
+      // mergeCallback: `null` prevents the roving-focus onKeyDown from running.
+      return null;
+    },
+  };
+});
 
 export const useTabsItem = composeHooks(
   createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
@@ -215,9 +224,9 @@ export const useTabsItem = composeHooks(
   }),
   useListItemSelect,
   useOverflowListItemMeasure,
+  useTabsItemFocusPanelOnArrowDown,
   useListItemRovingFocus,
-  useListItemRegister,
-  useTabsItemFocusPanelOnArrowDown
+  useListItemRegister
 );
 
 export const TabsItem = createSubcomponent('button')({

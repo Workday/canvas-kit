@@ -2,7 +2,7 @@
 
 This project provides a set of components for the Workday Canvas Design System that can be used to
 implement user experiences consistent with
-[Workday's design principles](https://design.workday.com/).
+[Workday's design principles](https://canvas.workdaydesign.com/).
 
 <a href="./LICENSE">
   <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Workday Canvas Kit is released under the Apache-2.0 license" />
@@ -27,9 +27,9 @@ implement user experiences consistent with
 
 The following are supported versions of dependencies.
 
-* React:  >=16.8 < 17
-* Typescript: >=5.0 (optional)
-* Emotion: ^11.7.0
+- React: >=17.0
+- Typescript: >=5.0 (optional)
+- Emotion: ^11.7.0
 
 **Installation**
 
@@ -62,7 +62,9 @@ import {cssVar} from '@workday/canvas-kit-styling';
 
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
+import '@workday/canvas-tokens-web/css/component/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+
 
 import {App} from './App';
 
@@ -75,7 +77,7 @@ injectGlobal({
   },
   '#root, #root < div': {
     minHeight: '100vh',
-    ...system.type.body.small,
+    ...system.type.body.sm,
   },
 });
 
@@ -87,33 +89,23 @@ root.render(<App />);
 The in your `App.js` you can set a global theme.
 
 ```jsx
-import {
-  CanvasProvider,
-  ContentDirection,
-  PartialEmotionCanvasTheme,
-  useTheme,
-} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 export const App = () => {
-  // useTheme is filling in the Canvas theme object if any keys are missing
-  const canvasTheme: PartialEmotionCanvasTheme = useTheme({
-    canvas: {
-      // Switch to `ContentDirection.RTL` to change direction
-      direction: ContentDirection.LTR,
-    },
-  });
-
   return (
-    <CanvasProvider theme={canvasTheme}>
-      <>
-        <main>
-          <p>Get Started With Canvas Kit</p>
-        </main>
-      </>
+    <CanvasProvider>
+      <main>
+        <p>Get Started With Canvas Kit</p>
+      </main>
     </CanvasProvider>
   );
 };
 ```
+
+> **Note:** Don't use the `CanvasProvider` to theme, instead use our CSS tokens from
+> `@workday/canvas-tokens-web`. For more information, view our
+> [Token docs](https://workday.github.io/canvas-tokens/?path=/docs/docs-getting-started--docs).
+> Theming should be global.
 
 ## Reporting a Bug
 
@@ -184,6 +176,8 @@ recommend against using it in production until the first stable version has been
   - [v10.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v10-0--docs)
   - [v11.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v11-0--docs)
   - [v12.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v12-0--docs)
+  - [v13.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v13-0--docs)
+  - [v14.0 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v14-0-overview--docs)
 - Code Style / Best Practices:
   - [API & Pattern Guidelines](https://workday.github.io/canvas-kit/?path=/docs/guides-api-pattern-guidelines--docs)
   - [Compound Components](https://workday.github.io/canvas-kit/?path=/docs/guides-compound-components--docs)

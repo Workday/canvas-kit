@@ -1,9 +1,12 @@
 import * as React from 'react';
 
-import {PaginationModel} from './types';
-import {ListItem, ListItemProps} from './common/List';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
 import {createComponent} from '@workday/canvas-kit-react/common';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+import {ListItem, ListItemProps} from './common/List';
+import {PaginationModel} from './types';
 import {PaginationContext} from './usePaginationModel';
 
 export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
@@ -11,34 +14,34 @@ export interface PageListProps extends Omit<FlexProps, 'as' | 'children'> {
   children?: (model: PaginationModel) => React.ReactNode[] | React.ReactNode;
 }
 
+export const paginationPageListStencil = createStencil({
+  base: {
+    display: 'flex',
+    margin: 0,
+    paddingInline: 0,
+    gap: system.legacy.gap.xs,
+  },
+});
+
 export const PageList = createComponent('ol')({
   displayName: 'Pagination.PageList',
   Component({children, ...elemProps}: PageListProps, ref, Element) {
     const model = React.useContext(PaginationContext);
     return (
-      <Flex
-        ref={ref}
-        as={Element}
-        margin="zero"
-        role="list"
-        paddingLeft="zero"
-        paddingRight="zero"
-        gap="xxxs"
-        {...elemProps}
-      >
+      <Element ref={ref} role="list" {...mergeStyles(elemProps, paginationPageListStencil())}>
         {typeof children === 'function' ? children(model) : children}
-      </Flex>
+      </Element>
     );
   },
 });
 
-export interface PageListItemProps extends ListItemProps {}
+export interface PageListItemProps extends ListItemProps, CSProps {}
 
 export const PageListItem = createComponent('li')({
   displayName: 'Pagination.PageListItem',
   Component({children, ...elemProps}: PageListItemProps, ref, Element) {
     return (
-      <ListItem ref={ref} as={Element} {...elemProps}>
+      <ListItem ref={ref} as={Element} {...handleCsProp(elemProps)}>
         {children}
       </ListItem>
     );

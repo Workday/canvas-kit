@@ -1,5 +1,5 @@
+import {viteDevServer} from '@cypress/vite-dev-server';
 import {defineConfig} from 'cypress';
-const webpack = require('@cypress/webpack-preprocessor');
 
 export default defineConfig({
   projectId: 'odida5',
@@ -15,10 +15,7 @@ export default defineConfig({
     specPattern: 'cypress/component/**/*.{js,jsx,ts,tsx}',
     devServer: {
       framework: 'react',
-      bundler: 'webpack',
-    },
-    setupNodeEvents(on, config) {
-      on('file:preprocessor', webpack());
+      bundler: 'vite',
     },
     viewportWidth: 1024,
     viewportHeight: 768,

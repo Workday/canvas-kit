@@ -3,6 +3,7 @@
  */
 import React from 'react';
 import {renderToString} from 'react-dom/server';
+
 import {FormField} from '../';
 
 describe('FormField', () => {

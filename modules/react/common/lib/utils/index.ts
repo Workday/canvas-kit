@@ -1,5 +1,6 @@
 export * from './colorUtils';
 export * from './getTranslateFromOrigin';
+export * from './isElementRTL';
 export * from './dispatchInputEvent';
 export * from './changeFocus';
 export * from './makeMq';

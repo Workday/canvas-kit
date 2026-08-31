@@ -1,16 +1,17 @@
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {
+  caretDownIcon,
   plusIcon,
   relatedActionsVerticalIcon,
-  caretDownIcon,
 } from '@workday/canvas-system-icons-web';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
-  gap: system.space.x4,
-  padding: system.space.x4,
+  gap: system.gap.md,
+  padding: system.padding.md,
 });
 
 export const Primary = () => (
@@ -22,6 +23,8 @@ export const Primary = () => (
     <PrimaryButton icon={caretDownIcon} iconPosition="end">
       Primary
     </PrimaryButton>
-    <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
+    <Tooltip title="Related Actions">
+      <PrimaryButton icon={relatedActionsVerticalIcon} />
+    </Tooltip>
   </Flex>
 );

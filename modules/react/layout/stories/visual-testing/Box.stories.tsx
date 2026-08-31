@@ -1,8 +1,6 @@
-import React from 'react';
-
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {ComponentStatesTable} from '@workday/canvas-kit-react/testing';
-import {CanvasProvider, ContentDirection} from '@workday/canvas-kit-react/common';
 
 export default {
   title: 'Testing/Layout/Box',
@@ -33,14 +31,14 @@ export const BoxStates = {
               label: 'Standard Props',
               props: {
                 ...cellDefaultProps,
-                borderLeft: 'solid 4px',
-                borderLeftColor: 'cinnamon500',
-                borderRight: 'solid 8px',
-                borderRightColor: 'sourLemon500',
+                borderInlineStart: 'solid 4px',
+                borderInlineStartColor: 'cinnamon500',
+                borderInlineEnd: 'solid 8px',
+                borderInlineEndColor: 'sourLemon500',
                 left: '8px',
-                marginLeft: 'm',
-                paddingLeft: 's',
-                paddingRight: 'l',
+                marginInlineStart: 'm',
+                paddingInlineStart: 's',
+                paddingInlineEnd: 'l',
               },
             },
             {
@@ -59,13 +57,13 @@ export const BoxStates = {
             },
           ]}
           rowProps={[
-            {label: 'LTR', props: {theme: {canvas: {direction: ContentDirection.LTR}}}},
-            {label: 'RTL', props: {theme: {canvas: {direction: ContentDirection.RTL}}}},
+            {label: 'LTR', props: {dir: 'ltr'}},
+            {label: 'RTL', props: {dir: 'rtl'}},
           ]}
         >
           {props => {
             return (
-              <CanvasProvider theme={props.theme}>
+              <CanvasProvider dir={props.dir}>
                 <Box {...props}>Box</Box>
               </CanvasProvider>
             );

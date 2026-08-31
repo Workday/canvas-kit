@@ -25,6 +25,7 @@ Then in your index or main file of your project...
 
 ```tsx
 import {Global, css} from '@emotion/react';
+
 import {fonts} from '@workday/canvas-kit-react-fonts';
 
 // Inject all of Canvas' @font-face declarations to <head> via emotion
@@ -52,15 +53,15 @@ render(
 or
 
 ```tsx
-import styled from '@emotion/styled';
-import {fontFamily, monoFontFamily} from '@workday/canvas-kit-react/tokens';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 // Custom typography using the official Canvas font list
-const customParagraph = styled('p')({
-  fontFamily: fontFamily, // "Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif
+const customParagraph = createStyles({
+  fontFamily: system.fontFamily.default, // "Roboto", "Helvetica Neue", "Helvetica", Arial, sans-serif
 });
 
-const customPre = styled('pre')({
-  fontFamily: monoFontFamily, // "Roboto Mono", "Courier New", Courier, monospace
+const customPre = createStyles({
+  fontFamily: system.fontFamily.mono, // "Roboto Mono", "Courier New", Courier, monospace
 });
 ```

@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {system} from '@workday/canvas-tokens-web';
-import {createSubcomponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {useListRenderItems, useOverflowListMeasure} from '@workday/canvas-kit-react/collection';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
-import {useOverflowListMeasure, useListRenderItems} from '@workday/canvas-kit-react/collection';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useActionBarModel} from './useActionBarModel';
-import {createStencil, cssVar} from '@workday/canvas-kit-styling';
 
 export interface ActionBarListProps<T = any>
   extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -34,17 +34,16 @@ export interface ActionBarListProps<T = any>
 export const actionBarListStencil = createStencil({
   base: {
     display: 'flex',
-    boxShadow: system.depth[1],
-    gap: system.space.x4,
-    background: system.color.bg.default,
-    borderBlockStart: `solid 1px ${cssVar(system.color.border.divider)}`,
-    padding: `${cssVar(system.space.x4)} ${cssVar(system.space.x10)} `,
+    boxShadow: system.depth[2],
+    gap: system.legacy.gap.md,
+    background: system.legacy.color.surface.default,
+    borderBlockStart: `solid ${px2rem(1)}  ${system.legacy.color.border.default}`,
+    padding: `${system.legacy.padding.md} ${base.legacy.size500} `,
     position: 'fixed',
     insetBlockEnd: 0,
-    insetInlineStart: 0,
-    insetInlineEnd: 0,
+    insetInline: 0,
     '@media (max-width: 767.5px)': {
-      padding: system.space.x4,
+      padding: system.legacy.size.xxxs,
       '> *': {
         flex: 1,
       },

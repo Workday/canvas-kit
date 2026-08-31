@@ -1,12 +1,12 @@
 import React from 'react';
+
+import {DeleteButton} from '@workday/canvas-kit-react/button';
+import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
-import {PartialEmotionCanvasTheme} from '@workday/canvas-kit-react/common';
-
-import {DeleteButton} from '@workday/canvas-kit-react/button';
 
 export const stateTableColumnProps = [
   {label: 'Default ', props: {className: '', disabled: false}},

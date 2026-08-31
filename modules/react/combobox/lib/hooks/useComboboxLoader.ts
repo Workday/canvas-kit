@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {useListLoader} from '@workday/canvas-kit-react/collection';
+
 import {useComboboxModel} from './useComboboxModel';
 
 const useDebounce = () => {
@@ -11,7 +12,6 @@ const useDebounce = () => {
       // We want to clear any timeout on unload. We disable the ESLint rule because this is actually
       // what we want
 
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       clearTimeout(debounceTimer.current);
     };
   }, []);

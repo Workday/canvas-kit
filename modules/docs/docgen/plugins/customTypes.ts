@@ -1,4 +1,4 @@
-import {ObjectProperty, Value, JSDoc, SymbolValue, FunctionValue} from '../docTypes';
+import {FunctionValue, JSDoc, ObjectProperty, SymbolValue, Value} from '../docTypes';
 
 export interface ModelHookValue {
   kind: 'modelHook';

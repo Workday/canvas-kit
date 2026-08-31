@@ -1,5 +1,5 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
 import {Hyperlink, HyperlinkProps} from '@workday/canvas-kit-react/button';
+import {createComponent} from '@workday/canvas-kit-react/common';
 
 export interface ToastLinkProps extends HyperlinkProps {}
 

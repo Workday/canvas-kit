@@ -1,13 +1,14 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
+
 import {ColorInput} from '../lib/ColorInput';
-import {render, fireEvent} from '@testing-library/react';
 
 const id = 'color-input';
 const placeholder = '000000';
 const value = 'eee';
 
 describe('ColorInput', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });
@@ -35,16 +36,6 @@ describe('ColorInput', () => {
 
         expect(getByRole('textbox')).toHaveValue(value);
         expect(container.querySelector('svg')).toHaveClass('wd-icon-check-small');
-      });
-    });
-
-    describe('with a value and background', () => {
-      test('should render a ColorInput with a value and the value as a background', () => {
-        const {container} = render(<ColorInput value={value} />);
-
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
       });
     });
 

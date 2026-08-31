@@ -1,7 +1,7 @@
-import React from 'react';
 import {useVirtualizer} from '@tanstack/react-virtual';
+import React from 'react';
 
-import {useUniqueId, createModelHook, Generic} from '@workday/canvas-kit-react/common';
+import {Generic, createModelHook, useUniqueId} from '@workday/canvas-kit-react/common';
 
 export type Orientation = 'horizontal' | 'vertical';
 
@@ -16,9 +16,12 @@ export const defaultGetId = (item: Generic): string => {
   return item === undefined ? '' : typeof item === 'string' ? item : item.id || '';
 };
 
+let hasWarnedNoGetTextValue = false;
+
 export const defaultGetTextValue = (item: Generic): string => {
   if (process.env.NODE_ENV === 'development') {
-    if (typeof item === 'object' && item.text === undefined) {
+    if (!hasWarnedNoGetTextValue && typeof item === 'object' && item.text === undefined) {
+      hasWarnedNoGetTextValue = true;
       console.warn(
         "List item was an object, but no `getTextValue` was passed to the model to inform the list where to find the item's text value. The item's text value is used for accessibility. Please pass a `getTextValue` to the list model"
       );

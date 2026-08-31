@@ -1,7 +1,7 @@
-import * as React from 'react';
-import 'github-markdown-css';
 import emojijs from 'emoji-js';
+import 'github-markdown-css';
 import MarkdownToJSX from 'markdown-to-jsx';
+import * as React from 'react';
 
 const emoji = new emojijs.EmojiConvertor();
 

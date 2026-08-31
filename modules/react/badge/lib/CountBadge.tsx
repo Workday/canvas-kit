@@ -1,5 +1,5 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {handleCsProp, CSProps, createStencil, px2rem, keyframes} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, handleCsProp, keyframes, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const grow = keyframes({
@@ -19,6 +19,12 @@ export interface CountBadgeProps extends CSProps {
    */
   count?: number;
   /**
+   * Sets the emphasis of the badge
+   *
+   * @default 'high'
+   */
+  emphasis?: 'high' | 'low';
+  /**
    * Sets the maximum count to display before formatting the number.
    * E.g. Given a count of `100` and a limit of `100`, the badge would display `99+`.
    *
@@ -36,31 +42,45 @@ const countBadgeStencil = createStencil({
   base: {
     alignItems: 'center',
     animation: `${grow} 0.2s ease`,
-    background: system.color.static.red.default,
-    borderRadius: system.shape.round,
-    color: system.color.text.inverse,
+    borderRadius: system.legacy.shape.full,
     display: 'inline-flex',
     fontFamily: system.fontFamily.default,
-    fontSize: system.fontSize.subtext.medium,
+    fontSize: system.legacy.fontSize.subtext.md,
     fontWeight: system.fontWeight.bold,
     height: px2rem(20),
     justifyContent: 'center',
-    lineHeight: px2rem(20),
-    minWidth: px2rem(20),
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.md,
+    minWidth: system.legacy.size.xxs,
     padding: `0 ${px2rem(6.5)}`,
-    textShadow: `0 0 ${px2rem(1)} rgba(0,0,0, 0.35)`,
+    background: system.legacy.color.accent.danger,
+    color: system.color.fg.inverse,
   },
   modifiers: {
     variant: {
       // .cnvs-count-badge--variant-inverse
       inverse: {
-        background: system.color.bg.default,
-        boxShadow: `0 ${px2rem(1)} ${px2rem(2)} rgba(0,0,0, 0.25)`,
-        color: system.color.text.primary.default,
-        textShadow: 'none',
+        background: system.legacy.color.surface.inverse,
+        color: system.legacy.color.fg.info.strong,
+      },
+    },
+    emphasis: {
+      high: {},
+      low: {
+        background: system.legacy.color.surface.info.strong,
+        color: system.legacy.color.fg.info.strong,
       },
     },
   },
+  compound: [
+    {
+      modifiers: {variant: 'inverse', emphasis: 'low'},
+      styles: {
+        background: system.legacy.color.surface.overlay.hover.inverse,
+        color: system.color.fg.inverse,
+      },
+    },
+  ],
 });
 
 /**
@@ -68,11 +88,15 @@ const countBadgeStencil = createStencil({
  */
 export const CountBadge = createComponent('span')({
   displayName: 'CountBadge',
-  Component: ({count = 0, limit = 1000, variant, ...elemProps}: CountBadgeProps, ref, Element) => {
+  Component: (
+    {count = 0, limit = 1000, variant, emphasis = 'high', ...elemProps}: CountBadgeProps,
+    ref,
+    Element
+  ) => {
     const formattedCount = count < limit ? `${count}` : `${limit - 1}+`;
 
     return (
-      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant})])}>
+      <Element ref={ref} {...handleCsProp(elemProps, [countBadgeStencil({variant, emphasis})])}>
         {formattedCount}
       </Element>
     );

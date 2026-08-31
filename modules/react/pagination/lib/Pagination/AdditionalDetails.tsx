@@ -1,15 +1,12 @@
 import * as React from 'react';
-import {type, space, typeColors} from '@workday/canvas-kit-react/tokens';
-import {
-  accessibleHide,
-  styled,
-  StyledType,
-  createComponent,
-} from '@workday/canvas-kit-react/common';
 
-import {PaginationModel} from './types';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
+import {accessibleHide, createComponent} from '@workday/canvas-kit-react/common';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
 import {useLiveRegion} from './common/useLiveRegion';
+import {PaginationModel} from './types';
 import {PaginationContext} from './usePaginationModel';
 
 export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
@@ -18,19 +15,27 @@ export interface AdditionalDetailsProps extends Omit<FlexProps, 'children'> {
   shouldHideDetails?: boolean;
 }
 
-const StyledAdditionalDetails = styled(Flex)<
-  StyledType & Pick<AdditionalDetailsProps, 'shouldHideDetails'>
->(({shouldHideDetails}) => {
-  if (shouldHideDetails) {
-    return {
-      ...accessibleHide,
-      marginTop: space.zero,
-    };
-  } else {
-    return {
-      marginTop: space.xs,
-    };
-  }
+export const paginationAdditionalDetailsStencil = createStencil({
+  base: {
+    display: 'flex',
+    // ...system.legacy.type.subtext.md,
+    // components do not support spreading for legacy type token
+    fontFamily: system.fontFamily.default,
+    fontWeight: system.fontWeight.normal,
+    fontSize: system.legacy.fontSize.subtext.md,
+    lineHeight: system.legacy.lineHeight.subtext.md,
+    letterSpacing: system.legacy.letterSpacing.subtext.md,
+    color: system.color.fg.muted.default,
+    marginBlockStart: px2rem(12),
+  },
+  modifiers: {
+    shouldHideDetails: {
+      true: {
+        ...accessibleHide,
+        marginBlockStart: '0',
+      },
+    },
+  },
 });
 
 export const AdditionalDetails = createComponent('div')({
@@ -44,16 +49,15 @@ export const AdditionalDetails = createComponent('div')({
     const liveRegionProps = useLiveRegion({shouldAnnounceToScreenReader});
 
     return (
-      <StyledAdditionalDetails
+      <Element
         ref={ref}
-        as={Element}
-        {...type.levels.subtext.medium}
-        color={typeColors.hint}
-        {...liveRegionProps}
-        {...elemProps}
+        {...mergeStyles(
+          {...liveRegionProps, ...elemProps},
+          paginationAdditionalDetailsStencil({shouldHideDetails: elemProps.shouldHideDetails})
+        )}
       >
         {typeof children === 'function' ? children(model) : children}
-      </StyledAdditionalDetails>
+      </Element>
     );
   },
 });

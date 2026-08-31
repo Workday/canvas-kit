@@ -14,7 +14,7 @@ export const useComboboxInputOpenWithArrowKeys = createElemPropsHook(useCombobox
         (event.key === 'ArrowUp' && model.state.visibility !== 'visible')
       ) {
         model.events.show(event);
-        model.events.setWidth(event.currentTarget.clientWidth);
+        model.events.setWidth(event.currentTarget.getBoundingClientRect().width);
       }
     },
   };

@@ -41,10 +41,5 @@ const stories = rootPath => `
 }
 `;
 
-module.exports = {
-  default: tsconfig,
-  cjs,
-  es6,
-  spec,
-  stories,
-};
+export default tsconfig;
+export {cjs, es6, spec, stories};

@@ -1,16 +1,17 @@
-import * as React from 'react';
-import {cardStencil, cardBodyStencil, cardHeadingStencil} from '@workday/canvas-kit-react/card';
+import {cardBodyStencil, cardHeadingStencil, cardStencil} from '@workday/canvas-kit-react/card';
 import {createComponent} from '@workday/canvas-kit-react/common';
-import {createStencil, px2rem, CSProps, handleCsProp} from '@workday/canvas-kit-styling';
-import {system, brand} from '@workday/canvas-tokens-web';
+import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {brand, system} from '@workday/canvas-tokens-web';
 
 const menuCardStencil = createStencil({
   extends: cardStencil,
   base: {
     display: 'flex',
     flexDirection: 'column',
-    padding: system.space.zero,
+    padding: '0',
     maxWidth: px2rem(320),
+    boxShadow: system.depth[1],
+    overflow: 'hidden',
   },
 });
 
@@ -21,8 +22,7 @@ const menuCardHeroStencil = createStencil({
     background: brand.gradient.primary,
     aspectRatio: '1',
     maxHeight: px2rem(80),
-    padding: system.space.x2,
-    borderRadius: `${system.shape.x2} ${system.shape.x2} 0 0`,
+    padding: system.padding.xs,
   },
 });
 
@@ -37,8 +37,8 @@ const menuCardContentStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.space.x2,
-    padding: system.space.x2,
+    gap: system.gap.sm,
+    padding: system.padding.xs,
   },
 });
 
@@ -52,8 +52,8 @@ const MenuCardContent = createComponent('div')({
 const menuCardHeadingStencil = createStencil({
   extends: cardHeadingStencil,
   base: {
-    color: brand.primary.accent,
-    margin: system.space.zero,
+    color: system.color.fg.inverse,
+    margin: '0',
   },
 });
 

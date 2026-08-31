@@ -1,9 +1,15 @@
-const path = require('node:path');
-const {promisify} = require('node:util');
-const fs = require('node:fs/promises');
-const glob = promisify(require('glob'));
+import globPkg from 'glob';
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {promisify} from 'node:util';
 
-const {version} = require(path.join(__dirname, '../lerna.json'));
+const glob = promisify(globPkg.glob);
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const lernaConfig = JSON.parse(await fs.readFile(path.join(__dirname, '../lerna.json'), 'utf8'));
+const {version} = lernaConfig;
 
 async function main() {
   const files = await glob(path.join(__dirname, '../modules/**/dist/**/version.js'));

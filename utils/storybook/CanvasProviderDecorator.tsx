@@ -1,21 +1,31 @@
+import {makeDecorator} from '@storybook/preview-api';
 import * as React from 'react';
+
 import {
-  defaultCanvasTheme,
   CanvasProvider,
   PartialEmotionCanvasTheme,
+  defaultCanvasTheme,
 } from '@workday/canvas-kit-react/common';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
-import {makeDecorator, useArgs} from '@storybook/preview-api';
+const storyStyles = createStyles({
+  padding: system.padding.md,
+});
 
 export default makeDecorator({
   name: 'canvasProviderDecorator',
   parameterName: 'canvasProviderDecorator',
   wrapper: (storyFn, context, {parameters = {}}) => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const [args] = useArgs();
     const theme: PartialEmotionCanvasTheme = {
-      canvas: parameters.theme || args.theme || defaultCanvasTheme,
+      canvas: parameters.theme || defaultCanvasTheme,
     };
-    return <CanvasProvider theme={theme}>{storyFn(context) as React.ReactNode}</CanvasProvider>;
+    const tokenTheme = context.globals?.theme;
+    const dataTheme = tokenTheme === 'sana' ? 'sana-canvas' : undefined;
+    return (
+      <CanvasProvider theme={theme} className={storyStyles} data-theme={dataTheme}>
+        {storyFn(context) as React.ReactNode}
+      </CanvasProvider>
+    );
   },
 });

@@ -1,15 +1,18 @@
 import * as React from 'react';
-import {composeHooks, createSubcomponent, useIsRTL} from '@workday/canvas-kit-react/common';
+
 import {
   useListItemRegister,
   useOverflowListItemMeasure,
 } from '@workday/canvas-kit-react/collection';
-import {Flex, FlexProps} from '@workday/canvas-kit-react/layout';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {composeHooks, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {FlexProps, mergeStyles} from '@workday/canvas-kit-react/layout';
+import {createStencil} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
-import {colors, space} from '@workday/canvas-kit-react/tokens';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
+import {component, system} from '@workday/canvas-tokens-web';
+
 import {BreadcrumbsLink} from './BreadcrumbsLink';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
 export interface BreadcrumbsItemProps extends FlexProps {
   /**
@@ -28,6 +31,29 @@ export interface BreadcrumbsItemProps extends FlexProps {
   'data-id'?: string;
 }
 
+export const breadcrumbsItemStencil = createStencil({
+  parts: {
+    chevronRightIcon: 'breadcrumbs-item-chevron-right-icon',
+  },
+  base: ({chevronRightIconPart}) => ({
+    alignItems: 'center',
+    display: 'inline-flex',
+    whiteSpace: 'nowrap',
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.color]: system.color.fg.default,
+    [chevronRightIconPart]: {
+      height: system.legacy.size.sm,
+      width: system.legacy.size.sm,
+      justifyContent: 'center',
+      alignItems: 'center',
+      display: 'inline-flex',
+      ':dir(rtl)': {
+        transform: 'scaleX(-1)',
+      },
+    },
+  }),
+});
+
 export const useBreadcrumbsItem = composeHooks(useOverflowListItemMeasure, useListItemRegister);
 
 export const BreadcrumbsItem = createSubcomponent('li')({
@@ -39,19 +65,13 @@ export const BreadcrumbsItem = createSubcomponent('li')({
   },
 })<BreadcrumbsItemProps>(({children, ...elemProps}, Element) => {
   return (
-    <Flex as={Element} alignItems="center" whiteSpace="nowrap" {...elemProps}>
+    <Element {...mergeStyles(elemProps, breadcrumbsItemStencil())}>
       {children}
       <SystemIcon
         icon={chevronRightSmallIcon}
-        color={colors.licorice200}
-        colorHover={colors.licorice200}
-        size={20}
-        height={space.l}
-        width={space.l}
-        shouldMirror={useIsRTL()}
-        cs={{justifyContent: 'center', alignItems: 'center', display: 'inline-flex'}}
+        {...breadcrumbsItemStencil.parts.chevronRightIcon}
         aria-hidden
       />
-    </Flex>
+    </Element>
   );
 });

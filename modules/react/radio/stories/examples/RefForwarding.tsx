@@ -1,8 +1,9 @@
 import React from 'react';
+
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {useUniqueId} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Radio, RadioGroup} from '@workday/canvas-kit-react/radio';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');

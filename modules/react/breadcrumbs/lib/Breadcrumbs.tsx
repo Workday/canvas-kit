@@ -1,15 +1,18 @@
 import * as React from 'react';
+
 import {createContainer} from '@workday/canvas-kit-react/common';
 import {Menu} from '@workday/canvas-kit-react/menu';
-import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
-import {BreadcrumbsList} from './BreadcrumbsList';
-import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
+import {CSProps, handleCsProp} from '@workday/canvas-kit-styling';
+
+import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
 import {BreadcrumbsItem} from './BreadcrumbsItem';
 import {BreadcrumbsLink} from './BreadcrumbsLink';
-import {BreadcrumbsCurrentItem} from './BreadcrumbsCurrentItem';
+import {BreadcrumbsList} from './BreadcrumbsList';
 import {BreadcrumbsMenu} from './BreadcrumbsMenu';
+import {BreadcrumbsOverflowButton} from './BreadcrumbsOverflowButton';
+import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 
-export interface BreadcrumbsProps {
+export interface BreadcrumbsProps extends CSProps {
   /**
    * The accessibility label for the nav element.
    * It's required to be provided by a11y guidance.
@@ -164,7 +167,7 @@ export const Breadcrumbs = createContainer('nav')({
 })<BreadcrumbsProps>(({children, ...elemProps}, _, model) => {
   return (
     <Menu model={model.menu}>
-      <nav role="navigation" {...elemProps}>
+      <nav role="navigation" {...handleCsProp(elemProps)}>
         {children}
       </nav>
     </Menu>

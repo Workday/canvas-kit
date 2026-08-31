@@ -1,5 +1,5 @@
-import * as ts from 'typescript';
 import path from 'path';
+import * as ts from 'typescript';
 
 function getConfig() {
   const tsconfigPath = ts.findConfigFile('.', ts.sys.fileExists) || '';
@@ -46,14 +46,15 @@ export function createProgramFromSource(...args: any[]) {
               languageVersion
             )
           : name === 'node_modules/react.ts'
-          ? ts.createSourceFile(
-              name,
-              ts.sys.readFile(`node_modules/@types/react/index.d.ts`)!,
-              languageVersion
-            )
-          : defaultCompilerHost.getSourceFile(name, languageVersion))
+            ? ts.createSourceFile(
+                name,
+                ts.sys.readFile(`node_modules/@types/react/index.d.ts`)!,
+                languageVersion
+              )
+            : defaultCompilerHost.getSourceFile(name, languageVersion))
       );
     },
+    // eslint-disable-next-line no-empty-function
     writeFile: (filename, data) => {},
     getDefaultLibFileName: () => 'lib.d.ts',
     useCaseSensitiveFileNames: () => false,

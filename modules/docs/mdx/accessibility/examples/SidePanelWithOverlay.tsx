@@ -1,0 +1,44 @@
+import {SidePanel, useSidePanel} from '@workday/canvas-kit-preview-react/side-panel';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Heading} from '@workday/canvas-kit-react/text';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stylesOverride = {
+  panelContainer: createStyles({
+    height: px2rem(320),
+    backgroundColor: system.color.surface.alt.default,
+    position: 'relative',
+  }),
+  panelContent: createStyles({
+    alignItems: 'center',
+    padding: system.padding.md,
+  }),
+  panel: createStyles({
+    zIndex: 1,
+  }),
+  overlay: createStyles({
+    position: 'absolute',
+    background: system.color.surface.overlay.scrim,
+    height: '100%',
+    width: '100%',
+  }),
+};
+
+export const WithOverlay = () => {
+  const {expanded, panelProps, labelProps, controlProps} = useSidePanel();
+
+  return (
+    <Flex cs={stylesOverride.panelContainer}>
+      <SidePanel className={stylesOverride.panel} {...panelProps} variant="alternate">
+        <Flex cs={stylesOverride.panelContainer}>
+          <Heading size="small" {...labelProps} hidden={!expanded ? true : undefined}>
+            Alternate Panel
+          </Heading>
+          <SidePanel.ToggleButton {...controlProps} />
+        </Flex>
+      </SidePanel>
+      {expanded && <Box cs={stylesOverride.overlay} />}
+    </Flex>
+  );
+};

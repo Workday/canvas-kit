@@ -1,8 +1,9 @@
 import React from 'react';
-import {useIsRTL, createElemPropsHook} from '@workday/canvas-kit-react/common';
 
-import {useCursorListModel} from './useCursorListModel';
+import {createElemPropsHook} from '@workday/canvas-kit-react/common';
+
 import {keyboardEventToCursorEvents} from './keyUtils';
+import {useCursorListModel} from './useCursorListModel';
 
 /**
  * This elemProps hook is used to attach keyboard events to handle keyboard navigation
@@ -15,11 +16,9 @@ import {keyboardEventToCursorEvents} from './keyUtils';
 ```
  */
 export const useListKeyboardHandler = createElemPropsHook(useCursorListModel)(model => {
-  const isRTL = useIsRTL();
-
   return {
     onKeyDown(event: React.KeyboardEvent) {
-      const handled = keyboardEventToCursorEvents(event, model, isRTL);
+      const handled = keyboardEventToCursorEvents(event, model);
       if (handled) {
         event.preventDefault();
       }

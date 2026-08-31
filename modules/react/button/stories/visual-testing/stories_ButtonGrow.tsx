@@ -1,19 +1,20 @@
-import React from 'react';
-import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 import {
+  DeleteButton,
   PrimaryButton,
   SecondaryButton,
   TertiaryButton,
-  DeleteButton,
 } from '@workday/canvas-kit-react/button';
 import {Flex} from '@workday/canvas-kit-react/layout';
+import {px2rem} from '@workday/canvas-kit-styling';
+
+import {withSnapshotsEnabled} from '../../../../../utils/storybook';
 
 export default withSnapshotsEnabled({
   title: 'Testing/Buttons/Button/Grow',
 });
 
 export const ButtonGrow = () => (
-  <Flex flexDirection="column" gap="xs">
+  <Flex cs={{flexDirection: 'column', gap: px2rem(12)}}>
     <PrimaryButton size="small" grow={true}>
       Primary
     </PrimaryButton>

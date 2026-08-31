@@ -1,4 +1,4 @@
-module.exports = (
+const storiesMdx = (
   modulePath,
   storyPath,
   pascalCaseName,
@@ -11,8 +11,6 @@ import {SymbolDoc, Specifications} from '@workday/canvas-kit-docs';
 import {${pascalCaseName}} from '${modulePath}';
 import {Basic} from './examples/Basic';
 import {Open} from './examples/Open';
-
-<Meta title="${storyPath}" component={${pascalCaseName}} />
 
 # ${titleCaseName}
 
@@ -43,3 +41,5 @@ You can open your component by default using the \`initialOpen\` prop.
 
 <SymbolDoc name="${pascalCaseName}" hideDescription />
 `;
+
+export default storiesMdx;

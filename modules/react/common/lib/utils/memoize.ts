@@ -8,7 +8,7 @@ export function memoize<T extends (...args: any[]) => any>(
 ): T {
   const cache = new Map<string, ReturnType<T>>();
 
-  return function(...args: Parameters<T>): ReturnType<T> {
+  return function (...args: Parameters<T>): ReturnType<T> {
     const key = resolver(...args);
 
     if (cache.has(key)) {

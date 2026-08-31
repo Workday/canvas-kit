@@ -1,19 +1,21 @@
-import React from 'react';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
-import {system} from '@workday/canvas-tokens-web';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const styleOverrides = {
   parentContainer: createStyles({
     display: 'flex',
-    gap: system.space.x4,
+    gap: system.gap.md,
   }),
 };
 
 export const CustomColorAndAnimation = () => {
   return (
     <div className={styleOverrides.parentContainer}>
-      <LoadingDots loadingDotColor={system.color.fg.primary.default} animationDurationMs="60ms" />
+      <LoadingDots
+        loadingDotColor={system.color.brand.fg.primary.default}
+        animationDurationMs="60ms"
+      />
     </div>
   );
 };

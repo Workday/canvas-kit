@@ -1,7 +1,7 @@
-import {createComponent, ExtractProps} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Popup} from '@workday/canvas-kit-react/popup';
 import {createStencil} from '@workday/canvas-kit-styling';
-import {mergeStyles} from '@workday/canvas-kit-react/layout';
 
 export interface ToastCloseIconProps extends ExtractProps<typeof Popup.CloseIcon, never> {}
 

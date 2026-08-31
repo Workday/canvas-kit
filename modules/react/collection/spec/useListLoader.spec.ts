@@ -38,9 +38,7 @@ describe('getPagesToLoad', () => {
   });
 
   it('should return page 2 if page 1 is loaded and we are on page 2 and the loading buffer includes page 1', () => {
-    const items = Array(10)
-      .fill(undefined)
-      .concat(Array(10).fill(true));
+    const items = Array(10).fill(undefined).concat(Array(10).fill(true));
 
     const actual = getPagesToLoad(10, 19, 10, items, 3);
     const expected = [1];
@@ -49,9 +47,7 @@ describe('getPagesToLoad', () => {
   });
 
   it('should return page 1 if page 1 is not loaded and we are on page 2 and page 1 is included in the loading buffer', () => {
-    const items = Array(10)
-      .fill(undefined)
-      .concat(Array(10).fill(true));
+    const items = Array(10).fill(undefined).concat(Array(10).fill(true));
 
     const actual = getPagesToLoad(10, 19, 10, items, 3);
     const expected = [1];

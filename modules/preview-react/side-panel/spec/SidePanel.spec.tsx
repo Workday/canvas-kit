@@ -1,5 +1,6 @@
-import {renderHook, act} from '@testing-library/react-hooks';
-import {useSidePanel, UseSidePanelProps} from '../lib/hooks';
+import {act, renderHook} from '@testing-library/react-hooks';
+
+import {UseSidePanelProps, useSidePanel} from '../lib/hooks';
 
 describe('useSidePanel Hook', () => {
   describe('when calling the useSidePanel hook with no arguments', () => {

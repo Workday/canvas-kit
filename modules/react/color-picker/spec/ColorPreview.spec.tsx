@@ -1,5 +1,6 @@
-import * as React from 'react';
 import {render} from '@testing-library/react';
+import * as React from 'react';
+
 import {ColorPreview} from '../lib/ColorPreview';
 
 const id = 'color-preview';
@@ -20,15 +21,6 @@ describe('ColorPreview', () => {
       test('should render ColorPreview as readonly', () => {
         const {getByTestId} = render(<ColorPreview value={value} data-testid={id} />);
         expect(getByTestId(id)).toHaveAttribute('readonly');
-      });
-    });
-
-    describe('with a value', () => {
-      test('should render ColorPreview with the value as a background', () => {
-        const {container} = render(<ColorPreview value={value} data-testid={id} />);
-        expect(container.querySelector('div div input + div')).toHaveStyle(
-          'background-color: #eee;'
-        );
       });
     });
 

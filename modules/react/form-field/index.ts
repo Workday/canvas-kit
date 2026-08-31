@@ -5,6 +5,5 @@ export * from './lib/FormFieldGroupLabel';
 export * from './lib/FormFieldGroupInput';
 export * from './lib/FormFieldGroupList';
 export * from './lib/formFieldStencil';
-export * from './lib/FormFieldContainer';
 export * from './lib/FormFieldHint';
 export * from './lib/FormFieldLabel';

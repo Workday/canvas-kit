@@ -1,9 +1,8 @@
 import {Meta, StoryObj} from '@storybook/react';
 
-import mdxDoc from './Heading.mdx';
-
 import {Heading} from '@workday/canvas-kit-react/text';
 
+import mdxDoc from './Heading.mdx';
 import {Basic as BasicExample} from './examples/Heading/Basic';
 
 export default {

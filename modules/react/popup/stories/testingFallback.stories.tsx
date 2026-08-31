@@ -1,5 +1,6 @@
-import {customViewport} from '../../../../utils/storybook';
 import {Popup} from '@workday/canvas-kit-react/popup';
+
+import {customViewport} from '../../../../utils/storybook';
 import {PopupWithFallbackPlacements as PopupWithFallbackPlacementsExample} from './examples/PopupWithFallbackPlacements';
 
 export default {

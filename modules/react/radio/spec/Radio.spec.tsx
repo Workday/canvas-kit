@@ -1,9 +1,10 @@
+import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
-import {render, fireEvent} from '@testing-library/react';
+
 import {Radio} from '../lib/Radio';
 
 describe('Radio', () => {
-  const cb = jest.fn();
+  const cb = vi.fn();
   afterEach(() => {
     cb.mockReset();
   });

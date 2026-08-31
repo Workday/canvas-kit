@@ -1,16 +1,16 @@
 import {
   API,
-  FileInfo,
-  Options,
-  JSXElement,
-  JSXAttribute,
-  JSXSpreadAttribute,
-  JSXMemberExpression,
-  JSXExpressionContainer,
-  MemberExpression,
-  Identifier,
-  ConditionalExpression,
   BooleanLiteral,
+  ConditionalExpression,
+  FileInfo,
+  Identifier,
+  JSXAttribute,
+  JSXElement,
+  JSXExpressionContainer,
+  JSXMemberExpression,
+  JSXSpreadAttribute,
+  MemberExpression,
+  Options,
 } from 'jscodeshift';
 
 import {getImportRenameMap} from './utils/getImportRenameMap';
@@ -76,9 +76,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         const variantIndex = attributes.findIndex(findAttribute('variant'));
 
         if (errorIndex >= 0 && nodePath.value.openingElement.attributes?.[errorIndex]) {
-          const errorExpression = ((nodePath.value.openingElement.attributes[
-            errorIndex
-          ] as JSXAttribute).value as JSXExpressionContainer).expression;
+          const errorExpression = (
+            (nodePath.value.openingElement.attributes[errorIndex] as JSXAttribute)
+              .value as JSXExpressionContainer
+          ).expression;
           const getNameToBoolean = (name: string) => {
             return name === 'Error' ? j.booleanLiteral(true) : j.booleanLiteral(false);
           };
@@ -111,9 +112,10 @@ export default function transformer(file: FileInfo, api: API, options: Options) 
         }
 
         if (variantIndex >= 0 && nodePath.value.openingElement.attributes?.[variantIndex]) {
-          const stickyExpression = ((nodePath.value.openingElement.attributes[
-            variantIndex
-          ] as JSXAttribute).value as JSXExpressionContainer).expression;
+          const stickyExpression = (
+            (nodePath.value.openingElement.attributes[variantIndex] as JSXAttribute)
+              .value as JSXExpressionContainer
+          ).expression;
           const getNameToBoolean = (name: string) => {
             return name === 'Sticky' ? j.booleanLiteral(true) : j.booleanLiteral(false);
           };

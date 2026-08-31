@@ -1,7 +1,7 @@
-import {createComponent, GrowthBehavior, ErrorType} from '@workday/canvas-kit-react/common';
-import {createStencil, cssVar, px2rem, calc, CSProps} from '@workday/canvas-kit-styling';
-import {brand, system} from '@workday/canvas-tokens-web';
+import {ErrorType, GrowthBehavior, createComponent} from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
+import {CSProps, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 export interface TextInputProps extends GrowthBehavior, CSProps {
   /**
@@ -19,41 +19,42 @@ export const textInputStencil = createStencil({
     width: '',
   },
   base: ({width}) => ({
-    ...system.type.subtext.large,
+    fontFamily: system.fontFamily.default,
+    fontSize: system.legacy.fontSize.subtext.lg,
+    fontWeight: system.fontWeight.normal,
+    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.legacy.letterSpacing.subtext.lg,
     display: 'block',
-    border: `${px2rem(1)} solid ${cssVar(system.color.border.input.default)}`,
-    backgroundColor: system.color.bg.default,
-    borderRadius: system.shape.x1,
-    boxSizing: 'border-box',
-    height: system.space.x10,
+    border: `${px2rem(1)} solid ${system.color.border.input.default}`,
+    backgroundColor: system.legacy.color.surface.default,
+    borderRadius: system.legacy.shape.md,
+    height: system.legacy.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
-    padding: system.space.x2, // Compensate for border
-    margin: px2rem(0), // Fix Safari
-    width: cssVar(width),
-    minWidth: cssVar(width, calc.add(calc.multiply(system.space.x20, 3), system.space.x10)),
-    color: system.color.text.default,
+    padding: system.legacy.padding.xs, // Compensate for border
+    margin: 0, // Fix Safari
+    width,
+    minWidth: cssVar(width, px2rem(280)),
+    color: system.color.fg.default,
     textOverflow: 'ellipsis', // Always show ellipsis for long text inputs as long as it doesn't have focus
 
     '::-ms-clear': {
       display: 'none',
     },
     '&::placeholder': {
-      color: system.color.text.hint,
+      color: system.color.fg.muted.default,
     },
-    '&:is(:hover, .hover)': {
-      borderColor: system.color.border.input.strong,
+    '&:is(:hover, .hover):where(:not([disabled], .disabled))': {
+      borderColor: system.legacy.color.border.input.hover,
     },
     '&:is(:focus-visible, .focus):where(:not([disabled]))': {
-      borderColor: brand.common.focusOutline,
-      boxShadow: `inset 0 0 0 1px ${cssVar(brand.common.focusOutline)}`,
+      borderColor: system.legacy.color.brand.focus.primary,
+      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
       outline: `${px2rem(2)} solid transparent`,
     },
     '&:is(:disabled, .disabled)': {
-      backgroundColor: system.color.bg.alt.softer,
-      borderColor: system.color.border.input.disabled,
-      color: system.color.text.disabled,
+      opacity: system.opacity.disabled,
       '&::placeholder': {
-        color: system.color.text.disabled,
+        opacity: system.opacity.disabled,
       },
     },
   }),
@@ -70,31 +71,33 @@ export const textInputStencil = createStencil({
 
     error: {
       error: {
-        borderColor: brand.error.base,
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}`,
+        borderColor: system.legacy.color.brand.border.critical,
+        // borderWidth: px2rem(2),
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        backgroundColor: system.legacy.color.brand.surface.critical.default,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.error.base,
+            borderColor: system.legacy.color.brand.border.critical,
           },
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `inset 0 0 0 ${px2rem(1)} ${brand.error.base}, 0 0 0 2px ${
-            system.color.border.inverse
-          }, 0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical},
+        0 0 0 2px ${system.legacy.color.focus.inverse},
+        0 0 0 4px ${system.legacy.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
       },
-      alert: {
-        borderColor: brand.alert.darkest,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base}`,
+      caution: {
+        borderColor: system.legacy.color.brand.border.caution,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner}`,
+        backgroundColor: system.legacy.color.brand.surface.caution.default,
         '&:is(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled]), .focus:not([disabled]))':
           {
-            borderColor: brand.alert.darkest,
+            borderColor: system.legacy.color.brand.border.caution,
           },
-
         '&:is(:focus-visible, .focus):not([disabled])': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${brand.alert.base},
-        0 0 0 2px ${system.color.border.inverse},
-        0 0 0 4px ${brand.common.focusOutline}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner},
+        0 0 0 2px ${system.legacy.color.focus.inverse},
+        0 0 0 4px ${system.legacy.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
       },

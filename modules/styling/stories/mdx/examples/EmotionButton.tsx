@@ -1,5 +1,5 @@
-import React from 'react';
 import styled from '@emotion/styled';
+import React from 'react';
 
 interface ButtonProps {
   variant: 'primary' | 'secondary' | 'danger';
@@ -8,6 +8,7 @@ interface ButtonProps {
   children?: React.ReactNode;
 }
 
+// Showcase of old Emotion approach
 const StyledButton = styled('button')<ButtonProps>(
   {
     // base styles

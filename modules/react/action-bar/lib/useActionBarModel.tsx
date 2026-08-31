@@ -1,7 +1,7 @@
 import React from 'react';
-import {createModelHook} from '@workday/canvas-kit-react/common';
-import {defaultGetId, useOverflowListModel} from '@workday/canvas-kit-react/collection';
 
+import {defaultGetId, useOverflowListModel} from '@workday/canvas-kit-react/collection';
+import {createModelHook} from '@workday/canvas-kit-react/common';
 import {useMenuModel} from '@workday/canvas-kit-react/menu';
 
 export const useActionBarModel = createModelHook({
@@ -49,8 +49,8 @@ export const useActionBarModel = createModelHook({
     !config.maximumVisible || config.maximumVisible < 1
       ? 3 // should fallback to default value
       : config.maximumVisible > totalSize
-      ? totalSize
-      : config.maximumVisible;
+        ? totalSize
+        : config.maximumVisible;
 
   if (totalSize - hiddenIds.length >= maximumVisible) {
     hiddenIds = items.slice(maximumVisible, totalSize).map(getId);
