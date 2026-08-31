@@ -92,8 +92,8 @@ input component. By default, the orientation will be set to `vertical`.
 
 ### Required
 
-Set the `required` prop of the wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `isRequired` prop of the wrapping Form Field to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
@@ -114,9 +114,9 @@ Use `TextArea` when users need to enter multiple lines or paragraphs of text. Fo
 
 ### Minimum Accessible Structure
 
-Build on the Basic example: label first, then the input inside `FormField.Field`. This order
-matches the DOM reading sequence and ensures the label's `htmlFor` targets the `<textarea>` before
-hint text follows the control.
+Build on the Basic example: label first, then the input inside `FormField.Field`. This order matches
+the DOM reading sequence and ensures the label's `htmlFor` targets the `<textarea>` before hint text
+follows the control.
 
 ```tsx
 import {FormField} from '@workday/canvas-kit-react/form-field';
@@ -157,7 +157,7 @@ Canvas Kit applies these automatically when you compose `TextArea` with `FormFie
 <kbd>Enter</kbd>: Inserts a new line (native `<textarea>` behavior). Do not add custom key handlers that prevent standard text editing.
 
 `TextArea` uses native `<textarea>` keyboard behavior (tab order, label activation, and text-editing
-shortcuts). 
+shortcuts).
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
@@ -188,19 +188,25 @@ a `ref` or call `focus()` unless the design or developer asks for it. See
 [Ref Forwarding](#ref-forwarding) under Usage for a complete Storybook example.
 
 ```tsx
-const ref = React.useRef<HTMLTextAreaElement>(null);
+const Example = () => {
+  const ref = React.useRef<HTMLTextAreaElement>(null);
 
-const handleClick = () => {
-  ref.current?.focus();
+  const handleClick = () => {
+    ref.current?.focus();
+  };
+
+  return (
+    <>
+      <FormField>
+        <FormField.Label>Leave a Review</FormField.Label>
+        <FormField.Field>
+          <FormField.Input as={TextArea} ref={ref} />
+        </FormField.Field>
+      </FormField>
+      <PrimaryButton onClick={handleClick}>Focus Text Area</PrimaryButton>
+    </>
+  );
 };
-
-<FormField>
-  <FormField.Label>Leave a Review</FormField.Label>
-  <FormField.Field>
-    <FormField.Input as={TextArea} ref={ref} />
-  </FormField.Field>
-</FormField>
-<PrimaryButton onClick={handleClick}>Focus Text Area</PrimaryButton>;
 ```
 
 | Requirement                        | How to satisfy                                                                                                                                                                                                                                                      |
@@ -212,9 +218,9 @@ const handleClick = () => {
 **Summary for code generation:**
 
 - **REQUIRED:** visible label, `FormField.Input as={TextArea}` wiring
-- **CONDITIONAL:** character limit with live region, programmatic focus via
-  `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared
-  FormField conditionals (hint/error, required, disabled, placeholder, stable `id`).
+- **CONDITIONAL:** character limit with live region, programmatic focus via `ref`. See
+  [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
+  conditionals (hint/error, required, disabled, placeholder, stable `id`).
 
 ### Anti-Patterns
 
@@ -225,8 +231,9 @@ to supply instead):
   **Minimum accessible structure**). For shared FormField anti-patterns (manual ARIA wiring,
   placeholder-only labels, color-only errors, broken ID references), see
   [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
-- **Single-line input for multi-line content**: Do not use `TextInput` when the user needs to enter
-  paragraphs or multi-line text; use `TextArea` instead.
+- **Single-line input for multi-line content**: Do not use
+  [TextInput](/components/inputs/text-input/) when the user needs to enter paragraphs or multi-line
+  text; use `TextArea` instead.
 - **Per-keystroke character announcements**: Do not announce character counts after every keystroke;
   debounce `AriaLiveRegion` updates so screen reader users are not interrupted while typing.
 - **Disabling resize unnecessarily**: Do not set `resize` to `none` unless there is a strong design
