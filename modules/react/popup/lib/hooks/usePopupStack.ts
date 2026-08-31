@@ -1,7 +1,12 @@
 import React from 'react';
 
 import {PopupStack} from '@workday/canvas-kit-popup-stack';
-import {CanvasBrandStyleContext, isElementRTL, useLocalRef} from '@workday/canvas-kit-react/common';
+import {
+  CanvasBrandStyleContext,
+  CanvasThemeAttributeContext,
+  isElementRTL,
+  useLocalRef,
+} from '@workday/canvas-kit-react/common';
 
 /**
  * **Note:** If you're using {@link Popper}, you do not need to use this hook directly.
@@ -53,6 +58,7 @@ export const usePopupStack = <E extends HTMLElement>(
 
   // Read brand style from the context provided by CanvasProvider
   const style = React.useContext(CanvasBrandStyleContext);
+  const themeAttribute = React.useContext(CanvasThemeAttributeContext);
   const firstLoadRef = React.useRef(true); // React 19 can call a useState more than once, so we need to track if we've already created a container
 
   // useState function input ensures we only create a container once.
@@ -89,6 +95,26 @@ export const usePopupStack = <E extends HTMLElement>(
     // No cleanup: leave theme on container so reopening doesn't flash
     return undefined;
   }, [localRef, style]);
+
+  // Forward `data-theme` so the popup container matches the same attribute selector the token
+  // stylesheet scopes its variables to (e.g. `[data-theme="sana-canvas"]`). Portals render under
+  // `document.body`, outside the CanvasProvider wrapper, so without this none of those variables
+  // resolve — and unlike the inline styles above, this covers the *whole* theme (palette, shape,
+  // depth, type), not just the brand vars the theme object enumerates. Runs before PopupStack.add
+  // to avoid a theme flash.
+  React.useLayoutEffect(() => {
+    const element = localRef.current;
+    if (!element) {
+      return undefined;
+    }
+    if (themeAttribute) {
+      element.setAttribute('data-theme', themeAttribute);
+    } else {
+      element.removeAttribute('data-theme');
+    }
+    // No unmount cleanup: leave theme on container so reopening doesn't flash
+    return undefined;
+  }, [localRef, themeAttribute]);
 
   // We useLayoutEffect to ensure proper timing of registration of the element to the popup stack.
   // Without this, the timing is unpredictable when mixed with other frameworks. Other frameworks
