@@ -21,7 +21,8 @@ export const CardStates = {
       <ComponentStatesTable
         rowProps={[
           {label: 'Without Heading', props: {heading: false}},
-          {label: 'Borderless', props: {variant: 'borderless'}},
+          {label: 'Default', props: {variant: ''}},
+          {label: 'Alt', props: {variant: 'alt'}},
           {label: 'Tonal', props: {variant: 'tonal'}},
           {label: 'With Heading', props: {}},
           {
@@ -55,7 +56,9 @@ export const CardStates = {
           <div
             style={{
               background:
-                props.variant !== 'tonal' ? cssVar(system.color.surface.raised) : undefined,
+                props.variant !== 'alt'
+                  ? cssVar(system.color.surface.raised)
+                  : cssVar(system.color.bg.alt.default),
               padding: cssVar(system.padding.md),
             }}
           >
