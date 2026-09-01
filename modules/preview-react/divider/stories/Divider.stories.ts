@@ -5,6 +5,7 @@ import {Divider} from '@workday/canvas-kit-preview-react/divider';
 import mdxDoc from './Divider.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {CustomSpace as CustomSpaceExample} from './examples/CustomSpace';
+import {Vertical as VerticalExample} from './examples/Vertical';
 
 export default {
   title: 'Preview/Divider',
@@ -24,4 +25,8 @@ export const Basic: Story = {
 };
 export const CustomSpace: Story = {
   render: CustomSpaceExample,
+};
+
+export const Vertical: Story = {
+  render: VerticalExample,
 };
