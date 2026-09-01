@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.13](https://github.com/Workday/canvas-kit/releases/tag/v16.0.13) (2026-08-31)
+
+### Components
+
+- fix: Ensure Sana theme is portaled ([#4142](https://github.com/Workday/canvas-kit/pull/4142)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
 ## [v16.0.12](https://github.com/Workday/canvas-kit/releases/tag/v16.0.12) (2026-08-31)
 
 ### Components, Documentation
