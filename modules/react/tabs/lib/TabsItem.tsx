@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {buttonStencil} from '@workday/canvas-kit-react/button';
 import {
+  ListRenderItemContext,
   isSelected,
   useListItemRegister,
   useListItemRovingFocus,
@@ -174,6 +175,40 @@ export const StyledTabItem = createComponent('button')<TabsItemProps>({
   },
 });
 
+/**
+ * When the selected tab receives ArrowDown, move focus to its tab panel.
+ * Returning `null` is the mergeCallback sentinel that stops later-merged
+ * `onKeyDown` handlers (including roving focus) from also handling this key.
+ * This hook must be composed before `useListItemRovingFocus` so it runs after
+ * that hook and its return value can skip the roving handler.
+ * Tabs.OverflowButton does not use this hook.
+ */
+const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)((
+  {state},
+  _,
+  elemProps: {'data-id'?: string} = {}
+) => {
+  const {item} = React.useContext(ListRenderItemContext);
+  const name = elemProps['data-id'] || item?.id || '';
+  const selected = !!name && isSelected(name, state);
+
+  return {
+    onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
+      if (!selected || event.key !== 'ArrowDown') {
+        return;
+      }
+      event.preventDefault();
+      const panelId = slugify(`tabpanel-${state.id}-${name}`);
+      const panel = document.getElementById(panelId);
+      if (panel) {
+        (panel as HTMLElement).focus();
+      }
+      // mergeCallback: `null` prevents the roving-focus onKeyDown from running.
+      return null;
+    },
+  };
+});
+
 export const useTabsItem = composeHooks(
   createElemPropsHook(useTabsModel)(({state}, _, elemProps: {'data-id'?: string} = {}) => {
     const name = elemProps['data-id'] || '';
@@ -189,6 +224,7 @@ export const useTabsItem = composeHooks(
   }),
   useListItemSelect,
   useOverflowListItemMeasure,
+  useTabsItemFocusPanelOnArrowDown,
   useListItemRovingFocus,
   useListItemRegister
 );
