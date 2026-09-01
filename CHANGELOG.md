@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.14](https://github.com/Workday/canvas-kit/releases/tag/v16.0.14) (2026-09-01)
+
+### Components
+
+- fix(MultiSelect): Open search popup when typing ([#4153](https://github.com/Workday/canvas-kit/pull/4153)) ([@maoyouaa](https://github.com/maoyouaa))
+
+
 ## [v16.0.13](https://github.com/Workday/canvas-kit/releases/tag/v16.0.13) (2026-08-31)
 
 ### Components
