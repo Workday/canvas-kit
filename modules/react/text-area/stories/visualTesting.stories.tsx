@@ -1,5 +1,4 @@
-import * as React from 'react';
-
+import {CanvasProviderTheme} from '@workday/canvas-kit-react/common';
 import {
   ComponentStatesTable,
   StaticStates,
@@ -7,7 +6,7 @@ import {
 } from '@workday/canvas-kit-react/testing';
 import {TextArea} from '@workday/canvas-kit-react/text-area';
 
-import {customColorTheme} from '../../../../utils/storybook';
+import {customNumericalTheme, toCanvasProviderTheme} from '../../../../utils/storybook';
 
 export default {
   title: 'Testing/Inputs/Text Area',
@@ -19,8 +18,8 @@ export default {
   },
 };
 
-export const TextAreaStates = () => (
-  <StaticStates>
+export const TextAreaStates = ({theme}: {theme?: CanvasProviderTheme} = {}) => (
+  <StaticStates theme={toCanvasProviderTheme(theme)}>
     <ComponentStatesTable
       rowProps={permutateProps(
         {
@@ -76,9 +75,4 @@ export const TextAreaStates = () => (
   </StaticStates>
 );
 
-export const TextAreaThemedStates = () => <TextAreaStates />;
-TextAreaThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const TextAreaThemedStates = () => <TextAreaStates theme={customNumericalTheme} />;

@@ -1,34 +1,29 @@
+// sort-imports-ignore
 import {DocsContainer, DocsPage} from '@storybook/addon-docs';
 
 import {defaultCanvasTheme} from '@workday/canvas-kit-react/common';
 import '@workday/canvas-tokens-web/css/base/_variables.css';
 import '@workday/canvas-tokens-web/css/brand/_variables.css';
 import '@workday/canvas-tokens-web/css/component/_variables.css';
-import '@workday/canvas-tokens-web/css/sana/_variables.css';
 import '@workday/canvas-tokens-web/css/system/_variables.css';
+// Sana's `[data-theme="sana-canvas"]` selector and system/brand/base's `:root`
+// selector have equal specificity (0,1,0). When both match the same element
+// (i.e. `data-theme="sana-canvas"` is set on <html>), the cascade falls back
+// to source order. Importing sana last is therefore required and sufficient —
+// this is deterministic as long as each file is imported exactly once, in
+// this order, by a single root entry point (true for both Storybook and any
+// real consuming app). See the Theming docs for the guidance we give consumers.
+import '@workday/canvas-tokens-web/css/sana/_variables.css';
 
 import {CanvasProviderDecorator} from '../utils/storybook';
 import routes from './routes';
 import theme from './theme';
 
+// After tokens so Sana Sans overrides token font-family defaults in the preview iframe
+import './updated-type.css';
+
 // set routes on window for testing the validity of the routes
 window.__routes = routes;
-
-export const globalTypes = {
-  theme: {
-    name: 'Theme',
-    description: 'Token theme',
-    defaultValue: 'canvas',
-    toolbar: {
-      icon: 'paintbrush',
-      items: [
-        {value: 'canvas', title: 'Canvas'},
-        {value: 'sana', title: 'Sana'},
-      ],
-      showName: true,
-    },
-  },
-};
 
 export const decorators = [CanvasProviderDecorator];
 
@@ -73,6 +68,8 @@ export const parameters = {
         prefix('default', 'ab'),
         prefix('testing', 'zzzzz'),
         prefix('examples', 'zzzz'),
+        // Guides > Accessibility > Table Patterns sits after Examples and before Testing
+        prefix('table-patterns', 'zzzzy'),
         // Make sure upgrade guides follow chronological order by replacing `v9.0` with `v09.0`
         value => value.replace(/v([1-9]\-0)/, '0$1'),
         // Make sure docs stories goes first

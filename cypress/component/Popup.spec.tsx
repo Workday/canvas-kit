@@ -195,10 +195,10 @@ describe('Popup', () => {
         cy.findByRole('dialog', {name: 'Delete Item'}).should('be.visible');
       });
 
-      // useFocusRedirect hides on Tab only from the last focusable in the popup (Close, Delete, Cancel)
+      // useFocusRedirect hides on Tab only from the last focusable in the popup (Usually Submit or Acknowledgement button)
       context('when the "Cancel" button has focus and the tab key is pressed', () => {
         beforeEach(() => {
-          cy.findByRole('button', {name: 'Cancel'}).focus().realPress('Tab');
+          cy.findByRole('button', {name: 'Delete'}).focus().realPress('Tab');
         });
 
         it('should hide the popup', () => {

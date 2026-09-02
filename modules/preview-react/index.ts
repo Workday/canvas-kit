@@ -7,4 +7,5 @@ export * from './radio';
 export * from './side-panel';
 export * from './status-indicator';
 export * from './switch';
+export * from './tabs';
 export * from './version';

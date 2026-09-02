@@ -153,15 +153,12 @@ Retrieves Canvas Kit version upgrade documentation covering major version migrat
 Retrieves Canvas Kit design token migration documentation for transitioning to the modern `@workday/canvas-tokens-web` package.
 
 **Use cases:**
-- Migrating from old token systems to `@workday/canvas-tokens-web`
-- Converting deprecated color tokens to the new token system
-- Understanding token hierarchy: base tokens, system tokens, and brand tokens
-- Finding correct system token replacements
-- Learning token naming patterns and semantic color roles
-- Migrating spacing, shape, typography, opacity, and depth tokens
-- Ensuring WCAG accessibility compliance with color contrast requirements
+- Migrating deprecated tokens (`bg.*` → `surface.*`, `text.*` → `fg.*`, `space.x*` → `padding`/`gap`)
+- Enabling the Sana Canvas theme
+- Understanding t-shirt size scales for shape, size, padding, and gap
+- Finding historical migration guides (v2→v3, v3→v4, v13→v14)
 
-**Returns:** Links to token documentation including migration guides, color palettes, color roles, contrast guidelines, and token system references.
+**Returns:** Links to token documentation. Start with the v4.4 current-state reference, then migration guides, color palettes, color roles, contrast guidelines, and per-family token guides.
 
 ### `get-accessibility-guidelines`
 
@@ -170,7 +167,7 @@ Retrieves Canvas Kit accessibility guidance for a scenario, component, or both. 
 **Parameters:**
 
 - `component` (optional) — Canvas Kit component/story slug, such as `checkbox`, `table`, or `modal`.
-- `scenario` (optional) — Accessibility scenario slug, such as `forms`, `tables`, `popups`, `aria-live`, or `page-structure`.
+- `scenario` (optional) — Accessibility scenario slug, such as `forms`, `tables`, `nested-rows`, `popups`, `aria-live`, or `page-structure`. Requesting `tables` also returns the table pattern pages (expandable/nested/selectable rows, filterable/sortable headers, and tables with form fields).
 
 At least one of `component` or `scenario` is required.
 
@@ -182,6 +179,10 @@ At least one of `component` or `scenario` is required.
 
 ```json
 {"component": "table"}
+```
+
+```json
+{"scenario": "nested-rows"}
 ```
 
 ```json
@@ -231,6 +232,7 @@ URI prefix: `docs://tokens/*`
 
 Design token migration and usage guides covering:
 
+- **Current state:** v4.4 token reference (Sana Canvas, t-shirt scales, deprecations)
 - Token system migrations (v2 → v3 → v4)
 - Color palette and semantic color roles
 - Token naming conventions and hierarchy
@@ -245,7 +247,7 @@ URI prefix: `docs://accessibility/*`
 Guidance-only accessibility documentation covering:
 
 - Overview and general Canvas Kit accessibility principles
-- Forms, page structure, tables, popups, ARIA live regions, headers, and side panels
+- Forms, page structure, tables (expandable rows, nested rows, selectable rows, filterable and sortable column headers, tables with form fields), popups, ARIA live regions, headers, and side panels
 - Windows High Contrast themes and color contrast
 
 These resources do not perform automated validation or provide compliance guarantees.

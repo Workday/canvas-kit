@@ -13,9 +13,9 @@ export const switchIconStencil = createStencil({
     position: 'absolute',
     transition: 'transform 0ms',
     pointerEvents: 'none',
-    transform: `translateX(${px2rem(12)})`,
+    transform: `translateX(${px2rem(14)})`,
     ':dir(rtl)': {
-      transform: `translateX(${px2rem(-12)})`,
+      transform: `translateX(${px2rem(-14)})`,
     },
   },
   modifiers: {

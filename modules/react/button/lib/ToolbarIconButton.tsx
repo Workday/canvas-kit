@@ -36,20 +36,12 @@ export const toolbarIconButtonStencil = createStencil({
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.transparent,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.hover,
-      }),
+      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.transparent,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.pressed,
-      }),
+      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
