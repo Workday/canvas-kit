@@ -62,7 +62,7 @@ export const SidePanelHeading = createSubcomponent(Heading)({
   return (
     <Element
       size={size}
-      {...handleCsProp(elemProps, sidePanelHeadingStencil({size, origin: model.state.origin}))}
+      {...handleCsProp(elemProps, sidePanelHeadingStencil({origin: model.state.origin}))}
     >
       {children}
     </Element>
