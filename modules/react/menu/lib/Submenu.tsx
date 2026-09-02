@@ -49,7 +49,7 @@ export const SubmenuPopper = createSubcomponent('div')({
 });
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
-  const timer = React.useRef() as React.MutableRefObject<number | undefined>;
+  const timer = React.useRef<number | undefined>(undefined);
 
   const start = () => {
     timer.current = window.setTimeout(fn, waitMs);
@@ -85,7 +85,7 @@ export const useSubmenuTargetItem = composeHooks(
   }),
   subModelHook(model => (model as any).UNSTABLE_parentModel!, useListItemRegister),
   createElemPropsHook(useMenuModel)(model => {
-    const currentTargetIdRef = React.useRef<string>();
+    const currentTargetIdRef = React.useRef<string | undefined>(undefined);
     // A submenu owns its own `visibility`, so opening a sibling submenu would otherwise leave this
     // one open. The parent's cursor always moves to the item being hovered or focused, so treat the
     // cursor moving away from our target item as a signal to close.

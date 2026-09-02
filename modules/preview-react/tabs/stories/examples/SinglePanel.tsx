@@ -1,0 +1,45 @@
+import {Tabs, useTabsModel} from '@workday/canvas-kit-preview-react/tabs';
+import {slugify} from '@workday/canvas-kit-react/common';
+import {system} from '@workday/canvas-tokens-web';
+
+export const SinglePanel = () => {
+  const model = useTabsModel();
+
+  const message = (
+    <p>
+      This example shows how to use a single tab panel. You must manually set the{' '}
+      <code>hidden</code>, <code>aria-controls</code>, and <code>id</code> attributes of Tab item
+      and Tab panel components
+    </p>
+  );
+
+  const contents = {
+    first: <div>Contents of First Tab {message}</div>,
+    second: <div>Contents of Second Tab {message}</div>,
+    third: <div>Contents of Third Tab {message}</div>,
+  };
+
+  return (
+    <Tabs model={model}>
+      <Tabs.List>
+        <Tabs.Item data-id="first" aria-controls="mytab-panel">
+          First Tab
+        </Tabs.Item>
+        <Tabs.Item data-id="second" aria-controls="mytab-panel">
+          Second Tab
+        </Tabs.Item>
+        <Tabs.Item data-id="third" aria-controls="mytab-panel">
+          Third Tab
+        </Tabs.Item>
+      </Tabs.List>
+      <Tabs.Panel
+        cs={{marginBlockStart: system.gap.lg}}
+        hidden={undefined}
+        id="mytab-panel"
+        aria-labelledby={slugify(`${model.state.id}-${model.state.selectedIds[0]}`)}
+      >
+        {contents[model.state.selectedIds[0]]}
+      </Tabs.Panel>
+    </Tabs>
+  );
+};

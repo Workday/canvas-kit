@@ -31,21 +31,15 @@ export const Focus = () => {
             <Dialog.Body>
               <FormField>
                 <FormField.Label>Email</FormField.Label>
-                <FormField.Input as={TextInput} onChange={handleChange} value={value} />
+                <FormField.Input as={TextInput} grow onChange={handleChange} value={value} />
               </FormField>
             </Dialog.Body>
-            <Flex
-              cs={{
-                padding: system.padding.xxs,
-                marginBlockStart: system.gap.xs,
-                gap: system.gap.md,
-              }}
-            >
+            <Dialog.ButtonGroup>
+              <Dialog.CloseButton>Cancel</Dialog.CloseButton>
               <Dialog.CloseButton as={PrimaryButton} onClick={handleEmail}>
                 Submit
               </Dialog.CloseButton>
-              <Dialog.CloseButton>Cancel</Dialog.CloseButton>
-            </Flex>
+            </Dialog.ButtonGroup>
           </Dialog.Card>
         </Dialog.Popper>
       </Dialog>

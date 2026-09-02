@@ -91,6 +91,12 @@ export const Dialog = createContainer()({
      * {@link usePopupCloseButton}.
      */
     CloseButton: Popup.CloseButton,
+    /**
+     * A `Dialog.ButtonGroup` component styled with {@link popupButtonGroupStencil}. It is used to
+     * group buttons within a dialog and can place buttons at the start, center, or end of the
+     * container.
+     */
+    ButtonGroup: Popup.ButtonGroup,
   },
 })(({children}: DialogProps) => {
   return <>{children}</>;

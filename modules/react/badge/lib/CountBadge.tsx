@@ -44,16 +44,13 @@ const countBadgeStencil = createStencil({
     animation: `${grow} 0.2s ease`,
     borderRadius: system.legacy.shape.full,
     display: 'inline-flex',
-    fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.md,
-    fontWeight: system.fontWeight.bold,
+    ...system.legacy.type.subtext.md,
+    fontWeight: system.fontWeight.medium,
     height: px2rem(20),
     justifyContent: 'center',
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.md,
     minWidth: system.legacy.size.xxs,
-    padding: `0 ${px2rem(6.5)}`,
-    background: system.legacy.color.accent.danger,
+    padding: `0 ${system.legacy.padding.xxs}`,
+    background: system.legacy.color.brand.accent.primary,
     color: system.color.fg.inverse,
   },
   modifiers: {
@@ -61,7 +58,7 @@ const countBadgeStencil = createStencil({
       // .cnvs-count-badge--variant-inverse
       inverse: {
         background: system.legacy.color.surface.inverse,
-        color: system.legacy.color.fg.info.strong,
+        color: system.color.fg.strong,
       },
     },
     emphasis: {
