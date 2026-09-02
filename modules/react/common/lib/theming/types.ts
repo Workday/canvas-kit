@@ -312,17 +312,34 @@ export type CanvasBrandRamp = Partial<
     | 'A25'
     | 'A50'
     | 'A100'
-    | 'A200',
+    | 'A200'
+    | 'A300',
     string
   >
 >;
 
 /**
- * Neutral brand ramp — includes Sana-only steps (`150` / `850` / `A150`) that are not
- * exported for primary/critical/caution/positive families.
+ * Neutral brand ramp — includes Sana-only steps (`150` / `850` / `A150` / `A850`), plus the
+ * extended alpha steps (`A400`–`A975`) that only the neutral family exposes.
  */
 export type CanvasNeutralBrandRamp = CanvasBrandRamp &
-  Partial<Record<'150' | '850' | 'A150', string>>;
+  Partial<
+    Record<
+      | '150'
+      | '850'
+      | 'A150'
+      | 'A400'
+      | 'A500'
+      | 'A600'
+      | 'A700'
+      | 'A800'
+      | 'A850'
+      | 'A900'
+      | 'A950'
+      | 'A975',
+      string
+    >
+  >;
 
 /** Semantic keys for `brand.action.*` CSS variables (PrimaryButton, etc.). */
 export type CanvasActionBrandRamp = Partial<
