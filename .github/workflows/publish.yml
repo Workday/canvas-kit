@@ -41,6 +41,8 @@ jobs:
     steps:
       - name: Determine publish type
         id: determine
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           # Debug: Show incoming event information
           echo "::group::Debug Information"
@@ -48,7 +50,7 @@ jobs:
           echo "Ref: ${{ github.ref }}"
           echo "Ref name: ${{ github.ref_name }}"
           echo "SHA: ${{ github.sha }}"
-          echo "Commit message: ${{ github.event.head_commit.message }}"
+          echo "Commit message: $COMMIT_MESSAGE"
           echo "::endgroup::"
 
           # For workflow_dispatch, use the selected release type
@@ -68,7 +70,7 @@ jobs:
             echo "::notice::Branch '${BRANCH}' matched prerelease/* - publish type: canary"
           elif [[ "$BRANCH" == "master" ]] || [[ "$BRANCH" == "support" ]]; then
             # Check if commit message contains [skip release]
-            if [[ "${{ github.event.head_commit.message }}" == *"[skip release]"* ]]; then
+            if [[ "$COMMIT_MESSAGE" == *"[skip release]"* ]]; then
               echo "publish_type=skip" >> $GITHUB_OUTPUT
               echo "::notice::Commit contains [skip release] - skipping publish"
             else
