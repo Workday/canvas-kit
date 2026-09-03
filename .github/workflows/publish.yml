@@ -45,14 +45,22 @@ jobs:
     steps:
       - name: Determine publish type
         id: determine
+        env:
+          COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          REF: ${{ github.ref }}
+          REF_NAME: ${{ github.ref_name }}
         run: |
           # Debug: Show incoming event information
           echo "::group::Debug Information"
           echo "Event name: ${{ github.event_name }}"
-          echo "Ref: ${{ github.ref }}"
-          echo "Ref name: ${{ github.ref_name }}"
+          echo "Ref: $REF"
+          echo "Ref name: $REF_NAME"
           echo "SHA: ${{ github.sha }}"
-          echo "Commit message: ${{ github.event.head_commit.message }}"
+          STOP_TOKEN="commit-message-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
+          echo "Commit message:"
+          echo "::stop-commands::${STOP_TOKEN}"
+          printf '%s\n' "$COMMIT_MESSAGE"
+          echo "::${STOP_TOKEN}::"
           echo "::endgroup::"
 
           # For workflow_dispatch, use the selected release type
@@ -72,7 +80,7 @@ jobs:
             echo "::notice::Branch '${BRANCH}' matched prerelease/* - publish type: canary"
           elif [[ "$BRANCH" == "master" ]] || [[ "$BRANCH" == "support" ]]; then
             # Check if commit message contains [skip release]
-            if [[ "${{ github.event.head_commit.message }}" == *"[skip release]"* ]]; then
+            if [[ "$COMMIT_MESSAGE" == *"[skip release]"* ]]; then
               echo "publish_type=skip" >> $GITHUB_OUTPUT
               echo "::notice::Commit contains [skip release] - skipping publish"
             else
@@ -85,13 +93,15 @@ jobs:
           fi
 
       - name: Summary
+        env:
+          REF_NAME: ${{ github.ref_name }}
         run: |
           echo "## Publish Decision" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "| Parameter | Value |" >> $GITHUB_STEP_SUMMARY
           echo "|-----------|-------|" >> $GITHUB_STEP_SUMMARY
           echo "| Event | \`${{ github.event_name }}\` |" >> $GITHUB_STEP_SUMMARY
-          echo "| Branch | \`${{ github.ref_name }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| Branch | \`${REF_NAME}\` |" >> $GITHUB_STEP_SUMMARY
           echo "| Publish Type | \`${{ steps.determine.outputs.publish_type }}\` |" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           if [[ "${{ steps.determine.outputs.publish_type }}" == "skip" ]]; then
