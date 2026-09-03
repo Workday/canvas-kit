@@ -16,8 +16,11 @@ import {
   ACCESSIBILITY_SCENARIOS,
   resolveAccessibilityScenarioSlugs,
 } from './accessibility-enums';
+import {loadCatalogBundle} from './catalog-loader';
 import fileNames from './config.json';
+import {registerCatalogTools} from './register-catalog-tools';
 import storiesConfig from './stories-config.json';
+import {finalizeToolResponse} from './tool-response';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -369,28 +372,24 @@ Covers:
           };
         }),
       };
-      return {
-        content: [
-          {type: 'text', text: JSON.stringify(output)},
-          ...fileNames.upgradeGuideFiles.map(fileName => {
-            const resource = getUpgradeGuideResource(fileName);
-            if (!resource) {
-              throw new Error(`Resource ${fileName} not found`);
-            }
-            return {
-              type: 'resource_link' as const,
-              uri: resource.uri,
-              name: resource.title,
-              mimeType: resource.mimeType,
-              description: resource.description,
-              annotations: {
-                audience: ['user', 'assistant'] as ('user' | 'assistant')[],
-              },
-            };
-          }),
-        ],
-        structuredContent: output,
-      };
+      const links = fileNames.upgradeGuideFiles.map(fileName => {
+        const resource = getUpgradeGuideResource(fileName);
+        if (!resource) {
+          throw new Error(`Resource ${fileName} not found`);
+        }
+        return {
+          type: 'resource_link' as const,
+          uri: resource.uri,
+          name: resource.title,
+          mimeType: resource.mimeType,
+          description: resource.description,
+          annotations: {
+            audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+          },
+        };
+      });
+
+      return finalizeToolResponse(server, mcpVersion, output, links);
     }
   );
   /**
@@ -639,28 +638,24 @@ Returns links to token documentation including the v4.4 current-state reference,
           };
         }),
       };
-      return {
-        content: [
-          {type: 'text', text: JSON.stringify(output)},
-          ...fileNames.tokenFiles.map(fileName => {
-            const resource = getTokenResource(fileName);
-            if (!resource) {
-              throw new Error(`Resource ${fileName} not found`);
-            }
-            return {
-              type: 'resource_link' as const,
-              uri: resource.uri,
-              name: resource.title,
-              mimeType: resource.mimeType,
-              description: resource.description,
-              annotations: {
-                audience: ['user', 'assistant'],
-              },
-            };
-          }),
-        ],
-        structuredContent: output,
-      };
+      const links = fileNames.tokenFiles.map(fileName => {
+        const resource = getTokenResource(fileName);
+        if (!resource) {
+          throw new Error(`Resource ${fileName} not found`);
+        }
+        return {
+          type: 'resource_link' as const,
+          uri: resource.uri,
+          name: resource.title,
+          mimeType: resource.mimeType,
+          description: resource.description,
+          annotations: {
+            audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+          },
+        };
+      });
+
+      return finalizeToolResponse(server, mcpVersion, output, links);
     }
   );
 
@@ -847,50 +842,48 @@ Returns links to token documentation including the v4.4 current-state reference,
         exampleDocumentation,
       };
 
-      return {
-        content: [
-          {type: 'text' as const, text: JSON.stringify(output)},
-          ...accessibilityResources.map(resource => ({
-            type: 'resource_link' as const,
-            uri: resource.uri,
-            name: resource.title,
-            mimeType: 'text/markdown',
-            description: resource.description,
-            annotations: {
-              audience: ['user', 'assistant'] as ('user' | 'assistant')[],
-            },
-          })),
-          ...(exampleDocumentation
-            ? [
-                {
-                  type: 'resource_link' as const,
-                  uri: exampleDocumentation.uri,
-                  name: exampleDocumentation.title,
-                  mimeType: 'text/markdown',
-                  description: exampleDocumentation.description,
-                  annotations: {
-                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
-                  },
+      const links = [
+        ...accessibilityResources.map(resource => ({
+          type: 'resource_link' as const,
+          uri: resource.uri,
+          name: resource.title,
+          mimeType: 'text/markdown',
+          description: resource.description,
+          annotations: {
+            audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+          },
+        })),
+        ...(exampleDocumentation
+          ? [
+              {
+                type: 'resource_link' as const,
+                uri: exampleDocumentation.uri,
+                name: exampleDocumentation.title,
+                mimeType: 'text/markdown',
+                description: exampleDocumentation.description,
+                annotations: {
+                  audience: ['user', 'assistant'] as ('user' | 'assistant')[],
                 },
-              ]
-            : []),
-          ...(componentAccessibilityDocumentation
-            ? [
-                {
-                  type: 'resource_link' as const,
-                  uri: componentAccessibilityDocumentation.uri,
-                  name: componentAccessibilityDocumentation.title,
-                  mimeType: 'text/markdown',
-                  description: componentAccessibilityDocumentation.description,
-                  annotations: {
-                    audience: ['user', 'assistant'] as ('user' | 'assistant')[],
-                  },
+              },
+            ]
+          : []),
+        ...(componentAccessibilityDocumentation
+          ? [
+              {
+                type: 'resource_link' as const,
+                uri: componentAccessibilityDocumentation.uri,
+                name: componentAccessibilityDocumentation.title,
+                mimeType: 'text/markdown',
+                description: componentAccessibilityDocumentation.description,
+                annotations: {
+                  audience: ['user', 'assistant'] as ('user' | 'assistant')[],
                 },
-              ]
-            : []),
-        ],
-        structuredContent: output,
-      };
+              },
+            ]
+          : []),
+      ];
+
+      return finalizeToolResponse(server, mcpVersion, output, links);
     }
   );
 
@@ -989,28 +982,24 @@ Returns links to the Sana Canvas Assets overview, which includes the full deprec
           };
         }),
       };
-      return {
-        content: [
-          {type: 'text', text: JSON.stringify(output)},
-          ...fileNames.iconMigrationFiles.map(fileName => {
-            const resource = getIconMigrationResource(fileName);
-            if (!resource) {
-              throw new Error(`Resource ${fileName} not found`);
-            }
-            return {
-              type: 'resource_link' as const,
-              uri: resource.uri,
-              name: resource.title,
-              mimeType: resource.mimeType,
-              description: resource.description,
-              annotations: {
-                audience: ['user', 'assistant'] as ('user' | 'assistant')[],
-              },
-            };
-          }),
-        ],
-        structuredContent: output,
-      };
+      const links = fileNames.iconMigrationFiles.map(fileName => {
+        const resource = getIconMigrationResource(fileName);
+        if (!resource) {
+          throw new Error(`Resource ${fileName} not found`);
+        }
+        return {
+          type: 'resource_link' as const,
+          uri: resource.uri,
+          name: resource.title,
+          mimeType: resource.mimeType,
+          description: resource.description,
+          annotations: {
+            audience: ['user', 'assistant'] as ('user' | 'assistant')[],
+          },
+        };
+      });
+
+      return finalizeToolResponse(server, mcpVersion, output, links);
     }
   );
 
@@ -1104,6 +1093,8 @@ Returns links to the Sana Canvas Assets overview, which includes the full deprec
       fetchStoryHandler
     );
   }
+
+  registerCatalogTools(server, mcpVersion, loadCatalogBundle());
 
   return server;
 }

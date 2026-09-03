@@ -28,6 +28,7 @@
     "tokens/v4/size.md",
     "tokens/v4/space.md"
   ],
+  "skillFiles": ["skills/canvas-component-selection.md"],
   "accessibilityFiles": [
     {
       "source": "accessibility/AccessibilityOverview.mdx",
