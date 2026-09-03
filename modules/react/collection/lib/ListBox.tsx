@@ -51,7 +51,7 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
   };
 });
 
-const listBoxContainerStencil = createStencil({
+export const listBoxContainerStencil = createStencil({
   parts: {
     listBoxContainer: 'list-box-container',
   },

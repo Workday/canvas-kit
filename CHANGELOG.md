@@ -3,6 +3,133 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.15](https://github.com/Workday/canvas-kit/releases/tag/v16.0.15) (2026-09-02)
+
+### Components
+
+- fix: Remove console.log from forward-merge-branch ([@alanbsmith](https://github.com/alanbsmith))
+
+### Documentation
+
+- docs(table): Expand accessibility guidance and table pattern guides` ([#4159](https://github.com/Workday/canvas-kit/pull/4159)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+### Infrastructure
+
+- chore(ci): Fix commit message parsing in publish workflow ([#4162](https://github.com/Workday/canvas-kit/pull/4162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.1.11](https://github.com/Workday/canvas-kit/releases/tag/v15.1.11) (2026-09-02)
+
+### Infrastructure
+
+- chore(ci): Fix commit message parsing in publish workflow ([#4162](https://github.com/Workday/canvas-kit/pull/4162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v16.0.14](https://github.com/Workday/canvas-kit/releases/tag/v16.0.14) (2026-09-01)
+
+### Components
+
+- fix(MultiSelect): Open search popup when typing ([#4153](https://github.com/Workday/canvas-kit/pull/4153)) ([@maoyouaa](https://github.com/maoyouaa))
+
+
+## [v15.1.10](https://github.com/Workday/canvas-kit/releases/tag/v15.1.10) (2026-08-31)
+## [v16.0.13](https://github.com/Workday/canvas-kit/releases/tag/v16.0.13) (2026-08-31)
+
+### Components
+
+- fix: Ensure Sana theme is portaled ([#4142](https://github.com/Workday/canvas-kit/pull/4142)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
+## [v16.0.12](https://github.com/Workday/canvas-kit/releases/tag/v16.0.12) (2026-08-31)
+
+### Components, Documentation
+
+- fix(StatusIndicator): Stop forcing `role="img"` on StatusIndicator.Icon ([#4158](https://github.com/Workday/canvas-kit/pull/4158)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+  `StatusIndicator.Icon` no longer applies `role="img"` automatically. Decorative icons next to a label need no extra ARIA. If an icon conveys meaning beyond the label, set `role="img"` and a translated `aria-label` on `StatusIndicator.Icon`.
+
+
+## [v16.0.11](https://github.com/Workday/canvas-kit/releases/tag/v16.0.11) (2026-08-31)
+
+### Documentation
+
+- docs: Update A11y documentation and examples ([#4156](https://github.com/Workday/canvas-kit/pull/4156)) ([@mannycarrera4](https://github.com/mannycarrera4), [@williamjstanton](https://github.com/williamjstanton), [@cursoragent](https://github.com/cursoragent), [@purvas12](https://github.com/purvas12), [@moaan-workday](https://github.com/moaan-workday), [@purvas12](https://github.com/purvas12), [@sheelah](https://github.com/sheelah), [@alanbsmith](https://github.com/alanbsmith), manuel.carrera)
+
+
+## [v15.1.10](https://github.com/Workday/canvas-kit/releases/tag/v15.1.10) (2026-08-31)
+
+### Components
+
+- fix(StatusIndicator): Stop forcing `role="img"` on StatusIndicator.Icon ([#4158](https://github.com/Workday/canvas-kit/pull/4158)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+  `StatusIndicator.Icon` no longer applies `role="img"` automatically. Decorative icons next to a label need no extra ARIA. If an icon conveys meaning beyond the label, set `role="img"` and a translated `aria-label` on `StatusIndicator.Icon`.
+  
+## [v16.0.10](https://github.com/Workday/canvas-kit/releases/tag/v16.0.10) (2026-08-25)
+
+### Components
+
+- fix: Handle cross-window elements for OverflowTooltip ([#4152](https://github.com/Workday/canvas-kit/pull/4152)) ([@jjbubudi](https://github.com/jjbubudi))
+  OverflowTooltip now correctly displays text for targets rendered in a different window/iframe context, such as pages opened via `window.open()`.
+
+
+## [v16.0.9](https://github.com/Workday/canvas-kit/releases/tag/v16.0.9) (2026-08-25)
+
+### Components
+
+- docs: Add AI disclosure example to Tooltip docs ([#4126](https://github.com/Workday/canvas-kit/pull/4126)) ([@dsumeet14](https://github.com/dsumeet14))
+
+
+## [v16.0.8](https://github.com/Workday/canvas-kit/releases/tag/v16.0.8) (2026-08-20)
+
+### Infrastructure
+
+- chore: Fix npm publish failures ([#4150](https://github.com/Workday/canvas-kit/pull/4150)) ([@alanbsmith](https://github.com/alanbsmith))
+  Release and canary CI now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
+## [v16.0.7](https://github.com/Workday/canvas-kit/releases/tag/v16.0.7) (2026-08-19)
+
+### Components
+
+- fix: Update SidePanel to use sidebarLeft icon ([#4071](https://github.com/Workday/canvas-kit/pull/4071)) ([@alanbsmith](https://github.com/alanbsmith))
+  This update will break any visual snapshots as the icon has changed from `extendIcon` to `sidebarLeftIcon`. It is safe to accept these visual changes. The icon also no longer flips on expand / collapse, but it will still respect end (right) origin and RTL.
+- fix(OverflowTooltip): Add missing showDelay and hideDelay prop support for OverflowTooltip ([#4138](https://github.com/Workday/canvas-kit/pull/4138)) ([@BillGeoghegan](https://github.com/BillGeoghegan), Bill Geoghegan)
+  - Adds ability to pass showDelay and hideDelay values for OverflowTooltip
+- fix: Forward getId to useTabsModel to ensure custom ids work when registering items ([#4141](https://github.com/Workday/canvas-kit/pull/4141)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+- fix: Close nested Menus when hovering over other items ([#4090](https://github.com/Workday/canvas-kit/pull/4090)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+### Documentation
+
+- docs: Update docs on Menu ([#4145](https://github.com/Workday/canvas-kit/pull/4145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.9](https://github.com/Workday/canvas-kit/releases/tag/v15.1.9) (2026-08-19)
+
+### Documentation
+
+- docs: Update docs on Menu ([#4145](https://github.com/Workday/canvas-kit/pull/4145)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.8](https://github.com/Workday/canvas-kit/releases/tag/v15.1.8) (2026-08-18)
+
+### Components
+
+- fix: Close nested Menus when hovering over other items ([#4090](https://github.com/Workday/canvas-kit/pull/4090)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
+## [v15.1.7](https://github.com/Workday/canvas-kit/releases/tag/v15.1.7) (2026-08-13)
+
+### Components
+
+- fix: Forward getId to useTabsModel to ensure custom ids work when registering items ([#4141](https://github.com/Workday/canvas-kit/pull/4141)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v15.1.6](https://github.com/Workday/canvas-kit/releases/tag/v15.1.6) (2026-08-13)
+
+### Components
+
+- fix(OverflowTooltip): Add missing showDelay and hideDelay prop support for OverflowTooltip ([#4138](https://github.com/Workday/canvas-kit/pull/4138)) ([@BillGeoghegan](https://github.com/BillGeoghegan), Bill Geoghegan)
+  - Adds ability to pass showDelay and hideDelay values for OverflowTooltip
+
+
 ## [v16.0.6](https://github.com/Workday/canvas-kit/releases/tag/v16.0.6) (2026-08-10)
 
 ### Documentation
@@ -17,6 +144,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs: Update readme for v16 ([#4127](https://github.com/Workday/canvas-kit/pull/4127)) ([@sheelah](https://github.com/sheelah))
 
 
+## [v15.1.5](https://github.com/Workday/canvas-kit/releases/tag/v15.1.5) (2026-08-05)
+
+### Components
+
+- fix: Update SidePanel to use sidebarLeft icon ([#4071](https://github.com/Workday/canvas-kit/pull/4071)) ([@alanbsmith](https://github.com/alanbsmith))
+  This update will break any visual snapshots as the icon has changed from `extendIcon` to `sidebarLeftIcon`. It is safe to accept these visual changes. The icon also no longer flips on expand / collapse, but it will still respect end (right) origin and RTL.
 ## [v16.0.4](https://github.com/Workday/canvas-kit/releases/tag/v16.0.4) (2026-08-05)
 
 ### Documentation

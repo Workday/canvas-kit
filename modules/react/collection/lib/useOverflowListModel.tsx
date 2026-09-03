@@ -25,9 +25,16 @@ export function getHiddenIds(
   let shouldAddGap = false;
 
   if (selectedIds !== 'all' && selectedIds.length) {
-    if (items.length) {
-      // If selectedIds[0] is not in items, use the first id from items
-      selectedKey = items.find(item => item.id === selectedIds[0]) ? selectedIds[0] : items[0].id;
+    const candidate = selectedIds[0];
+    const fallbackId = items?.[0]?.id;
+    // Only pin own cached sizes so unmeasured ids and inherited names cannot yield NaN.
+    if (Object.prototype.hasOwnProperty.call(itemSizeCache, candidate)) {
+      selectedKey = candidate;
+    } else if (
+      fallbackId !== undefined &&
+      Object.prototype.hasOwnProperty.call(itemSizeCache, fallbackId)
+    ) {
+      selectedKey = fallbackId;
     }
   }
 

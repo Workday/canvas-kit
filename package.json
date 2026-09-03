@@ -116,6 +116,7 @@
     "format:prettier": "prettier --config=./.prettierrc.mjs --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn eslint --fix",
     "test": "vitest run",
+    "publish:from-package": "node utils/publish-packages.mjs",
     "bump": "lerna version",
     "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",
@@ -138,8 +139,8 @@
   "@workday/canvas-accent-icons-web": "^3.0.17",
   "@workday/canvas-applet-icons-web": "^2.0.15",
   "@workday/canvas-expressive-icons-web": "1.0.2",
-  "@workday/canvas-tokens-web": "^4.4.0",
   "@workday/canvas-system-icons-web": "^5.0.3",
+  "@workday/canvas-tokens-web": "^4.4.0",
   "resolutions": {
     "ansi-regex": "3.0.1",
     "braces": "3.0.3",
