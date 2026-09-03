@@ -1,10 +1,6 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Caution} from './examples/Caution';
@@ -65,6 +61,9 @@ on a number of child Checkboxes. The parent Checkbox is set to the indeterminate
 not all) of its children are checked.
 
 <ExampleCodeBlock code={Indeterminate} />
+
+> **Accessibility Note**: Use semantic unordered list markup so that screen readers can communicate
+> the nested hierarchy of the components to users.
 
 ### Ref Forwarding
 
@@ -187,13 +186,13 @@ the situation matches—otherwise omit.
 **`isRequired`**, **`error`**, **`indeterminate`**, **`disabled`**, and a custom **`id`** unless the
 spec requires them.
 
-| Requirement                          | How to satisfy                                                                                                                                                                                                                  |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Accessible name                      | Non-empty **`label`** on every **`Checkbox`**. **`FormFieldGroup.Label`** is the group name only and does not replace **`label`**.                                                                                              |
+| Requirement                          | How to satisfy                                                                                                                                                                                                                                                                                                                     |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible name                      | Non-empty **`label`** on every **`Checkbox`**. **`FormFieldGroup.Label`** is the group name only and does not replace **`label`**.                                                                                                                                                                                                 |
 | Group wiring                         | **`FormFieldGroup`** + **`FormFieldGroup.Label`** + **`FormFieldGroup.Input as={Checkbox}`**. Hint, error, caution, and required belong on the group — see [FormField accessibility](/components/inputs/form-field/#accessibility). When the design uses the visual caution or error ring, also set **`error`** on **`Checkbox`**. |
-| Standalone checkbox _(conditional)_  | A checkbox outside **`FormFieldGroup`** may use **`label`** only. For examples of standalone checkboxes refer to [Inverse](#inverse) and [Indeterminate](#indeterminate). Prefer **`FormFieldGroup`** for form layouts.         |
-| Indeterminate parent _(conditional)_ | `indeterminate` on the parent **`Checkbox`** when some (but not all) children are checked; keep a **`label`** on the parent and on each child.                                                                                   |
-| Disabled _(conditional)_             | `disabled` on **`Checkbox`**. Because this removes the control from the keyboard focus order, consider using `aria-disabled="true"` instead of `disabled` when keyboard users need to discover the control and read the associated hint text, validation messages, or tooltips explaining why the option is unavailable.|
+| Standalone checkbox _(conditional)_  | A checkbox outside **`FormFieldGroup`** may use **`label`** only. For examples of standalone checkboxes refer to [Inverse](#inverse) and [Indeterminate](#indeterminate). Prefer **`FormFieldGroup`** for form layouts.                                                                                                            |
+| Indeterminate parent _(conditional)_ | `indeterminate` on the parent **`Checkbox`** when some (but not all) children are checked; keep a **`label`** on the parent and on each child.                                                                                                                                                                                     |
+| Disabled _(conditional)_             | `disabled` on **`Checkbox`**. Because this removes the control from the keyboard focus order, consider using `aria-disabled="true"` instead of `disabled` when keyboard users need to discover the control and read the associated hint text, validation messages, or tooltips explaining why the option is unavailable.           |
 
 **Summary for code generation:**
 
