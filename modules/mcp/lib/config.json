@@ -39,8 +39,28 @@
       "slug": "page-structure"
     },
     {
-      "source": "accessibility/TablesAdvanced.mdx",
+      "source": "accessibility/tables/Overview.mdx",
       "slug": "tables"
+    },
+    {
+      "source": "accessibility/tables/ExpandableRows.mdx",
+      "slug": "expandable-rows"
+    },
+    {
+      "source": "accessibility/tables/NestedRows.mdx",
+      "slug": "nested-rows"
+    },
+    {
+      "source": "accessibility/tables/SelectableRows.mdx",
+      "slug": "selectable-rows"
+    },
+    {
+      "source": "accessibility/tables/FilterableColumnHeaders.mdx",
+      "slug": "filterable-column-headers"
+    },
+    {
+      "source": "accessibility/tables/SortableColumnHeaders.mdx",
+      "slug": "sortable-column-headers"
     },
     {
       "source": "accessibility/Popups.mdx",
@@ -63,7 +83,7 @@
       "slug": "windows-high-contrast"
     },
     {
-      "source": "accessibility/TestingTableWithFormFields.mdx",
+      "source": "accessibility/tables/WithFormFields.mdx",
       "slug": "forms"
     },
     {

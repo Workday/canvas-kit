@@ -58,11 +58,41 @@ export function getServer() {
         'Guidance for landmarks, headings, navigation, and logical focus order in Canvas Kit applications.',
       slug: 'page-structure',
     },
-    'accessibility/TablesAdvanced.mdx': {
+    'accessibility/tables/Overview.mdx': {
       title: 'Canvas Kit Table Accessibility',
       description:
-        'Guidance for semantic data tables, interactive tables, sorting, filtering, row selection, and table focus behavior.',
+        'Index of Canvas Kit accessible table patterns, including when to use semantic tables and links to expandable rows, nested rows, selectable rows, filterable and sortable column headers, and tables with form fields.',
       slug: 'tables',
+    },
+    'accessibility/tables/ExpandableRows.mdx': {
+      title: 'Canvas Kit Expandable Rows Table Pattern',
+      description:
+        'Guidance for accordion-style expandable table rows: aria-expanded on the chevron, tooltip naming, and colspan detail rows. This is a research example, not a Canvas Kit primitive.',
+      slug: 'expandable-rows',
+    },
+    'accessibility/tables/NestedRows.mdx': {
+      title: 'Canvas Kit Nested Rows Table Pattern',
+      description:
+        'Guidance for hierarchical records as additional table rows in one table: tree-column chevrons, aria-expanded, aria-describedby, and aria-level. Distinct from expandable (colspan) rows. This is a research example, not a Canvas Kit primitive.',
+      slug: 'nested-rows',
+    },
+    'accessibility/tables/SelectableRows.mdx': {
+      title: 'Canvas Kit Selectable Rows Table Pattern',
+      description:
+        'Guidance for row-selection checkboxes in tables: avoiding Select All as a column header, tooltip names, aria-describedby to row headers, and thead/tbody considerations.',
+      slug: 'selectable-rows',
+    },
+    'accessibility/tables/FilterableColumnHeaders.mdx': {
+      title: 'Canvas Kit Filterable Column Headers Table Pattern',
+      description:
+        'Guidance for filter popups in table column headers: focus redirect, initial focus, aria-owns for reading order, tooltip filtered state, and live-region result counts.',
+      slug: 'filterable-column-headers',
+    },
+    'accessibility/tables/SortableColumnHeaders.mdx': {
+      title: 'Canvas Kit Sortable Column Headers Table Pattern',
+      description:
+        'Guidance for sortable table column headers: aria-sort on th, TertiaryButton in the header, and tooltip descriptions that apply only while focusing the sort control.',
+      slug: 'sortable-column-headers',
     },
     'accessibility/Popups.mdx': {
       title: 'Canvas Kit Popup and Overlay Accessibility',
@@ -94,7 +124,7 @@ export function getServer() {
         'Guidance for forced colors and Windows High Contrast themes, including focus, state, border, and icon visibility.',
       slug: 'windows-high-contrast',
     },
-    'accessibility/TestingTableWithFormFields.mdx': {
+    'accessibility/tables/WithFormFields.mdx': {
       title: 'Canvas Kit Form Accessibility',
       description:
         'Guidance from existing Canvas Kit accessibility documentation for form fields in table contexts.',

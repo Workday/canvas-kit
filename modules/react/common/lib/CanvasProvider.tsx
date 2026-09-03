@@ -31,6 +31,18 @@ import {sanaCanvasProviderTheme} from './theming/sanaTheme';
  */
 export const CanvasBrandStyleContext = React.createContext<React.CSSProperties>({});
 
+/**
+ * Context for providing the `data-theme` value to popup containers.
+ *
+ * Token stylesheets scope their variables to an attribute selector (e.g. Sana's
+ * `[data-theme="sana-canvas"]` block defines ~300 variables — palette, shape, depth, type).
+ * Portaled popups render under `document.body`, outside the `CanvasProvider` wrapper, so they
+ * never inherit a nested `data-theme` and none of those variables resolve. Forwarding the
+ * attribute itself lets the popup container match the same selector, so the whole theme applies
+ * through normal cascade — rather than trying to mirror every variable as an inline style.
+ */
+export const CanvasThemeAttributeContext = React.createContext<string | undefined>(undefined);
+
 export interface CanvasProviderProps {
   /**
    * ⚠️ Only use this prop if you intent to to theme a part of your application that is different from global theming.
@@ -222,6 +234,13 @@ export const CanvasProvider = ({
 
   // Read parent context to support nested scoped providers
   const parentBrandStyle = React.useContext(CanvasBrandStyleContext);
+  const parentThemeAttribute = React.useContext(CanvasThemeAttributeContext);
+
+  // `data-theme` on this provider wins; otherwise inherit from a parent provider so nested
+  // providers keep forwarding the outer theme attribute to popups.
+  const themeAttribute =
+    (props as React.HTMLAttributes<HTMLElement> & {'data-theme'?: string})['data-theme'] ??
+    parentThemeAttribute;
 
   // Popup forwarding only needs CSS custom properties (not consumer layout styles).
   const mergedBrandStyle = React.useMemo(() => {
@@ -256,9 +275,11 @@ export const CanvasProvider = ({
   );
 
   const wrappedContent = (
-    <CanvasBrandStyleContext.Provider value={mergedBrandStyle}>
-      {content}
-    </CanvasBrandStyleContext.Provider>
+    <CanvasThemeAttributeContext.Provider value={themeAttribute}>
+      <CanvasBrandStyleContext.Provider value={mergedBrandStyle}>
+        {content}
+      </CanvasBrandStyleContext.Provider>
+    </CanvasThemeAttributeContext.Provider>
   );
 
   return (

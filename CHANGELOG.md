@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.15](https://github.com/Workday/canvas-kit/releases/tag/v16.0.15) (2026-09-02)
+
+### Components
+
+- fix: Remove console.log from forward-merge-branch ([@alanbsmith](https://github.com/alanbsmith))
+
+### Documentation
+
+- docs(table): Expand accessibility guidance and table pattern guides` ([#4159](https://github.com/Workday/canvas-kit/pull/4159)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+### Infrastructure
+
+- chore(ci): Fix commit message parsing in publish workflow ([#4162](https://github.com/Workday/canvas-kit/pull/4162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v15.1.11](https://github.com/Workday/canvas-kit/releases/tag/v15.1.11) (2026-09-02)
+
+### Infrastructure
+
+- chore(ci): Fix commit message parsing in publish workflow ([#4162](https://github.com/Workday/canvas-kit/pull/4162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
+## [v16.0.14](https://github.com/Workday/canvas-kit/releases/tag/v16.0.14) (2026-09-01)
+
+### Components
+
+- fix(MultiSelect): Open search popup when typing ([#4153](https://github.com/Workday/canvas-kit/pull/4153)) ([@maoyouaa](https://github.com/maoyouaa))
+
+
+## [v15.1.10](https://github.com/Workday/canvas-kit/releases/tag/v15.1.10) (2026-08-31)
+## [v16.0.13](https://github.com/Workday/canvas-kit/releases/tag/v16.0.13) (2026-08-31)
+
+### Components
+
+- fix: Ensure Sana theme is portaled ([#4142](https://github.com/Workday/canvas-kit/pull/4142)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+
+
 ## [v16.0.12](https://github.com/Workday/canvas-kit/releases/tag/v16.0.12) (2026-08-31)
 
 ### Components, Documentation
