@@ -1,10 +1,6 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
 import {Caution} from './examples/Caution';
@@ -66,6 +62,9 @@ not all) of its children are checked.
 
 <ExampleCodeBlock code={Indeterminate} />
 
+> **Accessibility Note**: Use semantic unordered list markup so that screen readers can communicate
+> the nested hierarchy of the components to users.
+
 ### Ref Forwarding
 
 Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html). It will forward
@@ -75,27 +74,27 @@ Checkbox supports [ref forwarding](https://reactjs.org/docs/forwarding-refs.html
 
 ### Label Position Horizontal
 
-Set the `orientation` prop of the Form Field to designate the position of the label relative to the
-input component. By default, the orientation will be set to `vertical`.
+Set the `orientation` prop of the wrapping FormFieldGroup to designate the position of the group
+label relative to the checkboxes. By default, the orientation will be set to `vertical`.
 
 <ExampleCodeBlock code={LabelPosition} />
 
 ### Required
 
-Set the `required` prop of a wrapping Form Field to `true` to indicate that the field is required.
-Labels for required fields are suffixed by a red asterisk.
+Set the `isRequired` prop of a wrapping FormFieldGroup to `true` to indicate that the field is
+required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
 ### Error States
 
-Set the `error` prop of the wrapping Form Field to `"caution"` or `"error"` to set the Checkbox to
-the Alert or Error state, respectively. You will also need to set the `hintId` and `hintText` props
-on the Form Field to meet accessibility standards. You may wish to omit the `label` prop on the Form
-Field given that Checkbox already includes a label.
+Set the `error` prop of the wrapping FormFieldGroup to `"caution"` or `"error"` to set the Checkbox
+to the Alert or Error state, respectively. Render `FormFieldGroup.Hint` with the message text so
+assistive technology can associate the hint with the group. Keep the Checkbox `label` so each
+control retains its own accessible name; `FormFieldGroup.Label` only provides the group name.
 
 The `error` prop may be applied directly to the Checkbox with a value of `"caution"` or `"error"` if
-Form Field is not being used.
+FormFieldGroup is not being used.
 
 #### Caution
 
@@ -109,6 +108,126 @@ Form Field is not being used.
 
 Checkbox supports custom styling via the `cs` prop. For more information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+The primary accessibility goal is a visible, programmatically determinable name and a checked,
+unchecked, or mixed state that assistive technology can expose. Use **Checkbox** when the user can
+select zero, one, or many independent options. For mutually exclusive choices, use
+[**Radio**](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead.
+When checkboxes answer the same question, or need hint, error, caution, or required association,
+see [FormField's accessibility documentation](/components/inputs/form-field/#accessibility).
+
+### Minimum Accessible Structure
+
+The following matches the [Basic Example](#basic-example): a **`Checkbox`** with a non-empty
+**`label`**. **`FormFieldGroup`** is not required for a single standalone checkbox with no hint,
+error, caution, or required state.
+
+```tsx
+import {Checkbox} from '@workday/canvas-kit-react/checkbox';
+
+<Checkbox label="I agree to the terms" />;
+```
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically on **`Checkbox`**. When checkboxes that answer the same
+question are composed with **`FormFieldGroup`** subcomponents, that grouping wiring is also applied
+automatically. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by Checkbox_):
+
+- **`Checkbox`**: Renders a native `<input type="checkbox">`. Canvas Kit assigns an `id` with
+  `useUniqueId` unless you pass **`id`**.
+- **`label`**: Renders a visible `<label htmlFor={id}>` so the control has an accessible name and
+  clicking the text activates the input.
+- **`indeterminate`**: Sets `aria-checked="mixed"` and the input's native `indeterminate` property.
+  Otherwise `aria-checked` follows the **`checked`** prop.
+- **`disabled`**: Maps to the native `disabled` attribute.
+- **`ref`**: Forwards to the underlying `<input type="checkbox">`.
+
+**Keyboard** (_native checkbox behavior_):
+
+**`Checkbox`** uses native `<input type="checkbox">` keyboard behavior (tab order, Space to toggle,
+and label activation). Do not intercept <kbd>Space</kbd> or otherwise prevent the native toggle.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the Checkbox **`label`** and checked, unchecked, or mixed
+  state
+- Disabled checkboxes are announced as unavailable
+
+For group, hint, error, and required association, see
+[FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors).
+
+### Accessibility Requirements
+
+Required in application code for an accessible Checkbox. Rows marked _(conditional)_ apply only when
+the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible, non-empty Checkbox **`label`**. Omit
+**`FormFieldGroup`** unless the spec includes a group name, more than one independent option for the
+same question, or hint, error, caution, or required state. Omit **`FormFieldGroup.Hint`**,
+**`isRequired`**, **`error`**, **`indeterminate`**, **`disabled`**, a custom **`id`**, and a **`ref`**
+unless the spec requires them.
+
+**Choose a composition:**
+
+- Standalone **`Checkbox`** with **`label`** — one control with no hint, error, caution, or required
+  state
+- **`FormFieldGroup`** — one question with two or more independent options, or any checkbox that
+  needs a group name, hint, error, caution, or required state
+- Nested `<ul>` / `<li>` — parent checkbox with nested children and **`indeterminate`**. Do not use
+  **`FormFieldGroup`** for that hierarchy. Checkboxes that answer different questions stay in
+  separate compositions.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Attach a `ref` only when the product must move focus to the checkbox after an action (for example,
+**Submit** in [Ref Forwarding](#ref-forwarding)). Do not attach a `ref` or call `focus()` unless the
+design or developer asks for it.
+
+| Requirement                          | How to satisfy                                                                                                                                                                                                                                                                                    |
+| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible name                      | Non-empty **`label`** on every **`Checkbox`**. **`FormFieldGroup.Label`** names the group only (`div` with an `id`); it is not a `<label>` and does not replace **`label`**.                                                                                                                       |
+| Group wiring _(conditional)_         | When the spec is one question with two or more independent options, or includes a group name, hint, error, caution, or required state: **`FormFieldGroup`** + **`FormFieldGroup.Label`** + **`FormFieldGroup.Input as={Checkbox}`**. Put hint, error, caution, and required on the group — see [FormField accessibility](/components/inputs/form-field/#accessibility). See [Required](#required) and [Error States](#error-states). |
+| Visual error or caution _(conditional)_ | When **`FormFieldGroup`** has `error="error"` or `error="caution"`, also set **`error`** on **`Checkbox`** to the same state so the visual ring appears. See [Caution](#caution) and [Error](#error). |
+| Indeterminate parent _(conditional)_ | When a parent checkbox's value depends on nested children and some (but not all) children are checked: set **`indeterminate`** on the parent **`Checkbox`**; keep a non-empty **`label`** on the parent and on each child; nest the children in a `<ul>` inside the parent's `<li>`. See [Indeterminate](#indeterminate). |
+| Disabled _(conditional)_             | `disabled` on **`Checkbox`** when the spec marks the option unavailable. See [Disabled](#disabled).                                                                                                                                                                                               |
+| Programmatic focus _(conditional)_   | `ref` on **`Checkbox`** (or **`FormFieldGroup.Input`**) and move focus when the product requires it — omit by default (see **Programmatic focus** above and [Ref Forwarding](#ref-forwarding)).                                                                                                     |
+
+**Summary for code generation:**
+
+- **REQUIRED:** non-empty **`label`**
+- **CONDITIONAL:** **`FormFieldGroup`** for one question with two or more independent options, or
+  for hint, error, caution, or required; **`error`** on **`Checkbox`** when the group is in caution
+  or error; nested list + **`indeterminate`** for a parent/child tree; disabled; programmatic focus
+  via `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for group
+  hint, error, caution, and required.
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Manually set `aria-checked`, `id`, or `htmlFor` on **`Checkbox`** — Canvas Kit wires these
+- Ignore **Choose a composition** — do not wrap a standalone checkbox with no hint, error, caution,
+  or required state in **`FormFieldGroup`**; do not put different questions in one group; do not use
+  **`FormFieldGroup`** for a parent/child indeterminate tree
+- Wrap **`Checkbox`** with **`FormField.Input`** — **`Checkbox`** already renders its own
+  `<label>`. When a group is required, use **`FormFieldGroup.Input as={Checkbox}`** (see **Group
+  wiring**)
+- Omit **`label`** because **`FormFieldGroup.Label`** is present — the group label does not name the
+  individual control
+- Set `aria-checked="mixed"` without **`indeterminate`**
+- Use **`aria-disabled`** instead of **`disabled`** — **`Checkbox`** maps unavailability to the
+  native **`disabled`** prop
+- Use **`disabled`** when the spec says users must still focus the control to hear why it is
+  unavailable. Only in that case keep the checkbox enabled and put the explanation in
+  **`FormFieldGroup.Hint`** or on an adjacent focusable control
+- Use **Checkbox** for mutually exclusive choices — use
+  [**Radio**](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-radio--docs) instead
 
 ## Component API
 
