@@ -13,8 +13,12 @@ description: >-
 **Never introduce or recommend anything carrying `@deprecated`.** Verify in installed `node_modules`
 before choosing an export or prop.
 
+**REQUIRED SUB-SKILL:** `/sana-canvas-version`. Deprecation status is version-specific — run it
+first so you know which generation's rules apply before checking JSDoc.
+
 Which token → `/sana-canvas-tokens`. How to style (`cs`, stencils) → `/sana-canvas-styling`.
-Building a new component → `/sana-canvas-builder`.
+Building a new component → `/sana-canvas-builder`. Choosing between components for a use case →
+`/sana-canvas-design-principles`.
 
 ## Package tiers
 

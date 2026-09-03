@@ -1,7 +1,10 @@
 # Canvas Token Reference
 
-> **Verify in `node_modules` first.** Tables are hints. JSDoc `@deprecated` on the installed
-> `@workday/canvas-tokens-web` package always wins.
+> **Current generation only (`@workday/canvas-tokens-web` 4.4+).** Every table below assumes the
+> version reported by `/sana-canvas-version` is "current." If that skill reports an older install,
+> these inventories and mapping tables are not authoritative — use MCP `get-canvas-kit-tokens` and
+> the matching upgrade guide instead. Even on current generation, JSDoc `@deprecated` on the
+> installed package always wins over these tables.
 
 ## Installed package check
 

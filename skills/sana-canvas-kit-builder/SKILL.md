@@ -16,7 +16,9 @@ the factory pattern — not contributing a component into the canvas-kit repo it
 
 Styling → `/sana-canvas-styling`. Tokens → `/sana-canvas-tokens`. Accessibility →
 `/sana-canvas-a11y`. Deprecated exports when composing existing components →
-`/sana-canvas-component-selection`.
+`/sana-canvas-component-selection`. Version detection (which factory APIs are available) →
+`/sana-canvas-version`. Deciding whether a Canvas component already covers the use case before
+building your own → `/sana-canvas-design-principles`.
 
 ## When to apply
 
@@ -251,6 +253,7 @@ How to style?                            → /sana-canvas-styling
 Which token?                             → /sana-canvas-tokens
 Composing existing Canvas components?    → /sana-canvas-component-selection
 Accessibility (labels, keyboard, ARIA)? → /sana-canvas-a11y
+Does a Canvas component already do this?→ /sana-canvas-design-principles (check before building)
 ```
 
 ## Additional resources

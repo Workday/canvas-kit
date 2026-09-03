@@ -12,6 +12,9 @@ description: >-
 **Always run the codemod(s) before touching code by hand.** Codemods traverse the AST and apply
 prescribed transforms — manual edits first waste time and miss patterns.
 
+**REQUIRED SUB-SKILL:** `/sana-canvas-version`. Run it first to confirm the installed version and
+which upgrade guide(s) apply — don't re-derive version detection or upgrade-guide lookup here.
+
 How to apply styles after migration → `/sana-canvas-styling`. Leftover deprecated exports/props →
 `/sana-canvas-component-selection`. Leftover token paths → `/sana-canvas-tokens`.
 
@@ -52,6 +55,8 @@ MCP `get-canvas-kit-upgrade-guides` or read `modules/docs/mdx/<version>-UPGRADE-
 ```
 
 ### Check installed versions
+
+See `/sana-canvas-version` for the full detection workflow and version matrix. Quick check:
 
 ```bash
 node -p "require('@workday/canvas-kit-react/package.json').version"

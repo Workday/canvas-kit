@@ -12,6 +12,11 @@ description: >-
 **How** to apply styles. For **which token** to use (color, spacing, size, shape, type), see
 `/sana-canvas-tokens` — this skill deliberately does not duplicate the token tables.
 
+**REQUIRED SUB-SKILL:** `/sana-canvas-version`. Run it first — `createStyles`/`createStencil` and
+the `cs` prop assume current-generation Canvas Kit (16.x). On an older install, style props or
+early `createStyles` patterns may still be load-bearing; see `/sana-canvas-migration` before
+applying this skill's rules wholesale.
+
 ## When to apply
 
 - Creating or editing any component that uses Canvas Kit
@@ -384,6 +389,13 @@ px2rem(48); // off-scale sizes
 calc.add(system.padding.xxs, '0.125rem'); // math with tokens
 calc.negate(system.gap.md); // negative margins
 ```
+
+## Troubleshooting: styles not applying
+
+If `createStyles`/`createStencil` output renders with missing colors, `undefined` values, or no
+visible effect, the usual cause is missing CSS variable imports at the app root, not a styling API
+mistake. Full checklist (four `_variables.css` imports, Sana theme order, template-literal `var()`
+wrapping) lives in `/sana-canvas-tokens` — check that before re-writing the style definition.
 
 ## External documentation
 

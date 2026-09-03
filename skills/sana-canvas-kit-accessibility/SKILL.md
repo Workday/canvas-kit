@@ -177,6 +177,9 @@ Use `FormField` compound API for labels, hints, and errors:
 - Don't rely on color alone for error/caution — use text and icons
 - Checked-state contrast: custom `brand.success` themes must maintain 3:1 against white checkmarks
   (v16 Checkbox/Radio/Switch)
+- **Which color pair to use** for error/warning/success text and surfaces → `/sana-canvas-tokens`
+  (accessible color pairings section). This skill covers *that* color can't be the only signal;
+  `/sana-canvas-tokens` covers *which* token pair guarantees contrast.
 
 MCP: `get-accessibility-guidelines` with `{"scenario": "forms"}` or `{"component": "form-field"}`.
 
@@ -283,6 +286,8 @@ Custom expand/collapse?          → Expandable / Disclosure patterns (/sana-can
 Extending focus styles?          → `:focus-visible` (+ `&.focus` for static states)
 Which component a11y rules?      → MCP get-accessibility-guidelines + docs://examples/{slug}/accessibility
 Deprecated a11y props?           → /sana-canvas-component-selection
+Which color pairing is accessible? → /sana-canvas-tokens (color-contrast section)
+Choosing between two components? → /sana-canvas-design-principles
 ```
 
 ## Additional resources
