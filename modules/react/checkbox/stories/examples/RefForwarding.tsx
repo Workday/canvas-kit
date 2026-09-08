@@ -27,14 +27,8 @@ export const RefForwarding = () => {
 
   return (
     <Flex cs={containerStyles}>
-      <Checkbox
-        checked={checked}
-        label="I agree to the terms"
-        onChange={handleChange}
-        ref={ref}
-        required
-      />
-      <PrimaryButton onClick={handleClick}>Submit</PrimaryButton>
+      <Checkbox checked={checked} label="I agree to the terms" onChange={handleChange} ref={ref} />
+      <PrimaryButton onClick={handleClick}>Focus Checkbox</PrimaryButton>
     </Flex>
   );
 };
