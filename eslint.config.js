@@ -57,6 +57,10 @@ export default [
     },
     rules: {
       'prettier/prettier': 'warn',
+      'workday-custom-rules/enforce-canvas-breakpoints': 'error',
+      'workday-custom-rules/enforce-cssvar-system-tokens': 'error',
+      'workday-custom-rules/enforce-design-tokens': 'error',
+      'workday-custom-rules/no-inline-styles': 'error',
       'workday-custom-rules/restricted-imports': 'error',
       'workday-custom-rules/use-ck-slash-imports': 'error',
       '@typescript-eslint/naming-convention': [
