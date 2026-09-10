@@ -20,7 +20,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    include: ['**/spec/*.spec.ts?(x)'],
+    include: ['**/spec/*.spec.ts?(x)', '**/utils/custom-lint-rules/*.spec.*'],
     setupFiles: './vitest.setup.ts',
     server: {
       deps: {
