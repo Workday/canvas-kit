@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.16](https://github.com/Workday/canvas-kit/releases/tag/v16.0.16) (2026-09-14)
+
+### Documentation
+
+- docs(checkbox): Added accessibility guidance and fixed checkbox examples ([#4164](https://github.com/Workday/canvas-kit/pull/4164)) ([@moaan-workday](https://github.com/moaan-workday), [@cursoragent](https://github.com/cursoragent), William Stanton)
+
+
 ## [v16.0.15](https://github.com/Workday/canvas-kit/releases/tag/v16.0.15) (2026-09-02)
 
 ### Components
