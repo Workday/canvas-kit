@@ -21,6 +21,7 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     include: ['**/spec/*.spec.ts?(x)'],
+    exclude: ['modules/mcp/spec/**', '**/node_modules/@workday/canvas-kit-mcp/spec/**'],
     setupFiles: './vitest.setup.ts',
     server: {
       deps: {
