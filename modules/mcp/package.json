@@ -30,11 +30,13 @@
   ],
   "scripts": {
     "build:discover": "tsx ./build/discover-stories.ts",
+    "build:indexes": "tsx ./build/generate-indexes.ts",
     "build:apps": "tsx ./build/build-story-apps.ts",
     "build:copy": "tsx ./build/index.ts",
     "build:types": "tsc --project tsconfig.build.json -d true --declarationDir dist/types --emitDeclarationOnly --pretty",
     "build:mcp": "esbuild lib/index.ts --bundle --platform=node --packages=external --outfile=dist/index.js --format=esm --sourcemap && esbuild lib/cli.ts --bundle --platform=node --packages=external --outfile=dist/cli.js --format=esm --sourcemap",
-    "build": "npm-run-all build:discover build:apps build:copy build:types build:mcp",
+    "build": "npm-run-all build:discover build:indexes build:apps build:copy build:types build:mcp",
+    "test:catalog": "node --import tsx --test spec/*.spec.ts",
     "clean": "rimraf dist && rimraf .build-info && mkdirp dist"
   },
   "keywords": [
