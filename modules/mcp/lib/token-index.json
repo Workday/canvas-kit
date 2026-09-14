@@ -7,13 +7,13 @@
     "sources": [
       {
         "package": "@workday/canvas-tokens-web",
-        "version": "4.4.0-beta.6",
+        "version": "4.4.0",
         "channel": "production",
         "path": "css/{base,brand,system,component}/_variables.css"
       },
       {
         "package": "@workday/canvas-tokens-web",
-        "version": "4.4.0-beta.6",
+        "version": "4.4.0",
         "channel": "vision",
         "path": "css/sana/_variables.css"
       }

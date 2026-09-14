@@ -13,7 +13,7 @@
       },
       {
         "package": "@workday/canvas-system-icons-web",
-        "version": "5.0.0",
+        "version": "5.0.3",
         "channel": "vision",
         "path": "dist/metadata/system.metadata.json"
       },

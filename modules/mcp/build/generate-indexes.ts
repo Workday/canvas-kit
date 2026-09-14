@@ -59,9 +59,9 @@ const COMPONENT_SKIP_DIRS = new Set([
   'fonts',
 ]);
 
-const TOKEN_PACKAGE_VERSION = '4.4.0-beta.6';
+const TOKEN_PACKAGE_VERSION = '4.4.0';
 const PRODUCTION_ICON_PACKAGE_VERSION = '4.0.4';
-const VISION_ICON_PACKAGE_VERSION = '5.0.0';
+const VISION_ICON_PACKAGE_VERSION = '5.0.3';
 
 const TOKEN_CSS_FILES = [
   {path: 'css/base/_variables.css', channel: 'production' as const, theme: 'canvas' as const},
