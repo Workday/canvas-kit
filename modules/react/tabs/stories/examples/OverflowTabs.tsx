@@ -3,6 +3,7 @@ import React from 'react';
 import {Box} from '@workday/canvas-kit-react/layout';
 import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
 import {Tabs, useTabsModel} from '@workday/canvas-kit-react/tabs';
+import {Heading} from '@workday/canvas-kit-react/text';
 import {px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -43,13 +44,17 @@ export const OverflowTabs = () => {
           </Tabs.Menu.Popper>
           <Tabs.Panels>
             {(item: MyTabItem) => (
-              <Tabs.Panel cs={{marginBlockStart: system.gap.lg}}>{item.contents}</Tabs.Panel>
+              <Tabs.Panel tabIndex={-1} cs={{marginBlockStart: system.gap.lg}}>
+                {item.contents}
+              </Tabs.Panel>
             )}
           </Tabs.Panels>
         </Tabs>
       </Box>
       <hr />
-      <h4>Change Tabs container size</h4>
+      <Heading size="small" as="h4">
+        Change Tabs container size
+      </Heading>
       <SegmentedControl onSelect={data => setContainerWidth(data.id)}>
         <SegmentedControl.List aria-label="container width control">
           <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
