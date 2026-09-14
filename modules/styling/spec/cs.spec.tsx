@@ -1245,7 +1245,6 @@ describe('cs', () => {
       it('should apply true modifier styles', () => {
         const baseStencil = createStencil({
           base: {},
-          modifiers: {}, // TODO: Remove this requirement
         });
 
         const extendedStencil = createStencil({
@@ -1266,7 +1265,6 @@ describe('cs', () => {
       it('should apply false modifier styles', () => {
         const baseStencil = createStencil({
           base: {},
-          modifiers: {}, // TODO: Remove this requirement
         });
 
         const extendedStencil = createStencil({
