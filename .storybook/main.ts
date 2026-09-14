@@ -24,7 +24,13 @@ const docsMap = new Map<string, ExportedSymbol<Value>[]>();
 const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   staticDirs: ['../public'],
-  stories: ['../modules/**/mdx/**/*.mdx', '../modules/**/*.stories.@(js|jsx|ts|tsx)'],
+  stories: [
+    // Source MDX only — `docs/mdx` plus `**/stories/mdx`. Skips generated
+    // output under modules/docs/dist/mdx (no <Meta> tags).
+    '../modules/docs/mdx/**/*.mdx',
+    '../modules/**/stories/mdx/**/*.mdx',
+    '../modules/**/*.stories.@(js|jsx|ts|tsx)',
+  ],
   addons: [
     {
       name: '@storybook/addon-essentials',

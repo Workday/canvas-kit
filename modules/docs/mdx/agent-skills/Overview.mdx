@@ -1,0 +1,61 @@
+import {Meta} from '@storybook/blocks';
+
+<Meta title="Agent Skills/Overview" />
+
+# Agent Skills
+
+Canvas Kit ships a **consumer-facing** skill set for AI coding agents (Cursor, Claude, Copilot, and
+similar tools). Each skill is a `SKILL.md` file under [`skills/`](../../../../skills/README.md) in
+this repository. Agents load them to write, style, migrate, and review UI that follows Canvas Kit
+correctly.
+
+These skills target the **current generation**: Canvas Kit **v16** +
+`@workday/canvas-tokens-web` **4.4** (Sana Canvas theme). They do **not** cover maintainer-only
+concerns (`system.legacy.*` in `modules/**/lib/**`, Chromatic class twins, publishing) — see
+[`AGENTS.md`](../../../../AGENTS.md) and [`STYLE.md`](../../../../STYLE.md) for that workflow.
+
+## Installing skills
+
+Copy or symlink the [`skills/`](../../../../skills/) directory into your editor's skills location
+(for example `.cursor/skills/` or `.claude/skills/`), or point your agent configuration at the
+folder in a checkout of this repo.
+
+Start every version-sensitive task with the **Version Detection** skill so tables from other skills
+match what's installed in `node_modules`.
+
+## Skill catalog
+
+| Skill | Use when | Source on GitHub |
+| ----- | -------- | ---------------- |
+| [Version Detection](../../../../skills/sana-canvas-kit-version/SKILL.md) | Detect installed Canvas Kit / tokens-web versions; lookup upgrade guides | [references.md](../../../../skills/sana-canvas-kit-version/references.md) |
+| [Tokens](../../../../skills/sana-canvas-kit-tokens/SKILL.md) | Pick tokens by role; accessible color pairings; CSS-variable troubleshooting | [references.md](../../../../skills/sana-canvas-kit-tokens/references.md) |
+| [Styling](../../../../skills/sana-canvas-kit-styling/SKILL.md) | `createStyles`, `createStencil`, `cs`, layout without `Box`/`Flex` | — |
+| [Design Principles](../../../../skills/sana-canvas-kit-design-principles/SKILL.md) | Which component fits a use case; dos/don'ts snapshot | [references/components.md](../../../../skills/sana-canvas-kit-design-principles/references/components.md) |
+| [Accessibility](../../../../skills/sana-canvas-kit-accessibility/SKILL.md) | Labels, keyboard, focus, popups, forms, live regions | [references.md](../../../../skills/sana-canvas-kit-accessibility/references.md) |
+| [Component Selection](../../../../skills/sana-canvas-kit-component-selection/SKILL.md) | Avoid `@deprecated` exports; Main vs Preview vs Labs | [references.md](../../../../skills/sana-canvas-kit-component-selection/references.md) |
+| [Icons](../../../../skills/sana-canvas-kit-icons/SKILL.md) | System/expressive icons; `icon-migration` codemod | — |
+| [Migration](../../../../skills/sana-canvas-kit-migration/SKILL.md) | Run `@workday/canvas-kit-codemod` across majors | [references.md](../../../../skills/sana-canvas-kit-migration/references.md) |
+| [Builder](../../../../skills/sana-canvas-kit-builder/SKILL.md) | Custom components with Canvas Kit factories | — |
+| [Review](../../../../skills/sana-canvas-kit-review/SKILL.md) | Report-only design-system compliance check on a diff | — |
+
+Full index and dependency notes: [`skills/README.md`](../../../../skills/README.md).
+
+## How skills depend on each other
+
+Run **Version Detection** first whenever another skill's guidance might be release-specific.
+
+```
+version → tokens, styling, component-selection, icons, migration, review
+tokens → styling, design-principles, accessibility, builder, review
+component-selection → accessibility, icons, review
+accessibility → design-principles, builder, review
+styling → builder, review
+design-principles → builder, review
+migration → review
+```
+
+## Related tooling
+
+- **Canvas Kit MCP** — runtime docs, upgrade guides, and accessibility scenarios for agents.
+  See [MCP Docs](../../../mcp/stories/mdx/MCPDocs.mdx) (under **AI For LLMs** in the sidebar).
+- **Maintainer agent guide** — [`AGENTS.md`](../../../../AGENTS.md) for contributing to this repo.

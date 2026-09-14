@@ -326,11 +326,27 @@ testing complete.
 - Call out the areas you want reviewer focus on ("Where Should the Reviewer Start?", "Areas for
   Feedback?" in the template) instead of leaving them blank.
 
-## Skills
+## Agent skills (consumer apps)
 
-This repo does not yet have a `.claude/skills` (or equivalent) folder with task-specific skills.
-That's planned but not built — don't assume skills exist or fabricate references to one. When
-skills are added, this section will point to them.
+This file is the **maintainer** guide for working on Canvas Kit itself. The [`skills/`](./skills/)
+directory is a separate, **consumer-facing** skill pack for apps that *use* `@workday/canvas-kit-react`
+— tokens, styling, accessibility, component selection, migration, and similar tasks in downstream
+codebases.
+
+**Do not confuse the two.** Consumer skills teach `system.*` tokens and avoiding deprecated exports
+in app code. Maintainer work in `modules/**/lib/**` follows [STYLE.md](./STYLE.md) (`system.legacy.*`,
+Chromatic class twins, publishing). A maintainer-focused skill pack may come later; it does not
+exist yet.
+
+| Resource | Audience | Use when |
+| -------- | -------- | -------- |
+| [`skills/README.md`](./skills/README.md) | Consumers + maintainers editing skills | Skill index, dependencies, scope |
+| [Storybook → Agent Skills](modules/docs/mdx/agent-skills/Overview.mdx) | Humans browsing docs | Overview with links to each `SKILL.md` on GitHub |
+| [Storybook → AI For LLMs → MCP Docs](modules/mcp/stories/mdx/MCPDocs.mdx) | Consumers using MCP | Runtime upgrade guides, tokens, accessibility, component examples |
+
+When you add or change a consumer skill, update [`skills/`](./skills/) and the catalog table in
+[`modules/docs/mdx/agent-skills/Overview.mdx`](modules/docs/mdx/agent-skills/Overview.mdx) so
+Storybook stays in sync. Do not duplicate the full skill catalog here — link out instead.
 
 ## Quick reference
 
