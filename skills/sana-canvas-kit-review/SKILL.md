@@ -11,8 +11,9 @@ description: >-
 # Canvas Kit Consumer Review
 
 Report-only design-system review for **consumer apps** that depend on `@workday/canvas-kit-react`.
-This is not the Canvas Kit repo's own maintainer PR checklist (`canvas-kit-review-pr`) — this skill
-reviews app code that *uses* Canvas Kit, not the library's own source.
+This is not a checklist for reviewing the Canvas Kit repo's own source (that's a maintainer-only
+process, not part of this consumer skill pack) — this skill reviews app code that *uses* Canvas
+Kit, not the library's own source.
 
 **Do not fix anything unless the user explicitly asks.** Report findings with file:line references
 and which sub-skill covers the fix.
@@ -170,7 +171,7 @@ Version context: Canvas Kit <X> (current/older), tokens-web <Y>
 
 ```
 Reviewing a diff/branch/PR for Canvas Kit compliance?  → this skill
-Reviewing the canvas-kit repo's own source for a PR?    → canvas-kit-review-pr (maintainer skill, different repo)
+Reviewing the canvas-kit repo's own source for a PR?    → out of scope (maintainer-only process, not part of this skill pack)
 Found a styling issue?                                   → /sana-canvas-kit-styling
 Found a token issue?                                     → /sana-canvas-kit-tokens
 Found an a11y issue?                                     → /sana-canvas-kit-accessibility

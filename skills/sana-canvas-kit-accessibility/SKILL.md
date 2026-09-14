@@ -118,7 +118,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const customButtonStyles = createStyles({
   '&:focus-visible, &.focus': {
-    outline: `2px solid ${system.legacy.color.brand.focus.primary}`,
+    outline: `2px solid ${system.color.brand.focus.primary}`,
     outlineOffset: '2px',
   },
 });
