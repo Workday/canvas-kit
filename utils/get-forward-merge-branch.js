@@ -24,6 +24,3 @@ function getForwardMergeBranch(/** @type string */ branch) {
 }
 
 export default getForwardMergeBranch;
-
-// This console log for forward-merge.yml workflow and for workflows that need access to the next branch
-console.log(getForwardMergeBranch(branch));
