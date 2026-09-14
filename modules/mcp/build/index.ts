@@ -62,6 +62,24 @@ accessibilityFiles.forEach(file => {
   copyFile(accessibilitySourceDir, file.source);
 });
 
+if ('skillFiles' in index && Array.isArray(index.skillFiles)) {
+  index.skillFiles.forEach((file: string) => copyFile(path.resolve(__dirname, '../lib'), file));
+}
+
+const catalogFiles = ['component-index.json', 'token-index.json', 'icon-index.json'];
+const catalogSourceDir = path.resolve(__dirname, '../lib');
+
+catalogFiles.forEach(fileName => {
+  const sourcePath = path.resolve(catalogSourceDir, fileName);
+  if (!fs.existsSync(sourcePath)) {
+    throw new Error(`Missing required catalog file: ${sourcePath}`);
+  }
+
+  const destPath = path.resolve(targetDir, fileName);
+  fs.copyFileSync(sourcePath, destPath);
+  console.log(`  - ${fileName}`);
+});
+
 // story-viewer.html is now built by build-story-apps.ts through Vite (not copied raw).
 
 console.log('\nCopy completed successfully!');
