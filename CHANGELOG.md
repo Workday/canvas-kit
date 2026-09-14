@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.0.17](https://github.com/Workday/canvas-kit/releases/tag/v16.0.17) (2026-09-14)
+
+### Documentation
+
+- chore: Add Agents Skills ([#4136](https://github.com/Workday/canvas-kit/pull/4136)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+  Adds/updates Cursor & Claude agent skills under `skills/` for Canvas Kit consumers (tokens, styling, accessibility, component selection, design principles, migration, version detection, and a review checklist). No runtime code changes; these are editor/agent-only assets.
+
+
 ## [v16.0.16](https://github.com/Workday/canvas-kit/releases/tag/v16.0.16) (2026-09-14)
 
 ### Documentation
