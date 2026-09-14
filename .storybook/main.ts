@@ -25,14 +25,10 @@ const config: StorybookConfig = {
   framework: '@storybook/react-vite',
   staticDirs: ['../public'],
   stories: [
-    // Source MDX only — exclude generated output under modules/docs/dist/mdx (no <Meta> tags).
+    // Source MDX only — `docs/mdx` plus `**/stories/mdx`. Skips generated
+    // output under modules/docs/dist/mdx (no <Meta> tags).
     '../modules/docs/mdx/**/*.mdx',
-    '../modules/styling/stories/mdx/**/*.mdx',
-    '../modules/react/common/stories/mdx/**/*.mdx',
-    '../modules/react/collection/stories/mdx/**/*.mdx',
-    '../modules/react/_examples/stories/mdx/**/*.mdx',
-    '../modules/preview-react/_examples/stories/mdx/**/*.mdx',
-    '../modules/mcp/stories/mdx/**/*.mdx',
+    '../modules/**/stories/mdx/**/*.mdx',
     '../modules/**/*.stories.@(js|jsx|ts|tsx)',
   ],
   addons: [
