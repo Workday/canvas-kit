@@ -18,7 +18,22 @@ const __dirname = path.dirname(__filename);
 
 const REPO_ROOT = path.resolve(__dirname, '../../..');
 const MCP_ROOT = path.resolve(__dirname, '..');
-const OUTPUT_DIR = path.resolve(MCP_ROOT, 'lib');
+
+/**
+ * Committed catalogs live in lib/. The publishable MCP package reads from dist/lib/,
+ * so the full `build` pipeline writes there without touching tracked lib/ files.
+ * Run `yarn build:indexes` (no env) when updating catalogs for git.
+ */
+function resolveOutputDir(): string {
+  const configured = process.env.MCP_CATALOG_OUTPUT_DIR;
+  if (!configured) {
+    return path.resolve(MCP_ROOT, 'lib');
+  }
+
+  return path.isAbsolute(configured) ? configured : path.resolve(MCP_ROOT, configured);
+}
+
+const OUTPUT_DIR = resolveOutputDir();
 const RELEASE_CHANNEL = process.env.CANVAS_KIT_RELEASE_CHANNEL ?? 'prerelease/major';
 const STORYBOOK_URL =
   process.env.CANVAS_KIT_STORYBOOK_URL ??
@@ -646,6 +661,9 @@ function writeCatalog(fileName: string, catalog: unknown): void {
 }
 
 function main(): void {
+  fs.mkdirSync(OUTPUT_DIR, {recursive: true});
+  console.log(`Writing MCP catalogs to ${path.relative(REPO_ROOT, OUTPUT_DIR) || '.'}`);
+
   const canvasKitVersion = readPackageVersion(path.join(MCP_ROOT, 'package.json'));
   const tokenPackageRoot = resolveExternalRoot(
     'CANVAS_TOKENS_PACKAGE_ROOT',

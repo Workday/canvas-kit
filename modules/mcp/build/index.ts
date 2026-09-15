@@ -70,12 +70,19 @@ const catalogFiles = ['component-index.json', 'token-index.json', 'icon-index.js
 const catalogSourceDir = path.resolve(__dirname, '../lib');
 
 catalogFiles.forEach(fileName => {
+  const destPath = path.resolve(targetDir, fileName);
+
+  // build:indexes:dist writes fresh catalogs here; fall back to committed lib/ copies.
+  if (fs.existsSync(destPath)) {
+    console.log(`  - ${fileName} (from build:indexes:dist)`);
+    return;
+  }
+
   const sourcePath = path.resolve(catalogSourceDir, fileName);
   if (!fs.existsSync(sourcePath)) {
     throw new Error(`Missing required catalog file: ${sourcePath}`);
   }
 
-  const destPath = path.resolve(targetDir, fileName);
   fs.copyFileSync(sourcePath, destPath);
   console.log(`  - ${fileName}`);
 });
