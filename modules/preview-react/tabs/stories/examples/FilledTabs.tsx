@@ -2,9 +2,9 @@ import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
 import {cssVar} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-export const OutlinedTabs = () => {
+export const FilledTabs = () => {
   return (
-    <Tabs variant="outlined">
+    <Tabs variant="filled">
       <Tabs.List>
         <Tabs.Item>First Tab</Tabs.Item>
         <Tabs.Item>Second Tab</Tabs.Item>
