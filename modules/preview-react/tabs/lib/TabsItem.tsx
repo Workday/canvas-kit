@@ -82,7 +82,7 @@ export interface TabsItemProps
   tabIndex?: number;
   /**
    * The variant of the TabsItem.
-   * @default 'filled'
+   * @default 'outlined'
    */
   variant?: 'filled' | 'outlined';
 }
