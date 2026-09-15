@@ -7,7 +7,7 @@ import {AlternativeTabStop as AlternativeTabStopExample} from './examples/Altern
 import {Basic as BasicExample} from './examples/Basic';
 import {DisabledTab as DisabledTabExample} from './examples/DisabledTab';
 import {DynamicTabs as DynamicTabsExample} from './examples/DynamicTabs';
-import {OutlinedTabs as OutlinedTabsExample} from './examples/FilledTabs';
+import {FilledTabs as OutlinedTabsExample} from './examples/FilledTabs';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 import {Icons as IconsExample} from './examples/Icons';
 import {NamedTabs as NamedTabsExample} from './examples/NamedTabs';
