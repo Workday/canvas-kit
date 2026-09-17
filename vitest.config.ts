@@ -20,7 +20,11 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    include: ['**/spec/*.spec.ts?(x)', '**/utils/custom-lint-rules/*.spec.*'],
+    include: [
+      '**/spec/*.spec.ts?(x)',
+      '**/utils/custom-lint-rules/*.spec.*',
+      'modules/eslint-plugin-canvas-kit/spec/*.spec.js',
+    ],
     setupFiles: './vitest.setup.ts',
     server: {
       deps: {

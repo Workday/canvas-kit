@@ -2,7 +2,7 @@
 import {RuleTester} from 'eslint';
 import {describe, it} from 'vitest';
 
-import rule from './no-inline-styles.js';
+import rule from '../rules/no-inline-styles.js';
 
 RuleTester.describe = describe;
 RuleTester.it = it;

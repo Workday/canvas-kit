@@ -1,10 +1,8 @@
 // @ts-check
 
 /**
- * Single source of truth for Canvas Kit v4 token <-> v3 token mappings and the
- * CSS property -> token category groupings used by enforce-canvas-kit-v4-tokens
- * and enforce-design-tokens. Keep this file in sync with the design tokens
- * documentation at .cursor/rules/201-canvas-tokens.mdc.
+ * CSS property -> token category groupings used by enforce-design-tokens.
+ * Keep this file in sync with the Canvas Kit token migration documentation.
  */
 
 /** @type {Record<string, string>} */
@@ -150,8 +148,6 @@ export const STYLED_CALLEES = new Set(['createStencil', 'createStyles', 'createV
  * because v3 had no equivalent at those raw values; we still allow them as
  * documented v4 surface. `padding` and `shape` mirror the migration table
  * exactly — do NOT add `padding.lg` or `shape.lg|xl|xxl|xxxl` here.
- *
- * Keep in sync with .cursor/rules/201-canvas-tokens.mdc.
  * @type {Record<'size' | 'gap' | 'padding' | 'shape', string>}
  */
 export const CANONICAL_TOKENS_BY_CATEGORY = {

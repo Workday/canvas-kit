@@ -2,7 +2,7 @@
 import {RuleTester} from 'eslint';
 import {describe, it} from 'vitest';
 
-import rule from './enforce-cssvar-system-tokens.js';
+import rule from '../rules/enforce-cssvar-system-tokens.js';
 
 RuleTester.describe = describe;
 RuleTester.it = it;

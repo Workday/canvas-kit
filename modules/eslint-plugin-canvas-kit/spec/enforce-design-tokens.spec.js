@@ -2,7 +2,7 @@
 import {RuleTester} from 'eslint';
 import {describe, it} from 'vitest';
 
-import rule from './enforce-design-tokens.js';
+import rule from '../rules/enforce-design-tokens.js';
 
 // Bind Vitest functions to RuleTester so it knows how to generate test blocks
 RuleTester.describe = describe;

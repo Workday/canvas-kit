@@ -7,6 +7,8 @@ import prettierPlugin from 'eslint-plugin-prettier';
 import reactPlugin from 'eslint-plugin-react';
 import reactHooksPlugin from 'eslint-plugin-react-hooks';
 
+import canvasKit from '@workday/eslint-plugin-canvas-kit';
+
 import workdayCustomRules from './utils/custom-lint-rules/index.js';
 
 export default [
@@ -53,14 +55,15 @@ export default [
       prettier: prettierPlugin,
       '@emotion': emotionPlugin,
       compat: compatPlugin,
+      'canvas-kit': canvasKit,
       'workday-custom-rules': workdayCustomRules,
     },
     rules: {
       'prettier/prettier': 'warn',
-      'workday-custom-rules/enforce-canvas-breakpoints': 'error',
-      'workday-custom-rules/enforce-cssvar-system-tokens': 'error',
-      'workday-custom-rules/enforce-design-tokens': 'error',
-      'workday-custom-rules/no-inline-styles': 'error',
+      'canvas-kit/enforce-canvas-breakpoints': 'error',
+      'canvas-kit/enforce-cssvar-system-tokens': 'error',
+      'canvas-kit/enforce-design-tokens': 'error',
+      'canvas-kit/no-inline-styles': 'error',
       'workday-custom-rules/restricted-imports': 'error',
       'workday-custom-rules/use-ck-slash-imports': 'error',
       '@typescript-eslint/naming-convention': [

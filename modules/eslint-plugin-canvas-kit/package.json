@@ -1,0 +1,44 @@
+{
+  "name": "@workday/eslint-plugin-canvas-kit",
+  "version": "16.0.15",
+  "description": "ESLint rules for Canvas Kit styling conventions",
+  "author": "Workday, Inc. (https://www.workday.com)",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "index.js",
+  "exports": {
+    ".": "./index.js"
+  },
+  "files": [
+    "index.js",
+    "rules",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Workday/canvas-kit.git",
+    "directory": "modules/eslint-plugin-canvas-kit"
+  },
+  "bugs": {
+    "url": "https://github.com/Workday/canvas-kit/issues"
+  },
+  "homepage": "https://github.com/Workday/canvas-kit#readme",
+  "keywords": [
+    "canvas",
+    "canvas-kit",
+    "eslint",
+    "eslintplugin",
+    "workday"
+  ],
+  "scripts": {
+    "test": "vitest run --config vitest.config.js"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/parser": "^8.51.0",
+    "eslint": "^9.39.2",
+    "vitest": "^4.0.1"
+  }
+}
