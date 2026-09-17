@@ -1,13 +1,14 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
-import {StartIcon} from './examples/StartIcon';
-import {EndIcon} from './examples/EndIcon';
 import {Avatar} from './examples/Avatar';
 import {Depth} from './examples/Depth';
-import {RTL} from './examples/RTL';
-import {LongTitle} from './examples/LongTitle';
+import {EndIcon} from './examples/EndIcon';
 import {HoistedModel} from './examples/HoistedModel';
+import {LongTitle} from './examples/LongTitle';
+import {RTL} from './examples/RTL';
+import {StartIcon} from './examples/StartIcon';
 
 import ExpandableStoriesMeta from './Expandable.stories';
 
@@ -27,8 +28,8 @@ yarn add @workday/canvas-kit-react
 
 ### Start Icon
 
-For a basic expandable container with a chevron icon before the title, place`Expandable.Icon` before
-`Expandable.Title` as children of `Expandable.Target` and pass the `iconPosition` prop to
+For a basic expandable container with a chevron icon before the title, place `Expandable.Icon`
+before `Expandable.Title` as children of `Expandable.Target` and pass the `iconPosition` prop to
 `Expandable.Icon` with a value of `start`. `Expandable.Icon` will use a right chevron icon when
 collapsed and a down chevron icon when expanded.
 
@@ -50,10 +51,9 @@ To include an avatar image, `Expandable.Avatar` should be placed between `Expand
 to `Expandable.Icon` depending on whether the `Expandable.Icon` is placed before or after
 `Expandable.Title`.
 
-**Note:** If using an avatar image, do not also include an Icon component in addition to the Expandable.Icon.
-This component is meant to have either an avatar image or an icon in addition to the Expandable.Icon, or neither
-an avatar image nor an extra icon.
-
+**Note:** If using an avatar image, do not also include an Icon component in addition to the
+Expandable.Icon. This component is meant to have either an avatar image or an icon in addition to
+the Expandable.Icon, or neither an avatar image nor an extra icon.
 
 <ExampleCodeBlock code={Avatar} />
 
@@ -82,8 +82,6 @@ Long titles will wrap to the next line and increase the height of the container.
 
 <ExampleCodeBlock code={LongTitle} />
 
-You can also have direct access to the model if
-
 ### Hoisted Model
 
 If you need direct access to the model, you can hoist it with the `useExpandableModel` hook. In the
@@ -99,39 +97,178 @@ example below, we're hoisting the models to expand and collapse all three contai
 
 ## Accessibility
 
-Our Expandable component renders a semantic HTML `<button>` element to the DOM, with an optional
-parent heading element as defined by the `headingLevel` prop. The `aria-expanded` property is
-included on the button to indicate the state of the content to screen readers.
+Ensure users of assistive technology can find the control, understand whether related content is
+shown or hidden, and reveal or hide that content from the keyboard. **`Expandable`** is an inline
+[disclosure (show/hide)](https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/) widget: a button
+toggles content that stays in the document flow.
 
-[Accordion Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/)
+Use **`Expandable`** for show/hide sections in the page. Compose multiple instances to build an
+[accordion](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/) — see
+[Hoisted Model](#hoisted-model). For a navigation accordion, see
+[Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
 
-- Use the `headingLevel` prop to assign an appropriate heading level based on the context of the
-  page content.
-- When using Expandable Container for navigation elements, then we don't recommend using the
-  `headingLevel` prop. This will render only expandable buttons to the DOM, reserving headings for
-  organizing content in the main body of the page.
-- The `as` prop may also be used on `<Expandable.Content>` to render an HTML `<ul>` element for
-  displaying a list of items. For example, check out
-  [Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
+### Minimum Accessible Structure
 
-### Navigation
+The following matches the [Start Icon](#start-icon) example: **`Expandable.Icon`** before
+**`Expandable.Title`** inside **`Expandable.Target`**, then **`Expandable.Content`**. The Start Icon
+example uses **`headingLevel="h4"`**; choose a heading level that matches the page outline (see
+**Accessibility Requirements**).
 
-- **Tab key**: Moves focus to the next expandable button or focusable element
-- **Shift + Tab**: Moves focus to the previous focusable element
-- **Enter or Space**: Toggles the expanded/collapsed state
+```tsx
+import {Expandable} from '@workday/canvas-kit-react/expandable';
 
-### Screen Reader Experience
+<Expandable>
+  <Expandable.Target headingLevel="h4">
+    <Expandable.Icon iconPosition="start" />
+    <Expandable.Title>Title</Expandable.Title>
+  </Expandable.Target>
+  <Expandable.Content>Content</Expandable.Content>
+</Expandable>;
+```
 
-- The expandable button will be announced with its title text followed by the button role
-- The current state will be announced as either "collapsed" or "expanded" (For example: "Usage
-  Guidance, button, collapsed" or "Usage Guidance, button, expanded")
-- **State Changes:** When activating the button to expand content, screen readers will announce the
-  new "expanded" state and vice versa when collapsing content.
-- **Content Regions:** Screen reader users can use landmark navigation to jump between sections and
-  each section will be announced with its associated title (For example: "Usage Guidance, landmark
-  region")
-- **Heading Structure:** Using heading levels with expandable buttons allows screen reader users to
-  navigate by headings, making the document structure and hierarchy easier to understand.
+### Built-in Behaviors
+
+Canvas Kit applies these automatically via `useExpandableModel` (a `DisclosureModel`) and Expandable
+subcomponents. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by hooks/subcomponents_):
+
+- **`Expandable.Target`**: native `<button>` with `aria-expanded` (`true` when
+  `visibility !== 'hidden'`) and `aria-controls` set to the disclosure `id`. `onClick` toggles
+  `events.show()` / `events.hide()`.
+- **`headingLevel`**: when set (`'h1'`–`'h6'`), wraps the button in **`Heading`** rendered as that
+  heading element. When omitted, the button is not wrapped in a heading.
+- **`Expandable.Content`**: `id` set to the same disclosure `id`. Collapsed content stays in the DOM
+  with `display: none` (not unmounted). Default element is a `<div>`.
+- **`Expandable.Title`**: styled `<div>` for the visible name. It does **not** receive an `id` from
+  the model.
+- **`Expandable.Icon`**: decorative chevron that rotates from `visibility`. Expanded/collapsed state
+  for assistive technology comes from `aria-expanded`, not from the icon.
+- **`Expandable.Avatar`**: `isDecorative={true}` by default so the image is hidden from assistive
+  technology when paired with **`Expandable.Title`**.
+- Disclosure `id`: generated with `useUniqueId` unless you pass `id` to **`useExpandableModel`**.
+  Default `initialVisibility` is `'hidden'`.
+
+**Keyboard** (_native button behavior_):
+
+**`Expandable.Target`** uses native `<button>` keyboard behavior (tab order, <kbd>Enter</kbd> /
+<kbd>Space</kbd> to toggle). Collapsed content is not in the tab order (`display: none`). Focus
+stays on the button; Canvas Kit does not move focus into **`Expandable.Content`**.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the title text, the button role, and expanded/collapsed
+  state from `aria-expanded` (for example, "Title, button, collapsed")
+- Activating the button announces the updated expanded/collapsed state. Do not change the title text
+  to encode state
+- While collapsed, content is removed from the accessibility tree (`display: none`)
+- While expanded, content follows the button in reading order
+- When **`headingLevel`** is set, heading navigation includes the heading that wraps the button
+- When **`Expandable.Content as="section"`** is used with `aria-labelledby` pointing at
+  **`Expandable.Title`**, region/landmark navigation can name each open section
+
+### Accessibility Requirements
+
+Required in application code for an accessible Expandable. Hoist **`useExpandableModel`** when you
+need programmatic show/hide (for example, expand all) or a stable disclosure `id`. Rows marked
+_(conditional)_ apply only when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use the Start Icon composition (**`Expandable.Target`**,
+**`Expandable.Icon iconPosition="start"`**, **`Expandable.Title`**, **`Expandable.Content`**). **Ask
+which `headingLevel` matches the page outline** when the expandable titles body content; omit
+**`headingLevel`** for navigation. Omit **`Expandable.Avatar`**, **`as="section"`** /
+`aria-labelledby`, a hoisted model, **`initialVisibility`**, and a custom **`id`**.
+
+**Heading level and focus:** Canvas Kit does not move focus when the disclosure opens or closes.
+**State the default to the developer first.** Ask which heading level belongs in the document
+outline before setting **`headingLevel`**. **Do not generate `headingLevel="h4"` (or any other
+level) by default** — the Start Icon example uses `h4` only as a sample.
+
+| When                        | Default behavior                                                                              | Ask the developer before overriding                                                                                      |
+| --------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| Expandable **opens/closes** | Focus stays on **`Expandable.Target`**. Newly revealed controls are next in tab order.        | _Should focus move into the revealed content?_ (Only when a design spec requires it — Canvas Kit has no focus-ref API.)  |
+| **`headingLevel`**          | Omit for navigation. For page content, wrap the button in a heading that matches the outline. | _Which heading level should wrap this disclosure (`h1`–`h6`), or should headings be omitted because this is navigation?_ |
+
+**Named regions / landmarks** _(conditional)_:
+
+Default **`Expandable.Content`** is a `<div>`, not a landmark. Apply this when several Expandables
+can be open at once and each region's content should be identifiable to assistive technology: assign
+a unique `id` to **`Expandable.Title`** and render **`Expandable.Content as="section"`** with
+`aria-labelledby` pointing at that title `id`. Landmark navigation then names each open section. See
+[Hoisted Model](#hoisted-model). Omit **`as="section"`** when a landmark is not needed.
+
+```tsx
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+import {Expandable} from '@workday/canvas-kit-react/expandable';
+
+const titleId = useUniqueId();
+
+<Expandable>
+  <Expandable.Target headingLevel="h4">
+    <Expandable.Title id={titleId}>Usage Guidance</Expandable.Title>
+    <Expandable.Icon iconPosition="end" />
+  </Expandable.Target>
+  <Expandable.Content as="section" aria-labelledby={titleId}>
+    Content
+  </Expandable.Content>
+</Expandable>;
+```
+
+**Navigation lists** _(conditional)_:
+
+When the disclosed content is a list of links, render **`Expandable.Content as="ul"`** and omit
+**`headingLevel`** so headings stay reserved for the page body. See
+[Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
+
+| Requirement                                     | How to satisfy                                                                                                                                                                                   |
+| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Accessible name                                 | Non-empty **`Expandable.Title`** inside **`Expandable.Target`**.                                                                                                                                 |
+| Keyboard-operable toggle                        | **`Expandable.Target`** (native `<button>`).                                                                                                                                                     |
+| Visual expanded/collapsed indicator             | **`Expandable.Icon`** with `iconPosition` matching layout (`start` or `end`).                                                                                                                    |
+| Heading in the document outline _(conditional)_ | **`headingLevel`** on **`Expandable.Target`** when the control titles body content. Omit **`headingLevel`** for navigation. Ask which level.                                                     |
+| Named regions / landmarks _(conditional)_       | When several disclosures can be open at once and each region needs a name, use **`Expandable.Content as="section"`** plus `aria-labelledby` referencing a unique `id` on **`Expandable.Title`**. |
+| List markup _(conditional)_                     | **`Expandable.Content as="ul"`** (and list items as children) when disclosing a list.                                                                                                            |
+| Decorative avatar _(conditional)_               | **`Expandable.Avatar`** when the design includes an avatar. Keep **`isDecorative`** at the default `true`.                                                                                       |
+| Start expanded _(conditional)_                  | `initialVisibility: 'visible'` on **`useExpandableModel`** (or the equivalent model config).                                                                                                     |
+| Programmatic expand/collapse _(conditional)_    | Hoist **`useExpandableModel`** and call `model.events.show()` / `model.events.hide()`.                                                                                                           |
+
+**Summary for code generation:**
+
+- **REQUIRED:** **`Expandable.Target`**, non-empty **`Expandable.Title`**, **`Expandable.Content`**,
+  **`Expandable.Icon`**
+- **CONDITIONAL:** **`headingLevel`** (ask which; omit for navigation), **`as="section"`** +
+  `aria-labelledby`, **`as="ul"`**, **`Expandable.Avatar`**, hoisted **`useExpandableModel`**,
+  **`initialVisibility`**
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Manually set `aria-expanded`, `aria-controls`, or the disclosure `id` on **`Expandable.Target`**
+  or **`Expandable.Content`** — `useExpandableTarget` and `useExpandableContent` wire these
+- Rely on **`Expandable.Icon`** or **`Expandable.Avatar`** for the accessible name — use
+  **`Expandable.Title`**
+- Override **`Expandable.Target`** with a custom **`as`** — **`Expandable.Target`** already renders
+  a native `<button>`
+- Set `id` on **`Expandable`** to identify the outer wrapper — `id` is model config **and** is
+  forwarded to the container element, while **`Expandable.Content`** also uses `state.id`, which can
+  produce duplicate IDs. For a stable content `id`, hoist **`useExpandableModel({id: '…'})`**.
+  **`Expandable.Title`** still needs its own `id` when you set `aria-labelledby` on
+  **`Expandable.Content`**
+- Wrap **`Expandable.Target`** in your own heading — use **`headingLevel`** instead
+- Default **`headingLevel`** to `h4` (or any level) without asking, or set **`headingLevel`** on
+  navigation disclosures
+- Change **`Expandable.Title`** text to encode expanded/collapsed state — `aria-expanded` already
+  exposes state
+- Unmount **`Expandable.Content`** when collapsed, or add `aria-hidden` on it — the library uses
+  `display: none`
+- Set **`isDecorative={false}`** on **`Expandable.Avatar`** by default, or pair an avatar with an
+  extra non-chevron icon
+- Use **`open`**, **`expanded`**, or **`onToggle`** props on **`Expandable`** — visibility is
+  `initialVisibility` plus **`useExpandableModel`** events
+- Assume default **`Expandable.Content`** is a landmark region — that is only true with
+  **`as="section"`**
 
 ## Component API
 
