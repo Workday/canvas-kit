@@ -1,11 +1,15 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
 import {TextInputWithReactHookForm} from './examples/TextInputWithReactHookForm';
-import * as FormStories from './FormLibraryExample.stories';
 
-<Meta of={FormStories} />
+<Meta title="Guides/Accessibility/Form Validation" />
 
+# Form Validation with React Hook Form and Yup
 
-## Uncontrolled Text Inputs Using React Hook Form
+This example wires Canvas Kit `FormField`, `TextInput`, and `Select` to React Hook Form with Yup
+schema validation. On a failed submit, focus moves to the first invalid field so keyboard and
+screen-reader users are guided to the first error in the form.
 
 <ExampleCodeBlock code={TextInputWithReactHookForm} />
