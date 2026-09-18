@@ -166,61 +166,23 @@ need programmatic show/hide (for example, expand all) or a stable disclosure `id
 _(conditional)_ apply only when the situation matches—otherwise omit.
 
 **If no design spec is provided:** use the **single disclosure** composition ([Basic
-Example](#basic-example): **`Expandable.Target`**, **`Expandable.Icon iconPosition="start"`**,
-**`Expandable.Title`**, **`Expandable.Content`** as a `div`). **Ask which `headingLevel` matches the
-page outline** when the expandable titles body content; omit **`headingLevel`** for navigation. If
-the spec is several related headers, use the **accordion** composition, not several copies of the
-Basic Example with default `div` content. Omit **`Expandable.Avatar`**, **`as="section"`** /
-`aria-labelledby` (unless accordion), a hoisted model (unless accordion or expand-all),
-**`initialVisibility`**, and a custom **`id`**.
+Example](#basic-example)). If the spec is several related headers, use the **accordion**
+composition. Omit **`Expandable.Avatar`**, **`initialVisibility`**, and a custom **`id`**.
 
 **Choose a composition** (pick one; **`Expandable.Content as="section"`** and **`as="ul"`** are
 mutually exclusive):
 
 - **Single disclosure** — one show/hide section. [Basic Example](#basic-example) /
   [Minimum Accessible Structure](#minimum-accessible-structure). Default Content is a `<div>`.
-- **Accordion** — several related headers that can be open at once. [Hoisted Model](#hoisted-model)
-  and the [Accordion Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/accordion/). Each Content is
-  **`as="section"`** with `aria-labelledby`.
-- **Navigation list** — disclosed links in a list. [Side Panel with
-  Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
-  Content is **`as="ul"`**; omit **`headingLevel`**.
+- **Accordion** — several related headers. [Hoisted Model](#hoisted-model): unique `id` on
+  **`Expandable.Title`**, **`Expandable.Content as="section"`** with `aria-labelledby`.
+- **Navigation list** — disclosed links. [Side Panel with
+  Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs):
+  **`as="ul"`**, omit **`headingLevel`**.
 
 **Heading level:** Ask which heading (`h1`–`h6`) belongs in the document outline before setting
 **`headingLevel`**. Omit **`headingLevel`** for navigation. Do not generate **`headingLevel`** by
-default — the Basic Example code uses `h4` only as a sample. Focus stays on
-**`Expandable.Target`** when the disclosure opens or closes (see **Keyboard**).
-
-**Accordion** _(conditional)_:
-
-Use this composition when several related Expandables form an accordion. Default
-**`Expandable.Content`** is a `<div>`, not a landmark. For each item, assign a unique `id` to
-**`Expandable.Title`** and render **`Expandable.Content as="section"`** with `aria-labelledby`
-pointing at that title `id`. Ask **`headingLevel`** when the headers title body content. Do not also
-set **`as="ul"`** on that Content. See [Hoisted Model](#hoisted-model).
-
-```tsx
-import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {Expandable} from '@workday/canvas-kit-react/expandable';
-
-const titleId = useUniqueId();
-
-<Expandable>
-  <Expandable.Target>
-    <Expandable.Title id={titleId}>Usage Guidance</Expandable.Title>
-    <Expandable.Icon iconPosition="end" />
-  </Expandable.Target>
-  <Expandable.Content as="section" aria-labelledby={titleId}>
-    Content
-  </Expandable.Content>
-</Expandable>;
-```
-
-**Navigation list** _(conditional)_:
-
-When the disclosed content is a list of links, render **`Expandable.Content as="ul"`** and omit
-**`headingLevel`**. Do not also set **`as="section"`** on that Content. See
-[Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs).
+default — the Basic Example code uses `h4` only as a sample.
 
 | Requirement                                     | How to satisfy                                                                                                                                                                                   |
 | ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
