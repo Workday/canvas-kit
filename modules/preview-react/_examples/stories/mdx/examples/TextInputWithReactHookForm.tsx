@@ -12,6 +12,7 @@ import {
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -186,17 +187,18 @@ export const TextInputWithReactHookForm = () => {
               ref={combinePasswordRef}
             />
             <InputGroup.InnerEnd>
-              <TertiaryButton
-                type="button"
-                size="small"
-                icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
-                aria-label={showPassword ? 'Hide Password' : 'Show Password'}
-                aria-controls={`input-${passwordId}`}
-                onClick={() => {
-                  setShowPassword(state => !state);
-                  passwordRef.current?.focus();
-                }}
-              />
+              <Tooltip title={showPassword ? 'Hide Password' : 'Show Password'}>
+                <TertiaryButton
+                  type="button"
+                  size="small"
+                  icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
+                  aria-controls={`input-${passwordId}`}
+                  onClick={() => {
+                    setShowPassword(state => !state);
+                    passwordRef.current?.focus();
+                  }}
+                />
+              </Tooltip>
             </InputGroup.InnerEnd>
           </FormField.Field>
           <FormField.Hint>{errors.password?.message || passwordHint}</FormField.Hint>
