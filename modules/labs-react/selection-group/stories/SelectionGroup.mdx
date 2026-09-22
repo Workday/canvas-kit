@@ -1,0 +1,132 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import SelectionGroupStoriesMeta from './SelectionGroup.stories';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {ColumnWidth} from './examples/ColumnWidth';
+import {ContentWidth} from './examples/ContentWidth';
+import {Disabled} from './examples/Disabled';
+import {EqualWidth} from './examples/EqualWidth';
+import {Error} from './examples/Error';
+import {MultiSelect} from './examples/MultiSelect';
+import {RTL} from './examples/RTL';
+import {SingleSelect} from './examples/SingleSelect';
+
+<Meta of={SelectionGroupStoriesMeta} />
+
+# Canvas Kit Selection Group
+
+Selection Group is a
+[compound component](/getting-started/for-developers/resources/compound-components/) that lets users
+select one or more options from a predefined list using chip-style controls with a lightweight glyph
+indicator.
+
+Reach for Selection Group instead of standard radio buttons or checkboxes when a larger, more
+scannable tap target and a lighter visual footprint are preferred. It works best with roughly seven
+or fewer options and short, concise labels.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+`SelectionGroup` includes a container `SelectionGroup` component and the following subcomponents:
+`SelectionGroup.List` and `SelectionGroup.Item`.
+
+<ExampleCodeBlock code={Basic} />
+
+### Single Select
+
+Use `mode="single"` to allow only one selection at a time. Single-select groups use a circle glyph
+and behave like a radio group: they have a single tab stop and arrow keys move both focus and
+selection.
+
+<ExampleCodeBlock code={SingleSelect} />
+
+### Multi Select
+
+Use `mode="multiple"` to allow more than one selection. Multi-select groups use a square glyph and
+behave like a checkbox group, where every item is its own tab stop. The group label must state that
+multiple selections are allowed.
+
+<ExampleCodeBlock code={MultiSelect} />
+
+### Width Variations
+
+All items within a group use the same sizing method — don't mix sizing methods within one group.
+
+#### Content Width
+
+Each item is sized to its own label, so items within a group may differ in width.
+
+<ExampleCodeBlock code={ContentWidth} />
+
+#### Equal Width
+
+Every item is sized to match the width of the longest label, so all items end up the same width.
+
+<ExampleCodeBlock code={EqualWidth} />
+
+#### Column Width
+
+Every item spans the full width of the column. Best for longer labels, or when the group is the
+primary input on the page.
+
+<ExampleCodeBlock code={ColumnWidth} />
+
+### Disabled
+
+Set the `disabled` prop on `SelectionGroup` to disable the entire group. To disable individual
+items, pass their ids to `nonInteractiveIds` so that keyboard navigation skips over them as well.
+
+<ExampleCodeBlock code={Disabled} />
+
+### Error
+
+Notification states apply to the whole group rather than to individual items. Wrapping the group in
+a `FormField` with `error="error"` applies the error state and associates the hint text with the
+group. You can also set `error="error"` directly on `SelectionGroup` when you aren't using
+`FormField`.
+
+<ExampleCodeBlock code={Error} />
+
+### Caution
+
+<ExampleCodeBlock code={Caution} />
+
+### Right-to-Left (RTL)
+
+`SelectionGroup` supports right-to-left languages when specified in the `CanvasProvider` `theme` or
+via the `dir` attribute on a parent element.
+
+<ExampleCodeBlock code={RTL} />
+
+## Accessibility
+
+- Single-select groups render `role="radiogroup"` with `role="radio"` items and `aria-checked`, and
+  follow the [radio group keyboard pattern](https://www.w3.org/WAI/ARIA/apg/patterns/radio/): one
+  tab stop for the group, with arrow keys moving focus and selection together.
+- Multi-select groups render `role="group"` with `role="checkbox"` items and `aria-checked`, and
+  follow the [checkbox keyboard pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/): every
+  item is in the tab order and <kbd>Space</kbd> toggles it.
+- The glyph always renders, in both modes and in both selected states. Selection is communicated by
+  the checkmark inside the glyph _and_ a color change, never by color alone.
+- A group label is required. Provide it with `aria-label` or `aria-labelledby` on
+  `SelectionGroup.List`, or wrap the group in a `FormField` with a visible label. The label must
+  state the selection mode — "Select one" versus "Select all that apply" — so the mode is clear
+  before interacting.
+
+## Component API
+
+<SymbolDoc name="SelectionGroup" fileName="/labs-react/" />
+
+## Specifications
+
+<Specifications file="./cypress/component/SelectionGroup.spec.tsx" name="SelectionGroup" />
