@@ -125,8 +125,9 @@ In order to render the icon for the selected item in the `Select.Input`:
 3.  Pass the icon for the selected item to the input:
     `<Select.Input inputStartIcon={selectedItem.value.icon}>`
 
-> **Note: `data-id` on `Select.Item` must match the `id` property in your array of objects. This
-> ensures proper keyboard handling and type-ahead.**
+> **Note:** Dynamic `{item => <Select.Item>}` registration already uses the collection `id`. Set
+> **`data-id`** only on static **`Select.Item`** children (see [Grouped Items](#grouped-items)), and
+> keep it equal to that id (`id` or **`getId`**).
 
 <ExampleCodeBlock code={WithIcons} />
 
@@ -475,7 +476,8 @@ const Example = () => {
 | Requirement                              | How to satisfy                                                                                                                                                                                                                                                   |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Input wiring                             | **`FormField.Input as={Select.Input}`** wrapping every `Select` combobox, with **`Select.Popper`**, **`Select.Card`**, **`Select.List`**, and **`Select.Item`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
-| Item identity                            | Pass **`items`**. When objects are not `{id, text}`, set **`getId`** and/or **`getTextValue`**. When rendering object items, set **`data-id`** on **`Select.Item`** to the same id used by the collection                                                         |
+| Item identity                            | Pass **`items`**. When objects are not `{id, text}`, set **`getId`** and/or **`getTextValue`**. Dynamic `{item => <Select.Item>}` does **not** need **`data-id`** — the collection already registers `item.id` |
+| Static item ids _(conditional)_          | When **`Select.Item`**s are static JSX (not a render callback), set **`data-id`** to the same id the collection uses (`id` or **`getId`**). See [Grouped Items](#grouped-items) |
 | Disabled combobox _(conditional)_        | `disabled` on **`FormField.Input as={Select.Input}`**. See [Disabled](#disabled)                                                                                                                                                                                 |
 | Disabled options _(conditional)_         | **`nonInteractiveIds`** on **`Select`** (ids skipped by keyboard and type-ahead) **and** **`aria-disabled`** on those **`Select.Item`**s. See [Disabled Items](#disabled-items)                                                                                  |
 | Grouped list items _(conditional)_       | **`Menu.Group`** with **`title`** (or **`Menu.Group.Heading`**) around **`Select.Item`**s inside **`Select.List`**. See [Grouped Items](#grouped-items)                                                                                                          |
@@ -488,10 +490,10 @@ const Example = () => {
 - **REQUIRED:** visible label, **`FormField.Input as={Select.Input}`**, popup list composition
   (**`Select.Popper`**, **`Select.Card`**, **`Select.List`**, **`Select.Item`**), **`items`**
 - **CONDITIONAL:** disabled combobox, disabled options (`nonInteractiveIds` + `aria-disabled`),
-  grouped list items, option icons, custom placeholder, programmatic focus via `ref`, `getId` /
-  `getTextValue` / `data-id` when item shape is not `{id, text}`. See
-  [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
-  conditionals (hint/error, required, stable `id`).
+  grouped list items, option icons, custom placeholder, programmatic focus via `ref`, **`getId`** /
+  **`getTextValue`** when item shape is not `{id, text}`, **`data-id`** on static JSX
+  **`Select.Item`**s. See [FormField accessibility](/components/inputs/form-field/#accessibility)
+  for shared FormField conditionals (hint/error, required, stable `id`).
 
 ### Anti-Patterns
 
@@ -515,6 +517,9 @@ to supply instead):
   more than one option can be selected.
 - **`FormFieldGroup` around a single Select**: **`Select`** is one combobox, not a group of
   checkboxes or radios.
+- **`data-id` on dynamic items**: Do not set **`data-id`** on `{item => <Select.Item>}` — the
+  collection already registers `item.id`. Set **`data-id`** only on static JSX **`Select.Item`**s
+  (see **Static item ids**).
 - **Disabled options with only styling**: Do not omit **`nonInteractiveIds`** or **`aria-disabled`**
   — both are required so keyboard, type-ahead, and assistive technology skip or expose the option.
 - **Free-text `onKeyDown` on the combobox**: Do not add handlers that type into the input or call
