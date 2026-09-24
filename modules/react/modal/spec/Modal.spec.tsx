@@ -1,4 +1,4 @@
-import {render} from '@testing-library/react';
+import {fireEvent, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 import {renderToString} from 'react-dom/server';
 
@@ -15,18 +15,26 @@ describe('Modal', () => {
 
 describe('Modal Accessibility', () => {
   describe('Modal.Card accessible name', () => {
-    it('should have a valid accessible name via aria-labelledby pointing to an element', () => {
-      const {getByRole} = render(
+    it('should have a valid accessible name via aria-labelledby pointing to an element', async () => {
+      const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
           <Modal.Popper>
             <Modal.Card>
               <Modal.Heading>Modal Title</Modal.Heading>
               <Modal.Body>Content goes here</Modal.Body>
+              <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
           </Modal.Popper>
         </Modal>
       );
+
+      fireEvent.click(getByText('Open'));
+
+      await waitFor(() => {
+        const dialogElement = getByRole('dialog');
+        expect(dialogElement).toBeInTheDocument();
+      });
 
       const dialogElement = getByRole('dialog');
       const ariaLabelledby = dialogElement.getAttribute('aria-labelledby');
@@ -43,8 +51,8 @@ describe('Modal Accessibility', () => {
       expect(labelElement?.textContent).toBe('Modal Title');
     });
 
-    it('should have a valid accessible name when aria-labelledby references an element with text', () => {
-      const {getByRole} = render(
+    it('should have a valid accessible name when aria-labelledby references an element with text', async () => {
+      const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
           <Modal.Popper>
@@ -58,6 +66,13 @@ describe('Modal Accessibility', () => {
         </Modal>
       );
 
+      fireEvent.click(getByText('Open'));
+
+      await waitFor(() => {
+        const dialogElement = getByRole('dialog');
+        expect(dialogElement).toBeInTheDocument();
+      });
+
       const dialogElement = getByRole('dialog');
       const ariaLabelledby = dialogElement.getAttribute('aria-labelledby');
       const labelElement = document.getElementById(ariaLabelledby || '');
@@ -67,25 +82,29 @@ describe('Modal Accessibility', () => {
       expect(labelElement?.textContent?.length).toBeGreaterThan(0);
     });
 
-    it('should support aria-label as an alternative accessible name', () => {
-      const {getByRole} = render(
+    it('should support aria-label as an alternative accessible name', async () => {
+      const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
           <Modal.Popper>
             <Modal.Card aria-label="Confirm Action">
               <Modal.Body>Are you sure?</Modal.Body>
+              <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
           </Modal.Popper>
         </Modal>
       );
 
-      // Should be findable by its aria-label
-      const dialogElement = getByRole('dialog', {name: 'Confirm Action'});
-      expect(dialogElement).toBeInTheDocument();
+      fireEvent.click(getByText('Open'));
+
+      await waitFor(() => {
+        const dialogElement = getByRole('dialog', {name: 'Confirm Action'});
+        expect(dialogElement).toBeInTheDocument();
+      });
     });
 
-    it('should have a non-empty accessible name (via labelledby or label)', () => {
-      const {getByRole} = render(
+    it('should have a non-empty accessible name (via labelledby or label)', async () => {
+      const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
           <Modal.Popper>
@@ -96,6 +115,13 @@ describe('Modal Accessibility', () => {
           </Modal.Popper>
         </Modal>
       );
+
+      fireEvent.click(getByText('Open'));
+
+      await waitFor(() => {
+        const dialogElement = getByRole('dialog');
+        expect(dialogElement).toBeInTheDocument();
+      });
 
       const dialogElement = getByRole('dialog');
       const ariaLabelledby = dialogElement.getAttribute('aria-labelledby');
