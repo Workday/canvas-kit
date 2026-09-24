@@ -1,36 +1,28 @@
 import {fireEvent, render, waitFor} from '@testing-library/react';
-import * as React from 'react';
-import {renderToString} from 'react-dom/server';
+import React from 'react';
 
-import {Modal} from '../lib/Modal';
-import {Basic} from '../stories/examples/Basic';
+import {Dialog, useDialogModel} from '../lib/Dialog';
 
-describe('Modal', () => {
-  it('should render on a server without crashing', () => {
-    const ssrRender = () => renderToString(<Basic />);
-
-    expect(ssrRender).not.toThrow();
-  });
-});
-
-describe('Modal Accessibility', () => {
-  describe('Modal.Card accessible name', () => {
+describe('Dialog Accessibility', () => {
+  describe('Dialog.Card accessible name', () => {
     it('should have a valid accessible name via aria-labelledby pointing to an element', async () => {
       const {getByRole, getByText} = render(
-        <Modal>
-          <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
-            <Modal.Card>
-              <Modal.Heading>Modal Title</Modal.Heading>
-              <Modal.Body>Content goes here</Modal.Body>
-              <Modal.CloseButton>Close</Modal.CloseButton>
-            </Modal.Card>
-          </Modal.Popper>
-        </Modal>
+        <Dialog>
+          <Dialog.Target>Open</Dialog.Target>
+          <Dialog.Popper>
+            <Dialog.Card>
+              <Dialog.Heading>Dialog Title</Dialog.Heading>
+              <Dialog.Body>Content goes here</Dialog.Body>
+              <Dialog.CloseButton>Close</Dialog.CloseButton>
+            </Dialog.Card>
+          </Dialog.Popper>
+        </Dialog>
       );
 
+      // Click to open the dialog
       fireEvent.click(getByText('Open'));
 
+      // Wait for dialog to appear
       await waitFor(() => {
         const dialogElement = getByRole('dialog');
         expect(dialogElement).toBeInTheDocument();
@@ -48,22 +40,23 @@ describe('Modal Accessibility', () => {
       expect(labelElement).toBeInTheDocument();
 
       // Verify the referenced element has text content (the accessible name)
-      expect(labelElement?.textContent).toBe('Modal Title');
+      expect(labelElement?.textContent).toBe('Dialog Title');
     });
 
     it('should have a valid accessible name when aria-labelledby references an element with text', async () => {
       const {getByRole, getByText} = render(
-        <Modal>
-          <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
-            <Modal.Card>
-              <Modal.Heading>Critical Action Required</Modal.Heading>
-              <Modal.Body>
-                <p>This is a modal dialog</p>
-              </Modal.Body>
-            </Modal.Card>
-          </Modal.Popper>
-        </Modal>
+        <Dialog>
+          <Dialog.Target>Open</Dialog.Target>
+          <Dialog.Popper>
+            <Dialog.Card>
+              <Dialog.Heading>Important Dialog</Dialog.Heading>
+              <Dialog.Body>
+                <p>This is the dialog content</p>
+              </Dialog.Body>
+              <Dialog.CloseButton>Close</Dialog.CloseButton>
+            </Dialog.Card>
+          </Dialog.Popper>
+        </Dialog>
       );
 
       fireEvent.click(getByText('Open'));
@@ -84,36 +77,38 @@ describe('Modal Accessibility', () => {
 
     it('should support aria-label as an alternative accessible name', async () => {
       const {getByRole, getByText} = render(
-        <Modal>
-          <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
-            <Modal.Card aria-label="Confirm Action">
-              <Modal.Body>Are you sure?</Modal.Body>
-              <Modal.CloseButton>Close</Modal.CloseButton>
-            </Modal.Card>
-          </Modal.Popper>
-        </Modal>
+        <Dialog>
+          <Dialog.Target>Open</Dialog.Target>
+          <Dialog.Popper>
+            <Dialog.Card aria-label="Custom Dialog Name">
+              <Dialog.Body>Content without heading</Dialog.Body>
+              <Dialog.CloseButton>Close</Dialog.CloseButton>
+            </Dialog.Card>
+          </Dialog.Popper>
+        </Dialog>
       );
 
       fireEvent.click(getByText('Open'));
 
+      // Should be findable by its aria-label
       await waitFor(() => {
-        const dialogElement = getByRole('dialog', {name: 'Confirm Action'});
+        const dialogElement = getByRole('dialog', {name: 'Custom Dialog Name'});
         expect(dialogElement).toBeInTheDocument();
       });
     });
 
     it('should have a non-empty accessible name (via labelledby or label)', async () => {
       const {getByRole, getByText} = render(
-        <Modal>
-          <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
-            <Modal.Card>
-              <Modal.Heading>Modal Heading</Modal.Heading>
-              <Modal.Body>Content</Modal.Body>
-            </Modal.Card>
-          </Modal.Popper>
-        </Modal>
+        <Dialog>
+          <Dialog.Target>Open</Dialog.Target>
+          <Dialog.Popper>
+            <Dialog.Card>
+              <Dialog.Heading>My Dialog</Dialog.Heading>
+              <Dialog.Body>Body content</Dialog.Body>
+              <Dialog.CloseButton>Close</Dialog.CloseButton>
+            </Dialog.Card>
+          </Dialog.Popper>
+        </Dialog>
       );
 
       fireEvent.click(getByText('Open'));
@@ -135,7 +130,7 @@ describe('Modal Accessibility', () => {
         expect(ariaLabel).toBeTruthy();
       } else {
         // If neither exists, test should fail
-        fail('Modal should have either aria-labelledby or aria-label');
+        fail('Dialog should have either aria-labelledby or aria-label');
       }
     });
   });
