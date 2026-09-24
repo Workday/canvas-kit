@@ -2,12 +2,28 @@ import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 import {Density} from './examples/Density';
 
-<Meta title="Examples/Forms/Density and Alignment" />
+<Meta title="Examples/Density and Alignment" />
 
 # Canvas Kit Density Examples
 
-Although we currently don't support a density system, it's common practice to provide varying
-options to users, especially in the context of forms. Below is an example of how you can style our
-from elements to achieve the desired density.
+Canvas Kit does not ship a density system. Forms often still need compact, default, and
+comfortable spacing. This example shows how to style Canvas Kit form elements with
+`createStencil` to get three densities.
+
+Density in this demo changes:
+
+- **Input height and padding** (`system.size.sm` / `md` / `md + 4px`)
+- **Label and input type** (`subtext.medium` / `subtext.large` / `body.small`)
+- **Space between fields** (`system.gap.md` / `lg` / `xl`)
+- **Space between a label and its input** (tighter when labels are vertical)
+
+| Density | Input height | Field spacing | Type |
+| ------- | ------------ | ------------- | ---- |
+| High    | 32px         | 16px          | `subtext.medium` |
+| Medium  | 40px         | 24px          | `subtext.large` |
+| Low     | 48px         | 32px          | `body.small` |
+
+`Switch` does not expose a size API, so its dimensions stay the same across densities. Only its
+label type and surrounding field spacing change.
 
 <ExampleCodeBlock code={Density} />
