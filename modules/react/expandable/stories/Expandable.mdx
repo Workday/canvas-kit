@@ -26,7 +26,7 @@ yarn add @workday/canvas-kit-react
 
 ## Usage
 
-### Basic Example
+### Start Icon
 
 For a basic expandable container with a chevron icon before the title, place `Expandable.Icon`
 before `Expandable.Title` as children of `Expandable.Target` and pass the `iconPosition` prop to
@@ -101,11 +101,11 @@ Use **`Expandable`** for show/hide sections in the page. Compose multiple instan
 
 ### Minimum Accessible Structure
 
-The following matches the [Basic Example](#basic-example) layout: **`Expandable.Icon`** before
+The following matches the [Start Icon](#start-icon) example layout: **`Expandable.Icon`** before
 **`Expandable.Title`** inside **`Expandable.Target`**, then **`Expandable.Content`**.
 **`headingLevel`** is omitted here on purpose — add it only after asking which level matches the
-page outline (see **Accessibility Requirements**). The Basic Example code uses `headingLevel="h4"` as
-a sample, not a default.
+page outline (see **Accessibility Requirements**). The Basic Example code uses `headingLevel="h4"`
+as a sample, not a default.
 
 ```tsx
 import {Expandable} from '@workday/canvas-kit-react/expandable';
@@ -145,6 +145,7 @@ subcomponents. **Do not duplicate them** in consuming code.
 **Keyboard** (_native button behavior_):
 
 **`Expandable.Target`** uses native `<button>` keyboard behavior (tab order, <kbd>Enter</kbd> /
+
 <kbd>Space</kbd> to toggle). Collapsed content is not in the tab order (`display: none`). Focus
 stays on the button; Canvas Kit does not move focus into **`Expandable.Content`**.
 
@@ -165,8 +166,8 @@ Required in application code for an accessible Expandable. Hoist **`useExpandabl
 need programmatic show/hide (for example, expand all) or a stable disclosure `id`. Rows marked
 _(conditional)_ apply only when the situation matches—otherwise omit.
 
-**If no design spec is provided:** use the **single disclosure** composition ([Basic
-Example](#basic-example)). If the spec is several related headers, use the **accordion**
+**If no design spec is provided:** use the **single disclosure** composition
+([Basic Example](#basic-example)). If the spec is several related headers, use the **accordion**
 composition. Omit **`Expandable.Avatar`**, **`initialVisibility`**, and a custom **`id`**.
 
 **Choose a composition** (pick one; **`Expandable.Content as="section"`** and **`as="ul"`** are
@@ -176,25 +177,25 @@ mutually exclusive):
   [Minimum Accessible Structure](#minimum-accessible-structure). Default Content is a `<div>`.
 - **Accordion** — several related headers. [Hoisted Model](#hoisted-model): unique `id` on
   **`Expandable.Title`**, **`Expandable.Content as="section"`** with `aria-labelledby`.
-- **Navigation list** — disclosed links. [Side Panel with
-  Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs):
+- **Navigation list** — disclosed links.
+  [Side Panel with Navigation](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-examples-side-panel-navigation--docs):
   **`as="ul"`**, omit **`headingLevel`**.
 
 **Heading level:** Ask which heading (`h1`–`h6`) belongs in the document outline before setting
 **`headingLevel`**. Omit **`headingLevel`** for navigation. Do not generate **`headingLevel`** by
 default — the Basic Example code uses `h4` only as a sample.
 
-| Requirement                                     | How to satisfy                                                                                                                                                                                   |
-| ----------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Accessible name                                 | Non-empty **`Expandable.Title`** inside **`Expandable.Target`**.                                                                                                                                 |
-| Keyboard-operable toggle                        | **`Expandable.Target`** (native `<button>`).                                                                                                                                                     |
-| Visual expanded/collapsed indicator             | **`Expandable.Icon`** with `iconPosition` matching layout (`start` or `end`).                                                                                                                    |
+| Requirement                                     | How to satisfy                                                                                                                                                                                     |
+| ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible name                                 | Non-empty **`Expandable.Title`** inside **`Expandable.Target`**.                                                                                                                                   |
+| Keyboard-operable toggle                        | **`Expandable.Target`** (native `<button>`).                                                                                                                                                       |
+| Visual expanded/collapsed indicator             | **`Expandable.Icon`** with `iconPosition` matching layout (`start` or `end`).                                                                                                                      |
 | Heading in the document outline _(conditional)_ | **`headingLevel`** on **`Expandable.Target`** when the control titles body content (single disclosure or accordion). Omit **`headingLevel`** for the navigation-list composition. Ask which level. |
 | Accordion named regions _(conditional)_         | Accordion composition: **`Expandable.Content as="section"`** plus `aria-labelledby` referencing a unique `id` on **`Expandable.Title`**.                                                           |
-| List markup _(conditional)_                     | Navigation-list composition: **`Expandable.Content as="ul"`** (and list items as children).                                                                                                       |
-| Decorative avatar _(conditional)_               | **`Expandable.Avatar`** when the design includes an avatar. Keep **`isDecorative`** at the default `true`.                                                                                       |
-| Start expanded _(conditional)_                  | `initialVisibility: 'visible'` on **`useExpandableModel`** (or the equivalent model config).                                                                                                     |
-| Programmatic expand/collapse _(conditional)_    | Hoist **`useExpandableModel`** and call `model.events.show()` / `model.events.hide()`.                                                                                                           |
+| List markup _(conditional)_                     | Navigation-list composition: **`Expandable.Content as="ul"`** (and list items as children).                                                                                                        |
+| Decorative avatar _(conditional)_               | **`Expandable.Avatar`** when the design includes an avatar. Keep **`isDecorative`** at the default `true`.                                                                                         |
+| Start expanded _(conditional)_                  | `initialVisibility: 'visible'` on **`useExpandableModel`** (or the equivalent model config).                                                                                                       |
+| Programmatic expand/collapse _(conditional)_    | Hoist **`useExpandableModel`** and call `model.events.show()` / `model.events.hide()`.                                                                                                             |
 
 **Summary for code generation:**
 
@@ -228,8 +229,8 @@ to supply instead):
   accordion — use the **accordion** composition (see **Choose a composition**)
 - Set **`as="section"`** and **`as="ul"`** on the same **`Expandable.Content`** — pick one
   composition
-- Change **`Expandable.Title`** to encode state (for example "Collapsed" / "Expanded" or
-  "Show" / "Hide") — `aria-expanded` already exposes state
+- Change **`Expandable.Title`** to encode state (for example "Collapsed" / "Expanded" or "Show" /
+  "Hide") — `aria-expanded` already exposes state
 - Unmount **`Expandable.Content`** when collapsed, or add `aria-hidden` on it — the library uses
   `display: none`
 - Set **`isDecorative={false}`** on **`Expandable.Avatar`** by default, or pair an avatar with an
