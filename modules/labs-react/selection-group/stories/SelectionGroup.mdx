@@ -92,8 +92,13 @@ items, pass their ids to `nonInteractiveIds` so that keyboard navigation skips o
 
 Notification states apply to the whole group rather than to individual items. Wrapping the group in
 a `FormField` with `error="error"` applies the error state and associates the hint text with the
-group. You can also set `error="error"` directly on `SelectionGroup` when you aren't using
-`FormField`.
+group. This is the recommended approach, because `FormField` also renders the visible hint text,
+sets `aria-invalid`, and points the group's `aria-describedby` at that text.
+
+You can set `error="error"` directly on `SelectionGroup` when you aren't using `FormField`, but the
+prop only changes the group's border color. Color on its own is not an accessible way to
+communicate a notification state, so pair it with your own visible text and pass that element's id
+to `aria-describedby` on `SelectionGroup`.
 
 <ExampleCodeBlock code={Error} />
 

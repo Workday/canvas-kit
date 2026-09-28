@@ -82,6 +82,11 @@ export const useSelectionGroupModel = createModelHook({
     /**
      * The type of error associated with the group (if applicable). Notification states apply to the
      * whole group rather than to individual items.
+     *
+     * This prop only changes the group's border color, which is not sufficient on its own. Always
+     * pair it with visible text describing the state and reference that text with
+     * `aria-describedby`. Wrapping the group in a `FormField` with a `FormField.Hint` does this
+     * for you.
      */
     error: undefined as SelectionGroupError | undefined,
     /**
