@@ -57,8 +57,30 @@ export const useTabsModel = createModelHook({
   contextOverride: useOverflowListModel.Context,
 })(config => {
   const initialSelectedRef = React.useRef(config.initialTab);
-  const getId = config.getId || defaultGetId;
+  const userGetId = config.getId || defaultGetId;
   const modality = useModalityType();
+
+  // Stable object so getId can recognize the synthetic overflow item. Callers
+  // often pass a getId that only understands their own item shape (for example
+  // `item => item.contextId`). Without this, the overflow item gets an empty id
+  // and Tabs.List renders it as a normal tab.
+  const overflowItemRef = React.useRef({
+    id: TABS_OVERFLOW_BUTTON_ID,
+    text: 'More',
+  });
+
+  const getId = (item: Parameters<typeof userGetId>[0]) => {
+    if (item === overflowItemRef.current) {
+      return TABS_OVERFLOW_BUTTON_ID;
+    }
+    const id = userGetId(item);
+    if (id === TABS_OVERFLOW_BUTTON_ID) {
+      throw new Error(
+        `Tabs item id "${TABS_OVERFLOW_BUTTON_ID}" is reserved for the overflow tab. Choose a different id.`
+      );
+    }
+    return id;
+  };
 
   // When using dynamic items, append a synthetic overflow button item to the
   // items array. This ensures the overflow button is included in the navigation
@@ -68,9 +90,7 @@ export const useTabsModel = createModelHook({
   // via setOverflowTargetSize), so it won't be incorrectly hidden.
   const itemsWithOverflowButton = React.useMemo(() => {
     if (config.items?.length) {
-      // Create a synthetic item for the overflow button at the end of the list
-      const overflowItem = {id: TABS_OVERFLOW_BUTTON_ID, text: 'More'};
-      return [...config.items, overflowItem];
+      return [...config.items, overflowItemRef.current];
     }
     return config.items;
   }, [config.items]);

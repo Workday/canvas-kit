@@ -553,11 +553,16 @@ describe('Tabs', () => {
           cy.findByRole('tab', {name: 'First Tab'}).click().focus();
         });
 
-        context('when the Right Arrow key is pressed 3 times (navigate to More tab)', () => {
+        context('when the Right Arrow key is pressed until the More overflow tab', () => {
           beforeEach(() => {
-            cy.realPress('ArrowRight');
-            cy.realPress('ArrowRight');
-            cy.realPress('ArrowRight');
+            // Visible tab count depends on layout. Move from the first tab to More,
+            // which is always the last tab in the tablist.
+            cy.findAllByRole('tab').then($tabs => {
+              const presses = Math.max($tabs.length - 1, 0);
+              for (let i = 0; i < presses; i += 1) {
+                cy.realPress('ArrowRight');
+              }
+            });
           });
 
           it('should focus on the "More" overflow tab', () => {
