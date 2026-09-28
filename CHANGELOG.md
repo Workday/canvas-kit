@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.11](https://github.com/Workday/canvas-kit/releases/tag/v15.1.11) (2026-09-02)
+
+### Infrastructure
+
+- chore(ci): Fix commit message parsing in publish workflow ([#4162](https://github.com/Workday/canvas-kit/pull/4162)) ([@alanbsmith](https://github.com/alanbsmith))
+
+
 ## [v15.1.10](https://github.com/Workday/canvas-kit/releases/tag/v15.1.10) (2026-08-31)
 
 ### Components, Documentation
