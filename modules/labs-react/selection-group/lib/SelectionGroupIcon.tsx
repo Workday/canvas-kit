@@ -50,6 +50,9 @@ export const SelectionGroupIcon = createComponent('span')({
       as={Element}
       ref={ref}
       size={size}
+      // The item's `aria-checked` already conveys selection and its label provides the accessible
+      // name, so the icon is decorative.
+      aria-hidden={true}
       icon={icons[mode][selected ? 'selected' : 'unselected']}
       {...handleCsProp(elemProps, selectionGroupIconStencil())}
     />

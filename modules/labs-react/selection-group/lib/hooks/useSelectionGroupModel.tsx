@@ -126,6 +126,10 @@ export const useSelectionGroupModel = createModelHook({
   // A single-select group is a radio group, so selection follows focus while arrowing through
   // items. The cursor events below set this, and the effect selects whatever the cursor landed on.
   const shouldSelectCursorRef = React.useRef(false);
+  // A navigation event doesn't always move the cursor - a single-item group, or a non-wrapping
+  // navigation manager at either end of the list, leaves it where it is. Counting the events gives
+  // the effect below something that always changes, so an arrow key still selects in those cases.
+  const [navigationCount, setNavigationCount] = React.useState(0);
 
   const state = {
     ...listModel.state,
@@ -155,6 +159,7 @@ export const useSelectionGroupModel = createModelHook({
         // `nonInteractiveIds`, so this can't land selection on a non-interactive item.
         listModel.events[eventName]();
         shouldSelectCursorRef.current = true;
+        setNavigationCount(count => count + 1);
       });
       return result;
     },
@@ -164,12 +169,6 @@ export const useSelectionGroupModel = createModelHook({
   const events = {
     ...listModel.events,
     ...(config.mode === 'single' ? selectFollowsFocusEvents : {}),
-    // A click moves the cursor too, but it selects through `useListItemSelect`. Clearing the flag
-    // keeps a cursor move that didn't come from the keyboard from selecting a second time.
-    goTo: asWrappedEvent((data: {id: string}) => {
-      shouldSelectCursorRef.current = false;
-      listModel.events.goTo(data);
-    }),
   };
 
   const {cursorId} = listModel.state;
@@ -183,9 +182,10 @@ export const useSelectionGroupModel = createModelHook({
     if (typeof cursorId === 'string' && cursorId && !state.nonInteractiveIds.includes(cursorId)) {
       listModel.events.select({id: cursorId});
     }
-    // Selection follows the cursor, so this should only run when the cursor moves.
+    // Selection follows the cursor, so this should only run after a navigation event, whether or
+    // not that event moved the cursor.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursorId]);
+  }, [cursorId, navigationCount]);
 
   return {
     ...listModel,

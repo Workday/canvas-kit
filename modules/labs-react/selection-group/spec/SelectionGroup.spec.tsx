@@ -63,6 +63,22 @@ describe('SelectionGroup', () => {
       expect(screen.getByRole('radio', {name: 'Option B'})).toHaveAttribute('aria-checked', 'true');
     });
 
+    it('should select on arrow even when the cursor cannot move', () => {
+      render(
+        <SelectionGroup mode="single">
+          <SelectionGroup.List aria-label="Options">
+            <SelectionGroup.Item data-id="option-a">Option A</SelectionGroup.Item>
+          </SelectionGroup.List>
+        </SelectionGroup>
+      );
+
+      const only = screen.getByRole('radio', {name: 'Option A'});
+      only.focus();
+      fireEvent.keyDown(only, {key: 'ArrowRight'});
+
+      expect(only).toHaveAttribute('aria-checked', 'true');
+    });
+
     it('should use a single roving tab stop', () => {
       renderGroup({initialSelectedIds: ['option-a']});
 
