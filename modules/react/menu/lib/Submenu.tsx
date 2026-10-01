@@ -40,9 +40,32 @@ export interface SubmenuProps
 export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuPopper,
-})<ExtractProps<typeof Popper>>(({children, ...elemProps}) => {
+})<ExtractProps<typeof Popper>>(({children, fallbackPlacements, popperOptions, ...elemProps}) => {
+  const submenuPopperOptions = React.useMemo(
+    () => ({
+      ...popperOptions,
+      modifiers: [
+        // Keep the default submenu beside its parent when scrolling clips the target vertically.
+        // Explicit fallback placements retain the caller's existing positioning behavior.
+        ...(fallbackPlacements === undefined
+          ? [
+              {name: 'fallbackModifier', enabled: false},
+              {name: 'flip', options: {altAxis: false, flipVariations: false}},
+            ]
+          : []),
+        ...(popperOptions?.modifiers ?? defaultMenuPopperOptions.modifiers),
+      ],
+    }),
+    [fallbackPlacements, popperOptions]
+  );
+
   return (
-    <Popper placement="right-start" popperOptions={defaultMenuPopperOptions} {...elemProps}>
+    <Popper
+      placement="right-start"
+      fallbackPlacements={fallbackPlacements}
+      popperOptions={submenuPopperOptions}
+      {...elemProps}
+    >
       {children}
     </Popper>
   );
