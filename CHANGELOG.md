@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.3](https://github.com/Workday/canvas-kit/releases/tag/v16.1.3) (2026-10-01)
+
+### Documentation
+
+- docs(examples): Refresh form examples and add a form validation a11y guide ([#4175](https://github.com/Workday/canvas-kit/pull/4175)) ([@williamjstanton](https://github.com/williamjstanton), [@cursoragent](https://github.com/cursoragent), [@coderabbitai[bot]](https://github.com/coderabbitai[bot]))
+  Storybook: **Examples / Forms** is gone. Density lives under **Examples**. Form validation with React Hook Form now lives under **Guides / Accessibility / Form Validation**.
+
+
 ## [v16.1.2](https://github.com/Workday/canvas-kit/releases/tag/v16.1.2) (2026-10-01)
 
 ### Documentation
