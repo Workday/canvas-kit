@@ -121,8 +121,11 @@ via the `dir` attribute on a parent element.
 - Multi-select groups render `role="group"` with `role="checkbox"` items and `aria-checked`, and
   follow the [checkbox keyboard pattern](https://www.w3.org/WAI/ARIA/apg/patterns/checkbox/): every
   item is in the tab order and <kbd>Space</kbd> toggles it.
-- The glyph always renders, in both modes and in both selected states. Selection is communicated by
-  the checkmark inside the glyph _and_ a color change, never by color alone.
+- The icon always renders, in both modes and in both selected states. Selection is communicated by
+  the checkmark inside the icon _and_ a color change, never by color alone.
+- `aria-invalid` is only set on a single-select group. The `group` role that a multi-select group
+  renders does not allow the attribute, so a multi-select group communicates its error state
+  through the text referenced by `aria-describedby`. Make sure that text names the problem.
 - A group label is required. Provide it with `aria-label` or `aria-labelledby` on
   `SelectionGroup.List`, or wrap the group in a `FormField` with a visible label. The label must
   state the selection mode — "Select one" versus "Select all that apply" — so the mode is clear

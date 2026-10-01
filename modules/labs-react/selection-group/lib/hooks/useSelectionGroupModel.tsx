@@ -1,4 +1,7 @@
+import React from 'react';
+
 import {
+  SelectionManager,
   multiSelectionManager,
   singleSelectionManager,
   useListModel,
@@ -10,29 +13,10 @@ export type SelectionGroupWidth = 'content' | 'equal' | 'column';
 export type SelectionGroupError = 'error' | 'caution';
 
 /**
- * The cursor events that keyboard navigation dispatches, mapped to the navigation manager method
- * that resolves the index they land on. A single-select group is a radio group, so selection
- * follows focus while arrowing through items. Only these events select - `goTo` is also used to
- * place the initial focus stop and to respond to clicks, neither of which should select.
- */
-const navigationEvents = {
-  goToNext: 'getNext',
-  goToPrevious: 'getPrevious',
-  goToFirst: 'getFirst',
-  goToLast: 'getLast',
-  goToNextRow: 'getNextRow',
-  goToPreviousRow: 'getPreviousRow',
-  goToFirstOfRow: 'getFirstOfRow',
-  goToLastOfRow: 'getLastOfRow',
-  goToNextPage: 'getNextPage',
-  goToPreviousPage: 'getPreviousPage',
-} as const;
-
-/**
  * `createModelHook` runs a model's guards and callbacks unless the event it is wrapping is already
- * a wrapped event. The overrides below delegate to wrapped events from the list model, which has
- * the same config, so they are marked as wrapped too. Without this, `onSelect` and the `onGoTo*`
- * callbacks would fire twice for a single interaction.
+ * a wrapped event. The overrides below delegate to events from the list model, which runs those
+ * same guards and callbacks because both models share a config, so they are marked as wrapped too.
+ * Without this, the `onGoTo*` callbacks would fire twice for a single key press.
  */
 const asWrappedEvent = <T extends (...args: any[]) => void>(fn: T): T => {
   (fn as any)._wrapped = true;
@@ -50,9 +34,22 @@ export const useSelectionGroupModel = createModelHook({
     /**
      * The selection mode of the group. `single` allows one selection at a time and behaves like a
      * radio group. `multiple` allows more than one selection and behaves like a checkbox group.
+     *
+     * This drives more than selection - it also determines the `radio`/`checkbox` role of an item,
+     * the `radiogroup`/`group` role of the list, whether the group is one tab stop or many, and the
+     * shape of the item's icon. The matching `selection` manager is derived from it, so most groups
+     * should set `mode` rather than passing a `selection` manager directly.
      * @default 'single'
      */
     mode: 'single' as SelectionGroupMode,
+    /**
+     * The selection manager the underlying list model uses. Leave this unset unless you need
+     * selection to behave differently from what `mode` provides - `mode` picks
+     * `singleSelectionManager` or `multiSelectionManager` for you. Setting this does not change
+     * the roles or keyboard behavior that `mode` controls.
+     * @default `singleSelectionManager`, or `multiSelectionManager` when `mode` is `'multiple'`
+     */
+    selection: undefined as SelectionManager | undefined,
     /**
      * Controls how item widths are calculated within the group. All items in a group use the same
      * sizing method.
@@ -90,7 +87,9 @@ export const useSelectionGroupModel = createModelHook({
      */
     error: undefined as SelectionGroupError | undefined,
     /**
-     * If true, the group is marked invalid to assistive technology.
+     * If true, the group is marked invalid to assistive technology. Only applies when `mode` is
+     * `'single'`, because `aria-invalid` is not allowed on the `group` role that a multi-select
+     * group renders.
      * @default true when `error` is `'error'`, otherwise undefined
      */
     'aria-invalid': undefined as boolean | undefined,
@@ -108,14 +107,9 @@ export const useSelectionGroupModel = createModelHook({
   requiredConfig: useListModel.requiredConfig,
 })(config => {
   const isControlled = config.selectedIds !== undefined;
-  // `selection` always has a value because the list model defaults it to `singleSelectionManager`,
-  // so `mode` picks the manager unless a custom one was passed in.
   const selection =
-    config.selection && config.selection !== singleSelectionManager
-      ? config.selection
-      : config.mode === 'multiple'
-        ? multiSelectionManager
-        : singleSelectionManager;
+    config.selection ||
+    (config.mode === 'multiple' ? multiSelectionManager : singleSelectionManager);
 
   const listModel = useListModel(
     useListModel.mergeConfig(config, {
@@ -129,6 +123,10 @@ export const useSelectionGroupModel = createModelHook({
     })
   );
 
+  // A single-select group is a radio group, so selection follows focus while arrowing through
+  // items. The cursor events below set this, and the effect selects whatever the cursor landed on.
+  const shouldSelectCursorRef = React.useRef(false);
+
   const state = {
     ...listModel.state,
     mode: config.mode,
@@ -140,31 +138,54 @@ export const useSelectionGroupModel = createModelHook({
     selectedIds: isControlled ? config.selectedIds! : listModel.state.selectedIds,
   };
 
+  // The cursor model already maps each of its events to a navigation method, so the events are
+  // read off the model rather than restated here. Every cursor event except the direct `goTo`
+  // moves the cursor through the navigation manager. `goTo` is excluded because it also places the
+  // initial focus stop and responds to clicks, neither of which should select.
+  type NavigationEvent = Exclude<Extract<keyof typeof listModel.events, `goTo${string}`>, 'goTo'>;
+
+  const navigationEvents = Object.keys(listModel.events).filter(
+    name => name.startsWith('goTo') && name !== 'goTo'
+  ) as NavigationEvent[];
+
+  const selectFollowsFocusEvents = navigationEvents.reduce(
+    (result, eventName) => {
+      result[eventName] = asWrappedEvent(() => {
+        // Let the cursor model resolve the target and move the cursor. Navigation skips
+        // `nonInteractiveIds`, so this can't land selection on a non-interactive item.
+        listModel.events[eventName]();
+        shouldSelectCursorRef.current = true;
+      });
+      return result;
+    },
+    {} as Record<NavigationEvent, () => void>
+  );
+
   const events = {
     ...listModel.events,
-    ...(config.mode === 'single'
-      ? (Object.keys(navigationEvents) as (keyof typeof navigationEvents)[]).reduce(
-          (result, eventName) => {
-            result[eventName] = asWrappedEvent(() => {
-              // Resolve the target before moving the cursor - `cursorIndexRef` is updated by an
-              // effect and still points at the previous item at this point.
-              const index = listModel.navigation[navigationEvents[eventName]](
-                listModel.state.cursorIndexRef.current,
-                {state: listModel.state}
-              );
-              listModel.events[eventName]();
-
-              const item = listModel.state.items[index];
-              if (item) {
-                listModel.events.select({id: item.id});
-              }
-            });
-            return result;
-          },
-          {} as Record<keyof typeof navigationEvents, () => void>
-        )
-      : {}),
+    ...(config.mode === 'single' ? selectFollowsFocusEvents : {}),
+    // A click moves the cursor too, but it selects through `useListItemSelect`. Clearing the flag
+    // keeps a cursor move that didn't come from the keyboard from selecting a second time.
+    goTo: asWrappedEvent((data: {id: string}) => {
+      shouldSelectCursorRef.current = false;
+      listModel.events.goTo(data);
+    }),
   };
+
+  const {cursorId} = listModel.state;
+
+  React.useEffect(() => {
+    if (!shouldSelectCursorRef.current) {
+      return;
+    }
+    shouldSelectCursorRef.current = false;
+
+    if (typeof cursorId === 'string' && cursorId && !state.nonInteractiveIds.includes(cursorId)) {
+      listModel.events.select({id: cursorId});
+    }
+    // Selection follows the cursor, so this should only run when the cursor moves.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursorId]);
 
   return {
     ...listModel,

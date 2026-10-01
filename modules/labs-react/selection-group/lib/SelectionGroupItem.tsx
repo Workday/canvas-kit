@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import {isSelected} from '@workday/canvas-kit-react/collection';
-import {cornerShapeStencil, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {SelectionGroupGlyph} from './SelectionGroupGlyph';
+import {SelectionGroupIcon} from './SelectionGroupIcon';
 import {useSelectionGroupItem} from './hooks/useSelectionGroupItem';
 import {useSelectionGroupModel} from './hooks/useSelectionGroupModel';
 
@@ -33,12 +33,6 @@ export interface SelectionGroupItemProps {
    * append the index at the end. Only set this for advanced cases.
    */
   id?: string;
-  /**
-   * If true, the item cannot be selected. Prefer passing the item's id to the group's
-   * `nonInteractiveIds` instead, which also makes keyboard navigation skip over the item.
-   * @default false
-   */
-  disabled?: boolean;
 }
 
 export const selectionGroupItemStencil = createStencil({
@@ -48,26 +42,17 @@ export const selectionGroupItemStencil = createStencil({
   },
   base: ({labelPart}) => ({
     [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
-    fontFamily: system.fontFamily.default,
-    fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    ...system.legacy.type.subtext.lg,
     display: 'inline-flex',
     alignItems: 'center',
     gap: base.legacy.size75,
-    boxSizing: 'border-box',
-    borderWidth: px2rem(1),
-    borderStyle: 'solid',
-    borderColor: system.color.border.default,
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
     padding: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
     backgroundColor: system.legacy.color.surface.default,
     color: system.color.fg.strong,
     cursor: 'pointer',
     textAlign: 'start',
     transition: 'background-color 80ms ease, color 80ms ease, border-color 80ms ease',
-    WebkitFontSmoothing: 'antialiased',
-    MozOsxFontSmoothing: 'grayscale',
     [systemIconStencil.vars.color]: 'currentColor',
     [systemIconStencil.vars.accentColor]: 'currentColor',
 
@@ -83,11 +68,10 @@ export const selectionGroupItemStencil = createStencil({
       backgroundColor: system.legacy.color.surface.overlay.pressed.default,
     },
 
-    // The focus ring sits outside the item so it never competes with the selected background, and
-    // so a selected item and a focused item remain visually distinct.
+    // The ring sits outside the item so it never competes with the selected background, and so a
+    // selected item and a focused item remain visually distinct.
     '&:is(:focus-visible, .focus)': {
-      outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
-      outlineOffset: px2rem(1),
+      ...focusRing({separation: 1}),
     },
 
     '&:is(:disabled, .disabled)': {
@@ -103,7 +87,7 @@ export const selectionGroupItemStencil = createStencil({
     // transparent border keeps the item the same size as an unselected one.
     '&[aria-checked="true"]': {
       backgroundColor: system.legacy.color.brand.surface.selected,
-      borderColor: 'transparent',
+      border: `${px2rem(1)} solid transparent`,
       color: system.legacy.color.brand.fg.selected,
 
       '&:is(:hover, .hover)': {
@@ -118,12 +102,6 @@ export const selectionGroupItemStencil = createStencil({
         backgroundColor: system.legacy.color.brand.surface.selected,
         color: system.legacy.color.brand.fg.selected,
       },
-    },
-
-    [`[data-whatinput='mouse'] &:focus,
-      [data-whatinput='touch'] &:focus,
-      [data-whatinput='pointer'] &:focus`]: {
-      outline: 'none',
     },
   }),
   modifiers: {
@@ -158,7 +136,7 @@ export const SelectionGroupItem = createSubcomponent('button')({
         })
       )}
     >
-      <SelectionGroupGlyph mode={model.state.mode} selected={selected} />
+      <SelectionGroupIcon mode={model.state.mode} selected={selected} />
       {children && <span {...selectionGroupItemStencil.parts.label}>{children}</span>}
     </Element>
   );

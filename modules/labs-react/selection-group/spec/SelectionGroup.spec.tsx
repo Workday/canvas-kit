@@ -123,22 +123,33 @@ describe('SelectionGroup', () => {
       });
     });
 
-    it('should not call onSelect when a disabled item is clicked', () => {
+    it('should disable an item listed in nonInteractiveIds', () => {
+      renderGroup({nonInteractiveIds: ['option-b']});
+
+      expect(screen.getByRole('radio', {name: 'Option B'})).toBeDisabled();
+      expect(screen.getByRole('radio', {name: 'Option A'})).not.toBeDisabled();
+    });
+
+    it('should not call onSelect when a non-interactive item is clicked', () => {
       const onSelect = vi.fn();
-      render(
-        <SelectionGroup mode="single" onSelect={onSelect}>
-          <SelectionGroup.List aria-label="Options">
-            <SelectionGroup.Item data-id="option-a">Option A</SelectionGroup.Item>
-            <SelectionGroup.Item data-id="option-b" disabled>
-              Option B
-            </SelectionGroup.Item>
-          </SelectionGroup.List>
-        </SelectionGroup>
-      );
+      renderGroup({nonInteractiveIds: ['option-b'], onSelect});
 
       fireEvent.click(screen.getByRole('radio', {name: 'Option B'}));
 
       expect(onSelect).not.toHaveBeenCalled();
+    });
+
+    it('should not select a non-interactive item when arrowing onto it', () => {
+      renderGroup({nonInteractiveIds: ['option-b'], initialSelectedIds: ['option-a']});
+
+      const first = screen.getByRole('radio', {name: 'Option A'});
+      first.focus();
+      fireEvent.keyDown(first, {key: 'ArrowRight'});
+
+      expect(screen.getByRole('radio', {name: 'Option B'})).toHaveAttribute(
+        'aria-checked',
+        'false'
+      );
     });
   });
 
@@ -173,6 +184,12 @@ describe('SelectionGroup', () => {
       renderGroup({error: 'caution'});
 
       expect(screen.getByRole('radiogroup')).not.toHaveAttribute('aria-invalid');
+    });
+
+    it('should not set aria-invalid on a multi-select group, which does not allow it', () => {
+      renderGroup({mode: 'multiple', error: 'error'});
+
+      expect(screen.getByRole('group')).not.toHaveAttribute('aria-invalid');
     });
   });
 });

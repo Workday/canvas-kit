@@ -71,7 +71,9 @@ export const SelectionGroupList = createSubcomponent('div')({
   return (
     <Element
       role={model.state.mode === 'single' ? 'radiogroup' : 'group'}
-      aria-invalid={model.state['aria-invalid']}
+      // `aria-invalid` is not an allowed attribute of the `group` role, so a multi-select group
+      // conveys its error state through the text referenced by `aria-describedby` instead.
+      aria-invalid={model.state.mode === 'single' ? model.state['aria-invalid'] : undefined}
       aria-describedby={model.state['aria-describedby']}
       {...handleCsProp(
         elemProps,
