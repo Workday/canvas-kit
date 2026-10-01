@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.2](https://github.com/Workday/canvas-kit/releases/tag/v16.1.2) (2026-10-01)
+
+### Documentation
+
+- docs(expandable): Expand accessibility guidance for AI codegen ([#4174](https://github.com/Workday/canvas-kit/pull/4174)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.1](https://github.com/Workday/canvas-kit/releases/tag/v16.1.1) (2026-09-15)
 
 ### Infrastructure
