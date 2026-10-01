@@ -2549,6 +2549,36 @@
       "storySlug": "select"
     },
     {
+      "name": "SelectionGroup",
+      "packageName": "@workday/canvas-kit-labs-react",
+      "subpath": "selection-group",
+      "canonicalImport": "@workday/canvas-kit-labs-react/selection-group",
+      "status": "labs",
+      "exports": [
+        "SelectionGroup",
+        "SelectionGroupItem",
+        "SelectionGroupList",
+        "selectionGroupItemStencil",
+        "selectionGroupListStencil",
+        "type SelectionGroupError",
+        "type SelectionGroupItemProps",
+        "type SelectionGroupListProps",
+        "type SelectionGroupMode",
+        "type SelectionGroupProps",
+        "type SelectionGroupWidth",
+        "useSelectionGroupItem",
+        "useSelectionGroupModel"
+      ],
+      "deprecated": false,
+      "recommended": true,
+      "deprecatedExports": [],
+      "deprecatedProps": [],
+      "aliases": [
+        "selection-group",
+        "selection-group"
+      ]
+    },
+    {
       "name": "SidePanel",
       "slug": "side-panel",
       "packageName": "@workday/canvas-kit-react",
