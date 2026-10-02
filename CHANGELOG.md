@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.5](https://github.com/Workday/canvas-kit/releases/tag/v16.1.5) (2026-10-02)
+
+### Documentation
+
+- docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.4](https://github.com/Workday/canvas-kit/releases/tag/v16.1.4) (2026-10-01)
 
 ### Documentation
