@@ -118,47 +118,145 @@ tokens with the fallback being `brand.primary.**`.
 
 ## Accessibility
 
-Our button components render semantic HTML `<button>` elements to the browser DOM. This means that
-ARIA roles won't be necessary in most cases, and `onClick` listeners will automatically support the
-Enter and Space keys for keyboard interactions.
+The primary accessibility goal is a visible, programmatically determinable name on a native control
+that performs an in-page action (submit, open, dismiss, and similar). This page covers
+**`PrimaryButton`**, **`SecondaryButton`**, **`TertiaryButton`**, and **`DeleteButton`**. Use
+[Hyperlink](https://workday.github.io/canvas-kit/?path=/docs/components-hyperlink--docs) when the
+control navigates to another URL or in-page location. For
+[Toolbar](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-toolbar--docs)
+icon and dropdown controls, see that component’s documentation. For a control that opens a menu,
+compose [Menu](/components/popups/menu/) so **`Menu.Target`** wires popup state. When users choose
+one value from **two or more** mutually exclusive options, use
+[Segmented Control](/components/buttons/segmented-control/) (`SegmentedControl.List` with multiple
+**`SegmentedControl.Item`** components)—not a lone variant button.
 
-[Button Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/button/)
+See the [Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/button/) and Canvas Kit
+[Accessibility overview](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-overview--docs).
 
-- An `aria-label` is only necessary for icon-only buttons in most cases. Using
-  [Canvas Kit's tooltip component](/components/popups/tooltip/) will handle this for you, and all
-  users will be able to see the label for the button.
-- When button designs have 2 toggle states, an `aria-pressed={true | false}` property is required
-  for screen reader support. For example, see Canvas Kit's
-  [Segmented Control component](/components/buttons/segmented-control/).
-- When buttons have an attached menu, an `aria-haspopup="true"` property is required. Using
-  [Canvas Kit's Menu component](/components/popups/menu/) will handle this for you.
-- The icons used in text buttons are decorative in most cases and include ARIA `role="presentation"`
-  and `focusable="false"`. In some special cases where an icon does add meaning, you may be required
-  to change the `role` and add an `aria-label` to the icon for equivalent screen reader support.
+### Minimum Accessible Structure
 
-### Disabled Buttons
+The following matches the [PrimaryButton](#primarybutton) examples: visible text for the default case,
+text plus a decorative icon, and an icon-only control with an accessible name.
 
-- Disabled buttons use the `disabled` attribute, removing them from the tab order.
-- Disabled styling is exempt from WCAG contrast requirements.
+```tsx
+import {PrimaryButton} from '@workday/canvas-kit-react/button';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
+import {plusIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 
-### Screen Reader Experience
+<PrimaryButton>Save</PrimaryButton>;
 
-- Button text content is announced along with the button role (e.g., "Primary, button").
-- Icon-only buttons announce the `aria-label` value along with the button role.
-- Toggle buttons announce their pressed/unpressed state (e.g., "Activity Stream, toggle button,
-  pressed" and check out the [Segmented Control component](/components/buttons/segmented-control/)).
+<PrimaryButton icon={plusIcon}>Add item</PrimaryButton>;
 
-### Touch Target Size
+<Tooltip title="Related Actions">
+  <PrimaryButton icon={relatedActionsVerticalIcon} />
+</Tooltip>;
+```
 
-- All buttons meet the minimum 24px by 24px touch target size requirement for mobile accessibility.
-- Button padding ensures adequate spacing between interactive elements to prevent accidental
-  activation.
+For icon-only buttons, prefer **`Tooltip`** with **`title`** and default `type="label"` (which sets
+**`aria-label`** from **`title`** so sighted users also see the label). If the spec explicitly says
+not to use a tooltip, set **`aria-label`** on the button instead. The same patterns apply to
+**`SecondaryButton`**, **`TertiaryButton`**, and **`DeleteButton`**.
 
-### Button Groups
+### Built-in Behaviors
 
-- Related buttons can be grouped together with HTML unordered list elements or with `<fieldset>` and
-  `<legend>` elements. This can help give additional context to screen readers about the purpose of
-  the group.
+Canvas Kit applies these automatically on **`PrimaryButton`**, **`SecondaryButton`**,
+**`TertiaryButton`**, and **`DeleteButton`**. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by button components_):
+
+- **Variant buttons**: Render a native `<button type="button">` (via **`BaseButton`**). Do not add
+  `role="button"`.
+- **Visible label**: Button text is rendered in **`BaseButton.Label`** (`<span>`) inside the
+  `<button>` so its text contributes to the accessible name.
+- **`icon`**: Renders **`BaseButton.Icon`** (`SystemIcon`). Canvas Kit icon SVG markup uses
+  `role="presentation"` and `focusable="false"`, so icons beside visible text are not announced
+  separately.
+- **`disabled`**: Maps to the native `disabled` attribute; disabled buttons are skipped in the tab
+  order.
+- **Focus**: Visible focus styling uses `:focus-visible` (and a `.focus` class twin for visual
+  testing).
+- **`ref`**: Forwards to the underlying `<button>`.
+- **Native button attributes**: Standard props (for example `aria-label`, `aria-pressed`,
+  `aria-expanded`, `id`, `onClick`) pass through to the `<button>` unless you change the element with
+  **`as`**. Variant buttons do not set **`aria-pressed`** unless you pass it for a deliberate toggle
+  design.
+- **Menus**: Variant buttons do **not** set `aria-haspopup` or `aria-expanded`.
+  **`Menu.Target`** (and related Menu APIs) apply those when a menu is attached.
+
+**Keyboard** (_native `<button>` behavior_):
+
+Variant buttons use native button keyboard support: <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd>
+for focus order, and <kbd>Enter</kbd> or <kbd>Space</kbd> to activate. Do not replace the
+`<button>` with a non-focusable element or suppress activation keys.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the button name (visible text and/or `aria-label`) and
+  role (for example, "Save, button").
+- Icons rendered with **`icon`** next to visible text are not announced as separate images.
+- Disabled buttons are announced as unavailable and are not in the tab order.
+- When the button opens a menu through **`Menu`**, **`Menu.Target`** exposes popup and expanded
+  state; see [Menu accessibility](/components/popups/menu/#accessibility).
+
+### Accessibility Requirements
+
+Required in application code for an accessible button. Rows marked _(conditional)_ apply only when the
+situation matches—otherwise omit.
+
+**If no design spec is provided:** use a **`PrimaryButton`** (or the variant that matches the design)
+with non-empty visible text. Omit **`icon`**, **`disabled`**, **`Tooltip`**, **`aria-label`**, custom
+**`id`**, **`as`**, and a **`ref`** unless the spec requires them.
+
+| Requirement                            | How to satisfy                                                                                                                                                                                                                                                                 |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Accessible name                        | Non-empty visible text inside the variant button                                                                                                                                                                                                                               |
+| Icon-only name _(conditional)_         | **`Tooltip`** with `type="label"` and **`title`** (preferred; see [PrimaryButton](#primarybutton)), or **`aria-label`** when the spec explicitly says not to use a tooltip. Do not use `type="muted"` on **`Tooltip`**—it does not set an accessible name                      |
+| Variant choice                         | **`PrimaryButton`**, **`SecondaryButton`**, **`TertiaryButton`**, or **`DeleteButton`** per design; **`DeleteButton`** only for destructive actions                                                                                                                            |
+| Decorative icon _(conditional)_        | **`icon`** with visible text—no extra ARIA on the icon; meaning comes from button text                                                                                                                                                                                         |
+| Mutually exclusive group _(conditional)_ | [Segmented Control](/components/buttons/segmented-control/) with two or more **`SegmentedControl.Item`** siblings and **`aria-label`** on **`SegmentedControl.List`**—not for a single button or lone on/off control                                                         |
+| Toggle pressed state _(conditional)_   | **`aria-pressed`** on a variant button for a standalone on/off control, or [Toolbar](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-toolbar--docs) per toolbar specs—not for one-shot actions (Save, Delete, Open)                                       |
+| Menu trigger _(conditional)_           | **`Menu`** + **`Menu.Target`** (or **`Menu.ContextTarget`**) as the button—do not hand-wire `aria-haspopup` / `aria-expanded` without the Menu model; see [Menu accessibility](/components/popups/menu/#accessibility)                                                       |
+| Related button groups _(conditional)_  | Semantic grouping (`<ul>` / `<li>` or `<fieldset>` / `<legend>`) when several buttons share one question or legend; each control still needs its own accessible name                                                                                                            |
+| Disabled _(conditional)_               | Native **`disabled`** on the variant button when the spec marks the action unavailable                                                                                                                                                                                       |
+| Navigation _(conditional)_           | [Hyperlink](https://workday.github.io/canvas-kit/?path=/docs/components-hyperlink--docs) instead of a variant button when the action is navigation                                                                                                                             |
+| Programmatic focus _(conditional)_     | `ref` on the variant button and `focus()` only when the product must move focus after an action—omit by default                                                                                                                                                                |
+
+**Summary for code generation:**
+
+- **REQUIRED:** variant button with a non-empty accessible name (visible text for text buttons; for
+  icon-only, **`Tooltip`** with `type="label"` preferred, or **`aria-label`** when the spec says not
+  to use a tooltip)
+- **CONDITIONAL:** **`icon`**; icon-only naming; **`disabled`**; **`aria-pressed`** for toggle
+  specs; **`Menu`** for menus; **`Hyperlink`** for navigation; grouping markup; programmatic focus
+  via `ref`
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Use a `<div>` or `<span>` with `onClick` instead of a variant button—use **`PrimaryButton`**, **`SecondaryButton`**, **`TertiaryButton`**, or **`DeleteButton`** so keyboard and assistive technology get native `<button>` behavior
+- Add `role="button"` on variant buttons—the control is already a `<button>`
+- Use a variant button (or `type="submit"` without an intentional form action) for URL
+  navigation—use
+  [Hyperlink](https://workday.github.io/canvas-kit/?path=/docs/components-hyperlink--docs)
+- Leave icon-only buttons without a name—prefer **`Tooltip`** with `type="label"`, or
+  **`aria-label`** when the spec says not to use a tooltip; do not rely on the icon graphic alone
+- Use **`Tooltip`** with `type="muted"` on icon-only buttons—muted tooltips do not set an accessible
+  name
+- Use **`aria-label`** on icon-only buttons when the spec allows tooltips—prefer **`Tooltip`** with
+  `type="label"` unless the spec explicitly says not to use a tooltip
+- Set `aria-haspopup` or `aria-expanded` on a variant button without **`Menu`**—use
+  **`Menu.Target`** so open state stays in sync with the menu model
+- Set **`aria-pressed`** on one-shot actions (Save, Delete, Open)—see **Toggle pressed state** in the
+  requirements table
+- Use **`SegmentedControl`** for a single option or a lone on/off control—see **Mutually exclusive
+  group** in the requirements table
+- Add `aria-hidden` or change the **`role`** on **`icon`** when visible button text already conveys
+  meaning—Canvas Kit icons are presentational.
+- Use **`aria-disabled`** instead of **`disabled`**—variant buttons map unavailability to the
+  native **`disabled`** attribute
+- Duplicate menu ARIA that **`Menu.Target`** already applies
 
 ## Component API
 
