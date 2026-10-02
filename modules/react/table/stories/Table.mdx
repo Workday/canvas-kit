@@ -6,6 +6,7 @@ import TableStoriesMeta from './Table.stories';
 import {BaseHtmlTable} from './examples/BaseHtmlTable';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
+import {DraggableRows} from './examples/DraggableRows';
 import {FixedColumn} from './examples/FixedColumn';
 import {RightToLeft} from './examples/RightToLeft';
 
@@ -50,6 +51,15 @@ for
 purposes.
 
 <ExampleCodeBlock code={Basic} />
+
+### Draggable Rows
+
+Use a dedicated drag-handle button when rows can be reordered. Pointer users can drag the handle.
+Keyboard users can focus a handle, press Space or Enter to pick up the row, use the Up and Down
+Arrow keys to move it, then press Space or Enter to drop it. Pressing Escape cancels the move. The
+example also provides contextual screen reader instructions and live-region announcements.
+
+<ExampleCodeBlock code={DraggableRows} />
 
 ### Fixed Column
 
