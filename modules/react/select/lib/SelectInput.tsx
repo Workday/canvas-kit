@@ -68,6 +68,12 @@ export const selectInputStencil = createStencil({
       '&::selection': {
         backgroundColor: 'transparent',
       },
+      '&:is(:disabled, .disabled)': {
+        opacity: system.opacity.disabled,
+        '&::placeholder': {
+          opacity: system.opacity.disabled,
+        },
+      },
     },
     [caretPart]: {
       [systemIconStencil.vars.color]: system.color.fg.default,
