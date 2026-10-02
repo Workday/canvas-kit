@@ -14,7 +14,7 @@ import {
   subModelHook,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-import {Popper} from '@workday/canvas-kit-react/popup';
+import {Placement, Popper} from '@workday/canvas-kit-react/popup';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {MenuCard} from './MenuCard';
@@ -40,36 +40,62 @@ export interface SubmenuProps
 export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuPopper,
-})<ExtractProps<typeof Popper>>(({children, fallbackPlacements, popperOptions, ...elemProps}) => {
-  const submenuPopperOptions = React.useMemo(
-    () => ({
-      ...popperOptions,
-      modifiers: [
-        // Keep the default submenu beside its parent when scrolling clips the target vertically.
-        // Explicit fallback placements retain the caller's existing positioning behavior.
-        ...(fallbackPlacements === undefined
-          ? [
-              {name: 'fallbackModifier', enabled: false},
-              {name: 'flip', options: {altAxis: false, flipVariations: false}},
-            ]
-          : []),
-        ...(popperOptions?.modifiers ?? defaultMenuPopperOptions.modifiers),
-      ],
-    }),
-    [fallbackPlacements, popperOptions]
-  );
+})<ExtractProps<typeof Popper>>(
+  ({children, fallbackPlacements, popperOptions, ...elemProps}, Element, model) => {
+    const parentContainerRef = model.UNSTABLE_parentModel?.state.containerRef;
+    const targetRef = model.state.targetRef;
+    const submenuPopperOptions = React.useMemo(
+      () => ({
+        ...popperOptions,
+        modifiers: [
+          // Keep the default submenu beside its parent when scrolling clips the target vertically.
+          // Explicit fallback placements retain the caller's existing positioning behavior.
+          ...(fallbackPlacements === undefined
+            ? [
+                {name: 'fallbackModifier', enabled: false},
+                {name: 'flip', options: {altAxis: false, flipVariations: false}},
+              ]
+            : []),
+          ...(popperOptions?.modifiers ?? [
+            {
+              name: 'offset',
+              options: {
+                offset: ({placement}: {placement: Placement}) => {
+                  const [skidding, distance] =
+                    defaultMenuPopperOptions.modifiers[0].options.offset();
+                  const parent = parentContainerRef?.current?.getBoundingClientRect();
+                  const target = targetRef.current?.getBoundingClientRect();
+                  // Scrollbar gutters narrow the target without narrowing the parent menu.
+                  const gutter =
+                    parent && target
+                      ? placement.startsWith('right')
+                        ? parent.right - target.right
+                        : placement.startsWith('left')
+                          ? target.left - parent.left
+                          : 0
+                      : 0;
+                  return [skidding, distance + Math.max(0, gutter)];
+                },
+              },
+            },
+          ]),
+        ],
+      }),
+      [fallbackPlacements, popperOptions, parentContainerRef, targetRef]
+    );
 
-  return (
-    <Popper
-      placement="right-start"
-      fallbackPlacements={fallbackPlacements}
-      popperOptions={submenuPopperOptions}
-      {...elemProps}
-    >
-      {children}
-    </Popper>
-  );
-});
+    return (
+      <Popper
+        placement="right-start"
+        fallbackPlacements={fallbackPlacements}
+        popperOptions={submenuPopperOptions}
+        {...elemProps}
+      >
+        {children}
+      </Popper>
+    );
+  }
+);
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef<number | undefined>(undefined);

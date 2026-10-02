@@ -8,9 +8,28 @@ describe('Submenu placement', () => {
       context(`given a scrollable ${dir} menu at the ${atEnd ? 'end' : 'start'} edge`, () => {
         beforeEach(() => {
           cy.mount(<ScrollableSubmenu dir={dir} atEnd={atEnd} />);
+          cy.document().then(document => {
+            const style = document.createElement('style');
+            style.id = 'submenu-scrollbar-test';
+            style.textContent = `
+              [data-testid="scrollable-menu"] [data-part="list-box-container"] {
+                scrollbar-gutter: stable both-edges;
+              }
+              [data-testid="scrollable-menu"] [data-part="list-box-container"]::-webkit-scrollbar {
+                width: 16px;
+              }
+            `;
+            document.head.appendChild(style);
+          });
           cy.findByRole('button', {name: 'Open Menu'}).click();
           cy.findByRole('menuitem', {name: 'More Items'}).realHover();
           cy.findByTestId('submenu').should('be.visible');
+        });
+
+        afterEach(() => {
+          cy.document().then(document =>
+            document.getElementById('submenu-scrollbar-test')?.remove()
+          );
         });
 
         it('should pass axe checks', () => {
