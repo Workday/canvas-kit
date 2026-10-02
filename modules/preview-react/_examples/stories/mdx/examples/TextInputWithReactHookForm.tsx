@@ -1,13 +1,18 @@
 import React from 'react';
-import {FieldErrorsImpl, useForm} from 'react-hook-form';
-import {SchemaOf, object, string} from 'yup';
+import {FieldErrors, Resolver, useForm} from 'react-hook-form';
+import {SchemaOf, ValidationError, object, string} from 'yup';
 
 import {PrimaryButton, TertiaryButton} from '@workday/canvas-kit-react/button';
-import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {ErrorType, useUniqueId} from '@workday/canvas-kit-react/common';
+import {
+  FormField,
+  useFormFieldInput,
+  useFormFieldModel,
+} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
-import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {visibleIcon, visibleStrikethroughIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -18,31 +23,30 @@ const styles = createStyles({
   alignItems: 'flex-start',
 });
 
-type YupValidationResolver = <T extends {}>(
-  validationSchema: SchemaOf<T>
-) => (data: T) => Promise<{values: T; errors: {}} | {values: {}; errors: FieldErrorsImpl<T>}>;
-
-const useYupValidationResolver: YupValidationResolver = validationSchema => {
-  return React.useCallback(
+const useYupValidationResolver = <T extends {}>(validationSchema: SchemaOf<T>): Resolver<T> => {
+  return React.useCallback<Resolver<T>>(
     async data => {
       try {
-        const values = await validationSchema.validate(data, {abortEarly: false});
-        return {values, errors: {}};
-      } catch (errors) {
-        return {
-          values: {},
-          //@ts-ignore
-          errors: errors.inner.reduce(
-            (allErrors, currentError) => ({
-              ...allErrors,
-              [currentError.path]: {
-                type: currentError.type ?? 'validation',
-                message: currentError.message,
-              },
-            }),
-            {}
-          ),
-        };
+        await validationSchema.validate(data, {abortEarly: false});
+        return {values: data, errors: {}};
+      } catch (error) {
+        // Yup throws a `ValidationError` for failed validation. Anything else is a real error.
+        if (!ValidationError.isError(error)) {
+          throw error;
+        }
+
+        const errors = error.inner.reduce<Record<string, {type: string; message: string}>>(
+          (allErrors, currentError) => ({
+            ...allErrors,
+            [currentError.path ?? '']: {
+              type: currentError.type ?? 'validation',
+              message: currentError.message,
+            },
+          }),
+          {}
+        );
+
+        return {values: {}, errors: errors as FieldErrors<T>};
       }
     },
     [validationSchema]
@@ -74,6 +78,9 @@ const options = [
 ];
 
 export const TextInputWithReactHookForm = () => {
+  const formRef = React.useRef<HTMLFormElement>(null);
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [submitAttempt, setSubmitAttempt] = React.useState(0);
   const {
     handleSubmit,
     register,
@@ -84,19 +91,36 @@ export const TextInputWithReactHookForm = () => {
       password: 'foobarbaz',
       role: '',
     },
-    resolver: useYupValidationResolver(validationSchema),
+    resolver: useYupValidationResolver<LoginSchema>(validationSchema),
     mode: 'onTouched',
+    shouldFocusError: true,
   });
 
-  const onSubmit = handleSubmit(values => {
-    setShowPassword(false);
-    // Send data to server
-    setTimeout(() => {
-      alert(JSON.stringify(values, null, 2));
-    }, 0);
-  });
+  const onSubmit = handleSubmit(
+    values => {
+      setShowPassword(false);
+      // Send data to server
+      setTimeout(() => {
+        alert(JSON.stringify(values, null, 2));
+      }, 0);
+    },
+    () => {
+      // Count failed submits so we can move focus after FormField paints `aria-invalid`.
+      setSubmitAttempt(count => count + 1);
+    }
+  );
 
-  const [showPassword, setShowPassword] = React.useState(false);
+  React.useEffect(() => {
+    if (submitAttempt === 0) {
+      return;
+    }
+
+    const firstInvalidField = formRef.current?.querySelector<HTMLElement>(
+      '[aria-invalid="true"]:not([aria-hidden="true"]):not([tabindex="-1"])'
+    );
+    firstInvalidField?.focus();
+  }, [submitAttempt, errors]);
+
   const passwordId = useUniqueId();
   const passwordRef = React.useRef<HTMLInputElement | null>(null);
   const {ref: passwordCallbackRef, ...passwordRegistration} = register('password');
@@ -104,8 +128,15 @@ export const TextInputWithReactHookForm = () => {
     passwordCallbackRef(ref);
     passwordRef.current = ref;
   };
+  // `InputGroup` renders the input, so hoist the model to keep the label, hint, and error wiring.
+  const passwordModel = useFormFieldModel({
+    id: passwordId,
+    isRequired: true,
+    error: errors.password ? 'error' : undefined,
+  });
+  const passwordInputProps = useFormFieldInput(passwordModel);
   return (
-    <form onSubmit={onSubmit} action="." noValidate={true}>
+    <form ref={formRef} onSubmit={onSubmit} action="." noValidate={true}>
       <Flex cs={styles}>
         <FormField
           orientation="vertical"
@@ -143,35 +174,33 @@ export const TextInputWithReactHookForm = () => {
           </FormField.Field>
           <FormField.Hint>{errors.email?.message}</FormField.Hint>
         </FormField>
-        <FormField
-          orientation="vertical"
-          id={passwordId}
-          isRequired={true}
-          error={!!errors.password ? 'error' : undefined}
-        >
+        <FormField model={passwordModel} orientation="vertical">
           <FormField.Label>Password</FormField.Label>
-          <Flex cs={{gap: system.gap.md}}>
-            <FormField.Field>
-              <FormField.Input
-                as={TextInput}
-                {...passwordRegistration}
-                type={showPassword ? 'text' : 'password'}
-                autoComplete="current-password"
-                spellCheck={false}
-                ref={combinePasswordRef}
-              />
-            </FormField.Field>
-            <TertiaryButton
-              type="button"
-              icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
-              aria-label={showPassword ? 'Hide Password' : 'Show Password'}
-              aria-controls={`input-${passwordId}`}
-              onClick={() => {
-                setShowPassword(state => !state);
-                passwordRef.current?.focus();
-              }}
+          <FormField.Field as={InputGroup}>
+            <InputGroup.Input
+              {...passwordInputProps}
+              {...passwordRegistration}
+              error={errors.password ? ErrorType.Error : undefined}
+              type={showPassword ? 'text' : 'password'}
+              autoComplete="current-password"
+              spellCheck={false}
+              ref={combinePasswordRef}
             />
-          </Flex>
+            <InputGroup.InnerEnd>
+              <Tooltip title={showPassword ? 'Hide Password' : 'Show Password'}>
+                <TertiaryButton
+                  type="button"
+                  size="small"
+                  icon={showPassword ? visibleStrikethroughIcon : visibleIcon}
+                  aria-controls={`input-${passwordId}`}
+                  onClick={() => {
+                    setShowPassword(state => !state);
+                    passwordRef.current?.focus();
+                  }}
+                />
+              </Tooltip>
+            </InputGroup.InnerEnd>
+          </FormField.Field>
           <FormField.Hint>{errors.password?.message || passwordHint}</FormField.Hint>
         </FormField>
 
