@@ -11,6 +11,7 @@ import {Icons as IconsExample} from './examples/Icons';
 import {Nested as NestedExample} from './examples/Nested';
 import {NestedDynamic as NestedDynamicExample} from './examples/NestedDynamic';
 import {NestedSiblings as NestedSiblingsExample} from './examples/NestedSiblings';
+import {ScrollableSubmenu as ScrollableSubmenuExample} from './examples/ScrollableSubmenu';
 import {SelectableMenu as SelectableMenuExample} from './examples/SelectableMenu';
 
 export default {
@@ -49,6 +50,9 @@ export const NestedDynamic: Story = {
 };
 export const NestedSiblings: Story = {
   render: NestedSiblingsExample,
+};
+export const ScrollableSubmenu: StoryObj<typeof ScrollableSubmenuExample> = {
+  render: ScrollableSubmenuExample,
 };
 export const Alt: Story = {
   render: AltExample,
