@@ -1,0 +1,59 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import ToolbarStoriesMeta from './ToolbarButtons.stories';
+import {TextFormattingToolbar} from './examples/TextFormattingToolbar';
+
+<Meta of={ToolbarStoriesMeta} />
+
+# Canvas Kit Toolbar
+
+Canvas Kit does not ship a Toolbar component. Build one by composing
+[`ToolbarIconButton`](?path=/docs/components-buttons--docs),
+[Select](?path=/docs/components-inputs-select--docs),
+[Tooltip](?path=/docs/components-popups-tooltip--docs), and
+[Dialog](?path=/docs/components-popups-dialog--docs) inside a group that uses the
+[collection system](?path=/docs/features-collections--docs) for keyboard navigation.
+
+The example below follows the
+[W3C Toolbar pattern](https://www.w3.org/WAI/ARIA/apg/patterns/toolbar/): one tab stop for the
+group, and arrow keys to move between controls.
+
+## Basic Example
+
+The Text Formatting toolbar is a horizontal group of five controls:
+
+1. **Text Style** — a `Select` with Normal Text, Heading 1, Heading 2, and Heading 3. Normal Text
+   starts selected.
+2. **Bold, Italic, and Underline** — `ToolbarIconButton` toggles. `toggled` sets `aria-pressed`. The
+   example adds a brand border while a toggle is on, on top of the button's pressed background.
+3. **Insert Link** — a `ToolbarIconButton` used as `Dialog.Target`. The dialog is non-modal and
+   contains Link Text and URL fields. Focus moves to Link Text when it opens.
+
+Each control is the single child of a `Tooltip`. The default tooltip type is `label`, so the `title`
+becomes that control's accessible name. Do not also set `aria-label` on the control.
+
+The group itself is named with `aria-label="Text Formatting"` on an element with `role="toolbar"`.
+
+Keyboard movement comes from `useListModel` with `orientation="horizontal"` and
+`navigation={navigationManager}`. `navigationManager` stops at the first and last control instead of
+wrapping. Each control registers with `useListItemRovingFocus` and `useListItemRegister`, which
+keeps a single tab stop and moves it with the arrow keys. Give every control a stable `data-id`.
+
+The Text Style `Select` has its own arrow-key behavior. Left and Right move through the toolbar only
+while its menu is closed. While the menu is open, Left and Right do nothing, and Home and End move
+within the menu.
+
+<ExampleCodeBlock code={TextFormattingToolbar} />
+
+## Component API
+
+`ToolbarIconButton` is the icon button used inside the example. The toolbar container, roving tab
+stop, and link dialog are composed in the example. They are not separate exported components.
+
+<SymbolDoc name="ToolbarIconButton" fileName="/react/" />
+
+## Specifications
+
+<Specifications file="./cypress/component/Toolbar.spec.tsx" name="Toolbar" />
