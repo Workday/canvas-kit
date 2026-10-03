@@ -49,7 +49,7 @@ function isElementOutOfBounds(
 }
 
 /**
- * Returns focus to the target element when the popup is hidden. This works well with
+ * Returns focus to the previously focused element when the popup is hidden. This works well with
  * {@link useInitialFocus}. This should be used with {@link useFocusRedirect} or
  * {@link useFocusTrap} for a complete focus management solution.
  *
@@ -58,6 +58,7 @@ function isElementOutOfBounds(
 export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   const visible = model.state.visibility !== 'hidden';
   const elementRef = React.useRef<Element | null>(null);
+  const previousFocusRef = React.useRef<Element | null>(null);
 
   // This boolean tracks keyboard-driven focus changes. This is required for `useFocusRedirect` as
   // focus redirection needs synchronous focus management and everything else needs asynchronous
@@ -101,11 +102,20 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
   // we'll use `mousedown` and `mouseup` to determine if we're closing because of a mouse click.
   React.useLayoutEffect(() => {
     if (!visible) {
-      return;
+      // Capture before children's layout effects can apply native autofocus while opening.
+      return () => {
+        previousFocusRef.current = document.activeElement;
+      };
     }
     // capture the element here. The refs will be null by the time the cleanup function is called
-    const element = (model.state.returnFocusRef || model.state.targetRef)
-      .current as HTMLElement | null;
+    const activeElement = previousFocusRef.current || document.activeElement;
+    const previousFocus =
+      activeElement instanceof HTMLElement && activeElement !== document.body
+        ? activeElement
+        : model.state.targetRef.current;
+    const element = model.state.returnFocusRef
+      ? (model.state.returnFocusRef.current as HTMLElement | null)
+      : previousFocus;
     document.addEventListener('mousedown', onMouseDown, true);
     document.addEventListener('keydown', onKeyDown, true);
 

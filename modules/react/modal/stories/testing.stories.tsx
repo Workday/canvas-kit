@@ -11,6 +11,7 @@ import {IframeTest as IframeTestExample} from './examples/IframeTest';
 import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
 import {ModalWithPopupRTL as ModalWithPopupRTLExample} from './examples/ModalWithPopupRTL';
 import {NoTargetRTL as NoTargetRTLExample} from './examples/NoTargetRTL';
+import {PreviousFocus as PreviousFocusExample} from './examples/PreviousFocus';
 import {StackedModals as StackedModalsExample} from './examples/StackedModals';
 import {WithRadioButtons as WithRadioButtonsExample} from './examples/WithRadioButtons';
 import {WithTooltips as WithTooltipsExample} from './examples/WithTooltips';
@@ -250,3 +251,5 @@ export const CustomThemeModal = {
     );
   },
 };
+
+export const PreviousFocus = {render: PreviousFocusExample};
