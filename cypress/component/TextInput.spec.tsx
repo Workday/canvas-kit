@@ -1,12 +1,52 @@
 import {Basic} from '../../modules/react/text-input/stories/examples/Basic';
 import {Disabled} from '../../modules/react/text-input/stories/examples/Disabled';
+import {Grow} from '../../modules/react/text-input/stories/examples/Grow';
 import {Placeholder} from '../../modules/react/text-input/stories/examples/Placeholder';
+import {StandaloneGrow} from '../../modules/react/text-input/stories/examples/StandaloneGrow';
 
 const getTextInput = () => {
   return cy.get(`[type="text"]`);
 };
 
 describe('TextInput', () => {
+  context(`given the 'StandaloneGrow' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<StandaloneGrow />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should fill its container without becoming resizable', () => {
+      getTextInput().should('have.css', 'resize', 'none');
+      getTextInput().then($input => {
+        expect($input[0].getBoundingClientRect().width).to.equal(
+          $input[0].parentElement!.getBoundingClientRect().width
+        );
+      });
+    });
+  });
+
+  context(`given the 'Grow' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<Grow />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should fill the field without becoming resizable', () => {
+      getTextInput().should('have.css', 'resize', 'none');
+      getTextInput().then($input => {
+        expect($input[0].getBoundingClientRect().width).to.equal(
+          $input[0].parentElement!.getBoundingClientRect().width
+        );
+      });
+    });
+  });
+
   context(`given the 'Basic' story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Basic />);
