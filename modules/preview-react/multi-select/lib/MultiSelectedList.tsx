@@ -19,15 +19,19 @@ export interface MultiSelectedListProps
 export const MultiSelectedList = createSubcomponent('div')({
   modelHook: useMultiSelectModel,
 })<MultiSelectedListProps>(
-  ({'aria-labelledby': ariaLabelledBy, disabled, removeLabel}, Element, model) => {
+  (
+    {'aria-label': ariaLabel, 'aria-labelledby': ariaLabelledBy, disabled, removeLabel},
+    Element,
+    model
+  ) => {
     return model.selected.state.items.length ? (
       <>
         <div data-part="separator" />
         <ListBox
           model={model.selected}
           as={Element}
-          role="listbox"
-          aria-orientation="horizontal"
+          role="group"
+          aria-label={ariaLabel}
           aria-labelledby={ariaLabelledBy}
         >
           {item => (

@@ -1,6 +1,33 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {fireEvent, render, screen, within} from '@testing-library/react';
 
 import {MultiSelect} from '../lib/MultiSelect';
+
+describe.each([
+  ['Input', MultiSelect.Input],
+  ['SearchInput', MultiSelect.SearchInput],
+] as const)('MultiSelect.%s selected items', (_, Input) => {
+  it.each(['aria-label', 'aria-labelledby'] as const)(
+    'should use %s to label the removal group',
+    labelProp => {
+      render(
+        <MultiSelect items={['Apple']} initialSelectedIds={['Apple']}>
+          <span id="fruits-label">Fruits</span>
+          <Input
+            {...{[labelProp]: labelProp === 'aria-label' ? 'Fruits' : 'fruits-label'}}
+            removeLabel="Remove"
+          />
+        </MultiSelect>
+      );
+
+      expect(screen.getByRole('combobox', {name: 'Fruits'})).toBeInTheDocument();
+      const group = screen.getByRole('group', {name: 'Fruits'});
+      const button = within(group).getByRole('button', {name: 'Remove Apple'});
+      expect(button).not.toHaveAttribute('aria-selected');
+      expect(button).toHaveAttribute('type', 'button');
+      expect(group).not.toHaveAttribute('aria-orientation');
+    }
+  );
+});
 
 describe('MultiSelect.SearchInput', () => {
   it('should open the popup once when the user starts typing', async () => {
