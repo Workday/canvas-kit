@@ -1,3 +1,5 @@
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
 import {Basic} from '../../modules/react/text-area/stories/examples/Basic';
 import {Disabled} from '../../modules/react/text-area/stories/examples/Disabled';
 import {Grow} from '../../modules/react/text-area/stories/examples/Grow';
@@ -9,6 +11,16 @@ const getTextArea = () => {
 };
 
 describe('Text Area', () => {
+  context('given TextArea has grow enabled directly', () => {
+    beforeEach(() => {
+      cy.mount(<TextArea grow aria-label="Description" />);
+    });
+
+    it('should preserve the default resize behavior', () => {
+      getTextArea().should('have.css', 'resize', 'both');
+    });
+  });
+
   context(`given the 'Grow' story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Grow />);
