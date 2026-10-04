@@ -7,6 +7,7 @@ import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {brand, system} from '@workday/canvas-tokens-web';
 
+import {DynamicTrigger as DynamicTriggerExample} from './examples/DynamicTrigger';
 import {IframeTest as IframeTestExample} from './examples/IframeTest';
 import {ModalWithPopup as ModalWithPopupExample} from './examples/ModalWithPopup';
 import {ModalWithPopupRTL as ModalWithPopupRTLExample} from './examples/ModalWithPopupRTL';
@@ -253,3 +254,4 @@ export const CustomThemeModal = {
 };
 
 export const PreviousFocus = {render: PreviousFocusExample};
+export const DynamicTrigger = {render: DynamicTriggerExample};

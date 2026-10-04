@@ -109,10 +109,11 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
     }
     // capture the element here. The refs will be null by the time the cleanup function is called
     const activeElement = previousFocusRef.current || document.activeElement;
+    const target = model.state.targetRef.current;
     const previousFocus =
       activeElement instanceof HTMLElement && activeElement !== document.body
         ? activeElement
-        : model.state.targetRef.current;
+        : target;
     const element = model.state.returnFocusRef
       ? (model.state.returnFocusRef.current as HTMLElement | null)
       : previousFocus;
@@ -122,10 +123,14 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
     return () => {
       document.removeEventListener('mousedown', onMouseDown, true);
       document.removeEventListener('keydown', onKeyDown, true);
-      if (!element) {
+      const focusElement =
+        !model.state.returnFocusRef && !element?.isConnected
+          ? model.state.targetRef.current || target
+          : element;
+      if (!focusElement?.isConnected) {
         return;
       }
-      const scrollParent = getScrollParent(element);
+      const scrollParent = getScrollParent(focusElement);
       const scrollParentRect = scrollParent.getBoundingClientRect();
       const viewportRect = {left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight};
 
@@ -133,8 +138,8 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
       // element isn't on at least halfway rendered on the screen.
       if (
         (elementRef.current && getFocusableElement(elementRef.current)) || // did the user click on a focusable element?
-        isElementOutOfBounds(element, scrollParentRect) || // Is the element not visible in its scroll parent?
-        isElementOutOfBounds(element, viewportRect) // Is the element not visible in the viewport?
+        isElementOutOfBounds(focusElement, scrollParentRect) || // Is the element not visible in its scroll parent?
+        isElementOutOfBounds(focusElement, viewportRect) // Is the element not visible in the viewport?
       ) {
         // reset the focus element and bail early
         elementRef.current = null;
@@ -151,12 +156,14 @@ export const useReturnFocus = createElemPropsHook(usePopupModel)(model => {
         // We need to change focus _before_ the browser process the default action of picking a new
         // focus target. Doing this immediately prevents the `focus` event from firing on `element`,
         // but that's okay because the browser will change focus anyways.
-        changeFocus(element);
+        changeFocus(focusElement);
       } else {
         // We wait a frame for the current event to process, allowing the browser to fire default
         // actions. This delay allows the focus change to trigger a `focus` event on `element`.
         requestAnimationFrame(() => {
-          changeFocus(element);
+          if (focusElement.isConnected) {
+            changeFocus(focusElement);
+          }
         });
       }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import {DynamicTrigger} from '../../modules/react/modal/stories/examples/DynamicTrigger';
 import {PreviousFocus} from '../../modules/react/modal/stories/examples/PreviousFocus';
 
 describe('Modal previous focus', () => {
@@ -34,6 +35,26 @@ describe('Modal previous focus', () => {
       cy.realPress('Escape');
       cy.findByRole('dialog').should('not.exist');
       cy.findByRole('button', {name: 'Second trigger'}).should('have.focus');
+    });
+  });
+});
+
+context('given a trigger that changes while the modal is open', () => {
+  beforeEach(() => cy.mount(<DynamicTrigger />));
+
+  it('should not have any axe errors', () => {
+    cy.findByRole('button', {name: 'Open modal'}).realClick();
+    cy.findByRole('dialog', {name: 'Dynamic trigger'}).should('be.visible');
+    cy.checkA11y();
+  });
+
+  ['Remove trigger', 'Replace trigger'].forEach(action => {
+    it(`should return focus to the current target after ${action.toLowerCase()}`, () => {
+      cy.findByRole('button', {name: 'Open modal'}).realClick();
+      cy.findByRole('button', {name: action}).realClick();
+      cy.findByRole('button', {name: 'Close'}).realClick();
+      cy.findByRole('dialog').should('not.exist');
+      cy.findByRole('button', {name: 'Fallback trigger'}).should('have.focus');
     });
   });
 });
