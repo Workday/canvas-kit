@@ -4,6 +4,9 @@ Detail for [SKILL.md](SKILL.md). Worked example throughout: `SelectionGroup` (is
 
 ## File layout
 
+**Collection case** (list/grid with `List` + `Item` subcomponents). Non-collection components omit
+`List`/`Item` and the collection-shaped hooks.
+
 ```text
 modules/react/<name>/
 ├── index.ts                       # export * from each lib file (no default exports)
@@ -35,6 +38,21 @@ No per-component `package.json` or tsconfig path entries were needed for `module
 
 ## Model and hook rules
 
+### When to use the collection system
+
+| Use collection | Skip collection |
+| -------------- | --------------- |
+| List, grid, or set of items with selection, roving focus, or arrow-key navigation | Single control with no item set (button, banner, text field) |
+| Examples: `SegmentedControl`, `Tabs`, `Menu`, `Select` | Examples: `PrimaryButton`, `Banner`, form inputs |
+
+Models from `@workday/canvas-kit-react/collection`:
+
+- `useListModel` — cursor + selection (most lists)
+- `useGridModel` — 2D navigation
+- `useOverflowListModel` — overflow/measure patterns
+
+### Collection model + item hooks
+
 ```tsx
 export const useThingModel = createModelHook({
   defaultConfig: {
@@ -60,11 +78,16 @@ export const useThingItem = composeHooks(
     role: model.state.mode === 'single' ? 'radio' : 'checkbox',
     'aria-checked': isSelected(elemProps['data-id'] || '', model.state),
   })),
-  useListItemRovingFocus,
-  useListItemRegister // always last
+  useListItemRovingFocus, // or useListItemActiveDescendant for aria-activedescendant patterns
+  useListItemRegister // last, unless a later hook must override a prop register sets
 );
 ```
 
+- Typical order: `useListItemSelect` → component-specific elemProps → `useListItemRovingFocus` (or
+  `useListItemActiveDescendant`) → `useListItemRegister`. A hook may come **after** register only
+  to override a prop register sets (see `useSegmentedControlItem` and `disabled`).
+- Dynamic items: pass `items` and render with `useListRenderItems`. Virtualization defaults **on**
+  for dynamic items — pass `shouldVirtualize: false` for short lists and popup menus.
 - Controlled usage: accept `selectedIds` and sync with `events.setSelectedIds` in an effect;
   uncontrolled uses `initialSelectedIds`.
 - `onSelect` can fire on mount when single-select auto-selects the first item — account for it in
@@ -90,8 +113,10 @@ Apply in `lib/` stencils:
 - [ ] Hover / pressed: `system.legacy.color.surface.overlay.hover.default` / `.pressed.default`,
       scoped to unselected items.
 - [ ] Focus: `outline: 2px solid system.legacy.color.brand.border.primary` with
-      `outlineOffset: -2px` (MenuItem pattern), suppressed only under
-      `[data-whatinput='mouse'|'touch'|'pointer']`.
+      `outlineOffset: -2px` under `'&:is(.focus, :focus-visible)'` (MenuItem pattern). Use
+      `:focus-visible` + `&.focus` — not `data-whatinput`.
+- [ ] Do **not** set `boxSizing: 'border-box'` on a stencil — `createStencil` already injects it
+      (copying `MenuItem` will repeat it unnecessarily).
 - [ ] Disabled: `opacity: system.opacity.disabled`, `cursor: 'default'`, match
       `:disabled, .disabled, [aria-disabled="true"]`.
 - [ ] Every pseudo-state has a class twin: `'&:is(:hover, .hover)'`, `.active`, `.focus`,

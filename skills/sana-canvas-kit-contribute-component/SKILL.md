@@ -35,8 +35,8 @@ Copy this checklist and track progress:
 - [ ] 3. Study the closest sibling components; grep for existing helpers before inventing
 - [ ] 4. Propose a plan to the user (API, a11y roles, styling, open design/a11y questions) — wait
 - [ ] 5. Scaffold the package (see file layout in references.md)
-- [ ] 6. Model: extend collection models; don't hand-roll selection, guards, or callbacks
-- [ ] 7. Subcomponents: compose collection elemProps hooks in the right order
+- [ ] 6. Model: if list/grid/selection/roving focus — extend collection models; else createModelHook
+- [ ] 7. Subcomponents: for collection items, compose collection elemProps hooks in the right order
 - [ ] 8. Style with Sana-aligned stencils (system.legacy.*, cornerShapeStencil, class twins)
 - [ ] 9. Stories, examples, MDX, visual-testing stories
 - [ ] 10. Tests: unit (verifyComponent), SSR, Cypress with checkA11y
@@ -95,9 +95,15 @@ design/a11y questions. Wait for the user before editing.
 
 Use the file layout and model/hook rules in [references.md](references.md#file-layout). Key rules:
 
-- Extend `useListModel`; pick `singleSelectionManager` / `multiSelectionManager` via config.
-  `createModelHook` already provides `should<Event>` / `on<Event>` — don't reimplement them.
-- `composeHooks` runs right-to-left; `useListItemRegister` goes **last**. Compose
+- **Collection decision:** if the component is a list, grid, or set of items with selection,
+  roving focus, or arrow-key navigation (`SegmentedControl`, `Tabs`, `Menu`), extend collection
+  models — see [references.md](references.md#model-and-hook-rules). Skip collection for a single
+  control with no item set (button, banner, text field); use `createModelHook` alone.
+- When using collection: extend `useListModel` (or `useGridModel` / `useOverflowListModel`); pick
+  `singleSelectionManager` / `multiSelectionManager` via config. `createModelHook` already
+  provides `should<Event>` / `on<Event>` — don't reimplement them.
+- `composeHooks` runs right-to-left; `useListItemRegister` goes **last** (except when a later
+  hook must override a prop register sets — see `useSegmentedControlItem`). Compose
   `useListItemRovingFocus` / `useListItemSelect` directly — never call them inside another
   `createElemPropsHook` body.
 - Add `index.ts` exports and `export * from './<name>'` in `modules/react/index.ts`.
