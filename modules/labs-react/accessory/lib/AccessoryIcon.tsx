@@ -1,6 +1,6 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 import {accessoryStencil} from './Accessory';
@@ -93,14 +93,18 @@ export const accessoryIconStencil = createStencil({
         system.legacy.color.fg.danger.strong
       ),
       orange: variantFill(base.legacy.orangeA50, base.legacy.orange700),
-      outline: ({iconColor, tileBackground}) =>
-        variantFill(
+      outline: ({iconColor, tileBackground}) => ({
+        ...variantFill(
           system.legacy.color.surface.transparent,
           base.legacy.slate800
         )({
           iconColor,
           tileBackground,
         }),
+        borderWidth: px2rem(1),
+        borderStyle: 'solid',
+        borderColor: system.legacy.color.border.default,
+      }),
     },
   },
 });
@@ -128,7 +132,6 @@ export const AccessoryIcon = createComponent('span')({
           })
         )}
         {...accessoryStencil.parts.icon}
-        data-variant={variant}
         role={elemProps.role ?? (accessibleName ? 'img' : undefined)}
         aria-hidden={elemProps['aria-hidden'] ?? (accessibleName ? undefined : true)}
       />

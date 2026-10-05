@@ -1,6 +1,6 @@
 import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
+import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, component, system} from '@workday/canvas-tokens-web';
 
 import {AccessoryIcon, accessoryIconStencil} from './AccessoryIcon';
@@ -45,7 +45,6 @@ export const accessoryStencil = createStencil({
     position: 'relative',
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
     flexShrink: 0,
     verticalAlign: 'middle',
     [iconPart]: {
@@ -55,11 +54,16 @@ export const accessoryStencil = createStencil({
       alignItems: 'center',
       justifyContent: 'center',
       zIndex: 1,
+      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      cornerShape: 'superellipse(1.1)',
     },
     [imagePart]: {
       position: 'absolute',
       inset: 0,
       display: 'flex',
+      overflow: 'hidden',
+      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      cornerShape: 'superellipse(1.1)',
     },
   }),
   modifiers: {
@@ -91,11 +95,6 @@ export const accessoryStencil = createStencil({
         [iconPart]: {
           [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
         },
-        '&:has([data-variant="outline"])': {
-          borderWidth: px2rem(1),
-          borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
-        },
       }),
       large: ({iconPart}) => ({
         width: system.legacy.size.sm,
@@ -104,11 +103,6 @@ export const accessoryStencil = createStencil({
         [iconPart]: {
           [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
         },
-        '&:has([data-variant="outline"])': {
-          borderWidth: px2rem(1),
-          borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
-        },
       }),
       extraLarge: ({iconPart}) => ({
         width: system.legacy.size.md,
@@ -116,11 +110,6 @@ export const accessoryStencil = createStencil({
         [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
         [iconPart]: {
           [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
-        },
-        '&:has([data-variant="outline"])': {
-          borderWidth: px2rem(1),
-          borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
         },
       }),
     },
