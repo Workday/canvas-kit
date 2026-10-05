@@ -200,6 +200,21 @@ export const useDisclosureModel = createModelHook({
 });
 ```
 
+## Lists and grids — use the collection system
+
+If the custom component is a **list, grid, or set of items** with selection, roving focus, or
+arrow-key navigation, extend `@workday/canvas-kit-react/collection` instead of hand-rolling
+selection/`useState` for the item set:
+
+- Models: `useListModel`, `useGridModel`, `useOverflowListModel`
+- Item hooks: `useListItemRegister`, `useListItemSelect`, `useListItemRovingFocus` (compose via
+  `composeHooks`; register last unless overriding a prop register sets)
+- Selection managers: `singleSelectionManager`, `multiSelectionManager`
+
+Keep a plain `createModelHook` (like the disclosure example above) for non-collection state
+(visibility, ids, form flags). For contributing a collection-based component into the canvas-kit
+repo, see `/sana-canvas-kit-contribute-component`.
+
 ## Accessibility
 
 Wire a11y in `createElemPropsHook` (e.g. `aria-expanded`, `aria-controls`, `id` from
@@ -210,7 +225,7 @@ Wire a11y in `createElemPropsHook` (e.g. `aria-expanded`, `aria-controls`, `id` 
 
 ```text
 - [ ] Pick factory (createComponent vs createContainer + model)
-- [ ] Define model with createModelHook if behavior is shared
+- [ ] List/grid/selection/roving focus? → extend collection models; else createModelHook
 - [ ] Extract elemProps into createElemPropsHook (module scope)
 - [ ] Style with createStyles/createStencil + cs (/sana-canvas-kit-styling)
 - [ ] Use system tokens (/sana-canvas-kit-tokens)
@@ -236,6 +251,7 @@ This is encouraged when the app knows its context (translations, test ids, analy
 ## Anti-patterns
 
 - ❌ `createModelHook` for a static styled div
+- ❌ Hand-rolled selection / roving tabindex for a list or grid — use collection
 - ❌ `createElemPropsHook` inside render
 - ❌ Manual `React.Context` when `createContainer`/`createSubcomponent` handle it
 - ❌ `forwardRef` + Context by hand — use the factories
@@ -250,6 +266,7 @@ This is encouraged when the app knows its context (translations, test ids, analy
 ```
 No shared state, just markup/styles?     → createComponent
 Root provides state to children?         → createContainer + createModelHook
+List/grid with selection or roving focus?→ extend useListModel / collection item hooks
 Child reads model from context?          → createSubcomponent
 Reusable ARIA/event props for an element?→ createElemPropsHook
 Combining multiple elemProps hooks?      → composeHooks (module scope)

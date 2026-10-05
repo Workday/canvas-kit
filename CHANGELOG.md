@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.7](https://github.com/Workday/canvas-kit/releases/tag/v16.1.7) (2026-10-05)
+
+### Documentation
+
+- chore(skills): Add contribute-component maintainer skill ([#4195](https://github.com/Workday/canvas-kit/pull/4195)) ([@olaonikosi](https://github.com/olaonikosi), Ola Onikosi, [@cursoragent](https://github.com/cursoragent), manuel.carrera)
+
+
+## [v16.1.6](https://github.com/Workday/canvas-kit/releases/tag/v16.1.6) (2026-10-05)
+
+### Documentation
+
+- docs(action-bar): Expand accessibility section for AI codegen ([#4189](https://github.com/Workday/canvas-kit/pull/4189)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent), [@claude](https://github.com/claude))
+
+
+## [v16.1.5](https://github.com/Workday/canvas-kit/releases/tag/v16.1.5) (2026-10-02)
+
+### Documentation
+
+- docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.4](https://github.com/Workday/canvas-kit/releases/tag/v16.1.4) (2026-10-01)
 
 ### Documentation
