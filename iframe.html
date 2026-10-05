@@ -532,6 +532,13 @@
     padding-bottom: 16px;
   }
 
+  /* Match the Component API tables: opaque cells hide Storybook's zebra striping so inline `code`
+     (same color as the stripe) stays distinguishable in MDX tables. */
+  .sbdocs-content table:not([class]) th,
+  .sbdocs-content table:not([class]) td {
+    background-color: var(--cnvs-sys-color-bg-default);
+  }
+
   .cnvs-title-status-indicator {
     margin-left: 16px;
     vertical-align: middle;
@@ -556,7 +563,7 @@
 <link rel="preload" href="RobotoMono-Regular.ttf" as="font" type="font/ttf" crossorigin />
 <link rel="preload" href="IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
 
-    <script type="module" crossorigin src="./assets/iframe-B4egJ2yK.js"></script>
+    <script type="module" crossorigin src="./assets/iframe-D8j4w_od.js"></script>
   </head>
 
   <body>
