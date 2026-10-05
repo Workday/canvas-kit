@@ -1,0 +1,104 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import AccessoryStoriesMeta from './Accessory.stories';
+import {AccessibleName} from './examples/AccessibleName';
+import {Basic} from './examples/Basic';
+import {Custom} from './examples/Custom';
+import {CustomColor} from './examples/CustomColor';
+import {Image} from './examples/Image';
+import {RTL} from './examples/RTL';
+import {Sizes} from './examples/Sizes';
+import {Variants} from './examples/Variants';
+
+<Meta of={AccessoryStoriesMeta} />
+
+# Canvas Kit Accessory
+
+`Accessory` is a presentational tile for the leading visual in a row. It renders an icon or an
+image. Pass `icon` to `Accessory.Image` to center an icon on the image. It does not handle clicks
+or focus.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+`Accessory` owns the tile size and corner radius. `Accessory.Icon` renders a system icon. With no
+`aria-label`, the icon is decorative.
+
+<ExampleCodeBlock code={Basic} />
+
+### Image
+
+`Accessory.Image` fills the tile with an image. `alt` names the image. Use `alt=""` when the image
+is decorative.
+
+<ExampleCodeBlock code={Image} />
+
+### Image with an icon
+
+Pass `icon` to `Accessory.Image` and it renders `Accessory.Icon` centered on the image. `objectFit`
+is `cover` by default. `contain` fits the whole image inside the tile. The icon is decorative.
+`alt` names the image.
+
+<ExampleCodeBlock code={Custom} />
+
+### Custom color
+
+`variant` is a stencil modifier on `Accessory.Icon`. Tile size and glyph size are modifiers on
+`Accessory`, and the glyph size is applied through the icon `data-part`. `color` overrides the icon
+color from `variant`. `background` overrides the tile fill and is painted at every size. The icon is
+smaller than the tile: `extraSmall` is 10px, `small` is 12px, `medium` is 16px, `large` is 18px,
+and `extraLarge` is 20px. Variant fills stay hidden at `small` and `extraSmall` unless `background`
+is set. The same `color` and `background` props apply when `icon` is passed to `Accessory.Image`.
+
+<ExampleCodeBlock code={CustomColor} />
+
+### Sizes
+
+`size` is a prop on `Accessory`. The stencil sets the tile and, through `data-part`, the icon glyph. `extraLarge` (40px) is the default.
+
+<ExampleCodeBlock code={Sizes} />
+
+### Variants
+
+`variant` is set on `Accessory.Icon`. It pairs an icon color with a tile fill. The fill is painted
+at `medium`, `large`, and `extraLarge`. `outline` adds a default border at those larger sizes.
+
+<ExampleCodeBlock code={Variants} />
+
+### Right-to-Left
+
+The tile stays centered in right-to-left layouts. Directional icons still follow the icon's own
+mirroring rules.
+
+<ExampleCodeBlock code={RTL} />
+
+### Accessibility
+
+`Accessory` is presentational. It is not a button and does not take click or keyboard handlers.
+
+- Omit `aria-label` on `Accessory.Icon` when text next to the tile already names the item. The icon
+  is then hidden from assistive technology.
+- Pass `aria-label` when the icon is the only source of that information. The tile is exposed as an
+  image with that name.
+
+<ExampleCodeBlock code={AccessibleName} />
+
+- `Accessory.Image` uses the native `alt` on the image. An empty `alt` marks the image as
+  decorative. An `icon` on `Accessory.Image` is decorative.
+
+## Component API
+
+<SymbolDoc name="Accessory" fileName="/labs-react/" />
+
+## Specifications
+
+<Specifications file="./cypress/component/Accessory.spec.tsx" name="Accessory" />
