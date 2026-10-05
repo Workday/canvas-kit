@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.5](https://github.com/Workday/canvas-kit/releases/tag/v16.1.5) (2026-10-02)
+
+### Documentation
+
+- docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.1.4](https://github.com/Workday/canvas-kit/releases/tag/v16.1.4) (2026-10-01)
+
+### Documentation
+
+- docs(select): Expand accessibility guidance for AI codegen ([#4179](https://github.com/Workday/canvas-kit/pull/4179)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.1.3](https://github.com/Workday/canvas-kit/releases/tag/v16.1.3) (2026-10-01)
+
+### Documentation
+
+- docs(examples): Refresh form examples and add a form validation a11y guide ([#4175](https://github.com/Workday/canvas-kit/pull/4175)) ([@williamjstanton](https://github.com/williamjstanton), [@cursoragent](https://github.com/cursoragent), [@coderabbitai[bot]](https://github.com/coderabbitai[bot]))
+  Storybook: **Examples / Forms** is gone. Density lives under **Examples**. Form validation with React Hook Form now lives under **Guides / Accessibility / Form Validation**.
+
+
+## [v16.1.2](https://github.com/Workday/canvas-kit/releases/tag/v16.1.2) (2026-10-01)
+
+### Documentation
+
+- docs(expandable): Expand accessibility guidance for AI codegen ([#4174](https://github.com/Workday/canvas-kit/pull/4174)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.1](https://github.com/Workday/canvas-kit/releases/tag/v16.1.1) (2026-09-15)
 
 ### Infrastructure
