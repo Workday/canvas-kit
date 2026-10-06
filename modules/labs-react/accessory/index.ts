@@ -1,3 +1,4 @@
 export * from './lib/Accessory';
+export * from './lib/AccessoryFile';
 export * from './lib/AccessoryIcon';
-export * from './lib/AccessoryImage';
+export * from './lib/AccessoryMedia';

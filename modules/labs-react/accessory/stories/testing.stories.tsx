@@ -1,6 +1,9 @@
 import {
-  Accessory,
+  AccessoryFile,
+  AccessoryFileType,
+  AccessoryIcon,
   AccessoryIconVariant,
+  AccessoryMedia,
   AccessorySize,
 } from '@workday/canvas-kit-labs-react/accessory';
 import {
@@ -12,7 +15,6 @@ import {checkIcon} from '@workday/canvas-system-icons-web';
 
 export default {
   title: 'Testing/Labs/Accessory',
-  component: Accessory,
   parameters: {
     chromatic: {
       disable: false,
@@ -32,6 +34,16 @@ const variants: AccessoryIconVariant[] = [
   'orange',
   'outline',
 ];
+const fileTypes: AccessoryFileType[] = [
+  'pdf',
+  'spreadsheet',
+  'document',
+  'presentation',
+  'video',
+  'file',
+  'txt',
+  'empty',
+];
 
 const photo = 'https://picsum.photos/seed/accessory/200/200';
 
@@ -45,16 +57,12 @@ export const AccessoryIconStates = () => (
         size: sizes.map(size => ({value: size, label: size})),
       })}
     >
-      {props => (
-        <Accessory size={props.size}>
-          <Accessory.Icon icon={checkIcon} variant={props.variant} />
-        </Accessory>
-      )}
+      {props => <AccessoryIcon icon={checkIcon} size={props.size} variant={props.variant} />}
     </ComponentStatesTable>
   </StaticStates>
 );
 
-export const AccessoryImageStates = () => (
+export const AccessoryMediaStates = () => (
   <StaticStates>
     <ComponentStatesTable
       rowProps={permutateProps({
@@ -64,11 +72,22 @@ export const AccessoryImageStates = () => (
         className: [{label: 'Default', value: ''}],
       })}
     >
-      {props => (
-        <Accessory size={props.size}>
-          <Accessory.Image alt="Random photo" src={photo} />
-        </Accessory>
-      )}
+      {props => <AccessoryMedia alt="Random photo" size={props.size} src={photo} />}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
+export const AccessoryFileStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        type: fileTypes.map(type => ({value: type, label: type})),
+      })}
+      columnProps={permutateProps({
+        size: sizes.map(size => ({value: size, label: size})),
+      })}
+    >
+      {props => <AccessoryFile size={props.size} type={props.type} />}
     </ComponentStatesTable>
   </StaticStates>
 );

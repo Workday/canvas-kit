@@ -1,4 +1,4 @@
-import {Accessory, AccessoryIconVariant} from '@workday/canvas-kit-labs-react/accessory';
+import {AccessoryIcon, AccessoryIconVariant} from '@workday/canvas-kit-labs-react/accessory';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -25,9 +25,7 @@ const variants: AccessoryIconVariant[] = [
 export const Variants = () => (
   <div className={rowStyles}>
     {variants.map(variant => (
-      <Accessory key={variant}>
-        <Accessory.Icon icon={checkIcon} variant={variant} />
-      </Accessory>
+      <AccessoryIcon key={variant} icon={checkIcon} variant={variant} />
     ))}
   </div>
 );

@@ -3,9 +3,6 @@ import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {CSProps, createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {base, component, system} from '@workday/canvas-tokens-web';
 
-import {AccessoryIcon, accessoryIconStencil} from './AccessoryIcon';
-import {AccessoryImage} from './AccessoryImage';
-
 /**
  * The size of an `Accessory` tile.
  *
@@ -19,9 +16,8 @@ export type AccessorySize = 'extraSmall' | 'small' | 'medium' | 'large' | 'extra
 
 export interface AccessoryProps extends CSProps {
   /**
-   * The size of the tile. `Accessory.Icon` glyph size follows the tile: 10px, 12px, 16px, 18px,
-   * and 20px from `extraSmall` to `extraLarge`. Variant fills are painted at `medium` and above.
-   * `small` and `extraSmall` stay transparent unless `Accessory.Icon` sets `background`.
+   * The size of the tile. Icon glyph size follows the tile through the icon `data-part`: 10px,
+   * 12px, 16px, 18px, and 20px from `extraSmall` to `extraLarge`.
    *
    * * `extraSmall` — 16px
    * * `small` — 20px
@@ -32,15 +28,34 @@ export interface AccessoryProps extends CSProps {
    * @default 'extraLarge'
    */
   size?: AccessorySize;
+  /**
+   * The color of the icon. When set, this overrides the icon color from `variant` on
+   * `AccessoryIcon`. Inherited by the icon `data-part` via a CSS variable.
+   */
+  color?: string;
+  /**
+   * The background color of the icon tile. When set, this overrides the fill from `variant` and is
+   * painted at every size, including `small` and `extraSmall`. Inherited by the icon `data-part`
+   * via a CSS variable.
+   */
+  background?: string;
 }
 
+/**
+ * Tile shell for accessory visuals. Owns size, corner radius, icon glyph size, and optional icon
+ * color / fill overrides through the icon `data-part`. Prefer `AccessoryIcon`, `AccessoryFile`, or
+ * `AccessoryMedia`, which render this shell.
+ */
 export const accessoryStencil = createStencil({
   extends: cornerShapeStencil,
+  vars: {
+    iconColor: '',
+    tileBackground: '',
+  },
   parts: {
     icon: 'accessory-icon',
-    image: 'accessory-image',
   },
-  base: ({iconPart, imagePart}) => ({
+  base: ({iconPart}) => ({
     display: 'inline-flex',
     position: 'relative',
     alignItems: 'center',
@@ -53,38 +68,29 @@ export const accessoryStencil = createStencil({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      zIndex: 1,
-      borderRadius: cssVar(cornerShapeStencil.vars.shape),
-      cornerShape: 'superellipse(1.1)',
-    },
-    [imagePart]: {
-      position: 'absolute',
-      inset: 0,
-      display: 'flex',
-      overflow: 'hidden',
       borderRadius: cssVar(cornerShapeStencil.vars.shape),
       cornerShape: 'superellipse(1.1)',
     },
   }),
   modifiers: {
     size: {
-      extraSmall: ({iconPart}) => ({
+      extraSmall: ({iconPart, tileBackground}) => ({
         width: system.legacy.size.xxxs,
         height: system.legacy.size.xxxs,
         [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
         [iconPart]: {
           [systemIconStencil.vars.size]: base.legacy.size125,
-          backgroundColor: cssVar(accessoryIconStencil.vars.tileBackground, 'transparent'),
+          backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },
       }),
-      small: ({iconPart}) => ({
+      small: ({iconPart, tileBackground}) => ({
         width: system.legacy.size.xxs,
         height: system.legacy.size.xxs,
         [cornerShapeStencil.vars.shape]: base.legacy.size75,
         [iconPart]: {
           [systemIconStencil.vars.size]: base.legacy.size150,
-          backgroundColor: cssVar(accessoryIconStencil.vars.tileBackground, 'transparent'),
+          backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },
       }),
@@ -117,35 +123,30 @@ export const accessoryStencil = createStencil({
 });
 
 /**
- * `Accessory` is a presentational tile for a leading visual. It owns the tile size, corner radius,
- * and clipping. Place an `Accessory.Icon` or `Accessory.Image` inside it.
+ * `Accessory` is the presentational tile shell. It owns the tile size and corner radius.
+ * `AccessoryIcon`, `AccessoryFile`, and `AccessoryMedia` render this shell. Accessories are
+ * decorative and always hidden from assistive technology.
  *
  * ```tsx
- * <Accessory>
- *   <Accessory.Icon icon={activityIcon} />
- * </Accessory>
+ * <AccessoryIcon icon={activityIcon} />
  * ```
  */
 export const Accessory = createComponent('span')({
   displayName: 'Accessory',
-  Component: ({size = 'extraLarge', ...elemProps}: AccessoryProps, ref, Element) => {
-    return <Element ref={ref} {...handleCsProp(elemProps, accessoryStencil({size}))} />;
-  },
-  subComponents: {
-    /**
-     * `Accessory.Icon` renders a system icon inside the tile. `variant` sets the tile fill and icon
-     * color. The glyph size comes from the `size` prop on `Accessory`. `color` and `background`
-     * override the variant colors.
-     *
-     * Pass `aria-label` when the icon conveys information that is not available in adjacent text.
-     * Omit it when the icon is decorative.
-     */
-    Icon: AccessoryIcon,
-    /**
-     * `Accessory.Image` renders an image that fills the tile. Pass `icon` to center an
-     * `Accessory.Icon` on top of the image. `alt` is required. Use an empty string when the image
-     * is decorative.
-     */
-    Image: AccessoryImage,
+  Component: (
+    {size = 'extraLarge', color, background, ...elemProps}: AccessoryProps,
+    ref,
+    Element
+  ) => {
+    return (
+      <Element
+        ref={ref}
+        {...handleCsProp(
+          elemProps,
+          accessoryStencil({size, iconColor: color, tileBackground: background})
+        )}
+        aria-hidden={true}
+      />
+    );
   },
 });

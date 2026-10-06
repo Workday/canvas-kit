@@ -1,4 +1,4 @@
-import {Accessory} from '@workday/canvas-kit-labs-react/accessory';
+import {AccessoryIcon} from '@workday/canvas-kit-labs-react/accessory';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
@@ -27,9 +27,7 @@ export const Sizes = () => (
     {sizes.map(size => (
       <div className={rowStyles} key={size}>
         <Subtext size="large">{size}</Subtext>
-        <Accessory size={size}>
-          <Accessory.Icon icon={checkIcon} />
-        </Accessory>
+        <AccessoryIcon icon={checkIcon} size={size} />
       </div>
     ))}
   </div>

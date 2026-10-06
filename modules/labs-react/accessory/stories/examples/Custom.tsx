@@ -1,4 +1,4 @@
-import {Accessory} from '@workday/canvas-kit-labs-react/accessory';
+import {AccessoryMedia} from '@workday/canvas-kit-labs-react/accessory';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -22,16 +22,12 @@ const photo =
 
 export const Custom = () => (
   <div className={rowStyles}>
-    <Accessory>
-      <Accessory.Image alt="Three dark spheres" icon={checkIcon} src={photo} />
-    </Accessory>
-    <Accessory>
-      <Accessory.Image
-        alt="Three dark spheres, contained"
-        icon={checkIcon}
-        objectFit="contain"
-        src={photo}
-      />
-    </Accessory>
+    <AccessoryMedia alt="Three dark spheres" icon={checkIcon} src={photo} />
+    <AccessoryMedia
+      alt="Three dark spheres, contained"
+      icon={checkIcon}
+      objectFit="contain"
+      src={photo}
+    />
   </div>
 );

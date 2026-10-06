@@ -3,11 +3,11 @@ import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import AccessoryStoriesMeta from './Accessory.stories';
-import {AccessibleName} from './examples/AccessibleName';
 import {Basic} from './examples/Basic';
 import {Custom} from './examples/Custom';
 import {CustomColor} from './examples/CustomColor';
-import {Image} from './examples/Image';
+import {File} from './examples/File';
+import {Media} from './examples/Media';
 import {RTL} from './examples/RTL';
 import {Sizes} from './examples/Sizes';
 import {Variants} from './examples/Variants';
@@ -16,9 +16,10 @@ import {Variants} from './examples/Variants';
 
 # Canvas Kit Accessory
 
-`Accessory` is a presentational tile for the leading visual in a row. It renders an icon or an
-image. Pass `icon` to `Accessory.Image` to center an icon on the image. It does not handle clicks
-or focus.
+`Accessory` is a presentational tile shell for a leading visual. Prefer `AccessoryIcon`,
+`AccessoryFile`, or `AccessoryMedia`, which each extend the shared `Accessory` props (`size`,
+`color`, `background`) and render that shell. Accessories are decorative and always hidden from
+assistive technology. They do not handle clicks or focus.
 
 ## Installation
 
@@ -30,46 +31,52 @@ yarn add @workday/canvas-kit-labs-react
 
 ### Basic Example
 
-`Accessory` owns the tile size and corner radius. `Accessory.Icon` renders a system icon. With no
-`aria-label`, the icon is decorative.
+`AccessoryIcon` renders a system icon in an accessory tile. Glyph size follows `size` through the
+icon `data-part` on `accessoryStencil`.
 
 <ExampleCodeBlock code={Basic} />
 
-### Image
+### Media
 
-`Accessory.Image` fills the tile with an image. `alt` names the image. Use `alt=""` when the image
-is decorative.
+`AccessoryMedia` fills the tile with an image. The image stays hidden until it loads. Pass `icon`
+to center a glyph on a contrast scrim.
 
-<ExampleCodeBlock code={Image} />
+<ExampleCodeBlock code={Media} />
 
-### Image with an icon
+### File
 
-Pass `icon` to `Accessory.Image` and it renders `Accessory.Icon` centered on the image. `objectFit`
-is `cover` by default. `contain` fits the whole image inside the tile. The icon is decorative.
-`alt` names the image.
+`AccessoryFile` renders a file type through the shared icon graphic. Colored types keep their accent
+fill at every size. `file` and `txt` use `surface.alt` and a default border. `empty` is a shimmer
+placeholder.
+
+<ExampleCodeBlock code={File} />
+
+### Media with an icon
+
+Pass `icon` to `AccessoryMedia` to center a decorative icon on a contrast scrim. `objectFit` is
+`cover` by default. `contain` fits the whole image inside the tile.
 
 <ExampleCodeBlock code={Custom} />
 
 ### Custom color
 
-`variant` is a stencil modifier on `Accessory.Icon`. Tile size and glyph size are modifiers on
-`Accessory`, and the glyph size is applied through the icon `data-part`. `color` overrides the icon
-color from `variant`. `background` overrides the tile fill and is painted at every size. The icon is
-smaller than the tile: `extraSmall` is 10px, `small` is 12px, `medium` is 16px, `large` is 18px,
-and `extraLarge` is 20px. Variant fills stay hidden at `small` and `extraSmall` unless `background`
-is set. The same `color` and `background` props apply when `icon` is passed to `Accessory.Image`.
+`variant` is a stencil modifier on `AccessoryIcon`. `color` and `background` are shared `Accessory`
+props and override the variant through stencil vars on the shell. Glyph size follows `size` via the
+icon `data-part`. The icon is smaller than the tile: `extraSmall` is 10px, `small` is 12px,
+`medium` is 16px, `large` is 18px, and `extraLarge` is 20px. Variant fills stay hidden at `small`
+and `extraSmall` unless `background` is set.
 
 <ExampleCodeBlock code={CustomColor} />
 
 ### Sizes
 
-`size` is a prop on `Accessory`. The stencil sets the tile and, through `data-part`, the icon glyph. `extraLarge` (40px) is the default.
+`size` is a shared `Accessory` prop on each component. `extraLarge` (40px) is the default.
 
 <ExampleCodeBlock code={Sizes} />
 
 ### Variants
 
-`variant` is set on `Accessory.Icon`. It pairs an icon color with a tile fill. The fill is painted
+`variant` is set on `AccessoryIcon`. It pairs an icon color with a tile fill. The fill is painted
 at `medium`, `large`, and `extraLarge`. `outline` adds a default border at those larger sizes.
 
 <ExampleCodeBlock code={Variants} />
@@ -83,17 +90,8 @@ mirroring rules.
 
 ### Accessibility
 
-`Accessory` is presentational. It is not a button and does not take click or keyboard handlers.
-
-- Omit `aria-label` on `Accessory.Icon` when text next to the tile already names the item. The icon
-  is then hidden from assistive technology.
-- Pass `aria-label` when the icon is the only source of that information. The tile is exposed as an
-  image with that name.
-
-<ExampleCodeBlock code={AccessibleName} />
-
-- `Accessory.Image` uses the native `alt` on the image. An empty `alt` marks the image as
-  decorative. An `icon` on `Accessory.Image` is decorative.
+Accessory components are presentational and always `aria-hidden`. Name the item in adjacent text
+instead of on the accessory. They are not buttons and do not take click or keyboard handlers.
 
 ## Component API
 

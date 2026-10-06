@@ -1,4 +1,8 @@
-import {Accessory, AccessorySize} from '@workday/canvas-kit-labs-react/accessory';
+import {
+  AccessoryIcon,
+  AccessoryMedia,
+  AccessorySize,
+} from '@workday/canvas-kit-labs-react/accessory';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {documentIcon, playCircleIcon} from '@workday/canvas-system-icons-web';
@@ -29,23 +33,21 @@ export const CustomColor = () => (
     {sizes.map(size => (
       <div className={rowStyles} key={size}>
         <Subtext size="large">{size}</Subtext>
-        <Accessory size={size}>
-          <Accessory.Icon
-            background={system.color.accent.warning}
-            color={system.color.fg.warning.strong}
-            icon={documentIcon}
-          />
-        </Accessory>
-        <Accessory size={size}>
-          <Accessory.Image
-            alt=""
-            background={system.color.accent.info}
-            color={system.color.fg.inverse}
-            icon={playCircleIcon}
-            objectFit="contain"
-            src={photo}
-          />
-        </Accessory>
+        <AccessoryIcon
+          background={system.color.accent.warning}
+          color={system.color.fg.warning.strong}
+          icon={documentIcon}
+          size={size}
+        />
+        <AccessoryMedia
+          alt=""
+          background={system.color.accent.info}
+          color={system.color.fg.inverse}
+          icon={playCircleIcon}
+          objectFit="contain"
+          size={size}
+          src={photo}
+        />
       </div>
     ))}
   </div>

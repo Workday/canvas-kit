@@ -4,7 +4,8 @@
   <img src="https://img.shields.io/badge/LABS-alpha-orange" alt="LABS: Alpha" />
 </a>  This component is work in progress and currently in prerelease.
 
-A presentational tile for a leading visual. Renders an icon or an image.
+A presentational tile shell for a leading visual. Prefer `AccessoryIcon`, `AccessoryFile`, or
+`AccessoryMedia`.
 
 View the
 [documentation for Accessory](https://workday.github.io/canvas-kit/?path=/docs/labs-accessory--docs)

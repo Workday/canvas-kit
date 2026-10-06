@@ -1,4 +1,4 @@
-import {Accessory} from '@workday/canvas-kit-labs-react/accessory';
+import {AccessoryIcon} from '@workday/canvas-kit-labs-react/accessory';
 import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
@@ -12,9 +12,7 @@ const rowStyles = createStyles({
 
 export const RTL = () => (
   <div className={rowStyles} dir="rtl">
-    <Accessory>
-      <Accessory.Icon icon={checkIcon} />
-    </Accessory>
+    <AccessoryIcon icon={checkIcon} />
     <Subtext size="large">مكتمل</Subtext>
   </div>
 );

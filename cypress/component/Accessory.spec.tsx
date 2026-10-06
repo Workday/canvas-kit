@@ -1,8 +1,8 @@
-import {AccessibleName} from '../../modules/labs-react/accessory/stories/examples/AccessibleName';
 import {Basic} from '../../modules/labs-react/accessory/stories/examples/Basic';
 import {Custom} from '../../modules/labs-react/accessory/stories/examples/Custom';
 import {CustomColor} from '../../modules/labs-react/accessory/stories/examples/CustomColor';
-import {Image} from '../../modules/labs-react/accessory/stories/examples/Image';
+import {File} from '../../modules/labs-react/accessory/stories/examples/File';
+import {Media} from '../../modules/labs-react/accessory/stories/examples/Media';
 import {RTL} from '../../modules/labs-react/accessory/stories/examples/RTL';
 import {Sizes} from '../../modules/labs-react/accessory/stories/examples/Sizes';
 import {Variants} from '../../modules/labs-react/accessory/stories/examples/Variants';
@@ -16,7 +16,7 @@ describe('Accessory', () => {
     });
   });
 
-  [Basic, Image, Custom, CustomColor, Sizes, Variants, AccessibleName, RTL].forEach(Example => {
+  [Basic, Media, File, Custom, CustomColor, Sizes, Variants, RTL].forEach(Example => {
     context(`given the ${Example.name} story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);
@@ -28,23 +28,13 @@ describe('Accessory', () => {
     });
   });
 
-  context('given the Accessible Name story is rendered', () => {
+  context('given the Media story is rendered', () => {
     beforeEach(() => {
-      cy.mount(<AccessibleName />);
+      cy.mount(<Media />);
     });
 
-    it('should expose the icon name', () => {
-      cy.findByRole('img', {name: 'Complete'}).should('be.visible');
-    });
-  });
-
-  context('given the Image story is rendered', () => {
-    beforeEach(() => {
-      cy.mount(<Image />);
-    });
-
-    it('should expose the image name', () => {
-      cy.findByRole('img', {name: 'Random photo'}).should('be.visible');
+    it('should render the image', () => {
+      cy.get('img[alt="Random photo"]').should('be.visible');
     });
   });
 
@@ -53,9 +43,9 @@ describe('Accessory', () => {
       cy.mount(<Custom />);
     });
 
-    it('should expose both background images', () => {
-      cy.findByRole('img', {name: 'Three dark spheres'}).should('be.visible');
-      cy.findByRole('img', {name: 'Three dark spheres, contained'}).should('be.visible');
+    it('should render both images', () => {
+      cy.get('img[alt="Three dark spheres"]').should('be.visible');
+      cy.get('img[alt="Three dark spheres, contained"]').should('be.visible');
     });
   });
 });
