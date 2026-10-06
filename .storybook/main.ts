@@ -11,6 +11,7 @@ import {ExportedSymbol, Value} from '@workday/canvas-kit-docs/docgen/docTypes';
 import {version} from '../lerna.json' assert {type: 'json'};
 import stylingConfig from '../styling.config';
 import { vitePluginInlineSpecifications } from './vite-plugin-inline-specifications';
+import {remarkRewriteCanvasRoutes} from './remark-rewrite-canvas-routes';
 import { vitePluginRedirectMDXToGithub } from './vite-plugin-redirect-mdx-to-github';
 import { vitePluginWholeSource } from './vite-plugin-whole-source';
 import { vitePluginTypescriptWithTransformers } from '@workday/canvas-kit-styling-transform/vite';
@@ -44,7 +45,7 @@ const config: StorybookConfig = {
       options: {
         mdxPluginOptions: {
           mdxCompileOptions: {
-            remarkPlugins: [remarkGfm],
+            remarkPlugins: [remarkGfm, remarkRewriteCanvasRoutes],
           },
         },
       },
@@ -73,7 +74,7 @@ const config: StorybookConfig = {
             ...mdx({
               include: '*.md',
               providerImportSource: '@mdx-js/react',
-              remarkPlugins: [remarkGfm],
+              remarkPlugins: [remarkGfm, remarkRewriteCanvasRoutes],
             }),
           },
           vitePluginWholeSource(),
