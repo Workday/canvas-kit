@@ -31,8 +31,9 @@ yarn add @workday/canvas-kit-labs-react
 
 ### Basic Example
 
-`AccessoryIcon` renders a system icon in an accessory tile. Glyph size follows `size` through the
-icon `data-part` on `accessoryStencil`.
+`Accessory` is only a tile shell — size and corner radius. It does not render a visual by itself.
+Use a targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file
+type, or `AccessoryMedia` for an image (optionally with an icon on a scrim).
 
 <ExampleCodeBlock code={Basic} />
 
@@ -45,9 +46,9 @@ to center a glyph on a contrast scrim.
 
 ### File
 
-`AccessoryFile` renders a file type through the shared icon graphic. Colored types keep their accent
-fill at every size. `file` and `txt` use `surface.alt` and a default border. `empty` is a shimmer
-placeholder.
+`AccessoryFile` renders a file type through the shared icon graphic. `type` chooses the glyph and
+is a stencil modifier for the fill and icon color. Colored types keep their accent fill at every
+size. `file` and `txt` use `surface.alt` and a default border.
 
 <ExampleCodeBlock code={File} />
 

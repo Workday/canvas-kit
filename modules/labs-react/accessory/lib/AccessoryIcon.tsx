@@ -33,12 +33,6 @@ export interface AccessoryIconProps extends AccessoryProps {
   variant?: AccessoryIconVariant;
 }
 
-const variantFill = (backgroundColor: string, iconColor: string) => ({
-  // Prefer overrides set on the `Accessory` shell (inherited CSS variables).
-  backgroundColor: cssVar(accessoryStencil.vars.tileBackground, backgroundColor),
-  [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, iconColor),
-});
-
 export const accessoryIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
@@ -47,25 +41,86 @@ export const accessoryIconStencil = createStencil({
   },
   modifiers: {
     variant: {
-      grey: variantFill(system.legacy.color.surface.alt.strong, base.legacy.slate800),
-      green: variantFill(system.legacy.color.surface.success.strong, base.legacy.green800),
-      blue: variantFill(
-        system.legacy.color.surface.info.strong,
-        system.legacy.color.fg.info.strong
-      ),
-      purple: variantFill(base.legacy.purpleA50, base.legacy.purple700),
-      amber: variantFill(
-        system.legacy.color.surface.warning.strong,
-        system.legacy.color.fg.warning.strong
-      ),
-      magenta: variantFill(base.legacy.magentaA50, base.legacy.magenta800),
-      red: variantFill(
-        system.legacy.color.surface.danger.strong,
-        system.legacy.color.fg.danger.strong
-      ),
-      orange: variantFill(base.legacy.orangeA50, base.legacy.orange700),
+      grey: {
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.alt.strong
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.slate800
+        ),
+      },
+      green: {
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.success.strong
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.green800
+        ),
+      },
+      blue: {
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.info.strong
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          system.legacy.color.fg.info.strong
+        ),
+      },
+      purple: {
+        backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.purpleA50),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.purple700
+        ),
+      },
+      amber: {
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.warning.strong
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          system.legacy.color.fg.warning.strong
+        ),
+      },
+      magenta: {
+        backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.magentaA50),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.magenta800
+        ),
+      },
+      red: {
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.danger.strong
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          system.legacy.color.fg.danger.strong
+        ),
+      },
+      orange: {
+        backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.orangeA50),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.orange700
+        ),
+      },
       outline: {
-        ...variantFill(system.legacy.color.surface.transparent, base.legacy.slate800),
+        backgroundColor: cssVar(
+          accessoryStencil.vars.tileBackground,
+          system.legacy.color.surface.transparent
+        ),
+        [systemIconStencil.vars.color]: cssVar(
+          accessoryStencil.vars.iconColor,
+          base.legacy.slate800
+        ),
         borderWidth: px2rem(1),
         borderStyle: 'solid',
         borderColor: system.legacy.color.border.default,
@@ -86,7 +141,7 @@ export interface AccessoryIconGraphicProps {
 }
 
 /**
- * Icon graphic without a tile shell. Used inside `AccessoryFile` and `AccessoryMedia`. Glyph size,
+ * Icon graphic without a tile shell. Used inside `AccessoryMedia`. Glyph size,
  * color, and fill overrides come from the parent `Accessory` via the icon `data-part` and stencil
  * vars.
  */

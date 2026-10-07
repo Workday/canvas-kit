@@ -1,36 +1,27 @@
-import {css} from '@emotion/react';
-
-import {Accessory, AccessoryIcon} from '@workday/canvas-kit-labs-react/accessory';
-import {createStencil, createStyles} from '@workday/canvas-kit-styling';
-import {checkIcon} from '@workday/canvas-system-icons-web';
+import {
+  AccessoryFile,
+  AccessoryIcon,
+  AccessoryMedia,
+} from '@workday/canvas-kit-labs-react/accessory';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {checkIcon, playCircleIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
-const calendarAccessoryStencil = createStencil({
-  parts: {
-    month: 'month',
-    day: 'day',
-  },
-  base: ({monthPart, dayPart}) => ({
-    display: 'flex',
-    flexDirection: 'column',
-    backgroundColor: system.color.surface.alt.default,
-    border: `1px solid ${system.color.border.default}`,
-    alignItems: 'center',
-    lineHeight: system.lineHeight.subtext.md,
-    [monthPart]: {
-      fontSize: system.fontSize.subtext.sm,
-      color: system.color.fg.danger.default,
-      fontWeight: system.fontWeight.medium,
-    },
-    [dayPart]: {
-      fontSize: system.fontSize.subtext.lg,
-    },
-  }),
+const rowStyles = createStyles({
+  display: 'flex',
+  alignItems: 'center',
+  gap: system.gap.sm,
+  flexWrap: 'wrap',
 });
 
 export const Basic = () => (
-  <Accessory cs={calendarAccessoryStencil()}>
-    <div {...calendarAccessoryStencil.parts.month}>Aug</div>
-    <div {...calendarAccessoryStencil.parts.day}>14</div>
-  </Accessory>
+  <div className={rowStyles}>
+    <AccessoryIcon icon={checkIcon} variant="blue" />
+    <AccessoryFile type="pdf" />
+    <AccessoryMedia
+      alt=""
+      icon={playCircleIcon}
+      src="https://picsum.photos/seed/accessory/200/200"
+    />
+  </div>
 );

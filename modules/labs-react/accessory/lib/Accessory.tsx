@@ -79,7 +79,7 @@ export const accessoryStencil = createStencil({
         height: system.legacy.size.xxxs,
         [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
         [iconPart]: {
-          [systemIconStencil.vars.size]: base.legacy.size125,
+          [systemIconStencil.vars.size]: base.legacy.size200,
           backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },
@@ -89,7 +89,7 @@ export const accessoryStencil = createStencil({
         height: system.legacy.size.xxs,
         [cornerShapeStencil.vars.shape]: base.legacy.size75,
         [iconPart]: {
-          [systemIconStencil.vars.size]: base.legacy.size150,
+          [systemIconStencil.vars.size]: base.legacy.size225,
           backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },

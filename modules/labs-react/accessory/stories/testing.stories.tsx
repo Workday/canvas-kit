@@ -42,7 +42,6 @@ const fileTypes: AccessoryFileType[] = [
   'video',
   'file',
   'txt',
-  'empty',
 ];
 
 const photo = 'https://picsum.photos/seed/accessory/200/200';

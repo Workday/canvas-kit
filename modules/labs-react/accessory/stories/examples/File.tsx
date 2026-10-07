@@ -17,7 +17,6 @@ const types: AccessoryFileType[] = [
   'video',
   'file',
   'txt',
-  'empty',
 ];
 
 export const File = () => (

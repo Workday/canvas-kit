@@ -61,14 +61,6 @@ describe('Accessory', () => {
     });
   });
 
-  describe('when the file is empty', () => {
-    it('should render a placeholder without an icon', () => {
-      const {container} = render(<AccessoryFile type="empty" />);
-
-      expect(container.querySelector('svg')).not.toBeInTheDocument();
-    });
-  });
-
   describe('when media has a play icon', () => {
     it('should keep the preview and play icon decorative', () => {
       const {container} = render(

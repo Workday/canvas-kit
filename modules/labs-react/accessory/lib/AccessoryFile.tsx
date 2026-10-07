@@ -1,9 +1,8 @@
-import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIconProps} from '@workday/canvas-kit-react/icon';
-import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {createComponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps, systemIconStencil} from '@workday/canvas-kit-react/icon';
+import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {
   documentIcon,
-  fileIcon,
   pdfIcon,
   playCircleIcon,
   stackIcon,
@@ -12,8 +11,7 @@ import {
 } from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
-import {Accessory, AccessoryProps} from './Accessory';
-import {AccessoryIconGraphic, AccessoryIconVariant} from './AccessoryIcon';
+import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
 /**
  * The kind of file `AccessoryFile` represents.
@@ -25,71 +23,94 @@ export type AccessoryFileType =
   | 'presentation'
   | 'video'
   | 'file'
-  | 'txt'
-  | 'empty';
+  | 'txt';
 
 export interface AccessoryFileProps extends AccessoryProps {
   /**
-   * The file type. Colored types use an accent fill. `file` and `txt` use `surface.alt` with a
-   * `border.default` stroke. `empty` is a shimmer placeholder. `video` centers a play icon.
+   * The file type. Chooses the glyph and sets the tile fill and icon color through a stencil
+   * modifier. Colored types keep their accent fill at every size. `file` and `txt` use
+   * `surface.alt` with a `border.default` stroke. `video` uses `surface.alt` and an inverse icon.
+   * `color` and `background` override the type colors.
    * @default 'file'
    */
   type?: AccessoryFileType;
 }
 
-const inverse = system.color.fg.inverse;
-const altSurface = system.legacy.color.surface.alt.default;
-
-const fileIcons: Record<
-  Exclude<AccessoryFileType, 'empty'>,
-  {
-    icon: SystemIconProps['icon'];
-    background: string;
-    color: string;
-    variant?: AccessoryIconVariant;
-  }
-> = {
-  pdf: {icon: pdfIcon, background: system.legacy.color.brand.accent.critical, color: inverse},
-  spreadsheet: {
-    icon: tableExpandIcon,
-    background: system.legacy.color.brand.accent.positive,
-    color: inverse,
+/**
+ * File-type treatment for `AccessoryFile`. Each `type` sets the tile fill and icon color.
+ * `outline` adds the default border used by `file` and `txt`. `color` and `background` on
+ * `Accessory` still override the type colors.
+ */
+export const accessoryFileStencil = createStencil({
+  parts: {
+    icon: 'accessory-icon',
   },
-  document: {icon: documentIcon, background: system.legacy.color.accent.info, color: inverse},
-  presentation: {
-    icon: stackIcon,
-    background: system.legacy.color.brand.accent.caution,
-    color: inverse,
+  base: ({iconPart}) => ({
+    [iconPart]: {
+      backgroundColor: cssVar(accessoryStencil.vars.tileBackground),
+      [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor),
+    },
+  }),
+  modifiers: {
+    type: {
+      pdf: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.critical,
+      },
+      spreadsheet: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.positive,
+      },
+      document: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.info,
+      },
+      presentation: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.caution,
+      },
+      video: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+      },
+      file: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.default,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+      },
+      txt: {
+        [accessoryStencil.vars.iconColor]: system.color.fg.default,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+      },
+    },
+    outline: {
+      true: ({iconPart}) => ({
+        [iconPart]: {
+          borderWidth: px2rem(1),
+          borderStyle: 'solid',
+          borderColor: system.legacy.color.border.default,
+        },
+      }),
+    },
   },
-  video: {icon: playCircleIcon, background: altSurface, color: inverse},
-  file: {
-    icon: fileIcon,
-    background: altSurface,
-    color: system.color.fg.default,
-    variant: 'outline',
-  },
-  txt: {
-    icon: txtIcon,
-    background: altSurface,
-    color: system.color.fg.default,
-    variant: 'outline',
-  },
-};
-
-export const accessoryFileEmptyStencil = createStencil({
-  base: {
-    position: 'absolute',
-    inset: 0,
-    borderRadius: cssVar(cornerShapeStencil.vars.shape),
-    cornerShape: 'superellipse(1.1)',
-    background: `linear-gradient(to left, ${system.legacy.color.surface.alt.strong}, ${system.legacy.color.surface.loading})`,
+  defaultModifiers: {
+    type: 'file',
   },
 });
 
+const fileIcons: Record<AccessoryFileType, SystemIconProps['icon']> = {
+  pdf: pdfIcon,
+  spreadsheet: tableExpandIcon,
+  document: documentIcon,
+  presentation: stackIcon,
+  video: playCircleIcon,
+  file: documentIcon,
+  txt: txtIcon,
+};
+
 /**
- * `AccessoryFile` renders a file-type tile: PDF, spreadsheet, document, presentation, video,
- * a generic file, text, or an empty placeholder. Colored types keep their fill at every size.
- * Generic file and text use `surface.alt` and a `border.default` stroke. Always decorative.
+ * `AccessoryFile` renders a file-type tile. `type` chooses the glyph and sets the fill and icon
+ * color. Colored types keep their fill at every size. Generic file and text use `surface.alt` and
+ * a `border.default` stroke. Always decorative.
  */
 export const AccessoryFile = createComponent('span')({
   displayName: 'AccessoryFile',
@@ -98,33 +119,19 @@ export const AccessoryFile = createComponent('span')({
     ref,
     Element
   ) => {
-    if (type === 'empty') {
-      return (
-        <Accessory
-          as={Element}
-          ref={ref}
-          background={background}
-          color={color}
-          size={size}
-          {...handleCsProp(elemProps)}
-        >
-          <span {...handleCsProp({}, accessoryFileEmptyStencil())} />
-        </Accessory>
-      );
-    }
-
-    const treatment = fileIcons[type];
-
     return (
       <Accessory
         as={Element}
         ref={ref}
-        background={background ?? treatment.background}
-        color={color ?? treatment.color}
+        background={background}
+        color={color}
         size={size}
-        {...handleCsProp(elemProps)}
+        {...handleCsProp(
+          elemProps,
+          accessoryFileStencil({type, outline: type === 'file' || type === 'txt'})
+        )}
       >
-        <AccessoryIconGraphic icon={treatment.icon} variant={treatment.variant ?? 'grey'} />
+        <SystemIcon icon={fileIcons[type]} {...accessoryStencil.parts.icon} aria-hidden={true} />
       </Accessory>
     );
   },
