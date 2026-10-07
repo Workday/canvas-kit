@@ -5,6 +5,7 @@ import {checkIcon, playCircleIcon} from '@workday/canvas-system-icons-web';
 
 import {Accessory} from '../lib/Accessory';
 import {AccessoryCalendar} from '../lib/AccessoryCalendar';
+import {AccessoryFavicon} from '../lib/AccessoryFavicon';
 import {AccessoryFile} from '../lib/AccessoryFile';
 import {AccessoryIcon} from '../lib/AccessoryIcon';
 import {AccessoryMedia} from '../lib/AccessoryMedia';
@@ -18,6 +19,7 @@ describe('Accessory', () => {
   verifyComponent(AccessoryMedia, {props: {src: imageSrc, alt: 'Preview', icon: checkIcon}});
   verifyComponent(AccessoryFile, {});
   verifyComponent(AccessoryCalendar, {props: {month: 'Apr', date: 30}});
+  verifyComponent(AccessoryFavicon, {props: {url: 'gmail.com'}});
 
   describe('when a calendar date is rendered', () => {
     it('should show the month and day', () => {
@@ -61,6 +63,26 @@ describe('Accessory', () => {
 
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(container.querySelector('svg')).toBeInTheDocument();
+    });
+  });
+
+  describe('when a favicon is rendered', () => {
+    it('should resolve the site hostname and stay decorative', () => {
+      const {container} = render(<AccessoryFavicon url="https://mail.google.com/mail" />);
+      const img = container.querySelector('img')!;
+
+      expect(img).toHaveAttribute(
+        'src',
+        'https://www.google.com/s2/favicons?domain=mail.google.com&sz=180'
+      );
+      expect(img).toHaveAttribute('alt', '');
+      expect(screen.queryByRole('img')).not.toBeInTheDocument();
+    });
+
+    it('should render nothing when the site URL has no hostname', () => {
+      const {container} = render(<AccessoryFavicon url="not a url" />);
+
+      expect(container.querySelector('img')).not.toBeInTheDocument();
     });
   });
 

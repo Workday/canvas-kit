@@ -6,6 +6,7 @@ import mdxDoc from './Accessory.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Calendar as CalendarExample} from './examples/Calendar';
 import {Custom as CustomExample} from './examples/Custom';
+import {Favicon as FaviconExample} from './examples/Favicon';
 import {File as FileExample} from './examples/File';
 import {Icon as IconExample} from './examples/Icon';
 import {Media as MediaExample} from './examples/Media';
@@ -35,6 +36,10 @@ export const Icon: Story = {
 
 export const Media: Story = {
   render: MediaExample,
+};
+
+export const Favicon: Story = {
+  render: FaviconExample,
 };
 
 export const File: Story = {

@@ -126,8 +126,9 @@ export const accessoryStencil = createStencil({
 /**
  * `Accessory` is the small rounded visual that sits beside text, most often the leading element in
  * a list item or other row. It owns the tile size and corner radius so a system icon, file type,
- * image, calendar date, or custom content stays one consistent shape. `AccessoryIcon`,
- * `AccessoryFile`, `AccessoryMedia`, and `AccessoryCalendar` render this shell. Accessories are
+ * image, site favicon, calendar date, or custom content stays one consistent shape.
+ * `AccessoryIcon`, `AccessoryFile`, `AccessoryMedia`, `AccessoryFavicon`, and `AccessoryCalendar`
+ * render this shell. Accessories are
  * decorative and always hidden from assistive technology.
  *
  * ```tsx

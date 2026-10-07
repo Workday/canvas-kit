@@ -1,6 +1,7 @@
 import {Basic} from '../../modules/labs-react/accessory/stories/examples/Basic';
 import {Calendar} from '../../modules/labs-react/accessory/stories/examples/Calendar';
 import {Custom} from '../../modules/labs-react/accessory/stories/examples/Custom';
+import {Favicon} from '../../modules/labs-react/accessory/stories/examples/Favicon';
 import {File} from '../../modules/labs-react/accessory/stories/examples/File';
 import {Icon} from '../../modules/labs-react/accessory/stories/examples/Icon';
 import {Media} from '../../modules/labs-react/accessory/stories/examples/Media';
@@ -14,9 +15,13 @@ describe('Accessory', () => {
       fixture: 'avatar.png',
       headers: {'content-type': 'image/png'},
     });
+    cy.intercept('GET', 'https://www.google.com/s2/favicons*', {
+      fixture: 'avatar.png',
+      headers: {'content-type': 'image/png'},
+    });
   });
 
-  [Basic, Icon, Media, File, Calendar, Custom, Sizes, Variants].forEach(Example => {
+  [Basic, Icon, Media, Favicon, File, Calendar, Custom, Sizes, Variants].forEach(Example => {
     context(`given the ${Example.name} story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

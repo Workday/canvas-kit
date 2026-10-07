@@ -1,5 +1,6 @@
 import {
   AccessoryCalendar,
+  AccessoryFavicon,
   AccessoryFile,
   AccessoryFileType,
   AccessoryIcon,
@@ -73,6 +74,21 @@ export const AccessoryMediaStates = () => (
       })}
     >
       {props => <AccessoryMedia alt="Random photo" size={props.size} src={photo} />}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
+export const AccessoryFaviconStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        size: sizes.map(size => ({value: size, label: size})),
+      })}
+      columnProps={permutateProps({
+        className: [{label: 'Gmail', value: ''}],
+      })}
+    >
+      {props => <AccessoryFavicon size={props.size} url="gmail.com" />}
     </ComponentStatesTable>
   </StaticStates>
 );

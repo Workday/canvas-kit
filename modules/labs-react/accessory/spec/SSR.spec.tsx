@@ -6,6 +6,7 @@ import {renderToString} from 'react-dom/server';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 
 import {AccessoryCalendar} from '../lib/AccessoryCalendar';
+import {AccessoryFavicon} from '../lib/AccessoryFavicon';
 import {AccessoryFile} from '../lib/AccessoryFile';
 import {AccessoryIcon} from '../lib/AccessoryIcon';
 import {AccessoryMedia} from '../lib/AccessoryMedia';
@@ -22,6 +23,7 @@ describe('Accessory', () => {
           <AccessoryMedia alt="Four dark spheres" icon={checkIcon} src={imageSrc} />
           <AccessoryFile type="pdf" />
           <AccessoryCalendar date={30} month="Apr" />
+          <AccessoryFavicon url="gmail.com" />
         </>
       );
 
