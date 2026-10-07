@@ -91,6 +91,7 @@ export const MenuCard = createSubcomponent('div')({
           transformOriginHorizontal: transformOrigin.horizontal,
         })
       )}
+      ref={model.state.containerRef}
     >
       {elemProps.children}
     </Card>
