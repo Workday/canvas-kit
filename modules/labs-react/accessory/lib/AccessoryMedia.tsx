@@ -1,12 +1,11 @@
 import React from 'react';
 
 import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
-import {SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {Accessory, AccessoryProps} from './Accessory';
-import {AccessoryIconGraphic} from './AccessoryIcon';
+import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
 export interface AccessoryMediaProps extends AccessoryProps {
   /**
@@ -139,7 +138,7 @@ export const AccessoryMedia = createComponent('span')({
         {icon && (
           <>
             <span {...handleCsProp({}, accessoryMediaScrimStencil())} />
-            <AccessoryIconGraphic icon={icon} />
+            <SystemIcon icon={icon} {...accessoryStencil.parts.icon} aria-hidden={true} />
           </>
         )}
       </Accessory>

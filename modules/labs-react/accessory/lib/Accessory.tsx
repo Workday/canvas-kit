@@ -55,7 +55,7 @@ export const accessoryStencil = createStencil({
   parts: {
     icon: 'accessory-icon',
   },
-  base: ({iconPart}) => ({
+  base: ({iconColor, iconPart}) => ({
     display: 'inline-flex',
     position: 'relative',
     alignItems: 'center',
@@ -70,6 +70,7 @@ export const accessoryStencil = createStencil({
       justifyContent: 'center',
       borderRadius: cssVar(cornerShapeStencil.vars.shape),
       cornerShape: 'superellipse(1.1)',
+      [systemIconStencil.vars.color]: cssVar(iconColor),
     },
   }),
   modifiers: {

@@ -57,6 +57,10 @@ size. `file` and `txt` use `surface.alt` and a default border.
 Pass `icon` to `AccessoryMedia` to center a decorative icon on a contrast scrim. `objectFit` is
 `cover` by default. `contain` fits the whole image inside the tile.
 
+The file row checks color overrides on `AccessoryFile`. `color` and `background` set the shell
+stencil vars. A `cs` stencil can set those same vars: `accessoryStencil.vars.iconColor` and
+`accessoryStencil.vars.tileBackground`.
+
 <ExampleCodeBlock code={Custom} />
 
 ### Custom color
