@@ -8,7 +8,7 @@ import {useRef} from 'react';
  * const value = useConstant(generateUniqueId)
  */
 export function useConstant<T>(fn: () => T): T {
-  const ref = useRef<T>();
+  const ref = useRef<T | undefined>(undefined);
 
   if (!ref.current) {
     ref.current = fn();

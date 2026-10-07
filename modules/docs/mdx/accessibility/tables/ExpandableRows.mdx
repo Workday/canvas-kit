@@ -1,0 +1,29 @@
+import {Meta} from '@storybook/blocks';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {ExpandableRows} from '../examples/Table/WithExpandableRows';
+
+<Meta title="Guides/Accessibility/Table Patterns/Expandable Rows" />
+
+## Expandable Rows
+
+Expandable Rows combines the likes of an accordion with tabular data tables. Column 1 renders icon
+buttons with 2 states, a collapsed and expanded state. A new row that spans the entire width of the
+table is added to the table just after the expanded row.
+
+- The `aria-expanded` property is added to the chevron button to communicate this state to screen
+  reader users.
+- A Canvas accessible `Tooltip` component is used to assign names to each icon button based on the
+  most useful value in the row. In this example, we combined the car make (in column 1) and model
+  (in column 2) together. This allows everyone to view the name of the icon buttons by hovering the
+  mouse or focusing with the keyboard.
+- The expanded row uses `colspan` to span the entire width of the table and support screen readers.
+  This space provides flexibility to show headings, lists, and other structured content for the
+  table row above.
+- There is no explicit relationship between a row of cells and the spanned content below it. The
+  spanned content is assumed to belong to the row of cells above it, based on established accordion
+  patterns and logical reading order of content rendered to the screen.
+- Outlining hierarchy with additional nested rows in the table is not supported for screen readers
+  in this example.
+
+<ExampleCodeBlock code={ExpandableRows} />

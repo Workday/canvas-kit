@@ -1,4 +1,7 @@
 {
   "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "resolveJsonModule": true
+  },
   "exclude": ["node_modules", "ts-tmp", "dist", "spec", "lib/**/spec"]
 }

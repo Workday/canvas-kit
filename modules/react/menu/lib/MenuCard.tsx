@@ -4,6 +4,7 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
+  cornerShapeStencil,
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
@@ -19,6 +20,7 @@ export interface MenuCardProps extends ExtractProps<typeof Card, never> {
 }
 
 export const menuCardStencil = createStencil({
+  extends: cornerShapeStencil,
   vars: {
     minWidth: px2rem(1),
     transformOriginVertical: 'top',
@@ -33,13 +35,13 @@ export const menuCardStencil = createStencil({
     fontSize: system.legacy.fontSize.subtext.lg,
     lineHeight: system.legacy.lineHeight.subtext.lg,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    color: system.color.fg.default,
+    color: system.color.fg.strong,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.legacy.padding.xxs,
-    borderRadius: system.legacy.shape.xxl,
+    padding: system.legacy.padding.xs,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
     maxWidth: calc.subtract('100vw', system.legacy.size.sm),
     boxShadow: system.depth[3],
     minWidth,
@@ -53,7 +55,8 @@ export const menuCardStencil = createStencil({
       overflow: 'hidden',
     },
     [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
-      borderRadius: system.legacy.shape.xxl,
+      // slightly smaller border radius
+      borderRadius: system.legacy.shape.lg,
       // Card is a flex column container. Without this, a flex child won't shrink below its
       // content size, so `maxHeight` on the Card would be ignored and content would overflow
       // instead of scrolling inside the list-box-container.
@@ -70,7 +73,7 @@ export const MenuCard = createSubcomponent('div')({
   displayName: 'Menu.Card',
   modelHook: useMenuModel,
   elemPropsHook: useMenuCard,
-})<MenuCardProps>(({minWidth, maxHeight, ...elemProps}, Element, model) => {
+})<MenuCardProps>(({minWidth, maxHeight, variant, ...elemProps}, Element, model) => {
   const transformOrigin = React.useMemo(() => {
     return getTransformFromPlacement(model.state.placement || 'bottom');
   }, [model.state.placement]);
@@ -78,6 +81,7 @@ export const MenuCard = createSubcomponent('div')({
   return (
     <Card
       as={Element}
+      variant={variant}
       {...mergeStyles(
         elemProps,
         menuCardStencil({

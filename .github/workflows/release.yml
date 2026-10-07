@@ -53,12 +53,28 @@ jobs:
         run: npm config set registry https://registry.npmjs.org/
 
       - uses: Workday/canvas-kit-actions/release@v2
+        id: release
+        continue-on-error: true
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: ${{ inputs.version }}
           toRef: ${{ inputs.to_ref }}
+
+      ## Safety net: `lerna publish from-package` is idempotent (skips versions already on
+      ## npm). If the release action aborts mid-set — typically a Sigstore transparency-log
+      ## 409 during trusted publishing — this finishes the remainder without bumping again.
+      - name: Publish remaining packages
+        id: publish-remaining
+        if: steps.release.outcome == 'failure'
+        run:
+          yarn publish:from-package -- --dist-tag ${{ inputs.branch == 'master' && 'latest' ||
+          'support' }} --require-unpublished
+
+      - name: Verify npm publish completed
+        if: steps.release.outcome == 'failure' && steps.publish-remaining.outcome != 'success'
+        run: exit 1
 
       - uses: Workday/canvas-kit-actions/report-failure@v2
         if: failure()

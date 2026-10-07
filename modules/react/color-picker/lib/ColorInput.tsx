@@ -86,6 +86,9 @@ export const colorPickerHexInputStencil = createStencil({
       left: system.legacy.gap.sm,
       boxShadow: `inset 0 0 0 ${px2rem(1)} rgba(0,0,0,0.25)`,
       pointerEvents: 'none',
+      '@media (forced-colors: active)': {
+        outline: `solid ${px2rem(1)} SelectedItemText`,
+      },
     },
 
     ':dir(ltr)': {

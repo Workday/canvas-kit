@@ -1,66 +1,34 @@
-<link rel="icon" type="image/png" href="/canvas-kit-favicon.png" sizes="192x192" />
-<link rel="shortcut icon" href="/canvas-kit-favicon.ico" />
-<link
-  href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400,500&display=swap"
-  rel="stylesheet"
-/>
+<link rel="icon" type="image/png" href="./canvas-kit-favicon.png" sizes="192x192" />
+<link rel="shortcut icon" href="./canvas-kit-favicon.ico" />
+<link rel="preload" href="./SanaSansLCG05-Variable.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="./Roboto-Light.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="./Roboto-Regular.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="./Roboto-Medium.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="./Roboto-Bold.ttf" as="font" type="font/ttf" crossorigin />
+<link rel="preload" href="./IBMPlexMono-Regular.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="./RobotoMono-Regular.ttf" as="font" type="font/ttf" crossorigin />
 <script src="https://use.fontawesome.com/660238b999.js"></script>
 <script>
   document.title = 'Canvas Kit Storybook';
 </script>
+
+<link rel="stylesheet" href="./updated-type.css" />
+<script src="./set-data-theme.js"></script>
 <style>
-  [title^='_hidden_'] {
-    /* display: none !important; */
-  }
-</style>
-
-<style type="text/css">
-  /* body {
-    font-family: 'Roboto', sans-serif;
-    background: #e6f1ff !important;
-    font-size: 14px;
-  }
-  #storybook-explorer-tree {
-    font-family: 'Roboto', sans-serif;
-  }
-  .sto-1ngr21r {
-    color: #0875e1 !important;
-    font-size: 20px;
-    font-family: 'Roboto', sans-serif;
+  body {
+    font-family: var(--cnvs-sys-font-family-default);
   }
 
-  #storybook-explorer-menu svg {
-    color: #0875e1;
+  /* Sidebar selected item only — do not change colorSecondary in theme.js (breaks docs links) */
+  div.sidebar-item[data-nodetype][data-selected='true'],
+  div.sidebar-item[data-nodetype][data-selected='true']:hover,
+  div.sidebar-item[data-nodetype][data-selected='true']:focus,
+  div.sidebar-item[data-nodetype][data-selected='true']:focus-visible {
+    background: rgba(0, 127, 255, 0.1098) !important;
+    color: rgba(0, 87, 174, 1) !important;
   }
 
-  #storybook-explorer-menu button:focus,
-  #storybook-explorer-menu a[data-selected]:hover {
-    background-color: #a6d2ff;
+  div.sidebar-item[data-nodetype][data-selected='true'] svg {
+    color: inherit !important;
   }
-
-  #storybook-explorer-menu a[data-selected='true'],
-  #storybook-explorer-menu a[data-selected='true']:hover {
-    background-color: #0875e1;
-    color: #e6f1ff;
-  }
-
-  #storybook-explorer-menu a[data-selected='true'] svg {
-    color: #d7eafc;
-  }
-
-  .sidebar-subheading button,
-  .sidebar-subheading span,
-  .sidebar-item span {
-    color: #5e6a75;
-  }
-
-  .os-content button:hover,
-  .os-content button:focus {
-    background-color: #a6d2ff;
-    color: #0875e1;
-  }
-
-  .os-content button:hover svg {
-    color: #0875e1;
-  } */
 </style>

@@ -1,10 +1,8 @@
 import * as React from 'react';
 
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Popup, useCloseOnOutsideClick, usePopupModel} from '@workday/canvas-kit-react/popup';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {system} from '@workday/canvas-tokens-web';
 
 export const WithTooltips = () => {
   const modal = useModalModel();
@@ -24,13 +22,13 @@ export const WithTooltips = () => {
             <Modal.Heading>Open Modal</Modal.Heading>
             <Modal.Body>
               <p>Open a hidable and non-hidable popups</p>
-              <Flex cs={{gap: system.gap.md}}>
-                <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
-                <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
+              <Modal.ButtonGroup>
                 <Tooltip title="Not so sure" type="muted">
                   <Popup.CloseButton onClick={closeModal}>Cancel</Popup.CloseButton>
                 </Tooltip>
-              </Flex>
+                <Popup.Target model={popup1}>Hidable Popup</Popup.Target>
+                <Popup.Target model={popup2}>Non-hidable Popup</Popup.Target>
+              </Modal.ButtonGroup>
             </Modal.Body>
           </Modal.Card>
         </Modal.Overlay>
@@ -42,13 +40,15 @@ export const WithTooltips = () => {
             <Popup.Heading>Hidable Popup</Popup.Heading>
             <Popup.Body>
               <p>Pressing 'OK' will close the modal</p>
-              <Tooltip
-                placement="left"
-                title="Really, Really, Really, Really, Really sure"
-                type="muted"
-              >
-                <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
-              </Tooltip>
+              <Modal.ButtonGroup>
+                <Tooltip
+                  placement="left"
+                  title="Really, Really, Really, Really, Really sure"
+                  type="muted"
+                >
+                  <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
+                </Tooltip>
+              </Modal.ButtonGroup>
             </Popup.Body>
           </Popup.Card>
         </Popup.Popper>
@@ -60,13 +60,15 @@ export const WithTooltips = () => {
             <Popup.Heading>Non-hidable Popup</Popup.Heading>
             <Popup.Body>
               <p>Pressing 'OK' will close the modal</p>
-              <Tooltip
-                placement="left"
-                title="Really, Really, Really, Really, Really sure"
-                type="muted"
-              >
-                <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
-              </Tooltip>
+              <Modal.ButtonGroup>
+                <Tooltip
+                  placement="left"
+                  title="Really, Really, Really, Really, Really sure"
+                  type="muted"
+                >
+                  <Popup.CloseButton onClick={closeModal}>OK</Popup.CloseButton>
+                </Tooltip>
+              </Modal.ButtonGroup>
             </Popup.Body>
           </Popup.Card>
         </Popup.Popper>

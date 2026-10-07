@@ -1,5 +1,9 @@
 # Design Token Migration: v2 to v3
 
+> **Historical document.** This covers the v2→v3 fruity palette migration. For the current v4.4
+> token surface (Sana Canvas, t-shirt scales, deprecations), see
+> [v4.4 Token Reference](./v4/v4.4-token-reference.md).
+
 ## Overview
 
 This document outlines the migration from design tokens v2 to v3. Many color tokens from previous

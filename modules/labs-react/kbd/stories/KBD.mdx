@@ -1,0 +1,148 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import {KBD} from '@workday/canvas-kit-labs-react/kbd';
+
+import KBDStoriesMeta from './KBD.stories';
+import {Basic} from './examples/Basic';
+import {InTooltip} from './examples/InTooltip';
+import {Items} from './examples/Items';
+import {RTL} from './examples/RTL';
+import {Size} from './examples/Size';
+import {Variant} from './examples/Variant';
+
+<Meta of={KBDStoriesMeta} />
+
+# KBD
+
+`KBD` is a compound component used to visually represent keyboard input, such as keys or keyboard
+shortcuts.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+`KBD` is a container that wraps one or more `KBD.Item` components. Each `KBD.Item` represents a
+single keyboard key.
+
+> **Important:** When displaying a group of keyboard keys (such as <kbd>Ctrl</kbd> + <kbd>C</kbd>),
+> **do not** place that combination as a text into a single `KBD.Item` (for example,
+> `<KBD.Item>Ctrl + C</KBD.Item>`). Doing so will cause issues with RTL (right-to-left) positioning
+> and keyboard shortcut display. Instead, wrap each key in its own `KBD.Item` and group them inside
+> a `KBD` container. This ensures correct rendering and layout in both LTR and RTL environments.
+
+<ExampleCodeBlock code={Basic} />
+
+### Dynamic Items
+
+`KBD` is built on the [Collection API](/get-started/for-developers/guides/collection-api/). Instead
+of rendering `KBD.Item` components statically, you can pass an array of strings to the `items` prop
+and provide a render prop as the children. Each string represents the label of a single keyboard
+key.
+
+<ExampleCodeBlock code={Items} />
+
+### RTL Example
+
+You can also use the `KBD` component in right-to-left (RTL) layouts. This is helpful for languages
+that are read from right to left.
+
+<ExampleCodeBlock code={RTL} />
+
+### Size
+
+The `KBD` component supports different sizes. You can adjust the size using the `size` prop with
+options like `small`, `medium`, and `large` to suit various UI needs. The `size` is shared with each
+`KBD.Item` through the model.
+
+<ExampleCodeBlock code={Size} />
+
+### Variant
+
+The `KBD` component supports different variants through the `variant` prop. Use `default` for the
+standard style or `plain` for a more minimal appearance. The `variant` is shared with each
+`KBD.Item` through the model.
+
+<ExampleCodeBlock code={Variant} />
+
+### In Tooltip
+
+`KBD` can be used inside a `Tooltip` to communicate the keyboard shortcut associated with an
+interactive control. Pair it with descriptive text so the shortcut is easy to understand.
+
+<ExampleCodeBlock code={InTooltip} />
+
+## Accessibility
+
+`KBD` is **presentational and semantic text**. It renders a `kbd` element so assistive technology
+can recognize the content as keyboard input, but it does **not** make a keyboard shortcut work or
+expose it to the browser. It is the visual/semantic representation of a key, not the accessibility
+contract for a functioning shortcut.
+
+- `aria-keyshortcuts` isn't supposed to go on the presentational KBD wrapper, it should be on the interactive control with the key listener.
+- The `<KBD.Item>` components that use glyphs need translated aria-label strings. (E.g. "Command", "Control", etc.)
+
+
+
+### Provide spoken labels for symbolic or abbreviated keys
+
+Glyphs and abbreviations such as <kbd>⌘</kbd>, <kbd>⌥</kbd>, <kbd>⇧</kbd>, and arrow keys are **not
+announced reliably** across screen reader, browser, and OS combinations. When a `KBD.Item` contains
+a symbol or abbreviation, add an `aria-label` with the spoken name of the key so it is announced
+consistently:
+
+```tsx
+<KBD>
+  <KBD.Item aria-label="Command">⌘</KBD.Item>
+  <KBD.Item>C</KBD.Item>
+</KBD>
+```
+
+Plain alphanumeric keys (such as `C` above) read correctly on their own and don't need an
+`aria-label`.
+
+### Expose the actual shortcut on the control it triggers
+
+`KBD` only documents a shortcut visually. If the shortcut is functional, also expose it on the
+relevant interactive control using
+[`aria-keyshortcuts`](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-keyshortcuts)
+so assistive technology can communicate it to users:
+
+```tsx
+<button aria-keyshortcuts="Command+C">
+  Copy
+  <KBD>
+    <KBD.Item aria-label="Command">⌘</KBD.Item>
+    <KBD.Item>C</KBD.Item>
+  </KBD>
+</button>
+```
+
+## Component API
+
+<SymbolDoc name="KBD" hideDescription />
+
+## Model
+
+`KBD` uses a `useKBDModel` to track the keyboard keys (`items`) and to share the `size` and
+`variant` with each `KBD.Item`. If you need direct access to the model's state, you can create it
+yourself with `useKBDModel` and pass it to `KBD` via the `model` prop.
+
+```tsx
+const model = useKBDModel({
+  size: 'large',
+  variant: 'plain',
+  items: ['⌘', 'C'],
+});
+
+<KBD model={model}>{item => <KBD.Item>{item}</KBD.Item>}</KBD>;
+```
+
+<SymbolDoc name="useKBDModel" hideDescription />

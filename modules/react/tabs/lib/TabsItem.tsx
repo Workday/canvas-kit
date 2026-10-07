@@ -71,9 +71,8 @@ export interface TabsItemProps
    */
   'aria-controls'?: string;
   /**
-   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active. This
-   * should either be `true` or `undefined` and never `false`. This is automatically set by the
-   * component and should only be used in advanced cases.
+   * Part of the ARIA specification for tabs. Lets screen readers know which tab is active.  This
+   * is automatically set by the component and should only be used in advanced cases.
    */
   'aria-selected'?: boolean;
   /**
@@ -182,6 +181,9 @@ export const StyledTabItem = createComponent('button')<TabsItemProps>({
  * This hook must be composed before `useListItemRovingFocus` so it runs after
  * that hook and its return value can skip the roving handler.
  * Tabs.OverflowButton does not use this hook.
+ *
+ * ArrowDown is only intercepted in horizontal orientation. In a vertical tablist,
+ * ArrowDown is the roving-navigation key and must reach `useListItemRovingFocus`.
  */
 const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)((
   {state},
@@ -194,7 +196,7 @@ const useTabsItemFocusPanelOnArrowDown = createElemPropsHook(useTabsModel)((
 
   return {
     onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
-      if (!selected || event.key !== 'ArrowDown') {
+      if (!selected || state.orientation !== 'horizontal' || event.key !== 'ArrowDown') {
         return;
       }
       event.preventDefault();

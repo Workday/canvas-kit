@@ -211,7 +211,7 @@ export const tabsListStencil = createStencil({
  * This is needed because the overflow button is included in the model's items array
  * for navigation purposes, but should not be rendered by the list render function.
  */
-function useTabsListRenderItems<T>(
+export function useTabsListRenderItems<T>(
   model: ReturnType<typeof useTabsModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {

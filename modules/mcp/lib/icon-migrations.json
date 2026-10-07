@@ -1,0 +1,32 @@
+{
+  "source": "https://www.figma.com/design/0g27AGUYkTTHjqTooTBFhS/Sana-Canvas-Icon-Library-Audit?node-id=1506-25428",
+  "channel": "vision",
+  "mappings": [
+    {"previousName": "Anomaly Detection", "sanaName": "Line Chart Anomaly"},
+    {"previousName": "Arrow Diagonal Down Right Small", "sanaName": "Arrow Down Right"},
+    {"previousName": "Assistant", "sanaName": "Comment Blank"},
+    {"previousName": "Assistant Sparkle", "sanaName": "Comment Sparkle"},
+    {"previousName": "Bar Chart Growth", "sanaName": "Bar Chart Ascending Arrow"},
+    {"previousName": "Button Edit", "sanaName": "Button / Edit"},
+    {"previousName": "Card User", "sanaName": "Rectangle User"},
+    {"previousName": "Collapse", "sanaName": "Arrow Left To Line"},
+    {"previousName": "Column One", "sanaName": "Rectangle"},
+    {"previousName": "Download", "sanaName": "Arrow Down To Line"},
+    {"previousName": "Dropdown Button", "sanaName": "Dropdown"},
+    {"previousName": "Dual Line Chart", "sanaName": "Line Chart Double"},
+    {"previousName": "Easel", "sanaName": "Presentation"},
+    {"previousName": "Extend", "sanaName": "Arrow Right To Line"},
+    {"previousName": "Flow", "sanaName": "Split Up"},
+    {"previousName": "Lock Keyhole", "sanaName": "Lock"},
+    {"previousName": "Lock Keyhole Open", "sanaName": "Lock Open"},
+    {"previousName": "Redo", "sanaName": "Arrow U-Turn Right"},
+    {"previousName": "Select", "sanaName": "Square Pointer Dashed"},
+    {"previousName": "Skip", "sanaName": "Next"},
+    {"previousName": "Sub Organization", "sanaName": "Team Fill"},
+    {"previousName": "Undo", "sanaName": "Arrow U-Turn Left"},
+    {"previousName": "Upload", "sanaName": "Arrow Up To Line"},
+    {"previousName": "Virtual Version", "sanaName": "Document Dashed"},
+    {"previousName": "Virtual Version Lock", "sanaName": "Document Lock Dashed"},
+    {"previousName": "Zoom Area", "sanaName": "Square Search Dashed"}
+  ]
+}

@@ -12,6 +12,7 @@
     "noImplicitAny": false,
     "strictNullChecks": true,
     "noUnusedLocals": false,
+    "resolveJsonModule": true,
     "types": ["vitest/globals", "@testing-library/jest-dom"],
     "incremental": false
   }

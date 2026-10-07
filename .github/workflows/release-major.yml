@@ -51,12 +51,24 @@ jobs:
 
       # Run the release job to publish the next major version to npm
       - uses: Workday/canvas-kit-actions/release@v2
+        id: release
+        continue-on-error: true
         with:
           gh_token: ${{ secrets.GITHUB_TOKEN }}
           gh_rw_token: ${{ secrets.GH_RW_TOKEN }}
           chromatic_project_token: ${{ secrets.CHROMATIC_APP_CODE }}
           version: 'major'
           toRef: 'prerelease/major'
+
+      ## See release.yml: finish any packages a failed lerna publish left unpublished.
+      - name: Publish remaining packages
+        id: publish-remaining
+        if: steps.release.outcome == 'failure'
+        run: yarn publish:from-package -- --dist-tag latest --require-unpublished
+
+      - name: Verify npm publish completed
+        if: steps.release.outcome == 'failure' && steps.publish-remaining.outcome != 'success'
+        run: exit 1
 
       # Update prerelease/minor to point to the next major release.
       - name: Push to prerelease/minor
@@ -84,4 +96,6 @@ jobs:
         with:
           slackWebhook: ${{ secrets.SLACK_WEBHOOK }}
           slackMessage: |
-            Major Release job failed. Please check error logs.
+            Major release job failed. If npm publish was recovered but branch updates did not
+            run, manually push master to prerelease/minor and prerelease/major and update the
+            support dist-tag. See error logs for details.

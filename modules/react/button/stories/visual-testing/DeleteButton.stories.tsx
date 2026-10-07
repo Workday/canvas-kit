@@ -27,6 +27,10 @@ const DeleteButtonTest = (props: {theme?: PartialEmotionCanvasTheme}) => (
     <ComponentStatesTable
       rowProps={permutateProps(
         {
+          variant: [
+            {value: undefined, label: ''},
+            {value: 'outline', label: 'Outline'},
+          ],
           size: [
             {value: 'extraSmall', label: 'Extra Small'},
             {value: 'small', label: 'Small'},

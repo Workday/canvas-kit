@@ -2,6 +2,11 @@ export const ACCESSIBILITY_SCENARIOS = [
   'overview',
   'page-structure',
   'tables',
+  'expandable-rows',
+  'nested-rows',
+  'selectable-rows',
+  'filterable-column-headers',
+  'sortable-column-headers',
   'popups',
   'aria-live',
   'headers',
@@ -13,10 +18,43 @@ export const ACCESSIBILITY_SCENARIOS = [
 
 export type AccessibilityScenario = (typeof ACCESSIBILITY_SCENARIOS)[number];
 
+/** Pattern pages under Guides/Accessibility/Table Patterns, including the overview index. */
+export const TABLE_PATTERN_SCENARIOS: readonly AccessibilityScenario[] = [
+  'tables',
+  'expandable-rows',
+  'nested-rows',
+  'selectable-rows',
+  'filterable-column-headers',
+  'sortable-column-headers',
+  'forms',
+];
+
+function expandAccessibilityScenarioSlugs(slugs: AccessibilityScenario[]): AccessibilityScenario[] {
+  const result: AccessibilityScenario[] = [];
+  const seen = new Set<AccessibilityScenario>();
+
+  const add = (slug: AccessibilityScenario) => {
+    if (!seen.has(slug)) {
+      seen.add(slug);
+      result.push(slug);
+    }
+  };
+
+  for (const slug of slugs) {
+    if (slug === 'tables') {
+      TABLE_PATTERN_SCENARIOS.forEach(add);
+    } else {
+      add(slug);
+    }
+  }
+
+  return result;
+}
+
 export const ACCESSIBILITY_COMPONENTS = [
   'action-bar',
   'ai-ingress-button-(ai)',
-  'avatar-(promoted)',
+  'avatar',
   'banner',
   'body-text',
   'box',
@@ -51,7 +89,7 @@ export const ACCESSIBILITY_COMPONENTS = [
   'segmented-control',
   'select',
   'side-panel-(deprecated)',
-  'side-panel-(new)',
+  'side-panel',
   'skeleton',
   'status-indicator',
   'status-indicator-(deprecated)',
@@ -102,13 +140,13 @@ const STRUCTURE_COMPONENTS = new Set<string>([
   'hyperlink',
   'pagination',
   'side-panel-(deprecated)',
-  'side-panel-(new)',
+  'side-panel',
   'tabs',
 ]);
 
 const STATUS_COMPONENTS = new Set<string>([
   'ai-ingress-button-(ai)',
-  'avatar-(promoted)',
+  'avatar',
   'banner',
   'body-text',
   'countbadge',
@@ -161,15 +199,18 @@ export function resolveAccessibilityScenarioSlugs({
   scenario?: AccessibilityScenario;
 }): AccessibilityScenario[] {
   if (component && scenario) {
-    return [...new Set([...getAccessibilityScenarioSlugsForComponent(component), scenario])];
+    return expandAccessibilityScenarioSlugs([
+      ...getAccessibilityScenarioSlugsForComponent(component),
+      scenario,
+    ]);
   }
 
   if (component) {
-    return getAccessibilityScenarioSlugsForComponent(component);
+    return expandAccessibilityScenarioSlugs(getAccessibilityScenarioSlugsForComponent(component));
   }
 
   if (scenario) {
-    return [scenario];
+    return expandAccessibilityScenarioSlugs([scenario]);
   }
 
   return [];

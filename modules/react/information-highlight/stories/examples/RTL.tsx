@@ -32,6 +32,26 @@ export const RTL = () => {
           <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
         </InformationHighlight>
       </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant="informational" actionPlacement="end">
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>انتباه! من اليمين إلى اليسار</InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            مع `actionPlacement="end"`، يظهر الرابط بجانب المحتوى، متمركزًا عموديًا عند نهاية السطر.
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant="caution" emphasis="high" actionPlacement="end">
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>انتباه! من اليمين إلى اليسار</InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            يعمل وضع الإجراء عبر الأنماط ومستويات التأكيد.
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
     </Flex>
   );
 };

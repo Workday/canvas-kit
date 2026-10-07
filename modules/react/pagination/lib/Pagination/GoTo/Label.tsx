@@ -28,7 +28,7 @@ export const GoToLabel = createComponent('label')({
       <Subtext
         ref={ref}
         as={Element}
-        size="medium"
+        size="large"
         variant="hint"
         {...handleCsProp(elemProps, paginationGoToLabelStencil())}
       >

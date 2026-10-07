@@ -12,11 +12,6 @@ import {system} from '@workday/canvas-tokens-web';
 
 const INITIAL_FILES = ['Resume.docx', 'Cover_Letter.docx', 'References.docx'];
 
-const actionStyles = createStyles({
-  gap: system.gap.md,
-  padding: system.padding.sm,
-});
-
 const headingStyles = createStyles({
   marginBlock: '0',
 });
@@ -149,12 +144,12 @@ export const ReturnFocus = () => {
                 : 'Are you sure you want to delete this file?'}
             </Text>
           </Modal.Body>
-          <Flex cs={actionStyles}>
+          <Modal.ButtonGroup>
             <Modal.CloseButton ref={cancelButtonRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleConfirmDelete}>
               Delete
             </Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

@@ -11,7 +11,7 @@ import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
 
 export default {
-  title: 'Components/Indicators/Avatar (Promoted)',
+  title: 'Components/Indicators/Avatar',
   component: Avatar,
   tags: ['autodocs'],
   parameters: {

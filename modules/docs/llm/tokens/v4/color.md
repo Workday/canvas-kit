@@ -1,5 +1,7 @@
 # Color
 
+> For the complete current token inventory and deprecation map, see [v4.4 Token Reference](./v4.4-token-reference.md).
+
 ## Usage Guidance
 
 Our color choices promote visual clarity, making it easy for users to find what they need. We use a
@@ -78,7 +80,7 @@ State layers are overlays placed between or in front of background and foregroun
 
 ### Foreground
 
-Use foreground colors (or `fg`) to set the color of text and icons.
+Use foreground colors (`system.color.fg.*`) to set the color of text and icons. The deprecated `text.*` and `icon.*` families map to `fg.*`.
 
 All `fg` colors except `fg/inverse` can be used on `surface/default`, `bg/default`, `surface/alt`, and `bg/alt`.
 
@@ -144,13 +146,15 @@ need to import the CSS variables in your application.
 ### Javascript / Typescript
 
 ```tsx
-// styles.ts
+import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const styles = {
-  backgroundColor: `var(${system.color.bg.default})`,
-};
+const cardStyles = createStyles({
+  backgroundColor: system.color.bg.default,
+});
 ```
+
+`createStyles` resolves token names to `var(--cnvs-…)` automatically. Outside `createStyles`, wrap tokens with `cssVar()` or a `` `var(${token})` `` template literal.
 
 ### CSS
 
@@ -164,4 +168,17 @@ const styles = {
 
 ## All Colors
 
+107 non-deprecated `system.color.*` tokens are listed in [v4.4 Token Reference](./v4.4-token-reference.md#current-systemcolor-inventory-107-tokens).
+
 ## Deprecated Colors
+
+| Don't write | Write |
+|---|---|
+| `system.color.bg.*` (except `bg.default`, `bg.alt.default`) | `system.color.surface.*` |
+| `system.color.text.*` | `system.color.fg.*` |
+| `system.color.icon.*` | `system.color.fg.*` |
+| `system.color.border.divider` | `system.color.border.default` |
+| `system.color.border.container` | `system.color.border.strong` |
+| `system.color.static.*` | A `base` palette ramp |
+
+See [v4.4 Token Reference](./v4.4-token-reference.md#deprecated-color-families) for the full deprecation map.

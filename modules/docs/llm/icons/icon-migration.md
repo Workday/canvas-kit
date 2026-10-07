@@ -1,0 +1,418 @@
+# Sana Canvas Assets v5
+
+The **`@workday/canvas-system-icons-web` v5** package ships **Sana Canvas Assets**. This is an
+updated system icon library aligned with Sana Canvas.
+
+The major changes in this release are:
+
+- A **new visual look** that matches Sana icon style.
+- **Workday and Sana icons merged** into a single library, which is why there are **almost 200 new
+  icons**.
+
+Deprecated icons remain available for a transition period. Each deprecated export points to a
+**fallback** icon you should use instead. This guide summarizes what changed in v5 and how to
+upgrade the package.
+
+## Table of Contents
+
+- [What Changed in v5](#what-changed-in-v5)
+  - [Renames](#renames)
+  - [Deprecations](#deprecations)
+  - [Layer Simplification](#layer-simplification)
+- [Install `@workday/canvas-system-icons-web` v5](#install-workdaycanvas-system-icons-web-v5)
+- [Migrating with the Codemod](#migrating-with-the-codemod)
+- [All Deprecated Icons List](#all-deprecated-icons-list)
+
+## What Changed in v5
+
+### Renames
+
+The Sana alignment introduced a number of new icons that did not previously exist in the Canvas
+library. In earlier icon library work, we established a naming convention system and aligned all
+Canvas icons with it for better organization and clearer icon meaning. With the addition of new Sana
+icons, we need to extend that convention system so it also covers them.
+
+In some cases, this also requires renaming existing Canvas icons. As we have added more variations
+to existing icons, they now need systematic name or style changes to stay consistent. Their previous
+names are now outdated or confusing.
+
+| Old icon                        | Old JS name                       | New icon                  | New JS name                  |
+| ------------------------------- | --------------------------------- | ------------------------- | ---------------------------- |
+| Anomaly Detection               | `anomalyDetectionIcon`            | Line Chart Anomaly        | `lineChartAnomalyIcon`       |
+| Arrow Diagonal Down Right Small | `arrowDiagonalDownRightSmallIcon` | Arrow Down Right          | `arrowDownRightIcon`         |
+| Assistant                       | `assistantIcon`                   | Comment Blank             | `commentBlankIcon`           |
+| Bar Chart Growth                | `barChartGrowthIcon`              | Bar Chart Ascending Arrow | `barChartAscendingArrowIcon` |
+| Card User                       | `cardUserIcon`                    | Rectangle User            | `rectangleUserIcon`          |
+| Collapse                        | `collapseIcon`                    | Arrow Left To Line        | `arrowLeftToLineIcon`        |
+| Column One                      | `columnOneIcon`                   | Rectangle                 | `rectangleIcon`              |
+| Download                        | `downloadIcon`                    | Arrow Down To Line        | `arrowDownToLineIcon`        |
+| Dual Line Chart                 | `dualLineChartIcon`               | Line Chart Double         | `lineChartDoubleIcon`        |
+| Easel                           | `easelIcon`                       | Presentation              | `presentationIcon`           |
+| Extend                          | `extendIcon`                      | Arrow Right To Line       | `arrowRightToLineIcon`       |
+| Flow                            | `flowIcon`                        | Split Up                  | `splitUpIcon`                |
+| Lock Keyhole Open               | `lockKeyholeOpenIcon`             | Lock Open                 | `lockOpenIcon`               |
+| Select                          | `selectIcon`                      | Square Pointer Dashed     | `squarePointerDashedIcon`    |
+| Skip                            | `skipIcon`                        | Next                      | `nextIcon`                   |
+| Sub Organization                | `subOrganizationIcon`             | Team Fill                 | `teamFillIcon`               |
+| Upload                          | `uploadIcon`                      | Arrow Up To Line          | `arrowUpToLineIcon`          |
+| Virtual Version                 | `virtualVersionIcon`              | Document Dashed           | `documentDashedIcon`         |
+| Virtual Version Lock            | `virtualVersionLockIcon`          | Document Lock Dashed      | `documentLockDashedIcon`     |
+| Zoom Area                       | `zoomAreaIcon`                    | Square Search Dashed      | `squareSearchDashedIcon`     |
+
+### Deprecations
+
+The primary goal of the Sana Canvas Assets release is visual alignment with Sana. Some icons were
+redesigned to match Sana's visual language. Their previous designs are now either mismatched or
+redundant, so we no longer need to support them. Deprecated exports remain available for a
+transition period.
+
+| Old icon          | Old JS name            | New icon                | New JS name                  |
+| ----------------- | ---------------------- | ----------------------- | ---------------------------- |
+| Assistant Sparkle | `assistantSparkleIcon` | Comment Sparkle         | `commentSparkleIcon`         |
+| Button Edit       | `buttonEditIcon`       | Edit                    | `editIcon`                   |
+| Dropdown Button   | `dropdownButtonIcon`   | Dropdown                | `dropdownIcon`               |
+| Lock Keyhole      | `lockKeyholeIcon`      | Lock                    | `lockIcon`                   |
+| Loop              | `loopIcon`             | Arrows Counterclockwise | `arrowsCounterclockwiseIcon` |
+| Redo              | `redoIcon`             | Arrow U Turn Right      | `arrowUTurnRightIcon`        |
+| Undo              | `undoIcon`             | Arrow U Turn Left       | `arrowUTurnLeftIcon`         |
+
+### Layer Simplification
+
+As part of the shift to Sana styles, several icons were simplified to match Sana's visual language.
+Some elements were streamlined or removed for stylistic purposes. The result is cleaner icons with
+fewer layers than their previous versions. Fewer than ten icons were affected. Layer structure
+changed on the following icons:
+
+- Dropdown
+- Erase
+- Inbox Fill
+- Video
+
+## Install `@workday/canvas-system-icons-web` v5
+
+Upgrade the icon package before you run the codemod so deprecation and fallback mappings match what
+the transform expects.
+
+```sh
+yarn add @workday/canvas-system-icons-web@^5
+```
+
+If you use Canvas Kit packages that depend on system icons, align those versions with your Canvas
+Kit upgrade path and confirm `package.json` resolves to v5 of `@workday/canvas-system-icons-web`.
+
+## Migrating with the Codemod
+
+The **`icon-migration`** codemod is the recommended way to update `@workday/canvas-system-icons-web`
+imports in application code. It reads `dist/metadata/system.deprecated.metadata.json` from the
+installed icon package and rewrites static imports and references to match each deprecated export's
+fallback icon.
+
+The codemod applies **every** mapping in that metadata file. You do not need separate codemod runs
+for v4-era changes and v5 Sana Canvas Assets changes.
+
+To run the **`icon-migration`** codemod, see the
+[Icon Migration codemod guide](/docs/guides-icon-migration-codemod--docs).
+
+For general advice on running Canvas Kit codemods (review process, formatting, file types), see
+[Codemods](/docs/guides-codemods--docs).
+
+## All Deprecated Icons List
+
+The complete set of deprecated exports in `@workday/canvas-system-icons-web` v5, taken from
+`dist/metadata/system.deprecated.metadata.json`, with the fallback the
+[codemod](/docs/guides-icon-migration-codemod--docs) rewrites each one to. Sorted by old JS name.
+
+| Old JS name                           | New JS name                       |
+| ------------------------------------- | --------------------------------- |
+| `academicAppointmentTitleIcon`        | `clipboardUserIcon`               |
+| `accountsIcon`                        | `catalogIcon`                     |
+| `activityStreamIcon`                  | `commentIcon`                     |
+| `actualsLockedIcon`                   | `actualsLockIcon`                 |
+| `addFooterWsIcon`                     | `plusIcon`                        |
+| `adHocDeliveryIcon`                   | `boxTextPlusIcon`                 |
+| `adjustInventoryIcon`                 | `packageGearIcon`                 |
+| `anomalyDetectionIcon`                | `lineChartAnomalyIcon`            |
+| `antiJoinLeftIcon`                    | `joinLeftAntiIcon`                |
+| `antiJoinRightIcon`                   | `joinRightAntiIcon`               |
+| `arrowCircleIcon`                     | `arrowUpCircleIcon`               |
+| `arrowDiagonalDownRightSmallIcon`     | `arrowDownRightIcon`              |
+| `arrowDiagonalSmallIcon`              | `arrowDownRightIcon`              |
+| `articleStackedIcon`                  | `documentStackIcon`               |
+| `asAppliedIcon`                       | `checkSquareIcon`                 |
+| `assistantIcon`                       | `commentBlankIcon`                |
+| `assistantSparkleIcon`                | `commentSparkleIcon`              |
+| `atTagMentionIcon`                    | `mentionIcon`                     |
+| `audioMaxIcon`                        | `audioIcon`                       |
+| `authenticationTagIcon`               | `lockAuthenticationIcon`          |
+| `autosumIcon`                         | `autoSumIcon`                     |
+| `avatarIcon`                          | `cloudIcon`                       |
+| `barChartGrowthIcon`                  | `barChartAscendingArrowIcon`      |
+| `barcodeScannerIcon`                  | `barcodeIcon`                     |
+| `benefitsIcon`                        | `shieldHeartIcon`                 |
+| `bgColorIcon`                         | `backgroundColorIcon`             |
+| `borderBtm2Icon`                      | `borderBottomThickIcon`           |
+| `borderDblIcon`                       | `borderBottomDoubleIcon`          |
+| `boxPlusIcon`                         | `squarePlusIcon`                  |
+| `boxTextUserSolidIcon`                | `boxTextUserIcon`                 |
+| `businessIntelligenceIcon`            | `documentLightbulbIcon`           |
+| `buttonEditIcon`                      | `editIcon`                        |
+| `calculatorLockedIcon`                | `calculatorLockIcon`              |
+| `calculatorRefreshIcon`               | `calculatorLoopIcon`              |
+| `calendarAltIcon`                     | `calendarDaysIcon`                |
+| `calendarUserSolidIcon`               | `calendarUserIcon`                |
+| `captureDeliveryIcon`                 | `packageIcon`                     |
+| `cardIcon`                            | `cardStackIcon`                   |
+| `cardUserIcon`                        | `rectangleUserIcon`               |
+| `cardViewIcon`                        | `documentViewIcon`                |
+| `cArea100Icon`                        | `areaChartIcon`                   |
+| `cAreaLayeredIcon`                    | `areaLayerChartIcon`              |
+| `cAreaStackedIcon`                    | `areaStackChartIcon`              |
+| `cBar100Icon`                         | `barHorizontalFullStackChartIcon` |
+| `cBarClusteredIcon`                   | `barHorizontalChartIcon`          |
+| `cBarStackedIcon`                     | `barHorizontalStackChartIcon`     |
+| `cBubbleIcon`                         | `bubbleChartIcon`                 |
+| `cColumn100Icon`                      | `barFullStackChartIcon`           |
+| `cColumnClusteredIcon`                | `barChartFillIcon`                |
+| `cColumnLineIcon`                     | `barLineChartIcon`                |
+| `cColumnStackedIcon`                  | `barStackChartIcon`               |
+| `cDualLineIcon`                       | `lineChartDoubleIcon`             |
+| `cellFilterIcon`                      | `tableFilterIcon`                 |
+| `cellGearIcon`                        | `tableGearIcon`                   |
+| `cellResetIcon`                       | `tableRefreshIcon`                |
+| `cellRowIcon`                         | `tableRowIcon`                    |
+| `cellSearchIcon`                      | `tableSearchIcon`                 |
+| `cellSwapAxisIcon`                    | `tableSwapAxisIcon`               |
+| `cellTemplateIcon`                    | `dashboardGridIcon`               |
+| `chartConfigIcon`                     | `configureIcon`                   |
+| `chartIcon`                           | `barChartIcon`                    |
+| `chartVisualsFanIcon`                 | `fanChartIcon`                    |
+| `checkboxesIcon`                      | `checkboxStackIcon`               |
+| `chevron2xleftIcon`                   | `chevron2xLeftIcon`               |
+| `chevron2xrightIcon`                  | `chevron2xRightIcon`              |
+| `chevronHierarchyClosedIcon`          | `hierarchyChevronIcon`            |
+| `chevronHierarchyOpenIcon`            | `hierarchyChevronOpenIcon`        |
+| `cLineIcon`                           | `lineChartIcon`                   |
+| `clipboardBlankCheckIcon`             | `clipboardSuccessIcon`            |
+| `clipboardRemoveIcon`                 | `clipboardXIcon`                  |
+| `closedcaptionIcon`                   | `closedCaptionIcon`               |
+| `closeIcon`                           | `shrinkChevronIcon`               |
+| `clusterIcon`                         | `barClusterChartIcon`             |
+| `collapseIcon`                        | `arrowLeftToLineIcon`             |
+| `columnOneIcon`                       | `rectangleIcon`                   |
+| `commaWsIcon`                         | `commaIcon`                       |
+| `conclusionIcon`                      | `checkCircleUnderlineIcon`        |
+| `conclusionPopupIcon`                 | `documentSurveyIcon`              |
+| `contactCardCostCenterIcon`           | `buildingsIcon`                   |
+| `contactCardDeskIcon`                 | `deskIcon`                        |
+| `contactCardIdIcon`                   | `idCardIcon`                      |
+| `contactCardJobProfileIcon`           | `documentUserIcon`                |
+| `contactCardMatrixManagerIcon`        | `userGroupIcon`                   |
+| `convertInventoryIcon`                | `packageLoopIcon`                 |
+| `courseIcon`                          | `presentationIcon`                |
+| `cPieIcon`                            | `donutChartIcon`                  |
+| `cScatterIcon`                        | `scatterChartIcon`                |
+| `cWaterfallIcon`                      | `waterfallChartIcon`              |
+| `dashboardExpensesIcon`               | `receiptIcon`                     |
+| `dashboardWorkforceIcon`              | `userGroupCircleIcon`             |
+| `dataComplexIcon`                     | `dataServerIcon`                  |
+| `dataInputIcon`                       | `dataArrowRightIcon`              |
+| `deviceDesktopIcon`                   | `desktopIcon`                     |
+| `devicePhoneIcon`                     | `mobileIcon`                      |
+| `deviceTabletIcon`                    | `tabletIcon`                      |
+| `discoveryBoardIcon`                  | `barLineChartIcon`                |
+| `docIcon`                             | `documentIcon`                    |
+| `documentAltIcon`                     | `documentIcon`                    |
+| `documentCandidateActionRequiredIcon` | `documentUserExclamationIcon`     |
+| `documentCandidateInactiveIcon`       | `documentUserMinusIcon`           |
+| `documentCandidateSearchIcon`         | `documentUserSearchIcon`          |
+| `documentCandidateStarIcon`           | `documentUserStarIcon`            |
+| `documentLockedIcon`                  | `documentLockIcon`                |
+| `documentsCheckIcon`                  | `documentStackCheckIcon`          |
+| `dollarIcon`                          | `moneyIcon`                       |
+| `downloadIcon`                        | `arrowDownToLineIcon`             |
+| `dropdownButtonIcon`                  | `dropdownIcon`                    |
+| `dualLineChartIcon`                   | `lineChartDoubleIcon`             |
+| `easelIcon`                           | `presentationIcon`                |
+| `editButtonBarIcon`                   | `buttonBarIcon`                   |
+| `editButtonIcon`                      | `editIcon`                        |
+| `emptyAppIcon`                        | `cloudSearchIcon`                 |
+| `eraserCellIcon`                      | `cellEraseIcon`                   |
+| `eraserFontIcon`                      | `fontEraseIcon`                   |
+| `eraserIcon`                          | `eraseIcon`                       |
+| `esignatureIcon`                      | `eSignatureIcon`                  |
+| `expandTableIcon`                     | `tableExpandIcon`                 |
+| `extendIcon`                          | `arrowRightToLineIcon`            |
+| `extLinkIcon`                         | `externalLinkIcon`                |
+| `fetchDataIcon`                       | `dataArrowLeftIcon`               |
+| `fileIcon`                            | `documentIcon`                    |
+| `filterCheckedIcon`                   | `filterCheckIcon`                 |
+| `findInventoryIcon`                   | `packageSearchIcon`               |
+| `findTransactionsIcon`                | `receiptSearchIcon`               |
+| `flowIcon`                            | `splitUpIcon`                     |
+| `folderCloseIcon`                     | `folderIcon`                      |
+| `folderMoveIcon`                      | `folderArrowRightIcon`            |
+| `footerIcon`                          | `documentFooterIcon`              |
+| `forkKnifeIcon`                       | `utensilsIcon`                    |
+| `formattingIcon`                      | `fontEditIcon`                    |
+| `formulaClipboardIcon`                | `clipboardFormulaIcon`            |
+| `freezeHeaderIcon`                    | `tableHeaderFreezeIcon`           |
+| `fullscreenIcon`                      | `growChevronIcon`                 |
+| `fxBracketsIcon`                      | `formulaBracketsIcon`             |
+| `fxIcon`                              | `formulaIcon`                     |
+| `fxLoopIcon`                          | `formulaLoopIcon`                 |
+| `fxWritebackIcon`                     | `formulaBoltIcon`                 |
+| `hashMarkIcon`                        | `hashmarkIcon`                    |
+| `heatmapIcon`                         | `gridSquareIcon`                  |
+| `hideColIcon`                         | `columnHideIcon`                  |
+| `hierarchyParentChildIcon`            | `hierarchyPartialIcon`            |
+| `hierarchyRightFullIcon`              | `hierarchyChildrenIcon`           |
+| `hourGlassIcon`                       | `hourglassIcon`                   |
+| `inboxLargeIcon`                      | `inboxIcon`                       |
+| `instanceMappingIcon`                 | `instanceSearchIcon`              |
+| `interactiongroupIcon`                | `copyIcon`                        |
+| `inventoryCountIcon`                  | `rowClipboardIcon`                |
+| `inventorySearchIcon`                 | `listCheckIcon`                   |
+| `invisibleIcon`                       | `visibleStrikethroughIcon`        |
+| `itemizeIcon`                         | `documentListIcon`                |
+| `jobInfoIcon`                         | `briefcaseInfoIcon`               |
+| `justifyIcon`                         | `hamburgerIcon`                   |
+| `labeledImageIcon`                    | `imageLabelIcon`                  |
+| `leftSidebarIcon`                     | `sidebarLeftIcon`                 |
+| `legalIcon`                           | `gavelIcon`                       |
+| `letterAIcon`                         | `fontIcon`                        |
+| `liveDataIcon`                        | `dataBoltIcon`                    |
+| `livepagesIcon`                       | `boxTextCircleIcon`               |
+| `lockKeyholeIcon`                     | `lockIcon`                        |
+| `lockKeyholeOpenIcon`                 | `lockOpenIcon`                    |
+| `loopIcon`                            | `arrowsCounterclockwiseIcon`      |
+| `mailLetterIcon`                      | `mailOpenIcon`                    |
+| `manageDeliveryIcon`                  | `boxTextUserIcon`                 |
+| `mediaClassroomIcon`                  | `usersIcon`                       |
+| `mediaErrorIcon`                      | `boltFillIcon`                    |
+| `mediaMylearningIcon`                 | `bookmarkIcon`                    |
+| `mediaPauseIcon`                      | `pauseIcon`                       |
+| `mediaPlayIcon`                       | `playIcon`                        |
+| `mediaQuizIcon`                       | `documentListIcon`                |
+| `mediaSurveyIcon`                     | `documentSurveyIcon`              |
+| `mediaTopicsIcon`                     | `dashboardGridIcon`               |
+| `menuGroupIcon`                       | `stackIcon`                       |
+| `mergeTagIcon`                        | `tagMergeIcon`                    |
+| `messagingIcon`                       | `commentDiscussionIcon`           |
+| `mobileNotificationsIcon`             | `mobileActiveIcon`                |
+| `moveInventoryIcon`                   | `dollyIcon`                       |
+| `myLearningIcon`                      | `bookOpenBookmarkIcon`            |
+| `myReferralsIcon`                     | `userFocusIcon`                   |
+| `nboxIcon`                            | `dashboardGridIcon`               |
+| `noBidIcon`                           | `bidStrikethroughIcon`            |
+| `noConnectionCloudIcon`               | `cloudStrikethroughIcon`          |
+| `notificationsLargeIcon`              | `notificationsIcon`               |
+| `onboardingHomeIcon`                  | `mapLocationIcon`                 |
+| `oneColumnIcon`                       | `rectangleIcon`                   |
+| `openresponseIcon`                    | `commentTextIcon`                 |
+| `opportunityGraphIcon`                | `donutChartUserIcon`              |
+| `orderedListIcon`                     | `listOrderIcon`                   |
+| `orgChartIcon`                        | `organizationIcon`                |
+| `orgChartPeopleIcon`                  | `rectangleUserIcon`               |
+| `panelListIcon`                       | `listPlusIcon`                    |
+| `passwordIcon`                        | `lockIcon`                        |
+| `pasteIcon`                           | `clipboardIcon`                   |
+| `peopleRecruitingIcon`                | `userPlusIcon`                    |
+| `perspectiveIcon`                     | `layersIcon`                      |
+| `phoneUnlockIcon`                     | `mobileUnlockIcon`                |
+| `pickedShortIcon`                     | `circleHalfFillIcon`              |
+| `pinSlashIcon`                        | `pinStrikethroughIcon`            |
+| `pivotTableIcon`                      | `tablePivotIcon`                  |
+| `progressCircleIcon`                  | `relatedActionsCircleIcon`        |
+| `projectsIcon`                        | `hammerIcon`                      |
+| `promptsIcon`                         | `listIcon`                        |
+| `proofOfDeliveryIcon`                 | `packageCheckIcon`                |
+| `prospectIcon`                        | `idCardSearchIcon`                |
+| `pyramidIcon`                         | `pyramidChartIcon`                |
+| `questionFillIcon`                    | `questionCircleFillIcon`          |
+| `questionOutlineIcon`                 | `questionCircleIcon`              |
+| `radioMobileIcon`                     | `circleIcon`                      |
+| `radioMobileSelectedIcon`             | `radioIcon`                       |
+| `receiptsIcon`                        | `receiptIcon`                     |
+| `redoIcon`                            | `arrowUTurnRightIcon`             |
+| `renameIcon`                          | `documentEditIcon`                |
+| `reorderV2Icon`                       | `hamburgerIcon`                   |
+| `reportParameterIcon`                 | `documentGearIcon`                |
+| `rightSidebarIcon`                    | `sidebarRightIcon`                |
+| `rowsCheckIcon`                       | `rowCheckIcon`                    |
+| `rowsPlusIcon`                        | `rowPlusIcon`                     |
+| `rpmIcon`                             | `gaugeIcon`                       |
+| `rteEmphasisIcon`                     | `fontEmphasisIcon`                |
+| `rteListIcon`                         | `listIcon`                        |
+| `screenMagnificationIcon`             | `webpageSearchIcon`               |
+| `selectIcon`                          | `squarePointerDashedIcon`         |
+| `setupIcon`                           | `configureIcon`                   |
+| `showColIcon`                         | `columnShowIcon`                  |
+| `signoutIcon`                         | `signOutIcon`                     |
+| `skillsIcon`                          | `bowCompassIcon`                  |
+| `skipIcon`                            | `nextIcon`                        |
+| `sortDownIcon`                        | `arrowDownSmallIcon`              |
+| `sortUpIcon`                          | `arrowUpSmallIcon`                |
+| `sparkleSingleSmallIcon`              | `sparkleIcon`                     |
+| `speechBubbleIcon`                    | `commentBlankIcon`                |
+| `speechExclamationIcon`               | `commentExclamationIcon`          |
+| `starHalfIcon`                        | `starHalfFillIcon`                |
+| `subOrganizationIcon`                 | `teamFillIcon`                    |
+| `suborgIcon`                          | `teamFillIcon`                    |
+| `switchIcon`                          | `arrowSwitchIcon`                 |
+| `systemNotificationIcon`              | `cloudSettingsIcon`               |
+| `taskAcademicIcon`                    | `gradCapIcon`                     |
+| `taskBenefitsIcon`                    | `shieldHeartIcon`                 |
+| `taskCareerIcon`                      | `targetIcon`                      |
+| `taskCompanyPropertyIcon`             | `staplerIcon`                     |
+| `taskCompensationIcon`                | `documentChartIcon`               |
+| `taskContactIcon`                     | `bookUserIcon`                    |
+| `taskJobIcon`                         | `briefcaseIcon`                   |
+| `taskOverviewIcon`                    | `documentTaskIcon`                |
+| `taskPayIcon`                         | `walletIcon`                      |
+| `taskPerformanceIcon`                 | `clipboardChartIcon`              |
+| `taskTimeoffIcon`                     | `suitcaseIcon`                    |
+| `textColorIcon`                       | `fontColorIcon`                   |
+| `threeColumnIcon`                     | `columnThreeIcon`                 |
+| `thumbsDownFilledIcon`                | `thumbsDownFillIcon`              |
+| `thumbsDownOutlinedIcon`              | `thumbsDownIcon`                  |
+| `thumbsUpFilledIcon`                  | `thumbsUpFillIcon`                |
+| `thumbsUpOutlinedIcon`                | `thumbsUpIcon`                    |
+| `timeIcon`                            | `historyIcon`                     |
+| `timelineAllIcon`                     | `timelineIcon`                    |
+| `timelineMilestoneIcon`               | `signpostIcon`                    |
+| `timelinePerformanceInputIcon`        | `userStarIcon`                    |
+| `timeOffBalanceIcon`                  | `calendarInfoIcon`                |
+| `transcriptionIcon`                   | `boxTextMicrophoneIcon`           |
+| `transformationGroupbyIcon`           | `groupIcon`                       |
+| `transformationImportIcon`            | `arrowRightToLineIcon`            |
+| `transformationJoinIcon`              | `shrinkHorizontalIcon`            |
+| `transformationUnionIcon`             | `unionIcon`                       |
+| `translatedActualsIcon`               | `actualsFinanceIcon`              |
+| `travelIcon`                          | `airplaneIcon`                    |
+| `twoColumnIcon`                       | `columnTwoIcon`                   |
+| `undoIcon`                            | `arrowUTurnLeftIcon`              |
+| `undoLIcon`                           | `arrowUTurnLeftIcon`              |
+| `undoRIcon`                           | `arrowUTurnRightIcon`             |
+| `unfreezeIcon`                        | `sunIcon`                         |
+| `unknownIcon`                         | `documentUserTextIcon`            |
+| `unlinkIcon`                          | `linkStrikethroughIcon`           |
+| `unlockedIcon`                        | `lockOpenIcon`                    |
+| `unorderedListIcon`                   | `listBulletIcon`                  |
+| `uploadClipIcon`                      | `paperclipIcon`                   |
+| `uploadCloudIcon`                     | `cloudArrowUpIcon`                |
+| `uploadIcon`                          | `arrowUpToLineIcon`               |
+| `userLockedIcon`                      | `userLockIcon`                    |
+| `userRemoveIcon`                      | `userXIcon`                       |
+| `viewsiteIcon`                        | `webpageOpenIcon`                 |
+| `viewTeamIcon`                        | `teamIcon`                        |
+| `virtualVersionIcon`                  | `documentDashedIcon`              |
+| `virtualVersionLockedIcon`            | `documentLockDashedIcon`          |
+| `virtualVersionLockIcon`              | `documentLockDashedIcon`          |
+| `webinarIcon`                         | `desktopMediaIcon`                |
+| `wizardIcon`                          | `magicWandIcon`                   |
+| `workbookIcon`                        | `bookIcon`                        |
+| `worksheetsIcon`                      | `documentWorksheetsIcon`          |
+| `xoInstanceListIcon`                  | `xoLoopIcon`                      |
+| `zoomAreaIcon`                        | `squareSearchDashedIcon`          |
+| `zoominIcon`                          | `zoomInIcon`                      |
+| `zoomoutIcon`                         | `zoomOutIcon`                     |

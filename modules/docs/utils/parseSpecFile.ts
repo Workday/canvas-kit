@@ -34,15 +34,38 @@ export async function parseSpecFile(file: string): Promise<FileBlock | null> {
       .readFile(file)
       .then(contents => contents.toString())
       .then(contents =>
-        contents.replace(/import (.+) from .+/g, (substr: string, imports: string) => {
-          if (imports.includes('{')) {
-            return `const ${imports.replace(/[{}]/g, '')} = () => {}`;
+        // Strip imports before transpile. Use [\s\S] so multiline named imports are matched —
+        // otherwise typescript.transpile leaves `require(...)` calls that fail under eval.
+        contents.replace(
+          /import\s+([\s\S]+?)\s+from\s+['"][^'"]+['"];?/g,
+          (_substr: string, imports: string) => {
+            const trimmed = imports.trim();
+            if (trimmed.includes('{')) {
+              const names = trimmed
+                .replace(/[{}]/g, '')
+                .split(',')
+                .map(part => {
+                  // support `Foo as Bar` and whitespace/newlines
+                  const pieces = part
+                    .trim()
+                    .split(/\s+as\s+|\s+/)
+                    .filter(Boolean);
+                  return pieces[pieces.length - 1];
+                })
+                .filter(Boolean);
+              // Stub as both a component and a CSF story object (`Example.render`)
+              return names
+                .map(name => `const ${name} = Object.assign(() => {}, {render: () => {}});`)
+                .join('\n');
+            }
+            if (/react/i.test(trimmed)) {
+              return `const React = {createElement: () => {}};`;
+            }
+            // default / namespace imports — stub the binding name
+            const name = trimmed.replace(/^\*\s+as\s+/, '').trim();
+            return name ? `const ${name} = () => {};` : '';
           }
-          if (/react/g.test(imports)) {
-            return `const React = {createElement: () => {}}`;
-          }
-          return '';
-        })
+        )
       ) // remove imports
       .then(contents => typescript.transpile(contents, {jsx: typescript.JsxEmit.React}))
       .then(contents => {

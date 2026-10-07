@@ -1,0 +1,53 @@
+name: Complete unpublished packages
+
+# Publishes workspace versions that are not yet on npm, without bumping.
+# Used to recover from a partial `lerna publish` (e.g. Sigstore tlog 409).
+on:
+  workflow_call:
+    inputs:
+      dist_tag:
+        required: true
+        type: string
+        description: 'npm dist-tag to apply (latest or support)'
+
+permissions:
+  id-token: write # Required for OIDC
+  contents: read
+
+jobs:
+  complete-unpublished:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        with:
+          persist-credentials: false
+
+      - uses: Workday/canvas-kit-actions/install@v2
+        with:
+          node_version: 24.x
+
+      - name: Clear auth token for OIDC
+        run: echo "NODE_AUTH_TOKEN=" >> "$GITHUB_ENV"
+
+      - name: Upgrade npm for OIDC
+        run: npm install -g npm@11.11.0
+
+      - name: Configure npm registry
+        run: npm config set registry https://registry.npmjs.org/
+
+      - name: Build
+        run: yarn build
+        env:
+          TSP_SKIP_CACHE: true
+
+      - name: Publish unpublished packages
+        env:
+          DIST_TAG: ${{ inputs.dist_tag }}
+        run: |
+          case "$DIST_TAG" in
+            latest|support|next|prerelease-next) ;;
+            *) echo "::error::Unsupported dist_tag: $DIST_TAG"; exit 1 ;;
+          esac
+          yarn publish:from-package -- --dist-tag "$DIST_TAG"

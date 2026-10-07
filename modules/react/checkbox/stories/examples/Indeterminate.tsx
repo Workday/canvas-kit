@@ -1,13 +1,24 @@
 import React from 'react';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {Box} from '@workday/canvas-kit-react/layout';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-const styleOverrides = createStyles({
+const listStyles = createStyles({
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+});
+
+const nestedListStyles = createStyles({
+  listStyle: 'none',
+  margin: 0,
   marginInlineStart: system.gap.xl,
   marginBlockStart: system.gap.sm,
+  padding: 0,
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.gap.sm,
 });
 
 export const Indeterminate = () => {
@@ -59,23 +70,26 @@ export const Indeterminate = () => {
   };
 
   return (
-    <>
-      <Checkbox
-        checked={pizzaChecked}
-        indeterminate={pizzaIndeterminate}
-        label="Supreme Pizza Toppings"
-        onChange={handlePizzaChange}
-      />
-      <Box cs={styleOverrides}>
-        {toppings.map((topping, index) => (
-          <Checkbox
-            checked={topping.checked}
-            key={topping.name}
-            label={topping.name}
-            onChange={event => handleToppingChange(event, index)}
-          />
-        ))}
-      </Box>
-    </>
+    <ul className={listStyles}>
+      <li>
+        <Checkbox
+          checked={pizzaChecked}
+          indeterminate={pizzaIndeterminate}
+          label="Supreme Pizza Toppings"
+          onChange={handlePizzaChange}
+        />
+        <ul className={nestedListStyles}>
+          {toppings.map((topping, index) => (
+            <li key={topping.name}>
+              <Checkbox
+                checked={topping.checked}
+                label={topping.name}
+                onChange={event => handleToppingChange(event, index)}
+              />
+            </li>
+          ))}
+        </ul>
+      </li>
+    </ul>
   );
 };

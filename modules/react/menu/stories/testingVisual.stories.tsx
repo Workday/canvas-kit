@@ -7,9 +7,16 @@ import {px2rem} from '@workday/canvas-kit-styling';
 import {saveAsIcon} from '@workday/canvas-system-icons-web';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {customColorTheme} from '../../../../utils/storybook';
-
 const fontDelay = 150; // best guess for the font delay to prevent incorrect Chromatic regressions
+
+/**
+ * Numerical theme with independent focus and selected shortcuts.
+ */
+const menuNumericalTheme = {
+  brand: {primary: {'600': 'purple'}},
+  selected: {fg: 'purple', surface: 'lavender'},
+  focus: {primary: 'turquoise'},
+};
 
 export default {
   title: 'Testing/Popups/Menu',
@@ -32,6 +39,9 @@ const AllStatesMenuItem = () => (
           <Menu.Item className="hover">Hovered Item</Menu.Item>
           <Menu.Item className="focus hover">Focused & Hovered Item</Menu.Item>
           <Menu.Item aria-disabled={true}>Disabled Item</Menu.Item>
+          <Menu.Item className="focus" aria-disabled={true}>
+            Focused & Disabled Item
+          </Menu.Item>
           <Menu.Item>Wrapped Text Item Wrapped Text Item Wrapped Text Item</Menu.Item>
           <Menu.Item>
             Superlonglinethatshouldbreakonitsownwithouthavingtodoanythingspecial
@@ -79,7 +89,7 @@ export const MenuItemStates = {
           </div>
           <div>
             <h3>Themed</h3>
-            <CanvasProvider theme={{canvas: customColorTheme}}>
+            <CanvasProvider theme={menuNumericalTheme}>
               <AllStatesMenuItem />
             </CanvasProvider>
           </div>
@@ -104,12 +114,11 @@ export const MenuItemStatesCustomTheme = {
             <h3>Custom Themed</h3>
             <CanvasProvider
               theme={{
-                canvas: {
-                  palette: {
-                    primary: {main: base.indigo500},
-                    common: {focusOutline: base.magenta900},
-                  },
+                brand: {
+                  primary: {'600': base.indigo500},
                 },
+                selected: {fg: base.indigo600, surface: base.indigoA50},
+                focus: {primary: base.magenta900},
               }}
             >
               <AllStatesMenuItem />
@@ -130,6 +139,9 @@ const AllStatesMenuOption = () => (
         <Menu.Option className="hover">Hovered Item</Menu.Option>
         <Menu.Option className="focus hover">Focused & Hovered Item</Menu.Option>
         <Menu.Option aria-disabled={true}>Disabled Item</Menu.Option>
+        <Menu.Option className="focus" aria-disabled={true}>
+          Focused & Disabled Item
+        </Menu.Option>
         <Menu.Option aria-selected={true}>Selected Item</Menu.Option>
         <Menu.Option className="focus" aria-selected={true}>
           Focused & Selected Item
@@ -218,7 +230,7 @@ export const MenuOptionStates = {
           </div>
           <div>
             <h3>Themed</h3>
-            <CanvasProvider theme={{canvas: customColorTheme}}>
+            <CanvasProvider theme={menuNumericalTheme}>
               <AllStatesMenuOption />
             </CanvasProvider>
           </div>

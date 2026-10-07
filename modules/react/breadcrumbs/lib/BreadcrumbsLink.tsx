@@ -28,10 +28,20 @@ export const breadcrumbsLinkStencil = createStencil({
     fontWeight: system.fontWeight.normal,
     letterSpacing: system.legacy.letterSpacing.subtext.lg,
     lineHeight: system.legacy.lineHeight.subtext.lg,
+    color: system.color.fg.default,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     maxWidth,
+    '&:hover, &.hover': {
+      color: system.color.fg.strong,
+      backgroundColor: system.legacy.color.surface.overlay.hover.default,
+      textDecoration: 'underline',
+    },
+    '&:active, &.active': {
+      color: system.color.fg.strong,
+      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+    },
   }),
 });
 
@@ -49,7 +59,8 @@ export const BreadcrumbsLink = createComponent('a')({
           ref={ref}
           as={Element}
           role="link"
-          variant="standalone"
+          variant="secondary"
+          linkType="standalone"
           {...handleCsProp(
             elemProps,
             breadcrumbsLinkStencil({

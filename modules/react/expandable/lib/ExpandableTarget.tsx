@@ -1,6 +1,10 @@
 import React from 'react';
 
-import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
+import {
+  ExtractProps,
+  cornerShapeStencil,
+  createSubcomponent,
+} from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
@@ -25,10 +29,11 @@ export interface ExpandableTargetProps extends ExtractProps<typeof Flex, never> 
 }
 
 export const expandableTargetStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
     background: system.legacy.color.surface.transparent,
     borderColor: system.color.border.transparent,
-    borderRadius: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
     borderWidth: 0,
     display: 'flex',
     alignItems: 'center',
