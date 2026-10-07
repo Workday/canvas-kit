@@ -4,6 +4,7 @@ import {Accessory} from '@workday/canvas-kit-labs-react/accessory';
 
 import mdxDoc from './Accessory.mdx';
 import {Basic as BasicExample} from './examples/Basic';
+import {Calendar as CalendarExample} from './examples/Calendar';
 import {Custom as CustomExample} from './examples/Custom';
 import {File as FileExample} from './examples/File';
 import {Icon as IconExample} from './examples/Icon';
@@ -38,6 +39,10 @@ export const Media: Story = {
 
 export const File: Story = {
   render: FileExample,
+};
+
+export const Calendar: Story = {
+  render: CalendarExample,
 };
 
 export const Custom: Story = {

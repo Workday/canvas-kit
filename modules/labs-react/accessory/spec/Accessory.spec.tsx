@@ -4,6 +4,7 @@ import * as React from 'react';
 import {checkIcon, playCircleIcon} from '@workday/canvas-system-icons-web';
 
 import {Accessory} from '../lib/Accessory';
+import {AccessoryCalendar} from '../lib/AccessoryCalendar';
 import {AccessoryFile} from '../lib/AccessoryFile';
 import {AccessoryIcon} from '../lib/AccessoryIcon';
 import {AccessoryMedia} from '../lib/AccessoryMedia';
@@ -16,6 +17,17 @@ describe('Accessory', () => {
   verifyComponent(AccessoryIcon, {props: {icon: checkIcon}});
   verifyComponent(AccessoryMedia, {props: {src: imageSrc, alt: 'Preview', icon: checkIcon}});
   verifyComponent(AccessoryFile, {});
+  verifyComponent(AccessoryCalendar, {props: {month: 'Apr', date: 30}});
+
+  describe('when a calendar date is rendered', () => {
+    it('should show the month and day', () => {
+      const {container} = render(<AccessoryCalendar date={30} month="Apr" />);
+
+      expect(container).toHaveTextContent('Apr');
+      expect(container).toHaveTextContent('30');
+      expect(container.querySelector('[aria-hidden="true"]')).toBeInTheDocument();
+    });
+  });
 
   describe('when an icon is rendered', () => {
     it('should hide the accessory from assistive technology', () => {

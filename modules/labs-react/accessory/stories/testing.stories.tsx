@@ -1,4 +1,5 @@
 import {
+  AccessoryCalendar,
   AccessoryFile,
   AccessoryFileType,
   AccessoryIcon,
@@ -87,6 +88,21 @@ export const AccessoryFileStates = () => (
       })}
     >
       {props => <AccessoryFile size={props.size} type={props.type} />}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
+export const AccessoryCalendarStates = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={permutateProps({
+        size: sizes.map(size => ({value: size, label: size})),
+      })}
+      columnProps={permutateProps({
+        className: [{label: 'Apr 30', value: ''}],
+      })}
+    >
+      {props => <AccessoryCalendar date={30} month="Apr" size={props.size} />}
     </ComponentStatesTable>
   </StaticStates>
 );

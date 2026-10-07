@@ -1,4 +1,5 @@
 import {Basic} from '../../modules/labs-react/accessory/stories/examples/Basic';
+import {Calendar} from '../../modules/labs-react/accessory/stories/examples/Calendar';
 import {Custom} from '../../modules/labs-react/accessory/stories/examples/Custom';
 import {File} from '../../modules/labs-react/accessory/stories/examples/File';
 import {Icon} from '../../modules/labs-react/accessory/stories/examples/Icon';
@@ -15,7 +16,7 @@ describe('Accessory', () => {
     });
   });
 
-  [Basic, Icon, Media, File, Custom, Sizes, Variants].forEach(Example => {
+  [Basic, Icon, Media, File, Calendar, Custom, Sizes, Variants].forEach(Example => {
     context(`given the ${Example.name} story is rendered`, () => {
       beforeEach(() => {
         cy.mount(<Example />);

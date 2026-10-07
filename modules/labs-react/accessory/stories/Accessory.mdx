@@ -4,6 +4,7 @@ import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-d
 
 import AccessoryStoriesMeta from './Accessory.stories';
 import {Basic} from './examples/Basic';
+import {Calendar} from './examples/Calendar';
 import {Custom} from './examples/Custom';
 import {File} from './examples/File';
 import {Icon} from './examples/Icon';
@@ -19,10 +20,11 @@ import {Variants} from './examples/Variants';
 list item or other row. It keeps every thumbnail in one consistent shape and size, so a list of
 mixed content still feels uniform.
 
-It can show a system icon, a file type, an image, or fully custom content — whichever suits the
-row. Prefer `AccessoryIcon`, `AccessoryFile`, or `AccessoryMedia`, which each extend the shared
-`Accessory` props (`size`, `color`, `background`) and render that shell. Use `Accessory` itself for
-custom content, such as a gradient icon. Accessories are decorative and always hidden from
+It can show a system icon, a file type, an image, a calendar date, or fully custom content —
+whichever suits the row. Prefer `AccessoryIcon`, `AccessoryFile`, `AccessoryMedia`, or
+`AccessoryCalendar`, which each extend the shared `Accessory` props (`size`, `color`, `background`)
+and render that shell. Use `Accessory` itself for custom content, such as a gradient icon.
+Accessories are decorative and always hidden from
 assistive technology. They do not handle clicks or focus.
 
 ## Installation
@@ -36,8 +38,9 @@ yarn add @workday/canvas-kit-labs-react
 ### Basic Example
 
 `Accessory` is only the tile — size and corner radius. It does not render a visual by itself. Use a
-targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file type, or
-`AccessoryMedia` for an image (optionally with an icon on a scrim). Put custom content inside
+targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file type,
+`AccessoryMedia` for an image (optionally with an icon on a scrim), or `AccessoryCalendar` for a
+month and day. Put custom content inside
 `Accessory` when none of those fit the row.
 
 <ExampleCodeBlock code={Basic} />
@@ -62,6 +65,13 @@ is a stencil modifier for the fill and icon color. Colored types keep their acce
 size. `file` and `txt` use `surface.alt` and a default border.
 
 <ExampleCodeBlock code={File} />
+
+### Calendar
+
+`AccessoryCalendar` stacks a month label over the day. Pass `month` and `date`. The month uses a
+critical color. The day uses the default foreground color.
+
+<ExampleCodeBlock code={Calendar} />
 
 ### Custom
 
