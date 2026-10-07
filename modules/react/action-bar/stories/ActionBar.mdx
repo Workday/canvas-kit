@@ -8,7 +8,6 @@ import {DeleteAction} from './examples/DeleteAction';
 import {Icons} from './examples/Icons';
 import {OverflowActionBar} from './examples/OverflowActionBar';
 import {OverflowActionBarCustomButtonCount} from './examples/OverflowActionBarCustomButtonCount';
-import {TaskFlowDialog} from './examples/TaskFlowDialog';
 
 <Meta of={ActionBarStoriesMeta} />
 
@@ -51,14 +50,6 @@ with `ActionBar.Item` such as `icon` or `size`.
 such as `DeleteButton`, by using `as` prop.
 
 <ExampleCodeBlock code={DeleteAction} />
-
-### Task Flow Dialog Example
-
-Wrap **`Dialog`** around **`ActionBar`** and use **`ActionBar.Item as={Dialog.Target}`** for the opener.
-For a primary dialog trigger, pass a `forwardRef` wrapper that renders **`Dialog.Target as={PrimaryButton}`**
-to **`ActionBar.Item`** `as` (see [Task flow trigger composition](#task-flow-trigger-composition)).
-
-<ExampleCodeBlock code={TaskFlowDialog} />
 
 ### Overflow Example
 
@@ -234,7 +225,6 @@ to supply instead). For fake buttons, icon-only names, popup targets, and relate
 - Reuse the same **`aria-label`** for **`ActionBar.List`** and another landmark on the page
 - Use Action Bar for a single action—use [Button](/components/buttons/button/#accessibility) instead
 - Use more than one **`PrimaryButton`** or any **`TertiaryButton`** in an Action Bar
-- Use **`ActionBar.Item`** to open an **`Expandable`**
 - Add `role="toolbar"`, `role="group"`, roving tabindex, or arrow-key handlers to **`ActionBar.List`**
 - Hand-set **`aria-haspopup`**, **`aria-expanded`**, or **`aria-hidden`** on **`ActionBar.OverflowButton`**
   or overflowing **`ActionBar.Item`**—the Action Bar model sets these
