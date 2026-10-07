@@ -47,9 +47,9 @@ export const useTabsModel = createModelHook({
     orientation: 'horizontal' as typeof useOverflowListModel.defaultConfig.orientation,
     /**
      * The variant of the Tabs.
-     * @default 'filled'
+     * @default 'outlined'
      */
-    variant: 'filled' as 'filled' | 'outlined',
+    variant: 'outlined' as 'filled' | 'outlined',
     menuConfig: {} as typeof useMenuModel.TConfig,
   },
   requiredConfig: useOverflowListModel.requiredConfig,
@@ -94,7 +94,7 @@ export const useTabsModel = createModelHook({
      * state setting phase.
      */
     panelIndexRef: panels.state.indexRef,
-    variant: config.variant || 'filled',
+    variant: config.variant || 'outlined',
   };
 
   const overflowItems = React.useMemo(
