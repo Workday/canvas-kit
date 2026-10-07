@@ -59,7 +59,6 @@ export const Custom = () => (
     <div className={rowStyles}>
       <div className={labelStyles}>
         <AccessoryFile type="pdf" />
-        <Subtext size="small">Default</Subtext>
       </div>
       <div className={labelStyles}>
         <AccessoryFile
@@ -67,11 +66,9 @@ export const Custom = () => (
           color={system.color.fg.warning.strong}
           type="pdf"
         />
-        <Subtext size="small">color and background</Subtext>
       </div>
       <div className={labelStyles}>
         <AccessoryFile cs={customFileStencil()} type="pdf" />
-        <Subtext size="small">Stencil vars</Subtext>
       </div>
     </div>
   </div>

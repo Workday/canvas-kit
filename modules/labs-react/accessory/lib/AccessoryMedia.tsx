@@ -30,14 +30,19 @@ export interface AccessoryMediaProps extends AccessoryProps {
   icon?: SystemIconProps['icon'];
 }
 
+/**
+ * Image treatment for `AccessoryMedia`. The image part stays hidden until `imageLoaded`. The scrim
+ * part sits under an optional icon. `background` overrides the tile fill.
+ */
 export const accessoryMediaStencil = createStencil({
   vars: {
     background: '',
   },
   parts: {
     image: 'accessory-media-image',
+    scrim: 'accessory-media-scrim',
   },
-  base: ({background, imagePart}) => ({
+  base: ({background, imagePart, scrimPart}) => ({
     backgroundColor: cssVar(background, system.legacy.color.surface.alt.default),
     [imagePart]: {
       position: 'absolute',
@@ -48,6 +53,14 @@ export const accessoryMediaStencil = createStencil({
       overflow: 'hidden',
       borderRadius: cssVar(cornerShapeStencil.vars.shape),
       cornerShape: 'superellipse(1.1)',
+    },
+    [scrimPart]: {
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: system.legacy.color.surface.overlay.scrim,
+      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      cornerShape: 'superellipse(1.1)',
+      pointerEvents: 'none',
     },
   }),
   modifiers: {
@@ -71,17 +84,6 @@ export const accessoryMediaStencil = createStencil({
         },
       }),
     },
-  },
-});
-
-export const accessoryMediaScrimStencil = createStencil({
-  base: {
-    position: 'absolute',
-    inset: 0,
-    backgroundColor: system.legacy.color.surface.overlay.scrim,
-    borderRadius: cssVar(cornerShapeStencil.vars.shape),
-    cornerShape: 'superellipse(1.1)',
-    pointerEvents: 'none',
   },
 });
 
@@ -137,7 +139,7 @@ export const AccessoryMedia = createComponent('span')({
         />
         {icon && (
           <>
-            <span {...handleCsProp({}, accessoryMediaScrimStencil())} />
+            <span {...accessoryMediaStencil.parts.scrim} />
             <SystemIcon icon={icon} {...accessoryStencil.parts.icon} aria-hidden={true} />
           </>
         )}

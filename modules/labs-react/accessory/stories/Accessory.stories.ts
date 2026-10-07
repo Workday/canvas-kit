@@ -5,10 +5,9 @@ import {Accessory} from '@workday/canvas-kit-labs-react/accessory';
 import mdxDoc from './Accessory.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Custom as CustomExample} from './examples/Custom';
-import {CustomColor as CustomColorExample} from './examples/CustomColor';
 import {File as FileExample} from './examples/File';
+import {Icon as IconExample} from './examples/Icon';
 import {Media as MediaExample} from './examples/Media';
-import {RTL as RTLExample} from './examples/RTL';
 import {Sizes as SizesExample} from './examples/Sizes';
 import {Variants as VariantsExample} from './examples/Variants';
 
@@ -29,6 +28,10 @@ export const Basic: Story = {
   render: BasicExample,
 };
 
+export const Icon: Story = {
+  render: IconExample,
+};
+
 export const Media: Story = {
   render: MediaExample,
 };
@@ -41,18 +44,10 @@ export const Custom: Story = {
   render: CustomExample,
 };
 
-export const CustomColor: Story = {
-  render: CustomColorExample,
-};
-
 export const Sizes: Story = {
   render: SizesExample,
 };
 
 export const Variants: Story = {
   render: VariantsExample,
-};
-
-export const RTL: Story = {
-  render: RTLExample,
 };

@@ -5,10 +5,9 @@ import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-d
 import AccessoryStoriesMeta from './Accessory.stories';
 import {Basic} from './examples/Basic';
 import {Custom} from './examples/Custom';
-import {CustomColor} from './examples/CustomColor';
 import {File} from './examples/File';
+import {Icon} from './examples/Icon';
 import {Media} from './examples/Media';
-import {RTL} from './examples/RTL';
 import {Sizes} from './examples/Sizes';
 import {Variants} from './examples/Variants';
 
@@ -16,9 +15,14 @@ import {Variants} from './examples/Variants';
 
 # Canvas Kit Accessory
 
-`Accessory` is a presentational tile shell for a leading visual. Prefer `AccessoryIcon`,
-`AccessoryFile`, or `AccessoryMedia`, which each extend the shared `Accessory` props (`size`,
-`color`, `background`) and render that shell. Accessories are decorative and always hidden from
+`Accessory` is the small rounded visual that sits beside text, most often the leading element in a
+list item or other row. It keeps every thumbnail in one consistent shape and size, so a list of
+mixed content still feels uniform.
+
+It can show a system icon, a file type, an image, or fully custom content — whichever suits the
+row. Prefer `AccessoryIcon`, `AccessoryFile`, or `AccessoryMedia`, which each extend the shared
+`Accessory` props (`size`, `color`, `background`) and render that shell. Use `Accessory` itself for
+custom content, such as a gradient icon. Accessories are decorative and always hidden from
 assistive technology. They do not handle clicks or focus.
 
 ## Installation
@@ -31,11 +35,18 @@ yarn add @workday/canvas-kit-labs-react
 
 ### Basic Example
 
-`Accessory` is only a tile shell — size and corner radius. It does not render a visual by itself.
-Use a targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file
-type, or `AccessoryMedia` for an image (optionally with an icon on a scrim).
+`Accessory` is only the tile — size and corner radius. It does not render a visual by itself. Use a
+targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file type, or
+`AccessoryMedia` for an image (optionally with an icon on a scrim). Put custom content inside
+`Accessory` when none of those fit the row.
 
 <ExampleCodeBlock code={Basic} />
+
+### Icon
+
+`AccessoryIcon` renders a system icon in the tile. `variant` sets the fill and icon color.
+
+<ExampleCodeBlock code={Icon} />
 
 ### Media
 
@@ -52,26 +63,13 @@ size. `file` and `txt` use `surface.alt` and a default border.
 
 <ExampleCodeBlock code={File} />
 
-### Media with an icon
+### Custom
 
-Pass `icon` to `AccessoryMedia` to center a decorative icon on a contrast scrim. `objectFit` is
-`cover` by default. `contain` fits the whole image inside the tile.
-
-The file row checks color overrides on `AccessoryFile`. `color` and `background` set the shell
-stencil vars. A `cs` stencil can set those same vars: `accessoryStencil.vars.iconColor` and
-`accessoryStencil.vars.tileBackground`.
+Use `Accessory` when the row needs content that is not a system icon, file type, or image. Set
+`accessoryStencil.vars.iconColor` and `accessoryStencil.vars.tileBackground` to recolor the tile.
+The icon `data-part` keeps the tile's corner radius.
 
 <ExampleCodeBlock code={Custom} />
-
-### Custom color
-
-`variant` is a stencil modifier on `AccessoryIcon`. `color` and `background` are shared `Accessory`
-props and override the variant through stencil vars on the shell. Glyph size follows `size` via the
-icon `data-part`. The icon is smaller than the tile: `extraSmall` is 10px, `small` is 12px,
-`medium` is 16px, `large` is 18px, and `extraLarge` is 20px. Variant fills stay hidden at `small`
-and `extraSmall` unless `background` is set.
-
-<ExampleCodeBlock code={CustomColor} />
 
 ### Sizes
 
@@ -85,13 +83,6 @@ and `extraSmall` unless `background` is set.
 at `medium`, `large`, and `extraLarge`. `outline` adds a default border at those larger sizes.
 
 <ExampleCodeBlock code={Variants} />
-
-### Right-to-Left
-
-The tile stays centered in right-to-left layouts. Directional icons still follow the icon's own
-mirroring rules.
-
-<ExampleCodeBlock code={RTL} />
 
 ### Accessibility
 
