@@ -5,7 +5,7 @@ import {alarmClockIcon, notificationsIcon} from '@workday/canvas-system-icons-we
 export const Icons = () => {
   return (
     <ActionBar>
-      <ActionBar.List position="relative" as="section" aria-label="Action Bar">
+      <ActionBar.List position="relative" as="section" aria-label="Page actions">
         <ActionBar.Item as={PrimaryButton} icon={notificationsIcon}>
           First Action
         </ActionBar.Item>

@@ -3,3 +3,4 @@ export {DeleteAction} from './DeleteAction';
 export {Icons} from './Icons';
 export {OverflowActionBar} from './OverflowActionBar';
 export {OverflowActionBarCustomButtonCount} from './OverflowActionBarCustomButtonCount';
+export {TaskFlowDialog} from './TaskFlowDialog';

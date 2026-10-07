@@ -8,6 +8,7 @@ import {DeleteAction as DeleteActionExample} from './examples/DeleteAction';
 import {Icons as IconsExample} from './examples/Icons';
 import {OverflowActionBar as OverflowActionBarExample} from './examples/OverflowActionBar';
 import {OverflowActionBarCustomButtonCount as OverflowActionBarCustomButtonCountExample} from './examples/OverflowActionBarCustomButtonCount';
+import {TaskFlowDialog as TaskFlowDialogExample} from './examples/TaskFlowDialog';
 
 export default {
   title: 'Components/Buttons/Action Bar',
@@ -36,4 +37,7 @@ export const OverflowActionBar: Story = {
 };
 export const OverflowActionBarCustomButtonCount: Story = {
   render: OverflowActionBarCustomButtonCountExample,
+};
+export const TaskFlowDialog: Story = {
+  render: TaskFlowDialogExample,
 };

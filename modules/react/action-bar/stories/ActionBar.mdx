@@ -8,6 +8,7 @@ import {DeleteAction} from './examples/DeleteAction';
 import {Icons} from './examples/Icons';
 import {OverflowActionBar} from './examples/OverflowActionBar';
 import {OverflowActionBarCustomButtonCount} from './examples/OverflowActionBarCustomButtonCount';
+import {TaskFlowDialog} from './examples/TaskFlowDialog';
 
 <Meta of={ActionBarStoriesMeta} />
 
@@ -29,7 +30,7 @@ yarn add @workday/canvas-kit-react
 ### Basic Example
 
 `ActionBar` includes a container `ActionBar` component and the following subcomponent:
-`ActionBar.List` which should contains `ActionBar.Item`.
+`ActionBar.List` which should contain `ActionBar.Item`.
 
 In a basic example of an `ActionBar` there are two buttons. The primary action button should be used
 only once and left aligned if content is left to right, followed by secondary buttons. Tertiary
@@ -46,10 +47,18 @@ with `ActionBar.Item` such as `icon` or `size`.
 
 ### Delete Action Example
 
-`ActionBar.Item` is a `SecondaryButton` by default but it's posible to change it to another element,
+`ActionBar.Item` is a `SecondaryButton` by default but it's possible to change it to another element,
 such as `DeleteButton`, by using `as` prop.
 
 <ExampleCodeBlock code={DeleteAction} />
+
+### Task Flow Dialog Example
+
+Wrap **`Dialog`** around **`ActionBar`** and use **`ActionBar.Item as={Dialog.Target}`** for the opener.
+For a primary dialog trigger, pass a `forwardRef` wrapper that renders **`Dialog.Target as={PrimaryButton}`**
+to **`ActionBar.Item`** `as` (see [Task flow trigger composition](#task-flow-trigger-composition)).
+
+<ExampleCodeBlock code={TaskFlowDialog} />
 
 ### Overflow Example
 
@@ -77,30 +86,27 @@ You can change it from the default of 3 to any number greater than 1 and less th
 
 ## Accessibility
 
-The primary accessibility goal is a clearly named group of page-level actions where every action is
-a native, keyboard-operable button. Use Action Bar for the primary and secondary actions of a page
-or task. For a single action, use a [Button](/components/buttons/button/#accessibility) directly.
-For a dense set of icon or dropdown controls that behaves as one tab stop, use
-[Toolbar](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-toolbar--docs). For
-actions that open a task flow, compose [Modal](/components/popups/modal/#accessibility) or
-[Dialog](/components/popups/dialog/#accessibility) from an **`ActionBar.Item`**.
+The primary accessibility goal is a clearly named group of page-level actions where every action is a native, keyboard-operable button. Use Action Bar for the primary and secondary actions of a page or task. For a single action, use a [Button](/components/buttons/button/#accessibility) directly.
 
-See the [Menu Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/), the
-[Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/button/), and the Canvas Kit
-[Accessibility overview](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-overview--docs).
+For URL navigation, use **`ActionBar.Item as={Hyperlink}`** with **`href`**; see
+[Hyperlink](/components/hyperlink/) (including **`linkType`** for items in the bar).
+
+For [Toolbar](/components/buttons/toolbar/) icon and dropdown controls that behave as one tab stop, see that component’s documentation. Overflow in Action Bar uses [Menu](/components/popups/menu).
+
+For actions that open a task flow, compose [Modal](/components/popups/modal) or [Dialog](/components/popups/dialog) from an **`ActionBar.Item`** (see **Task flow trigger composition** below).
+
+See the [Menu Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/menu-button/), the [Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/button/), and Canvas Kit [Accessibility overview](/guides/accessibility/overview/).
 
 ### Minimum Accessible Structure
 
-The following matches the [Basic Example](#basic-example): an **`ActionBar.List`** rendered as a
-labelled `section`, with a primary action first and secondary actions after it. **`ActionBar.List`**
-and **`ActionBar.Item`** should always be inside **`ActionBar`**.
+The following matches the [Basic Example](#basic-example): an **`ActionBar.List`** rendered as a labelled `section`, with a primary action first and secondary actions after it. **`ActionBar.List`** and **`ActionBar.Item`** should always be inside **`ActionBar`**.
 
 ```tsx
 import {ActionBar} from '@workday/canvas-kit-react/action-bar';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 
 <ActionBar>
-  <ActionBar.List as="section" aria-label="Page actions">
+  <ActionBar.List position="relative" as="section" aria-label="Page actions">
     <ActionBar.Item as={PrimaryButton} onClick={() => console.log('first action')}>
       First Action
     </ActionBar.Item>
@@ -109,8 +115,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 </ActionBar>;
 ```
 
-Provide a translated, descriptive **`aria-label`** on **`ActionBar.List`**. Every
-**`ActionBar.Item`** needs non-empty visible text, which becomes its accessible name.
+Provide a translated, descriptive **`aria-label`** on **`ActionBar.List`**. Every **`ActionBar.Item`** needs non-empty visible text, which becomes its accessible name.
 
 ### Built-in Behaviors
 
@@ -118,23 +123,12 @@ Canvas Kit applies these automatically. **Do not duplicate them** in consuming c
 
 **ARIA and DOM** (_applied by hooks/subcomponents_):
 
-- **`ActionBar`**: Does not render an element. It creates the model and wraps its children in
-  **`Menu`** so the overflow menu shares state.
-- **`ActionBar.List`**: Renders a `div` by default. It has no role of its own—use `as="section"`
-  with **`aria-label`** to expose a landmark. It is positioned fixed to the bottom of the viewport
-  unless you override `position`.
-- **`ActionBar.Item`**: Renders a native `<button>` through **`SecondaryButton`** (or the component
-  passed to `as`). It inherits the [Button accessibility](/components/buttons/button/#accessibility)
-  behavior, including visible label wiring and decorative `icon` handling.
-- **Overflow**: Items that do not fit, or that exceed `maximumVisible`, receive `aria-hidden`,
-  `inert`, and `disabled`, so they are removed from the tab order and the accessibility tree and
-  appear in the overflow menu instead.
-- **`ActionBar.OverflowButton`**: Renders a **`SecondaryButton`** with the related-actions icon,
-  `aria-haspopup`, and `aria-expanded` through the **`Menu.Target`**. It is `aria-hidden` with
-  `tabIndex={-1}` while no items overflow, and gains `tabIndex={0}` once items overflow.
-- **`ActionBar.Menu`**: Is the standard [Menu](/components/popups/menu/#accessibility).
-  **`ActionBar.Menu.List`** has `role="menu"` labelled by the overflow button, and
-  **`ActionBar.Menu.Item`** has `role="menuitem"` with roving `tabIndex`.
+- **`ActionBar`**: Does not render an element. It creates the model and wraps its children in **`Menu`** so the overflow menu shares state.
+- **`ActionBar.List`**: Renders a `div` by default. It has no role of its own—use `as="section"` with **`aria-label`** to expose a landmark. It is positioned fixed to the bottom of the viewport unless you override `position`.
+- **`ActionBar.Item`**: Renders a native `<button>` through **`SecondaryButton`** (or the component passed to `as`). Follow [Button accessibility](/components/buttons/button/#accessibility) for everything else about the underlying control.
+- **Overflow**: Items that do not fit, or that exceed `maximumVisible`, receive `aria-hidden`, `inert`, and `disabled`, so they are removed from the tab order and the accessibility tree and appear in the overflow menu instead.
+- **`ActionBar.OverflowButton`**: Renders a **`SecondaryButton`** with the related-actions icon, `aria-haspopup`, and `aria-expanded` through the **`Menu.Target`**. It is `aria-hidden` with `tabIndex={-1}` while no items overflow, and gains `tabIndex={0}` once items overflow.
+- **`ActionBar.Menu`**: The standard [Menu](/components/popups/menu/#accessibility) API (`ActionBar` shares one menu model with **`ActionBar.OverflowButton`**).
 
 **Focus** (_applied by the model_):
 
@@ -144,24 +138,21 @@ Canvas Kit applies these automatically. **Do not duplicate them** in consuming c
 
 **Keyboard**:
 
-| Key                                                   | Behavior                                                                                                                                                 |
-| ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Key     | Behavior  |
+| ----------------------------------------------------- | ---------------------------------------------- |
 | <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd>      | Moves between each visible **`ActionBar.Item`** and the overflow button. Every visible item is its own tab stop; Action Bar does not use roving tabindex |
-| <kbd>Enter</kbd> / <kbd>Space</kbd>                   | Activates the focused item, or opens the overflow menu                                                                                                   |
-| <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>             | Opens the overflow menu from the overflow button                                                                                                         |
-| <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> inside menu | Moves between overflow menu items                                                                                                                        |
-| <kbd>Escape</kbd>                                     | Closes the overflow menu and returns focus to the overflow button                                                                                        |
-| <kbd>Tab</kbd> inside menu                            | Closes the menu and moves focus to the next focusable element on the page                                                                                |
+| <kbd>Enter</kbd> / <kbd>Space</kbd>                   | Activates the focused item, or opens the overflow menu  |
+| <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd>             | Opens the overflow menu from the overflow button  |
+| <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> inside menu | Moves between overflow menu items  |
+| <kbd>Escape</kbd>                                     | Closes the overflow menu and returns focus to the overflow button  |
+| <kbd>Tab</kbd> inside menu                            | Closes the menu and moves focus to the next focusable element on the page  |
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
-- On entering the group, the landmark is announced with the **`aria-label`** (for example, "Page
-  actions, region").
+- On entering the group, the landmark is announced with the **`aria-label`** (for example, "Page actions, region").
 - Each visible item is announced by its text and role (for example, "First Action, button").
-- The overflow button is announced with its **`aria-label`** and as a menu button with expanded or
-  collapsed state (for example, "More actions, menu button, collapsed").
-- Items moved into the overflow menu are no longer announced as buttons in the bar. They are
-  announced as menu items when the menu is open.
+- The overflow button is announced with its **`aria-label`** and as a menu button with expanded or collapsed state (for example, "More actions, menu button, collapsed").
+- Items moved into the overflow menu are no longer announced as buttons in the bar. They are announced as menu items when the menu is open.
 
 ### Accessibility Requirements
 
@@ -173,48 +164,86 @@ and a translated **`aria-label`**, one primary **`ActionBar.Item`** first, follo
 **`ActionBar.Item`** components with visible text. Omit `icon`, `disabled`, the overflow API, custom
 `maximumVisible`, and custom `data-id` unless the spec requires them.
 
-| Requirement                          | How to satisfy                                                                                                                                                                                                           |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Group label                          | `as="section"` and a translated **`aria-label`** on **`ActionBar.List`** that is unique among landmarks on the page                                                                                                      |
-| Item accessible name                 | Non-empty visible text as the child of every **`ActionBar.Item`**                                                                                                                                                        |
-| Composition order                    | **`ActionBar`** → **`ActionBar.List`** → **`ActionBar.Item`**; add **`ActionBar.Menu`** as a sibling of **`ActionBar.List`** for overflow                                                                                |
-| Primary action _(conditional)_       | **`as={PrimaryButton}`** on only the first **`ActionBar.Item`**; secondary actions use the default; do not use **`TertiaryButton`**                                                                                      |
-| Destructive action _(conditional)_   | **`as={DeleteButton}`** only for destructive actions, per design                                                                                                                                                         |
-| Decorative icon _(conditional)_      | **`icon`** on **`ActionBar.Item`** with visible text—no extra ARIA on the icon                                                                                                                                           |
-| Overflow button name _(conditional)_ | Translated **`aria-label`** on **`ActionBar.OverflowButton`** (required by its type), passed through **`overflowButton`** on **`ActionBar.List`**                                                                        |
+| Requirement                          | How to satisfy  |
+| ------------------------------------ | ------------------------------------------- |
+| Group label                          | `as="section"` and a translated **`aria-label`** on **`ActionBar.List`** that is unique among landmarks on the page  |
+| Item accessible name                 | Non-empty visible text as the child of every **`ActionBar.Item`**  |
+| Composition order                    | **`ActionBar`** → **`ActionBar.List`** → **`ActionBar.Item`**; add **`ActionBar.Menu`** as a sibling of **`ActionBar.List`** for overflow  |
+| Primary action _(conditional)_       | **`as={PrimaryButton}`** on only the first **`ActionBar.Item`**; secondary actions use the default; do not use **`TertiaryButton`**  |
+| Destructive action _(conditional)_   | **`as={DeleteButton}`** only for destructive actions, per design  |
+| Decorative icon _(conditional)_      | **`icon`** on **`ActionBar.Item`** with visible text—no extra ARIA on the icon; meaning comes from button text  |
+| Icon-only name _(conditional)_       | Prefer visible text on every item. If the spec requires an icon-only action button, follow [Button accessibility](/components/buttons/button/#accessibility) **Icon-only name** (**`Tooltip`** with `type="label"` or **`aria-label`**) |
+| Form submit _(conditional)_          | **`type="submit"`** on the relevant **`ActionBar.Item`** inside a `<form>` that should submit when that action is activated; omit **`type="submit"`** otherwise (default is **`type="button"`**)                            |
+| Navigation _(conditional)_           | **`ActionBar.Item as={Hyperlink}`** with **`href`** for URL navigation; see [Hyperlink](/components/hyperlink/) (**`linkType="standalone"`** for bar items)  |
+| Task flow trigger _(conditional)_    | **`Dialog`** or **`Modal`** wrapping **`ActionBar`**; **`ActionBar.Item as={Dialog.Target}`** (or the matching **`Modal`** target) for the opener—see **Task flow trigger composition** below and the popup component’s accessibility section |
+| Overflow button name _(conditional)_ | Translated **`aria-label`** on **`ActionBar.OverflowButton`** (required by its type), passed through **`overflowButton`** on **`ActionBar.List`**  |
 | Overflow menu _(conditional)_        | Dynamic API: `items` on **`useActionBarModel`**, render props on both **`ActionBar.List`** and **`ActionBar.Menu.List`**, and **`ActionBar.Menu.Popper`** → **`Card`** → **`List`** → **`Item`** with the same item text |
-| Menu item activation _(conditional)_ | The same `onClick` handler on **`ActionBar.Item`** and its **`ActionBar.Menu.Item`** counterpart so an action behaves the same wherever it renders                                                                       |
+| Menu item activation _(conditional)_ | The same `onClick` handler on **`ActionBar.Item`** and its **`ActionBar.Menu.Item`** counterpart so an action behaves the same wherever it renders  |
 | Fixed placement _(conditional)_      | **`ActionBar.List`** is `position: fixed` at the bottom of the viewport. Reserve space so page content and focused controls are not hidden behind it, or pass `position="relative"` when the bar sits in the page flow   |
-| Disabled action _(conditional)_      | Native **`disabled`** on **`ActionBar.Item`** when the spec marks the action unavailable                                                                                                                                 |
+| Disabled action _(conditional)_      | Native **`disabled`** on **`ActionBar.Item`** when the spec marks the action unavailable  |
+
+#### Task flow trigger composition
+
+_(Conditional requirement.)_
+
+Wrap **`ActionBar`** in **`Dialog`** or **`Modal`** (whichever matches the design). On the bar action
+that opens the flow, set **`ActionBar.Item as={Dialog.Target}`** or **`ActionBar.Item as={Modal.Target}`**
+so the popup model owns open, close, and focus. When that action should look primary, follow
+**Custom targets** in [Dialog accessibility](/components/popups/dialog/#accessibility) or
+[Modal accessibility](/components/popups/modal/#accessibility)—for example pass a `forwardRef` wrapper
+around **`Dialog.Target as={PrimaryButton}`** or **`Modal.Target as={PrimaryButton}`** to
+**`ActionBar.Item`** `as`. Compose **`Dialog.Popper`**, **`Dialog.Card`**, and related subcomponents—or
+the **`Modal`** equivalents—per the same accessibility sections.
+
+```tsx
+import {ActionBar} from '@workday/canvas-kit-react/action-bar';
+import {Dialog} from '@workday/canvas-kit-react/dialog';
+
+<Dialog>
+  <ActionBar>
+    <ActionBar.List position="relative" as="section" aria-label="Page actions">
+      <ActionBar.Item as={Dialog.Target}>Create</ActionBar.Item>
+      <ActionBar.Item>Cancel</ActionBar.Item>
+    </ActionBar.List>
+    <Dialog.Popper>
+      <Dialog.Card>
+        <Dialog.Heading>Create</Dialog.Heading>
+        {/* Dialog.Body, actions — see Dialog accessibility */}
+      </Dialog.Card>
+    </Dialog.Popper>
+  </ActionBar>
+</Dialog>;
+```
 
 **Summary for code generation:**
 
 - **REQUIRED:** **`ActionBar.List`** with `as="section"` and a translated **`aria-label`**; every
   **`ActionBar.Item`** with visible text; one primary action first
-- **CONDITIONAL:** **`icon`**; **`DeleteButton`**; **`overflowButton`** with an **`aria-label`**;
-  matching **`ActionBar.Menu`** items and handlers; `position="relative"`; **`disabled`**
+- **CONDITIONAL:** **`icon`**; icon-only naming per Button docs; **`DeleteButton`**; **`type="submit"`**;
+  **`Dialog`** / **`Modal`** composition; **`overflowButton`** with an
+  **`aria-label`**; matching **`ActionBar.Menu`** items and handlers; **`as={Hyperlink}`** with **`href`** for navigation;
+  `position="relative"`; **`disabled`**
 
 ### Anti-Patterns
 
 Do **not** generate code that does the following (see **Accessibility Requirements** above for what
-to supply instead):
+to supply instead). For fake buttons, icon-only names, popup targets, and related control behavior on
+**`ActionBar.Item`**, see [Button accessibility](/components/buttons/button/#accessibility).
 
-- Omit `as="section"` or **`aria-label`** on **`ActionBar.List`**, which leaves the group
-  unidentifiable to screen reader users
+- Omit `as="section"` or **`aria-label`** on **`ActionBar.List`**
 - Reuse the same **`aria-label`** for **`ActionBar.List`** and another landmark on the page
+- Use Action Bar for a single action—use [Button](/components/buttons/button/#accessibility) instead
 - Use more than one **`PrimaryButton`** or any **`TertiaryButton`** in an Action Bar
-- Render **`ActionBar.Item`** without visible text or as a non-button element with `onClick`
-- Add `role="toolbar"`, `role="group"`, roving tabindex, or arrow-key handlers to
-  **`ActionBar.List`**—each item must be a separate tab stop
+- Use **`ActionBar.Item`** to open an **`Expandable`**
+- Add `role="toolbar"`, `role="group"`, roving tabindex, or arrow-key handlers to **`ActionBar.List`**
+- Hand-set **`aria-haspopup`**, **`aria-expanded`**, or **`aria-hidden`** on **`ActionBar.OverflowButton`**
+  or overflowing **`ActionBar.Item`**—the Action Bar model sets these
 - Render **`ActionBar.OverflowButton`** without **`aria-label`**
-- Set `aria-haspopup`, `aria-expanded`, or `aria-hidden` on **`ActionBar.OverflowButton`** or
-  **`ActionBar.Item`**—the model sets them
-- Hide overflowing items with CSS, `hidden`, or conditional rendering—use the dynamic API
-  and `maximumVisible`
-- Use the overflow behavior with static children—it requires `items` on the model and render props
-- Provide an overflow menu whose items differ in text or behavior from the action bar items
-- Move focus manually after the overflow menu closes—**`Menu`** returns focus to the overflow button
-- Leave the fixed **`ActionBar.List`** covering page content or focused controls
+- Hide overflow with CSS, `hidden`, or conditional rendering—use the dynamic API and `maximumVisible`
+- Use overflow with static children—it requires `items` on the model and render props
+- Mismatch overflow menu item text or behavior from the visible bar items
+- Move focus manually after the overflow menu closes
+- Leave fixed **`ActionBar.List`** covering page content or focused controls
 
 ## Component API
 
