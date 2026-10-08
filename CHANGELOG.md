@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.8](https://github.com/Workday/canvas-kit/releases/tag/v16.1.8) (2026-10-08)
+
+### Components
+
+- fix: Overflow Tabs (3558) included in collection system ([#3790](https://github.com/Workday/canvas-kit/pull/3790)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+  Optional release note message. Changelog and release summaries will contain a pull request title. This section will add additional notes under that title. This section is not a summary, but something extra to point out in release notes. An example might be calling out breaking changes in a labs component or minor visual changes that need visual regression updates. Remove this section if no additional release notes are required.
+  
+  The Tabs "More" overflow button is now part of the tablist for accessibility: it has `role="tab"`, is included in the roving tabindex, and is reached with Left/Right arrow keys instead of Tab. Automation or tests that relied on the overflow control being a `button` or focused only via Tab may need to be updated.
+
+
 ## [v16.1.7](https://github.com/Workday/canvas-kit/releases/tag/v16.1.7) (2026-10-05)
 
 ### Documentation
