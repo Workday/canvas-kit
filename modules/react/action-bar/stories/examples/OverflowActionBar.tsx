@@ -32,7 +32,7 @@ export const OverflowActionBar = () => {
           <ActionBar.List
             position="relative"
             as="section"
-            aria-label="Action Bar"
+            aria-label="Page actions"
             overflowButton={<ActionBar.OverflowButton aria-label="More actions" />}
           >
             {(item: MyActionItem, index) => (
