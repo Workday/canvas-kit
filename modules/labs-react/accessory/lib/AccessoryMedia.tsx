@@ -3,7 +3,7 @@ import React from 'react';
 import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
@@ -25,7 +25,7 @@ export interface AccessoryMediaProps extends AccessoryProps {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`, centered over the image. When
    * set, a scrim is painted under the icon for contrast. Uses `color` from `Accessory` for the
-   * glyph (`system.color.fg.inverse` by default).
+   * glyph (`base.legacy.neutral0` by default).
    */
   icon?: SystemIconProps['icon'];
 }
@@ -101,7 +101,7 @@ export const AccessoryMedia = createComponent('span')({
       size = 'extraLarge',
       objectFit = 'cover',
       icon,
-      color = system.color.fg.inverse,
+      color = base.legacy.neutral0,
       background,
       ...elemProps
     }: AccessoryMediaProps,

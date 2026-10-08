@@ -9,7 +9,7 @@ import {
   tableExpandIcon,
   txtIcon,
 } from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
@@ -54,31 +54,31 @@ export const accessoryFileStencil = createStencil({
   modifiers: {
     type: {
       pdf: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.critical,
       },
       spreadsheet: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.positive,
       },
       document: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.info,
       },
       presentation: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.caution,
       },
       video: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
       file: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.default,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutralA800,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
       txt: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.default,
+        [accessoryStencil.vars.iconColor]: base.legacy.neutralA800,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
     },
