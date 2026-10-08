@@ -1,23 +1,26 @@
 import * as React from 'react';
 
 import {
-  useListRenderItems,
-  useListResetCursorOnBlur,
+  ListRenderItemContext,
+  isCursor,
   useOverflowListMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
+  Generic,
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
   useLocalRef,
   useModalityType,
+  useMountLayout,
 } from '@workday/canvas-kit-react/common';
 import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {useTabsModel} from './useTabsModel';
+import {orientationKeyMap} from '../../../react/collection/lib/keyUtils';
+import {TABS_OVERFLOW_BUTTON_ID, useTabsModel} from './useTabsModel';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
   /**
@@ -100,6 +103,49 @@ export const useTabOverflowScroll = createElemPropsHook(useTabsModel)((
   };
 });
 
+/**
+ * Resets the tablist cursor on blur to the selected tab when visible, or to the first visible
+ * item (e.g. the overflow button) when the selected tab is hidden. This ensures the roving
+ * tabindex always lands on a focusable element when only the "More" button is visible.
+ */
+export const useTabsListResetCursorOnBlur = createElemPropsHook(useTabsModel)(({state, events}) => {
+  const programmaticFocusRef = React.useRef(false);
+  const requestAnimationFrameRef = React.useRef(0);
+
+  useMountLayout(() => {
+    return () => {
+      cancelAnimationFrame(requestAnimationFrameRef.current);
+    };
+  });
+
+  return {
+    onKeyDown(event: React.KeyboardEvent) {
+      if (Object.keys(orientationKeyMap[state.orientation]).indexOf(event.key) !== -1) {
+        programmaticFocusRef.current = true;
+      }
+    },
+    onFocus() {
+      programmaticFocusRef.current = false;
+    },
+    onBlur() {
+      if (!programmaticFocusRef.current) {
+        requestAnimationFrameRef.current = requestAnimationFrame(() => {
+          const selectedId =
+            state.selectedIds !== 'all' && state.selectedIds.length
+              ? state.selectedIds[0]
+              : undefined;
+          const visibleItems = state.items.filter(item => !state.hiddenIds.includes(item.id));
+          const targetId =
+            selectedId && !state.hiddenIds.includes(selectedId) ? selectedId : visibleItems[0]?.id;
+          if (targetId && !isCursor(state, targetId)) {
+            events.goTo({id: targetId});
+          }
+        });
+      }
+    },
+  };
+});
+
 export const useTabsList = composeHooks(
   useTabOverflowScroll,
   createElemPropsHook(useTabsModel)(model => {
@@ -109,13 +155,14 @@ export const useTabsList = composeHooks(
     } as const;
   }),
   useOverflowListMeasure,
-  useListResetCursorOnBlur
+  useTabsListResetCursorOnBlur
 );
 
 export const tabsListStencil = createStencil({
   base: {
     display: 'flex',
     position: 'relative',
+    minWidth: 0,
     gap: system.legacy.gap.sm,
 
     '@media screen and (max-width: 768px)': {
@@ -156,6 +203,37 @@ export const tabsListStencil = createStencil({
   },
 });
 
+/**
+ * Custom render function for tabs that filters out the synthetic overflow button item.
+ * This is needed because the overflow button is included in the model's items array
+ * for navigation purposes, but should not be rendered by the list or panel render function.
+ */
+export function useTabsCollectionRenderItems(
+  model: ReturnType<typeof useTabsModel>,
+  children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
+): React.ReactNode {
+  const itemsToRender = model.state.items.filter(item => item.id !== TABS_OVERFLOW_BUTTON_ID);
+
+  const items =
+    typeof children === 'function' ? (
+      itemsToRender.map(item => {
+        const child = (children as (item: Generic, index: number) => React.ReactNode)(
+          item.value,
+          item.index
+        );
+        return (
+          <ListRenderItemContext.Provider key={item.id || item.index} value={{item}}>
+            {child}
+          </ListRenderItemContext.Provider>
+        );
+      })
+    ) : (
+      <ListRenderItemContext.Provider value={{}}>{children}</ListRenderItemContext.Provider>
+    );
+
+  return items;
+}
+
 export const TabsList = createSubcomponent('div')({
   displayName: 'Tabs.List',
   modelHook: useTabsModel,
@@ -173,7 +251,7 @@ export const TabsList = createSubcomponent('div')({
           })
         )}
       >
-        {useListRenderItems(model, children)}
+        {useTabsCollectionRenderItems(model, children)}
         {overflowButton}
       </Element>
     );
