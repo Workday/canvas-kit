@@ -41,6 +41,57 @@ describe('Color Picker', () => {
   });
 
   describe('custom hex input', () => {
+    it.each([
+      ['#AABBCC', 'AABBCc'],
+      ['#AABBCC', 'ABC'],
+      ['#AABBCC', 'abc'],
+      ['#AABBCC', '#AbC'],
+      ['#abc', 'AABBCC'],
+      ['AABBCC', 'abc'],
+    ])('keeps the check when %s is entered as %s', (value, inputValue) => {
+      const onColorChange = vi.fn();
+      const {container, getByRole} = renderColorPicker({
+        value,
+        colorSet: [],
+        showCustomHexInput: true,
+        onColorChange,
+      });
+
+      fireEvent.change(getByRole('textbox'), {target: {value: inputValue}});
+
+      expect(container.querySelector('.wd-icon-check-small')).toBeInTheDocument();
+      expect(getByRole('button', {name: 'Submit'})).toBeEnabled();
+      expect(onColorChange).not.toHaveBeenCalled();
+    });
+
+    it.each(['AABBCD', 'AB', 'GGG', ''])('removes the check for %s', inputValue => {
+      const {container, getByRole} = renderColorPicker({
+        value: '#AABBCC',
+        colorSet: [],
+        showCustomHexInput: true,
+      });
+
+      fireEvent.change(getByRole('textbox'), {target: {value: inputValue}});
+
+      expect(container.querySelector('.wd-icon-check-small')).not.toBeInTheDocument();
+    });
+
+    it('does not check an empty custom input when no color is selected', () => {
+      const {container} = renderColorPicker({colorSet: [], showCustomHexInput: true});
+
+      expect(container.querySelector('.wd-icon-check-small')).not.toBeInTheDocument();
+    });
+
+    it('preserves the submitted color format', () => {
+      const onColorChange = vi.fn();
+      const {getByRole} = renderColorPicker({showCustomHexInput: true, onColorChange});
+
+      fireEvent.change(getByRole('textbox'), {target: {value: 'aBc'}});
+      fireEvent.click(getByRole('button', {name: 'Submit'}));
+
+      expect(onColorChange).toHaveBeenCalledWith('#aaBBcc');
+    });
+
     it('should NOT render by default', () => {
       const {queryByRole} = renderColorPicker();
 

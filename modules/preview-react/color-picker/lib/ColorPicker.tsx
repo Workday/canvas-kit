@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
+import {expandHex} from '@workday/canvas-kit-react/common';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
@@ -105,6 +106,8 @@ const isCustomColor = (colors: (string | SwatchBookColorObject)[], hexCode?: str
   });
 };
 
+const normalizeHex = (value: string) => expandHex(value.replace(/^#/, '')).toLowerCase();
+
 export const ColorPicker = ({
   colorSet = Object.values(defaultColorSet),
   customHexInputLabel = 'Custom Hex Color',
@@ -158,7 +161,10 @@ export const ColorPicker = ({
               onChange={onCustomHexChange}
               onValidColorChange={onValidCustomHexChange}
               value={customHexValue}
-              showCheck={value === validHexValue || value === customHexValue}
+              showCheck={
+                Boolean(value) &&
+                normalizeHex(value) === normalizeHex(validHexValue || customHexValue)
+              }
               {...colorPickerStencil.parts.hexInput}
             />
           </FormField>
