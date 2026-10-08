@@ -24,6 +24,14 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
 
 
+## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
+
+### Components
+
+- fix: Overflow Tabs (3558) included in collection system ([#3790](https://github.com/Workday/canvas-kit/pull/3790)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
+  The Tabs "More" overflow button is now part of the tablist for accessibility: it has `role="tab"`, is included in the roving tabindex, and is reached with Left/Right arrow keys instead of Tab. Automation or tests that relied on the overflow control being a `button` or focused only via Tab may need to be updated. The id `__tabs-overflow__` is reserved for that control. A tab item whose id resolves to `__tabs-overflow__` causes `getId` in `useTabsModel` to throw.
+
+
 ## [v16.1.4](https://github.com/Workday/canvas-kit/releases/tag/v16.1.4) (2026-10-01)
 
 ### Documentation
