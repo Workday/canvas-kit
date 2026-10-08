@@ -3,7 +3,6 @@ import {
   AccessoryMedia,
   accessoryStencil,
 } from '@workday/canvas-kit-labs-react/accessory';
-import {Subtext} from '@workday/canvas-kit-react/text';
 import {createStencil, createStyles} from '@workday/canvas-kit-styling';
 import {checkIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
