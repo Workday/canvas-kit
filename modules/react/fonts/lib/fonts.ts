@@ -9,7 +9,7 @@ export const fonts: CSSObject[] = [
       fontFamily: 'Sana Sans VF',
       fontStyle: 'normal',
       fontWeight: [100, 700],
-      src: `local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'), url(${fontsPath}/SanaSansLCG05-Variable.ttf) format('truetype')`,
+      src: `local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'), url(${fontsPath}/SanaSansLCG05-Variable.woff2) format('woff2'), url(${fontsPath}/SanaSansLCG05-Variable.ttf) format('truetype')`,
     },
   },
   {
@@ -17,7 +17,7 @@ export const fonts: CSSObject[] = [
       fontFamily: 'Sana Sans VF',
       fontStyle: 'italic',
       fontWeight: [100, 700],
-      src: `local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'), url(${fontsPath}/SanaSansLCG05-Variable.ttf) format('truetype')`,
+      src: `local('Sana Sans LCG 05 VF'), local('SanaSansLCG05VF-Regular'), url(${fontsPath}/SanaSansLCG05-Variable.woff2) format('woff2'), url(${fontsPath}/SanaSansLCG05-Variable.ttf) format('truetype')`,
     },
   },
   {
