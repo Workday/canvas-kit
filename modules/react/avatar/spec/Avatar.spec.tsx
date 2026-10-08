@@ -1,9 +1,46 @@
-import {render, waitFor} from '@testing-library/react';
+import {fireEvent, isInaccessible, render, waitFor} from '@testing-library/react';
 import * as React from 'react';
 
 import {Avatar} from '../lib/Avatar';
 
 describe('Avatar', () => {
+  verifyComponent(Avatar, {props: {name: 'John Doe'}});
+
+  describe('decorative initials', () => {
+    it.each([undefined, false, true])(
+      'should expose initials only when isDecorative is not true (%s)',
+      isDecorative => {
+        const screen = render(<Avatar name="John Doe" isDecorative={isDecorative} />);
+        const initials = screen.getByText('JD');
+
+        expect(initials).toBeVisible();
+        expect(isInaccessible(initials)).toBe(isDecorative === true);
+      }
+    );
+
+    it('should hide custom decorative initials from assistive technology', () => {
+      const screen = render(<Avatar name="John Doe" preferredInitials="J" isDecorative />);
+
+      expect(screen.getByText('J')).toBeVisible();
+      expect(isInaccessible(screen.getByText('J'))).toBe(true);
+    });
+
+    it('should keep decorative fallback initials hidden while loading and after an image error', () => {
+      const screen = render(<Avatar name="John Doe" url="/avatar.jpg" isDecorative />);
+      const initials = screen.getByText('JD');
+      const image = screen.container.querySelector('img')!;
+
+      expect(isInaccessible(initials)).toBe(true);
+      fireEvent.error(image);
+      expect(initials).toBeVisible();
+      expect(isInaccessible(initials)).toBe(true);
+
+      fireEvent.load(image);
+      expect(screen.queryByText('JD')).not.toBeInTheDocument();
+      expect(isInaccessible(image)).toBe(true);
+    });
+  });
+
   it('shoudld show the initials JD given the name is John Doe', () => {
     const screen = render(<Avatar name="John Doe" />);
 

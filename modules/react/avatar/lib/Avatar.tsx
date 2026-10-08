@@ -19,7 +19,9 @@ export interface AvatarProps extends BaseAvatarProps, AvatarNameProps {
    */
   objectFit?: Property.ObjectFit;
   /**
-   * If true, the Avatar won't forward the `name` prop to the `alt` attribute of the image. This is useful when the Avatar is purely decorative and is rendered next to a name or text.
+   * If true, hides the image and fallback initials from assistive technology. This is useful when
+   * the Avatar is purely decorative and is rendered next to a name or text.
+   * @default false
    */
   isDecorative?: boolean;
 }
@@ -147,6 +149,7 @@ export const Avatar = createComponent('div')({
           <BaseAvatar.Name
             name={name}
             preferredInitials={preferredInitials}
+            aria-hidden={isDecorative}
             {...avatarStencil.parts.avatarName}
           />
         )}
