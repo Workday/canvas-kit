@@ -9,7 +9,7 @@ import {
   tableExpandIcon,
   txtIcon,
 } from '@workday/canvas-system-icons-web';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
