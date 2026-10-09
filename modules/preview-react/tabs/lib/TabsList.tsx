@@ -3,6 +3,7 @@ import * as React from 'react';
 import {
   ListRenderItemContext,
   isCursor,
+  orientationKeyMap,
   useOverflowListMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {
@@ -19,7 +20,6 @@ import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {orientationKeyMap} from '../../../react/collection/lib/keyUtils';
 import {TABS_OVERFLOW_BUTTON_ID, useTabsModel} from './useTabsModel';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
