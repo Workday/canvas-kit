@@ -1,0 +1,120 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
+
+import AccessoryStoriesMeta from './Accessory.stories';
+import {Basic} from './examples/Basic';
+import {Calendar} from './examples/Calendar';
+import {Custom} from './examples/Custom';
+import {Favicon} from './examples/Favicon';
+import {File} from './examples/File';
+import {Icon} from './examples/Icon';
+import {Media} from './examples/Media';
+import {Sizes} from './examples/Sizes';
+import {Variants} from './examples/Variants';
+
+<Meta of={AccessoryStoriesMeta} />
+
+# Canvas Kit Accessory
+
+`Accessory` is the small rounded visual that sits beside text, most often the leading element in a
+list item or other row. It keeps every thumbnail in one consistent shape and size, so a list of
+mixed content still feels uniform.
+
+It can show a system icon, a file type, an image, a site favicon, a calendar date, or fully custom
+content — whichever suits the row. Prefer `AccessoryIcon`, `AccessoryFile`, `AccessoryMedia`,
+`AccessoryFavicon`, or `AccessoryCalendar`, which each extend the shared `Accessory` props (`size`,
+`color`, `background`)
+and render that shell. Use `Accessory` itself for custom content, such as a gradient icon.
+Accessories are decorative and always hidden from
+assistive technology. They do not handle clicks or focus.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-labs-react
+```
+
+## Usage
+
+### Basic Example
+
+`Accessory` is only the tile — size and corner radius. It does not render a visual by itself. Use a
+targeted accessory instead: `AccessoryIcon` for a system icon, `AccessoryFile` for a file type,
+`AccessoryMedia` for an image (optionally with an icon on a scrim), `AccessoryFavicon` for a site
+favicon, or `AccessoryCalendar` for a month and day. Put custom content inside
+`Accessory` when none of those fit the row.
+
+<ExampleCodeBlock code={Basic} />
+
+### Icon
+
+`AccessoryIcon` renders a system icon in the tile. `variant` sets the fill and icon color.
+
+<ExampleCodeBlock code={Icon} />
+
+### Media
+
+`AccessoryMedia` fills the tile with an image. The image stays hidden until it loads. Pass `icon`
+to center a glyph on a contrast scrim.
+
+<ExampleCodeBlock code={Media} />
+
+### Favicon
+
+`AccessoryFavicon` resolves a brand mark from a site URL or domain. The browser requests that mark
+from Google's favicon service, which receives the hostname and the user's IP. The image uses
+`referrerPolicy="no-referrer"`, so the app origin is not sent. At `large` and `extraLarge` the mark
+sits inset in an outlined tile. At `medium` and smaller it fills the tile.
+
+<ExampleCodeBlock code={Favicon} />
+
+### File
+
+`AccessoryFile` renders a file type through the shared icon graphic. `type` chooses the glyph and
+is a stencil modifier for the fill and icon color. Colored types keep their accent fill at every
+size. `file` and `txt` use `surface.alt` and a default border.
+
+<ExampleCodeBlock code={File} />
+
+### Calendar
+
+`AccessoryCalendar` stacks a month label over the day. Pass `month` and `date`. The month uses a
+critical color. The day uses the default foreground color.
+
+<ExampleCodeBlock code={Calendar} />
+
+### Custom
+
+Use `Accessory` when the row needs content that is not a system icon, file type, image, or favicon.
+Set
+`accessoryStencil.vars.iconColor` and `accessoryStencil.vars.tileBackground` to recolor the tile.
+The icon `data-part` keeps the tile's corner radius.
+
+<ExampleCodeBlock code={Custom} />
+
+### Sizes
+
+`size` is a shared `Accessory` prop on each component. `extraLarge` (40px) is the default.
+
+<ExampleCodeBlock code={Sizes} />
+
+### Variants
+
+`variant` is set on `AccessoryIcon`. It pairs an icon color with a tile fill. The fill is painted
+at `medium`, `large`, and `extraLarge`. `outline` adds a default border at those larger sizes.
+
+<ExampleCodeBlock code={Variants} />
+
+### Accessibility
+
+Accessory components are presentational and always `aria-hidden`. Name the item in adjacent text
+instead of on the accessory. They are not buttons and do not take click or keyboard handlers.
+
+## Component API
+
+<SymbolDoc name="Accessory" fileName="/labs-react/" />
+
+## Specifications
+
+<Specifications file="./cypress/component/Accessory.spec.tsx" name="Accessory" />

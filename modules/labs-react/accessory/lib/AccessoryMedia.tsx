@@ -1,0 +1,149 @@
+import React from 'react';
+
+import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
+import {SystemIcon, SystemIconProps} from '@workday/canvas-kit-react/icon';
+import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling';
+import {base, system} from '@workday/canvas-tokens-web';
+
+import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
+
+export interface AccessoryMediaProps extends AccessoryProps {
+  /**
+   * The URL of the image.
+   */
+  src: string;
+  /**
+   * The alternative text for the image. Accessories are decorative, so the image is always hidden
+   * from assistive technology. Prefer an empty string when adjacent text already names the media.
+   */
+  alt: string;
+  /**
+   * How the image is resized to fit the tile.
+   * @default 'cover'
+   */
+  objectFit?: 'contain' | 'cover';
+  /**
+   * The icon to display from `@workday/canvas-system-icons-web`, centered over the image. When
+   * set, a scrim is painted under the icon for contrast. Uses `color` from `Accessory` for the
+   * glyph (`base.legacy.neutral0` by default).
+   */
+  icon?: SystemIconProps['icon'];
+}
+
+/**
+ * Image treatment for `AccessoryMedia`. The image part stays hidden until `imageLoaded`. The scrim
+ * part sits under an optional icon. `background` overrides the tile fill.
+ */
+export const accessoryMediaStencil = createStencil({
+  vars: {
+    background: '',
+  },
+  parts: {
+    image: 'accessory-media-image',
+    scrim: 'accessory-media-scrim',
+  },
+  base: ({background, imagePart, scrimPart}) => ({
+    backgroundColor: cssVar(background, system.legacy.color.surface.alt.default),
+    [imagePart]: {
+      position: 'absolute',
+      inset: 0,
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover',
+      overflow: 'hidden',
+      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      cornerShape: 'superellipse(1.1)',
+    },
+    [scrimPart]: {
+      position: 'absolute',
+      inset: 0,
+      backgroundColor: system.legacy.color.surface.overlay.scrim,
+      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      cornerShape: 'superellipse(1.1)',
+      pointerEvents: 'none',
+    },
+  }),
+  modifiers: {
+    imageLoaded: {
+      false: ({imagePart}) => ({
+        [imagePart]: {
+          display: 'none',
+        },
+      }),
+      true: {},
+    },
+    objectFit: {
+      cover: ({imagePart}) => ({
+        [imagePart]: {
+          objectFit: 'cover',
+        },
+      }),
+      contain: ({imagePart}) => ({
+        [imagePart]: {
+          objectFit: 'contain',
+        },
+      }),
+    },
+  },
+});
+
+/**
+ * `AccessoryMedia` fills an accessory tile with an image. Pass `icon` to center a decorative icon
+ * on a contrast scrim. The image stays hidden until it loads; a failed load keeps the tile
+ * background. Always decorative.
+ */
+export const AccessoryMedia = createComponent('span')({
+  displayName: 'AccessoryMedia',
+  Component: (
+    {
+      src,
+      alt,
+      size = 'extraLarge',
+      objectFit = 'cover',
+      icon,
+      color = base.legacy.neutral0,
+      background,
+      ...elemProps
+    }: AccessoryMediaProps,
+    ref,
+    Element
+  ) => {
+    // Track the loaded URL so a `src` change hides the image again without a mount effect that
+    // can race a synchronous `onLoad` (cached images and data URLs).
+    const [loadedSrc, setLoadedSrc] = React.useState<string | null>(null);
+    const imageRef = React.useRef<HTMLImageElement>(null);
+    const imageLoaded = loadedSrc === src;
+
+    React.useEffect(() => {
+      const image = imageRef.current;
+      if (image?.complete && image.naturalWidth > 0) {
+        setLoadedSrc(src);
+      }
+    }, [src]);
+
+    return (
+      <Accessory
+        as={Element}
+        ref={ref}
+        color={icon ? color : undefined}
+        size={size}
+        {...handleCsProp(elemProps, accessoryMediaStencil({background, imageLoaded, objectFit}))}
+      >
+        <img
+          ref={imageRef}
+          alt={alt}
+          onLoad={() => setLoadedSrc(src)}
+          src={src}
+          aria-hidden={true}
+          {...accessoryMediaStencil.parts.image}
+        />
+        {icon && (
+          <>
+            <span {...accessoryMediaStencil.parts.scrim} />
+            <SystemIcon icon={icon} {...accessoryStencil.parts.icon} aria-hidden={true} />
+          </>
+        )}
+      </Accessory>
+    );
+  },
+});
