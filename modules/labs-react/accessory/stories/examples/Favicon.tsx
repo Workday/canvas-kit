@@ -10,10 +10,7 @@ const rowStyles = createStyles({
 
 export const Favicon = () => (
   <div className={rowStyles}>
-    <AccessoryFavicon size="medium" url="gmail.com" />
-    <AccessoryFavicon size="large" url="gmail.com" />
-    <AccessoryFavicon url="gmail.com" />
-    <AccessoryFavicon url="stripe.com" />
-    <AccessoryFavicon url="linear.app" />
+    <AccessoryFavicon size="medium" url="workday.com" />
+    <AccessoryFavicon url="design.workday.com" />
   </div>
 );

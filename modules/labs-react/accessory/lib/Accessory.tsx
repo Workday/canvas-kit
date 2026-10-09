@@ -6,8 +6,8 @@ import {base, component, system} from '@workday/canvas-tokens-web';
 /**
  * The size of an `Accessory` tile.
  *
- * * `extraSmall` — 16px tile, 10px icon
- * * `small` — 20px tile, 12px icon
+ * * `extraSmall` — 16px tile, 16px icon
+ * * `small` — 20px tile, 18px icon
  * * `medium` — 24px tile, 16px icon
  * * `large` — 32px tile, 18px icon
  * * `extraLarge` — 40px tile, 20px icon
@@ -16,8 +16,8 @@ export type AccessorySize = 'extraSmall' | 'small' | 'medium' | 'large' | 'extra
 
 export interface AccessoryProps extends CSProps {
   /**
-   * The size of the tile. Icon glyph size follows the tile through the icon `data-part`: 10px,
-   * 12px, 16px, 18px, and 20px from `extraSmall` to `extraLarge`.
+   * The size of the tile. Icon glyph size follows the tile through the icon `data-part`: 16px,
+   * 18px, 16px, 18px, and 20px from `extraSmall` to `extraLarge`.
    *
    * * `extraSmall` — 16px
    * * `small` — 20px
@@ -88,7 +88,7 @@ export const accessoryStencil = createStencil({
       small: ({iconPart, tileBackground}) => ({
         width: system.legacy.size.xxs,
         height: system.legacy.size.xxs,
-        [cornerShapeStencil.vars.shape]: base.legacy.size75,
+        [cornerShapeStencil.vars.shape]: system.sana.shape.sm,
         [iconPart]: {
           [systemIconStencil.vars.size]: base.legacy.size225,
           backgroundColor: cssVar(tileBackground, 'transparent'),

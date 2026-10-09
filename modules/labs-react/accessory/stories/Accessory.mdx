@@ -62,8 +62,10 @@ to center a glyph on a contrast scrim.
 
 ### Favicon
 
-`AccessoryFavicon` resolves a brand mark from a site URL or domain. At `large` and `extraLarge` the
-mark sits inset in an outlined tile. At `medium` and smaller it fills the tile.
+`AccessoryFavicon` resolves a brand mark from a site URL or domain. The browser requests that mark
+from Google's favicon service, which receives the hostname and the user's IP. The image uses
+`referrerPolicy="no-referrer"`, so the app origin is not sent. At `large` and `extraLarge` the mark
+sits inset in an outlined tile. At `medium` and smaller it fills the tile.
 
 <ExampleCodeBlock code={Favicon} />
 

@@ -118,6 +118,10 @@ export const accessoryFaviconStencil = createStencil({
  * `AccessoryFavicon` renders a site favicon in an accessory tile. Pass a site URL or domain as
  * `url`. The mark is inset in an outlined frame at `large` and `extraLarge`, and fills the tile at
  * smaller sizes. Always decorative.
+ *
+ * The image is requested from the user's browser at `https://www.google.com/s2/favicons`. Google
+ * receives the hostname and the user's IP address. `referrerPolicy="no-referrer"` keeps the app
+ * origin off that request. It does not proxy the request.
  */
 export const AccessoryFavicon = createComponent('span')({
   displayName: 'AccessoryFavicon',
@@ -138,7 +142,13 @@ export const AccessoryFavicon = createComponent('span')({
       >
         {src ? (
           <span {...accessoryStencil.parts.icon}>
-            <img alt="" src={src} aria-hidden={true} {...accessoryFaviconStencil.parts.image} />
+            <img
+              alt=""
+              src={src}
+              aria-hidden={true}
+              {...accessoryFaviconStencil.parts.image}
+              referrerPolicy="no-referrer"
+            />
           </span>
         ) : null}
       </Accessory>

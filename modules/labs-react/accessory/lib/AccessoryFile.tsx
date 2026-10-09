@@ -54,31 +54,31 @@ export const accessoryFileStencil = createStencil({
   modifiers: {
     type: {
       pdf: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.critical,
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.danger,
       },
       spreadsheet: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.positive,
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.success,
       },
       document: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.info,
       },
       presentation: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.brand.accent.caution,
+        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.warning,
       },
       video: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutral0,
+        [accessoryStencil.vars.iconColor]: system.color.fg.default,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
       file: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutralA800,
+        [accessoryStencil.vars.iconColor]: system.color.fg.default,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
       txt: {
-        [accessoryStencil.vars.iconColor]: base.legacy.neutralA800,
+        [accessoryStencil.vars.iconColor]: system.color.fg.default,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
       },
     },

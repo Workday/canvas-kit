@@ -76,6 +76,7 @@ describe('Accessory', () => {
         'https://www.google.com/s2/favicons?domain=mail.google.com&sz=180'
       );
       expect(img).toHaveAttribute('alt', '');
+      expect(img).toHaveAttribute('referrerPolicy', 'no-referrer');
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
     });
 
