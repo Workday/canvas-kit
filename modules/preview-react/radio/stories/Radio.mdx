@@ -219,16 +219,17 @@ radio. That removes the group's tab stop. See [Disabled](#disabled).
 For group, hint, error, and required association, see
 [FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors).
 
-### Accessibility Requirements{/*CONTINUE HERE*/}
+### Accessibility Requirements
 
 Required in application code for an accessible Radio group. Rows marked _(conditional)_ apply only
 when the situation matches—otherwise omit.
 
-**If no design spec is provided:** use a visible **`FormFieldGroup.Label`**, two or more
-**`RadioGroup.RadioButton`** options with visible text and unique **`value`**s, and a shared
-**`name`**, **`value`**, and **`onChange`** on **`RadioGroup`**. Omit **`error`**, **`isRequired`**,
+**If no design spec is provided:** use a visible **`FormFieldGroup.Label`** and two or more
+**`RadioGroup.RadioButton`** options with visible text. Give each button its own **`value`**. On
+**`RadioGroup`**, set a shared **`name`**, the selected **`value`**, and **`onChange`**. Omit
+**`error`**, **`isRequired`**,
 **`FormFieldGroup.Hint`**, **`disabled`**, **`aria-describedby`** on **`RadioGroup`**, **`error`** on
-**`RadioGroup`**, a **`ref`**, and **`StyledRadioButton`**.
+**`RadioGroup`**, a **`ref`**, and **`StyledRadioButton`** unless the spec requires them.
 
 **Choose a composition:**
 
@@ -247,20 +248,20 @@ Attach a **`ref`** only when the product must move focus to a radio after an act
 **`ref`** or call `focus()` unless the design or developer asks for it. See
 [Ref Forwarding](#ref-forwarding).
 
-| Requirement                                          | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                       |
-| ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Group label and wiring                               | **`FormFieldGroup`** + **`FormFieldGroup.Label`** + **`FormFieldGroup.Field`** + **`FormFieldGroup.List as={RadioGroup}`** + **`FormFieldGroup.Input as={RadioGroup.RadioButton}`**. The group label is a `div` with an `id`; it does not name an individual option. Each option's name is the **`RadioGroup.RadioButton`** text. See [Basic Example](#basic-example).                                  |
-| Shared name and unique values                        | **`name`**, **`value`**, and **`onChange`** on **`RadioGroup`**. A unique **`value`** and visible text on every **`RadioGroup.RadioButton`**.                                                                                                                                                                                                                                                        |
-| Hint, error, caution, or required _(conditional)_   | On **`FormFieldGroup`**, set only the props the spec includes: **`FormFieldGroup.Hint`** for hint, caution, or error text; **`error="caution"`** or **`error="error"`** for that state; **`isRequired`** when the group is required. Do not set **`aria-describedby`** or **`error`** on **`RadioGroup`**. See [Error States](#error-states), [Required](#required), and [FormField accessibility](/components/inputs/form-field/#accessibility). |
-| Disabled _(conditional)_                             | **`disabled`** on **`RadioGroup.RadioButton`** when the spec marks that option unavailable. Never on the selected radio. See [Disabled](#disabled).                                                                                                                                                                                                                                                  |
-| Programmatic focus _(conditional)_                   | **`ref`** on **`RadioGroup.RadioButton`** and move focus when the product requires it — omit by default (see **Programmatic focus** above and [Ref Forwarding](#ref-forwarding)).                                                                                                                                                                                                                    |
-| Custom input and text markup _(conditional)_         | **`RadioGroup.Label`**, **`FormFieldGroup.Input as={RadioGroup.Label.Input}`**, and **`RadioGroup.Label.Text`**, inside **`FormFieldGroup`**. See [Custom Radio Button](#custom-radio-button). |
+| Requirement                                        | How to satisfy                                                                                                                                                                                                                                                                                                      |
+| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Group and option names                             | Use **`FormFieldGroup`** with a visible **`FormFieldGroup.Label`**. Render **`FormFieldGroup.List as={RadioGroup}`** and give every **`FormFieldGroup.Input as={RadioGroup.RadioButton}`** visible option text. See [Basic Example](#basic-example).                                                                               |
+| Selection wiring                                   | Set the shared **`name`**, selected **`value`**, and **`onChange`** on **`RadioGroup`**. Give each **`RadioGroup.RadioButton`** its own **`value`**.                                                                                                                                                                               |
+| Hint, error, caution, or required _(conditional)_ | On **`FormFieldGroup`**, use **`FormFieldGroup.Hint`** for message text, **`error`** for caution or error state, and **`isRequired`** for required state. See [Error States](#error-states), [Required](#required), and [FormField accessibility](/components/inputs/form-field/#accessibility). |
+| Disabled _(conditional)_                           | Set **`disabled`** on an unavailable **`RadioGroup.RadioButton`**. Never disable the selected radio. See [Disabled](#disabled).                                                                                                                                                                                                     |
+| Programmatic focus _(conditional)_                 | Attach a **`ref`** to **`RadioGroup.RadioButton`** only when the product must move focus after an action. See [Ref Forwarding](#ref-forwarding).                                                                                                                                                                                   |
+| Custom input and text markup _(conditional)_       | Use **`RadioGroup.Label`**, **`FormFieldGroup.Input as={RadioGroup.Label.Input}`**, and **`RadioGroup.Label.Text`** inside **`FormFieldGroup`**. See [Custom Radio Button](#custom-radio-button).                                                                                                                                   |
 
 **Summary for code generation:**
 
 - **REQUIRED:** **`FormFieldGroup`**, visible **`FormFieldGroup.Label`**, **`FormFieldGroup.List
-  as={RadioGroup}`** with **`name`**, **`value`**, and **`onChange`**, and two or more
-  **`RadioGroup.RadioButton`** options with unique **`value`**s and visible text
+  as={RadioGroup}`** with a shared **`name`**, the selected **`value`**, and **`onChange`**, and two
+  or more **`RadioGroup.RadioButton`** options, each with its own **`value`** and visible text
 - **CONDITIONAL:** on **`FormFieldGroup`**, only the states the spec includes —
   **`FormFieldGroup.Hint`**, **`error`**, or **`isRequired`**; **`disabled`** (not on the selected
   radio); programmatic focus via
