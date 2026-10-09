@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.9](https://github.com/Workday/canvas-kit/releases/tag/v16.1.9) (2026-10-09)
+
+### Components
+
+- fix: Avoid relative import for orientationKeyMap export  ([#4201](https://github.com/Workday/canvas-kit/pull/4201)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v16.1.8](https://github.com/Workday/canvas-kit/releases/tag/v16.1.8) (2026-10-08)
 
 ### Components
