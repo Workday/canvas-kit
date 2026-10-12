@@ -9,10 +9,10 @@ design system correctly. Written against the **current generation**: Canvas Kit 
 `@workday/canvas-tokens-web` **4.4** (Sana Canvas theme). `/sana-canvas-kit-version` detects when an
 install is older and hands off to the upgrade path instead of applying current-gen tables as truth.
 
-This is **not** the maintainer skill set for working on the `canvas-kit` repo's own source
-(`system.legacy.*` in `modules/**/lib/**`, `cornerShapeStencil`, Chromatic class twins, publishing
-concerns — see [STYLE.md](../STYLE.md) / [AGENTS.md](../AGENTS.md)). A maintainer-focused skill
-pack is a possible future addition; don't assume it exists yet.
+Most skills below are consumer-facing. For contributing a component **into the canvas-kit repo**
+itself (`modules/**/lib/**`, `system.legacy.*`, Chromatic class twins, publishing), use
+[`sana-canvas-kit-contribute-component`](sana-canvas-kit-contribute-component/SKILL.md) plus
+[STYLE.md](../STYLE.md) / [AGENTS.md](../AGENTS.md).
 
 ## Skills
 
@@ -28,6 +28,7 @@ pack is a possible future addition; don't assume it exists yet.
 | [`sana-canvas-kit-migration`](sana-canvas-kit-migration/SKILL.md) | Running `@workday/canvas-kit-codemod` across majors; upgrade-guide checklist | version |
 | [`sana-canvas-kit-builder`](sana-canvas-kit-builder/SKILL.md) | Building custom components with `createComponent`/`createContainer`/`createModelHook`/etc. | styling, tokens, a11y, design-principles |
 | [`sana-canvas-kit-review`](sana-canvas-kit-review/SKILL.md) | Report-only grep/checklist review of a diff/branch for design-system compliance | version, all of the above |
+| [`sana-canvas-kit-contribute-component`](sana-canvas-kit-contribute-component/SKILL.md) | **Maintainer-only:** add a component to this repo from a GitHub issue + Figma (collection models, Sana stencils, stories, tests, PR) | builder, styling, tokens, a11y |
 
 ## How they fit together
 
