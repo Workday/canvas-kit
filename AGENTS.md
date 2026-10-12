@@ -160,6 +160,12 @@ Rules that come up often:
   `export default` metadata). No TS `enum` (use disjoint string unions); prop names never repeat
   the component name (`type`, not `buttonType`) and avoid direction/color-coupled names
   (`leftIcon` breaks under RTL).
+- **Lists, menus, tabs, segmented controls, and grids** extend the collection system
+  (`useListModel`, `useGridModel`, `useOverflowListModel`, and item hooks from
+  `@workday/canvas-kit-react/collection`). Do not hand-roll selection, roving tabindex, or list
+  keyboard handling. See
+  [Collection.mdx](modules/react/collection/stories/mdx/Collection.mdx) and
+  [`/sana-canvas-kit-contribute-component`](skills/sana-canvas-kit-contribute-component/SKILL.md).
 
 Full reference: [CREATING_COMPOUND_COMPONENTS.mdx](modules/docs/mdx/CREATING_COMPOUND_COMPONENTS.mdx),
 [API_PATTERN_GUIDELINES.mdx](modules/docs/mdx/API_PATTERN_GUIDELINES.mdx).
@@ -190,16 +196,17 @@ When implementing or changing a component:
   Check whether Tab/Shift+Tab is sufficient or whether the APG pattern calls for additional keys
   (arrow keys for a listbox/menu/tablist, Escape to dismiss, Enter/Space to activate). Don't ship
   mouse-only interaction.
-- **Focus management** — visible focus indicators are required by default. Only suppress the
-  focus ring for mouse/touch/pointer input specifically, using the existing `data-whatinput`
-  pattern, never by removing `outline` unconditionally:
+- **Focus management** — visible focus indicators are required by default. Use **`:focus-visible`**
+  so browser heuristics show the ring for keyboard (and other non-pointer) focus, and pair it with
+  a `&.focus` class twin for Chromatic/`StaticStates`. Never remove `outline` on `:focus` without a
+  `:focus-visible` replacement. Do not use `data-whatinput` or `InputProvider` (removed in v14).
+  See [`/sana-canvas-kit-accessibility`](skills/sana-canvas-kit-accessibility/SKILL.md) and the
+  `MenuItem` pattern:
 
   ```tsx
-  [`[data-whatinput='mouse'] &:focus,
-    [data-whatinput='touch'] &:focus,
-    [data-whatinput='pointer'] &:focus`]: {
-    outline: 'none',
-    border: 'none',
+  '&:is(.focus, :focus-visible)': {
+    outline: `2px solid ${system.legacy.color.brand.border.primary}`,
+    outlineOffset: '-2px',
   },
   ```
 - **Popups, portals, and live regions** have their own established patterns — check
@@ -222,7 +229,9 @@ and the rest of [modules/docs/mdx/accessibility](modules/docs/mdx/accessibility)
 See [STYLE.md](./STYLE.md) for the full reference. The headline rules:
 
 - **Use `createStyles` / `createStencil` from `@workday/canvas-kit-styling`.** Define them at
-  module scope, never inside a render function.
+  module scope, never inside a render function. `createStencil` already injects
+  `box-sizing: border-box` — do not repeat `boxSizing: 'border-box'` in a stencil's `base`.
+  `createStyles` does **not** get that automatically.
 - **Don't use `Box`, `Flex`, `Grid`, `Stack`, `HStack`, or `VStack` in new code**, and don't use
   style props (`padding="s"`, `depth={1}`, `backgroundColor="frenchVanilla100"`, etc.) or
   Emotion's `styled()`. `Stack`/`HStack`/`VStack` were removed in v9; style props and `styled()`
@@ -347,21 +356,24 @@ testing complete.
 - Call out the areas you want reviewer focus on ("Where Should the Reviewer Start?", "Areas for
   Feedback?" in the template) instead of leaving them blank.
 
-## Agent skills (consumer apps)
+## Agent skills
 
-This file is the **maintainer** guide for working on Canvas Kit itself. The [`skills/`](./skills/)
-directory is a separate, **consumer-facing** skill pack for apps that *use* `@workday/canvas-kit-react`
-— tokens, styling, accessibility, component selection, migration, and similar tasks in downstream
-codebases.
+This file is the **maintainer** guide for working on Canvas Kit itself. Most skills under
+[`skills/`](./skills/) are **consumer-facing** (apps that *use* `@workday/canvas-kit-react` —
+tokens, styling, accessibility, component selection, migration). For adding a component **to this
+repo**, use
+[`/sana-canvas-kit-contribute-component`](skills/sana-canvas-kit-contribute-component/SKILL.md)
+(maintainer-only). It builds on the consumer factory/styling/a11y skills plus
+[STYLE.md](./STYLE.md) (`system.legacy.*`, Chromatic class twins, publishing).
 
 **Do not confuse the two.** Consumer skills teach `system.*` tokens and avoiding deprecated exports
-in app code. Maintainer work in `modules/**/lib/**` follows [STYLE.md](./STYLE.md) (`system.legacy.*`,
-Chromatic class twins, publishing). A maintainer-focused skill pack may come later; it does not
-exist yet.
+in app code. Maintainer work in `modules/**/lib/**` follows [STYLE.md](./STYLE.md) and the
+contribute skill.
 
 | Resource | Audience | Use when |
 | -------- | -------- | -------- |
 | [`skills/README.md`](./skills/README.md) | Consumers + maintainers editing skills | Skill index, dependencies, scope |
+| [`sana-canvas-kit-contribute-component`](skills/sana-canvas-kit-contribute-component/SKILL.md) | Maintainers | New component in `modules/react` (or preview/labs) from issue + Figma |
 | [Storybook → Agent Skills](modules/docs/mdx/agent-skills/Overview.mdx) | Humans browsing docs | Overview with links to each `SKILL.md` on GitHub |
 | [Storybook → AI For LLMs → MCP Docs](modules/mcp/stories/mdx/MCPDocs.mdx) | Consumers using MCP | Runtime upgrade guides, tokens, accessibility, component examples |
 
@@ -391,8 +403,9 @@ Storybook stays in sync. Do not duplicate the full skill catalog here — link o
 - Import the package barrel or anything under `/lib/`.
 - Commit Cursor or Claude plan files, debug sessions, or other local AI session artifacts
   (`.cursor/`, `.claude/`, etc.).
-- Add ARIA attributes speculatively, or suppress focus outlines unconditionally instead of
-  scoping to `[data-whatinput='mouse'|'touch'|'pointer']`.
+- Add ARIA attributes speculatively, or suppress focus outlines with `data-whatinput` /
+  unconditional `outline: none` on `:focus` — use `:focus-visible` (plus `&.focus` for static
+  states) instead.
 - Modify `tsconfig*.json`, build config, or CI workflows without explaining why first.
 - Add DOM snapshot tests.
 - Ship a breaking change without an upgrade-guide entry.
