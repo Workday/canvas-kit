@@ -22,7 +22,7 @@ export const RightToLeft = () => {
           <Tabs.Panel>תוכן החמישי</Tabs.Panel>
         </div>
       </Tabs>
-      <Tabs variant="outlined">
+      <Tabs variant="filled">
         <Tabs.List>
           <Tabs.Item>ראשון</Tabs.Item>
           <Tabs.Item>שְׁנִיָה</Tabs.Item>
