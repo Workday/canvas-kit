@@ -81,11 +81,6 @@ export interface TabsItemProps
    * set while all inactive tabs should have a `tabIndex={-1}`
    */
   tabIndex?: number;
-  /**
-   * The variant of the TabsItem.
-   * @default 'outlined'
-   */
-  variant?: 'filled' | 'outlined';
 }
 
 const tabItemStencil = createStencil({
@@ -219,7 +214,9 @@ const tabItemStencil = createStencil({
   },
 });
 
-export const StyledTabItem = createComponent('button')<TabsItemProps>({
+export const StyledTabItem = createComponent('button')<
+  TabsItemProps & {variant?: 'filled' | 'outlined'}
+>({
   displayName: 'StyledTabItem',
   Component: ({children, variant, ...elemProps}, ref, Element) => {
     return (

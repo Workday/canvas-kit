@@ -229,7 +229,7 @@ export const useTabsModel = createModelHook({
      * state setting phase.
      */
     panelIndexRef: panels.state.indexRef,
-    variant: config.variant || 'outlined',
+    variant: config.variant,
   };
 
   const overflowItems = React.useMemo(
