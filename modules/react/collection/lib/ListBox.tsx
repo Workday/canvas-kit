@@ -51,9 +51,6 @@ export const useListBox = createElemPropsHook(useListModel)(model => {
   };
 });
 
-/** Selector for `listBoxContainerStencil.parts.listBoxContainer` for use in other stencils' `base` rules. */
-export const listBoxContainerPartSelector = '[data-part="list-box-container"]';
-
 export const listBoxContainerStencil = createStencil({
   parts: {
     listBoxContainer: 'list-box-container',

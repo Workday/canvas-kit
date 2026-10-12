@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
+import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   cornerShapeStencil,
@@ -13,9 +14,6 @@ import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useMenuModel} from './useMenuModel';
-
-/** Matches `listBoxContainerStencil` / `listBoxContainerPartSelector` in `@workday/canvas-kit-react/collection`. */
-const listBoxContainerPartSelector = '[data-part="list-box-container"]';
 
 export interface MenuCardProps extends ExtractProps<typeof Card, never> {
   children?: React.ReactNode;
@@ -53,10 +51,10 @@ export const menuCardStencil = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    [`&:where(:has(${listBoxContainerPartSelector}))`]: {
+    [`&:where(:has(${listBoxContainerStencil.parts.listBoxContainer.selector}))`]: {
       overflow: 'hidden',
     },
-    [`& :where(${listBoxContainerPartSelector})`]: {
+    [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
       // slightly smaller border radius
       borderRadius: system.legacy.shape.lg,
       // Card is a flex column container. Without this, a flex child won't shrink below its
