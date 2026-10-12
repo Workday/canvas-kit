@@ -15,7 +15,7 @@ const fontsToDownload = [
 ];
 
 const sanaFontBaseUrl = 'https://design.workdaycdn.com/assets/fonts/Sana-Sans/';
-const sanaFontsToDownload = ['SanaSansLCG05-Variable.ttf'];
+const sanaFontsToDownload = ['SanaSansLCG05-Variable.ttf', 'SanaSansLCG05-Variable.woff2'];
 
 const ibmPlexMonoBaseUrl = 'https://design.workdaycdn.com/assets/fonts/IBM-Plex-Mono/';
 const ibmPlexMonoFontsToDownload = ['IBMPlexMono-Regular.woff2'];
