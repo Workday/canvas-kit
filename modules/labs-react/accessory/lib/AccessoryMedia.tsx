@@ -13,11 +13,6 @@ export interface AccessoryMediaProps extends AccessoryProps {
    */
   src: string;
   /**
-   * The alternative text for the image. Accessories are decorative, so the image is always hidden
-   * from assistive technology. Prefer an empty string when adjacent text already names the media.
-   */
-  alt: string;
-  /**
    * How the image is resized to fit the tile.
    * @default 'cover'
    */
@@ -97,7 +92,6 @@ export const AccessoryMedia = createComponent('span')({
   Component: (
     {
       src,
-      alt,
       size = 'extraLarge',
       objectFit = 'cover',
       icon,
@@ -131,7 +125,7 @@ export const AccessoryMedia = createComponent('span')({
       >
         <img
           ref={imageRef}
-          alt={alt}
+          alt=""
           onLoad={() => setLoadedSrc(src)}
           src={src}
           aria-hidden={true}
