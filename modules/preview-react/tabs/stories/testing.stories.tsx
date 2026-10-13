@@ -127,7 +127,7 @@ const OverflowTabs = () => {
           )}
         </Tabs.Panels>
       </Tabs>
-      <Tabs variant="outlined" items={items}>
+      <Tabs variant="filled" items={items}>
         <Tabs.List
           overflowButton={<Tabs.OverflowButton>More</Tabs.OverflowButton>}
           cs={{marginBlockStart: system.gap.lg}}
