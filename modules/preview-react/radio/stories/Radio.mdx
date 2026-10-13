@@ -172,9 +172,9 @@ import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 </FormFieldGroup>;
 ```
 
-Each option needs visible text and a unique **`value`**. The group needs a shared **`name`**, a
-**`value`**, and **`onChange`**. Track the selected value in React state, as the
-[Basic Example](#basic-example) does.
+Each option needs visible text and its own **`value`**. Set the shared **`name`**, selected
+**`value`**, and **`onChange`** on **`RadioGroup`**. Track the selected value in React state, as
+the [Basic Example](#basic-example) does.
 
 ### Built-in Behaviors
 
@@ -280,8 +280,6 @@ to supply instead):
 - Use **`FormField`** with `useFieldset`, or set `hintId` and `hintText` — group radios with
   **`FormFieldGroup`** and put the message in **`FormFieldGroup.Hint`**
 - Wrap radios in **`FormField.Input`** — use **`FormFieldGroup.Input as={RadioGroup.RadioButton}`**
-- Use [**Checkbox**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-checkbox--docs)
-  for mutually exclusive choices
 - Use **`StyledRadioButton`** unless the spec requires a radio outside **`RadioGroup`**. In that
   case supply **`name`**, **`checked`**, a real `<label>`, and a group label. See
   [Standalone Radio Button](#standalone-radio-button)
