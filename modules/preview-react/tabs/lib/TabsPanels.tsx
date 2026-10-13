@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {createSubcomponent} from '@workday/canvas-kit-react/common';
 
+import {useTabsCollectionRenderItems} from './TabsList';
 import {useTabsModel} from './useTabsModel';
 
 export interface TabsPanelsProps<T = any> {
@@ -16,5 +16,5 @@ export const TabsPanels = createSubcomponent()({
   displayName: 'Tabs.Panels',
   modelHook: useTabsModel,
 })<TabsPanelsProps>(({children}, _, model) => {
-  return <>{useListRenderItems(model, children)}</>;
+  return <>{useTabsCollectionRenderItems(model, children)}</>;
 });
