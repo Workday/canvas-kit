@@ -130,6 +130,8 @@ Read the actual JSX/TSX for changed files, not just grep matches:
   for a 3-option yes/no choice, `Modal` for a dense table)? (`/sana-canvas-kit-design-principles`)
 - **One primary action** — more than one `PrimaryButton` in the same view?
   (`/sana-canvas-kit-design-principles`)
+- **Redundant stencil `boxSizing`** — is `boxSizing: 'border-box'` set inside a `createStencil`
+  `base`? Stencils already inject it; flag as unnecessary (`/sana-canvas-kit-styling`)
 
 ## Report format
 

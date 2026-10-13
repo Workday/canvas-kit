@@ -107,6 +107,10 @@ const formStyles = createStyles({
 
 Use when styles depend on props, variants, component parts, or CSS variables.
 
+`createStencil` already injects `box-sizing: border-box` on every stencil. Do **not** set
+`boxSizing: 'border-box'` in `base` (or modifiers). `createStyles` does **not** get that
+automatically — set `boxSizing` there only if you need it.
+
 ```tsx
 import {createStencil, cssVar, handleCsProp} from '@workday/canvas-kit-styling'
 import {system} from '@workday/canvas-tokens-web'
@@ -415,6 +419,7 @@ wrapping) lives in `/sana-canvas-kit-tokens` — check that before re-writing th
 - ❌ Style props: `<Flex gap="m" padding="xl" backgroundColor="...">`
 - ❌ `cs` on native HTML elements — use `className` (`cs` is for Canvas Kit components)
 - ❌ `createStyles` / `createStencil` inside render
+- ❌ `boxSizing: 'border-box'` inside a `createStencil` `base` — stencils already include it
 - ❌ Inline `cs={{...}}` with 2+ properties in component code — extract to `createStyles`
 - ❌ `cs` arrays — use one `createStyles`/`createStencil`, or stencil modifiers
 - ❌ `mergeStyles` — use `handleCsProp`
