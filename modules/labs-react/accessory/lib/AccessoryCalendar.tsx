@@ -16,16 +16,16 @@ export interface AccessoryCalendarProps extends AccessoryProps {
 }
 
 /**
- * Month and day are fractions of the tile. At `extraLarge` (40px) that is 10px and 16px, matching
- * `subtext.sm` and `body.sm`. Type tokens do not go below 10px, so smaller tiles use the same
- * ratio instead of a fixed type level.
+ * Font size of the icon part, matching the tile so month (`0.25em`) and day (`0.4em`) stay in
+ * proportion. At `extraLarge` that is 10px and 16px (`subtext.sm` and `body.sm`). Type tokens do
+ * not go below 10px, so smaller tiles keep the ratio instead of a fixed type level.
  */
 const calendarType = {
-  extraSmall: system.legacy.size.xxxs,
-  small: system.legacy.size.xxs,
-  medium: system.legacy.size.xs,
-  large: system.legacy.size.sm,
-  extraLarge: system.legacy.size.md,
+  extraSmall: system.legacy.fontSize.body.sm,
+  small: system.legacy.fontSize.body.lg,
+  medium: system.legacy.fontSize.heading.sm,
+  large: system.legacy.fontSize.heading.lg,
+  extraLarge: system.legacy.fontSize.title.sm,
 } as const satisfies Record<AccessorySize, string>;
 
 /**

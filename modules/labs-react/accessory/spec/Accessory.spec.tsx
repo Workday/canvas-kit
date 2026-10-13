@@ -16,7 +16,7 @@ const imageSrc =
 describe('Accessory', () => {
   verifyComponent(Accessory, {});
   verifyComponent(AccessoryIcon, {props: {icon: checkIcon}});
-  verifyComponent(AccessoryMedia, {props: {src: imageSrc, alt: 'Preview', icon: checkIcon}});
+  verifyComponent(AccessoryMedia, {props: {src: imageSrc, icon: checkIcon}});
   verifyComponent(AccessoryFile, {});
   verifyComponent(AccessoryCalendar, {props: {month: 'Apr', date: 30}});
   verifyComponent(AccessoryFavicon, {props: {url: 'gmail.com'}});
@@ -43,12 +43,13 @@ describe('Accessory', () => {
 
   describe('when media has loaded', () => {
     it('should keep the image decorative and show the photo', () => {
-      const {container} = render(<AccessoryMedia alt="Four dark spheres" src={imageSrc} />);
+      const {container} = render(<AccessoryMedia src={imageSrc} />);
       const img = container.querySelector('img')!;
 
       fireEvent.load(img);
 
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
+      expect(img).toHaveAttribute('alt', '');
       expect(img).toHaveAttribute('aria-hidden', 'true');
     });
   });
@@ -56,7 +57,7 @@ describe('Accessory', () => {
   describe('when media has an icon', () => {
     it('should keep the image and icon decorative', () => {
       const {container} = render(
-        <AccessoryMedia alt="Team photo" icon={checkIcon} objectFit="contain" src={imageSrc} />
+        <AccessoryMedia icon={checkIcon} objectFit="contain" src={imageSrc} />
       );
 
       fireEvent.load(container.querySelector('img')!);
@@ -98,9 +99,7 @@ describe('Accessory', () => {
 
   describe('when media has a play icon', () => {
     it('should keep the preview and play icon decorative', () => {
-      const {container} = render(
-        <AccessoryMedia alt="Product demo" icon={playCircleIcon} src={imageSrc} />
-      );
+      const {container} = render(<AccessoryMedia icon={playCircleIcon} src={imageSrc} />);
 
       fireEvent.load(container.querySelector('img')!);
 

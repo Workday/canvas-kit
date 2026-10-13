@@ -47,13 +47,8 @@ const photo =
 export const Custom = () => (
   <div className={columnStyles}>
     <div className={rowStyles}>
-      <AccessoryMedia alt="Three dark spheres" icon={checkIcon} src={photo} />
-      <AccessoryMedia
-        alt="Three dark spheres, contained"
-        icon={checkIcon}
-        objectFit="contain"
-        src={photo}
-      />
+      <AccessoryMedia icon={checkIcon} src={photo} />
+      <AccessoryMedia icon={checkIcon} objectFit="contain" src={photo} />
     </div>
     <div className={rowStyles}>
       <div className={labelStyles}>

@@ -20,7 +20,7 @@ describe('Accessory', () => {
       renderToString(
         <>
           <AccessoryIcon icon={checkIcon} variant="green" />
-          <AccessoryMedia alt="Four dark spheres" icon={checkIcon} src={imageSrc} />
+          <AccessoryMedia icon={checkIcon} src={imageSrc} />
           <AccessoryFile type="pdf" />
           <AccessoryCalendar date={30} month="Apr" />
           <AccessoryFavicon url="gmail.com" />

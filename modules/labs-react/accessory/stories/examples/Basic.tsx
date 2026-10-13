@@ -18,10 +18,6 @@ export const Basic = () => (
   <div className={rowStyles}>
     <AccessoryIcon icon={checkIcon} variant="blue" />
     <AccessoryFile type="pdf" />
-    <AccessoryMedia
-      alt=""
-      icon={playCircleIcon}
-      src="https://picsum.photos/seed/accessory/200/200"
-    />
+    <AccessoryMedia icon={playCircleIcon} src="https://picsum.photos/seed/accessory/200/200" />
   </div>
 );

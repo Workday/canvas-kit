@@ -55,7 +55,7 @@ export const accessoryStencil = createStencil({
   parts: {
     icon: 'accessory-icon',
   },
-  base: ({iconColor, iconPart}) => ({
+  base: ({iconColor, iconPart, shape}) => ({
     display: 'inline-flex',
     position: 'relative',
     alignItems: 'center',
@@ -68,7 +68,7 @@ export const accessoryStencil = createStencil({
       display: 'flex',
       alignItems: 'center',
       justifyContent: 'center',
-      borderRadius: cssVar(cornerShapeStencil.vars.shape),
+      borderRadius: shape,
       cornerShape: 'superellipse(1.1)',
       [systemIconStencil.vars.color]: cssVar(iconColor),
     },
@@ -88,7 +88,7 @@ export const accessoryStencil = createStencil({
       small: ({iconPart, tileBackground}) => ({
         width: system.legacy.size.xxs,
         height: system.legacy.size.xxs,
-        [cornerShapeStencil.vars.shape]: system.sana.shape.sm,
+        [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
         [iconPart]: {
           [systemIconStencil.vars.size]: base.legacy.size225,
           backgroundColor: cssVar(tileBackground, 'transparent'),

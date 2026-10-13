@@ -82,7 +82,7 @@ export const AccessoryMediaStates = () => (
         className: [{label: 'Default', value: ''}],
       })}
     >
-      {props => <AccessoryMedia alt="Random photo" size={props.size} src={photo} />}
+      {props => <AccessoryMedia size={props.size} src={photo} />}
     </ComponentStatesTable>
   </StaticStates>
 );

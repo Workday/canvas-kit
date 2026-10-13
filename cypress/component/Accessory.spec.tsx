@@ -39,7 +39,7 @@ describe('Accessory', () => {
     });
 
     it('should render the image', () => {
-      cy.get('img[alt="Random photo"]').should('be.visible');
+      cy.get('img[alt=""]').should('be.visible');
     });
   });
 });
