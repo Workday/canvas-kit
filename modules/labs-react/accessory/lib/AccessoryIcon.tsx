@@ -206,7 +206,7 @@ export const AccessoryIcon = createComponent('span')({
         size={size}
         {...handleCsProp(elemProps, accessoryIconStencil({size, variant}))}
       >
-        <SystemIcon icon={icon} {...accessoryStencil.parts.icon} aria-hidden={true} />
+        <SystemIcon icon={icon} {...accessoryStencil.parts.icon} />
       </Accessory>
     );
   },

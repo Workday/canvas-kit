@@ -133,7 +133,7 @@ export const AccessoryFile = createComponent('span')({
           accessoryFileStencil({type, outline: type === 'file' || type === 'txt'})
         )}
       >
-        <SystemIcon icon={fileIcons[type]} {...accessoryStencil.parts.icon} aria-hidden={true} />
+        <SystemIcon icon={fileIcons[type]} {...accessoryStencil.parts.icon} />
       </Accessory>
     );
   },

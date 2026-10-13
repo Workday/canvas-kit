@@ -50,7 +50,7 @@ describe('Accessory', () => {
 
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(img).toHaveAttribute('alt', '');
-      expect(img).toHaveAttribute('aria-hidden', 'true');
+      expect(container.firstElementChild).toHaveAttribute('aria-hidden', 'true');
     });
   });
 

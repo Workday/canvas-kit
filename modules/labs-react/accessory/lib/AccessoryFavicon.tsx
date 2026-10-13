@@ -145,7 +145,6 @@ export const AccessoryFavicon = createComponent('span')({
             <img
               alt=""
               src={src}
-              aria-hidden={true}
               {...accessoryFaviconStencil.parts.image}
               referrerPolicy="no-referrer"
             />

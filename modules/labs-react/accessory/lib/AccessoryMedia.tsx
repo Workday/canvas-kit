@@ -128,13 +128,12 @@ export const AccessoryMedia = createComponent('span')({
           alt=""
           onLoad={() => setLoadedSrc(src)}
           src={src}
-          aria-hidden={true}
           {...accessoryMediaStencil.parts.image}
         />
         {icon && (
           <>
             <span {...accessoryMediaStencil.parts.scrim} />
-            <SystemIcon icon={icon} {...accessoryStencil.parts.icon} aria-hidden={true} />
+            <SystemIcon icon={icon} {...accessoryStencil.parts.icon} />
           </>
         )}
       </Accessory>

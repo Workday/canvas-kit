@@ -2,7 +2,7 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {Accessory, AccessoryProps, AccessorySize, accessoryStencil} from './Accessory';
+import {Accessory, AccessoryProps, accessoryStencil} from './Accessory';
 
 export interface AccessoryCalendarProps extends AccessoryProps {
   /**
@@ -14,19 +14,6 @@ export interface AccessoryCalendarProps extends AccessoryProps {
    */
   date: number | string;
 }
-
-/**
- * Font size of the icon part, matching the tile so month (`0.25em`) and day (`0.4em`) stay in
- * proportion. At `extraLarge` that is 10px and 16px (`subtext.sm` and `body.sm`). Type tokens do
- * not go below 10px, so smaller tiles keep the ratio instead of a fixed type level.
- */
-const calendarType = {
-  extraSmall: system.legacy.fontSize.body.sm,
-  small: system.legacy.fontSize.body.lg,
-  medium: system.legacy.fontSize.heading.sm,
-  large: system.legacy.fontSize.heading.lg,
-  extraLarge: system.legacy.fontSize.title.sm,
-} as const satisfies Record<AccessorySize, string>;
 
 /**
  * Calendar treatment for `AccessoryCalendar`. The month uses a critical color. The day uses the
@@ -69,21 +56,26 @@ export const accessoryCalendarStencil = createStencil({
     },
   }),
   modifiers: {
+    /**
+     * The icon part's font size matches the tile so month (`0.25em`) and day (`0.4em`) stay in
+     * proportion. At `extraLarge` that is 10px and 16px (`subtext.sm` and `body.sm`). Type tokens
+     * do not go below 10px, so smaller tiles keep the ratio instead of a fixed type level.
+     */
     size: {
       extraSmall: ({iconPart}) => ({
-        [iconPart]: {fontSize: calendarType.extraSmall},
+        [iconPart]: {fontSize: system.legacy.fontSize.body.sm},
       }),
       small: ({iconPart}) => ({
-        [iconPart]: {fontSize: calendarType.small},
+        [iconPart]: {fontSize: system.legacy.fontSize.body.lg},
       }),
       medium: ({iconPart}) => ({
-        [iconPart]: {fontSize: calendarType.medium},
+        [iconPart]: {fontSize: system.legacy.fontSize.heading.sm},
       }),
       large: ({iconPart}) => ({
-        [iconPart]: {fontSize: calendarType.large},
+        [iconPart]: {fontSize: system.legacy.fontSize.heading.lg},
       }),
       extraLarge: ({iconPart}) => ({
-        [iconPart]: {fontSize: calendarType.extraLarge},
+        [iconPart]: {fontSize: system.legacy.fontSize.title.sm},
       }),
     },
   },
