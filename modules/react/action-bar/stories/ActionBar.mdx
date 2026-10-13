@@ -169,12 +169,10 @@ when the situation matches—otherwise omit.
 | In-flow placement _(conditional)_    | Pass **`position="relative"`** when the bar sits in the page flow instead of the default fixed footer  |
 | Disabled action _(conditional)_      | Native **`disabled`** on **`ActionBar.Item`** when the spec marks the action unavailable  |
 
-#### Dialog/Modal trigger composition
-
-_(Conditional requirement.)_
+#### Dialog/Modal trigger composition _(Conditional requirement)_
 
 Wrap **`ActionBar`** in **`Dialog`** or **`Modal`** (whichever matches the design). On the bar action
-that opens the flow, set **`ActionBar.Item as={Dialog.Target}`** or **`ActionBar.Item as={Modal.Target}`**
+that opens a dialog or modal, set **`ActionBar.Item as={Dialog.Target}`** or **`ActionBar.Item as={Modal.Target}`**
 so the popup model owns open, close, and focus. When that action should look primary, follow
 **Custom targets** in [Dialog accessibility](/components/popups/dialog/#accessibility) or
 [Modal accessibility](/components/popups/modal/#accessibility)—for example pass a `forwardRef` wrapper
