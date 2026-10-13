@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Card} from '@workday/canvas-kit-react/card';
-import {listBoxContainerStencil} from '@workday/canvas-kit-react/collection';
+import {listBoxContainerPartSelector} from '@workday/canvas-kit-react/collection';
 import {
   ExtractProps,
   cornerShapeStencil,
@@ -51,10 +51,10 @@ export const menuCardStencil = createStencil({
     '.wd-no-animation &': {
       animation: 'none',
     },
-    [`&:where(:has(${listBoxContainerStencil.parts.listBoxContainer.selector}))`]: {
+    [`&:where(:has(${listBoxContainerPartSelector}))`]: {
       overflow: 'hidden',
     },
-    [`& :where(${listBoxContainerStencil.parts.listBoxContainer.selector})`]: {
+    [`& :where(${listBoxContainerPartSelector})`]: {
       // slightly smaller border radius
       borderRadius: system.legacy.shape.lg,
       // Card is a flex column container. Without this, a flex child won't shrink below its
