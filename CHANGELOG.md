@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.11](https://github.com/Workday/canvas-kit/releases/tag/v16.1.11) (2026-10-13)
+
+### Components
+
+- docs(button): Expand accessibility section for AI codegen ([#4183](https://github.com/Workday/canvas-kit/pull/4183)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.1.10](https://github.com/Workday/canvas-kit/releases/tag/v16.1.10) (2026-10-12)
+
+### Components
+
+- fix: Fix default Tabs variant to be outlined ([#4173](https://github.com/Workday/canvas-kit/pull/4173)) ([@RayRedGoose](https://github.com/RayRedGoose), [@Copilot](https://github.com/Copilot))
+  Make preview Tabs default variant to be outlined instead filled, based on design spec. Use `variant='filled'` to make Tabs filled.
+
+
 ## [v16.1.9](https://github.com/Workday/canvas-kit/releases/tag/v16.1.9) (2026-10-09)
 
 ### Components
