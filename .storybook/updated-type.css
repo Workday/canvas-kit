@@ -5,6 +5,7 @@
   src:
     local('Sana Sans LCG 05 VF'),
     local('SanaSansLCG05VF-Regular'),
+    url(./SanaSansLCG05-Variable.woff2) format('woff2'),
     url(./SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
@@ -15,6 +16,7 @@
   src:
     local('Sana Sans LCG 05 VF'),
     local('SanaSansLCG05VF-Regular'),
+    url(./SanaSansLCG05-Variable.woff2) format('woff2'),
     url(./SanaSansLCG05-Variable.ttf) format('truetype');
 }
 
