@@ -4,7 +4,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 import {Accessory, AccessoryProps, AccessorySize, accessoryStencil} from './Accessory';
 
-/** Hostname from a site URL or a bare domain such as `gmail.com`. */
+/** Hostname from a site URL or a bare domain such as `workday.com`. */
 function hostnameFromSiteUrl(siteUrl: string): string {
   const trimmed = siteUrl.trim();
   if (!trimmed) {
@@ -35,7 +35,7 @@ function faviconSrcFromSiteUrl(siteUrl: string, size: AccessorySize): string {
 
 export interface AccessoryFaviconProps extends AccessoryProps {
   /**
-   * The site URL or bare domain, such as `https://mail.google.com` or `gmail.com`. The hostname is
+   * The site URL or bare domain, such as `https://design.workday.com` or `workday.com`. The hostname is
    * used to resolve the favicon.
    */
   url: string;
@@ -63,8 +63,8 @@ export const accessoryFaviconStencil = createStencil({
       borderColor: system.legacy.color.border.default,
     },
     [imagePart]: {
-      width: `calc(100% - ${cssVar(system.space.x3)})`,
-      height: `calc(100% - ${cssVar(system.space.x3)})`,
+      width: `calc(100% - ${system.legacy.padding.sm})`,
+      height: `calc(100% - ${system.legacy.padding.sm})`,
       objectFit: 'contain',
       borderRadius: system.legacy.shape.md,
       cornerShape: 'superellipse(1.1)',

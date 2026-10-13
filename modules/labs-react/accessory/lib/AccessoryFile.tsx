@@ -66,7 +66,9 @@ export const accessoryFileStencil = createStencil({
         [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.info,
       },
       presentation: {
-        [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
+        // Amber is too light for an inverse glyph (about 2:1). `accent.contrast` is the dark
+        // foreground paired with accent fills.
+        [accessoryStencil.vars.iconColor]: system.legacy.color.accent.contrast,
         [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.warning,
       },
       video: {

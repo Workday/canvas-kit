@@ -94,10 +94,10 @@ export const AccessoryFaviconStates = () => (
         size: sizes.map(size => ({value: size, label: size})),
       })}
       columnProps={permutateProps({
-        className: [{label: 'Gmail', value: ''}],
+        className: [{label: 'Workday', value: ''}],
       })}
     >
-      {props => <AccessoryFavicon size={props.size} url="gmail.com" />}
+      {props => <AccessoryFavicon size={props.size} url="workday.com" />}
     </ComponentStatesTable>
   </StaticStates>
 );

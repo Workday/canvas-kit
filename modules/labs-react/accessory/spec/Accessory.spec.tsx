@@ -19,7 +19,7 @@ describe('Accessory', () => {
   verifyComponent(AccessoryMedia, {props: {src: imageSrc, icon: checkIcon}});
   verifyComponent(AccessoryFile, {});
   verifyComponent(AccessoryCalendar, {props: {month: 'Apr', date: 30}});
-  verifyComponent(AccessoryFavicon, {props: {url: 'gmail.com'}});
+  verifyComponent(AccessoryFavicon, {props: {url: 'workday.com'}});
 
   describe('when a calendar date is rendered', () => {
     it('should show the month and day', () => {

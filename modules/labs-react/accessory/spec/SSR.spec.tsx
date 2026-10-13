@@ -23,7 +23,7 @@ describe('Accessory', () => {
           <AccessoryMedia icon={checkIcon} src={imageSrc} />
           <AccessoryFile type="pdf" />
           <AccessoryCalendar date={30} month="Apr" />
-          <AccessoryFavicon url="gmail.com" />
+          <AccessoryFavicon url="workday.com" />
         </>
       );
 
