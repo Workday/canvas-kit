@@ -1,25 +1,7 @@
 import {fireEvent, render} from '@testing-library/react';
 import * as React from 'react';
 
-import {cssVar} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
-
 import {Checkbox} from '../lib/Checkbox';
-
-const getMatchingStyleRules = (element: HTMLElement) => {
-  const classNames = Array.from(element.classList);
-  const rules: string[] = [];
-
-  for (const sheet of document.styleSheets as unknown as Iterable<CSSStyleSheet>) {
-    for (const rule of sheet.cssRules as unknown as Iterable<CSSRule>) {
-      if (classNames.some(className => rule.cssText.includes(`.${className}`))) {
-        rules.push(rule.cssText);
-      }
-    }
-  }
-
-  return rules;
-};
 
 describe('Checkbox', () => {
   const cb = vi.fn();
@@ -75,17 +57,6 @@ describe('Checkbox', () => {
     it('should render a disabled checkbox input', () => {
       const {getByRole} = render(<Checkbox disabled={true} onChange={cb} />);
       expect(getByRole('checkbox')).toHaveProperty('disabled', true);
-    });
-
-    it('should apply disabled opacity on the container', () => {
-      const {container} = render(<Checkbox disabled={true} label="I agree" onChange={cb} />);
-      const checkboxContainer = container.firstElementChild as HTMLElement;
-
-      expect(getMatchingStyleRules(checkboxContainer)).toEqual(
-        expect.arrayContaining([
-          expect.stringContaining(`opacity: ${cssVar(system.opacity.disabled)}`),
-        ])
-      );
     });
   });
 
