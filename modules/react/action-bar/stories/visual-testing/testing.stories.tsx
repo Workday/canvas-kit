@@ -56,35 +56,37 @@ export const ActionBarStates = {
   ),
 };
 
+const ActionBarIconOnlyTest = () => (
+  <StaticStates>
+    <ComponentStatesTable
+      rowProps={[
+        {label: 'Icon-only items', props: {}},
+        {label: 'Icon-only items (small)', props: {size: 'small'}},
+      ]}
+      columnProps={[
+        {label: 'Icons only', props: {withText: false}},
+        {label: 'With a text action', props: {withText: true}},
+      ]}
+    >
+      {({size, withText}) => (
+        <ActionBar>
+          <ActionBar.List position="relative">
+            {withText && (
+              <ActionBar.Item as={PrimaryButton} size={size}>
+                Save
+              </ActionBar.Item>
+            )}
+            <ActionBar.Item icon={editIcon} aria-label="Edit" size={size} />
+            <ActionBar.Item icon={trashIcon} aria-label="Delete" size={size} />
+          </ActionBar.List>
+        </ActionBar>
+      )}
+    </ComponentStatesTable>
+  </StaticStates>
+);
+
 export const ActionBarIconOnlyStates = {
-  render: () => (
-    <StaticStates>
-      <ComponentStatesTable
-        rowProps={[
-          {label: 'Icon-only items', props: {}},
-          {label: 'Icon-only items (small)', props: {size: 'small'}},
-        ]}
-        columnProps={[
-          {label: 'Icons only', props: {withText: false}},
-          {label: 'With a text action', props: {withText: true}},
-        ]}
-      >
-        {({size, withText}) => (
-          <ActionBar>
-            <ActionBar.List position="relative">
-              {withText && (
-                <ActionBar.Item as={PrimaryButton} size={size}>
-                  Save
-                </ActionBar.Item>
-              )}
-              <ActionBar.Item icon={editIcon} aria-label="Edit" size={size} />
-              <ActionBar.Item icon={trashIcon} aria-label="Delete" size={size} />
-            </ActionBar.List>
-          </ActionBar>
-        )}
-      </ComponentStatesTable>
-    </StaticStates>
-  ),
+  render: () => <ActionBarIconOnlyTest />,
 };
 
 export const ActionBarWithOverflowMenuStates = {
