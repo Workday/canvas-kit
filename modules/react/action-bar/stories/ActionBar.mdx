@@ -79,9 +79,6 @@ You can change it from the default of 3 to any number greater than 1 and less th
 
 The primary accessibility goal is a clearly named group of page-level actions where every action is a native, keyboard-operable button. Use Action Bar for the primary and secondary actions of a page or task. For a single action, use a [Button](/components/buttons/button/#accessibility) directly.
 
-For URL navigation, use **`ActionBar.Item as={Hyperlink}`** with **`href`**; see
-[Hyperlink](/components/hyperlink/) (including **`linkType`** for items in the bar).
-
 Overflow in Action Bar uses [Menu](/components/popups/menu).
 
 For actions that open a modal or dialog, compose [Modal](/components/popups/modal) or [Dialog](/components/popups/dialog) from an **`ActionBar.Item`** (see **Dialog/Modal trigger composition** in Accessibility Requirements below).
@@ -125,9 +122,8 @@ Canvas Kit applies these automatically. **Do not duplicate them** in consuming c
 
 **Keyboard** (_native `<button>` behavior_):
 
-Visible **`ActionBar.Item`** components follow
-[Button accessibility](/components/buttons/button/#accessibility): each item is its own tab stop
-(<kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd>), and <kbd>Enter</kbd> or <kbd>Space</kbd>
+Visible **`ActionBar.Item`** components use native `<button>` keyboard support: each item is its own tab
+stop (<kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd>), and <kbd>Enter</kbd> or <kbd>Space</kbd>
 activates it. Action Bar does not use roving tabindex. Overflow menu behavior follows
 [Menu accessibility](/components/popups/menu/#accessibility); **`ActionBar.OverflowButton`** is the
 menu target.
@@ -160,7 +156,6 @@ when the situation matches—otherwise omit.
 | Decorative icon _(conditional)_      | **`icon`** on **`ActionBar.Item`** with visible text—no extra ARIA on the icon; meaning comes from button text  |
 | Icon-only name _(conditional)_       | Prefer visible text on every item. If the spec requires an icon-only **`ActionBar.Item`**, wrap it in **`Tooltip`** with **`title`** and `type="label"` (preferred), or set **`aria-label`** on the item when the spec says not to use a tooltip. Do not use `type="muted"` on **`Tooltip`**—it does not set an accessible name  |
 | Form submit _(conditional)_          | **`type="submit"`** on the relevant **`ActionBar.Item`** inside a `<form>` that should submit when that action is activated; omit **`type="submit"`** otherwise (default is **`type="button"`**)                            |
-| Navigation _(conditional)_           | **`ActionBar.Item as={Hyperlink}`** with **`href`** for URL navigation; see [Hyperlink](/components/hyperlink/) (**`linkType="standalone"`** for bar items)  |
 | Dialog or modal trigger _(conditional)_    | **`Dialog`** or **`Modal`** wrapping **`ActionBar`**; **`ActionBar.Item as={Dialog.Target}`** (or the matching **`Modal`** target) for the opener—see **Dialog/Modal trigger composition** below and the popup component’s accessibility section |
 | Overflow button name _(conditional)_ | Translated **`aria-label`** on **`ActionBar.OverflowButton`** (required by its type), passed through **`overflowButton`** on **`ActionBar.List`**  |
 | Overflow menu _(conditional)_        | Dynamic API: `items` on **`useActionBarModel`**, render props on both **`ActionBar.List`** and **`ActionBar.Menu.List`**, and **`ActionBar.Menu.Popper`** → **`Card`** → **`List`** → **`Item`** with the same item text |
@@ -209,18 +204,18 @@ import {Dialog} from '@workday/canvas-kit-react/dialog';
   secondary items, when the spec includes a primary action); **`icon`**; icon-only **`Tooltip`** /
   **`aria-label`** naming; **`DeleteButton`**; **`type="submit"`**;
   **`Dialog`** / **`Modal`** composition; **`overflowButton`** with an
-  **`aria-label`**; matching **`ActionBar.Menu`** items and handlers; **`as={Hyperlink}`** with **`href`** for navigation;
+  **`aria-label`**; matching **`ActionBar.Menu`** items and handlers;
   **`position="relative"`** for in-flow placement; **`disabled`**
 
 ### Anti-Patterns
 
 Do **not** generate code that does the following (see **Accessibility Requirements** above for what
-to supply instead). For fake buttons, icon-only names, popup targets, and related control behavior on
-**`ActionBar.Item`**, see [Button accessibility](/components/buttons/button/#accessibility).
+to supply instead).
 
 - Omit `as="section"` or **`aria-label`** on **`ActionBar.List`**
 - Reuse the same **`aria-label`** for **`ActionBar.List`** and another landmark on the page
 - Use Action Bar for a single action—use [Button](/components/buttons/button/#accessibility) instead
+- Add links or URL navigation in Action Bar (for example **`Hyperlink`** or **`href`** on **`ActionBar.Item`**)—bar actions should be buttons
 - Use more than one **`PrimaryButton`** or any **`TertiaryButton`** in an Action Bar
 - Add `role="toolbar"`, `role="group"`, roving tabindex, or arrow-key handlers to **`ActionBar.List`**
 - Hand-set **`aria-haspopup`**, **`aria-expanded`**, or **`aria-hidden`** on **`ActionBar.OverflowButton`**
