@@ -20,8 +20,6 @@ gh pr view --json number,url,title,baseRefName,headRefOid,files,isDraft
 
 ## 2. Code review (report only)
 
-Adapted from [sana-canvas-ai-tooling `commands/pr-review`](https://ghe.megaleo.com/design/sana-canvas-ai-tooling/blob/main/commands/pr-review.md).
-
 1. Read [AGENTS.md](AGENTS.md) and [STYLE.md](STYLE.md) (this repo has no `CLAUDE.md`). Also note any AGENTS/STYLE guidance that applies to directories the PR touched.
 2. Review the changed files for bugs, behavioral regressions, security issues, missing tests, and AGENTS.md / STYLE.md adherence.
 3. **Do not edit** for these findings — report only unless the user later asks to fix them.
