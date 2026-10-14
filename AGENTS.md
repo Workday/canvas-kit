@@ -76,7 +76,8 @@ Cursor and Claude (and similar agents) write local working files that are **not*
 repo's source. Never add, stage, or commit them:
 
 - **Cursor** — plan files (e.g. `.cursor/plans/`), debug sessions, and other session state under
-  `.cursor/`
+  `.cursor/` (except committed project slash commands under [`.cursor/commands/`](.cursor/commands/),
+  which are shared maintainer prompts — see [`pr-review.md`](.cursor/commands/pr-review.md))
 - **Claude** — plan files, debug sessions, and other local session artifacts (e.g. under
   `.claude/`)
 
@@ -374,12 +375,33 @@ contribute skill.
 | -------- | -------- | -------- |
 | [`skills/README.md`](./skills/README.md) | Consumers + maintainers editing skills | Skill index, dependencies, scope |
 | [`sana-canvas-kit-contribute-component`](skills/sana-canvas-kit-contribute-component/SKILL.md) | Maintainers | New component in `modules/react` (or preview/labs) from issue + Figma |
+| [`/pr-review`](.cursor/commands/pr-review.md) | Maintainers | Review a branch or PR of **this** repo (code + a11y + CodeRabbit) |
+| [`sana-canvas-a11y-pr-review`](skills/sana-canvas-a11y-pr-review/SKILL.md) | Maintainers | Accessibility checklist used by `/pr-review` |
 | [Storybook → Agent Skills](modules/docs/mdx/agent-skills/Overview.mdx) | Humans browsing docs | Overview with links to each `SKILL.md` on GitHub |
 | [Storybook → AI For LLMs → MCP Docs](modules/mcp/stories/mdx/MCPDocs.mdx) | Consumers using MCP | Runtime upgrade guides, tokens, accessibility, component examples |
 
 When you add or change a consumer skill, update [`skills/`](./skills/) and the catalog table in
 [`modules/docs/mdx/agent-skills/Overview.mdx`](modules/docs/mdx/agent-skills/Overview.mdx) so
 Storybook stays in sync. Do not duplicate the full skill catalog here — link out instead.
+
+### Reviewing a branch or pull request
+
+If the user asks to review a branch, pull request, or diff of **this** repo, or invokes
+`/pr-review` / `/code-review`, read and follow [`.cursor/commands/pr-review.md`](.cursor/commands/pr-review.md)
+**before** reviewing. That command covers:
+
+1. **Code review** (report-only) — bugs, regressions, missing tests, [AGENTS.md](./AGENTS.md) /
+   [STYLE.md](./STYLE.md) adherence on the PR/branch diff only.
+2. **Accessibility review** (report-only) — [`skills/sana-canvas-a11y-pr-review`](skills/sana-canvas-a11y-pr-review/SKILL.md)
+   plus the Accessibility section above.
+3. **CodeRabbit** — fetch `coderabbitai[bot]` comments; apply clear fixes and reply on threads;
+   if no review exists and the PR base is in [`.coderabbit.yaml`](./.coderabbit.yaml)
+   `reviews.auto_review.base_branches` (`support`, `prerelease/minor`, `prerelease/major`), request
+   `@coderabbitai review` and stop so the user can re-run after the bot finishes.
+
+Do **not** use the consumer skill [`sana-canvas-kit-review`](skills/sana-canvas-kit-review/SKILL.md)
+for `modules/**` library source. CodeRabbit auto-review still only runs for the bases listed in
+`.coderabbit.yaml`; labeling a PR `ready for review` does not trigger it.
 
 ## Quick reference
 
@@ -402,7 +424,8 @@ Storybook stays in sync. Do not duplicate the full skill catalog here — link o
   exists — library code must stay compatible across token package versions.
 - Import the package barrel or anything under `/lib/`.
 - Commit Cursor or Claude plan files, debug sessions, or other local AI session artifacts
-  (`.cursor/`, `.claude/`, etc.).
+  (`.cursor/plans/`, `.claude/`, etc.). Shared project commands under `.cursor/commands/` are
+  allowed when intentionally part of the change.
 - Add ARIA attributes speculatively, or suppress focus outlines with `data-whatinput` /
   unconditional `outline: none` on `:focus` — use `:focus-visible` (plus `&.focus` for static
   states) instead.
