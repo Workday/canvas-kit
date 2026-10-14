@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.1.12](https://github.com/Workday/canvas-kit/releases/tag/v16.1.12) (2026-10-14)
+
+### Components
+
+- fix(checkbox): Restore disabled opacity on the container ([#4206](https://github.com/Workday/canvas-kit/pull/4206)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.11](https://github.com/Workday/canvas-kit/releases/tag/v16.1.11) (2026-10-13)
 
 ### Components
