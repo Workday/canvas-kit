@@ -130,10 +130,8 @@ subcomponents. **Do not duplicate them** in consuming code.
 
 **Keyboard** (_native checkbox behavior_):
 
-- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move focus to and from the Switch (native tab
-  order)
-- <kbd>Space</kbd> toggles the Switch on and off
-- A visible focus ring is shown around the track when the Switch receives focus
+**`Switch`** uses native `<input type="checkbox">` keyboard behavior (tab order and Space to
+toggle). Do not intercept <kbd>Space</kbd> or otherwise prevent the native toggle.
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
@@ -163,39 +161,12 @@ Attach a `ref` only when the product must move focus to the Switch after an acti
 `ref` or call `focus()` unless the design or developer asks for it. See
 [Ref Forwarding](#ref-forwarding) under Usage for a complete Storybook example.
 
-```tsx
-const Example = () => {
-  const [checked, setChecked] = React.useState(false);
-  const ref = React.useRef<HTMLInputElement>(null);
-
-  return (
-    <>
-      <FormField>
-        <FormField.Label>Dark Mode</FormField.Label>
-        <FormField.Field>
-          <FormField.Input
-            as={Switch}
-            checked={checked}
-            ref={ref}
-            onChange={event => setChecked(event.target.checked)}
-          />
-        </FormField.Field>
-      </FormField>
-      <PrimaryButton onClick={() => ref.current?.focus()}>Focus Switch</PrimaryButton>
-    </>
-  );
-};
-```
-
 | Requirement                             | How to satisfy                                                                                                                                                                                                                  |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Accessible name                         | Visible, non-empty **`FormField.Label`** describing the setting (for example, "Dark Mode"), not the state ("On"/"Off"). Use **`FormField.Label isHidden`** only when an equally clear visible alternative exists               |
 | Input wiring                            | **`FormField.Input as={Switch}`** inside **`FormField.Field`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                         |
-                                                                                                                     |
-                                                                                                      |
 | Required state _(conditional)_          | `isRequired` on **`FormField`** only when the form cannot be submitted unless the Switch is on — native `required` on a checkbox means it must be checked                                                                      |
 | Disabled _(conditional)_                | `disabled` on **`FormField.Input`** when the spec marks the setting unavailable. See [Disabled](#disabled)                                                                                                                      |
-                                                                               |
 | Programmatic focus _(conditional)_      | `ref` on **`FormField.Input`** and call `focus()` when the product requires it — omit by default (see **Programmatic focus** above and [Ref Forwarding](#ref-forwarding))                                                       |
 
 **Summary for code generation:**
@@ -228,7 +199,6 @@ to supply instead):
   options — use [**Checkbox**](/components/inputs/checkbox/) instead
 - Use **`aria-disabled`** instead of **`disabled`** — **Switch** maps unavailability to the native
   **`disabled`** attribute
-- Do not intercept <kbd>Space</kbd> or otherwise prevent the native toggle.
 
 ## Component API
 
