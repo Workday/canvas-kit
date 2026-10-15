@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.1](https://github.com/Workday/canvas-kit/releases/tag/v16.2.1) (2026-10-15)
+
+### Components
+
+- docs(action-bar): Updating some sections to match button docs ([#4200](https://github.com/Workday/canvas-kit/pull/4200)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent), [@claude](https://github.com/claude), William Stanton)
+
+
 ## [v16.2.0](https://github.com/Workday/canvas-kit/releases/tag/v16.2.0) (2026-10-14)
 
 
