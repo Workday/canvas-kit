@@ -31,7 +31,7 @@ Also apply the Accessibility section of [AGENTS.md](../../AGENTS.md) (`:focus-vi
 ## 2. WCAG 1.4.10 Reflow (320px)
 
 * Review layout and interaction at a viewport width of **320px** (equivalent to 400% zoom at 1280px CSS width). Content must reflow without requiring two-dimensional scrolling for reading or operation, except where 2D scrolling is essential (e.g. data tables, maps, diagrams).
-* **Avoid sticky / fixed content at 320px.** Flag `position: sticky`, `position: fixed`, persistent headers/footers, or overlays that reduce usable viewport height or obscure content when the viewport is 320px wide.
+* At 320px, flag `position: sticky`, `position: fixed`, persistent headers/footers, or overlays only when they obscure content or keyboard focus, or prevent reading or operation. Treat static positioning or a user toggle as a recommendation when the layout remains usable.
 * **Review truncation at the smallest breakpoints.** Flag styles or components that clip or ellipsize meaningful text (`text-overflow: ellipsis`, fixed heights, `overflow: hidden`) without an accessible way to reveal the full content at narrow widths.
 
 ## 3. Document, MDX & Storybook Accuracy
@@ -86,16 +86,10 @@ Format your PR review using this exact template:
 
 ### Recommended GitHub Inline Comments
 
-Provide ready-to-copy reviewer comments targeted at specific lines in the diff.
+Provide ready-to-copy reviewer comments targeted at specific lines in the diff. List only actionable findings. If there are none, write `None`. Repeat the entry below once per finding.
 
-#### 1. `[Relative Path to File 1]`
+#### `[Relative Path to File]`
 
-* **Line Range:** `L[StartLine]-L[EndLine]`
-* **Suggested Comment:**
-> [Polite, actionable comment from a Sr. Accessibility PM, including any suggested code fix]
-
-#### 2. `[Relative Path to File 2]`
-
-* **Line Range:** `L[LineNumber]`
+* **Line Range:** `L[StartLine]-L[EndLine]` (or `L[LineNumber]` for a single line)
 * **Suggested Comment:**
 > [Polite, actionable comment from a Sr. Accessibility PM, including any suggested code fix]

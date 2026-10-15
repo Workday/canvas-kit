@@ -70,28 +70,30 @@ Prioritize findings by severity (blockers first). That ordering must lead the fi
 3. Return the skill’s response template (WHCM, 320px reflow, docs/Storybook, keyboard/ARIA/compound mechanics, Vitest/Cypress).
 4. **Do not edit** for these findings — report only unless the user later asks to fix them.
 
-## 4. CodeRabbit (act when clear)
+## 4. CodeRabbit (verify, then act with approval)
 
 Only when a PR was resolved in step 1.
 
 1. Load CodeRabbit feedback:
-   - Inline: `gh api repos/{owner}/{repo}/pulls/{n}/comments` — keep rows where `user.login` is `coderabbitai[bot]` (or similar CodeRabbit bot login). Prefer top-level comments (`in_reply_to_id` null) that still need a human/agent response.
-   - Summary review: `gh api repos/{owner}/{repo}/pulls/{n}/reviews` — keep CodeRabbit reviews for context.
+   - Inline: `gh api --paginate repos/{owner}/{repo}/pulls/{n}/comments` — keep rows where `user.login` is `coderabbitai[bot]` (or similar CodeRabbit bot login). Prefer top-level comments (`in_reply_to_id` null) that still need a human/agent response.
+   - Summary review: `gh api --paginate repos/{owner}/{repo}/pulls/{n}/reviews` — keep CodeRabbit reviews for context.
 2. If **no** CodeRabbit inline comments and **no** CodeRabbit review exist:
    - Read [`.coderabbit.yaml`](.coderabbit.yaml) `reviews.auto_review.base_branches` (currently `support`, `prerelease/minor`, `prerelease/major`; drafts are off).
    - If `baseRefName` is in that list and the PR is not a draft, post a PR comment requesting a review (`gh pr comment {n} --body "@coderabbitai review"`), then **stop** and tell the user to re-run `/pr-review` after the bot finishes.
    - If the base is not eligible (e.g. `master`), say so and do **not** request a review unless the user asks.
-3. If CodeRabbit comments exist, triage each unresolved top-level inline comment:
-   - **Clear bug, a11y defect, or AGENTS.md / STYLE.md miss** — apply a minimal code fix, then reply on that thread:
+3. If CodeRabbit comments exist, triage each unresolved top-level inline comment. **Verify before classifying:** read the code the comment points at and confirm its claim is true (cited lines, described behavior, suggested fix compiles and fits repo conventions). Do not accept or dismiss a finding based on the comment text alone.
+   - **Verified bug, a11y defect, or AGENTS.md / STYLE.md miss** — plan a minimal fix and a short reply (what changes and why).
+   - **Verified incorrect or out of scope** — plan no code change and a short reply with the reason, citing the code that contradicts the comment.
+   - **Could not verify, or ambiguous** — ask the user; do not edit or reply.
+4. **Confirm before acting.** Present a table of planned actions, one row per thread (comment link, verdict, planned edit if any, draft reply text). Apply edits and post replies only after the user approves, and only for the rows they approve. Replies are public and cannot be cleanly retracted. Post an approved reply with:
 
 ```bash
 gh api -X POST repos/{owner}/{repo}/pulls/{n}/comments/{id}/replies -f body='…'
 ```
 
-   Reply briefly: what you changed (or will change in the working tree) and why.
-   - **Incorrect or out of scope** — do not change code; reply with a short reason.
-   - **Ambiguous** — ask the user before editing or posting a dismissal.
-4. Do **not** commit, push, or mark threads resolved unless the user asks.
+5. Do **not** commit, push, or mark threads resolved unless the user asks.
+
+CodeRabbit triage requires a PR with completed CodeRabbit feedback. After opening the PR (or requesting a review) and waiting for CodeRabbit to finish, re-run `/pr-review`. The command does not resume automatically. On that run, present the plan table for approval; do not apply fixes or post thread replies until the user approves.
 
 ## 5. Final response structure
 
@@ -99,6 +101,6 @@ Lead with severity-ordered findings, then the rest:
 
 1. **Code review** (section 2)
 2. **Accessibility PR Review Summary** (section 3 template)
-3. **CodeRabbit** — for each thread: addressed (fix applied + reply posted), dismissed (reply posted), skipped/waiting (user decision or bot not ready), or “requested `@coderabbitai review` — re-run later”
+3. **CodeRabbit** — for each thread: proposed fix + reply (awaiting approval), proposed dismissal + reply (awaiting approval), applied and replied (after approval), skipped/waiting, or “requested `@coderabbitai review` — re-run later”
 
-Do not leave CodeRabbit findings as silent local edits without a thread reply when you chose to address them.
+Do not apply CodeRabbit fixes or post thread replies before the user approves the plan table. Once approved, do not leave an addressed finding as a silent local edit without a thread reply.
