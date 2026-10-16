@@ -23,7 +23,7 @@ import {TertiaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
 import {AccessibleHide} from '@workday/canvas-kit-react/common/';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {createStyles} from '@workday/canvas-kit-styling';
+import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {draggableVerticalIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -57,10 +57,34 @@ const dragHandleStyles = createStyles({
   [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
 });
 
+const feedbackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.gap.xs,
+  marginBlockStart: system.gap.md,
+  padding: system.padding.md,
+  backgroundColor: system.color.surface.alt.default,
+  borderRadius: system.legacy.shape.sm,
+  border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
+});
+
+const feedbackLabelStyles = createStyles({
+  fontWeight: system.fontWeight.bold,
+  margin: 0,
+});
+
+const feedbackMessageStyles = createStyles({
+  margin: 0,
+});
+
+const keyboardInstructions =
+  'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.';
+
+const initialAnnouncement = 'Move a row to see screen reader feedback.';
+
 const screenReaderInstructions: ScreenReaderInstructions = {
   // dnd-kit associates these instructions with every sortable drag handle.
-  draggable:
-    'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.',
+  draggable: keyboardInstructions,
 };
 
 const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
@@ -99,6 +123,7 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
 
 export const DraggableRows = () => {
   const [employees, setEmployees] = useState(initialEmployees);
+  const [visibleAnnouncement, setVisibleAnnouncement] = useState(initialAnnouncement);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -111,36 +136,51 @@ export const DraggableRows = () => {
       employees.find(employee => employee.id === id)?.name ?? 'Unknown employee';
     const position = (id: string | number) =>
       employees.findIndex(employee => employee.id === id) + 1;
+    // The same string is printed below the table. That visible text is not a live region.
+    const announce = (message: string) => {
+      setVisibleAnnouncement(message);
+      return message;
+    };
 
     // Contextual announcements replace dnd-kit's generic live-region messages.
     return {
       onDragStart({active}) {
-        return `${employeeName(active.id)} row picked up. Current position ${position(
-          active.id
-        )} of ${employees.length}.`;
+        return announce(
+          `${employeeName(active.id)} row picked up. Current position ${position(active.id)} of ${
+            employees.length
+          }.`
+        );
       },
       onDragOver({active, over}) {
         if (!over) {
           return;
         }
-        return `${employeeName(active.id)} row moved to position ${position(over.id)} of ${
-          employees.length
-        }.`;
+        return announce(
+          `${employeeName(active.id)} row moved to position ${position(over.id)} of ${
+            employees.length
+          }.`
+        );
       },
       onDragEnd({active, over}) {
         if (!over) {
-          return `${employeeName(active.id)} row was not moved. It remains at position ${position(
-            active.id
-          )} of ${employees.length}.`;
+          return announce(
+            `${employeeName(active.id)} row was not moved. It remains at position ${position(
+              active.id
+            )} of ${employees.length}.`
+          );
         }
-        return `${employeeName(active.id)} row dropped at position ${position(over.id)} of ${
-          employees.length
-        }.`;
+        return announce(
+          `${employeeName(active.id)} row dropped at position ${position(over.id)} of ${
+            employees.length
+          }.`
+        );
       },
       onDragCancel({active}) {
-        return `${employeeName(active.id)} row movement cancelled. It returned to position ${position(
-          active.id
-        )} of ${employees.length}.`;
+        return announce(
+          `${employeeName(active.id)} row movement cancelled. It returned to position ${position(
+            active.id
+          )} of ${employees.length}.`
+        );
       },
     };
   }, [employees]);
@@ -189,6 +229,12 @@ export const DraggableRows = () => {
           </Table.Body>
         </Table>
       </SortableContext>
+      <div className={feedbackStyles}>
+        <p className={feedbackLabelStyles}>Keyboard instructions</p>
+        <p className={feedbackMessageStyles}>{keyboardInstructions}</p>
+        <p className={feedbackLabelStyles}>Screen reader feedback</p>
+        <p className={feedbackMessageStyles}>{visibleAnnouncement}</p>
+      </div>
     </DndContext>
   );
 };

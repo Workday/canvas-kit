@@ -21,16 +21,19 @@ not a Canvas Kit primitive.
 - The first column holds only the reorder controls. Its column header is the visually hidden text
   "Row reorder controls" on a `Table.Header` with `scope="col"`, so screen readers still receive a
   column header while the column shows the drag icons.
-- Each handle is a `TertiaryButton` inside a `Tooltip` titled "Move row". The tooltip's default
-  `type="label"` sets that title as the accessible name.
+- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
+  `type="muted"` and the title "Move row", so the tooltip is visible on hover without replacing
+  that name.
 - The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
   announce that name while reading the other cells in the row.
 - `@dnd-kit`'s default instructions are replaced with directions for this table: Space or Enter to
   pick up, Up and Down Arrow keys to move, Space or Enter to drop, and Escape to cancel. Those
-  instructions are associated with every drag handle.
+  instructions are associated with every drag handle. The same instructions are printed below the
+  table.
 - `@dnd-kit`'s generic live-region messages are replaced with announcements that include the
   employee name and position, for example "Avery Johnson row picked up. Current position 1 of 4."
   Moving, dropping, cancelling, and a drop that leaves the row in place each have their own
-  message.
+  message. The latest message is also printed below the table. That visible text is plain content,
+  so a screen reader does not announce it a second time.
 
 <ExampleCodeBlock code={DraggableRows} />

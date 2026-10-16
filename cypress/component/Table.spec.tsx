@@ -11,12 +11,22 @@ describe('Table', () => {
     });
 
     it('should provide a drag handle for every employee', () => {
-      cy.findAllByRole('button', {name: 'Move row'}).should('have.length', 4);
+      cy.findByRole('button', {name: 'Move row Avery Johnson'}).should('be.visible');
+      cy.findByRole('button', {name: 'Move row Jordan Lee'}).should('be.visible');
+      cy.findByRole('button', {name: 'Move row Morgan Smith'}).should('be.visible');
+      cy.findByRole('button', {name: 'Move row Riley Chen'}).should('be.visible');
+    });
+
+    it('should show the keyboard instructions and screen reader feedback', () => {
+      cy.contains(
+        'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.'
+      ).should('be.visible');
+      cy.contains('Move a row to see screen reader feedback.').should('be.visible');
     });
 
     context('when a keyboard user moves the first row down', () => {
       beforeEach(() => {
-        cy.findAllByRole('button', {name: 'Move row'}).first().focus().realPress('Space');
+        cy.findByRole('button', {name: 'Move row Avery Johnson'}).focus().realPress('Space');
         cy.realPress('ArrowDown');
         cy.realPress('Space');
       });
@@ -28,6 +38,7 @@ describe('Table', () => {
           expect(rowNames[0]).to.contain('Jordan Lee');
           expect(rowNames[1]).to.contain('Avery Johnson');
         });
+        cy.contains('Avery Johnson row dropped at position 2 of 4.').should('be.visible');
       });
     });
   });
