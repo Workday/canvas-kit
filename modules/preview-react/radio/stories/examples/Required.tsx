@@ -20,7 +20,6 @@ export const Required = () => {
         name="crust-required"
         onChange={handleChange}
         value={value}
-        aria-describedby="choose-crust"
       >
         <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
           Deep dish
