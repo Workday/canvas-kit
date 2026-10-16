@@ -19,9 +19,9 @@ import {
 import {CSS} from '@dnd-kit/utilities';
 import {useMemo, useState} from 'react';
 
-import {focusRing} from '@workday/canvas-kit-react/common';
-import {SystemIcon} from '@workday/canvas-kit-react/icon';
+import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Table} from '@workday/canvas-kit-react/table';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {draggableVerticalIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
@@ -65,31 +65,6 @@ const visuallyHiddenStyles = createStyles({
   width: px2rem(1),
 });
 
-const dragHandleStyles = createStyles({
-  alignItems: 'center',
-  appearance: 'none',
-  backgroundColor: system.color.bg.transparent.default,
-  border: 0,
-  color: system.color.fg.default,
-  cursor: 'grab',
-  display: 'inline-flex',
-  height: system.legacy.size.sm,
-  justifyContent: 'center',
-  padding: 0,
-  touchAction: 'none',
-  width: system.legacy.size.sm,
-
-  '&:hover, &.hover': {
-    backgroundColor: system.color.bg.alt.default,
-  },
-  '&:focus-visible, &.focus': {
-    ...focusRing(),
-  },
-  '&:active, &.active': {
-    cursor: 'grabbing',
-  },
-});
-
 const screenReaderInstructions: ScreenReaderInstructions = {
   // dnd-kit associates these instructions with every sortable drag handle.
   draggable:
@@ -113,15 +88,15 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
       }}
     >
       <Table.Cell cs={handleCellStyles}>
-        <button
-          type="button"
-          aria-label={`Reorder row for ${employee.name}`}
-          className={dragHandleStyles}
-          {...attributes}
-          {...listeners}
-        >
-          <SystemIcon aria-hidden="true" icon={draggableVerticalIcon} size="sm" />
-        </button>
+        <Tooltip title="Move row">
+          <TertiaryButton
+            aria-label={`Move row ${employee.name}`}
+            icon={draggableVerticalIcon}
+            size="small"
+            {...attributes}
+            {...listeners}
+          />
+        </Tooltip>
       </Table.Cell>
       <Table.Header scope="row">{employee.name}</Table.Header>
       <Table.Cell>{employee.jobTitle}</Table.Cell>

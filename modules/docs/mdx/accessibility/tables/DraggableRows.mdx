@@ -21,9 +21,8 @@ not a Canvas Kit primitive.
 - The first column holds only the reorder controls. Its column header is the visually hidden text
   "Row reorder controls" on a `Table.Header` with `scope="col"`, so screen readers still receive a
   column header while the column shows the drag icons.
-- Each handle is a `<button>` with an accessible name of `Reorder row for {employee name}`. The drag
-  icon is hidden from assistive technology with `aria-hidden`, so the button label is the name, and
-  each handle is unique.
+- Each handle is a `TertiaryButton` inside a `Tooltip` titled "Move row". The tooltip's default
+  `type="label"` sets that title as the accessible name.
 - The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
   announce that name while reading the other cells in the row.
 - `@dnd-kit`'s default instructions are replaced with directions for this table: Space or Enter to
