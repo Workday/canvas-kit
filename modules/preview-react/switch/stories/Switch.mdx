@@ -80,6 +80,125 @@ Switch supports right-to-left languages when specified in the CanvasProvider the
 Switch supports custom styling via the `cs` prop. For more information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
 
+## Accessibility
+
+The primary accessibility goal is a visible, programmatically determinable name and an on or off
+state that assistive technology can expose. Use **Switch** for a single setting that takes effect
+immediately when toggled (for example, "Dark Mode"). When the user selects one or more options that
+are applied on form submission, use [**Checkbox**](/components/inputs/checkbox/) instead. **Switch**
+does not render its own `<label>`, so it relies on **`FormField`** for its name, hint, error, and
+required wiring — see [FormField's accessibility documentation](/components/inputs/form-field/#accessibility).
+
+### Minimum Accessible Structure
+
+The following matches the [Basic Example](#basic-example). Every **Switch** needs **`FormField`**, a
+visible **`FormField.Label`**, and **`FormField.Input as={Switch}`** inside **`FormField.Field`**.
+
+```tsx
+import React from 'react';
+
+import {Switch} from '@workday/canvas-kit-preview-react/switch';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+const Example = () => {
+  
+  return (
+    <FormField>
+      <FormField.Label>Dark Mode</FormField.Label>
+      <FormField.Field>
+        <FormField.Input as={Switch} />
+      </FormField.Field>
+    </FormField>
+  );
+};
+```
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically when you compose **Switch** with **`FormField`**
+subcomponents. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by Switch and FormField_):
+
+- **`Switch`**: Renders a native `<input type="checkbox">` with `role="switch"`. The native `checked`
+  state is exposed to assistive technology as on or off, so no `aria-checked` is needed. Canvas Kit
+  assigns an `id` with `useUniqueId` unless you pass **`id`**.
+- **Track, thumb, and check/x icon**: Purely visual. The icon is a Canvas Kit **`SystemIcon`**, whose
+  SVG markup sets `role="presentation"` and `focusable="false"`, so it is not announced.
+- **`disabled`**: Maps to the native `disabled` attribute.
+
+**Keyboard** (_native checkbox behavior_):
+
+**`Switch`** uses native `<input type="checkbox">` keyboard behavior (tab order and Space to
+toggle). Do not intercept <kbd>Space</kbd> or otherwise prevent the native toggle.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the **`FormField.Label`** text, the "switch" role, and
+  the on or off state; when applicable, required state, invalid state (`error="error"`), and
+  **`FormField.Hint`** text via `aria-describedby`
+- Toggling announces the new on or off state
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`
+- Disabled switches are skipped in the tab order and may be announced as unavailable
+
+For label, hint, and error association details, see
+[FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors).
+
+### Accessibility Requirements
+
+Required in application code for an accessible **Switch**. Rows marked _(conditional)_ apply only
+when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible **`FormField.Label`**, wrap the control with
+**`FormField.Input as={Switch}`** inside **`FormField.Field`**, and control it with **`checked`** and
+**`onChange`**. Omit **`isRequired`**, **`error`**, **`FormField.Hint`**, **`disabled`**,
+**`isHidden`**, a custom **`id`**, and a **`ref`** unless the spec requires them.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Attach a `ref` only when the product must move focus to the Switch after an action. Do not attach a
+`ref` or call `focus()` unless the design or developer asks for it. See
+[Ref Forwarding](#ref-forwarding) under Usage for a complete Storybook example.
+
+| Requirement                             | How to satisfy                                                                                                                                                                                                                  |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Accessible name                         | Visible, non-empty **`FormField.Label`** describing the setting (for example, "Dark Mode"), not the state ("On"/"Off"). Use **`FormField.Label isHidden`** only when an equally clear visible alternative exists               |
+| Input wiring                            | **`FormField.Input as={Switch}`** inside **`FormField.Field`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring                                         |
+| Required state _(conditional)_          | `isRequired` on **`FormField`** only when the form cannot be submitted unless the Switch is on — native `required` on a checkbox means it must be checked                                                                      |
+| Disabled _(conditional)_                | `disabled` on **`FormField.Input`** when the spec marks the setting unavailable. See [Disabled](#disabled)                                                                                                                      |
+| Programmatic focus _(conditional)_      | `ref` on **`FormField.Input`** and call `focus()` when the product requires it — omit by default (see **Programmatic focus** above and [Ref Forwarding](#ref-forwarding))                                                       |
+
+**Summary for code generation:**
+
+- **REQUIRED:** **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={Switch}`**
+  inside **`FormField.Field`**
+- **CONDITIONAL:** `isRequired` only when the Switch must be on; `disabled`; programmatic focus via
+  `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared
+  FormField conditionals (hint, error, and caution).
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Render **Switch** without **`FormField`** and **`FormField.Label`** — **Switch** has no built-in
+  label. For shared FormField anti-patterns (manual ARIA wiring, color-only errors, broken ID
+  references), see [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns)
+- Manually set `role`, `aria-checked`, `aria-labelledby`, `aria-describedby`, `aria-invalid`, or
+  `id` on **Switch** — Canvas Kit wires these from the native checkbox and **`FormField`**
+- Nest **`FormField`** inside **`FormField`** instead of using **`FormField.Field`** — the inner
+  **`FormField`** breaks the label association
+- Put the state in the label (for example, "Dark Mode: On") or add a visually hidden "on"/"off"
+  string — the state is already announced from `role="switch"` and `checked`
+- Set **`error`** directly on **Switch** inside **`FormField`** — set it on **`FormField`** so
+  `aria-invalid` and the visual ring stay in sync. Setting **`error`** on a Switch outside
+  **`FormField`** is visual only and does not set `aria-invalid`
+- Use **`isRequired`** for a setting that can validly be off
+- Use **Switch** for selections that only apply on form submission, or for multiple related
+  options — use [**Checkbox**](/components/inputs/checkbox/) instead
+- Use **`aria-disabled`** instead of **`disabled`** — **Switch** maps unavailability to the native
+  **`disabled`** attribute
+
 ## Component API
 
 <SymbolDoc name="Switch" fileName="/react/" />
