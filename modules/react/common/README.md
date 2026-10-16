@@ -87,7 +87,7 @@ in Storybook.
 
 Theming documentation has its own README. You can find it [here](./lib/theming/README.md), and the
 guide is in
-[Guides / Theming](https://workday.github.io/canvas-kit/?path=/docs/guides-theming--docs).
+[Features / Theming / Overview](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 ---
 
