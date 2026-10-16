@@ -1,4 +1,4 @@
-import {DraggableRows} from '../../modules/react/table/stories/examples/DraggableRows';
+import {DraggableRows} from '../../modules/docs/mdx/accessibility/examples/Table/WithDraggableRows';
 
 describe('Table', () => {
   context('given the draggable rows example is rendered', () => {

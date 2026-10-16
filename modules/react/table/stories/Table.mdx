@@ -6,7 +6,6 @@ import TableStoriesMeta from './Table.stories';
 import {BaseHtmlTable} from './examples/BaseHtmlTable';
 import {Basic} from './examples/Basic';
 import {BasicWithHeading} from './examples/BasicWithHeading';
-import {DraggableRows} from './examples/DraggableRows';
 import {FixedColumn} from './examples/FixedColumn';
 import {RightToLeft} from './examples/RightToLeft';
 
@@ -52,15 +51,6 @@ purposes.
 
 <ExampleCodeBlock code={Basic} />
 
-### Draggable Rows
-
-Use a dedicated drag-handle button when rows can be reordered. Pointer users can drag the handle.
-Keyboard users can focus a handle, press Space or Enter to pick up the row, use the Up and Down
-Arrow keys to move it, then press Space or Enter to drop it. Pressing Escape cancels the move. The
-example also provides contextual screen reader instructions and live-region announcements.
-
-<ExampleCodeBlock code={DraggableRows} />
-
 ### Fixed Column
 
 Users may add styles to the `Table.Header` to render a fixed column. The example below assigns a
@@ -100,6 +90,7 @@ section.
 - [Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
 - [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
 - [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- [Draggable Rows](?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
 - [Filterable Column Headers](?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
 - [Sortable Column Headers](?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
 - [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
@@ -116,7 +107,7 @@ our
 `<thead>`, `<tbody>`, `<tfoot>`, `<tr>`, `<th>`, `<td>`). Assistive technology can announce column
 and row headers as users move through cells **only when** the markup is a real data table with
 correct headers and an accessible name. `Table` does **not** include a model, roving tabindex, or
-built-in sort, filter, selection, or expand behavior.
+built-in sort, filter, selection, expand, or reorder behavior.
 
 Use `Table` for tabular data with a relationship between rows and columns—not for page layout.
 Prefer **`Table`** (CSS Grid) unless the design needs a standard HTML table layout without Grid;
@@ -206,8 +197,8 @@ apply only when the situation matches—otherwise omit.
 **If no design spec is provided:** generate a simple data table with **`Table.Caption`**,
 **`Table.Head`** / **`Table.Body`**, **`scope="col"`** on column headers, and **`Table.Cell`** for
 body data. Omit **`Table.Footer`**, row headers, **`tabIndex`**, `id` / `headers` associations,
-**`aria-sort`**, **`aria-expanded`**, **`aria-level`**, selection checkboxes, and filter/sort popups
-unless the spec calls for those patterns.
+**`aria-sort`**, **`aria-expanded`**, **`aria-level`**, selection checkboxes, filter/sort popups,
+and drag handles unless the spec calls for those patterns.
 
 **Heading instead of caption** _(conditional)_:
 
@@ -230,6 +221,7 @@ Do not invent table ARIA. Copy the matching Canvas Kit guide when the spec inclu
 - [Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
 - [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
 - [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- [Draggable Rows](?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
 - [Filterable Column Headers](?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
 - [Sortable Column Headers](?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
 - [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
@@ -243,6 +235,7 @@ Do not invent table ARIA. Copy the matching Canvas Kit guide when the spec inclu
 | Keyboard access to overflow _(conditional)_           | If the table scrolls, set **`tabIndex={0}`** on **`Table`**. Omit it when content does not overflow.                                                                                                                                                                       |
 | Footer _(conditional)_                                | **`Table.Footer`** only when the design includes summary or footer rows.                                                                                                                                                                                                   |
 | Form controls in cells _(conditional)_                | Label every control (prefer **`FormField`**). See [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs) and [Form Field](?path=/docs/components-inputs-form-field--docs).                                                             |
+| Reorder rows _(conditional)_                          | Follow [Draggable Rows](?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs). **Ask the developer** before generating drag handles, reorder keyboard behavior, or move announcements.                                                                     |
 | Sort, filter, select, expand, or nest _(conditional)_ | Follow the matching [Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs) guide. **Ask the developer** which pattern the spec requires before generating `aria-sort`, `aria-expanded`, `aria-level`, `aria-owns`, live regions, or selection checkboxes. |
 
 **Summary for code generation:**
@@ -275,6 +268,8 @@ to supply instead):
   tree — see [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
 - Put a "Select All" checkbox in a column header **`Table.Header`** without following
   [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- Add drag handles or make rows reorderable without following
+  [Draggable Rows](?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
 - Place unlabeled inputs in cells, or rely on the column header alone without checking
   [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
 - Generate **`role="grid"`** / grid-widget keyboard behavior on **`Table`** — CSS Grid on

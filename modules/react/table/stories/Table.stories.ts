@@ -7,7 +7,6 @@ import {BaseHtmlTable as BaseHtmlTableExample} from './examples/BaseHtmlTable';
 // Examples
 import {Basic as BasicExample} from './examples/Basic';
 import {BasicWithHeading as BasicWithHeadingExample} from './examples/BasicWithHeading';
-import {DraggableRows as DraggableRowsExample} from './examples/DraggableRows';
 import {FixedColumn as FixedColumnExample} from './examples/FixedColumn';
 import {RightToLeft as RightToLeftExample} from './examples/RightToLeft';
 
@@ -32,9 +31,6 @@ export const BaseHtmlTable: Story = {
 };
 export const BasicWithHeading: Story = {
   render: BasicWithHeadingExample,
-};
-export const DraggableRows: Story = {
-  render: DraggableRowsExample,
 };
 export const FixedColumn: Story = {
   render: FixedColumnExample,

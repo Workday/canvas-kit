@@ -1,0 +1,37 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {DraggableRows} from '../examples/Table/WithDraggableRows';
+
+<Meta title="Guides/Accessibility/Table Patterns/Draggable Rows" />
+
+## Draggable Rows
+
+Draggable Rows reorders records in a table with a drag-handle button in the first column of each
+row. Pointer users drag the handle. Keyboard users focus the handle, press Space or Enter to pick
+the row up, use the Up and Down Arrow keys to move it, then press Space or Enter to drop it. Escape
+cancels the move and returns the row to its previous position.
+
+This example uses `@dnd-kit` for the pointer and keyboard interaction. `Table` does not include
+reorder behavior. The notes below describe how this example names the handles and announces each
+move. Validate the screen reader and browser combinations you support. This is a research example,
+not a Canvas Kit primitive.
+
+- The first column holds only the reorder controls. Its column header is the visually hidden text
+  "Row reorder controls" on a `Table.Header` with `scope="col"`, so screen readers still receive a
+  column header while the column shows the drag icons.
+- Each handle is a `<button>` with an accessible name of `Reorder row for {employee name}`. The drag
+  icon is hidden from assistive technology with `aria-hidden`, so the button label is the name, and
+  each handle is unique.
+- The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
+  announce that name while reading the other cells in the row.
+- `@dnd-kit`'s default instructions are replaced with directions for this table: Space or Enter to
+  pick up, Up and Down Arrow keys to move, Space or Enter to drop, and Escape to cancel. Those
+  instructions are associated with every drag handle.
+- `@dnd-kit`'s generic live-region messages are replaced with announcements that include the
+  employee name and position, for example "Avery Johnson row picked up. Current position 1 of 4."
+  Moving, dropping, cancelling, and a drop that leaves the row in place each have their own
+  message.
+
+<ExampleCodeBlock code={DraggableRows} />
