@@ -68,7 +68,6 @@ export const textInputStencil = createStencil({
     grow: {
       true: {
         width: '100%',
-        resize: 'vertical',
       },
       false: {
         width: 'initial',
