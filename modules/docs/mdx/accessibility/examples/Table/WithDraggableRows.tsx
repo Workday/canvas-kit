@@ -19,10 +19,11 @@ import {
 import {CSS} from '@dnd-kit/utilities';
 import {useMemo, useState} from 'react';
 
-import {TertiaryButton} from '@workday/canvas-kit-react/button';
+import {TertiaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
+import {AccessibleHide} from '@workday/canvas-kit-react/common/';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {draggableVerticalIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
@@ -52,23 +53,14 @@ const handleCellStyles = createStyles({
   justifyItems: 'center',
 });
 
-const visuallyHiddenStyles = createStyles({
-  border: 0,
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: px2rem(1),
-  margin: px2rem(-1),
-  overflow: 'hidden',
-  padding: 0,
-  position: 'absolute',
-  whiteSpace: 'nowrap',
-  width: px2rem(1),
+const dragHandleStyles = createStyles({
+  [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
 });
 
 const screenReaderInstructions: ScreenReaderInstructions = {
   // dnd-kit associates these instructions with every sortable drag handle.
   draggable:
-    'To reorder this row, press Space or Enter to pick it up. Use the Up and Down Arrow keys to move it. Press Space or Enter again to drop it, or press Escape to cancel.',
+    'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.',
 };
 
 const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
@@ -88,9 +80,10 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
       }}
     >
       <Table.Cell cs={handleCellStyles}>
-        <Tooltip title="Move row">
+        <Tooltip type="muted" title="Move row">
           <TertiaryButton
             aria-label={`Move row ${employee.name}`}
+            cs={dragHandleStyles}
             icon={draggableVerticalIcon}
             size="small"
             {...attributes}
@@ -179,7 +172,7 @@ export const DraggableRows = () => {
           <Table.Head>
             <Table.Row cs={tableRowStyles}>
               <Table.Header scope="col" cs={tableHeaderStyles}>
-                <span className={visuallyHiddenStyles}>Row reorder controls</span>
+                <AccessibleHide>Sort</AccessibleHide>
               </Table.Header>
               <Table.Header scope="col" cs={tableHeaderStyles}>
                 Employee Name
