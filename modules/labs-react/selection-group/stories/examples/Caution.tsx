@@ -16,7 +16,7 @@ export const Caution = () => {
         onSelect={data => setSelected([data.id])}
       >
         <SelectionGroup.List aria-label="Pizza crust options (select one)">
-          <SelectionGroup.Item disabled data-id="deep-dish">
+          <SelectionGroup.Item data-id="deep-dish">
             Deep Dish
           </SelectionGroup.Item>
           <SelectionGroup.Item data-id="thin">Thin</SelectionGroup.Item>
