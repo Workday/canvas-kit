@@ -19,13 +19,13 @@ describe('Modal Accessibility', () => {
       const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
+          <Modal.Overlay>
             <Modal.Card>
               <Modal.Heading>Modal Title</Modal.Heading>
               <Modal.Body>Content goes here</Modal.Body>
               <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
-          </Modal.Popper>
+          </Modal.Overlay>
         </Modal>
       );
 
@@ -55,14 +55,15 @@ describe('Modal Accessibility', () => {
       const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
+          <Modal.Overlay>
             <Modal.Card>
               <Modal.Heading>Critical Action Required</Modal.Heading>
               <Modal.Body>
                 <p>This is a modal dialog</p>
               </Modal.Body>
+              <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
-          </Modal.Popper>
+          </Modal.Overlay>
         </Modal>
       );
 
@@ -86,12 +87,12 @@ describe('Modal Accessibility', () => {
       const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
+          <Modal.Overlay>
             <Modal.Card aria-label="Confirm Action">
               <Modal.Body>Are you sure?</Modal.Body>
               <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
-          </Modal.Popper>
+          </Modal.Overlay>
         </Modal>
       );
 
@@ -107,12 +108,13 @@ describe('Modal Accessibility', () => {
       const {getByRole, getByText} = render(
         <Modal>
           <Modal.Target>Open</Modal.Target>
-          <Modal.Popper>
+          <Modal.Overlay>
             <Modal.Card>
               <Modal.Heading>Modal Heading</Modal.Heading>
               <Modal.Body>Content</Modal.Body>
+              <Modal.CloseButton>Close</Modal.CloseButton>
             </Modal.Card>
-          </Modal.Popper>
+          </Modal.Overlay>
         </Modal>
       );
 
@@ -131,11 +133,8 @@ describe('Modal Accessibility', () => {
       if (ariaLabelledby) {
         const labelElement = document.getElementById(ariaLabelledby);
         expect(labelElement?.textContent).toBeTruthy();
-      } else if (ariaLabel) {
-        expect(ariaLabel).toBeTruthy();
       } else {
-        // If neither exists, test should fail
-        fail('Modal should have either aria-labelledby or aria-label');
+        expect(ariaLabel).toBeTruthy();
       }
     });
   });

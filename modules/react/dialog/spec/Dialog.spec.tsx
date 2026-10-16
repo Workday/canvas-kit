@@ -1,7 +1,7 @@
 import {fireEvent, render, waitFor} from '@testing-library/react';
 import React from 'react';
 
-import {Dialog, useDialogModel} from '../lib/Dialog';
+import {Dialog} from '../lib/Dialog';
 
 describe('Dialog Accessibility', () => {
   describe('Dialog.Card accessible name', () => {
@@ -126,11 +126,8 @@ describe('Dialog Accessibility', () => {
       if (ariaLabelledby) {
         const labelElement = document.getElementById(ariaLabelledby);
         expect(labelElement?.textContent).toBeTruthy();
-      } else if (ariaLabel) {
-        expect(ariaLabel).toBeTruthy();
       } else {
-        // If neither exists, test should fail
-        fail('Dialog should have either aria-labelledby or aria-label');
+        expect(ariaLabel).toBeTruthy();
       }
     });
   });

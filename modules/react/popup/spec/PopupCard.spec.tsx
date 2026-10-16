@@ -131,11 +131,8 @@ describe('Popup.Card Accessibility', () => {
       if (ariaLabelledby) {
         const labelElement = document.getElementById(ariaLabelledby);
         expect(labelElement?.textContent).toBeTruthy();
-      } else if (ariaLabel) {
-        expect(ariaLabel).toBeTruthy();
       } else {
-        // If neither exists, test should fail
-        fail('Popup should have either aria-labelledby or aria-label');
+        expect(ariaLabel).toBeTruthy();
       }
     });
   });
