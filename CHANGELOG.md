@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.3](https://github.com/Workday/canvas-kit/releases/tag/v16.2.3) (2026-10-16)
+
+### Components
+
+- docs(radio): Address accessibility review feedback ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Format accessibility guidance for consistency ([@](https://github.com/), Cursor)
+
+### Documentation
+
+- docs(radio): Add accessibility guidance for AI codegen ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify accessibility requirements wording ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify option value and trim anti-patterns ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+
+
+## [v16.2.2](https://github.com/Workday/canvas-kit/releases/tag/v16.2.2) (2026-10-15)
+
+### Components
+
+- docs(switch): Expand accessibility section for AI codegen ([@](https://github.com/), Cursor)
+- Simplified Switch component documentation ([@gautamjn6388](https://github.com/gautamjn6388))
+- docs(switch): Simplify accessibility keyboard and focus guidance ([@](https://github.com/), Cursor)
+- docs(switch): Leave required off the basic example ([@](https://github.com/), Cursor)
+
+
 ## [v16.2.1](https://github.com/Workday/canvas-kit/releases/tag/v16.2.1) (2026-10-15)
 
 ### Components
