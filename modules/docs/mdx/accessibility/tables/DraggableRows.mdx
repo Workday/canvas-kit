@@ -1,0 +1,35 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {DraggableRows} from '../examples/Table/WithDraggableRows';
+
+<Meta title="Guides/Accessibility/Table Patterns/Draggable Rows" />
+
+## Draggable Rows
+
+Draggable Rows reorders records in a table with a drag-handle button in the first column of each
+row. Pointer users drag the handle. Keyboard users focus the handle, press Space or Enter to pick
+the row up, use the Up and Down Arrow keys to move it, then press Space or Enter to drop it. Escape
+cancels the move and returns the row to its previous position.
+
+This example uses `@dnd-kit` for the pointer and keyboard interaction. `Table` does not include
+reorder behavior. The notes below describe how this example names the handles and shows which row is
+picked up. Validate the screen reader and browser combinations you support. This is a research
+example, not a Canvas Kit primitive.
+
+<ExampleCodeBlock code={DraggableRows} />
+
+- The first column holds only the reorder controls. Its column header is the visually hidden text
+  "Sort" on a `Table.Header` with `scope="col"`, so screen readers still receive a column header
+  while the column shows the drag icons.
+- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
+  `type="muted"` and the title "Move row", so the tooltip is visible on hover without replacing that
+  name.
+- The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
+  announce that name while reading the other cells in the row.
+- A picked-up row stays in the table and only moves with a transform, so it needs its own appearance
+  to stay distinct from the rows sliding around it. It uses a popover surface, a level 5 depth
+  shadow, and a small shift to the right, and it paints above the other rows. The handle cursor
+  changes from grab to grabbing. Keyboard users rely on this treatment, because no pointer is
+  attached to the row.
