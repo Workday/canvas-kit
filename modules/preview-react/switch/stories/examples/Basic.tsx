@@ -11,7 +11,7 @@ export const Basic = () => {
   };
 
   return (
-    <FormField isRequired>
+    <FormField>
       <FormField.Label>Dark Mode</FormField.Label>
       <FormField.Field>
         <FormField.Input as={Switch} checked={checked} onChange={handleChange} />
