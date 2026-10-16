@@ -1,17 +1,18 @@
 import {Meta} from '@storybook/blocks';
+
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 
-import { Basic } from './examples/Basic';
-import { Caution } from './examples/Caution';
-import { Error } from './examples/Error';
-import { Inverse } from './examples/Inverse';
-import { LabelPosition } from './examples/LabelPosition';
-import { NoValue } from './examples/NoValue';
-import { RefForwarding } from './examples/RefForwarding';
-import { Disabled } from './examples/Disabled';
-import { Required } from './examples/Required';
-import { Custom } from './examples/Custom';
-import { StandaloneRadio } from './examples/StandaloneRadio';
+import {Basic} from './examples/Basic';
+import {Caution} from './examples/Caution';
+import {Custom} from './examples/Custom';
+import {Disabled} from './examples/Disabled';
+import {Error} from './examples/Error';
+import {Inverse} from './examples/Inverse';
+import {LabelPosition} from './examples/LabelPosition';
+import {NoValue} from './examples/NoValue';
+import {RefForwarding} from './examples/RefForwarding';
+import {Required} from './examples/Required';
+import {StandaloneRadio} from './examples/StandaloneRadio';
 
 import RadioStoriesMeta from './Radio.stories';
 
@@ -144,7 +145,8 @@ our
 
 The primary accessibility goal is to ensure users can identify the radio group and each option,
 determine which option is selected, and hear associated hints, errors, and required state when a
-radio receives focus. Use **Radio** when the user must choose one option from a list. For independent options, use
+radio receives focus. Use **Radio** when the user must choose one option from a list. For
+independent options, use
 [**Checkbox**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-checkbox--docs)
 instead.
 
@@ -155,19 +157,15 @@ The following matches the [Basic Example](#basic-example): a **`FormFieldGroup`*
 **`FormFieldGroup.Input as={RadioGroup.RadioButton}`** options.
 
 ```tsx
-import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 
 <FormFieldGroup>
   <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
   <FormFieldGroup.Field>
     <FormFieldGroup.List as={RadioGroup}>
-      <FormFieldGroup.Input as={RadioGroup.RadioButton}>
-        Deep dish
-      </FormFieldGroup.Input>
-      <FormFieldGroup.Input as={RadioGroup.RadioButton}>
-        Thin
-      </FormFieldGroup.Input>
+      <FormFieldGroup.Input as={RadioGroup.RadioButton}>Deep dish</FormFieldGroup.Input>
+      <FormFieldGroup.Input as={RadioGroup.RadioButton}>Thin</FormFieldGroup.Input>
     </FormFieldGroup.List>
   </FormFieldGroup.Field>
 </FormFieldGroup>;
@@ -212,9 +210,9 @@ when the situation matches—otherwise omit.
 **If no design spec is provided:** use a visible **`FormFieldGroup.Label`**. On
 **`FormFieldGroup.List as={RadioGroup}`**, set a shared **`name`** and render two or more
 **`RadioGroup.RadioButton`** options with visible text and their own **`value`**. Omit **`error`**,
-**`isRequired`**,
-**`FormFieldGroup.Hint`**, **`disabled`**, **`aria-describedby`** on **`RadioGroup`**, **`error`** on
-**`RadioGroup`**, a **`ref`**, and **`StyledRadioButton`** unless the spec requires them.
+**`isRequired`**, **`FormFieldGroup.Hint`**, **`disabled`**, **`aria-describedby`** on
+**`RadioGroup`**, **`error`** on **`RadioGroup`**, a **`ref`**, and **`StyledRadioButton`** unless
+the spec requires them.
 
 **Programmatic focus** _(conditional — omit by default)_:
 
@@ -222,24 +220,23 @@ Attach a **`ref`** only when the product must move focus to a radio after an act
 **`ref`** or call `focus()` unless the design or developer asks for it. See
 [Ref Forwarding](#ref-forwarding).
 
-| Requirement                                        | How to satisfy                                                                                                                                                                                                                                                                                                      |
-| -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Group and option names                             | Use **`FormFieldGroup`** with a visible **`FormFieldGroup.Label`**. Render **`FormFieldGroup.List as={RadioGroup}`** with a shared **`name`**, and give every **`FormFieldGroup.Input as={RadioGroup.RadioButton}`** visible text and its own **`value`**. The shared **`name`** groups the inputs, and each option **`value`** is what the selected state matches. See [Basic Example](#basic-example). |
-| Error state _(conditional)_                    | When the selection is invalid, set `error="error"` on **`FormFieldGroup`** and prefix **`FormFieldGroup.Hint`** with "Error:". See [Error States](#error-states).                                                                                                                                                                   |
-| Hint, caution, or required _(conditional)_     | On **`FormFieldGroup`**, use **`FormFieldGroup.Hint`** for hint text, `error="caution"` for caution, and **`isRequired`** for required state, only when the spec includes that state. See [Required](#required) and [FormField accessibility](/components/inputs/form-field/#accessibility). |
-| Disabled _(conditional)_                           | Set **`disabled`** on an unavailable **`RadioGroup.RadioButton`**. Never disable the selected radio. See [Disabled](#disabled).                                                                                                                                                                                                     |
+| Requirement                                | How to satisfy                                                                                                                                                                                                                                                                                                                                                                                           |
+| ------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Group and option names                     | Use **`FormFieldGroup`** with a visible **`FormFieldGroup.Label`**. Render **`FormFieldGroup.List as={RadioGroup}`** with a shared **`name`**, and give every **`FormFieldGroup.Input as={RadioGroup.RadioButton}`** visible text and its own **`value`**. The shared **`name`** groups the inputs, and each option **`value`** is what the selected state matches. See [Basic Example](#basic-example). |
+| Error state _(conditional)_                | When the selection is invalid, set `error="error"` on **`FormFieldGroup`** and prefix **`FormFieldGroup.Hint`** with "Error:". See [Error States](#error-states).                                                                                                                                                                                                                                        |
+| Hint, caution, or required _(conditional)_ | On **`FormFieldGroup`**, use **`FormFieldGroup.Hint`** for hint text, `error="caution"` for caution, and **`isRequired`** for required state, only when the spec includes that state. See [Required](#required) and [FormField accessibility](/components/inputs/form-field/#accessibility).                                                                                                             |
+| Disabled _(conditional)_                   | Set **`disabled`** on an unavailable **`RadioGroup.RadioButton`**. Never disable the selected radio. See [Disabled](#disabled).                                                                                                                                                                                                                                                                          |
 
 **Summary for code generation:**
 
-- **REQUIRED:** **`FormFieldGroup`**, visible **`FormFieldGroup.Label`**, **`FormFieldGroup.List
-  as={RadioGroup}`** with a shared **`name`**, and two or more **`RadioGroup.RadioButton`** options,
-  each with visible text and its own **`value`**
+- **REQUIRED:** **`FormFieldGroup`**, visible **`FormFieldGroup.Label`**,
+  **`FormFieldGroup.List as={RadioGroup}`** with a shared **`name`**, and two or more
+  **`RadioGroup.RadioButton`** options, each with visible text and its own **`value`**
 - **CONDITIONAL:** when the selection is invalid, `error="error"` on **`FormFieldGroup`** and
   **`FormFieldGroup.Hint`** prefixed with "Error:". Hint text, `error="caution"`, and
   **`isRequired`** only when the spec includes that state. Also **`disabled`** (not on the selected
-  radio). See
-  [FormField accessibility](/components/inputs/form-field/#accessibility) for group hint, caution,
-  and required.
+  radio). See [FormField accessibility](/components/inputs/form-field/#accessibility) for group
+  hint, caution, and required.
 
 ### Anti-Patterns
 
