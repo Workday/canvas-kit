@@ -1,0 +1,97 @@
+import {Meta} from '@storybook/blocks';
+
+<Meta title="Hooks and Utilities/Unique IDs" />
+
+# Unique IDs
+
+Accessible markup needs IDs to connect elements to one another: a label to its field, a heading to
+the region it names, a control to the element it describes. Those IDs have to be unique on the page
+and stable across renders. Canvas Kit generates them for you.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## useUniqueId
+
+Generates a unique, HTML5-compliant ID that is stable across renders, and uses `React.useId()` where
+it is available. It takes an optional ID: pass one in and it is returned unchanged, so a component
+can accept an ID from a consumer and fall back to a generated one without branching.
+
+```tsx
+import {useUniqueId} from '@workday/canvas-kit-react/common';
+
+// Pairing a heading with the table it names, where `<caption>` is not wanted
+const tableHeadingId = useUniqueId();
+
+<Heading id={tableHeadingId}>Pizza Toppings</Heading>
+<Table aria-labelledby={tableHeadingId}>{/* table rows */}</Table>
+```
+
+Because it accepts an ID, it is safe to call unconditionally:
+
+```tsx
+const MyField = ({id, ...elemProps}) => {
+  // uses `id` when given, generates one when not
+  const fieldId = useUniqueId(id);
+  return <input id={fieldId} {...elemProps} />;
+};
+```
+
+> **Note:** In React 18, `useId()` generates IDs containing colons, such as `:r0:`, which are not
+> valid in CSS selectors. `useUniqueId` rewrites them with guillemets, `«r0»`, matching the format
+> React is moving to.
+
+## generateUniqueId
+
+Returns a new ID string each time it is called. It is the generator behind `useUniqueId`, exported
+for the cases where an ID is needed outside a render, where hook rules do not apply.
+
+```tsx
+import {generateUniqueId} from '@workday/canvas-kit-react/common';
+
+const id = generateUniqueId();
+```
+
+Each ID is a four-character random seed followed by an incrementing Base 36 counter. The seed is
+unique per copy of the package, so two versions of Canvas Kit on one page will not collide.
+
+Prefer `useUniqueId` inside components: `generateUniqueId` is not stable across renders.
+
+## setUniqueSeed
+
+Replaces the random seed with one of your choosing. Two uses:
+
+- **Snapshot tests**, so the IDs in a snapshot are the same on every run.
+- **Server-side rendering**, so IDs generated on the server match the ones generated on the client
+  during hydration. Set the same seed in both places before anything renders.
+
+```tsx
+import {setUniqueSeed} from '@workday/canvas-kit-react/common';
+
+// from a script tag written by the server
+setUniqueSeed(window.__ID_SEED);
+```
+
+## resetUniqueIdCount
+
+Resets the counter to zero. Intended for tests, in a `beforeEach`, alongside `setUniqueSeed`.
+
+```tsx
+import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+
+beforeEach(() => {
+  setUniqueSeed('a'); // a static seed
+  resetUniqueIdCount(); // reset the counter before every test
+});
+```
+
+See [Guides / Testing](https://workday.github.io/canvas-kit/?path=/docs/guides-testing--docs) for
+how this fits into a test setup, and
+[Guides / Accessibility / Overview](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-overview--docs)
+for where generated IDs are needed.
+
+> **Note:** `uniqueId` is deprecated and will be removed in a future major version. Use
+> `useUniqueId` instead.

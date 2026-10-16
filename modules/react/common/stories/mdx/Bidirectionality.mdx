@@ -1,0 +1,66 @@
+import {Meta} from '@storybook/blocks';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {RTL} from './examples/RTL';
+
+<Meta title="Hooks and Utilities/Bidirectionality" />
+
+# Bidirectionality
+
+Canvas Kit supports right-to-left (RTL) content direction. Set the direction once on
+`CanvasProvider` and style with logical properties, so the same markup works in both directions.
+
+## Installation
+
+```sh
+yarn add @workday/canvas-kit-react
+```
+
+## Styling
+
+Use
+[CSS logical properties](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Logical_Properties)
+rather than physical ones: `paddingInlineStart` instead of `paddingLeft`, `marginInlineEnd` instead
+of `marginRight`. The browser resolves them against the content direction, so no direction-specific
+stylesheet is needed.
+
+Where a style has to differ by direction, such as mirroring a directional icon, use the
+[`:dir()`](https://developer.mozilla.org/en-US/docs/Web/CSS/:dir) pseudo-class rather than branching
+in JavaScript.
+
+<ExampleCodeBlock code={RTL} />
+
+## Keyboard events
+
+Logical properties cover styling, but they do not cover key handling. The right arrow key should
+always move the cursor to the right of its current position. In a left-to-right language that means
+"move to the next item"; in a right-to-left language it means "move to the previous one". So a
+keyboard handler has to know the direction of the element it is on.
+
+### isElementRTL
+
+Returns `true` when an element has a content direction of `rtl`. It reads the computed style of the
+element it is given, so it is meant for event handlers rather than render functions.
+
+```tsx
+import {isElementRTL} from '@workday/canvas-kit-react/common';
+
+onKeyDown(event: React.KeyboardEvent) {
+  const isRTL = isElementRTL(event.currentTarget);
+
+  if (event.key === 'ArrowRight') {
+    if (isRTL) {
+      // Right arrow still moves to the right, but "right" is not "advance" in RTL:
+      // the previous row is to the right of the current one.
+      model.events.goToPreviousRow();
+    } else {
+      model.events.goToNextRow();
+    }
+  }
+}
+```
+
+<br />
+
+> **Note:** `useIsRTL` is deprecated and will be removed in a future major version. Use
+> `isElementRTL`, or the `:dir()` pseudo-class where the decision is a styling one.
