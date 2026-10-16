@@ -1,4 +1,4 @@
-import {Meta} from '@storybook/blocks';
+import { Meta } from "@storybook/blocks";
 
 <Meta title="Hooks and Utilities/Unique IDs" />
 
@@ -33,7 +33,7 @@ const tableHeadingId = useUniqueId();
 Because it accepts an ID, it is safe to call unconditionally:
 
 ```tsx
-const MyField = ({id, ...elemProps}) => {
+const MyField = ({ id, ...elemProps }) => {
   // uses `id` when given, generates one when not
   const fieldId = useUniqueId(id);
   return <input id={fieldId} {...elemProps} />;
@@ -50,7 +50,7 @@ Returns a new ID string each time it is called. It is the generator behind `useU
 for the cases where an ID is needed outside a render, where hook rules do not apply.
 
 ```tsx
-import {generateUniqueId} from '@workday/canvas-kit-react/common';
+import { generateUniqueId } from "@workday/canvas-kit-react/common";
 
 const id = generateUniqueId();
 ```
@@ -66,10 +66,13 @@ Replaces the random seed with one of your choosing. Two uses:
 
 - **Snapshot tests**, so the IDs in a snapshot are the same on every run.
 - **Server-side rendering**, so IDs generated on the server match the ones generated on the client
-  during hydration. Set the same seed in both places before anything renders.
+  during hydration. The seed is only half of it: IDs are the seed plus an incrementing counter, so
+  the two sides must also start from the same count and generate in the same order. Prefer
+  `useUniqueId` inside components, which uses `React.useId()` where it is available and does not
+  depend on either.
 
 ```tsx
-import {setUniqueSeed} from '@workday/canvas-kit-react/common';
+import { setUniqueSeed } from "@workday/canvas-kit-react/common";
 
 // from a script tag written by the server
 setUniqueSeed(window.__ID_SEED);
@@ -80,10 +83,10 @@ setUniqueSeed(window.__ID_SEED);
 Resets the counter to zero. Intended for tests, in a `beforeEach`, alongside `setUniqueSeed`.
 
 ```tsx
-import {setUniqueSeed, resetUniqueIdCount} from '@workday/canvas-kit-react/common';
+import { setUniqueSeed, resetUniqueIdCount } from "@workday/canvas-kit-react/common";
 
 beforeEach(() => {
-  setUniqueSeed('a'); // a static seed
+  setUniqueSeed("a"); // a static seed
   resetUniqueIdCount(); // reset the counter before every test
 });
 ```

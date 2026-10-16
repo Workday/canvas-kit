@@ -1,7 +1,7 @@
-import {Meta} from '@storybook/blocks';
-import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+import { Meta } from "@storybook/blocks";
+import { ExampleCodeBlock } from "@workday/canvas-kit-docs";
 
-import {RTL} from './examples/RTL';
+import { RTL } from "./examples/RTL";
 
 <Meta title="Hooks and Utilities/Bidirectionality" />
 
@@ -50,11 +50,11 @@ onKeyDown(event: React.KeyboardEvent) {
 
   if (event.key === 'ArrowRight') {
     if (isRTL) {
-      // Right arrow still moves to the right, but "right" is not "advance" in RTL:
-      // the previous row is to the right of the current one.
-      model.events.goToPreviousRow();
+      // Right arrow still moves to the right, but "right" is not "advance" in
+      // RTL: the previous item is to the right of the current one.
+      model.events.goToPrevious();
     } else {
-      model.events.goToNextRow();
+      model.events.goToNext();
     }
   }
 }

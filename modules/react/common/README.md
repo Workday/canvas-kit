@@ -14,28 +14,11 @@ Includes:
   - [Installation](#installation)
   - [CanvasProvider](#canvasprovider)
     - [Storybook Decorator](#storybook-decorator)
-    - [Input Provider](#input-provider)
-      - [Definitions](#definitions)
-      - [Usage](#usage)
-      - [Static Properties](#static-properties)
-        - [`InputTypes`](#inputtypes)
-      - [Component Props](#component-props)
-        - [Required](#required)
-        - [Optional](#optional)
-          - [`provideIntent: boolean`](#provideintent-boolean)
-          - [`container: HTMLElement | React.RefObject<HTMLElement>`](#container-htmlelement--reactrefobjecthtmlelement)
-      - [Storybook Decorator](#storybook-decorator-1)
+  - [Focus rings](#focus-rings)
+  - [RTL and bidirectionality](#rtl-and-bidirectionality)
   - [Theming](#theming)
-  - [Bidirectionality](#bidirectionality)
-  - [Component Functions](#component-functions)
-    - [`createComponent`](#createcomponent)
-    - [`ExtractProps`](#extractprops)
-  - [Common Hooks](#common-hooks)
-    - [useUniqueId](#useuniqueid)
-  - [Utility Functions](#utility-functions)
-    - [generateUniqueId](#generateuniqueid)
-    - [setUniqueSeed](#setuniqueseed)
-    - [resetUniqueIdCount](#resetuniqueidcount)
+  - [Component functions](#component-functions)
+  - [Unique IDs](#unique-ids)
 
 ## CanvasProvider
 
@@ -46,8 +29,8 @@ can find more information in the [theming documentation](./lib/theming/README.md
 **We strongly encourage you to use this in your application to wrap all Canvas components.**
 
 ```tsx
-import * as React from 'react';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import * as React from "react";
+import { CanvasProvider } from "@workday/canvas-kit-react/common";
 
 <CanvasProvider>{/* All your components containing any Canvas components */}</CanvasProvider>;
 ```
@@ -60,7 +43,7 @@ stories in a `CanvasProvider` automatically.
 Add this decorator to your `/.storybook/preview.js` configuration file to apply to all stories:
 
 ```js
-import {CanvasProviderDecorator} from '../utils/storybook';
+import { CanvasProviderDecorator } from "../utils/storybook";
 
 export const decorators = [CanvasProviderDecorator];
 ```
@@ -68,10 +51,10 @@ export const decorators = [CanvasProviderDecorator];
 Or, add it to stories individually:
 
 ```js
-import {CanvasProviderDecorator} from '../../../../utils/storybook';
+import { CanvasProviderDecorator } from "../../../../utils/storybook";
 
 export default {
-  title: 'MyComponent',
+  title: "MyComponent",
   component: MyComponent,
   decorators: [CanvasProviderDecorator],
 };
