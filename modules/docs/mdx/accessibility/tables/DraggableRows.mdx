@@ -14,26 +14,22 @@ the row up, use the Up and Down Arrow keys to move it, then press Space or Enter
 cancels the move and returns the row to its previous position.
 
 This example uses `@dnd-kit` for the pointer and keyboard interaction. `Table` does not include
-reorder behavior. The notes below describe how this example names the handles and announces each
-move. Validate the screen reader and browser combinations you support. This is a research example,
-not a Canvas Kit primitive.
-
-- The first column holds only the reorder controls. Its column header is the visually hidden text
-  "Row reorder controls" on a `Table.Header` with `scope="col"`, so screen readers still receive a
-  column header while the column shows the drag icons.
-- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
-  `type="muted"` and the title "Move row", so the tooltip is visible on hover without replacing
-  that name.
-- The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
-  announce that name while reading the other cells in the row.
-- `@dnd-kit`'s default instructions are replaced with directions for this table: Space or Enter to
-  pick up, Up and Down Arrow keys to move, Space or Enter to drop, and Escape to cancel. Those
-  instructions are associated with every drag handle. The same instructions are printed below the
-  table.
-- `@dnd-kit`'s generic live-region messages are replaced with announcements that include the
-  employee name and position, for example "Avery Johnson row picked up. Current position 1 of 4."
-  Moving, dropping, cancelling, and a drop that leaves the row in place each have their own
-  message. The latest message is also printed below the table. That visible text is plain content,
-  so a screen reader does not announce it a second time.
+reorder behavior. The notes below describe how this example names the handles and shows which row is
+picked up. Validate the screen reader and browser combinations you support. This is a research
+example, not a Canvas Kit primitive.
 
 <ExampleCodeBlock code={DraggableRows} />
+
+- The first column holds only the reorder controls. Its column header is the visually hidden text
+  "Sort" on a `Table.Header` with `scope="col"`, so screen readers still receive a column header
+  while the column shows the drag icons.
+- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
+  `type="muted"` and the title "Move row", so the tooltip is visible on hover without replacing that
+  name.
+- The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
+  announce that name while reading the other cells in the row.
+- A picked-up row stays in the table and only moves with a transform, so it needs its own appearance
+  to stay distinct from the rows sliding around it. It uses a popover surface, a level 5 depth
+  shadow, and a small shift to the right, and it paints above the other rows. The handle cursor
+  changes from grab to grabbing. Keyboard users rely on this treatment, because no pointer is
+  attached to the row.

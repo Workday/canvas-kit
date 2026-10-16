@@ -17,11 +17,10 @@ describe('Table', () => {
       cy.findByRole('button', {name: 'Move row Riley Chen'}).should('be.visible');
     });
 
-    it('should show the keyboard instructions and screen reader feedback', () => {
-      cy.contains(
-        'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.'
-      ).should('be.visible');
-      cy.contains('Move a row to see screen reader feedback.').should('be.visible');
+    it('should show the screen reader feedback', () => {
+      cy.contains('Move a row to see screen reader feedback. (For demonstration purposes.)').should(
+        'be.visible'
+      );
     });
 
     context('when a keyboard user moves the first row down', () => {

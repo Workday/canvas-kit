@@ -48,6 +48,12 @@ const tableRowStyles = createStyles({
   gridTemplateColumns: `${system.legacy.size.lg} minmax(0, 1fr) minmax(0, 1fr)`,
 });
 
+const pickedUpRowStyles = createStyles({
+  backgroundColor: system.legacy.color.surface.popover,
+  boxShadow: system.depth[5],
+  translate: `${system.gap.xs} 0`,
+});
+
 const handleCellStyles = createStyles({
   alignItems: 'center',
   justifyItems: 'center',
@@ -55,6 +61,11 @@ const handleCellStyles = createStyles({
 
 const dragHandleStyles = createStyles({
   [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+  cursor: 'grab',
+});
+
+const pickedUpDragHandleStyles = createStyles({
+  cursor: 'grabbing',
 });
 
 const feedbackStyles = createStyles({
@@ -80,7 +91,8 @@ const feedbackMessageStyles = createStyles({
 const keyboardInstructions =
   'Space or Enter picks up and drops this row. Use arrow keys to move up or down. Escape to cancel.';
 
-const initialAnnouncement = 'Move a row to see screen reader feedback.';
+const initialAnnouncement =
+  'Move a row to see screen reader feedback. (For demonstration purposes.)';
 
 const screenReaderInstructions: ScreenReaderInstructions = {
   // dnd-kit associates these instructions with every sortable drag handle.
@@ -95,9 +107,8 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
   return (
     <Table.Row
       ref={setNodeRef}
-      cs={tableRowStyles}
+      cs={isDragging ? [tableRowStyles, pickedUpRowStyles] : tableRowStyles}
       style={{
-        opacity: isDragging ? system.opacity.disabled : undefined,
         transform: CSS.Transform.toString(transform),
         transition,
         zIndex: isDragging ? 1 : undefined,
@@ -107,7 +118,7 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
         <Tooltip type="muted" title="Move row">
           <TertiaryButton
             aria-label={`Move row ${employee.name}`}
-            cs={dragHandleStyles}
+            cs={isDragging ? [dragHandleStyles, pickedUpDragHandleStyles] : dragHandleStyles}
             icon={draggableVerticalIcon}
             size="small"
             {...attributes}
@@ -206,6 +217,10 @@ export const DraggableRows = () => {
       sensors={sensors}
       onDragEnd={handleDragEnd}
     >
+      <div className={feedbackStyles}>
+        <p className={feedbackLabelStyles}>Screen reader feedback</p>
+        <p className={feedbackMessageStyles}>{visibleAnnouncement}</p>
+      </div>
       <SortableContext items={employeeIds} strategy={verticalListSortingStrategy}>
         <Table>
           <Table.Caption>Employee roster</Table.Caption>
@@ -229,12 +244,6 @@ export const DraggableRows = () => {
           </Table.Body>
         </Table>
       </SortableContext>
-      <div className={feedbackStyles}>
-        <p className={feedbackLabelStyles}>Keyboard instructions</p>
-        <p className={feedbackMessageStyles}>{keyboardInstructions}</p>
-        <p className={feedbackLabelStyles}>Screen reader feedback</p>
-        <p className={feedbackMessageStyles}>{visibleAnnouncement}</p>
-      </div>
     </DndContext>
   );
 };
