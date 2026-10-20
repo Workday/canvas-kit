@@ -99,14 +99,13 @@ reference composition.
 
 ### Minimum Accessible Structure
 
-Match the [Autocomplete](#autocomplete) example: a visible label, an input that composes
-**`useComboboxInput`** and **`useComboboxInputArbitrary`**, then **`Combobox.Menu.Popper`**,
-**`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and **`Combobox.Menu.Item`**.
+Use a visible **`FormField.Label`**, **`FormField.Input as={Combobox.Input}`**, then
+**`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and
+**`Combobox.Menu.Item`**.
 
-**`Combobox.Input`** applies **`useComboboxInput`** only. It does not copy a chosen option into the
-input. Arbitrary autocomplete must compose **`useComboboxInputArbitrary`** as well. Printable keys
-do not open the list unless the input calls `model.events.show`, which the Autocomplete example
-does on `onKeyPress`.
+**`Combobox.Input`** applies **`useComboboxInput`** only. The [Autocomplete](#autocomplete) example
+replaces it with an input that also composes **`useComboboxInputArbitrary`** and calls
+`model.events.show` on `onKeyPress` so the list opens as the user types.
 
 ```tsx
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
@@ -122,7 +121,7 @@ const Example = () => {
       <FormField.Label>Fruit</FormField.Label>
       <FormField.Field>
         <Combobox model={model}>
-          <FormField.Input as={AutocompleteInput} />
+          <FormField.Input as={Combobox.Input} />
           <Combobox.Menu.Popper>
             <Combobox.Menu.Card>
               <Combobox.Menu.List>
@@ -137,8 +136,8 @@ const Example = () => {
 };
 ```
 
-`AutocompleteInput` is that local input from the [Autocomplete](#autocomplete) example, passed
-through **`FormField.Input`** so the combobox has a programmatically determinable name.
+**`FormField.Input`** gives the combobox a programmatically determinable name from
+**`FormField.Label`**.
 
 ### Built-in Behaviors
 
@@ -155,8 +154,10 @@ are rendered. **Do not duplicate them** in consuming code. Behaviors from
 - **`aria-activedescendant`**: set to the active option's id while the list is open, and removed
   when the list is closed. DOM focus stays on the input. Options are not tab stops.
 - **`Combobox.Menu.List`**: `role="listbox"`, `id="{modelId}-list"`, and `aria-labelledby` set to
-  the combobox model id. Do not set `aria-label` or `aria-labelledby` on the list. The combobox's
-  accessible name comes from **`FormField.Label`** through **`FormField.Input`**.
+  the combobox model id. **`FormField.Input`** replaces the input `id` with `input-{id}`, so that
+  `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby` on the
+  list. The combobox input's accessible name comes from **`FormField.Label`** through
+  **`FormField.Input`**.
 - **`Combobox.Menu.Item`** (`Menu.Option`): `role="option"` and `aria-selected` from selection
   state. The option id matches `aria-activedescendant`.
 - **Popup**: **`Combobox.Menu.Popper`** portals the list. **`Combobox.Menu.Card`** is presentational.
@@ -186,7 +187,7 @@ are rendered. **Do not duplicate them** in consuming code. Behaviors from
 - Activating an option with the pointer selects it, keeps focus on the input, and closes the list
   when `mode` is `"single"`.
 - Printable characters are typed into the input. They open the list only when the input calls
-  `model.events.show` (see **Minimum accessible structure**).
+  `model.events.show`, which the [Autocomplete](#autocomplete) example does on `onKeyPress`.
 
 **`useComboboxKeyboardTypeAhead`** is not part of **`useComboboxInput`**. [**Select**](/components/inputs/select/)
 composes it for select-only type-ahead.
@@ -211,17 +212,22 @@ For label, input, and hint association, see
 Required in application code for an accessible combobox built on `Combobox`. Rows marked
 _(conditional)_ apply only when the situation matches—otherwise omit.
 
-**If no design spec is provided:** use a visible **`FormField.Label`**, **`FormField.Input`** on
-the visible combobox, and the menu subcomponents from **Minimum accessible structure**. Open the
-list when the user types (`model.events.show`) so suggestions are available from the keyboard.
-Omit a custom `id`, a `ref`, **`disabled`**, **`nonInteractiveIds`**, **`initialFocusRef`**, and
-**`returnFocusRef`**.
+**If no design spec is provided:** use a visible **`FormField.Label`**,
+**`FormField.Input as={Combobox.Input}`**, and the menu subcomponents from **Minimum accessible
+structure**. Omit a custom `id`, a `ref`, **`disabled`**, **`nonInteractiveIds`**,
+**`initialFocusRef`**, and **`returnFocusRef`**.
+
+**Open on type** _(conditional)_:
+
+When suggestions should appear as the user types, call `model.events.show` from the input, as the
+[Autocomplete](#autocomplete) example does on `onKeyPress`. Arrow keys and a click already open the
+list.
 
 **Second form input** _(conditional)_:
 
-When a second input carries the submitted value, keep that input visually hidden. Leave
-`aria-hidden` and `tabIndex={-1}` in place so it is omitted from the accessibility tree and the
-tab order. `focus()` and `blur()` on that input must move the visible combobox.
+When a second input carries the submitted value, compose **`useComboboxInputConstrained`** and
+spread its `formInputProps` onto that input. Those props include `aria-hidden` and `tabIndex={-1}`,
+and they forward `focus()` and `blur()` to the visible combobox. Leave those props in place.
 
 **Programmatic focus** _(conditional — omit by default)_:
 
@@ -237,24 +243,23 @@ will not select them). Do not use styling alone.
 | Requirement                       | How to satisfy                                                                                                                                                                                                                      |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Input wiring                      | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input`** on the visible combobox. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring           |
-| Open on type                      | Call `model.events.show` when the user types so the list opens from the keyboard (see **Minimum accessible structure**)                                                                                                             |
+| Open on type _(conditional)_      | Call `model.events.show` when suggestions should appear as the user types, as the [Autocomplete](#autocomplete) example does on `onKeyPress` (see **Open on type** above)                                                          |
 | Menu structure                    | **`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and **`Combobox.Menu.Item`** in that order                                                                                                           |
 | Option name                       | Visible text as **`Combobox.Menu.Item`** children, so the option's accessible name matches what is shown                                                                                                                            |
-| Second form input _(conditional)_ | Visually hide it, and keep `aria-hidden` and `tabIndex={-1}` (see **Second form input** above)                                                                                                                                      |
+| Second form input _(conditional)_ | Spread `formInputProps` from **`useComboboxInputConstrained`** onto that input and leave `aria-hidden` and `tabIndex={-1}` in place (see **Second form input** above)                                                                |
 | Disabled options _(conditional)_  | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`Combobox.Menu.Item`**s                                                                                                                                     |
 | Empty results _(conditional)_     | A non-interactive message when there are no options. Do not use **`Combobox.Menu.Item`** for that message                                                                                                                           |
 | Programmatic focus _(conditional)_ | `ref` and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                                                         |
 
 **Summary for code generation:**
 
-- **REQUIRED:** visible label, **`FormField.Input`** on the visible combobox, menu structure
+- **REQUIRED:** visible label, **`FormField.Input as={Combobox.Input}`**, menu structure
   (**`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**,
-  **`Combobox.Menu.Item`**), open the list when the user types, and option text as the accessible
-  name.
-- **CONDITIONAL:** a visually hidden second form input that keeps `aria-hidden` and
-  `tabIndex={-1}`, disabled options (`nonInteractiveIds` + `aria-disabled`), an empty-state
-  message, programmatic focus via `ref`. See
-  [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
+  **`Combobox.Menu.Item`**), and option text as the accessible name.
+- **CONDITIONAL:** `model.events.show` when suggestions should appear as the user types, a second
+  form input that spreads `formInputProps` from **`useComboboxInputConstrained`**, disabled options
+  (`nonInteractiveIds` + `aria-disabled`), an empty-state message, programmatic focus via `ref`.
+  See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
   conditionals (hint/error, required, stable `id`).
 
 ### Anti-Patterns
@@ -275,8 +280,9 @@ to supply instead):
   **`Combobox.Menu.List`** (`role="listbox"`). Use **`Combobox.Menu.Item`**.
 - **Dialog-style focus props**: Do not set **`initialFocusRef`** or **`returnFocusRef`**. The list
   does not take DOM focus.
-- **Exposed form input**: When a second input holds the submitted value, do not leave it visible,
-  and do not remove its `aria-hidden` or `tabIndex={-1}`.
+- **Exposed form input**: When a second input holds the submitted value, spread `formInputProps`
+  from **`useComboboxInputConstrained`** onto it. Do not remove `aria-hidden` or `tabIndex={-1}`
+  from those props, and do not set those attributes by hand on another input.
 - **Incomplete menu**: Do not omit **`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**,
   **`Combobox.Menu.List`**, or **`Combobox.Menu.Item`**, and do not render the list outside the
   popper.
