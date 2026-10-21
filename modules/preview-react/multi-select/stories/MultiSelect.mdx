@@ -1,17 +1,14 @@
 import {Meta} from '@storybook/blocks';
-import {
-  ExampleCodeBlock,
-  SymbolDoc,
-  Specifications,
-} from '@workday/canvas-kit-docs';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
+import {Complex} from './examples/Complex';
+import {Controlled} from './examples/Controlled';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
-import {Complex} from './examples/Complex';
 import {Icons} from './examples/Icons';
 import {InitialSelectedItems} from './examples/InitialSelectedItems';
-import {Controlled} from './examples/Controlled';
 import {Searching} from './examples/Searching';
 
 import MultiSelectStoriesMeta from './MultiSelect.stories';
@@ -33,9 +30,9 @@ yarn add @workday/canvas-kit-preview-react
 ### Basic Example
 
 `MultiSelect` supports a
-[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you
-pass an array of items via the `items` prop and provide a render function to display the items. The
-items may be provided as an
+[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you pass an
+array of items via the `items` prop and provide a render function to display the items. The items
+may be provided as an
 [array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
 [array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
 
@@ -134,8 +131,8 @@ and **`MultiSelect.Item`**. Set **`data-id`** to the item id, and put the visibl
 **`MultiSelect.Item.Text`**.
 
 ```tsx
-import {FormField} from '@workday/canvas-kit-react/form-field';
 import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
 
 const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 
@@ -177,25 +174,21 @@ Selecting an option does not close the list.
   **`MultiSelect.SearchInput`** is editable.
 - **`aria-activedescendant`**: set to the active option's id while the list is open, and removed
   when the list is closed. DOM focus stays on the visible input. Options are not tab stops.
-- **Hidden form input**: rendered inside the field with `aria-hidden` and `tabIndex={-1}`. Its
-  value is the selected ids joined with `", "`. A `name` passed to **`FormField.Input`** is placed
-  on this input. `focus()` and `blur()` on it are forwarded to the visible combobox. The visible
-  input shows the selected labels joined with `", "` and is excluded from form submission.
+- **Hidden form input**: rendered inside the field with `aria-hidden` and `tabIndex={-1}`. Its value
+  is the selected ids joined with `", "`. A `name` passed to **`FormField.Input`** is placed on this
+  input. `focus()` and `blur()` on it are forwarded to the visible combobox. The visible input shows
+  the selected labels joined with `", "` and is excluded from form submission.
 - **`MultiSelect.List`**: `role="listbox"`, `id="{modelId}-list"`, and `aria-labelledby` set to the
   combobox model id. **`FormField.Input`** sets the visible input's `id` to `input-{id}`, so the
-  list's `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby`
-  on the list. The combobox name comes from **`FormField.Label`** through **`FormField.Input`**
+  list's `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby` on
+  the list. The combobox name comes from **`FormField.Label`** through **`FormField.Input`**
   (`aria-labelledby="label-{id}"` and `<label htmlFor>`).
 - **`MultiSelect.Item`**: `role="option"` and `aria-selected` from selection state. The option id
   matches `aria-activedescendant`. **`data-id`** must be the item id.
 - **Popup**: **`MultiSelect.Popper`** portals the list. **`MultiSelect.Card`** is presentational.
   The list closes on <kbd>Escape</kbd>, on pointer interaction outside the popup, and when the
-  visible input blurs. Focus is not moved into the list. `initialFocusRef` and `returnFocusRef`
-  are not applied.
-- **Selected values**: when at least one item is selected, a horizontal `role="listbox"` is rendered
-  under the input. It does not receive the **`FormField`** label. Each value is a removable pill.
-  The remove button is the tab stop (`aria-selected="true"`). Its accessible name is
-  **`removeLabel`** plus the selected value's text.
+  visible input blurs. Focus is not moved into the list. `initialFocusRef` and `returnFocusRef` are
+  not applied.
 - **Chevron and search icons**: no accessible name is set. Pointer events are disabled on those
   icons, so they are not separate controls.
 - **`MultiSelect.SearchInput`** clear control: `role="presentation"` and `tabIndex={-1}`. It is not
@@ -203,15 +196,14 @@ Selecting an option does not close the list.
 - **Virtualization**: off by default (`shouldVirtualize` is `false`). When it is enabled, rendered
   options include `aria-setsize` and `aria-posinset`.
 - **`FormField`**: `aria-describedby` (`hint-{id}` when an `id` exists), `required` when
-  `isRequired`, and `aria-invalid="true"` when `error="error"`. Caution (`error="caution"`) does
-  not set `aria-invalid`.
+  `isRequired`, and `aria-invalid="true"` when `error="error"`. Caution (`error="caution"`) does not
+  set `aria-invalid`.
 
 **Keyboard** (_focus remains on the combobox input while the options list is used; that list is
 vertical_):
 
 - <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move to and from the input (native tab order).
-  Leaving the input blurs it and closes the options list. The next tab stop is one selected item's
-  remove button, when a value is selected.
+  Leaving the input blurs it and closes the options list.
 - Clicking **`FormField.Label`** moves focus to the input and toggles the list, because the label
   click is forwarded to the input. Clicking the input opens the list if it is closed and closes it
   if it is open.
@@ -231,20 +223,11 @@ vertical_):
 - **`MultiSelect.Input`** does not accept typed values. Printable characters open the list only on
   **`MultiSelect.SearchInput`**.
 
-**Selected values** (_horizontal roving tabindex on the remove button_):
-
-- One remove button is in the tab order. <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> move to the
-  previous or next selected value and wrap. In right-to-left languages those arrows are swapped.
-  <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last selected value.
-- <kbd>Enter</kbd> or <kbd>Space</kbd> activates the remove button. <kbd>Backspace</kbd> or
-  <kbd>Delete</kbd> removes that value. Focus moves to another selected value, or back to the
-  combobox input when none remain.
-
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
 - On focus, assistive technology announces the field label and, when applicable: required state,
-  invalid state (`error="error"`), hint or error text via `aria-describedby`, and the current
-  value (the selected labels).
+  invalid state (`error="error"`), hint or error text via `aria-describedby`, and the current value
+  (the selected labels).
 - The control is announced as a combobox. Collapsed vs expanded follows `aria-expanded`. While the
   options list is open, the active option is exposed through `aria-activedescendant` on the focused
   input.
@@ -253,7 +236,6 @@ vertical_):
   **`MultiSelect.Item.Text`**.
 - A selected value's remove button should be announced with **`removeLabel`** and that value (for
   example, "Remove Olives" when **`removeLabel`** is "Remove").
-- The selected-values listbox is not named by **`FormField.Label`**.
 - The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
 - A disabled field may be announced as unavailable and is skipped in the tab order. Its remove
   buttons are disabled as well.
@@ -265,8 +247,8 @@ For label, input, and hint association, see
 
 ### Accessibility Requirements
 
-Required in application code for an accessible `MultiSelect`. Rows marked _(conditional)_ apply
-only when the situation matches—otherwise omit.
+Required in application code for an accessible `MultiSelect`. Rows marked _(conditional)_ apply only
+when the situation matches—otherwise omit.
 
 **If no design spec is provided:** use a visible **`FormField.Label`**,
 **`FormField.Input as={MultiSelect.Input}`**, a translated **`removeLabel`**, and the menu
@@ -284,10 +266,10 @@ value is invalid. Use `error="caution"` only for a warning; it does not set `ari
 
 **Searching** _(conditional)_:
 
-When the field filters options as the user types, use **`FormField.Input as={MultiSelect.SearchInput}`**
-as in [Searching](#searching). A printable character opens the list. Keep the clear control as
-rendered. When there are no options, render a non-interactive message. Do not use
-**`MultiSelect.Item`** for that message.
+When the field filters options as the user types, use
+**`FormField.Input as={MultiSelect.SearchInput}`** as in [Searching](#searching). A printable
+character opens the list. Keep the clear control as rendered. When there are no options, render a
+non-interactive message. Do not use **`MultiSelect.Item`** for that message.
 
 **Disabled options** _(conditional)_:
 
@@ -298,27 +280,27 @@ will not select an option with `aria-disabled="true"`. Do not use styling alone.
 **Programmatic focus** _(conditional — omit by default)_:
 
 Use a `ref` on **`FormField.Input`** when the product needs to move focus to the combobox after an
-action. `focus()` is forwarded to the visible input. Do not attach a `ref` or call `focus()`
-unless the design or developer asks for it.
+action. `focus()` is forwarded to the visible input. Do not attach a `ref` or call `focus()` unless
+the design or developer asks for it.
 
 **Icons** _(conditional)_:
 
 When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible name. See
 [With Icons](#with-icons). An icon does not replace that text.
 
-| Requirement                         | How to satisfy                                                                                                                                                                                                 |
-| ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Input wiring                        | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
-| Remove control name                 | Translated **`removeLabel`** on **`FormField.Input`** (for example, `"Remove"`) so each remove button is named with that action and the selected value                                                          |
-| Menu structure                      | **`MultiSelect.Popper`**, **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`** in that order                                                                                             |
-| Option identity                     | **`data-id`** on **`MultiSelect.Item`** set to the item id. For objects, use `getId` / `getTextValue` when the fields are not `id` and `text`. See [Complex](#complex)                                          |
-| Option name                         | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                            |
-| Hint or error _(conditional)_       | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                        |
-| Searching _(conditional)_           | **`FormField.Input as={MultiSelect.SearchInput}`**. Empty results are a non-interactive message, not **`MultiSelect.Item`**. See [Searching](#searching)                                                       |
-| Disabled field _(conditional)_      | **`disabled`** on **`FormField.Input`**. See [Disabled Example](#disabled-example)                                                                                                                             |
-| Disabled options _(conditional)_    | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`MultiSelect.Item`**s                                                                                                                  |
-| Icons _(conditional)_               | **`MultiSelect.Item.Icon`** plus **`MultiSelect.Item.Text`**. See [With Icons](#with-icons)                                                                                                                    |
-| Programmatic focus _(conditional)_  | `ref` on **`FormField.Input`** and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                          |
+| Requirement                        | How to satisfy                                                                                                                                                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
+| Remove control name                | Translated **`removeLabel`** on **`FormField.Input`** (for example, `"Remove"`) so each remove button is named with that action and the selected value                                                                  |
+| Menu structure                     | **`MultiSelect.Popper`**, **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`** in that order                                                                                                      |
+| Option identity                    | **`data-id`** on **`MultiSelect.Item`** set to the item id. For objects, use `getId` / `getTextValue` when the fields are not `id` and `text`. See [Complex](#complex)                                                  |
+| Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                     |
+| Hint or error _(conditional)_      | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                                |
+| Searching _(conditional)_          | **`FormField.Input as={MultiSelect.SearchInput}`**. Empty results are a non-interactive message, not **`MultiSelect.Item`**. See [Searching](#searching)                                                                |
+| Disabled field _(conditional)_     | **`disabled`** on **`FormField.Input`**. See [Disabled Example](#disabled-example)                                                                                                                                      |
+| Disabled options _(conditional)_   | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`MultiSelect.Item`**s                                                                                                                           |
+| Icons _(conditional)_              | **`MultiSelect.Item.Icon`** plus **`MultiSelect.Item.Text`**. See [With Icons](#with-icons)                                                                                                                             |
+| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                    |
 
 **Summary for code generation:**
 
@@ -339,8 +321,8 @@ to supply instead):
 
 - **Missing `FormField` wiring**: Do not render **`MultiSelect.Input`** without **`FormField`**,
   **`FormField.Label`**, and **`FormField.Input`**. Do not pass a `label` prop to **`FormField`**.
-  For shared FormField anti-patterns (manual label ARIA, placeholder-only labels, color-only
-  errors, broken ID references), see
+  For shared FormField anti-patterns (manual label ARIA, placeholder-only labels, color-only errors,
+  broken ID references), see
   [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
 - **Unnamed remove buttons**: Do not omit **`removeLabel`**. The selected value's text is not an
   action name by itself.
@@ -350,13 +332,10 @@ to supply instead):
   Do not retarget the list's `aria-labelledby` at the Form Field label. Do not make
   **`MultiSelect.Item`** focusable or add a roving `tabIndex` — the active option is
   **`aria-activedescendant`** on the input.
-- **Labeled selected-values list**: Do not set `aria-labelledby` on **`MultiSelect.Input`**
-  expecting it to name the selected-values listbox. That attribute names the combobox input. The
-  selected-values listbox is not given the field label.
 - **Wrong option role**: Do not use **`Menu.Item`** (`role="menuitem"`) inside
   **`MultiSelect.List`** (`role="listbox"`). Use **`MultiSelect.Item`**.
-- **Missing option identity or name**: Do not omit **`data-id`**, and do not use an icon as the
-  only content of **`MultiSelect.Item`**.
+- **Missing option identity or name**: Do not omit **`data-id`**, and do not use an icon as the only
+  content of **`MultiSelect.Item`**.
 - **Dialog-style focus props**: Do not set **`initialFocusRef`** or **`returnFocusRef`**. The
   options list does not take DOM focus.
 - **A second visible value input**: The hidden form input already submits the selected ids. Do not
