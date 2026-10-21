@@ -40,11 +40,8 @@ interaction behavior.
 
 You can render an icon inside the `Pill` with `Pill.Icon`. It will render a `plusIcon` by default,
 but it can be customized by providing an icon to the `icon` prop. Because it uses `SystemIcon` under
-the hood, you also have access to all `SystemIconProps`.
-
-#### Accessibility
-
-You must provide an `aria-label` to the `Pill.Icon` for proper accessibility.
+the hood, you also have access to all `SystemIconProps`. Provide an `aria-label` on `Pill.Icon`.
+That label is part of the button’s accessible name. See [Accessibility](#accessibility).
 
 <ExampleCodeBlock code={Basic} />
 
@@ -79,13 +76,14 @@ You can define a removable `Pill` by providing a `variant='removable'` prop.
 
 ```tsx
 <Pill variant="removable">
-  Pink Shirts
-  <Pill.IconButton onClick={() => console.warn('clicked')} />
+  <Pill.Label>Pink Shirts</Pill.Label>
+  <Pill.IconButton aria-label="Remove" onClick={() => console.warn('clicked')} />
 </Pill>
 ```
 
 In this case, we use a `Pill.IconButton` because the `X` becomes the focusable and clickable
-element.
+element. `Pill.Label` is the item name. `aria-label` on `Pill.IconButton` is the action, such as
+"Remove".
 
 The default icon for `Pill.IconButton` is `xSmallIcon` but this can also be overwritten by passing
 an `icon` prop to `Pill.IconButton`
@@ -109,6 +107,197 @@ accordingly.
 or view the example below.
 
 <ExampleCodeBlock code={CustomStyles} />
+
+## Accessibility
+
+The primary accessibility goal is a visible, programmatically determinable name on the element that
+performs the action. A default **`Pill`** is a native button. `variant="readOnly"` is static text.
+`variant="removable"` keeps the action on **`Pill.IconButton`**.
+
+Use a default **`Pill`** when activating the pill performs an in-page action, such as filtering or
+applying a label. Use `variant="readOnly"` when the pill only displays information. Use
+`variant="removable"` when the only action is removing that item.
+
+Use [Button](/components/buttons/#accessibility) for a general action that is not a label or filter
+token. Use [Hyperlink](/components/hyperlink/) when the control navigates to a URL. Use
+[Checkbox](/components/inputs/checkbox/#accessibility) when the choice has a checked state, and
+[Segmented Control](/components/buttons/segmented-control/) when the user picks one option from a
+mutually exclusive group. **`Pill`** does not set `aria-pressed`, `aria-checked`, or
+`aria-selected`.
+
+See the [Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/button/) and Canvas Kit
+[Accessibility overview](/guides/accessibility/overview/).
+
+### Minimum Accessible Structure
+
+The following matches [Basic Pills](#basic-pills), [Read Only](#read-only), and
+[Removable Pills](#removable-pills).
+A text-only pill can use visible children. Add **`Pill.Label`** when the pill also has an icon,
+avatar, count, or remove button.
+
+```tsx
+import {Pill} from '@workday/canvas-kit-react/pill';
+
+<Pill onClick={() => {}}>
+  <Pill.Icon aria-label="Add user" />
+  <Pill.Label>Regina Skeltor</Pill.Label>
+</Pill>;
+
+<Pill variant="readOnly">Read-only</Pill>;
+
+<Pill variant="removable">
+  <Pill.Label>Pink Shirts</Pill.Label>
+  <Pill.IconButton aria-label="Remove" onClick={() => {}} />
+</Pill>;
+```
+
+**`Pill.IconButton`** is only for `variant="removable"`. On the default pill it would nest a button
+inside a button.
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by Pill_):
+
+- **Default `Pill`**: Renders a native `<button>`. Visible children, **`Pill.Label`** text, and
+  **`Pill.Count`** text are inside that button and form its accessible name. Neither this button nor
+  **`Pill.IconButton`** sets `type`. In a form, a `<button>` with no `type` submits the form.
+- **`usePillModel`**: Assigns an `id` with `useUniqueId` unless you pass **`id`**. That id is used
+  for **`Pill.Label`** (`label-${id}`) and **`Pill.IconButton`** (`removable-${id}`). It is not
+  copied onto the default button.
+- **`Pill.Label`**: Renders a `<span>` with `id="label-${id}"` and wraps it in **`OverflowTooltip`**
+  (`type="muted"`). The full label text stays in the accessibility tree when `maxWidth` truncates
+  it (default `200`). The tooltip is a visual hover affordance. It does not set `aria-label` or
+  `aria-describedby`. See [Tooltip](/components/popups/tooltip/) overflowing content.
+- **`Pill.Icon`**: Renders **`SystemIcon`** with `role="img"`. An **`aria-label`** on **`Pill.Icon`**
+  is included in the parent button’s accessible name, in DOM order. Place the icon before
+  **`Pill.Label`**, as in [Basic Pills](#basic-pills), so the icon is spoken first.
+- **`Pill.Avatar`**: Passes `isDecorative` to [Avatar](/components/indicators/avatar/#accessibility),
+  so the photo is hidden from assistive technology. The person’s name belongs in **`Pill.Label`**.
+  **`name`** on **`Pill.Avatar`** supplies initials when no image is shown.
+- **`Pill.Count`**: Renders a `<span>`. Its text is part of the parent button’s accessible name and
+  has no extra role.
+- **`variant="readOnly"`**: Renders a `<span>`, not a button, sets that span’s `id` to the model
+  id, and wraps `children` in **`Pill.Label`**. The span is not in the tab order. Pass text
+  children only — another **`Pill.Label`** inside would duplicate `label-${id}`.
+- **`variant="removable"`**: Renders a `<span>` for the pill. **`Pill.IconButton`** renders the
+  `<button>` and sets `aria-labelledby` to the icon id and the label id. The button’s accessible
+  name is the icon **`aria-label`** plus the **`Pill.Label`** text, in that order. Visible text that
+  is not inside **`Pill.Label`** is not part of that name. **`Pill.IconButton`** shows its icon
+  only.
+- **`disabled`**: On the default pill, sets the native `disabled` attribute on the button. On a
+  removable pill, sets it on **`Pill.IconButton`**. Disabled buttons are skipped in the tab order.
+- **Focus**: The default button and **`Pill.IconButton`** use `:focus-visible`. The removable and
+  read-only containers are not focusable.
+- **`ref`**: Forwards to the root element: the `<button>` for a default pill, or the `<span>` for
+  `readOnly` and `removable`.
+
+**Keyboard** (_native button behavior on the element that is actually a button_):
+
+- **Default**: <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move to the pill.
+  <kbd>Enter</kbd> or <kbd>Space</kbd> activates it.
+- **Removable**: <kbd>Tab</kbd> moves to each **`Pill.IconButton`**. <kbd>Enter</kbd> or
+  <kbd>Space</kbd> activates that button. The label is not a separate control. Arrow keys do not
+  move between pills.
+- **Read-only**: The pill is not in the tab order and has no keyboard action.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On a default pill, assistive technology announces the button name and role. With
+  **`Pill.Icon`** `aria-label="Add user"` and **`Pill.Label`** “Regina Skeltor”, that is “Add user
+  Regina Skeltor, button”. With visible text “Shoes” and **`Pill.Count`** “30”, that is “Shoes 30,
+  button”.
+- A decorative **`Pill.Avatar`** photo is not announced. The **`Pill.Label`** text is the name. When
+  initials are showing, those characters can be included with the label.
+- On a removable pill, assistive technology announces the remove button, not the surrounding span.
+  With **`aria-label="Remove"`** and **`Pill.Label`** “Pink Shirts”, that is “Remove Pink Shirts,
+  button”.
+- Disabled buttons are announced as unavailable and are not in the tab order.
+- Read-only pill text is static. It is not announced as a button.
+- Truncated text is still the accessible name. The overflow tooltip is not announced.
+
+### Accessibility Requirements
+
+Required in application code for an accessible pill. Rows marked _(conditional)_ apply only when the
+situation matches—otherwise omit.
+
+**If no design spec is provided:** use a default **`Pill`** with non-empty visible text. Omit
+**`variant`**, **`Pill.Icon`**, **`Pill.Avatar`**, **`Pill.Count`**, **`Pill.IconButton`**,
+**`disabled`**, **`aria-label`**, a custom **`id`**, **`as`**, **`type`**, and a **`ref`**.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Attach a `ref` only when the product must move focus after an action. For a default pill, put the
+`ref` on **`Pill`**. For a removable pill, put it on **`Pill.IconButton`**. The read-only and
+removable containers are `<span>` elements.
+
+| Requirement | How to satisfy |
+| --- | --- |
+| Accessible name | Non-empty visible text. Use **`Pill.Label`** for that text when the pill also has **`Pill.Icon`**, **`Pill.Avatar`**, **`Pill.Count`**, or **`Pill.IconButton`**. |
+| Read-only _(conditional)_ | `variant="readOnly"` and visible text as children. The component wraps those children in **`Pill.Label`**. Do not add another **`Pill.Label`**. |
+| Removable _(conditional)_ | `variant="removable"`, **`Pill.Label`** with the item name, and **`Pill.IconButton`** with an action **`aria-label`** such as `"Remove"` plus the remove `onClick`. The announced name is the action plus the label. |
+| Leading icon _(conditional)_ | **`Pill.Icon`** with a non-empty **`aria-label`** that describes the icon, then **`Pill.Label`**. The icon label is spoken before the pill text, so it should add meaning. |
+| Avatar _(conditional)_ | **`Pill.Avatar`** before **`Pill.Label`**. Keep the person’s name in **`Pill.Label`**. |
+| Count _(conditional)_ | **`Pill.Count`** with text that still makes sense when spoken after the label, as in [Count](#count). |
+| Disabled _(conditional)_ | **`disabled`** on **`Pill`** when the action is unavailable. |
+| Inside a form _(conditional)_ | **`type="button"`** on the default **`Pill`**, or on **`Pill.IconButton`** when the pill is removable, when activating it must not submit the form. |
+| Group of pills _(conditional)_ | A `<ul>` and `<li>` when the spec presents the pills as a list. Each pill still needs its own name. |
+| Programmatic focus _(conditional)_ | `ref` on the button that should receive focus — **`Pill`** by default, **`Pill.IconButton`** when removable. Omit by default. |
+
+**Avatar** _(conditional)_:
+
+```tsx
+import {Pill} from '@workday/canvas-kit-react/pill';
+
+<Pill onClick={() => {}}>
+  <Pill.Avatar name="Regina Skeltor" url="/avatar.png" />
+  <Pill.Label>Regina Skeltor</Pill.Label>
+</Pill>;
+```
+
+**Summary for code generation:**
+
+- **REQUIRED:** a default **`Pill`** with non-empty visible text
+- **CONDITIONAL:** `variant="readOnly"` with text children only; `variant="removable"` with
+  **`Pill.Label`** and an action **`aria-label`** on **`Pill.IconButton`**; **`Pill.Icon`**
+  **`aria-label`**; **`Pill.Avatar`**; **`Pill.Count`**; **`disabled`** on **`Pill`**;
+  **`type="button"`** on the pill button or **`Pill.IconButton`** inside a form; list markup;
+  programmatic focus on the element that is the button
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- Use a `<div>`, `<span>`, or `role="button"` in place of a default **`Pill`**, or set **`as`** to a
+  non-button element — the default **`Pill`** is already a `<button>`
+- Use **`Pill.IconButton`** on a default **`Pill`**, or omit it on `variant="removable"` — only the
+  removable variant’s **`Pill.IconButton`** is the button
+- Omit **`Pill.Label`** on a removable pill, or put the item name only in **`Pill.IconButton`**
+  **`aria-label`** or as **`Pill.IconButton`** children — the button name is the action
+  **`aria-label`** plus **`Pill.Label`**
+- Repeat the item name in **`Pill.IconButton`** **`aria-label`** when **`Pill.Label`** already has
+  it — `aria-label="Remove Pink Shirts"` with label “Pink Shirts” is announced as “Remove Pink
+  Shirts Pink Shirts, button”
+- Set **`aria-label`** on the **`Pill`** container when visible text already names it — that
+  replaces the visible name on a default pill, and on a removable pill it is on the `<span>`, not
+  the button
+- Omit **`aria-label`** on **`Pill.Icon`**, or copy the **`Pill.Label`** text into that
+  **`aria-label`**
+- Use **`Pill.Avatar`** **`name`** as the only name, or pass `isDecorative={false}` — keep the name
+  in **`Pill.Label`**
+- Add **`Pill.Label`** inside `variant="readOnly"` — the component already wraps those children in
+  **`Pill.Label`**, and a second one duplicates `label-${id}`
+- Add `tabIndex` to a read-only pill or **`Pill.Label`** so the overflow tooltip can be focused —
+  the full text is already in the accessibility tree. See [Tooltip](/components/popups/tooltip/)
+- Set **`aria-pressed`**, **`aria-checked`**, **`aria-selected`**, `role="listbox"`, or a roving
+  tabindex — **`Pill`** does not implement a selection widget. Use
+  [Checkbox](/components/inputs/checkbox/#accessibility) or
+  [Segmented Control](/components/buttons/segmented-control/) when that is the interaction
+- Use **`aria-disabled`** instead of **`disabled`** on **`Pill`**
+- Pass `variant="default"` — omit **`variant`** for the interactive button
+- Use a default **`Pill`** for URL navigation — use [Hyperlink](/components/hyperlink/)
 
 ## Component API
 
