@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.4](https://github.com/Workday/canvas-kit/releases/tag/v16.2.4) (2026-10-21)
+
+### Components
+
+- fix: Update focus styles for SelectionGroup ([#4210](https://github.com/Workday/canvas-kit/pull/4210)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
 ## [v16.2.3](https://github.com/Workday/canvas-kit/releases/tag/v16.2.3) (2026-10-16)
 
 ### Components
