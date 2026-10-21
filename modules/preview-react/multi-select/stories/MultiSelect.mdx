@@ -38,8 +38,9 @@ may be provided as an
 
 Wrap `MultiSelect` around [Form Field](/components/inputs/form-field/). Use `FormField.Label` and
 `FormField.Input as={MultiSelect.Input}` so the visible label is the combobox name. Pass a
-translated `removeLabel` for each selected item's remove control. See
-[Accessibility](#accessibility).
+translated `removeLabel` as the action word only, such as "Remove". See
+[Removable Pills](/components/indicators/pill/#removable-pills) for the button name, and
+[Accessibility](#accessibility) for the MultiSelect requirements.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -110,8 +111,8 @@ You can set `initialSelectedIds` to the value that you want initially selected.
 `MultiSelect` is a preview component in `@workday/canvas-kit-preview-react`. It implements the
 WAI-ARIA [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for choosing more
 than one value from a list. The accessibility goal is a visible, persistent label on the combobox,
-an options list the user can browse while keyboard focus stays on the input, and a remove control
-for each selected value whose name includes that value.
+an options list the user can browse while keyboard focus stays on the input, and a
+[removable Pill](/components/indicators/pill/#removable-pills) for each selected value.
 
 Use a different component when it matches the interaction:
 
@@ -156,8 +157,9 @@ const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 ```
 
 **`FormField.Input`** gives the combobox a programmatically determinable name from
-**`FormField.Label`**. **`removeLabel`** is the action name on each selected item's remove button
-(for example, "Remove"). The component does not supply that word when **`removeLabel`** is omitted.
+**`FormField.Label`**. Pass **`removeLabel`** as the action word only, such as "Remove". MultiSelect
+does not supply that word when **`removeLabel`** is omitted. See
+[Removable Pills](/components/indicators/pill/#removable-pills).
 
 ### Built-in Behaviors
 
@@ -223,6 +225,13 @@ vertical_):
 - **`MultiSelect.Input`** does not accept typed values. Printable characters open the list only on
   **`MultiSelect.SearchInput`**.
 
+**Selected values** (_horizontal roving tabindex on the remove button_):
+
+- When a value is selected, one remove button is in the tab order after the combobox input.
+- <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> move to the previous or next selected value and wrap.
+  In right-to-left languages those arrows are swapped.
+- <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last selected value.
+
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
 - On focus, assistive technology announces the field label and, when applicable: required state,
@@ -234,8 +243,9 @@ vertical_):
 - Options are announced with selected or not-selected state (`aria-selected`). An option with
   **`aria-disabled`** is announced as disabled. The option name is the text in
   **`MultiSelect.Item.Text`**.
-- A selected value's remove button should be announced with **`removeLabel`** and that value (for
-  example, "Remove Olives" when **`removeLabel`** is "Remove").
+- A selected value's remove button uses the
+  [removable Pill](/components/indicators/pill/#built-in-behaviors) accessible name.
+  **`removeLabel`** is the action word.
 - The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
 - A disabled field may be announced as unavailable and is skipped in the tab order. Its remove
   buttons are disabled as well.
@@ -291,7 +301,7 @@ When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible
 | Requirement                        | How to satisfy                                                                                                                                                                                                          |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
-| Remove control name                | Translated **`removeLabel`** on **`FormField.Input`** (for example, `"Remove"`) so each remove button is named with that action and the selected value                                                                  |
+| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](/components/indicators/pill/#removable-pills)                                                                  |
 | Menu structure                     | **`MultiSelect.Popper`**, **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`** in that order                                                                                                      |
 | Option identity                    | **`data-id`** on **`MultiSelect.Item`** set to the item id. For objects, use `getId` / `getTextValue` when the fields are not `id` and `text`. See [Complex](#complex)                                                  |
 | Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                     |
@@ -304,8 +314,9 @@ When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible
 
 **Summary for code generation:**
 
-- **REQUIRED:** visible label, **`FormField.Input as={MultiSelect.Input}`**, translated
-  **`removeLabel`**, menu structure (**`MultiSelect.Popper`**, **`MultiSelect.Card`**,
+- **REQUIRED:** visible label, **`FormField.Input as={MultiSelect.Input}`**, action-only
+  **`removeLabel`** (see [Removable Pills](/components/indicators/pill/#removable-pills)), menu
+  structure (**`MultiSelect.Popper`**, **`MultiSelect.Card`**,
   **`MultiSelect.List`**, **`MultiSelect.Item`**), **`data-id`** equal to the item id, and option
   text in **`MultiSelect.Item.Text`**.
 - **CONDITIONAL:** hint or error inside **`FormField.Field`**, **`MultiSelect.SearchInput`** when
@@ -324,8 +335,9 @@ to supply instead):
   For shared FormField anti-patterns (manual label ARIA, placeholder-only labels, color-only errors,
   broken ID references), see
   [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
-- **Unnamed remove buttons**: Do not omit **`removeLabel`**. The selected value's text is not an
-  action name by itself.
+- **Unnamed or doubled remove names**: Pass an action-only **`removeLabel`**, such as `"Remove"`.
+  Do not omit it, and do not include the selected value in it. See
+  [Pill Anti-Patterns](/components/indicators/pill/#anti-patterns).
 - **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup` (the hook sets
   `"listbox"`), `aria-expanded`, `aria-autocomplete`, `aria-controls`, `aria-activedescendant`, or
   listbox `role` / `id` / `aria-labelledby` / `aria-label` on the input or **`MultiSelect.List`**.
