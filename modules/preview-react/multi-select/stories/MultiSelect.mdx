@@ -118,7 +118,7 @@ Use a different component when it matches the interaction:
 
 - One value from a fixed list: [**Select**](/components/inputs/select/).
 - A custom combobox (one value, or any typed value with suggestions):
-  [**Combobox**](/docs/features-combobox--docs#accessibility).
+  [**Combobox**](/get-started/for-developers/guides/combobox/#accessibility).
 
 See [FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
 label, hint, error, and required wiring.
@@ -180,11 +180,9 @@ Selecting an option does not close the list.
   is the selected ids joined with `", "`. A `name` passed to **`FormField.Input`** is placed on this
   input. `focus()` and `blur()` on it are forwarded to the visible combobox. The visible input shows
   the selected labels joined with `", "` and is excluded from form submission.
-- **`MultiSelect.List`**: `role="listbox"`, `id="{modelId}-list"`, and `aria-labelledby` set to the
-  combobox model id. **`FormField.Input`** sets the visible input's `id` to `input-{id}`, so the
-  list's `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby` on
-  the list. The combobox name comes from **`FormField.Label`** through **`FormField.Input`**
-  (`aria-labelledby="label-{id}"` and `<label htmlFor>`).
+- **`MultiSelect.List`**: `role="listbox"` and `id="{modelId}-list"`. The combobox name comes from
+  **`FormField.Label`** through **`FormField.Input`** (`aria-labelledby="label-{id}"` and
+  `<label htmlFor>`).
 - **`MultiSelect.Item`**: `role="option"` and `aria-selected` from selection state. The option id
   matches `aria-activedescendant`. **`data-id`** must be the item id.
 - **Popup**: **`MultiSelect.Popper`** portals the list. **`MultiSelect.Card`** is presentational.
@@ -215,9 +213,9 @@ vertical_):
   skipped. <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last option while the list is open.
 - <kbd>Enter</kbd> while the list is open selects the active option unless that option has
   `aria-disabled="true"`. The list stays open. <kbd>Enter</kbd> does not submit the form while the
-  list is open.
-- <kbd>Space</kbd> while the list is open and an option is active toggles that option.
-  **`MultiSelect.SearchInput`** types the character instead when no option is active.
+  list is open. <kbd>Space</kbd> does not select an option. On **`MultiSelect.Input`** it has no
+  effect. On **`MultiSelect.SearchInput`** it is typed into the field, including when an option is
+  active.
 - <kbd>Escape</kbd> closes the list. Focus remains on the input. After close,
   `aria-activedescendant` is removed.
 - Activating an option with the pointer selects it, keeps focus on the input, and leaves the list
@@ -227,10 +225,15 @@ vertical_):
 
 **Selected values** (_horizontal roving tabindex on the remove button_):
 
+This keyboard replaces the standalone removable Pill keyboard. One remove button is in the tab
+order, and arrow keys move between selected values.
+
 - When a value is selected, one remove button is in the tab order after the combobox input.
 - <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> move to the previous or next selected value and wrap.
-  In right-to-left languages those arrows are swapped.
 - <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last selected value.
+- <kbd>Backspace</kbd> / <kbd>Delete</kbd> remove the focused value. Focus moves to another selected
+  value, or back to the combobox input when none remain.
+- <kbd>Enter</kbd> / <kbd>Space</kbd> activate the remove button and remove that value the same way.
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
@@ -244,8 +247,8 @@ vertical_):
   **`aria-disabled`** is announced as disabled. The option name is the text in
   **`MultiSelect.Item.Text`**.
 - A selected value's remove button uses the
-  [removable Pill](/components/indicators/pill/#built-in-behaviors) accessible name.
-  **`removeLabel`** is the action word.
+  [removable Pill](/components/indicators/pill/#removable-pills) accessible name.
+  **`removeLabel`** is the action word, and the selected text supplies the value.
 - The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
 - A disabled field may be announced as unavailable and is skipped in the tab order. Its remove
   buttons are disabled as well.
@@ -274,13 +277,6 @@ popup, and **`FormField.Hint`** inside **`FormField.Field`**. **`FormField`** al
 `aria-describedby` at `hint-{id}`. Prefix error text with "Error:". Use `error="error"` when the
 value is invalid. Use `error="caution"` only for a warning; it does not set `aria-invalid`.
 
-**Searching** _(conditional)_:
-
-When the field filters options as the user types, use
-**`FormField.Input as={MultiSelect.SearchInput}`** as in [Searching](#searching). A printable
-character opens the list. Keep the clear control as rendered. When there are no options, render a
-non-interactive message. Do not use **`MultiSelect.Item`** for that message.
-
 **Disabled options** _(conditional)_:
 
 When an option is unavailable, set **`nonInteractiveIds`** on the model (arrow keys skip those ids)
@@ -301,27 +297,24 @@ When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible
 | Requirement                        | How to satisfy                                                                                                                                                                                                          |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
-| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](/components/indicators/pill/#removable-pills)                                                                  |
-| Menu structure                     | **`MultiSelect.Popper`**, **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`** in that order                                                                                                      |
-| Option identity                    | **`data-id`** on **`MultiSelect.Item`** set to the item id. For objects, use `getId` / `getTextValue` when the fields are not `id` and `text`. See [Complex](#complex)                                                  |
-| Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                     |
-| Hint or error _(conditional)_      | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                                |
-| Searching _(conditional)_          | **`FormField.Input as={MultiSelect.SearchInput}`**. Empty results are a non-interactive message, not **`MultiSelect.Item`**. See [Searching](#searching)                                                                |
-| Disabled field _(conditional)_     | **`disabled`** on **`FormField.Input`**. See [Disabled Example](#disabled-example)                                                                                                                                      |
-| Disabled options _(conditional)_   | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`MultiSelect.Item`**s                                                                                                                           |
-| Icons _(conditional)_              | **`MultiSelect.Item.Icon`** plus **`MultiSelect.Item.Text`**. See [With Icons](#with-icons)                                                                                                                             |
-| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                    |
+| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](/components/indicators/pill/#removable-pills)                                                                        |
+| Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                    |
+| Hint or error _(conditional)_      | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                               |
+| Disabled field _(conditional)_     | **`disabled`** on **`FormField.Input`** so the field and its remove buttons are unavailable and skipped in the tab order. See [Disabled Example](#disabled-example)                                                    |
+| Disabled options _(conditional)_   | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`MultiSelect.Item`**s                                                                                                                          |
+| Icons _(conditional)_              | **`MultiSelect.Item.Icon`** plus **`MultiSelect.Item.Text`**. See [With Icons](#with-icons)                                                                                                                            |
+| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                   |
 
 **Summary for code generation:**
 
 - **REQUIRED:** visible label, **`FormField.Input as={MultiSelect.Input}`**, action-only
-  **`removeLabel`** (see [Removable Pills](/components/indicators/pill/#removable-pills)), menu
-  structure (**`MultiSelect.Popper`**, **`MultiSelect.Card`**,
-  **`MultiSelect.List`**, **`MultiSelect.Item`**), **`data-id`** equal to the item id, and option
-  text in **`MultiSelect.Item.Text`**.
-- **CONDITIONAL:** hint or error inside **`FormField.Field`**, **`MultiSelect.SearchInput`** when
-  the user filters by typing, **`disabled`**, disabled options (`nonInteractiveIds` +
-  `aria-disabled`), an empty-state message, icons alongside option text, programmatic focus via
+  **`removeLabel`** (see [Removable Pills](/components/indicators/pill/#removable-pills)), option
+  text in **`MultiSelect.Item.Text`**, and the menu from
+  [Minimum Accessible Structure](#minimum-accessible-structure): **`MultiSelect.Popper`**,
+  **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`**, in that order, with
+  **`data-id`** on each item equal to the item id.
+- **CONDITIONAL:** hint or error inside **`FormField.Field`**, **`disabled`**, disabled options
+  (`nonInteractiveIds` + `aria-disabled`), icons alongside option text, programmatic focus via
   `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared
   FormField conditionals (required, stable `id`).
 
@@ -336,18 +329,20 @@ to supply instead):
   broken ID references), see
   [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
 - **Unnamed or doubled remove names**: Pass an action-only **`removeLabel`**, such as `"Remove"`.
-  Do not omit it, and do not include the selected value in it. See
-  [Pill Anti-Patterns](/components/indicators/pill/#anti-patterns).
+  Do not omit it, and do not include the selected value in it. The selected text is already part of
+  the button name. See [Removable Pills](/components/indicators/pill/#removable-pills).
 - **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup` (the hook sets
-  `"listbox"`), `aria-expanded`, `aria-autocomplete`, `aria-controls`, `aria-activedescendant`, or
-  listbox `role` / `id` / `aria-labelledby` / `aria-label` on the input or **`MultiSelect.List`**.
-  Do not retarget the list's `aria-labelledby` at the Form Field label. Do not make
-  **`MultiSelect.Item`** focusable or add a roving `tabIndex` — the active option is
+  `"listbox"`), `aria-expanded`, `aria-autocomplete`, `aria-controls`, or `aria-activedescendant`
+  on the input. Do not set `role` or `id` on **`MultiSelect.List`**. Do not add `aria-label` or
+  `aria-labelledby` on the list. The combobox name already comes from **`FormField.Label`**. Do not
+  make **`MultiSelect.Item`** focusable or add a roving `tabIndex` — the active option is
   **`aria-activedescendant`** on the input.
 - **Wrong option role**: Do not use **`Menu.Item`** (`role="menuitem"`) inside
   **`MultiSelect.List`** (`role="listbox"`). Use **`MultiSelect.Item`**.
 - **Missing option identity or name**: Do not omit **`data-id`**, and do not use an icon as the only
   content of **`MultiSelect.Item`**.
+- **Empty results as options**: When a search has no matches, do not use **`MultiSelect.Item`** for
+  the message. See [Searching](#searching).
 - **Dialog-style focus props**: Do not set **`initialFocusRef`** or **`returnFocusRef`**. The
   options list does not take DOM focus.
 - **A second visible value input**: The hidden form input already submits the selected ids. Do not
@@ -361,5 +356,5 @@ to supply instead):
   **`MultiSelect.List`**, or **`MultiSelect.Item`**, and do not render the list outside the popper.
 - **Wrong component**: Do not use **`MultiSelect`** for a single value. Use
   [**Select**](/components/inputs/select/). Do not start from
-  [**Combobox**](/docs/features-combobox--docs#accessibility) when this preview component already
+  [**Combobox**](/get-started/for-developers/guides/combobox/#accessibility) when this preview component already
   matches the interaction.
