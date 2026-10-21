@@ -44,25 +44,7 @@ Wrap `MultiSelect` around [Form Field](/components/inputs/form-field/). Use `For
 translated `removeLabel` for each selected item's remove control. See
 [Accessibility](#accessibility).
 
-```tsx
-<MultiSelect items={options}>
-  <FormField>
-    <FormField.Label>Your Label</FormField.Label>
-    <FormField.Input as={MultiSelect.Input} removeLabel="Remove" />
-    <MultiSelect.Popper>
-      <MultiSelect.Card>
-        <MultiSelect.List>
-          {item => (
-            <MultiSelect.Item data-id={item}>
-              <MultiSelect.Item.Text>{item}</MultiSelect.Item.Text>
-            </MultiSelect.Item>
-          )}
-        </MultiSelect.List>
-      </MultiSelect.Card>
-    </MultiSelect.Popper>
-  </FormField>
-</MultiSelect>
-```
+<ExampleCodeBlock code={Basic} />
 
 ### Disabled Example
 
