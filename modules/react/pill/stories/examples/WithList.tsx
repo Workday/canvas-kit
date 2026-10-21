@@ -18,28 +18,33 @@ const data = [
   'Jewelry',
 ];
 
-const flexWrapStyles = createStyles({
+const listStyles = createStyles({
   display: 'flex',
   flexWrap: 'wrap',
   gap: system.gap.sm,
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
 });
 
 export const WithList = () => {
   const [items, setItems] = React.useState(data);
 
   return (
-    <div className={flexWrapStyles}>
-      {items.map((cat, index) => {
+    <ul className={listStyles}>
+      {items.map(cat => {
         return (
-          <Pill key={index} variant="removable">
-            <Pill.Label>{cat}</Pill.Label>
-            <Pill.IconButton
-              aria-label="Remove"
-              onClick={() => setItems(items.filter(i => i !== cat))}
-            />
-          </Pill>
+          <li key={cat}>
+            <Pill variant="removable">
+              <Pill.Label>{cat}</Pill.Label>
+              <Pill.IconButton
+                aria-label="Remove"
+                onClick={() => setItems(items.filter(i => i !== cat))}
+              />
+            </Pill>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };

@@ -92,11 +92,13 @@ an `icon` prop to `Pill.IconButton`
 
 ### List of Pills
 
-`Pill`s can often represent multiple pieces of information such as a filtered list of categories or
-skills.
+`Pill`s often represent several related items, such as a filtered set of categories or skills. Use a
+`ul` with one `li` per `Pill`. Lay the list out with `createStyles`: `display: 'flex'`,
+`flexWrap: 'wrap'`, and a `gap` token. Reset the list’s default margin, padding, and markers so
+spacing comes from `gap`.
 
-In order to achieve this, use our `Flex` component to wrap each `Pill` and space them out
-accordingly.
+Each `Pill` keeps its own accessible name and tab stop. `Pill` does not move focus between items
+with arrow keys.
 
 <ExampleCodeBlock code={WithList} />
 
@@ -242,7 +244,7 @@ removable containers are `<span>` elements.
 | Count _(conditional)_ | **`Pill.Count`** with text that still makes sense when spoken after the label, as in [Count](#count). |
 | Disabled _(conditional)_ | **`disabled`** on **`Pill`** when the action is unavailable. |
 | Inside a form _(conditional)_ | **`type="button"`** on the default **`Pill`**, or on **`Pill.IconButton`** when the pill is removable, when activating it must not submit the form. |
-| Group of pills _(conditional)_ | A `<ul>` and `<li>` when the spec presents the pills as a list. Each pill still needs its own name. |
+| Group of pills _(conditional)_ | A `ul` with one `li` per pill, as in [List of Pills](#list-of-pills). Each pill still needs its own name. |
 | Programmatic focus _(conditional)_ | `ref` on the button that should receive focus — **`Pill`** by default, **`Pill.IconButton`** when removable. Omit by default. |
 
 **Avatar** _(conditional)_:
