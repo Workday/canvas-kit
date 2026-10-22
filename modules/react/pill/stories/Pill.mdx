@@ -99,7 +99,8 @@ an `icon` prop to `Pill.IconButton`
 spacing comes from `gap`.
 
 Each `Pill` keeps its own accessible name and tab stop. `Pill` does not move focus between items
-with arrow keys.
+with arrow keys. Removing a pill moves focus to the next pill’s remove button, or to the previous
+one when the removed pill is last.
 
 <ExampleCodeBlock code={WithList} />
 
@@ -222,8 +223,8 @@ When **`Pill.IconButton`** removes its own pill, move focus to an element that r
 next pill’s **`Pill.IconButton`**. When the removed pill is last, use the previous pill’s
 **`Pill.IconButton`**. When no pill remains, use another control that is still on the page, such as
 the control that adds a pill. Attach `ref` to **`Pill.IconButton`**. A `ref` on the removable
-**`Pill`** points at the `<span>`, which cannot take focus. [List of Pills](#list-of-pills) shows
-the list markup. Move focus in the remove handler.
+**`Pill`** points at the `<span>`, which cannot take focus. [List of Pills](#list-of-pills) moves
+focus in the remove handler.
 
 | Requirement                   | How to satisfy                                                                                                                                                                                                       |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

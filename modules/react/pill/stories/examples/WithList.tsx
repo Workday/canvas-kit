@@ -29,6 +29,24 @@ const listStyles = createStyles({
 
 export const WithList = () => {
   const [items, setItems] = React.useState(data);
+  const buttonRefs = React.useRef(new Map<string, HTMLButtonElement>());
+  const pendingFocus = React.useRef<string | null>(null);
+
+  React.useLayoutEffect(() => {
+    const category = pendingFocus.current;
+    if (!category) {
+      return;
+    }
+    pendingFocus.current = null;
+    buttonRefs.current.get(category)?.focus();
+  }, [items]);
+
+  const removeItem = (category: string) => {
+    const index = items.indexOf(category);
+    const nextItems = items.filter(item => item !== category);
+    pendingFocus.current = nextItems[index] ?? nextItems[index - 1] ?? null;
+    setItems(nextItems);
+  };
 
   return (
     <ul className={listStyles}>
@@ -38,8 +56,15 @@ export const WithList = () => {
             <Pill variant="removable">
               <Pill.Label>{cat}</Pill.Label>
               <Pill.IconButton
+                ref={element => {
+                  if (element) {
+                    buttonRefs.current.set(cat, element);
+                  } else {
+                    buttonRefs.current.delete(cat);
+                  }
+                }}
                 aria-label="Remove"
-                onClick={() => setItems(items.filter(i => i !== cat))}
+                onClick={() => removeItem(cat)}
               />
             </Pill>
           </li>
