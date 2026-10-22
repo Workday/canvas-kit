@@ -12,6 +12,7 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  isElementRTL,
   subModelHook,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
@@ -86,43 +87,52 @@ const getSubmenuOffsetModifier = (parentRef?: ElementRef, targetRef?: ElementRef
 export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuPopper,
-})<ExtractProps<typeof Popper>>(({children, popperOptions, ...elemProps}, Element, model) => {
-  const parentContainerRef = model.UNSTABLE_parentModel?.state.containerRef;
-  const targetRef = model.state.targetRef;
+})<ExtractProps<typeof Popper>>(
+  ({children, fallbackPlacements, popperOptions, ...elemProps}, Element, model) => {
+    const parentContainerRef = model.UNSTABLE_parentModel?.state.containerRef;
+    const targetRef = model.state.targetRef;
+    const align = targetRef.current && isElementRTL(targetRef.current) ? 'end' : 'start';
 
-  // Popper measures this rect for both positioning and overflow checks, and still listens to the
-  // target's scroll containers through `anchorElement`.
-  const getAnchorClientRect = React.useCallback(() => {
-    const rects = getSubmenuAnchorRects(parentContainerRef, targetRef);
-    if (!rects) {
-      return targetRef.current?.getBoundingClientRect() ?? new DOMRect();
-    }
-    const {top, bottom, left, right} = rects.anchor;
-    return new DOMRect(left, top, right - left, bottom - top);
-  }, [parentContainerRef, targetRef]);
+    const submenuFallbackPlacements = React.useMemo(
+      (): Placement[] => fallbackPlacements ?? [`bottom-${align}`, `top-${align}`],
+      [fallbackPlacements, align]
+    );
 
-  const submenuPopperOptions = React.useMemo(
-    () => ({
-      ...popperOptions,
-      modifiers: [
-        getSubmenuOffsetModifier(parentContainerRef, targetRef),
-        ...(popperOptions?.modifiers ?? []),
-      ],
-    }),
-    [popperOptions, parentContainerRef, targetRef]
-  );
+    // Popper measures this rect for both positioning and overflow checks, and still listens to the
+    // target's scroll containers through `anchorElement`.
+    const getAnchorClientRect = React.useCallback(() => {
+      const rects = getSubmenuAnchorRects(parentContainerRef, targetRef);
+      if (!rects) {
+        return targetRef.current?.getBoundingClientRect() ?? new DOMRect();
+      }
+      const {top, bottom, left, right} = rects.anchor;
+      return new DOMRect(left, top, right - left, bottom - top);
+    }, [parentContainerRef, targetRef]);
 
-  return (
-    <Popper
-      placement="right-start"
-      getAnchorClientRect={getAnchorClientRect}
-      popperOptions={submenuPopperOptions}
-      {...elemProps}
-    >
-      {children}
-    </Popper>
-  );
-});
+    const submenuPopperOptions = React.useMemo(
+      () => ({
+        ...popperOptions,
+        modifiers: [
+          getSubmenuOffsetModifier(parentContainerRef, targetRef),
+          ...(popperOptions?.modifiers ?? []),
+        ],
+      }),
+      [popperOptions, parentContainerRef, targetRef]
+    );
+
+    return (
+      <Popper
+        placement="right-start"
+        getAnchorClientRect={getAnchorClientRect}
+        fallbackPlacements={submenuFallbackPlacements}
+        popperOptions={submenuPopperOptions}
+        {...elemProps}
+      >
+        {children}
+      </Popper>
+    );
+  }
+);
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
