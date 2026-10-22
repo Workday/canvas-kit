@@ -30,16 +30,16 @@ yarn add @workday/canvas-kit-preview-react
 ### Basic Example
 
 `MultiSelect` supports a
-[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you pass an
+[dynamic API](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#dynamic-items) where you pass an
 array of items via the `items` prop and provide a render function to display the items. The items
 may be provided as an
-[array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
-[array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
+[array of strings](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#array-of-strings) or an
+[array of objects](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#array-of-objects).
 
-Wrap `MultiSelect` around [Form Field](/components/inputs/form-field/). Use `FormField.Label` and
+Wrap `MultiSelect` around [Form Field](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs). Use `FormField.Label` and
 `FormField.Input as={MultiSelect.Input}` so the visible label is the combobox name. Pass a
 translated `removeLabel` as the action word only, such as "Remove". See
-[Removable Pills](/components/indicators/pill/#removable-pills) for the button name, and
+[Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) for the button name, and
 [Accessibility](#accessibility) for the MultiSelect requirements.
 
 <ExampleCodeBlock code={Basic} />
@@ -70,7 +70,7 @@ to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object
 ### With Icons
 
 Use `MultiSelect.Item.Icon` to render an icon for a `MultiSelect.Item`. The `icon` prop for
-`MultiSelect.Item.Icon` accepts [system icons](/assets/system-icons/) from
+`MultiSelect.Item.Icon` accepts [system icons](https://workday.github.io/canvas-kit/?path=/docs/assets-icon-components--docs) from
 `@workday/canvas-system-icons-web`.
 
 > **Note: `data-id` on `MultiSelect.Item` must match the item `id`. This identifies the option for
@@ -112,15 +112,15 @@ You can set `initialSelectedIds` to the value that you want initially selected.
 WAI-ARIA [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for choosing more
 than one value from a list. The accessibility goal is a visible, persistent label on the combobox,
 an options list the user can browse while keyboard focus stays on the input, and a
-[removable Pill](/components/indicators/pill/#removable-pills) for each selected value.
+[removable Pill](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) for each selected value.
 
 Use a different component when it matches the interaction:
 
-- One value from a fixed list: [**Select**](/components/inputs/select/).
+- One value from a fixed list: [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs).
 - A custom combobox (one value, or any typed value with suggestions):
-  [**Combobox**](/get-started/for-developers/guides/combobox/#accessibility).
+  [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#accessibility).
 
-See [FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for
+See [FormField's accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for
 label, hint, error, and required wiring.
 
 ### Minimum Accessible Structure
@@ -159,7 +159,7 @@ const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
 **`FormField.Input`** gives the combobox a programmatically determinable name from
 **`FormField.Label`**. Pass **`removeLabel`** as the action word only, such as "Remove". MultiSelect
 does not supply that word when **`removeLabel`** is omitted. See
-[Removable Pills](/components/indicators/pill/#removable-pills).
+[Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills).
 
 ### Built-in Behaviors
 
@@ -247,7 +247,7 @@ order, and arrow keys move between selected values.
   **`aria-disabled`** is announced as disabled. The option name is the text in
   **`MultiSelect.Item.Text`**.
 - A selected value's remove button uses the
-  [removable Pill](/components/indicators/pill/#removable-pills) accessible name.
+  [removable Pill](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) accessible name.
   **`removeLabel`** is the action word, and the selected text supplies the value.
 - The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
 - A disabled field may be announced as unavailable and is skipped in the tab order. Its remove
@@ -256,7 +256,7 @@ order, and arrow keys move between selected values.
   announced as separate operable controls.
 
 For label, input, and hint association, see
-[FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors).
+[FormField's Built-in Behaviors](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#built-in-behaviors).
 
 ### Accessibility Requirements
 
@@ -296,8 +296,8 @@ When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible
 
 | Requirement                        | How to satisfy                                                                                                                                                                                                          |
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
-| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](/components/indicators/pill/#removable-pills)                                                                        |
+| Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for label, hint, error, and required wiring |
+| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills)                                                                        |
 | Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                    |
 | Hint or error _(conditional)_      | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                               |
 | Disabled field _(conditional)_     | **`disabled`** on **`FormField.Input`** so the field and its remove buttons are unavailable and skipped in the tab order. See [Disabled Example](#disabled-example)                                                    |
@@ -308,14 +308,14 @@ When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible
 **Summary for code generation:**
 
 - **REQUIRED:** visible label, **`FormField.Input as={MultiSelect.Input}`**, action-only
-  **`removeLabel`** (see [Removable Pills](/components/indicators/pill/#removable-pills)), option
+  **`removeLabel`** (see [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills)), option
   text in **`MultiSelect.Item.Text`**, and the menu from
   [Minimum Accessible Structure](#minimum-accessible-structure): **`MultiSelect.Popper`**,
   **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`**, in that order, with
   **`data-id`** on each item equal to the item id.
 - **CONDITIONAL:** hint or error inside **`FormField.Field`**, **`disabled`**, disabled options
   (`nonInteractiveIds` + `aria-disabled`), icons alongside option text, programmatic focus via
-  `ref`. See [FormField accessibility](/components/inputs/form-field/#accessibility) for shared
+  `ref`. See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for shared
   FormField conditionals (required, stable `id`).
 
 ### Anti-Patterns
@@ -327,10 +327,10 @@ to supply instead):
   **`FormField.Label`**, and **`FormField.Input`**. Do not pass a `label` prop to **`FormField`**.
   For shared FormField anti-patterns (manual label ARIA, placeholder-only labels, color-only errors,
   broken ID references), see
-  [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
+  [FormField Anti-Patterns](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#anti-patterns).
 - **Unnamed or doubled remove names**: Pass an action-only **`removeLabel`**, such as `"Remove"`.
   Do not omit it, and do not include the selected value in it. The selected text is already part of
-  the button name. See [Removable Pills](/components/indicators/pill/#removable-pills).
+  the button name. See [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills).
 - **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup` (the hook sets
   `"listbox"`), `aria-expanded`, `aria-autocomplete`, `aria-controls`, or `aria-activedescendant`
   on the input. Do not set `role` or `id` on **`MultiSelect.List`**. Do not add `aria-label` or
@@ -355,6 +355,6 @@ to supply instead):
 - **Incomplete menu**: Do not omit **`MultiSelect.Popper`**, **`MultiSelect.Card`**,
   **`MultiSelect.List`**, or **`MultiSelect.Item`**, and do not render the list outside the popper.
 - **Wrong component**: Do not use **`MultiSelect`** for a single value. Use
-  [**Select**](/components/inputs/select/). Do not start from
-  [**Combobox**](/get-started/for-developers/guides/combobox/#accessibility) when this preview component already
+  [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs). Do not start from
+  [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#accessibility) when this preview component already
   matches the interaction.

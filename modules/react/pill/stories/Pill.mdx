@@ -118,12 +118,12 @@ The primary accessibility goal is a visible, programmatically determinable name 
 performs the action. A default **`Pill`** is a native button. `variant="readOnly"` is static text.
 `variant="removable"` keeps the action on **`Pill.IconButton`**.
 
-Use [Button](/components/buttons/#accessibility) for a general action that is not a label or filter
-token. Use [Hyperlink](/components/hyperlink/) when the control navigates to a URL. **`Pill`** does
+Use [Button](https://workday.github.io/canvas-kit/?path=/docs/components-buttons--docs#accessibility) for a general action that is not a label or filter
+token. Use [Hyperlink](https://workday.github.io/canvas-kit/?path=/docs/components-hyperlink--docs) when the control navigates to a URL. **`Pill`** does
 not set `aria-pressed`, `aria-checked`, or `aria-selected`.
 
 See the [Button pattern (APG)](https://www.w3.org/WAI/ARIA/apg/patterns/button/) and Canvas Kit
-[Accessibility overview](/guides/accessibility/overview/).
+[Accessibility overview](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-overview--docs).
 
 ### Minimum Accessible Structure
 
@@ -163,11 +163,11 @@ Canvas Kit applies these automatically. **Do not duplicate them** in consuming c
   **`Pill.IconButton`**’s icon uses `removable-${id}`. That id is not copied onto the default button.
 - **`Pill.Label`**: Sets `id="label-${id}"`. When `maxWidth` truncates the label, the full text stays
   in the accessibility tree. The overflow tooltip does not set `aria-label` or `aria-describedby`.
-  See [Tooltip](/components/popups/tooltip/) overflowing content.
+  See [Tooltip](https://workday.github.io/canvas-kit/?path=/docs/components-popups-tooltip--docs) overflowing content.
 - **`Pill.Icon`**: Renders **`SystemIcon`** with `role="img"`. An **`aria-label`** on **`Pill.Icon`**
   is included in the parent button’s accessible name, in DOM order.
 - **`Pill.Avatar`**: Passes `isDecorative` to
-  [Avatar](/components/indicators/avatar/#accessibility), so the photo is hidden from assistive
+  [Avatar](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-avatar--docs#accessibility), so the photo is hidden from assistive
   technology. **`name`** supplies the initials shown when there is no image or the image has not
   loaded. On a default pill those initials are inside the button and are part of its accessible name
   while they are visible. On a removable pill they sit outside **`Pill.IconButton`**, so they are
@@ -280,14 +280,14 @@ to supply instead):
 - Add **`Pill.Label`** inside `variant="readOnly"` — the component already wraps those children in
   **`Pill.Label`**, and a second one duplicates `label-${id}`
 - Add `tabIndex` to a read-only pill or **`Pill.Label`** so the overflow tooltip can be focused —
-  the full text is already in the accessibility tree. See [Tooltip](/components/popups/tooltip/)
+  the full text is already in the accessibility tree. See [Tooltip](https://workday.github.io/canvas-kit/?path=/docs/components-popups-tooltip--docs)
 - Set **`aria-pressed`**, **`aria-checked`**, **`aria-selected`**, `role="listbox"`, or a roving
   tabindex — **`Pill`** does not implement a selection widget. Use
-  [Checkbox](/components/inputs/checkbox/#accessibility) or
-  [Segmented Control](/components/buttons/segmented-control/) when that is the interaction
+  [Checkbox](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-checkbox--docs#accessibility) or
+  [Segmented Control](https://workday.github.io/canvas-kit/?path=/docs/components-buttons-segmented-control--docs) when that is the interaction
 - Use **`aria-disabled`** instead of **`disabled`** on **`Pill`**
 - Pass `variant="default"` — omit **`variant`** for the interactive button
-- Use a default **`Pill`** for URL navigation — use [Hyperlink](/components/hyperlink/)
+- Use a default **`Pill`** for URL navigation — use [Hyperlink](https://workday.github.io/canvas-kit/?path=/docs/components-hyperlink--docs)
 
 ## Component API
 
