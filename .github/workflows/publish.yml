@@ -147,7 +147,11 @@ jobs:
   # Finish packages missing from npm after a partial publish. Does not bump versions.
   complete-unpublished:
     needs: determine-publish-type
-    if: needs.determine-publish-type.outputs.publish_type == 'complete-unpublished'
+    # workflow_dispatch accepts any branch. Only master (latest) and support (support) are valid
+    # targets, so a prerelease branch can never publish under a release dist-tag.
+    if: >-
+      needs.determine-publish-type.outputs.publish_type == 'complete-unpublished' &&
+      (github.ref_name == 'master' || github.ref_name == 'support')
     uses: ./.github/workflows/complete-unpublished.yml
     with:
       dist_tag: ${{ github.ref_name == 'master' && 'latest' || 'support' }}
