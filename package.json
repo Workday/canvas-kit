@@ -116,6 +116,7 @@
     "format:prettier": "prettier --config=./.prettierrc.mjs --ignore-path=./.prettierignore \"**/*.{js,jsx,json,ts,tsx,md}\" --write",
     "format": "yarn eslint --fix",
     "test": "vitest run",
+    "publish:from-package": "node utils/publish-packages.mjs",
     "bump": "lerna version",
     "bump:prerelease": "lerna version prerelease --exact --preid",
     "cypress:open": "cypress open",
