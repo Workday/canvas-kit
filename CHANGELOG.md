@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.13](https://github.com/Workday/canvas-kit/releases/tag/v15.1.13) (2026-10-22)
+
+### Components
+
+- fix: Position Menu submenu against parent's visible edge ([#4214](https://github.com/Workday/canvas-kit/pull/4214)) ([@sheelah](https://github.com/sheelah))
+
+
 ## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
 
 ### Components
