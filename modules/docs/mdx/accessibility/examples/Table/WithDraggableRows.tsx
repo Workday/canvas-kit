@@ -51,7 +51,9 @@ const tableRowStyles = createStyles({
 const pickedUpRowStyles = createStyles({
   backgroundColor: system.legacy.color.surface.popover,
   boxShadow: system.depth[5],
-  translate: `${system.gap.xs} 0`,
+  // Inset so the table's overflow does not clip the outline at the row edges.
+  outline: `1px solid ${system.color.border.input.default}`,
+  outlineOffset: `-${px2rem(2)}`,
 });
 
 const handleCellStyles = createStyles({
@@ -109,7 +111,11 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
       ref={setNodeRef}
       cs={isDragging ? [tableRowStyles, pickedUpRowStyles] : tableRowStyles}
       style={{
-        transform: CSS.Transform.toString(transform),
+        // Rotate after the drag translation. Transform functions apply right to left,
+        // so the row tilts in place instead of swinging as it moves.
+        transform: isDragging
+          ? `${CSS.Transform.toString(transform) ?? ''} rotate(0.5deg)`.trim()
+          : CSS.Transform.toString(transform),
         transition,
         zIndex: isDragging ? 1 : undefined,
       }}
