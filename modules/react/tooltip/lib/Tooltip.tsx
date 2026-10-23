@@ -76,6 +76,10 @@ export interface TooltipProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
    * Amount of time (in ms) to delay before hiding the tooltip
    */
   hideDelay?: number;
+  /**
+   * The `alt` variant is designed for use on alternative page backgrounds (`system.color.bg.alt.default`). Use this variant to maintain proper visual hierarchy when placing components on colored backgrounds. While the default variant should be used on `system.color.bg.default` backgrounds, the `alt` variant ensures the component remains visually elevated on `system.color.bg.alt.default` backgrounds.
+   */
+  variant?: 'alt';
 }
 
 function mergeCallbacks<T extends {[key: string]: any}>(
@@ -106,6 +110,7 @@ export const Tooltip = createComponent('div')({
     showDelay = 300,
     hideDelay = 100,
     fallbackPlacements = defaultFallbackPlacements,
+    variant,
     ...elemProps
   }: TooltipProps) {
     const titleText = innerText(title);
@@ -157,6 +162,7 @@ export const Tooltip = createComponent('div')({
                 {...handleCsProp(elemProps)}
                 {...tooltipProps}
                 elementHasFocus={elementHasFocus}
+                variant={variant}
               >
                 {title}
               </TooltipContainer>

@@ -1,32 +1,47 @@
 import {Hyperlink} from '@workday/canvas-kit-react/button';
-import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+import {useInformationHighlightModel} from '../hooks/useInformationHighlightModel';
+
 const informationHighlightLinkStencil = createStencil({
+  parts: {
+    link: 'information-highlight-link',
+  },
   base: () => {
     return {
-      fontFamily: system.fontFamily.default,
-      fontWeight: system.fontWeight.bold,
-      lineHeight: system.legacy.lineHeight.subtext.lg,
-      fontSize: system.legacy.fontSize.subtext.lg,
-      letterSpacing: system.legacy.letterSpacing.subtext.lg,
-      gridColumn: '2',
-      justifySelf: 'start',
+      ...system.legacy.type.subtext.lg,
       color: system.color.fg.default,
     };
   },
+  modifiers: {
+    actionPlacement: {
+      bottom: {
+        gridColumn: '2',
+        justifySelf: 'start',
+      },
+      end: {
+        margin: 0,
+        maxWidth: '100%',
+      },
+    },
+  },
 });
 
-export const Link = createComponent('a')({
+export const Link = createSubcomponent('a')({
   displayName: 'Link',
-  Component: ({...elemProps}: ExtractProps<typeof Hyperlink, never>, ref, Element) => {
-    return (
-      <Hyperlink
-        as={Element}
-        ref={ref}
-        {...handleCsProp(elemProps, informationHighlightLinkStencil())}
-      />
-    );
-  },
+  modelHook: useInformationHighlightModel,
+})(({...elemProps}: ExtractProps<typeof Hyperlink, never>, Element, model) => {
+  return (
+    <Hyperlink
+      as={Element}
+      {...informationHighlightLinkStencil.parts.link}
+      {...handleCsProp(
+        elemProps,
+        informationHighlightLinkStencil({actionPlacement: model.state.actionPlacement})
+      )}
+      variant="secondary"
+    />
+  );
 });

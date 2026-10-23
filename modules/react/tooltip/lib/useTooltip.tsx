@@ -10,7 +10,7 @@ import {
 } from '@workday/canvas-kit-react/popup';
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
-  const timer = React.useRef() as React.MutableRefObject<number | undefined>;
+  const timer = React.useRef<number | undefined>(undefined);
 
   const start = () => {
     timer.current = window.setTimeout(fn, waitMs);

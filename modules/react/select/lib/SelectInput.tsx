@@ -2,7 +2,11 @@ import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
 import {CSProps, createStencil} from '@workday/canvas-kit-styling';
-import {CanvasSystemIcon, caretDownSmallIcon} from '@workday/canvas-system-icons-web';
+import {
+  CanvasSystemIcon,
+  chevronDownSmallIcon,
+  chevronUpSmallIcon,
+} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 import {useSelectInput} from './hooks/useSelectInput';
@@ -112,7 +116,11 @@ export const SelectInput = createSubcomponent(TextInput)({
         {...elemProps}
       />
       <InputGroup.InnerEnd {...selectInputStencil.parts.caretContainer}>
-        <SystemIcon {...selectInputStencil.parts.caret} icon={caretDownSmallIcon} />
+        <SystemIcon
+          size="md"
+          {...selectInputStencil.parts.caret}
+          icon={model.state.visibility === 'visible' ? chevronUpSmallIcon : chevronDownSmallIcon}
+        />
       </InputGroup.InnerEnd>
     </InputGroup>
   );

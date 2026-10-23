@@ -593,15 +593,8 @@ describe('Tabs', () => {
             cy.findByRole('tab', {name: 'Sixth Tab'}).should('have.attr', 'aria-selected', 'true');
           });
 
-          it('should move focus to a tab (newly selected or More)', () => {
-            // Implementation focuses the selected tab when visible; otherwise menu returns focus to More
-            cy.wait(100); // allow menu close and double rAF focus logic to run
-            cy.focused().should('have.attr', 'role', 'tab');
-            cy.focused()
-              .invoke('text')
-              .then(text => {
-                expect(text.trim()).to.match(/^(Sixth Tab|More)$/);
-              });
+          it('should move focus to the Sixth Tab', () => {
+            cy.findByRole('tab', {name: 'Sixth Tab'}).should('have.focus');
           });
         });
       });

@@ -35,6 +35,14 @@ export const AvatarStates = () => {
             label: 'Purple',
             props: {variant: 'purple'},
           },
+          {
+            label: 'Magenta',
+            props: {variant: 'magenta'},
+          },
+          {
+            label: 'Green',
+            props: {variant: 'green'},
+          },
         ]}
       >
         {({variant, ...props}) => {

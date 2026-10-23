@@ -1,13 +1,13 @@
 import {createComponent} from '@workday/canvas-kit-react/common';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {SwitchProps} from './Switch';
 
 export const switchCircleStencil = createStencil({
   base: {
-    width: base.legacy.size150,
-    height: base.legacy.size150,
+    width: system.legacy.size.xxxs,
+    height: system.legacy.size.xxxs,
     borderRadius: system.legacy.shape.full,
     // This is used in "High Contrast Mode" to show a border on the Switch thumb.
     border: `${px2rem(1)} solid transparent`,
@@ -20,9 +20,9 @@ export const switchCircleStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        transform: `translateX(${px2rem(16)})`,
+        transform: `translateX(${px2rem(14)})`,
         ':dir(rtl)': {
-          transform: `translateX(${px2rem(-16)})`,
+          transform: `translateX(${px2rem(-14)})`,
         },
       },
     },

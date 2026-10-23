@@ -3,8 +3,8 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Card} from '@workday/canvas-kit-react/card';
 
 import mdxDoc from './card.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {Basic as BasicExample} from './examples/Basic';
-import {Borderless as BorderlessExample} from './examples/Borderless';
 import {Tonal as TonalExample} from './examples/Tonal';
 
 export default {
@@ -24,8 +24,8 @@ export const Basic: Story = {
   render: BasicExample,
 };
 
-export const Borderless: Story = {
-  render: BorderlessExample,
+export const Alt: Story = {
+  render: AltExample,
 };
 
 export const Tonal: Story = {

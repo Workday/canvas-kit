@@ -18,9 +18,9 @@ export const Basic = () => {
   return (
     <Flex cs={viewPortStyles}>
       <SidePanel>
-        <SidePanel.Heading size="small">
+        <SidePanel.Heading>
           <Flex cs={flexHeadingStyles}>
-            <ExpressiveIcon icon={rocketIcon} />
+            <ExpressiveIcon icon={rocketIcon} size="xs" />
             Tasks Panel
           </Flex>
         </SidePanel.Heading>

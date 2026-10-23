@@ -29,7 +29,8 @@ export const NoTargetRTL = () => {
                 ("התוכנה").
               </Box>
             </Modal.Body>
-            <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+            <Modal.ButtonGroup>
+              <Modal.CloseButton onClick={handleCancel}>לְבַטֵל</Modal.CloseButton>
               <Modal.CloseButton
                 as={PrimaryButton}
                 onClick={handleAcknowledge}
@@ -39,8 +40,7 @@ export const NoTargetRTL = () => {
               >
                 לְהוֹדוֹת
               </Modal.CloseButton>
-              <Modal.CloseButton onClick={handleCancel}>לְבַטֵל</Modal.CloseButton>
-            </Flex>
+            </Modal.ButtonGroup>
           </Modal.Card>
         </Modal.Overlay>
       </Modal>

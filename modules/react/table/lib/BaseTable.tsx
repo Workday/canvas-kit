@@ -1,4 +1,4 @@
-import {createComponent} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createComponent} from '@workday/canvas-kit-react/common';
 import {BoxProps, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
@@ -14,16 +14,11 @@ import {BaseTableRow} from './parts/BaseTableRow';
 export interface BaseTableProps extends Omit<BoxProps, 'ref'> {}
 
 export const baseTableStencil = createStencil({
+  extends: cornerShapeStencil,
   base: {
-    // ...system.legacy.type.subtext.lg,
-    // components do not support spreading for legacy type token
-    fontFamily: system.fontFamily.default,
-    fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    border: `${px2rem(1)} solid ${system.legacy.color.border.strong}`,
-    borderRadius: system.legacy.shape.md,
+    ...system.legacy.type.subtext.lg,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
     overflow: 'auto',
     color: system.color.fg.default,
   },

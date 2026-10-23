@@ -2,12 +2,12 @@ import {createComponent} from '@workday/canvas-kit-react/common';
 import {CSProps, createStencil, cssVar, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
-import {SkeletonShape} from './SkeletonShape';
+import {SkeletonShape, skeletonSurfaceFillStencil} from './SkeletonShape';
 
 export interface SkeletonHeaderProps extends CSProps {
   /**
    * The background color of the skeleton
-   * @default `system.color.bg.alt.strong`
+   * @default Surface shimmer gradient (`surface.alt.strong` → `surface.loading`); override with a solid color
    */
   backgroundColor?: string;
   /**
@@ -23,14 +23,14 @@ export interface SkeletonHeaderProps extends CSProps {
 }
 
 export const skeletonHeaderStencil = createStencil({
+  extends: skeletonSurfaceFillStencil,
   vars: {
     width: '',
     height: '',
     backgroundColor: '',
   },
-  base: ({width, backgroundColor, height}) => ({
-    backgroundColor: cssVar(backgroundColor, system.legacy.color.surface.loading),
-    borderRadius: system.legacy.shape.md,
+  base: ({width, height}) => ({
+    borderRadius: system.legacy.shape.sm,
     height: cssVar(height, system.legacy.size.xs),
     width: width,
     marginBlockEnd: system.legacy.size.xxxs,

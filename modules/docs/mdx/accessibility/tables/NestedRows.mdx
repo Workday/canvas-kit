@@ -1,0 +1,41 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {NestedRows} from '../examples/Table/WithNestedRows';
+
+<Meta title="Guides/Accessibility/Table Patterns/Nested Rows" />
+
+## Nested Rows
+
+Nested Rows shows a hierarchy of related records in **one table**, using additional `<tr>` elements
+for child rows. Expanding a project reveals its phases; expanding a phase reveals its tasks. The
+chevron and name share the Name cell so they indent together. Collapsing a parent hides its
+descendants even if a child was previously expanded.
+
+This is a different pattern from
+[Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs). That
+example inserts a `colspan` panel with extra content for a single parent row. It does **not** add
+nested table rows. Use Nested Rows when the children are themselves tabular records (same columns at
+every level). Use Expandable Rows when the extra content is not a row of the same table.
+
+- Child rows are siblings in the same `<tbody>`, not a nested `<table>` and not extra `<tbody>`
+  elements used to fake a tree.
+- The Name cell is the tree column: it holds the chevron `TertiaryButton` and the row name together
+  so the control stays next to the label it expands. Leaf rows keep an empty slot the same width as
+  the button so names line up with their siblings.
+- The `aria-expanded` property is added to the chevron button to communicate this state to screen
+  reader users.
+- A Canvas Kit `Tooltip` names each chevron **Project**, **Phase**, or **Task** based on the row's
+  depth. The visible name stays in the row header, so the button name describes the _kind_ of row
+  rather than repeating the label.
+- Since those button names are not unique, we added `aria-describedby` to each chevron, referencing
+  the unique `id` on the name text in the same cell. That gives screen readers the specific project
+  or phase the control belongs to, similar to the
+  [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+  checkboxes.
+- `aria-level` is set on each `Table.Row` (`1` = project, `2` = phase, `3` = task) to describe
+  depth. Support for `aria-level` on HTML table rows is uneven across screen readers and browsers.
+  Validate the combinations you support. This is a research example, not a Canvas Kit primitive.
+
+<ExampleCodeBlock code={NestedRows} />

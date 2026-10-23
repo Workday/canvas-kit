@@ -16,7 +16,7 @@ export interface BaseAvatarProps extends CSProps {
    * The variant of the Avatar.
    * @default "blue"
    */
-  variant?: 'blue' | 'amber' | 'teal' | 'purple';
+  variant?: 'blue' | 'amber' | 'teal' | 'purple' | 'magenta' | 'green';
 
   /**
    * The size of the Avatar.
@@ -53,13 +53,25 @@ export const baseAvatarStencil = createStencil({
     height: cssVar(size, system.legacy.size.lg),
     minWidth: cssVar(size, system.legacy.size.lg),
     minHeight: cssVar(size, system.legacy.size.lg),
-    backgroundColor: cssVar(backgroundColor, base.legacy.blue300),
-    color: cssVar(color, base.legacy.blue800),
+    backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+    color: cssVar(color, system.color.fg.inverse),
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     border: 'none',
+    // For Windows high contrast desktop themes
+    outline: `${px2rem(1)} solid transparent`,
+
+    // Remove outline when Avatar is or is inside a button/link — parent owns boundary and focus
+    'button &, a &, &:is(button, a)': {
+      outline: 'none',
+    },
+    // Focus-only ring when Avatar is the button/link — avoids clashing with a permanent boundary
+    '&:is(button, a):focus-visible, &:is(button, a).focus': {
+      outline: `${px2rem(2)} solid transparent`,
+      outlineOffset: px2rem(2),
+    },
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
     lineHeight: system.legacy.lineHeight.body.md,
@@ -68,12 +80,12 @@ export const baseAvatarStencil = createStencil({
   modifiers: {
     variant: {
       blue: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.blue300),
-        color: cssVar(color, base.legacy.blue800),
+        backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+        color: cssVar(color, system.color.fg.inverse),
       }),
       amber: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.amber200),
-        color: cssVar(color, base.legacy.amber700),
+        backgroundColor: cssVar(backgroundColor, base.legacy.amber300),
+        color: cssVar(color, base.legacy.amber800),
       }),
 
       teal: ({backgroundColor, color}) => ({
@@ -81,8 +93,16 @@ export const baseAvatarStencil = createStencil({
         color: cssVar(color, base.legacy.teal800),
       }),
       purple: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.purple300),
-        color: cssVar(color, base.legacy.purple800),
+        backgroundColor: cssVar(backgroundColor, base.legacy.purple600),
+        color: cssVar(color, system.color.fg.inverse),
+      }),
+      magenta: ({backgroundColor, color}) => ({
+        backgroundColor: cssVar(backgroundColor, base.legacy.magenta600),
+        color: cssVar(color, system.color.fg.inverse),
+      }),
+      green: ({backgroundColor, color}) => ({
+        backgroundColor: cssVar(backgroundColor, base.legacy.green600),
+        color: cssVar(color, system.color.fg.inverse),
       }),
     },
     size: {

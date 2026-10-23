@@ -5,29 +5,27 @@ import {createModelHook} from '@workday/canvas-kit-react/common';
 export const useRadioModel = createModelHook({
   defaultConfig: {
     /**
-     * Use this attribute when you have a `FormField` that is in an `Alert` | `Error` or `Required` state. This will add attach an `aria-describedby` to each radio input so that screen readers can read out the message attached to the form field.
-     * The value of this attribute needs to match the value passed to `hintId` on the `FormField`.
+     * The id of hint or error text associated with each radio.
+     *
+     * Do not set this when radios are wrapped in `FormFieldGroup.Input`. `FormFieldGroup.Input`
+     * writes `aria-describedby="hint-{id}"` on each radio, and that value overrides
+     * `aria-describedby` set on `RadioGroup`. Put the message in `FormFieldGroup.Hint`.
      *
      * ```tsx
-     * <FormField
-     *    error="caution"
-     *    hintId="hint-alert"
-     *    hintText="Deep dish is an extra $2.99"
-     *    label="Choose Your Pizza Crust"
-     *    useFieldset={true}
-     *  >
-     *    <RadioGroup
-     *      name="crust"
-     *      onChange={handleChange}
-     *      initialValue={value}
-     *      aria-describedby="hint-alert"
-     *    >
-     *      <RadioGroup.RadioButton value="deep-dish">Deep dish</RadioGroup.RadioButton>
-     *      <RadioGroup.RadioButton value="thin">Thin</RadioGroup.RadioButton>
-     *      <RadioGroup.RadioButton value="gluten-free">Gluten free</RadioGroup.RadioButton>
-     *      <RadioGroup.RadioButton value="cauliflower">Cauliflower</RadioGroup.RadioButton>
-     *    </RadioGroup>
-     * </FormField>
+     * <FormFieldGroup error="caution">
+     *   <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
+     *   <FormFieldGroup.Field>
+     *     <FormFieldGroup.List as={RadioGroup} name="crust" value={value} onChange={handleChange}>
+     *       <FormFieldGroup.Input as={RadioGroup.RadioButton} value="deep-dish">
+     *         Deep dish
+     *       </FormFieldGroup.Input>
+     *       <FormFieldGroup.Input as={RadioGroup.RadioButton} value="thin">
+     *         Thin
+     *       </FormFieldGroup.Input>
+     *     </FormFieldGroup.List>
+     *     <FormFieldGroup.Hint>Deep dish is an extra $2.99.</FormFieldGroup.Hint>
+     *   </FormFieldGroup.Field>
+     * </FormFieldGroup>
      * ```
      */
     'aria-describedby': undefined as string | undefined,
