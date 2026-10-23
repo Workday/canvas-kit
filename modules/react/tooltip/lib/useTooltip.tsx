@@ -50,6 +50,28 @@ const isInteractiveElement = (element: Element) => {
   }
 };
 
+const nonTextInputTypes = [
+  'button',
+  'checkbox',
+  'color',
+  'file',
+  'image',
+  'radio',
+  'range',
+  'reset',
+  'submit',
+];
+
+const isTextEntryElement = (element: Element) => {
+  const tagName = element.tagName.toLowerCase();
+
+  if (tagName === 'textarea') {
+    return true;
+  }
+
+  return tagName === 'input' && !nonTextInputTypes.includes((element as HTMLInputElement).type);
+};
+
 /**
  * Convenience hook for creating components with tooltips. It will return an object of properties to mix
  * into a target, popper and tooltip
@@ -127,6 +149,18 @@ export function useTooltip<T extends Element = Element>({
     }
   };
 
+  // Keyboard activation of an interactive target dismisses the tooltip, matching `onMouseDown`.
+  // Text entry is excluded so typing Space or Enter in a field does not hide the tooltip.
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (
+      (event.key === 'Enter' || event.key === ' ') &&
+      isInteractiveElement(event.currentTarget) &&
+      !isTextEntryElement(event.currentTarget)
+    ) {
+      popupModel.events.hide();
+    }
+  };
+
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
   useCloseOnFullscreenExit(popupModel);
@@ -143,6 +177,7 @@ export function useTooltip<T extends Element = Element>({
     onMouseEnter: onOpenFromTarget,
     onMouseLeave: onHide,
     onMouseDown,
+    onKeyDown,
     onFocus,
     onBlur: onHide,
   };
