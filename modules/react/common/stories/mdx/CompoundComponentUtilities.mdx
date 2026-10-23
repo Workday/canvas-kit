@@ -35,6 +35,68 @@ up components with `ref` forwarding.
 
 <ExampleCodeBlock code={CreateComponent} />
 
+# ExtractProps
+
+Components that accept an `as` prop do not extend an HTML attribute interface directly, because the
+interface depends on what `as` is set to. `ExtractProps` recovers that type, so a component can be
+extended without importing its prop interface.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent> {
+  foo: string;
+}
+
+const MyNewComponent = ({foo, ...props}: MyNewComponentProps) => {
+  return <MyComponent {...props}>My Content</MyComponent>;
+};
+```
+
+With one argument, the HTML attributes are taken from the default element given to
+`createComponent`. For a component typed `ElementComponent<'div', MyComponentProps>`, that is
+`'div'`.
+
+## Changing the element
+
+Pass the element as a second argument when the component will be rendered as something else.
+TypeScript cannot infer it from the `as` prop alone, so the element has to appear in both places.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent, 'aside'> {
+  foo: string;
+}
+
+const MyNewComponent = ({foo, ...props}: MyNewComponentProps) => {
+  return (
+    <MyComponent as="aside" {...props}>
+      My Content
+    </MyComponent>
+  );
+};
+```
+
+This matters for props that come from the HTML attribute interface rather than the component's own,
+such as `onClick`. `onClick` is not declared on `MyComponentProps`, but because `MyComponent` is an
+`ElementComponent` it is forwarded to the underlying element. The resulting type is:
+
+```tsx
+MyComponentProps & React.HTMLAttributes<HTMLElement>;
+```
+
+## Declared props only
+
+Pass `never` as the second argument to take only a component's declared props, with no HTML
+attributes. Canvas Kit uses this internally when extending one dynamic component from another, where
+the attribute interface is not yet known.
+
+```tsx
+interface MyNewComponentProps extends ExtractProps<typeof MyComponent, never> {
+  foo: string;
+}
+```
+
+For a `Component` rather than an `ElementComponent`, only the prop interface is ever returned, since
+there is no HTML attribute interface associated with it.
+
 # createModelHook
 
 When building compound components that might have some internal state or events, you typically want
