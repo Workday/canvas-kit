@@ -17,14 +17,15 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import {CSS} from '@dnd-kit/utilities';
-import {useMemo, useState} from 'react';
+import {useEffect, useMemo, useRef, useState} from 'react';
 
 import {TertiaryButton, buttonStencil} from '@workday/canvas-kit-react/button';
-import {AccessibleHide} from '@workday/canvas-kit-react/common/';
+import {AccessibleHide, AriaLiveRegion} from '@workday/canvas-kit-react/common/';
+import {Menu} from '@workday/canvas-kit-react/menu';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
-import {createStyles, px2rem} from '@workday/canvas-kit-styling';
-import {draggableVerticalIcon} from '@workday/canvas-system-icons-web';
+import {calc, createStyles, px2rem} from '@workday/canvas-kit-styling';
+import {draggableVerticalIcon, relatedActionsVerticalIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
 interface Employee {
@@ -32,6 +33,18 @@ interface Employee {
   name: string;
   jobTitle: string;
 }
+
+const rowMoves = ['move-to-top', 'move-up', 'move-down', 'move-to-bottom'] as const;
+
+type RowMove = (typeof rowMoves)[number];
+
+const isRowMove = (id: string): id is RowMove => rowMoves.some(move => move === id);
+
+// Two small icon buttons, the gap between them, and the cell's inline padding.
+const actionsColumnSize = calc.add(
+  calc.add(system.legacy.size.sm, system.legacy.size.sm),
+  calc.add(system.gap.xs, calc.add(system.legacy.padding.md, system.legacy.padding.md))
+);
 
 const initialEmployees: Employee[] = [
   {id: 'employee-1', name: 'Avery Johnson', jobTitle: 'Product Designer'},
@@ -45,7 +58,7 @@ const tableHeaderStyles = createStyles({
 });
 
 const tableRowStyles = createStyles({
-  gridTemplateColumns: `${system.legacy.size.lg} minmax(0, 1fr) minmax(0, 1fr)`,
+  gridTemplateColumns: `${actionsColumnSize} minmax(0, 1fr) minmax(0, 1fr)`,
 });
 
 const pickedUpRowStyles = createStyles({
@@ -58,11 +71,17 @@ const pickedUpRowStyles = createStyles({
 
 const handleCellStyles = createStyles({
   alignItems: 'center',
-  justifyItems: 'center',
+  columnGap: system.gap.xs,
+  gridAutoFlow: 'column',
+  gridTemplateColumns: `${system.legacy.size.sm} ${system.legacy.size.sm}`,
+  justifyContent: 'center',
+});
+
+const squaredControlStyles = createStyles({
+  [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
 });
 
 const dragHandleStyles = createStyles({
-  [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
   cursor: 'grab',
 });
 
@@ -101,7 +120,32 @@ const screenReaderInstructions: ScreenReaderInstructions = {
   draggable: keyboardInstructions,
 };
 
-const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
+const destinationIndex = (index: number, length: number, action: RowMove) => {
+  switch (action) {
+    case 'move-to-top':
+      return 0;
+    case 'move-up':
+      return Math.max(0, index - 1);
+    case 'move-down':
+      return Math.min(length - 1, index + 1);
+    case 'move-to-bottom':
+      return length - 1;
+    default:
+      return index;
+  }
+};
+
+const SortableEmployeeRow = ({
+  employee,
+  isFirst,
+  isLast,
+  onMove,
+}: {
+  employee: Employee;
+  isFirst: boolean;
+  isLast: boolean;
+  onMove: (employeeId: string, action: RowMove) => void;
+}) => {
   const {attributes, isDragging, listeners, setNodeRef, transform, transition} = useSortable({
     id: employee.id,
   });
@@ -124,15 +168,56 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
         <Tooltip type="muted" title="Move row">
           <TertiaryButton
             aria-label={`Move row ${employee.name}`}
-            cs={isDragging ? [dragHandleStyles, pickedUpDragHandleStyles] : dragHandleStyles}
+            cs={
+              isDragging
+                ? [squaredControlStyles, dragHandleStyles, pickedUpDragHandleStyles]
+                : [squaredControlStyles, dragHandleStyles]
+            }
             icon={draggableVerticalIcon}
             size="small"
             {...attributes}
             {...listeners}
           />
         </Tooltip>
+        <Menu
+          onSelect={({id}) => {
+            if (isRowMove(id)) {
+              onMove(employee.id, id);
+            }
+          }}
+        >
+          <Tooltip type="label" title="Row actions">
+            <Menu.Target
+              as={TertiaryButton}
+              cs={squaredControlStyles}
+              icon={relatedActionsVerticalIcon}
+              size="small"
+              aria-describedby={employee.id}
+            />
+          </Tooltip>
+          <Menu.Popper>
+            <Menu.Card>
+              <Menu.List>
+                <Menu.Item aria-disabled={isFirst || undefined} data-id="move-to-top">
+                  Move to top
+                </Menu.Item>
+                <Menu.Item aria-disabled={isFirst || undefined} data-id="move-up">
+                  Move up
+                </Menu.Item>
+                <Menu.Item aria-disabled={isLast || undefined} data-id="move-down">
+                  Move down
+                </Menu.Item>
+                <Menu.Item aria-disabled={isLast || undefined} data-id="move-to-bottom">
+                  Move to bottom
+                </Menu.Item>
+              </Menu.List>
+            </Menu.Card>
+          </Menu.Popper>
+        </Menu>
       </Table.Cell>
-      <Table.Header scope="row">{employee.name}</Table.Header>
+      <Table.Header scope="row" id={employee.id}>
+        {employee.name}
+      </Table.Header>
       <Table.Cell>{employee.jobTitle}</Table.Cell>
     </Table.Row>
   );
@@ -141,6 +226,8 @@ const SortableEmployeeRow = ({employee}: {employee: Employee}) => {
 export const DraggableRows = () => {
   const [employees, setEmployees] = useState(initialEmployees);
   const [visibleAnnouncement, setVisibleAnnouncement] = useState(initialAnnouncement);
+  const [menuAnnouncement, setMenuAnnouncement] = useState('');
+  const menuAnnouncementTimer = useRef<number | undefined>(undefined);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -154,6 +241,7 @@ export const DraggableRows = () => {
     const position = (id: string | number) =>
       employees.findIndex(employee => employee.id === id) + 1;
     // The same string is printed below the table. That visible text is not a live region.
+    // dnd-kit reads the returned string into its own assertive live region.
     const announce = (message: string) => {
       setVisibleAnnouncement(message);
       return message;
@@ -202,6 +290,21 @@ export const DraggableRows = () => {
     };
   }, [employees]);
 
+  useEffect(() => {
+    return () => window.clearTimeout(menuAnnouncementTimer.current);
+  }, []);
+
+  // Menu moves are not drag events, so dnd-kit will not announce them. The visible feedback is
+  // not a live region. Wait until the menu has returned focus, then announce assertively.
+  const announceMenuMove = (message: string) => {
+    setVisibleAnnouncement(message);
+    window.clearTimeout(menuAnnouncementTimer.current);
+    setMenuAnnouncement('');
+    menuAnnouncementTimer.current = window.setTimeout(() => {
+      setMenuAnnouncement(message);
+    }, 100);
+  };
+
   const handleDragEnd = ({active, over}: DragEndEvent) => {
     if (!over || active.id === over.id) {
       return;
@@ -212,6 +315,22 @@ export const DraggableRows = () => {
       const newIndex = currentEmployees.findIndex(employee => employee.id === over.id);
       return arrayMove(currentEmployees, oldIndex, newIndex);
     });
+  };
+
+  const handleMove = (employeeId: string, action: RowMove) => {
+    const oldIndex = employees.findIndex(employee => employee.id === employeeId);
+    if (oldIndex < 0) {
+      return;
+    }
+
+    const newIndex = destinationIndex(oldIndex, employees.length, action);
+    if (newIndex === oldIndex) {
+      return;
+    }
+
+    const name = employees[oldIndex].name;
+    setEmployees(currentEmployees => arrayMove(currentEmployees, oldIndex, newIndex));
+    announceMenuMove(`${name} row moved to position ${newIndex + 1} of ${employees.length}.`);
   };
 
   const employeeIds = employees.map(employee => employee.id);
@@ -227,13 +346,16 @@ export const DraggableRows = () => {
         <p className={feedbackLabelStyles}>Screen reader feedback</p>
         <p className={feedbackMessageStyles}>{visibleAnnouncement}</p>
       </div>
+      <AriaLiveRegion aria-live="assertive" as={AccessibleHide}>
+        {menuAnnouncement}
+      </AriaLiveRegion>
       <SortableContext items={employeeIds} strategy={verticalListSortingStrategy}>
         <Table>
           <Table.Caption>Employee roster</Table.Caption>
           <Table.Head>
             <Table.Row cs={tableRowStyles}>
               <Table.Header scope="col" cs={tableHeaderStyles}>
-                <AccessibleHide>Sort</AccessibleHide>
+                <AccessibleHide>Actions</AccessibleHide>
               </Table.Header>
               <Table.Header scope="col" cs={tableHeaderStyles}>
                 Employee Name
@@ -244,8 +366,14 @@ export const DraggableRows = () => {
             </Table.Row>
           </Table.Head>
           <Table.Body>
-            {employees.map(employee => (
-              <SortableEmployeeRow key={employee.id} employee={employee} />
+            {employees.map((employee, index) => (
+              <SortableEmployeeRow
+                key={employee.id}
+                employee={employee}
+                isFirst={index === 0}
+                isLast={index === employees.length - 1}
+                onMove={handleMove}
+              />
             ))}
           </Table.Body>
         </Table>
