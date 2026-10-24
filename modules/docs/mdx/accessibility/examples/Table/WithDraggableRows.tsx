@@ -40,10 +40,10 @@ type RowMove = (typeof rowMoves)[number];
 
 const isRowMove = (id: string): id is RowMove => rowMoves.some(move => move === id);
 
-// Two small icon buttons, the gap between them, and the cell's inline padding.
-const actionsColumnSize = calc.add(
-  calc.add(system.legacy.size.sm, system.legacy.size.sm),
-  calc.add(system.gap.xs, calc.add(system.legacy.padding.md, system.legacy.padding.md))
+// One small icon button and the cell's inline padding.
+const controlColumnSize = calc.add(
+  system.legacy.size.sm,
+  calc.add(system.legacy.padding.md, system.legacy.padding.md)
 );
 
 const initialEmployees: Employee[] = [
@@ -58,7 +58,7 @@ const tableHeaderStyles = createStyles({
 });
 
 const tableRowStyles = createStyles({
-  gridTemplateColumns: `${actionsColumnSize} minmax(0, 1fr) minmax(0, 1fr)`,
+  gridTemplateColumns: `${controlColumnSize} minmax(0, 1fr) minmax(0, 1fr) ${controlColumnSize}`,
 });
 
 const pickedUpRowStyles = createStyles({
@@ -69,11 +69,8 @@ const pickedUpRowStyles = createStyles({
   outlineOffset: `-${px2rem(2)}`,
 });
 
-const handleCellStyles = createStyles({
-  alignItems: 'center',
-  columnGap: system.gap.xs,
-  gridAutoFlow: 'column',
-  gridTemplateColumns: `${system.legacy.size.sm} ${system.legacy.size.sm}`,
+const iconCellStyles = createStyles({
+  gridTemplateColumns: system.legacy.size.sm,
   justifyContent: 'center',
 });
 
@@ -164,7 +161,7 @@ const SortableEmployeeRow = ({
         zIndex: isDragging ? 1 : undefined,
       }}
     >
-      <Table.Cell cs={handleCellStyles}>
+      <Table.Cell cs={iconCellStyles}>
         <Tooltip type="muted" title="Move row">
           <TertiaryButton
             aria-label={`Move row ${employee.name}`}
@@ -179,6 +176,12 @@ const SortableEmployeeRow = ({
             {...listeners}
           />
         </Tooltip>
+      </Table.Cell>
+      <Table.Header scope="row" id={employee.id}>
+        {employee.name}
+      </Table.Header>
+      <Table.Cell>{employee.jobTitle}</Table.Cell>
+      <Table.Cell cs={iconCellStyles}>
         <Menu
           onSelect={({id}) => {
             if (isRowMove(id)) {
@@ -215,10 +218,6 @@ const SortableEmployeeRow = ({
           </Menu.Popper>
         </Menu>
       </Table.Cell>
-      <Table.Header scope="row" id={employee.id}>
-        {employee.name}
-      </Table.Header>
-      <Table.Cell>{employee.jobTitle}</Table.Cell>
     </Table.Row>
   );
 };
@@ -240,7 +239,7 @@ export const DraggableRows = () => {
       employees.find(employee => employee.id === id)?.name ?? 'Unknown employee';
     const position = (id: string | number) =>
       employees.findIndex(employee => employee.id === id) + 1;
-    // The same string is printed below the table. That visible text is not a live region.
+    // The same string is printed above the table. That visible text is not a live region.
     // dnd-kit reads the returned string into its own assertive live region.
     const announce = (message: string) => {
       setVisibleAnnouncement(message);
@@ -355,13 +354,16 @@ export const DraggableRows = () => {
           <Table.Head>
             <Table.Row cs={tableRowStyles}>
               <Table.Header scope="col" cs={tableHeaderStyles}>
-                <AccessibleHide>Actions</AccessibleHide>
+                <AccessibleHide>Reorder</AccessibleHide>
               </Table.Header>
               <Table.Header scope="col" cs={tableHeaderStyles}>
                 Employee Name
               </Table.Header>
               <Table.Header scope="col" cs={tableHeaderStyles}>
                 Job Title
+              </Table.Header>
+              <Table.Header scope="col" cs={tableHeaderStyles}>
+                <AccessibleHide>Actions</AccessibleHide>
               </Table.Header>
             </Table.Row>
           </Table.Head>

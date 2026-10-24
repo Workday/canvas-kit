@@ -8,38 +8,35 @@ import {DraggableRows} from '../examples/Table/WithDraggableRows';
 
 ## Draggable Rows
 
-<ExampleCodeBlock code={DraggableRows} />
+Draggable Rows reorders records in a table. Pointer users drag the move handle in the first column,
+or open Row actions in the last column and choose Move to top, Move up, Move down, or Move to
+bottom. That menu is a single-pointer alternative to dragging
+([WCAG 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html)).
+Keyboard users focus the move handle, press Space or Enter to pick the row up, use the Up and Down
+Arrow keys to move it, then press Space or Enter to drop it. Escape cancels the move and returns the
+row to its previous position. The menu is also available from the keyboard.
 
-Draggable Rows reorders records in a table from the first column of each row. Pointer users can drag
-the move handle. They can also open Row actions and choose Move to top, Move up, Move down, or Move
-to bottom. Each menu item is a single pointer action, so reordering does not require a dragging
-movement ([WCAG 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html)).
-Keyboard users can focus the move handle, press Space or Enter to pick the row up, use the Up and
-Down Arrow keys to move it, then press Space or Enter to drop it. Escape cancels the move and
-returns the row to its previous position. The same menu is available from the keyboard.
+This example uses `@dnd-kit` for the pointer and keyboard drag. `Table` has no reorder behavior.
+Validate the screen reader and browser combinations you support. This is a research example, not a
+Canvas Kit primitive.
 
-This example uses `@dnd-kit` for the pointer and keyboard drag interaction. `Table` does not include
-reorder behavior. The notes below describe how this example names the controls and shows which row
-is picked up. Validate the screen reader and browser combinations you support. This is a research
-example, not a Canvas Kit primitive.
-
-- The first column holds the reorder controls. Its column header is the visually hidden text
-  "Actions" on a `Table.Header` with `scope="col"`, so screen readers still receive a column header
-  while the column shows the icons.
-- Each move handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
-  `type="muted"` and the title "Move row", so the tooltip is visible on hover without replacing that
-  name.
-- Each row actions control is a `TertiaryButton` named `Row actions {employee name}`. The `Tooltip`
-  uses `type="muted"` and the title "Row actions". It opens a `Menu` with Move to top, Move up,
-  Move down, and Move to bottom. Move to top and Move up are disabled on the first row. Move down
-  and Move to bottom are disabled on the last row. Choosing an item reorders that row without a
-  dragging movement. The new position is announced in a visually hidden assertive live region.
-  Dragging is announced by `@dnd-kit` instead. The text under the table repeats those messages for
-  sighted readers and is not itself a live region.
-- The employee name is the row header (`Table.Header` with `scope="row"`). Screen readers can
-  announce that name while reading the other cells in the row.
-- A picked-up row stays in the table and only moves with a transform, so it needs its own appearance
-  to stay distinct from the rows sliding around it. It uses a popover surface, a level 5 depth
-  shadow, a gray outline, and a slight tilt, and it paints above the other rows. The handle
+- The first column is the move handle. Its header is the visually hidden text "Reorder" on a
+  `Table.Header` with `scope="col"`.
+- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
+  `type="muted"` and the title "Move row", so hover shows that title and the accessible name stays
+  `Move row {employee name}`.
+- The last column is the row actions menu. Its header is the visually hidden text "Actions" on a
+  `Table.Header` with `scope="col"`. Each control is a `TertiaryButton` named "Row actions" by a
+  `Tooltip` with `type="label"`. `aria-describedby` points at the row header, so the employee name
+  is the button's description. Move to top and Move up are disabled on the first row. Move down and
+  Move to bottom are disabled on the last row. A menu move is announced in a visually hidden
+  assertive live region. A drag is announced by `@dnd-kit`. The "Screen reader feedback" text above
+  the table repeats those messages and is not a live region.
+- The employee name is the row header (`Table.Header` with `scope="row"`), so screen readers can
+  announce it with the other cells in the row.
+- A picked-up row stays in the table and moves only with a transform. It uses a popover surface, a
+  level 5 shadow, a gray outline, and a slight tilt, and it paints above the other rows. The handle
   cursor changes from grab to grabbing. Keyboard users rely on this treatment, because no pointer is
   attached to the row.
+
+<ExampleCodeBlock code={DraggableRows} />

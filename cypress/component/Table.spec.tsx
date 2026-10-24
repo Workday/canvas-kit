@@ -17,6 +17,27 @@ describe('Table', () => {
       cy.findByRole('button', {name: 'Move row Riley Chen'}).should('be.visible');
     });
 
+    it('should place row actions in the last column', () => {
+      cy.findAllByRole('columnheader').then($headers => {
+        const names = [...$headers].map(header => header.textContent?.trim());
+
+        expect(names).to.deep.equal(['Reorder', 'Employee Name', 'Job Title', 'Actions']);
+      });
+
+      cy.findAllByRole('row')
+        .eq(1)
+        .within(() => {
+          cy.findAllByRole('cell')
+            .first()
+            .findByRole('button', {name: 'Move row Avery Johnson'})
+            .should('be.visible');
+          cy.findAllByRole('cell')
+            .last()
+            .findByRole('button', {name: 'Row actions'})
+            .should('be.visible');
+        });
+    });
+
     it('should show the screen reader feedback', () => {
       cy.contains('Move a row to see screen reader feedback. (For demonstration purposes.)').should(
         'be.visible'
