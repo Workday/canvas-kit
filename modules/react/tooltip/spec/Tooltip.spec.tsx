@@ -172,6 +172,43 @@ describe('Tooltip', () => {
       fireEvent.keyDown(screen.getByRole('textbox'), {key: ' '});
       expect(screen.getByRole('tooltip')).toBeInTheDocument();
     });
+
+    it('should keep the tooltip open when Space is typed into text entry inside an interactive target', () => {
+      render(
+        <Tooltip title="Search hint">
+          <div tabIndex={0}>
+            <input type="text" aria-label="Search" />
+          </div>
+        </Tooltip>
+      );
+
+      fireEvent.focus(screen.getByRole('textbox')); // triggers the tooltip
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the delay time
+      });
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+
+      fireEvent.keyDown(screen.getByRole('textbox'), {key: ' '});
+      expect(screen.getByRole('tooltip')).toBeInTheDocument();
+    });
+
+    it('should not reopen the tooltip after keyboard activation before the show delay', () => {
+      render(
+        <Tooltip title="Move row">
+          <button>Move row</button>
+        </Tooltip>
+      );
+
+      const button = screen.getByRole('button');
+      fireEvent.focus(button); // starts the tooltip's show timer
+      fireEvent.keyDown(button, {key: 'Enter'});
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      act(() => {
+        vi.advanceTimersByTime(300); // advance the timer by the show delay
+      });
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    });
   });
 
   it('should call the onKeyDown callback provided to the wrapped component and still hide on Enter', () => {

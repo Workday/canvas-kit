@@ -155,8 +155,9 @@ export function useTooltip<T extends Element = Element>({
     if (
       (event.key === 'Enter' || event.key === ' ') &&
       isInteractiveElement(event.currentTarget) &&
-      !isTextEntryElement(event.currentTarget)
+      !isTextEntryElement(event.target as Element)
     ) {
+      intentTimerShow.clear();
       popupModel.events.hide();
     }
   };
