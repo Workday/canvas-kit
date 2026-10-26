@@ -4,7 +4,7 @@ description: >-
   Use when reviewing pull requests, git diffs, or React component changes for Canvas Kit
   accessibility (WHCM, WCAG reflow, ARIA, docs, tests) — not for conversational WCAG/ARIA
   Q&A from the design site (sana-canvas-accessibility). Maintainer-only for this repo;
-  invoked by /.cursor/commands/pr-review.md.
+  invoked by the `/pr-review` command.
 disable-model-invocation: true
 ---
 

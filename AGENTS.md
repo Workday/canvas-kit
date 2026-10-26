@@ -387,17 +387,18 @@ Storybook stays in sync. Do not duplicate the full skill catalog here — link o
 ### Reviewing a branch or pull request
 
 If the user asks to review a branch, pull request, or diff of **this** repo, or invokes
-`/pr-review` / `/code-review`, read and follow [`.cursor/commands/pr-review.md`](.cursor/commands/pr-review.md)
+`/pr-review`, read and follow [`.cursor/commands/pr-review.md`](.cursor/commands/pr-review.md)
 **before** reviewing. That command covers:
 
 1. **Code review** (report-only) — bugs, regressions, missing tests, [AGENTS.md](./AGENTS.md) /
    [STYLE.md](./STYLE.md) adherence on the PR/branch diff only.
 2. **Accessibility review** (report-only) — [`skills/sana-canvas-a11y-pr-review`](skills/sana-canvas-a11y-pr-review/SKILL.md)
    plus the Accessibility section above.
-3. **CodeRabbit** — fetch `coderabbitai[bot]` comments; apply clear fixes and reply on threads;
-   if no review exists and the PR base is in [`.coderabbit.yaml`](./.coderabbit.yaml)
+3. **CodeRabbit** — fetch `coderabbitai[bot]` comments; verify each finding against the code, then
+   present planned fixes and replies for approval. Apply fixes and reply on threads only after the
+   user approves. If no review exists and the PR base is in [`.coderabbit.yaml`](./.coderabbit.yaml)
    `reviews.auto_review.base_branches` (`support`, `prerelease/minor`, `prerelease/major`), request
-   `@coderabbitai review` and stop so the user can re-run after the bot finishes.
+   `@coderabbitai review` and stop so the user can re-run `/pr-review` after the bot finishes.
 
 Do **not** use the consumer skill [`sana-canvas-kit-review`](skills/sana-canvas-kit-review/SKILL.md)
 for `modules/**` library source. CodeRabbit auto-review still only runs for the bases listed in
