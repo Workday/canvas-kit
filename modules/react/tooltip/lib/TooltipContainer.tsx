@@ -6,7 +6,14 @@ import {
   getTransformOrigin,
 } from '@workday/canvas-kit-react/common';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
-import {calc, createStencil, createVars, keyframes, px2rem} from '@workday/canvas-kit-styling';
+import {
+  calc,
+  createStencil,
+  createVars,
+  cssVar,
+  keyframes,
+  px2rem,
+} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
 export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -25,6 +32,7 @@ export interface TooltipContainerProps extends React.HTMLAttributes<HTMLDivEleme
    * @private
    */
   elementHasFocus?: boolean;
+  variant?: 'alt';
 }
 
 const defaultTransformOrigin = {
@@ -52,42 +60,37 @@ export const tooltipContainerStencil = createStencil({
   vars: {
     tooltipTransformOriginHorizontal: '',
     tooltipTransformOriginVertical: '',
+    background: '',
   },
-  base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical}) => ({
-    // ...system.legacy.type.subtext.md
-    // components do not support spreading for legacy type token
-    fontFamily: system.fontFamily.default,
-    fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.md,
-    lineHeight: system.legacy.lineHeight.subtext.md,
-    letterSpacing: system.legacy.letterSpacing.subtext.md,
+  base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical, background}) => ({
+    ...system.legacy.type.subtext.lg,
     display: 'inline-flex',
     position: 'relative',
-    padding: system.legacy.padding.sm,
-    color: system.color.fg.inverse,
+    padding: `${px2rem(6)} ${system.legacy.padding.sm}`,
+    color: system.color.fg.default,
     animationName: tooltipAnimation,
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${tooltipTransformOriginVertical} ${tooltipTransformOriginHorizontal}`,
+    margin: system.legacy.gap.xs,
     a: {
-      color: system.color.fg.inverse,
+      color: system.color.fg.default,
       textDecoration: 'underline',
     },
     // use :before vs margin to increase the tooltip hit-box
     '&:before': {
       content: '""',
-      borderRadius: system.legacy.shape.md,
-      outline: `${px2rem(1)} solid transparent`,
-      outlineOffset: `-${px2rem(1)}`,
+      borderRadius: system.legacy.shape.full,
+      border: `${px2rem(1)} solid ${system.color.border.default}`,
       zIndex: -1,
-      margin: system.legacy.gap.xs,
-      backgroundColor: system.legacy.color.surface.contrast.default,
+      margin: 0,
+      background: cssVar(background, system.legacy.color.surface.default),
       position: 'absolute',
       top: 0,
       left: 0,
       right: 0,
       bottom: 0,
-      boxShadow: system.depth[2],
+      boxShadow: system.depth[3],
     },
     // Hide tooltip when the reference element is either clipped or fully hidden
     '[data-popper-reference-hidden] &': {
@@ -108,15 +111,24 @@ export const tooltipContainerStencil = createStencil({
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
       bottom: calc.negate(base.legacy.size50),
     },
+
+    '@media (forced-colors: active)': {
+      outline: `${px2rem(1)} solid CanvasText`,
+    },
   }),
   modifiers: {
     elementHasFocus: {
       true: {
-        padding: calc.subtract(system.legacy.padding.md, calc.divide(system.legacy.padding.xxs, 2)),
-        '&:before': {
-          margin: base.legacy.size75,
-        },
+        margin: px2rem(6),
       },
+    },
+    variant: {
+      alt: ({background}) => ({
+        '&:before': {
+          background: cssVar(background, system.sana.color.surface.elevated),
+          border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
+        },
+      }),
     },
   },
 });
@@ -124,7 +136,13 @@ export const tooltipContainerStencil = createStencil({
 export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
   displayName: 'TooltipContainer',
   Component: (
-    {children, transformOrigin = defaultTransformOrigin, elementHasFocus = false, ...elemProps},
+    {
+      children,
+      transformOrigin = defaultTransformOrigin,
+      elementHasFocus = false,
+      variant,
+      ...elemProps
+    },
     ref,
     Element
   ) => {
@@ -141,6 +159,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
             tooltipTransformOriginHorizontal: transformOrigin?.horizontal,
             tooltipTransformOriginVertical: transformOrigin?.vertical,
             elementHasFocus,
+            variant,
           }),
           tooltipTranslateVars({positionX: translate.x, positionY: translate.y}),
         ])}

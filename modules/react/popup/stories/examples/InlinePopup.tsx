@@ -90,10 +90,10 @@ function SingleInlinePopup({
             <Popup.Body>
               <Box as="p">Are you sure you'd like to delete the item titled 'My Item'?</Box>
             </Popup.Body>
-            <Flex cs={flexStyles}>
+            <Popup.ButtonGroup>
               <Popup.CloseButton ref={initialFocusRef}>Cancel</Popup.CloseButton>
               <Popup.CloseButton as={DeleteButton}>Delete</Popup.CloseButton>
-            </Flex>
+            </Popup.ButtonGroup>
           </Popup.Card>
         </Popup.Popper>
       </Popup>

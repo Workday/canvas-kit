@@ -8,6 +8,7 @@ import {ExternalLinkRTL} from './examples/ExternalHyperlinkRTL';
 import {Link} from './examples/Hyperlink';
 import {InBodyText} from './examples/HyperlinkInBodyText';
 import {LinkInverse} from './examples/HyperlinkInverse';
+import {SecondaryLink} from './examples/SecondaryHyperlink';
 import {StandaloneLink} from './examples/StandaloneHyperlink';
 
 import HyperlinkStoriesMeta from './Hyperlink.stories';
@@ -38,31 +39,44 @@ the current page. By default, `Hyperlink`s have an underline for accessibility.
 #### Inverse
 
 `Hyperlink`s also have an `inverse` variant. Use this variant when you need to place a `Hyperlink`
-on a dark or colorful background.
+on a dark background.
 
 <ExampleCodeBlock code={LinkInverse} />
 
+#### Secondary
+
+`Hyperlink`s also have a `secondary` variant. This is a dark gray alternate to the default blue
+hyperlink. Use this variant when you need to place a `Hyperlink` on a colored background.
+
+<ExampleCodeBlock code={SecondaryLink} />
+
 #### Standalone
 
-`Hyperlink`s also have a `standalone` variant. Use this variant when you need to place a `Hyperlink`
-outside of a paragraph or body text. This will remove the underline.
-
-This variant can also be used with the `ExternalHyperlink` component.
+Use `linkType="standalone"` when you need to place a `Hyperlink` outside of paragraph or body text,
+such as in a button group or navigation list. This removes the underline. By default, `linkType` is
+`"inline"` and links are underlined.
 
 <ExampleCodeBlock code={StandaloneLink} />
 
+> **Accessibility Note:** Only use `linkType="standalone"` when something other than color already
+> shows it's a link — for example, it's set apart from surrounding content, like in a button or
+> navigation list. Never use `linkType="standalone"` for links embedded in body copy; a hover-only
+> underline is not enough for inline links to meet
+> [WCAG v2.2 success criterion 1.4.1 Use of Color](https://www.w3.org/WAI/WCAG22/Understanding/use-of-color.html).
+
 #### In Body Text
 
-In most cases use `HyperLink` and `ExternalHyperlink` in body text of a sentence where you need to
-link to another page or part of the document. By default they will wrap to a new line.
+In most cases use `Hyperlink` and `ExternalHyperlink` with the default `linkType="inline"` in body
+text of a sentence where you need to link to another page or part of the document. By default they
+will wrap to a new line.
 
 <ExampleCodeBlock code={InBodyText} />
 
 > **Accessibility Note:** Underlining links is not required in most cases. However, the example
 > above is one such exception. When hyperlinked text appears inline with static text, a text
-> decoration is required to avoid failing WCAG v2.2 success criterion 1.4.1 Use of Color.
->
-> [Failure of Success Criterion 1.4.1 due to creating links that are not visually evident without color vision](https://www.w3.org/WAI/WCAG22/Techniques/failures/F73)
+> decoration is required to avoid
+> [failing WCAG v2.2 success criterion 1.4.1 Use of Color](https://www.w3.org/WAI/WCAG22/Techniques/failures/F73).
+> Do not use `linkType="standalone"` here, as removing the underline would fail this criterion.
 
 ### Accessibility
 
@@ -103,7 +117,7 @@ users know about the behavior by adding an icon, `externalLinkIcon`.
 <ExampleCodeBlock code={ExternalLink} />
 
 `ExternalHyperlink`s also have an `inverse` variant. Use this variant when you need to place the
-link on a dark or colorful background.
+link on a dark background.
 
 <ExampleCodeBlock code={ExternalLinkInverse} />
 

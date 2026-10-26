@@ -43,7 +43,7 @@ export const WithIcons = () => {
                 {model.state.items.length > 0 && (
                   <Select.List>
                     {item => (
-                      <Select.Item data-id={item.id}>
+                      <Select.Item>
                         <Select.Item.Icon icon={item.icon} />
                         {item.text}
                       </Select.Item>

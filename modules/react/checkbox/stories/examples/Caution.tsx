@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 
 export const Caution = () => {
   const [checked, setChecked] = React.useState(false);
@@ -11,17 +11,18 @@ export const Caution = () => {
   };
 
   return (
-    <FormField error="caution">
-      <FormField.Label>Confirm</FormField.Label>
-      <FormField.Field>
-        <FormField.Input
+    <FormFieldGroup error="caution">
+      <FormFieldGroup.Label>Confirm</FormFieldGroup.Label>
+      <FormFieldGroup.Field>
+        <FormFieldGroup.Input
           as={Checkbox}
           checked={checked}
+          error={Checkbox.ErrorType.Caution}
           label="I agree to the terms"
           onChange={handleChange}
         />
-        <FormField.Hint>You must agree to the terms before proceeding</FormField.Hint>
-      </FormField.Field>
-    </FormField>
+        <FormFieldGroup.Hint>You must agree to the terms before proceeding</FormFieldGroup.Hint>
+      </FormFieldGroup.Field>
+    </FormFieldGroup>
   );
 };

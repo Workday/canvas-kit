@@ -3,6 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {Menu} from '@workday/canvas-kit-react/menu';
 
 import mdxDoc from './Menu.mdx';
+import {Alt as AltExample} from './examples/Alt';
 import {Basic as BasicExample} from './examples/Basic';
 import {ContextMenu as ContextMenuExample} from './examples/ContextMenu';
 import {Grouping as GroupingExample} from './examples/Grouping';
@@ -52,4 +53,7 @@ export const NestedSiblings: Story = {
 };
 export const ScrollableSubmenu: StoryObj<typeof ScrollableSubmenuExample> = {
   render: ScrollableSubmenuExample,
+};
+export const Alt: Story = {
+  render: AltExample,
 };

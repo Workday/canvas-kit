@@ -5,12 +5,19 @@ import {Card} from '@workday/canvas-kit-react/card';
 import {Placement, Popper} from '@workday/canvas-kit-react/popup';
 import {StaticStates} from '@workday/canvas-kit-react/testing';
 import {OverflowTooltip, Tooltip, TooltipContainer} from '@workday/canvas-kit-react/tooltip';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {resetIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 export default {
   title: 'Testing/Popups/Tooltip',
   component: Tooltip,
 };
+
+const styles = createStyles({
+  background: system.color.bg.alt.default,
+  padding: system.padding.md,
+});
 
 export const NonInteractive = {
   render: () => {
@@ -18,6 +25,18 @@ export const NonInteractive = {
       <Tooltip title="Test">
         <span data-testid="non-interactive">Non-interactive Tooltip</span>
       </Tooltip>
+    );
+  },
+};
+
+export const AltTooltip = {
+  render: () => {
+    return (
+      <div className={styles}>
+        <Tooltip title="Test" variant="alt">
+          <span>Alt Tooltip</span>
+        </Tooltip>
+      </div>
     );
   },
 };

@@ -13,6 +13,6 @@ export const useBannerIcon = createElemPropsHook(useBannerModel)(({state}) => {
 
   return {
     icon: icon as CanvasSystemIcon,
-    size: 24,
+    size: 20,
   };
 });

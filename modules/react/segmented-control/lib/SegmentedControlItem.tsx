@@ -5,9 +5,9 @@ import {createSubcomponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {Text} from '@workday/canvas-kit-react/text';
 import {Tooltip, TooltipProps} from '@workday/canvas-kit-react/tooltip';
-import {colorSpace, createStencil, handleCsProp} from '@workday/canvas-kit-styling';
+import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {CanvasSystemIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSegmentedControlItem} from './hooks/useSegmentedControlItem';
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
@@ -53,37 +53,24 @@ export interface ItemProps extends ButtonContainerProps {
 export const segmentedControlItemStencil = createStencil({
   extends: buttonStencil,
   base: {
-    fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    fontWeight: system.fontWeight.bold,
+    ...system.legacy.type.subtext.lg,
+    fontWeight: system.fontWeight.medium,
     textAlign: 'start',
     paddingInline: 0,
     gap: system.legacy.gap.xs,
 
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.md,
+    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
     [buttonStencil.vars.label]: system.color.fg.muted.default,
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.strong,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.hover,
-      }),
+      [buttonStencil.vars.background]: system.color.surface.overlay.hover.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: colorSpace.darken({
-        color: system.legacy.color.surface.alt.strong,
-        fallback: system.color.bg.alt.strong,
-        mixinColor: system.legacy.color.surface.overlay.mixin,
-        mixinValue: system.legacy.opacity.surface.pressed,
-      }),
+      [buttonStencil.vars.background]: system.color.surface.overlay.pressed.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
@@ -102,13 +89,17 @@ export const segmentedControlItemStencil = createStencil({
 
     "&[aria-pressed='true']": {
       [buttonStencil.vars.background]: system.legacy.color.surface.default,
-      [buttonStencil.vars.border]: system.color.border.input.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
       [buttonStencil.vars.label]: system.color.fg.strong,
+      boxShadow: system.depth[2],
 
       '&:hover, &.hover': {
         [systemIconStencil.vars.color]: system.color.fg.strong,
         [buttonStencil.vars.label]: system.color.fg.strong,
+      },
+
+      '&:focus-visible, &.focus': {
+        boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.border.inverse.default},0 0 0 ${px2rem(4)} ${system.color.brand.border.primary}`,
       },
 
       '&:disabled, &.disabled': {
@@ -124,19 +115,21 @@ export const segmentedControlItemStencil = createStencil({
   modifiers: {
     size: {
       large: {
-        height: system.legacy.size.md,
-        gap: system.legacy.gap.sm,
+        height: system.legacy.size.sm,
+        fontSize: system.legacy.fontSize.subtext.lg,
       },
       medium: {
-        height: system.legacy.size.sm,
+        height: base.legacy.size350,
+        fontWeight: system.sana.fontWeight.semibold,
       },
       small: {
         fontFamily: system.fontFamily.default,
         fontSize: system.legacy.fontSize.subtext.md,
         lineHeight: system.legacy.lineHeight.subtext.md,
         letterSpacing: system.legacy.letterSpacing.subtext.md,
-        fontWeight: system.fontWeight.bold,
+        fontWeight: system.fontWeight.medium,
         height: system.legacy.size.xs,
+        gap: base.legacy.size25,
       },
     },
     variant: {
@@ -149,13 +142,13 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'large', variant: 'iconOnly'},
       styles: {
-        minWidth: system.legacy.size.md,
+        minWidth: system.legacy.size.sm,
       },
     },
     {
       modifiers: {size: 'large', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.legacy.padding.lg} ${system.legacy.padding.xl}`,
+        paddingInline: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
       },
     },
     {
@@ -167,13 +160,13 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'medium', variant: 'iconOnly'},
       styles: {
-        minWidth: system.legacy.size.sm,
+        minWidth: base.legacy.size350,
       },
     },
     {
       modifiers: {size: 'medium', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.legacy.padding.md} ${system.legacy.padding.lg}`,
+        paddingInline: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
       },
     },
     {
@@ -191,7 +184,7 @@ export const segmentedControlItemStencil = createStencil({
     {
       modifiers: {size: 'small', variant: 'iconWithText'},
       styles: {
-        paddingInline: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
+        paddingInline: `${base.legacy.size75} ${system.legacy.padding.xs}`,
       },
     },
     {

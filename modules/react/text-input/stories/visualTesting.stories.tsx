@@ -1,5 +1,9 @@
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
-import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {
+  CanvasProvider,
+  CanvasProviderTheme,
+  PartialCanvasTheme,
+} from '@workday/canvas-kit-react/common';
 import {SystemIcon} from '@workday/canvas-kit-react/icon';
 import {
   ComponentStatesTable,
@@ -11,7 +15,9 @@ import {px2rem} from '@workday/canvas-kit-styling';
 import {searchIcon, xSmallIcon} from '@workday/canvas-system-icons-web';
 import {system} from '@workday/canvas-tokens-web';
 
-import {customColorTheme} from '../../../../utils/storybook';
+import {customColorTheme, toCanvasProviderTheme} from '../../../../utils/storybook';
+
+type VisualTestingTheme = PartialCanvasTheme | CanvasProviderTheme;
 
 export default {
   title: 'Testing/Inputs/Text Input',
@@ -23,8 +29,8 @@ export default {
   },
 };
 
-export const TextInputStates = () => (
-  <StaticStates>
+export const TextInputStates = ({theme}: {theme?: VisualTestingTheme} = {}) => (
+  <StaticStates theme={toCanvasProviderTheme(theme)}>
     <ComponentStatesTable
       rowProps={permutateProps(
         {
@@ -80,12 +86,7 @@ export const TextInputStates = () => (
   </StaticStates>
 );
 
-export const TextInputThemedStates = () => <TextInputStates />;
-TextInputThemedStates.parameters = {
-  canvasProviderDecorator: {
-    theme: customColorTheme,
-  },
-};
+export const TextInputThemedStates = () => <TextInputStates theme={customColorTheme} />;
 
 export const InputGroupStates = () => (
   <StaticStates>

@@ -32,7 +32,8 @@ export const useSidePanelModel = createModelHook({
     panelId: '',
     /**
      * The unique ID for the panel's label element. If not provided, a unique ID will be generated.
-     * This ID is used for the `aria-labelledby` attribute on both the panel and toggle button.
+     * This ID is used for the `aria-labelledby` attribute on the panel and the `aria-describedby`
+     * attribute on the toggle button.
      */
     labelId: '',
     /**
@@ -67,8 +68,8 @@ export const useSidePanelModel = createModelHook({
      */
     panelId,
     /**
-     * The unique ID for the panel's label element. Used for `aria-labelledby` on the panel
-     * and toggle button to provide an accessible name.
+     * The unique ID for the panel's label element. Used for `aria-labelledby` on the panel to
+     * provide its accessible name, and for `aria-describedby` on the toggle button.
      */
     labelId,
     /**

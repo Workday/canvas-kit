@@ -13,7 +13,7 @@ export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
     marginInlineStart: calc.negate(system.legacy.gap.xs),
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
+    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
     flex: '0 0 auto',
   },
 });

@@ -231,10 +231,13 @@ describe('Submenu placement', () => {
     });
   });
 
-  // Clearing the parent needs room for the parent and the submenu stacked. Where that does not
-  // fit, overlapping the parent is the better of the two bad options, so the submenu should still
-  // take a vertical fallback rather than stay beside the parent and run off screen.
-  [320, 360].forEach(width => {
+  // 568px is too short to stack the parent and the submenu without overlap. Sana menu padding is
+  // narrow enough that 360px still fits a side placement, so the submenu stays on `right-start`.
+  // 320px does not, and overlapping the parent below it is better than running off screen.
+  [
+    {width: 320, placement: 'bottom-start'},
+    {width: 360, placement: 'right-start'},
+  ].forEach(({width, placement}) => {
     const height = 568;
 
     context(`given a ${width}x${height} viewport too short to clear the parent`, () => {
@@ -248,8 +251,8 @@ describe('Submenu placement', () => {
         cy.checkA11y();
       });
 
-      it('should still fall back below the parent', () => {
-        getSubmenuPopper().should('have.attr', 'data-popper-placement', 'bottom-start');
+      it(`should use ${placement}`, () => {
+        getSubmenuPopper().should('have.attr', 'data-popper-placement', placement);
       });
 
       it('should stay inside the viewport', () => {
@@ -262,8 +265,8 @@ describe('Submenu placement', () => {
         });
       });
 
-      // The side placements do not fit here, so re-deriving a placement once the target scrolls
-      // away would put the submenu back beside the parent and halfway off screen.
+      // Re-deriving a placement after the target scrolls out of view must not send the submenu
+      // off screen. Where the side did not fit, that means staying on the vertical fallback.
       context('when the parent menu is then scrolled', () => {
         beforeEach(() => {
           getParentListContainer().scrollTo('bottom');
@@ -272,8 +275,8 @@ describe('Submenu placement', () => {
           getSubmenuPopper().should('have.attr', 'data-popper-reference-hidden');
         });
 
-        it('should keep the vertical placement', () => {
-          getSubmenuPopper().should('have.attr', 'data-popper-placement', 'bottom-start');
+        it('should keep its placement', () => {
+          getSubmenuPopper().should('have.attr', 'data-popper-placement', placement);
         });
 
         it('should stay inside the viewport', () => {
@@ -287,30 +290,33 @@ describe('Submenu placement', () => {
         });
 
         // Clamping the clearance to the viewport edge should leave nothing left to recompute, so
-        // the submenu holds its position rather than creeping up over the parent as it scrolls.
-        it('should not move while the parent keeps scrolling', () => {
-          getSubmenuPopper().then($popper => {
-            const settled = $popper[0].getBoundingClientRect();
+        // a vertical fallback holds its position rather than creeping up over the parent as it
+        // scrolls. A side placement tracks the target once that item scrolls back into view.
+        if (placement === 'bottom-start') {
+          it('should not move while the parent keeps scrolling', () => {
+            getSubmenuPopper().then($popper => {
+              const settled = $popper[0].getBoundingClientRect();
 
-            [480, 240, 0, 640].forEach(position => {
-              getParentListContainer().scrollTo(0, position);
-              // PopperJS updates on scroll asynchronously. Let it settle, then assert once with
-              // `then` rather than `should`, so a stale value cannot satisfy a retrying assertion.
-              cy.wait(250);
-              getSubmenuPopper().then($moved => {
-                const submenu = $moved[0].getBoundingClientRect();
-                expect(submenu.top, `top at scroll ${position}`).to.be.closeTo(
-                  settled.top,
-                  tolerance
-                );
-                expect(submenu.left, `left at scroll ${position}`).to.be.closeTo(
-                  settled.left,
-                  tolerance
-                );
+              [480, 240, 0, 640].forEach(position => {
+                getParentListContainer().scrollTo(0, position);
+                // PopperJS updates on scroll asynchronously. Let it settle, then assert once with
+                // `then` rather than `should`, so a stale value cannot satisfy a retrying assertion.
+                cy.wait(250);
+                getSubmenuPopper().then($moved => {
+                  const submenu = $moved[0].getBoundingClientRect();
+                  expect(submenu.top, `top at scroll ${position}`).to.be.closeTo(
+                    settled.top,
+                    tolerance
+                  );
+                  expect(submenu.left, `left at scroll ${position}`).to.be.closeTo(
+                    settled.left,
+                    tolerance
+                  );
+                });
               });
             });
           });
-        });
+        }
       });
     });
   });

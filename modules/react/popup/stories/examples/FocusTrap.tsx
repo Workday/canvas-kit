@@ -49,12 +49,12 @@ export const FocusTrap = () => {
                 Are you sure you'd like to delete the item titled 'My Item'?
               </Box>
             </Popup.Body>
-            <Flex cs={{gap: system.gap.sm, paddingBlock: system.padding.xxs}}>
+            <Popup.ButtonGroup>
+              <Popup.CloseButton>Cancel</Popup.CloseButton>
               <Popup.CloseButton as={DeleteButton} onClick={handleDelete}>
                 Delete
               </Popup.CloseButton>
-              <Popup.CloseButton>Cancel</Popup.CloseButton>
-            </Flex>
+            </Popup.ButtonGroup>
           </Popup.Card>
         </Popup.Popper>
         <SecondaryButton>Next Focusable Button</SecondaryButton>

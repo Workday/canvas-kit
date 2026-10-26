@@ -14,6 +14,9 @@ const containerStencil = createStencil({
 
 // A fixed height makes the parent list scroll independently of the page.
 const cardStyles = createStyles({[menuCardStencil.vars.maxHeight]: px2rem(280)});
+// Short enough that a Sana submenu cannot fit below the target when the menu is pinned to the
+// bottom of the viewport, so placement falls back above the parent.
+const bottomEdgeCardStyles = createStyles({[menuCardStencil.vars.maxHeight]: px2rem(160)});
 
 export const ScrollableSubmenu = ({
   dir = 'ltr',
@@ -31,7 +34,10 @@ export const ScrollableSubmenu = ({
       <Menu>
         <Menu.Target>Open Menu</Menu.Target>
         <Menu.Popper>
-          <Menu.Card cs={cardStyles} data-testid="scrollable-menu">
+          <Menu.Card
+            cs={alignBottom ? bottomEdgeCardStyles : cardStyles}
+            data-testid="scrollable-menu"
+          >
             <Menu.List>
               <Menu.Item data-id="first">First Item</Menu.Item>
               <Menu.Item data-id="second">Second Item</Menu.Item>

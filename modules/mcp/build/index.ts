@@ -41,7 +41,9 @@ function copyFile(sourceDir: string, relativePath: string): void {
   fs.copyFileSync(srcPath, destPath);
 }
 
-const allFiles = [...new Set([...index.upgradeGuideFiles, ...index.tokenFiles])];
+const allFiles = [
+  ...new Set([...index.upgradeGuideFiles, ...index.tokenFiles, ...index.iconMigrationFiles]),
+];
 const accessibilityFiles = [
   ...new Map(
     (index.accessibilityFiles as AccessibilityFileEntry[]).map(file => {
@@ -58,6 +60,31 @@ accessibilityFiles.forEach(file => console.log(`  - ${file.source}`));
 allFiles.forEach(file => copyFile(llmSourceDir, file));
 accessibilityFiles.forEach(file => {
   copyFile(accessibilitySourceDir, file.source);
+});
+
+if ('skillFiles' in index && Array.isArray(index.skillFiles)) {
+  index.skillFiles.forEach((file: string) => copyFile(path.resolve(__dirname, '../lib'), file));
+}
+
+const catalogFiles = ['component-index.json', 'token-index.json', 'icon-index.json'];
+const catalogSourceDir = path.resolve(__dirname, '../lib');
+
+catalogFiles.forEach(fileName => {
+  const destPath = path.resolve(targetDir, fileName);
+
+  // build:indexes:dist writes fresh catalogs here; fall back to committed lib/ copies.
+  if (fs.existsSync(destPath)) {
+    console.log(`  - ${fileName} (from build:indexes:dist)`);
+    return;
+  }
+
+  const sourcePath = path.resolve(catalogSourceDir, fileName);
+  if (!fs.existsSync(sourcePath)) {
+    throw new Error(`Missing required catalog file: ${sourcePath}`);
+  }
+
+  fs.copyFileSync(sourcePath, destPath);
+  console.log(`  - ${fileName}`);
 });
 
 // story-viewer.html is now built by build-story-apps.ts through Vite (not copied raw).

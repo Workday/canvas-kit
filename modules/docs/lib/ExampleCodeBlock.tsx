@@ -5,7 +5,7 @@ import {vscDarkPlus} from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {Card} from '@workday/canvas-kit-react/card';
-import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
+import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {calc, createStencil, cssVar, px2rem} from '@workday/canvas-kit-styling';
 import {checkCircleIcon, copyIcon} from '@workday/canvas-system-icons-web';
@@ -137,7 +137,7 @@ export const ExampleCodeBlock = ({code}: any) => {
       <Card data-part="example-block" className="sb-unstyled">
         {/* This allows for the div to scroll on smaller viewports while not allowing the components to overflow over the container */}
         <Card.Body data-part="example-block-container">
-          <CanvasProvider className={defaultBranding}>
+          <CanvasProvider>
             {React.createElement(code)}
             {code && (
               <div data-part="code-toggle-stackblitz-btn-container">
@@ -157,7 +157,7 @@ export const ExampleCodeBlock = ({code}: any) => {
       </Card>
       <Card data-part="code-block" cs={{padding: 0}}>
         <Card.Body cs={{position: 'relative'}}>
-          <CanvasProvider className={defaultBranding}>
+          <CanvasProvider>
             {code && (
               <div ref={textInput}>
                 <SyntaxHighlighter

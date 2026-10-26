@@ -1,11 +1,6 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
-import {Table} from '@workday/canvas-kit-react/table';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import SelectStoriesMeta from './Select.stories';
 import {Basic} from './examples/Basic';
@@ -45,30 +40,16 @@ yarn add @workday/canvas-kit-react
 
 ### Basic Example
 
-`Select` supports a
-[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you
-pass an array of items via the `items` prop and provide a render function to display the items. The
-items may be provided as an
+`Select` supports a [dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items)
+where you pass an array of items via the `items` prop and provide a render function to display the
+items. The items may be provided as an
 [array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
 [array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
 
-`Select` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`Select` wraps the `FormField` element and the `FormField` element wraps the children of `Select` to
-meet accessibility standards. This ensures the `label` text from `FormField` is attached to the
-`Select.Input` and read out as a group for voiceover.
-
-```tsx
-<Select items={options}>
-  <FormField label="Your Label">
-    <Select.Input onChange={e => handleChange(e)} id="contact-select" />
-    <Select.Popper>
-      <Select.Card>
-        <Select.List>{item => <Select.Item>{item.id}</Select.Item>}</Select.List>
-      </Select.Card>
-    </Select.Popper>
-  </FormField>
-</Select>
-```
+`Select` should be used in tandem with [Form Field](/components/inputs/form-field/) to ensure proper
+label association and screen reader support. Wrap **`Select`** with **`FormField`**, and compose
+**`FormField.Input as={Select.Input}`** so the combobox receives the field label. Include
+**`Select.Popper`**, **`Select.Card`**, **`Select.List`**, and **`Select.Item`**.
 
 <ExampleCodeBlock code={Basic} />
 
@@ -101,14 +82,15 @@ input component. By default, the orientation will be set to `vertical`.
 
 ### Required
 
-Set the `required` prop of the wrapping `FormField` to `true` to indicate that the field is
+Set the `isRequired` prop of the wrapping `FormField` to `true` to indicate that the field is
 required. Labels for required fields are suffixed by a red asterisk.
 
 <ExampleCodeBlock code={Required} />
 
 ### Disabled
 
-Set the `disabled` prop of `Select.Input` to prevent users from interacting with it.
+Set the `disabled` prop on **`FormField.Input as={Select.Input}`** to prevent users from interacting
+with the combobox.
 
 <ExampleCodeBlock code={Disabled} />
 
@@ -134,20 +116,21 @@ sets `aria-disabled` for the disabled items.
 Use `Select.Item.Icon` to render an icon for a `Select.Item`. The `icon` prop for `Select.Item.Icon`
 accepts [system icons](/assets/system-icons/) from `@workday/canvas-system-icons-web`.
 
-In order to render the icon for the selected item in the `Select.Input`:
+In order to render the icon for the selected item on **`FormField.Input as={Select.Input}`**:
 
 1.  Obtain a reference to the `model` by registering your `items` with `useSelectModel`.
 2.  Get the selected item:
     `const selectedItem = model.navigation.getItem(model.state.selectedIds[0], model)`
 3.  Pass the icon for the selected item to the input:
-    `<Select.Input inputStartIcon={selectedItem.value.icon}>`
+    `<FormField.Input as={Select.Input} inputStartIcon={selectedItem?.value.icon} />`
 
-> **Note: `data-id` on `Select.Item` must match the `id` property in your array of objects. This
-> ensures proper keyboard handling and type-ahead.**
+> **Note:** Dynamic `{item => <Select.Item>}` registration already uses the collection `id`. Set
+> **`data-id`** only on static **`Select.Item`** children (see [Grouped Items](#grouped-items)), and
+> keep it equal to that id (`id` or **`getId`**).
 
 <ExampleCodeBlock code={WithIcons} />
 
-**Note: that `Select.Input` will only render an icon if an item is selected.**
+**Note: that `FormField.Input as={Select.Input}` will only render an icon if an item is selected.**
 
 ### Grow
 
@@ -172,23 +155,10 @@ forward `ref` to its underlying `<input type="text" role="combobox">` element.
 
 ### Error States
 
-Set the `error` prop of the wrapping `FormField` to `"caution"` or `"error"` to set the `Select` to
-the caution or error state, respectively. You will also need to set the `hintId` and `hintText`
-props on the `FormField` to meet accessibility standards. You must set an `id` attribute on the
-`Select.Input` element that matches the value of `inputId` set on the `FormField` element. These
-attributes ensure that the caution message is associated to the `Select` and read out by voiceover.
-
-**Note: The Select container component, `Select`, must wrap `FormField` to ensure `Select.Input` is
-styled correctly.**
-
-```tsx
-<Select items={options}>
-  <FormField label="Contact" inputId="contact-id-formfield">
-    <Select.Input id="contact-id-formfield" />
-    ...
-  </FormField>
-</Select>
-```
+Form Field provides error and caution states for Select. Set the `error` prop on Form Field to
+`"error"` or `"caution"` and use `FormField.Hint` to provide messages. See
+[Form Field's Error documentation](/components/inputs/form-field/#error-states) for examples and
+accessibility guidance.
 
 #### Caution
 
@@ -210,8 +180,9 @@ You can set `initialSelectedIds` to the value that you want initially selected.
 
 ### Placeholder
 
-You can change the placeholder text by passing in a string value to the `placeholder` attribute on
-the `Select.Input`.
+You can change the placeholder text by passing a string to the `placeholder` prop on
+**`FormField.Input as={Select.Input}`**. Placeholder text is not a substitute for
+**`FormField.Label`**.
 
 <ExampleCodeBlock code={Placeholder} />
 
@@ -237,8 +208,9 @@ to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object
 <ExampleCodeBlock code={Complex} />
 
 **Note: By default, the identifier and text value are `id` and `text` properties respectively. If
-your data object for each item is different, provide a `getId` or `getTextValue` function to the
-model config. For example:**
+your data object for each item is different, provide `getId` and/or `getTextValue`. If a custom
+`getId` does not return the display text, also pass `getTextValue` — otherwise the model uses
+`getId` for type-ahead and the selected value. For example:**
 
 ```jsx
 const items = [
@@ -270,20 +242,24 @@ prop as well as the `value` DOM property and will update the model accordingly.
   `items`, do not override this function. Instead provide static items via JSX. the list will create
   an internal array of items where `id` is the only property and the default `getId` will return the
   desired result. **Note: If your array of objects has a different property for `id`, like
-  `serverId`, use this function to set the id.**
+  `serverId`, use this function to set the id. If that function does not return the display text,
+  also pass `getTextValue`.**
 
   ```tsx
   const options = [{text: 'Pizza', serverId: 'pizza-1'}, {text: 'Cheeseburger', serverId: 'cheeseburger'}]
-  <Select items={options} getId={(item) => item.serverId}>
-    <FormField label="Your Label">
-      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
-      <Select.Popper>
-        <Select.Card>
-          <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
-        </Select.Card>
-      </Select.Popper>
-    </FormField>
-  </Select>
+  <FormField>
+    <FormField.Label>Your Label</FormField.Label>
+    <FormField.Field>
+      <Select items={options} getId={(item) => item.serverId} getTextValue={(item) => item.text}>
+        <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
+        <Select.Popper>
+          <Select.Card>
+            <Select.List>{item => <Select.Item>{item.text}</Select.Item>}</Select.List>
+          </Select.Card>
+        </Select.Popper>
+      </Select>
+    </FormField.Field>
+  </FormField>
   ```
 
 - `getTextValue`: Optional function to return the text representation of an item. If not provided,
@@ -294,21 +270,25 @@ prop as well as the `value` DOM property and will update the model accordingly.
 
   ```tsx
   const options = [{label: 'Pizza', id: 'pizza-1'}, {label: 'Cheeseburger', id: 'cheeseburger'}]
-  <Select items={options} getTextValue={(item) => item.label}>
-    <FormField label="Your Label">
-      <Select.Input onChange={e => handleChange(e)} id="contact-select" />
-      <Select.Popper>
-        <Select.Card>
-          <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
-        </Select.Card>
-      </Select.Popper>
-    </FormField>
-  </Select>
+  <FormField>
+    <FormField.Label>Your Label</FormField.Label>
+    <FormField.Field>
+      <Select items={options} getTextValue={(item) => item.label}>
+        <FormField.Input as={Select.Input} onChange={e => handleChange(e)} />
+        <Select.Popper>
+          <Select.Card>
+            <Select.List>{item => <Select.Item>{item.label}</Select.Item>}</Select.List>
+          </Select.Card>
+        </Select.Popper>
+      </Select>
+    </FormField.Field>
+  </FormField>
   ```
 
 ### Grouped Items
 
-In order to group items, you have to use the static API in combination of the `Menu.Group` component.
+In order to group items, use the static item API with **`Menu.Group`** inside **`Select.List`**, and
+still pass **`items`** whose ids match each **`Select.Item`** **`data-id`**.
 
 <ExampleCodeBlock code={GroupedItems} />
 
@@ -317,6 +297,188 @@ In order to group items, you have to use the static API in combination of the `M
 Select and its subcomponents support custom styling via the `cs` prop. For more information, check
 our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+The primary accessibility goal for `Select` is a visible, persistent label and a single choice from
+a known list that assistive technology identifies as a combobox. Use **`Select`** when the user must
+pick one option. For multiple selections, use [**MultiSelect**](/docs/preview-multiselect--docs).
+For a value outside a fixed list, use [**Combobox**](/features/combobox/). See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for label,
+hint, error, and required wiring. This follows the WAI-ARIA
+[Select-Only Combobox](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/examples/combobox-select-only/)
+pattern.
+
+### Minimum Accessible Structure
+
+Build on the [Basic Example](#basic-example): label first, then **`Select`** inside
+**`FormField.Field`**, with the combobox, popup, list, and items in this order.
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {Select} from '@workday/canvas-kit-react/select';
+
+const options = ['E-mail', 'Phone', 'Fax'];
+
+<FormField>
+  <FormField.Label>Contact</FormField.Label>
+  <FormField.Field>
+    <Select items={options}>
+      <FormField.Input as={Select.Input} />
+      <Select.Popper>
+        <Select.Card>
+          <Select.List>{item => <Select.Item>{item}</Select.Item>}</Select.List>
+        </Select.Card>
+      </Select.Popper>
+    </Select>
+  </FormField.Field>
+</FormField>;
+```
+
+Every `Select` requires **`FormField`**, a visible **`FormField.Label`**, and
+**`FormField.Input as={Select.Input}`** so the combobox has a programmatically determinable name,
+relationships, and instructions. See
+[FormField's accessibility documentation](/components/inputs/form-field/#accessibility) for hint,
+error, and required wiring.
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically when you compose `Select` with `FormField` subcomponents.
+**Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by subcomponents_):
+
+- **`Select.Input`**: Visual `<input>` with `role="combobox"`, `aria-haspopup="listbox"`,
+  `aria-expanded` from menu visibility, `aria-autocomplete="list"` (do not change to `"none"`),
+  `aria-controls` pointing at the listbox id (`{modelId}-list`), and `aria-activedescendant` while
+  the list is open (removed when the list is closed). `autoComplete` is `"off"`. Keyboard characters
+  are not inserted into the input; type-ahead is handled by the model. **`FormField.Label`** (via
+  **`FormField.Input`**) is the accessible name of the combobox — do not add a second name on the
+  listbox.
+- **Hidden form input**: A second input holds the selected id(s) for form submission. It is
+  `aria-hidden`, has `tabIndex={-1}`, and is not in the tab order. `onChange` and `name` apply to
+  this input. Focus and blur on a `ref` are forwarded to the visual combobox.
+- **`Select.List`**: `role="listbox"` with an id that matches the combobox `aria-controls`. Options
+  are not in the tab order; keyboard focus stays on the combobox. Listbox labelling is library-owned
+  — do not set `aria-labelledby` (or `aria-label`) on **`Select.List`**.
+- **`Select.Item`**: `role="option"` and `aria-selected` from selection state. Disabled options need
+  **`aria-disabled`** from application code (see **Accessibility Requirements**).
+- **`Menu.Group`** (when used inside **`Select.List`**): `role="group"` with `aria-labelledby`
+  referencing the group heading (`title` or **`Menu.Group.Heading`**).
+- **`Select.Item.Icon`** and the caret / start icons on **`Select.Input`**: Canvas Kit icons use
+  `role="presentation"` and `focusable="false"`. Decorative icons need no extra attributes.
+- **`disabled` on `Select.Input`**: Maps to the native `disabled` attribute on both inputs; the
+  combobox is removed from the tab order.
+- **`ref`**: Forwards to the visual combobox (`<input type="text" role="combobox">`).
+
+**Keyboard** (_select-only combobox; focus remains on **`Select.Input`**_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move to and from the combobox (native tab order).
+  Other keys are prevented from editing the input.
+- Clicking **`FormField.Label`** moves focus to the combobox. Clicking the combobox opens or closes
+  the list.
+- <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> open the list. While the list is open, those keys move
+  the active option (skipping ids in **`nonInteractiveIds`**). <kbd>Home</kbd> / <kbd>End</kbd> move
+  to the first or last option while the list is open.
+- <kbd>Space</kbd> opens the list when it is closed and no type-ahead string is in progress. While
+  the list is open and type-ahead is empty, <kbd>Space</kbd> selects the active option and closes
+  the list.
+- Printable characters type-ahead: with the list closed, matching options are selected; with the
+  list open, assistive focus moves to the matching option. Consecutive keys within 500ms form a
+  search string.
+- <kbd>Enter</kbd> while the list is open selects the active option (unless **`aria-disabled`**) and
+  closes the list in single-select mode. It does not submit the form while the list is open.
+- <kbd>Escape</kbd> closes the list. Blur also hides the list. After close, `aria-activedescendant`
+  is removed; the active option returns to the selected item when one is selected.
+- Activating an option with the pointer keeps focus on the combobox and closes the list.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), hint or error text via `aria-describedby`, and the current
+  selected text (or the placeholder when nothing is selected).
+- The control is announced as a combobox. Collapsed vs expanded follows `aria-expanded`. While the
+  list is open, the active option is exposed through `aria-activedescendant`.
+- Options are announced with selected or not-selected state (`aria-selected`). Disabled options are
+  announced as disabled when **`aria-disabled`** is set.
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
+- Disabled comboboxes may be announced as unavailable and are skipped in the tab order.
+- The hidden form input and decorative icons are not announced.
+
+For rendered label, input, and hint association markup, see the DOM examples in
+[FormField's Built-in Behaviors](/components/inputs/form-field/#built-in-behaviors).
+
+### Accessibility Requirements
+
+Required in application code for an accessible `Select`. Rows marked _(conditional)_ apply only when
+the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible `FormField.Label`, wrap **`Select`** with
+**`FormField`**, use **`FormField.Input as={Select.Input}`**, include **`Select.Popper`**,
+**`Select.Card`**, **`Select.List`**, and **`Select.Item`**, and pass **`items`**. Omit `isHidden`,
+omit a custom `id` unless testing or composition requires it, omit a `ref` unless programmatic focus
+is required, omit **`disabled`**, **`nonInteractiveIds`**, icons, grouped list items, and a custom
+**`placeholder`** unless the spec includes them.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Use a ref when the product needs to move focus to the combobox after an action. Do not attach a
+`ref` or call `focus()` unless the design or developer asks for it. See
+[Ref Forwarding](#ref-forwarding) under Usage for a complete Storybook example (imports, `ref` on
+**`FormField.Input as={Select.Input}`**, and a button that calls `focus()`).
+
+**Disabled options** _(conditional)_:
+
+When an option is unavailable, set **`nonInteractiveIds`** on **`Select`** and **`aria-disabled`**
+on those **`Select.Item`**s. See [Disabled Items](#disabled-items) under Usage for a complete
+Storybook example. Do not use styling alone.
+
+| Requirement                        | How to satisfy                                                                                                                                                                                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Input wiring                       | **`FormField.Input as={Select.Input}`** for the combobox, with **`Select.Popper`**, **`Select.Card`**, **`Select.List`**, and **`Select.Item`**. See [FormField accessibility](/components/inputs/form-field/#accessibility) for label, hint, error, and required wiring |
+| Disabled combobox _(conditional)_  | `disabled` on **`FormField.Input as={Select.Input}`**. See [Disabled](#disabled)                                                                                                                                                                                         |
+| Disabled options _(conditional)_   | **`nonInteractiveIds`** on **`Select`** (ids skipped by keyboard and type-ahead) **and** **`aria-disabled`** on those **`Select.Item`**s. See [Disabled Items](#disabled-items)                                                                                          |
+| Grouped list items _(conditional)_ | Keep **`items`**. Inside **`Select.List`**, render static **`Menu.Group`** (`title` or **`Menu.Group.Heading`**) and **`Select.Item`**s with matching **`data-id`** — not `{item => …}`. See [Grouped Items](#grouped-items)                                             |
+| Option icons _(conditional)_       | **`Select.Item.Icon`** on each item; **`inputStartIcon`** on **`FormField.Input as={Select.Input}`** for the selected item. Decorative icons need no extra attributes; meaning beyond the label must be text                                                             |
+| Custom placeholder _(conditional)_ | `placeholder` on **`FormField.Input as={Select.Input}`** only as short prompt text—never as the only name. Default is `"Choose an option"`                                                                                                                               |
+| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input as={Select.Input}`** and call `focus()` when moving focus to the field after an action—omit by default (see **Programmatic focus** above)                                                                                                    |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, **`FormField.Input as={Select.Input}`**, popup list composition
+  (**`Select.Popper`**, **`Select.Card`**, **`Select.List`**, **`Select.Item`**), **`items`**.
+  Default list rendering is `{item => <Select.Item>{item}</Select.Item>}` (or `item.text` /
+  **`getTextValue`**).
+- **CONDITIONAL:** disabled combobox, disabled options (`nonInteractiveIds` + `aria-disabled`),
+  grouped list items (**`items`** plus static **`Menu.Group`** / **`data-id`** children — do not
+  omit **`items`**), option icons, custom placeholder, programmatic focus via `ref`, **`getId`** and
+  **`getTextValue`** when item shape is not `{id, text}` (always pass **`getTextValue`** if custom
+  **`getId`** is not the display text), **`data-id`** on static JSX **`Select.Item`**s. See
+  [FormField accessibility](/components/inputs/form-field/#accessibility) for shared FormField
+  conditionals (hint/error, required, stable `id`).
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- **Missing `FormField` wiring**: Do not use `Select` without **`FormField`** and
+  **`FormField.Label`**, and do not render a bare **`Select.Input`** when a **`FormField`** is
+  present. Use **`FormField.Input as={Select.Input}`** (see **Minimum accessible structure**). For
+  shared FormField anti-patterns (manual ARIA, placeholder-only labels, color-only errors, broken ID
+  references), see [FormField Anti-Patterns](/components/inputs/form-field/#anti-patterns).
+- **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup`, `aria-expanded`,
+  `aria-autocomplete` (including `"none"`), `aria-controls`, `aria-activedescendant`,
+  `autoComplete`, or listbox `role` / `id` / `aria-labelledby` / `aria-label`. Do not make
+  **`Select.Item`** focusable — the active option is **`aria-activedescendant`** on the combobox.
+- **Wrong component**: Do not use a native `<select>`, **`Menu`**, **`Combobox`**, **`TextInput`**,
+  or **`FormFieldGroup`** for a single submitted list value. Use
+  [**MultiSelect**](/docs/preview-multiselect--docs) when more than one option can be selected.
+- **Item identity / grouping**: Do not set **`data-id`** on `{item => <Select.Item>}`. Do not omit
+  **`items`** when grouping, and do not group with a render callback alone — use **`Menu.Group`**
+  and **`data-id`** (see **Static item ids** and **Grouped list items**).
+- **Free-text keyboard on the combobox**: Do not add `onKeyDown` that types into the input or calls
+  `preventDefault` on <kbd>Tab</kbd> — Select is select-only.
 
 ## Component API
 
