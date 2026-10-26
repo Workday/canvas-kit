@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.6](https://github.com/Workday/canvas-kit/releases/tag/v16.2.6) (2026-10-26)
+
+### Infrastructure
+
+- test: Add automated accessibility tests for popup components ([#4181](https://github.com/Workday/canvas-kit/pull/4181)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@claude](https://github.com/claude), [@cursoragent](https://github.com/cursoragent))
+  Added automated accessibility tests for popup components (Dialog, Modal, Popup) to verify accessible names. These tests catch accessibility gaps early by validating that dialog containers have proper labeling.
+
+
 ## [v16.2.5](https://github.com/Workday/canvas-kit/releases/tag/v16.2.5) (2026-10-23)
 
 ### Components
