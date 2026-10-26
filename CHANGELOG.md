@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.8](https://github.com/Workday/canvas-kit/releases/tag/v16.2.8) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v15.1.15](https://github.com/Workday/canvas-kit/releases/tag/v15.1.15) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+## [v16.2.7](https://github.com/Workday/canvas-kit/releases/tag/v16.2.7) (2026-10-26)
+
+### Documentation
+
+- docs(table): Add an accessible draggable rows pattern ([#4184](https://github.com/Workday/canvas-kit/pull/4184)) ([@AverageZ](https://github.com/AverageZ), alex.zajac, William Stanton, [@cursoragent](https://github.com/cursoragent))
+  Documentation only. `Table` does not gain reorder behavior. The pattern is a research example at Guides > Accessibility > Table Patterns > Draggable Rows.
+
+
+## [v16.2.6](https://github.com/Workday/canvas-kit/releases/tag/v16.2.6) (2026-10-26)
+
+### Infrastructure
+
+- test: Add automated accessibility tests for popup components ([#4181](https://github.com/Workday/canvas-kit/pull/4181)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@claude](https://github.com/claude), [@cursoragent](https://github.com/cursoragent))
+  Added automated accessibility tests for popup components (Dialog, Modal, Popup) to verify accessible names. These tests catch accessibility gaps early by validating that dialog containers have proper labeling.
+
+
 ## [v16.2.5](https://github.com/Workday/canvas-kit/releases/tag/v16.2.5) (2026-10-23)
 
 ### Components
