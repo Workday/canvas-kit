@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.7](https://github.com/Workday/canvas-kit/releases/tag/v16.2.7) (2026-10-26)
+
+### Documentation
+
+- docs(table): Add an accessible draggable rows pattern ([#4184](https://github.com/Workday/canvas-kit/pull/4184)) ([@AverageZ](https://github.com/AverageZ), alex.zajac, William Stanton, [@cursoragent](https://github.com/cursoragent))
+  Documentation only. `Table` does not gain reorder behavior. The pattern is a research example at Guides > Accessibility > Table Patterns > Draggable Rows.
+
+
 ## [v16.2.6](https://github.com/Workday/canvas-kit/releases/tag/v16.2.6) (2026-10-26)
 
 ### Infrastructure
