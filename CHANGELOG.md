@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.5](https://github.com/Workday/canvas-kit/releases/tag/v16.2.5) (2026-10-23)
+
+### Components
+
+- fix: Position Menu submenu against parent's visible edge ([#4214](https://github.com/Workday/canvas-kit/pull/4214)) ([@sheelah](https://github.com/sheelah))
+
+### Infrastructure
+
+- chore: Fix npm publish failures in support ([#4218](https://github.com/Workday/canvas-kit/pull/4218)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Release and canary CI on `support` now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
+## [v15.1.14](https://github.com/Workday/canvas-kit/releases/tag/v15.1.14) (2026-10-22)
+
+### Infrastructure
+
+- chore: Fix npm publish failures in support ([#4218](https://github.com/Workday/canvas-kit/pull/4218)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Release and canary CI on `support` now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
+## [v15.1.13](https://github.com/Workday/canvas-kit/releases/tag/v15.1.13) (2026-10-22)
+
+### Components
+
+- fix: Position Menu submenu against parent's visible edge ([#4214](https://github.com/Workday/canvas-kit/pull/4214)) ([@sheelah](https://github.com/sheelah))
+
+
+## [v16.2.4](https://github.com/Workday/canvas-kit/releases/tag/v16.2.4) (2026-10-21)
+
+### Components
+
+- fix: Update focus styles for SelectionGroup ([#4210](https://github.com/Workday/canvas-kit/pull/4210)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v16.2.3](https://github.com/Workday/canvas-kit/releases/tag/v16.2.3) (2026-10-16)
+
+### Components
+
+- docs(radio): Address accessibility review feedback ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Format accessibility guidance for consistency ([@](https://github.com/), Cursor)
+
+### Documentation
+
+- docs(radio): Add accessibility guidance for AI codegen ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify accessibility requirements wording ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify option value and trim anti-patterns ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+
+
+## [v16.2.2](https://github.com/Workday/canvas-kit/releases/tag/v16.2.2) (2026-10-15)
+
+### Components
+
+- docs(switch): Expand accessibility section for AI codegen ([@](https://github.com/), Cursor)
+- Simplified Switch component documentation ([@gautamjn6388](https://github.com/gautamjn6388))
+- docs(switch): Simplify accessibility keyboard and focus guidance ([@](https://github.com/), Cursor)
+- docs(switch): Leave required off the basic example ([@](https://github.com/), Cursor)
+
+
+## [v16.2.1](https://github.com/Workday/canvas-kit/releases/tag/v16.2.1) (2026-10-15)
+
+### Components
+
+- docs(action-bar): Updating some sections to match button docs ([#4200](https://github.com/Workday/canvas-kit/pull/4200)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent), [@claude](https://github.com/claude), William Stanton)
+
+
 ## [v16.2.0](https://github.com/Workday/canvas-kit/releases/tag/v16.2.0) (2026-10-14)
 
 
@@ -68,6 +133,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
 
 
+## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
 ## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
 
 ### Components
