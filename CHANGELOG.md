@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.8](https://github.com/Workday/canvas-kit/releases/tag/v16.2.8) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v15.1.15](https://github.com/Workday/canvas-kit/releases/tag/v15.1.15) (2026-10-26)
 
 ### Infrastructure
