@@ -36,7 +36,8 @@ export interface PopperProps {
    * instead of calling `getBoundingClientRect` on the `anchorElement` prop. Use this when you need
    * complete control over positioning. When this prop is specified, it is safe to pass `null` into the
    * `anchorElement` prop. If `null` is passed into the `anchorElement` prop, an `owner` will not be
-   * provided for the `PopupStack`.
+   * provided for the `PopupStack`. If an `anchorElement` is also provided, Popper listens to its
+   * scroll containers and uses it for clipping, so the Popper still updates when it scrolls.
    */
   getAnchorClientRect?: () => DOMRect;
   /**
@@ -164,7 +165,10 @@ const OpenPopper = React.forwardRef<HTMLDivElement, PopperProps>(
     // useLayoutEffect prevents flashing of the popup before position is determined
     React.useLayoutEffect(() => {
       const anchorEl = getAnchorClientRect
-        ? {getBoundingClientRect: getAnchorClientRect}
+        ? {
+            getBoundingClientRect: getAnchorClientRect,
+            contextElement: getElementFromRefOrElement(anchorElement ?? null),
+          }
         : getElementFromRefOrElement(anchorElement ?? null);
       if (!anchorEl) {
         console.warn(

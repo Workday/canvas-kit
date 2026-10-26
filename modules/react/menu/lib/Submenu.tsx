@@ -1,3 +1,4 @@
+import {Rect} from '@popperjs/core';
 import React from 'react';
 
 import {
@@ -11,10 +12,11 @@ import {
   composeHooks,
   createElemPropsHook,
   createSubcomponent,
+  isElementRTL,
   subModelHook,
   useForkRef,
 } from '@workday/canvas-kit-react/common';
-import {Popper} from '@workday/canvas-kit-react/popup';
+import {Placement, Popper} from '@workday/canvas-kit-react/popup';
 import {chevronRightSmallIcon} from '@workday/canvas-system-icons-web';
 
 import {MenuCard} from './MenuCard';
@@ -23,7 +25,7 @@ import {MenuGroup} from './MenuGroup';
 import {MenuItem, StyledMenuItem, useMenuItemArrowReturn, useMenuItemFocus} from './MenuItem';
 import {MenuList} from './MenuList';
 import {MenuOption} from './MenuOption';
-import {defaultMenuPopperOptions, useMenuPopper} from './MenuPopper';
+import {menuPopperOffset, useMenuPopper} from './MenuPopper';
 import {useMenuModel} from './useMenuModel';
 
 type MenuModelConfig = (typeof useMenuModel)['TConfig'];
@@ -37,16 +39,100 @@ export interface SubmenuProps
   children: React.ReactNode;
 }
 
+type ElementRef = React.RefObject<HTMLElement | null>;
+
+// The target sits inside the parent menu, so placements are measured against the parent's visible
+// box instead. Otherwise vertical placements cover the parent, and a target scrolled out of the
+// parent's list fails the side placements' fallback checks.
+const getSubmenuAnchorRects = (parentRef?: ElementRef, targetRef?: ElementRef) => {
+  const parentEl = parentRef?.current;
+  const targetEl = targetRef?.current;
+  if (!parentEl || !targetEl) {
+    return undefined;
+  }
+  const parent = parentEl.getBoundingClientRect();
+  const target = targetEl.getBoundingClientRect();
+  const top = Math.min(Math.max(target.top, parent.top), parent.bottom);
+  const bottom = Math.max(Math.min(target.bottom, parent.bottom), parent.top);
+  return {parent, anchor: {top, bottom, left: parent.left, right: parent.right}};
+};
+
+const getSubmenuOffsetModifier = (parentRef?: ElementRef, targetRef?: ElementRef) => ({
+  name: 'offset',
+  options: {
+    // Popper includes these offsets when checking overflow, so vertical fallbacks are only chosen
+    // when the submenu fits fully above or below the parent.
+    offset: ({placement, popper}: {placement: Placement; popper: Rect}) => {
+      const [skidding, distance] = menuPopperOffset;
+      const rects = getSubmenuAnchorRects(parentRef, targetRef);
+      const side = placement.split('-')[0];
+      if (!rects || (side !== 'top' && side !== 'bottom')) {
+        return [skidding, distance];
+      }
+      const {parent, anchor} = rects;
+      const wanted = side === 'bottom' ? parent.bottom - anchor.bottom : anchor.top - parent.top;
+      // How far the submenu can move before it leaves the viewport it is portalled into.
+      const available =
+        side === 'bottom'
+          ? document.documentElement.clientHeight - popper.height - distance - anchor.bottom
+          : anchor.top - distance - popper.height;
+      // Clear the parent where there is room, and clear as much of it as the viewport allows where
+      // there is not. Going further would only push the submenu off screen, and clamping to the
+      // viewport edge also holds the submenu still while the parent scrolls underneath it.
+      return [skidding, distance + Math.max(0, Math.min(wanted, available))];
+    },
+  },
+});
+
 export const SubmenuPopper = createSubcomponent('div')({
   modelHook: useMenuModel,
   elemPropsHook: useMenuPopper,
-})<ExtractProps<typeof Popper>>(({children, ...elemProps}) => {
-  return (
-    <Popper placement="right-start" popperOptions={defaultMenuPopperOptions} {...elemProps}>
-      {children}
-    </Popper>
-  );
-});
+})<ExtractProps<typeof Popper>>(
+  ({children, fallbackPlacements, popperOptions, ...elemProps}, Element, model) => {
+    const parentContainerRef = model.UNSTABLE_parentModel?.state.containerRef;
+    const targetRef = model.state.targetRef;
+    const align = targetRef.current && isElementRTL(targetRef.current) ? 'end' : 'start';
+
+    const submenuFallbackPlacements = React.useMemo(
+      (): Placement[] => fallbackPlacements ?? [`bottom-${align}`, `top-${align}`],
+      [fallbackPlacements, align]
+    );
+
+    // Popper measures this rect for both positioning and overflow checks, and still listens to the
+    // target's scroll containers through `anchorElement`.
+    const getAnchorClientRect = React.useCallback(() => {
+      const rects = getSubmenuAnchorRects(parentContainerRef, targetRef);
+      if (!rects) {
+        return targetRef.current?.getBoundingClientRect() ?? new DOMRect();
+      }
+      const {top, bottom, left, right} = rects.anchor;
+      return new DOMRect(left, top, right - left, bottom - top);
+    }, [parentContainerRef, targetRef]);
+
+    const submenuPopperOptions = React.useMemo(
+      () => ({
+        ...popperOptions,
+        modifiers: [
+          getSubmenuOffsetModifier(parentContainerRef, targetRef),
+          ...(popperOptions?.modifiers ?? []),
+        ],
+      }),
+      [popperOptions, parentContainerRef, targetRef]
+    );
+
+    return (
+      <Popper
+        placement="right-start"
+        getAnchorClientRect={getAnchorClientRect}
+        fallbackPlacements={submenuFallbackPlacements}
+        popperOptions={submenuPopperOptions}
+        {...elemProps}
+      >
+        {children}
+      </Popper>
+    );
+  }
+);
 
 const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear(): void} => {
   const timer = React.useRef<number | undefined>(undefined);
