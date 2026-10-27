@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.16](https://github.com/Workday/canvas-kit/releases/tag/v15.1.16) (2026-10-27)
+
+### Components
+
+- fix(ActionBar): Allow icon-only items without children ([#4203](https://github.com/Workday/canvas-kit/pull/4203)) ([@akshita317](https://github.com/akshita317))
+
+
 ## [v15.1.15](https://github.com/Workday/canvas-kit/releases/tag/v15.1.15) (2026-10-26)
 
 ### Infrastructure
