@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.9](https://github.com/Workday/canvas-kit/releases/tag/v16.2.9) (2026-10-27)
+
+### Components
+
+- fix(select): Apply disabled styles without FormField ([#4182](https://github.com/Workday/canvas-kit/pull/4182)) ([@mig-builds](https://github.com/mig-builds))
+
+
 ## [v16.2.8](https://github.com/Workday/canvas-kit/releases/tag/v16.2.8) (2026-10-26)
 
 ### Infrastructure
