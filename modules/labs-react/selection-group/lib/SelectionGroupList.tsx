@@ -25,7 +25,7 @@ export interface SelectionGroupListProps<T = any> extends CSProps {
 export const selectionGroupListStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    [cornerShapeStencil.vars.shape]: system.legacy.shape.xl,
     display: 'flex',
     flexWrap: 'wrap',
     gap: system.legacy.gap.xs,

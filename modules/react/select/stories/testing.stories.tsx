@@ -98,6 +98,14 @@ export const SelectStates = (props: {theme?: PartialEmotionCanvasTheme}) => {
   );
 };
 
+export const StandaloneDisabledSelect = () => (
+  <StaticStates>
+    <Select items={options}>
+      <Select.Input disabled aria-label="Contact" />
+    </Select>
+  </StaticStates>
+);
+
 const customTheme = createStyles({
   [brand.primary.base]: 'purple',
   [brand.primary.accent]: 'turquoise',
