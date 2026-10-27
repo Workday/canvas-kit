@@ -84,15 +84,16 @@ use the `BaseTable` component.
 ### Advanced
 
 You can also find several advanced Table examples in our
-[Guides > Accessibility > Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs)
+[Guides > Accessibility > Table Patterns](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns--docs)
 section.
 
-- [Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
-- [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
-- [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
-- [Filterable Column Headers](?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
-- [Sortable Column Headers](?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
-- [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
+- [Expandable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
+- [Nested Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
+- [Selectable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- [Draggable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
+- [Filterable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
+- [Sortable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
+- [With Form Fields](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
 
 ### Custom Styles
 
@@ -106,13 +107,13 @@ our
 `<thead>`, `<tbody>`, `<tfoot>`, `<tr>`, `<th>`, `<td>`). Assistive technology can announce column
 and row headers as users move through cells **only when** the markup is a real data table with
 correct headers and an accessible name. `Table` does **not** include a model, roving tabindex, or
-built-in sort, filter, selection, or expand behavior.
+built-in sort, filter, selection, expand, or reorder behavior.
 
 Use `Table` for tabular data with a relationship between rows and columns—not for page layout.
 Prefer **`Table`** (CSS Grid) unless the design needs a standard HTML table layout without Grid;
 then use **`BaseTable`**. The same accessibility requirements apply to both. For interactive table
 patterns, follow
-[Guides > Accessibility > Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs)
+[Guides > Accessibility > Table Patterns](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns--docs)
 instead of inventing ARIA. See also
 [Table Pattern | APG | WAI | W3C](https://www.w3.org/WAI/ARIA/apg/patterns/table/).
 
@@ -196,8 +197,8 @@ apply only when the situation matches—otherwise omit.
 **If no design spec is provided:** generate a simple data table with **`Table.Caption`**,
 **`Table.Head`** / **`Table.Body`**, **`scope="col"`** on column headers, and **`Table.Cell`** for
 body data. Omit **`Table.Footer`**, row headers, **`tabIndex`**, `id` / `headers` associations,
-**`aria-sort`**, **`aria-expanded`**, **`aria-level`**, selection checkboxes, and filter/sort popups
-unless the spec calls for those patterns.
+**`aria-sort`**, **`aria-expanded`**, **`aria-level`**, selection checkboxes, filter/sort popups,
+and drag handles unless the spec calls for those patterns.
 
 **Heading instead of caption** _(conditional)_:
 
@@ -217,12 +218,13 @@ heading a unique `id` and set **`aria-labelledby`** on **`Table`**. Do not also 
 
 Do not invent table ARIA. Copy the matching Canvas Kit guide when the spec includes that behavior:
 
-- [Expandable Rows](?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
-- [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
-- [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
-- [Filterable Column Headers](?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
-- [Sortable Column Headers](?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
-- [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
+- [Expandable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-expandable-rows--docs)
+- [Nested Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
+- [Selectable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- [Draggable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
+- [Filterable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-filterable-column-headers--docs)
+- [Sortable Column Headers](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-sortable-column-headers--docs)
+- [With Form Fields](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
 
 | Requirement                                           | How to satisfy                                                                                                                                                                                                                                                             |
 | ----------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -232,8 +234,9 @@ Do not invent table ARIA. Copy the matching Canvas Kit guide when the spec inclu
 | Row headers _(conditional)_                           | When the first (or identifying) column names each row, set **`scope="row"`** on **`Table.Header`** in the body, as in [Fixed Column](#fixed-column). Do not rely on `<th>` alone.                                                                                          |
 | Keyboard access to overflow _(conditional)_           | If the table scrolls, set **`tabIndex={0}`** on **`Table`**. Omit it when content does not overflow.                                                                                                                                                                       |
 | Footer _(conditional)_                                | **`Table.Footer`** only when the design includes summary or footer rows.                                                                                                                                                                                                   |
-| Form controls in cells _(conditional)_                | Label every control (prefer **`FormField`**). See [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs) and [Form Field](?path=/docs/components-inputs-form-field--docs).                                                             |
-| Sort, filter, select, expand, or nest _(conditional)_ | Follow the matching [Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs) guide. **Ask the developer** which pattern the spec requires before generating `aria-sort`, `aria-expanded`, `aria-level`, `aria-owns`, live regions, or selection checkboxes. |
+| Form controls in cells _(conditional)_                | Label every control (prefer **`FormField`**). See [With Form Fields](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs) and [Form Field](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs).                                                             |
+| Reorder rows _(conditional)_                          | Follow [Draggable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs). **Ask the developer** before generating drag handles, reorder keyboard behavior, or move announcements.                                                                     |
+| Sort, filter, select, expand, or nest _(conditional)_ | Follow the matching [Table Patterns](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns--docs) guide. **Ask the developer** which pattern the spec requires before generating `aria-sort`, `aria-expanded`, `aria-level`, `aria-owns`, live regions, or selection checkboxes. |
 
 **Summary for code generation:**
 
@@ -259,14 +262,16 @@ to supply instead):
   scrollable table
 - Set **`aria-sort`**, **`aria-expanded`**, **`aria-level`**, **`aria-owns`**, or selection
   checkboxes by default — those belong to specific
-  [Table Patterns](?path=/docs/guides-accessibility-table-patterns--docs) and need a matching design
+  [Table Patterns](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns--docs) and need a matching design
   spec
 - Nest a `<table>` inside a cell to fake hierarchy, or add extra **`Table.Body`** elements to fake a
-  tree — see [Nested Rows](?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
+  tree — see [Nested Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-nested-rows--docs)
 - Put a "Select All" checkbox in a column header **`Table.Header`** without following
-  [Selectable Rows](?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+  [Selectable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-selectable-rows--docs)
+- Add drag handles or make rows reorderable without following
+  [Draggable Rows](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-draggable-rows--docs)
 - Place unlabeled inputs in cells, or rely on the column header alone without checking
-  [With Form Fields](?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
+  [With Form Fields](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-table-patterns-with-form-fields--docs)
 - Generate **`role="grid"`** / grid-widget keyboard behavior on **`Table`** — CSS Grid on
   **`Table.Row`** is visual layout, not an ARIA grid
 
