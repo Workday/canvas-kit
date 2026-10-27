@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.10](https://github.com/Workday/canvas-kit/releases/tag/v16.2.10) (2026-10-27)
+
+### Infrastructure
+
+- chore(Infrastructure): Add maintainer /pr-review command ([#4208](https://github.com/Workday/canvas-kit/pull/4208)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.2.9](https://github.com/Workday/canvas-kit/releases/tag/v16.2.9) (2026-10-27)
 
 ### Components
