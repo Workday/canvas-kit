@@ -173,7 +173,11 @@ exec('git diff --name-only HEAD HEAD^')
           .join('\n')}`
       );
 
-      const retryResult = await exec(lernaCommand);
+      // Don't re-run the bump command: that would calculate new prerelease versions. The first
+      // run already wrote the versions to package.json, so publish those as-is.
+      const retryResult = await exec(
+        `yarn lerna publish from-package --yes --dist-tag ${distTag} --concurrency 1`
+      );
       const retryOutput = `${output}\n${retryResult.stdout ?? ''}\n${retryResult.stderr ?? ''}`;
       const published = parsePublishedPackageLines(retryOutput).filter(pkg =>
         pkg.version.includes(`-${preid}.`)
