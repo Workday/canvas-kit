@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.11](https://github.com/Workday/canvas-kit/releases/tag/v16.2.11) (2026-10-27)
+
+### Components
+
+- fix(avatar): Hide decorative fallback initials from assistive technology ([#4188](https://github.com/Workday/canvas-kit/pull/4188)) ([@minwookshin](https://github.com/minwookshin))
+
+
 ## [v16.2.10](https://github.com/Workday/canvas-kit/releases/tag/v16.2.10) (2026-10-27)
 
 ### Infrastructure
