@@ -9,7 +9,7 @@ const glob = promisify(globPkg.glob);
 
 let command = '';
 
-const {path} = yargs(hideBin(process.argv))
+yargs(hideBin(process.argv))
   .scriptName('publish')
   // .usage(chalk.blueBright.bold('prepublish [path]'))
   .command('pre [path]', chalk.gray('Create package.json files in module'), argv => {
@@ -59,11 +59,16 @@ if (command === 'pre') {
   });
 }
 if (command === 'post') {
-  glob(`modules/${path}/*/index.ts`, {cwd}).then(async files => {
+  // Lerna runs `postpack` with the package directory as the cwd (same as `prepack`), so this must
+  // use the same pattern as `pre`. A repo-root-relative pattern (`modules/<pkg>/*/index.ts`) matches
+  // nothing here, which leaves nameless `package.json` files behind. Nx then treats them as
+  // duplicate projects and any later `lerna` command in the same job fails with
+  // `MultipleProjectsWithSameNameError`.
+  glob(`*/index.ts`, {cwd}).then(async files => {
     files.forEach(async file => {
       const folderName = file.replace('/index.ts', '');
 
-      fs.unlinkSync(folderName + '/package.json');
+      fs.rmSync(folderName + '/package.json', {force: true});
     });
   });
 }

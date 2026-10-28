@@ -6,6 +6,7 @@ import mdxDoc from './Avatar.mdx';
 import {Basic as BasicExample} from './examples/Basic';
 import {Custom as CustomExample} from './examples/Custom';
 import {Decorative as DecorativeExample} from './examples/Decorative';
+import {DecorativeInitials as DecorativeInitialsExample} from './examples/DecorativeInitials';
 import {Image as ImageExample} from './examples/Image';
 import {Size as SizeExample} from './examples/Size';
 import {Variant as VariantExample} from './examples/Variant';
@@ -45,4 +46,8 @@ export const Custom: Story = {
 
 export const Decorative: Story = {
   render: DecorativeExample,
+};
+
+export const DecorativeInitials: Story = {
+  render: DecorativeInitialsExample,
 };

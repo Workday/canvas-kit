@@ -173,7 +173,7 @@ Version context: Canvas Kit <X> (current/older), tokens-web <Y>
 
 ```
 Reviewing a diff/branch/PR for Canvas Kit compliance?  → this skill
-Reviewing the canvas-kit repo's own source for a PR?    → out of scope (maintainer-only process, not part of this skill pack)
+Reviewing the canvas-kit repo's own source for a PR?    → out of scope for this skill; maintainers use `/pr-review` (`.cursor/commands/pr-review.md`)
 Found a styling issue?                                   → /sana-canvas-kit-styling
 Found a token issue?                                     → /sana-canvas-kit-tokens
 Found an a11y issue?                                     → /sana-canvas-kit-accessibility

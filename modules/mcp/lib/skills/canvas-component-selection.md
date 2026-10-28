@@ -71,5 +71,3 @@ Re-check source JSDoc before using:
 - `canvas.*` tokens
 - AccentIcon, AppletIcon, or LabelText
 - component props such as `disabled` when JSDoc directs `aria-disabled`
-
-Source: `design/sana-canvas-ai-tooling`, skill `canvas-component-selection`.
