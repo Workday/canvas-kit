@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.11](https://github.com/Workday/canvas-kit/releases/tag/v16.2.11) (2026-10-27)
+
+### Components
+
+- fix(avatar): Hide decorative fallback initials from assistive technology ([#4188](https://github.com/Workday/canvas-kit/pull/4188)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v16.2.10](https://github.com/Workday/canvas-kit/releases/tag/v16.2.10) (2026-10-27)
+
+### Infrastructure
+
+- chore(Infrastructure): Add maintainer /pr-review command ([#4208](https://github.com/Workday/canvas-kit/pull/4208)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.9](https://github.com/Workday/canvas-kit/releases/tag/v16.2.9) (2026-10-27)
+
+### Components
+
+- fix(select): Apply disabled styles without FormField ([#4182](https://github.com/Workday/canvas-kit/pull/4182)) ([@mig-builds](https://github.com/mig-builds))
+
+
+## [v16.2.8](https://github.com/Workday/canvas-kit/releases/tag/v16.2.8) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v15.1.15](https://github.com/Workday/canvas-kit/releases/tag/v15.1.15) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+## [v16.2.7](https://github.com/Workday/canvas-kit/releases/tag/v16.2.7) (2026-10-26)
+
+### Documentation
+
+- docs(table): Add an accessible draggable rows pattern ([#4184](https://github.com/Workday/canvas-kit/pull/4184)) ([@AverageZ](https://github.com/AverageZ), alex.zajac, William Stanton, [@cursoragent](https://github.com/cursoragent))
+  Documentation only. `Table` does not gain reorder behavior. The pattern is a research example at Guides > Accessibility > Table Patterns > Draggable Rows.
+
+
+## [v16.2.6](https://github.com/Workday/canvas-kit/releases/tag/v16.2.6) (2026-10-26)
+
+### Infrastructure
+
+- test: Add automated accessibility tests for popup components ([#4181](https://github.com/Workday/canvas-kit/pull/4181)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@claude](https://github.com/claude), [@cursoragent](https://github.com/cursoragent))
+  Added automated accessibility tests for popup components (Dialog, Modal, Popup) to verify accessible names. These tests catch accessibility gaps early by validating that dialog containers have proper labeling.
+
+
 ## [v16.2.5](https://github.com/Workday/canvas-kit/releases/tag/v16.2.5) (2026-10-23)
 
 ### Components

@@ -1,16 +1,13 @@
 import {Meta} from '@storybook/blocks';
 
-import {
-  ExampleCodeBlock,
-  Specifications,
-  SymbolDoc,
-} from '@workday/canvas-kit-docs';
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 import {Basic} from './examples/Basic';
 import {Custom} from './examples/Custom';
 import {Decorative} from './examples/Decorative';
+import {DecorativeInitials} from './examples/DecorativeInitials';
 import {Image} from './examples/Image';
 import {Size} from './examples/Size';
 import {Variant} from './examples/Variant';
@@ -82,10 +79,14 @@ For complete control over styling and behavior, use the `BaseAvatar` component:
 
 ### Accessibility
 
-If the Avatar is purely decorative, you can set the `isDecorative` prop to `true` to prevent the
-`name` prop from being forwarded to the `alt` attribute of the image.
+If the Avatar is rendered next to the user's name, set `isDecorative` to `true` to hide the image
+and fallback initials from assistive technology. This avoids announcing the same name twice.
 
 <ExampleCodeBlock code={Decorative} />
+
+The same applies when no image is provided:
+
+<ExampleCodeBlock code={DecorativeInitials} />
 
 ## Component API
 
