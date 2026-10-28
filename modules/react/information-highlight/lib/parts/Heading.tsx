@@ -16,6 +16,11 @@ const informationHighlightHeadingStencil = createStencil({
       color: system.color.fg.strong,
       margin: 0,
       marginBlockEnd: system.legacy.gap.xs,
+      // The margin separates Heading from content below it (e.g. Body). When Heading is the last
+      // element, there is nothing to separate from, so remove it to avoid extra trailing space.
+      '&:last-child': {
+        marginBlockEnd: 0,
+      },
     };
   },
   modifiers: {
