@@ -14,6 +14,11 @@ const informationHighlightBodyStencil = createStencil({
       color: system.color.fg.default,
       gridColumn: '2',
       marginBlockEnd: system.legacy.gap.sm,
+      // The margin separates Body from content below it (e.g. Link). When Body is the last
+      // element, there is nothing to separate from, so remove it to avoid extra trailing space.
+      '&:last-child': {
+        marginBlockEnd: 0,
+      },
     };
   },
 });
