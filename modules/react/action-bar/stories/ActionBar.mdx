@@ -2,6 +2,7 @@ import {Meta} from '@storybook/blocks';
 import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {Icons} from './examples/Icons';
+import {IconOnly} from './examples/IconOnly';
 import {DeleteAction} from './examples/DeleteAction';
 import {OverflowActionBar} from './examples/OverflowActionBar';
 import {OverflowActionBarCustomButtonCount} from './examples/OverflowActionBarCustomButtonCount';
@@ -41,6 +42,14 @@ buttons should not be used in the Action Bar.
 with `ActionBar.Item` such as `icon` or `size`.
 
 <ExampleCodeBlock code={Icons} />
+
+### Icon-Only Example
+
+An `ActionBar.Item` can render an icon-only button by passing an `icon` without `children`. Because
+there is no visible text, provide an `aria-label` so the action has an accessible name. Wrapping the
+item in a [Tooltip](/components/popups/tooltip/) also shows the label to sighted users.
+
+<ExampleCodeBlock code={IconOnly} />
 
 ### Delete Action Example
 
