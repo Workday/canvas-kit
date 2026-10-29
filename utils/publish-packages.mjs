@@ -24,6 +24,7 @@ const BUILD_MARKER = path.join(REPO_ROOT, 'modules', 'react', 'dist', 'es6', 'in
 const DEFAULT_RETRIES = 5;
 const RETRY_BASE_MS = 8000;
 const REGISTRY_CHECK_CONCURRENCY = 4;
+const NPM_REGISTRY = 'https://registry.npmjs.org';
 const ALLOWED_DIST_TAGS = new Set(['latest', 'support', 'next', 'prerelease-next']);
 
 /** @typedef {{distTag: string, retries: number, verifyOnly: boolean, requireUnpublished: boolean}} PublishArgs */
@@ -181,27 +182,36 @@ export async function getPublicPackages() {
 /**
  * Checks whether an exact package version already exists on the public npm registry.
  *
+ * Reads the per-version endpoint on purpose. `npm view` fetches the package-level document, which
+ * the registry CDN caches for 5 minutes (`cache-control: max-age=300`), so right after a publish it
+ * keeps reporting the new version as missing. The per-version endpoint is served uncached.
+ *
  * @param {string} name
  * @param {string} version
+ * @param {string} [registry]
  */
-export async function isPackageVersionOnNpm(name, version) {
+export async function isPackageVersionOnNpm(name, version, registry = NPM_REGISTRY) {
+  const url = `${registry}/${name.replace('/', '%2f')}/${encodeURIComponent(version)}`;
+
+  let response;
   try {
-    const {stdout} = await execFileAsync('npm', ['view', `${name}@${version}`, 'version'], {
-      timeout: 30000,
-    });
-    return stdout.trim() === version;
+    response = await fetch(url, {signal: AbortSignal.timeout(30000)});
   } catch (err) {
-    const execErr = /** @type {Error & {stdout?: string, stderr?: string}} */ (err);
-    const output = `${execErr.stdout ?? ''}\n${execErr.stderr ?? ''}\n${execErr.message}`;
-
-    // Version is actually missing from npm — treat as unpublished, not an operational error.
-    if (/E404|is not in this registry|No match found for version/.test(output)) {
-      return false;
-    }
-
-    // Timeout, auth, or registry outage — do not misreport as "missing from npm".
-    throw new Error(`Could not check ${name}@${version} on npm:\n${output}`, {cause: err});
+    // Timeout or network failure — do not misreport as "missing from npm".
+    throw new Error(`Could not check ${name}@${version} on npm: ${url}`, {cause: err});
   }
+
+  if (response.ok) {
+    return true;
+  }
+
+  // Version is actually missing from npm — treat as unpublished, not an operational error.
+  if (response.status === 404) {
+    return false;
+  }
+
+  // Registry outage or auth error — do not misreport as "missing from npm".
+  throw new Error(`Could not check ${name}@${version} on npm: HTTP ${response.status} from ${url}`);
 }
 
 /**

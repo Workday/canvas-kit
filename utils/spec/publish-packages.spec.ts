@@ -1,7 +1,12 @@
-import {execFileSync} from 'node:child_process';
+import {execFile, execFileSync} from 'node:child_process';
 import fs from 'node:fs';
+import http from 'node:http';
+import type {AddressInfo} from 'node:net';
 import os from 'node:os';
 import path from 'node:path';
+import {promisify} from 'node:util';
+
+const execFileAsync = promisify(execFile);
 
 const publishPackagesScript = path.resolve(__dirname, '../publish-packages.mjs');
 
@@ -26,7 +31,74 @@ function git(cwd: string, ...args: string[]) {
   return execFileSync('git', args, {cwd, encoding: 'utf8'}).trim();
 }
 
+/**
+ * Calls `isPackageVersionOnNpm(name, version, registry)` in a child process. Async so the fake
+ * registry in this process can answer while the child waits.
+ */
+async function isOnNpm(name: string, version: string, registry: string) {
+  const {stdout} = await execFileAsync(
+    process.execPath,
+    [
+      '--input-type=module',
+      '-e',
+      `import * as m from ${JSON.stringify(publishPackagesScript)};
+       console.log(JSON.stringify(await m.isPackageVersionOnNpm(${JSON.stringify(
+         name
+       )}, ${JSON.stringify(version)}, ${JSON.stringify(registry)})));`,
+    ],
+    {env: {...process.env, NODE_NO_WARNINGS: '1'}}
+  );
+  return JSON.parse(stdout);
+}
+
 describe('publish-packages.mjs', () => {
+  // Regression test: `npm view` reads the package-level document, which the registry CDN caches for
+  // 5 minutes (`cache-control: max-age=300`), so it kept reporting just-published versions as
+  // missing. The per-version endpoint is served uncached and is the source of truth.
+  describe('isPackageVersionOnNpm', () => {
+    let server: http.Server;
+    let registry: string;
+    const requested: string[] = [];
+
+    beforeEach(async () => {
+      requested.length = 0;
+      server = http.createServer((req, res) => {
+        requested.push(req.url ?? '');
+        if (req.url === '/@workday%2fpublished/1.0.0') {
+          res.writeHead(200, {'content-type': 'application/json'}).end('{"version":"1.0.0"}');
+        } else if (req.url === '/@workday%2fbroken/1.0.0') {
+          res.writeHead(503).end('unavailable');
+        } else {
+          res.writeHead(404).end('{"error":"version not found"}');
+        }
+      });
+      await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
+      registry = `http://127.0.0.1:${(server.address() as AddressInfo).port}`;
+    });
+
+    afterEach(async () => {
+      await new Promise(resolve => server.close(resolve));
+    });
+
+    it('should be true when the registry has the exact version', async () => {
+      expect(await isOnNpm('@workday/published', '1.0.0', registry)).toBe(true);
+    });
+
+    it('should query the per-version endpoint, not the cached package document', async () => {
+      await isOnNpm('@workday/published', '1.0.0', registry);
+
+      expect(requested).toEqual(['/@workday%2fpublished/1.0.0']);
+    });
+
+    it('should be false when the registry does not have the version', async () => {
+      expect(await isOnNpm('@workday/published', '2.0.0', registry)).toBe(false);
+    });
+
+    it('should fail, not report "missing", when the registry is unavailable', async () => {
+      await expect(isOnNpm('@workday/broken', '1.0.0', registry)).rejects.toThrow();
+    });
+  });
+
   describe('restoreLernaManifests', () => {
     let repo: string;
     const manifests = [

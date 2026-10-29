@@ -77,6 +77,29 @@ Covered by `utils/spec/publish-packages.spec.ts` (real temp git repo).
 Next time a release hits one, check that the `Publish remaining packages` step goes green and that
 all 13 packages show up on npm. Record the result below.
 
+### Layer 3 — the registry check lies right after a publish (fixed here)
+
+**Verified** in run 40909685326: six packages published during attempt 1 (16:19:10–16:19:50), then
+the script's own check at 16:20:04 reported **all 12** as still missing, including `canvas-kit-codemod`,
+published 54 s earlier. The same happened on 29 Oct 15:21 (`canvas-kit-mcp` published, listed missing 50 s
+later).
+
+Cause (checked with `curl -I`): `npm view name@version` fetches the package-level document
+(`registry.npmjs.org/@workday%2fname`), which Cloudflare serves with `cache-control: public, max-age=300`
+(`cf-cache-status: HIT`). For up to 5 minutes it can omit a version that was just published. The
+per-version endpoint (`.../@workday%2fname/16.2.12`) is `cf-cache-status: DYNAMIC` (not cached).
+
+Why it matters once the dirty-tree bug is gone: lerna handles the stale view itself (it treats
+`E409` / `EPUBLISHCONFLICT` / "cannot publish over the previously published versions" as already
+published), but the script's own check would keep reporting packages as missing after lerna succeeded.
+It would retry up to its limit and then fail with `Exhausted ... attempts`, even though everything was on npm.
+
+**Fix:** `isPackageVersionOnNpm()` now reads the per-version endpoint with `fetch` (200 = published,
+404 = missing, anything else throws). Covered by a spec using a local fake registry.
+
+**Unverified:** the exact point at which the cached document refreshes, and whether lerna's `pacote`
+packument lookup is cached the same way (the E409 handling makes this harmless either way).
+
 ## Run history (`publish.yml`, master/support, non-skip runs)
 
 | Date (UTC) | Branch | Run | Layer 1 | Layer 2 |
@@ -88,6 +111,7 @@ all 13 packages show up on npm. Record the result below.
 | 26 Oct 15:29 | master | 40349815957 | OIDC 504 → E404 (1 pkg) | Nx duplicate projects |
 | 26 Oct 18:30 | support | 40378385152 | tlog 409 (1 pkg) | EUNCOMMIT |
 | 29 Oct 15:13 | master | 40899439848 | tlog 409 (7 pkgs) | EUNCOMMIT |
+| 29 Oct 16:18 | master | 40909685326 | tlog 409 (1 pkg), manual `complete-unpublished` | EUNCOMMIT on attempt 2 |
 
 Earlier attempts: #4150 (retry script + safety net), #4162 (commit message parsing in
 `publish.yml`), #4218 (safety net for `support`), #4224 (remove generated `package.json` after packing).
@@ -105,9 +129,16 @@ done
 
 Then run **Publish to npm** manually (Actions → Run workflow) on `master` (or `support`) with
 release type `complete-unpublished`. It does not bump versions and publishes only what is missing.
-npm's registry can lag a minute or so after a publish (on 29 Oct `canvas-kit-mcp@16.2.12` was
-reported published and then listed as missing 50 s later), so re-check before concluding something
-is still missing.
+Until the `restoreLernaManifests` fix is on the branch you run it from, a 409 during the first
+attempt still ends the job with `EUNCOMMIT`. Just re-run: every run starts from a clean checkout and
+only publishes what is still missing, so each run makes progress (29 Oct: 1 of 13, then 6 more).
+
+Check npm with the per-version endpoint (the `npm view` loop above can be up to 5 minutes stale
+right after a publish; see layer 3):
+
+```bash
+curl -s -o /dev/null -w '%{http_code}\n' "https://registry.npmjs.org/@workday%2fcanvas-kit-react/$v"  # 200 = published
+```
 
 ## Open questions
 
