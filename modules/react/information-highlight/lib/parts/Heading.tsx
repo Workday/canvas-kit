@@ -9,17 +9,24 @@ const informationHighlightHeadingStencil = createStencil({
   parts: {
     heading: 'information-highlight-heading',
   },
-  base: () => {
+  vars: {
+    marginEnd: '',
+  },
+  base: ({marginEnd}) => {
     return {
       ...system.legacy.type.subtext.lg,
       fontWeight: system.fontWeight.medium,
       color: system.color.fg.strong,
       margin: 0,
-      marginBlockEnd: system.legacy.gap.xs,
+      [marginEnd]: system.legacy.gap.xs,
+      marginBlockEnd: marginEnd,
       // The margin separates Heading from content below it (e.g. Body). When Heading is the last
       // element, there is nothing to separate from, so remove it to avoid extra trailing space.
-      '&:last-child': {
-        marginBlockEnd: 0,
+      // The pseudo-class rule changes a variable instead of `margin-block-end` itself: nested
+      // rules are emitted after flat declarations, so overriding the property would also override
+      // a consumer's `cs={{marginBlockEnd}}`.
+      '&:where(:last-child)': {
+        [marginEnd]: 0,
       },
     };
   },
