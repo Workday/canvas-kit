@@ -4,7 +4,10 @@ import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
 const informationHighlightBodyStencil = createStencil({
-  base: () => {
+  vars: {
+    marginEnd: '',
+  },
+  base: ({marginEnd}) => {
     return {
       fontFamily: system.fontFamily.default,
       fontWeight: system.fontWeight.normal,
@@ -13,11 +16,15 @@ const informationHighlightBodyStencil = createStencil({
       letterSpacing: system.legacy.letterSpacing.subtext.lg,
       color: system.color.fg.default,
       gridColumn: '2',
-      marginBlockEnd: system.legacy.gap.sm,
+      [marginEnd]: system.legacy.gap.sm,
+      marginBlockEnd: marginEnd,
       // The margin separates Body from content below it (e.g. Link). When Body is the last
       // element, there is nothing to separate from, so remove it to avoid extra trailing space.
-      '&:last-child': {
-        marginBlockEnd: 0,
+      // The pseudo-class rule changes a variable instead of `margin-block-end` itself: nested
+      // rules are emitted after flat declarations, so overriding the property would also override
+      // a consumer's `cs={{marginBlockEnd}}`.
+      '&:where(:last-child)': {
+        [marginEnd]: 0,
       },
     };
   },
