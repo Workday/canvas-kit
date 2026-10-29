@@ -317,6 +317,31 @@ export function parsePublishedPackageLines(output) {
 }
 
 /**
+ * Restores `package.json` manifests that a failed `lerna publish` left modified.
+ *
+ * Lerna rewrites every manifest it publishes (`gitHead`, resolved dependency specifiers) and only
+ * resets them after the whole publish succeeds. When a package fails mid-run (e.g. a Sigstore tlog
+ * 409), the manifests stay dirty and the next `lerna publish from-package` refuses to start with
+ * EUNCOMMIT. The release commit already holds the correct versions, so resetting to it is safe.
+ *
+ * Only `package.json` files are restored; any other uncommitted change is left alone so lerna's
+ * own working tree check still reports it.
+ *
+ * @param {string} [cwd]
+ */
+export async function restoreLernaManifests(cwd = REPO_ROOT) {
+  const {stdout} = await execFileAsync('git', ['diff', '--name-only', '--relative', '-z'], {cwd});
+  const manifests = stdout.split('\0').filter(file => path.basename(file) === 'package.json');
+
+  if (manifests.length === 0) {
+    return;
+  }
+
+  console.log(`Restoring ${manifests.length} package.json file(s) left modified by lerna publish.`);
+  await execFileAsync('git', ['checkout', '--', ...manifests], {cwd});
+}
+
+/**
  * Publish any workspace versions that are not yet on the registry.
  * `lerna publish from-package` skips versions that already exist, so this is
  * safe to retry after a partial release. Serial publishes plus retries recover
@@ -362,6 +387,9 @@ export async function publishFromPackage({
     console.log(
       `Publishing unpublished packages (attempt ${attempt}/${retries}) with dist-tag "${distTag}" and concurrency 1...`
     );
+
+    // The release action's own publish (and every failed attempt here) leaves manifests dirty.
+    await restoreLernaManifests();
 
     const result = await runStreaming('yarn', [
       'lerna',
