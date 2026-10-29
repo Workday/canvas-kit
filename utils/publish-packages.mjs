@@ -304,6 +304,27 @@ function formatPackageList(packages) {
 }
 
 /**
+ * Parses `@scope/name@version` strings from Lerna publish output.
+ *
+ * Used by `publish-canary.mjs`. It matches every mention of a package, including failures, so it
+ * says which packages lerna attempted, not which ones were published (see `parseConfirmedPackages`).
+ *
+ * @param {string} output
+ * @returns {{name: string, version: string}[]}
+ */
+export function parsePublishedPackageLines(output) {
+  /** @type {Map<string, {name: string, version: string}>} */
+  const packages = new Map();
+
+  for (const match of output.matchAll(/@workday\/([a-z-]+)@(\d+\.\d+\.\d+(?:-[^\s'"]+)?)/g)) {
+    const name = `@workday/${match[1]}`;
+    packages.set(name, {name, version: match[2]});
+  }
+
+  return [...packages.values()];
+}
+
+/**
  * Reads which `name@version` packages the registry confirmed in response to lerna's publish calls:
  * either lerna published them, or the registry said they were already published.
  *

@@ -30,6 +30,39 @@ function git(cwd: string, ...args: string[]) {
 }
 
 describe('publish-packages.mjs', () => {
+  // Regression test: `publish-canary.mjs` imports helpers from this module. Dropping one of them
+  // makes every canary publish fail at load time, before any publish logic runs.
+  describe('exports used by publish-canary.mjs', () => {
+    it('should export every name that publish-canary.mjs imports', () => {
+      const canary = fs.readFileSync(path.resolve(__dirname, '../publish-canary.mjs'), 'utf8');
+      const match = /import\s*\{([^}]*)\}\s*from\s*'\.\/publish-packages\.mjs'/.exec(canary);
+      if (!match) {
+        throw new Error('publish-canary.mjs no longer imports from ./publish-packages.mjs');
+      }
+      const imported = match[1]
+        .split(',')
+        .map(name => name.trim())
+        .filter(Boolean);
+
+      const exported = JSON.parse(
+        execFileSync(
+          process.execPath,
+          [
+            '--input-type=module',
+            '-e',
+            `import * as m from ${JSON.stringify(
+              publishPackagesScript
+            )}; console.log(JSON.stringify(Object.keys(m)));`,
+          ],
+          {encoding: 'utf8', env: {...process.env, NODE_NO_WARNINGS: '1'}}
+        )
+      );
+
+      expect(imported.length).toBeGreaterThan(0);
+      expect(exported).toEqual(expect.arrayContaining(imported));
+    });
+  });
+
   describe('restoreLernaManifests', () => {
     let repo: string;
     const manifests = [
