@@ -22,9 +22,11 @@ The follow-up `Release vX.Y.Z [skip release]` runs that appear green afterwards 
 runs for the release commit. They do not publish anything. A green run after a red one does **not**
 mean the release was recovered.
 
-## Two stacked failures
+## Three layers
 
-A red run is two independent problems, one after the other.
+A red run is several independent problems stacked on each other: a transient publish error
+(layer 1), a registry that lags behind publishes (layer 2), and a safety net that mishandled both
+(layer 3).
 
 ### Layer 1 — the trigger: transient publish errors (not fixed, only worked around)
 
@@ -42,17 +44,51 @@ on with the rest, then exits non-zero.
   write leaving a Rekor entry behind, so npm's internal retry produces an identical entry. Failed
   packages here took 8–20 s, which is consistent with an internal retry, but nothing in our logs
   proves it. Nothing authoritative from npm or Sigstore was found.
-- We cannot fix this from this repo. The workaround is the retry loop in layer 2.
+- **Verified:** the 409 also happens when a package that is **already on npm** is published again
+  (run 40912333768, attempt 3: `styling` had been published in attempt 1). So a 409 does not mean the
+  package is missing.
+- We cannot fix this from this repo. Provenance stays on (decision 29 Oct 2026); the retry loop in
+  layer 2 is the workaround.
 
-### Layer 2 — why the safety net never recovered anything (fixed here)
+### Layer 2 — the registry lags publishes, and the safety net trusted it (fixed here)
 
-The safety net has not recovered a release on `master` since it was added. Two different bugs, in
-order:
+**Verified, measured 29 Oct 2026 (run 40912333768):** a publish is accepted immediately, but reads
+lag behind it. Lerna logged `success published`, and the package became visible on npm (tarball
+`Last-Modified`) this much later:
 
-| Period | Safety-net error | Cause | Fix |
+| Package | Lerna said published | Visible on npm | Lag |
+| --- | --- | --- | --- |
+| `styling` | 16:36:32 | 16:37:54 | 1.4 min |
+| `react` | 16:36:41 | 16:42:59 | 6.3 min |
+| `preview-react` | 16:37:01 | 16:46:21 | 9.3 min |
+| `mcp` (run 40899439848) | 15:21:31 | 15:34:06 | 12.6 min |
+
+During the lag **every read path says the version is missing**: `npm view` (package document, also
+CDN-cached for 5 min: `cache-control: max-age=300`), the per-version endpoint
+(`registry.npmjs.org/<pkg>/<version>` returned 404 for `preview-react` 9 min after its publish) and
+lerna's own lookup. The write path is authoritative: at 16:37:48 the registry already answered
+"already published" for `preview-react`, 8.5 minutes before it was readable. The lag looked longer for
+larger packages (`mcp`, `react`, `preview-react`); that is a correlation, not a measured cause.
+
+**Consequence (run 40912333768):** attempt 1 published all 6 remaining packages and exited 0. The
+script then asked the registry, was told all 12 were still missing, and retried. Lerna's own lookup
+was equally stale, so attempt 3 re-published `styling`, which was already on npm, and hit a Rekor 409
+(see layer 1). That left the manifests dirty and attempt 4 died with `EUNCOMMIT`. The release was
+actually complete after attempt 1.
+
+**Rule: never decide that a package is "still missing" from a registry read made less than ~15
+minutes after a publish. Decide from the registry's response to the publish call itself.**
+
+### Layer 3 — bugs in the safety net itself (fixed here)
+
+The safety net (`utils/publish-packages.mjs`) had not recovered a release on `master` since it was
+added. Three independent bugs, in the order they surfaced:
+
+| Seen | Symptom | Cause | Fix |
 | --- | --- | --- | --- |
 | 15 Oct – 26 Oct 15:29 | `MultipleProjectsWithSameNameError` from `lerna ls` (Nx) | `postpack` (`utils/publish.js post`) used a repo-root-relative glob, so the generated nameless `package.json` files were never deleted. Nx saw duplicate projects. | #4224 (`5cdbb558a`) |
-| 26 Oct 18:30 – now | `lerna ERR! EUNCOMMIT Working tree has uncommitted changes` listing all 13 `modules/*/package.json` | See below | this change |
+| 26 Oct 18:30 – 29 Oct | `EUNCOMMIT Working tree has uncommitted changes` listing every `modules/*/package.json` | lerna leaves manifests modified after a failed publish (below) | `restoreLernaManifests()` |
+| 29 Oct 16:30 | Retried and failed after a publish that had fully succeeded | The loop used registry reads (layer 2) to decide what was missing | `parseConfirmedPackages()` |
 
 **EUNCOMMIT root cause (Verified in `node_modules/lerna/dist/commands/publish/index.js`, lerna 9.0.1):**
 
@@ -61,48 +97,41 @@ order:
 - `execute()` writes `gitHead` and resolved dependency specifiers into **every** manifest it will
   publish (`annotateGitHead` + `serializeChanges`) and restores them with `resetChanges()` only
   **after** `publishPacked()` returns. If a package fails, the manifests are left dirty.
-- So the safety net starts on the tree the failed publish left behind and can never pass lerna's own
-  check. `EUNCOMMIT` is not classed as retryable in `publish-packages.mjs`, so it gave up at once, and
-  every retry would have re-dirtied the tree anyway.
-- This was masked until #4224, because the Nx error fired first.
+- So the next run starts on the tree the failed publish left behind and can never pass lerna's own
+  check. It was masked until #4224 because the Nx error fired first.
 - Not directly observed: the CI log lists the modified files but not the diff, so "the diff is
   `gitHead` plus resolved specifiers" is read from the lerna source, not from a log.
 
-**Fix:** `restoreLernaManifests()` in `utils/publish-packages.mjs` runs `git checkout --` on modified
-`package.json` files before every lerna attempt. The bump commit is already in `HEAD`, so this only
-discards lerna's temporary edits. Other dirty files are left alone so lerna still reports them.
-Covered by `utils/spec/publish-packages.spec.ts` (real temp git repo).
+**What the script does now** (`utils/publish-packages.mjs`, covered by `utils/spec/publish-packages.spec.ts`):
 
-**Not verified end-to-end:** the fix has unit coverage but has not yet run in CI against a real 409.
-Next time a release hits one, check that the `Publish remaining packages` step goes green and that
-all 13 packages show up on npm. Record the result below.
+1. Decides what to publish once, at the start, from registry reads (state is old by then).
+2. Before every lerna attempt, resets modified `package.json` files to `HEAD` (`git checkout --`).
+   The bump commit is already in `HEAD`; other dirty files are left alone so lerna still reports them.
+3. Records which packages the registry **confirmed** in lerna's output (`lerna success published ...`
+   or `Package is already published: ...`) and never un-confirms them.
+4. Succeeds when lerna exits 0 **or** every package is confirmed (a non-zero exit with everything
+   confirmed is a failed re-publish of a package that is already there). Otherwise retries
+   (`--retries`, default 5) only for transient errors and fails fast on anything else.
+5. Treats a 5xx from GitHub's OIDC token endpoint (`/idtoken/... 504`, surfaced as `E404`) as
+   transient.
+6. Compares real paths in its `main` guard. It used to compare `process.argv[1]` with the resolved
+   `import.meta.url`, so running it through a symlinked path silently did nothing and exited 0.
 
-### Layer 3 — the registry check lies right after a publish (fixed here)
+**Known gap, not fixed here:** the release action (`canvas-kit-actions/release@v2`) publishes once.
+If that fails, the safety net publishes the rest and the job goes green, but the action's later steps
+(**Publish Storybook** to `gh-pages` and **Update Chromatic Baseline**) are skipped and never re-run,
+so a recovered release has no updated Storybook or Chromatic baseline. Verified skipped in run
+40899439848. A branch in `canvas-kit-actions` that made the action retry itself was written and
+dropped in favour of keeping the logic in this repo.
 
-**Verified** in run 40909685326: six packages published during attempt 1 (16:19:10–16:19:50), then
-the script's own check at 16:20:04 reported **all 12** as still missing, including `canvas-kit-codemod`,
-published 54 s earlier. The same happened on 29 Oct 15:21 (`canvas-kit-mcp` published, listed missing 50 s
-later).
-
-Cause (checked with `curl -I`): `npm view name@version` fetches the package-level document
-(`registry.npmjs.org/@workday%2fname`), which Cloudflare serves with `cache-control: public, max-age=300`
-(`cf-cache-status: HIT`). For up to 5 minutes it can omit a version that was just published. The
-per-version endpoint (`.../@workday%2fname/16.2.12`) is `cf-cache-status: DYNAMIC` (not cached).
-
-Why it matters once the dirty-tree bug is gone: lerna handles the stale view itself (it treats
-`E409` / `EPUBLISHCONFLICT` / "cannot publish over the previously published versions" as already
-published), but the script's own check would keep reporting packages as missing after lerna succeeded.
-It would retry up to its limit and then fail with `Exhausted ... attempts`, even though everything was on npm.
-
-**Fix:** `isPackageVersionOnNpm()` now reads the per-version endpoint with `fetch` (200 = published,
-404 = missing, anything else throws). Covered by a spec using a local fake registry.
-
-**Unverified:** the exact point at which the cached document refreshes, and whether lerna's `pacote`
-packument lookup is cached the same way (the E409 handling makes this harmless either way).
+**Not verified end-to-end:** all of this is covered by tests that replay the real failure sequences
+with a fake `yarn`/`npm`, but it has not yet run in CI against a real 409. Next time a release hits
+one, check that `Publish remaining packages` goes green and that all 13 packages appear on npm
+(allow ~15 minutes for reads to catch up). Record the result below.
 
 ## Run history (`publish.yml`, master/support, non-skip runs)
 
-| Date (UTC) | Branch | Run | Layer 1 | Layer 2 |
+| Date (UTC) | Branch | Run | Trigger (layer 1) | Safety net |
 | --- | --- | --- | --- | --- |
 | 15 Oct | master | 38781099215 | tlog 409 (2 pkgs) | Nx duplicate projects |
 | 21 Oct | master | 39669576846 | tlog 409 (5 pkgs) | Nx duplicate projects |
@@ -111,40 +140,38 @@ packument lookup is cached the same way (the E409 handling makes this harmless e
 | 26 Oct 15:29 | master | 40349815957 | OIDC 504 → E404 (1 pkg) | Nx duplicate projects |
 | 26 Oct 18:30 | support | 40378385152 | tlog 409 (1 pkg) | EUNCOMMIT |
 | 29 Oct 15:13 | master | 40899439848 | tlog 409 (7 pkgs) | EUNCOMMIT |
-| 29 Oct 16:18 | master | 40909685326 | tlog 409 (1 pkg), manual `complete-unpublished` | EUNCOMMIT on attempt 2 |
+| 29 Oct 16:15 | master | 40909685326 | manual `complete-unpublished`: published 6, then tlog 409 (1 pkg) | EUNCOMMIT on attempt 2 |
+| 29 Oct 16:30 | master | 40912333768 | manual `complete-unpublished`: published the last 6, then stale reads | retried a finished publish; 409 on re-publish; EUNCOMMIT |
+
+v16.2.12 took three runs and ~1.5 hours to complete (1 package, then 6, then 6), although the
+publishes themselves worked.
 
 Earlier attempts: #4150 (retry script + safety net), #4162 (commit message parsing in
 `publish.yml`), #4218 (safety net for `support`), #4224 (remove generated `package.json` after packing).
 
 ## Recovering a half-published release
 
-Check what is on npm:
+1. **Wait ~15 minutes after the last publish**, then check what is on npm. Reads lag (layer 2), so
+   an earlier check gives false "missing" answers:
 
-```bash
-v=$(node -p 'require("./lerna.json").version')
-for p in codemod css docs labs-css labs-react mcp popup-stack preview-css preview-react react react-fonts styling styling-transform; do
-  echo "$p: $(npm view @workday/canvas-kit-$p@$v version 2>/dev/null || echo MISSING)"
-done
-```
+   ```bash
+   v=$(node -p 'require("./lerna.json").version')
+   for p in codemod css docs labs-css labs-react mcp popup-stack preview-css preview-react react react-fonts styling styling-transform; do
+     echo "$p: $(npm view @workday/canvas-kit-$p@$v version 2>/dev/null || echo MISSING)"
+   done
+   ```
 
-Then run **Publish to npm** manually (Actions → Run workflow) on `master` (or `support`) with
-release type `complete-unpublished`. It does not bump versions and publishes only what is missing.
-Until the `restoreLernaManifests` fix is on the branch you run it from, a 409 during the first
-attempt still ends the job with `EUNCOMMIT`. Just re-run: every run starts from a clean checkout and
-only publishes what is still missing, so each run makes progress (29 Oct: 1 of 13, then 6 more).
-
-Check npm with the per-version endpoint (the `npm view` loop above can be up to 5 minutes stale
-right after a publish; see layer 3):
-
-```bash
-curl -s -o /dev/null -w '%{http_code}\n' "https://registry.npmjs.org/@workday%2fcanvas-kit-react/$v"  # 200 = published
-```
+2. Run **Publish to npm** manually (Actions → Run workflow) on `master` (or `support`) with release
+   type `complete-unpublished`. It does not bump versions and publishes only what is missing. Packages
+   it re-publishes by mistake get "already published", which counts as done.
+3. If the job fails, read the log before re-running: the packages that lerna logged
+   `success published` are done even if the job is red.
 
 ## Open questions
 
-- Why does Rekor return 409 for these publishes? Worth an issue against `npm/cli` with a failing run
-  link if it keeps happening.
-- Whether to drop or decouple provenance for patch releases. That removes Rekor from the path but
-  is a supply-chain decision (see `scorecard.yml`), so it needs a maintainer call.
-- Whether the release action (`canvas-kit-actions/release@v2`) should itself retry per package, which
-  would make the safety net a last resort instead of the normal path.
+- Why does Rekor return 409 for these publishes, including for re-publishes? Worth an issue against
+  `npm/cli` with a failing run link if it keeps happening.
+- Provenance: **kept on** (decision 29 Oct 2026). Turning it off (`NPM_CONFIG_PROVENANCE=false`) would
+  take Rekor out of the publish path, but gives up the attestation (see `scorecard.yml`).
+- Whether the release action should retry its own publish so the Storybook and Chromatic steps still
+  run after a transient failure (the known gap above).

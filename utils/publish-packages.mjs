@@ -22,9 +22,8 @@ const execFileAsync = promisify(execFile);
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD_MARKER = path.join(REPO_ROOT, 'modules', 'react', 'dist', 'es6', 'index.js');
 const DEFAULT_RETRIES = 5;
-const RETRY_BASE_MS = 8000;
+const RETRY_BASE_MS = Number(process.env.PUBLISH_RETRY_BASE_MS ?? 8000);
 const REGISTRY_CHECK_CONCURRENCY = 4;
-const NPM_REGISTRY = 'https://registry.npmjs.org';
 const ALLOWED_DIST_TAGS = new Set(['latest', 'support', 'next', 'prerelease-next']);
 
 /** @typedef {{distTag: string, retries: number, verifyOnly: boolean, requireUnpublished: boolean}} PublishArgs */
@@ -157,8 +156,13 @@ export function parsePublishArgs(argv) {
  * @param {string} output
  */
 export function isRetryablePublishFailure(output) {
-  return /TLOG_CREATE_ENTRY_ERROR|error creating tlog entry|an equivalent entry already exists|ECONNRESET|ETIMEDOUT|EAI_AGAIN|502 Bad Gateway|503 Service Unavailable/.test(
-    output
+  return (
+    /TLOG_CREATE_ENTRY_ERROR|error creating tlog entry|an equivalent entry already exists|ECONNRESET|ETIMEDOUT|EAI_AGAIN|502 Bad Gateway|503 Service Unavailable/.test(
+      output
+    ) ||
+    // GitHub's OIDC token endpoint failing (`.../idtoken/... 504`) surfaces from npm as a bare
+    // `E404 Not found`, which would otherwise look like a permanent error.
+    /\/idtoken\/\S*\s+5\d\d\b/.test(output)
   );
 }
 
@@ -182,36 +186,27 @@ export async function getPublicPackages() {
 /**
  * Checks whether an exact package version already exists on the public npm registry.
  *
- * Reads the per-version endpoint on purpose. `npm view` fetches the package-level document, which
- * the registry CDN caches for 5 minutes (`cache-control: max-age=300`), so right after a publish it
- * keeps reporting the new version as missing. The per-version endpoint is served uncached.
- *
  * @param {string} name
  * @param {string} version
- * @param {string} [registry]
  */
-export async function isPackageVersionOnNpm(name, version, registry = NPM_REGISTRY) {
-  const url = `${registry}/${name.replace('/', '%2f')}/${encodeURIComponent(version)}`;
-
-  let response;
+export async function isPackageVersionOnNpm(name, version) {
   try {
-    response = await fetch(url, {signal: AbortSignal.timeout(30000)});
+    const {stdout} = await execFileAsync('npm', ['view', `${name}@${version}`, 'version'], {
+      timeout: 30000,
+    });
+    return stdout.trim() === version;
   } catch (err) {
-    // Timeout or network failure — do not misreport as "missing from npm".
-    throw new Error(`Could not check ${name}@${version} on npm: ${url}`, {cause: err});
-  }
+    const execErr = /** @type {Error & {stdout?: string, stderr?: string}} */ (err);
+    const output = `${execErr.stdout ?? ''}\n${execErr.stderr ?? ''}\n${execErr.message}`;
 
-  if (response.ok) {
-    return true;
-  }
+    // Version is actually missing from npm — treat as unpublished, not an operational error.
+    if (/E404|is not in this registry|No match found for version/.test(output)) {
+      return false;
+    }
 
-  // Version is actually missing from npm — treat as unpublished, not an operational error.
-  if (response.status === 404) {
-    return false;
+    // Timeout, auth, or registry outage — do not misreport as "missing from npm".
+    throw new Error(`Could not check ${name}@${version} on npm:\n${output}`, {cause: err});
   }
-
-  // Registry outage or auth error — do not misreport as "missing from npm".
-  throw new Error(`Could not check ${name}@${version} on npm: HTTP ${response.status} from ${url}`);
 }
 
 /**
@@ -309,21 +304,32 @@ function formatPackageList(packages) {
 }
 
 /**
- * Parses `@scope/name@version` strings from Lerna publish output.
+ * Reads which `name@version` packages the registry confirmed in response to lerna's publish calls:
+ * either lerna published them, or the registry said they were already published.
+ *
+ * This is the only reliable evidence that a package is on npm. A publish is accepted immediately,
+ * but reads (`npm view`, the packument, tarballs) can lag by 1–13 minutes afterwards, so a read
+ * right after a publish may still say "missing". Packages that merely appear in a failure line are
+ * not confirmed.
  *
  * @param {string} output
- * @returns {{name: string, version: string}[]}
+ * @returns {Set<string>}
  */
-export function parsePublishedPackageLines(output) {
-  /** @type {Map<string, {name: string, version: string}>} */
-  const packages = new Map();
+export function parseConfirmedPackages(output) {
+  const text = output.replace(/\u001b\[[0-9;]*m/g, '');
+  const confirmed = new Set();
 
-  for (const match of output.matchAll(/@workday\/([a-z-]+)@(\d+\.\d+\.\d+(?:-[^\s'"]+)?)/g)) {
-    const name = `@workday/${match[1]}`;
-    packages.set(name, {name, version: match[2]});
+  // `lerna success published @workday/canvas-kit-react 16.2.12`
+  for (const match of text.matchAll(/lerna success published (\S+) (\d+\.\d+\.\d+\S*)/g)) {
+    confirmed.add(`${match[1]}@${match[2]}`);
   }
 
-  return [...packages.values()];
+  // `lerna WARN publish Package is already published: @workday/canvas-kit-react@16.2.12`
+  for (const match of text.matchAll(/Package is already published: (\S+)@(\d+\.\d+\.\d+\S*)/g)) {
+    confirmed.add(`${match[1]}@${match[2]}`);
+  }
+
+  return confirmed;
 }
 
 /**
@@ -393,6 +399,14 @@ export async function publishFromPackage({
 
   assertPackagesBuilt();
 
+  // Decide what is left from the registry's responses to our own publish calls, never from reads:
+  // right after a publish, `npm view` and lerna's own lookup still say "missing" for minutes, which
+  // used to send this loop into re-publishing packages that were already on npm (and failing on
+  // them with a Rekor 409).
+  const targets = unpublished;
+  const confirmed = new Set();
+  const getMissing = () => targets.filter(pkg => !confirmed.has(`${pkg.name}@${pkg.version}`));
+
   for (let attempt = 1; attempt <= retries; attempt++) {
     console.log(
       `Publishing unpublished packages (attempt ${attempt}/${retries}) with dist-tag "${distTag}" and concurrency 1...`
@@ -410,40 +424,42 @@ export async function publishFromPackage({
       '--concurrency=1',
     ]);
 
-    unpublished = await getUnpublishedPackages(packages);
+    parseConfirmedPackages(result.output).forEach(key => confirmed.add(key));
+    const missing = getMissing();
 
-    // Re-check the registry; Lerna may exit non-zero even after some packages landed.
-    if (unpublished.length === 0) {
-      console.log('All workspace package versions are on npm.');
+    // Exit 0 means lerna published, or saw on npm, everything it believed was missing. A non-zero
+    // exit with nothing left to confirm is a failed re-publish of a package that is already there.
+    if (result.code === 0 || missing.length === 0) {
+      console.log('All workspace package versions were published or confirmed on npm.');
       return packages;
     }
 
-    // Lerna can exit 0 while packages are still missing, or non-zero for retryable tlog errors.
-    const retryable = result.code === 0 || isRetryablePublishFailure(result.output);
-    if (!retryable) {
+    if (!isRetryablePublishFailure(result.output)) {
       throw new Error(
-        `Publish failed with a non-retryable error. Still missing:\n${formatPackageList(
-          unpublished
-        )}`
+        `Publish failed with a non-retryable error. Still missing:\n${formatPackageList(missing)}`
       );
     }
 
-    console.warn(`Retryable publish failure. Still missing:\n${formatPackageList(unpublished)}`);
+    console.warn(`Retryable publish failure. Still missing:\n${formatPackageList(missing)}`);
 
-    // Back off before the next from-package pass (which skips versions already on npm).
+    // Back off before the next from-package pass.
     if (attempt < retries) {
       await waitForRetry(attempt);
     }
   }
 
-  unpublished = await getUnpublishedPackages(packages);
   throw new Error(
-    `Exhausted ${retries} publish attempts. Still missing:\n${formatPackageList(unpublished)}`
+    `Exhausted ${retries} publish attempts. Still missing:\n${formatPackageList(getMissing())}`
   );
 }
 
-// Allow `node utils/publish-packages.mjs --dist-tag latest` from release workflows.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Allow `node utils/publish-packages.mjs --dist-tag latest` from release workflows. Compare real
+// paths: `import.meta.url` is already resolved, so a symlinked path (e.g. macOS `/var` ->
+// `/private/var`) would otherwise skip this block and exit 0 without publishing anything.
+if (
+  process.argv[1] &&
+  fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))
+) {
   Promise.resolve()
     .then(() => publishFromPackage(parsePublishArgs(process.argv.slice(2))))
     .catch(err => {
