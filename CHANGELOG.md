@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.12](https://github.com/Workday/canvas-kit/releases/tag/v16.2.12) (2026-10-29)
+
+### Infrastructure
+
+- chore: Snyk Security upgrade @modelcontextprotocol/sdk from 1.29.0 to 1.32.0 ([#4219](https://github.com/Workday/canvas-kit/pull/4219)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
 ## [v16.2.11](https://github.com/Workday/canvas-kit/releases/tag/v16.2.11) (2026-10-27)
 
 ### Components
