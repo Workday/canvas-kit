@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.13](https://github.com/Workday/canvas-kit/releases/tag/v16.2.13) (2026-10-30)
+
+### Documentation
+
+- docs(a11y): Update accessibility documentation for Accessory and Selection Group ([#4233](https://github.com/Workday/canvas-kit/pull/4233)) ([@jamesfan](https://github.com/jamesfan))
+
+
 ## [v16.2.12](https://github.com/Workday/canvas-kit/releases/tag/v16.2.12) (2026-10-29)
 
 ### Infrastructure
