@@ -13,6 +13,8 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
 
   const start = () => {
+    // cancel any pending timeout so it cannot fire after this one replaces its ID
+    window.clearTimeout(timer.current);
     timer.current = window.setTimeout(fn, waitMs);
   };
 

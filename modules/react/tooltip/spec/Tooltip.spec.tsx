@@ -209,6 +209,25 @@ describe('Tooltip', () => {
       });
       expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
     });
+
+    it('should not show the tooltip from an earlier mouse-enter timer after keyboard activation', () => {
+      render(
+        <Tooltip title="Move row">
+          <button>Move row</button>
+        </Tooltip>
+      );
+
+      const button = screen.getByRole('button');
+      fireEvent.mouseEnter(button); // starts the show timer
+      fireEvent.focus(button); // starts a second show timer, which must replace the first
+      fireEvent.keyDown(button, {key: 'Enter'}); // cancels the pending show timer
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+
+      act(() => {
+        vi.advanceTimersByTime(300); // advance past the show delay of the earlier timer
+      });
+      expect(screen.queryByRole('tooltip')).not.toBeInTheDocument();
+    });
   });
 
   it('should call the onKeyDown callback provided to the wrapped component and still hide on Enter', () => {
