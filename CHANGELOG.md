@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.17](https://github.com/Workday/canvas-kit/releases/tag/v15.1.17) (2026-10-30)
+
+### Infrastructure
+
+- fix: Restore package.json manifests before release recovery publish ([#4232](https://github.com/Workday/canvas-kit/pull/4232)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes the release safety-net step so a partial or failed npm publish is recovered correctly. No change to published packages.
+
+
 ## [v15.1.16](https://github.com/Workday/canvas-kit/releases/tag/v15.1.16) (2026-10-27)
 
 ### Components
