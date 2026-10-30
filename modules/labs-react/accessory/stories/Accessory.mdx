@@ -108,12 +108,11 @@ at `medium`, `large`, and `extraLarge`. `outline` adds a default border at those
 
 ## Accessibility
 
-Accessory components are presentational and always `aria-hidden`. Images use an empty `alt` because
-assistive technology does not see content inside that tile. Name the item in adjacent text instead
-of on the accessory. They are not buttons and do not take click or keyboard handlers.
-
-Accessory renders with `role="img"` (or `role="presentation"` when purely decorative) and
-propagates `alt` or `label` text from the wrapped type.
+- Accessory components are presentational and always `aria-hidden`. Images use an empty `alt`
+  because assistive technology does not see content inside that tile. Name the item in adjacent text
+  instead of on the accessory. They are not buttons and do not take click or keyboard handlers.
+- Accessory renders with `role="img"` (or `role="presentation"` when purely decorative) and
+  propagates `alt` or `label` text from the wrapped type.
 
 ## Component API
 
