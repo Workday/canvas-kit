@@ -36,5 +36,8 @@
   ],
   "dependencies": {
     "screenfull": "^5.2.0"
+  },
+  "publishConfig": {
+    "timeout": 300000
   }
 }

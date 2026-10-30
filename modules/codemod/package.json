@@ -45,5 +45,8 @@
   },
   "resolutions": {
     "recast": "0.20.4"
+  },
+  "publishConfig": {
+    "timeout": 300000
   }
 }
