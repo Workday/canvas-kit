@@ -57,5 +57,8 @@
   },
   "peerDependencies": {
     "typescript": ">=5.0"
+  },
+  "publishConfig": {
+    "timeout": 300000
   }
 }
