@@ -8,7 +8,7 @@ export const generateLevelTokens = ([level, size]: string[]) => {
         acc.color = `system.color.fg.${isHeadingStyle ? 'strong' : 'default'}`;
         break;
       case 'fontWeight':
-        acc.fontWeight = `system.fontWeight.${isHeadingStyle ? 'bold' : 'regular'}`;
+        acc.fontWeight = `system.fontWeight.${isHeadingStyle ? 'bold' : 'normal'}`;
         break;
       case 'fontFamily':
         acc.fontFamily = 'system.fontFamily.default';

@@ -675,7 +675,7 @@ type.properties.fontSizes[48] → system.fontSize.title.medium
 type.properties.fontSizes[56] → system.fontSize.title.large
 
 Font Weight Mappings:
-type.properties.fontWeights.regular → system.fontWeight.regular
+type.properties.fontWeights.regular → system.fontWeight.normal
 type.properties.fontWeights.medium  → system.fontWeight.medium
 type.properties.fontWeights.bold    → system.fontWeight.bold
 
@@ -891,7 +891,7 @@ Good - Consistent type styling:
 
 Avoid - Mixing individual properties:
 fontSize: system.fontSize.body.medium,
-fontWeight: system.fontWeight.regular,
+fontWeight: system.fontWeight.normal,
 lineHeight: '1.5'
 
 3. Leverage Styling Utilities
