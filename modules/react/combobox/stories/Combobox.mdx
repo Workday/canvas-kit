@@ -48,7 +48,7 @@ An arbitrary combobox allows the user to enter any value. The list of options ar
 suggestions and selecting an option will prefill the combobox with the value of the option. The user
 is still allowed to modify the combobox even after an option is entered. With arbitrary comboboxes,
 there is only one `input` element. Arbitrary combobox inputs should use the
-[useComboboxInputArbitrary](#usecomboboxinputarbirary) hook. Typeahead or `Autocomplete` are
+[useComboboxInputArbitrary](#usecomboboxinputarbitrary) hook. Typeahead or `Autocomplete` are
 examples are arbitrary value comboboxes.
 
 ## Installation
@@ -77,6 +77,215 @@ An Autocomplete is an example of an arbitrary combobox.
 Combobox and its subcomponents support custom styling via the `cs` prop. For more information, check
 our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+## Accessibility
+
+`Combobox` is the abstract foundation for the WAI-ARIA
+[Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/): a text input with an
+associated listbox. The accessibility goal is a visible, persistent label on that input, and a
+list of options the user can browse and choose while keyboard focus stays on the input.
+
+Use a finished component when it matches the interaction:
+
+- One value from a fixed list: [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs) (select-only combobox,
+  including type-ahead).
+- More than one value: [**MultiSelect**](https://workday.github.io/canvas-kit/?path=/docs/preview-multiselect--docs).
+- Any typed value, with options as suggestions: compose `Combobox` as in the
+  [Autocomplete](#autocomplete) example (arbitrary combobox).
+
+See [FormField's accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for
+label, hint, error, and required wiring. `Combobox` has no Basic example; Autocomplete is the
+reference composition.
+
+### Minimum Accessible Structure
+
+Use a visible **`FormField.Label`**, **`FormField.Input as={Combobox.Input}`**, then
+**`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and
+**`Combobox.Menu.Item`**.
+
+**`Combobox.Input`** applies **`useComboboxInput`** only. The [Autocomplete](#autocomplete) example
+replaces it with an input that also composes **`useComboboxInputArbitrary`** and calls
+`model.events.show` on `onKeyPress` so the list opens as the user types.
+
+```tsx
+import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+const Example = () => {
+  const model = useComboboxModel({
+    items: ['Apple', 'Orange', 'Banana'],
+  });
+
+  return (
+    <FormField>
+      <FormField.Label>Fruit</FormField.Label>
+      <FormField.Field>
+        <Combobox model={model}>
+          <FormField.Input as={Combobox.Input} />
+          <Combobox.Menu.Popper>
+            <Combobox.Menu.Card>
+              <Combobox.Menu.List>
+                {item => <Combobox.Menu.Item>{item}</Combobox.Menu.Item>}
+              </Combobox.Menu.List>
+            </Combobox.Menu.Card>
+          </Combobox.Menu.Popper>
+        </Combobox>
+      </FormField.Field>
+    </FormField>
+  );
+};
+```
+
+**`FormField.Input`** gives the combobox a programmatically determinable name from
+**`FormField.Label`**.
+
+### Built-in Behaviors
+
+Canvas Kit applies these when the input composes **`useComboboxInput`** and the menu subcomponents
+are rendered. **Do not duplicate them** in consuming code. Behaviors from
+**`useComboboxInputArbitrary`**, **`useComboboxInputConstrained`**, and
+**`useComboboxKeyboardTypeAhead`** apply only when those hooks are composed.
+
+**ARIA and DOM** (_applied by **`useComboboxInput`** and menu subcomponents_):
+
+- **Input**: `role="combobox"`, `aria-haspopup="listbox"`, `aria-expanded` from menu visibility,
+  `aria-autocomplete="list"`, and `aria-controls` pointing at `{modelId}-list`. `id` is the combobox
+  model id unless a passed `id` overrides it (**`FormField.Input`** supplies `input-{id}`).
+- **`aria-activedescendant`**: set to the active option's id while the list is open, and removed
+  when the list is closed. DOM focus stays on the input. Options are not tab stops.
+- **`Combobox.Menu.List`**: `role="listbox"`, `id="{modelId}-list"`, and `aria-labelledby` set to
+  the combobox model id. **`FormField.Input`** replaces the input `id` with `input-{id}`, so that
+  `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby` on the
+  list. The combobox input's accessible name comes from **`FormField.Label`** through
+  **`FormField.Input`**.
+- **`Combobox.Menu.Item`** (`Menu.Option`): `role="option"` and `aria-selected` from selection
+  state. The option id matches `aria-activedescendant`.
+- **Popup**: **`Combobox.Menu.Popper`** portals the list. **`Combobox.Menu.Card`** is presentational.
+  The model closes the list on <kbd>Escape</kbd> and on pointer interaction outside the popup.
+  `initialFocusRef` and `returnFocusRef` are not applied; focus is not moved into the list.
+- **Virtualized options**: Once `items` is non-empty, the list is virtualized by default
+  (`shouldVirtualize` defaults to `true`). Rendered options then include `aria-setsize` and
+  `aria-posinset`.
+- **`FormField`**: `aria-labelledby`, `aria-describedby`, `required`, and `aria-invalid` when
+  `error="error"`. Caution (`error="caution"`) does not set `aria-invalid`.
+
+**Keyboard** (_focus remains on the combobox input; list orientation defaults to vertical_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move to and from the input (native tab order).
+  Leaving the input blurs it and closes the list.
+- Clicking **`FormField.Label`** moves focus to the input. Clicking the input opens the list if it
+  is closed and closes it if it is open.
+- <kbd>ArrowDown</kbd> opens the list. <kbd>ArrowUp</kbd> opens the list when it is closed. While
+  the list is open, <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> move the active option and wrap from
+  the last option to the first (and the first to the last). Ids in **`nonInteractiveIds`** are
+  skipped. <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last option while the list is open.
+- <kbd>Enter</kbd> while the list is open selects the active option unless that option has
+  `aria-disabled="true"`. In the default `mode` (`"single"`), the list then closes. <kbd>Enter</kbd>
+  does not submit the form while the list is open.
+- <kbd>Escape</kbd> closes the list. Focus remains on the input. After close,
+  `aria-activedescendant` is removed.
+- Activating an option with the pointer selects it, keeps focus on the input, and closes the list
+  when `mode` is `"single"`.
+- Printable characters are typed into the input. They open the list only when the input calls
+  `model.events.show`, which the [Autocomplete](#autocomplete) example does on `onKeyPress`.
+
+**`useComboboxKeyboardTypeAhead`** is not part of **`useComboboxInput`**. [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs)
+composes it for select-only type-ahead.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), hint or error text via `aria-describedby`, and the current
+  value.
+- The control is announced as a combobox. Collapsed vs expanded follows `aria-expanded`. While the
+  list is open, the active option is exposed through `aria-activedescendant` on the focused input.
+- Options are announced with selected or not-selected state (`aria-selected`). An option with
+  **`aria-disabled`** is announced as disabled.
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
+- A disabled input may be announced as unavailable and is skipped in the tab order.
+
+For label, input, and hint association, see
+[FormField's Built-in Behaviors](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#built-in-behaviors).
+
+### Accessibility Requirements
+
+Required in application code for an accessible combobox built on `Combobox`. Rows marked
+_(conditional)_ apply only when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible **`FormField.Label`**,
+**`FormField.Input as={Combobox.Input}`**, and the menu subcomponents from **Minimum accessible
+structure**. Omit a custom `id`, a `ref`, **`disabled`**, **`nonInteractiveIds`**,
+**`initialFocusRef`**, and **`returnFocusRef`**.
+
+**Open on type** _(conditional)_:
+
+When suggestions should appear as the user types, call `model.events.show` from the input, as the
+[Autocomplete](#autocomplete) example does on `onKeyPress`. Arrow keys and a click already open the
+list.
+
+**Second form input** _(conditional)_:
+
+When a second input carries the submitted value, compose **`useComboboxInputConstrained`** and
+spread its `formInputProps` onto that input. Those props include `aria-hidden` and `tabIndex={-1}`,
+and they forward `focus()` and `blur()` to the visible combobox. Leave those props in place.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Use a ref when the product needs to move focus to the combobox after an action. Do not attach a
+`ref` or call `focus()` unless the design or developer asks for it.
+
+**Disabled options** _(conditional)_:
+
+When an option is unavailable, set **`nonInteractiveIds`** on the model (arrow keys skip those ids)
+and **`aria-disabled`** on those **`Combobox.Menu.Item`**s (<kbd>Enter</kbd> and pointer activation
+will not select them). Do not use styling alone.
+
+| Requirement                       | How to satisfy                                                                                                                                                                                                                      |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                      | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input`** on the visible combobox. See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for label, hint, error, and required wiring           |
+| Open on type _(conditional)_      | Call `model.events.show` when suggestions should appear as the user types, as the [Autocomplete](#autocomplete) example does on `onKeyPress` (see **Open on type** above)                                                          |
+| Menu structure                    | **`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and **`Combobox.Menu.Item`** in that order                                                                                                           |
+| Option name                       | Visible text as **`Combobox.Menu.Item`** children, so the option's accessible name matches what is shown                                                                                                                            |
+| Second form input _(conditional)_ | Spread `formInputProps` from **`useComboboxInputConstrained`** onto that input and leave `aria-hidden` and `tabIndex={-1}` in place (see **Second form input** above)                                                                |
+| Disabled options _(conditional)_  | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`Combobox.Menu.Item`**s                                                                                                                                     |
+| Empty results _(conditional)_     | A non-interactive message when there are no options. Do not use **`Combobox.Menu.Item`** for that message                                                                                                                           |
+| Programmatic focus _(conditional)_ | `ref` and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                                                         |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, **`FormField.Input as={Combobox.Input}`**, menu structure
+  (**`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**,
+  **`Combobox.Menu.Item`**), and option text as the accessible name.
+- **CONDITIONAL:** `model.events.show` when suggestions should appear as the user types, a second
+  form input that spreads `formInputProps` from **`useComboboxInputConstrained`**, disabled options
+  (`nonInteractiveIds` + `aria-disabled`), an empty-state message, programmatic focus via `ref`.
+  See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for shared FormField
+  conditionals (hint/error, required, stable `id`).
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- **Missing `FormField` wiring**: Do not render a combobox input without **`FormField`** and
+  **`FormField.Label`**. Use **`FormField.Input`** for the visible input. For shared FormField
+  anti-patterns (manual label ARIA, placeholder-only labels, color-only errors, broken ID
+  references), see [FormField Anti-Patterns](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#anti-patterns).
+- **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup` (the hook sets
+  `"listbox"`), `aria-expanded`, `aria-autocomplete` (including `"none"`), `aria-controls`,
+  `aria-activedescendant`, or listbox `role` / `id` / `aria-labelledby` / `aria-label`. Do not make
+  **`Combobox.Menu.Item`** focusable or add a roving `tabIndex` — the active option is
+  **`aria-activedescendant`** on the input.
+- **Menu items in the listbox**: Do not use **`Menu.Item`** (`role="menuitem"`) inside
+  **`Combobox.Menu.List`** (`role="listbox"`). Use **`Combobox.Menu.Item`**.
+- **Dialog-style focus props**: Do not set **`initialFocusRef`** or **`returnFocusRef`**. The list
+  does not take DOM focus.
+- **Exposed form input**: When a second input holds the submitted value, spread `formInputProps`
+  from **`useComboboxInputConstrained`** onto it. Do not remove `aria-hidden` or `tabIndex={-1}`
+  from those props, and do not set those attributes by hand on another input.
+- **Incomplete menu**: Do not omit **`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**,
+  **`Combobox.Menu.List`**, or **`Combobox.Menu.Item`**, and do not render the list outside the
+  popper.
 
 ## Component API
 
