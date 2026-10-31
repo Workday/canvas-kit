@@ -15,7 +15,7 @@ export const usePopupModel = createModelHook({
     ...useDisclosureModel.defaultConfig,
     /**
      * Optional reference to an element that should receive focus when a popup is hidden. If left
-     * blank, focus will return to the `targetRef`
+     * blank, focus will return to the previously focused element, falling back to `targetRef`
      */
     returnFocusRef: undefined as undefined | React.RefObject<any>,
     /**
@@ -50,7 +50,7 @@ export const usePopupModel = createModelHook({
     initialFocusRef: config.initialFocusRef,
     /**
      * Optional reference to an element that should receive focus when a popup is hidden. If left
-     * blank, focus will return to the `targetRef`
+     * blank, focus will return to the previously focused element, falling back to `targetRef`
      */
     returnFocusRef: config.returnFocusRef,
     /**
