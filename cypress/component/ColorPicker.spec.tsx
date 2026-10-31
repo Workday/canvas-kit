@@ -159,7 +159,7 @@ describe('ColorPicker', () => {
       });
 
       context('when a custom color is submitted', () => {
-        const customColor = '#123123';
+        const customColor = '#aabbcc';
 
         beforeEach(() => {
           getColorInput().focus();
@@ -170,6 +170,39 @@ describe('ColorPicker', () => {
         it('should set the selected color to input value', () => {
           getOpenButton().click();
           getSwatch(customColor).find('.wd-icon').should('exist');
+        });
+
+        it('should not have any axe errors in the custom color form', () => {
+          getOpenButton().click();
+          cy.injectAxe();
+          cy.checkA11y('form');
+        });
+
+        ['AABBCc', 'ABC', 'abc'].forEach(inputValue => {
+          it(`should keep the check when the same color is entered as ${inputValue}`, () => {
+            getOpenButton().click();
+            getColorInput().clear().type(inputValue);
+
+            getSwatch(`#${inputValue.toLowerCase()}`)
+              .find('.wd-icon-check-small')
+              .should('be.visible');
+            getSubmitButton().should('be.enabled');
+
+            getColorInput().type('{enter}');
+            getOpenButton().should('be.focused').click();
+            getSwatch(customColor).find('.wd-icon-check-small').should('be.visible');
+          });
+        });
+
+        it('should remove the check when the color changes or becomes invalid', () => {
+          getOpenButton().click();
+          getColorInput().clear().type('AABBCD');
+          getColorPickerPopup().find('.wd-icon-check-small').should('not.exist');
+          getSubmitButton().should('be.enabled');
+
+          getColorInput().clear().type('AB');
+          getColorPickerPopup().find('.wd-icon-check-small').should('not.exist');
+          getSubmitButton().should('be.disabled');
         });
       });
     });
