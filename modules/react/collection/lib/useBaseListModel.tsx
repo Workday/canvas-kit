@@ -168,6 +168,7 @@ export const useBaseListModel = createModelHook({
     estimateSize: React.useCallback(() => UNSTABLE_defaultItemHeight, [UNSTABLE_defaultItemHeight]),
     horizontal: config.orientation === 'horizontal',
     overscan: 3, // overscan of 3 helps rapid navigation
+    directDomUpdates: true,
   });
 
   // Force Typescript to recognize the `Generic` symbol
