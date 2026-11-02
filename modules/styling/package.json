@@ -32,7 +32,8 @@
     "typecheck:src": "tsc -p . --noEmit --incremental false"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "timeout": 300000
   },
   "keywords": [
     "canvas",

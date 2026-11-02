@@ -24,5 +24,8 @@
     "css",
     "components",
     "workday"
-  ]
+  ],
+  "publishConfig": {
+    "timeout": 300000
+  }
 }
