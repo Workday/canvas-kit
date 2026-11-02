@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.18](https://github.com/Workday/canvas-kit/releases/tag/v15.1.18) (2026-11-02)
+
+### Infrastructure
+
+- fix: Give Sigstore a real timeout when lerna publishes with provenance ([#4234](https://github.com/Workday/canvas-kit/pull/4234)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes intermittent npm publish failures (`TLOG_CREATE_ENTRY_ERROR 409`) by giving Sigstore's provenance upload a 5 minute timeout. Each published `package.json` now has `publishConfig.timeout`, which only affects publishing.
+
+
+## [v15.1.17](https://github.com/Workday/canvas-kit/releases/tag/v15.1.17) (2026-10-30)
+
+### Infrastructure
+
+- fix: Restore package.json manifests before release recovery publish ([#4232](https://github.com/Workday/canvas-kit/pull/4232)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes the release safety-net step so a partial or failed npm publish is recovered correctly. No change to published packages.
+
+
 ## [v16.2.13](https://github.com/Workday/canvas-kit/releases/tag/v16.2.13) (2026-10-30)
 
 ### Documentation
@@ -17,6 +33,11 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - chore: Snyk Security upgrade @modelcontextprotocol/sdk from 1.29.0 to 1.32.0 ([#4219](https://github.com/Workday/canvas-kit/pull/4219)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
 
 
+## [v15.1.16](https://github.com/Workday/canvas-kit/releases/tag/v15.1.16) (2026-10-27)
+
+### Components
+
+- fix(ActionBar): Allow icon-only items without children ([#4203](https://github.com/Workday/canvas-kit/pull/4203)) ([@akshita317](https://github.com/akshita317))
 ## [v16.2.11](https://github.com/Workday/canvas-kit/releases/tag/v16.2.11) (2026-10-27)
 
 ### Components

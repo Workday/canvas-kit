@@ -59,5 +59,8 @@
   },
   "devDependencies": {
     "@types/lodash.flatten": "^4.4.6"
+  },
+  "publishConfig": {
+    "timeout": 300000
   }
 }

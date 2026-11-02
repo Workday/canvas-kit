@@ -22,7 +22,7 @@ const execFileAsync = promisify(execFile);
 const REPO_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const BUILD_MARKER = path.join(REPO_ROOT, 'modules', 'react', 'dist', 'es6', 'index.js');
 const DEFAULT_RETRIES = 5;
-const RETRY_BASE_MS = 8000;
+const RETRY_BASE_MS = Number(process.env.PUBLISH_RETRY_BASE_MS ?? 8000);
 const REGISTRY_CHECK_CONCURRENCY = 4;
 const ALLOWED_DIST_TAGS = new Set(['latest', 'support', 'next', 'prerelease-next']);
 
@@ -156,8 +156,13 @@ export function parsePublishArgs(argv) {
  * @param {string} output
  */
 export function isRetryablePublishFailure(output) {
-  return /TLOG_CREATE_ENTRY_ERROR|error creating tlog entry|an equivalent entry already exists|ECONNRESET|ETIMEDOUT|EAI_AGAIN|502 Bad Gateway|503 Service Unavailable/.test(
-    output
+  return (
+    /TLOG_CREATE_ENTRY_ERROR|error creating tlog entry|an equivalent entry already exists|ECONNRESET|ETIMEDOUT|EAI_AGAIN|502 Bad Gateway|503 Service Unavailable/.test(
+      output
+    ) ||
+    // GitHub's OIDC token endpoint failing (`.../idtoken/... 504`) surfaces from npm as a bare
+    // `E404 Not found`, which would otherwise look like a permanent error.
+    /\/idtoken\/\S*\s+5\d\d\b/.test(output)
   );
 }
 
@@ -301,6 +306,9 @@ function formatPackageList(packages) {
 /**
  * Parses `@scope/name@version` strings from Lerna publish output.
  *
+ * Used by `publish-canary.mjs`. It matches every mention of a package, including failures, so it
+ * says which packages lerna attempted, not which ones were published (see `parseConfirmedPackages`).
+ *
  * @param {string} output
  * @returns {{name: string, version: string}[]}
  */
@@ -314,6 +322,60 @@ export function parsePublishedPackageLines(output) {
   }
 
   return [...packages.values()];
+}
+
+/**
+ * Reads which `name@version` packages the registry confirmed in response to lerna's publish calls:
+ * either lerna published them, or the registry said they were already published.
+ *
+ * This is the only reliable evidence that a package is on npm. A publish is accepted immediately,
+ * but reads (`npm view`, the packument, tarballs) can lag by 1–13 minutes afterwards, so a read
+ * right after a publish may still say "missing". Packages that merely appear in a failure line are
+ * not confirmed.
+ *
+ * @param {string} output
+ * @returns {Set<string>}
+ */
+export function parseConfirmedPackages(output) {
+  const text = output.replace(/\u001b\[[0-9;]*m/g, '');
+  const confirmed = new Set();
+
+  // `lerna success published @workday/canvas-kit-react 16.2.12`
+  for (const match of text.matchAll(/lerna success published (\S+) (\d+\.\d+\.\d+\S*)/g)) {
+    confirmed.add(`${match[1]}@${match[2]}`);
+  }
+
+  // `lerna WARN publish Package is already published: @workday/canvas-kit-react@16.2.12`
+  for (const match of text.matchAll(/Package is already published: (\S+)@(\d+\.\d+\.\d+\S*)/g)) {
+    confirmed.add(`${match[1]}@${match[2]}`);
+  }
+
+  return confirmed;
+}
+
+/**
+ * Restores `package.json` manifests that a failed `lerna publish` left modified.
+ *
+ * Lerna rewrites every manifest it publishes (`gitHead`, resolved dependency specifiers) and only
+ * resets them after the whole publish succeeds. When a package fails mid-run (e.g. a Sigstore tlog
+ * 409), the manifests stay dirty and the next `lerna publish from-package` refuses to start with
+ * EUNCOMMIT. The release commit already holds the correct versions, so resetting to it is safe.
+ *
+ * Only `package.json` files are restored; any other uncommitted change is left alone so lerna's
+ * own working tree check still reports it.
+ *
+ * @param {string} [cwd]
+ */
+export async function restoreLernaManifests(cwd = REPO_ROOT) {
+  const {stdout} = await execFileAsync('git', ['diff', '--name-only', '--relative', '-z'], {cwd});
+  const manifests = stdout.split('\0').filter(file => path.basename(file) === 'package.json');
+
+  if (manifests.length === 0) {
+    return;
+  }
+
+  console.log(`Restoring ${manifests.length} package.json file(s) left modified by lerna publish.`);
+  await execFileAsync('git', ['checkout', '--', ...manifests], {cwd});
 }
 
 /**
@@ -358,10 +420,21 @@ export async function publishFromPackage({
 
   assertPackagesBuilt();
 
+  // Decide what is left from the registry's responses to our own publish calls, never from reads:
+  // right after a publish, `npm view` and lerna's own lookup still say "missing" for minutes, which
+  // used to send this loop into re-publishing packages that were already on npm (and failing on
+  // them with a Rekor 409).
+  const targets = unpublished;
+  const confirmed = new Set();
+  const getMissing = () => targets.filter(pkg => !confirmed.has(`${pkg.name}@${pkg.version}`));
+
   for (let attempt = 1; attempt <= retries; attempt++) {
     console.log(
       `Publishing unpublished packages (attempt ${attempt}/${retries}) with dist-tag "${distTag}" and concurrency 1...`
     );
+
+    // The release action's own publish (and every failed attempt here) leaves manifests dirty.
+    await restoreLernaManifests();
 
     const result = await runStreaming('yarn', [
       'lerna',
@@ -372,40 +445,42 @@ export async function publishFromPackage({
       '--concurrency=1',
     ]);
 
-    unpublished = await getUnpublishedPackages(packages);
+    parseConfirmedPackages(result.output).forEach(key => confirmed.add(key));
+    const missing = getMissing();
 
-    // Re-check the registry; Lerna may exit non-zero even after some packages landed.
-    if (unpublished.length === 0) {
-      console.log('All workspace package versions are on npm.');
+    // Exit 0 means lerna published, or saw on npm, everything it believed was missing. A non-zero
+    // exit with nothing left to confirm is a failed re-publish of a package that is already there.
+    if (result.code === 0 || missing.length === 0) {
+      console.log('All workspace package versions were published or confirmed on npm.');
       return packages;
     }
 
-    // Lerna can exit 0 while packages are still missing, or non-zero for retryable tlog errors.
-    const retryable = result.code === 0 || isRetryablePublishFailure(result.output);
-    if (!retryable) {
+    if (!isRetryablePublishFailure(result.output)) {
       throw new Error(
-        `Publish failed with a non-retryable error. Still missing:\n${formatPackageList(
-          unpublished
-        )}`
+        `Publish failed with a non-retryable error. Still missing:\n${formatPackageList(missing)}`
       );
     }
 
-    console.warn(`Retryable publish failure. Still missing:\n${formatPackageList(unpublished)}`);
+    console.warn(`Retryable publish failure. Still missing:\n${formatPackageList(missing)}`);
 
-    // Back off before the next from-package pass (which skips versions already on npm).
+    // Back off before the next from-package pass.
     if (attempt < retries) {
       await waitForRetry(attempt);
     }
   }
 
-  unpublished = await getUnpublishedPackages(packages);
   throw new Error(
-    `Exhausted ${retries} publish attempts. Still missing:\n${formatPackageList(unpublished)}`
+    `Exhausted ${retries} publish attempts. Still missing:\n${formatPackageList(getMissing())}`
   );
 }
 
-// Allow `node utils/publish-packages.mjs --dist-tag latest` from release workflows.
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+// Allow `node utils/publish-packages.mjs --dist-tag latest` from release workflows. Compare real
+// paths: `import.meta.url` is already resolved, so a symlinked path (e.g. macOS `/var` ->
+// `/private/var`) would otherwise skip this block and exit 0 without publishing anything.
+if (
+  process.argv[1] &&
+  fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url))
+) {
   Promise.resolve()
     .then(() => publishFromPackage(parsePublishArgs(process.argv.slice(2))))
     .catch(err => {
