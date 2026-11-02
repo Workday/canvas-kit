@@ -2,20 +2,12 @@ import React from 'react';
 
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
-import {Flex} from '@workday/canvas-kit-react/layout';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
-import {createStyles} from '@workday/canvas-kit-styling';
 import {plusIcon} from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
 
 const FAVORITE_COLOR_OPTIONS = ['Blue', 'Yellow'];
-
-const flexStyles = createStyles({
-  gap: system.gap.md,
-  padding: system.padding.xs,
-});
 
 export const FormModal = () => {
   const model = useModalModel();
@@ -44,15 +36,15 @@ export const FormModal = () => {
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>New User</Modal.Heading>
           <Modal.Body>
-            <FormField>
+            <FormField grow>
               <FormField.Label>First Name</FormField.Label>
               <FormField.Input as={TextInput} name="first" />
             </FormField>
-            <FormField>
+            <FormField grow>
               <FormField.Label>Last Name</FormField.Label>
               <FormField.Input as={TextInput} name="last" />
             </FormField>
-            <FormField>
+            <FormField grow>
               <FormField.Label>Favorite Color</FormField.Label>
               <FormField.Field>
                 <Select items={FAVORITE_COLOR_OPTIONS}>
@@ -66,10 +58,10 @@ export const FormModal = () => {
               </FormField.Field>
             </FormField>
           </Modal.Body>
-          <Flex cs={flexStyles}>
+          <Modal.ButtonGroup>
             <Modal.CloseButton>Cancel</Modal.CloseButton>
             <PrimaryButton type="submit">Submit</PrimaryButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

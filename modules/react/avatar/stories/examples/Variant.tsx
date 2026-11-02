@@ -14,6 +14,8 @@ export const Variant = () => {
       <Avatar name="Logan McNeil" variant="amber" />
       <Avatar name="Wonder Woman" variant="teal" />
       <Avatar name="Elektra" variant="purple" />
+      <Avatar name="Mary Jane" variant="magenta" />
+      <Avatar name="Green Arrow" variant="green" />
     </div>
   );
 };

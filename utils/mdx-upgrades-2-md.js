@@ -81,7 +81,7 @@ const cleanImports = content => {
   topContent = topContent.replace(/\n{3,}/g, '\n\n').trim();
 
   // Combine cleaned top content with rest
-  const cleaned = (topContent + restContent)
+  const cleaned = (topContent ? `${topContent}\n\n${restContent}` : restContent)
     .replace(/\n{3,}/g, '\n\n') // Remove excessive newlines
     .trim();
 

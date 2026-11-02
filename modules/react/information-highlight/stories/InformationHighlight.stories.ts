@@ -3,6 +3,7 @@ import {Meta, StoryObj} from '@storybook/react';
 import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
 
 import mdxDoc from './InformationHighlight.mdx';
+import {ActionPlacementEnd as ActionPlacementEndExample} from './examples/ActionPlacementEnd';
 import {Basic as BasicExample} from './examples/Basic';
 import {Body as BodyExample} from './examples/Body';
 import {Caution as CautionExamples} from './examples/Caution';
@@ -42,6 +43,9 @@ export const Caution: Story = {
 };
 export const Informational: Story = {
   render: InformationalExamples,
+};
+export const ActionPlacementEnd: Story = {
+  render: ActionPlacementEndExample,
 };
 export const IconCritical: Story = {
   render: IconCriticalExamples,

@@ -3,7 +3,7 @@ import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import CardStoriesMeta from './Card.stories';
 
 import {Basic} from './examples/Basic';
-import {Borderless} from './examples/Borderless';
+import {Alt} from './examples/Alt';
 import {Tonal} from './examples/Tonal';
 import {WithCustomStyles} from './examples/CustomStyles';
 import {WithStencils} from './examples/Stencils';
@@ -33,13 +33,11 @@ yarn add @workday/canvas-kit-react
 
 <ExampleCodeBlock code={Basic} />
 
-### Borderless Example
+### Alt Example
 
-The `borderless` variant removes the border from the Card, creating a cleaner appearance while
-maintaining the same internal spacing and structure. Use this variant when placing cards on colored
-backgrounds where you want the card to blend seamlessly without borders or shadows.
+The `alt` variant is designed for use on alternative page backgrounds (`system.color.bg.alt.default`). Use this variant to maintain proper visual hierarchy when placing components on colored backgrounds. While the default variant should be used on `system.color.bg.default` backgrounds, the `alt` variant ensures the component remains visually elevated on `system.color.bg.alt.default` backgrounds.
 
-<ExampleCodeBlock code={Borderless} />
+<ExampleCodeBlock code={Alt} />
 
 ### Tonal Example
 
@@ -53,6 +51,8 @@ grayish background to create visual separation from the page background.
 
 Card and its subcomponents support custom styling via the `cs` prop. For more information, check our
 ["How To Customize Styles"](https://workday.github.io/canvas-kit/?path=/docs/styling-guides-customizing-styles--docs).
+
+**Note:** The card uses the `background` css property to style the background color. If you want to override the background, you can use the `[cardStencil.vars.background]` css variable.
 
 <ExampleCodeBlock code={WithCustomStyles} />
 

@@ -1,0 +1,53 @@
+import {ContentDirection, isNumericalTheme, resolveThemingScope} from '../lib/theming/types';
+
+describe('isNumericalTheme', () => {
+  it('is false for the deprecated shape', () => {
+    expect(isNumericalTheme({canvas: {palette: {primary: {main: 'red'}}}})).toBe(false);
+  });
+
+  it('is true for the numerical shape', () => {
+    expect(isNumericalTheme({brand: {primary: {'600': 'red'}}})).toBe(true);
+  });
+
+  it('is true for direction-only and themeScope-only numerical themes', () => {
+    expect(isNumericalTheme({direction: ContentDirection.RTL})).toBe(true);
+    expect(isNumericalTheme({themeScope: 'brand'})).toBe(true);
+  });
+
+  it('is false for undefined and empty', () => {
+    expect(isNumericalTheme(undefined)).toBe(false);
+    expect(isNumericalTheme({} as any)).toBe(false);
+  });
+});
+
+describe('resolveThemingScope', () => {
+  it('defaults to brand for primary-only input', () => {
+    expect(resolveThemingScope({canvas: {palette: {primary: {main: 'red'}}}})).toBe('brand');
+  });
+
+  it('promotes to full when extended ramp keys are provided', () => {
+    expect(
+      resolveThemingScope({canvas: {palette: {primary: {main: 'red', lightest: '#fff'}}}})
+    ).toBe('full');
+  });
+
+  it('respects explicit themeScope', () => {
+    expect(
+      resolveThemingScope({themeScope: 'full', canvas: {palette: {primary: {main: 'red'}}}})
+    ).toBe('full');
+  });
+
+  it('numerical shape defaults to brand even with extended ramp keys', () => {
+    expect(resolveThemingScope({brand: {critical: {'600': 'red', '700': 'darkred'}}})).toBe(
+      'brand'
+    );
+  });
+
+  it('error and alert main-only input stays on brand scope', () => {
+    expect(
+      resolveThemingScope({
+        canvas: {palette: {error: {main: 'crimson'}, alert: {main: 'coral'}}},
+      })
+    ).toBe('brand');
+  });
+});
