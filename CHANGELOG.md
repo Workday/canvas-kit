@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.18](https://github.com/Workday/canvas-kit/releases/tag/v15.1.18) (2026-11-02)
+
+### Infrastructure
+
+- fix: Give Sigstore a real timeout when lerna publishes with provenance ([#4234](https://github.com/Workday/canvas-kit/pull/4234)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes intermittent npm publish failures (`TLOG_CREATE_ENTRY_ERROR 409`) by giving Sigstore's provenance upload a 5 minute timeout. Each published `package.json` now has `publishConfig.timeout`, which only affects publishing.
+
+
 ## [v15.1.17](https://github.com/Workday/canvas-kit/releases/tag/v15.1.17) (2026-10-30)
 
 ### Infrastructure
