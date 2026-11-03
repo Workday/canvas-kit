@@ -9,8 +9,8 @@ export const Basic = () => {
       <InformationHighlight.Heading>Information Highlight</InformationHighlight.Heading>
       <InformationHighlight.Body>
         {' '}
-        This is what an information highlight would look like with with the default settings and
-        every field filled in{' '}
+        This is what an information highlight looks like with the default `variant` and `emphasis`
+        and every field filled in{' '}
       </InformationHighlight.Body>
       <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
     </InformationHighlight>

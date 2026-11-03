@@ -4,6 +4,7 @@ import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Heading} from '@workday/canvas-kit-react/text';
+import {Tooltip} from '@workday/canvas-kit-react/tooltip';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {
   caretDownIcon,
@@ -48,7 +49,9 @@ export const ThemeOverrides = () => (
         <PrimaryButton icon={caretDownIcon} iconPosition="end">
           Primary
         </PrimaryButton>
-        <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
+        <Tooltip title="Related Actions">
+          <PrimaryButton icon={relatedActionsVerticalIcon} />
+        </Tooltip>
       </Flex>
     </CanvasProvider>
     <Heading size="medium" as="h3">
@@ -63,7 +66,9 @@ export const ThemeOverrides = () => (
         <PrimaryButton icon={caretDownIcon} iconPosition="end">
           Primary
         </PrimaryButton>
-        <PrimaryButton aria-label="Related Actions" icon={relatedActionsVerticalIcon} />
+        <Tooltip title="Related Actions">
+          <PrimaryButton icon={relatedActionsVerticalIcon} />
+        </Tooltip>
       </Flex>
     </div>
   </div>

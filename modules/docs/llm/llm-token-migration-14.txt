@@ -1,8 +1,11 @@
 Canvas Kit Token Migration Guide: Moving to @workday/canvas-tokens-web
 
 ================================================================================
-IMPORTANT: This migration guide is for Canvas Kit v14
+IMPORTANT: This migration guide is for Canvas Kit v14 (historical)
 ================================================================================
+
+For the current v4.4 token surface (Sana Canvas, t-shirt scales, deprecations), see
+tokens/v4/v4.4-token-reference.md in this MCP server's token documentation.
 
 Canvas Kit v14 is using a new token system that replaces the old JavaScript-based
 tokens from @workday/canvas-kit-react/tokens with CSS variables from

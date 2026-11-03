@@ -20,9 +20,10 @@ export const cardHeadingStencil = createStencil({
   base: {
     color: system.color.fg.strong,
     fontWeight: system.fontWeight.bold,
-    marginBlock: system.legacy.padding.none,
+    marginBlockStart: system.legacy.padding.none,
+    marginBlockEnd: system.legacy.padding.none,
   },
-  defaultModifiers: {typeLevel: 'body.large'},
+  defaultModifiers: {typeLevel: 'body.small'},
 });
 
 export const CardHeading = createComponent('h3')({

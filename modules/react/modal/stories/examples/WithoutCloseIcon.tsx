@@ -2,7 +2,7 @@ import React from 'react';
 
 import {DeleteButton} from '@workday/canvas-kit-react/button';
 import {useUniqueId} from '@workday/canvas-kit-react/common';
-import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {Box} from '@workday/canvas-kit-react/layout';
 import {Modal} from '@workday/canvas-kit-react/modal';
 import {
   useAssistiveHideSiblings,
@@ -12,7 +12,6 @@ import {
   usePopupModel,
   useReturnFocus,
 } from '@workday/canvas-kit-react/popup';
-import {system} from '@workday/canvas-tokens-web';
 
 export const WithoutCloseIcon = () => {
   const longDescId = useUniqueId();
@@ -42,12 +41,12 @@ export const WithoutCloseIcon = () => {
               Are you sure you want to delete the item?
             </Box>
           </Modal.Body>
-          <Flex cs={{gap: system.gap.md, paddingBlock: system.padding.xs}}>
+          <Modal.ButtonGroup>
             <Modal.CloseButton ref={cancelBtnRef}>Cancel</Modal.CloseButton>
             <Modal.CloseButton as={DeleteButton} onClick={handleDelete}>
               Delete
             </Modal.CloseButton>
-          </Flex>
+          </Modal.ButtonGroup>
         </Modal.Card>
       </Modal.Overlay>
     </Modal>

@@ -17,7 +17,7 @@ Some of the below rules are inspired by painpoints we've encountered in this pro
 - [Patterns](#patterns)
   - [Event Handlers](#event-handlers-1)
   - [Grow Interface](#grow-interface)
-  - [Input Provider](#input-provider)
+  - [Focus indicators](#focus-indicators)
   - [Prop Spread Behavior](#prop-spread-behavior)
   - [Controlled Components](#controlled-components)
   - [Accessibility](#accessibility)
@@ -139,22 +139,18 @@ If objects are desired, the keys follow these rules:
 - Then use the `grow` boolean prop in your styles to achieve the desired effect (e.g.
   `width: grow ? '100%' : undefined`)
 
-#### Input Provider
+#### Focus indicators
 
-- All Canvas Kit components should support an `InputProvider` component to provide the cleanest
-  experience for mouse users. Read the docs
-  [here](https://github.com/Workday/canvas-kit/tree/master/modules/core/react#input-provider).
-- Do not use `InputProvider` within your components. It is meant to be used only once in your
-  application. It does not require wrapping any children
-- Make sure you provide fully accessible styling by default, and only override for mouse usage.
--
+- Visible focus indicators are required by default. Use **`:focus-visible`** so browser heuristics
+  show the ring for keyboard (and other non-pointer) focus. Pair it with a `&.focus` class twin for
+  Chromatic / `StaticStates` visual testing.
+- Do **not** use `data-whatinput` or `InputProvider` — those were removed in v14. Never remove
+  `outline` on `:focus` without a `:focus-visible` replacement.
 
 ```tsx
-[`[data-whatinput='mouse'] &:focus,
-  [data-whatinput='touch'] &:focus,
-  [data-whatinput='pointer'] &:focus`]: {
-  outline: 'none',
-  border: 'none',
+'&:is(.focus, :focus-visible)': {
+  outline: `2px solid ${system.legacy.color.brand.border.primary}`,
+  outlineOffset: '-2px',
 },
 ```
 

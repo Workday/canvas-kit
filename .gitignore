@@ -38,4 +38,4 @@ cypress/videos
 cypress/screenshots
 
 # css
-.css
+*.css
