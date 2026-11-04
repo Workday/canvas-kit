@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.17](https://github.com/Workday/canvas-kit/releases/tag/v16.2.17) (2026-11-04)
+
+### Components
+
+- fix(text-input): Avoid resizing growing inputs ([#4191](https://github.com/Workday/canvas-kit/pull/4191)) ([@minwookshin](https://github.com/minwookshin))
+
+
 ## [v16.2.16](https://github.com/Workday/canvas-kit/releases/tag/v16.2.16) (2026-11-04)
 
 ### Components
