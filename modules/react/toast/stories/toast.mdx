@@ -4,6 +4,7 @@ import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Toast} from '@workday/canvas-kit-react/toast';
 
 import {Basic} from './examples/Basic';
+import {Alt} from './examples/Alt';
 import {RTL} from './examples/RTL';
 import {ToastAlert} from './examples/ToastAlert';
 import {ToastDialog} from './examples/ToastDialog';
@@ -39,6 +40,12 @@ By default, `mode` is set to `status`, which indicates the message contains advi
 such as a successful action.
 
 <ExampleCodeBlock code={Basic} />
+
+### Alt Example
+
+The `alt` variant is designed for use on alternative page backgrounds (`system.color.bg.alt.default`). Use this variant to maintain proper visual hierarchy when placing components on colored backgrounds. While the default variant should be used on `system.color.bg.default` backgrounds, the `alt` variant ensures the component remains visually elevated on `system.color.bg.alt.default` backgrounds.
+
+<ExampleCodeBlock code={Alt} />
 
 A `status` `Toast` will wrap the message within a `polite` ARIA live region with a `role` of
 `status`.

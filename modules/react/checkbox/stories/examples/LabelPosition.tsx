@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
 
 export const LabelPosition = () => {
   const [checked, setChecked] = React.useState(false);
@@ -11,16 +11,16 @@ export const LabelPosition = () => {
   };
 
   return (
-    <FormField orientation="horizontalStart">
-      <FormField.Label>Confirm</FormField.Label>
-      <FormField.Field>
-        <FormField.Input
+    <FormFieldGroup orientation="horizontalStart">
+      <FormFieldGroup.Label>Confirm</FormFieldGroup.Label>
+      <FormFieldGroup.Field>
+        <FormFieldGroup.Input
           as={Checkbox}
           checked={checked}
           label="I agree to the terms"
           onChange={handleChange}
         />
-      </FormField.Field>
-    </FormField>
+      </FormFieldGroup.Field>
+    </FormFieldGroup>
   );
 };

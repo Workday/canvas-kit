@@ -4,7 +4,7 @@ import {useListRenderItems} from '@workday/canvas-kit-react/collection';
 import {ExtractProps, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {Grid} from '@workday/canvas-kit-react/layout';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
-import {system} from '@workday/canvas-tokens-web';
+import {base, system} from '@workday/canvas-tokens-web';
 
 import {useSegmentedControlModel} from './hooks/useSegmentedControlModel';
 
@@ -20,13 +20,25 @@ export const segmentedControlListStencil = createStencil({
   },
   base: {
     display: 'inline-grid',
-    backgroundColor: system.legacy.color.surface.alt.strong,
+    backgroundColor: system.legacy.color.surface.alt.default,
     border: `0 solid ${system.color.border.transparent}`,
-    borderRadius: system.legacy.shape.lg,
+    borderRadius: system.legacy.shape.full,
     padding: system.legacy.padding.xxs,
-    gridGap: system.legacy.gap.sm,
+    gridGap: system.legacy.gap.xs,
   },
   modifiers: {
+    size: {
+      large: {
+        padding: system.legacy.padding.xxs,
+      },
+      medium: {
+        padding: base.legacy.size25,
+      },
+      small: {
+        padding: base.legacy.size25,
+        gap: base.legacy.size25,
+      },
+    },
     orientation: {
       vertical: ({items}) => ({
         gridTemplateRows: `repeat(${items}, 1fr)`,
@@ -50,6 +62,7 @@ export const SegmentedControlList = createSubcomponent('div')({
         segmentedControlListStencil({
           items: `${model.state.items.length}`,
           orientation: model.state.orientation,
+          size: model.state.size,
         })
       )}
     >

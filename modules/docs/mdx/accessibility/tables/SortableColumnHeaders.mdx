@@ -1,0 +1,25 @@
+import {Meta} from '@storybook/blocks';
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {SortableColumnHeaders} from '../examples/Table/WithSortableColumnHeaders';
+
+<Meta title="Guides/Accessibility/Table Patterns/Sortable Column Headers" />
+
+## Sortable Column Headers
+
+The challenge in this example is to provide all of the necessary information about the interactive
+column headers, the sort state of the column, and instructions about how the table will be sorted
+without giving too much information to users while reading the data cells below.
+
+- The `aria-sort` property has been added to each of the `<Table.Header>` components (`<th>` DOM
+  element) and updated to `ascending` or `descending` to reflect the current sort state. We
+  recommend validating whether this property is well supported for your screen reader and browser
+  combinations first.
+- A `<TertiaryButton>` describing the column name is used inside of the `<Table.Header>` component.
+- The `description` variant of the Canvas `Tooltip` component is applied to the button in the column
+  header and applied to the accessible description of the button with the `aria-description`
+  property. This is used to describe how the column will be sorted when pressed and screen readers
+  will only read this description while focusing on the column headers, not while reading the data
+  cells below.
+
+<ExampleCodeBlock code={SortableColumnHeaders} />

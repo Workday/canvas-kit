@@ -9,15 +9,8 @@ const containerStyles = createStyles({
 
 export const StandaloneLink = () => (
   <div className={containerStyles}>
-    <Hyperlink variant="standalone" href="#standalone-hyperlink">
-      Standalone Hyperlink
+    <Hyperlink linkType="standalone" href="#standalone-hyperlink">
+      Hyperlink
     </Hyperlink>
-    <ExternalHyperlink
-      variant="standalone"
-      href="#standalone-external-hyperlink"
-      iconLabel="Opens new window"
-    >
-      Standalone External Hyperlink
-    </ExternalHyperlink>
   </div>
 );
