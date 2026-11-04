@@ -12,7 +12,9 @@ install is older and hands off to the upgrade path instead of applying current-g
 Most skills below are consumer-facing. For contributing a component **into the canvas-kit repo**
 itself (`modules/**/lib/**`, `system.legacy.*`, Chromatic class twins, publishing), use
 [`sana-canvas-kit-contribute-component`](sana-canvas-kit-contribute-component/SKILL.md) plus
-[STYLE.md](../STYLE.md) / [AGENTS.md](../AGENTS.md).
+[STYLE.md](../STYLE.md) / [AGENTS.md](../AGENTS.md). To review a maintainer branch or PR of this
+repo (code + a11y + CodeRabbit), use [`/pr-review`](../.cursor/commands/pr-review.md) — do not use
+[`sana-canvas-kit-review`](sana-canvas-kit-review/SKILL.md) on library source.
 
 ## Skills
 
@@ -29,6 +31,7 @@ itself (`modules/**/lib/**`, `system.legacy.*`, Chromatic class twins, publishin
 | [`sana-canvas-kit-builder`](sana-canvas-kit-builder/SKILL.md) | Building custom components with `createComponent`/`createContainer`/`createModelHook`/etc. | styling, tokens, a11y, design-principles |
 | [`sana-canvas-kit-review`](sana-canvas-kit-review/SKILL.md) | Report-only grep/checklist review of a diff/branch for design-system compliance | version, all of the above |
 | [`sana-canvas-kit-contribute-component`](sana-canvas-kit-contribute-component/SKILL.md) | **Maintainer-only:** add a component to this repo from a GitHub issue + Figma (collection models, Sana stencils, stories, tests, PR) | builder, styling, tokens, a11y |
+| [`sana-canvas-a11y-pr-review`](sana-canvas-a11y-pr-review/SKILL.md) | **Maintainer-only:** accessibility PR audit (WHCM, 320px reflow, ARIA, docs, tests); used by [`/pr-review`](../.cursor/commands/pr-review.md) | AGENTS.md Accessibility |
 
 ## How they fit together
 

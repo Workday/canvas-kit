@@ -12,12 +12,14 @@ import {useActionBarModel} from './useActionBarModel';
 export interface ActionBarItemProps {
   /**
    * The contents of the action item. This will be the accessible name of the action for screen readers.
+   * Omit it to render an icon-only button, and provide an `aria-label` instead.
    *
    * ```tsx
    * <ActionBar.Item>First Action</ActionBar.Item>
+   * <ActionBar.Item icon={trashIcon} aria-label="Delete" />
    * ```
    */
-  children: React.ReactNode;
+  children?: React.ReactNode;
   /**
    * The identifier of the action. This identifier will be used for correct overflow behavior.
    * If this property is not provided, it will default to a string representation

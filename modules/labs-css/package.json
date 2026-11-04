@@ -1,6 +1,6 @@
 {
   "name": "@workday/canvas-kit-labs-css",
-  "version": "16.2.4",
+  "version": "16.2.15",
   "type": "module",
   "description": "The parent module that contains all Workday Canvas Kit Labs CSS components",
   "author": "Workday, Inc. (https://www.workday.com)",
@@ -25,5 +25,8 @@
     "css",
     "components",
     "workday"
-  ]
+  ],
+  "publishConfig": {
+    "timeout": 300000
+  }
 }

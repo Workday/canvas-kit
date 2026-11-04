@@ -61,7 +61,7 @@ export function getServer() {
     'accessibility/tables/Overview.mdx': {
       title: 'Canvas Kit Table Accessibility',
       description:
-        'Index of Canvas Kit accessible table patterns, including when to use semantic tables and links to expandable rows, nested rows, selectable rows, filterable and sortable column headers, and tables with form fields.',
+        'Index of Canvas Kit accessible table patterns, including when to use semantic tables and links to expandable rows, nested rows, selectable rows, draggable rows, filterable and sortable column headers, and tables with form fields.',
       slug: 'tables',
     },
     'accessibility/tables/ExpandableRows.mdx': {
@@ -81,6 +81,12 @@ export function getServer() {
       description:
         'Guidance for row-selection checkboxes in tables: avoiding Select All as a column header, tooltip names, aria-describedby to row headers, and thead/tbody considerations.',
       slug: 'selectable-rows',
+    },
+    'accessibility/tables/DraggableRows.mdx': {
+      title: 'Canvas Kit Draggable Rows Table Pattern',
+      description:
+        'Guidance for reordering table rows with a dedicated drag handle: a visually hidden column header, unique button names, row headers, keyboard instructions, and live-region announcements. This is a research example, not a Canvas Kit primitive.',
+      slug: 'draggable-rows',
     },
     'accessibility/tables/FilterableColumnHeaders.mdx': {
       title: 'Canvas Kit Filterable Column Headers Table Pattern',
