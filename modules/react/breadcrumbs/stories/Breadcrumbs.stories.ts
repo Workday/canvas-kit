@@ -28,6 +28,7 @@ export const Basic: Story = {
 export const OverflowBreadcrumbs: Story = {
   // @ts-ignore Storybook doesn't allow the use of props within components
   render: OverflowBreadcrumbsExample,
+  parameters: {docs: {source: {type: 'code'}}},
 };
 export const RTLOverflowList: Story = {
   render: RTLOverflowListExample,
