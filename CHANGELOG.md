@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.16](https://github.com/Workday/canvas-kit/releases/tag/v16.2.16) (2026-11-04)
+
+### Components
+
+- fix(multi-select): Correct selected pill accessibility ([#4192](https://github.com/Workday/canvas-kit/pull/4192)) ([@minwookshin](https://github.com/minwookshin))
+
+
 ## [v15.1.20](https://github.com/Workday/canvas-kit/releases/tag/v15.1.20) (2026-11-04)
 
 ### Components
