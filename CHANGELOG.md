@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body is the last element ([#4229](https://github.com/Workday/canvas-kit/pull/4229)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` when it is the last element. Spacing is unchanged when a `Link` follows. Chromatic will show a visual diff on the "Only Body" states.
+
+
 ## [v15.1.20](https://github.com/Workday/canvas-kit/releases/tag/v15.1.20) (2026-11-04)
 
 ### Components
