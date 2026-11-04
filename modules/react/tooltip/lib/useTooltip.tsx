@@ -13,6 +13,8 @@ const useIntentTimer = (fn: Function, waitMs: number = 0): {start(): void; clear
   const timer = React.useRef() as React.MutableRefObject<number | undefined>;
 
   const start = () => {
+    // cancel any pending timeout so it cannot fire after this one replaces its ID
+    window.clearTimeout(timer.current);
     timer.current = window.setTimeout(fn, waitMs);
   };
 
@@ -48,6 +50,28 @@ const isInteractiveElement = (element: Element) => {
     default:
       return tabIndex ? Number(tabIndex) >= 0 : false;
   }
+};
+
+const nonTextInputTypes = [
+  'button',
+  'checkbox',
+  'color',
+  'file',
+  'image',
+  'radio',
+  'range',
+  'reset',
+  'submit',
+];
+
+const isTextEntryElement = (element: Element) => {
+  const tagName = element.tagName.toLowerCase();
+
+  if (tagName === 'textarea') {
+    return true;
+  }
+
+  return tagName === 'input' && !nonTextInputTypes.includes((element as HTMLInputElement).type);
 };
 
 /**
@@ -127,6 +151,19 @@ export function useTooltip<T extends Element = Element>({
     }
   };
 
+  // Keyboard activation of an interactive target dismisses the tooltip, matching `onMouseDown`.
+  // Text entry is excluded so typing Space or Enter in a field does not hide the tooltip.
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (
+      (event.key === 'Enter' || event.key === ' ') &&
+      isInteractiveElement(event.currentTarget) &&
+      !isTextEntryElement(event.target as Element)
+    ) {
+      intentTimerShow.clear();
+      popupModel.events.hide();
+    }
+  };
+
   useCloseOnEscape(popupModel);
   useAlwaysCloseOnOutsideClick(popupModel);
   useCloseOnFullscreenExit(popupModel);
@@ -143,6 +180,7 @@ export function useTooltip<T extends Element = Element>({
     onMouseEnter: onOpenFromTarget,
     onMouseLeave: onHide,
     onMouseDown,
+    onKeyDown,
     onFocus,
     onBlur: onHide,
   };

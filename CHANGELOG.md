@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v15.1.19](https://github.com/Workday/canvas-kit/releases/tag/v15.1.19) (2026-11-03)
+
+### Components
+
+- fix(tooltip): Dismiss tooltip when an interactive target is activated with the keyboard ([#4231](https://github.com/Workday/canvas-kit/pull/4231)) ([@jay23606](https://github.com/jay23606), [@claude](https://github.com/claude))
+
+
 ## [v15.1.18](https://github.com/Workday/canvas-kit/releases/tag/v15.1.18) (2026-11-02)
 
 ### Infrastructure
