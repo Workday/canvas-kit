@@ -187,7 +187,7 @@ export interface MultiSelectInputProps
   extends CSProps,
     Pick<
       React.InputHTMLAttributes<HTMLInputElement>,
-      'disabled' | 'className' | 'style' | 'aria-labelledby'
+      'disabled' | 'className' | 'style' | 'aria-label' | 'aria-labelledby'
     >,
     Pick<MultiSelectedItemProps, 'removeLabel'> {
   error?: ErrorType;
@@ -203,6 +203,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
       cs,
       style,
       error,
+      'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       removeLabel,
       disabled,
@@ -218,6 +219,7 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
           <InputGroup.Input
             data-part="user-input"
             as={Element}
+            aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
             readOnly
             disabled={disabled}
@@ -228,7 +230,12 @@ export const MultiSelectInput = createSubcomponent(TextInput)({
             <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
-        <MultiSelectedList disabled={disabled} removeLabel={removeLabel} />
+        <MultiSelectedList
+          disabled={disabled}
+          removeLabel={removeLabel}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+        />
       </div>
     );
   }
@@ -243,6 +250,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       className,
       cs,
       style,
+      'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       removeLabel,
       formInputProps,
@@ -251,7 +259,8 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
       error,
       ...elemProps
     },
-    Element
+    Element,
+    model
   ) => {
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
@@ -267,9 +276,11 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
           <InputGroup.Input
             data-part="user-input"
             as={Element}
+            aria-label={ariaLabel}
             aria-labelledby={ariaLabelledBy}
             disabled={disabled}
             error={error}
+            ref={model.state.searchInputRef}
             {...elemProps}
           />
           <InputGroup.InnerEnd width={system.legacy.size.xxxs}>
@@ -279,7 +290,12 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             <SystemIcon icon={caretDownSmallIcon} size="md" />
           </InputGroup.InnerEnd>
         </InputGroup>
-        <MultiSelectedList removeLabel={removeLabel} disabled={disabled} />
+        <MultiSelectedList
+          removeLabel={removeLabel}
+          disabled={disabled}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+        />
       </div>
     );
   }

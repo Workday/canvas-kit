@@ -23,15 +23,19 @@ import {useMultiSelectModel} from './useMultiSelectModel';
  */
 export const useMultiSelectItemRemove = createElemPropsHook(useMultiSelectModel)((model, _ref) => {
   return {
+    onFocus(event: React.FocusEvent<HTMLElement>) {
+      model.selected.events.goTo({id: event.currentTarget.dataset.id || ''});
+    },
     onKeyDown(event: React.KeyboardEvent<HTMLElement>) {
       if (event.key === 'Backspace' || event.key === 'Delete') {
+        event.preventDefault();
         const id = event.currentTarget.dataset.id || '';
         const nextId = listItemRemove(id, model.selected);
         model.selected.events.remove({id, event});
         if (nextId) {
           focusOnCurrentCursor(model.selected, nextId, event.currentTarget);
         } else {
-          model.state.inputRef.current?.focus();
+          (model.state.searchInputRef.current || model.state.inputRef.current)?.focus();
         }
       }
     },
@@ -42,7 +46,7 @@ export const useMultiSelectItemRemove = createElemPropsHook(useMultiSelectModel)
       if (nextId) {
         focusOnCurrentCursor(model.selected, nextId, event.currentTarget);
       } else {
-        model.state.inputRef.current?.focus();
+        (model.state.searchInputRef.current || model.state.inputRef.current)?.focus();
       }
     },
   };
