@@ -30,6 +30,8 @@ export const useMultiSelectModel = createModelHook({
   contextOverride: useComboboxModel.Context,
 })(config => {
   const cachedSelectedRef = React.useRef<Item<any>[]>([]);
+  // Search text is independent of the constrained form value, but still needs a focus target.
+  const searchInputRef = React.useRef<HTMLInputElement>(null);
   const model = useComboboxModel(
     useComboboxModel.mergeConfig(config, {
       onHide() {
@@ -61,7 +63,8 @@ export const useMultiSelectModel = createModelHook({
   );
   cachedSelectedRef.current = cachedSelected;
 
-  // The `listbox` of pills under the MultiSelect combobox input.
+  const visibleSelectedItems = model.state.visibility === 'hidden' ? cachedSelected : selectedItems;
+
   const selected = useListModel({
     orientation: 'horizontal',
     onRemove({id}) {
@@ -69,7 +72,7 @@ export const useMultiSelectModel = createModelHook({
       setSelectedItems(cachedSelected.filter(item => item.id !== id));
     },
     shouldVirtualize: false,
-    items: model.state.visibility === 'hidden' ? cachedSelected : selectedItems,
+    items: visibleSelectedItems,
   });
 
   return {
@@ -87,5 +90,6 @@ export const useMultiSelectModel = createModelHook({
       },
     },
     ...model,
+    state: {...model.state, searchInputRef},
   };
 });

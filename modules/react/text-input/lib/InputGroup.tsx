@@ -160,7 +160,7 @@ export const useClearButton = createElemPropsHook(useInputGroupModel)(model => {
   return {
     // This element does not need to be accessible via screen reader. The user can already clear
     // an input
-    role: 'presentation',
+    'aria-hidden': true,
     // A clear input button doesn't need focus. There's already keyboard keys to clear an input
     tabIndex: -1,
     icon: xSmallIcon as CanvasSystemIcon,
