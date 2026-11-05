@@ -55,8 +55,10 @@ Parameters:
 
 - `component` (optional) -- Canvas Kit component/story slug, such as `checkbox`, `table`, or
   `modal`.
-- `scenario` (optional) -- Accessibility scenario slug, such as `forms`, `tables`, `popups`, or
-  `page-structure`.
+- `scenario` (optional) -- Accessibility scenario slug, such as `forms`, `tables`,
+  `nested-rows`, `popups`, or `page-structure`. Requesting `tables` also returns the table
+  pattern pages (expandable/nested/selectable rows, filterable/sortable headers, and tables
+  with form fields).
 
 At least one of `component` or `scenario` is required.
 
@@ -68,6 +70,10 @@ Examples:
 
 ```json
 {"component": "table"}
+```
+
+```json
+{"scenario": "nested-rows"}
 ```
 
 ```json
@@ -102,7 +108,8 @@ Design token migration guides, color palette, roles, contrast, and scale documen
 ### `docs://accessibility/*`
 
 Accessibility guidance documentation for Canvas Kit scenarios, including overview, forms, page
-structure, tables, popups, ARIA live regions, headers, side panels, Windows High Contrast themes, and
+structure, tables (including expandable rows, nested rows, selectable rows, and filterable/sortable
+column headers), popups, ARIA live regions, headers, side panels, Windows High Contrast themes, and
 color contrast.
 
 ### `docs://examples/{slug}`

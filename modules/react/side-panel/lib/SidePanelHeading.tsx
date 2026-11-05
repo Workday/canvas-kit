@@ -23,7 +23,16 @@ export interface SidePanelHeadingProps extends Omit<ExtractProps<typeof Heading,
 export const sidePanelHeadingStencil = createStencil({
   extends: headingStencil,
   base: {
-    padding: system.legacy.padding.xs,
+    display: 'flex',
+    alignItems: 'center',
+    padding: system.legacy.padding.sm,
+    paddingInlineStart: system.legacy.padding.md,
+    minHeight: system.legacy.size.xxl,
+    margin: 0,
+    // `display` from this stencil outranks the user agent's `[hidden] {display: none}`
+    '&:where([hidden])': {
+      display: 'none',
+    },
   },
   modifiers: {
     origin: {

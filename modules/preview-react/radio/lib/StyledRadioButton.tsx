@@ -3,7 +3,7 @@ import React from 'react';
 import {ExtractProps, StyledType, createComponent} from '@workday/canvas-kit-react/common';
 import {Box, Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {CSProps, createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
-import {base, system} from '@workday/canvas-tokens-web';
+import {system} from '@workday/canvas-tokens-web';
 
 import {RadioLabelContext} from './RadioLabel';
 
@@ -17,23 +17,23 @@ export const radioInputStencil = createStencil({
   },
   base: {
     cursor: 'pointer',
-    height: base.legacy.size225,
-    width: base.legacy.size225,
+    height: system.legacy.size.xs,
+    width: system.legacy.size.xs,
     borderRadius: system.legacy.shape.full,
     position: 'absolute',
     margin: 0,
+    opacity: system.opacity.zero,
     '&:focus-visible, &.focus, &:active': {
-      outline: 'transparent',
+      outline: `${px2rem(1)} solid transparent`,
     },
     '&:disabled, &.disabled': {
       cursor: 'auto',
-      opacity: system.opacity.disabled,
       // This creates the inner circle when the Radio is checked.
       // The backgroundColor represents the dot in the middle of the radio.
       // The borderColor represents the border around the middle dot of the radio.
       '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
         backgroundColor: system.legacy.color.surface.default, // inner circle background color
-        border: `${px2rem(5)} solid ${system.legacy.color.brand.accent.primary}`, // inner circle border color
+        border: `${px2rem(5)} solid ${system.legacy.color.brand.accent.positive}`, // inner circle border color
       },
     },
 
@@ -45,8 +45,8 @@ export const radioInputStencil = createStencil({
       backgroundColor: system.color.bg.default,
       boxSizing: 'border-box',
       border: `${px2rem(1)} solid ${system.color.border.input.default}`,
-      height: base.legacy.size225,
-      width: base.legacy.size225,
+      height: system.legacy.size.xxxs,
+      width: system.legacy.size.xxxs,
       borderRadius: system.legacy.shape.full,
       justifyContent: 'center',
       pointerEvents: 'none',
@@ -69,7 +69,7 @@ export const radioInputStencil = createStencil({
     // The borderColor represents the border around the middle dot of the radio.
     '&:checked + .cnvs-radio-check, &.checked + .cnvs-radio-check': {
       backgroundColor: system.legacy.color.surface.default, // inner circle background color
-      border: `${px2rem(5)} solid ${system.legacy.color.brand.accent.primary}`, // inner circle border color
+      border: `${px2rem(5)} solid ${system.legacy.color.brand.accent.positive}`, // inner circle border color
     },
 
     '&:focus-visible:checked + .cnvs-radio-check, &:focus-visible:hover:checked + .cnvs-radio-check, &.focus:checked + .cnvs-radio-check, &.focus:hover:checked + .cnvs-radio-check':
@@ -96,7 +96,7 @@ export const radioInputStencil = createStencil({
           // The backgroundColor represents the dot in the middle of the radio.
           // The borderColor represents the border around the middle dot of the radio.
           [`&:checked + ${checkPart}, &.checked + ${checkPart}`]: {
-            backgroundColor: system.legacy.color.brand.accent.primary, // inner circle background color
+            backgroundColor: system.legacy.color.brand.accent.positive, // inner circle background color
             borderColor: system.legacy.color.border.inverse.default, // inner circle border color
           },
         },
@@ -135,29 +135,31 @@ const StyledRadioInput = createComponent('input')<StyledRadioButtonProps & Style
 
 export const radioInputWrapperStencil = createStencil({
   base: {
-    height: base.legacy.size225,
-    width: base.legacy.size225,
+    height: system.legacy.size.xxs,
+    width: system.legacy.size.xxs,
     flex: '0 0 auto',
+    alignItems: 'center',
+    justifyContent: 'center',
     // Hover Ripple element
     '::before': {
       content: "''",
       position: 'absolute',
       borderRadius: system.legacy.shape.full,
-      height: base.legacy.size225,
+      height: system.legacy.size.xxxs,
       transition: 'box-shadow 150ms ease-out',
-      width: base.legacy.size225,
+      width: system.legacy.size.xxxs,
       pointerEvents: 'none',
       opacity: system.opacity.full,
     },
     '&:hover:before, &.hover:before': {
-      boxShadow: `0 0 0 ${px2rem(7)} ${system.legacy.color.surface.overlay.hover.default}`,
+      boxShadow: `0 0 0 ${px2rem(4)} ${system.legacy.color.surface.overlay.hover.default}`,
     },
   },
   modifiers: {
     variant: {
       inverse: {
         '&:hover:before, &.hover:before': {
-          boxShadow: `0 0 0 ${px2rem(7)} ${system.legacy.color.surface.overlay.hover.inverse}`,
+          boxShadow: `0 0 0 ${px2rem(4)} ${system.legacy.color.surface.overlay.hover.inverse}`,
         },
       },
     },
