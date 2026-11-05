@@ -77,7 +77,7 @@ For each other file:
 
 Also check files that merged *cleanly* but belong with a conflicted one, especially new tests: tests added on `<src>` must still pass against `<dest>`'s implementation.
 
-**No conflicts, but the forward-merge job failed.** The workflow also opens these PRs when the merged result fails lint, depcheck, typecheck, unit tests, the Storybook build, or Cypress. Find the failure in the run linked from the PR body (`gh run view <run-id> --log-failed`), fix its cause, and run the matching check locally (`yarn lint`, `yarn depcheck`, `yarn typecheck`, `yarn test`) before pushing. Fix commits must amend the merge commit (`git commit --amend --no-edit`) and be force-pushed (`git push --force-with-lease upstream <mb>`) so CI re-runs verification.
+**No conflicts, but the forward-merge job failed.** The workflow also opens these PRs when the merged result fails lint, depcheck, typecheck, unit tests, the Storybook build, or Cypress. Find the failure in the run linked from the PR body (`gh run view <run-id> --log-failed`), fix its cause, and run the matching check locally (`yarn lint`, `yarn depcheck`, `yarn typecheck`, `yarn test`) before pushing. Fix commits must amend the merge commit (`git commit --amend --no-edit`), which means a force push so CI re-runs verification. Ask the user before force pushing (see step 5.5).
 
 ## 5. Verify and push
 
@@ -89,7 +89,8 @@ Also check files that merged *cleanly* but belong with a conflicted one, especia
    If `MERGE_HEAD` doesn't exist, skip this and go on. The pre-commit hook takes ~30s on a merge; don't use `--no-verify`.
 3. With nothing pending, re-fetch and make sure `<dest>` hasn't moved: `git fetch upstream && git log --oneline HEAD..upstream/<dest>`. A fix landing on `<dest>` triggers a release commit that changes `CHANGELOG.md`. If there are new commits, re-run the script (safe now, since no merge is pending; it merges `upstream/<dest>`), resolve anything left, and return to step 2. Don't run this check mid-merge: `HEAD` is then the `<src>` side and the list will always be non-empty.
 4. Confirm `git diff --stat upstream/<dest> HEAD` shows only what you expect (often just a `CHANGELOG.md` entry).
-5. Push: `git push upstream <mb>`. Amending the merge commit needs `git commit --amend --no-edit` and a force push.
+5. Push: `git push upstream <mb>`. A normal push is a fast-forward and needs no extra confirmation.
+   - **Ask the user before any force push.** Amending the merge commit (`git commit --amend --no-edit`) requires one. First tell them the branch (`<mb>`), the remote head you'd overwrite (`git rev-parse upstream/<mb>`), and why, and wait for a yes. Then use `git push --force-with-lease upstream <mb>`, never a bare `--force`.
 6. Wait ~10s (don't run in parallel with the push), then `gh pr view <n> --repo Workday/canvas-kit --json mergeable,mergeStateStatus,headRefOid`. `CONFLICTING` means `<dest>` moved again: go back to step 5.3. `BLOCKED` just means waiting on checks/approval.
 
 This PR must be merged with the merge strategy, never squash. The `automerge` label picks the right strategy.
