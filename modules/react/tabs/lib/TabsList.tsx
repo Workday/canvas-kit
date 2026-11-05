@@ -3,6 +3,7 @@ import * as React from 'react';
 import {
   ListRenderItemContext,
   isCursor,
+  orientationKeyMap,
   useOverflowListMeasure,
 } from '@workday/canvas-kit-react/collection';
 import {
@@ -19,7 +20,6 @@ import {Flex, mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
 
-import {orientationKeyMap} from '../../collection/lib/keyUtils';
 import {TABS_OVERFLOW_BUTTON_ID, useTabsModel} from './useTabsModel';
 
 export interface TabListProps<T = any> extends Omit<ExtractProps<typeof Flex, never>, 'children'> {
@@ -211,7 +211,7 @@ export const tabsListStencil = createStencil({
  * This is needed because the overflow button is included in the model's items array
  * for navigation purposes, but should not be rendered by the list render function.
  */
-function useTabsListRenderItems<T>(
+export function useTabsListRenderItems<T>(
   model: ReturnType<typeof useTabsModel>,
   children: ((item: Generic, index: number) => React.ReactNode) | React.ReactNode
 ): React.ReactNode {

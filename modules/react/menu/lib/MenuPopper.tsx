@@ -10,7 +10,7 @@ export const useMenuPopper = usePopupPopper;
 /**
  * The `[skidding, distance]` offset every menu popper sits at relative to its anchor.
  */
-export const menuPopperOffset: [number, number] = [0, 4];
+export const menuPopperOffset: [number, number] = [0, 8];
 
 // We moved this out of the component function to prevent rebuilding this object on re-renders.
 export const defaultMenuPopperOptions = {

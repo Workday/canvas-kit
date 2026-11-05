@@ -24,36 +24,30 @@ const items = [
 ];
 
 export const GroupedItems = () => {
-  const [selected, setSelected] = React.useState('');
-
   return (
-    <>
-      <FormField>
-        <FormField.Label>Contact</FormField.Label>
-        <FormField.Field>
-          <Select items={items} getId={item => item.id} getTextValue={item => item.text}>
-            <FormField.Input as={Select.Input} />
-            <Select.Popper>
-              <Select.Card>
-                <Select.List>
-                  <Menu.Group title="First Group">
-                    <Select.Item data-id="first">First Item</Select.Item>
-                    <Select.Item data-id="second">Second Item</Select.Item>
-                  </Menu.Group>
-                  <Menu.Group title="Second Group">
-                    <Select.Item data-id="third">
-                      Third Item (with a really, really, really long label)
-                    </Select.Item>
-                    <Select.Item aria-disabled data-id="fourth">
-                      Fourth Item
-                    </Select.Item>
-                  </Menu.Group>
-                </Select.List>
-              </Select.Card>
-            </Select.Popper>
-          </Select>
-        </FormField.Field>
-      </FormField>
-    </>
+    <FormField>
+      <FormField.Label>Contact</FormField.Label>
+      <FormField.Field>
+        <Select items={items} getId={item => item.id} getTextValue={item => item.text}>
+          <FormField.Input as={Select.Input} />
+          <Select.Popper>
+            <Select.Card>
+              <Select.List>
+                <Menu.Group title="First Group">
+                  <Select.Item data-id="first">First Item</Select.Item>
+                  <Select.Item data-id="second">Second Item</Select.Item>
+                </Menu.Group>
+                <Menu.Group title="Second Group">
+                  <Select.Item data-id="third">
+                    Third Item (with a really, really, really long label)
+                  </Select.Item>
+                  <Select.Item data-id="fourth">Fourth Item</Select.Item>
+                </Menu.Group>
+              </Select.List>
+            </Select.Card>
+          </Select.Popper>
+        </Select>
+      </FormField.Field>
+    </FormField>
   );
 };

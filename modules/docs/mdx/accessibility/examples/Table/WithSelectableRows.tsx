@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {Checkbox} from '@workday/canvas-kit-react/checkbox';
-import {createComponent, generateUniqueId} from '@workday/canvas-kit-react/common';
+import {createComponent, generateUniqueId, useUniqueId} from '@workday/canvas-kit-react/common';
 import {Table} from '@workday/canvas-kit-react/table';
 import {Heading} from '@workday/canvas-kit-react/text';
 import {Tooltip} from '@workday/canvas-kit-react/tooltip';
@@ -38,14 +38,16 @@ interface SelectableRowProps {
 const SelectableRow = createComponent('tr')({
   displayName: 'SelectableRow',
   Component: ({onSelect, rowData}: SelectableRowProps) => {
+    const rowNameId = useUniqueId();
+
     return (
       <Table.Row cs={selectableRowStencil({isSelected: rowData.checked})}>
         <Table.Cell cs={tableCellStyles}>
-          <Tooltip title={rowData.name}>
-            <Checkbox checked={rowData.checked} onChange={onSelect} />
+          <Tooltip title="Select Row">
+            <Checkbox checked={rowData.checked} onChange={onSelect} aria-describedby={rowNameId} />
           </Tooltip>
         </Table.Cell>
-        <Table.Header cs={tableCellStyles} scope="row">
+        <Table.Header id={rowNameId} cs={tableCellStyles} scope="row">
           {rowData.name}
         </Table.Header>
         <Table.Cell cs={tableCellStyles}>{rowData.amount}</Table.Cell>

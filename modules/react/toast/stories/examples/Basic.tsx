@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 export const Basic = () => {
   return (
     <Toast>
-      <Toast.Icon icon={checkIcon} color={system.color.fg.success.default} />
+      <Toast.Icon icon={checkIcon} color={system.color.brand.fg.positive.default} />
       <Toast.Body>
         <Toast.Message>Your workbook was successfully processed.</Toast.Message>
       </Toast.Body>

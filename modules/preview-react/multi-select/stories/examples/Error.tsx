@@ -1,5 +1,3 @@
-import React from 'react';
-
 import {MultiSelect, useMultiSelectModel} from '@workday/canvas-kit-preview-react/multi-select';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 

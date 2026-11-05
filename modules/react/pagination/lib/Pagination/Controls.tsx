@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {TertiaryButton} from '@workday/canvas-kit-react/button';
 import {ExtractProps, createComponent} from '@workday/canvas-kit-react/common';
+import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {mergeStyles} from '@workday/canvas-kit-react/layout';
 import {createStencil} from '@workday/canvas-kit-styling';
 import {
@@ -10,7 +11,7 @@ import {
   chevronLeftSmallIcon,
   chevronRightSmallIcon,
 } from '@workday/canvas-system-icons-web';
-import {system} from '@workday/canvas-tokens-web';
+import {component, system} from '@workday/canvas-tokens-web';
 
 import {PaginationContext} from './usePaginationModel';
 
@@ -30,6 +31,10 @@ export const paginationControlsStencil = createStencil({
 
 const controlButtonStencil = createStencil({
   base: {
+    '& > span': {
+      [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+      [systemIconStencil.vars.color]: system.color.fg.strong,
+    },
     '&:dir(rtl)': {
       '& .wd-icon': {
         transform: 'scaleX(-1)',

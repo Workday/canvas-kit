@@ -11,6 +11,15 @@ describe('MultiSelect', () => {
       cy.checkA11y({include: ['form > main > *']});
     });
 
+    context('when Enter is pressed before typing', () => {
+      it('should keep the listbox hidden', () => {
+        cy.findByRole('combobox', {name: 'Fruits'}).focus().realPress('Enter');
+        cy.findByRole('combobox', {name: 'Fruits'}).should('have.attr', 'aria-expanded', 'false');
+        cy.findByRole('listbox').should('not.exist');
+        cy.checkA11y({include: ['[role="combobox"]']});
+      });
+    });
+
     context('when options have been selected', () => {
       beforeEach(() => {
         cy.findByRole('combobox', {name: 'Fruits'}).focus().realPress('ArrowDown');
@@ -97,9 +106,7 @@ describe('MultiSelect', () => {
 
     context('when search text is entered using the keyboard', () => {
       beforeEach(() => {
-        cy.findByRole('combobox', {name: 'Fruits'}).focus().realPress('ArrowDown');
-        cy.findByRole('option', {name: 'Red Apple 1'}).should('be.visible');
-        cy.findByRole('combobox', {name: 'Fruits'}).realType('apple');
+        cy.findByRole('combobox', {name: 'Fruits'}).focus().realType('apple{enter}');
       });
 
       it('should not have any axe errors', () => {

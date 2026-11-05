@@ -1,0 +1,42 @@
+import {Meta} from '@storybook/blocks';
+
+import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
+
+import {DraggableRows} from '../examples/Table/WithDraggableRows';
+
+<Meta title="Guides/Accessibility/Table Patterns/Draggable Rows" />
+
+## Draggable Rows
+
+Draggable Rows reorders records in a table. Pointer users drag the move handle in the first column,
+or open Row actions in the last column and choose Move to top, Move up, Move down, or Move to
+bottom. That menu is a single-pointer alternative to dragging
+([WCAG 2.5.7 Dragging Movements](https://www.w3.org/WAI/WCAG22/Understanding/dragging-movements.html)).
+Keyboard users focus the move handle, press Space or Enter to pick the row up, use the Up and Down
+Arrow keys to move it, then press Space or Enter to drop it. Escape cancels the move and returns the
+row to its previous position. The menu is also available from the keyboard.
+
+This example uses `@dnd-kit` for the pointer and keyboard drag. `Table` has no reorder behavior.
+Validate the screen reader and browser combinations you support. This is a research example, not a
+Canvas Kit primitive.
+
+- The first column is the move handle. Its header is the visually hidden text "Reorder" on a
+  `Table.Header` with `scope="col"`.
+- Each handle is a `TertiaryButton` named `Move row {employee name}`. The `Tooltip` uses
+  `type="muted"` and the title "Move row", so hover shows that title and the accessible name stays
+  `Move row {employee name}`.
+- The last column is the row actions menu. Its header is the visually hidden text "Actions" on a
+  `Table.Header` with `scope="col"`. Each control is a `TertiaryButton` named "Row actions" by a
+  `Tooltip` with `type="label"`. `aria-describedby` points at the row header, so the employee name
+  is the button's description. Move to top and Move up are disabled on the first row. Move down and
+  Move to bottom are disabled on the last row. A menu move is announced in a visually hidden
+  assertive live region. A drag is announced by `@dnd-kit`. The "Screen reader feedback" text above
+  the table repeats those messages and is not a live region.
+- The employee name is the row header (`Table.Header` with `scope="row"`), so screen readers can
+  announce it with the other cells in the row.
+- A picked-up row stays in the table and moves only with a transform. It uses a popover surface, a
+  level 5 shadow, a gray outline, and a slight tilt, and it paints above the other rows. The handle
+  cursor changes from grab to grabbing. Keyboard users rely on this treatment, because no pointer is
+  attached to the row.
+
+<ExampleCodeBlock code={DraggableRows} />

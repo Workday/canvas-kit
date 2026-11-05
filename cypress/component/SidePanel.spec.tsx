@@ -50,8 +50,27 @@ describe('Side Panel', () => {
         });
 
         context('the button', () => {
-          it(`should have an aria-pressed attribute of 'false'`, () => {
+          it(`should still have an aria-pressed attribute of 'false' while collapsing`, () => {
             cy.findByRole('button', {name}).should('have.attr', 'aria-pressed', 'false');
+          });
+        });
+
+        context(`when the panel's width transition finishes`, () => {
+          beforeEach(() => {
+            // Transitions are disabled for Cypress in `component-index.html`, so the width
+            // transition never runs and `transitionend` never fires on its own. Dispatch it so the
+            // model settles from `collapsing` into `collapsed`. `eventConstructor` matters here:
+            // the default `Event` cannot carry `propertyName`, which the model checks for.
+            cy.findByRole(story.role, {name}).trigger('transitionend', {
+              eventConstructor: 'TransitionEvent',
+              propertyName: 'width',
+            });
+          });
+
+          context('the button', () => {
+            it(`should have an aria-pressed attribute of 'true'`, () => {
+              cy.findByRole('button', {name}).should('have.attr', 'aria-pressed', 'true');
+            });
           });
         });
       });
