@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.20](https://github.com/Workday/canvas-kit/releases/tag/v16.2.20) (2026-11-05)
+
+### Infrastructure
+
+- chore: Add resolve-forward-merge skill ([#4239](https://github.com/Workday/canvas-kit/pull/4239)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v15.1.22](https://github.com/Workday/canvas-kit/releases/tag/v15.1.22) (2026-11-05)
 
 ### Infrastructure
