@@ -46,13 +46,16 @@ git fetch upstream
 git checkout --track upstream/<mb>
 git pull upstream <mb> -f
 git pull upstream <src>
+# If the pull above reports conflicts, stop. Do not run the script.
 node utils/forward-merge.js
 ```
 
+- If you're currently on `<mb>`, run `git checkout --detach` first. `git branch -D` can't delete the checked-out branch, and `git checkout --track` fails while a local `<mb>` exists.
 - Before `git branch -D <mb>`, check a stale local copy has nothing unique: `git branch -r --contains <local sha>` should list upstream branches.
+- **If `git pull upstream <src>` conflicts, stop and don't run the script.** Git is mid-merge on a branch named `merge/...`, so the script treats it as already merging and runs a second `git merge` that Git rejects. It reads the empty output as zero conflicts and can commit the conflict markers. Resolve those conflicts, or `git merge --abort` and restart.
 - The script auto-resolves `lerna.json`, `package.json` files, and `CHANGELOG.md`; `yarn.lock` is left to yarn.
 - It exits at `yarn install` before committing. If that fails with `unable to get local issuer certificate`, this is an agent-shell network issue, not a merge problem. Never disable SSL checks. Skip it if `git diff upstream/<dest> -- yarn.lock 'modules/*/package.json'` is empty; otherwise ask the user to run `yarn` in their own terminal.
-- **Never re-run the script mid-merge** (it starts a second merge). To start over: `git merge --abort`, then redo from `git branch -D`.
+- **Never re-run the script mid-merge** (it starts a second merge). To start over: `git merge --abort`, `git checkout --detach` (so `<mb>` is no longer checked out), then redo from `git branch -D <mb>`.
 
 ## 4. Resolve conflicts
 
@@ -66,19 +69,27 @@ List what's left: `git diff --name-only --diff-filter=U`. In this merge `<dest>`
 For each other file:
 
 1. **Find the fix on `<dest>`.** Look at the commit(s) from `<src>` that touched the file (`git log upstream/<dest>..upstream/<src> -- <file>`), then search `<dest>` for the same fix (PR/issue number, similar subject, `git diff upstream/<dest> upstream/<src> -- <file>`).
-2. **Fix already on `<dest>`, or `<dest>` restructured the code** (different implementation, same intent): `<dest>` wins. `git checkout --theirs -- <file> && git add <file>`.
+2. **Fix already on `<dest>`, or `<dest>` restructured the code** (different implementation, same intent): `<dest>` wins for the conflicting parts. First see everything `<src>` changed in the file: `git diff $(git merge-base upstream/<src> upstream/<dest>) upstream/<src> -- <file>`.
+   - If the only `<src>` change is the superseded fix, take the whole file: `git checkout --theirs -- <file> && git add <file>`.
+   - If `<src>` also made unrelated changes that merged cleanly, `--theirs` would discard them. Restore the conflict markers with `git checkout --merge -- <file>`, resolve only the conflicting hunks in favor of `<dest>`, then `git add <file>`.
 3. **Fix is missing on `<dest>`:** stop. Abort the merge (`git merge --abort`), tell the user the `<dest>` equivalent must land first, and why. Otherwise tests added on `<src>` will fail on `<dest>`.
 4. **Truly independent changes to the same lines:** show the user both sides and the intent of each commit (use AskQuestion for the choice), then edit by hand.
 
 Also check files that merged *cleanly* but belong with a conflicted one, especially new tests: tests added on `<src>` must still pass against `<dest>`'s implementation.
 
+**No conflicts, but the forward-merge job failed.** The workflow also opens these PRs when the merged result fails lint, depcheck, typecheck, unit tests, the Storybook build, or Cypress. Find the failure in the run linked from the PR body (`gh run view <run-id> --log-failed`), fix its cause, and run the matching check locally (`yarn lint`, `yarn depcheck`, `yarn typecheck`, `yarn test`) before pushing. Fix commits must amend the merge commit (`git commit --amend --no-edit`) and be force-pushed (`git push --force-with-lease upstream <mb>`) so CI re-runs verification.
+
 ## 5. Verify and push
 
 1. Sanity check: `git diff --name-only --diff-filter=U` is empty, and no conflict markers (`git grep -n -E '^(<<<<<<<|>>>>>>>)'`).
-2. Re-fetch and make sure `<dest>` hasn't moved: `git fetch upstream && git log --oneline HEAD..upstream/<dest>`. A fix landing on `<dest>` triggers a release commit that changes `CHANGELOG.md`. If there are new commits, merge them in (re-run the script on the current branch; it merges `upstream/<dest>`) and repeat.
-3. Commit: `git add . && git commit -m "chore: Merge <src> into <dest>"` (the pre-commit hook takes ~30s on a merge; don't use `--no-verify`).
+2. Commit the merge only if it's still pending. A clean merge commits itself, and the script commits auto-resolved conflicts after a successful `yarn install`, so an unconditional commit can fail with "nothing to commit":
+   ```
+   git rev-parse -q --verify MERGE_HEAD >/dev/null && git add . && git commit -m "chore: Merge <src> into <dest>"
+   ```
+   If `MERGE_HEAD` doesn't exist, skip this and go on. The pre-commit hook takes ~30s on a merge; don't use `--no-verify`.
+3. With nothing pending, re-fetch and make sure `<dest>` hasn't moved: `git fetch upstream && git log --oneline HEAD..upstream/<dest>`. A fix landing on `<dest>` triggers a release commit that changes `CHANGELOG.md`. If there are new commits, re-run the script (safe now, since no merge is pending; it merges `upstream/<dest>`), resolve anything left, and return to step 2. Don't run this check mid-merge: `HEAD` is then the `<src>` side and the list will always be non-empty.
 4. Confirm `git diff --stat upstream/<dest> HEAD` shows only what you expect (often just a `CHANGELOG.md` entry).
 5. Push: `git push upstream <mb>`. Amending the merge commit needs `git commit --amend --no-edit` and a force push.
-6. Wait ~10s (don't run in parallel with the push), then `gh pr view <n> --repo Workday/canvas-kit --json mergeable,mergeStateStatus,headRefOid`. `CONFLICTING` means `<dest>` moved again: go back to step 5.2. `BLOCKED` just means waiting on checks/approval.
+6. Wait ~10s (don't run in parallel with the push), then `gh pr view <n> --repo Workday/canvas-kit --json mergeable,mergeStateStatus,headRefOid`. `CONFLICTING` means `<dest>` moved again: go back to step 5.3. `BLOCKED` just means waiting on checks/approval.
 
 This PR must be merged with the merge strategy, never squash. The `automerge` label picks the right strategy.
