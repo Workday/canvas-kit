@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.18](https://github.com/Workday/canvas-kit/releases/tag/v16.2.18) (2026-11-05)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body or Heading is the last element ([#4230](https://github.com/Workday/canvas-kit/pull/4230)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` and `InformationHighlight.Heading` when they are the last element. Spacing is unchanged when other content follows. Chromatic will show a visual diff on the "Only Heading" and "Only Body" states.
+
+
 ## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
 
 ### Components
