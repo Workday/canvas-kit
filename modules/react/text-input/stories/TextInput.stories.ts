@@ -11,6 +11,7 @@ import {LabelPosition as LabelPositionExample} from './examples/LabelPosition';
 import {Placeholder as PlaceholderExample} from './examples/Placeholder';
 import {RefForwarding as RefForwardingExample} from './examples/RefForwarding';
 import {Required as RequiredExample} from './examples/Required';
+import {StandaloneGrow as StandaloneGrowExample} from './examples/StandaloneGrow';
 
 export default {
   title: 'Components/Inputs/Text Input',
@@ -33,6 +34,9 @@ export const Disabled: Story = {
 };
 export const Grow: Story = {
   render: GrowExample,
+};
+export const StandaloneGrow: Story = {
+  render: StandaloneGrowExample,
 };
 export const LabelPosition: Story = {
   render: LabelPositionExample,
