@@ -1,0 +1,394 @@
+import{j as i}from"./jsx-runtime-Bu6AqWCO.js";import{useMDXComponents as P}from"./index-3YbjYt95.js";import{ae as D}from"./index-BTewJVIB.js";import{E as o,c as R}from"./union-CWNVRhjM.js";import{S as F}from"./Specifications-wTjAvSN5.js";import{r as V}from"./index-IfJi-UCQ.js";import{B as W}from"./Box-DNrttudE.js";import{g as r}from"./index-C_4iH04t.js";import{F as h}from"./Flex-CSKuB8Eg.js";import{I as e}from"./InformationHighlight-C8Tlqb22.js";import{T as H}from"./Text-B-az9lgp.js";import{S as a}from"./SegmentedControl-Clsuqo7F.js";import{b as C}from"./bar-chart-Cu39Kmxt.js";import{c as T}from"./cs-CmRirKzJ.js";import{C as l}from"./CanvasProvider-wRa9Af4a.js";import"./iframe-BpI0TQGq.js";import"../sb-preview/runtime.js";import"./index-BDZ5T_cP.js";import"./index-CDT9hUPM.js";import"./index-BfFTulA3.js";import"./index-Rq9y6XjC.js";import"./sparkle-CvCkjYNC.js";import"./types-wqmYQQWa.js";import"./SystemIcon-D383ry7W.js";import"./Svg-YYj-hmuy.js";import"./px2rem-C0KbprIx.js";import"./components-BZZbendq.js";import"./StatusIndicator-B8jyF6Cm.js";import"./mergeStyles-BrOzO49v.js";import"./flex-DLEP31EQ.js";import"./grid-DWoMPrqj.js";import"./cornerShape-CpTbNqpe.js";import"./Card-CE7R42ky.js";import"./document-Bmp3YBI-.js";import"./ExternalHyperlink-UWSN-oYk.js";import"./Hyperlink-DmBLDRD6.js";import"./external-link-ChL2h1Cn.js";import"./SecondaryButton-DTfVcNph.js";import"./BaseButton-qatokQZh.js";import"./Button-Bb-9X2_s.js";import"./lerna-0SPvVc4r.js";import"./emotion-element-699e6908.browser.esm-CCgPGf3R.js";import"./Tooltip-BcHkFI8E.js";import"./useTooltip-ggS7GWRg.js";import"./getTransformFromPlacement-C8z0KlTw.js";import"./useDisclosureModel-ySjWLcPL.js";import"./models-CHTjB2ql.js";import"./useUniqueId-BoA5684E.js";import"./useConstant-B_SD0x5s.js";import"./useCloseOnEscape-BTQA5nou.js";import"./Popper-BGpHDNvg.js";import"./isElementRTL-lizwOp5U.js";import"./TertiaryButton-CLwGezHZ.js";import"./index-CFEs8r9D.js";import"./TypeLevelComponents-CJ_xnz7G.js";import"./ColorPicker-4Ttc9WWI.js";import"./ColorInput-B49zKvT2.js";import"./check-small-BqSDQIle.js";import"./index-BR_jJr7N.js";import"./TextInput-tfKmqQGS.js";import"./types-DXdjelYI.js";import"./FormField-PbmSf9Fx.js";import"./check-Ds6vsrAM.js";import"./Expandable-DoJHc5m4.js";import"./Avatar-BA9kbUop.js";import"./chevron-up-CAo1sqci.js";import"./Dialog-Ct1V3OJb.js";import"./Popup-CcIfSHXM.js";import"./x-B1faap_l.js";import"./usePopupTarget-D7LypT8H.js";import"./useInitialFocus-C2C4yxbj.js";import"./useReturnFocus-DN6tr14e.js";import"./useFocusRedirect-Drl4v-g8.js";import"./Breadcrumbs-CwcN52Gf.js";import"./useOverflowListItemMeasure-D98g6Wvx.js";import"./useListItemRegister-C3SogmsT.js";import"./useMount-CAK2BN3_.js";import"./bundle.esm-C4XAbbi1.js";import"./Menu-BmGbD5Rc.js";import"./OverflowTooltip-CDNsrqTs.js";import"./useListItemRovingFocus-B-Rv_2Gj.js";import"./useListItemSelect-BhYGOYL5.js";import"./chevron-right-small-Ng-H0z5q.js";import"./related-actions-BBat1SFr.js";import"./useOverflowListTarget-CGfUTzFN.js";import"./Table-Ba7Cr2JQ.js";import"./exclamation-circle-BNuxaliX.js";import"./exclamation-triangle-BLgzpFfC.js";import"./info-DJgWrsaO.js";import"./layers-BWn7B7pb.js";const u=()=>i.jsxs(e,{children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Information Highlight"}),i.jsxs(e.Body,{children:[" ","This is what an information highlight looks like with the default `variant` and `emphasis` and every field filled in"," "]}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]});u.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
+export const Basic = () => {
+  return (
+    <InformationHighlight>
+      <InformationHighlight.Icon />
+      <InformationHighlight.Heading>Information Highlight</InformationHighlight.Heading>
+      <InformationHighlight.Body>
+        {' '}
+        This is what an information highlight looks like with the default \`variant\` and \`emphasis\`
+        and every field filled in{' '}
+      </InformationHighlight.Body>
+      <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+    </InformationHighlight>
+  );
+};
+`;const y=()=>i.jsx(e,{children:i.jsx(e.Body,{children:"Only the body of an information highlight"})});y.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
+export const Body = () => {
+  return (
+    <InformationHighlight>
+      <InformationHighlight.Body>
+        Only the body of an information highlight
+      </InformationHighlight.Body>
+    </InformationHighlight>
+  );
+};
+`;const j=()=>i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsxs(e,{variant:"caution",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:" Caution: Highlight Something "}),i.jsx(e.Body,{children:"If you select the link below, nothing will happen"}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]}),i.jsxs(e,{variant:"caution",emphasis:"high",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:" Caution: Highlight Something "}),i.jsx(e.Body,{children:"If you select the link below, nothing will happen"}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]})]});j.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+
+export const Caution = () => {
+  return (
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+      <InformationHighlight variant={'caution'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          If you select the link below, nothing will happen
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+      <InformationHighlight variant={'caution'} emphasis={'high'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading> Caution: Highlight Something </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          If you select the link below, nothing will happen
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+    </Flex>
+  );
+};
+`;const k=()=>i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsxs(e,{variant:"critical",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Attention! Highlight Something"}),i.jsx(e.Body,{children:"If you select the link below it will reroute you back to this page."}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]}),i.jsxs(e,{variant:"critical",emphasis:"high",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Attention! Highlight Something"}),i.jsx(e.Body,{children:"If you select the link below it will reroute you back to this page."}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]})]});k.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+
+export const Critical = () => {
+  return (
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+      <InformationHighlight variant={'critical'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          If you select the link below it will reroute you back to this page.
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+      <InformationHighlight variant={'critical'} emphasis={'high'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading>Attention! Highlight Something</InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          If you select the link below it will reroute you back to this page.
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+    </Flex>
+  );
+};
+`;const w=()=>{const[t,n]=V.useState("100%");return i.jsxs("div",{children:[i.jsx(W,{cs:{width:t,marginBlockEnd:r.lg},children:i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsxs(e,{variant:"informational",actionPlacement:"end",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Informational Highlight"}),i.jsx(e.Body,{children:i.jsx(H,{cs:{margin:0},children:'With `actionPlacement="end"`, the link renders beside the content, vertically centered at the inline end. DOM and keyboard tab order stay heading, body, then link.'})}),i.jsx(e.Link,{href:"#hyperlink",children:"Learn More"})]}),i.jsxs(e,{variant:"caution",emphasis:"high",actionPlacement:"end",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Caution Highlight"}),i.jsx(e.Body,{children:i.jsx(H,{cs:{margin:0},children:"Action placement works across variants and emphasis levels."})}),i.jsx(e.Link,{href:"#hyperlink",children:"Learn More"})]}),i.jsxs(e,{variant:"informational",actionPlacement:"end",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"Long link label"}),i.jsx(e.Body,{children:i.jsx(H,{cs:{margin:0},children:"In narrow layouts or with longer link labels, the link appears below the body, aligned to the inline end."})}),i.jsx(e.Link,{href:"#hyperlink",children:"View supplementary documentation and configuration information"})]})]})}),i.jsx("h4",{children:"Change Information Highlight container size"}),i.jsx(a,{initialValue:"100%",onSelect:A=>n(A.id),children:i.jsxs(a.List,{"aria-label":"container width control",cs:{marginBlockEnd:r.lg},children:[i.jsx(a.Item,{"data-id":"100%",children:"100%"}),i.jsx(a.Item,{"data-id":"480px",children:"480px"}),i.jsx(a.Item,{"data-id":"320px",children:"320px"}),i.jsx(a.Item,{"data-id":"250px",children:"250px"})]})}),i.jsxs("p",{children:["Selected: ",t]})]})};w.__RAW__=`import * as React from 'react';
+
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Box, Flex} from '@workday/canvas-kit-react/layout';
+import {SegmentedControl} from '@workday/canvas-kit-react/segmented-control';
+import {Text} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+export const ActionPlacementEnd = () => {
+  const [containerWidth, setContainerWidth] = React.useState('100%');
+
+  return (
+    <div>
+      <Box cs={{width: containerWidth, marginBlockEnd: system.gap.lg}}>
+        <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+          <InformationHighlight variant="informational" actionPlacement="end">
+            <InformationHighlight.Icon />
+            <InformationHighlight.Heading>Informational Highlight</InformationHighlight.Heading>
+            <InformationHighlight.Body>
+              <Text cs={{margin: 0}}>
+                With \`actionPlacement="end"\`, the link renders beside the content, vertically
+                centered at the inline end. DOM and keyboard tab order stay heading, body, then
+                link.
+              </Text>
+            </InformationHighlight.Body>
+            <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
+          </InformationHighlight>
+          <InformationHighlight variant="caution" emphasis="high" actionPlacement="end">
+            <InformationHighlight.Icon />
+            <InformationHighlight.Heading>Caution Highlight</InformationHighlight.Heading>
+            <InformationHighlight.Body>
+              <Text cs={{margin: 0}}>
+                Action placement works across variants and emphasis levels.
+              </Text>
+            </InformationHighlight.Body>
+            <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
+          </InformationHighlight>
+          <InformationHighlight variant="informational" actionPlacement="end">
+            <InformationHighlight.Icon />
+            <InformationHighlight.Heading>Long link label</InformationHighlight.Heading>
+            <InformationHighlight.Body>
+              <Text cs={{margin: 0}}>
+                In narrow layouts or with longer link labels, the link appears below the body,
+                aligned to the inline end.
+              </Text>
+            </InformationHighlight.Body>
+            <InformationHighlight.Link href="#hyperlink">
+              View supplementary documentation and configuration information
+            </InformationHighlight.Link>
+          </InformationHighlight>
+        </Flex>
+      </Box>
+      <h4>Change Information Highlight container size</h4>
+      <SegmentedControl initialValue="100%" onSelect={data => setContainerWidth(data.id)}>
+        <SegmentedControl.List
+          aria-label="container width control"
+          cs={{marginBlockEnd: system.gap.lg}}
+        >
+          <SegmentedControl.Item data-id="100%">100%</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="480px">480px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="320px">320px</SegmentedControl.Item>
+          <SegmentedControl.Item data-id="250px">250px</SegmentedControl.Item>
+        </SegmentedControl.List>
+      </SegmentedControl>
+      <p>Selected: {containerWidth}</p>
+    </div>
+  );
+};
+`;const v=()=>i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsxs(e,{variant:"critical",emphasis:"low",children:[i.jsx(e.Icon,{icon:C}),i.jsx(e.Heading,{children:" Attention! Custom Highlight "}),i.jsx(e.Body,{children:"A custom Icon can be added to the Information Highlight component"}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]}),i.jsxs(e,{variant:"critical",emphasis:"high",children:[i.jsx(e.Icon,{icon:C}),i.jsx(e.Heading,{children:" Attention! Custom Highlight "}),i.jsx(e.Body,{children:"A custom Icon can be added to the Information Highlight component"}),i.jsx(e.Link,{href:"#hyperlink",children:"View the Docs"})]})]});v.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {barChartIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
+
+export const IconCritical = () => {
+  return (
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+      <InformationHighlight variant={'critical'} emphasis={'low'}>
+        <InformationHighlight.Icon icon={barChartIcon} />
+        <InformationHighlight.Heading> Attention! Custom Highlight </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          A custom Icon can be added to the Information Highlight component
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+      <InformationHighlight variant={'critical'} emphasis={'high'}>
+        <InformationHighlight.Icon icon={barChartIcon} />
+        <InformationHighlight.Heading> Attention! Custom Highlight </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          A custom Icon can be added to the Information Highlight component
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">View the Docs</InformationHighlight.Link>
+      </InformationHighlight>
+    </Flex>
+  );
+};
+`;const b=()=>i.jsx(e,{children:i.jsx(e.Heading,{children:" Only Heading "})});b.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+
+export const Heading = () => {
+  return (
+    <InformationHighlight>
+      <InformationHighlight.Heading> Only Heading </InformationHighlight.Heading>
+    </InformationHighlight>
+  );
+};
+`;const S=T({margin:0}),_=T({listStyle:"inside",marginInlineStart:0,marginBlockStart:r.sm,marginBlockEnd:0,padding:0}),B=()=>i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsxs(e,{variant:"informational",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:" Informational Highlight "}),i.jsxs(e.Body,{children:[i.jsx("p",{className:S,children:"This is a low-emphasis, informational callout. You should use this for nice-to-have information, such as:"}),i.jsxs("ul",{className:_,children:[i.jsx("li",{children:"tangential information or context"}),i.jsx("li",{children:"related features"}),i.jsx("li",{children:"additional opportunities"})]})]}),i.jsx(e.Link,{href:"#hyperlink",children:"Learn More"})]}),i.jsxs(e,{variant:"informational",emphasis:"high",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:" Informational Highlight "}),i.jsxs(e.Body,{children:[i.jsx("p",{className:S,children:"This is a high-emphasis, informational callout. You should use this for nice-to-have information, such as:"}),i.jsxs("ul",{className:_,children:[i.jsx("li",{children:"tangential information or context"}),i.jsx("li",{children:"related features"}),i.jsx("li",{children:"additional opportunities"})]})]}),i.jsx(e.Link,{href:"#hyperlink",children:"Learn More"})]})]});B.__RAW__=`import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const contentTextStyles = createStyles({
+  margin: 0,
+});
+
+const contentListStyles = createStyles({
+  listStyle: 'inside',
+  marginInlineStart: 0,
+  marginBlockStart: system.gap.sm,
+  marginBlockEnd: 0,
+  padding: 0,
+});
+
+export const Informational = () => {
+  return (
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+      <InformationHighlight variant={'informational'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          <p className={contentTextStyles}>
+            This is a low-emphasis, informational callout. You should use this for nice-to-have
+            information, such as:
+          </p>
+          <ul className={contentListStyles}>
+            <li>tangential information or context</li>
+            <li>related features</li>
+            <li>additional opportunities</li>
+          </ul>
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
+      </InformationHighlight>
+      <InformationHighlight variant={'informational'} emphasis={'high'}>
+        <InformationHighlight.Icon />
+        <InformationHighlight.Heading> Informational Highlight </InformationHighlight.Heading>
+        <InformationHighlight.Body>
+          <p className={contentTextStyles}>
+            This is a high-emphasis, informational callout. You should use this for nice-to-have
+            information, such as:
+          </p>
+          <ul className={contentListStyles}>
+            <li>tangential information or context</li>
+            <li>related features</li>
+            <li>additional opportunities</li>
+          </ul>
+        </InformationHighlight.Body>
+        <InformationHighlight.Link href="#hyperlink">Learn More</InformationHighlight.Link>
+      </InformationHighlight>
+    </Flex>
+  );
+};
+`;const L=()=>i.jsxs(h,{cs:{gap:r.sm,flexDirection:"column"},children:[i.jsx(l,{dir:"rtl",children:i.jsxs(e,{variant:"caution",emphasis:"low",children:[i.jsx(e.Icon,{}),i.jsxs(e.Heading,{children:[" ","انتباه! من اليمين إلى اليسار"," "]}),i.jsx(e.Body,{children:"نحن ندعم اللغات من اليمين إلى اليسار"}),i.jsx(e.Link,{href:"#hyperlink",children:"وثائق"})]})}),i.jsx(l,{dir:"rtl",children:i.jsxs(e,{variant:"caution",emphasis:"high",children:[i.jsx(e.Icon,{}),i.jsxs(e.Heading,{children:[" ","انتباه! من اليمين إلى اليسار"," "]}),i.jsx(e.Body,{children:"نحن ندعم اللغات من اليمين إلى اليسار"}),i.jsx(e.Link,{href:"#hyperlink",children:"وثائق"})]})}),i.jsx(l,{dir:"rtl",children:i.jsxs(e,{variant:"informational",actionPlacement:"end",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"انتباه! من اليمين إلى اليسار"}),i.jsx(e.Body,{children:'مع `actionPlacement="end"`، يظهر الرابط بجانب المحتوى، متمركزًا عموديًا عند نهاية السطر.'}),i.jsx(e.Link,{href:"#hyperlink",children:"وثائق"})]})}),i.jsx(l,{dir:"rtl",children:i.jsxs(e,{variant:"caution",emphasis:"high",actionPlacement:"end",children:[i.jsx(e.Icon,{}),i.jsx(e.Heading,{children:"انتباه! من اليمين إلى اليسار"}),i.jsx(e.Body,{children:"يعمل وضع الإجراء عبر الأنماط ومستويات التأكيد."}),i.jsx(e.Link,{href:"#hyperlink",children:"وثائق"})]})})]});L.__RAW__=`import {CanvasProvider} from '@workday/canvas-kit-react/common';
+import {InformationHighlight} from '@workday/canvas-kit-react/information-highlight';
+import {Flex} from '@workday/canvas-kit-react/layout';
+import {system} from '@workday/canvas-tokens-web';
+
+export const RTL = () => {
+  return (
+    <Flex cs={{gap: system.gap.sm, flexDirection: 'column'}}>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant={'caution'} emphasis={'low'}>
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant={'caution'} emphasis={'high'}>
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>
+            {' '}
+            انتباه! من اليمين إلى اليسار{' '}
+          </InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            نحن ندعم اللغات من اليمين إلى اليسار
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant="informational" actionPlacement="end">
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>انتباه! من اليمين إلى اليسار</InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            مع \`actionPlacement="end"\`، يظهر الرابط بجانب المحتوى، متمركزًا عموديًا عند نهاية السطر.
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+      <CanvasProvider dir="rtl">
+        <InformationHighlight variant="caution" emphasis="high" actionPlacement="end">
+          <InformationHighlight.Icon />
+          <InformationHighlight.Heading>انتباه! من اليمين إلى اليسار</InformationHighlight.Heading>
+          <InformationHighlight.Body>
+            يعمل وضع الإجراء عبر الأنماط ومستويات التأكيد.
+          </InformationHighlight.Body>
+          <InformationHighlight.Link href="#hyperlink">وثائق</InformationHighlight.Link>
+        </InformationHighlight>
+      </CanvasProvider>
+    </Flex>
+  );
+};
+`;function E(t){const n={a:"a",blockquote:"blockquote",code:"code",em:"em",h1:"h1",h2:"h2",h3:"h3",h4:"h4",li:"li",p:"p",pre:"pre",strong:"strong",ul:"ul",...P(),...t.components};return i.jsxs(i.Fragment,{children:[i.jsx(D,{of:N}),`
+`,i.jsx(n.h1,{id:"canvas-kit-information-highlight",children:"Canvas Kit Information Highlight"}),`
+`,i.jsx(n.p,{children:`A container to call out important information on a page or a section of a page that the user should
+be aware of.`}),`
+`,i.jsx(n.h2,{id:"installation",children:"Installation"}),`
+`,i.jsx(n.pre,{children:i.jsx(n.code,{className:"language-sh",children:`yarn add @workday/canvas-kit-react
+`})}),`
+`,i.jsx(n.h2,{id:"usage",children:"Usage"}),`
+`,i.jsx(n.h3,{id:"basic-example",children:"Basic Example"}),`
+`,i.jsx(o,{code:u}),`
+`,i.jsx(n.h3,{id:"variants",children:"Variants"}),`
+`,i.jsxs(n.p,{children:[i.jsx(n.code,{children:"InformationHighlight"})," has four variants and each ",i.jsx(n.code,{children:"variant"})," has two types of ",i.jsx(n.code,{children:"emphasis"}),"."]}),`
+`,i.jsxs(n.p,{children:["Variants: ",i.jsx(n.code,{children:"default"}),", ",i.jsx(n.code,{children:"informational"}),", ",i.jsx(n.code,{children:"caution"}),", ",i.jsx(n.code,{children:"critical"})]}),`
+`,i.jsxs(n.p,{children:["Emphasis: ",i.jsx(n.code,{children:"low"}),", ",i.jsx(n.code,{children:"high"})]}),`
+`,i.jsxs(n.p,{children:[`The variants have different icons and colors to convey severity and the emphasis changes the
+background color to have a lower or higher contrast. If no `,i.jsx(n.code,{children:"variant"})," or ",i.jsx(n.code,{children:"emphasis"}),` is selected the
+layout will default to `,i.jsx(n.code,{children:"Variant: default, Emphasis: low"}),"."]}),`
+`,i.jsxs(n.p,{children:["The following examples will show the ",i.jsx(n.code,{children:"low"})," and ",i.jsx(n.code,{children:"high"})," emphasis of the severity variants. ",i.jsx(n.code,{children:"low"}),`
+Emphasis will be shown first and should be used when there is other more important information on
+the page. `,i.jsx(n.code,{children:"high"}),` Emphasis will be shown second, and should be used when the highlight is not
+competing with other, more important information.`]}),`
+`,i.jsx(n.h4,{id:"default",children:"Default"}),`
+`,i.jsxs(n.p,{children:[`The default variant is for general callouts that do not convey a specific severity level. See the
+`,i.jsx(n.a,{href:"#basic-example",children:"Basic Example"})," above — it uses the default ",i.jsx(n.code,{children:"variant"})," and ",i.jsx(n.code,{children:"emphasis"}),` with all parts
+filled in.`]}),`
+`,i.jsx(n.h4,{id:"informational",children:"Informational"}),`
+`,i.jsxs(n.p,{children:["The informational variant is for ",i.jsx(n.em,{children:"nice to have"}),` information, such as related features or
+opportunities.`]}),`
+`,i.jsx(o,{code:B}),`
+`,i.jsx(n.h4,{id:"caution",children:"Caution"}),`
+`,i.jsxs(n.p,{children:["The caution variant is for ",i.jsx(n.em,{children:"important to know"}),` information, such as the potential consequences of
+specific actions.`]}),`
+`,i.jsx(o,{code:j}),`
+`,i.jsx(n.h4,{id:"critical",children:"Critical"}),`
+`,i.jsxs(n.p,{children:["The critical variant is for ",i.jsx(n.em,{children:"must know"}),` information that could otherwise cause failure if the user
+is unaware.`]}),`
+`,i.jsx(o,{code:k}),`
+`,i.jsx(n.h3,{id:"link-text-guidance",children:"Link Text Guidance"}),`
+`,i.jsxs(n.p,{children:["When you include ",i.jsx(n.code,{children:"InformationHighlight.Link"}),`, write labels for quick scanning in the highlight
+layout.`]}),`
+`,i.jsxs(n.ul,{children:[`
+`,i.jsxs(n.li,{children:[i.jsx(n.strong,{children:"Keep link text concise and scannable"})," — Use the shortest meaningful phrase."]}),`
+`,i.jsxs(n.li,{children:[i.jsx(n.strong,{children:"Prevent wrapping"})," — Avoid sentence-length links in tight layouts."]}),`
+`]}),`
+`,i.jsx(n.h3,{id:"action-placement",children:"Action Placement"}),`
+`,i.jsxs(n.p,{children:["Use ",i.jsx(n.code,{children:"actionPlacement"})," to control where the link renders relative to the heading and body."]}),`
+`,i.jsxs(n.ul,{children:[`
+`,i.jsxs(n.li,{children:[i.jsx(n.code,{children:"bottom"})," (default): the link stacks below the heading and body in document order."]}),`
+`,i.jsxs(n.li,{children:[i.jsx(n.code,{children:"end"}),`: the link renders beside the content (when the component is wide enough), vertically
+centered at the inline end; in narrower widths it moves below the body, still aligned to the
+inline end.`]}),`
+`]}),`
+`,i.jsxs(n.blockquote,{children:[`
+`,i.jsxs(n.p,{children:[i.jsx(n.strong,{children:"Note"}),": ",i.jsx(n.code,{children:"actionPlacement"}),` only changes placement in the component's CSS grid. Keyboard tab
+order and screen reader order stay unchanged (`,i.jsx(n.strong,{children:"Heading → Body → Link"}),`). With
+`,i.jsx(n.code,{children:'actionPlacement="end"'}),`, the link appears at the inline end when the highlight container is wide
+enough. At narrower widths, it stacks under the body while remaining last in the DOM. Use the
+width controls in `,i.jsx(n.a,{href:"#action-placement",children:"Action Placement End"})," to preview reflow."]}),`
+`]}),`
+`,i.jsxs(n.p,{children:["With ",i.jsx(n.code,{children:'actionPlacement="end"'}),`, long link text wraps within the available width rather than
+truncating, and the layout reflows when the highlight is narrow. `,i.jsx(n.code,{children:"end"}),` uses the logical inline end,
+so placement follows reading direction in RTL layouts (see `,i.jsx(n.a,{href:"#rtl-example",children:"RTL Example"}),`). See
+`,i.jsx(n.a,{href:"#link-text-guidance",children:"Link Text Guidance"})," for copy guidance."]}),`
+`,i.jsx(o,{code:w}),`
+`,i.jsx(n.h3,{id:"rtl-example",children:"RTL Example"}),`
+`,i.jsxs(n.p,{children:["Information Highlight also supports RTL Languages. To enable RTL, set the ",i.jsx(n.code,{children:"dir"}),` attribute on the
+parent dom element that renders your application.`]}),`
+`,i.jsx(o,{code:L}),`
+`,i.jsx(n.h3,{id:"partial-and-custom-information-highlights",children:"Partial and Custom Information Highlights"}),`
+`,i.jsxs(n.p,{children:[i.jsx(n.code,{children:"InformationHighlight"})," can use custom icons or be designed to only use some of its components."]}),`
+`,i.jsx(n.h4,{id:"custom-icon-critical",children:"Custom Icon: Critical"}),`
+`,i.jsx(o,{code:v}),`
+`,i.jsx(n.h4,{id:"body-only-example",children:"Body Only Example"}),`
+`,i.jsx(o,{code:y}),`
+`,i.jsx(n.h4,{id:"heading-only-example",children:"Heading Only Example"}),`
+`,i.jsx(o,{code:b}),`
+`,i.jsx(n.h2,{id:"component-api",children:"Component API"}),`
+`,i.jsx(R,{name:"InformationHighlight",fileName:"/react/"}),`
+`,i.jsx(n.h2,{id:"specifications",children:"Specifications"}),`
+`,i.jsx(F,{file:"./cypress/component/InformationHighlight.spec.tsx",initialSpecs:{type:"file",name:"InformationHighlight",children:[{type:"describe",name:"Information Highlight",children:[{type:"describe",name:" Example",children:[{type:"it",name:"should pass axe checks"},{type:"it",name:'should have an element with a role of "heading"'}]},{type:"describe",name:" Example",children:[{type:"it",name:"should pass axe checks"},{type:"it",name:'should have an element with a role of "heading"'}]},{type:"describe",name:" Example",children:[{type:"it",name:"should pass axe checks"},{type:"it",name:'should have an element with a role of "heading"'}]},{type:"describe",name:"given the Heading is the last element",children:[{type:"it",name:"should not have any axe errors"},{type:"it",name:"should not add space below the Heading"}]},{type:"describe",name:"given the Body is the last element",children:[{type:"it",name:"should not have any axe errors"},{type:"it",name:"should not add space below the Body"}]},{type:"describe",name:"given the Heading and Body are followed by other content",children:[{type:"it",name:"should not have any axe errors"},{type:"it",name:"should add space between the Heading and the Body"},{type:"it",name:"should add space between the Body and the Link"}]}]}]},name:"InformationHighlight"})]})}function M(t={}){const{wrapper:n}={...P(),...t.components};return n?i.jsx(n,{...t,children:i.jsx(E,{...t})}):E(t)}const N={title:"Components/Indicators/Information Highlight",component:e,tags:["autodocs"],parameters:{docs:{page:M}}},s={render:u},c={render:y},d={render:b},m={render:k},g={render:j},p={render:B},f={render:w},x={render:v},I={render:L};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  render: BasicExample
+}`,...s.parameters?.docs?.source}}};c.parameters={...c.parameters,docs:{...c.parameters?.docs,source:{originalSource:`{
+  render: BodyExample
+}`,...c.parameters?.docs?.source}}};d.parameters={...d.parameters,docs:{...d.parameters?.docs,source:{originalSource:`{
+  render: HeadingExample
+}`,...d.parameters?.docs?.source}}};m.parameters={...m.parameters,docs:{...m.parameters?.docs,source:{originalSource:`{
+  render: CriticalExamples
+}`,...m.parameters?.docs?.source}}};g.parameters={...g.parameters,docs:{...g.parameters?.docs,source:{originalSource:`{
+  render: CautionExamples
+}`,...g.parameters?.docs?.source}}};p.parameters={...p.parameters,docs:{...p.parameters?.docs,source:{originalSource:`{
+  render: InformationalExamples
+}`,...p.parameters?.docs?.source}}};f.parameters={...f.parameters,docs:{...f.parameters?.docs,source:{originalSource:`{
+  render: ActionPlacementEndExample
+}`,...f.parameters?.docs?.source}}};x.parameters={...x.parameters,docs:{...x.parameters?.docs,source:{originalSource:`{
+  render: IconCriticalExamples
+}`,...x.parameters?.docs?.source}}};I.parameters={...I.parameters,docs:{...I.parameters?.docs,source:{originalSource:`{
+  render: RTLExample
+}`,...I.parameters?.docs?.source}}};const bn=["Basic","Body","Heading","Critical","Caution","Informational","ActionPlacementEnd","IconCritical","RTL"];export{f as ActionPlacementEnd,s as Basic,c as Body,g as Caution,m as Critical,d as Heading,x as IconCritical,p as Informational,I as RTL,bn as __namedExportsOrder,N as default};
