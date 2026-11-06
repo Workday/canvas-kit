@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {
@@ -18,9 +20,9 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
-   * style prop applies styles to the whole Flex component,
-   * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
-   * style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore
+   * Inline styles applied to the wrapping `<li>`. `useOverflowListTarget` uses this to visually
+   * hide the overflow button (while keeping it measurable) when the list doesn't have items to
+   * hide. A style prop passed through `overflowButtonProps` from `Breadcrumbs.List` is ignored.
    */
   style?: FlexProps;
 }
@@ -63,7 +65,10 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+    // `useOverflowListTarget` hides the button with inline styles when nothing overflows. They
+    // must be applied as `style` on the `<li>`; spreading them renders invalid DOM attributes
+    // (`position="absolute"`) and leaves an empty overflow menu button visible.
+    <li {...breadcrumbsOverflowButtonStencil()} style={style as React.CSSProperties}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}
