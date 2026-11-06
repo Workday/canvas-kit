@@ -50,6 +50,16 @@ describe('Pill', () => {
       cy.findByLabelText('Color').click();
       cy.findByLabelText('Color').should('not.exist');
     });
+
+    it('should move focus to the next pill when one is removed', () => {
+      cy.findByLabelText('Color').click();
+      cy.findByLabelText('Accessories').should('have.focus');
+    });
+
+    it('should move focus to the previous pill when the last one is removed', () => {
+      cy.findByLabelText('Jewelry').click();
+      cy.findByLabelText('Glasses').should('have.focus');
+    });
   });
 
   context(`given the [Components/Indicators/Pill, With Removable] story is rendered`, () => {

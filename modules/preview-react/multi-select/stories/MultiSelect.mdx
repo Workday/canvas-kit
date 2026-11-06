@@ -1,17 +1,14 @@
 import {Meta} from '@storybook/blocks';
-import {
-  ExampleCodeBlock,
-  SymbolDoc,
-  Specifications,
-} from '@workday/canvas-kit-docs';
+
+import {ExampleCodeBlock, Specifications, SymbolDoc} from '@workday/canvas-kit-docs';
 
 import {Basic} from './examples/Basic';
+import {Complex} from './examples/Complex';
+import {Controlled} from './examples/Controlled';
 import {Disabled} from './examples/Disabled';
 import {Error} from './examples/Error';
-import {Complex} from './examples/Complex';
 import {Icons} from './examples/Icons';
 import {InitialSelectedItems} from './examples/InitialSelectedItems';
-import {Controlled} from './examples/Controlled';
 import {Searching} from './examples/Searching';
 
 import MultiSelectStoriesMeta from './MultiSelect.stories';
@@ -33,31 +30,19 @@ yarn add @workday/canvas-kit-preview-react
 ### Basic Example
 
 `MultiSelect` supports a
-[dynamic API](/get-started/for-developers/guides/collection-api/#dynamic-items) where you
-pass an array of items via the `items` prop and provide a render function to display the items. The
-items may be provided as an
-[array of strings](/get-started/for-developers/guides/collection-api/#array-of-strings) or an
-[array of objects](/get-started/for-developers/guides/collection-api/#array-of-objects).
+[dynamic API](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#dynamic-items) where you pass an
+array of items via the `items` prop and provide a render function to display the items. The items
+may be provided as an
+[array of strings](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#array-of-strings) or an
+[array of objects](https://workday.github.io/canvas-kit/?path=/docs/features-collections--docs#array-of-objects).
 
-`MultiSelect` should be used in tandem with [Form Field](/components/inputs/form-field/) where the
-`MultiSelect` wraps the `FormField` element and the `FormField` element wraps the children of
-`MultiSelect` to meet accessibility standards. This ensures the `label` text from `FormField` is
-attached to the `MultiSelect.Input` and read out as a group for voiceover.
+Wrap `MultiSelect` around [Form Field](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs). Use `FormField.Label` and
+`FormField.Input as={MultiSelect.Input}` so the visible label is the combobox name. Pass a
+translated `removeLabel` as the action word only, such as "Remove". See
+[Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) for the button name, and
+[Accessibility](#accessibility) for the MultiSelect requirements.
 
-```tsx
-<MultiSelect items={options}>
-  <FormField label="Your Label">
-    <MultiSelect.Input onChange={e => handleChange(e)} id="contact-multi-select" />
-    <MultiSelect.Popper>
-      <MultiSelect.Card>
-        <MultiSelect.List>
-          {item => <MultiSelect.Item>{item.id}</MultiSelect.Item>}
-        </MultiSelect.List>
-      </MultiSelect.Card>
-    </MultiSelect.Popper>
-  </FormField>
-</MultiSelect>
-```
+<ExampleCodeBlock code={Basic} />
 
 ### Disabled Example
 
@@ -85,11 +70,11 @@ to `id` and `text` hence the usage of `getId` and `getTextValue`. If your object
 ### With Icons
 
 Use `MultiSelect.Item.Icon` to render an icon for a `MultiSelect.Item`. The `icon` prop for
-`MultiSelect.Item.Icon` accepts [system icons](/assets/system-icons/) from
+`MultiSelect.Item.Icon` accepts [system icons](https://workday.github.io/canvas-kit/?path=/docs/assets-icon-components--docs) from
 `@workday/canvas-system-icons-web`.
 
-> **Note: `data-id` on `MultiSelect.Item` must match the `id` property in your array of objects.
-> This ensures proper keyboard handling and type-ahead.**
+> **Note: `data-id` on `MultiSelect.Item` must match the item `id`. This identifies the option for
+> keyboard navigation and selection.**
 
 <ExampleCodeBlock code={Icons} />
 
@@ -120,3 +105,256 @@ dynamically load items as the user navigates the available options.
 You can set `initialSelectedIds` to the value that you want initially selected.
 
 <ExampleCodeBlock code={InitialSelectedItems} />
+
+## Accessibility
+
+`MultiSelect` is a preview component in `@workday/canvas-kit-preview-react`. It implements the
+WAI-ARIA [Combobox Pattern](https://www.w3.org/WAI/ARIA/apg/patterns/combobox/) for choosing more
+than one value from a list. The accessibility goal is a visible, persistent label on the combobox,
+an options list the user can browse while keyboard focus stays on the input, and a
+[removable Pill](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) for each selected value.
+
+Use a different component when it matches the interaction:
+
+- One value from a fixed list: [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs).
+- A custom combobox (one value, or any typed value with suggestions):
+  [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#accessibility).
+
+See [FormField's accessibility documentation](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for
+label, hint, error, and required wiring.
+
+### Minimum Accessible Structure
+
+The following matches the [Basic Example](#basic-example): **`MultiSelect`** wraps **`FormField`**,
+with a visible **`FormField.Label`**, **`FormField.Input as={MultiSelect.Input}`**, a translated
+**`removeLabel`**, then **`MultiSelect.Popper`**, **`MultiSelect.Card`**, **`MultiSelect.List`**,
+and **`MultiSelect.Item`**. Set **`data-id`** to the item id, and put the visible label in
+**`MultiSelect.Item.Text`**.
+
+```tsx
+import {MultiSelect} from '@workday/canvas-kit-preview-react/multi-select';
+import {FormField} from '@workday/canvas-kit-react/form-field';
+
+const items = ['Cheese', 'Olives', 'Onions', 'Pepperoni', 'Peppers'];
+
+<MultiSelect items={items}>
+  <FormField>
+    <FormField.Label>Toppings</FormField.Label>
+    <FormField.Input as={MultiSelect.Input} removeLabel="Remove" />
+    <MultiSelect.Popper>
+      <MultiSelect.Card>
+        <MultiSelect.List>
+          {item => (
+            <MultiSelect.Item data-id={item}>
+              <MultiSelect.Item.Text>{item}</MultiSelect.Item.Text>
+            </MultiSelect.Item>
+          )}
+        </MultiSelect.List>
+      </MultiSelect.Card>
+    </MultiSelect.Popper>
+  </FormField>
+</MultiSelect>;
+```
+
+**`FormField.Input`** gives the combobox a programmatically determinable name from
+**`FormField.Label`**. Pass **`removeLabel`** as the action word only, such as "Remove". MultiSelect
+does not supply that word when **`removeLabel`** is omitted. See
+[Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills).
+
+### Built-in Behaviors
+
+Canvas Kit applies these when you compose **`MultiSelect.Input`** or **`MultiSelect.SearchInput`**
+with the menu subcomponents. **Do not duplicate them** in consuming code. **`MultiSelect`** uses
+`useMultiSelectModel`, which defaults `mode` to `"multiple"` and composes the combobox input hooks.
+Selecting an option does not close the list.
+
+**ARIA and DOM** (_applied by hooks and subcomponents_):
+
+- **Visible input** (**`MultiSelect.Input`** or **`MultiSelect.SearchInput`**): `role="combobox"`,
+  `aria-haspopup="listbox"`, `aria-expanded` from list visibility, `aria-autocomplete="list"`, and
+  `aria-controls` pointing at `{modelId}-list`. **`MultiSelect.Input`** is `readOnly`.
+  **`MultiSelect.SearchInput`** is editable.
+- **`aria-activedescendant`**: set to the active option's id while the list is open, and removed
+  when the list is closed. DOM focus stays on the visible input. Options are not tab stops.
+- **Hidden form input**: rendered inside the field with `aria-hidden` and `tabIndex={-1}`. Its value
+  is the selected ids joined with `", "`. A `name` passed to **`FormField.Input`** is placed on this
+  input. `focus()` and `blur()` on it are forwarded to the visible combobox. The visible input shows
+  the selected labels joined with `", "` and is excluded from form submission.
+- **`MultiSelect.List`**: `role="listbox"` and `id="{modelId}-list"`. The combobox name comes from
+  **`FormField.Label`** through **`FormField.Input`** (`aria-labelledby="label-{id}"` and
+  `<label htmlFor>`).
+- **`MultiSelect.Item`**: `role="option"` and `aria-selected` from selection state. The option id
+  matches `aria-activedescendant`. **`data-id`** must be the item id.
+- **Popup**: **`MultiSelect.Popper`** portals the list. **`MultiSelect.Card`** is presentational.
+  The list closes on <kbd>Escape</kbd>, on pointer interaction outside the popup, and when the
+  visible input blurs. Focus is not moved into the list. `initialFocusRef` and `returnFocusRef` are
+  not applied.
+- **Chevron and search icons**: no accessible name is set. Pointer events are disabled on those
+  icons, so they are not separate controls.
+- **`MultiSelect.SearchInput`** clear control: `role="presentation"` and `tabIndex={-1}`. It is not
+  a tab stop. Clearing while editing stays on the input.
+- **Virtualization**: off by default (`shouldVirtualize` is `false`). When it is enabled, rendered
+  options include `aria-setsize` and `aria-posinset`.
+- **`FormField`**: `aria-describedby` (`hint-{id}` when an `id` exists), `required` when
+  `isRequired`, and `aria-invalid="true"` when `error="error"`. Caution (`error="caution"`) does not
+  set `aria-invalid`.
+
+**Keyboard** (_focus remains on the combobox input while the options list is used; that list is
+vertical_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd> move to and from the input (native tab order).
+  Leaving the input blurs it and closes the options list.
+- Clicking **`FormField.Label`** moves focus to the input and toggles the list, because the label
+  click is forwarded to the input. Clicking the input opens the list if it is closed and closes it
+  if it is open.
+- <kbd>ArrowDown</kbd> opens the list. <kbd>ArrowUp</kbd> opens the list when it is closed. While
+  the list is open, <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> move the active option and wrap from
+  the last option to the first (and the first to the last). Ids in **`nonInteractiveIds`** are
+  skipped. <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last option while the list is open.
+- <kbd>Enter</kbd> while the list is open selects the active option unless that option has
+  `aria-disabled="true"`. The list stays open. <kbd>Enter</kbd> does not submit the form while the
+  list is open. <kbd>Space</kbd> does not select an option. On **`MultiSelect.Input`** it has no
+  effect. On **`MultiSelect.SearchInput`** it is typed into the field, including when an option is
+  active.
+- <kbd>Escape</kbd> closes the list. Focus remains on the input. After close,
+  `aria-activedescendant` is removed.
+- Activating an option with the pointer selects it, keeps focus on the input, and leaves the list
+  open.
+- **`MultiSelect.Input`** does not accept typed values. Printable characters open the list only on
+  **`MultiSelect.SearchInput`**.
+
+**Selected values** (_horizontal roving tabindex on the remove button_):
+
+This keyboard replaces the standalone removable Pill keyboard. One remove button is in the tab
+order, and arrow keys move between selected values.
+
+- When a value is selected, one remove button is in the tab order after the combobox input.
+- <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> move to the previous or next selected value and wrap.
+- <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last selected value.
+- <kbd>Backspace</kbd> / <kbd>Delete</kbd> remove the focused value. Focus moves to another selected
+  value, or back to the combobox input when none remain.
+- <kbd>Enter</kbd> / <kbd>Space</kbd> activate the remove button and remove that value the same way.
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- On focus, assistive technology announces the field label and, when applicable: required state,
+  invalid state (`error="error"`), hint or error text via `aria-describedby`, and the current value
+  (the selected labels).
+- The control is announced as a combobox. Collapsed vs expanded follows `aria-expanded`. While the
+  options list is open, the active option is exposed through `aria-activedescendant` on the focused
+  input.
+- Options are announced with selected or not-selected state (`aria-selected`). An option with
+  **`aria-disabled`** is announced as disabled. The option name is the text in
+  **`MultiSelect.Item.Text`**.
+- A selected value's remove button uses the
+  [removable Pill](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills) accessible name.
+  **`removeLabel`** is the action word, and the selected text supplies the value.
+- The Caution state is visual only — `aria-invalid` is **not** set for `error="caution"`.
+- A disabled field may be announced as unavailable and is skipped in the tab order. Its remove
+  buttons are disabled as well.
+- The hidden form input, the chevron, the search icon, and the search clear control are not
+  announced as separate operable controls.
+
+For label, input, and hint association, see
+[FormField's Built-in Behaviors](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#built-in-behaviors).
+
+### Accessibility Requirements
+
+Required in application code for an accessible `MultiSelect`. Rows marked _(conditional)_ apply only
+when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use a visible **`FormField.Label`**,
+**`FormField.Input as={MultiSelect.Input}`**, a translated **`removeLabel`**, and the menu
+subcomponents from **Minimum accessible structure**. Set **`data-id`** and
+**`MultiSelect.Item.Text`** for every option. Omit **`MultiSelect.SearchInput`**, a custom `id`, a
+`ref`, **`disabled`**, **`nonInteractiveIds`**, **`initialFocusRef`**, and **`returnFocusRef`**.
+Focus stays on the combobox input. Do not generate focus refs.
+
+**Hint or error** _(conditional)_:
+
+When there is hint or validation copy, follow [Error States](#error-states): put the input, the
+popup, and **`FormField.Hint`** inside **`FormField.Field`**. **`FormField`** already points
+`aria-describedby` at `hint-{id}`. Prefix error text with "Error:". Use `error="error"` when the
+value is invalid. Use `error="caution"` only for a warning; it does not set `aria-invalid`.
+
+**Disabled options** _(conditional)_:
+
+When an option is unavailable, set **`nonInteractiveIds`** on the model (arrow keys skip those ids)
+and **`aria-disabled`** on those **`MultiSelect.Item`**s. <kbd>Enter</kbd> and pointer activation
+will not select an option with `aria-disabled="true"`. Do not use styling alone.
+
+**Programmatic focus** _(conditional — omit by default)_:
+
+Use a `ref` on **`FormField.Input`** when the product needs to move focus to the combobox after an
+action. `focus()` is forwarded to the visible input. Do not attach a `ref` or call `focus()` unless
+the design or developer asks for it.
+
+**Icons** _(conditional)_:
+
+When an option shows an icon, keep **`MultiSelect.Item.Text`** as the accessible name. See
+[With Icons](#with-icons). An icon does not replace that text.
+
+| Requirement                        | How to satisfy                                                                                                                                                                                                          |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input wiring                       | **`FormField`** + visible **`FormField.Label`** + **`FormField.Input as={MultiSelect.Input}`**. See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for label, hint, error, and required wiring |
+| Remove control name                | Action-only **`removeLabel`** on **`FormField.Input`**, such as `"Remove"`. See [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills)                                                                        |
+| Option name                        | Visible text in **`MultiSelect.Item.Text`**, matching what is shown                                                                                                                                                    |
+| Hint or error _(conditional)_      | **`FormField.Field`** around the input, popup, and **`FormField.Hint`**, with `error` on **`FormField`** (see **Hint or error** above and [Error States](#error-states))                                               |
+| Disabled field _(conditional)_     | **`disabled`** on **`FormField.Input`** so the field and its remove buttons are unavailable and skipped in the tab order. See [Disabled Example](#disabled-example)                                                    |
+| Disabled options _(conditional)_   | **`nonInteractiveIds`** on the model and **`aria-disabled`** on those **`MultiSelect.Item`**s                                                                                                                          |
+| Icons _(conditional)_              | **`MultiSelect.Item.Icon`** plus **`MultiSelect.Item.Text`**. See [With Icons](#with-icons)                                                                                                                            |
+| Programmatic focus _(conditional)_ | `ref` on **`FormField.Input`** and `focus()` only when the design asks to move focus to the field (see **Programmatic focus** above)                                                                                   |
+
+**Summary for code generation:**
+
+- **REQUIRED:** visible label, **`FormField.Input as={MultiSelect.Input}`**, action-only
+  **`removeLabel`** (see [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills)), option
+  text in **`MultiSelect.Item.Text`**, and the menu from
+  [Minimum Accessible Structure](#minimum-accessible-structure): **`MultiSelect.Popper`**,
+  **`MultiSelect.Card`**, **`MultiSelect.List`**, and **`MultiSelect.Item`**, in that order, with
+  **`data-id`** on each item equal to the item id.
+- **CONDITIONAL:** hint or error inside **`FormField.Field`**, **`disabled`**, disabled options
+  (`nonInteractiveIds` + `aria-disabled`), icons alongside option text, programmatic focus via
+  `ref`. See [FormField accessibility](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#accessibility) for shared
+  FormField conditionals (required, stable `id`).
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** above for what
+to supply instead):
+
+- **Missing `FormField` wiring**: Do not render **`MultiSelect.Input`** without **`FormField`**,
+  **`FormField.Label`**, and **`FormField.Input`**. Do not pass a `label` prop to **`FormField`**.
+  For shared FormField anti-patterns (manual label ARIA, placeholder-only labels, color-only errors,
+  broken ID references), see
+  [FormField Anti-Patterns](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs#anti-patterns).
+- **Unnamed or doubled remove names**: Pass an action-only **`removeLabel`**, such as `"Remove"`.
+  Do not omit it, and do not include the selected value in it. The selected text is already part of
+  the button name. See [Removable Pills](https://workday.github.io/canvas-kit/?path=/docs/components-indicators-pill--docs#removable-pills).
+- **Duplicating combobox or listbox ARIA**: Do not set `role`, `aria-haspopup` (the hook sets
+  `"listbox"`), `aria-expanded`, `aria-autocomplete`, `aria-controls`, or `aria-activedescendant`
+  on the input. Do not set `role` or `id` on **`MultiSelect.List`**. Do not add `aria-label` or
+  `aria-labelledby` on the list. The combobox name already comes from **`FormField.Label`**. Do not
+  make **`MultiSelect.Item`** focusable or add a roving `tabIndex` — the active option is
+  **`aria-activedescendant`** on the input.
+- **Wrong option role**: Do not use **`Menu.Item`** (`role="menuitem"`) inside
+  **`MultiSelect.List`** (`role="listbox"`). Use **`MultiSelect.Item`**.
+- **Missing option identity or name**: Do not omit **`data-id`**, and do not use an icon as the only
+  content of **`MultiSelect.Item`**.
+- **Empty results as options**: When a search has no matches, do not use **`MultiSelect.Item`** for
+  the message. See [Searching](#searching).
+- **Dialog-style focus props**: Do not set **`initialFocusRef`** or **`returnFocusRef`**. The
+  options list does not take DOM focus.
+- **A second visible value input**: The hidden form input already submits the selected ids. Do not
+  add another input, and do not set `aria-hidden`, `tabIndex`, or `name` by hand on the visible
+  combobox.
+- **Editable select-only input**: Do not pass `readOnly={false}` on **`MultiSelect.Input`**. Use
+  **`MultiSelect.SearchInput`** when the user must type to filter.
+- **Re-wiring the search clear control**: Do not override its `role` or `tabIndex` to make it a
+  focusable, announced button.
+- **Incomplete menu**: Do not omit **`MultiSelect.Popper`**, **`MultiSelect.Card`**,
+  **`MultiSelect.List`**, or **`MultiSelect.Item`**, and do not render the list outside the popper.
+- **Wrong component**: Do not use **`MultiSelect`** for a single value. Use
+  [**Select**](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-select--docs). Do not start from
+  [**Combobox**](https://workday.github.io/canvas-kit/?path=/docs/features-combobox--docs#accessibility) when this preview component already
+  matches the interaction.
