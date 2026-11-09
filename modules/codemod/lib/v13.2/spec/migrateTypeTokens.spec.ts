@@ -53,7 +53,7 @@ describe('Typography: from /tokens to v2', () => {
         import { cssVar } from "@workday/canvas-kit-styling";
         import { system } from "@workday/canvas-tokens-web";
 
-        const fontWeight = cssVar(system.fontWeight.regular);
+        const fontWeight = cssVar(system.fontWeight.normal);
       `;
 
     expectTransform(input, expected);
@@ -79,7 +79,7 @@ describe('Typography: from /tokens to v2', () => {
         const propertyName = 'fontWeights';
         const size = 'bold';
 
-        const fontWeight = cssVar(system.fontWeight.regular);
+        const fontWeight = cssVar(system.fontWeight.normal);
         const fontWeight2 = type.properties[propertyName][size];
       `;
 
@@ -102,7 +102,7 @@ describe('Typography: from /tokens to v2', () => {
             fontFamily: cssVar(system.fontFamily.default),
             fontSize: cssVar(system.fontSize.subtext.small),
             lineHeight: cssVar(system.lineHeight.subtext.small),
-            fontWeight: cssVar(system.fontWeight.regular),
+            fontWeight: cssVar(system.fontWeight.normal),
             color: cssVar(system.color.fg.default)
           };
         `;
@@ -125,7 +125,7 @@ describe('Typography: from /tokens to v2', () => {
             fontFamily: cssVar(system.fontFamily.default),
             fontSize: cssVar(system.fontSize.subtext.small),
             lineHeight: cssVar(system.lineHeight.subtext.small),
-            fontWeight: cssVar(system.fontWeight.regular),
+            fontWeight: cssVar(system.fontWeight.normal),
             color: cssVar(system.color.fg.default)
           };
         `;
@@ -179,7 +179,7 @@ describe('Typography: from /tokens to v2', () => {
             fontFamily: cssVar(system.fontFamily.default),
             fontSize: cssVar(system.fontSize.subtext.small),
             lineHeight: cssVar(system.lineHeight.subtext.small),
-            fontWeight: cssVar(system.fontWeight.regular),
+            fontWeight: cssVar(system.fontWeight.normal),
             color: cssVar(system.color.fg.default),
 
             p: {

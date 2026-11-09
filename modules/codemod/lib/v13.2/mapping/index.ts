@@ -103,7 +103,7 @@ const typeMap = {
   fontWeights: {
     name: 'fontWeight',
     values: {
-      regular: 'regular',
+      regular: 'normal',
       medium: 'medium',
       bold: 'bold',
     },
