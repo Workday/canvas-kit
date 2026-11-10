@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.21](https://github.com/Workday/canvas-kit/releases/tag/v16.2.21) (2026-11-10)
+
+### Components
+
+- fix(fonts): Emit the variable font weight as a range string ([#4251](https://github.com/Workday/canvas-kit/pull/4251)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.2.20](https://github.com/Workday/canvas-kit/releases/tag/v16.2.20) (2026-11-05)
 
 ### Infrastructure
