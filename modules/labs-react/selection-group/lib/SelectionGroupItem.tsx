@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {isSelected} from '@workday/canvas-kit-react/collection';
-import {cornerShapeStencil, createSubcomponent, focusRing} from '@workday/canvas-kit-react/common';
+import {cornerShapeStencil, createSubcomponent} from '@workday/canvas-kit-react/common';
 import {systemIconStencil} from '@workday/canvas-kit-react/icon';
 import {createStencil, handleCsProp, px2rem} from '@workday/canvas-kit-styling';
 import {base, system} from '@workday/canvas-tokens-web';
@@ -68,12 +68,6 @@ export const selectionGroupItemStencil = createStencil({
       backgroundColor: system.legacy.color.surface.overlay.pressed.default,
     },
 
-    // The ring sits outside the item so it never competes with the selected background, and so a
-    // selected item and a focused item remain visually distinct.
-    '&:is(:focus-visible, .focus)': {
-      ...focusRing({separation: 1}),
-    },
-
     '&:is(:disabled, .disabled)': {
       cursor: 'default',
       opacity: system.opacity.disabled,
@@ -102,6 +96,14 @@ export const selectionGroupItemStencil = createStencil({
         backgroundColor: system.legacy.color.brand.surface.selected,
         color: system.legacy.color.brand.fg.selected,
       },
+    },
+
+    // Matches the TextInput focus ring. This is declared after the selected styles so a focused
+    // selected item gets the same ring (border color + inset shadow) as an unselected one.
+    '&:is(:focus-visible, .focus):where(:not(:disabled, .disabled))': {
+      borderColor: system.legacy.color.brand.focus.primary,
+      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
+      outline: `${px2rem(2)} solid transparent`,
     },
   }),
   modifiers: {

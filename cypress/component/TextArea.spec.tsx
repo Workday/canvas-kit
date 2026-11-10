@@ -1,12 +1,54 @@
+import {TextArea} from '@workday/canvas-kit-react/text-area';
+
 import {Basic} from '../../modules/react/text-area/stories/examples/Basic';
 import {Disabled} from '../../modules/react/text-area/stories/examples/Disabled';
+import {Grow} from '../../modules/react/text-area/stories/examples/Grow';
 import {Placeholder} from '../../modules/react/text-area/stories/examples/Placeholder';
+import {ResizeConstraints} from '../../modules/react/text-area/stories/examples/ResizeConstraints';
 
 const getTextArea = () => {
   return cy.get(`textarea`);
 };
 
 describe('Text Area', () => {
+  context('given TextArea has grow enabled directly', () => {
+    beforeEach(() => {
+      cy.mount(<TextArea grow aria-label="Description" />);
+    });
+
+    it('should preserve the default resize behavior', () => {
+      getTextArea().should('have.css', 'resize', 'both');
+    });
+  });
+
+  context(`given the 'Grow' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<Grow />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should remain resizable in both directions', () => {
+      getTextArea().should('have.css', 'resize', 'both');
+    });
+  });
+
+  context(`given the 'ResizeConstraints' story is rendered`, () => {
+    beforeEach(() => {
+      cy.mount(<ResizeConstraints />);
+    });
+
+    it('should not have any axe errors', () => {
+      cy.checkA11y();
+    });
+
+    it('should respect the vertical resize constraint', () => {
+      getTextArea().should('have.css', 'resize', 'vertical');
+    });
+  });
+
   context(`given the 'Basic' story is rendered`, () => {
     beforeEach(() => {
       cy.mount(<Basic />);

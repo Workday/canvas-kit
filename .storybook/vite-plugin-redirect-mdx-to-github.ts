@@ -18,14 +18,22 @@ export function vitePluginRedirectMDXToGithub(): PluginOption {
       if (/.mdx?$/.test(id)) {
         return code
           .replace(/\[([^\]]+)\]\((\/[^\)]+)\)/g, function replacer(_match, p1, p2) {
-            const [url, hash] = p2.split('#');
+            const hashIndex = p2.indexOf('#');
+            const url = hashIndex === -1 ? p2 : p2.slice(0, hashIndex);
+            const hash = hashIndex === -1 ? '' : p2.slice(hashIndex + 1);
             if (routeKeys.includes(url)) {
-              return `[${p1}](?path=/docs/${routes[url]}${hash ? '#' + hash : ''})`;
+              // `../?path=` so links from the docs iframe resolve to the manager URL
+              // (e.g. `/?path=/docs/...` locally and `/canvas-kit/?path=...` on GitHub Pages).
+              return `[${p1}](../?path=/docs/${routes[url]}${hash ? `#${hash}` : ''})`;
             }
             // no match, return original
             return `[${p1}](${p2})`;
           })
           .replace(/\[([^\]]+)\]\((\.\.?[^\)]+)\)/g, function replacer(match, p1, p2) {
+            // Storybook doc links rewritten by `remarkRewriteCanvasRoutes` / the route replacer above
+            if (p2.startsWith('../?path=') || p2.startsWith('./?path=') || p2.startsWith('?path=')) {
+              return match;
+            }
             // extract the directory from the resourcePath given by Webpack
             const {dir} = path.parse(id);
 

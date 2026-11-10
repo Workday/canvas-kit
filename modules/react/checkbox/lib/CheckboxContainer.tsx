@@ -43,6 +43,7 @@ const checkboxContainerStencil = createStencil({
   modifiers: {
     disabled: {
       true: ({labelPart}) => ({
+        opacity: system.opacity.disabled,
         [labelPart]: {
           cursor: 'default',
         },

@@ -64,7 +64,9 @@ jobs:
       - name: Publish remaining packages
         id: publish-remaining
         if: steps.release.outcome == 'failure'
-        run: yarn publish:from-package -- --dist-tag latest --require-unpublished
+        run:
+          yarn publish:from-package -- --dist-tag ${{ github.ref_name == 'master' && 'latest' ||
+          'support' }} --require-unpublished
 
       - name: Verify npm publish completed
         if: steps.release.outcome == 'failure' && steps.publish-remaining.outcome != 'success'

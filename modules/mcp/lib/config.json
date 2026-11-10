@@ -55,6 +55,10 @@
       "slug": "selectable-rows"
     },
     {
+      "source": "accessibility/tables/DraggableRows.mdx",
+      "slug": "draggable-rows"
+    },
+    {
       "source": "accessibility/tables/FilterableColumnHeaders.mdx",
       "slug": "filterable-column-headers"
     },

@@ -3,6 +3,263 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.21](https://github.com/Workday/canvas-kit/releases/tag/v16.2.21) (2026-11-10)
+
+### Components
+
+- fix(fonts): Emit the variable font weight as a range string ([#4251](https://github.com/Workday/canvas-kit/pull/4251)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.20](https://github.com/Workday/canvas-kit/releases/tag/v16.2.20) (2026-11-05)
+
+### Infrastructure
+
+- chore: Add resolve-forward-merge skill ([#4239](https://github.com/Workday/canvas-kit/pull/4239)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v15.1.22](https://github.com/Workday/canvas-kit/releases/tag/v15.1.22) (2026-11-05)
+
+### Infrastructure
+
+- chore: Add resolve-forward-merge skill ([#4239](https://github.com/Workday/canvas-kit/pull/4239)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.19](https://github.com/Workday/canvas-kit/releases/tag/v16.2.19) (2026-11-05)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body is the last element ([#4229](https://github.com/Workday/canvas-kit/pull/4229)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` when it is the last element. Spacing is unchanged when a `Link` follows. Chromatic will show a visual diff on the "Only Body" states.
+
+
+## [v16.2.18](https://github.com/Workday/canvas-kit/releases/tag/v16.2.18) (2026-11-05)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body or Heading is the last element ([#4230](https://github.com/Workday/canvas-kit/pull/4230)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` and `InformationHighlight.Heading` when they are the last element. Spacing is unchanged when other content follows. Chromatic will show a visual diff on the "Only Heading" and "Only Body" states.
+
+
+## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
+## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body is the last element ([#4229](https://github.com/Workday/canvas-kit/pull/4229)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` when it is the last element. Spacing is unchanged when a `Link` follows. Chromatic will show a visual diff on the "Only Body" states.
+## [v16.2.17](https://github.com/Workday/canvas-kit/releases/tag/v16.2.17) (2026-11-04)
+
+### Components
+
+- fix(text-input): Avoid resizing growing inputs ([#4191](https://github.com/Workday/canvas-kit/pull/4191)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v16.2.16](https://github.com/Workday/canvas-kit/releases/tag/v16.2.16) (2026-11-04)
+
+### Components
+
+- fix(multi-select): Correct selected pill accessibility ([#4192](https://github.com/Workday/canvas-kit/pull/4192)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v15.1.20](https://github.com/Workday/canvas-kit/releases/tag/v15.1.20) (2026-11-04)
+
+### Components
+
+- fix(multi-select): Correct selected pill accessibility ([#4192](https://github.com/Workday/canvas-kit/pull/4192)) ([@minwookshin](https://github.com/minwookshin))
+## [v16.2.15](https://github.com/Workday/canvas-kit/releases/tag/v16.2.15) (2026-11-03)
+
+### Components
+
+- fix(tooltip): Dismiss tooltip when an interactive target is activated with the keyboard ([#4231](https://github.com/Workday/canvas-kit/pull/4231)) ([@jay23606](https://github.com/jay23606), [@claude](https://github.com/claude))
+
+
+## [v15.1.19](https://github.com/Workday/canvas-kit/releases/tag/v15.1.19) (2026-11-03)
+
+### Components
+
+- fix(tooltip): Dismiss tooltip when an interactive target is activated with the keyboard ([#4231](https://github.com/Workday/canvas-kit/pull/4231)) ([@jay23606](https://github.com/jay23606), [@claude](https://github.com/claude))
+## [v16.2.14](https://github.com/Workday/canvas-kit/releases/tag/v16.2.14) (2026-11-02)
+
+### Components
+
+- fix(ActionBar): Allow icon-only items without children ([#4203](https://github.com/Workday/canvas-kit/pull/4203)) ([@akshita317](https://github.com/akshita317))
+
+### Infrastructure
+
+- fix: Restore package.json manifests before release recovery publish ([#4232](https://github.com/Workday/canvas-kit/pull/4232)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes the release safety-net step so a partial or failed npm publish is recovered correctly. No change to published packages.
+- fix: Give Sigstore a real timeout when lerna publishes with provenance ([#4234](https://github.com/Workday/canvas-kit/pull/4234)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes intermittent npm publish failures (`TLOG_CREATE_ENTRY_ERROR 409`) by giving Sigstore's provenance upload a 5 minute timeout. Each published `package.json` now has `publishConfig.timeout`, which only affects publishing.
+
+
+## [v15.1.18](https://github.com/Workday/canvas-kit/releases/tag/v15.1.18) (2026-11-02)
+
+### Infrastructure
+
+- fix: Give Sigstore a real timeout when lerna publishes with provenance ([#4234](https://github.com/Workday/canvas-kit/pull/4234)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes intermittent npm publish failures (`TLOG_CREATE_ENTRY_ERROR 409`) by giving Sigstore's provenance upload a 5 minute timeout. Each published `package.json` now has `publishConfig.timeout`, which only affects publishing.
+
+
+## [v15.1.17](https://github.com/Workday/canvas-kit/releases/tag/v15.1.17) (2026-10-30)
+
+### Infrastructure
+
+- fix: Restore package.json manifests before release recovery publish ([#4232](https://github.com/Workday/canvas-kit/pull/4232)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@claude](https://github.com/claude))
+  Fixes the release safety-net step so a partial or failed npm publish is recovered correctly. No change to published packages.
+
+
+## [v16.2.13](https://github.com/Workday/canvas-kit/releases/tag/v16.2.13) (2026-10-30)
+
+### Documentation
+
+- docs(a11y): Update accessibility documentation for Accessory and Selection Group ([#4233](https://github.com/Workday/canvas-kit/pull/4233)) ([@jamesfan](https://github.com/jamesfan))
+
+
+## [v16.2.12](https://github.com/Workday/canvas-kit/releases/tag/v16.2.12) (2026-10-29)
+
+### Infrastructure
+
+- chore: Snyk Security upgrade @modelcontextprotocol/sdk from 1.29.0 to 1.32.0 ([#4219](https://github.com/Workday/canvas-kit/pull/4219)) ([@mannycarrera4](https://github.com/mannycarrera4), [@snyk-bot](https://github.com/snyk-bot), manuel.carrera)
+
+
+## [v15.1.16](https://github.com/Workday/canvas-kit/releases/tag/v15.1.16) (2026-10-27)
+
+### Components
+
+- fix(ActionBar): Allow icon-only items without children ([#4203](https://github.com/Workday/canvas-kit/pull/4203)) ([@akshita317](https://github.com/akshita317))
+## [v16.2.11](https://github.com/Workday/canvas-kit/releases/tag/v16.2.11) (2026-10-27)
+
+### Components
+
+- fix(avatar): Hide decorative fallback initials from assistive technology ([#4188](https://github.com/Workday/canvas-kit/pull/4188)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v16.2.10](https://github.com/Workday/canvas-kit/releases/tag/v16.2.10) (2026-10-27)
+
+### Infrastructure
+
+- chore(Infrastructure): Add maintainer /pr-review command ([#4208](https://github.com/Workday/canvas-kit/pull/4208)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.9](https://github.com/Workday/canvas-kit/releases/tag/v16.2.9) (2026-10-27)
+
+### Components
+
+- fix(select): Apply disabled styles without FormField ([#4182](https://github.com/Workday/canvas-kit/pull/4182)) ([@mig-builds](https://github.com/mig-builds))
+
+
+## [v16.2.8](https://github.com/Workday/canvas-kit/releases/tag/v16.2.8) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v15.1.15](https://github.com/Workday/canvas-kit/releases/tag/v15.1.15) (2026-10-26)
+
+### Infrastructure
+
+- fix: Remove generated package.json files after packing ([#4224](https://github.com/Workday/canvas-kit/pull/4224)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+## [v16.2.7](https://github.com/Workday/canvas-kit/releases/tag/v16.2.7) (2026-10-26)
+
+### Documentation
+
+- docs(table): Add an accessible draggable rows pattern ([#4184](https://github.com/Workday/canvas-kit/pull/4184)) ([@AverageZ](https://github.com/AverageZ), alex.zajac, William Stanton, [@cursoragent](https://github.com/cursoragent))
+  Documentation only. `Table` does not gain reorder behavior. The pattern is a research example at Guides > Accessibility > Table Patterns > Draggable Rows.
+
+
+## [v16.2.6](https://github.com/Workday/canvas-kit/releases/tag/v16.2.6) (2026-10-26)
+
+### Infrastructure
+
+- test: Add automated accessibility tests for popup components ([#4181](https://github.com/Workday/canvas-kit/pull/4181)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@claude](https://github.com/claude), [@cursoragent](https://github.com/cursoragent))
+  Added automated accessibility tests for popup components (Dialog, Modal, Popup) to verify accessible names. These tests catch accessibility gaps early by validating that dialog containers have proper labeling.
+
+
+## [v16.2.5](https://github.com/Workday/canvas-kit/releases/tag/v16.2.5) (2026-10-23)
+
+### Components
+
+- fix: Position Menu submenu against parent's visible edge ([#4214](https://github.com/Workday/canvas-kit/pull/4214)) ([@sheelah](https://github.com/sheelah))
+
+### Infrastructure
+
+- chore: Fix npm publish failures in support ([#4218](https://github.com/Workday/canvas-kit/pull/4218)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Release and canary CI on `support` now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
+## [v15.1.14](https://github.com/Workday/canvas-kit/releases/tag/v15.1.14) (2026-10-22)
+
+### Infrastructure
+
+- chore: Fix npm publish failures in support ([#4218](https://github.com/Workday/canvas-kit/pull/4218)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Release and canary CI on `support` now recover from partial npm publishes caused by Sigstore transparency-log 409s during trusted publishing. A new **complete-unpublished** workflow dispatch option can finish missing packages without bumping versions.
+
+
+## [v15.1.13](https://github.com/Workday/canvas-kit/releases/tag/v15.1.13) (2026-10-22)
+
+### Components
+
+- fix: Position Menu submenu against parent's visible edge ([#4214](https://github.com/Workday/canvas-kit/pull/4214)) ([@sheelah](https://github.com/sheelah))
+
+
+## [v16.2.4](https://github.com/Workday/canvas-kit/releases/tag/v16.2.4) (2026-10-21)
+
+### Components
+
+- fix: Update focus styles for SelectionGroup ([#4210](https://github.com/Workday/canvas-kit/pull/4210)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera)
+
+
+## [v16.2.3](https://github.com/Workday/canvas-kit/releases/tag/v16.2.3) (2026-10-16)
+
+### Components
+
+- docs(radio): Address accessibility review feedback ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Format accessibility guidance for consistency ([@](https://github.com/), Cursor)
+
+### Documentation
+
+- docs(radio): Add accessibility guidance for AI codegen ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify accessibility requirements wording ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+- docs(radio): Clarify option value and trim anti-patterns ([@moaan-workday](https://github.com/moaan-workday), Cursor)
+
+
+## [v16.2.2](https://github.com/Workday/canvas-kit/releases/tag/v16.2.2) (2026-10-15)
+
+### Components
+
+- docs(switch): Expand accessibility section for AI codegen ([@](https://github.com/), Cursor)
+- Simplified Switch component documentation ([@gautamjn6388](https://github.com/gautamjn6388))
+- docs(switch): Simplify accessibility keyboard and focus guidance ([@](https://github.com/), Cursor)
+- docs(switch): Leave required off the basic example ([@](https://github.com/), Cursor)
+
+
+## [v16.2.1](https://github.com/Workday/canvas-kit/releases/tag/v16.2.1) (2026-10-15)
+
+### Components
+
+- docs(action-bar): Updating some sections to match button docs ([#4200](https://github.com/Workday/canvas-kit/pull/4200)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent), [@claude](https://github.com/claude), William Stanton)
+
+
+## [v16.2.0](https://github.com/Workday/canvas-kit/releases/tag/v16.2.0) (2026-10-14)
+
+
+
+
+## [v16.1.12](https://github.com/Workday/canvas-kit/releases/tag/v16.1.12) (2026-10-14)
+
+### Components
+
+- fix(checkbox): Restore disabled opacity on the container ([#4206](https://github.com/Workday/canvas-kit/pull/4206)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.1.11](https://github.com/Workday/canvas-kit/releases/tag/v16.1.11) (2026-10-13)
+
+### Components
+
+- docs(button): Expand accessibility section for AI codegen ([#4183](https://github.com/Workday/canvas-kit/pull/4183)) ([@purvas12](https://github.com/purvas12), [@cursoragent](https://github.com/cursoragent))
+
+
 ## [v16.1.10](https://github.com/Workday/canvas-kit/releases/tag/v16.1.10) (2026-10-12)
 
 ### Components
@@ -49,6 +306,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 - docs(ToolbarIconButton): Add a text formatting toolbar example ([#4185](https://github.com/Workday/canvas-kit/pull/4185)) ([@williamjstanton](https://github.com/williamjstanton), William Stanton, [@cursoragent](https://github.com/cursoragent))
 
 
+## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
 ## [v15.1.12](https://github.com/Workday/canvas-kit/releases/tag/v15.1.12) (2026-10-01)
 
 ### Components
