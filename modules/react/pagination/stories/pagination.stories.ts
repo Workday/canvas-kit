@@ -5,6 +5,7 @@ import {Pagination} from '@workday/canvas-kit-react/pagination';
 import {Basic as BasicExample} from './examples/Basic';
 import {CustomRange as CustomRangeExample} from './examples/CustomRange';
 import {GoToForm as GoToFormExample} from './examples/GoToForm';
+import {GuardedPageChange as GuardedPageChangeExample} from './examples/GuardedPageChange';
 import {HoistedModel as HoistedModelExample} from './examples/HoistedModel';
 import {JumpControls as JumpControlsExample} from './examples/JumpControls';
 import {RTL as RTLExample} from './examples/RTL';
@@ -38,6 +39,9 @@ export const GoToForm: Story = {
 };
 export const HoistedModel: Story = {
   render: HoistedModelExample,
+};
+export const GuardedPageChange: Story = {
+  render: GuardedPageChangeExample,
 };
 export const ResponsiveRange: Story = {
   render: ResponsiveRangeExample,

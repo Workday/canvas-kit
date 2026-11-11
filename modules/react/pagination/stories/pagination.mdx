@@ -5,6 +5,7 @@ import {ExampleCodeBlock, SymbolDoc} from '@workday/canvas-kit-docs';
 import {Basic} from './examples/Basic';
 import {CustomRange} from './examples/CustomRange';
 import {GoToForm} from './examples/GoToForm';
+import {GuardedPageChange} from './examples/GuardedPageChange';
 import {HoistedModel} from './examples/HoistedModel';
 import {JumpControls} from './examples/JumpControls';
 import {RTL} from './examples/RTL';
@@ -73,6 +74,18 @@ This example adds a form (`Pagination.GoToForm`) that allows you to skip to a sp
 the range.
 
 <ExampleCodeBlock code={GoToForm} />
+
+### Guarding Page Changes
+
+Pass a `shouldPageChange` function to `Pagination` or `usePaginationModel` to prevent the page from
+changing under certain conditions, such as when the user has unsaved changes. The function receives
+the page number the model is about to change to. Returning `false` cancels the change: `currentPage`
+stays the same and `onPageChange` is not called. The guard is not called when the requested page is
+already the current page.
+
+In this example, page changes are blocked until the checkbox is cleared.
+
+<ExampleCodeBlock code={GuardedPageChange} />
 
 ### Right-to-Left (RTL)
 

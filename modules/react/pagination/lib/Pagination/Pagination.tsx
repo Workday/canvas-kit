@@ -31,6 +31,10 @@ export type PaginationProps = PaginationNavProps & {
   rangeSize?: number;
   model?: PaginationModel;
   onPageChange?: (pageNumber: number) => void;
+  /**
+   * A guard function called before the page changes. Return `false` to prevent the change.
+   */
+  shouldPageChange?: (pageNumber: number) => boolean;
 };
 
 function useDefaultModel<T, C>(model: T | undefined, config: C, fn: (config: C) => T) {
@@ -91,7 +95,15 @@ export const Pagination = createComponent('nav')({
       usePaginationModel
     );
 
-    const {lastPage, firstPage, initialCurrentPage, rangeSize, onPageChange, ...elemProps} = props;
+    const {
+      lastPage,
+      firstPage,
+      initialCurrentPage,
+      rangeSize,
+      onPageChange,
+      shouldPageChange,
+      ...elemProps
+    } = props;
 
     return (
       <PaginationContext.Provider value={model}>

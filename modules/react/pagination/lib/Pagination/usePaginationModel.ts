@@ -27,6 +27,13 @@ export type UsePaginationModelConfig = {
    */
   onPageChange?: (pageNumber: number) => void;
   /**
+   * A guard function called before the page changes. It receives the page number the model is
+   * about to change to. Return `false` to prevent the change: `currentPage` stays as is and
+   * `onPageChange` is not called. The guard is not called when the requested page is already the
+   * current page.
+   */
+  shouldPageChange?: (pageNumber: number) => boolean;
+  /**
    * The size of the pagination range
    * @default 5
    */
@@ -34,15 +41,25 @@ export type UsePaginationModelConfig = {
 };
 
 export const usePaginationModel = (config: UsePaginationModelConfig): PaginationModel => {
-  const {firstPage = 1, initialCurrentPage = 1, lastPage, rangeSize = 5, onPageChange} = config;
+  const {
+    firstPage = 1,
+    initialCurrentPage = 1,
+    lastPage,
+    rangeSize = 5,
+    onPageChange,
+    shouldPageChange,
+  } = config;
   const [currentPage, setCurrentPage] = React.useState(initialCurrentPage);
 
   const changePage = (page: number) => {
-    // Don't fire an `onPageChange` event if the page number is the same as the current page.
-    // `setCurrentPage` doesn't need this check, because React won't update the state if the values are the same.
-    if (currentPage !== page) {
-      onPageChange?.(page);
+    if (currentPage === page) {
+      // Nothing changes, so there is nothing to guard and no `onPageChange` event to fire.
+      return;
     }
+    if (shouldPageChange?.(page) === false) {
+      return;
+    }
+    onPageChange?.(page);
     setCurrentPage(page);
   };
 
