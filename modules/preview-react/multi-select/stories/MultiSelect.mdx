@@ -211,15 +211,16 @@ vertical_):
   the list is open, <kbd>ArrowDown</kbd> / <kbd>ArrowUp</kbd> move the active option and wrap from
   the last option to the first (and the first to the last). Ids in **`nonInteractiveIds`** are
   skipped. <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last option while the list is open.
-- <kbd>Enter</kbd> while the list is open selects the active option unless that option has
-  `aria-disabled="true"`. The list stays open. <kbd>Enter</kbd> does not submit the form while the
-  list is open. <kbd>Space</kbd> does not select an option. On **`MultiSelect.Input`** it has no
-  effect. On **`MultiSelect.SearchInput`** it is typed into the field, including when an option is
-  active.
+- <kbd>Enter</kbd> while the list is open selects or deselects the active option unless that option
+  has `aria-disabled="true"`. The list stays open. <kbd>Enter</kbd> does not submit the form while
+  the list is open. <kbd>Space</kbd> does the same on both **`MultiSelect.Input`** and
+  **`MultiSelect.SearchInput`** when an option is active. When no option is active, <kbd>Space</kbd>
+  has no effect on **`MultiSelect.Input`** and is typed into the field on
+  **`MultiSelect.SearchInput`**.
 - <kbd>Escape</kbd> closes the list. Focus remains on the input. After close,
   `aria-activedescendant` is removed.
-- Activating an option with the pointer selects it, keeps focus on the input, and leaves the list
-  open.
+- Activating an option with the pointer selects or deselects it, keeps focus on the input, and
+  leaves the list open.
 - **`MultiSelect.Input`** does not accept typed values. Printable characters open the list only on
   **`MultiSelect.SearchInput`**.
 
