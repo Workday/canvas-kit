@@ -114,15 +114,17 @@ replaces it with an input that also composes **`useComboboxInputArbitrary`** and
 
 ```tsx
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField, useFormFieldModel} from '@workday/canvas-kit-react/form-field';
 
 const Example = () => {
+  const field = useFormFieldModel();
   const model = useComboboxModel({
+    id: `input-${field.state.id}`,
     items: ['Apple', 'Orange', 'Banana'],
   });
 
   return (
-    <FormField>
+    <FormField model={field}>
       <FormField.Label>Fruit</FormField.Label>
       <FormField.Field>
         <Combobox model={model}>
@@ -142,7 +144,9 @@ const Example = () => {
 ```
 
 **`FormField.Input`** gives the combobox a programmatically determinable name from
-**`FormField.Label`**.
+**`FormField.Label`**. The combobox model `id` is `input-${field.state.id}`, the same id
+**`FormField.Input`** puts on the input, so **`Combobox.Menu.List`** `aria-labelledby` points at
+that input. The [Autocomplete](#autocomplete) example does the same.
 
 ### Built-in Behaviors
 
@@ -159,10 +163,11 @@ are rendered. **Do not duplicate them** in consuming code. Behaviors from
 - **`aria-activedescendant`**: set to the active option's id while the list is open, and removed
   when the list is closed. DOM focus stays on the input. Options are not tab stops.
 - **`Combobox.Menu.List`**: `role="listbox"`, `id="{modelId}-list"`, and `aria-labelledby` set to
-  the combobox model id. **`FormField.Input`** replaces the input `id` with `input-{id}`, so that
-  `aria-labelledby` does not match the input. Do not set `aria-label` or `aria-labelledby` on the
-  list. The combobox input's accessible name comes from **`FormField.Label`** through
-  **`FormField.Input`**.
+  the combobox model id. **`FormField.Input`** sets the input `id` to `input-{formFieldId}`.
+  `aria-labelledby` matches the input when the combobox model id is that same value. The
+  [Autocomplete](#autocomplete) example sets the model id to `input-${field.state.id}`. Do not set
+  `aria-label` or `aria-labelledby` on the list. The combobox input's accessible name comes from
+  **`FormField.Label`** through **`FormField.Input`**.
 - **`Combobox.Menu.Item`** (`Menu.Option`): `role="option"` and `aria-selected` from selection
   state. The option id matches `aria-activedescendant`.
 - **Popup**: **`Combobox.Menu.Popper`** portals the list. **`Combobox.Menu.Card`** is
