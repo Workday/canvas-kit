@@ -10,9 +10,12 @@ export const GuardedPageChange = () => {
   return (
     <>
       <FormField orientation="horizontalStart">
-        <Checkbox
+        <FormField.Input
+          as={Checkbox}
           checked={hasUnsavedChanges}
-          onChange={event => setHasUnsavedChanges(event.target.checked)}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setHasUnsavedChanges(event.target.checked)
+          }
         />
         <FormField.Label>Has unsaved changes (blocks page changes)</FormField.Label>
       </FormField>
@@ -38,6 +41,9 @@ export const GuardedPageChange = () => {
           </Pagination.PageList>
           <Pagination.StepToNextButton aria-label="Next" />
         </Pagination.Controls>
+        <Pagination.AdditionalDetails shouldHideDetails>
+          {({state}) => `Page ${state.currentPage} of 10`}
+        </Pagination.AdditionalDetails>
       </Pagination>
     </>
   );
