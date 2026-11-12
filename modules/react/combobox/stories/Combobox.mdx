@@ -108,9 +108,12 @@ Use a visible **`FormField.Label`**, **`FormField.Input as={Combobox.Input}`**, 
 **`Combobox.Menu.Popper`**, **`Combobox.Menu.Card`**, **`Combobox.Menu.List`**, and
 **`Combobox.Menu.Item`**.
 
-**`Combobox.Input`** applies **`useComboboxInput`** only. The [Autocomplete](#autocomplete) example
-replaces it with an input that also composes **`useComboboxInputArbitrary`** and calls
-`model.events.show` on `onKeyPress` so the list opens as the user types.
+This snippet is the accessible structure: the label, the combobox input, and the listbox. It is
+not a complete selection example. **`Combobox.Input`** applies **`useComboboxInput`** only.
+Choosing an option updates the model and does not write that option into the visible input. The
+[Autocomplete](#autocomplete) example keeps **`useComboboxInputArbitrary`**, which synchronizes the
+selected value into the input, and calls `model.events.show` on `onKeyPress` so the list opens as
+the user types.
 
 ```tsx
 import {Combobox, useComboboxModel} from '@workday/canvas-kit-react/combobox';
@@ -192,7 +195,9 @@ are rendered. **Do not duplicate them** in consuming code. Behaviors from
   skipped. <kbd>Home</kbd> / <kbd>End</kbd> move to the first or last option while the list is open.
 - <kbd>Enter</kbd> while the list is open selects the active option unless that option has
   `aria-disabled="true"`. In the default `mode` (`"single"`), the list then closes. <kbd>Enter</kbd>
-  does not submit the form while the list is open.
+  does not submit the form while the list is open. **`Combobox.Input`** does not copy the selected
+  option into the visible input. **`useComboboxInputArbitrary`**, used by the
+  [Autocomplete](#autocomplete) example, does.
 - <kbd>Escape</kbd> closes the list. Focus remains on the input. After close,
   `aria-activedescendant` is removed.
 - Activating an option with the pointer selects it, keeps focus on the input, and closes the list
