@@ -18,28 +18,83 @@ const data = [
   'Jewelry',
 ];
 
-const flexWrapStyles = createStyles({
+const listStyles = createStyles({
   display: 'flex',
   flexWrap: 'wrap',
   gap: system.gap.sm,
+  listStyle: 'none',
+  margin: 0,
+  padding: 0,
+});
+
+const emptyStateStyles = createStyles({
+  margin: 0,
+  color: system.color.fg.default,
+  '&:is(.focus, :focus, :focus-visible)': {
+    outline: `2px solid ${system.legacy.color.brand.border.primary}`,
+    outlineOffset: '2px',
+  },
 });
 
 export const WithList = () => {
   const [items, setItems] = React.useState(data);
+  const buttonRefs = React.useRef(new Map<string, HTMLButtonElement>());
+  const emptyStateRef = React.useRef<HTMLParagraphElement>(null);
+  // A category id, or '' when the list is empty and focus should move to the empty state.
+  const pendingFocus = React.useRef<string | null>(null);
+
+  React.useLayoutEffect(() => {
+    if (pendingFocus.current === '') {
+      pendingFocus.current = null;
+      emptyStateRef.current?.focus();
+      return;
+    }
+
+    const category = pendingFocus.current;
+    if (!category) {
+      return;
+    }
+    pendingFocus.current = null;
+    buttonRefs.current.get(category)?.focus();
+  }, [items]);
+
+  const removeItem = (category: string) => {
+    const index = items.indexOf(category);
+    const nextItems = items.filter(item => item !== category);
+    pendingFocus.current = nextItems[index] ?? nextItems[index - 1] ?? '';
+    setItems(nextItems);
+  };
+
+  if (items.length === 0) {
+    return (
+      <p ref={emptyStateRef} tabIndex={-1} className={emptyStateStyles}>
+        No categories remaining.
+      </p>
+    );
+  }
 
   return (
-    <div className={flexWrapStyles}>
-      {items.map((cat, index) => {
+    <ul className={listStyles}>
+      {items.map(cat => {
         return (
-          <Pill key={index} variant="removable">
-            <Pill.Label>{cat}</Pill.Label>
-            <Pill.IconButton
-              aria-label="Remove"
-              onClick={() => setItems(items.filter(i => i !== cat))}
-            />
-          </Pill>
+          <li key={cat}>
+            <Pill variant="removable">
+              <Pill.Label>{cat}</Pill.Label>
+              <Pill.IconButton
+                ref={element => {
+                  if (element) {
+                    buttonRefs.current.set(cat, element);
+                  } else {
+                    buttonRefs.current.delete(cat);
+                  }
+                }}
+                aria-label="Remove"
+                onClick={() => removeItem(cat)}
+              />
+            </Pill>
+          </li>
         );
       })}
-    </div>
+    </ul>
   );
 };

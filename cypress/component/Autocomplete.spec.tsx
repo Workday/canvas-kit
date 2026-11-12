@@ -65,6 +65,10 @@ describe('Autocomplete', () => {
         cy.findByRole('combobox').should(haveAttrMatchingIdOf('aria-controls', '[role=listbox]'));
       });
 
+      it('should label the listbox with the combobox input', () => {
+        cy.findByRole('listbox').should(haveAttrMatchingIdOf('aria-labelledby', '[role=combobox]'));
+      });
+
       it('should show menu', () => {
         cy.findByRole('listbox').should('be.visible');
       });

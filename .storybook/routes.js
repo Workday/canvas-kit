@@ -19,6 +19,7 @@ const routes = {
   '/components/containers/tabs/': 'components-containers-tabs--docs',
   '/components/indicators/banner/': 'components-indicators-banner--docs',
   '/components/indicators/loading-dots/': 'components-indicators-loading-dots--docs',
+  '/components/indicators/pill/': 'components-indicators-pill--docs',
   '/components/indicators/skeleton/': 'components-indicators-skeleton--docs',
   '/components/indicators/status-indicator/': 'preview-status-indicator--docs',
   '/components/inputs/checkbox/': 'components-inputs-checkbox--docs',

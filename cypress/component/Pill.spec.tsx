@@ -50,6 +50,28 @@ describe('Pill', () => {
       cy.findByLabelText('Color').click();
       cy.findByLabelText('Color').should('not.exist');
     });
+
+    it('should move focus to the next pill when one is removed', () => {
+      cy.findByLabelText('Color').click();
+      cy.findByLabelText('Accessories').should('have.focus');
+    });
+
+    it('should move focus to the previous pill when the last one is removed', () => {
+      cy.findByLabelText('Jewelry').click();
+      cy.findByLabelText('Glasses').should('have.focus');
+    });
+
+    it('should move focus to the empty state when no pills remain', () => {
+      Cypress._.times(11, () => {
+        cy.findAllByRole('button').first().click();
+      });
+
+      cy.findByText('No categories remaining.')
+        .should('have.focus')
+        .and('have.attr', 'tabindex', '-1');
+      cy.findAllByRole('button').should('have.length', 0);
+      cy.checkA11y();
+    });
   });
 
   context(`given the [Components/Indicators/Pill, With Removable] story is rendered`, () => {
