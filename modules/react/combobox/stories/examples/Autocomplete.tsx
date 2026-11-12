@@ -13,7 +13,7 @@ import {
   createElemPropsHook,
   createSubcomponent,
 } from '@workday/canvas-kit-react/common';
-import {FormField} from '@workday/canvas-kit-react/form-field';
+import {FormField, useFormFieldModel} from '@workday/canvas-kit-react/form-field';
 import {LoadingDots} from '@workday/canvas-kit-react/loading-dots';
 import {StyledMenuItem} from '@workday/canvas-kit-react/menu';
 import {InputGroup, TextInput} from '@workday/canvas-kit-react/text-input';
@@ -84,8 +84,12 @@ const AutoCompleteInput = createSubcomponent(TextInput)({
 });
 
 export const Autocomplete = () => {
+  const field = useFormFieldModel({orientation: 'horizontalStart', isRequired: true});
   const {model, loader} = useComboboxLoader(
     {
+      // Match the id FormField.Input assigns so Combobox.Menu.List aria-labelledby points at it.
+      id: `input-${field.state.id}`,
+
       // You can start with any number that makes sense.
       total: 0,
 
@@ -128,7 +132,7 @@ export const Autocomplete = () => {
   );
 
   return (
-    <FormField orientation="horizontalStart" isRequired>
+    <FormField model={field}>
       <FormField.Label>Fruit</FormField.Label>
       <FormField.Field>
         <Combobox model={model} onChange={event => console.log('input', event.currentTarget.value)}>
