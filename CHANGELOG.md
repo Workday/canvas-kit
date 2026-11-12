@@ -3,6 +3,69 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [v16.2.21](https://github.com/Workday/canvas-kit/releases/tag/v16.2.21) (2026-11-10)
+
+### Components
+
+- fix(fonts): Emit the variable font weight as a range string ([#4251](https://github.com/Workday/canvas-kit/pull/4251)) ([@mannycarrera4](https://github.com/mannycarrera4), manuel.carrera, [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.20](https://github.com/Workday/canvas-kit/releases/tag/v16.2.20) (2026-11-05)
+
+### Infrastructure
+
+- chore: Add resolve-forward-merge skill ([#4239](https://github.com/Workday/canvas-kit/pull/4239)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v15.1.22](https://github.com/Workday/canvas-kit/releases/tag/v15.1.22) (2026-11-05)
+
+### Infrastructure
+
+- chore: Add resolve-forward-merge skill ([#4239](https://github.com/Workday/canvas-kit/pull/4239)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+
+
+## [v16.2.19](https://github.com/Workday/canvas-kit/releases/tag/v16.2.19) (2026-11-05)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body is the last element ([#4229](https://github.com/Workday/canvas-kit/pull/4229)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` when it is the last element. Spacing is unchanged when a `Link` follows. Chromatic will show a visual diff on the "Only Body" states.
+
+
+## [v16.2.18](https://github.com/Workday/canvas-kit/releases/tag/v16.2.18) (2026-11-05)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body or Heading is the last element ([#4230](https://github.com/Workday/canvas-kit/pull/4230)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` and `InformationHighlight.Heading` when they are the last element. Spacing is unchanged when other content follows. Chromatic will show a visual diff on the "Only Heading" and "Only Body" states.
+
+
+## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
+## [v15.1.21](https://github.com/Workday/canvas-kit/releases/tag/v15.1.21) (2026-11-04)
+
+### Components
+
+- fix(information-highlight): Remove trailing margin when Body is the last element ([#4229](https://github.com/Workday/canvas-kit/pull/4229)) ([@alanbsmith](https://github.com/alanbsmith), [@cursoragent](https://github.com/cursoragent))
+  Removes the extra space below `InformationHighlight.Body` when it is the last element. Spacing is unchanged when a `Link` follows. Chromatic will show a visual diff on the "Only Body" states.
+## [v16.2.17](https://github.com/Workday/canvas-kit/releases/tag/v16.2.17) (2026-11-04)
+
+### Components
+
+- fix(text-input): Avoid resizing growing inputs ([#4191](https://github.com/Workday/canvas-kit/pull/4191)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v16.2.16](https://github.com/Workday/canvas-kit/releases/tag/v16.2.16) (2026-11-04)
+
+### Components
+
+- fix(multi-select): Correct selected pill accessibility ([#4192](https://github.com/Workday/canvas-kit/pull/4192)) ([@minwookshin](https://github.com/minwookshin))
+
+
+## [v15.1.20](https://github.com/Workday/canvas-kit/releases/tag/v15.1.20) (2026-11-04)
+
+### Components
+
+- fix(multi-select): Correct selected pill accessibility ([#4192](https://github.com/Workday/canvas-kit/pull/4192)) ([@minwookshin](https://github.com/minwookshin))
 ## [v16.2.15](https://github.com/Workday/canvas-kit/releases/tag/v16.2.15) (2026-11-03)
 
 ### Components
