@@ -27,12 +27,29 @@ const listStyles = createStyles({
   padding: 0,
 });
 
+const emptyStateStyles = createStyles({
+  margin: 0,
+  color: system.color.fg.default,
+  '&:is(.focus, :focus, :focus-visible)': {
+    outline: `2px solid ${system.legacy.color.brand.border.primary}`,
+    outlineOffset: '2px',
+  },
+});
+
 export const WithList = () => {
   const [items, setItems] = React.useState(data);
   const buttonRefs = React.useRef(new Map<string, HTMLButtonElement>());
+  const emptyStateRef = React.useRef<HTMLParagraphElement>(null);
+  // A category id, or '' when the list is empty and focus should move to the empty state.
   const pendingFocus = React.useRef<string | null>(null);
 
   React.useLayoutEffect(() => {
+    if (pendingFocus.current === '') {
+      pendingFocus.current = null;
+      emptyStateRef.current?.focus();
+      return;
+    }
+
     const category = pendingFocus.current;
     if (!category) {
       return;
@@ -44,9 +61,17 @@ export const WithList = () => {
   const removeItem = (category: string) => {
     const index = items.indexOf(category);
     const nextItems = items.filter(item => item !== category);
-    pendingFocus.current = nextItems[index] ?? nextItems[index - 1] ?? null;
+    pendingFocus.current = nextItems[index] ?? nextItems[index - 1] ?? '';
     setItems(nextItems);
   };
+
+  if (items.length === 0) {
+    return (
+      <p ref={emptyStateRef} tabIndex={-1} className={emptyStateStyles}>
+        No categories remaining.
+      </p>
+    );
+  }
 
   return (
     <ul className={listStyles}>

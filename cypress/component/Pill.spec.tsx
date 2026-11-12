@@ -60,6 +60,18 @@ describe('Pill', () => {
       cy.findByLabelText('Jewelry').click();
       cy.findByLabelText('Glasses').should('have.focus');
     });
+
+    it('should move focus to the empty state when no pills remain', () => {
+      Cypress._.times(11, () => {
+        cy.findAllByRole('button').first().click();
+      });
+
+      cy.findByText('No categories remaining.')
+        .should('have.focus')
+        .and('have.attr', 'tabindex', '-1');
+      cy.findAllByRole('button').should('have.length', 0);
+      cy.checkA11y();
+    });
   });
 
   context(`given the [Components/Indicators/Pill, With Removable] story is rendered`, () => {

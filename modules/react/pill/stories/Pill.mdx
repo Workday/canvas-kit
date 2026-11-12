@@ -99,8 +99,11 @@ an `icon` prop to `Pill.IconButton`
 spacing comes from `gap`.
 
 Each `Pill` keeps its own accessible name and tab stop. `Pill` does not move focus between items
-with arrow keys. Removing a pill moves focus to the next pill’s remove button, or to the previous
-one when the removed pill is last.
+with arrow keys. Removing a pill should move focus to the next pill’s remove button, or to the
+previous one when the removed pill is last. When no pill remains, focus moves to an empty state
+with `tabIndex={-1}`, so it can take focus without joining the tab order. `Pill` does not do this
+itself. The example below handles it in the remove handler. See
+[Focus after removal](#accessibility-requirements).
 
 <ExampleCodeBlock code={WithList} />
 
@@ -189,8 +192,9 @@ Canvas Kit applies these automatically. **Do not duplicate them** in consuming c
 
 The default **`Pill`** and **`Pill.IconButton`** use native button keyboard support: <kbd>Tab</kbd> /
 <kbd>Shift</kbd>+<kbd>Tab</kbd> for focus order, and <kbd>Enter</kbd> or <kbd>Space</kbd> to
-activate. A read-only pill is not in the tab order and has no keyboard action. Removing a pill does
-not move focus.
+activate. A read-only pill is not in the tab order and has no keyboard action. Canvas Kit does not
+move focus when a removable pill is removed. Moving focus to a remaining pill is application
+behavior. See [Focus after removal](#accessibility-requirements).
 
 **Screen reader expectations** (_when built-in behaviors are used as intended_):
 
@@ -221,17 +225,17 @@ situation matches—otherwise omit.
 
 When **`Pill.IconButton`** removes its own pill, move focus to an element that remains. Prefer the
 next pill’s **`Pill.IconButton`**. When the removed pill is last, use the previous pill’s
-**`Pill.IconButton`**. When no pill remains, use another control that is still on the page, such as
-the control that adds a pill. Attach `ref` to **`Pill.IconButton`**. A `ref` on the removable
-**`Pill`** points at the `<span>`, which cannot take focus. [List of Pills](#list-of-pills) moves
-focus in the remove handler.
+**`Pill.IconButton`**. When no pill remains, move focus to an element that stays on the page.
+[List of Pills](#list-of-pills) uses an empty state with `tabIndex={-1}`. A control that adds a pill
+is another option. Attach `ref` to **`Pill.IconButton`**. A `ref` on the removable **`Pill`** points
+at the `<span>`, which cannot take focus. The example moves focus in the remove handler.
 
 | Requirement                   | How to satisfy                                                                                                                                                                                                       |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Accessible name               | Non-empty visible text. On `variant="removable"`, put that text in **`Pill.Label`**.                                                                                                                                 |
 | Read-only _(conditional)_     | `variant="readOnly"` and visible text as children. The component wraps those children in **`Pill.Label`**. Do not add another **`Pill.Label`**.                                                                      |
 | Removable _(conditional)_     | `variant="removable"`, **`Pill.Label`** with the item name, and **`Pill.IconButton`** with an action **`aria-label`** such as `"Remove"` plus the remove `onClick`. The announced name is the action plus the label. |
-| Focus after removal _(conditional)_ | When the focused **`Pill.IconButton`** removes its pill, move focus to the next **`Pill.IconButton`**, the previous one when it was last, or another remaining control when the list is empty. Attach `ref` to **`Pill.IconButton`**. |
+| Focus after removal _(conditional)_ | When the focused **`Pill.IconButton`** removes its pill, move focus to the next **`Pill.IconButton`**, the previous one when it was last, or an empty state with `tabIndex={-1}` when the list is empty. Attach `ref` to **`Pill.IconButton`**. |
 | Leading icon _(conditional)_  | **`Pill.Icon`** with a non-empty **`aria-label`** that describes the icon. That label is spoken with the pill text, so it should add meaning.                                                                        |
 | Avatar _(conditional)_        | Keep the person’s full name in **`Pill.Label`**. **`Pill.Avatar`** hides the photo. **`name`** supplies initials only, and those initials disappear once the image loads.                                             |
 | Count _(conditional)_         | **`Pill.Count`** with text that still makes sense when spoken after the label, as in [Count](#count).                                                                                                                |
@@ -249,8 +253,8 @@ focus in the remove handler.
   when spoken; **`disabled`** on **`Pill`** when the action is unavailable; **`type="button"`** on
   the pill button or **`Pill.IconButton`**
   inside a form; list markup; when removal unmounts the focused
-  **`Pill.IconButton`**, move focus to the next or previous **`Pill.IconButton`**, or to another
-  remaining control
+  **`Pill.IconButton`**, move focus to the next or previous **`Pill.IconButton`**, or to an empty
+  state with `tabIndex={-1}` when no pill remains
 
 ### Anti-Patterns
 
@@ -262,8 +266,8 @@ to supply instead):
 - Use **`Pill.IconButton`** on a default **`Pill`**, or omit it on `variant="removable"` — only the
   removable variant’s **`Pill.IconButton`** is the button
 - Remove a focused **`Pill.IconButton`** and leave focus on `document.body` — move focus to the next
-  or previous **`Pill.IconButton`**, or to another control that remains. Attach `ref` to
-  **`Pill.IconButton`**; a `ref` on the removable **`Pill`** points at the `<span>`
+  or previous **`Pill.IconButton`**, or to an empty state with `tabIndex={-1}` when no pill remains.
+  Attach `ref` to **`Pill.IconButton`**; a `ref` on the removable **`Pill`** points at the `<span>`
 - Omit **`Pill.Label`** on a removable pill, or put the item name only in **`Pill.IconButton`**
   **`aria-label`** or as **`Pill.IconButton`** children — the button name is the action
   **`aria-label`** plus **`Pill.Label`**
