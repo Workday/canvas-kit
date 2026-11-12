@@ -96,6 +96,67 @@ describe('usePaginationModel hook', () => {
       expect(onPageChange).toHaveBeenCalledWith(4);
     });
 
+    context('given a shouldPageChange guard', () => {
+      it('should call the guard with the page being changed to', () => {
+        const shouldPageChange = vi.fn(() => true);
+        const {result} = renderHook(() => buildModel({shouldPageChange}));
+        act(() => {
+          result.current.events.next();
+        });
+        expect(shouldPageChange).toHaveBeenCalledWith(6);
+        expect(result.current.state.currentPage).toBe(6);
+      });
+
+      it('should call the guard with the clamped page for goTo', () => {
+        const shouldPageChange = vi.fn(() => true);
+        const {result} = renderHook(() => buildModel({shouldPageChange}));
+        act(() => {
+          result.current.events.goTo(12);
+        });
+        expect(shouldPageChange).toHaveBeenCalledWith(10);
+      });
+
+      it('should not change the page or call onPageChange when the guard returns false', () => {
+        const onPageChange = vi.fn();
+        const {result} = renderHook(() =>
+          buildModel({onPageChange, shouldPageChange: () => false})
+        );
+        act(() => {
+          result.current.events.next();
+          result.current.events.first();
+          result.current.events.last();
+          result.current.events.previous();
+          result.current.events.goTo(8);
+          result.current.events.setCurrentPage(2);
+        });
+        expect(result.current.state.currentPage).toBe(5);
+        expect(onPageChange).not.toHaveBeenCalled();
+      });
+
+      it('should not call the guard when the requested page is the current page', () => {
+        const shouldPageChange = vi.fn(() => false);
+        const {result} = renderHook(() => buildModel({shouldPageChange}));
+        act(() => {
+          result.current.events.goTo(5);
+        });
+        expect(shouldPageChange).not.toHaveBeenCalled();
+      });
+
+      it('should use the latest guard result between events', () => {
+        let allowed = false;
+        const {result} = renderHook(() => buildModel({shouldPageChange: () => allowed}));
+        act(() => {
+          result.current.events.next();
+        });
+        expect(result.current.state.currentPage).toBe(5);
+        allowed = true;
+        act(() => {
+          result.current.events.next();
+        });
+        expect(result.current.state.currentPage).toBe(6);
+      });
+    });
+
     context('given the goTo event', () => {
       it('should set currentPage to the given page if it is within the page count', () => {
         const {result} = renderHook(() => buildModel());
