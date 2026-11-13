@@ -9,8 +9,8 @@ export interface ToastCloseIconProps extends ExtractProps<typeof Popup.CloseIcon
 export const toastCloseIconStencil = createStencil({
   base: {
     position: 'absolute',
-    insetBlockStart: base.legacy.size50,
-    insetInlineEnd: base.legacy.size50,
+    insetBlockStart: base.size50,
+    insetInlineEnd: base.size50,
   },
 });
 

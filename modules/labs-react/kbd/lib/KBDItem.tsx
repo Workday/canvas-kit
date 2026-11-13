@@ -18,7 +18,7 @@ export interface KBDItemProps extends CSProps {
 export const kbdItemStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
+    [cornerShapeStencil.vars.shape]: system.shape.sm,
     textAlign: 'center',
     display: 'flex',
     alignItems: 'center',
@@ -27,12 +27,12 @@ export const kbdItemStencil = createStencil({
   modifiers: {
     variant: {
       plain: {
-        backgroundColor: system.legacy.color.surface.transparent,
+        backgroundColor: system.color.surface.transparent,
         borderRadius: 0,
         cornerShape: 'unset',
       },
       default: {
-        backgroundColor: system.sana.color.surface.alt.default,
+        backgroundColor: system.color.surface.alt.default,
       },
     },
   },
@@ -43,8 +43,8 @@ export const kbdItemStencil = createStencil({
         variant: 'default',
       },
       styles: {
-        minWidth: system.legacy.size.xs,
-        padding: `${px2rem(2)} ${system.legacy.padding.xxs}`,
+        minWidth: system.size.xs,
+        padding: `${px2rem(2)} ${system.padding.xxs}`,
       },
     },
     {
@@ -53,8 +53,8 @@ export const kbdItemStencil = createStencil({
         variant: 'default',
       },
       styles: {
-        minWidth: system.legacy.size.xxs,
-        padding: `${px2rem(2)} ${system.legacy.padding.xxs}`,
+        minWidth: system.size.xxs,
+        padding: `${px2rem(2)} ${system.padding.xxs}`,
       },
     },
     {
@@ -63,7 +63,7 @@ export const kbdItemStencil = createStencil({
         variant: 'default',
       },
       styles: {
-        minWidth: system.legacy.size.xxxs,
+        minWidth: system.size.xxxs,
         paddingInline: px2rem(2),
       },
     },

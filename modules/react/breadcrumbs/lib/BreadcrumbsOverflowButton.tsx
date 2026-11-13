@@ -34,7 +34,7 @@ export const breadcrumbsOverflowButtonStencil = createStencil({
     alignItems: 'center',
     display: 'flex',
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
     [overflowButtonPart]: {
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },

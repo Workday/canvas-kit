@@ -15,7 +15,7 @@ interface CheckboxCheckProps {
 
 const checkboxCheckStencil = createStencil({
   base: {
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

@@ -39,7 +39,7 @@ export const breadcrumbsItemStencil = createStencil({
     alignItems: 'center',
     display: 'inline-flex',
     whiteSpace: 'nowrap',
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
     [systemIconStencil.vars.color]: system.color.fg.muted.default,
     [chevronRightIconPart]: {
       height: system.size.sm,

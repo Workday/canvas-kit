@@ -80,7 +80,7 @@ export const accessoryStencil = createStencil({
         height: system.size.xxxs,
         [cornerShapeStencil.vars.shape]: system.shape.sm,
         [iconPart]: {
-          [systemIconStencil.vars.size]: base.legacy.size200,
+          [systemIconStencil.vars.size]: base.size200,
           backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },
@@ -90,7 +90,7 @@ export const accessoryStencil = createStencil({
         height: system.size.xxs,
         [cornerShapeStencil.vars.shape]: system.shape.sm,
         [iconPart]: {
-          [systemIconStencil.vars.size]: base.legacy.size225,
+          [systemIconStencil.vars.size]: base.size225,
           backgroundColor: cssVar(tileBackground, 'transparent'),
           borderWidth: 0,
         },
@@ -100,15 +100,15 @@ export const accessoryStencil = createStencil({
         height: system.size.xs,
         [cornerShapeStencil.vars.shape]: system.shape.md,
         [iconPart]: {
-          [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+          [systemIconStencil.vars.size]: component.systemIcon.size.xs,
         },
       }),
       large: ({iconPart}) => ({
         width: system.size.sm,
         height: system.size.sm,
-        [cornerShapeStencil.vars.shape]: base.legacy.size125,
+        [cornerShapeStencil.vars.shape]: base.size125,
         [iconPart]: {
-          [systemIconStencil.vars.size]: component.legacy.systemIcon.size.sm,
+          [systemIconStencil.vars.size]: component.systemIcon.size.sm,
         },
       }),
       extraLarge: ({iconPart}) => ({
@@ -116,7 +116,7 @@ export const accessoryStencil = createStencil({
         height: system.size.md,
         [cornerShapeStencil.vars.shape]: system.shape.lg,
         [iconPart]: {
-          [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+          [systemIconStencil.vars.size]: component.systemIcon.size.md,
         },
       }),
     },

@@ -515,7 +515,7 @@ appearance:
 - `Toast` - Can use `variant="alt"` for elevated toast styling
 - `Tooltip` - Can use `variant="alt"` for elevated tooltip styling
 
-The `alt` variant uses `system.sana.color.surface.elevated` background with inverse borders,
+The `alt` variant uses `system..color.surface.elevated` background with inverse borders,
 providing visual hierarchy and depth to these components when placed on an alt background.
 
 ```tsx
@@ -576,7 +576,7 @@ instead. While the styles are different, both where intended to be used on an `a
 - Card's border radius is now managed via the new `cornerShapeStencil` (see
   [New Utilities](#new-utilities)).
 - The default variant now includes a visible border (`system.color.border.default`).
-- The `alt` variant uses an elevated surface color (`system.sana.color.surface.elevated`) with
+- The `alt` variant uses an elevated surface color (`system..color.surface.elevated`) with
   inverse borders.
 
 #### Expandable
@@ -998,7 +998,7 @@ No API changes. No migration is required unless you render a custom dropdown ind
 
 **Menu.List**
 
-- Gap between items updated from `gap.xs` (4px) to `base.legacy.size25` (2px).
+- Gap between items updated from `gap.xs` (4px) to `base.size25` (2px).
 
 **Menu.Item**
 
@@ -1167,7 +1167,7 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
   underline on hover.
 - The current item (`Breadcrumbs.CurrentItem`) uses `system.color.fg.muted.default`.
 - Overflow and separator chevrons use muted/strong foreground colors with
-  `component.legacy.systemIcon.size.md`.
+  `component.systemIcon.size.md`.
 
 #### Pagination
 
@@ -1177,7 +1177,7 @@ Run the Canvas Kit v16 codemod (`updateHyperlinkProps`) to migrate automatically
   TertiaryButton pattern). The current page uses `system.color.brand.accent.primary` with inverse
   label text.
 - Control chevrons (previous/next and jump controls) are sized to 16px via
-  `component.legacy.systemIcon.size.xs`.
+  `component.systemIcon.size.xs`.
 - GoTo label uses `size="large"` (14px). GoTo input text is centered; border radius inherits from
   TextInput `shape.lg` (12px).
 - GoToForm spacing uses `marginInlineStart: gap.xs` alongside Controls `gap.xs`.

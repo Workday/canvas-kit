@@ -51,16 +51,16 @@ export const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${base.legacy.size25} ${system.color.focus.inverse},
-              0 0 0 ${base.legacy.size50} ${system.color.brand.focus.critical},
+              0 0 0 ${base.size25} ${system.color.focus.inverse},
+              0 0 0 ${base.size50} ${system.color.brand.focus.critical},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${base.legacy.size25} ${system.color.focus.inverse},
-          0 0 0 ${base.legacy.size50} ${system.color.brand.focus.caution.inner},
+          0 0 0 ${base.size25} ${system.color.focus.inverse},
+          0 0 0 ${base.size50} ${system.color.brand.focus.caution.inner},
           0 0 0 ${px2rem(5)} ${system.color.brand.border.caution}`,
         },
       },

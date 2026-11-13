@@ -21,8 +21,8 @@ export const checkboxBackgroundStencil = createStencil({
   },
   base: {
     alignItems: 'center',
-    backgroundColor: system.legacy.color.surface.default,
-    [cornerShapeStencil.vars.shape]: system.sana.shape.xs,
+    backgroundColor: system.color.surface.default,
+    [cornerShapeStencil.vars.shape]: system.shape.xs,
     boxSizing: 'border-box',
     display: 'flex',
     justifyContent: 'center',
@@ -30,24 +30,24 @@ export const checkboxBackgroundStencil = createStencil({
     pointerEvents: 'none',
     position: 'absolute',
     transition: 'border 200ms ease, background 200ms',
-    height: system.legacy.size.xxxs,
-    width: system.legacy.size.xxxs,
+    height: system.size.xxxs,
+    width: system.size.xxxs,
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
   },
   modifiers: {
     variant: {
       inverse: {
-        backgroundColor: system.legacy.color.surface.inverse,
+        backgroundColor: system.color.surface.inverse,
       },
     },
     error: {
       error: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: system.legacy.color.brand.border.critical,
-        [errorRingColorOuter]: system.legacy.color.brand.border.critical,
+        [errorRingColorInner]: system.color.brand.border.critical,
+        [errorRingColorOuter]: system.color.brand.border.critical,
       }),
       caution: ({errorRingColorInner, errorRingColorOuter}) => ({
-        [errorRingColorInner]: system.legacy.color.brand.focus.caution.inner,
-        [errorRingColorOuter]: system.legacy.color.brand.border.caution,
+        [errorRingColorInner]: system.color.brand.focus.caution.inner,
+        [errorRingColorOuter]: system.color.brand.border.caution,
       }),
     },
   },
@@ -55,13 +55,13 @@ export const checkboxBackgroundStencil = createStencil({
     {
       modifiers: {variant: 'inverse', error: 'error'},
       styles: {
-        backgroundColor: system.legacy.color.surface.inverse,
+        backgroundColor: system.color.surface.inverse,
       },
     },
     {
       modifiers: {variant: 'inverse', error: 'caution'},
       styles: {
-        backgroundColor: system.legacy.color.surface.inverse,
+        backgroundColor: system.color.surface.inverse,
       },
     },
   ],

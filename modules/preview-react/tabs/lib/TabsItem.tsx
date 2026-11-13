@@ -86,15 +86,15 @@ export interface TabsItemProps
 const tabItemStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
-    ...system.legacy.type.subtext.lg,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
+    ...system.type.subtext.lg,
     fontWeight: system.fontWeight.medium,
-    backgroundColor: system.legacy.color.surface.transparent,
+    backgroundColor: system.color.surface.transparent,
     flex: '0 0 auto',
     minWidth: 0,
     alignItems: 'center',
-    padding: `0 ${system.legacy.padding.md}`,
-    height: system.legacy.size.md,
+    padding: `0 ${system.padding.md}`,
+    height: system.size.md,
     cursor: 'pointer',
     color: system.color.fg.default,
     position: 'relative',
@@ -103,11 +103,11 @@ const tabItemStencil = createStencil({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: 'currentColor',
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
 
     '&:has(span)': {
       display: 'flex',
-      gap: base.legacy.size75,
+      gap: base.size75,
     },
 
     '&:hover, &.hover': {
@@ -118,7 +118,7 @@ const tabItemStencil = createStencil({
     '&:focus-visible, &.focus': {
       // focus outline for Windows high contrast theme
       outline: `${px2rem(2)} solid transparent`,
-      backgroundColor: system.legacy.color.surface.transparent,
+      backgroundColor: system.color.surface.transparent,
       color: system.color.fg.strong,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
@@ -129,7 +129,7 @@ const tabItemStencil = createStencil({
       opacity: system.opacity.disabled,
       '&:hover': {
         cursor: 'auto',
-        backgroundColor: system.legacy.color.surface.transparent,
+        backgroundColor: system.color.surface.transparent,
         [systemIconStencil.vars.color]: system.color.fg.default,
       },
     },
@@ -149,23 +149,23 @@ const tabItemStencil = createStencil({
         border: `${px2rem(1)} solid transparent`,
 
         '&:hover, &.hover': {
-          backgroundColor: system.legacy.color.surface.overlay.hover.default,
+          backgroundColor: system.color.surface.overlay.hover.default,
         },
 
         '&:focus-visible, &.focus': {
           ...focusRing({
             width: 2,
             separation: 2,
-            innerColor: system.legacy.color.focus.inverse,
-            outerColor: system.legacy.color.brand.focus.primary,
+            innerColor: system.color.focus.inverse,
+            outerColor: system.color.brand.focus.primary,
           }),
         },
 
         '&[aria-selected=true]': {
-          backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+          backgroundColor: system.color.surface.overlay.pressed.default,
           borderColor: system.color.border.input.default,
           '&:hover, &.hover, &:focus-visible, &.focus': {
-            backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+            backgroundColor: system.color.surface.overlay.pressed.default,
           },
 
           '&:focus-visible, &.focus': {
@@ -180,17 +180,17 @@ const tabItemStencil = createStencil({
         },
       },
       outlined: {
-        border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+        border: `${px2rem(1)} solid ${system.color.border.default}`,
         // adding extra margin to the left and right of the tab item to avoid visual glitch when the tab is selected
         marginInline: px2rem(1),
 
         '&:hover, &.hover': {
-          borderColor: system.legacy.color.border.strong,
+          borderColor: system.color.border.strong,
         },
 
         '&:focus-visible, &.focus': {
           marginInline: px2rem(0),
-          border: `${px2rem(2)} solid ${system.legacy.color.brand.focus.primary}`,
+          border: `${px2rem(2)} solid ${system.color.brand.focus.primary}`,
         },
 
         '&[aria-selected=true]': {
@@ -204,8 +204,8 @@ const tabItemStencil = createStencil({
             ...focusRing({
               width: 2,
               separation: 2,
-              innerColor: system.legacy.color.focus.inverse,
-              outerColor: system.legacy.color.brand.focus.primary,
+              innerColor: system.color.focus.inverse,
+              outerColor: system.color.brand.focus.primary,
             }),
           },
         },

@@ -105,7 +105,7 @@ const tabItemStencil = createStencil({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
     [systemIconStencil.vars.color]: 'currentColor',
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
 
     '&:has(span)': {
       display: 'flex',
@@ -146,7 +146,7 @@ const tabItemStencil = createStencil({
       '&:after': {
         position: 'absolute',
         // selected state for Windows high contrast theme
-        borderBlockEnd: `${base.legacy.size50} solid transparent`,
+        borderBlockEnd: `${base.size50} solid transparent`,
         borderRadius: `${system.shape.md} ${system.shape.md} ${system.shape.none} ${system.shape.none}`,
         backgroundColor: system.color.brand.fg.primary.default,
         bottom: 0,

@@ -179,7 +179,7 @@ theme.canvas.palette.neutral.main         | brand.neutral.base          | --cnvs
 theme.canvas.palette.neutral.dark         | brand.neutral.dark          | --cnvs-brand-neutral-dark
 theme.canvas.palette.neutral.darkest      | brand.neutral.darkest       | --cnvs-brand-neutral-darkest
 theme.canvas.palette.neutral.contrast     | brand.neutral.accent        | --cnvs-brand-neutral-accent
-theme.canvas.palette.common.focusOutline  | brand.common.focusOutline   | --cnvs-brand-common-focus-outline
+theme.canvas.palette.common.focusOutline  | brand.common.focus   | --cnvs-brand-common-focus-outline
 
 System Color Usage Guide (Recommended)
 

@@ -122,8 +122,7 @@ Apply in `lib/` stencils:
       `.disabled`.
 - [ ] Icons: set `[systemIconStencil.vars.color]: 'currentColor'` on the item; don't color icons
       separately.
-- [ ] Spacing: `system.padding.*` / `gap.*`. There's no `system.gap.xxs`; 6px is
-      `base.legacy.size75`.
+- [ ] Spacing: `system.padding.*` / `gap.*`. There's no `system.gap.xxs`; 6px is `base.size75`.
 - [ ] Error / caution group ring: copy preview `RadioGroup` (inset `box-shadow` using
       `system.color.brand.border.critical` / `.caution` + `focus.caution.inner`).
 

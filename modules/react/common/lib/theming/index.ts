@@ -21,7 +21,7 @@ export * from './sanaTheme';
  */
 export * from './useTheme';
 /**
- * @deprecated ⚠️ `useThemedRing` is deprecated. Use `brand.common.focusOutline` CSS variable instead.
+ * @deprecated ⚠️ `useThemedRing` is deprecated. Use `brand.common.focus` CSS variable instead.
  * For more information, view our [Theming Docs](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs#-preferred-approach-v14).
  */
 export * from './useThemedRing';

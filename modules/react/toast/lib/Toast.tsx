@@ -52,10 +52,10 @@ const toastStencil = createStencil({
     display: 'flex',
     flexDirection: 'row',
     width: px2rem(360),
-    paddingBlock: system.legacy.padding.sm,
-    paddingInline: `${system.legacy.padding.md} ${system.legacy.padding.xl}`,
-    gap: base.legacy.size150,
-    borderRadius: system.legacy.shape.xl,
+    paddingBlock: system.padding.sm,
+    paddingInline: `${system.padding.md} ${system.padding.xl}`,
+    gap: base.size150,
+    borderRadius: system.shape.xl,
     border: `${px2rem(1)} solid ${system.color.border.default}`,
     boxShadow: system.depth[5],
 
@@ -64,7 +64,7 @@ const toastStencil = createStencil({
     },
     variant: {
       alt: {
-        border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
+        border: `${px2rem(1)} solid ${system.color.border.elevated}`,
       },
       tonal: {},
     },

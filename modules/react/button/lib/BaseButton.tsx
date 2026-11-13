@@ -254,7 +254,7 @@ export const buttonStencil = createStencil({
         letterSpacing: system.letterSpacing.body.sm,
         height: system.size.lg,
         paddingInline: system.padding.lg,
-        minWidth: base.legacy.size1300,
+        minWidth: base.size1300,
       },
       medium: {
         fontSize: system.fontSize.subtext.lg,
@@ -262,8 +262,8 @@ export const buttonStencil = createStencil({
         letterSpacing: system.letterSpacing.subtext.lg,
         paddingInline: system.padding.md,
         height: system.size.md,
-        gap: base.legacy.size75,
-        minWidth: base.legacy.size1100,
+        gap: base.size75,
+        minWidth: base.size1100,
       },
       small: {
         fontSize: system.fontSize.subtext.lg,
@@ -272,7 +272,7 @@ export const buttonStencil = createStencil({
         height: system.size.sm,
         paddingInline: system.padding.sm,
         gap: system.gap.xs,
-        minWidth: base.legacy.size900,
+        minWidth: base.size900,
       },
       extraSmall: {
         fontSize: system.fontSize.subtext.md,

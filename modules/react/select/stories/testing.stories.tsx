@@ -107,13 +107,12 @@ export const StandaloneDisabledSelect = () => (
 );
 
 const customTheme = createStyles({
-  [brand.primary.base]: 'purple',
-  [brand.primary.accent]: 'turquoise',
-  [brand.common.focusOutline]: 'turquoise',
-  [brand.common.alertInner]: 'coral',
-  [brand.common.errorInner]: 'crimson',
-  [brand.success.base]: 'aquamarine',
-  [brand.neutral.base]: 'gray',
+  [brand.primary400]: 'purple',
+  [brand.common.focus]: 'turquoise',
+  [brand.common.caution.inner]: 'coral',
+  [brand.common.critical]: 'crimson',
+  [brand.positive400]: 'aquamarine',
+  [brand.neutral400]: 'gray',
 });
 
 export const SelectOpenMenuStates = (selectProps: {

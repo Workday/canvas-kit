@@ -43,7 +43,7 @@ describe('applyCriticalBrandBundle', () => {
     const style: Record<string, string> = {};
     applyCriticalBrandBundle('crimson', style);
 
-    expect(style[brand.error.base as string]).toBe('crimson');
+    expect(style[brand.critical600 as string]).toBe('crimson');
     expect(style[system.color.brand.border.critical as string]).toBe('crimson');
     expect(style[system.color.brand.focus.critical as string]).toBe('crimson');
   });
@@ -54,7 +54,7 @@ describe('applyCautionBrandBundle', () => {
     const style: Record<string, string> = {};
     applyCautionBrandBundle('coral', style);
 
-    expect(style[brand.alert.base as string]).toBe('coral');
+    expect(style[brand.caution600 as string]).toBe('coral');
     expect(style[system.color.brand.border.caution as string]).toBe('coral');
     expect(style[system.color.brand.focus.caution?.inner as string]).toBe('coral');
   });
@@ -85,7 +85,7 @@ describe('writeBrandScopeSemantic', () => {
     const style: Record<string, string> = {};
     writeBrandScopeSemantic({canvas: {palette: {neutral: {main: 'gray'}}}}, style);
 
-    expect(style[brand.neutral.base as string]).toBe('gray');
+    expect(style[brand.neutral600 as string]).toBe('gray');
     expect(style[brand.neutral600 as string]).toBe('gray');
   });
 });
@@ -159,7 +159,6 @@ describe('writeNumericalTheme', () => {
 
     expect(style[brand.critical500 as string]).toBe('orange');
     expect(style[brand.critical600 as string]).toBeUndefined();
-    expect(style[brand.error.base as string]).toBeUndefined();
   });
 
   it('writes lone caution[500] without overwriting caution400', () => {
@@ -168,6 +167,6 @@ describe('writeNumericalTheme', () => {
 
     expect(style[brand.caution500 as string]).toBe('gold');
     expect(style[brand.caution400 as string]).toBeUndefined();
-    expect(style[brand.alert.base as string]).toBeUndefined();
+    expect(style[brand.caution600 as string]).toBeUndefined();
   });
 });

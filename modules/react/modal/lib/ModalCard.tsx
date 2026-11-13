@@ -10,7 +10,7 @@ export interface ModalCardProps extends ExtractProps<typeof Popup.Card, never> {
 
 export const modalCardStencil = createStencil({
   base: {
-    margin: base.legacy.size500,
+    margin: base.size500,
     width: px2rem(440),
     border: '0',
     outline: `${px2rem(1)} solid transparent`,

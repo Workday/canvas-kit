@@ -30,7 +30,7 @@ export const pillIconButtonStencil = createStencil({
     [buttonStencil.vars.background]: system.color.surface.transparent,
 
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+    [systemIconStencil.vars.size]: component.systemIcon.size.xs,
     '::after': {
       content: '""',
       boxSizing: 'border-box',

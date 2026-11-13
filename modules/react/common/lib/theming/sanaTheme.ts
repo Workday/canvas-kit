@@ -21,15 +21,14 @@ import {base, brand} from '@workday/canvas-tokens-web';
 import type {CanvasNumericalBrandTheme} from './types';
 
 /**
- * `base.sana` is a pre-built map of `var(--token, fallback)` strings exported by
- * canvas-tokens-web specifically for these Sana-only base-palette steps — use them directly,
- * not `cssVar()` (which expects a bare variable name, not an already-wrapped `var()` string).
+ * `base` exports bare CSS variable names (e.g. `--cnvs-base-palette-blue-a300`); `CanvasProvider`
+ * wraps them in `var()` when writing the ramp.
  * Referencing `base.*` (not `brand.*` of the same name) avoids a `var()` self-reference cycle:
  * CanvasProvider writes each ramp entry onto the identically-named `--cnvs-brand-*` variable, so
- * `brand.sana.neutral150` (itself `var(--cnvs-brand-neutral-150, ...)`) would point right back at
+ * `brand.neutral150` (`--cnvs-brand-neutral-150`) would point right back at
  * the variable being written.
  */
-const sanaBasePalette = base.sana;
+const sanaBasePalette = base;
 
 /**
  * Sana Canvas brand tokens for scoped `CanvasProvider` / popup forwarding.

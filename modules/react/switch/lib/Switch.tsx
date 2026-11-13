@@ -147,8 +147,8 @@ const SwitchBackground = createComponent('div')({
 
 const switchCircleStencil = createStencil({
   base: {
-    width: base.legacy.size150,
-    height: base.legacy.size150,
+    width: base.size150,
+    height: base.size150,
     borderRadius: system.shape.full,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',

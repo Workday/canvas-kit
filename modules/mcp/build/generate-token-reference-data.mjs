@@ -116,7 +116,7 @@ function buildDeprecationTable(dts, namespace) {
 const systemDeprecations = buildDeprecationTable(systemDts, 'system');
 const brandDeprecations = buildDeprecationTable(brandDts, 'brand');
 
-const sanaOverrides = flat(system.sana).map(([k, v]) => ({
+const sanaOverrides = flat(system).map(([k, v]) => ({
   path: `system.${k}`,
   cssVar: v.match(/--cnvs-[\w-]+/)?.[0] || v,
 }));

@@ -18,7 +18,7 @@ export const ToastIcon = createComponent('div')({
       <SystemIcon
         ref={ref}
         as={Element}
-        size={component.legacy.systemIcon.size.md}
+        size={component.systemIcon.size.md}
         {...handleCsProp(elemProps, toastIconStencil())}
       />
     );

@@ -288,9 +288,9 @@ Rules:
   deprecated CSS variables so components keep working when consumers are on older
   `@workday/canvas-tokens-web` versions. That backward-compat behavior is why it exists — not as a
   shortcut for app authors.
-  - **In Canvas Kit library source (`modules/**/lib/**`)** — use `system.*` (and `base.legacy`,
-    `brand.legacy` when applicable) for any token that has a legacy equivalent. Published components
-    must not assume consumers have migrated to the latest token names.
+  - **In Canvas Kit library source (`modules/**/lib/**`)** — use `system.*` (and `base`, `brand`
+    when applicable) for any token that has a legacy equivalent. Published components must not
+    assume consumers have migrated to the latest token names.
   - **Outside `lib/`** (stories, examples, docs, consumer apps) — prefer non-legacy `system.*`
     tokens. Don't spread `system.*` into new example or app code just because it's common in
     existing component implementations.

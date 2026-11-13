@@ -98,19 +98,19 @@ export const appletIconStencil = createStencil({
       fill: system.color.fg.inverse,
     },
     '& .color-200': {
-      fill: cssVar(color200, baseTokens.legacy.blue200),
+      fill: cssVar(color200, baseTokens.blue200),
     },
     '& .color-300': {
-      fill: cssVar(color300, baseTokens.legacy.blue400),
+      fill: cssVar(color300, baseTokens.blue400),
     },
     '& .color-400': {
-      fill: cssVar(color400, baseTokens.legacy.blue600),
+      fill: cssVar(color400, baseTokens.blue600),
     },
     '& .color-400-alpha-20': {
-      fill: cssVar(color400, baseTokens.legacy.blue600),
+      fill: cssVar(color400, baseTokens.blue600),
     },
     '& .color-500': {
-      fill: cssVar(color500, baseTokens.legacy.blue700),
+      fill: cssVar(color500, baseTokens.blue700),
     },
   }),
 });
@@ -122,10 +122,10 @@ export const AppletIcon = createComponent('span')({
   displayName: 'AppletIcon',
   Component: ({size, icon, color, ...elemProps}: AppletIconProps, ref, Element) => {
     const colors = color && {
-      color200: baseTokens.legacy[`${color}200` as keyof typeof baseTokens.legacy],
-      color300: baseTokens.legacy[`${color}300` as keyof typeof baseTokens.legacy],
-      color400: baseTokens.legacy[`${color}400` as keyof typeof baseTokens.legacy],
-      color500: baseTokens.legacy[`${color}500` as keyof typeof baseTokens.legacy],
+      color200: baseTokens[`${color}200` as keyof typeof baseTokens],
+      color300: baseTokens[`${color}300` as keyof typeof baseTokens],
+      color400: baseTokens[`${color}400` as keyof typeof baseTokens],
+      color500: baseTokens[`${color}500` as keyof typeof baseTokens],
     };
 
     return (

@@ -63,16 +63,16 @@ export const tooltipContainerStencil = createStencil({
     background: '',
   },
   base: ({tooltipTransformOriginHorizontal, tooltipTransformOriginVertical, background}) => ({
-    ...system.legacy.type.subtext.lg,
+    ...system.type.subtext.lg,
     display: 'inline-flex',
     position: 'relative',
-    padding: `${px2rem(6)} ${system.legacy.padding.sm}`,
+    padding: `${px2rem(6)} ${system.padding.sm}`,
     color: system.color.fg.default,
     animationName: tooltipAnimation,
     animationDuration: '150ms',
     animationTimingFunction: 'ease-out',
     transformOrigin: `${tooltipTransformOriginVertical} ${tooltipTransformOriginHorizontal}`,
-    margin: system.legacy.gap.xs,
+    margin: system.gap.xs,
     a: {
       color: system.color.fg.default,
       textDecoration: 'underline',
@@ -80,11 +80,11 @@ export const tooltipContainerStencil = createStencil({
     // use :before vs margin to increase the tooltip hit-box
     '&:before': {
       content: '""',
-      borderRadius: system.legacy.shape.full,
+      borderRadius: system.shape.full,
       border: `${px2rem(1)} solid ${system.color.border.default}`,
       zIndex: -1,
       margin: 0,
-      background: cssVar(background, system.legacy.color.surface.default),
+      background: cssVar(background, system.color.surface.default),
       position: 'absolute',
       top: 0,
       left: 0,
@@ -100,16 +100,16 @@ export const tooltipContainerStencil = createStencil({
 
     // Fix offsets based on placement
     '[data-popper-placement="top-start"] &, [data-popper-placement="bottom-start"] &': {
-      left: calc.negate(base.legacy.size50),
+      left: calc.negate(base.size50),
     },
     '[data-popper-placement="top-end"] &, [data-popper-placement="bottom-end"] &': {
-      right: calc.negate(base.legacy.size50),
+      right: calc.negate(base.size50),
     },
     '[data-popper-placement="left-start"] &, [data-popper-placement="right-start"] &': {
-      top: calc.negate(base.legacy.size50),
+      top: calc.negate(base.size50),
     },
     '[data-popper-placement="left-end"] &, [data-popper-placement="right-end"] &': {
-      bottom: calc.negate(base.legacy.size50),
+      bottom: calc.negate(base.size50),
     },
 
     '@media (forced-colors: active)': {
@@ -125,8 +125,8 @@ export const tooltipContainerStencil = createStencil({
     variant: {
       alt: ({background}) => ({
         '&:before': {
-          background: cssVar(background, system.sana.color.surface.elevated),
-          border: `${px2rem(1)} solid ${system.sana.color.border.elevated}`,
+          background: cssVar(background, system.color.surface.elevated),
+          border: `${px2rem(1)} solid ${system.color.border.elevated}`,
         },
       }),
     },
@@ -146,10 +146,7 @@ export const TooltipContainer = createComponent('div')<TooltipContainerProps>({
     ref,
     Element
   ) => {
-    const translate = getTransformOrigin(
-      transformOrigin || defaultTransformOrigin,
-      system.legacy.gap.sm
-    );
+    const translate = getTransformOrigin(transformOrigin || defaultTransformOrigin, system.gap.sm);
 
     return (
       <Element

@@ -63,7 +63,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.color.surface.alt.default,
         fallback: system.color.surface.alt.default,
-        mixinColor: base.legacy.neutral1000,
+        mixinColor: base.neutral1000,
         mixinValue: '0.0392',
       }),
       [buttonStencil.vars.border]: system.color.border.transparent,
@@ -75,7 +75,7 @@ export const pillStencil = createStencil({
       [buttonStencil.vars.background]: colorSpace.darken({
         color: system.color.surface.alt.default,
         fallback: system.color.surface.alt.default,
-        mixinColor: base.legacy.neutral1000,
+        mixinColor: base.neutral1000,
         mixinValue: '0.0745',
       }),
       [buttonStencil.vars.label]: system.color.fg.stronger,
@@ -136,7 +136,7 @@ export const pillStencil = createStencil({
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.color.surface.alt.default,
             fallback: system.color.surface.alt.default,
-            mixinColor: base.legacy.neutral1000,
+            mixinColor: base.neutral1000,
             mixinValue: '0.0392',
           }),
           [pillCountStencil.vars.backgroundColor]: system.color.surface.transparent,
@@ -145,7 +145,7 @@ export const pillStencil = createStencil({
           [buttonStencil.vars.background]: colorSpace.darken({
             color: system.color.surface.alt.default,
             fallback: system.color.surface.alt.default,
-            mixinColor: base.legacy.neutral1000,
+            mixinColor: base.neutral1000,
             mixinValue: '0.0745',
           }),
           [pillCountStencil.vars.backgroundColor]: system.color.surface.transparent,

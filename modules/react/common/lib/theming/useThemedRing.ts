@@ -16,27 +16,27 @@ const getPaletteColorsFromTheme = (
 ): ContrastColors => {
   if (errorType === 'error') {
     return {
-      outer: cssVar(brand.common.errorInner),
-      inner: cssVar(brand.common.errorInner),
+      outer: cssVar(brand.common.critical),
+      inner: cssVar(brand.common.critical),
     };
   } else if (errorType === 'alert') {
     return {
-      outer: cssVar(brand.common.alertOuter),
-      inner: cssVar(brand.common.alertInner),
+      outer: cssVar(brand.common.caution.outer),
+      inner: cssVar(brand.common.caution.inner),
     };
   }
 
   // If specific fallback colors are provided (e.g., for success), prefer those
   if (fallbackColors && (fallbackColors.outer || fallbackColors.inner)) {
     return {
-      outer: fallbackColors.outer ?? cssVar(brand.common.focusOutline),
-      inner: fallbackColors.inner ?? fallbackColors.outer ?? cssVar(brand.common.focusOutline),
+      outer: fallbackColors.outer ?? cssVar(brand.common.focus),
+      inner: fallbackColors.inner ?? fallbackColors.outer ?? cssVar(brand.common.focus),
     };
   }
 
   return {
-    outer: cssVar(brand.common.focusOutline),
-    inner: cssVar(brand.common.focusOutline),
+    outer: cssVar(brand.common.focus),
+    inner: cssVar(brand.common.focus),
   };
 };
 
@@ -49,17 +49,17 @@ export function getPaletteColorsForFocusRing(
 ): ContrastColors {
   switch (type) {
     case 'error': {
-      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.errorInner}, 'error');
+      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.critical}, 'error');
     }
     case 'alert': {
-      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.alertInner}, 'alert');
+      return getPaletteColorsFromTheme(theme.canvas, {outer: brand.common.caution.inner}, 'alert');
     }
     case 'success': {
       return getPaletteColorsFromTheme(theme.canvas, {
-        outer: cssVar(brand.success.dark),
+        outer: cssVar(brand.positive400),
         // The theme default for success.main is set to the darkest GreenApple
         // For our default ring, we need to override it so the inner ring is a bit lighter
-        inner: cssVar(brand.success.base),
+        inner: cssVar(brand.positive400),
       });
     }
     default: {
@@ -102,7 +102,7 @@ export function getPaletteColorsForFocusRing(
  *  );
  * };
  *```
- * @deprecated `useThemedRing` is deprecated and will be removed in a future major version. Please use `brand.common.focusOutline` CSS variable instead. View our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) for more information.
+ * @deprecated `useThemedRing` is deprecated and will be removed in a future major version. Please use `brand.common.focus` CSS variable instead. View our [CSS tokens](https://workday.github.io/canvas-tokens/?path=/docs/docs-brand-tokens--docs) for more information.
  */
 export const useThemedRing = (type: paletteSelection): CSSProperties => {
   const theme = useTheme();
@@ -126,8 +126,8 @@ export const useThemedRing = (type: paletteSelection): CSSProperties => {
     '&:focus:not([disabled])': {
       borderColor: paletteColors.outer,
       boxShadow: `${errorBoxShadow},
-        0 0 0 2px ${cssVar(system.color.border.input.inverse)},
-        0 0 0 4px ${cssVar(brand.common.focusOutline)}`,
+        0 0 0 2px ${cssVar(system.color.border.inverse.default)},
+        0 0 0 4px ${cssVar(brand.common.focus)}`,
     },
   };
 };

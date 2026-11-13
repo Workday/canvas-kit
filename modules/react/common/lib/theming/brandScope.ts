@@ -122,7 +122,6 @@ export function writeNumericalBrandRamp(
 export function applyPrimaryBrandBundle(primaryColor: string, style: React.CSSProperties) {
   const value = maybeWrapCSSVariables(primaryColor);
 
-  setStyleVar(style, brand.primary.base, value);
   setStyleVar(style, brand.primary600, value);
   setStyleVar(style, brand.action.base, value);
 
@@ -146,7 +145,6 @@ export function applyPrimaryBrandBundle(primaryColor: string, style: React.CSSPr
   });
 
   setStyleVar(style, brand.primary700, selectedFg);
-  setStyleVar(style, brand.primary.dark, selectedFg);
   setStyleVar(style, brand.primaryA50, selectedSurface);
 
   if (BRAND_SCOPE_PRIMARY_BUNDLE.selected.fg) {
@@ -174,7 +172,6 @@ export function applyPrimaryBrandBundle(primaryColor: string, style: React.CSSPr
 export function applyCriticalBrandBundle(criticalColor: string, style: React.CSSProperties) {
   const value = maybeWrapCSSVariables(criticalColor);
 
-  setStyleVar(style, brand.error.base, value);
   setStyleVar(style, brand.critical600, value);
   setStyleVar(style, brand.critical500, value);
 
@@ -196,9 +193,9 @@ export function applyCriticalBrandBundle(criticalColor: string, style: React.CSS
 export function applyCautionBrandBundle(cautionColor: string, style: React.CSSProperties) {
   const value = maybeWrapCSSVariables(cautionColor);
 
-  setStyleVar(style, brand.alert.base, value);
   setStyleVar(style, brand.caution400, value);
   setStyleVar(style, brand.caution500, value);
+  setStyleVar(style, brand.caution600, value);
 
   if (system.color.brand.accent.caution) {
     setStyleVar(style, system.color.brand.accent.caution, value);
@@ -221,7 +218,6 @@ export function applyCautionBrandBundle(cautionColor: string, style: React.CSSPr
 export function applyPositiveBrandBundle(positiveColor: string, style: React.CSSProperties) {
   const value = maybeWrapCSSVariables(positiveColor);
 
-  setStyleVar(style, brand.success.base, value);
   setStyleVar(style, brand.positive600, value);
 
   if (system.color.brand.accent.positive) {
@@ -236,7 +232,6 @@ export function applyPositiveBrandBundle(positiveColor: string, style: React.CSS
 export function applyNeutralBrandBundle(neutralColor: string, style: React.CSSProperties) {
   const value = maybeWrapCSSVariables(neutralColor);
 
-  setStyleVar(style, brand.neutral.base, value);
   setStyleVar(style, brand.neutral600, value);
 }
 
@@ -268,7 +263,7 @@ export function writeFocusShortcuts(
 
 /** Writes focus/border system tokens without touching brand.primary500. */
 function writeFocusBorderBundle(value: string, style: React.CSSProperties) {
-  setStyleVar(style, brand.common.focusOutline, value);
+  setStyleVar(style, brand.common.focus, value);
   if (BRAND_SCOPE_INDEPENDENT.focus.primary) {
     setStyleVar(style, BRAND_SCOPE_INDEPENDENT.focus.primary, value);
   }

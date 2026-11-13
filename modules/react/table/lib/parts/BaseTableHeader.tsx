@@ -8,7 +8,7 @@ export const baseTableHeaderStencil = createStencil({
     backgroundColor: system.color.bg.default,
     borderBlockEnd: `${px2rem(1)} solid ${system.color.border.default}`,
     justifyContent: 'start',
-    minHeight: calc.subtract(system.size.xxl, base.legacy.size100),
+    minHeight: calc.subtract(system.size.xxl, base.size100),
     padding: system.padding.md,
     wordBreak: 'break-word',
     fontWeight: system.fontWeight.medium,

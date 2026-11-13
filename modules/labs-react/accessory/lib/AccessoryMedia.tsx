@@ -20,7 +20,7 @@ export interface AccessoryMediaProps extends AccessoryProps {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`, centered over the image. When
    * set, a scrim is painted under the icon for contrast. Uses `color` from `Accessory` for the
-   * glyph (`base.legacy.neutral0` by default).
+   * glyph (`base.neutral0` by default).
    */
   icon?: SystemIconProps['icon'];
 }
@@ -95,7 +95,7 @@ export const AccessoryMedia = createComponent('span')({
       size = 'extraLarge',
       objectFit = 'cover',
       icon,
-      color = base.legacy.neutral0,
+      color = base.neutral0,
       background,
       ...elemProps
     }: AccessoryMediaProps,

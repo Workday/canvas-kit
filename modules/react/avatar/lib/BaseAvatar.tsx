@@ -53,7 +53,7 @@ export const baseAvatarStencil = createStencil({
     height: cssVar(size, system.size.lg),
     minWidth: cssVar(size, system.size.lg),
     minHeight: cssVar(size, system.size.lg),
-    backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+    backgroundColor: cssVar(backgroundColor, base.blue600),
     color: cssVar(color, system.color.fg.inverse),
     display: 'flex',
     alignItems: 'center',
@@ -80,28 +80,28 @@ export const baseAvatarStencil = createStencil({
   modifiers: {
     variant: {
       blue: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.blue600),
+        backgroundColor: cssVar(backgroundColor, base.blue600),
         color: cssVar(color, system.color.fg.inverse),
       }),
       amber: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.amber300),
-        color: cssVar(color, base.legacy.amber800),
+        backgroundColor: cssVar(backgroundColor, base.amber300),
+        color: cssVar(color, base.amber800),
       }),
 
       teal: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.teal300),
-        color: cssVar(color, base.legacy.teal800),
+        backgroundColor: cssVar(backgroundColor, base.teal300),
+        color: cssVar(color, base.teal800),
       }),
       purple: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.purple600),
+        backgroundColor: cssVar(backgroundColor, base.purple600),
         color: cssVar(color, system.color.fg.inverse),
       }),
       magenta: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.magenta600),
+        backgroundColor: cssVar(backgroundColor, base.magenta600),
         color: cssVar(color, system.color.fg.inverse),
       }),
       green: ({backgroundColor, color}) => ({
-        backgroundColor: cssVar(backgroundColor, base.legacy.green600),
+        backgroundColor: cssVar(backgroundColor, base.green600),
         color: cssVar(color, system.color.fg.inverse),
       }),
     },
@@ -125,18 +125,18 @@ export const baseAvatarStencil = createStencil({
         letterSpacing: system.letterSpacing.body.sm,
       }),
       medium: ({size}) => ({
-        [size]: base.legacy.size600,
+        [size]: base.size600,
         lineHeight: system.lineHeight.body.md,
         fontSize: system.fontSize.body.md,
       }),
       large: ({size}) => ({
-        [size]: base.legacy.size900,
+        [size]: base.size900,
         fontWeight: system.fontWeight.bold,
         lineHeight: system.lineHeight.heading.md,
         fontSize: system.fontSize.heading.md,
       }),
       extraLarge: ({size}) => ({
-        [size]: base.legacy.size1200,
+        [size]: base.size1200,
         fontWeight: system.fontWeight.bold,
         lineHeight: system.lineHeight.title.sm,
         fontSize: system.fontSize.title.sm,

@@ -32,11 +32,11 @@ export const segmentedControlListStencil = createStencil({
         padding: system.padding.xxs,
       },
       medium: {
-        padding: base.legacy.size25,
+        padding: base.size25,
       },
       small: {
-        padding: base.legacy.size25,
-        gap: base.legacy.size25,
+        padding: base.size25,
+        gap: base.size25,
       },
     },
     orientation: {

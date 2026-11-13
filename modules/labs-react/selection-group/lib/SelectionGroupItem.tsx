@@ -45,7 +45,7 @@ export const selectionGroupItemStencil = createStencil({
     ...system.type.subtext.lg,
     display: 'inline-flex',
     alignItems: 'center',
-    gap: base.legacy.size75,
+    gap: base.size75,
     border: `${px2rem(1)} solid ${system.color.border.default}`,
     padding: `${system.padding.xs} ${system.padding.sm}`,
     backgroundColor: system.color.surface.default,

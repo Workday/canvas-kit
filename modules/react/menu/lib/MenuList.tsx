@@ -37,7 +37,7 @@ export const menuListStencil = createStencil({
   base: {
     [cornerShapeStencil.vars.shape]: system.shape.xxl,
     padding: 0,
-    gap: base.legacy.size25,
+    gap: base.size25,
   },
   modifiers: {
     orientation: {
