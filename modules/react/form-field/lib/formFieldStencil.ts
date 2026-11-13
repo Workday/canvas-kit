@@ -6,7 +6,7 @@ export const formFieldStencil = createStencil({
     display: 'flex',
     border: 'none',
     padding: 0,
-    margin: `0 0 ${system.legacy.gap.lg}`,
+    margin: `0 0 ${system.gap.lg}`,
   },
   modifiers: {
     grow: {
@@ -23,17 +23,17 @@ export const formFieldStencil = createStencil({
     orientation: {
       horizontalStart: {
         flexDirection: 'row',
-        gap: system.legacy.gap.xl,
+        gap: system.gap.xl,
         width: '100%',
       },
       horizontalEnd: {
         flexDirection: 'row',
-        gap: system.legacy.gap.xl,
+        gap: system.gap.xl,
         width: '100%',
       },
       vertical: {
         flexDirection: 'column',
-        gap: system.legacy.gap.xs,
+        gap: system.gap.xs,
         alignItems: 'flex-start',
       },
     },

@@ -19,9 +19,9 @@ export const colorPickerColorSwatchStencil = createStencil({
   },
   base: ({color, iconColor}) => ({
     [systemIconStencil.vars.color]: iconColor,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.sm,
-    width: system.legacy.size.xxs,
-    height: system.legacy.size.xxs,
+    [cornerShapeStencil.vars.shape]: system.shape.sm,
+    width: system.size.xxs,
+    height: system.size.xxs,
     backgroundColor: color,
     display: 'flex',
     alignItems: 'center',

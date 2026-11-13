@@ -74,7 +74,7 @@ export const colorPickerStencil = createStencil({
       display: 'flex',
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBlockStart: system.legacy.gap.md,
+      marginBlockStart: system.gap.md,
     },
     [inputWrapperPart]: {
       display: 'flex',

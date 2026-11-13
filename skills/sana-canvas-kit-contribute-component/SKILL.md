@@ -12,7 +12,7 @@ description: >-
 # Contribute a Component to Canvas Kit
 
 Maintainer-only. This covers building a component **inside the canvas-kit repo**, where
-[AGENTS.md](../../AGENTS.md) and [STYLE.md](../../STYLE.md) apply (`system.legacy.*` in `lib/`,
+[AGENTS.md](../../AGENTS.md) and [STYLE.md](../../STYLE.md) apply (`system.*` in `lib/`,
 `cornerShapeStencil`, Chromatic class twins, public API impact). For components in a consumer app,
 use `/sana-canvas-kit-builder` instead.
 
@@ -37,7 +37,7 @@ Copy this checklist and track progress:
 - [ ] 5. Scaffold the package (see file layout in references.md)
 - [ ] 6. Model: if list/grid/selection/roving focus — extend collection models; else createModelHook
 - [ ] 7. Subcomponents: for collection items, compose collection elemProps hooks in the right order
-- [ ] 8. Style with Sana-aligned stencils (system.legacy.*, cornerShapeStencil, class twins)
+- [ ] 8. Style with Sana-aligned stencils (system.*, cornerShapeStencil, class twins)
 - [ ] 9. Stories, examples, MDX, visual-testing stories
 - [ ] 10. Tests: unit (verifyComponent), SSR, Cypress with checkA11y
 - [ ] 11. Validate: typecheck, test, lint, cypress, Storybook visual check against Figma
@@ -95,15 +95,15 @@ design/a11y questions. Wait for the user before editing.
 
 Use the file layout and model/hook rules in [references.md](references.md#file-layout). Key rules:
 
-- **Collection decision:** if the component is a list, grid, or set of items with selection,
-  roving focus, or arrow-key navigation (`SegmentedControl`, `Tabs`, `Menu`), extend collection
-  models — see [references.md](references.md#model-and-hook-rules). Skip collection for a single
-  control with no item set (button, banner, text field); use `createModelHook` alone.
+- **Collection decision:** if the component is a list, grid, or set of items with selection, roving
+  focus, or arrow-key navigation (`SegmentedControl`, `Tabs`, `Menu`), extend collection models —
+  see [references.md](references.md#model-and-hook-rules). Skip collection for a single control with
+  no item set (button, banner, text field); use `createModelHook` alone.
 - When using collection: extend `useListModel` (or `useGridModel` / `useOverflowListModel`); pick
-  `singleSelectionManager` / `multiSelectionManager` via config. `createModelHook` already
-  provides `should<Event>` / `on<Event>` — don't reimplement them.
-- `composeHooks` runs right-to-left; `useListItemRegister` goes **last** (except when a later
-  hook must override a prop register sets — see `useSegmentedControlItem`). Compose
+  `singleSelectionManager` / `multiSelectionManager` via config. `createModelHook` already provides
+  `should<Event>` / `on<Event>` — don't reimplement them.
+- `composeHooks` runs right-to-left; `useListItemRegister` goes **last** (except when a later hook
+  must override a prop register sets — see `useSegmentedControlItem`). Compose
   `useListItemRovingFocus` / `useListItemSelect` directly — never call them inside another
   `createElemPropsHook` body.
 - Add `index.ts` exports and `export * from './<name>'` in `modules/react/index.ts`.
@@ -142,7 +142,7 @@ Use the template in [references.md](references.md#pr-summary-template). Title fo
 
 - ❌ Editing files before the user approves the plan
 - ❌ Copying Tailwind / px values from Figma output instead of mapping to tokens
-- ❌ Non-legacy `system.*` tokens in `lib/` when a `system.legacy.*` path exists
+- ❌ Non-legacy `system.*` tokens in `lib/` when a `system.*` path exists
 - ❌ Inventing ARIA when a sibling component or APG pattern already covers it
 - ❌ Shared helpers across example files (each example must be copy-pasteable)
 - ❌ Inline JSX in the CSF file, DOM snapshot tests, or ad hoc markup in Cypress

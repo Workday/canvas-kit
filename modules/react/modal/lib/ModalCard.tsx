@@ -15,11 +15,11 @@ export const modalCardStencil = createStencil({
     border: '0',
     outline: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[6],
-    borderRadius: system.legacy.shape.xxxl,
+    borderRadius: system.shape.xxxl,
     '@media screen and (max-width: 768px)': {
       gap: 0,
-      margin: system.legacy.gap.md, // 16px all around margin on smaller screen sizes
-      padding: system.legacy.gap.md, // brings total padding between edge and content to 24px
+      margin: system.gap.md, // 16px all around margin on smaller screen sizes
+      padding: system.gap.md, // brings total padding between edge and content to 24px
     },
   },
 });

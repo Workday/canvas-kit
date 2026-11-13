@@ -8,7 +8,7 @@ export const formFieldFieldStencil = createStencil({
   base: {
     display: 'flex',
     flexDirection: 'column',
-    gap: system.legacy.gap.sm,
+    gap: system.gap.sm,
   },
 });
 

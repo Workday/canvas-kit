@@ -38,7 +38,7 @@ export const accessoryMediaStencil = createStencil({
     scrim: 'accessory-media-scrim',
   },
   base: ({background, imagePart, scrimPart}) => ({
-    backgroundColor: cssVar(background, system.legacy.color.surface.alt.default),
+    backgroundColor: cssVar(background, system.color.surface.alt.default),
     [imagePart]: {
       position: 'absolute',
       inset: 0,
@@ -52,7 +52,7 @@ export const accessoryMediaStencil = createStencil({
     [scrimPart]: {
       position: 'absolute',
       inset: 0,
-      backgroundColor: system.legacy.color.surface.overlay.scrim,
+      backgroundColor: system.color.surface.overlay.scrim,
       borderRadius: cornerShapeStencil.vars.shape,
       cornerShape: 'superellipse(1.1)',
       pointerEvents: 'none',

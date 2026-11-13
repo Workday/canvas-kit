@@ -3,9 +3,9 @@
  * Run: node modules/mcp/build/generate-token-reference-data.mjs
  */
 import * as fs from 'node:fs';
+import {createRequire} from 'node:module';
 import * as path from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {createRequire} from 'node:module';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const repoRoot = path.resolve(__dirname, '../../..');
@@ -14,24 +14,14 @@ const require = createRequire(import.meta.url);
 // Prefer beta.11 from /tmp if repo still has beta.7
 const beta11Path = '/tmp/ck-token-audit/package';
 const localPath = path.join(repoRoot, 'node_modules/@workday/canvas-tokens-web');
-const tokensPkgPath = fs.existsSync(path.join(beta11Path, 'package.json'))
-  ? beta11Path
-  : localPath;
+const tokensPkgPath = fs.existsSync(path.join(beta11Path, 'package.json')) ? beta11Path : localPath;
 
 const system = require(path.join(tokensPkgPath, 'dist/common-js/system/index.js'));
 const brand = require(path.join(tokensPkgPath, 'dist/common-js/brand/index.js'));
-const pkgJson = JSON.parse(
-  fs.readFileSync(path.join(tokensPkgPath, 'package.json'), 'utf8')
-);
+const pkgJson = JSON.parse(fs.readFileSync(path.join(tokensPkgPath, 'package.json'), 'utf8'));
 
-const systemDts = fs.readFileSync(
-  path.join(tokensPkgPath, 'dist/es6/system/index.d.ts'),
-  'utf8'
-);
-const brandDts = fs.readFileSync(
-  path.join(tokensPkgPath, 'dist/es6/brand/index.d.ts'),
-  'utf8'
-);
+const systemDts = fs.readFileSync(path.join(tokensPkgPath, 'dist/es6/system/index.d.ts'), 'utf8');
+const brandDts = fs.readFileSync(path.join(tokensPkgPath, 'dist/es6/brand/index.d.ts'), 'utf8');
 
 function flat(obj, prefix = '') {
   return Object.entries(obj).flatMap(([k, v]) =>
@@ -94,7 +84,7 @@ for (const t of liveColor) {
 }
 
 const shapeDefault = flat(system.shape).filter(([, v]) => !isDeprecated(v, systemDeprecated));
-const shapeSana = flat(system.sana.shape);
+const shapeSana = flat(system.shape);
 
 const scales = ['gap', 'padding', 'size'];
 const scaleData = {};
@@ -127,7 +117,7 @@ const systemDeprecations = buildDeprecationTable(systemDts, 'system');
 const brandDeprecations = buildDeprecationTable(brandDts, 'brand');
 
 const sanaOverrides = flat(system.sana).map(([k, v]) => ({
-  path: `system.sana.${k}`,
+  path: `system.${k}`,
   cssVar: v.match(/--cnvs-[\w-]+/)?.[0] || v,
 }));
 
@@ -139,8 +129,7 @@ const output = {
     token: k,
     defaultPx: extractPx(v),
     sanaPx:
-      shapeSana.find(([sk]) => sk === k)?.[1] &&
-      extractPx(shapeSana.find(([sk]) => sk === k)[1]),
+      shapeSana.find(([sk]) => sk === k)?.[1] && extractPx(shapeSana.find(([sk]) => sk === k)[1]),
   })),
   shapeSanaOnly: shapeSana
     .filter(([k]) => !shapeDefault.some(([dk]) => dk === k))
@@ -173,8 +162,7 @@ for (const [fam, tokens] of Object.entries(liveByFamily).sort()) {
 fs.writeFileSync(path.join(fragmentsDir, 'color-inventory.md'), colorMd);
 
 // Shape table
-let shapeMd =
-  '| Token | Default | Sana | Usage |\n|---|---|---|---|\n';
+let shapeMd = '| Token | Default | Sana | Usage |\n|---|---|---|---|\n';
 const shapeUsage = {
   none: 'Full-width containers, headers, side panels',
   xs: 'Sana-only — compact rounding (checkboxes)',
@@ -222,9 +210,7 @@ for (const row of scaleData.padding) padMd += `| \`padding.${row.token}\` | ${ro
 fs.writeFileSync(path.join(fragmentsDir, 'padding-table.md'), padMd);
 
 // Top deprecated color mappings
-const colorDeps = systemDeprecations
-  .filter(r => r.cssVar.includes('color'))
-  .slice(0, 40);
+const colorDeps = systemDeprecations.filter(r => r.cssVar.includes('color')).slice(0, 40);
 let depMd = '| Deprecated CSS variable | Replacement |\n|---|---|\n';
 for (const r of colorDeps) {
   depMd += `| \`${r.cssVar}\` | ${r.replacement} |\n`;

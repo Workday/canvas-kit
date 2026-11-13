@@ -12,8 +12,8 @@ export interface PopupCloseIconProps extends ExtractProps<typeof TertiaryButton,
 export const popupCloseIconStencil = createStencil({
   base: {
     position: 'absolute',
-    insetInlineEnd: system.legacy.padding.xs,
-    top: system.legacy.padding.xs,
+    insetInlineEnd: system.padding.xs,
+    top: system.padding.xs,
   },
 });
 

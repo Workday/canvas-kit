@@ -49,7 +49,7 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.alt.strong
+            system.color.surface.alt.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
@@ -61,7 +61,7 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.success.strong
+            system.color.surface.success.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
@@ -73,11 +73,11 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.info.strong
+            system.color.surface.info.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.info.strong
+            system.color.fg.info.strong
           ),
         },
       }),
@@ -94,11 +94,11 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.warning.strong
+            system.color.surface.warning.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.warning.strong
+            system.color.fg.warning.strong
           ),
         },
       }),
@@ -115,11 +115,11 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.danger.strong
+            system.color.surface.danger.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.danger.strong
+            system.color.fg.danger.strong
           ),
         },
       }),
@@ -136,7 +136,7 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.transparent
+            system.color.surface.transparent
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
@@ -144,7 +144,7 @@ export const accessoryIconStencil = createStencil({
           ),
           borderWidth: px2rem(1),
           borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
+          borderColor: system.color.border.default,
         },
       }),
     },

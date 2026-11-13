@@ -37,9 +37,9 @@ export interface SidePanelProps extends CSProps {
   expandedWidth?: number | string;
   /**
    * The style variant of the side panel.
-   * - `'standard'`: navigation surface background (`system.legacy.color.surface.navigation`), no depth.
-   * - `'alternative'`: raised surface background (`system.legacy.color.surface.raised`), no depth.
-   * - `'overlay'`: default surface background (`system.legacy.color.surface.default`) with level 6 depth, for panels that need to look lifted off the page. This is a visual treatment only — it adds no dialog semantics, focus trapping, or backdrop.
+   * - `'standard'`: navigation surface background (`system.color.surface.navigation`), no depth.
+   * - `'alternative'`: raised surface background (`system.color.surface.raised`), no depth.
+   * - `'overlay'`: default surface background (`system.color.surface.default`) with level 6 depth, for panels that need to look lifted off the page. This is a visual treatment only — it adds no dialog semantics, focus trapping, or backdrop.
    *
    * @default 'standard'
    */
@@ -62,14 +62,14 @@ export const panelStencil = createStencil({
   modifiers: {
     variant: {
       overlay: {
-        backgroundColor: system.legacy.color.surface.default,
+        backgroundColor: system.color.surface.default,
         boxShadow: system.depth[6],
       },
       alternative: {
-        backgroundColor: system.legacy.color.surface.raised,
+        backgroundColor: system.color.surface.raised,
       },
       standard: {
-        backgroundColor: system.legacy.color.surface.navigation,
+        backgroundColor: system.color.surface.navigation,
       },
     },
     expanded: {

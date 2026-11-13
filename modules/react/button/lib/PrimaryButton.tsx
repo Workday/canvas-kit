@@ -22,23 +22,17 @@ const primaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: cssVar(
-      brand.action.base,
-      system.legacy.color.brand.accent.primary
-    ),
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
+    [buttonStencil.vars.background]: cssVar(brand.action.base, system.color.brand.accent.primary),
+    [buttonStencil.vars.borderRadius]: system.shape.full,
     [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: cssVar(
-        brand.action.base,
-        system.legacy.color.brand.accent.primary
-      ),
+      [buttonStencil.vars.background]: cssVar(brand.action.base, system.color.brand.accent.primary),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
-      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
 
-      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
     // Hover Styles
@@ -46,8 +40,8 @@ const primaryButtonStencil = createStencil({
       [buttonStencil.vars.background]: cssVar(
         brand.action.dark,
         colorSpace.hover({
-          color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-          fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          color: cssVar(brand.action.base, system.color.brand.accent.primary),
+          fallback: cssVar(brand.action.base, system.color.brand.accent.primary),
           colorType: 'accent',
         })
       ),
@@ -59,8 +53,8 @@ const primaryButtonStencil = createStencil({
       [buttonStencil.vars.background]: cssVar(
         brand.action.darkest,
         colorSpace.pressed({
-          color: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
-          fallback: cssVar(brand.action.base, system.legacy.color.brand.accent.primary),
+          color: cssVar(brand.action.base, system.color.brand.accent.primary),
+          fallback: cssVar(brand.action.base, system.color.brand.accent.primary),
           colorType: 'accent',
         })
       ),
@@ -70,10 +64,7 @@ const primaryButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: cssVar(
-        brand.action.base,
-        system.legacy.color.brand.accent.primary
-      ),
+      [buttonStencil.vars.background]: cssVar(brand.action.base, system.color.brand.accent.primary),
       [buttonStencil.vars.label]: cssVar(brand.action.accent, system.color.fg.inverse),
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
@@ -84,9 +75,9 @@ const primaryButtonStencil = createStencil({
       inverse: {
         [buttonStencil.vars.background]: cssVar(
           brand.action.lightest,
-          system.legacy.color.surface.inverse
+          system.color.surface.inverse
         ),
-        [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
+        [buttonStencil.vars.borderRadius]: system.shape.full,
         [buttonStencil.vars.label]: system.color.fg.strong,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
@@ -94,8 +85,8 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: cssVar(
             brand.action.lighter,
             colorSpace.hover({
-              color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
-              fallback: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              color: cssVar(brand.action.lightest, system.color.surface.inverse),
+              fallback: cssVar(brand.action.lightest, system.color.surface.inverse),
               colorType: 'surface',
             })
           ),
@@ -106,11 +97,11 @@ const primaryButtonStencil = createStencil({
         '&:focus-visible, &.focus': {
           [buttonStencil.vars.background]: cssVar(
             brand.action.lightest,
-            system.legacy.color.surface.inverse
+            system.color.surface.inverse
           ),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.color.focus.inverse,
 
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
@@ -119,8 +110,8 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.background]: cssVar(
             brand.action.light,
             colorSpace.pressed({
-              color: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
-              fallback: cssVar(brand.action.lightest, system.legacy.color.surface.inverse),
+              color: cssVar(brand.action.lightest, system.color.surface.inverse),
+              fallback: cssVar(brand.action.lightest, system.color.surface.inverse),
               colorType: 'surface',
             })
           ),
@@ -132,7 +123,7 @@ const primaryButtonStencil = createStencil({
           [buttonStencil.vars.opacity]: system.opacity.disabled,
           [buttonStencil.vars.background]: cssVar(
             brand.action.lightest,
-            system.legacy.color.surface.inverse
+            system.color.surface.inverse
           ),
           [buttonStencil.vars.label]: system.color.fg.strong,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.disabled.icon, 'currentColor'),

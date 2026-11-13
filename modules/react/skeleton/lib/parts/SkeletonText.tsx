@@ -23,10 +23,10 @@ export const skeletonTextLineStencil = createStencil({
     backgroundColor: '',
   },
   base: () => ({
-    height: system.legacy.size.xxxs,
+    height: system.size.xxxs,
     // We do not have a `gap` token for 0.75rem so `padding` is being used here
-    marginBlockEnd: system.legacy.padding.sm,
-    borderRadius: system.legacy.shape.xxxl,
+    marginBlockEnd: system.padding.sm,
+    borderRadius: system.shape.xxxl,
     width: '100%',
     display: 'block',
   }),
@@ -34,7 +34,7 @@ export const skeletonTextLineStencil = createStencil({
 
 export const skeletonTextStencil = createStencil({
   base: () => ({
-    marginBlockEnd: system.legacy.size.xs,
+    marginBlockEnd: system.size.xs,
     '& [data-part="skeleton-text-lines"]:last-child': {
       width: '60%',
     },

@@ -33,20 +33,12 @@
       "subpath": "action-bar",
       "canonicalImport": "@workday/canvas-kit-react/action-bar",
       "status": "production",
-      "exports": [
-        "ActionBar",
-        "ActionBarProps",
-        "useActionBarModel"
-      ],
+      "exports": ["ActionBar", "ActionBarProps", "useActionBarModel"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "action-bar",
-        "action-bar",
-        "action-bar"
-      ],
+      "aliases": ["action-bar", "action-bar", "action-bar"],
       "storySlug": "action-bar"
     },
     {
@@ -98,11 +90,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "avatar",
-        "avatar",
-        "avatar"
-      ],
+      "aliases": ["avatar", "avatar", "avatar"],
       "storySlug": "avatar"
     },
     {
@@ -111,18 +99,12 @@
       "subpath": "badge",
       "canonicalImport": "@workday/canvas-kit-react/badge",
       "status": "production",
-      "exports": [
-        "CountBadge",
-        "type CountBadgeProps"
-      ],
+      "exports": ["CountBadge", "type CountBadgeProps"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "badge",
-        "badge"
-      ]
+      "aliases": ["badge", "badge"]
     },
     {
       "name": "Banner",
@@ -155,11 +137,7 @@
         }
       ],
       "deprecatedProps": [],
-      "aliases": [
-        "banner",
-        "banner",
-        "banner"
-      ],
+      "aliases": ["banner", "banner", "banner"],
       "storySlug": "banner"
     },
     {
@@ -169,20 +147,12 @@
       "subpath": "breadcrumbs",
       "canonicalImport": "@workday/canvas-kit-react/breadcrumbs",
       "status": "production",
-      "exports": [
-        "Breadcrumbs",
-        "BreadcrumbsProps",
-        "useBreadcrumbsModel"
-      ],
+      "exports": ["Breadcrumbs", "BreadcrumbsProps", "useBreadcrumbsModel"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "breadcrumbs",
-        "breadcrumbs",
-        "breadcrumbs"
-      ],
+      "aliases": ["breadcrumbs", "breadcrumbs", "breadcrumbs"],
       "storySlug": "breadcrumbs"
     },
     {
@@ -237,13 +207,7 @@
           "source": "modules/react/button/lib/types.ts"
         }
       ],
-      "aliases": [
-        "button",
-        "button",
-        "buttons",
-        "hyperlink",
-        "link"
-      ]
+      "aliases": ["button", "button", "buttons", "hyperlink", "link"]
     },
     {
       "name": "Card",
@@ -267,11 +231,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "card",
-        "card",
-        "card"
-      ],
+      "aliases": ["card", "card", "card"],
       "storySlug": "card"
     },
     {
@@ -281,19 +241,12 @@
       "subpath": "checkbox",
       "canonicalImport": "@workday/canvas-kit-react/checkbox",
       "status": "production",
-      "exports": [
-        "Checkbox",
-        "type CheckboxProps"
-      ],
+      "exports": ["Checkbox", "type CheckboxProps"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "checkbox",
-        "checkbox",
-        "checkbox"
-      ],
+      "aliases": ["checkbox", "checkbox", "checkbox"],
       "storySlug": "checkbox"
     },
     {
@@ -368,10 +321,7 @@
           "source": "modules/react/collection/lib/useOverflowListModel.tsx"
         }
       ],
-      "aliases": [
-        "collection",
-        "collection"
-      ]
+      "aliases": ["collection", "collection"]
     },
     {
       "name": "ColorPicker",
@@ -394,10 +344,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "color-picker",
-        "color-picker"
-      ]
+      "aliases": ["color-picker", "color-picker"]
     },
     {
       "name": "ColorPicker",
@@ -405,18 +352,12 @@
       "subpath": "color-picker",
       "canonicalImport": "@workday/canvas-kit-preview-react/color-picker",
       "status": "preview",
-      "exports": [
-        "ColorPicker",
-        "type ColorPickerProps"
-      ],
+      "exports": ["ColorPicker", "type ColorPickerProps"],
       "deprecated": false,
       "recommended": false,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "color-picker",
-        "color-picker"
-      ]
+      "aliases": ["color-picker", "color-picker"]
     },
     {
       "name": "Combobox",
@@ -457,10 +398,7 @@
         }
       ],
       "deprecatedProps": [],
-      "aliases": [
-        "combobox",
-        "combobox"
-      ]
+      "aliases": ["combobox", "combobox"]
     },
     {
       "name": "Dialog",
@@ -469,22 +407,12 @@
       "subpath": "dialog",
       "canonicalImport": "@workday/canvas-kit-react/dialog",
       "status": "production",
-      "exports": [
-        "Dialog",
-        "DialogProps",
-        "useDialogCard",
-        "useDialogModel",
-        "useDialogPopper"
-      ],
+      "exports": ["Dialog", "DialogProps", "useDialogCard", "useDialogModel", "useDialogPopper"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "dialog",
-        "dialog",
-        "dialog"
-      ],
+      "aliases": ["dialog", "dialog", "dialog"],
       "storySlug": "dialog"
     },
     {
@@ -493,18 +421,12 @@
       "subpath": "disclosure",
       "canonicalImport": "@workday/canvas-kit-react/disclosure",
       "status": "production",
-      "exports": [
-        "Visibility",
-        "useDisclosureModel"
-      ],
+      "exports": ["Visibility", "useDisclosureModel"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "disclosure",
-        "disclosure"
-      ]
+      "aliases": ["disclosure", "disclosure"]
     },
     {
       "name": "Divider",
@@ -513,20 +435,12 @@
       "subpath": "divider",
       "canonicalImport": "@workday/canvas-kit-preview-react/divider",
       "status": "preview",
-      "exports": [
-        "Divider",
-        "DividerProps",
-        "dividerStencil"
-      ],
+      "exports": ["Divider", "DividerProps", "dividerStencil"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "divider",
-        "divider",
-        "divider"
-      ],
+      "aliases": ["divider", "divider", "divider"],
       "storySlug": "divider"
     },
     {
@@ -549,11 +463,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "expandable",
-        "expandable",
-        "expandable"
-      ],
+      "aliases": ["expandable", "expandable", "expandable"],
       "storySlug": "expandable"
     },
     {
@@ -597,11 +507,7 @@
         }
       ],
       "deprecatedProps": [],
-      "aliases": [
-        "form-field",
-        "form-field",
-        "form-field"
-      ],
+      "aliases": ["form-field", "form-field", "form-field"],
       "storySlug": "form-field"
     },
     {
@@ -651,7 +557,7 @@
         },
         {
           "name": "AccentIconProps",
-          "message": "The fill color of the AccentIcon. @default system.legacy.color.bg.primary.strong / color?: SystemPropValues['color']; /** If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; } /** @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0."
+          "message": "The fill color of the AccentIcon. @default system.color.bg.primary.strong / color?: SystemPropValues['color']; /** If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; } /** @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0."
         },
         {
           "name": "accentIconStencil",
@@ -659,11 +565,11 @@
         },
         {
           "name": "accentIconStyles",
-          "message": "The fill color of the AccentIcon. @default system.legacy.color.bg.primary.strong / color?: SystemPropValues['color']; /** If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; /** The icon to display from `@workday/canvas-accent-icons-web`. / icon: CanvasAccentIcon; /** The size of the AccentIcon in `px`. @default 56 / size?: number; } /** @deprecated `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `accentIconStencil` instead. Deprecated in v11.0.0."
+          "message": "The fill color of the AccentIcon. @default system.color.bg.primary.strong / color?: SystemPropValues['color']; /** If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; /** The icon to display from `@workday/canvas-accent-icons-web`. / icon: CanvasAccentIcon; /** The size of the AccentIcon in `px`. @default 56 / size?: number; } /** @deprecated `accentIconStyles` will be removed in in a future version as a part of implementation of stencils and new tokens. Consider to use `accentIconStencil` instead. Deprecated in v11.0.0."
         },
         {
           "name": "AccentIconStyles",
-          "message": "Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.legacy.color.bg.primary.strong}`. Deprecated in v15.0.0."
+          "message": "Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`. Deprecated in v15.0.0."
         },
         {
           "name": "AppletIcon",
@@ -707,7 +613,7 @@
         },
         {
           "name": "SystemIconCircleProps",
-          "message": "Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens. @deprecated Use tokens instead. Deprecated in v15.0.0. */ const sizes = { xs: system.legacy.size.xxxs, s: system.legacy.size.xs, m: system.legacy.size.sm, l: system.legacy.size.md, xl: system.legacy.size.xxl, xxl: px2rem(120), }; type SystemIconCircleCommonProps = { /** The icon to display from `@workday/canvas-system-icons-web`. / icon: CanvasSystemIcon | LegacyCanvasSystemIcon; /** The size token of the SystemIconCircle. @default SystemIconCircleSize.l / size?: SystemIconCircleSize | string | number; /** If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead. @default false / shouldMirror?: boolean; /** If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. @default false / shouldMirrorInRTL?: boolean; /** If set to `true`, the icon will be displayed in inverse mode. @default false / inverse?: boolean; } & CSProps; /** Circle fill and icon color. When `background` is set, `color` is required so foreground/background stay paired for contrast."
+          "message": "Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens. @deprecated Use tokens instead. Deprecated in v15.0.0. */ const sizes = { xs: system.size.xxxs, s: system.size.xs, m: system.size.sm, l: system.size.md, xl: system.size.xxl, xxl: px2rem(120), }; type SystemIconCircleCommonProps = { /** The icon to display from `@workday/canvas-system-icons-web`. / icon: CanvasSystemIcon | LegacyCanvasSystemIcon; /** The size token of the SystemIconCircle. @default SystemIconCircleSize.l / size?: SystemIconCircleSize | string | number; /** If set to `true`, transform the SVG's x-axis to mirror the graphic. Use this if you want to always mirror the icon regardless of the content direction. If the SVG should mirror only when in an right-to-left language, use `shouldMirrorInRTL` instead. @default false / shouldMirror?: boolean; /** If set to `true`, transform the SVG's x-axis to mirror the graphic when the content direction is `rtl`. Icons don't have enough context to know if they should be mirrored in all cases. Setting this to `true` indicates the icon should be mirrored in right-to-left languages. @default false / shouldMirrorInRTL?: boolean; /** If set to `true`, the icon will be displayed in inverse mode. @default false / inverse?: boolean; } & CSProps; /** Circle fill and icon color. When `background` is set, `color` is required so foreground/background stay paired for contrast."
         },
         {
           "name": "validateIconType",
@@ -717,7 +623,7 @@
       "deprecatedProps": [
         {
           "name": "color",
-          "message": "If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; } /** @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0. / export interface AccentIconProps extends Omit<SvgProps, 'src' | 'type'> { /** The fill color of the AccentIcon. @default system.legacy.color.bg.primary.strong",
+          "message": "If true, set the background fill of the AccentIcon to `transparent`. If false, set the background fill of the AccentIcon to `system.color.bg.alt.soft`. @default false / transparent?: boolean; } /** @deprecated ⚠️ `AccentIconProps` is deprecated and will be removed in a future major version. Deprecated in v15.0.0. / export interface AccentIconProps extends Omit<SvgProps, 'src' | 'type'> { /** The fill color of the AccentIcon. @default system.color.bg.primary.strong",
           "source": "modules/react/icon/lib/AccentIcon.tsx"
         },
         {
@@ -737,7 +643,7 @@
         },
         {
           "name": "icon",
-          "message": "Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens. @deprecated Use tokens instead. Deprecated in v15.0.0. */ const sizes = { xs: system.legacy.size.xxxs, s: system.legacy.size.xs, m: system.legacy.size.sm, l: system.legacy.size.md, xl: system.legacy.size.xxl, xxl: px2rem(120), }; type SystemIconCircleCommonProps = { /** The icon to display from `@workday/canvas-system-icons-web`.",
+          "message": "Mapping utility for the SystemIconCircleSize enum to the systemLegacy size tokens. @deprecated Use tokens instead. Deprecated in v15.0.0. */ const sizes = { xs: system.size.xxxs, s: system.size.xs, m: system.size.sm, l: system.size.md, xl: system.size.xxl, xxl: px2rem(120), }; type SystemIconCircleCommonProps = { /** The icon to display from `@workday/canvas-system-icons-web`.",
           "source": "modules/react/icon/lib/SystemIconCircle.tsx"
         },
         {
@@ -751,10 +657,7 @@
           "source": "modules/react/icon/lib/Svg.tsx"
         }
       ],
-      "aliases": [
-        "icon",
-        "icon"
-      ]
+      "aliases": ["icon", "icon"]
     },
     {
       "name": "InformationHighlight",
@@ -777,11 +680,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "information-highlight",
-        "information-highlight",
-        "information-highlight"
-      ],
+      "aliases": ["information-highlight", "information-highlight", "information-highlight"],
       "storySlug": "information-highlight"
     },
     {
@@ -804,11 +703,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "kbd",
-        "kbd",
-        "kbd"
-      ],
+      "aliases": ["kbd", "kbd", "kbd"],
       "storySlug": "kbd"
     },
     {
@@ -2120,10 +2015,7 @@
           "source": "modules/react/layout/lib/utils/position.ts"
         }
       ],
-      "aliases": [
-        "layout",
-        "layout"
-      ]
+      "aliases": ["layout", "layout"]
     },
     {
       "name": "LoadingDots",
@@ -2132,20 +2024,12 @@
       "subpath": "loading-dots",
       "canonicalImport": "@workday/canvas-kit-react/loading-dots",
       "status": "production",
-      "exports": [
-        "LoadingDots",
-        "LoadingDotsProps",
-        "loadingDotsStencil"
-      ],
+      "exports": ["LoadingDots", "LoadingDotsProps", "loadingDotsStencil"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "loading-dots",
-        "loading-dots",
-        "loading-dots"
-      ],
+      "aliases": ["loading-dots", "loading-dots", "loading-dots"],
       "storySlug": "loading-dots"
     },
     {
@@ -2154,20 +2038,12 @@
       "subpath": "loading-sparkles",
       "canonicalImport": "@workday/canvas-kit-preview-react/loading-sparkles",
       "status": "preview",
-      "exports": [
-        "LoadingSparkles",
-        "loadingSparklesStencil"
-      ],
+      "exports": ["LoadingSparkles", "loadingSparklesStencil"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "loading-sparkles",
-        "loading-sparkles",
-        "loading-sparkles-(ai)",
-        "ai-loading"
-      ]
+      "aliases": ["loading-sparkles", "loading-sparkles", "loading-sparkles-(ai)", "ai-loading"]
     },
     {
       "name": "Menu",
@@ -2222,11 +2098,7 @@
           "source": "modules/react/menu/lib/MenuItem.tsx"
         }
       ],
-      "aliases": [
-        "menu",
-        "menu",
-        "menu"
-      ],
+      "aliases": ["menu", "menu", "menu"],
       "storySlug": "menu"
     },
     {
@@ -2247,11 +2119,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "modal",
-        "modal",
-        "modal"
-      ],
+      "aliases": ["modal", "modal", "modal"],
       "storySlug": "modal"
     },
     {
@@ -2281,11 +2149,7 @@
         }
       ],
       "deprecatedProps": [],
-      "aliases": [
-        "multi-select",
-        "multi-select",
-        "multiselect"
-      ],
+      "aliases": ["multi-select", "multi-select", "multiselect"],
       "storySlug": "multiselect"
     },
     {
@@ -2316,11 +2180,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "pagination",
-        "pagination",
-        "pagination"
-      ],
+      "aliases": ["pagination", "pagination", "pagination"],
       "storySlug": "pagination"
     },
     {
@@ -2352,11 +2212,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "pill",
-        "pill",
-        "pill"
-      ],
+      "aliases": ["pill", "pill", "pill"],
       "storySlug": "pill"
     },
     {
@@ -2403,11 +2259,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "popup",
-        "popup",
-        "popup"
-      ],
+      "aliases": ["popup", "popup", "popup"],
       "storySlug": "popup"
     },
     {
@@ -2417,12 +2269,7 @@
       "subpath": "radio",
       "canonicalImport": "@workday/canvas-kit-react/radio",
       "status": "production",
-      "exports": [
-        "Radio",
-        "RadioGroup",
-        "RadioGroupProps",
-        "RadioProps"
-      ],
+      "exports": ["Radio", "RadioGroup", "RadioGroupProps", "RadioProps"],
       "deprecated": true,
       "recommended": false,
       "deprecatedExports": [
@@ -2459,11 +2306,7 @@
           "source": "modules/react/radio/lib/RadioGroup.tsx"
         }
       ],
-      "aliases": [
-        "radio",
-        "radio",
-        "radio"
-      ],
+      "aliases": ["radio", "radio", "radio"],
       "storySlug": "radio"
     },
     {
@@ -2486,11 +2329,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "radio",
-        "radio",
-        "radio"
-      ],
+      "aliases": ["radio", "radio", "radio"],
       "storySlug": "radio"
     },
     {
@@ -2513,11 +2352,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "segmented-control",
-        "segmented-control",
-        "segmented-control"
-      ],
+      "aliases": ["segmented-control", "segmented-control", "segmented-control"],
       "storySlug": "segmented-control"
     },
     {
@@ -2541,11 +2376,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "select",
-        "select",
-        "select"
-      ],
+      "aliases": ["select", "select", "select"],
       "storySlug": "select"
     },
     {
@@ -2573,10 +2404,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "selection-group",
-        "selection-group"
-      ]
+      "aliases": ["selection-group", "selection-group"]
     },
     {
       "name": "SidePanel",
@@ -2603,7 +2431,7 @@
       "deprecatedExports": [
         {
           "name": "useSidePanelToggleButton",
-          "message": "The tooltip text to expand the side panel @deprecated Use / tooltipTextExpand?: string; /** Provides an accessible label to the button. This text **should not** convey visual state but rather what it does like \"control data panel.\" / tooltipText?: string; /** The tooltip text to collapse the side panel. Optional text for when the side panel is in a collapsed state. / tooltipTextCollapse?: string; tooltipProps?: Omit<TooltipProps, 'children'>; } export const sidePanelToggleButtonStencil = createStencil({ base: { position: 'absolute', top: px2rem(12), width: system.legacy.size.md, ':dir(rtl)': { transform: `scaleX(-1)`, }, }, modifiers: { state: { collapsing: { margin: 0, }, collapsed: { margin: 'auto', }, expanded: { margin: 0, }, expanding: { margin: 0, }, }, origin: { start: { insetInlineEnd: base.legacy.size150, }, end: { insetInlineStart: base.legacy.size150, }, }, }, }); /** Adds the necessary ARIA attributes to the SidePanel's toggle button. This includes `aria-controls` pointing at the panel, `aria-pressed` to convey the collapsed state, and `aria-describedby` pointing at the panel's heading."
+          "message": "The tooltip text to expand the side panel @deprecated Use / tooltipTextExpand?: string; /** Provides an accessible label to the button. This text **should not** convey visual state but rather what it does like \"control data panel.\" / tooltipText?: string; /** The tooltip text to collapse the side panel. Optional text for when the side panel is in a collapsed state. / tooltipTextCollapse?: string; tooltipProps?: Omit<TooltipProps, 'children'>; } export const sidePanelToggleButtonStencil = createStencil({ base: { position: 'absolute', top: px2rem(12), width: system.size.md, ':dir(rtl)': { transform: `scaleX(-1)`, }, }, modifiers: { state: { collapsing: { margin: 0, }, collapsed: { margin: 'auto', }, expanded: { margin: 0, }, expanding: { margin: 0, }, }, origin: { start: { insetInlineEnd: base.legacy.size150, }, end: { insetInlineStart: base.legacy.size150, }, }, }, }); /** Adds the necessary ARIA attributes to the SidePanel's toggle button. This includes `aria-controls` pointing at the panel, `aria-pressed` to convey the collapsed state, and `aria-describedby` pointing at the panel's heading."
         }
       ],
       "deprecatedProps": [
@@ -2613,11 +2441,7 @@
           "source": "modules/react/side-panel/lib/SidePanelToggleButton.tsx"
         }
       ],
-      "aliases": [
-        "side-panel",
-        "side-panel",
-        "side-panel"
-      ],
+      "aliases": ["side-panel", "side-panel", "side-panel"],
       "storySlug": "side-panel"
     },
     {
@@ -2722,17 +2546,11 @@
         },
         {
           "name": "ToggleButton",
-          "message": "If true, sets the expanded state of the side panel @default true / expanded?: boolean; /** The width of the component (in `px` if it's a `number`) when it is expanded. @default 320 / expandedWidth?: number | string; /** Which side the side panel is meant to originate from. @default 'left' / origin?: 'left' | 'right'; /** The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateTransition` @param boolean / onExpandedChange?: (expanded?: boolean) => void; /** The function called when the side panel is transitioning between states. Use this to track when the side panel is animating between `'collapsed'`, `'collapsing'`, `'expanded'`, and `'expanding'` states. This can be particularly helpful if child components need to react specifically to these states. @param SidePanelTransitionStates / onStateTransition?: (state?: SidePanelTransitionStates) => void; /** The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth. @default 'standard' / variant?: SidePanelVariant; /** This is set by the useSidePanel hook and prevents unintended keyframe animations @param boolean / touched: boolean; children?: React.ReactNode; onAnimationEnd?: React.TransitionEvent<HTMLElement>; } /** @deprecated ⚠️ `panelStencil` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead. / export const panelStencil = createStencil({ vars: { expandedWidth: '', collapsedWidth: '', }, base: () => ({ overflow: 'hidden', position: 'relative', height: '100%', outline: `${px2rem(1)} solid transparent`, transition: 'width ease-out 200ms, max-width ease-out 200ms', }), modifiers: { variant: { alternate: { backgroundColor: system.color.bg.default, boxShadow: system.depth[5], }, standard: { backgroundColor: system.legacy.color.surface.default, }, }, expanded: { true: ({expandedWidth}) => ({ width: expandedWidth, maxWidth: expandedWidth, }), false: ({collapsedWidth}) => ({ width: collapsedWidth, maxWidth: collapsedWidth, }), }, touched: { true: {}, false: { animation: 'none', }, }, }, }); /** @deprecated ⚠️ `SidePanel` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead. / export const SidePanel = createComponent('section')({ displayName: 'SidePanel', Component( { children, collapsedWidth = 64, expanded = true, expandedWidth = 320, onAnimationEnd, onExpandedChange, onStateTransition, origin = 'left', variant = 'standard', touched, ...elemProps }: SidePanelProps, ref, Element ) { const [state, setState] = React.useState<SidePanelTransitionStates>( expanded ? 'expanded' : 'collapsed' ); React.useEffect(() => { if (typeof onExpandedChange !== 'undefined') { onExpandedChange(expanded); } }, [expanded, onExpandedChange]); React.useEffect(() => { if (typeof onStateTransition !== 'undefined') { onStateTransition(state); } }, [state, onStateTransition]); const handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => { if (event.propertyName === 'width') { if (state === 'expanding') { setState('expanded'); } else if (state === 'collapsing') { setState('collapsed'); } } }; const handleAnimationStart = () => { if (state === 'collapsed' || state === 'collapsing') { setState('expanding'); } else if (state === 'expanded' || state === 'expanding') { setState('collapsing'); } return undefined; }; return ( <Element ref={ref} onTransitionEnd={handleAnimationEnd} {...handleCsProp(elemProps, [ panelStencil({ expanded, variant, expandedWidth: typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth, collapsedWidth: typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth, }), ])} > <SidePanelContext.Provider value={{ state, origin, handleAnimationStart, }} > {children} </SidePanelContext.Provider> </Element> ); }, subComponents: { /** `SidePanel.ToggleButton` is a control that is meant to toggle between `expanded = true` and `expanded = false` states. It must be used within the `SidePanel` component as a child. Use in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick` handlers. For accessibility purposes, it must be the first focusable element. We recommend that you keep it as the first child of `SidePanel`",
+          "message": "If true, sets the expanded state of the side panel @default true / expanded?: boolean; /** The width of the component (in `px` if it's a `number`) when it is expanded. @default 320 / expandedWidth?: number | string; /** Which side the side panel is meant to originate from. @default 'left' / origin?: 'left' | 'right'; /** The function called when the side panel's `expanded` state changes. States like `'collapsing'` and `'expanding'` are tracked in another callback: `onStateTransition` @param boolean / onExpandedChange?: (expanded?: boolean) => void; /** The function called when the side panel is transitioning between states. Use this to track when the side panel is animating between `'collapsed'`, `'collapsing'`, `'expanded'`, and `'expanding'` states. This can be particularly helpful if child components need to react specifically to these states. @param SidePanelTransitionStates / onStateTransition?: (state?: SidePanelTransitionStates) => void; /** The style variant of the side panel. 'standard' is with a `soap100` background, no depth. 'alternate' is a `frenchVanilla100` background with a level 6 depth. @default 'standard' / variant?: SidePanelVariant; /** This is set by the useSidePanel hook and prevents unintended keyframe animations @param boolean / touched: boolean; children?: React.ReactNode; onAnimationEnd?: React.TransitionEvent<HTMLElement>; } /** @deprecated ⚠️ `panelStencil` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead. / export const panelStencil = createStencil({ vars: { expandedWidth: '', collapsedWidth: '', }, base: () => ({ overflow: 'hidden', position: 'relative', height: '100%', outline: `${px2rem(1)} solid transparent`, transition: 'width ease-out 200ms, max-width ease-out 200ms', }), modifiers: { variant: { alternate: { backgroundColor: system.color.bg.default, boxShadow: system.depth[5], }, standard: { backgroundColor: system.color.surface.default, }, }, expanded: { true: ({expandedWidth}) => ({ width: expandedWidth, maxWidth: expandedWidth, }), false: ({collapsedWidth}) => ({ width: collapsedWidth, maxWidth: collapsedWidth, }), }, touched: { true: {}, false: { animation: 'none', }, }, }, }); /** @deprecated ⚠️ `SidePanel` in Preview has been deprecated and will be removed in a future major version. Please use [`SidePanel` in Labs](https://workday.github.io/canvas-kit/?path=/docs/labs-side-panel--docs) instead. / export const SidePanel = createComponent('section')({ displayName: 'SidePanel', Component( { children, collapsedWidth = 64, expanded = true, expandedWidth = 320, onAnimationEnd, onExpandedChange, onStateTransition, origin = 'left', variant = 'standard', touched, ...elemProps }: SidePanelProps, ref, Element ) { const [state, setState] = React.useState<SidePanelTransitionStates>( expanded ? 'expanded' : 'collapsed' ); React.useEffect(() => { if (typeof onExpandedChange !== 'undefined') { onExpandedChange(expanded); } }, [expanded, onExpandedChange]); React.useEffect(() => { if (typeof onStateTransition !== 'undefined') { onStateTransition(state); } }, [state, onStateTransition]); const handleAnimationEnd = (event: React.TransitionEvent<HTMLDivElement>) => { if (event.propertyName === 'width') { if (state === 'expanding') { setState('expanded'); } else if (state === 'collapsing') { setState('collapsed'); } } }; const handleAnimationStart = () => { if (state === 'collapsed' || state === 'collapsing') { setState('expanding'); } else if (state === 'expanded' || state === 'expanding') { setState('collapsing'); } return undefined; }; return ( <Element ref={ref} onTransitionEnd={handleAnimationEnd} {...handleCsProp(elemProps, [ panelStencil({ expanded, variant, expandedWidth: typeof expandedWidth === 'number' ? px2rem(expandedWidth) : expandedWidth, collapsedWidth: typeof collapsedWidth === 'number' ? px2rem(collapsedWidth) : collapsedWidth, }), ])} > <SidePanelContext.Provider value={{ state, origin, handleAnimationStart, }} > {children} </SidePanelContext.Provider> </Element> ); }, subComponents: { /** `SidePanel.ToggleButton` is a control that is meant to toggle between `expanded = true` and `expanded = false` states. It must be used within the `SidePanel` component as a child. Use in conjunction with `useSidePanel`'s `controlProps`, otherwise it does not come with explicit `onClick` handlers. For accessibility purposes, it must be the first focusable element. We recommend that you keep it as the first child of `SidePanel`",
           "source": "modules/preview-react/side-panel/lib/SidePanel.tsx"
         }
       ],
-      "aliases": [
-        "side-panel",
-        "side-panel",
-        "side-panel-(new)",
-        "sidepanel",
-        "side-panel"
-      ],
+      "aliases": ["side-panel", "side-panel", "side-panel-(new)", "sidepanel", "side-panel"],
       "storySlug": "side-panel"
     },
     {
@@ -2762,11 +2580,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "skeleton",
-        "skeleton",
-        "skeleton"
-      ],
+      "aliases": ["skeleton", "skeleton", "skeleton"],
       "storySlug": "skeleton"
     },
     {
@@ -2825,12 +2639,7 @@
           "source": "modules/react/status-indicator/lib/StatusIndicator.tsx"
         }
       ],
-      "aliases": [
-        "status-indicator",
-        "status-indicator",
-        "statusindicator",
-        "status-indicator"
-      ],
+      "aliases": ["status-indicator", "status-indicator", "statusindicator", "status-indicator"],
       "storySlug": "status-indicator"
     },
     {
@@ -2840,11 +2649,7 @@
       "subpath": "status-indicator",
       "canonicalImport": "@workday/canvas-kit-preview-react/status-indicator",
       "status": "preview",
-      "exports": [
-        "StatusIndicator",
-        "StatusIndicatorProps",
-        "StatusIndicatorVariant"
-      ],
+      "exports": ["StatusIndicator", "StatusIndicatorProps", "StatusIndicatorVariant"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [
@@ -2860,12 +2665,7 @@
           "source": "modules/preview-react/status-indicator/lib/StatusIndicator.tsx"
         }
       ],
-      "aliases": [
-        "status-indicator",
-        "status-indicator",
-        "statusindicator",
-        "status-indicator"
-      ],
+      "aliases": ["status-indicator", "status-indicator", "statusindicator", "status-indicator"],
       "storySlug": "status-indicator"
     },
     {
@@ -2875,16 +2675,13 @@
       "subpath": "switch",
       "canonicalImport": "@workday/canvas-kit-react/switch",
       "status": "production",
-      "exports": [
-        "Switch",
-        "SwitchProps"
-      ],
+      "exports": ["Switch", "SwitchProps"],
       "deprecated": true,
       "recommended": false,
       "deprecatedExports": [
         {
           "name": "Switch",
-          "message": "If true, set the Switch to the on state. @default false / checked?: boolean; /** If true, set the Switch to the disabled state. @default false / disabled?: boolean; /** The HTML `id` of the underlying checkbox input element. @default A uniquely generated id / id?: string; /** The function called when the Switch state changes. / onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; /** The value of the Switch. / value?: string; /** The type of error associated with the Switch (if applicable). / error?: ErrorType; } const switchContainerStencil = createStencil({ base: { position: 'relative', height: system.legacy.size.xs, width: system.legacy.size.sm, }, }); const SwitchContainer = createComponent('div')({ displayName: 'SwitchContainer', Component: ({children, ...elemProps}, ref, Element) => { return ( <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}> {children} </Element> ); }, }); const switchInputStencil = createStencil({ base: { display: 'flex', position: 'absolute', height: system.legacy.size.xs, width: system.legacy.size.sm, borderRadius: system.legacy.shape.full, opacity: '0', cursor: 'pointer', '&:checked, &.checked': { '& ~ div:first-of-type': { backgroundColor: system.legacy.color.brand.accent.primary, }, '&:disabled, &.disabled': { '& ~ div:first-of-type': { opacity: system.opacity.disabled, }, }, }, '&:disabled, &.disabled': { cursor: 'not-allowed', '& ~ div:first-of-type': { opacity: system.opacity.disabled, }, }, '&:focus-visible, &:focus, &.focus': { outline: 'none', '& ~ div:first-of-type': { ...focusRing({separation: 2, animate: false}), }, }, }, modifiers: { error: { error: { '& ~ div:first-of-type': { boxShadow: ` 0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse}, 0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.critical}, 0 0 0 ${px2rem(5)} transparent`, }, }, caution: { '& ~ div:first-of-type': { boxShadow: ` 0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse}, 0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.caution.inner}, 0 0 0 ${px2rem(5)} ${system.legacy.color.brand.border.caution}`, }, }, }, }, }); const SwitchInput = createComponent('input')<SwitchProps>({ displayName: 'SwitchInput', Component: ({error, ...elemProps}, ref, Element) => { return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />; }, }); const switchBackgroundStencil = createStencil({ base: { position: 'absolute', display: 'flex', alignItems: 'center', pointerEvents: 'none', marginBlockStart: system.legacy.gap.xs, width: system.legacy.size.sm, height: system.legacy.size.xxxs, borderRadius: system.legacy.shape.full, padding: `0 ${px2rem(2)}`, transition: 'background-color 200ms ease', backgroundColor: system.legacy.color.accent.muted.soft, }, }); const SwitchBackground = createComponent('div')({ displayName: 'SwitchBackground', Component: ({children, ...elemProps}, ref, Element) => { return ( <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}> {children} </Element> ); }, }); const switchCircleStencil = createStencil({ base: { width: base.legacy.size150, height: base.legacy.size150, borderRadius: system.legacy.shape.full, boxShadow: system.depth[1], transition: 'transform 150ms ease', pointerEvents: 'none', backgroundColor: system.color.fg.inverse, transform: `translateX(0)`, }, modifiers: { checked: { true: { transform: `translateX(${system.legacy.size.xxxs})`, ':dir(rtl)': { transform: `translateX(${calc.negate(system.legacy.size.xxxs)})`, }, }, }, }, }); const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({ displayName: 'SwitchCircle', Component: ({checked, ...elemProps}, ref, Element) => { return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />; }, }); /** @deprecated ⚠️ `Switch` in Main has been deprecated in v15 and will be removed in a future major version. Please use [`Switch` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) instead.",
+          "message": "If true, set the Switch to the on state. @default false / checked?: boolean; /** If true, set the Switch to the disabled state. @default false / disabled?: boolean; /** The HTML `id` of the underlying checkbox input element. @default A uniquely generated id / id?: string; /** The function called when the Switch state changes. / onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void; /** The value of the Switch. / value?: string; /** The type of error associated with the Switch (if applicable). / error?: ErrorType; } const switchContainerStencil = createStencil({ base: { position: 'relative', height: system.size.xs, width: system.size.sm, }, }); const SwitchContainer = createComponent('div')({ displayName: 'SwitchContainer', Component: ({children, ...elemProps}, ref, Element) => { return ( <Element ref={ref} {...mergeStyles(elemProps, switchContainerStencil())}> {children} </Element> ); }, }); const switchInputStencil = createStencil({ base: { display: 'flex', position: 'absolute', height: system.size.xs, width: system.size.sm, borderRadius: system.shape.full, opacity: '0', cursor: 'pointer', '&:checked, &.checked': { '& ~ div:first-of-type': { backgroundColor: system.color.brand.accent.primary, }, '&:disabled, &.disabled': { '& ~ div:first-of-type': { opacity: system.opacity.disabled, }, }, }, '&:disabled, &.disabled': { cursor: 'not-allowed', '& ~ div:first-of-type': { opacity: system.opacity.disabled, }, }, '&:focus-visible, &:focus, &.focus': { outline: 'none', '& ~ div:first-of-type': { ...focusRing({separation: 2, animate: false}), }, }, }, modifiers: { error: { error: { '& ~ div:first-of-type': { boxShadow: ` 0 0 0 ${px2rem(2)} ${system.color.focus.inverse}, 0 0 0 ${px2rem(4)} ${system.color.brand.focus.critical}, 0 0 0 ${px2rem(5)} transparent`, }, }, caution: { '& ~ div:first-of-type': { boxShadow: ` 0 0 0 ${px2rem(2)} ${system.color.focus.inverse}, 0 0 0 ${px2rem(4)} ${system.color.brand.focus.caution.inner}, 0 0 0 ${px2rem(5)} ${system.color.brand.border.caution}`, }, }, }, }, }); const SwitchInput = createComponent('input')<SwitchProps>({ displayName: 'SwitchInput', Component: ({error, ...elemProps}, ref, Element) => { return <Element ref={ref} {...mergeStyles(elemProps, switchInputStencil({error}))} />; }, }); const switchBackgroundStencil = createStencil({ base: { position: 'absolute', display: 'flex', alignItems: 'center', pointerEvents: 'none', marginBlockStart: system.gap.xs, width: system.size.sm, height: system.size.xxxs, borderRadius: system.shape.full, padding: `0 ${px2rem(2)}`, transition: 'background-color 200ms ease', backgroundColor: system.color.accent.muted.soft, }, }); const SwitchBackground = createComponent('div')({ displayName: 'SwitchBackground', Component: ({children, ...elemProps}, ref, Element) => { return ( <Element ref={ref} {...mergeStyles(elemProps, switchBackgroundStencil())}> {children} </Element> ); }, }); const switchCircleStencil = createStencil({ base: { width: base.legacy.size150, height: base.legacy.size150, borderRadius: system.shape.full, boxShadow: system.depth[1], transition: 'transform 150ms ease', pointerEvents: 'none', backgroundColor: system.color.fg.inverse, transform: `translateX(0)`, }, modifiers: { checked: { true: { transform: `translateX(${system.size.xxxs})`, ':dir(rtl)': { transform: `translateX(${calc.negate(system.size.xxxs)})`, }, }, }, }, }); const SwitchCircle = createComponent('div')<Pick<SwitchProps, 'checked'>>({ displayName: 'SwitchCircle', Component: ({checked, ...elemProps}, ref, Element) => { return <Element ref={ref} {...mergeStyles(elemProps, switchCircleStencil({checked}))} />; }, }); /** @deprecated ⚠️ `Switch` in Main has been deprecated in v15 and will be removed in a future major version. Please use [`Switch` in Preview](https://workday.github.io/canvas-kit/?path=/docs/preview-inputs-switch--docs) instead.",
           "replacementPackage": "@workday/canvas-kit-preview-react"
         },
         {
@@ -2900,11 +2697,7 @@
           "source": "modules/react/switch/lib/Switch.tsx"
         }
       ],
-      "aliases": [
-        "switch",
-        "switch",
-        "switch"
-      ],
+      "aliases": ["switch", "switch", "switch"],
       "storySlug": "switch"
     },
     {
@@ -2932,12 +2725,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "switch",
-        "switch",
-        "switch-(new)",
-        "switch"
-      ],
+      "aliases": ["switch", "switch", "switch-(new)", "switch"],
       "storySlug": "switch"
     },
     {
@@ -2985,11 +2773,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "table",
-        "table",
-        "table"
-      ],
+      "aliases": ["table", "table", "table"],
       "storySlug": "table"
     },
     {
@@ -3032,11 +2816,7 @@
           "source": "modules/react/tabs/lib/Tabs.tsx"
         }
       ],
-      "aliases": [
-        "tabs",
-        "tabs",
-        "preview-tabs"
-      ],
+      "aliases": ["tabs", "tabs", "preview-tabs"],
       "storySlug": "preview-tabs"
     },
     {
@@ -3070,11 +2850,7 @@
       "recommended": false,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "tabs",
-        "tabs",
-        "preview-tabs"
-      ],
+      "aliases": ["tabs", "tabs", "preview-tabs"],
       "storySlug": "preview-tabs"
     },
     {
@@ -3102,7 +2878,7 @@
       "deprecatedExports": [
         {
           "name": "LabelText",
-          "message": "Disabled state as a boolean ```tsx <LabelText disabled={true}>Error text</LabelText> ``` / disabled?: boolean; /** Type variant token names: `error`, `hint` or `inverse`. ```tsx <LabelText variant=\"error\">Error text</LabelText> ``` / variant?: 'error' | 'hint' | 'inverse'; } const labelTextStencil = createStencil({ extends: textStencil, base: { // ...system.legacy.type.subtext.lg, // components do not support spreading for legacy type token fontFamily: system.fontFamily.default, fontWeight: system.fontWeight.normal, fontSize: system.legacy.fontSize.subtext.lg, lineHeight: system.legacy.lineHeight.subtext.lg, letterSpacing: system.legacy.letterSpacing.subtext.lg, color: system.color.fg.default, }, modifiers: { disabled: { true: { cursor: 'default', color: system.color.fg.disabled, }, }, variant: { inverse: {color: system.color.fg.inverse}, error: {color: system.legacy.color.brand.fg.critical.default}, hint: {color: system.color.fg.muted.default}, }, }, compound: [ { modifiers: {variant: 'inverse', disabled: true}, styles: { opacity: system.opacity.disabled, color: system.color.fg.inverse, }, }, ], }); /** This component is intended to be used for labeling input fields. By default, it renders a semantic `label` element. It also uses the `subtext.large` typeLevel by default: - font-size: 14px (0.875rem) - font-weight: regular (400) ```tsx import { LabelText } from '@workday/canvas-kit-react/text'; const CustomLabelText = () => ( <LabelText>Input Label Text</LabelText> ); ``` @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Please use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) from Main instead."
+          "message": "Disabled state as a boolean ```tsx <LabelText disabled={true}>Error text</LabelText> ``` / disabled?: boolean; /** Type variant token names: `error`, `hint` or `inverse`. ```tsx <LabelText variant=\"error\">Error text</LabelText> ``` / variant?: 'error' | 'hint' | 'inverse'; } const labelTextStencil = createStencil({ extends: textStencil, base: { // ...system.type.subtext.lg, // components do not support spreading for legacy type token fontFamily: system.fontFamily.default, fontWeight: system.fontWeight.normal, fontSize: system.fontSize.subtext.lg, lineHeight: system.lineHeight.subtext.lg, letterSpacing: system.letterSpacing.subtext.lg, color: system.color.fg.default, }, modifiers: { disabled: { true: { cursor: 'default', color: system.color.fg.disabled, }, }, variant: { inverse: {color: system.color.fg.inverse}, error: {color: system.color.brand.fg.critical.default}, hint: {color: system.color.fg.muted.default}, }, }, compound: [ { modifiers: {variant: 'inverse', disabled: true}, styles: { opacity: system.opacity.disabled, color: system.color.fg.inverse, }, }, ], }); /** This component is intended to be used for labeling input fields. By default, it renders a semantic `label` element. It also uses the `subtext.large` typeLevel by default: - font-size: 14px (0.875rem) - font-weight: regular (400) ```tsx import { LabelText } from '@workday/canvas-kit-react/text'; const CustomLabelText = () => ( <LabelText>Input Label Text</LabelText> ); ``` @deprecated ⚠️ `LabelText` has been deprecated and will be removed in a future major version. Please use [FormField.Label](https://workday.github.io/canvas-kit/?path=/docs/components-inputs-form-field--docs) from Main instead."
         },
         {
           "name": "TypeLabelProps",
@@ -3116,11 +2892,7 @@
           "source": "modules/react/text/lib/LabelText.tsx"
         }
       ],
-      "aliases": [
-        "text",
-        "text",
-        "text"
-      ],
+      "aliases": ["text", "text", "text"],
       "storySlug": "text"
     },
     {
@@ -3141,12 +2913,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "text-area",
-        "text-area",
-        "textarea",
-        "textarea"
-      ],
+      "aliases": ["text-area", "text-area", "textarea", "textarea"],
       "storySlug": "textarea"
     },
     {
@@ -3167,13 +2934,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "text-input",
-        "text-input",
-        "textinput",
-        "input",
-        "text-input"
-      ],
+      "aliases": ["text-input", "text-input", "textinput", "input", "text-input"],
       "storySlug": "text-input"
     },
     {
@@ -3183,21 +2944,12 @@
       "subpath": "toast",
       "canonicalImport": "@workday/canvas-kit-react/toast",
       "status": "production",
-      "exports": [
-        "AriaRoleMode",
-        "Toast",
-        "ToastProps",
-        "useToastModel"
-      ],
+      "exports": ["AriaRoleMode", "Toast", "ToastProps", "useToastModel"],
       "deprecated": false,
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "toast",
-        "toast",
-        "toast"
-      ],
+      "aliases": ["toast", "toast", "toast"],
       "storySlug": "toast"
     },
     {
@@ -3223,11 +2975,7 @@
       "recommended": true,
       "deprecatedExports": [],
       "deprecatedProps": [],
-      "aliases": [
-        "tooltip",
-        "tooltip",
-        "tooltip"
-      ],
+      "aliases": ["tooltip", "tooltip", "tooltip"],
       "storySlug": "tooltip"
     }
   ]

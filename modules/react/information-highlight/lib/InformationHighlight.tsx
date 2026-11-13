@@ -14,7 +14,7 @@ interface InformationHighlightProps extends CSProps {
 }
 
 const defaultVariantStyles = {
-  backgroundColor: system.legacy.color.surface.alt.default,
+  backgroundColor: system.color.surface.alt.default,
   '& [data-part="information-highlight-icon"]': {
     [systemIconStencil.vars.color]: system.color.fg.default,
   },
@@ -26,10 +26,10 @@ export const informationHighlightStencil = createStencil({
     display: 'grid',
     gridTemplateColumns: 'min-content',
     gap: `0 ${px2rem(12)}`,
-    padding: system.legacy.padding.md,
-    borderRadius: system.legacy.shape.sm,
+    padding: system.padding.md,
+    borderRadius: system.shape.sm,
     outline: `${px2rem(1)} solid transparent`,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.shape.xxl,
   },
   modifiers: {
     default: {
@@ -38,56 +38,56 @@ export const informationHighlightStencil = createStencil({
     },
     informational: {
       low: {
-        backgroundColor: system.legacy.color.surface.alt.default,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.info.default,
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.info.default,
+          [systemIconStencil.vars.color]: system.color.fg.info.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.info.default,
         },
       },
       high: {
-        backgroundColor: system.legacy.color.surface.info.default,
+        backgroundColor: system.color.surface.info.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.info.default,
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.info.default,
+          [systemIconStencil.vars.color]: system.color.fg.info.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.info.default,
         },
       },
     },
     caution: {
       low: {
-        backgroundColor: system.legacy.color.surface.alt.default,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.warning.default,
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.warning.default,
+          [systemIconStencil.vars.color]: system.color.fg.warning.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.warning.default,
         },
       },
       high: {
-        backgroundColor: system.legacy.color.surface.warning.default,
+        backgroundColor: system.color.surface.warning.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.warning.default,
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.warning.default,
+          [systemIconStencil.vars.color]: system.color.fg.warning.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.warning.default,
         },
       },
     },
     critical: {
       low: {
-        backgroundColor: system.legacy.color.surface.alt.default,
+        backgroundColor: system.color.surface.alt.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.danger.default,
+          [systemIconStencil.vars.color]: system.color.fg.danger.default,
           // The fallback is set to 'transparent' as this will be the same transparent background icon used with v3 tokens
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.danger.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.danger.default,
         },
       },
       high: {
-        backgroundColor: system.legacy.color.surface.danger.default,
+        backgroundColor: system.color.surface.danger.default,
         '& [data-part="information-highlight-icon"]': {
           [systemIconStencil.vars.accentColor]: system.color.fg.inverse,
-          [systemIconStencil.vars.color]: system.legacy.color.fg.danger.default,
-          [systemIconStencil.vars.backgroundColor]: system.legacy.color.fg.danger.default,
+          [systemIconStencil.vars.color]: system.color.fg.danger.default,
+          [systemIconStencil.vars.backgroundColor]: system.color.fg.danger.default,
         },
       },
     },
@@ -116,7 +116,7 @@ export const informationHighlightStencil = createStencil({
         '& [data-part="information-highlight-link"]': {
           gridArea: 'link',
           justifySelf: 'end',
-          marginBlockStart: system.legacy.gap.md,
+          marginBlockStart: system.gap.md,
         },
         '@container (min-width: 28rem)': {
           gridTemplateColumns: 'min-content minmax(0, 1fr) minmax(0, max-content)',

@@ -548,7 +548,7 @@ The `Card` component's variants have been updated:
 - **Removed:** The `borderless` variant has been removed and replaced with `alt`
 - **New:** The `alt` variant provides an elevated surface with inverse borders
 - **Updated:** The default variant now has a visible border
-- The `tonal` variant now uses a `system.legacy.color.surface.alt.strong` background.
+- The `tonal` variant now uses a `system.color.surface.alt.strong` background.
 
 **Note:** If you were previously using `variant="borderless"`, you should use `variant="alt"`
 instead. While the styles are different, both where intended to be used on an `alt` background.
@@ -620,7 +620,7 @@ shadow.
 
 ##### New API
 
-- `variant="alternative"` — uses a raised surface (`system.legacy.color.surface.raised`) with no
+- `variant="alternative"` — uses a raised surface (`system.color.surface.raised`) with no
   depth. Use it for panels that need to stand out from the page background while remaining part of
   the page layout.
 
@@ -628,9 +628,9 @@ The full set of variants is now:
 
 | Variant       | Surface                                  | Depth |
 | ------------- | ---------------------------------------- | ----- |
-| `standard`    | `system.legacy.color.surface.navigation` | None  |
-| `alternative` | `system.legacy.color.surface.raised`     | None  |
-| `overlay`     | `system.legacy.color.surface.default`    | 6     |
+| `standard`    | `system.color.surface.navigation` | None  |
+| `alternative` | `system.color.surface.raised`     | None  |
+| `overlay`     | `system.color.surface.default`    | 6     |
 
 ##### Visual Updates
 
@@ -650,10 +650,10 @@ The full set of variants is now:
 
 ##### Visual Updates
 
-- `BaseTable` / `Table` outer border color updated from `system.legacy.color.border.strong` to
-  `system.legacy.color.border.default`.
-- `Table.Caption` divider (`borderBlockEnd`) updated from `system.legacy.color.border.strong` to
-  `system.legacy.color.border.default`.
+- `BaseTable` / `Table` outer border color updated from `system.color.border.strong` to
+  `system.color.border.default`.
+- `Table.Caption` divider (`borderBlockEnd`) updated from `system.color.border.strong` to
+  `system.color.border.default`.
 - Container corner radius is now **12px** (`shape.lg`, previously `shape.md` / 8px), managed via
   `cornerShapeStencil` (see [New Utilities](#new-utilities)).
 - `Table.Header` (and `BaseTable.Header`) cell padding is now uniform `padding.md` (16px) on all
@@ -709,7 +709,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
   [New Utilities](#new-utilities)), using `shape.lg` (12px) instead of individual corner-radius
   properties set to `shape.sm` (4px).
 - A box shadow (`system.depth[5]`) has been added to the container.
-- The focus ring now uses `system.legacy.color.brand.border.primary` for its outer color.
+- The focus ring now uses `system.color.brand.border.primary` for its outer color.
 - Hover background now uses `colorSpace.hover()` instead of `colorSpace.darken()`, making the hover
   direction theme-aware (lightens in the Sana Canvas theme, darkens in the default/legacy theme).
 - The default `Banner.Icon` size has been reduced from `24px` to `20px`.
@@ -720,14 +720,14 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 ##### Visual Updates
 
-- Typography now uses the `system.legacy.type.subtext.md` type preset (previously individually set
+- Typography now uses the `system.type.subtext.md` type preset (previously individually set
   `fontFamily`/`fontSize`/`lineHeight`/`letterSpacing`); `fontWeight` is now
   `system.fontWeight.medium` (previously `system.fontWeight.bold`).
-- Horizontal padding changed from a hardcoded `6.5px` to `system.legacy.padding.xxs` (4px).
-- Default background color changed from `system.legacy.color.accent.danger` to
-  `system.legacy.color.brand.accent.primary`. This is a visual color change — the default badge is
+- Horizontal padding changed from a hardcoded `6.5px` to `system.padding.xxs` (4px).
+- Default background color changed from `system.color.accent.danger` to
+  `system.color.brand.accent.primary`. This is a visual color change — the default badge is
   no longer red/danger-colored and now uses the brand primary accent color.
-- The `inverse` variant's text color changed from `system.legacy.color.fg.info.strong` to
+- The `inverse` variant's text color changed from `system.color.fg.info.strong` to
   `system.color.fg.strong`.
 
 #### Information Highlight
@@ -758,11 +758,11 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
   between body and link (`gap.md`).
 - The default `InformationHighlight.Icon` size has been reduced from `24px` to `20px` (`systemIcon`
   size `md`).
-- `Heading` typography now uses `system.legacy.type.subtext.lg` with `fontWeight.medium` (previously
+- `Heading` typography now uses `system.type.subtext.lg` with `fontWeight.medium` (previously
   `body.sm` scale with `fontWeight.bold`). Color changed from `fg.default` to `fg.strong`.
-- `Body` typography consolidated to `system.legacy.type.subtext.lg` spread. Color changed from
+- `Body` typography consolidated to `system.type.subtext.lg` spread. Color changed from
   `fg.default` to `fg.muted.default`.
-- `Link` typography consolidated to `system.legacy.type.subtext.lg` spread; `fontWeight.bold`
+- `Link` typography consolidated to `system.type.subtext.lg` spread; `fontWeight.bold`
   override removed (weight is now regular).
 - `Link` now uses the newly introduced `secondary` Hyperlink variant (see [Hyperlink](#hyperlink)).
 - Background surface tokens per variant/emphasis are unchanged.
@@ -773,7 +773,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 
 ##### Visual Updates
 
-- Typography now uses the `system.legacy.type.subtext.md` type preset (previously individually set
+- Typography now uses the `system.type.subtext.md` type preset (previously individually set
   `fontFamily`/`fontSize`/`lineHeight`/`letterSpacing`/`fontWeight`).
 - Background color tier changed from `surface.alt.strong` to `surface.alt.default` (a lighter
   background) for the base, disabled state, and the disabled `Pill.Count` background. Hover/active
@@ -797,7 +797,7 @@ import {Avatar} from '@workday/canvas-kit-react/avatar';
 - `Pill.IconButton`'s focus indicator is no longer a separate `focusRing()` box-shadow. It's now a
   border drawn on the button's existing larger (invisible) hit-target overlay, so the ring appears
   flush with the ~24px click target instead of hugging the smaller 16px icon box. It uses
-  `system.legacy.color.brand.border.primary`, matching the Pill container's own focus color.
+  `system.color.brand.border.primary`, matching the Pill container's own focus color.
 - `Pill.Icon`'s glyph size shrunk from `systemIcon.size.sm` (18px) to `systemIcon.size.xs` (16px).
 
 #### Skeleton
@@ -1223,7 +1223,7 @@ import {system} from '@workday/canvas-tokens-web';
 export const myStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.shape.xxl,
   },
 });
 ```

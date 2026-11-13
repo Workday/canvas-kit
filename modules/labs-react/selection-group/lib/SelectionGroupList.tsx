@@ -25,16 +25,16 @@ export interface SelectionGroupListProps<T = any> extends CSProps {
 export const selectionGroupListStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xl,
+    [cornerShapeStencil.vars.shape]: system.shape.xl,
     display: 'flex',
     flexWrap: 'wrap',
-    gap: system.legacy.gap.xs,
+    gap: system.gap.xs,
     width: 'fit-content',
     boxSizing: 'border-box',
     // Notification states draw a ring around the whole group, so the container always reserves the
     // space the ring occupies. Without it the ring would sit underneath the opaque items.
     border: `${px2rem(2)} solid transparent`,
-    padding: system.legacy.padding.xxs,
+    padding: system.padding.xxs,
     transition: '100ms border-color',
   },
   modifiers: {
@@ -55,10 +55,10 @@ export const selectionGroupListStencil = createStencil({
     },
     error: {
       error: {
-        borderColor: system.legacy.color.brand.border.critical,
+        borderColor: system.color.brand.border.critical,
       },
       caution: {
-        borderColor: system.legacy.color.brand.border.caution,
+        borderColor: system.color.brand.border.caution,
       },
     },
   },

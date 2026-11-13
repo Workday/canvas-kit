@@ -27,10 +27,10 @@ export const breadcrumbsCurrentItemStencil = createStencil({
   },
   base: ({maxWidth}) => ({
     fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
     fontWeight: system.fontWeight.normal,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
     color: system.color.fg.muted.default,
     display: 'inline-block',
     whiteSpace: 'nowrap',

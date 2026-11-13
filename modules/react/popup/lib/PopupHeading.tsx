@@ -15,7 +15,7 @@ export interface PopupHeadingProps extends ExtractProps<typeof Card.Heading, nev
 export const popupHeadingStencil = createStencil({
   extends: cardHeadingStencil,
   base: {
-    paddingInline: system.legacy.padding.xs,
+    paddingInline: system.padding.xs,
   },
   defaultModifiers: {typeLevel: 'body.large'},
 });

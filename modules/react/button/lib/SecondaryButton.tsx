@@ -22,18 +22,18 @@ const secondaryButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
-    [buttonStencil.vars.border]: system.legacy.color.border.default,
+    [buttonStencil.vars.background]: system.color.surface.transparent,
+    [buttonStencil.vars.borderRadius]: system.shape.full,
+    [buttonStencil.vars.border]: system.color.border.default,
     [buttonStencil.vars.label]: system.color.fg.strong,
     [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.default,
+      [buttonStencil.vars.background]: system.color.surface.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.border]: system.legacy.color.border.default,
-      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      [buttonStencil.vars.border]: system.color.border.default,
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
     },
     // Hover Styles
@@ -51,7 +51,7 @@ const secondaryButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.background]: system.color.surface.transparent,
       [buttonStencil.vars.label]: system.color.fg.strong,
       [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
     },
@@ -60,35 +60,35 @@ const secondaryButtonStencil = createStencil({
     variant: {
       inverse: {
         // Default Styles
-        [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-        [buttonStencil.vars.border]: system.legacy.color.border.inverse.strong,
+        [buttonStencil.vars.background]: system.color.surface.transparent,
+        [buttonStencil.vars.border]: system.color.border.inverse.strong,
         [buttonStencil.vars.label]: system.color.fg.inverse,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
+          [buttonStencil.vars.border]: system.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.legacy.color.surface.default,
+          [buttonStencil.vars.background]: system.color.surface.default,
           [buttonStencil.vars.border]: system.color.border.transparent,
           [buttonStencil.vars.label]: system.color.fg.contrast.default,
           [buttonStencil.vars.boxShadowInner]: system.color.border.contrast.default,
-          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.color.focus.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.border]: system.legacy.color.border.inverse.default,
+          [buttonStencil.vars.border]: system.color.border.inverse.default,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
-          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+          [buttonStencil.vars.background]: system.color.surface.transparent,
           [buttonStencil.vars.label]: system.color.fg.inverse,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         },

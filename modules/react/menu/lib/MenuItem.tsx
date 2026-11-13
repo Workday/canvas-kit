@@ -65,23 +65,23 @@ export const menuItemStencil = createStencil({
   base: ({textPart, iconPart, selectedPart}) => ({
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.legacy.gap.sm,
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.xs} ${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
+    gap: system.gap.sm,
+    padding: `${system.padding.xs} ${system.padding.xs} ${system.padding.xs} ${system.padding.sm}`,
     boxSizing: 'border-box',
     cursor: 'pointer',
     color: system.color.fg.strong,
     borderWidth: 0,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
     textAlign: 'start',
     transition: 'background-color 80ms, color 80ms',
     backgroundColor: 'inherit',
-    minHeight: system.legacy.size.md,
+    minHeight: system.size.md,
     overflowWrap: 'anywhere',
     // We want the icon colors to be the same as the text color
     [systemIconStencil.vars.color]: 'currentColor',
@@ -99,31 +99,31 @@ export const menuItemStencil = createStencil({
 
     // Selected styles
     '&[aria-selected=true]': {
-      color: system.legacy.color.brand.fg.selected,
-      backgroundColor: system.legacy.color.brand.surface.selected,
+      color: system.color.brand.fg.selected,
+      backgroundColor: system.color.brand.surface.selected,
 
       [`& :where(${selectedPart})`]: {
         opacity: system.opacity.full,
       },
       '&:where(.focus, :focus-visible)': {
-        outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
+        outline: `${px2rem(2)} solid ${system.color.brand.border.primary}`,
         outlineOffset: `-${px2rem(2)}`,
       },
     },
 
     // Hover styles
     '&:is(.hover, :hover)': {
-      backgroundColor: system.legacy.color.surface.overlay.hover.default,
+      backgroundColor: system.color.surface.overlay.hover.default,
     },
 
     // Active styles
     '&:is(.active, :active)': {
-      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+      backgroundColor: system.color.surface.overlay.pressed.default,
     },
 
     // Focus styles
     '&:is(.focus, :focus-visible)': {
-      outline: `${px2rem(2)} solid ${system.legacy.color.brand.border.primary}`,
+      outline: `${px2rem(2)} solid ${system.color.brand.border.primary}`,
       outlineOffset: `-${px2rem(2)}`,
     },
 
@@ -132,8 +132,8 @@ export const menuItemStencil = createStencil({
     // de-emphasize this item's focus ring and show selected styling instead to indicate it's part
     // of the open ancestor trail rather than the actively focused item.
     '&[aria-expanded="true"]:is(.focus, :focus-visible)': {
-      color: system.legacy.color.brand.fg.selected,
-      backgroundColor: system.legacy.color.brand.surface.selected,
+      color: system.color.brand.fg.selected,
+      backgroundColor: system.color.brand.surface.selected,
       outline: 'none',
     },
 
@@ -148,8 +148,8 @@ export const menuItemStencil = createStencil({
 
       // Focus + Disabled
       '&:where(.focus, :focus-visible)': {
-        color: system.legacy.color.brand.fg.selected,
-        backgroundColor: system.legacy.color.brand.surface.selected,
+        color: system.color.brand.fg.selected,
+        backgroundColor: system.color.brand.surface.selected,
         opacity: system.opacity.disabled,
       },
     },

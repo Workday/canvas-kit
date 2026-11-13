@@ -14,11 +14,11 @@ const informationHighlightHeadingStencil = createStencil({
   },
   base: ({marginEnd}) => {
     return {
-      ...system.legacy.type.subtext.lg,
+      ...system.type.subtext.lg,
       fontWeight: system.fontWeight.medium,
       color: system.color.fg.strong,
       margin: 0,
-      [marginEnd]: system.legacy.gap.xs,
+      [marginEnd]: system.gap.xs,
       marginBlockEnd: marginEnd,
       // The margin separates Heading from content below it (e.g. Body). When Heading is the last
       // element, there is nothing to separate from, so remove it to avoid extra trailing space.

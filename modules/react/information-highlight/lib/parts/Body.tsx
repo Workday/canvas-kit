@@ -14,9 +14,9 @@ const informationHighlightBodyStencil = createStencil({
   },
   base: ({marginEnd}) => {
     return {
-      ...system.legacy.type.subtext.lg,
+      ...system.type.subtext.lg,
       color: system.color.fg.muted.default,
-      [marginEnd]: system.legacy.gap.md,
+      [marginEnd]: system.gap.md,
       marginBlockEnd: marginEnd,
       // The margin separates Body from content below it (e.g. Link). When Body is the last
       // element, there is nothing to separate from, so remove it to avoid extra trailing space.

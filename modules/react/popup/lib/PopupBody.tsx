@@ -9,7 +9,7 @@ import {usePopupModel} from './hooks';
 export const popupBodyStencil = createStencil({
   base: {
     overflowY: 'auto',
-    paddingInline: system.legacy.padding.xs,
+    paddingInline: system.padding.xs,
   },
 });
 

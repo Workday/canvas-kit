@@ -10,26 +10,26 @@ import {PaginationContext} from './usePaginationModel';
 export const paginationPageButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.legacy.size.sm,
-    height: system.legacy.size.sm,
+    minWidth: system.size.sm,
+    height: system.size.sm,
     padding: 0,
     fontWeight: system.fontWeight.normal,
     [buttonStencil.vars.label]: system.color.fg.default,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.default,
+      [buttonStencil.vars.background]: system.color.surface.default,
       [buttonStencil.vars.label]: system.color.fg.strong,
-      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.hover.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.pressed.default,
       [buttonStencil.vars.label]: system.color.fg.stronger,
     },
 
@@ -41,7 +41,7 @@ export const paginationPageButtonStencil = createStencil({
     toggled: {
       true: {
         fontWeight: system.fontWeight.bold,
-        [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+        [buttonStencil.vars.background]: system.color.brand.accent.primary,
 
         [buttonStencil.vars.label]: system.color.fg.inverse,
 
@@ -53,7 +53,7 @@ export const paginationPageButtonStencil = createStencil({
         },
 
         '&:hover, &.hover, &:active, &.active, &:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.legacy.color.brand.accent.primary,
+          [buttonStencil.vars.background]: system.color.brand.accent.primary,
 
           [buttonStencil.vars.label]: system.color.fg.inverse,
         },

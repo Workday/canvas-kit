@@ -30,10 +30,10 @@ export const skeletonHeaderStencil = createStencil({
     backgroundColor: '',
   },
   base: ({width, height}) => ({
-    borderRadius: system.legacy.shape.sm,
-    height: cssVar(height, system.legacy.size.xs),
+    borderRadius: system.shape.sm,
+    height: cssVar(height, system.size.xs),
     width: width,
-    marginBlockEnd: system.legacy.size.xxxs,
+    marginBlockEnd: system.size.xxxs,
   }),
 });
 

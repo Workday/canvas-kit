@@ -20,16 +20,16 @@ export const segmentedControlListStencil = createStencil({
   },
   base: {
     display: 'inline-grid',
-    backgroundColor: system.legacy.color.surface.alt.default,
+    backgroundColor: system.color.surface.alt.default,
     border: `0 solid ${system.color.border.transparent}`,
-    borderRadius: system.legacy.shape.full,
-    padding: system.legacy.padding.xxs,
-    gridGap: system.legacy.gap.xs,
+    borderRadius: system.shape.full,
+    padding: system.padding.xxs,
+    gridGap: system.gap.xs,
   },
   modifiers: {
     size: {
       large: {
-        padding: system.legacy.padding.xxs,
+        padding: system.padding.xxs,
       },
       medium: {
         padding: base.legacy.size25,

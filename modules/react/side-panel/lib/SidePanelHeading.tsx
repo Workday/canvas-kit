@@ -25,9 +25,9 @@ export const sidePanelHeadingStencil = createStencil({
   base: {
     display: 'flex',
     alignItems: 'center',
-    padding: system.legacy.padding.sm,
-    paddingInlineStart: system.legacy.padding.md,
-    minHeight: system.legacy.size.xxl,
+    padding: system.padding.sm,
+    paddingInlineStart: system.padding.md,
+    minHeight: system.size.xxl,
     margin: 0,
     // `display` from this stencil outranks the user agent's `[hidden] {display: none}`
     '&:where([hidden])': {

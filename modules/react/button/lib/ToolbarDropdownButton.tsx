@@ -18,17 +18,17 @@ export const toolbarDropdownButtonStencil = createStencil({
   },
   base: ({chevronPart, customIconPart}) => ({
     padding: 0,
-    minWidth: system.legacy.size.sm,
+    minWidth: system.size.sm,
     gap: 0,
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    [buttonStencil.vars.borderRadius]: system.shape.sm,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
       system.color.fg.default
     ),
-    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+    [buttonStencil.vars.background]: system.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.background]: system.color.surface.transparent,
 
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
@@ -37,14 +37,14 @@ export const toolbarDropdownButtonStencil = createStencil({
       ...focusRing({
         width: 2,
         separation: 0,
-        innerColor: system.legacy.color.focus.inverse,
+        innerColor: system.color.focus.inverse,
 
-        outerColor: system.legacy.color.brand.focus.primary,
+        outerColor: system.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.hover.icon,
         system.color.fg.default
@@ -52,7 +52,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.pressed.default,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.active.icon,
         system.color.fg.strong
@@ -60,7 +60,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     '&:disabled, &.disabled': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.background]: system.color.surface.transparent,
       [buttonStencil.vars.opacity]: system.opacity.disabled,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
@@ -73,7 +73,7 @@ export const toolbarDropdownButtonStencil = createStencil({
     },
 
     [customIconPart]: {
-      marginInlineStart: system.legacy.padding.xxs,
+      marginInlineStart: system.padding.xxs,
       marginInlineEnd: calc.negate(px2rem(2)),
     },
 

@@ -28,9 +28,9 @@ export interface RadioLabelProps
 const radioLabelStencil = createStencil({
   base: {
     alignItems: 'flex-start',
-    minHeight: system.legacy.size.xxxs,
+    minHeight: system.size.xxxs,
     position: 'relative',
-    gap: system.legacy.gap.sm,
+    gap: system.gap.sm,
   },
 });
 

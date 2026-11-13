@@ -16,9 +16,9 @@ export interface BaseTableProps extends Omit<BoxProps, 'ref'> {}
 export const baseTableStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    ...system.legacy.type.subtext.lg,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
-    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    ...system.type.subtext.lg,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
     overflow: 'auto',
     color: system.color.fg.default,
   },

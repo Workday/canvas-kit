@@ -41,10 +41,7 @@ type RowMove = (typeof rowMoves)[number];
 const isRowMove = (id: string): id is RowMove => rowMoves.some(move => move === id);
 
 // One small icon button and the cell's inline padding.
-const controlColumnSize = calc.add(
-  system.legacy.size.sm,
-  calc.add(system.legacy.padding.md, system.legacy.padding.md)
-);
+const controlColumnSize = calc.add(system.size.sm, calc.add(system.padding.md, system.padding.md));
 
 const initialEmployees: Employee[] = [
   {id: 'employee-1', name: 'Avery Johnson', jobTitle: 'Product Designer'},
@@ -62,7 +59,7 @@ const tableRowStyles = createStyles({
 });
 
 const pickedUpRowStyles = createStyles({
-  backgroundColor: system.legacy.color.surface.popover,
+  backgroundColor: system.color.surface.popover,
   boxShadow: system.depth[5],
   // Inset so the table's overflow does not clip the outline at the row edges.
   outline: `1px solid ${system.color.border.input.default}`,
@@ -70,12 +67,12 @@ const pickedUpRowStyles = createStyles({
 });
 
 const iconCellStyles = createStyles({
-  gridTemplateColumns: system.legacy.size.sm,
+  gridTemplateColumns: system.size.sm,
   justifyContent: 'center',
 });
 
 const squaredControlStyles = createStyles({
-  [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+  [buttonStencil.vars.borderRadius]: system.shape.sm,
 });
 
 const dragHandleStyles = createStyles({
@@ -93,7 +90,7 @@ const feedbackStyles = createStyles({
   marginBlockStart: system.gap.md,
   padding: system.padding.md,
   backgroundColor: system.color.surface.alt.default,
-  borderRadius: system.legacy.shape.sm,
+  borderRadius: system.shape.sm,
   border: `${px2rem(1)} solid ${system.color.border.contrast.default}`,
 });
 

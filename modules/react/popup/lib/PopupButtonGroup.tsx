@@ -21,7 +21,7 @@ export interface PopupButtonGroupProps extends GrowthBehavior, CSProps {
 export const popupButtonGroupStencil = createStencil({
   base: {
     display: 'flex',
-    gap: system.legacy.gap.sm,
+    gap: system.gap.sm,
     '@media screen and (max-width: 768px)': {
       flexDirection: 'column',
     },

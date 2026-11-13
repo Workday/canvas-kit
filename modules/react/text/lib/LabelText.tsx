@@ -31,13 +31,13 @@ export interface TypeLabelProps extends BoxProps {
 const labelTextStencil = createStencil({
   extends: textStencil,
   base: {
-    // ...system.legacy.type.subtext.lg,
+    // ...system.type.subtext.lg,
     // components do not support spreading for legacy type token
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     color: system.color.fg.default,
   },
   modifiers: {
@@ -49,7 +49,7 @@ const labelTextStencil = createStencil({
     },
     variant: {
       inverse: {color: system.color.fg.inverse},
-      error: {color: system.legacy.color.brand.fg.critical.default},
+      error: {color: system.color.brand.fg.critical.default},
       hint: {color: system.color.fg.muted.default},
     },
   },

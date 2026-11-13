@@ -5,7 +5,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 export const baseTableCaptionStencil = createStencil({
   base: {
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
+    padding: `${system.padding.xs} ${system.padding.md}`,
   },
 });
 

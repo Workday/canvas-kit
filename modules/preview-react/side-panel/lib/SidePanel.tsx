@@ -95,7 +95,7 @@ export const panelStencil = createStencil({
         boxShadow: system.depth[5],
       },
       standard: {
-        backgroundColor: system.legacy.color.surface.default,
+        backgroundColor: system.color.surface.default,
       },
     },
     expanded: {

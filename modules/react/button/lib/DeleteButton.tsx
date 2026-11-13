@@ -22,8 +22,8 @@ const deleteButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
     // Base Styles
-    [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.full,
+    [buttonStencil.vars.background]: system.color.brand.accent.critical,
+    [buttonStencil.vars.borderRadius]: system.shape.full,
     [buttonStencil.vars.label]: system.color.fg.inverse,
     [systemIconStencil.vars.color]: cssVar(
       buttonColorPropVars.default.icon,
@@ -31,22 +31,22 @@ const deleteButtonStencil = createStencil({
     ),
     // Focus Styles
     '&:focus-visible, &.focus': {
-      [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
+      [buttonStencil.vars.background]: system.color.brand.accent.critical,
       [buttonStencil.vars.label]: system.color.fg.inverse,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.focus.icon,
         system.color.fg.inverse
       ),
-      [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
-      [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+      [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+      [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
     },
     // Hover Styles
     '&:hover, &.hover': {
       [buttonStencil.vars.background]: cssVar(
         brand.critical700,
         colorSpace.hover({
-          color: system.legacy.color.brand.accent.critical,
-          fallback: system.legacy.color.brand.accent.critical,
+          color: system.color.brand.accent.critical,
+          fallback: system.color.brand.accent.critical,
           colorType: 'accent',
         })
       ),
@@ -61,8 +61,8 @@ const deleteButtonStencil = createStencil({
       [buttonStencil.vars.background]: cssVar(
         brand.critical800,
         colorSpace.pressed({
-          color: system.legacy.color.brand.accent.critical,
-          fallback: system.legacy.color.brand.accent.critical,
+          color: system.color.brand.accent.critical,
+          fallback: system.color.brand.accent.critical,
           colorType: 'accent',
         })
       ),
@@ -75,7 +75,7 @@ const deleteButtonStencil = createStencil({
     // Disabled Styles
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.legacy.color.brand.accent.critical,
+      [buttonStencil.vars.background]: system.color.brand.accent.critical,
       [systemIconStencil.vars.color]: cssVar(
         buttonColorPropVars.disabled.icon,
         system.color.fg.inverse
@@ -87,38 +87,38 @@ const deleteButtonStencil = createStencil({
     variant: {
       outline: {
         // Default Styles
-        [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+        [buttonStencil.vars.background]: system.color.surface.transparent,
         [buttonStencil.vars.border]: system.color.border.default,
-        [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+        [buttonStencil.vars.label]: system.color.brand.fg.critical.default,
         [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         // Hover Styles
         '&:hover, &.hover': {
-          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
-          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [buttonStencil.vars.background]: system.color.surface.transparent,
+          [buttonStencil.vars.border]: system.color.brand.border.critical,
+          [buttonStencil.vars.label]: system.color.brand.fg.critical.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.hover.icon, 'currentColor'),
         },
         // Focus Styles
         '&:focus-visible, &.focus': {
-          [buttonStencil.vars.background]: system.legacy.color.surface.default,
-          [buttonStencil.vars.border]: system.legacy.color.border.default,
-          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
-          [buttonStencil.vars.boxShadowInner]: system.legacy.color.focus.inverse,
-          [buttonStencil.vars.boxShadowOuter]: system.legacy.color.brand.focus.primary,
+          [buttonStencil.vars.background]: system.color.surface.default,
+          [buttonStencil.vars.border]: system.color.border.default,
+          [buttonStencil.vars.label]: system.color.brand.fg.critical.default,
+          [buttonStencil.vars.boxShadowInner]: system.color.focus.inverse,
+          [buttonStencil.vars.boxShadowOuter]: system.color.brand.focus.primary,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.focus.icon, 'currentColor'),
         },
         // Active Styles
         '&:active, &.active': {
-          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-          [buttonStencil.vars.border]: system.legacy.color.brand.border.critical,
-          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [buttonStencil.vars.background]: system.color.surface.transparent,
+          [buttonStencil.vars.border]: system.color.brand.border.critical,
+          [buttonStencil.vars.label]: system.color.brand.fg.critical.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.active.icon, 'currentColor'),
         },
         // Disabled Styles
         '&:disabled, &.disabled': {
           [buttonStencil.vars.opacity]: system.opacity.disabled,
-          [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
-          [buttonStencil.vars.label]: system.legacy.color.brand.fg.critical.default,
+          [buttonStencil.vars.background]: system.color.surface.transparent,
+          [buttonStencil.vars.label]: system.color.brand.fg.critical.default,
           [systemIconStencil.vars.color]: cssVar(buttonColorPropVars.default.icon, 'currentColor'),
         },
       },

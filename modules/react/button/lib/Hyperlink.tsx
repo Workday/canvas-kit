@@ -41,10 +41,10 @@ export const hyperlinkStencil = createStencil({
     wordBreak: 'break-word',
     '&:hover, &.hover': {
       color: system.color.fg.link.hover,
-      background: system.legacy.color.surface.overlay.hover.default,
+      background: system.color.surface.overlay.hover.default,
     },
     '&:focus, &.focus, &:focus-visible': {
-      boxShadow: `0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.primary}`,
+      boxShadow: `0 0 0 ${px2rem(2)} ${system.color.brand.focus.primary}`,
       outline: 'none',
       // Windows High Contrast Mode ignores `boxShadow`, so provide an explicit
       // outline to keep the focus indicator visible.
@@ -54,7 +54,7 @@ export const hyperlinkStencil = createStencil({
     },
     '&:active, &.active': {
       color: system.color.fg.link.hover,
-      background: system.legacy.color.surface.overlay.pressed.default,
+      background: system.color.surface.overlay.pressed.default,
     },
   },
   modifiers: {
@@ -70,18 +70,18 @@ export const hyperlinkStencil = createStencil({
         },
         '&:active, &.active': {
           color: system.color.fg.link.hover,
-          background: system.legacy.color.surface.navigation,
+          background: system.color.surface.navigation,
         },
       },
       secondary: {
         color: system.color.fg.default,
         '&:hover, &.hover': {
           color: system.color.fg.strong,
-          background: system.legacy.color.surface.overlay.hover.default,
+          background: system.color.surface.overlay.hover.default,
         },
         '&:active, &.active': {
           color: system.color.fg.strong,
-          background: system.legacy.color.surface.overlay.pressed.default,
+          background: system.color.surface.overlay.pressed.default,
         },
       },
     },

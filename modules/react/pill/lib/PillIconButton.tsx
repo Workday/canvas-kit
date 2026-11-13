@@ -20,14 +20,14 @@ export const pillIconButtonStencil = createStencil({
   base: {
     marginInlineEnd: calc.negate(px2rem(7)), // visually pull in the pill to the right size  by -7px
     marginInlineStart: 0, // leave room for the 24x24 focus ring
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
-    height: system.legacy.size.xxxs,
-    width: system.legacy.size.xxxs,
+    [buttonStencil.vars.borderRadius]: system.shape.sm,
+    height: system.size.xxxs,
+    width: system.size.xxxs,
     padding: 0,
     overflow: 'visible',
     flex: '0 0 auto',
     [buttonStencil.vars.border]: system.color.border.transparent,
-    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+    [buttonStencil.vars.background]: system.color.surface.transparent,
 
     [systemIconStencil.vars.color]: system.color.fg.default,
     [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
@@ -41,7 +41,7 @@ export const pillIconButtonStencil = createStencil({
       left: calc.negate(px2rem(5)),
       margin: 0,
       pointerEvents: 'all',
-      borderRadius: system.legacy.shape.sm,
+      borderRadius: system.shape.sm,
       borderStyle: 'solid',
       borderWidth: px2rem(2),
       borderColor: 'transparent',
@@ -51,7 +51,7 @@ export const pillIconButtonStencil = createStencil({
       [buttonStencil.vars.border]: system.color.border.transparent,
       boxShadow: 'none',
       '::after': {
-        borderColor: system.legacy.color.brand.border.primary,
+        borderColor: system.color.brand.border.primary,
       },
     },
     '&:hover, &.hover': {

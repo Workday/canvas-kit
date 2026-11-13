@@ -18,12 +18,12 @@ export interface ToolbarIconButtonProps extends Omit<TertiaryButtonProps, 'size'
 export const toolbarIconButtonStencil = createStencil({
   extends: buttonStencil,
   base: {
-    minWidth: system.legacy.size.sm,
+    minWidth: system.size.sm,
     padding: 0,
-    height: system.legacy.size.sm,
-    [buttonStencil.vars.borderRadius]: system.legacy.shape.sm,
+    height: system.size.sm,
+    [buttonStencil.vars.borderRadius]: system.shape.sm,
     [systemIconStencil.vars.color]: system.color.fg.default,
-    [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+    [buttonStencil.vars.background]: system.color.surface.transparent,
 
     '&:focus-visible, &.focus': {
       [systemIconStencil.vars.color]: system.color.fg.strong,
@@ -31,51 +31,51 @@ export const toolbarIconButtonStencil = createStencil({
         width: 2,
         separation: 0,
         innerColor: system.color.border.transparent,
-        outerColor: system.legacy.color.brand.focus.primary,
+        outerColor: system.color.brand.focus.primary,
       }),
     },
 
     '&:hover, &.hover': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.hover.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.hover.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:active, &.active': {
-      [buttonStencil.vars.background]: system.legacy.color.surface.overlay.pressed.default,
+      [buttonStencil.vars.background]: system.color.surface.overlay.pressed.default,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
 
     '&:disabled, &.disabled': {
       [buttonStencil.vars.opacity]: system.opacity.disabled,
-      [buttonStencil.vars.background]: system.legacy.color.surface.transparent,
+      [buttonStencil.vars.background]: system.color.surface.transparent,
       [systemIconStencil.vars.color]: system.color.fg.default,
     },
 
     "&[aria-pressed='true']": {
-      [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.default,
+      [systemIconStencil.vars.color]: system.color.brand.fg.primary.default,
 
-      [buttonStencil.vars.background]: system.legacy.color.brand.surface.primary.default,
+      [buttonStencil.vars.background]: system.color.brand.surface.primary.default,
 
       '&:focus-visible, &.focus': {
-        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
 
       '&:hover, &.hover': {
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.legacy.color.brand.surface.primary.default,
-          mixinColor: system.legacy.color.surface.overlay.mixin,
-          mixinValue: system.legacy.opacity.surface.hover,
+          color: system.color.brand.surface.primary.default,
+          mixinColor: system.color.surface.overlay.mixin,
+          mixinValue: system.opacity.surface.hover,
         }),
-        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
 
       '&:active, &.active': {
         [buttonStencil.vars.background]: colorSpace.darken({
-          color: system.legacy.color.brand.surface.primary.default,
-          mixinColor: system.legacy.color.surface.overlay.mixin,
-          mixinValue: system.legacy.opacity.surface.pressed,
+          color: system.color.brand.surface.primary.default,
+          mixinColor: system.color.surface.overlay.mixin,
+          mixinValue: system.opacity.surface.pressed,
         }),
-        [systemIconStencil.vars.color]: system.legacy.color.brand.fg.primary.strong,
+        [systemIconStencil.vars.color]: system.color.brand.fg.primary.strong,
       },
     },
   },
