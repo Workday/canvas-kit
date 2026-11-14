@@ -361,16 +361,6 @@ export function writeSystemBrandOverrides(
   walk(brandOverrides, []);
 }
 
-const mappedKeys = {
-  lightest: 'lightest',
-  lighter: 'lighter',
-  light: 'light',
-  main: 'base',
-  dark: 'dark',
-  darkest: 'darkest',
-  contrast: 'accent',
-} as const;
-
 const numericalTokenMapping = {
   lightest: '25',
   lighter: '50',
@@ -424,8 +414,14 @@ export function writeSemanticTheme(
           if (writeAll || palette[color][key] !== defaultCanvasTheme.palette[color][key]) {
             // @ts-ignore
             const value = maybeWrapCSSVariables(palette[color][key]);
-            // @ts-ignore
-            setStyleVar(style, brand[color][mappedKeys[key]], value);
+            if ((key as string) === 'contrast') {
+              // The new brand tokens have no per-family `accent`; the primary contrast color
+              // maps to `brand.action.accent` (text on the action/primary background).
+              if (color === 'primary') {
+                setStyleVar(style, brand.action.accent, value);
+              }
+              return;
+            }
 
             if (key !== 'contrast' && key in numericalTokenMapping) {
               const newBrandColor = brandColorMapping[color];
