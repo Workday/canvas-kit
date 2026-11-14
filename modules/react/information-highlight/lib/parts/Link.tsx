@@ -11,7 +11,7 @@ const informationHighlightLinkStencil = createStencil({
   },
   base: () => {
     return {
-      ...system.legacy.type.subtext.lg,
+      ...system.type.subtext.lg,
       color: system.color.fg.default,
     };
   },

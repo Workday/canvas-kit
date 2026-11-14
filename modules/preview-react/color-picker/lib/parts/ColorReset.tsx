@@ -18,10 +18,10 @@ export const resetButtonStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    width: calc.add('100%', system.legacy.size.sm),
-    height: system.legacy.size.sm,
-    margin: `${calc.negate(base.legacy.size100)} ${calc.negate(system.legacy.size.xxxs)} ${base.legacy.size100}`,
-    padding: `0 ${system.legacy.padding.md}`,
+    width: calc.add('100%', system.size.sm),
+    height: system.size.sm,
+    margin: `${calc.negate(base.size100)} ${calc.negate(system.size.xxxs)} ${base.size100}`,
+    padding: `0 ${system.padding.md}`,
     whiteSpace: 'nowrap',
     border: 'none',
     outline: 'none',
@@ -34,13 +34,13 @@ export const resetButtonStencil = createStencil({
     },
 
     '&:active, &.active': {
-      backgroundColor: system.legacy.color.surface.default,
+      backgroundColor: system.color.surface.default,
     },
     '&:focus-visible, &.focus': {
       ...focusRing(),
     },
     [labelPart]: {
-      marginInlineStart: system.legacy.gap.sm,
+      marginInlineStart: system.gap.sm,
     },
   }),
 });

@@ -34,7 +34,7 @@ export const ComboboxMenuList = createSubcomponent('ul')({
     <ListBox
       as={Element}
       model={model}
-      marginY={system.legacy.gap.none}
+      marginY={system.gap.none}
       {...handleCsProp(elemProps, comboboxMenuListStencil({orientation: model.state.orientation}))}
     >
       {children}

@@ -28,10 +28,10 @@ describe('sanaCanvasNumericalTheme', () => {
     expect(Object.keys(sanaCanvasNumericalTheme.brand?.positive ?? {})).toEqual(['A300']);
 
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-brand-primary-a300' as any]).toBe(base.sana.blueA300);
-    expect(style['--cnvs-brand-critical-a300' as any]).toBe(base.sana.redA300);
-    expect(style['--cnvs-brand-caution-a300' as any]).toBe(base.sana.amberA300);
-    expect(style['--cnvs-brand-positive-a300' as any]).toBe(base.sana.greenA300);
+    expect(style['--cnvs-brand-primary-a300' as any]).toBe(`var(${base.blueA300})`);
+    expect(style['--cnvs-brand-critical-a300' as any]).toBe(`var(${base.redA300})`);
+    expect(style['--cnvs-brand-caution-a300' as any]).toBe(`var(${base.amberA300})`);
+    expect(style['--cnvs-brand-positive-a300' as any]).toBe(`var(${base.greenA300})`);
   });
 
   it('writes brand tokens when passed to canvasThemeToCssVars', () => {
@@ -42,10 +42,10 @@ describe('sanaCanvasNumericalTheme', () => {
 
   it('writes Sana extended neutral ramp keys from the base palette', () => {
     const {style} = canvasThemeToCssVars(sanaCanvasProviderTheme, {});
-    expect(style['--cnvs-brand-neutral-150' as any]).toBe(base.sana.neutral150);
-    expect(style['--cnvs-brand-neutral-850' as any]).toBe(base.sana.neutral850);
-    expect(style['--cnvs-brand-neutral-a150' as any]).toBe(base.sana.neutralA150);
-    expect(style['--cnvs-brand-neutral-a850' as any]).toBe(base.sana.neutralA850);
+    expect(style['--cnvs-brand-neutral-150' as any]).toBe(`var(${base.neutral150})`);
+    expect(style['--cnvs-brand-neutral-850' as any]).toBe(`var(${base.neutral850})`);
+    expect(style['--cnvs-brand-neutral-a150' as any]).toBe(`var(${base.neutralA150})`);
+    expect(style['--cnvs-brand-neutral-a850' as any]).toBe(`var(${base.neutralA850})`);
   });
 
   it('writes the full neutral alpha ramp through A975 (not just up to A200)', () => {

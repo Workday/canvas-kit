@@ -15,11 +15,11 @@ export interface ExpandableTitleProps extends ExtractProps<typeof Box, never> {
 export const expandableTitleStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
-    lineHeight: system.legacy.lineHeight.body.md,
-    fontSize: system.legacy.fontSize.body.md,
+    lineHeight: system.lineHeight.body.md,
+    fontSize: system.fontSize.body.md,
     fontWeight: system.fontWeight.bold,
     color: system.color.fg.strong,
-    padding: `${px2rem(2)} ${system.legacy.padding.xs}`,
+    padding: `${px2rem(2)} ${system.padding.xs}`,
     textAlign: 'left',
   },
 });

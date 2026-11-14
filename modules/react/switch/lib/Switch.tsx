@@ -41,8 +41,8 @@ export interface SwitchProps {
 const switchContainerStencil = createStencil({
   base: {
     position: 'relative',
-    height: system.legacy.size.xs,
-    width: system.legacy.size.sm,
+    height: system.size.xs,
+    width: system.size.sm,
   },
 });
 
@@ -61,14 +61,14 @@ const switchInputStencil = createStencil({
   base: {
     display: 'flex',
     position: 'absolute',
-    height: system.legacy.size.xs,
-    width: system.legacy.size.sm,
-    borderRadius: system.legacy.shape.full,
+    height: system.size.xs,
+    width: system.size.sm,
+    borderRadius: system.shape.full,
     opacity: '0',
     cursor: 'pointer',
     '&:checked, &.checked': {
       '& ~ div:first-of-type': {
-        backgroundColor: system.legacy.color.brand.accent.primary,
+        backgroundColor: system.color.brand.accent.primary,
       },
       '&:disabled, &.disabled': {
         '& ~ div:first-of-type': {
@@ -94,17 +94,17 @@ const switchInputStencil = createStencil({
       error: {
         '& ~ div:first-of-type': {
           boxShadow: `
-              0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-              0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.critical},
+              0 0 0 ${px2rem(2)} ${system.color.focus.inverse},
+              0 0 0 ${px2rem(4)} ${system.color.brand.focus.critical},
               0 0 0 ${px2rem(5)} transparent`,
         },
       },
       caution: {
         '& ~ div:first-of-type': {
           boxShadow: `
-          0 0 0 ${px2rem(2)} ${system.legacy.color.focus.inverse},
-          0 0 0 ${px2rem(4)} ${system.legacy.color.brand.focus.caution.inner},
-          0 0 0 ${px2rem(5)} ${system.legacy.color.brand.border.caution}`,
+          0 0 0 ${px2rem(2)} ${system.color.focus.inverse},
+          0 0 0 ${px2rem(4)} ${system.color.brand.focus.caution.inner},
+          0 0 0 ${px2rem(5)} ${system.color.brand.border.caution}`,
         },
       },
     },
@@ -124,13 +124,13 @@ const switchBackgroundStencil = createStencil({
     display: 'flex',
     alignItems: 'center',
     pointerEvents: 'none',
-    marginBlockStart: system.legacy.gap.xs,
-    width: system.legacy.size.sm,
-    height: system.legacy.size.xxxs,
-    borderRadius: system.legacy.shape.full,
+    marginBlockStart: system.gap.xs,
+    width: system.size.sm,
+    height: system.size.xxxs,
+    borderRadius: system.shape.full,
     padding: `0 ${px2rem(2)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: system.legacy.color.accent.muted.soft,
+    backgroundColor: system.color.accent.muted.soft,
   },
 });
 
@@ -147,9 +147,9 @@ const SwitchBackground = createComponent('div')({
 
 const switchCircleStencil = createStencil({
   base: {
-    width: base.legacy.size150,
-    height: base.legacy.size150,
-    borderRadius: system.legacy.shape.full,
+    width: base.size150,
+    height: base.size150,
+    borderRadius: system.shape.full,
     boxShadow: system.depth[1],
     transition: 'transform 150ms ease',
     pointerEvents: 'none',
@@ -159,9 +159,9 @@ const switchCircleStencil = createStencil({
   modifiers: {
     checked: {
       true: {
-        transform: `translateX(${system.legacy.size.xxxs})`,
+        transform: `translateX(${system.size.xxxs})`,
         ':dir(rtl)': {
-          transform: `translateX(${calc.negate(system.legacy.size.xxxs)})`,
+          transform: `translateX(${calc.negate(system.size.xxxs)})`,
         },
       },
     },

@@ -12,8 +12,8 @@ export interface PillIconProps extends Partial<SystemIconProps> {}
 export const pillIconStencil = createStencil({
   extends: systemIconStencil,
   base: {
-    marginInlineStart: calc.negate(system.legacy.gap.xs),
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+    marginInlineStart: calc.negate(system.gap.xs),
+    [systemIconStencil.vars.size]: component.systemIcon.size.xs,
     flex: '0 0 auto',
   },
 });

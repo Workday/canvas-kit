@@ -10,12 +10,12 @@ import {CanvasAccentIcon, CanvasIconTypes} from '@workday/design-assets-types';
 import {Svg, SvgProps, svgStencil} from './Svg';
 
 /**
- * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.legacy.color.bg.primary.strong}`. Deprecated in v15.0.0.
+ * @deprecated Interface `AccentIconStyles` will be removed in a future version. All props will be moved inside `AccentIconProps`. Consider use the new tokens set to set `color` prop: `color={system.color.bg.primary.strong}`. Deprecated in v15.0.0.
  */
 export interface AccentIconStyles {
   /**
    * The fill color of the AccentIcon.
-   * @default system.legacy.color.bg.primary.strong
+   * @default system.color.bg.primary.strong
    */
   color?: SystemPropValues['color'];
   /**
@@ -32,7 +32,7 @@ export interface AccentIconStyles {
 export interface AccentIconProps extends Omit<SvgProps, 'src' | 'type'> {
   /**
    * The fill color of the AccentIcon.
-   * @default system.legacy.color.bg.primary.strong
+   * @default system.color.bg.primary.strong
    */
   color?: SystemPropValues['color'];
   /**
@@ -78,7 +78,7 @@ export const accentIconStencil = createStencil({
   base: ({color, size}) => ({
     [size]: px2rem(56),
     '& .color-500': {
-      fill: cssVar(color, system.color.bg.primary.strong),
+      fill: cssVar(color, system.color.surface.info.strong),
     },
     '& .french-vanilla-100': {
       fill: system.color.bg.default,
@@ -97,7 +97,7 @@ export const accentIconStencil = createStencil({
 
 /** @deprecated Deprecated in v11 */
 const transformColorNameToToken = (color?: string) => {
-  const {legacy, sana, ...baseTokens} = base;
+  const {...baseTokens} = base;
   if (color && color in baseTokens) {
     return cssVar(baseTokens[color as keyof typeof baseTokens]);
   }

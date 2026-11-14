@@ -32,11 +32,11 @@ export const formFieldGroupLabelStencil = createStencil({
       true: {
         '&::after': {
           content: '"*"',
-          fontSize: system.legacy.fontSize.body.lg,
+          fontSize: system.fontSize.body.lg,
           fontWeight: system.fontWeight.normal,
-          color: system.legacy.color.brand.fg.critical.default,
+          color: system.color.brand.fg.critical.default,
           textDecoration: 'unset',
-          marginInlineStart: system.legacy.gap.xs,
+          marginInlineStart: system.gap.xs,
         },
       },
     },
@@ -47,10 +47,10 @@ export const formFieldGroupLabelStencil = createStencil({
       horizontalStart: {
         justifyContent: 'flex-start',
         float: 'left',
-        maxHeight: system.legacy.size.md,
+        maxHeight: system.size.md,
       },
       horizontalEnd: {
-        maxHeight: system.legacy.size.md,
+        maxHeight: system.size.md,
         float: 'left',
         justifyContent: 'flex-end',
       },

@@ -25,22 +25,22 @@ export interface RadioGroupProps extends Themeable, CSProps, FlexProps {
 const radioGroupStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
     display: 'flex',
     flexDirection: 'column',
-    gap: system.legacy.gap.sm,
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
-    margin: `0 ${calc.negate(base.legacy.size150)}`,
+    gap: system.gap.sm,
+    padding: `${system.padding.xs} ${system.padding.sm}`,
+    margin: `0 ${calc.negate(base.size150)}`,
     transition: '100ms box-shadow',
     width: 'fit-content',
   },
   modifiers: {
     error: {
       error: {
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.border.critical}`,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.border.critical}`,
       },
       caution: {
-        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.legacy.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.legacy.color.brand.border.caution}`,
+        boxShadow: `inset 0 0 0 ${px2rem(1)} ${system.color.brand.focus.caution.inner}, inset 0 0 0 ${px2rem(3)} ${system.color.brand.border.caution}`,
       },
     },
   },

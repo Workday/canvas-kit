@@ -28,21 +28,21 @@ export const menuCardStencil = createStencil({
     maxHeight: '',
   },
   base: ({transformOriginVertical, transformOriginHorizontal, minWidth, maxHeight}) => ({
-    // ...system.legacy.type.subtext.lg,
+    // ...system.type.subtext.lg,
     // components do not support spreading for legacy type token
     fontFamily: system.fontFamily.default,
     fontWeight: system.fontWeight.normal,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     color: system.color.fg.strong,
     position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     transition: `transform ease-out 150ms`,
-    padding: system.legacy.padding.xs,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
-    maxWidth: calc.subtract('100vw', system.legacy.size.sm),
+    padding: system.padding.xs,
+    [cornerShapeStencil.vars.shape]: system.shape.xxl,
+    maxWidth: calc.subtract('100vw', system.size.sm),
     boxShadow: system.depth[3],
     minWidth,
     maxHeight: cssVar(maxHeight, '60vh'),
@@ -56,7 +56,7 @@ export const menuCardStencil = createStencil({
     },
     [`& :where(${listBoxContainerPartSelector})`]: {
       // slightly smaller border radius
-      borderRadius: system.legacy.shape.lg,
+      borderRadius: system.shape.lg,
       // Card is a flex column container. Without this, a flex child won't shrink below its
       // content size, so `maxHeight` on the Card would be ignored and content would overflow
       // instead of scrolling inside the list-box-container.

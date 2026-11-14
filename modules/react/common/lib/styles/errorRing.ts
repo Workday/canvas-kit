@@ -14,8 +14,8 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
       };
     } else {
       return {
-        outer: brand.common.errorInner,
-        inner: brand.common.errorInner,
+        outer: brand.common.critical,
+        inner: brand.common.critical,
       };
     }
   } else if (error === ErrorType.Caution) {
@@ -27,8 +27,8 @@ export function getErrorColors(error?: ErrorType, theme?: EmotionCanvasTheme) {
       };
     } else {
       return {
-        outer: brand.common.alertOuter,
-        inner: brand.common.alertInner,
+        outer: brand.common.caution.outer,
+        inner: brand.common.caution.outer,
       };
     }
   } else {
@@ -56,9 +56,7 @@ export function errorRing(error?: ErrorType, theme?: EmotionCanvasTheme) {
       borderColor: errorColors.outer,
       boxShadow: `${errorBoxShadow},
         0 0 0 2px ${cssVar(system.color.border.inverse.default, base.neutral0)},
-        0 0 0 4px ${
-          theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focusOutline)
-        }`,
+        0 0 0 4px ${theme ? theme.canvas.palette.common.focusOutline : cssVar(brand.common.focus)}`,
     },
   };
 }

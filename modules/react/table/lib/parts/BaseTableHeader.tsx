@@ -6,10 +6,10 @@ import {base, system} from '@workday/canvas-tokens-web';
 export const baseTableHeaderStencil = createStencil({
   base: {
     backgroundColor: system.color.bg.default,
-    borderBlockEnd: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.color.border.default}`,
     justifyContent: 'start',
-    minHeight: calc.subtract(system.legacy.size.xxl, base.legacy.size100),
-    padding: system.legacy.padding.md,
+    minHeight: calc.subtract(system.size.xxl, base.size100),
+    padding: system.padding.md,
     wordBreak: 'break-word',
     fontWeight: system.fontWeight.medium,
     color: system.color.fg.strong,

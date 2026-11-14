@@ -41,14 +41,14 @@ export const selectionGroupItemStencil = createStencil({
     label: 'selection-group-item-label',
   },
   base: ({labelPart}) => ({
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
-    ...system.legacy.type.subtext.lg,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
+    ...system.type.subtext.lg,
     display: 'inline-flex',
     alignItems: 'center',
-    gap: base.legacy.size75,
+    gap: base.size75,
     border: `${px2rem(1)} solid ${system.color.border.default}`,
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.sm}`,
-    backgroundColor: system.legacy.color.surface.default,
+    padding: `${system.padding.xs} ${system.padding.sm}`,
+    backgroundColor: system.color.surface.default,
     color: system.color.fg.strong,
     cursor: 'pointer',
     textAlign: 'start',
@@ -61,11 +61,11 @@ export const selectionGroupItemStencil = createStencil({
     },
 
     '&:not([aria-checked="true"]):is(:hover, .hover)': {
-      backgroundColor: system.legacy.color.surface.overlay.hover.default,
+      backgroundColor: system.color.surface.overlay.hover.default,
     },
 
     '&:not([aria-checked="true"]):is(:active, .active)': {
-      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+      backgroundColor: system.color.surface.overlay.pressed.default,
     },
 
     '&:is(:disabled, .disabled)': {
@@ -73,36 +73,36 @@ export const selectionGroupItemStencil = createStencil({
       opacity: system.opacity.disabled,
 
       '&:is(:hover, .hover)': {
-        backgroundColor: system.legacy.color.surface.default,
+        backgroundColor: system.color.surface.default,
       },
     },
 
     // No border on a selected item - a selected border would compete with the focus ring. The
     // transparent border keeps the item the same size as an unselected one.
     '&[aria-checked="true"]': {
-      backgroundColor: system.legacy.color.brand.surface.selected,
+      backgroundColor: system.color.brand.surface.selected,
       border: `${px2rem(1)} solid transparent`,
-      color: system.legacy.color.brand.fg.selected,
+      color: system.color.brand.fg.selected,
 
       '&:is(:hover, .hover)': {
-        backgroundColor: system.legacy.color.brand.surface.selected,
+        backgroundColor: system.color.brand.surface.selected,
       },
 
       '&:is(:active, .active)': {
-        backgroundColor: system.legacy.color.brand.surface.selected,
+        backgroundColor: system.color.brand.surface.selected,
       },
 
       '&:is(:disabled, .disabled)': {
-        backgroundColor: system.legacy.color.brand.surface.selected,
-        color: system.legacy.color.brand.fg.selected,
+        backgroundColor: system.color.brand.surface.selected,
+        color: system.color.brand.fg.selected,
       },
     },
 
     // Matches the TextInput focus ring. This is declared after the selected styles so a focused
     // selected item gets the same ring (border color + inset shadow) as an unselected one.
     '&:is(:focus-visible, .focus):where(:not(:disabled, .disabled))': {
-      borderColor: system.legacy.color.brand.focus.primary,
-      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
+      borderColor: system.color.brand.focus.primary,
+      boxShadow: `inset 0 0 0 1px ${system.color.brand.focus.primary}`,
       outline: `${px2rem(2)} solid transparent`,
     },
   }),

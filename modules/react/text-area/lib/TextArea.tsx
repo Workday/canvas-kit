@@ -27,7 +27,7 @@ export const TextAreaResizeDirection = {
 export const textAreaStencil = createStencil({
   extends: textInputStencil,
   base: {
-    minHeight: system.legacy.size.xxl,
+    minHeight: system.size.xxl,
     minWidth: px2rem(280),
     '&::webkit-resizer': {
       display: 'none',

@@ -34,7 +34,7 @@ export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
     top: px2rem(12),
-    width: system.legacy.size.md,
+    width: system.size.md,
     ':dir(rtl)': {
       transform: `scaleX(-1)`,
     },
@@ -56,10 +56,10 @@ export const sidePanelToggleButtonStencil = createStencil({
     },
     origin: {
       start: {
-        insetInlineEnd: base.legacy.size150,
+        insetInlineEnd: base.size150,
       },
       end: {
-        insetInlineStart: base.legacy.size150,
+        insetInlineStart: base.size150,
       },
     },
   },

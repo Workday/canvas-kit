@@ -29,31 +29,31 @@ export const multiSelectInputStencil = createStencil({
     border: `${px2rem(1)} solid ${system.color.border.input.default}`,
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: system.legacy.color.surface.default,
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.lg,
+    backgroundColor: system.color.surface.default,
+    [cornerShapeStencil.vars.shape]: system.shape.lg,
     boxSizing: 'border-box',
-    minHeight: system.legacy.size.md,
+    minHeight: system.size.md,
     transition: '0.2s box-shadow, 0.2s border-color',
     margin: 0, // Fix Safari
     [textInputStencil.vars.width]: '100%',
     [systemIconStencil.vars.color]: system.color.fg.default,
 
     '&:hover, &.hover': {
-      borderColor: system.legacy.color.border.input.hover,
+      borderColor: system.color.border.input.hover,
     },
 
     '&:has(:focus-visible:not([disabled])), &.focus': {
-      borderColor: system.legacy.color.brand.border.primary,
-      boxShadow: `inset 0 0 0 1px ${system.legacy.color.brand.focus.primary}`,
+      borderColor: system.color.brand.border.primary,
+      boxShadow: `inset 0 0 0 1px ${system.color.brand.focus.primary}`,
     },
 
     '& [data-part="user-input"]': {
       fontFamily: system.fontFamily.default,
-      fontSize: system.legacy.fontSize.subtext.lg,
+      fontSize: system.fontSize.subtext.lg,
       fontWeight: system.fontWeight.normal,
-      lineHeight: system.legacy.lineHeight.subtext.lg,
-      backgroundColor: system.legacy.color.surface.transparent,
-      borderRadius: system.legacy.shape.md,
+      lineHeight: system.lineHeight.subtext.lg,
+      backgroundColor: system.color.surface.transparent,
+      borderRadius: system.shape.md,
 
       // collapse the height of the input by the border width so that an empty multi-select
       // is the same height as a `TextInput`
@@ -102,51 +102,51 @@ export const multiSelectInputStencil = createStencil({
     },
 
     '& :where([data-part="separator"])': {
-      backgroundColor: system.legacy.color.border.default,
+      backgroundColor: system.color.border.default,
       height: 1,
-      margin: `0 ${system.legacy.gap.sm}`,
+      margin: `0 ${system.gap.sm}`,
     },
 
     '& :where([data-part="list"])': {
       display: 'flex',
-      gap: system.legacy.gap.sm,
-      padding: system.legacy.padding.xs,
+      gap: system.gap.sm,
+      padding: system.padding.xs,
       flexWrap: 'wrap',
     },
   },
   modifiers: {
     error: {
       error: {
-        borderColor: system.legacy.color.brand.border.critical,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}`,
-        backgroundColor: system.legacy.color.brand.surface.critical.default,
+        borderColor: system.color.brand.border.critical,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}`,
+        backgroundColor: system.color.brand.surface.critical.default,
         '&:has(:hover, :disabled, :focus-visible), &:is(.hover, .disabled, .focus)': {
-          borderColor: system.legacy.color.brand.border.critical,
+          borderColor: system.color.brand.border.critical,
         },
         '&:has(:focus-visible:not([disabled])), &.focus': {
-          borderColor: system.legacy.color.brand.border.critical,
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.critical}, 0 0 0 2px ${
-            system.legacy.color.focus.inverse
-          }, 0 0 0 4px ${system.legacy.color.brand.border.primary}`,
+          borderColor: system.color.brand.border.critical,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.critical}, 0 0 0 2px ${
+            system.color.focus.inverse
+          }, 0 0 0 4px ${system.color.brand.border.primary}`,
           outlineOffset: px2rem(2),
         },
       },
       caution: {
-        borderColor: system.legacy.color.brand.border.caution,
-        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner}`,
-        backgroundColor: system.legacy.color.brand.surface.caution.default,
+        borderColor: system.color.brand.border.caution,
+        boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner}`,
+        backgroundColor: system.color.brand.surface.caution.default,
         '&:has(:hover, .hover, :disabled, .disabled, :focus-visible:not([disabled])), .focus:not(:has([disabled]))':
           {
-            borderColor: system.legacy.color.brand.border.caution,
+            borderColor: system.color.brand.border.caution,
           },
         '&:hover, &.hover': {
-          borderColor: system.legacy.color.brand.border.caution,
+          borderColor: system.color.brand.border.caution,
         },
 
         '&:has(:focus-visible, .focus):not(:has([disabled]))': {
-          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.legacy.color.brand.focus.caution.inner},
-        0 0 0 2px ${system.legacy.color.focus.inverse},
-        0 0 0 4px ${system.legacy.color.brand.border.primary}`,
+          boxShadow: `inset 0 0 0 ${px2rem(2)} ${system.color.brand.focus.caution.inner},
+        0 0 0 2px ${system.color.focus.inverse},
+        0 0 0 4px ${system.color.brand.border.primary}`,
         },
         outlineOffset: px2rem(2),
       },
@@ -294,7 +294,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
     return (
       <div {...handleCsProp({className, cs, style}, multiSelectInputStencil({}))}>
         <InputGroup>
-          <InputGroup.InnerStart pointerEvents="none" width={system.legacy.size.sm}>
+          <InputGroup.InnerStart pointerEvents="none" width={system.size.sm}>
             <SystemIcon icon={searchIcon} size="xs" />
           </InputGroup.InnerStart>
           <InputGroup.Input
@@ -312,7 +312,7 @@ export const MultiSelectSearchInput = createSubcomponent(TextInput)({
             ref={model.state.searchInputRef}
             {...elemProps}
           />
-          <InputGroup.InnerEnd width={system.legacy.size.xxxs}>
+          <InputGroup.InnerEnd width={system.size.xxxs}>
             <InputGroup.ClearButton />
           </InputGroup.InnerEnd>
           <InputGroup.InnerEnd pointerEvents="none">

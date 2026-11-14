@@ -55,33 +55,33 @@ export const accessoryFileStencil = createStencil({
     type: {
       pdf: {
         [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.danger,
+        [accessoryStencil.vars.tileBackground]: system.color.accent.danger,
       },
       spreadsheet: {
         [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.success,
+        [accessoryStencil.vars.tileBackground]: system.color.accent.success,
       },
       document: {
         [accessoryStencil.vars.iconColor]: system.color.fg.inverse,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.info,
+        [accessoryStencil.vars.tileBackground]: system.color.accent.info,
       },
       presentation: {
         // Amber is too light for an inverse glyph (about 2:1). `accent.contrast` is the dark
         // foreground paired with accent fills.
-        [accessoryStencil.vars.iconColor]: system.legacy.color.accent.contrast,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.accent.warning,
+        [accessoryStencil.vars.iconColor]: system.color.accent.contrast,
+        [accessoryStencil.vars.tileBackground]: system.color.accent.warning,
       },
       video: {
         [accessoryStencil.vars.iconColor]: system.color.fg.default,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+        [accessoryStencil.vars.tileBackground]: system.color.surface.alt.default,
       },
       file: {
         [accessoryStencil.vars.iconColor]: system.color.fg.default,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+        [accessoryStencil.vars.tileBackground]: system.color.surface.alt.default,
       },
       txt: {
         [accessoryStencil.vars.iconColor]: system.color.fg.default,
-        [accessoryStencil.vars.tileBackground]: system.legacy.color.surface.alt.default,
+        [accessoryStencil.vars.tileBackground]: system.color.surface.alt.default,
       },
     },
     outline: {
@@ -89,7 +89,7 @@ export const accessoryFileStencil = createStencil({
         [iconPart]: {
           borderWidth: px2rem(1),
           borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
+          borderColor: system.color.border.default,
         },
       }),
     },

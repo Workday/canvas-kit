@@ -20,7 +20,7 @@ export interface AccessoryMediaProps extends AccessoryProps {
   /**
    * The icon to display from `@workday/canvas-system-icons-web`, centered over the image. When
    * set, a scrim is painted under the icon for contrast. Uses `color` from `Accessory` for the
-   * glyph (`base.legacy.neutral0` by default).
+   * glyph (`base.neutral0` by default).
    */
   icon?: SystemIconProps['icon'];
 }
@@ -38,7 +38,7 @@ export const accessoryMediaStencil = createStencil({
     scrim: 'accessory-media-scrim',
   },
   base: ({background, imagePart, scrimPart}) => ({
-    backgroundColor: cssVar(background, system.legacy.color.surface.alt.default),
+    backgroundColor: cssVar(background, system.color.surface.alt.default),
     [imagePart]: {
       position: 'absolute',
       inset: 0,
@@ -52,7 +52,7 @@ export const accessoryMediaStencil = createStencil({
     [scrimPart]: {
       position: 'absolute',
       inset: 0,
-      backgroundColor: system.legacy.color.surface.overlay.scrim,
+      backgroundColor: system.color.surface.overlay.scrim,
       borderRadius: cornerShapeStencil.vars.shape,
       cornerShape: 'superellipse(1.1)',
       pointerEvents: 'none',
@@ -95,7 +95,7 @@ export const AccessoryMedia = createComponent('span')({
       size = 'extraLarge',
       objectFit = 'cover',
       icon,
-      color = base.legacy.neutral0,
+      color = base.neutral0,
       background,
       ...elemProps
     }: AccessoryMediaProps,

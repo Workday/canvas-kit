@@ -18,8 +18,8 @@ export interface ExpandableContentProps extends ExtractProps<typeof Box, never> 
 
 export const expandableContentStencil = createStencil({
   base: {
-    background: system.legacy.color.surface.transparent,
-    padding: system.legacy.padding.xs,
+    background: system.color.surface.transparent,
+    padding: system.padding.xs,
   },
 });
 

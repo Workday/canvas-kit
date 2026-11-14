@@ -34,7 +34,7 @@ export const kbdStencil = createStencil({
   base: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: system.legacy.gap.xs,
+    gap: system.gap.xs,
   },
   modifiers: {
     variant: {

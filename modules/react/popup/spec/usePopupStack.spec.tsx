@@ -65,7 +65,9 @@ describe('usePopupStack', () => {
           // var() self-reference cycle. The neutral ramp and system.color.brand.* overrides
           // are forwarded as var() references to the underlying palette.
           expect(styles.getPropertyValue('--cnvs-brand-primary-600')).toBe('');
-          expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(base.sana.blueA300);
+          expect(styles.getPropertyValue('--cnvs-brand-primary-a300')).toBe(
+            `var(${base.blueA300})`
+          );
           expect(styles.getPropertyValue('--cnvs-brand-neutral-600')).toBe(
             `var(${base.neutral600})`
           );
@@ -175,8 +177,8 @@ describe('usePopupStack', () => {
         const styles = container?.style;
         if (styles) {
           // The legacy theme should set brand variables based on the primary color
-          // Legacy themes with brand scope set the primary-base variable
-          const primaryBase = styles.getPropertyValue('--cnvs-brand-primary-base');
+          // Legacy themes with brand scope set the primary-600 variable
+          const primaryBase = styles.getPropertyValue('--cnvs-brand-primary-600');
           expect(primaryBase).toBe('#FF00FF');
         }
       });
@@ -196,7 +198,7 @@ describe('usePopupStack', () => {
       const styles = container?.style;
       if (styles) {
         // When no theme is provided, no brand variables should be forced
-        expect(styles.getPropertyValue('--cnvs-brand-primary-base')).toBe('');
+        expect(styles.getPropertyValue('--cnvs-brand-primary-600')).toBe('');
       }
     });
 

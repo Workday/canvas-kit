@@ -7,11 +7,11 @@ export const baseTableCellStencil = createStencil({
   base: {
     alignItems: 'center',
     backgroundColor: system.color.bg.default,
-    borderBlockEnd: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.color.border.default}`,
     gridTemplateColumns: '1fr',
     justifyContent: 'start',
     minHeight: '3.5rem',
-    padding: `${system.legacy.padding.xs} ${system.legacy.padding.md}`,
+    padding: `${system.padding.xs} ${system.padding.md}`,
     wordBreak: 'break-word',
   },
 });

@@ -15,13 +15,13 @@ const statStyles = createStyles({
 });
 
 const labelStyles = createStyles({
-  ...system.type.subtext.medium,
+  ...system.type.subtext.md,
   color: system.color.fg.default,
   margin: 0,
 });
 
 const valueStyles = createStyles({
-  ...system.type.body.large,
+  ...system.type.body.lg,
   fontWeight: system.fontWeight.bold,
   margin: 0,
 });

@@ -24,10 +24,10 @@ export const breadcrumbsLinkStencil = createStencil({
   },
   base: ({maxWidth}) => ({
     fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
     fontWeight: system.fontWeight.normal,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
     color: system.color.fg.default,
     textOverflow: 'ellipsis',
     overflow: 'hidden',
@@ -35,12 +35,12 @@ export const breadcrumbsLinkStencil = createStencil({
     maxWidth,
     '&:hover, &.hover': {
       color: system.color.fg.strong,
-      backgroundColor: system.legacy.color.surface.overlay.hover.default,
+      backgroundColor: system.color.surface.overlay.hover.default,
       textDecoration: 'underline',
     },
     '&:active, &.active': {
       color: system.color.fg.strong,
-      backgroundColor: system.legacy.color.surface.overlay.pressed.default,
+      backgroundColor: system.color.surface.overlay.pressed.default,
     },
   }),
 });

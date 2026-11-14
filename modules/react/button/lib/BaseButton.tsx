@@ -122,9 +122,9 @@ export const buttonStencil = createStencil({
   base: ({background, border, boxShadowInner, boxShadowOuter, label, opacity, borderRadius}) => ({
     // Default Styles
     fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.medium,
     backgroundColor: cssVar(
       buttonColorPropVars.default.background,
@@ -133,7 +133,7 @@ export const buttonStencil = createStencil({
     color: cssVar(buttonColorPropVars.default.label, cssVar(label, system.color.fg.strong)),
     borderWidth: px2rem(1),
     borderStyle: 'solid',
-    gap: system.legacy.gap.sm,
+    gap: system.gap.sm,
     borderColor: cssVar(buttonColorPropVars.default.border, cssVar(border, 'transparent')),
     cursor: 'pointer',
     display: 'inline-flex',
@@ -146,7 +146,7 @@ export const buttonStencil = createStencil({
     MozOsxFontSmoothing: 'grayscale',
     borderRadius: cssVar(
       buttonColorPropVars.default.borderRadius,
-      cssVar(borderRadius, system.legacy.shape.full)
+      cssVar(borderRadius, system.shape.full)
     ),
     position: 'relative',
     verticalAlign: 'middle',
@@ -178,17 +178,17 @@ export const buttonStencil = createStencil({
       outlineOffset: px2rem(2),
       boxShadow: `0 0 0 ${px2rem(2)} ${cssVar(
         buttonColorPropVars.focus.boxShadowInner,
-        cssVar(boxShadowInner, system.legacy.color.border.inverse.default)
+        cssVar(boxShadowInner, system.color.border.inverse.default)
       )},0 0 0 ${px2rem(4)} ${cssVar(
         buttonColorPropVars.focus.boxShadowOuter,
-        cssVar(boxShadowOuter, system.legacy.color.brand.focus.primary)
+        cssVar(boxShadowOuter, system.color.brand.focus.primary)
       )}`,
     },
     // Hover Styles
     '&:hover, &.hover': {
       backgroundColor: cssVar(
         buttonColorPropVars.hover.background,
-        cssVar(background, system.legacy.color.surface.contrast.strong)
+        cssVar(background, system.color.surface.contrast.strong)
       ),
       borderColor: cssVar(buttonColorPropVars.hover.border, cssVar(border, 'transparent')),
       color: cssVar(buttonColorPropVars.hover.label, cssVar(label, system.color.fg.stronger)),
@@ -249,38 +249,38 @@ export const buttonStencil = createStencil({
      */
     size: {
       large: {
-        fontSize: system.legacy.fontSize.body.sm,
-        lineHeight: system.legacy.lineHeight.body.sm,
-        letterSpacing: system.legacy.letterSpacing.body.sm,
-        height: system.legacy.size.lg,
-        paddingInline: system.legacy.padding.lg,
-        minWidth: base.legacy.size1300,
+        fontSize: system.fontSize.body.sm,
+        lineHeight: system.lineHeight.body.sm,
+        letterSpacing: system.letterSpacing.body.sm,
+        height: system.size.lg,
+        paddingInline: system.padding.lg,
+        minWidth: base.size1300,
       },
       medium: {
-        fontSize: system.legacy.fontSize.subtext.lg,
-        lineHeight: system.legacy.lineHeight.subtext.lg,
-        letterSpacing: system.legacy.letterSpacing.subtext.lg,
-        paddingInline: system.legacy.padding.md,
-        height: system.legacy.size.md,
-        gap: base.legacy.size75,
-        minWidth: base.legacy.size1100,
+        fontSize: system.fontSize.subtext.lg,
+        lineHeight: system.lineHeight.subtext.lg,
+        letterSpacing: system.letterSpacing.subtext.lg,
+        paddingInline: system.padding.md,
+        height: system.size.md,
+        gap: base.size75,
+        minWidth: base.size1100,
       },
       small: {
-        fontSize: system.legacy.fontSize.subtext.lg,
-        lineHeight: system.legacy.lineHeight.subtext.lg,
-        letterSpacing: system.legacy.letterSpacing.subtext.lg,
-        height: system.legacy.size.sm,
-        paddingInline: system.legacy.padding.sm,
-        gap: system.legacy.gap.xs,
-        minWidth: base.legacy.size900,
+        fontSize: system.fontSize.subtext.lg,
+        lineHeight: system.lineHeight.subtext.lg,
+        letterSpacing: system.letterSpacing.subtext.lg,
+        height: system.size.sm,
+        paddingInline: system.padding.sm,
+        gap: system.gap.xs,
+        minWidth: base.size900,
       },
       extraSmall: {
-        fontSize: system.legacy.fontSize.subtext.md,
-        lineHeight: system.legacy.lineHeight.subtext.md,
-        letterSpacing: system.legacy.letterSpacing.subtext.md,
-        height: system.legacy.size.xs,
-        paddingInline: system.legacy.padding.xs,
-        gap: system.legacy.gap.xs,
+        fontSize: system.fontSize.subtext.md,
+        lineHeight: system.lineHeight.subtext.md,
+        letterSpacing: system.letterSpacing.subtext.md,
+        height: system.size.xs,
+        paddingInline: system.padding.xs,
+        gap: system.gap.xs,
         minWidth: 'auto',
       },
     },
@@ -302,81 +302,81 @@ export const buttonStencil = createStencil({
     {
       modifiers: {size: 'large', iconPosition: 'only'},
       styles: {
-        minWidth: system.legacy.size.lg,
+        minWidth: system.size.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.md,
-        paddingInlineEnd: system.legacy.padding.lg,
+        paddingInlineStart: system.padding.md,
+        paddingInlineEnd: system.padding.lg,
       },
     },
     {
       modifiers: {size: 'large', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.lg,
-        paddingInlineEnd: system.legacy.padding.md,
+        paddingInlineStart: system.padding.lg,
+        paddingInlineEnd: system.padding.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'only'},
       styles: {
-        minWidth: system.legacy.size.md,
+        minWidth: system.size.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.sm,
-        paddingInlineEnd: system.legacy.padding.md,
+        paddingInlineStart: system.padding.sm,
+        paddingInlineEnd: system.padding.md,
       },
     },
     {
       modifiers: {size: 'medium', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.md,
-        paddingInlineEnd: system.legacy.padding.sm,
+        paddingInlineStart: system.padding.md,
+        paddingInlineEnd: system.padding.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'only'},
       styles: {
-        minWidth: system.legacy.size.sm,
+        minWidth: system.size.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xs,
-        paddingInlineEnd: system.legacy.padding.sm,
+        paddingInlineStart: system.padding.xs,
+        paddingInlineEnd: system.padding.sm,
       },
     },
     {
       modifiers: {size: 'small', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.sm,
-        paddingInlineEnd: system.legacy.padding.xs,
+        paddingInlineStart: system.padding.sm,
+        paddingInlineEnd: system.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'only'},
       styles: {
-        minWidth: system.legacy.size.xs,
+        minWidth: system.size.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'start'},
       styles: {
-        paddingInlineStart: calc.add(system.legacy.padding.xxs, px2rem(2)),
-        paddingInlineEnd: system.legacy.padding.xs,
+        paddingInlineStart: calc.add(system.padding.xxs, px2rem(2)),
+        paddingInlineEnd: system.padding.xs,
       },
     },
     {
       modifiers: {size: 'extraSmall', iconPosition: 'end'},
       styles: {
-        paddingInlineStart: system.legacy.padding.xs,
-        paddingInlineEnd: calc.add(system.legacy.padding.xxs, px2rem(2)),
+        paddingInlineStart: system.padding.xs,
+        paddingInlineEnd: calc.add(system.padding.xxs, px2rem(2)),
       },
     },
   ],

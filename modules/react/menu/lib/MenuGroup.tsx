@@ -68,16 +68,16 @@ const useMenuGroupModel = createModelHook({
 export const menuGroupHeadingStencil = createStencil({
   base: {
     fontFamily: system.fontFamily.default,
-    fontSize: system.legacy.fontSize.subtext.lg,
-    lineHeight: system.legacy.lineHeight.subtext.lg,
-    letterSpacing: system.legacy.letterSpacing.subtext.lg,
+    fontSize: system.fontSize.subtext.lg,
+    lineHeight: system.lineHeight.subtext.lg,
+    letterSpacing: system.letterSpacing.subtext.lg,
     fontWeight: system.fontWeight.bold,
     display: 'flex',
     alignItems: 'center',
     width: '100%',
-    gap: system.legacy.gap.md,
-    paddingBlock: system.legacy.padding.xs,
-    paddingInline: `${system.legacy.padding.sm} ${system.legacy.padding.md}`,
+    gap: system.gap.md,
+    paddingBlock: system.padding.xs,
+    paddingInline: `${system.padding.sm} ${system.padding.md}`,
   },
 });
 

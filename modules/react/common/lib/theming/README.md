@@ -8,8 +8,8 @@
 
 ## Sana Canvas Theme
 
-For application-level theming in v16, import the Sana CSS variables and set `data-theme="sana-canvas"`
-on `<html>`. See the
+For application-level theming in v16, import the Sana CSS variables and set
+`data-theme="sana-canvas"` on `<html>`. See the
 [v16 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v-16-0-overview--docs#sana-canvas-theme)
 for the canonical setup. The `CanvasProvider` `theme` prop is for **scoped** theming only.
 
@@ -67,7 +67,7 @@ import {base} from '@workday/canvas-tokens-web';
 
 <CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
   <ScopedSection />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 ### Popups and `sanaCanvasProviderTheme`
@@ -75,11 +75,11 @@ import {base} from '@workday/canvas-tokens-web';
 Popups (menus, selects, modals) portal to `document.body`. Theme inheritance depends on where
 `data-theme="sana-canvas"` lives:
 
-- **You control `<html>`:** set `data-theme="sana-canvas"` there. Popups inherit Sana variables —
-  no `theme` prop needed.
+- **You control `<html>`:** set `data-theme="sana-canvas"` there. Popups inherit Sana variables — no
+  `theme` prop needed.
 - **You cannot control `<html>`** (embedded apps, microfrontends, third-party shells): pass
-  `sanaCanvasProviderTheme` to your root `CanvasProvider`. Nested `data-theme` on a wrapper does
-  not reach portaled popups; this preset forwards Sana brand variables onto the popup stack.
+  `sanaCanvasProviderTheme` to your root `CanvasProvider`. Nested `data-theme` on a wrapper does not
+  reach portaled popups; this preset forwards Sana brand variables onto the popup stack.
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
@@ -87,10 +87,12 @@ import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react
 // Required when <html> is unavailable
 <CanvasProvider theme={sanaCanvasProviderTheme}>
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
-See the [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs) for details.
+See the
+[Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs)
+for details.
 
 ## Bidirectionality (RTL Support)
 

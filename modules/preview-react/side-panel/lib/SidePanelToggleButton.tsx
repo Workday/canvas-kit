@@ -24,9 +24,9 @@ export interface SidePanelToggleButtonProps extends ExtractProps<typeof Tertiary
 export const sidePanelToggleButtonStencil = createStencil({
   base: {
     position: 'absolute',
-    top: system.legacy.gap.lg,
-    width: system.legacy.size.sm,
-    insetInlineEnd: system.legacy.gap.md,
+    top: system.gap.lg,
+    width: system.size.sm,
+    insetInlineEnd: system.gap.md,
   },
   modifiers: {
     state: {
@@ -78,21 +78,21 @@ export const sidePanelToggleButtonStencil = createStencil({
       modifiers: {state: 'collapsing', origin: 'right'},
       styles: {
         transform: `scaleX(-1)`,
-        insetInlineStart: system.legacy.gap.md,
+        insetInlineStart: system.gap.md,
       },
     },
     {
       modifiers: {state: 'expanded', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.legacy.gap.md,
+        insetInlineStart: system.gap.md,
       },
     },
     {
       modifiers: {state: 'expanding', origin: 'right'},
       styles: {
         transform: `scaleX(1)`,
-        insetInlineStart: system.legacy.gap.md,
+        insetInlineStart: system.gap.md,
       },
     },
   ],

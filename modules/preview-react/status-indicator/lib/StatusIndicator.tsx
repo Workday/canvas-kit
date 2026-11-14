@@ -61,12 +61,12 @@ const statusIndicatorStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
     display: 'inline-flex',
-    gap: system.legacy.gap.xs,
+    gap: system.gap.xs,
     maxWidth: px2rem(200),
     alignItems: 'center',
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.md,
-    height: system.legacy.size.xs,
-    padding: `${system.legacy.padding.xxs} ${system.legacy.padding.xs}`,
+    [cornerShapeStencil.vars.shape]: system.shape.md,
+    height: system.size.xs,
+    padding: `${system.padding.xxs} ${system.padding.xs}`,
     outline: `${px2rem(1)} solid transparent`,
     [systemIconStencil.vars.color]: 'currentColor',
   },
@@ -85,28 +85,28 @@ const statusIndicatorStencil = createStencil({
      */
     variant: {
       info: {
-        color: system.legacy.color.fg.info.strong,
-        backgroundColor: system.legacy.color.surface.info.strong,
+        color: system.color.fg.info.strong,
+        backgroundColor: system.color.surface.info.strong,
       },
       positive: {
-        color: system.legacy.color.fg.success.strong,
-        backgroundColor: system.legacy.color.surface.success.strong,
+        color: system.color.fg.success.strong,
+        backgroundColor: system.color.surface.success.strong,
       },
       caution: {
-        color: system.legacy.color.fg.warning.strong,
-        backgroundColor: system.legacy.color.surface.warning.strong,
+        color: system.color.fg.warning.strong,
+        backgroundColor: system.color.surface.warning.strong,
       },
       critical: {
-        color: system.legacy.color.fg.danger.strong,
-        backgroundColor: system.legacy.color.surface.danger.strong,
+        color: system.color.fg.danger.strong,
+        backgroundColor: system.color.surface.danger.strong,
       },
       neutral: {
         color: system.color.fg.muted.strong,
-        backgroundColor: system.legacy.color.surface.alt.strong,
+        backgroundColor: system.color.surface.alt.strong,
       },
       transparent: {
         color: system.color.fg.inverse,
-        backgroundColor: system.legacy.color.surface.contrast.default,
+        backgroundColor: system.color.surface.contrast.default,
       },
     },
     /**
@@ -131,7 +131,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.legacy.color.accent.info,
+        backgroundColor: system.color.accent.info,
         color: system.color.fg.inverse,
       },
     },
@@ -141,7 +141,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.legacy.color.accent.success,
+        backgroundColor: system.color.accent.success,
         color: system.color.fg.inverse,
       },
     },
@@ -151,7 +151,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.legacy.color.accent.warning,
+        backgroundColor: system.color.accent.warning,
         color: system.color.fg.contrast.default,
       },
     },
@@ -161,7 +161,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.legacy.color.accent.danger,
+        backgroundColor: system.color.accent.danger,
         color: system.color.fg.inverse,
       },
     },
@@ -171,7 +171,7 @@ const statusIndicatorStencil = createStencil({
         emphasis: 'high',
       },
       styles: {
-        backgroundColor: system.legacy.color.accent.muted.default,
+        backgroundColor: system.color.accent.muted.default,
         color: system.color.fg.inverse,
       },
     },

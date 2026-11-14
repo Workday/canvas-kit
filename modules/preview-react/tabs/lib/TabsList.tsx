@@ -163,10 +163,10 @@ export const tabsListStencil = createStencil({
     display: 'flex',
     position: 'relative',
     minWidth: 0,
-    gap: system.legacy.gap.sm,
+    gap: system.gap.sm,
 
     '@media screen and (max-width: 768px)': {
-      paddingInline: system.legacy.padding.md,
+      paddingInline: system.padding.md,
     },
   },
   modifiers: {

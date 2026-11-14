@@ -54,19 +54,16 @@ export const accessoryFaviconStencil = createStencil({
   base: ({iconPart, imagePart}) => ({
     [iconPart]: {
       overflow: 'hidden',
-      backgroundColor: cssVar(
-        accessoryStencil.vars.tileBackground,
-        system.legacy.color.surface.default
-      ),
+      backgroundColor: cssVar(accessoryStencil.vars.tileBackground, system.color.surface.default),
       borderWidth: px2rem(1),
       borderStyle: 'solid',
-      borderColor: system.legacy.color.border.default,
+      borderColor: system.color.border.default,
     },
     [imagePart]: {
-      width: `calc(100% - ${system.legacy.padding.sm})`,
-      height: `calc(100% - ${system.legacy.padding.sm})`,
+      width: `calc(100% - ${system.padding.sm})`,
+      height: `calc(100% - ${system.padding.sm})`,
       objectFit: 'contain',
-      borderRadius: system.legacy.shape.md,
+      borderRadius: system.shape.md,
       cornerShape: 'superellipse(1.1)',
     },
   }),

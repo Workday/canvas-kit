@@ -40,10 +40,10 @@ No per-component `package.json` or tsconfig path entries were needed for `module
 
 ### When to use the collection system
 
-| Use collection | Skip collection |
-| -------------- | --------------- |
+| Use collection                                                                    | Skip collection                                              |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | List, grid, or set of items with selection, roving focus, or arrow-key navigation | Single control with no item set (button, banner, text field) |
-| Examples: `SegmentedControl`, `Tabs`, `Menu`, `Select` | Examples: `PrimaryButton`, `Banner`, form inputs |
+| Examples: `SegmentedControl`, `Tabs`, `Menu`, `Select`                            | Examples: `PrimaryButton`, `Banner`, form inputs             |
 
 Models from `@workday/canvas-kit-react/collection`:
 
@@ -84,8 +84,8 @@ export const useThingItem = composeHooks(
 ```
 
 - Typical order: `useListItemSelect` → component-specific elemProps → `useListItemRovingFocus` (or
-  `useListItemActiveDescendant`) → `useListItemRegister`. A hook may come **after** register only
-  to override a prop register sets (see `useSegmentedControlItem` and `disabled`).
+  `useListItemActiveDescendant`) → `useListItemRegister`. A hook may come **after** register only to
+  override a prop register sets (see `useSegmentedControlItem` and `disabled`).
 - Dynamic items: pass `items` and render with `useListRenderItems`. Virtualization defaults **on**
   for dynamic items — pass `shouldVirtualize: false` for short lists and popup menus.
 - Controlled usage: accept `selectedIds` and sync with `events.setSelectedIds` in an effect;
@@ -98,23 +98,22 @@ export const useThingItem = composeHooks(
 Apply in `lib/` stencils:
 
 - [ ] Radius `shape.md`–`shape.xxxl` → `extends: cornerShapeStencil` +
-      `[cornerShapeStencil.vars.shape]: system.legacy.shape.lg` (not a raw `borderRadius`).
-      Exception: stencils extending `buttonStencil` set `buttonStencil.vars.borderRadius`.
+      `[cornerShapeStencil.vars.shape]: system.shape.lg` (not a raw `borderRadius`). Exception:
+      stencils extending `buttonStencil` set `buttonStencil.vars.borderRadius`.
 - [ ] Typography: explicit `fontFamily: system.fontFamily.default`,
-      `fontWeight: system.fontWeight.normal`, and `system.legacy.fontSize/lineHeight/letterSpacing`
-      for the level (see `MenuItem`). Render the label as a plain `<span>` that inherits color;
-      wrapping in `Subtext` fights the selected color.
-- [ ] Selected: `system.legacy.color.brand.surface.selected` +
-      `system.legacy.color.brand.fg.selected`. `system.color.surface.selected` /
-      `system.color.fg.selected` don't exist in tokens-web 4.4 even though Figma shows
-      `--cnvs-sys-color-surface-selected`.
+      `fontWeight: system.fontWeight.normal`, and `system.fontSize/lineHeight/letterSpacing` for the
+      level (see `MenuItem`). Render the label as a plain `<span>` that inherits color; wrapping in
+      `Subtext` fights the selected color.
+- [ ] Selected: `system.color.brand.surface.selected` + `system.color.brand.fg.selected`.
+      `system.color.surface.selected` / `system.color.fg.selected` don't exist in tokens-web 4.4
+      even though Figma shows `--cnvs-sys-color-surface-selected`.
 - [ ] Selected chips drop the visible border (`borderColor: 'transparent'`) and don't shift on
       hover/active — the border would compete with the focus indicator.
-- [ ] Hover / pressed: `system.legacy.color.surface.overlay.hover.default` / `.pressed.default`,
-      scoped to unselected items.
-- [ ] Focus: `outline: 2px solid system.legacy.color.brand.border.primary` with
-      `outlineOffset: -2px` under `'&:is(.focus, :focus-visible)'` (MenuItem pattern). Use
-      `:focus-visible` + `&.focus` — not `data-whatinput`.
+- [ ] Hover / pressed: `system.color.surface.overlay.hover.default` / `.pressed.default`, scoped to
+      unselected items.
+- [ ] Focus: `outline: 2px solid system.color.brand.border.primary` with `outlineOffset: -2px` under
+      `'&:is(.focus, :focus-visible)'` (MenuItem pattern). Use `:focus-visible` + `&.focus` — not
+      `data-whatinput`.
 - [ ] Do **not** set `boxSizing: 'border-box'` on a stencil — `createStencil` already injects it
       (copying `MenuItem` will repeat it unnecessarily).
 - [ ] Disabled: `opacity: system.opacity.disabled`, `cursor: 'default'`, match
@@ -123,10 +122,9 @@ Apply in `lib/` stencils:
       `.disabled`.
 - [ ] Icons: set `[systemIconStencil.vars.color]: 'currentColor'` on the item; don't color icons
       separately.
-- [ ] Spacing: `system.legacy.padding.*` / `gap.*`. There's no `system.legacy.gap.xxs`; 6px is
-      `base.legacy.size75`.
+- [ ] Spacing: `system.padding.*` / `gap.*`. There's no `system.gap.xxs`; 6px is `base.size75`.
 - [ ] Error / caution group ring: copy preview `RadioGroup` (inset `box-shadow` using
-      `system.legacy.color.brand.border.critical` / `.caution` + `focus.caution.inner`).
+      `system.color.brand.border.critical` / `.caution` + `focus.caution.inner`).
 
 ## Known gotchas
 

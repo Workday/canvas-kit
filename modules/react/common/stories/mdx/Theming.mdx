@@ -2,16 +2,15 @@ import {Meta} from '@storybook/blocks';
 
 import {ExampleCodeBlock} from '@workday/canvas-kit-docs';
 
-import {ThemingBrandScope} from './examples/ThemingBrandScope';
 import {SimplifiedSetup} from './examples/SimplifiedSanaSetup';
+import {ThemingBrandScope} from './examples/ThemingBrandScope';
 
 <Meta title="Features/Theming/Overview" />
 
 # Canvas Kit Theming Guide
 
 Canvas Kit v16 components are Sana-aligned out of the box. The Sana Canvas **theme** is a separate,
-opt-in step that updates brand colors, neutrals, surfaces, and shapes at the application
-level.
+opt-in step that updates brand colors, neutrals, surfaces, and shapes at the application level.
 
 For a full list of what changes when you opt in, see the
 [v16 Upgrade Guide](https://workday.github.io/canvas-kit/?path=/docs/guides-upgrade-guides-v-16-0-overview--docs#sana-canvas-theme).
@@ -52,21 +51,21 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider>
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 The sana stylesheet only defines `[data-theme="sana-canvas"]` overrides. Without that attribute,
 those rules do not apply.
 
-If your application **has** opted into Sana globally but one subsection needs classic Canvas branding,
-use `defaultBranding` on a scoped `CanvasProvider`:
+If your application **has** opted into Sana globally but one subsection needs classic Canvas
+branding, use `defaultBranding` on a scoped `CanvasProvider`:
 
 ```tsx
 import {CanvasProvider, defaultBranding} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider className={defaultBranding}>
   <ClassicCanvasSection />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 ## Scoped Theming
@@ -78,16 +77,16 @@ example, embedding Canvas in a third-party application, multi-tenant branding, o
 The `theme` prop accepts a numerical `brand` object. Each key maps 1:1 to a `--cnvs-brand-*` CSS
 variable.
 
-| You set | Components affected |
-| ------- | ------------------- |
-| `brand.primary['600']` alone | `PrimaryButton`, selected `Menu.Item` (text + background) |
-| `focus.primary` | Focus rings, border primary (independent of primary brand) |
-| `brand.action.*` | `PrimaryButton` (read before `brand.primary`) |
-| `brand.critical.*` | `TextInput` error, critical accents |
-| `brand.caution.*` | `TextInput` caution, caution focus |
-| `brand.positive.*` | `Checkbox`, `Radio` checked states |
-| `brand.neutral.*` | Neutral brand text/surfaces |
-| `selected.fg` / `selected.surface` | Selected list/menu states directly |
+| You set                            | Components affected                                        |
+| ---------------------------------- | ---------------------------------------------------------- |
+| `brand.primary['600']` alone       | `PrimaryButton`, selected `Menu.Item` (text + background)  |
+| `focus.primary`                    | Focus rings, border primary (independent of primary brand) |
+| `brand.action.*`                   | `PrimaryButton` (read before `brand.primary`)              |
+| `brand.critical.*`                 | `TextInput` error, critical accents                        |
+| `brand.caution.*`                  | `TextInput` caution, caution focus                         |
+| `brand.positive.*`                 | `Checkbox`, `Radio` checked states                         |
+| `brand.neutral.*`                  | Neutral brand text/surfaces                                |
+| `selected.fg` / `selected.surface` | Selected list/menu states directly                         |
 
 **Focus does not follow primary.** Setting only `brand.primary['600']` leaves focus rings at the
 default blue unless you also set `focus.primary`.
@@ -98,13 +97,13 @@ import {base} from '@workday/canvas-tokens-web';
 
 <CanvasProvider theme={{brand: {primary: {'600': base.magenta600}}}}>
   <ScopedSection />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 <ExampleCodeBlock code={ThemingBrandScope} />
 
-Popups (including menus, selects, modals, and toasts) portal to `document.body` — outside the
-parent component's DOM hierarchy. How theming reaches them:
+Popups (including menus, selects, modals, and toasts) portal to `document.body` — outside the parent
+component's DOM hierarchy. How theming reaches them:
 
 **Preferred — you control the document root:** set `data-theme="sana-canvas"` on the `<html>`
 element. Popups inherit Sana CSS variables automatically; no `theme` prop needed:
@@ -115,31 +114,30 @@ import {CanvasProvider} from '@workday/canvas-kit-react/common';
 // <html data-theme="sana-canvas">
 <CanvasProvider>
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 **Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,
 microfrontends, third-party shells), pass both `data-theme="sana-canvas"` and
 `sanaCanvasProviderTheme` to `CanvasProvider`. The preset supplies Sana's brand variables, and
-Canvas Kit forwards the `data-theme` attribute onto the popup stack container — so portaled
-menus, modals, and dialogs match the same `[data-theme="sana-canvas"]` selector and pick up the
-rest of the theme (shape, depth, type, non-brand system colors) through normal cascade:
+Canvas Kit forwards the `data-theme` attribute onto the popup stack container — so portaled menus,
+modals, and dialogs match the same `[data-theme="sana-canvas"]` selector and pick up the rest of the
+theme (shape, depth, type, non-brand system colors) through normal cascade:
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
-`sanaCanvasProviderTheme` is also useful in tests without global Sana CSS or with custom popup
-hosts outside the normal document flow.
+`sanaCanvasProviderTheme` is also useful in tests without global Sana CSS or with custom popup hosts
+outside the normal document flow.
 
 <ExampleCodeBlock code={SimplifiedSetup} />
 
-See the
-[Sana Canvas](?path=/story/features-theming--sana-canvas) Storybook story for a side-by-side
+See the [Sana Canvas](?path=/story/features-theming--sana-canvas) Storybook story for a side-by-side
 comparison of global and scoped branding.
 
 View token documentation

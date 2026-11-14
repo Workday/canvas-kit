@@ -35,9 +35,9 @@ export const useMenuList = composeHooks(
 export const menuListStencil = createStencil({
   extends: cornerShapeStencil,
   base: {
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.shape.xxl,
     padding: 0,
-    gap: base.legacy.size25,
+    gap: base.size25,
   },
   modifiers: {
     orientation: {
@@ -60,7 +60,7 @@ export const MenuList = createSubcomponent('div')({
     <ListBox
       as={Element}
       model={model}
-      marginY={system.legacy.gap.none}
+      marginY={system.gap.none}
       maxHeight={maxHeight ?? '100%'}
       {...handleCsProp(elemProps, menuListStencil({orientation: model.state.orientation}))}
     >

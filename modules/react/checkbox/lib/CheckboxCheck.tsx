@@ -15,7 +15,7 @@ interface CheckboxCheckProps {
 
 const checkboxCheckStencil = createStencil({
   base: {
-    [systemIconStencil.vars.size]: component.legacy.systemIcon.size.md,
+    [systemIconStencil.vars.size]: component.systemIcon.size.md,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -45,10 +45,10 @@ const checkboxCheckStencil = createStencil({
     },
     variant: {
       inverse: {
-        [systemIconStencil.vars.color]: system.legacy.color.brand.accent.primary,
+        [systemIconStencil.vars.color]: system.color.brand.accent.primary,
 
         '& > div': {
-          backgroundColor: system.legacy.color.brand.accent.primary,
+          backgroundColor: system.color.brand.accent.primary,
         },
       },
     },
@@ -64,7 +64,7 @@ const indeterminateBoxStencil = createStencil({
   modifiers: {
     variant: {
       inverse: {
-        backgroundColor: system.legacy.color.brand.accent.positive,
+        backgroundColor: system.color.brand.accent.positive,
       },
     },
   },

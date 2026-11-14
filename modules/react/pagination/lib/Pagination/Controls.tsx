@@ -24,7 +24,7 @@ export interface PaginationControlsProps {}
 export const paginationControlsStencil = createStencil({
   base: {
     display: 'flex',
-    gap: system.legacy.gap.xs,
+    gap: system.gap.xs,
     alignItems: 'center',
   },
 });
@@ -32,7 +32,7 @@ export const paginationControlsStencil = createStencil({
 const controlButtonStencil = createStencil({
   base: {
     '& > span': {
-      [systemIconStencil.vars.size]: component.legacy.systemIcon.size.xs,
+      [systemIconStencil.vars.size]: component.systemIcon.size.xs,
       [systemIconStencil.vars.color]: system.color.fg.strong,
     },
     '&:dir(rtl)': {

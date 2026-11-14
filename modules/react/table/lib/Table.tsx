@@ -31,7 +31,7 @@ export const tableCaptionStencil = createStencil({
   extends: baseTableCaptionStencil,
   base: {
     display: 'flex',
-    borderBlockEnd: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    borderBlockEnd: `${px2rem(1)} solid ${system.color.border.default}`,
   },
 });
 

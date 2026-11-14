@@ -49,102 +49,84 @@ export const accessoryIconStencil = createStencil({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.alt.strong
+            system.color.surface.alt.strong
           ),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.slate800
-          ),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.slate800),
         },
       }),
       green: ({iconPart}) => ({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.success.strong
+            system.color.surface.success.strong
           ),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.green800
-          ),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.green800),
         },
       }),
       blue: ({iconPart}) => ({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.info.strong
+            system.color.surface.info.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.info.strong
+            system.color.fg.info.strong
           ),
         },
       }),
       purple: ({iconPart}) => ({
         [iconPart]: {
-          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.purpleA50),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.purple700
-          ),
+          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.purpleA50),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.purple700),
         },
       }),
       amber: ({iconPart}) => ({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.warning.strong
+            system.color.surface.warning.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.warning.strong
+            system.color.fg.warning.strong
           ),
         },
       }),
       magenta: ({iconPart}) => ({
         [iconPart]: {
-          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.magentaA50),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.magenta800
-          ),
+          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.magentaA50),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.magenta800),
         },
       }),
       red: ({iconPart}) => ({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.danger.strong
+            system.color.surface.danger.strong
           ),
           [systemIconStencil.vars.color]: cssVar(
             accessoryStencil.vars.iconColor,
-            system.legacy.color.fg.danger.strong
+            system.color.fg.danger.strong
           ),
         },
       }),
       orange: ({iconPart}) => ({
         [iconPart]: {
-          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.legacy.orangeA50),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.orange700
-          ),
+          backgroundColor: cssVar(accessoryStencil.vars.tileBackground, base.orangeA50),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.orange700),
         },
       }),
       outline: ({iconPart}) => ({
         [iconPart]: {
           backgroundColor: cssVar(
             accessoryStencil.vars.tileBackground,
-            system.legacy.color.surface.transparent
+            system.color.surface.transparent
           ),
-          [systemIconStencil.vars.color]: cssVar(
-            accessoryStencil.vars.iconColor,
-            base.legacy.slate800
-          ),
+          [systemIconStencil.vars.color]: cssVar(accessoryStencil.vars.iconColor, base.slate800),
           borderWidth: px2rem(1),
           borderStyle: 'solid',
-          borderColor: system.legacy.color.border.default,
+          borderColor: system.color.border.default,
         },
       }),
     },

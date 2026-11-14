@@ -27,23 +27,23 @@ export const cardStencil = createStencil({
     background: '',
   },
   base: ({background}) => ({
-    [cornerShapeStencil.vars.shape]: system.legacy.shape.xxl,
+    [cornerShapeStencil.vars.shape]: system.shape.xxl,
     display: 'flex',
     flexDirection: 'column',
-    gap: system.legacy.padding.sm,
-    padding: system.legacy.padding.xl,
-    background: cssVar(background, system.legacy.color.surface.default),
-    border: `${px2rem(1)} solid ${system.legacy.color.border.default}`,
+    gap: system.padding.sm,
+    padding: system.padding.xl,
+    background: cssVar(background, system.color.surface.default),
+    border: `${px2rem(1)} solid ${system.color.border.default}`,
   }),
   modifiers: {
     variant: {
       tonal: ({background}) => ({
-        background: cssVar(background, system.legacy.color.surface.alt.strong),
+        background: cssVar(background, system.color.surface.alt.strong),
         borderColor: system.color.border.transparent,
       }),
       alt: ({background}) => ({
-        background: cssVar(background, system.sana.color.surface.elevated),
-        borderColor: system.sana.color.border.elevated,
+        background: cssVar(background, system.color.surface.elevated),
+        borderColor: system.color.border.elevated,
       }),
     },
   },

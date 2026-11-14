@@ -10,7 +10,7 @@ export const skeletonSurfaceFillStencil = createStencil({
   base: ({backgroundColor}) => ({
     background: cssVar(
       backgroundColor,
-      `linear-gradient(to left, ${system.legacy.color.surface.alt.strong}, ${system.legacy.color.surface.loading})`
+      `linear-gradient(to left, ${system.color.surface.alt.strong}, ${system.color.surface.loading})`
     ),
     border: `${px2rem(1)} solid transparent`,
     '@media (forced-colors: active)': {
@@ -54,7 +54,7 @@ export const skeletonShapeStencil = createStencil({
     borderRadius: cssVar(borderRadius, '0'),
     height: cssVar(height, '100%'),
     width: width,
-    marginBlockEnd: system.legacy.size.xxxs,
+    marginBlockEnd: system.size.xxxs,
   }),
 });
 

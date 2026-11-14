@@ -10,14 +10,14 @@ export const switchBackgroundStencil = createStencil({
     pointerEvents: 'none',
     // This is used in "High Contrast Mode" to show a border on the Switch background.
     border: `${px2rem(1)} solid transparent`,
-    height: system.legacy.size.xxs,
+    height: system.size.xxs,
     // This value is in the spec and there is no token for this size.
     // calc() does not work inside of cssVar() as the first value.
     width: px2rem(34),
-    borderRadius: system.legacy.shape.full,
+    borderRadius: system.shape.full,
     padding: `0 ${px2rem(1)}`,
     transition: 'background-color 200ms ease',
-    backgroundColor: system.legacy.color.accent.muted.default,
+    backgroundColor: system.color.accent.muted.default,
   },
 });
 

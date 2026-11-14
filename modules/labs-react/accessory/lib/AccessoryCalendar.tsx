@@ -32,16 +32,13 @@ export const accessoryCalendarStencil = createStencil({
       // 3px stack gap on the 40px tile, scaled with the tile.
       gap: '0.075em',
       overflow: 'hidden',
-      backgroundColor: cssVar(
-        accessoryStencil.vars.tileBackground,
-        system.legacy.color.surface.default
-      ),
+      backgroundColor: cssVar(accessoryStencil.vars.tileBackground, system.color.surface.default),
       borderWidth: px2rem(1),
       borderStyle: 'solid',
-      borderColor: system.legacy.color.border.default,
+      borderColor: system.color.border.default,
     },
     [monthPart]: {
-      color: cssVar(accessoryStencil.vars.iconColor, system.legacy.color.fg.danger.default),
+      color: cssVar(accessoryStencil.vars.iconColor, system.color.fg.danger.default),
       fontSize: '0.25em',
       fontWeight: system.fontWeight.medium,
       lineHeight: 1,
@@ -63,19 +60,19 @@ export const accessoryCalendarStencil = createStencil({
      */
     size: {
       extraSmall: ({iconPart}) => ({
-        [iconPart]: {fontSize: system.legacy.fontSize.body.sm},
+        [iconPart]: {fontSize: system.fontSize.body.sm},
       }),
       small: ({iconPart}) => ({
-        [iconPart]: {fontSize: system.legacy.fontSize.body.lg},
+        [iconPart]: {fontSize: system.fontSize.body.lg},
       }),
       medium: ({iconPart}) => ({
-        [iconPart]: {fontSize: system.legacy.fontSize.heading.sm},
+        [iconPart]: {fontSize: system.fontSize.heading.sm},
       }),
       large: ({iconPart}) => ({
-        [iconPart]: {fontSize: system.legacy.fontSize.heading.lg},
+        [iconPart]: {fontSize: system.fontSize.heading.lg},
       }),
       extraLarge: ({iconPart}) => ({
-        [iconPart]: {fontSize: system.legacy.fontSize.title.sm},
+        [iconPart]: {fontSize: system.fontSize.title.sm},
       }),
     },
   },

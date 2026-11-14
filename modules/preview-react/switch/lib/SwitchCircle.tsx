@@ -6,9 +6,9 @@ import {SwitchProps} from './Switch';
 
 export const switchCircleStencil = createStencil({
   base: {
-    width: system.legacy.size.xxxs,
-    height: system.legacy.size.xxxs,
-    borderRadius: system.legacy.shape.full,
+    width: system.size.xxxs,
+    height: system.size.xxxs,
+    borderRadius: system.shape.full,
     // This is used in "High Contrast Mode" to show a border on the Switch thumb.
     border: `${px2rem(1)} solid transparent`,
     boxShadow: system.depth[1],
