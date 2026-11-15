@@ -63,8 +63,10 @@ export const useBreadcrumbsModel = createModelHook({
       items: overflowItems,
       nonInteractiveIds: state.nonInteractiveIds.filter(key => !state.hiddenIds.includes(key)),
       onShow() {
-        // Always select the first item when the menu is opened
-        menu.events.goToFirst();
+        // Always select the first item when the menu is opened with items
+        if (overflowItems && overflowItems.length > 0) {
+          menu.events.goToFirst();
+        }
       },
     })
   );
