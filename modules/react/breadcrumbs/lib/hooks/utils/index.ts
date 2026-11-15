@@ -1,11 +1,15 @@
 export const reorganizeHiddenItems = (
-  items: {id: string}[],
-  hiddenIds: string[],
-  getId: (item: {id: string}) => string
+  items: {id: string}[] = [],
+  hiddenIds: string[] = [],
+  getId: (item: {id: string}) => string = (item: any) => item?.id || ''
 ): string[] => {
-  let updatedHiddenIds = hiddenIds;
+  if (!items || !items.length) {
+    return hiddenIds || [];
+  }
+
+  let updatedHiddenIds = hiddenIds || [];
   const totalSize = items.length;
-  const itemSpace = totalSize - hiddenIds.length;
+  const itemSpace = totalSize - updatedHiddenIds.length;
 
   if (totalSize > 2 && itemSpace <= 2) {
     // Keep only last items if there is place for two or less items

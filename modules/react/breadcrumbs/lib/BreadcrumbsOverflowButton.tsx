@@ -1,13 +1,14 @@
+import * as React from 'react';
+
 import {TertiaryButton, TertiaryButtonProps} from '@workday/canvas-kit-react/button';
 import {useOverflowListTarget} from '@workday/canvas-kit-react/collection';
 import {
   composeHooks,
   createElemPropsHook,
+  createSubModelElemPropsHook,
   createSubcomponent,
-  subModelHook,
 } from '@workday/canvas-kit-react/common';
 import {SystemIcon, systemIconStencil} from '@workday/canvas-kit-react/icon';
-import {FlexProps} from '@workday/canvas-kit-react/layout';
 import {useMenuTarget} from '@workday/canvas-kit-react/menu';
 import {createStencil, handleCsProp} from '@workday/canvas-kit-styling';
 import {chevronRightSmallIcon, relatedActionsIcon} from '@workday/canvas-system-icons-web';
@@ -18,11 +19,11 @@ import {useBreadcrumbsModel} from './hooks/useBreadcrumbsModel';
 export interface BreadcrumbsOverflowButtonProps extends Omit<TertiaryButtonProps, 'style'> {
   'aria-label': string;
   /**
-   * style prop applies styles to the whole Flex component,
-   * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide
-   * style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore
+   * Style prop applies inline styles to the list item container.
+   * `useOverflowListTarget` automatically adds hidden styles if list doesn't have items to hide.
+   * Style prop passed through `overflowButtonProps` from `Breadcrumbs.List` will ignore.
    */
-  style?: FlexProps;
+  style?: React.CSSProperties;
 }
 
 export const breadcrumbsOverflowButtonStencil = createStencil({
@@ -57,7 +58,7 @@ export const useBreadcrumbsOverflowButton = composeHooks(
     'aria-controls': 'menu',
   })),
   useOverflowListTarget,
-  subModelHook((m: ReturnType<typeof useBreadcrumbsModel>) => m.menu, useMenuTarget)
+  createSubModelElemPropsHook(useBreadcrumbsModel)(m => m.menu, useMenuTarget)
 );
 
 export const BreadcrumbsOverflowButton = createSubcomponent('button')({
@@ -66,7 +67,7 @@ export const BreadcrumbsOverflowButton = createSubcomponent('button')({
   elemPropsHook: useBreadcrumbsOverflowButton,
 })<BreadcrumbsOverflowButtonProps>(({style, ...elemProps}, Element) => {
   return (
-    <li {...breadcrumbsOverflowButtonStencil()} {...style}>
+    <li {...breadcrumbsOverflowButtonStencil()} style={style}>
       <TertiaryButton
         as={Element}
         icon={relatedActionsIcon}
