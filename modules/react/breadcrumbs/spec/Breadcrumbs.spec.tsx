@@ -80,11 +80,13 @@ describe('Breadcrumbs Component', () => {
 
     const parentLi = button.closest('li');
     expect(parentLi).not.toBeNull();
-    // Verify that style is not spread as invalid DOM attributes and button is hidden
+    // Verify that style is not spread as invalid DOM attributes and button is positioned offscreen
     expect(button.getAttribute('aria-hidden')).toBe('true');
     expect(button.getAttribute('tabindex')).toBe('-1');
     expect(parentLi?.getAttribute('position')).toBeNull();
     expect(parentLi?.getAttribute('left')).toBeNull();
+    expect(parentLi?.style.position).toBe('absolute');
+    expect(parentLi?.style.left).toBe('-99999px');
   });
 
   it('should render the overflow button and open popup menu with items when clicked', () => {
