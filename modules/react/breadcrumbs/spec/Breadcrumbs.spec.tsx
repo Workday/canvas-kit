@@ -80,9 +80,9 @@ describe('Breadcrumbs Component', () => {
 
     const parentLi = button.closest('li');
     expect(parentLi).not.toBeNull();
-    // Verify that style is applied as an inline style on the li element, not as invalid attributes
-    expect(parentLi?.style.position).toBe('absolute');
-    expect(parentLi?.style.left).toBe('-99999px');
+    // Verify that style is not spread as invalid DOM attributes and button is hidden
+    expect(button.getAttribute('aria-hidden')).toBe('true');
+    expect(button.getAttribute('tabindex')).toBe('-1');
     expect(parentLi?.getAttribute('position')).toBeNull();
     expect(parentLi?.getAttribute('left')).toBeNull();
   });
