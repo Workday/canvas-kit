@@ -9,6 +9,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
+  gap: system.gap.lg,
 });
 
 const options = [

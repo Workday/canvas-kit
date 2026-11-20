@@ -4,9 +4,11 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Flex} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 const parentContainerStyles = createStyles({
   flexDirection: 'column',
+  gap: system.gap.lg,
 });
 
 const options = [

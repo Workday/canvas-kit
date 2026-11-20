@@ -3,6 +3,15 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState('');
@@ -17,7 +26,7 @@ export const RefForwarding = () => {
   };
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
         <FormField.Field>
@@ -25,6 +34,6 @@ export const RefForwarding = () => {
         </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Color Input</PrimaryButton>
-    </>
+    </div>
   );
 };

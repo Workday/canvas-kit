@@ -3,6 +3,15 @@ import React from 'react';
 import {RadioGroup} from '@workday/canvas-kit-preview-react/radio';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormFieldGroup} from '@workday/canvas-kit-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 export const RefForwarding = () => {
   const [value, setValue] = React.useState<string | number>('deep-dish');
@@ -20,7 +29,7 @@ export const RefForwarding = () => {
   };
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormFieldGroup>
         <FormFieldGroup.Label>Choose Your Pizza Crust</FormFieldGroup.Label>
         <FormFieldGroup.List as={RadioGroup} name="crust-ref" onChange={handleChange} value={value}>
@@ -39,6 +48,6 @@ export const RefForwarding = () => {
         </FormFieldGroup.List>
       </FormFieldGroup>
       <PrimaryButton onClick={handleClick}>Select Gluten Free</PrimaryButton>
-    </>
+    </div>
   );
 };

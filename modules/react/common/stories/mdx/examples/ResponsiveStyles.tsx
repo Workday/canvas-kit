@@ -5,6 +5,7 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Box, Flex, Grid} from '@workday/canvas-kit-react/layout';
 import {Select} from '@workday/canvas-kit-react/select';
 import {Text} from '@workday/canvas-kit-react/text';
+import {system} from '@workday/canvas-tokens-web';
 
 const HeadingText = ({children, ...props}) => (
   <Text as="p" fontSize={20} fontWeight="bold" color="frenchVanilla100" margin={0} {...props}>
@@ -86,7 +87,7 @@ export const ResponsiveContainer = () => {
 
   return (
     <Box ref={ref} width={contWidth}>
-      <FormField>
+      <FormField cs={{marginBlockEnd: system.gap.lg}}>
         <FormField.Label>Container Size</FormField.Label>
         <Select items={['1024px', '768px', '320px']} initialSelectedIds={['1024px']}>
           <FormField.Input as={Select.Input} onChange={handleChange} />

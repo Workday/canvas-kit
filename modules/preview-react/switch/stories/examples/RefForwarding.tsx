@@ -3,6 +3,15 @@ import React from 'react';
 import {Switch} from '@workday/canvas-kit-preview-react/switch';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 export const RefForwarding = () => {
   const [checked, setChecked] = React.useState(false);
@@ -17,7 +26,7 @@ export const RefForwarding = () => {
   };
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField>
         <FormField.Label>Dark Mode</FormField.Label>
         <FormField>
@@ -25,6 +34,6 @@ export const RefForwarding = () => {
         </FormField>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Switch</PrimaryButton>
-    </>
+    </div>
   );
 };

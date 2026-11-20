@@ -158,7 +158,14 @@ export const RadioStates = {
           </ComponentStatesTable>
         </StaticStates>
         <h3>RadioGroup (wrapping)</h3>
-        <div style={{maxWidth: 480}}>
+        <div
+          style={{
+            maxWidth: 480,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: cssVar(system.gap.lg),
+          }}
+        >
           <FormFieldGroup orientation="horizontalStart">
             <FormFieldGroup.Label>
               Really long label. Really long label. Really long label. Really long label. Really

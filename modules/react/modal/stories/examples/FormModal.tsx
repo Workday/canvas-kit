@@ -5,9 +5,17 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Modal, useModalModel} from '@workday/canvas-kit-react/modal';
 import {Select} from '@workday/canvas-kit-react/select';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
+import {createStyles} from '@workday/canvas-kit-styling';
 import {plusIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const FAVORITE_COLOR_OPTIONS = ['Blue', 'Yellow'];
+
+const formStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.gap.lg,
+});
 
 export const FormModal = () => {
   const model = useModalModel();
@@ -35,7 +43,7 @@ export const FormModal = () => {
         <Modal.Card as="form" onSubmit={onSubmit}>
           <Modal.CloseIcon aria-label="Close" />
           <Modal.Heading>New User</Modal.Heading>
-          <Modal.Body>
+          <Modal.Body cs={formStyles}>
             <FormField grow>
               <FormField.Label>First Name</FormField.Label>
               <FormField.Input as={TextInput} name="first" />

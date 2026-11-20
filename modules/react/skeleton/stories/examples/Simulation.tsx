@@ -76,7 +76,15 @@ export const Simulation = () => {
 
   return (
     <Box>
-      <Box cs={{marginBlockEnd: system.gap.xl}}>
+      <Box
+        cs={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'flex-start',
+          gap: system.gap.lg,
+          marginBlockEnd: system.gap.xl,
+        }}
+      >
         <FormField orientation="horizontalStart">
           <FormField.Label>Load Time</FormField.Label>
           <FormField.Input as={TextInput} onChange={onChangeLoadTime} value={loadTime} />

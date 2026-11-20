@@ -7,6 +7,13 @@ import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles} from '@workday/canvas-kit-styling';
 import {system} from '@workday/canvas-tokens-web';
 
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
+
 const hintStyles = createStyles({
   height: system.size.xs,
 });
@@ -20,7 +27,7 @@ export const TextInputWithLiveError = () => {
   const handleSubmit = () => hasError && changeFocus(inputRef.current);
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField error={hasError === 'error' ? 'error' : undefined} isRequired={true}>
         <FormField.Label>First Name:</FormField.Label>
         <FormField.Input as={TextInput} onBlur={handleBlur} ref={inputRef} />
@@ -29,6 +36,6 @@ export const TextInputWithLiveError = () => {
         </FormField.Hint>
       </FormField>
       <PrimaryButton onClick={handleSubmit}>Continue</PrimaryButton>
-    </>
+    </div>
   );
 };

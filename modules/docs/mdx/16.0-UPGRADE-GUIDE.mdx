@@ -19,12 +19,14 @@ that updates brand colors, neutrals, surfaces, and shapes at the application lev
 [Sana Canvas Theme](#sana-canvas-theme) below.
 
 ### What You Need
+
 - Canvas Tokens v4.4.0: Introduces the new Sana Canvas variables.
 - Canvas System Icons v5.0.0: Introduces the new Sana Canvas icons.
-- Canvas Kit v16: The new version of Canvas Kit that includes the new Sana Canvas components and utilities.
+- Canvas Kit v16: The new version of Canvas Kit that includes the new Sana Canvas components and
+  utilities.
 
-> **Note:** Canvas Tokens and Canvas System Icons are not included in the Canvas Kit package. Install
-> them separately, then upgrade Canvas Kit itself:
+> **Note:** Canvas Tokens and Canvas System Icons are not included in the Canvas Kit package.
+> Install them separately, then upgrade Canvas Kit itself:
 
 ```sh
 # Separate packages required by Canvas Kit v16
@@ -33,7 +35,6 @@ yarn add @workday/canvas-tokens-web@4.4.0 @workday/canvas-system-icons-web@5.0.0
 # Upgrade Canvas Kit packages (adjust package names to what your app uses)
 yarn add @workday/canvas-kit-react@^16
 ```
-
 
 ## Sana Canvas Theme
 
@@ -61,10 +62,10 @@ selector and `:root` have equal specificity — source order determines the winn
 ```
 
 Set `data-theme="sana-canvas"` on `<html>` when you control the document root (preferred). Nested
-elements are not enough for portaled popups (including all Canvas Kit popups such as menus,
-selects, modals, and toasts) — those render under `document.body` via React portals, outside the
-parent component's DOM hierarchy, and only inherit theme from `<html>`, or from
-`sanaCanvasProviderTheme` on `CanvasProvider` when `<html>` is unavailable.
+elements are not enough for portaled popups (including all Canvas Kit popups such as menus, selects,
+modals, and toasts) — those render under `document.body` via React portals, outside the parent
+component's DOM hierarchy, and only inherit theme from `<html>`, or from `sanaCanvasProviderTheme`
+on `CanvasProvider` when `<html>` is unavailable.
 
 ```html
 <html lang="en" data-theme="sana-canvas"></html>
@@ -77,16 +78,16 @@ parent component's DOM hierarchy, and only inherit theme from `<html>`, or from
 **Scoped / no document-root control:** if you cannot set `data-theme` on `<html>` (embedded apps,
 microfrontends, third-party shells), pass both `data-theme="sana-canvas"` and
 `sanaCanvasProviderTheme` to `CanvasProvider`. The preset supplies Sana's brand variables, and
-Canvas Kit forwards the `data-theme` attribute onto the popup stack container — so portaled
-menus, modals, and dialogs match the same `[data-theme="sana-canvas"]` selector and pick up the
-rest of the theme (shape, depth, type, non-brand system colors) through normal cascade:
+Canvas Kit forwards the `data-theme` attribute onto the popup stack container — so portaled menus,
+modals, and dialogs match the same `[data-theme="sana-canvas"]` selector and pick up the rest of the
+theme (shape, depth, type, non-brand system colors) through normal cascade:
 
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 ### What Changes When You Opt In
@@ -108,24 +109,24 @@ Things that change are primary brand consumers and Sana's neutral color scale
 
 ### Scoped Theming
 
-The `CanvasProvider` theming updates in
-[#4060](https://github.com/Workday/canvas-kit/pull/4060) are for **scoped** use cases — embedding
-Canvas in another brand, multi-tenant sections, and popup parity when you cannot set
-`data-theme="sana-canvas"` on `<html>`. Application teams that control `<html>` and import the
-Sana variables globally do not need a `theme` prop for app-wide Sana.
+The `CanvasProvider` theming updates in [#4060](https://github.com/Workday/canvas-kit/pull/4060) are
+for **scoped** use cases — embedding Canvas in another brand, multi-tenant sections, and popup
+parity when you cannot set `data-theme="sana-canvas"` on `<html>`. Application teams that control
+`<html>` and import the Sana variables globally do not need a `theme` prop for app-wide Sana.
 
 For the scoped theming API, see our
 [Theming documentation](https://workday.github.io/canvas-kit/?path=/docs/features-theming-overview--docs).
 
 #### Default Scope Change for Legacy Themes
 
-**Important:** If you previously used `canvas.palette.<color>.main` only (without other palette properties)
-to scope-theme your application, the default behavior has changed. In v16:
+**Important:** If you previously used `canvas.palette.<color>.main` only (without other palette
+properties) to scope-theme your application, the default behavior has changed. In v16:
 
 - **Before v16:** Setting only `palette.primary.main` would automatically generate a full color ramp
-  (lightest, lighter, light, dark, darkest, contrast) and apply broad `system.color.brand.*` forwarding.
-- **In v16:** Setting only `palette.primary.main` defaults to `'brand'` scope, which applies a narrower
-  set of variables (PrimaryButton and selected states only).
+  (lightest, lighter, light, dark, darkest, contrast) and apply broad `system.color.brand.*`
+  forwarding.
+- **In v16:** Setting only `palette.primary.main` defaults to `'brand'` scope, which applies a
+  narrower set of variables (PrimaryButton and selected states only).
 
 To restore the previous behavior, explicitly set `themeScope: 'full'`:
 
@@ -151,22 +152,24 @@ renders them through React portals under `document.body` — outside the parent 
 hierarchy — so they inherit CSS variables from `<html>`, not from a nested wrapper.
 
 **Before:**
+
 ```tsx
 import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react/common';
 
 <CanvasProvider theme={sanaCanvasProviderTheme}>
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 **After (when you control `<html>`):**
+
 ```tsx
 import {CanvasProvider} from '@workday/canvas-kit-react/common';
 
 // <html data-theme="sana-canvas">
 <CanvasProvider>
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 **Still required — cannot set `data-theme` on `<html>`:** embedded apps, microfrontends, and
@@ -179,7 +182,7 @@ import {CanvasProvider, sanaCanvasProviderTheme} from '@workday/canvas-kit-react
 
 <CanvasProvider theme={sanaCanvasProviderTheme} data-theme="sana-canvas">
   <App />
-</CanvasProvider>
+</CanvasProvider>;
 ```
 
 If you control `<html>` and see a console warning about unnecessary theme usage, you can safely
@@ -404,7 +407,8 @@ functional shortcuts, refer to the storybook documentation and our example stori
 **PR:** [#4062](https://github.com/Workday/canvas-kit/pull/4062)
 
 A new `Tabs` component has been added to `@workday/canvas-kit-preview-react`, aligned with the Sana
-Canvas visual language. It supports `filled` and `outlined` variants, with `outlined` variant as default.
+Canvas visual language. It supports `filled` and `outlined` variants, with `outlined` variant as
+default.
 
 ```tsx
 import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
@@ -423,8 +427,8 @@ import {Tabs} from '@workday/canvas-kit-preview-react/tabs';
 
 ## MCP
 
-Canvas Kit's MCP server (`@workday/canvas-kit-mcp`) helps agents migrate icons and look up tokens for
-v16 / tokens `4.4.0`.
+Canvas Kit's MCP server (`@workday/canvas-kit-mcp`) helps agents migrate icons and look up tokens
+for v16 / tokens `4.4.0`.
 
 ### Icon migration — `get-canvas-kit-icon-migration`
 
@@ -900,6 +904,38 @@ If you customize `brand.success.base` in your theme, please verify the following
 - Error and caution states no longer display a status background color; only the standard background
   is shown.
 
+##### Bottom Margin Removed
+
+`FormField` and `FormFieldGroup` no longer add a bottom margin (`margin: 0 0 24px`). Spacing between
+fields should be owned by the parent layout, not by each field. This fixes
+[#4259](https://github.com/Workday/canvas-kit/issues/4259) and removes the extra space that appeared
+below a lone `FormField` or doubled up when a parent already used `gap`.
+
+**This is a visual change.** If you stacked `FormField`s and relied on the built-in margin, your
+fields will now touch. Add `gap` to the parent container. Canvas Kit does not provide a `Form`
+component, so use your own container. The previous spacing was `system.gap.lg`:
+
+```tsx
+import {FormField} from '@workday/canvas-kit-react/form-field';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const formStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.gap.lg,
+});
+
+<form className={formStyles}>
+  <FormField>{/* ... */}</FormField>
+  <FormField>{/* ... */}</FormField>
+</form>;
+```
+
+If you already override the built-in margin on `FormField` (for example `cs={{margin: 0}}`), that
+override is now unnecessary but harmless. Anything that uses `formFieldStencil` directly also loses
+the margin.
+
 #### Radio
 
 **PR:** [#3984](https://github.com/Workday/canvas-kit/pull/3984)
@@ -1236,10 +1272,10 @@ export const myStencil = createStencil({
 Canvas Kit does not bundle fonts. In v16, which font you load depends on whether you opt into the
 [Sana Canvas theme](#sana-canvas-theme).
 
-| Theme | Typeface | Package |
-| ----- | -------- | ------- |
+| Theme                                    | Typeface                    | Package                           |
+| ---------------------------------------- | --------------------------- | --------------------------------- |
 | Sana Canvas (`data-theme="sana-canvas"`) | Sana Sans (+ IBM Plex Mono) | `@workday/canvas-kit-react/fonts` |
-| Classic Canvas (default) | Roboto (+ Roboto Mono) | `@workday/canvas-kit-react-fonts` |
+| Classic Canvas (default)                 | Roboto (+ Roboto Mono)      | `@workday/canvas-kit-react-fonts` |
 
 ### Sana Canvas Theme — Switch to Sana Sans
 
