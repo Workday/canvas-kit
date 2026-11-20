@@ -11,6 +11,7 @@ import {system} from '@workday/canvas-tokens-web';
 
 const outerContainerStyles = createStyles({
   flexDirection: 'column',
+  gap: system.gap.lg,
 });
 
 const buttonContainerStyles = createStyles({

@@ -73,10 +73,7 @@ const zipCodeContainerStyles = createStyles({
 });
 
 const formFieldStencil = createStencil({
-  base: {
-    // FormField's built-in margin would double-space with the stack gap below.
-    margin: 0,
-  },
+  base: {},
   modifiers: {
     density: {
       high: {

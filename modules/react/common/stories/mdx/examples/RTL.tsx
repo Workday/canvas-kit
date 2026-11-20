@@ -7,8 +7,13 @@ import {FormField} from '@workday/canvas-kit-react/form-field';
 import {TextInput} from '@workday/canvas-kit-react/text-input';
 import {createStyles, px2rem} from '@workday/canvas-kit-styling';
 import {arrowRightSmallIcon} from '@workday/canvas-system-icons-web';
+import {system} from '@workday/canvas-tokens-web';
 
 const rtlStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
   paddingInlineStart: px2rem(64),
 });
 

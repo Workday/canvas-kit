@@ -47,7 +47,7 @@ export const CreateStencil = ({headerColor, elemProps}) => {
   };
   return (
     <div>
-      <FormField>
+      <FormField cs={{marginBlockEnd: system.gap.lg}}>
         <FormField.Label>Toggle Dark Theme</FormField.Label>
         <FormField.Input as={Switch} onChange={handleChange} checked={darkTheme} />
       </FormField>

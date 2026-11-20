@@ -3,6 +3,15 @@ import React from 'react';
 import {PrimaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select} from '@workday/canvas-kit-react/select';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 const options = [
   'E-mail',
@@ -30,7 +39,7 @@ export const RefForwarding = () => {
   };
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField>
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
@@ -45,6 +54,6 @@ export const RefForwarding = () => {
         </FormField.Field>
       </FormField>
       <PrimaryButton onClick={handleClick}>Focus Select</PrimaryButton>
-    </>
+    </div>
   );
 };

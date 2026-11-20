@@ -40,6 +40,12 @@ const toolbarStyles = createStyles({
   padding: system.padding.sm,
 });
 
+const formStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: system.gap.lg,
+});
+
 const toggledToolbarButtonStyles = createStyles({
   "&[aria-pressed='true'], &[aria-pressed='true']:hover, &[aria-pressed='true']:active, &[aria-pressed='true']:focus-visible":
     {
@@ -150,7 +156,7 @@ export const TextFormattingToolbar = () => {
         </Tooltip>
         <Dialog.Popper>
           <Dialog.Card aria-labelledby={linkButtonId}>
-            <Dialog.Body>
+            <Dialog.Body cs={formStyles}>
               <FormField>
                 <FormField.Label>Link Text</FormField.Label>
                 <FormField.Input as={TextInput} ref={linkTextRef} />

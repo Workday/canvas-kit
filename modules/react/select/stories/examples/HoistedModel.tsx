@@ -4,6 +4,15 @@ import {SecondaryButton} from '@workday/canvas-kit-react/button';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Select, useSelectModel} from '@workday/canvas-kit-react/select';
 import {BodyText} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 const options = [
   {text: 'E-mail', id: 'email-1'},
@@ -20,7 +29,7 @@ export const HoistedModel = () => {
   });
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField>
         <FormField.Label>Contact</FormField.Label>
         <FormField.Field>
@@ -42,6 +51,6 @@ export const HoistedModel = () => {
       >
         Select Phone Item
       </SecondaryButton>
-    </>
+    </div>
   );
 };

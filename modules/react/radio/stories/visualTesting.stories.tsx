@@ -7,6 +7,8 @@ import {
   StaticStates,
   permutateProps,
 } from '@workday/canvas-kit-react/testing';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
 
 import {customColorTheme} from '../../../../utils/storybook';
 
@@ -151,7 +153,9 @@ export const RadioStates = () => (
     </StaticStates>
 
     <h3>RadioGroup (wrapping)</h3>
-    <div style={{maxWidth: 480}}>
+    <div
+      style={{maxWidth: 480, display: 'flex', flexDirection: 'column', gap: cssVar(system.gap.lg)}}
+    >
       <FormField orientation="horizontalStart" as="fieldset">
         <FormField.Label as="legend">
           Really long label. Really long label. Really long label. Really long label. Really long

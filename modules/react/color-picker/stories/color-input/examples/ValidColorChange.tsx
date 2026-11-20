@@ -3,6 +3,15 @@ import React from 'react';
 import {ColorInput} from '@workday/canvas-kit-react/color-picker';
 import {FormField} from '@workday/canvas-kit-react/form-field';
 import {Subtext} from '@workday/canvas-kit-react/text';
+import {createStyles} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+const stackStyles = createStyles({
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'flex-start',
+  gap: system.gap.lg,
+});
 
 export const ValidColorChange = () => {
   const [value, setValue] = React.useState('');
@@ -17,7 +26,7 @@ export const ValidColorChange = () => {
   };
 
   return (
-    <>
+    <div className={stackStyles}>
       <FormField>
         <FormField.Label>Background Color</FormField.Label>
         <FormField.Field>
@@ -30,6 +39,6 @@ export const ValidColorChange = () => {
         </FormField.Field>
       </FormField>
       <Subtext size="large">Last valid color: {validColor}</Subtext>
-    </>
+    </div>
   );
 };
