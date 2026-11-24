@@ -125,6 +125,112 @@ array.
 
 <ExampleCodeBlock code={DynamicTabs} />
 
+## Accessibility
+
+Ensure users of assistive technology can find the tab list, know which tab is selected, switch tabs from the keyboard, and reach the content of the active panel. **`Tabs`** follows the [W3C Tabs pattern](https://www.w3.org/WAI/ARIA/apg/patterns/tabs/): a **`tablist`** of labelled tabs, each controlling a **`tabpanel`**, with one selected view visible at a time.
+
+Use **`Tabs`** when related page views share context and only one panel should be shown. For in-place toggles without separate panels (for example list vs grid), use [**SegmentedControl**](/components/inputs/segmented-control/#accessibility) instead. For inline show/hide sections, use [**Expandable**](/components/containers/expandable/#accessibility). See the [Accessibility overview](https://workday.github.io/canvas-kit/?path=/docs/guides-accessibility-overview--docs) for broader Canvas Kit guidance.
+
+### Minimum Accessible Structure
+
+The following matches the [Basic Example](#basic-example): **`Tabs.List`** with one **`Tabs.Item`** per tab, and a matching **`Tabs.Panel`** for each item (paired by registration order when **`data-id`** is omitted).
+
+```tsx
+import {Tabs} from '@workday/canvas-kit-react/tabs';
+import {cssVar} from '@workday/canvas-kit-styling';
+import {system} from '@workday/canvas-tokens-web';
+
+<Tabs>
+  <Tabs.List>
+    <Tabs.Item>First Tab</Tabs.Item>
+    <Tabs.Item>Second Tab</Tabs.Item>
+  </Tabs.List>
+  <div style={{marginBlockStart: cssVar(system.gap.lg)}}>
+    <Tabs.Panel>Contents of First Tab</Tabs.Panel>
+    <Tabs.Panel>Contents of Second Tab</Tabs.Panel>
+  </div>
+</Tabs>;
+```
+
+Every **`Tabs.Item`** needs a non-empty accessible name (usually visible text as children). Provide one **`Tabs.Panel`** per tab so selection exposes the correct content.
+
+### Built-in Behaviors
+
+Canvas Kit applies these automatically via `useTabsModel`, the [Collection API](/getting-started/for-developers/resources/collection-api/), and Tabs subcomponents. **Do not duplicate them** in consuming code.
+
+**ARIA and DOM** (_applied by hooks/subcomponents_):
+
+- **`Tabs`**: Creates and shares a `TabsModel` (and overflow **`Menu`** sub-model when used). Optional
+  `id` on **`useTabsModel`** stabilizes derived element ids; otherwise `useUniqueId` assigns one.
+- **`Tabs.List`**: `<div role="tablist">` with `aria-orientation` from model state (default `horizontal`).
+- **`Tabs.Item`**: `<button type="button" role="tab">` with `aria-selected`, `aria-controls` pointing at the paired panel id, `id` for `aria-labelledby`, and roving `tabIndex` (only the tab with collection **cursor** focus has `tabIndex={0}`; other tabs use `-1`). Registers with the collection for id generation and selection.
+- **`Tabs.Panel`**: `<div role="tabpanel">` with `id`, `aria-labelledby` referencing the tab `id`, `hidden` when not selected, and `tabIndex={0}` by default so the panel is focusable.
+- **`Tabs.OverflowButton`**: Rendered inside **`Tabs.List`** when items overflow. `role="tab"`, `aria-haspopup="menu"`, `aria-selected={false}`; opens the overflow menu instead of selecting a tab. Unmounts when nothing overflows.
+- **`Tabs.Menu.*`**: Standard [Menu](/components/popups/menu/#accessibility) composition on the Tabs overflow menu sub-model; selecting a menu item activates the tab and returns focus to that tab.
+
+**Keyboard** (_Tabs + roving tabindex in the tablist_):
+
+- <kbd>Tab</kbd> / <kbd>Shift</kbd>+<kbd>Tab</kbd>: Enter and leave the tablist. With default panel `tabIndex`, <kbd>Tab</kbd> from the selected tab moves focus into the visible **`tabpanel`** (see [Alternative Tab Stop](#alternative-tab-stop)).
+- <kbd>ArrowLeft</kbd> / <kbd>ArrowRight</kbd> (horizontal; RTL-aware), <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>PageUp</kbd> / <kbd>PageDown</kbd>: Move roving focus among tabs (and the overflow tab when present) without leaving the tablist.
+- <kbd>Enter</kbd> / <kbd>Space</kbd> on a focused tab: Activate (select) that tab.
+- <kbd>ArrowDown</kbd> on the **selected** tab (horizontal orientation only): Moves focus into the associated **`tabpanel`** (even when other arrow keys still navigate the tablist).
+
+Disabled tabs remain in the roving sequence but do not activate on click or <kbd>Enter</kbd> / <kbd>Space</kbd> when marked unavailable (native **`disabled`** or `aria-disabled="true"`). Overflow menu keyboard behavior follows [Menu accessibility](/components/popups/menu/#accessibility).
+
+**Screen reader expectations** (_when built-in behaviors are used as intended_):
+
+- The tablist is exposed as `tablist`; each tab exposes its visible name, `tab` role, and selected/unselected state via `aria-selected`.
+- Only the selected tab's panel is visible (`hidden` is removed from the active **`tabpanel`**).
+- Activating a tab updates `aria-selected` and shows the matching panel content.
+- The overflow control is announced as a tab with a menu (`aria-haspopup`) when overflow tabs exist; tabs moved only into the overflow menu are selected from the menu, not from hidden tab buttons.
+
+### Accessibility Requirements
+
+Required in application code for accessible Tabs. Hoist **`useTabsModel`** when you need `initialTab`, stable ids, dynamic items, or overflow. Rows marked _(conditional)_ apply only when the situation matches—otherwise omit.
+
+**If no design spec is provided:** use the **static composition** ([Basic Example](#basic-example)).
+Omit matching **`data-id`** values (index pairing is automatic). Omit **`Tabs.OverflowButton`**, **`Tabs.Menu`**, custom model **`id`**, **`index`**, **`disabled`**, icon-only tabs, a tablist **`aria-label`**, and non-default panel **`tabIndex`** unless the spec requires them.
+
+**Choose a composition:**
+
+- **Static tabs** — fixed **`Tabs.Item`** / **`Tabs.Panel`** children. [Basic Example](#basic-example).
+- **Named tabs** — matching **`data-id`** on **`Tabs.Item`** and **`Tabs.Panel`**. [Named Tabs](#named-tabs) and [Hoisted Model](#hoisted-model).
+- **Dynamic + overflow** — `items` and `getId` on **`useTabsModel`**, render prop on **`Tabs.List`**, **`Tabs.OverflowButton`**, **`Tabs.Menu.Popper`**, and **`Tabs.Panels`**. [Overflow Tabs](#overflow-tabs).
+- **Single shared panel** — one **`Tabs.Panel`** driven by selection state. [Single Tab Panel](#single-tab-panel).
+
+| Requirement | How to satisfy |
+| --- | --- |
+| Tab accessible name | Non-empty visible text (or text via **`Tabs.Item.Text`**) inside every **`Tabs.Item`**. |
+| Item ↔ panel pairing | Equal count of **`Tabs.Item`** and **`Tabs.Panel`** components. Use matching **`data-id`** when ids must be stable or panels reorder; otherwise keep DOM order aligned. See [Named Tabs](#named-tabs). |
+| Tablist name _(conditional)_ | When no visible heading names the tab set, set `aria-label` (or `aria-labelledby` referencing a visible label `id`) on **`Tabs.List`**. |
+| Disabled tab _(conditional)_ | `disabled` on **`Tabs.Item`**, or `aria-disabled` as in [Disabled Tab](#disabled-tab). Pair with a panel only if the design still shows content for that slot. |
+| Dynamic list keys _(conditional)_ | When rendering **`Tabs.Item`** from **`Array.map`**, pass **`index`** so keyboard order stays correct if items insert out of order. See [Dynamic Tabs](#dynamic-tabs). |
+| Icon tabs _(conditional)_ | **`Tabs.Item.Icon`** (decorative) plus **`Tabs.Item.Text`** for the accessible name—the [Tab Icons](#tab-icons) pattern. If the design hides the label visually, keep **`Tabs.Item.Text`** and hide it in CSS; do not use a bare icon or **`aria-label`** unless the spec explicitly requires icon-only tabs with no visible text. |
+| Panel tab stop _(conditional)_ | Default: omit **`tabIndex`** on **`Tabs.Panel`** so the panel is focusable (`tabIndex={0}`). When the panel's first child is already focusable, set **`tabIndex={undefined}`** on that panel. See [Alternative Tab Stop](#alternative-tab-stop). |
+| Overflow _(conditional)_ | `items` on **`useTabsModel`**, **`Tabs.List overflowButton`**, **`Tabs.Menu.Popper`** subtree, and overflow menu item render props. Menu labeling and keyboard behavior follow [Menu accessibility](/components/popups/menu/#accessibility). See [Overflow Tabs](#overflow-tabs). |
+| Stable ids _(conditional)_ | Pass `id` to **`useTabsModel`** when tests, analytics, or deep links need predictable tab/panel ids. |
+
+**Summary for code generation:**
+
+- **REQUIRED:** **`Tabs`** + **`Tabs.List`** + one labelled **`Tabs.Item`** and matching **`Tabs.Panel`** per tab.
+- **CONDITIONAL:** matching **`data-id`**; **`index`** when mapping items; **`disabled`** / `aria-disabled`; tablist **`aria-label`** / **`aria-labelledby`**; icon + text pattern; **`tabIndex={undefined}`** on panels with an internal focus target; dynamic **`items`**, overflow menu, and **`useTabsModel`** config; hoisted model and **`initialTab`**. See examples linked above.
+
+### Anti-Patterns
+
+Do **not** generate code that does the following (see **Accessibility Requirements** for what to
+supply instead):
+
+- Manually set `role="tab"`, `role="tablist"`, `role="tabpanel"`, `aria-selected`,
+  `aria-controls`, `aria-labelledby`, roving `tabIndex`, or panel `hidden` — Canvas Kit wires these via the collection and item hooks
+- Mismatch **`Tabs.Item`** and **`Tabs.Panel`** counts or **`data-id`** values so the wrong panel shows or ARIA references break
+- Set **`aria-label`** on **`Tabs.Item`** when **`Tabs.Item.Text`** or other visible tab text already names the tab (see **Icon tabs** in Accessibility Requirements)
+- Use icon-only **`Tabs.Item`** children without **`Tabs.Item.Text`**—icons are decorative; the name must come from text content unless the spec explicitly calls for icon-only and documents an **`aria-label`** alternative
+- Set **`tabIndex={undefined}`** on every panel by default — only when a focusable child inside the panel should receive <kbd>Tab</kbd> focus first ([Alternative Tab Stop](#alternative-tab-stop))
+- Hand-roll arrow-key roving focus or selection on tab buttons — use **`Tabs`** subcomponents and, for dynamic lists, use **`index`** instead
+- Use **Tabs** for simple segmented toggles without separate panels — use [**SegmentedControl**](/components/inputs/segmented-control/#accessibility)
+- Reimplement overflow UI without **`Tabs.OverflowButton`** and **`Tabs.Menu`** when using the dynamic items API
+- Assume **`disabled`** and **`aria-disabled`** are interchangeable for styling only — both block activation; prefer native **`disabled`** when the spec marks a tab unavailable unless the design requires focusable disabled tabs with an explanation adjacent to the tab
+
 ## Component API
 
 <SymbolDoc name="Tabs" fileName="/react/" />
